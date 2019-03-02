@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="c++&amp;#x4E2D;&amp;#x5F15;&amp;#x7528;&amp;#x7684;&amp;#x6982;&amp;#x5FF5;&amp;#x8DDF;java&amp;#x4E2D;&amp;#x7684;&amp;#x4E0D;&amp;#x4E00;&amp;#x6837;c++&amp;#x4E2D;&amp;#x7684;&amp;#x5F15;&amp;#x7528;&amp;#x5FC5;&amp;#x987B;&amp;#x7ED1;&amp;#x5B9A;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/01/20/C_C++/Mess/C++和Java的引用/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="c++&amp;#x4E2D;&amp;#x5F15;&amp;#x7528;&amp;#x7684;&amp;#x6982;&amp;#x5FF5;&amp;#x8DDF;java&amp;#x4E2D;&amp;#x7684;&amp;#x4E0D;&amp;#x4E00;&amp;#x6837;c++&amp;#x4E2D;&amp;#x7684;&amp;#x5F15;&amp;#x7528;&amp;#x5FC5;&amp;#x987B;&amp;#x7ED1;&amp;#x5B9A;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B9">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-20T12:51:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="c++&amp;#x4E2D;&amp;#x5F15;&amp;#x7528;&amp;#x7684;&amp;#x6982;&amp;#x5FF5;&amp;#x8DDF;java&amp;#x4E2D;&amp;#x7684;&amp;#x4E0D;&amp;#x4E00;&amp;#x6837;c++&amp;#x4E2D;&amp;#x7684;&amp;#x5F15;&amp;#x7528;&amp;#x5FC5;&amp;#x987B;&amp;#x7ED1;&amp;#x5B9A;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B9">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-C_C++/Mess/C++和Java的引用" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h5 id="c-&#x4E2D;&#x5F15;&#x7528;&#x7684;&#x6982;&#x5FF5;&#x8DDF;java&#x4E2D;&#x7684;&#x4E0D;&#x4E00;&#x6837;"><a href="#c-&#x4E2D;&#x5F15;&#x7528;&#x7684;&#x6982;&#x5FF5;&#x8DDF;java&#x4E2D;&#x7684;&#x4E0D;&#x4E00;&#x6837;" class="headerlink" title="c++&#x4E2D;&#x5F15;&#x7528;&#x7684;&#x6982;&#x5FF5;&#x8DDF;java&#x4E2D;&#x7684;&#x4E0D;&#x4E00;&#x6837;"></a>c++&#x4E2D;&#x5F15;&#x7528;&#x7684;&#x6982;&#x5FF5;&#x8DDF;java&#x4E2D;&#x7684;&#x4E0D;&#x4E00;&#x6837;</h5><p>c++&#x4E2D;&#x7684;&#x5F15;&#x7528;&#x5FC5;&#x987B;&#x7ED1;&#x5B9A;&#x5230;&#x4E00;&#x4E2A;&#x5B9E;&#x9645;&#x5B58;&#x5728;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4E0D;&#x80FD;&#x7ED1;&#x5B9A;&#x5230;NULL&#xFF0C;</p>
+<p>c++&#x4E2D; Object &amp;obj=NULL;&#x8FD9;&#x6837;&#x7684;&#x53E5;&#x5B50;&#x662F;&#x7EDD;&#x5BF9;&#x8FDD;&#x6CD5;&#x7684;&#x3002;</p>
+<p>Object &amp;obj=*(new Object());&#x8FD9;&#x6837;&#x7684;&#x53E5;&#x5B50;&#xFF0C;&#x6216;&#x8BB8;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x662F;&#x975E;&#x5E38;&#x5371;&#x9669;&#x5730;&#xFF0C;&#x56E0;&#x4E3A;&#x540E;&#x9762;&#x5F88;&#x5BB9;&#x6613;&#x5FD8;&#x8BB0;&#x91CA;&#x653E;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;</p>
+<p>string &amp;str=string(&#x201C;123&#x201D;)+&#x201D;456&#x201D;;&#x8FD9;&#x6837;&#x7684;&#x53E5;&#x5B50;&#xFF0C;VC&#x4E2D;&#x6253;&#x5F00;&#x6269;&#x5C55;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#xFF0C;&#x4F46;&#x662F;c++&#x89C4;&#x8303;&#x662F;&#x4E0D;&#x5141;&#x8BB8;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x540C;&#x6837;&#x975E;&#x5E38;&#x5371;&#x9669;&#x3002;str&#x7ED1;&#x5B9A;&#x5230;&#x4E86;&#x4E34;&#x65F6;&#x5BF9;&#x8C61;&#x3002;</p>
+<h5 id="c-&#x4E2D;&#x7684;&#x6307;&#x9488;&#x8DDF;java&#x4E2D;&#x7684;&#x5F15;&#x7528;&#x7C7B;&#x4F3C;"><a href="#c-&#x4E2D;&#x7684;&#x6307;&#x9488;&#x8DDF;java&#x4E2D;&#x7684;&#x5F15;&#x7528;&#x7C7B;&#x4F3C;" class="headerlink" title="c++&#x4E2D;&#x7684;&#x6307;&#x9488;&#x8DDF;java&#x4E2D;&#x7684;&#x5F15;&#x7528;&#x7C7B;&#x4F3C;"></a>c++&#x4E2D;&#x7684;&#x6307;&#x9488;&#x8DDF;java&#x4E2D;&#x7684;&#x5F15;&#x7528;&#x7C7B;&#x4F3C;</h5><p>Object obj = null; java&#x4E2D;&#x7684;&#x610F;&#x601D;&#x662F;&#x5B9A;&#x4E49;Object&#x578B;&#x5F15;&#x7528;&#x7684;&#x53D8;&#x91CF;obj&#x5E76;&#x521D;&#x59CB;&#x5316;&#x4E3A;null</p>
+<p>Object *obj=NULL;c++&#x4E2D;&#x7684;&#x610F;&#x601D;&#x4E3A;&#x5B9A;Object&#x578B;&#x6307;&#x9488;&#x7684;&#x53D8;&#x91CF;obj&#x5E76;&#x521D;&#x59CB;&#x5316;&#x4E3A;NULL  </p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2019-01-20T12:51:10.000Z" itemprop="datePublished">2019-01-20</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2019/01/20/C_C++/C++基础/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    C++ 基础
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2019/01/18/Network/IO模型/Reactor/" class="ui tiny button">
+                    
+                    高性能IO之Reactor模式
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#c-中引用的概念跟java中的不一样"><span>c++中引用的概念跟java中的不一样</span></a></li><li><a href="#c-中的指针跟java中的引用类似"><span>c++中的指针跟java中的引用类似</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

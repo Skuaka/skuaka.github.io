@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="title:TCP &amp;#x534A;&amp;#x5173;&amp;#x95ED;,&amp;#x534A;&amp;#x8FDE;&amp;#x63A5;,&amp;#x534A;&amp;#x6253;&amp;#x5F00;&amp;#x534A;&amp;#x5173;&amp;#x95ED;&amp;#x5F53;TCP&amp;#x94FE;&amp;#x63A5;&amp;#x4E2D;A&amp;#x5411;B&amp;#x53D1;&amp;#x9001; FIN &amp;#x8BF7;&amp;#x6C42;&amp;#x5173;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title:TCP &amp;#x534A;&amp;#x5173;&amp;#x95ED;,&amp;#x534A;&amp;#x8FDE;&amp;#x63A5;,&amp;#x534A;&amp;#x6253;&amp;#x5F00;&amp;#x534A;&amp;#x5173;&amp;#x95ED;&amp;#x5F53;TCP&amp;#x94FE;&amp;#x63A5;&amp;#x4E2D;A&amp;#x5411;B&amp;#x53D1;&amp;#x9001; FIN &amp;#x8BF7;&amp;#x6C42;&amp;#x5173;&amp;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-28T11:44:29.609Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="title:TCP &amp;#x534A;&amp;#x5173;&amp;#x95ED;,&amp;#x534A;&amp;#x8FDE;&amp;#x63A5;,&amp;#x534A;&amp;#x6253;&amp;#x5F00;&amp;#x534A;&amp;#x5173;&amp;#x95ED;&amp;#x5F53;TCP&amp;#x94FE;&amp;#x63A5;&amp;#x4E2D;A&amp;#x5411;B&amp;#x53D1;&amp;#x9001; FIN &amp;#x8BF7;&amp;#x6C42;&amp;#x5173;&amp;">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Network/Tcp/TCP半关闭,半连接,半打开" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <hr>
+<h2 id="title-TCP-&#x534A;&#x5173;&#x95ED;-&#x534A;&#x8FDE;&#x63A5;-&#x534A;&#x6253;&#x5F00;"><a href="#title-TCP-&#x534A;&#x5173;&#x95ED;-&#x534A;&#x8FDE;&#x63A5;-&#x534A;&#x6253;&#x5F00;" class="headerlink" title="title:TCP &#x534A;&#x5173;&#x95ED;,&#x534A;&#x8FDE;&#x63A5;,&#x534A;&#x6253;&#x5F00;"></a>title:TCP &#x534A;&#x5173;&#x95ED;,&#x534A;&#x8FDE;&#x63A5;,&#x534A;&#x6253;&#x5F00;</h2><h4 id="&#x534A;&#x5173;&#x95ED;"><a href="#&#x534A;&#x5173;&#x95ED;" class="headerlink" title="&#x534A;&#x5173;&#x95ED;"></a>&#x534A;&#x5173;&#x95ED;</h4><p>&#x5F53;TCP&#x94FE;&#x63A5;&#x4E2D;A&#x5411;B&#x53D1;&#x9001; FIN &#x8BF7;&#x6C42;&#x5173;&#x95ED;&#xFF0C;&#x53E6;&#x4E00;&#x7AEF;B&#x56DE;&#x5E94;ACK&#x4E4B;&#x540E;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x7ACB;&#x5373;&#x53D1;&#x9001; FIN &#x7ED9;A,A&#x65B9;&#x5904;&#x4E8E;&#x534A;&#x8FDE;&#x63A5;&#x72B6;&#x6001;&#xFF08;&#x534A;&#x5F00;&#x5173;&#xFF09;&#xFF0C;&#x6B64;&#x65F6;A&#x53EF;&#x4EE5;&#x63A5;&#x6536;B&#x53D1;&#x9001;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F46;&#x662F;A&#x5DF2;&#x7ECF;&#x4E0D;&#x80FD;&#x518D;&#x5411;B&#x53D1;&#x9001;&#x6570;&#x636E;&#x3002;</p>
+<h4 id="&#x534A;&#x8FDE;&#x63A5;"><a href="#&#x534A;&#x8FDE;&#x63A5;" class="headerlink" title="&#x534A;&#x8FDE;&#x63A5;"></a>&#x534A;&#x8FDE;&#x63A5;</h4><p>&#x53D1;&#x751F;&#x5728;TCP&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x4E2D;</p>
+<p>&#x5982;&#x679C;A&#x5411;B&#x53D1;&#x8D77;&#x94FE;&#x63A5;&#xFF0C;B&#x4E5F;&#x6309;&#x7167;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x54CD;&#x5E94;&#x4E86;&#xFF0C;&#x4F46;&#x662F;A&#x4E0D;&#x8FDB;&#x884C;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x534A;&#x8FDE;&#x63A5;&#x3002; </p>
+<p>&#x534A;&#x8FDE;&#x63A5;&#x653B;&#x51FB;&#xFF1A;&#x534A;&#x8FDE;&#x63A5;&#xFF0C;&#x4F1A;&#x9020;&#x6210;B&#x5206;&#x914D;&#x7684;&#x5185;&#x5B58;&#x8D44;&#x6E90;&#x5C31;&#x4E00;&#x76F4;&#x8FD9;&#x4E48;&#x8017;&#x7740;&#xFF0C;&#x76F4;&#x5230;&#x8D44;&#x6E90;&#x8017;&#x5C3D;&#x3002;&#xFF08;SYN&#x653B;&#x51FB;&#xFF09;</p>
+<h4 id="&#x534A;&#x6253;&#x5F00;"><a href="#&#x534A;&#x6253;&#x5F00;" class="headerlink" title="&#x534A;&#x6253;&#x5F00;"></a>&#x534A;&#x6253;&#x5F00;</h4><p>&#x5982;&#x679C;&#x4E00;&#x65B9;&#x5173;&#x95ED;&#x6216;&#x8005;&#x5F02;&#x5E38;&#x5173;&#x95ED;&#xFF08;&#x65AD;&#x7535;&#xFF0C;&#x65AD;&#x7F51;&#xFF09;&#xFF0C;&#x800C;&#x53E6;&#x4E00;&#x65B9;&#x5E76;&#x4E0D;&#x77E5;&#x60C5;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x94FE;&#x63A5;&#x79F0;&#x4E4B;&#x4E3A;&#x534A;&#x6253;&#x5F00;&#x3002;&#x5904;&#x4E8E;&#x534A;&#x6253;&#x5F00;&#x7684;&#x8FDE;&#x63A5;&#xFF0C;&#x5982;&#x679C;&#x53CC;&#x65B9;&#x4E0D;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x901A;&#x4FE1;&#xFF0C;&#x662F;&#x53D1;&#x73B0;&#x4E0D;&#x4E86;&#x95EE;&#x9898;&#x7684;&#xFF0C;&#x53EA;&#x6709;&#x5728;&#x901A;&#x4FE1;&#x662F;&#x624D;&#x771F;&#x6B63;&#x7684;&#x5BDF;&#x89C9;&#x5230;&#x8FD9;&#x4E2A;&#x8FDE;&#x63A5;&#x5DF2;&#x7ECF;&#x5904;&#x4E8E;&#x534A;&#x6253;&#x5F00;&#x72B6;&#x6001;&#xFF0C;&#x5982;&#x679C;&#x53CC;&#x65B9;&#x4E0D;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x7684;&#x8BDD;&#xFF0C;&#x4ECD;&#x5904;&#x4E8E;&#x8FDE;&#x63A5;&#x72B6;&#x6001;&#x7684;&#x4E00;&#x65B9;&#x5C31;&#x4E0D;&#x4F1A;&#x68C0;&#x6D4B;&#x53E6;&#x5916;&#x4E00;&#x65B9;&#x5DF2;&#x7ECF;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x3002;</p>
+<p><strong>&#x89E3;&#x51B3;&#x65B9;&#x6CD5;</strong>&#xFF1A;</p>
+<p>&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x534A;&#x6253;&#x5F00;&#x95EE;&#x9898;&#xFF0C;&#x5F15;&#x5165;&#x5FC3;&#x8DF3;&#x673A;&#x5236;&#x5C31;&#x53EF;&#x4EE5;&#x5BDF;&#x89C9;&#x534A;&#x6253;&#x5F00;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x9700;&#x8981;&#x53D1;&#x6570;&#x636E;&#x7684;&#x8BDD;&#xFF0C;&#x8FD9;&#x8FB9;&#x6536;&#x5230;&#x4E4B;&#x540E; &#x5176;&#x5B9E;&#x53D1;&#x73B0;&#x8FD9;&#x4E2A;&#x8FDE;&#x63A5;&#x5E76;&#x4E0D;&#x5B58;&#x5728;&#x4E86;&#xFF0C;&#x5C31;&#x4F1A;&#x56DE;&#x590D;RST&#x5305;&#x544A;&#x77E5;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5C31;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#x4E86;&#xFF01;</p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2019-02-28T11:42:10.000Z" itemprop="datePublished">2019-02-28</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2019/02/28/OpenGl/窗口视口/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    (No Title)
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2019/02/27/Network/Tcp/Tcp_ip协议栈/" class="ui tiny button">
+                    
+                    (No Title)
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#title-TCP-半关闭-半连接-半打开"><span>title:TCP 半关闭,半连接,半打开</span></a><ol><li><a href="#半关闭"><span>半关闭</span></a></li><li><a href="#半连接"><span>半连接</span></a></li><li><a href="#半打开"><span>半打开</span></a></li></ol></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>gcc_gdb备忘录 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="gcc&amp;#x5E38;&amp;#x7528;&amp;#x6807;&amp;#x7B7E;gcc -o hello hello.c   &amp;#x7F16;&amp;#x8BD1;&amp;#xFF1B;-o &amp;#x540E;&amp;#x63A5;&amp;#x53EF;&amp;#x6267;&amp;#x884C;&amp;#x6587;&amp;#x4EF6;&amp;#x540D;&amp;#x79F0; gcc -E hello.c &amp;gt; hello.i  &amp;#x53EA;&amp;#x8F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gcc_gdb备忘录">
+<meta property="og:url" content="http://yoursite.com/2018/06/13/Unix/Programming/gcc_gdb备忘录/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="gcc&amp;#x5E38;&amp;#x7528;&amp;#x6807;&amp;#x7B7E;gcc -o hello hello.c   &amp;#x7F16;&amp;#x8BD1;&amp;#xFF1B;-o &amp;#x540E;&amp;#x63A5;&amp;#x53EF;&amp;#x6267;&amp;#x884C;&amp;#x6587;&amp;#x4EF6;&amp;#x540D;&amp;#x79F0; gcc -E hello.c &amp;gt; hello.i  &amp;#x53EA;&amp;#x8F">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-28T05:37:19.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gcc_gdb备忘录">
+<meta name="twitter:description" content="gcc&amp;#x5E38;&amp;#x7528;&amp;#x6807;&amp;#x7B7E;gcc -o hello hello.c   &amp;#x7F16;&amp;#x8BD1;&amp;#xFF1B;-o &amp;#x540E;&amp;#x63A5;&amp;#x53EF;&amp;#x6267;&amp;#x884C;&amp;#x6587;&amp;#x4EF6;&amp;#x540D;&amp;#x79F0; gcc -E hello.c &amp;gt; hello.i  &amp;#x53EA;&amp;#x8F">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Unix/Programming/gcc_gdb备忘录" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    gcc_gdb备忘录
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h3 id="gcc&#x5E38;&#x7528;&#x6807;&#x7B7E;"><a href="#gcc&#x5E38;&#x7528;&#x6807;&#x7B7E;" class="headerlink" title="gcc&#x5E38;&#x7528;&#x6807;&#x7B7E;"></a>gcc&#x5E38;&#x7528;&#x6807;&#x7B7E;</h3><p><code>gcc -o hello hello.c</code>   &#x7F16;&#x8BD1;&#xFF1B;-o &#x540E;&#x63A5;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x540D;&#x79F0;</p>
+<p><code>gcc -E hello.c &gt; hello.i</code>  &#x53EA;&#x8FDB;&#x884C;<strong>&#x9884;&#x5904;&#x7406;</strong></p>
+<p><code>gcc hello.c -DMAX=100</code>       -D&#x4ECE;<strong>&#x5916;&#x90E8;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5B8F;</strong></p>
+<p><code>gcc hello.c -Ilib/include</code>   -I&#x5B9A;&#x4E49;&#x7B2C;&#x4E09;&#x65B9;include&#x8DEF;&#x5F84;</p>
+<p><code>-Wall</code> &#x6253;&#x5F00;&#x6240;&#x6709;&#x8B66;&#x544A;</p>
+<p><code>-w</code> &#x5173;&#x95ED;&#x6240;&#x6709;&#x8B66;&#x544A;</p>
+<p><code>-lm</code>  &#x627E;&#x6570;&#x5B66;&#x5E93; <code>/usr/lib/libm.a</code></p>
+<p><code>gcc -O1 -S hello.c</code>   -S &#x4EA7;&#x751F;<strong>&#x6C47;&#x7F16;</strong>&#x4EE3;&#x7801; hello.s &#xFF1B;-O1&#x662F;&#x7A0B;&#x5E8F;&#x4F18;&#x5316;&#x7B49;&#x7EA7;&#xFF0C;O2&#x4F18;&#x5316;&#x6BD4;O1&#x9AD8;&#xFF0C;&#x67E5;&#x770B;&#x6C47;&#x7F16;&#x4EE3;&#x7801;&#x65F6;&#x4F7F;&#x7528;&#x4F4E;&#x4F18;&#x5316;&#x7B49;&#x7EA7;&#x6709;&#x52A9;&#x4E8E;&#x9605;&#x8BFB;&#x5B66;&#x4E60;&#xFF0C;&#x9AD8;&#x7248;&#x672C;gcc&#x53EF;&#x4EE5;&#x4F7F;&#x7528;-Og</p>
+<p><code>gcc -O1 -c hello.c</code> &#x7F16;&#x8BD1;&#x5E76;&#x6C47;&#x7F16;&#xFF0C;&#x4EA7;&#x751F;<strong>&#x4E8C;&#x8FDB;&#x5236;&#x76EE;&#x6807;&#x4EE3;&#x7801;&#x6587;&#x4EF6;</strong>hello.o &#xFF0C;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x65E0;&#x6CD5;&#x76F4;&#x63A5;&#x67E5;&#x770B;&#xFF0C;&#x8981;&#x67E5;&#x770B;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x53CD;&#x6C47;&#x7F16;&#x5668;</p>
+<p><code>objdump -d hello.o</code> <strong>&#x53CD;&#x6C47;&#x7F16;</strong>&#x4E8C;&#x8FDB;&#x5236;&#x4EE3;&#x7801;&#x5E76;&#x8F93;&#x51FA;</p>
+<p><code>gcc -c bill.c</code> -c &#x963B;&#x6B62;&#x7F16;&#x8BD1;&#x5668;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;main&#x51FD;&#x6570;&#x5374;&#x8BD5;&#x56FE;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x7A0B;&#x5E8F;&#x4E0D;&#x4F1A;&#x6210;&#x529F;&#xFF0C;&#x4F1A;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;a.out&#x6587;&#x4EF6;&#xFF1B;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E86;-c&#x5219;&#x4EA7;&#x751F;&#x65E0;&#x6CD5;&#x8FD0;&#x884C;&#x7684;.o&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x3002;&#x53EF;&#x4EE5;<strong>&#x94FE;&#x63A5;</strong>&#x5230;&#x5176;&#x4ED6;&#x6587;&#x4EF6;&#x3002;</p>
+<p><code>TIMEFORMAT=&quot;&quot; time program</code> &#x4F7F;&#x7528;time&#x547D;&#x4EE4;&#x67E5;&#x770B;&#x8FD0;&#x884C;&#x65F6;&#x95F4;&#x548C;cpu&#x5360;&#x7528;&#x7387;&#x3002;&#x4F7F;&#x7528;TIMEFORMAT&#x91CD;&#x7F6E;&#x9ED8;&#x8BA4;&#x7684;POSIX&#x65F6;&#x95F4;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&#xFF0C;POSIX&#x65F6;&#x95F4;&#x683C;&#x5F0F;&#x4E0D;&#x5305;&#x62EC;cpu&#x4F7F;&#x7528;&#x7387;&#x3002;</p>
+<h4 id="include&#x533A;&#x522B;"><a href="#include&#x533A;&#x522B;" class="headerlink" title="include&#x533A;&#x522B;"></a>include&#x533A;&#x522B;</h4><p>&lt;&gt; &#x641C;&#x7D22;&#x8DEF;&#x5F84;&#x662F;&#x7CFB;&#x7EDF;&#x6307;&#x5B9A;&#x7684;&#x8DEF;&#x5F84;</p>
+<p>&#x201C; &#x201D; &#x5148;&#x5728;&#x5F53;&#x524D;&#x8DEF;&#x5F84;&#x627E;&#xFF0C;&#x518D;&#x627E;&#x7CFB;&#x7EDF;&#x8DEF;&#x5F84;</p>
+<h4 id="&#x9759;&#x6001;&#x5E93;&#x548C;&#x52A8;&#x6001;&#x5E93;"><a href="#&#x9759;&#x6001;&#x5E93;&#x548C;&#x52A8;&#x6001;&#x5E93;" class="headerlink" title="&#x9759;&#x6001;&#x5E93;&#x548C;&#x52A8;&#x6001;&#x5E93;"></a>&#x9759;&#x6001;&#x5E93;&#x548C;&#x52A8;&#x6001;&#x5E93;</h4><p>&#x9759;&#x6001;&#x5E93;.a &#x52A8;&#x6001;&#x5E93;.so</p>
+<p>/lib/ &#x7CFB;&#x7EDF;&#x8FD0;&#x884C;&#x5E93;</p>
+<p>/usr/lib/ &#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x5E93;</p>
+<p>&#x9759;&#x6001;&#x5E93;&#x5728;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#x52A0;&#x8F7D;&#xFF0C;&#x5347;&#x7EA7;&#x65F6;&#x8981;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#xFF0C;&#x5BB9;&#x6613;&#x90E8;&#x7F72;(&#x7A7A;&#x95F4;&#x5229;&#x7528;&#x7387;)</p>
+<p>&#x52A8;&#x6001;&#x5E93;&#x5728;&#x6267;&#x884C;&#x9636;&#x6BB5;&#x52A0;&#x8F7D;&#xFF0C;&#x5347;&#x7EA7;&#x4E0D;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#xFF0C;&#x4E0D;&#x6613;&#x90E8;&#x7F72;</p>
+<p><strong>&#x751F;&#x6210;&#x9759;&#x6001;&#x5E93;</strong> </p>
+<ol class="ui list">
+<li><code>ar rcs libadd.a add.o</code></li>
+<li><code>gcc main.c -ladd -L.</code></li>
+</ol>
+<ul class="ui list">
+<li><p>&#x53C2;&#x6570;r&#xFF1A;&#x5728;&#x5E93;&#x4E2D;&#x63D2;&#x5165;&#x6A21;&#x5757;(&#x66FF;&#x6362;)&#x3002;&#x5F53;&#x63D2;&#x5165;&#x7684;&#x6A21;&#x5757;&#x540D;&#x5DF2;&#x7ECF;&#x5728;&#x5E93;&#x4E2D;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x66FF;&#x6362;&#x540C;&#x540D;&#x7684;&#x6A21;&#x5757;&#x3002;&#x5982;&#x679C;&#x82E5;&#x5E72;&#x6A21;&#x5757;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x5728;&#x5E93;&#x4E2D;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;ar&#x663E;&#x793A;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;&#x6D88;&#x606F;&#xFF0C;&#x5E76;&#x4E0D;&#x66FF;&#x6362;&#x5176;&#x4ED6;&#x540C;&#x540D;&#x6A21;&#x5757;&#x3002;&#x9ED8;&#x8BA4;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x65B0;&#x7684;&#x6210;&#x5458;&#x589E;&#x52A0;&#x5728;&#x5E93;&#x7684;&#x7ED3;&#x5C3E;&#x5904;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x4EFB;&#x9009;&#x9879;&#x6765;&#x6539;&#x53D8;&#x589E;&#x52A0;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
+</li>
+<li><p>&#x53C2;&#x6570;c&#xFF1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5E93;&#x3002;&#x4E0D;&#x7BA1;&#x5E93;&#x662F;&#x5426;&#x5B58;&#x5728;&#xFF0C;&#x90FD;&#x5C06;&#x521B;&#x5EFA;&#x3002;</p>
+</li>
+<li><p>&#x53C2;&#x6570;s&#xFF1A;&#x521B;&#x5EFA;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x7D22;&#x5F15;&#xFF0C;&#x8FD9;&#x5728;&#x521B;&#x5EFA;&#x8F83;&#x5927;&#x7684;&#x5E93;&#x65F6;&#x80FD;&#x52A0;&#x5FEB;&#x65F6;&#x95F4;&#x3002;</p>
+</li>
+</ul>
+<p><strong>&#x751F;&#x6210;&#x52A8;&#x6001;&#x5E93;</strong></p>
+<p><code>gcc -shared -fPIC add.c -o libadd.so</code></p>
+<ul class="ui list">
+<li><code>-fPIC</code> &#x4F5C;&#x7528;&#x4E8E;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#xFF0C;&#x544A;&#x8BC9;&#x7F16;&#x8BD1;&#x5668;&#x4EA7;&#x751F;&#x4E0E;&#x4F4D;&#x7F6E;&#x65E0;&#x5173;&#x4EE3;&#x7801;(Position-Independent Code)&#xFF0C;&#x5219;&#x4EA7;&#x751F;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x6CA1;&#x6709;&#x7EDD;&#x5BF9;&#x5730;&#x5740;&#xFF0C;&#x5168;&#x90E8;&#x4F7F;&#x7528;&#x76F8;&#x5BF9;&#x5730;&#x5740;&#xFF0C;&#x6545;&#x800C;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x88AB;&#x52A0;&#x8F7D;&#x5668;&#x52A0;&#x8F7D;&#x5230;&#x5185;&#x5B58;&#x7684;&#x4EFB;&#x610F;&#x4F4D;&#x7F6E;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x6B63;&#x786E;&#x7684;&#x6267;&#x884C;&#x3002;&#x8FD9;&#x6B63;&#x662F;&#x5171;&#x4EAB;&#x5E93;&#x6240;&#x8981;&#x6C42;&#x7684;&#xFF0C;&#x5171;&#x4EAB;&#x5E93;&#x88AB;&#x52A0;&#x8F7D;&#x65F6;&#xFF0C;&#x5728;&#x5185;&#x5B58;&#x7684;&#x4F4D;&#x7F6E;&#x4E0D;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#x3002;</li>
+</ul>
+<h3 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h3><ol class="ui list">
+<li>&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;</li>
+<li>&#x8BBE;&#x7F6E;&#x65AD;&#x70B9;</li>
+<li>&#x67E5;&#x770B;&#x53D8;&#x91CF;&#x72B6;&#x6001;</li>
+</ol>
+<ol class="ui list">
+<li><code>gcc -g demo.c -o demo</code></li>
+<li><code>gdb demo</code></li>
+</ol>
+<p>list  &#x663E;&#x793A;c&#x4EE3;&#x7801;</p>
+<hr>
+<p>break 10 if i=10&#xFF08;&#x8BBE;&#x7F6E;&#x65AD;&#x70B9;&#x884C;&#x53F7;&#x548C;&#x6761;&#x4EF6;&#xFF09;</p>
+<p>break add&#xFF08;&#x8FD0;&#x884C;&#x5230;add&#x51FD;&#x6570;&#x65F6;&#x505C;&#x6B62;&#xFF09;</p>
+<p>info break&#xFF08;&#x67E5;&#x770B;&#x65AD;&#x70B9;&#x4FE1;&#x606F;&#xFF09;</p>
+<p>delete 1&#xFF08;&#x5220;&#x9664;&#x65AD;&#x70B9;&#xFF0C;delete&#x52A0;&#x65AD;&#x70B9;&#x7F16;&#x53F7;&#xFF09;</p>
+<p>run</p>
+<p>print i&#xFF08;&#x6253;&#x5370;&#x53D8;&#x91CF;&#x503C;&#xFF09;</p>
+<p>continue(&#x8DF3;&#x8FC7;&#x5F53;&#x524D;&#x65AD;&#x70B9;&#x7EE7;&#x7EED;&#x6267;&#x884C;)</p>
+<p>quit</p>
+<hr>
+<p>next &#x5355;&#x6B65;&#x8C03;&#x8BD5;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x8FDB;&#x5165;&#x5B50;&#x51FD;&#x6570;</p>
+<p>step &#x4E5F;&#x662F;&#x5355;&#x6B65;&#x8C03;&#x8BD5;&#xFF0C;&#x53EF;&#x4EE5;&#x8FDB;&#x5165;&#x5B50;&#x51FD;&#x6570;</p>
+<hr>
+<p>&#x6240;&#x6709;&#x547D;&#x4EE4;&#x90FD;&#x53EF;&#x4EE5;&#x7528;&#x9996;&#x5B57;&#x6BCD;&#x4EE3;&#x66FF;</p>
+<p>info break = i b</p>
+<hr>
+<p>&#x7A0B;&#x5E8F;&#x9519;&#x8BEF;&#xFF1A;</p>
+<p>1&#x8BED;&#x6CD5;&#x9519;&#x8BEF;&#x3001;2&#x903B;&#x8F91;&#x9519;&#x8BEF;&#x3001;3&#x8FD0;&#x884C;&#x65F6;&#x9519;&#x8BEF;&#xFF1A;&#x5185;&#x5B58;&#x9519;&#x8BEF;&#xFF08;&#x6BB5;&#x9519;&#x8BEF;&#xFF09;+ &#x603B;&#x7EBF;&#x9519;&#x8BEF;</p>
+<p>&#x6BB5;&#x9519;&#x8BEF;&#x53EF;&#x4EE5; run &#x51FA;&#x6765;&#x3002;</p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2018-06-13T06:48:50.000Z" itemprop="datePublished">2018-06-13</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/07/16/Network/Ccie/bgp/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    bgp
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/05/24/Frontend/jQuery入门(待)/" class="ui tiny button">
+                    
+                    jQuery入门
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#gcc常用标签"><span>gcc常用标签</span></a><ol><li><a href="#include区别"><span>include区别</span></a></li><li><a href="#静态库和动态库"><span>静态库和动态库</span></a></li></ol></li><li><a href="#gdb"><span>gdb</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

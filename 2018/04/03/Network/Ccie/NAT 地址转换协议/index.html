@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>NAT 地址转换协议 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="NAT &amp;#x5730;&amp;#x5740;&amp;#x8F6C;&amp;#x6362;&amp;#x534F;&amp;#x8BAE;&amp;#x4F18;&amp;#x7F3A;&amp;#x70B9;&amp;#x4F18;&amp;#x70B9;&amp;#x5728;&amp;#x5730;&amp;#x5740;&amp;#x91CD;&amp;#x53E0;&amp;#x65F6;&amp;#x63D0;&amp;#x4F9B;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848; &amp;#x5728;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NAT 地址转换协议">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/Network/Ccie/NAT 地址转换协议/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="NAT &amp;#x5730;&amp;#x5740;&amp;#x8F6C;&amp;#x6362;&amp;#x534F;&amp;#x8BAE;&amp;#x4F18;&amp;#x7F3A;&amp;#x70B9;&amp;#x4F18;&amp;#x70B9;&amp;#x5728;&amp;#x5730;&amp;#x5740;&amp;#x91CD;&amp;#x53E0;&amp;#x65F6;&amp;#x63D0;&amp;#x4F9B;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848; &amp;#x5728;&amp;#x">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-03T04:16:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NAT 地址转换协议">
+<meta name="twitter:description" content="NAT &amp;#x5730;&amp;#x5740;&amp;#x8F6C;&amp;#x6362;&amp;#x534F;&amp;#x8BAE;&amp;#x4F18;&amp;#x7F3A;&amp;#x70B9;&amp;#x4F18;&amp;#x70B9;&amp;#x5728;&amp;#x5730;&amp;#x5740;&amp;#x91CD;&amp;#x53E0;&amp;#x65F6;&amp;#x63D0;&amp;#x4F9B;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848; &amp;#x5728;&amp;#x">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Network/Ccie/NAT 地址转换协议" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    NAT 地址转换协议
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h2 id="NAT-&#x5730;&#x5740;&#x8F6C;&#x6362;&#x534F;&#x8BAE;"><a href="#NAT-&#x5730;&#x5740;&#x8F6C;&#x6362;&#x534F;&#x8BAE;" class="headerlink" title="NAT &#x5730;&#x5740;&#x8F6C;&#x6362;&#x534F;&#x8BAE;"></a>NAT &#x5730;&#x5740;&#x8F6C;&#x6362;&#x534F;&#x8BAE;</h2><h3 id="&#x4F18;&#x7F3A;&#x70B9;"><a href="#&#x4F18;&#x7F3A;&#x70B9;" class="headerlink" title="&#x4F18;&#x7F3A;&#x70B9;"></a>&#x4F18;&#x7F3A;&#x70B9;</h3><p><strong>&#x4F18;&#x70B9;</strong><br>&#x5728;&#x5730;&#x5740;&#x91CD;&#x53E0;&#x65F6;&#x63D0;&#x4F9B;&#x89E3;&#x51B3;&#x65B9;&#x6848;</p>
+<p>&#x5728;&#x7F51;&#x7EDC;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x65F6;&#x907F;&#x514D;&#x91CD;&#x65B0;&#x7F16;&#x7EC7;</p>
+<p>&#x6700;&#x5927;&#x4F5C;&#x7528;&#x4E3A;&#x53EF;&#x5C06;&#x79C1;&#x7F51;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x4E3A;&#x516C;&#x7F51;&#x5730;&#x5740;&#xFF0C;&#x63D0;&#x5347;&#x4E86;ip&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x7684;&#x4F7F;&#x7528;&#x7387;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;ipv4&#x81F3;&#x4ECA;&#x8FD8;&#x672A;&#x8017;&#x5C3D;&#x7684;&#x539F;&#x56E0;</p>
+<p><strong>&#x7F3A;&#x70B9;</strong></p>
+<p>&#x589E;&#x52A0;&#x4EA4;&#x6362;&#x5EF6;&#x8FDF;</p>
+<p>&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x7AEF;&#x5230;&#x7AEF;ip&#x8DDF;&#x8E2A;</p>
+<p>&#x6709;&#x4E9B;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x8FD0;&#x884C;</p>
+<h3 id="&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x7C7B;&#x578B;"><a href="#&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x7C7B;&#x578B;" class="headerlink" title="&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x7C7B;&#x578B;"></a>&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x7C7B;&#x578B;</h3><p><strong>&#x9759;&#x6001;NAT</strong>&#xFF1A;&#x5728;&#x672C;&#x5730;&#x5730;&#x5740;&#x548C;&#x5168;&#x5C40;&#x5730;&#x5740;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x4E00;&#x5BF9;&#x4E00;&#x7684;&#x6620;&#x5C04;&#x3002;&#x5FC5;&#x987B;&#x4E3A;&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x6BCF;&#x53F0;&#x4E3B;&#x673A;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x516C;&#x6709;ip&#x5730;&#x5740;&#x3002;</p>
+<p><strong>&#x52A8;&#x6001;NAT</strong>&#xFF1A;&#x5C06;&#x672A;&#x6CE8;&#x518C;&#x7684;ip&#x5730;&#x5740;&#x6620;&#x5C04;&#x5230;&#x6CE8;&#x518C;ip&#x5730;&#x5740;&#x6C60;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x5730;&#x5740;&#x3002;&#x5FC5;&#x987B;&#x6709;&#x8DB3;&#x591F;&#x591A;&#x7684;&#x516C;&#x6709;ip&#x5730;&#x5740;&#xFF0C;&#x8BA9;&#x8FDE;&#x63A5;&#x5230;&#x56E0;&#x7279;&#x7F51;&#x7684;&#x4E3B;&#x673A;&#x90FD;&#x80FD;&#x591F;&#x540C;&#x65F6;&#x53D1;&#x9001;&#x548C;&#x63A5;&#x6536;&#x5206;&#x7EC4;&#x3002;</p>
+<p><strong>NAT&#x91CD;&#x8F7D;</strong>&#xFF1A;<em>&#x6700;&#x5E38;&#x7528;&#x7684;NAT&#x7C7B;&#x578B;</em></p>
+<p>&#x4E5F;&#x88AB;&#x79F0;&#x4E3A;&#x7AEF;&#x53E3;&#x5730;&#x5740;&#x8F6C;&#x6362;(PAT) </p>
+<p>&#x5229;&#x7528;&#x6E90;&#x7AEF;&#x53E3;&#x5C06;&#x591A;&#x4E2A;&#x975E;&#x6CE8;&#x518C;ip&#x5730;&#x5740;&#x6620;&#x5C04;&#x5230;&#x4E00;&#x4E2A;&#x6CE8;&#x518C;ip&#x5730;&#x5740;(&#x591A;&#x5BF9;&#x4E00;)</p>
+<p>&#x4F7F;&#x7528;&#x4F20;&#x8F93;&#x5C42;&#x7AEF;&#x53E3;&#x53F7;&#x6765;&#x6807;&#x8BC6;&#x4E3B;&#x673A;&#xFF0C;&#x56E0;&#x6B64;&#x7406;&#x8BBA;&#x4E0A;&#x6700;&#x591A;&#x53EF;&#x8BA9;&#x5927;&#x7EA6;65 000&#x53F0;&#x4E3B;&#x673A;&#x5171;&#x7528;&#x4E00;&#x4E2A;&#x516C;&#x6709;ip&#x5730;&#x5740;</p>
+<p><strong>&#x672C;&#x5730;&#x5730;&#x5740;</strong>&#xFF1A;&#x8FDB;&#x884C;NAT&#x8F6C;&#x6362;&#x524D;&#x7684;&#x5730;&#x5740;</p>
+<p>&#x5185;&#x90E8;&#x672C;&#x5730;&#x5730;&#x5740;&#xFF1A;&#x8F6C;&#x6362;&#x524D;&#x7684;&#x5185;&#x90E8;&#x6E90;&#x5730;&#x5740;&#xFF0C;&#x4E3B;&#x673A;&#x7684;&#x79C1;&#x7F51;&#x5730;&#x5740;</p>
+<p>&#x5916;&#x90E8;&#x672C;&#x5730;&#x5730;&#x5740;&#xFF1A;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x76EE;&#x6807;&#x5730;&#x5740;&#xFF0C;&#x4E0E;ISP&#x76F8;&#x8FDE;&#x7684;&#x8DEF;&#x7531;&#x5668;&#x63A5;&#x53E3;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x901A;&#x5E38;&#x4E3A;&#x5171;&#x6709;&#x5730;&#x5740;</p>
+<p><strong>&#x5168;&#x5C40;&#x5730;&#x5740;</strong>&#xFF1A;&#x8FDB;&#x884C;NAT&#x8F6C;&#x6362;&#x540E;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x901A;&#x5E38;&#x4E3A;&#x56E0;&#x7279;&#x7F51;&#x5171;&#x6709;&#x5730;&#x5740;</p>
+<p>&#x5185;&#x90E8;&#x5168;&#x5C40;&#x5730;&#x5740;&#xFF1A;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x6E90;&#x5730;&#x5740;</p>
+<p>&#x5916;&#x90E8;&#x5168;&#x5C40;&#x5730;&#x5740;&#xFF1A;&#x8F6C;&#x6362;&#x524D;&#x7684;&#x5916;&#x90E8;&#x76EE;&#x6807;&#x5730;&#x5740;</p>
+<h3 id="&#x914D;&#x7F6E;&#x65B9;&#x5F0F;"><a href="#&#x914D;&#x7F6E;&#x65B9;&#x5F0F;" class="headerlink" title="&#x914D;&#x7F6E;&#x65B9;&#x5F0F;"></a>&#x914D;&#x7F6E;&#x65B9;&#x5F0F;</h3><p>&#x63A5;&#x53E3;&#x89D2;&#x8272;&#xFF1A;<br>inside&#xFF1A;&#x8FDE;&#x63A5;&#x5728;&#x5185;&#x90E8;&#x5E7F;&#x64AD;&#x57DF;<br>outside&#xFF1A;&#x8FDE;&#x63A5;&#x516C;&#x7F51;</p>
+<p>&#x8F6C;&#x6362;&#x63A5;&#x53E3;&#x89D2;&#x8272;<br>int xx<br>ip nat inside/outside</p>
+<h4 id="&#x9759;&#x6001;NAT"><a href="#&#x9759;&#x6001;NAT" class="headerlink" title="&#x9759;&#x6001;NAT"></a>&#x9759;&#x6001;NAT</h4><p>ip nat inside source static &#x5185;&#x90E8;ip &#x5916;&#x90E8;ip</p>
+<h4 id="&#x52A8;&#x6001;NAT"><a href="#&#x52A8;&#x6001;NAT" class="headerlink" title="&#x52A8;&#x6001;NAT"></a>&#x52A8;&#x6001;NAT</h4><p>ip nat pool todd 170.168.2.3 170.168.2.254 netmask 255.255.255.0</p>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5730;&#x5740;&#x6C60;todd&#xFF0C;&#x7528;&#x4E8E;&#x5C06;&#x5168;&#x5C40;&#x5730;&#x5740;&#x5206;&#x914D;&#x7ED9;&#x4E3B;&#x673A;</p>
+<p>ip nat inside source list 1 pool todd</p>
+<p>&#x5C06;&#x4E0E;access-list 1&#x5339;&#x914D;&#x7684;ip&#x5730;&#x5740;&#x8F6C;&#x6362;&#x4E3A;ip&#x5730;&#x5740;&#x6C60;todd&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x53EF;&#x7528;&#x5730;&#x5740;</p>
+<h4 id="PAT-NAT&#x91CD;&#x8F7D;"><a href="#PAT-NAT&#x91CD;&#x8F7D;" class="headerlink" title="PAT(NAT&#x91CD;&#x8F7D;)"></a>PAT(NAT&#x91CD;&#x8F7D;)</h4><p>&#x4E0E;&#x52A8;&#x6001;NAT&#x76F8;&#x6BD4;&#xFF0C;PAT&#x5730;&#x5740;&#x6C60;&#x53EA;&#x5305;&#x542B;&#x4E00;&#x4E2A;ip&#x5730;&#x5740;&#xFF0C;&#x4E14;&#x914D;&#x7F6E;&#x547D;&#x4EE4;&#x672B;&#x5C3E;&#x5305;&#x542B;&#x5173;&#x952E;&#x5B57;overload</p>
+<p>ip nat pool globalnet 170.168.2.1170.168.2.1 netmask 255.255.255.0 </p>
+<p>ip nat inside source list 1 pool overload</p>
+<p>(&#x91CD;&#x590D;&#x4F7F;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x5730;&#x5740;&#x6C60;&#x6709;&#x5176;&#x4ED6;&#x5730;&#x5740;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#xFF0C;&#x9002;&#x5408;&#x5927;&#x578B;&#x7F51;&#x7EDC;&#xFF0C;&#x5FC5;&#x987B;&#x91CD;&#x8F7D;&#x591A;&#x4E2A;&#x516C;&#x6709;ip&#x5730;&#x5740;)</p>
+<h3 id="&#x9A8C;&#x8BC1;&#x4E0E;&#x4FEE;&#x6539;"><a href="#&#x9A8C;&#x8BC1;&#x4E0E;&#x4FEE;&#x6539;" class="headerlink" title="&#x9A8C;&#x8BC1;&#x4E0E;&#x4FEE;&#x6539;"></a>&#x9A8C;&#x8BC1;&#x4E0E;&#x4FEE;&#x6539;</h3><p>show ip nat translation</p>
+<p>debug ip nat</p>
+<p>show ip nat statistics</p>
+<p>&#x547D;&#x4EE4;claer ip nat translations &#x6E05;&#x9664;&#x8F6C;&#x6362;&#x6761;&#x76EE;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5168;&#x5C40;&#x5730;&#x5740;&#x3001;&#x672C;&#x5730;&#x5730;&#x5740;&#x3001;tcp(udp)&#x7AEF;&#x53E3;&#x3001;*&#xFF08;&#x661F;&#x53F7;&#xFF0C;&#x6E05;&#x9664;&#x6240;&#x6709;&#x8F6C;&#x6362;&#x6761;&#x76EE;&#xFF09;</p>
+<p>&#x53EA;&#x8981;NAT&#x8868;&#x4E2D;&#x6709;&#x5305;&#x542B;&#x5730;&#x5740;&#x6C60;&#x4E2D;&#x5730;&#x5740;&#x7684;&#x8F6C;&#x6362;&#x6761;&#x76EE;&#xFF0C;&#x601D;&#x79D1;ios&#x5C31;&#x4E0D;&#x5141;&#x8BB8;&#x4FEE;&#x6539;&#x6216;&#x5220;&#x9664;&#x76F8;&#x5E94;&#x7684;&#x5730;&#x5740;&#x6C60;</p>
+<p>&#x8F6C;&#x6362;&#x6761;&#x76EE;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF1A;&#x9ED8;&#x8BA4;&#x4E3A;24&#x5C0F;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x547D;&#x4EE4;ip nat translation timeout&#x4FEE;&#x6539;&#x3002;&#x5982;&#x679C;&#x5B9A;&#x65F6;&#x5668;&#x5230;&#x671F;&#xFF0C;&#x76F8;&#x5E94;&#x7684;&#x8F6C;&#x6362;&#x6761;&#x76EE;&#x5C06;&#x4ECE;NAT&#x8868;&#x4E2D;&#x5220;&#x9664;&#xFF0C;&#x52A8;&#x6001;&#x5206;&#x914D;&#x7ED9;&#x5B83;&#x7684;&#x5730;&#x5740;&#x5C06;&#x5F52;&#x8FD8;&#x7ED9;&#x5730;&#x5740;&#x6C60;&#x3002;</p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2018-04-03T04:16:51.000Z" itemprop="datePublished">2018-04-03</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/04/03/Frontend/CSS入门/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    CSS入门
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/03/25/Algorithm/DFS/" class="ui tiny button">
+                    
+                    algorithm
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#NAT-地址转换协议"><span>NAT 地址转换协议</span></a><ol><li><a href="#优缺点"><span>优缺点</span></a></li><li><a href="#网络地址转换类型"><span>网络地址转换类型</span></a></li><li><a href="#配置方式"><span>配置方式</span></a><ol><li><a href="#静态NAT"><span>静态NAT</span></a></li><li><a href="#动态NAT"><span>动态NAT</span></a></li><li><a href="#PAT-NAT重载"><span>PAT(NAT重载)</span></a></li></ol></li><li><a href="#验证与修改"><span>验证与修改</span></a></li></ol></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

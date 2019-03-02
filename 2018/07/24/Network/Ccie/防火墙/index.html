@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>防火墙 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="&amp;#x9632;&amp;#x706B;&amp;#x5899;&amp;#x9632;&amp;#x706B;&amp;#x5899;&amp;#x7684;&amp;#x5206;&amp;#x7C7B;&amp;#x786C;&amp;#x4EF6;&amp;#x9632;&amp;#x706B;&amp;#x5899;&amp;#xFF1A;&amp;#x6D41;&amp;#x91CF;&amp;#x7684;&amp;#x7701;&amp;#x67E5;&amp;#x53CA;&amp;#x8BBF;&amp;#x95EE;&amp;#x7684;&amp;#x63A7;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="防火墙">
+<meta property="og:url" content="http://yoursite.com/2018/07/24/Network/Ccie/防火墙/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x9632;&amp;#x706B;&amp;#x5899;&amp;#x9632;&amp;#x706B;&amp;#x5899;&amp;#x7684;&amp;#x5206;&amp;#x7C7B;&amp;#x786C;&amp;#x4EF6;&amp;#x9632;&amp;#x706B;&amp;#x5899;&amp;#xFF1A;&amp;#x6D41;&amp;#x91CF;&amp;#x7684;&amp;#x7701;&amp;#x67E5;&amp;#x53CA;&amp;#x8BBF;&amp;#x95EE;&amp;#x7684;&amp;#x63A7;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-24T07:55:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="防火墙">
+<meta name="twitter:description" content="&amp;#x9632;&amp;#x706B;&amp;#x5899;&amp;#x9632;&amp;#x706B;&amp;#x5899;&amp;#x7684;&amp;#x5206;&amp;#x7C7B;&amp;#x786C;&amp;#x4EF6;&amp;#x9632;&amp;#x706B;&amp;#x5899;&amp;#xFF1A;&amp;#x6D41;&amp;#x91CF;&amp;#x7684;&amp;#x7701;&amp;#x67E5;&amp;#x53CA;&amp;#x8BBF;&amp;#x95EE;&amp;#x7684;&amp;#x63A7;">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Network/Ccie/防火墙" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    防火墙
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h1 id="&#x9632;&#x706B;&#x5899;"><a href="#&#x9632;&#x706B;&#x5899;" class="headerlink" title="&#x9632;&#x706B;&#x5899;"></a>&#x9632;&#x706B;&#x5899;</h1><h2 id="&#x9632;&#x706B;&#x5899;&#x7684;&#x5206;&#x7C7B;"><a href="#&#x9632;&#x706B;&#x5899;&#x7684;&#x5206;&#x7C7B;" class="headerlink" title="&#x9632;&#x706B;&#x5899;&#x7684;&#x5206;&#x7C7B;"></a>&#x9632;&#x706B;&#x5899;&#x7684;&#x5206;&#x7C7B;</h2><p>&#x786C;&#x4EF6;&#x9632;&#x706B;&#x5899;&#xFF1A;&#x6D41;&#x91CF;&#x7684;&#x7701;&#x67E5;&#x53CA;&#x8BBF;&#x95EE;&#x7684;&#x63A7;&#x5236;&#xFF1A;&#x4FDD;&#x62A4;&#x7684;&#x662F;&#x7F51;&#x7EDC;</p>
+<p>&#x8F6F;&#x4EF6;&#x9632;&#x706B;&#x5899;&#xFF1A;&#x7701;&#x67E5;&#x6728;&#x9A6C;&#x6216;&#x75C5;&#x6BD2;&#xFF1A;&#x4FDD;&#x62A4;&#x7684;&#x662F;&#x7CFB;&#x7EDF;</p>
+<p>&#x5E94;&#x7528;&#x9632;&#x706B;&#x5899;&#xFF1A;WAF&#xFF08;WEB &#x5E94;&#x7528;&#x9632;&#x706B;&#x5899;&#xFF09;&#x3001;APP &#x9632;&#x706B;&#x5899;</p>
+<h3 id="&#x786C;&#x4EF6;&#x9632;&#x706B;&#x5899;"><a href="#&#x786C;&#x4EF6;&#x9632;&#x706B;&#x5899;" class="headerlink" title="&#x786C;&#x4EF6;&#x9632;&#x706B;&#x5899;"></a>&#x786C;&#x4EF6;&#x9632;&#x706B;&#x5899;</h3><p>checkpoint&#xFF08;&#x8BFA;&#x57FA;&#x4E9A;&#xFF09;</p>
+<p>netscreen&#xFF08;&#x8A79;&#x535A;&#x3001;Juniper&#xFF09;</p>
+<p>PIX&#x3001;ASA&#xFF08;Cisco&#xFF09;SDN&#xFF08;&#x5B89;&#x5168;&#x81EA;&#x9632;&#x5FA1;&#x7F51;&#x7EDC;&#x3001;&#x8F6F;&#x4EF6;&#x5B9A;&#x4E49;&#x7684;&#x7F51;&#x7EDC;&#xFF09;</p>
+<p>&#x534E;&#x4E3A;&#x3001;&#x5929;&#x878D;&#x4FE1;</p>
+<h4 id="&#x786C;&#x4EF6;&#x9632;&#x706B;&#x5899;&#x7684;&#x90E8;&#x7F72;"><a href="#&#x786C;&#x4EF6;&#x9632;&#x706B;&#x5899;&#x7684;&#x90E8;&#x7F72;" class="headerlink" title="&#x786C;&#x4EF6;&#x9632;&#x706B;&#x5899;&#x7684;&#x90E8;&#x7F72;"></a>&#x786C;&#x4EF6;&#x9632;&#x706B;&#x5899;&#x7684;&#x90E8;&#x7F72;</h4><p>&#x7F51;&#x7EDC;&#x7684;&#x8FB9;&#x7F18;&#x90E8;&#x7F72;&#x9632;&#x706B;&#x5899;&#xFF0C;&#x4E00;&#x822C;&#x653E;&#x5728; PPPOE &#x62E8;&#x53F7;&#x8BBE;&#x5907;&#x7684;&#x8EAB;&#x540E;&#xFF0C;&#x5173;&#x952E;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x3002;</p>
+<h2 id="&#x9632;&#x706B;&#x5899;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;"><a href="#&#x9632;&#x706B;&#x5899;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;" class="headerlink" title="&#x9632;&#x706B;&#x5899;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;"></a>&#x9632;&#x706B;&#x5899;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;</h2><h3 id="&#x9632;&#x706B;&#x5899;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;"><a href="#&#x9632;&#x706B;&#x5899;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;" class="headerlink" title="&#x9632;&#x706B;&#x5899;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;"></a>&#x9632;&#x706B;&#x5899;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;</h3><p>&#x8DEF;&#x7531;&#x6A21;&#x5F0F;&#xFF1A;&#xFF08;&#x9ED8;&#x8BA4;&#x6A21;&#x5F0F;&#xFF09;&#x9632;&#x706B;&#x5899;&#x8BFB;&#x53D6; IP &#x5305;&#x5934;&#xFF0C;&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x5C42;&#x7684;&#x4FDD;&#x62A4;&#xFF0C;&#x652F;&#x6301;&#x52A8;&#x6001;&#x8DEF;&#x7531;&#x534F;&#x8BAE;&#x548C;&#x9759;&#x6001;&#x8DEF;&#x7531;&#x3002;</p>
+<p>&#x4EA4;&#x6362;&#x6A21;&#x5F0F;&#xFF1A;</p>
+<h3 id="&#x9632;&#x706B;&#x5899;&#x7684;&#x591A;&#x6A21;&#x5F0F;&#x548C;&#x5355;&#x6A21;&#x5F0F;"><a href="#&#x9632;&#x706B;&#x5899;&#x7684;&#x591A;&#x6A21;&#x5F0F;&#x548C;&#x5355;&#x6A21;&#x5F0F;" class="headerlink" title="&#x9632;&#x706B;&#x5899;&#x7684;&#x591A;&#x6A21;&#x5F0F;&#x548C;&#x5355;&#x6A21;&#x5F0F;"></a>&#x9632;&#x706B;&#x5899;&#x7684;&#x591A;&#x6A21;&#x5F0F;&#x548C;&#x5355;&#x6A21;&#x5F0F;</h3><p>&#x591A;&#x6A21;&#x5F0F;&#x652F;&#x6301;&#x865A;&#x62DF;&#x9632;&#x706B;&#x5899;&#xFF0C;&#x5373;&#x628A;&#x4E00;&#x53F0;&#x9632;&#x706B;&#x5899;&#x914D;&#x7F6E;&#x6210;&#x591A;&#x53F0;&#x903B;&#x8F91;&#x9632;&#x706B;&#x5899;&#x3002;</p>
+<p>&#x5355;&#x6A21;&#x5F0F;&#x662F;&#x9ED8;&#x8BA4;&#x6A21;&#x5F0F;&#x3002;</p>
+<h3 id="&#x9632;&#x706B;&#x5899;&#x63A5;&#x53E3;&#x7684;&#x7C7B;&#x578B;"><a href="#&#x9632;&#x706B;&#x5899;&#x63A5;&#x53E3;&#x7684;&#x7C7B;&#x578B;" class="headerlink" title="&#x9632;&#x706B;&#x5899;&#x63A5;&#x53E3;&#x7684;&#x7C7B;&#x578B;"></a>&#x9632;&#x706B;&#x5899;&#x63A5;&#x53E3;&#x7684;&#x7C7B;&#x578B;</h3><p>inside&#xFF1A;&#x5185;&#x90E8;&#x63A5;&#x53E3;</p>
+<p>&#x901A;&#x5E38;&#x8FDE;&#x63A5;&#x7684;&#x662F;&#x4FE1;&#x4EFB;&#x7F51;&#x7EDC;&#x5373;&#x5185;&#x7F51;</p>
+<p>outside&#xFF1A;&#x5916;&#x90E8;&#x63A5;&#x53E3;</p>
+<p>&#x901A;&#x5E38;&#x8FDE;&#x63A5;&#x7684;&#x662F;&#x975E;&#x4FE1;&#x4EFB;&#x516C;&#x5171;&#x7F51;&#x7EDC;&#xFF0C;&#x6BD4;&#x5982; ISP &#x6216; &#x5176;&#x4ED6;&#x7EC4;&#x7EC7;&#x7F51;&#x7EDC;</p>
+<h3 id="DMZ&#xFF1A;&#x975E;&#x519B;&#x4E8B;&#x533A;&#x57DF;"><a href="#DMZ&#xFF1A;&#x975E;&#x519B;&#x4E8B;&#x533A;&#x57DF;" class="headerlink" title="DMZ&#xFF1A;&#x975E;&#x519B;&#x4E8B;&#x533A;&#x57DF;"></a>DMZ&#xFF1A;&#x975E;&#x519B;&#x4E8B;&#x533A;&#x57DF;</h3><p>&#x901A;&#x5E38;&#x6570;&#x636E;&#x4E2D;&#x5FC3;&#x653E;&#x5728; DMZ &#x533A;&#x57DF;</p>
+<h3 id="&#x9632;&#x706B;&#x5899;&#x63A5;&#x53E3;&#x7B49;&#x7EA7;&#x548C;&#x8BBF;&#x95EE;&#x89C4;&#x5219;"><a href="#&#x9632;&#x706B;&#x5899;&#x63A5;&#x53E3;&#x7B49;&#x7EA7;&#x548C;&#x8BBF;&#x95EE;&#x89C4;&#x5219;" class="headerlink" title="&#x9632;&#x706B;&#x5899;&#x63A5;&#x53E3;&#x7B49;&#x7EA7;&#x548C;&#x8BBF;&#x95EE;&#x89C4;&#x5219;"></a>&#x9632;&#x706B;&#x5899;&#x63A5;&#x53E3;&#x7B49;&#x7EA7;&#x548C;&#x8BBF;&#x95EE;&#x89C4;&#x5219;</h3><p>inside &#x63A5;&#x53E3;&#x5B89;&#x5168;&#x7B49;&#x7EA7;&#xFF1A;100</p>
+<p>outside &#x63A5;&#x53E3;&#x5B89;&#x5168;&#x7B49;&#x7EA7;&#xFF1A;0</p>
+<p>DMZ &#x63A5;&#x53E3;&#x5B89;&#x5168;&#x7B49;&#x7EA7;&#xFF1A;50&#x3001;0</p>
+<p>&#x9AD8;&#x7B49;&#x7EA7;&#x63A5;&#x53E3;&#x63A5;&#x6536;&#x6D41;&#x91CF;&#x7A7F;&#x8D8A;&#x9632;&#x706B;&#x5899;&#x4ECE;&#x4F4E;&#x7B49;&#x7EA7;&#x63A5;&#x53E3;&#x53D1;&#x9001;&#x51FA;&#x53BB;&#xFF0C;&#x5FC5;&#x987B;&#x7ECF;&#x8FC7; NAT&#x3002;</p>
+<p>&#x4F4E;&#x7B49;&#x7EA7;&#x63A5;&#x53E3;&#x63A5;&#x6536;&#x6D41;&#x91CF;&#x7A7F;&#x8D8A;&#x9632;&#x706B;&#x5899;&#x4ECE;&#x9AD8;&#x7B49;&#x7EA7;&#x63A5;&#x53E3;&#x53D1;&#x9001;&#x51FA;&#x53BB;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E0D;&#x5141;&#x8BB8;&#x3002;</p>
+<p>&#x9664;&#x975E;&#x662F;&#x8FD4;&#x56DE;&#x6D41;&#x91CF;&#x6216;&#x88AB;&#x7BA1;&#x7406;&#x5458;&#x624B;&#x52A8;&#x653E;&#x884C;&#x3002;</p>
+<p>&#x76F8;&#x540C;&#x5B89;&#x5168;&#x7EA7;&#x522B;&#x7684;&#x63A5;&#x53E3;&#x76F8;&#x4E92;&#x901A;&#x8BAF;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E0D;&#x5141;&#x8BB8;&#x901A;&#x8BAF;&#xFF0C;&#x9664;&#x975E;&#x7BA1;&#x7406;&#x5458;&#x653E;&#x884C;&#x3002;</p>
+<h2 id="&#x914D;&#x7F6E;"><a href="#&#x914D;&#x7F6E;" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</h2><ol class="ui list">
+<li>&#x67E5;&#x770B;&#x63A5;&#x53E3;<code>show interface ip brief</code></li>
+</ol>
+<ol start="2" class="ui list">
+<li></li>
+</ol>
+<ol start="3" class="ui list">
+<li>&#x67E5;&#x770B;&#x7279;&#x5B9A;&#x914D;&#x7F6E;`show run</li>
+</ol>
+<ol start="4" class="ui list">
+<li><p>&#x67E5;&#x770B;&#x8F6C;&#x6362;&#x8868;&#xFF1A; <code>show xlate</code></p>
+</li>
+<li><p>&#x914D;&#x7F6E;&#x63A5;&#x53E3;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">nameif &lt;inside/outside/dmz/other&gt; //&#x63A5;&#x53E3;&#x547D;&#x540D;&#xFF0C;&#x5FC5;&#x987B;&#x505A;&#xFF0C;&#x4E0D;&#x7136;&#x63A5;&#x53E3;&#x4E0D;&#x5DE5;&#x4F5C;</span><br><span class="line">security-level &lt;100/0/other&gt;  //&#x8BBE;&#x7F6E;&#x9632;&#x706B;&#x5899;&#x63A5;&#x53E3;&#x5B89;&#x5168;&#x7B49;&#x7EA7;</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br><span class="line">no shutdown</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x6CE8;&#x5165;&#x9759;&#x6001;&#x8DEF;&#x7531;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route &lt;&#x63A5;&#x53E3;&#x540D;&gt; &lt;&#x76EE;&#x6807;&#x7F51;&#x7EDC;&gt; &lt;&#x63A9;&#x7801;&gt; &lt;&#x4E0B;&#x4E00;&#x8DF3;&#x5730;&#x5740;&gt;</span><br><span class="line">//route outside 0.0.0.0 0.0.0.0 202.1.1.1</span><br><span class="line">//outside &#x63A5;&#x53E3;&#x4F5C;&#x4E3A;&#x7F3A;&#x7701;&#x8DEF;&#x7531;&#x7684;&#x51FA;&#x53E3;&#xFF0C;&#x4E0B;&#x4E00;&#x8DF3;&#x4E3A; 202.1.1.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x9632;&#x706B;&#x5899;&#x4E0A;&#x914D;&#x7F6E; ACL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">access-list &lt;ACL-name&gt; &lt;extended/standard&gt; &lt;permit/deny&gt; &lt;&#x534F;&#x8BAE;&#x540D;&#x5B57;&gt; any any</span><br><span class="line">access-group &lt;ACL-name&gt; &lt;in/out&gt; interface &lt;intf-name&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x9632;&#x706B;&#x5899;&#x4E0A;&#x914D;&#x7F6E; NAT</p>
+<ol>
+<li><p>&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x7F51;&#x7EDC;&#xFF0C;&#x6DFB;&#x52A0;&#x5141;&#x8BB8;&#x8F6C;&#x5316;&#x7684;&#x5185;&#x7F51;&#x4FE1;&#x606F;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object network &lt;INSIDE&gt;</span><br><span class="line">subnet &lt;10.1.1.0 255.255.255.0&gt;</span><br></pre></td></tr></table></figure>
+<p>&#x9632;&#x706B;&#x5899;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x591A;&#x4E2A;&#x5BF9;&#x8C61;&#x7F51;&#x7EDC;&#xFF0C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7F51;&#x7EDC;&#x5BF9;&#x5E94;&#x5230;&#x4E00;&#x4E2A;&#x90E8;&#x95E8;&#x3002;</p>
+</li>
+<li><p>&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x7EC4;&#xFF0C;&#x5C06;&#x5BF9;&#x8C61;&#x7F51;&#x7EDC;&#x5173;&#x8054;&#x5E76;&#x4E14;&#x8BBE;&#x7F6E; NAT &#x8F6C;&#x5316;&#x8BED;&#x53E5;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object-group network &lt;G&gt;</span><br><span class="line">network-object object &lt;INSIDE&gt;</span><br><span class="line">network-object object &lt;DMZ&gt;</span><br><span class="line">nat (inside,outside) source dynamic G interface</span><br><span class="line">nat (DMZ,outside) source dynamic G interface</span><br></pre></td></tr></table></figure>
+<p>&#xFF01;&#xFF01;&#x8865;&#x5145;&#x77E5;&#x8BC6;</p>
+<p>NAT&#xFF1A;&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;</p>
+<p>&#x9759;&#x6001; NAT&#xFF1A;&#x7BA1;&#x7406;&#x5458;&#x6307;&#x5B9A;&#x7684;&#x4E00;&#x5BF9;&#x4E00;&#x8F6C;&#x5316;</p>
+<p>&#x52A8;&#x6001; NAT&#xFF1A;&#x8DEF;&#x7531;&#x5668;&#x81EA;&#x52A8;&#x7684;&#x5B8C;&#x6210;&#x4E00;&#x5BF9;&#x4E00;&#x8F6C;&#x5316;</p>
+<p>&#x7AEF;&#x53E3; NAT&#xFF1A;PAT &#x591A;&#x5BF9;&#x4E00;&#x7684;&#x8F6C;&#x5316;&#xFF0C;&#x5229;&#x7528;&#x7AEF;&#x53E3;&#x53F7;&#x533A;&#x5206;&#x5F00;</p>
+<p>&#xFF01;&#xFF01;&#x6CE8;&#x610F;</p>
+<p>&#x9632;&#x706B;&#x5899;&#x9ED8;&#x8BA4;&#x4E0D;&#x5141;&#x8BB8; PING &#x5305;&#x6D41;&#x91CF;&#x4ECE;&#x4F4E;&#x7B49;&#x7EA7;&#x63A5;&#x53E3;&#x7A7F;&#x8D8A;&#x9632;&#x706B;&#x5899;&#x62B5;&#x8FBE;&#x9AD8;&#x7B49;&#x7EA7;&#x63A5;&#x53E3;&#x3002;</p>
+</li>
+<li><p>&#x5185;&#x7F51;&#x670D;&#x52A1;&#x53D1;&#x5E03;&#x5230;&#x5916;&#x7F51;</p>
+<ol>
+<li><p>&#x5B9A;&#x4E49;&#x5BF9;&#x8C61;&#x7F51;&#x7EDC;&#xFF0C;&#x628A;&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;&#x653E;&#x5165;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object network &lt;TELNET&gt;</span><br><span class="line">host &lt;&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x5B8C;&#x6210;&#x9759;&#x6001; NAT &#x7684;&#x914D;&#x7F6E;&#x53D1;&#x5E03;&#x670D;&#x52A1;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nat (dmz,outside) static &lt;&#x516C;&#x7F51;&#x5730;&#x5740;&gt; service tcp &lt;&#x76EE;&#x6807;&#x7AEF;&#x53E3;&#x53F7;&gt;</span><br><span class="line">//&#x516C;&#x7F51;&#x5730;&#x5740;&#x4E0D;&#x662F; ASA outside &#x63A5;&#x53E3;&#x5730;&#x5740;&#xFF0C;&#x662F;&#x989D;&#x5916;&#x7533;&#x8BF7;&#x7684;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x5229;&#x7528; ACL &#x653E;&#x884C;&#x6765;&#x81EA;&#x5916;&#x7F51;&#x4E3B;&#x52A8;&#x8BBF;&#x95EE;&#x5185;&#x7F51;&#x670D;&#x52A1;&#x7684;&#x6D41;&#x91CF;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list &lt;acl-name&gt; extended permit tcp any host 10.2.2.2 eq 23</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h1>
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2018-07-24T07:55:49.000Z" itemprop="datePublished">2018-07-24</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/07/26/Network/Ccie/IPSEC VPN/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    IPSEC VPN
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/07/24/Network/Ccie/MPLS VPN/" class="ui tiny button">
+                    
+                    MPLS VPN
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#防火墙"><span>防火墙</span></a><ol><li><a href="#防火墙的分类"><span>防火墙的分类</span></a><ol><li><a href="#硬件防火墙"><span>硬件防火墙</span></a><ol><li><a href="#硬件防火墙的部署"><span>硬件防火墙的部署</span></a></li></ol></li></ol></li><li><a href="#防火墙的基础知识"><span>防火墙的基础知识</span></a><ol><li><a href="#防火墙工作模式"><span>防火墙工作模式</span></a></li><li><a href="#防火墙的多模式和单模式"><span>防火墙的多模式和单模式</span></a></li><li><a href="#防火墙接口的类型"><span>防火墙接口的类型</span></a></li><li><a href="#DMZ：非军事区域"><span>DMZ：非军事区域</span></a></li><li><a href="#防火墙接口等级和访问规则"><span>防火墙接口等级和访问规则</span></a></li></ol></li><li><a href="#配置"><span>配置</span></a></li></ol></li><li><a href="#结束"><span>结束</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>CMake入门 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="&amp;#x57FA;&amp;#x672C;123456# CMake &amp;#x6700;&amp;#x4F4E;&amp;#x7248;&amp;#x672C;&amp;#x53F7;&amp;#x8981;&amp;#x6C42;cmake_minimum_required (VERSION 2.8)# &amp;#x9879;&amp;#x76EE;&amp;#x4FE1;&amp;#x606F;project (Demo1)# &amp;#x6307;&amp;#x5B9A;&amp;#x751F;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMake入门">
+<meta property="og:url" content="http://yoursite.com/2018/10/05/Unix/Programming/CMake入门/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x57FA;&amp;#x672C;123456# CMake &amp;#x6700;&amp;#x4F4E;&amp;#x7248;&amp;#x672C;&amp;#x53F7;&amp;#x8981;&amp;#x6C42;cmake_minimum_required (VERSION 2.8)# &amp;#x9879;&amp;#x76EE;&amp;#x4FE1;&amp;#x606F;project (Demo1)# &amp;#x6307;&amp;#x5B9A;&amp;#x751F;&amp;#x">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-25T11:11:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CMake入门">
+<meta name="twitter:description" content="&amp;#x57FA;&amp;#x672C;123456# CMake &amp;#x6700;&amp;#x4F4E;&amp;#x7248;&amp;#x672C;&amp;#x53F7;&amp;#x8981;&amp;#x6C42;cmake_minimum_required (VERSION 2.8)# &amp;#x9879;&amp;#x76EE;&amp;#x4FE1;&amp;#x606F;project (Demo1)# &amp;#x6307;&amp;#x5B9A;&amp;#x751F;&amp;#x">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Unix/Programming/CMake入门" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    CMake入门
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h3 id="&#x57FA;&#x672C;"><a href="#&#x57FA;&#x672C;" class="headerlink" title="&#x57FA;&#x672C;"></a>&#x57FA;&#x672C;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># CMake &#x6700;&#x4F4E;&#x7248;&#x672C;&#x53F7;&#x8981;&#x6C42;</span><br><span class="line">cmake_minimum_required (VERSION 2.8)</span><br><span class="line"># &#x9879;&#x76EE;&#x4FE1;&#x606F;</span><br><span class="line">project (Demo1)</span><br><span class="line"># &#x6307;&#x5B9A;&#x751F;&#x6210;&#x76EE;&#x6807;</span><br><span class="line">add_executable(Demo main.c fuc.c)</span><br></pre></td></tr></table></figure>
+<h3 id="&#x540C;&#x4E00;&#x76EE;&#x5F55;&#xFF0C;&#x591A;&#x4E2A;&#x6E90;&#x6587;&#x4EF6;"><a href="#&#x540C;&#x4E00;&#x76EE;&#x5F55;&#xFF0C;&#x591A;&#x4E2A;&#x6E90;&#x6587;&#x4EF6;" class="headerlink" title="&#x540C;&#x4E00;&#x76EE;&#x5F55;&#xFF0C;&#x591A;&#x4E2A;&#x6E90;&#x6587;&#x4EF6;"></a>&#x540C;&#x4E00;&#x76EE;&#x5F55;&#xFF0C;&#x591A;&#x4E2A;&#x6E90;&#x6587;&#x4EF6;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># CMake &#x6700;&#x4F4E;&#x7248;&#x672C;&#x53F7;&#x8981;&#x6C42;</span><br><span class="line">cmake_minimum_required (VERSION 2.8)</span><br><span class="line"># &#x9879;&#x76EE;&#x4FE1;&#x606F;</span><br><span class="line">project (Demo2)</span><br><span class="line"># &#x67E5;&#x627E;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x6240;&#x6709;&#x6E90;&#x6587;&#x4EF6;</span><br><span class="line"># &#x5E76;&#x5C06;&#x540D;&#x79F0;&#x4FDD;&#x5B58;&#x5230; DIR_SRCS &#x53D8;&#x91CF;</span><br><span class="line">aux_source_directory(. DIR_SRCS)</span><br><span class="line"># &#x6307;&#x5B9A;&#x751F;&#x6210;&#x76EE;&#x6807;</span><br><span class="line">add_executable(Demo ${DIR_SRCS})</span><br></pre></td></tr></table></figure>
+<h3 id="&#x591A;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x591A;&#x4E2A;&#x6E90;&#x6587;&#x4EF6;"><a href="#&#x591A;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x591A;&#x4E2A;&#x6E90;&#x6587;&#x4EF6;" class="headerlink" title="&#x591A;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x591A;&#x4E2A;&#x6E90;&#x6587;&#x4EF6;"></a>&#x591A;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x591A;&#x4E2A;&#x6E90;&#x6587;&#x4EF6;</h3><p>&#x6839;&#x76EE;&#x5F55;&#x4E2D;&#x7684; CMakeLists.txt &#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># CMake &#x6700;&#x4F4E;&#x7248;&#x672C;&#x53F7;&#x8981;&#x6C42;</span><br><span class="line">cmake_minimum_required (VERSION 2.8)</span><br><span class="line"># &#x9879;&#x76EE;&#x4FE1;&#x606F;</span><br><span class="line">project (Demo3)</span><br><span class="line"># &#x67E5;&#x627E;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x6240;&#x6709;&#x6E90;&#x6587;&#x4EF6;</span><br><span class="line"># &#x5E76;&#x5C06;&#x540D;&#x79F0;&#x4FDD;&#x5B58;&#x5230; DIR_SRCS &#x53D8;&#x91CF;</span><br><span class="line">aux_source_directory(. DIR_SRCS)</span><br><span class="line"># &#x6DFB;&#x52A0; math &#x5B50;&#x76EE;&#x5F55;</span><br><span class="line">add_subdirectory(math)</span><br><span class="line"># &#x6307;&#x5B9A;&#x751F;&#x6210;&#x76EE;&#x6807; </span><br><span class="line">add_executable(Demo main.cc)</span><br><span class="line"># &#x6DFB;&#x52A0;&#x94FE;&#x63A5;&#x5E93;</span><br><span class="line">target_link_libraries(Demo MathFunctions)</span><br></pre></td></tr></table></figure>
+<p>&#x5B50;&#x76EE;&#x5F55;math&#x4E2D;&#x7684; CMakeLists.txt&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># &#x67E5;&#x627E;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x6240;&#x6709;&#x6E90;&#x6587;&#x4EF6;</span><br><span class="line"># &#x5E76;&#x5C06;&#x540D;&#x79F0;&#x4FDD;&#x5B58;&#x5230; DIR_LIB_SRCS &#x53D8;&#x91CF;</span><br><span class="line">aux_source_directory(. DIR_LIB_SRCS)</span><br><span class="line"># &#x751F;&#x6210;&#x94FE;&#x63A5;&#x5E93;</span><br><span class="line">add_library (MathFunctions ${DIR_LIB_SRCS})</span><br></pre></td></tr></table></figure>
+<h3 id="&#x6DFB;&#x52A0;&#x7F16;&#x8BD1;&#x53C2;&#x6570;"><a href="#&#x6DFB;&#x52A0;&#x7F16;&#x8BD1;&#x53C2;&#x6570;" class="headerlink" title="&#x6DFB;&#x52A0;&#x7F16;&#x8BD1;&#x53C2;&#x6570;"></a>&#x6DFB;&#x52A0;&#x7F16;&#x8BD1;&#x53C2;&#x6570;</h3><p>c&#xFF1A;<code>set(CMAKE_C_FLAGS &quot;${CMAKE_C_FLAGS} -std=c++11&quot;)</code></p>
+<p>c++&#xFF1A;<code>set(CMAKE_CXX_FLAGS &quot;${CMAKE_CXX_FLAGS} -std=c++11&quot;)</code></p>
+<h3 id="&#x6DFB;&#x52A0;&#x5934;&#x6587;&#x4EF6;&#x76EE;&#x5F55;"><a href="#&#x6DFB;&#x52A0;&#x5934;&#x6587;&#x4EF6;&#x76EE;&#x5F55;" class="headerlink" title="&#x6DFB;&#x52A0;&#x5934;&#x6587;&#x4EF6;&#x76EE;&#x5F55;"></a>&#x6DFB;&#x52A0;&#x5934;&#x6587;&#x4EF6;&#x76EE;&#x5F55;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include_directories([AFTER|BEFORE] [SYSTEM] dir1 [dir2 ...])</span><br></pre></td></tr></table></figure>
+<h3 id="&#x6DFB;&#x52A0;&#x9700;&#x8981;&#x94FE;&#x63A5;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x76EE;&#x5F55;"><a href="#&#x6DFB;&#x52A0;&#x9700;&#x8981;&#x94FE;&#x63A5;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x76EE;&#x5F55;" class="headerlink" title="&#x6DFB;&#x52A0;&#x9700;&#x8981;&#x94FE;&#x63A5;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x76EE;&#x5F55;"></a>&#x6DFB;&#x52A0;&#x9700;&#x8981;&#x94FE;&#x63A5;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x76EE;&#x5F55;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link_directories(directory1 directory2 ...)</span><br></pre></td></tr></table></figure>
+<p>&#x5B83;&#x76F8;&#x5F53;&#x4E8E;g++&#x547D;&#x4EE4;&#x7684;-L&#x9009;&#x9879;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x4E5F;&#x76F8;&#x5F53;&#x4E8E;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4E2D;&#x589E;&#x52A0;LD_LIBRARY_PATH&#x7684;&#x8DEF;&#x5F84;&#x7684;&#x4F5C;&#x7528;&#x3002;</p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2018-10-05T04:17:18.000Z" itemprop="datePublished">2018-10-05</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/10/06/Database/Mysql/mysql大小写区分/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    mysql大小写区分
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/10/04/App/sk2mp3/" class="ui tiny button">
+                    
+                    (No Title)
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#基本"><span>基本</span></a></li><li><a href="#同一目录，多个源文件"><span>同一目录，多个源文件</span></a></li><li><a href="#多个目录，多个源文件"><span>多个目录，多个源文件</span></a></li><li><a href="#添加编译参数"><span>添加编译参数</span></a></li><li><a href="#添加头文件目录"><span>添加头文件目录</span></a></li><li><a href="#添加需要链接的库文件目录"><span>添加需要链接的库文件目录</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

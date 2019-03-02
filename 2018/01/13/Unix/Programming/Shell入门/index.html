@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>shell程序设计入门 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="&amp;#x7B80;&amp;#x4ECB;&amp;#x6807;&amp;#x51C6;shell&amp;#x2014;&amp;#x2014;bash&amp;#x200B;    &amp;#x5728;Linux&amp;#x4E2D;&amp;#xFF0C;&amp;#x603B;&amp;#x662F;&amp;#x4F5C;&amp;#x4E3A;/bin/sh&amp;#x5B89;&amp;#x88C5;&amp;#x7684;&amp;#x6807;&amp;#x51C6;shell&amp;#x662F;GNU&amp;#x5DE5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell程序设计入门">
+<meta property="og:url" content="http://yoursite.com/2018/01/13/Unix/Programming/Shell入门/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x7B80;&amp;#x4ECB;&amp;#x6807;&amp;#x51C6;shell&amp;#x2014;&amp;#x2014;bash&amp;#x200B;    &amp;#x5728;Linux&amp;#x4E2D;&amp;#xFF0C;&amp;#x603B;&amp;#x662F;&amp;#x4F5C;&amp;#x4E3A;/bin/sh&amp;#x5B89;&amp;#x88C5;&amp;#x7684;&amp;#x6807;&amp;#x51C6;shell&amp;#x662F;GNU&amp;#x5DE5">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-02T20:29:10.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell程序设计入门">
+<meta name="twitter:description" content="&amp;#x7B80;&amp;#x4ECB;&amp;#x6807;&amp;#x51C6;shell&amp;#x2014;&amp;#x2014;bash&amp;#x200B;    &amp;#x5728;Linux&amp;#x4E2D;&amp;#xFF0C;&amp;#x603B;&amp;#x662F;&amp;#x4F5C;&amp;#x4E3A;/bin/sh&amp;#x5B89;&amp;#x88C5;&amp;#x7684;&amp;#x6807;&amp;#x51C6;shell&amp;#x662F;GNU&amp;#x5DE5">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Unix/Programming/Shell入门" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    shell程序设计入门
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h3 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;" class="headerlink" title="&#x7B80;&#x4ECB;"></a>&#x7B80;&#x4ECB;</h3><h4 id="&#x6807;&#x51C6;shell&#x2014;&#x2014;bash"><a href="#&#x6807;&#x51C6;shell&#x2014;&#x2014;bash" class="headerlink" title="&#x6807;&#x51C6;shell&#x2014;&#x2014;bash"></a>&#x6807;&#x51C6;shell&#x2014;&#x2014;bash</h4><p>&#x200B;    &#x5728;Linux&#x4E2D;&#xFF0C;&#x603B;&#x662F;&#x4F5C;&#x4E3A;/bin/sh&#x5B89;&#x88C5;&#x7684;&#x6807;&#x51C6;shell&#x662F;GNU&#x5DE5;&#x5177;&#x96C6;&#x4E2D;&#x7684;bash&#xFF0C;&#x5B83;&#x662F;&#x5F00;&#x6E90;&#x7684;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x88AB;&#x79FB;&#x690D;&#x5230;&#x51E0;&#x4E4E;&#x6240;&#x6709;&#x7684;&#x7C7B;unix&#x7CFB;&#x7EDF;&#x4E0A;&#x3002;</p>
+<p>&#x200B;    &#x5728;&#x5927;&#x591A;&#x6570;Linux&#x53D1;&#x884C;&#x7248;&#x4E2D;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;shell&#x7A0B;&#x5E8F;/bin/sh&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x5BF9;&#x7A0B;&#x5E8F;/bin/bash&#x7684;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#x3002;</p>
+<p>&#x200B;    &#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#x6765;&#x67E5;&#x770B;bash&#x7684;&#x7248;&#x672C;&#x53F7;</p>
+<p><code>$/bin/bash --version</code></p>
+<h4 id="&#x5207;&#x6362;shell"><a href="#&#x5207;&#x6362;shell" class="headerlink" title="&#x5207;&#x6362;shell"></a>&#x5207;&#x6362;shell</h4><p>&#x200B;    &#x53EA;&#x9700;&#x8981;&#x76F4;&#x63A5;&#x6267;&#x884C;&#x9700;&#x8981;&#x7684;shell&#x7A0B;&#x5E8F;&#xFF0C;&#x4F8B;&#x5982;<code>/bin/bash</code>&#xFF0C;&#x5C31;&#x80FD;&#x591F;&#x8FD0;&#x884C;&#x65B0;&#x7684;shell&#x5E76;&#x4E14;&#x6539;&#x53D8;&#x547D;&#x4EE4;&#x63D0;&#x793A;&#x7B26;&#x4E86;&#x3002;</p>
+<h3 id="&#x811A;&#x672C;"><a href="#&#x811A;&#x672C;" class="headerlink" title="&#x811A;&#x672C;"></a>&#x811A;&#x672C;</h3><h4 id="&#x521B;&#x5EFA;&#x811A;&#x672C;"><a href="#&#x521B;&#x5EFA;&#x811A;&#x672C;" class="headerlink" title="&#x521B;&#x5EFA;&#x811A;&#x672C;"></a>&#x521B;&#x5EFA;&#x811A;&#x672C;</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bash/sh</span></span><br><span class="line"><span class="comment"># &#x811A;&#x672C;&#x540D;&#x5B57;&#x4E3A;skuaka</span></span><br><span class="line"></span><br><span class="line">&#x547D;&#x4EE4;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p>&#x200B;    <code>#!</code>&#x5B57;&#x7B26;&#x544A;&#x8BC9;&#x7CFB;&#x7EDF;&#x540C;&#x4E00;&#x884C;&#x4E0A;<strong>&#x7D27;&#x8DDF;</strong>&#x5728;&#x5B83;&#x540E;&#x9762;&#x7684;&#x90A3;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x7528;&#x6765;&#x6267;&#x884C;&#x672C;&#x6587;&#x4EF6;&#x7684;&#x7A0B;&#x5E8F;&#x3002;</p>
+<p>&#x200B;    <code>#</code>&#x5B57;&#x7B26;&#x540E;&#x9762;&#x7684;&#x6574;&#x884C;&#x4E3A;&#x6CE8;&#x91CA;</p>
+<p>&#x200B;    <code>exit</code>&#x547D;&#x4EE4;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x786E;&#x4FDD;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x80FD;&#x591F;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6709;&#x610F;&#x4E49;&#x7684;&#x9000;&#x51FA;&#x7801;&#xFF0C;&#x4EE5;&#x4F9B;&#x5176;&#x4ED6;&#x811A;&#x672C;&#x8C03;&#x7528;&#x3002;0&#x8868;&#x793A;&#x8FD0;&#x884C;&#x6210;&#x529F;&#x3002;</p>
+<p>&#x200B;    &#x67E5;&#x770B;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x662F;&#x811A;&#x672C;&#x7684;&#x6700;&#x597D;&#x65B9;&#x6CD5;&#x662F;&#x4F7F;&#x7528;file&#x547D;&#x4EE4;<code>file skuaka</code></p>
+<h4 id="&#x6267;&#x884C;&#x811A;&#x672C;"><a href="#&#x6267;&#x884C;&#x811A;&#x672C;" class="headerlink" title="&#x6267;&#x884C;&#x811A;&#x672C;"></a>&#x6267;&#x884C;&#x811A;&#x672C;</h4><p>&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<ol class="ui list">
+<li><p>&#x8C03;&#x7528;shell&#xFF0C;&#x628A;&#x811A;&#x672C;&#x6587;&#x4EF6;&#x540D;&#x5F53;&#x505A;&#x53C2;&#x6570;<code>$ /bin/sh skuaka</code></p>
+</li>
+<li><p>&#x628A;&#x811A;&#x672C;&#x5F53;&#x505A;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;<code>$ chmod +x skuaka</code></p>
+<p>&#x5982;&#x679C;skuaka&#x5728;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#xFF0C;&#x5219;&#x7528;<code>./skuaka</code>&#x8C03;&#x7528;&#x811A;&#x672C;&#xFF08;&#x63A8;&#x8350;&#x4E60;&#x60EF;&#xFF09;</p>
+<p>&#x5982;&#x679C;&#x60F3;&#x76F4;&#x63A5;&#x7528;<code>skuaka</code>&#x8C03;&#x7528;&#x811A;&#x672C;&#xFF0C;&#x4FEE;&#x6539;&#x73AF;&#x5883;&#x53D8;&#x91CF;(&#x4E0D;&#x63A8;&#x8350;&#xFF0C;&#x6709;&#x5B89;&#x5168;&#x9690;&#x60A3;)&#x3002;</p>
+</li>
+</ol>
+<h5 id="&#x4FEE;&#x6539;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a href="#&#x4FEE;&#x6539;&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="headerlink" title="&#x4FEE;&#x6539;&#x73AF;&#x5883;&#x53D8;&#x91CF;"></a>&#x4FEE;&#x6539;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h5><p>&#x200B;    &#x8F93;&#x5165;<code>PATH=$PATH:.</code>&#x6216;&#x8005;&#x7F16;&#x8F91;<code>.bash_profile</code>&#x6587;&#x4EF6;&#xFF0C;&#x628A;&#x524D;&#x8005;&#x6DFB;&#x52A0;&#x5230;&#x6587;&#x4EF6;&#x672B;&#x5C3E;&#xFF0C;&#x7136;&#x540E;&#x91CD;&#x65B0;&#x767B;&#x5165;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x53EA;&#x4F9B;&#x4F60;&#x672C;&#x4EBA;&#x4F7F;&#x7528;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x81EA;&#x5DF1;&#x7684;&#x5BB6;&#x76EE;&#x5F55;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;bin&#x76EE;&#x5F55;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x6DFB;&#x52A0;&#x5230;&#x81EA;&#x5DF1;&#x7684;PATH&#x53D8;&#x91CF;&#x4E2D;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x60F3;&#x8BA9;&#x522B;&#x4EBA;&#x4F7F;&#x7528;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x7A0B;&#x5E8F;&#x5B58;&#x653E;&#x5230;/usr/local/bin&#x6216;&#x5176;&#x4ED6;&#x7CFB;&#x7EDF;&#x76EE;&#x5F55;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x5176;&#x4ED6;&#x7528;&#x6237;&#x4FEE;&#x6539;&#x7A0B;&#x5E8F;&#xFF0C;&#x5E94;&#x8BE5;&#x53BB;&#x6389;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x7684;&#x5199;&#x6743;&#x9650;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp  skuaka /usr/<span class="built_in">local</span>/bin</span><br><span class="line">chown root /usr/<span class="built_in">local</span>/bin/skuaka</span><br><span class="line">chgrp root /usr/<span class="built_in">local</span>/bin/skuaka</span><br><span class="line">chmod 755  /usr/<span class="built_in">local</span>/bin/skuaka</span><br></pre></td></tr></table></figure>
+<h3 id="shell&#x8BED;&#x6CD5;"><a href="#shell&#x8BED;&#x6CD5;" class="headerlink" title="shell&#x8BED;&#x6CD5;"></a>shell&#x8BED;&#x6CD5;</h3><h4 id="&#x53D8;&#x91CF;"><a href="#&#x53D8;&#x91CF;" class="headerlink" title="&#x53D8;&#x91CF;"></a>&#x53D8;&#x91CF;</h4><ul class="ui list">
+<li>&#x53D8;&#x91CF;&#x4E0D;&#x9700;&#x8981;&#x58F0;&#x660E;&#xFF0C;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x7684;&#x65F6;&#x5019;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x3002;</li>
+<li>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6240;&#x6709;&#x53D8;&#x91CF;&#x90FD;&#x88AB;&#x770B;&#x505A;&#x5B57;&#x7B26;&#x4E32;&#x5E76;&#x4E14;&#x4EE5;&#x5B57;&#x7B26;&#x4E32;&#x6765;&#x50A8;&#x5B58;&#xFF0C;&#x5373;&#x4F7F;&#x88AB;&#x8D4B;&#x503C;&#x4E3A;&#x6570;&#x5B57;&#x65F6;&#x4E5F;&#x662F;&#x5982;&#x6B64;&#x3002;</li>
+<li>&#x5728;&#x53D8;&#x91CF;&#x540D;&#x524D;&#x9762;&#x52A0;&#x4E00;&#x4E2A;$&#x6765;&#x8BBF;&#x95EE;&#x5B83;&#x50A8;&#x5B58;&#x7684;&#x5185;&#x5BB9;</li>
+<li>&#x4E3A;&#x53D8;&#x91CF;&#x8D4B;&#x503C;&#x65F6;&#x7B49;&#x53F7;&#x4E24;&#x8FB9;&#x4E0D;&#x80FD;&#x6709;&#x7A7A;&#x683C;&#x3002;</li>
+<li>read&#x547D;&#x4EE4;&#x8BFB;&#x53D6;&#x7528;&#x6237;&#x7684;&#x8F93;&#x5165;&#x4E3A;&#x53D8;&#x91CF;a&#x8D4B;&#x503C;<code>read a</code></li>
+<li>&#x4F7F;&#x7528;&#x53CC;&#x5F15;&#x53F7;&#x5C06;<strong>&#x5305;&#x542B;&#x7A7A;&#x767D;&#x5B57;&#x7B26;&#x7684;&#x53C2;&#x6570;</strong>&#x5F15;&#x8D77;&#x6765;&#x3002;</li>
+<li>&#x53CC;&#x5F15;&#x53F7;&#x4E2D;&#x7684;<code>$</code>&#x53D8;&#x91CF;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x4F1A;&#x88AB;&#x66FF;&#x6362;&#x4E3A;&#x503C;&#xFF0C;&#x901A;&#x8FC7;&#x5728;<code>$</code>&#x524D;&#x9762;&#x52A0;&#x4E0A;<code>\</code>&#x5B57;&#x7B26;&#x4EE5;&#x53D6;&#x6D88;&#x5B83;&#x7684;&#x7279;&#x6B8A;&#x542B;&#x4E49;&#x3002;</li>
+<li>&#x5355;&#x5F15;&#x53F7;&#x4E2D;&#x4E0D;&#x4F1A;&#x53D1;&#x751F;&#x66FF;&#x6362;&#x73B0;&#x8C61;</li>
+</ul>
+<h5 id="&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a href="#&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="headerlink" title="&#x73AF;&#x5883;&#x53D8;&#x91CF;"></a>&#x73AF;&#x5883;&#x53D8;&#x91CF;</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$HOME</span>	<span class="comment">#&#x5F53;&#x524D;&#x7528;&#x6237;&#x7684;&#x5BB6;&#x76EE;&#x5F55;</span></span><br><span class="line"><span class="variable">$PATH</span>	<span class="comment">#&#x4EE5;&#x5192;&#x53F7;&#x5206;&#x9694;&#x7684;&#x7528;&#x6765;&#x641C;&#x7D22;&#x547D;&#x4EE4;&#x7684;&#x76EE;&#x5F55;&#x5217;&#x8868;</span></span><br><span class="line"><span class="variable">$PS1</span>	<span class="comment">#&#x547D;&#x4EE4;&#x63D0;&#x793A;&#x7B26;&#xFF0C;&#x901A;&#x5E38;&#x4E3A;$</span></span><br><span class="line"><span class="variable">$PS2</span>	<span class="comment">#&#x4E8C;&#x7EA7;&#x63D0;&#x793A;&#x7B26;&#xFF0C;&#x901A;&#x5E38;&#x4E3A;&gt;</span></span><br><span class="line"><span class="variable">$IFS</span>	<span class="comment">#&#x8F93;&#x5165;&#x57DF;&#x5206;&#x9694;&#x7B26;&#xFF0C;&#x8BFB;&#x53D6;&#x8F93;&#x5165;&#x65F6;&#x7528;&#x6765;&#x5206;&#x9694;&#x5355;&#x8BCD;&#x7684;&#x4E00;&#x7EC4;&#x5B57;&#x7B26;&#xFF0C;&#x5B83;&#x4EEC;&#x901A;&#x5E38;&#x662F;&#x7A7A;&#x683C;&#x3001;&#x5236;&#x8868;&#x7B26;&#x548C;&#x6362;&#x884C;&#x7B26;</span></span><br><span class="line"><span class="variable">$0</span>		<span class="comment">#shell&#x811A;&#x672C;&#x7684;&#x540D;&#x5B57;</span></span><br><span class="line"><span class="variable">$#</span>		<span class="comment">#&#x4F20;&#x9012;&#x7ED9;&#x811A;&#x672C;&#x7684;&#x53C2;&#x6570;&#x4E2A;&#x6570;</span></span><br><span class="line">$$		<span class="comment">#shell&#x811A;&#x672C;&#x7684;&#x8FDB;&#x7A0B;&#x53F7;</span></span><br><span class="line">$?		<span class="comment">#&#x524D;&#x4E00;&#x4E2A;&#x547D;&#x4EE4;&#x7684;&#x9000;&#x51FA;&#x7801;</span></span><br></pre></td></tr></table></figure>
+<h5 id="&#x53C2;&#x6570;&#x53D8;&#x91CF;"><a href="#&#x53C2;&#x6570;&#x53D8;&#x91CF;" class="headerlink" title="&#x53C2;&#x6570;&#x53D8;&#x91CF;"></a>&#x53C2;&#x6570;&#x53D8;&#x91CF;</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$1</span>,<span class="variable">$2</span>,...	<span class="comment">#&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x7684;&#x53C2;&#x6570;</span></span><br><span class="line">$*			<span class="comment">#&#x5728;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x4E2D;&#x5217;&#x51FA;&#x6240;&#x6709;&#x53C2;&#x6570;&#xFF0C;&#x7528;IFS&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x5206;&#x9694;</span></span><br><span class="line"><span class="variable">$@</span>			<span class="comment">#$*&#x7684;&#x53D8;&#x4F53;&#xFF0C;&#x4E0D;&#x4F7F;&#x7528;IFS&#x53D8;&#x91CF;&#xFF0C;&#x6240;&#x4EE5;&#x5373;&#x4F7F;IFS&#x4E3A;&#x7A7A;&#xFF0C;&#x53C2;&#x6570;&#x4E5F;&#x4E0D;&#x4F1A;&#x6324;&#x5728;&#x4E00;&#x8D77;</span></span><br></pre></td></tr></table></figure>
+<h4 id="&#x901A;&#x914D;&#x7B26;&#x6269;&#x5C55;"><a href="#&#x901A;&#x914D;&#x7B26;&#x6269;&#x5C55;" class="headerlink" title="&#x901A;&#x914D;&#x7B26;&#x6269;&#x5C55;"></a>&#x901A;&#x914D;&#x7B26;&#x6269;&#x5C55;</h4><p><code>*</code>&#x5339;&#x914D;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;</p>
+<p><code>?</code>&#x5339;&#x914D;&#x5355;&#x4E2A;&#x5B57;&#x7B26;</p>
+<p><code>[set]</code>&#x5339;&#x914D;&#x65B9;&#x62EC;&#x53F7;&#x4E2D;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x5355;&#x5B57;&#x7B26;</p>
+<p><code>[^set]</code>&#x5339;&#x914D;&#x6CA1;&#x6709;&#x51FA;&#x73B0;&#x5728;&#x65B9;&#x62EC;&#x53F7;&#x4E2D;&#x7684;&#x5355;&#x5B57;&#x7B26;</p>
+<p><code>{str1,str2}</code>&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x7EC4;&#xFF08;&#x53EA;&#x80FD;&#x7528;&#x5728;&#x90E8;&#x5206;shell&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x62EC;bash&#xFF09;</p>
+<h4 id="&#x6761;&#x4EF6;&#x8BED;&#x53E5;"><a href="#&#x6761;&#x4EF6;&#x8BED;&#x53E5;" class="headerlink" title="&#x6761;&#x4EF6;&#x8BED;&#x53E5;"></a>&#x6761;&#x4EF6;&#x8BED;&#x53E5;</h4><h5 id="if-test"><a href="#if-test" class="headerlink" title="if/test"></a>if/test</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> condition	<span class="comment">#&#x53EF;&#x4EE5;&#x7528;[]&#x66FF;&#x6362;test</span></span><br><span class="line"><span class="comment">#if [ condition ]   # [ &#x7684;&#x5DE6;&#x53F3;&#x8981;&#x6709;&#x7A7A;&#x683C;</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">statement1</span><br><span class="line"><span class="keyword">elif</span></span><br><span class="line">statement2</span><br><span class="line"><span class="keyword">elif</span></span><br><span class="line">statement3</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">statement4</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>test&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7684;&#x6761;&#x4EF6;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x5F52;&#x4E3A;3&#x7C7B;&#xFF1A;</p>
+<ol class="ui list">
+<li><p>&#x5B57;&#x7B26;&#x4E32;&#x6BD4;&#x8F83;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#x8FD0;&#x7B97;&#x7B26;&#x4E24;&#x8FB9;&#x5FC5;&#x987B;&#x8981;&#x6709;&#x7A7A;&#x683C;</span></span><br><span class="line">string1 = string2		<span class="comment">#&#x76F8;&#x7B49;</span></span><br><span class="line">string1 != string2		<span class="comment">#&#x4E0D;&#x76F8;&#x7B49;</span></span><br><span class="line">-n string				<span class="comment">#&#x5B57;&#x7B26;&#x4E32;&#x4E0D;&#x4E3A;&#x7A7A;</span></span><br><span class="line">-z string				<span class="comment">#&#x5B57;&#x7B26;&#x4E32;&#x4E3A;&#x7A7A;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x7B97;&#x6570;&#x6BD4;&#x8F83;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">exp1 -eq exp2		<span class="comment">#&#x76F8;&#x7B49;</span></span><br><span class="line">exp1 -ne exp2		<span class="comment">#&#x4E0D;&#x76F8;&#x7B49;</span></span><br><span class="line">exp1 -gt exp2		<span class="comment">#&#x5927;&#x4E8E;</span></span><br><span class="line">exp1 -ge exp2		<span class="comment">#&#x5927;&#x4E8E;&#x7B49;&#x4E8E;</span></span><br><span class="line">exp1 -lt exp2		<span class="comment">#&#x5C0F;&#x4E8E;</span></span><br><span class="line">exp1 -le exp2		<span class="comment">#&#x5C0F;&#x4E8E;&#x7B49;&#x4E8E;</span></span><br><span class="line">!exp				<span class="comment">#&#x8868;&#x8FBE;&#x5F0F;&#x4E3A;&#x5047;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x6587;&#x4EF6;&#x6761;&#x4EF6;&#x6D4B;&#x8BD5;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-d file		<span class="comment">#&#x662F;&#x76EE;&#x5F55;</span></span><br><span class="line">-e file		<span class="comment">#&#x548C;-f&#x76F8;&#x4F3C;&#xFF0C;&#x5386;&#x53F2;&#x4E0A;-e&#x4E0D;&#x53EF;&#x79FB;&#x690D;&#xFF0C;&#x6240;&#x4EE5;&#x5E38;&#x7528;&#x7684;&#x662F;-f&#x9009;&#x9879;</span></span><br><span class="line">-f file		<span class="comment">#&#x662F;&#x666E;&#x901A;&#x6587;&#x4EF6;</span></span><br><span class="line">-g file		<span class="comment">#gid&#x88AB;&#x8BBE;&#x7F6E;</span></span><br><span class="line">-r file		<span class="comment">#&#x53EF;&#x8BFB;</span></span><br><span class="line">-s file		<span class="comment">#&#x5927;&#x5C0F;&#x4E0D;&#x4E3A;0</span></span><br><span class="line">-u file		<span class="comment">#uid&#x88AB;&#x8BBE;&#x7F6E;</span></span><br><span class="line">-w file		<span class="comment">#&#x53EF;&#x5199;</span></span><br><span class="line">-x file		<span class="comment">#&#x53EF;&#x6267;&#x884C;</span></span><br></pre></td></tr></table></figure>
+<p>&#x6CE8;&#xFF1A;gid&#x548C;uid&#x53EA;&#x5BF9;&#x53EF;&#x6267;&#x884C;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x6709;&#x7528;&#xFF0C;&#x5BF9;shell&#x811A;&#x672C;&#x4E0D;&#x8D77;&#x4F5C;&#x7528;&#x3002;</p>
+</li>
+</ol>
+<p>AND&#x548C;OR&#x5217;&#x8868;</p>
+<p>&#x200B;    &#x5373;&amp;&amp; &#x548C;||&#xFF0C;&#x7528;&#x6CD5;&#x4E0E;c&#x8BED;&#x8A00;&#x4E00;&#x6837;&#x3002;</p>
+<p>&#x8BED;&#x53E5;&#x5757;</p>
+<p>&#x200B;    &#x5982;&#x679C;&#x8981;&#x5728;&#x53EA;&#x5141;&#x8BB8;&#x5355;&#x8BED;&#x53E5;&#x7684;&#x5730;&#x65B9;&#xFF08;&#x6BD4;&#x5982;&#x5728;AND&#x6216;OR&#x5217;&#x8868;&#x4E2D;&#xFF09;&#x4F7F;&#x7528;&#x591A;&#x6761;&#x8BED;&#x53E5;&#xFF0C;&#x53EF;&#x4EE5;&#x628A;&#x591A;&#x6761;&#x8BED;&#x53E5;&#x62EC;&#x5728;&#x82B1;&#x62EC;&#x53F7;&#x4E2D;<code>{ }</code>&#x6765;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x8BED;&#x53E5;&#x5757;&#x3002;</p>
+<h5 id="for-while-until"><a href="#for-while-until" class="headerlink" title="for/while/until"></a>for/while/until</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> variable <span class="keyword">in</span> values</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	statements</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> condition</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	statements</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">untill condition	<span class="comment">#&#x53CD;&#x590D;&#x6267;&#x884C;&#x5230;&#x6761;&#x4EF6;&#x4E3A;&#x771F;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	statements</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h5 id="case"><a href="#case" class="headerlink" title="case"></a>case</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> variable <span class="keyword">in</span></span><br><span class="line">	pattern [ | pattern] ...) statements;;</span><br><span class="line">	pattern [ | pattern] ...) statements;;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x6BCF;&#x4E2A;&#x6A21;&#x5F0F;&#x884C;&#x90FD;&#x4EE5;&#x53CC;&#x5206;&#x53F7;(;;)&#x7ED3;&#x5C3E;&#x3002;&#x56E0;&#x4E3A;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x524D;&#x540E;&#x6A21;&#x5F0F;&#x4E4B;&#x95F4;&#x653E;&#x7F6E;&#x591A;&#x6761;&#x8BED;&#x53E5;&#x3002;</p>
+<p>&#x793A;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Is it morning? Please answer yes or no&quot;</span></span><br><span class="line"><span class="built_in">read</span> timeofday</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;<span class="variable">$timeofday</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line">	[yY] | [yY][eE][sS] )	</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">&quot;Good morning&quot;</span></span><br><span class="line">		<span class="built_in">echo</span> <span class="string">&quot;Up bright and early this morning&quot;</span></span><br><span class="line">		;;</span><br><span class="line">	[nN]*)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">&quot;Good afternoon&quot;</span></span><br><span class="line">		;;</span><br><span class="line">	*)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">&quot;Sorry, answer not recognized&quot;</span></span><br><span class="line">		<span class="built_in">exit</span> 1</span><br><span class="line">		;;		<span class="comment">####&#x8FD9;&#x91CC;&#x7684;;;&#x53EF;&#x4EE5;&#x4E0D;&#x5199;</span></span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<h4 id="&#x51FD;&#x6570;"><a href="#&#x51FD;&#x6570;" class="headerlink" title="&#x51FD;&#x6570;"></a>&#x51FD;&#x6570;</h4><h5 id="&#x57FA;&#x672C;&#x89C4;&#x5219;"><a href="#&#x57FA;&#x672C;&#x89C4;&#x5219;" class="headerlink" title="&#x57FA;&#x672C;&#x89C4;&#x5219;"></a>&#x57FA;&#x672C;&#x89C4;&#x5219;</h5><ul class="ui list">
+<li><p>&#x5728;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x4E2D;&#x6267;&#x884C;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x8981;&#x6BD4;&#x6267;&#x884C;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6162;&#x7684;&#x591A;</p>
+</li>
+<li><p>&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#x65B9;&#x5F0F;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">function_name</span></span>(){</span><br><span class="line">  statements</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shell&#x4E2D;&#x4E0D;&#x5B58;&#x5728;&#x524D;&#x5411;&#x58F0;&#x660E;&#xFF0C;&#x8981;&#x628A;&#x6240;&#x6709;&#x51FD;&#x6570;&#x5B9A;&#x4E49;&#x90FD;&#x653E;&#x5728;<strong>&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;</strong>&#x51FD;&#x6570;&#x8C03;&#x7528;&#x4E4B;&#x524D;&#x3002;</p>
+</li>
+<li><p>&#x5F53;&#x51FD;&#x6570;&#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x7684;&#x4F4D;&#x7F6E;&#x53C2;&#x6570;(<code>$*,$@,$#,$1,$2&#x7B49;</code>)&#x4F1A;&#x88AB;&#x66FF;&#x6362;&#x4E3A;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x8BFB;&#x53D6;&#x4F20;&#x9012;&#x7ED9;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x5F53;&#x51FD;&#x6570;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#xFF0C;&#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x4F1A;&#x6062;&#x590D;&#x4E3A;&#x4E4B;&#x524D;&#x7684;&#x503C;&#x3002;</p>
+</li>
+<li><p>return&#x8BA9;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x6570;&#x5B57;&#x503C;</p>
+</li>
+<li><p>&#x8BA9;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x5B57;&#x7B26;&#x4E32;&#x503C;&#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;&#x662F;&#x8BA9;&#x51FD;&#x6570;&#x5C06;&#x5B57;&#x7B26;&#x4E32;&#x4FDD;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x51FD;&#x6570;&#x7ED3;&#x675F;&#x4E4B;&#x540E;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;</p>
+<p>&#x8FD8;&#x53EF;&#x4EE5;echo&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x5E76;&#x6355;&#x83B7;&#x5176;&#x7ED3;&#x679C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">foo</span></span> () {<span class="built_in">echo</span> JAY;}</span><br><span class="line">...</span><br><span class="line">result=<span class="string">&quot;<span class="variable">$(foo)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x4F7F;&#x7528;local&#x5173;&#x952E;&#x5B57;&#x5728;shell&#x51FD;&#x6570;&#x4E2D;&#x58F0;&#x660E;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x540D;&#x5B57;&#x548C;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x540D;&#x5B57;&#x76F8;&#x540C;&#xFF0C;&#x5728;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;&#x8303;&#x56F4;&#x5185;&#xFF0C;&#x524D;&#x8005;&#x5C31;&#x4F1A;&#x8986;&#x76D6;&#x540E;&#x8005;&#x3002;</p>
+</li>
+</ul>
+<h5 id="shell&#x5E38;&#x89C1;&#x547D;&#x4EE4;"><a href="#shell&#x5E38;&#x89C1;&#x547D;&#x4EE4;" class="headerlink" title="shell&#x5E38;&#x89C1;&#x547D;&#x4EE4;"></a>shell&#x5E38;&#x89C1;&#x547D;&#x4EE4;</h5><p>shell&#x811A;&#x672C;&#x5185;&#x90E8;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x4E24;&#x79CD;&#x547D;&#x4EE4;&#xFF1A;</p>
+<ul class="ui list">
+<li>&#x5916;&#x90E8;&#x547D;&#x4EE4;(external command): &#x53EF;&#x4EE5;&#x5728;&#x547D;&#x4EE4;&#x63D0;&#x793A;&#x7B26;&#x4E2D;&#x6267;&#x884C;&#x7684;&#x666E;&#x901A;&#x547D;&#x4EE4;</li>
+<li>&#x5185;&#x90E8;&#x547D;&#x4EE4;(internal command):  &#x5185;&#x90E8;&#x547D;&#x4EE4;&#x662F;&#x5728;shell&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x4E0D;&#x80FD;&#x4F5C;&#x4E3A;&#x5916;&#x90E8;&#x7A0B;&#x5E8F;&#x88AB;&#x8C03;&#x7528;&#x3002;&#xFF08;&#x7136;&#x800C;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x7684;&#x5185;&#x90E8;&#x547D;&#x4EE4;&#x540C;&#x65F6;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x72EC;&#x7ACB;&#x8FD0;&#x884C;&#x7684;&#x7A0B;&#x5E8F;&#x7248;&#x672C;&#x2014;&#x2014;&#x5C5E;&#x4E8E;POSIX&#x89C4;&#x8303;&#xFF09;</li>
+</ul>
+<p>&#x5E38;&#x7528;&#x547D;&#x4EE4;&#xFF1A;</p>
+<ol class="ui list">
+<li><p>break &#x8DF3;&#x51FA;&#x5FAA;&#x73AF;</p>
+</li>
+<li><p>&#x5192;&#x53F7;(:)&#x547D;&#x4EE4;&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x547D;&#x4EE4;&#x3002;</p>
+<p>&#x5B83;&#x5076;&#x5C14;&#x7528;&#x4E8E;&#x7B80;&#x5316;&#x6761;&#x4EF6;&#x903B;&#x8F91;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;true&#x7684;&#x522B;&#x540D;&#xFF0C;while &#xFF1A;&#x5B9E;&#x73B0;&#x4E86;&#x65E0;&#x9650;&#x5FAA;&#x73AF;&#x3002;&#x7531;&#x4E8E;&#x5B83;&#x662F;&#x5185;&#x7F6E;&#x547D;&#x4EE4;&#xFF0C;&#x6240;&#x4EE5;&#x8FD0;&#x884C;&#x7684;&#x6BD4;true&#x5FEB;&#xFF0C;&#x4F46;&#x662F;&#x8F93;&#x51FA;&#x53EF;&#x8BFB;&#x6027;&#x5DEE;&#x3002;</p>
+</li>
+<li><p>continue &#x8DF3;&#x5230;&#x4E0B;&#x4E00;&#x6B21;&#x5FAA;&#x73AF;</p>
+</li>
+<li><p>&#x70B9;(.)&#x547D;&#x4EE4;&#xFF0C;&#x7528;&#x4E8E;&#x5728;&#x5F53;&#x524D;shell&#x4E2D;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x3002;</p>
+<p>&#x200B;    &#x901A;&#x5E38;&#xFF0C;&#x5F53;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x6267;&#x884C;&#x4E00;&#x6761;&#x5916;&#x90E8;&#x547D;&#x4EE4;&#x6216;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x73AF;&#x5883;&#xFF08;&#x4E00;&#x4E2A;&#x5B50;shell&#xFF09;&#xFF0C;&#x547D;&#x4EE4;&#x5C06;&#x5728;&#x8FD9;&#x4E2A;&#x884C;&#x73AF;&#x5883;&#x4E2D;&#x6267;&#x884C;&#xFF0C;&#x5728;&#x547D;&#x4EE4;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#xFF0C;&#x8FD9;&#x4E2A;&#x73AF;&#x5883;&#x88AB;&#x4E22;&#x5F03;&#xFF0C;&#x7559;&#x4E0B;&#x9000;&#x51FA;&#x7801;&#x8FD4;&#x56DE;&#x7ED9;&#x7236;shell&#x3002;</p>
+<p>&#x200B;    &#x6240;&#x4EE5;&#xFF0C;&#x5F53;&#x4F60;&#x8981;&#x7528;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x6765;&#x4E3A;&#x540E;&#x7EED;&#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x65F6;&#xFF0C;&#x8FD9;&#x547D;&#x4EE4;&#x5C31;&#x975E;&#x5E38;&#x6709;&#x7528;&#xFF0C;&#x5728;&#x8FD9;&#x79CD;&#x610F;&#x4E49;&#x4E0A;&#xFF0C;&#x70B9;&#x547D;&#x4EE4;&#x7684;&#x4F5C;&#x7528;&#x7C7B;&#x4F3C;&#x4E8E;C/C++&#x7684;<code>#include</code>&#x6307;&#x4EE4;&#x3002;</p>
+<p>&#x200B;    &#x793A;&#x4F8B;&#xFF1A;&#x5047;&#x8BBE;&#x6709;&#x4E24;&#x4E2A;&#x5305;&#x542B;&#x73AF;&#x5883;&#x8BBE;&#x7F6E;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x4ED6;&#x4EEC;&#x5206;&#x522B;&#x9488;&#x5BF9;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x3002;</p>
+<p>&#xFF08;1&#xFF09;&#x4E3A;&#x4E86;&#x8BBE;&#x7F6E;&#x8001;&#x7684;&#x73AF;&#x5883;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6587;&#x4EF6;classic_set</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">version=classic</span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/old_bin:/usr/bin:/bin:.</span><br><span class="line">PS1=<span class="string">&quot;classc&gt; &quot;</span></span><br></pre></td></tr></table></figure>
+<p>&#xFF08;2&#xFF09;&#x5BF9;&#x4E8E;&#x65B0;&#x547D;&#x4EE4;&#xFF0C;&#x4F7F;&#x7528;&#x6587;&#x4EF6;lastest_set</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">version=lastest</span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/new_bin:/usr/bin:/bin:.</span><br><span class="line">PS1=<span class="string">&quot;lastest version&gt; &quot;</span></span><br></pre></td></tr></table></figure>
+<p>&#xFF08;3&#xFF09;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5C06;&#x8FD9;&#x4E9B;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x548C;&#x70B9;&#x547D;&#x4EE4;&#x7ED3;&#x5408;&#x6765;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ . ./class_set</span><br><span class="line">classic&gt; echo $version</span><br><span class="line">classic</span><br><span class="line">classic&gt; . /lastest_set</span><br><span class="line">lastest version&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>echo&#x547D;&#x4EE4;</p>
+<p>&#x200B;    &#x867D;&#x7136;&#xFF0C;X/Open&#x5EFA;&#x8BAE;&#x5728;&#x73B0;&#x4EE3;shell&#x4E2D;&#x4F7F;&#x7528;printf&#x547D;&#x4EE4;&#xFF0C;&#x4F46;&#x662F;&#x4F7F;&#x7528;echo&#x65B9;&#x4FBF;&#x3002;</p>
+<p>&#x200B;    &#x5982;&#x4F55;&#x53BB;&#x6389;&#x6362;&#x884C;&#x7B26;&#xFF1F;</p>
+<ul>
+<li><p><code>echo -n &quot;str&quot;</code>      -n&#x53C2;&#x6570;&#x53BB;&#x6389;&#x6362;&#x884C;&#x7B26;</p>
+</li>
+<li><p><code>echo -e &quot;str\c&quot;</code>     -e&#x53C2;&#x6570;&#x786E;&#x4FDD;&#x542F;&#x7528;&#x4E86;&#x53CD;&#x659C;&#x7EBF;&#x8F6C;&#x4E49;&#x5B57;&#x7B26;&#x7684;&#x89E3;&#x91CA;(\c&#x4EE3;&#x8868;&#x53BB;&#x6389;&#x6362;&#x884C;&#x7B26;)</p>
+<p>&#x8001;&#x7248;&#x672C;bash&#x9ED8;&#x8BA4;&#x5F00;&#x542F;&#x53CD;&#x659C;&#x7EBF;&#x8F6C;&#x4E49;&#x5B57;&#x7B26;&#x7684;&#x89E3;&#x91CA;&#xFF0C;&#x4F46;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;bash&#x4E0D;&#x4E00;&#x5B9A;&#x5F00;&#x542F;&#x3002;</p>
+</li>
+</ul>
+<p>&#x5982;&#x679C;&#x9700;&#x8981;&#x811A;&#x672C;&#x517C;&#x5BB9;UNIX&#x7CFB;&#x7EDF;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x5220;&#x9664;&#x6362;&#x884C;&#x7B26;&#xFF0C;&#x6700;&#x597D;&#x575A;&#x6301;&#x4F7F;&#x7528;printf&#x547D;&#x4EE4;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x53EA;&#x8FD0;&#x884C;&#x5728;Linux&#x548C;bash&#x4E0A;&#xFF0C;&#x90A3;&#x4E48;echo-n&#x662F;&#x4E0D;&#x9519;&#x7684;&#x9009;&#x62E9;&#x3002;</p>
+</li>
+<li><p>eval&#x547D;&#x4EE4;&#xFF0C;&#x5141;&#x8BB8;&#x4F60;&#x5BF9;&#x53C2;&#x6570;&#x8FDB;&#x884C;&#x6C42;&#x503C;&#x3002;&#x793A;&#x4F8B;&#x5982;&#x4E0B;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foo=10</span><br><span class="line">x=foo</span><br><span class="line">y=<span class="string">&apos;$&apos;</span><span class="variable">$x</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$y</span></span><br></pre></td></tr></table></figure>
+<p>&#x5B83;&#x8F93;&#x51FA;$foo&#xFF0C;&#x800C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foo=10</span><br><span class="line">x=foo</span><br><span class="line"><span class="built_in">eval</span> y=<span class="string">&apos;$&apos;</span><span class="variable">$x</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$y</span></span><br></pre></td></tr></table></figure>
+<p>&#x8F93;&#x51FA;10&#x3002;&#x56E0;&#x6B64;&#xFF0C;eval&#x547D;&#x4EE4;&#x6709;&#x70B9;&#x50CF;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;$&#xFF0C;&#x5B83;&#x7ED9;&#x51FA;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x7684;&#x503C;&#x3002;</p>
+</li>
+<li><p>exec&#x547D;&#x4EE4;   &#x6709;&#x4E24;&#x79CD;&#x7528;&#x6CD5;,&#x7B2C;&#x4E8C;&#x79CD;&#x7565;&#x3002;</p>
+<p>&#x5178;&#x578B;&#x7528;&#x6CD5;&#x662F;&#x5C06;&#x5F53;&#x524D;shell&#x66FF;&#x6362;&#x4E3A;&#x4E00;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x7A0B;&#x5E8F;&#x3002;</p>
+<p><code>exec wall &quot;Thanks for all the fish&quot;</code></p>
+<p>&#x811A;&#x672C;&#x4E2D;&#x7684;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x4F1A;&#x7528;wall&#x547D;&#x4EE4;&#x66FF;&#x6362;&#x5F53;&#x524D;&#x7684;shell&#x3002;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x4E2D;exec&#x547D;&#x4EE4;&#x540E;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x90FD;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#xFF0C;&#x56E0;&#x4E3A;&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#x7684;shell&#x5DF2;&#x7ECF;&#x4E0D;&#x5B58;&#x5728;&#x4E86;&#x3002;</p>
+</li>
+<li><p>exit n &#x547D;&#x4EE4;</p>
+<ul>
+<li><p>&#x4F7F;&#x811A;&#x672C;&#x4EE5;&#x9000;&#x51FA;&#x7801;n&#x7ED3;&#x675F;&#x8FD0;&#x884C;&#x3002;</p>
+</li>
+<li><p>&#x5728;&#x4EA4;&#x4E92;&#x5F0F;shell&#x547D;&#x4EE4;&#x63D0;&#x793A;&#x7B26;&#x4E2D;&#x8F93;&#x5165;exit&#x4EE5;&#x9000;&#x51FA;&#x7CFB;&#x7EDF;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x679C;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x5728;&#x9000;&#x51FA;&#x65F6;&#x4E0D;&#x6307;&#x5B9A;&#x9000;&#x51FA;&#x72B6;&#x6001;&#xFF0C;&#x90A3;&#x4E48;&#x811A;&#x672C;&#x4E2D;&#x6700;&#x540E;&#x4E00;&#x6761;&#x88AB;&#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x72B6;&#x6001;&#x5C06;&#x88AB;&#x7528;&#x4F5C;&#x8FD4;&#x56DE;&#x503C;&#x3002;</p>
+</li>
+<li><p>&#x9000;&#x51FA;&#x7801;</p>
+<p>0         &#x8868;&#x793A;&#x6210;&#x529F;</p>
+<p>1-125    &#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7684;&#x9519;&#x8BEF;&#x4EE3;&#x7801;</p>
+<p>126   &#x6587;&#x4EF6;&#x4E0D;&#x53EF;&#x6267;&#x884C;</p>
+<p>127   &#x547D;&#x4EE4;&#x672A;&#x627E;&#x5230;</p>
+<p>128&#x53CA;&#x4EE5;&#x4E0A;  &#x51FA;&#x73B0;&#x4E00;&#x4E2A;&#x4FE1;&#x53F7;</p>
+</li>
+<li><p>&#x7CBE;&#x7B80;&#x7684;&#x9000;&#x51FA;&#x7801;&#x793A;&#x4F8B;&#xFF1A;&#x5982;&#x679C;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#x5219;&#x8FD4;&#x56DE;0&#xFF0C;&#x5426;&#x5219;1&#x3002;</p>
+<p><code>[ -f .profile ] &amp;&amp; exit 0 || exit 1</code></p>
+</li>
+</ul>
+</li>
+<li><p>export&#x547D;&#x4EE4;  &#x5BFC;&#x51FA;&#x547D;&#x4EE4;</p>
+<p>&#x4F5C;&#x4E3A;export&#x53C2;&#x6570;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x5B50;shell&#x4E2D;&#x4F7F;&#x7528;&#x3002;&#x800C;&#x4E0D;&#x4F1A;&#x56E0;&#x4E3A;&#x8C03;&#x7528;&#x5B50;shell&#x800C;&#x6E05;&#x9664;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x3002;</p>
+<p><code>set -a</code> &#x6216;<code>set -o allexport</code>&#x547D;&#x4EE4;&#x5C06;&#x5BFC;&#x51FA;&#x5B83;&#x4E4B;&#x540E;&#x58F0;&#x660E;&#x7684;&#x6240;&#x6709;&#x53D8;&#x91CF;&#x3002;</p>
+</li>
+<li><p>expr&#x547D;&#x4EE4;&#x5C06;&#x5B83;&#x7684;&#x53C2;&#x6570;&#x5F53;&#x505A;&#x4E00;&#x4E2A;&#x8868;&#x8FBE;&#x5F0F;&#x6765;&#x6C42;&#x503C;&#xFF0C;&#x5982;</p>
+<p><code>x=$(expr $x + 1)</code>  &#x4F7F;x&#x53D6;&#x503C;&#x4E3A;&#x8868;&#x8FBE;&#x5F0F; <code>expr $x + 1</code>&#x7684;&#x6267;&#x884C;&#x7ED3;&#x679C;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x53CD;&#x5F15;&#x53F7;(`)&#x5B57;&#x7B26;&#x5C06;&#x8868;&#x8FBE;&#x5F0F;&#x62EC;&#x8D77;&#x6765;&#x3002;</p>
+<p>expr&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x5F88;&#x591A;&#x7B97;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x3002;&#x6BD4;&#x5927;&#x5C0F;&#x3001;&#x52A0;&#x51CF;&#x4E58;&#x9664;&#x3001;&#x53D6;&#x6A21;&#x53D6;&#x4F59;&#x3002;&#x6BD4;&#x8F83;&#x7279;&#x6B8A;&#x7684;&#x4E24;&#x4E2A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expr1 | expr2			<span class="comment">#&#x5982;&#x679C;expr1&#x975E;&#x96F6;&#xFF0C;&#x5219;&#x7B49;&#x4E8E;expr1&#xFF1B;&#x5426;&#x5219;&#x7B49;&#x4E8E;expr2</span></span><br><span class="line">expr1 &amp; expr2			<span class="comment">#&#x53EA;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x8868;&#x8FBE;&#x5F0F;&#x7B49;&#x4E8E;0&#xFF0C;&#x5219;&#x7B49;&#x4E8E;0,&#xFF1B;&#x5426;&#x5219;&#x7B49;&#x4E8E;expr1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>printf&#x547D;&#x4EE4;&#x4E0E;C/C++&#x7C7B;&#x4F3C;&#xFF0C;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x662F;&#x4E0D;&#x9700;&#x8981;&#x62EC;&#x53F7;&#x3001;&#x4E0D;&#x652F;&#x6301;&#x6D6E;&#x70B9;&#x6570;&#xFF0C;&#x56E0;&#x4E3A;shell&#x4E2D;&#x6240;&#x6709;&#x7B97;&#x6570;&#x8FD0;&#x7B97;&#x90FD;&#x662F;&#x6309;&#x7167;&#x6574;&#x6570;&#x6765;&#x8FDB;&#x884C;&#x8FD0;&#x7B97;&#x7684;</p>
+</li>
+<li><p>return&#x547D;&#x4EE4;&#xFF0C;&#x4F7F;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6570;&#x503C;&#x3002;</p>
+</li>
+<li><p>set&#x547D;&#x4EE4;&#xFF0C;&#x4E3A;shell&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#x53D8;&#x91CF;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> $(date)</span><br><span class="line"><span class="built_in">echo</span> The month is <span class="variable">$2</span></span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x5355;&#x72EC;&#x63D0;&#x53D6;date&#x91CC;&#x9762;&#x7684;&#x6708;&#x4EFD;&#x3002;</p>
+<p>&#x8FD8;&#x6709;&#x5176;&#x4ED6;&#x7528;&#x5904;&#xFF0C;&#x7565;&#x3002;</p>
+</li>
+<li><p>shift&#x547D;&#x4EE4;&#xFF0C;&#x5C06;&#x6240;&#x6709;&#x53C2;&#x6570;&#x90FD;&#x5DE6;&#x79FB;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#xFF0C;<code>$2</code>&#x53D8;&#x6210;<code>$1</code>,<code>$3</code>&#x53D8;&#x6210;<code>$2</code>&#xFF0C;<code>$* $@ $#</code>&#x4E5F;&#x76F8;&#x5E94;&#x5730;&#x6539;&#x53D8;&#x3002;&#xFF08;<code>$0</code>&#x662F;&#x811A;&#x672C;&#x540D;&#x5B57;&#xFF0C;&#x4E0D;&#x53D8;&#xFF09;&#x3002;</p>
+<p>&#x5982;&#x679C;shift&#x540E;&#x9762;&#x5E26;&#x6709;&#x6570;&#x503C;&#x53C2;&#x6570;n&#xFF0C;&#x5219;&#x8868;&#x660E;&#x5DE6;&#x79FB;n&#x4F4D;&#x3002;</p>
+</li>
+<li><p>trap&#x547D;&#x4EE4;&#xFF0C;&#x6307;&#x5B9A;&#x5728;&#x6536;&#x5230;&#x4FE1;&#x53F7;&#x540E;&#x5C06;&#x8981;&#x91C7;&#x53D6;&#x7684;&#x884C;&#x52A8;&#x3002;<code>trap command signal</code></p>
+</li>
+<li><p>unset&#x547D;&#x4EE4;&#xFF0C;&#x4ECE;&#x73AF;&#x5883;&#x4E2D;&#x5220;&#x9664;&#x53D8;&#x91CF;&#x6216;&#x51FD;&#x6570;&#xFF08;&#x4E0D;&#x80FD;&#x5220;&#x9664;shell&#x672C;&#x8EAB;&#x7684;&#x53EA;&#x8BFB;&#x53D8;&#x91CF;&#xFF09;</p>
+</li>
+</ol>
+<h3 id="&#x62D3;&#x5C55;"><a href="#&#x62D3;&#x5C55;" class="headerlink" title="$ &#x62D3;&#x5C55;"></a>$ &#x62D3;&#x5C55;</h3><h4 id="&#x6355;&#x83B7;&#x8F93;&#x51FA;"><a href="#&#x6355;&#x83B7;&#x8F93;&#x51FA;" class="headerlink" title="&#x6355;&#x83B7;&#x8F93;&#x51FA;"></a>&#x6355;&#x83B7;&#x8F93;&#x51FA;</h4><p><code>$(command)</code>&#x7684;&#x7ED3;&#x679C;&#x5C31;&#x662F;&#x5176;&#x4E2D;&#x547D;&#x4EE4;&#x7684;&#x8F93;&#x51FA;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> The current directory is <span class="variable">$PWD</span></span><br><span class="line"><span class="built_in">echo</span> The current users are $(who)</span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p><code>$PWD</code>&#x662F;&#x4E00;&#x4E2A;shell&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x7ED3;&#x6784;&#x3002;&#x4F46;&#x60F3;&#x7528;who&#x547D;&#x4EE4;&#x7684;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#xFF0C;&#x5C31;&#x8981;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x3002;</p>
+<h4 id="&#x7B97;&#x6570;&#x62D3;&#x5C55;"><a href="#&#x7B97;&#x6570;&#x62D3;&#x5C55;" class="headerlink" title="&#x7B97;&#x6570;&#x62D3;&#x5C55;"></a>&#x7B97;&#x6570;&#x62D3;&#x5C55;</h4><p>&#x200B;    &#x4E4B;&#x524D;&#x8BF4;&#x7684;expr&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x5904;&#x7406;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x7B97;&#x6570;&#x547D;&#x4EE4;&#xFF0C;&#x4F46;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x6267;&#x884C;&#x8D77;&#x6765;&#x5F88;&#x6162;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x9700;&#x8981;&#x8C03;&#x7528;&#x4E00;&#x4E2A;&#x65B0;&#x7684;shell&#x6765;&#x5904;&#x7406;expr&#x547D;&#x4EE4;&#x3002;</p>
+<p>&#x200B;    &#x4E00;&#x79CD;&#x66F4;&#x597D;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x4F7F;&#x7528;<code>$((...))</code>&#x62D3;&#x5C55;&#x3002;&#x4F8B;&#x5982;<code>x=$(($x+1))</code>&#x3002;</p>
+<h4 id="&#x53C2;&#x6570;&#x62D3;&#x5C55;"><a href="#&#x53C2;&#x6570;&#x62D3;&#x5C55;" class="headerlink" title="&#x53C2;&#x6570;&#x62D3;&#x5C55;"></a>&#x53C2;&#x6570;&#x62D3;&#x5C55;</h4><p>&#x200B;    <code>${}</code>&#x628A;&#x53C2;&#x6570;&#x503C;&#x66FF;&#x6362;&#x8FDB;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x5982;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> 1 2 ; <span class="keyword">do</span></span><br><span class="line">	my_process <span class="variable">${i}</span>_tmp</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>&#x53C2;&#x6570;&#x62D3;&#x5C55;&#x6709;&#x5F88;&#x591A;&#x79CD;&#x65B9;&#x6CD5;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">${param:-defult}</span>	<span class="comment">#&#x5982;&#x679C;param&#x4E3A;&#x7A7A;&#xFF0C;&#x5C31;&#x628A;&#x5B83;&#x8BBE;&#x7F6E;&#x4E3A;default&#x7684;&#x503C;&#xFF0C;param&#x4E0D;&#x4F1A;&#x88AB;&#x8D4B;&#x503C;</span></span><br><span class="line"><span class="variable">${param:+defult}</span>	<span class="comment">#&#x5982;&#x679C;param&#x5B58;&#x5728;&#x4E14;&#x4E0D;&#x4F1A;&#x7A7A;&#xFF0C;&#x5C31;&#x628A;&#x5B83;&#x8BBE;&#x7F6E;&#x4E3A;defult</span></span><br><span class="line"><span class="variable">${param:=defult}</span>	<span class="comment">#&#x5982;&#x679C;param&#x4E3A;&#x7A7A;&#xFF0C;&#x5C31;&#x628A;&#x5B83;&#x8BBE;&#x7F6E;&#x4E3A;default&#x7684;&#x503C;,&#x5E76;&#x4E14;param&#x4E5F;&#x4F1A;&#x88AB;&#x8D4B;&#x503C;</span></span><br><span class="line"><span class="variable">${param:?defult}</span>	<span class="comment">#&#x5982;&#x679C;param&#x4E3A;&#x7A7A;&#xFF0C;&#x8F93;&#x51FA;param:defult&#x5E76;&#x5F02;&#x5E38;&#x7EC8;&#x6B62;&#x811A;&#x672C;</span></span><br><span class="line"><span class="variable">${#param}</span>			<span class="comment">#&#x8F93;&#x51FA;param&#x7684;&#x957F;&#x5EA6;</span></span><br><span class="line"><span class="variable">${param%word}</span>		<span class="comment">#&#x4ECE;param&#x7684;&#x5C3E;&#x90E8;&#x5F00;&#x59CB;&#x5220;&#x9664;&#x4E0E;word&#x5339;&#x914D;&#x7684;&#x6700;&#x5C0F;&#x90E8;&#x5206;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x5269;&#x4F59;&#x90E8;&#x5206;</span></span><br><span class="line"><span class="variable">${param%%word}</span>		<span class="comment">#&#x4ECE;param&#x7684;&#x5C3E;&#x90E8;&#x5F00;&#x59CB;&#x5220;&#x9664;&#x4E0E;word&#x5339;&#x914D;&#x7684;&#x6700;&#x957F;&#x90E8;&#x5206;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x5269;&#x4F59;&#x90E8;&#x5206;</span></span><br><span class="line"><span class="variable">${param#word}</span>		<span class="comment">#&#x4ECE;param&#x7684;&#x5934;&#x90E8;&#x5F00;&#x59CB;&#x5220;&#x9664;&#x4E0E;word&#x5339;&#x914D;&#x7684;&#x6700;&#x5C0F;&#x90E8;&#x5206;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x5269;&#x4F59;&#x90E8;&#x5206;</span></span><br><span class="line"><span class="variable">${param##word}</span>		<span class="comment">#&#x4ECE;param&#x7684;&#x5934;&#x90E8;&#x5F00;&#x59CB;&#x5220;&#x9664;&#x4E0E;word&#x5339;&#x914D;&#x7684;&#x6700;&#x957F;&#x90E8;&#x5206;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x5269;&#x4F59;&#x90E8;&#x5206;</span></span><br></pre></td></tr></table></figure>
+<h3 id="&#x96C6;&#x5408;"><a href="#&#x96C6;&#x5408;" class="headerlink" title="&#x96C6;&#x5408;"></a>&#x96C6;&#x5408;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> {a..z}</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> -n <span class="variable">$n</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="&#x5B8C;"><a href="#&#x5B8C;" class="headerlink" title="&#x5B8C;"></a>&#x5B8C;</h3>
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2018-01-13T13:25:30.000Z" itemprop="datePublished">2018-01-13</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/02/26/Script Language/Python/懒得整理的python学习笔记/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    懒得整理的python学习笔记
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/01/10/Mess/Markdown/" class="ui tiny button">
+                    
+                    Markdown标记语言
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#简介"><span>简介</span></a><ol><li><a href="#标准shell——bash"><span>标准shell——bash</span></a></li><li><a href="#切换shell"><span>切换shell</span></a></li></ol></li><li><a href="#脚本"><span>脚本</span></a><ol><li><a href="#创建脚本"><span>创建脚本</span></a></li><li><a href="#执行脚本"><span>执行脚本</span></a><ol><li><a href="#修改环境变量"><span>修改环境变量</span></a></li></ol></li></ol></li><li><a href="#shell语法"><span>shell语法</span></a><ol><li><a href="#变量"><span>变量</span></a><ol><li><a href="#环境变量"><span>环境变量</span></a></li><li><a href="#参数变量"><span>参数变量</span></a></li></ol></li><li><a href="#通配符扩展"><span>通配符扩展</span></a></li><li><a href="#条件语句"><span>条件语句</span></a><ol><li><a href="#if-test"><span>if/test</span></a></li><li><a href="#for-while-until"><span>for/while/until</span></a></li><li><a href="#case"><span>case</span></a></li></ol></li><li><a href="#函数"><span>函数</span></a><ol><li><a href="#基本规则"><span>基本规则</span></a></li><li><a href="#shell常见命令"><span>shell常见命令</span></a></li></ol></li></ol></li><li><a href="#拓展"><span>$ 拓展</span></a><ol><li><a href="#捕获输出"><span>捕获输出</span></a></li><li><a href="#算数拓展"><span>算数拓展</span></a></li><li><a href="#参数拓展"><span>参数拓展</span></a></li></ol></li><li><a href="#集合"><span>集合</span></a></li><li><a href="#完"><span>完</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

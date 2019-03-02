@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>DTD入门 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="DTD &amp;#x7B80;&amp;#x4ECB; &amp;#x6587;&amp;#x6863;&amp;#x7C7B;&amp;#x578B;&amp;#x5B9A;&amp;#x4E49;&amp;#xFF08;DTD&amp;#xFF09;&amp;#x53EF;&amp;#x5B9A;&amp;#x4E49;&amp;#x5408;&amp;#x6CD5;&amp;#x7684;XML&amp;#x6587;&amp;#x6863;&amp;#x6784;&amp;#x5EFA;&amp;#x6A21;&amp;#x5757;&amp;#x3002;&amp;#x5B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DTD入门">
+<meta property="og:url" content="http://yoursite.com/2018/08/09/Frontend/DTD入门/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="DTD &amp;#x7B80;&amp;#x4ECB; &amp;#x6587;&amp;#x6863;&amp;#x7C7B;&amp;#x578B;&amp;#x5B9A;&amp;#x4E49;&amp;#xFF08;DTD&amp;#xFF09;&amp;#x53EF;&amp;#x5B9A;&amp;#x4E49;&amp;#x5408;&amp;#x6CD5;&amp;#x7684;XML&amp;#x6587;&amp;#x6863;&amp;#x6784;&amp;#x5EFA;&amp;#x6A21;&amp;#x5757;&amp;#x3002;&amp;#x5B">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-09T07:06:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DTD入门">
+<meta name="twitter:description" content="DTD &amp;#x7B80;&amp;#x4ECB; &amp;#x6587;&amp;#x6863;&amp;#x7C7B;&amp;#x578B;&amp;#x5B9A;&amp;#x4E49;&amp;#xFF08;DTD&amp;#xFF09;&amp;#x53EF;&amp;#x5B9A;&amp;#x4E49;&amp;#x5408;&amp;#x6CD5;&amp;#x7684;XML&amp;#x6587;&amp;#x6863;&amp;#x6784;&amp;#x5EFA;&amp;#x6A21;&amp;#x5757;&amp;#x3002;&amp;#x5B">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Frontend/DTD入门" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    DTD入门
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h2 id="DTD-&#x7B80;&#x4ECB;"><a href="#DTD-&#x7B80;&#x4ECB;" class="headerlink" title="DTD &#x7B80;&#x4ECB;"></a>DTD &#x7B80;&#x4ECB;</h2><hr>
+<p>&#x6587;&#x6863;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#xFF08;DTD&#xFF09;&#x53EF;&#x5B9A;&#x4E49;&#x5408;&#x6CD5;&#x7684;XML&#x6587;&#x6863;&#x6784;&#x5EFA;&#x6A21;&#x5757;&#x3002;&#x5B83;&#x4F7F;&#x7528;&#x4E00;&#x7CFB;&#x5217;&#x5408;&#x6CD5;&#x7684;&#x5143;&#x7D20;&#x6765;&#x5B9A;&#x4E49;&#x6587;&#x6863;&#x7684;&#x7ED3;&#x6784;&#x3002;</p>
+<p>DTD &#x53EF;&#x88AB;&#x6210;&#x884C;&#x5730;&#x58F0;&#x660E;&#x4E8E; XML &#x6587;&#x6863;&#x4E2D;&#xFF0C;&#x4E5F;&#x53EF;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x5916;&#x90E8;&#x5F15;&#x7528;&#x3002;</p>
+<hr>
+<h4 id="&#x5185;&#x90E8;&#x7684;-DOCTYPE-&#x58F0;&#x660E;"><a href="#&#x5185;&#x90E8;&#x7684;-DOCTYPE-&#x58F0;&#x660E;" class="headerlink" title="&#x5185;&#x90E8;&#x7684; DOCTYPE &#x58F0;&#x660E;"></a>&#x5185;&#x90E8;&#x7684; DOCTYPE &#x58F0;&#x660E;</h4><p>&#x5047;&#x5982; DTD &#x88AB;&#x5305;&#x542B;&#x5728;&#x60A8;&#x7684; XML &#x6E90;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x5B83;&#x5E94;&#x5F53;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x7684;&#x8BED;&#x6CD5;&#x5305;&#x88C5;&#x5728;&#x4E00;&#x4E2A; DOCTYPE &#x58F0;&#x660E;&#x4E2D;&#xFF1A;</p>
+<p>&lt;!DOCTYPE root-element [element-declarations]&gt;</p>
+<p>&#x5E26;&#x6709; DTD &#x7684; XML &#x6587;&#x6863;&#x5B9E;&#x4F8B;&#xFF08;&#x8BF7;&#x5728; IE5 &#x4EE5;&#x53CA;&#x66F4;&#x9AD8;&#x7684;&#x7248;&#x672C;&#x6253;&#x5F00;&#xFF0C;&#x5E76;&#x9009;&#x62E9;&#x67E5;&#x770B;&#x6E90;&#x4EE3;&#x7801;&#xFF09;&#xFF1A;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE note [</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT note (to,from,heading,body)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT to (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT from (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT heading (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT body (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">to</span>&gt;</span>Tove<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">from</span>&gt;</span>Jani<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">heading</span>&gt;</span>Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>Don&apos;t forget me this weekend<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&#x4EE5;&#x4E0A; DTD &#x89E3;&#x91CA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul class="ui list">
+<li><strong>!DOCTYPE note</strong> (&#x7B2C;&#x4E8C;&#x884C;)&#x5B9A;&#x4E49;&#x6B64;&#x6587;&#x6863;&#x662F; <strong>note</strong> &#x7C7B;&#x578B;&#x7684;&#x6587;&#x6863;&#x3002;</li>
+<li><strong>!ELEMENT note</strong> (&#x7B2C;&#x4E09;&#x884C;)&#x5B9A;&#x4E49; <strong>note</strong> &#x5143;&#x7D20;&#x6709;&#x56DB;&#x4E2A;&#x5143;&#x7D20;&#xFF1A;&#x201D;to&#x3001;from&#x3001;heading,&#x3001;body&#x201D;</li>
+<li><strong>!ELEMENT to</strong> (&#x7B2C;&#x56DB;&#x884C;)&#x5B9A;&#x4E49; <strong>to</strong> &#x5143;&#x7D20;&#x4E3A; &#x201C;#PCDATA&#x201D; &#x7C7B;&#x578B;</li>
+<li><strong>!ELEMENT from</strong> (&#x7B2C;&#x4E94;&#x884C;)&#x5B9A;&#x4E49; <strong>from</strong> &#x5143;&#x7D20;&#x4E3A; &#x201C;#PCDATA&#x201D; &#x7C7B;&#x578B;</li>
+<li><strong>!ELEMENT heading</strong> (&#x7B2C;&#x516D;&#x884C;)&#x5B9A;&#x4E49; <strong>heading</strong> &#x5143;&#x7D20;&#x4E3A; &#x201C;#PCDATA&#x201D; &#x7C7B;&#x578B;</li>
+<li><strong>!ELEMENT body</strong> (&#x7B2C;&#x4E03;&#x884C;)&#x5B9A;&#x4E49; <strong>body</strong> &#x5143;&#x7D20;&#x4E3A; &#x201C;#PCDATA&#x201D; &#x7C7B;&#x578B;</li>
+</ul>
+<hr>
+<h4 id="&#x5916;&#x90E8;&#x6587;&#x6863;&#x58F0;&#x660E;"><a href="#&#x5916;&#x90E8;&#x6587;&#x6863;&#x58F0;&#x660E;" class="headerlink" title="&#x5916;&#x90E8;&#x6587;&#x6863;&#x58F0;&#x660E;"></a>&#x5916;&#x90E8;&#x6587;&#x6863;&#x58F0;&#x660E;</h4><p>&#x5047;&#x5982; DTD &#x4F4D;&#x4E8E; XML &#x6E90;&#x6587;&#x4EF6;&#x7684;&#x5916;&#x90E8;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5E94;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x7684;&#x8BED;&#x6CD5;&#x88AB;&#x5C01;&#x88C5;&#x5728;&#x4E00;&#x4E2A; DOCTYPE &#x5B9A;&#x4E49;&#x4E2D;&#xFF1A;</p>
+<p>&lt;!DOCTYPE root-element SYSTEM &#x201C;filename&#x201D;&gt;</p>
+<p>&#x8FD9;&#x4E2A; XML &#x6587;&#x6863;&#x548C;&#x4E0A;&#x9762;&#x7684; XML &#x6587;&#x6863;&#x76F8;&#x540C;&#xFF0C;&#x4F46;&#x662F;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x5916;&#x90E8;&#x7684; DTD:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE note SYSTEM &quot;note.dtd&quot;&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">to</span>&gt;</span>Tove<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">from</span>&gt;</span>Jani<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">heading</span>&gt;</span>Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>Don&apos;t forget me this weekend!<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x662F;&#x5305;&#x542B; DTD &#x7684; &#x201C;note.dtd&#x201D; &#x6587;&#x4EF6;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT note (to,from,heading,body)&gt;</span><br><span class="line">&lt;!ELEMENT to (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT from (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT heading (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT body (#PCDATA)&gt;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;-DTD&#xFF1F;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;-DTD&#xFF1F;" class="headerlink" title="&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528; DTD&#xFF1F;"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528; DTD&#xFF1F;</h4><p>&#x901A;&#x8FC7; DTD&#xFF0C;&#x60A8;&#x7684;&#x6BCF;&#x4E00;&#x4E2A; XML &#x6587;&#x4EF6;&#x5747;&#x53EF;&#x643A;&#x5E26;&#x4E00;&#x4E2A;&#x6709;&#x5173;&#x5176;&#x81EA;&#x8EAB;&#x683C;&#x5F0F;&#x7684;&#x63CF;&#x8FF0;&#x3002;</p>
+<p>&#x901A;&#x8FC7; DTD&#xFF0C;&#x72EC;&#x7ACB;&#x7684;&#x56E2;&#x4F53;&#x53EF;&#x4E00;&#x81F4;&#x5730;&#x4F7F;&#x7528;&#x67D0;&#x4E2A;&#x6807;&#x51C6;&#x7684; DTD &#x6765;&#x4EA4;&#x6362;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x800C;&#x60A8;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E5F;&#x53EF;&#x4F7F;&#x7528;&#x67D0;&#x4E2A;&#x6807;&#x51C6;&#x7684; DTD &#x6765;&#x9A8C;&#x8BC1;&#x4ECE;&#x5916;&#x90E8;&#x63A5;&#x6536;&#x5230;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x60A8;&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; DTD &#x6765;&#x9A8C;&#x8BC1;&#x60A8;&#x81EA;&#x8EAB;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<h2 id="DTD-&#x5143;&#x7D20;"><a href="#DTD-&#x5143;&#x7D20;" class="headerlink" title="DTD - &#x5143;&#x7D20;"></a>DTD - &#x5143;&#x7D20;</h2><hr>
+<h4 id="PCDATA"><a href="#PCDATA" class="headerlink" title="PCDATA"></a>PCDATA</h4><p>PCDATA &#x7684;&#x610F;&#x601D;&#x662F;&#x88AB;&#x89E3;&#x6790;&#x7684;&#x5B57;&#x7B26;&#x6570;&#x636E;&#xFF08;parsed character data&#xFF09;&#x3002;</p>
+<p>&#x53EF;&#x628A;&#x5B57;&#x7B26;&#x6570;&#x636E;&#x60F3;&#x8C61;&#x4E3A; XML &#x5143;&#x7D20;&#x7684;&#x5F00;&#x59CB;&#x6807;&#x7B7E;&#x4E0E;&#x7ED3;&#x675F;&#x6807;&#x7B7E;&#x4E4B;&#x95F4;&#x7684;&#x6587;&#x672C;&#x3002;</p>
+<p><strong>PCDATA &#x662F;&#x4F1A;&#x88AB;&#x89E3;&#x6790;&#x5668;&#x89E3;&#x6790;&#x7684;&#x6587;&#x672C;&#x3002;&#x8FD9;&#x4E9B;&#x6587;&#x672C;&#x5C06;&#x88AB;&#x89E3;&#x6790;&#x5668;&#x68C0;&#x67E5;&#x5B9E;&#x4F53;&#x4EE5;&#x53CA;&#x6807;&#x8BB0;&#x3002;</strong></p>
+<p>&#x6587;&#x672C;&#x4E2D;&#x7684;&#x6807;&#x7B7E;&#x4F1A;&#x88AB;&#x5F53;&#x4F5C;&#x6807;&#x8BB0;&#x6765;&#x5904;&#x7406;&#xFF0C;&#x800C;&#x5B9E;&#x4F53;&#x4F1A;&#x88AB;&#x5C55;&#x5F00;&#x3002;</p>
+<p>&#x4E0D;&#x8FC7;&#xFF0C;&#x88AB;&#x89E3;&#x6790;&#x7684;&#x5B57;&#x7B26;&#x6570;&#x636E;&#x4E0D;&#x5E94;&#x5F53;&#x5305;&#x542B;&#x4EFB;&#x4F55; &amp;&#x3001;&lt; &#x6216;&#x8005; &gt; &#x5B57;&#x7B26;&#xFF1B;&#x9700;&#x8981;&#x4F7F;&#x7528; &amp;&#x3001;&lt; &#x4EE5;&#x53CA; &gt; &#x5B9E;&#x4F53;&#x6765;&#x5206;&#x522B;&#x66FF;&#x6362;&#x5B83;&#x4EEC;&#x3002;</p>
+<hr>
+<h4 id="CDATA"><a href="#CDATA" class="headerlink" title="CDATA"></a>CDATA</h4><p>CDATA &#x7684;&#x610F;&#x601D;&#x662F;&#x5B57;&#x7B26;&#x6570;&#x636E;&#xFF08;character data&#xFF09;&#x3002;</p>
+<p><strong>CDATA &#x662F;&#x4E0D;&#x4F1A;&#x88AB;&#x89E3;&#x6790;&#x5668;&#x89E3;&#x6790;&#x7684;&#x6587;&#x672C;&#x3002;</strong>&#x5728;&#x8FD9;&#x4E9B;&#x6587;&#x672C;&#x4E2D;&#x7684;&#x6807;&#x7B7E;&#x4E0D;&#x4F1A;&#x88AB;&#x5F53;&#x4F5C;&#x6807;&#x8BB0;&#x6765;&#x5BF9;&#x5F85;&#xFF0C;&#x5176;&#x4E2D;&#x7684;&#x5B9E;&#x4F53;&#x4E5F;&#x4E0D;&#x4F1A;&#x88AB;&#x5C55;&#x5F00;&#x3002;</p>
+<hr>
+<h4 id="&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;"><a href="#&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;" class="headerlink" title="&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;"></a>&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;</h4><p>&#x5728; DTD &#x4E2D;&#xFF0C;XML &#x5143;&#x7D20;&#x901A;&#x8FC7;&#x5143;&#x7D20;&#x58F0;&#x660E;&#x6765;&#x8FDB;&#x884C;&#x58F0;&#x660E;&#x3002;&#x5143;&#x7D20;&#x58F0;&#x660E;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x8BED;&#x6CD5;&#xFF1A;</p>
+<p>&lt;!ELEMENT element-name category&gt;<br>&#x6216;<br>&lt;!ELEMENT element-name (element-content)&gt;</p>
+<hr>
+<h4 id="&#x7A7A;&#x5143;&#x7D20;"><a href="#&#x7A7A;&#x5143;&#x7D20;" class="headerlink" title="&#x7A7A;&#x5143;&#x7D20;"></a>&#x7A7A;&#x5143;&#x7D20;</h4><p>&#x7A7A;&#x5143;&#x7D20;&#x901A;&#x8FC7;&#x7C7B;&#x522B;&#x5173;&#x952E;&#x8BCD;EMPTY&#x8FDB;&#x884C;&#x58F0;&#x660E;&#xFF1A;</p>
+<p>&lt;!ELEMENT element-name EMPTY&gt;<br>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT br EMPTY&gt;<br>XML example:<br><br></p>
+<hr>
+<h4 id="&#x53EA;&#x6709;-PCDATA-&#x7684;&#x5143;&#x7D20;"><a href="#&#x53EA;&#x6709;-PCDATA-&#x7684;&#x5143;&#x7D20;" class="headerlink" title="&#x53EA;&#x6709; PCDATA &#x7684;&#x5143;&#x7D20;"></a>&#x53EA;&#x6709; PCDATA &#x7684;&#x5143;&#x7D20;</h4><p>&#x53EA;&#x6709; PCDATA &#x7684;&#x5143;&#x7D20;&#x901A;&#x8FC7;&#x5706;&#x62EC;&#x53F7;&#x4E2D;&#x7684; #PCDATA &#x8FDB;&#x884C;&#x58F0;&#x660E;&#xFF1A;</p>
+<p>&lt;!ELEMENT element-name (#PCDATA)&gt;<br>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT from (#PCDATA)&gt;</p>
+<hr>
+<h4 id="&#x5E26;&#x6709;&#x4EFB;&#x4F55;&#x5185;&#x5BB9;&#x7684;&#x5143;&#x7D20;"><a href="#&#x5E26;&#x6709;&#x4EFB;&#x4F55;&#x5185;&#x5BB9;&#x7684;&#x5143;&#x7D20;" class="headerlink" title="&#x5E26;&#x6709;&#x4EFB;&#x4F55;&#x5185;&#x5BB9;&#x7684;&#x5143;&#x7D20;"></a>&#x5E26;&#x6709;&#x4EFB;&#x4F55;&#x5185;&#x5BB9;&#x7684;&#x5143;&#x7D20;</h4><p>&#x901A;&#x8FC7;&#x7C7B;&#x522B;&#x5173;&#x952E;&#x8BCD; ANY &#x58F0;&#x660E;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x53EF;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x53EF;&#x89E3;&#x6790;&#x6570;&#x636E;&#x7684;&#x7EC4;&#x5408;&#xFF1A;</p>
+<p>&lt;!ELEMENT element-name ANY&gt;<br>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT note ANY&gt;</p>
+<hr>
+<h4 id="&#x5E26;&#x6709;&#x5B50;&#x5143;&#x7D20;&#xFF08;&#x5E8F;&#x5217;&#xFF09;&#x7684;&#x5143;&#x7D20;"><a href="#&#x5E26;&#x6709;&#x5B50;&#x5143;&#x7D20;&#xFF08;&#x5E8F;&#x5217;&#xFF09;&#x7684;&#x5143;&#x7D20;" class="headerlink" title="&#x5E26;&#x6709;&#x5B50;&#x5143;&#x7D20;&#xFF08;&#x5E8F;&#x5217;&#xFF09;&#x7684;&#x5143;&#x7D20;"></a>&#x5E26;&#x6709;&#x5B50;&#x5143;&#x7D20;&#xFF08;&#x5E8F;&#x5217;&#xFF09;&#x7684;&#x5143;&#x7D20;</h4><p>&#x5E26;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x5B50;&#x5143;&#x7D20;&#x7684;&#x5143;&#x7D20;&#x901A;&#x8FC7;&#x5706;&#x62EC;&#x53F7;&#x4E2D;&#x7684;&#x5B50;&#x5143;&#x7D20;&#x540D;&#x8FDB;&#x884C;&#x58F0;&#x660E;&#xFF1A;</p>
+<p>&lt;!ELEMENT element-name (child1)&gt;<br>&#x6216;<br>&lt;!ELEMENT element-name (child1,child2,&#x2026;)&gt;<br>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT note (to,from,heading,body)&gt;</p>
+<p>&#x5F53;&#x5B50;&#x5143;&#x7D20;&#x6309;&#x7167;&#x7531;&#x9017;&#x53F7;&#x5206;&#x9694;&#x5F00;&#x7684;&#x5E8F;&#x5217;&#x8FDB;&#x884C;&#x58F0;&#x660E;&#x65F6;&#xFF0C;&#x8FD9;&#x4E9B;&#x5B50;&#x5143;&#x7D20;&#x5FC5;&#x987B;&#x6309;&#x7167;&#x76F8;&#x540C;&#x7684;&#x987A;&#x5E8F;&#x51FA;&#x73B0;&#x5728;&#x6587;&#x6863;&#x4E2D;&#x3002;&#x5728;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x58F0;&#x660E;&#x4E2D;&#xFF0C;&#x5B50;&#x5143;&#x7D20;&#x4E5F;&#x5FC5;&#x987B;&#x88AB;&#x58F0;&#x660E;&#xFF0C;&#x540C;&#x65F6;&#x5B50;&#x5143;&#x7D20;&#x4E5F;&#x53EF;&#x62E5;&#x6709;&#x5B50;&#x5143;&#x7D20;&#x3002;&#x201D;note&#x201D; &#x5143;&#x7D20;&#x7684;&#x5B8C;&#x6574;&#x58F0;&#x660E;&#x662F;&#xFF1A;</p>
+<p>&lt;!ELEMENT note (to,from,heading,body)&gt;<br>&lt;!ELEMENT to (#PCDATA)&gt;<br>&lt;!ELEMENT from (#PCDATA)&gt;<br>&lt;!ELEMENT heading (#PCDATA)&gt;<br>&lt;!ELEMENT body (#PCDATA)&gt;</p>
+<hr>
+<h4 id="&#x58F0;&#x660E;&#x53EA;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;"><a href="#&#x58F0;&#x660E;&#x53EA;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;" class="headerlink" title="&#x58F0;&#x660E;&#x53EA;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;"></a>&#x58F0;&#x660E;&#x53EA;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;</h4><p>&lt;!ELEMENT element-name (child-name)&gt;<br>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT note (message)&gt;</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x58F0;&#x660E;&#x4E86;&#xFF1A;message &#x5B50;&#x5143;&#x7D20;&#x5FC5;&#x987B;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#xFF0C;&#x5E76;&#x4E14;&#x5FC5;&#x987B;&#x53EA;&#x5728; &#x201C;note&#x201D; &#x5143;&#x7D20;&#x4E2D;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#x3002;</p>
+<hr>
+<h4 id="&#x58F0;&#x660E;&#x6700;&#x5C11;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;"><a href="#&#x58F0;&#x660E;&#x6700;&#x5C11;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;" class="headerlink" title="&#x58F0;&#x660E;&#x6700;&#x5C11;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;"></a>&#x58F0;&#x660E;&#x6700;&#x5C11;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;</h4><p>&lt;!ELEMENT element-name (child-name+)&gt;<br>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT note (message+)&gt;</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#x7684;&#x52A0;&#x53F7;&#xFF08;+&#xFF09;&#x58F0;&#x660E;&#x4E86;&#xFF1A;message &#x5B50;&#x5143;&#x7D20;&#x5FC5;&#x987B;&#x5728; &#x201C;note&#x201D; &#x5143;&#x7D20;&#x5185;&#x51FA;&#x73B0;&#x81F3;&#x5C11;&#x4E00;&#x6B21;&#x3002;</p>
+<hr>
+<h4 id="&#x58F0;&#x660E;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x591A;&#x6B21;&#x7684;&#x5143;&#x7D20;"><a href="#&#x58F0;&#x660E;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x591A;&#x6B21;&#x7684;&#x5143;&#x7D20;" class="headerlink" title="&#x58F0;&#x660E;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x591A;&#x6B21;&#x7684;&#x5143;&#x7D20;"></a>&#x58F0;&#x660E;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x591A;&#x6B21;&#x7684;&#x5143;&#x7D20;</h4><p>&lt;!ELEMENT element-name (child-name<em>)&gt;<br>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT note (message</em>)&gt;</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#x7684;&#x661F;&#x53F7;&#xFF08;*&#xFF09;&#x58F0;&#x660E;&#x4E86;&#xFF1A;&#x5B50;&#x5143;&#x7D20; message &#x53EF;&#x5728; &#x201C;note&#x201D; &#x5143;&#x7D20;&#x5185;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x591A;&#x6B21;&#x3002;</p>
+<hr>
+<h4 id="&#x58F0;&#x660E;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;"><a href="#&#x58F0;&#x660E;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;" class="headerlink" title="&#x58F0;&#x660E;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;"></a>&#x58F0;&#x660E;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x4E00;&#x6B21;&#x7684;&#x5143;&#x7D20;</h4><p>&lt;!ELEMENT element-name (child-name?)&gt;<br>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT note (message?)&gt;</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#x7684;&#x95EE;&#x53F7;(?)&#x58F0;&#x660E;&#x4E86;&#xFF1A;&#x5B50;&#x5143;&#x7D20; message &#x53EF;&#x5728; &#x201C;note&#x201D; &#x5143;&#x7D20;&#x5185;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x4E00;&#x6B21;&#x3002;</p>
+<hr>
+<h4 id="&#x58F0;&#x660E;&#x201D;&#x975E;&#x2026;-&#x65E2;&#x2026;&#x201D;&#x7C7B;&#x578B;&#x7684;&#x5185;&#x5BB9;"><a href="#&#x58F0;&#x660E;&#x201D;&#x975E;&#x2026;-&#x65E2;&#x2026;&#x201D;&#x7C7B;&#x578B;&#x7684;&#x5185;&#x5BB9;" class="headerlink" title="&#x58F0;&#x660E;&#x201D;&#x975E;&#x2026;/&#x65E2;&#x2026;&#x201D;&#x7C7B;&#x578B;&#x7684;&#x5185;&#x5BB9;"></a>&#x58F0;&#x660E;&#x201D;&#x975E;&#x2026;/&#x65E2;&#x2026;&#x201D;&#x7C7B;&#x578B;&#x7684;&#x5185;&#x5BB9;</h4><p>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT note (to,from,header,(message|body))&gt;</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x58F0;&#x660E;&#x4E86;&#xFF1A;&#x201D;note&#x201D; &#x5143;&#x7D20;&#x5FC5;&#x987B;&#x5305;&#x542B; &#x201C;to&#x201D; &#x5143;&#x7D20;&#x3001;&#x201D;from&#x201D; &#x5143;&#x7D20;&#x3001;&#x201D;header&#x201D; &#x5143;&#x7D20;&#xFF0C;&#x4EE5;&#x53CA;&#x975E; &#x201C;message&#x201D; &#x5143;&#x7D20;&#x65E2; &#x201C;body&#x201D; &#x5143;&#x7D20;&#x3002;</p>
+<hr>
+<h4 id="&#x58F0;&#x660E;&#x6DF7;&#x5408;&#x578B;&#x7684;&#x5185;&#x5BB9;"><a href="#&#x58F0;&#x660E;&#x6DF7;&#x5408;&#x578B;&#x7684;&#x5185;&#x5BB9;" class="headerlink" title="&#x58F0;&#x660E;&#x6DF7;&#x5408;&#x578B;&#x7684;&#x5185;&#x5BB9;"></a>&#x58F0;&#x660E;&#x6DF7;&#x5408;&#x578B;&#x7684;&#x5185;&#x5BB9;</h4><p>&#x5B9E;&#x4F8B;:<br>&lt;!ELEMENT note (#PCDATA|to|from|header|message)*&gt;</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x58F0;&#x660E;&#x4E86;&#xFF1A;&#x201D;note&#x201D; &#x5143;&#x7D20;&#x53EF;&#x5305;&#x542B;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x591A;&#x6B21;&#x7684; PCDATA&#x3001;&#x201D;to&#x201D;&#x3001;&#x201D;from&#x201D;&#x3001;&#x201D;header&#x201D; &#x6216;&#x8005; &#x201C;message&#x201D;&#x3002;</p>
+<h2 id="DTD-&#x5C5E;&#x6027;"><a href="#DTD-&#x5C5E;&#x6027;" class="headerlink" title="DTD - &#x5C5E;&#x6027;"></a>DTD - &#x5C5E;&#x6027;</h2><hr>
+<p>&#x5728; DTD &#x4E2D;&#xFF0C;&#x5C5E;&#x6027;&#x901A;&#x8FC7; ATTLIST &#x58F0;&#x660E;&#x6765;&#x8FDB;&#x884C;&#x58F0;&#x660E;&#x3002;</p>
+<hr>
+<h4 id="&#x58F0;&#x660E;&#x5C5E;&#x6027;"><a href="#&#x58F0;&#x660E;&#x5C5E;&#x6027;" class="headerlink" title="&#x58F0;&#x660E;&#x5C5E;&#x6027;"></a>&#x58F0;&#x660E;&#x5C5E;&#x6027;</h4><p>&#x5C5E;&#x6027;&#x58F0;&#x660E;&#x4F7F;&#x7528;&#x4E0B;&#x5217;&#x8BED;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">!ATTLIST</span> <span class="attr">element-name</span> <span class="attr">attribute-name</span> <span class="attr">attribute-type</span> <span class="attr">attribute-value</span>&gt;</span></span><br><span class="line">DTD &#x5B9E;&#x4F8B;:</span><br><span class="line"><span class="tag">&lt;<span class="name">!ATTLIST</span> <span class="attr">payment</span> <span class="attr">type</span> <span class="attr">CDATA</span> &quot;<span class="attr">check</span>&quot;&gt;</span></span><br><span class="line">XML &#x5B9E;&#x4F8B;:</span><br><span class="line"><span class="tag">&lt;<span class="name">payment</span> <span class="attr">type</span>=<span class="string">&quot;check&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&#x4EE5;&#x4E0B;&#x662F; <strong>&#x5C5E;&#x6027;&#x7C7B;&#x578B;</strong>&#x7684;&#x9009;&#x9879;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x7C7B;&#x578B;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CDATA</td>
+<td>&#x503C;&#x4E3A;&#x5B57;&#x7B26;&#x6570;&#x636E; (character data)</td>
+</tr>
+<tr>
+<td>(<em>en1</em>\</td>
+<td><em>en2</em>\</td>
+<td>..)</td>
+<td>&#x6B64;&#x503C;&#x662F;&#x679A;&#x4E3E;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x503C;</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>&#x503C;&#x4E3A;&#x552F;&#x4E00;&#x7684; id</td>
+</tr>
+<tr>
+<td>IDREF</td>
+<td>&#x503C;&#x4E3A;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684; id</td>
+</tr>
+<tr>
+<td>IDREFS</td>
+<td>&#x503C;&#x4E3A;&#x5176;&#x4ED6; id &#x7684;&#x5217;&#x8868;</td>
+</tr>
+<tr>
+<td>NMTOKEN</td>
+<td>&#x503C;&#x4E3A;&#x5408;&#x6CD5;&#x7684; XML &#x540D;&#x79F0;</td>
+</tr>
+<tr>
+<td>NMTOKENS</td>
+<td>&#x503C;&#x4E3A;&#x5408;&#x6CD5;&#x7684; XML &#x540D;&#x79F0;&#x7684;&#x5217;&#x8868;</td>
+</tr>
+<tr>
+<td>ENTITY</td>
+<td>&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x5B9E;&#x4F53;</td>
+</tr>
+<tr>
+<td>ENTITIES</td>
+<td>&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x5B9E;&#x4F53;&#x5217;&#x8868;</td>
+</tr>
+<tr>
+<td>NOTATION</td>
+<td>&#x6B64;&#x503C;&#x662F;&#x7B26;&#x53F7;&#x7684;&#x540D;&#x79F0;</td>
+</tr>
+<tr>
+<td>xml:</td>
+<td>&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x9884;&#x5B9A;&#x4E49;&#x7684; XML &#x503C;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x9ED8;&#x8BA4;<strong>&#x5C5E;&#x6027;&#x503C;</strong>&#x53EF;&#x4F7F;&#x7528;&#x4E0B;&#x5217;&#x503C; :</p>
+<table>
+<thead>
+<tr>
+<th>&#x503C;</th>
+<th>&#x89E3;&#x91CA;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x503C;</td>
+<td>&#x5C5E;&#x6027;&#x7684;&#x9ED8;&#x8BA4;&#x503C;</td>
+</tr>
+<tr>
+<td>#REQUIRED</td>
+<td>&#x5C5E;&#x6027;&#x503C;&#x662F;&#x5FC5;&#x9700;&#x7684;</td>
+</tr>
+<tr>
+<td>#IMPLIED</td>
+<td>&#x5C5E;&#x6027;&#x4E0D;&#x662F;&#x5FC5;&#x9700;&#x7684;</td>
+</tr>
+<tr>
+<td>#FIXED value</td>
+<td>&#x5C5E;&#x6027;&#x503C;&#x662F;&#x56FA;&#x5B9A;&#x7684;</td>
+</tr>
+</tbody>
+</table>
+<h5 id="&#x5217;&#x4E3E;&#x5C5E;&#x6027;&#x503C;"><a href="#&#x5217;&#x4E3E;&#x5C5E;&#x6027;&#x503C;" class="headerlink" title="&#x5217;&#x4E3E;&#x5C5E;&#x6027;&#x503C;"></a>&#x5217;&#x4E3E;&#x5C5E;&#x6027;&#x503C;</h5><p>&#x8BED;&#x6CD5;</p>
+<p>&lt;!ATTLIST element-name attribute-name (en1|en2|..) default-value&gt;</p>
+<p>&#x5B9E;&#x4F8B;</p>
+<p>DTD:<br>&lt;!ATTLIST payment type (check|cash) &#x201C;cash&#x201D;&gt;<br>XML &#x4F8B;&#x5B50;:</p>
+<p><payment type="check"><br>&#x6216;</payment></p>
+<payment type="cash">
+
+<p>&#x5982;&#x679C;&#x60A8;&#x5E0C;&#x671B;&#x5C5E;&#x6027;&#x503C;&#x4E3A;&#x4E00;&#x7CFB;&#x5217;&#x56FA;&#x5B9A;&#x7684;&#x5408;&#x6CD5;&#x503C;&#x4E4B;&#x4E00;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x5217;&#x4E3E;&#x5C5E;&#x6027;&#x503C;&#x3002;</p>
+<h2 id="DTD-&#x5B9E;&#x4F53;"><a href="#DTD-&#x5B9E;&#x4F53;" class="headerlink" title="DTD - &#x5B9E;&#x4F53;"></a>DTD - &#x5B9E;&#x4F53;</h2><hr>
+<p>&#x5B9E;&#x4F53;&#x662F;&#x7528;&#x4E8E;&#x5B9A;&#x4E49;&#x5F15;&#x7528;&#x666E;&#x901A;&#x6587;&#x672C;&#x6216;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x5F0F;&#x7684;&#x53D8;&#x91CF;&#x3002;</p>
+<ul class="ui list">
+<li>&#x5B9E;&#x4F53;&#x5F15;&#x7528;&#x662F;&#x5BF9;&#x5B9E;&#x4F53;&#x7684;&#x5F15;&#x7528;&#x3002;</li>
+<li>&#x5B9E;&#x4F53;&#x53EF;&#x5728;&#x5185;&#x90E8;&#x6216;&#x5916;&#x90E8;&#x8FDB;&#x884C;&#x58F0;&#x660E;&#x3002;</li>
+</ul>
+<hr>
+<h4 id="&#x5185;&#x90E8;&#x5B9E;&#x4F53;&#x58F0;&#x660E;"><a href="#&#x5185;&#x90E8;&#x5B9E;&#x4F53;&#x58F0;&#x660E;" class="headerlink" title="&#x5185;&#x90E8;&#x5B9E;&#x4F53;&#x58F0;&#x660E;"></a>&#x5185;&#x90E8;&#x5B9E;&#x4F53;&#x58F0;&#x660E;</h4><p>&#x8BED;&#x6CD5;</p>
+<p>&lt;!ENTITY entity-name &#x201C;entity-value&#x201D;&gt;</p>
+<p>&#x5B9E;&#x4F8B;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DTD &#x5B9E;&#x4F8B;:</span><br><span class="line"><span class="tag">&lt;<span class="name">!ENTITY</span> <span class="attr">writer</span> &quot;<span class="attr">Donald</span> <span class="attr">Duck.</span>&quot;&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">!ENTITY</span> <span class="attr">copyright</span> &quot;<span class="attr">Copyright</span> <span class="attr">runoob.com</span>&quot;&gt;</span></span><br><span class="line">XML &#x5B9E;&#x4F8B;&#xFF1A;</span><br><span class="line"><span class="tag">&lt;<span class="name">author</span>&gt;</span>&amp;writer;&amp;copyright;<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong> &#x4E00;&#x4E2A;&#x5B9E;&#x4F53;&#x7531;&#x4E09;&#x90E8;&#x5206;&#x6784;&#x6210;: &#x4E00;&#x4E2A;&#x548C;&#x53F7; (&amp;), &#x4E00;&#x4E2A;&#x5B9E;&#x4F53;&#x540D;&#x79F0;, &#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x5206;&#x53F7; (;)&#x3002;</p>
+<hr>
+<h4 id="&#x5916;&#x90E8;&#x5B9E;&#x4F53;&#x58F0;&#x660E;"><a href="#&#x5916;&#x90E8;&#x5B9E;&#x4F53;&#x58F0;&#x660E;" class="headerlink" title="&#x5916;&#x90E8;&#x5B9E;&#x4F53;&#x58F0;&#x660E;"></a>&#x5916;&#x90E8;&#x5B9E;&#x4F53;&#x58F0;&#x660E;</h4><p>&#x8BED;&#x6CD5;</p>
+<p>&lt;!ENTITY entity-name SYSTEM &#x201C;URI/URL&#x201D;&gt;</p>
+<p>&#x5B9E;&#x4F8B;<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DTD &#x5B9E;&#x4F8B;:</span><br><span class="line"><span class="tag">&lt;<span class="name">!ENTITY</span> <span class="attr">writer</span> <span class="attr">SYSTEM</span> &quot;<span class="attr">http:</span>//<span class="attr">www.runoob.com</span>/<span class="attr">entities.dtd</span>&quot;&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">!ENTITY</span> <span class="attr">copyright</span> <span class="attr">SYSTEM</span> &quot;<span class="attr">http:</span>//<span class="attr">www.runoob.com</span>/<span class="attr">entities.dtd</span>&quot;&gt;</span></span><br><span class="line">XML example:</span><br><span class="line"><span class="tag">&lt;<span class="name">author</span>&gt;</span>&amp;writer;&amp;copyright;<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="DTD-&#x6765;&#x81EA;&#x7F51;&#x7EDC;&#x7684;&#x5B9E;&#x4F8B;"><a href="#DTD-&#x6765;&#x81EA;&#x7F51;&#x7EDC;&#x7684;&#x5B9E;&#x4F8B;" class="headerlink" title="DTD - &#x6765;&#x81EA;&#x7F51;&#x7EDC;&#x7684;&#x5B9E;&#x4F8B;"></a>DTD - &#x6765;&#x81EA;&#x7F51;&#x7EDC;&#x7684;&#x5B9E;&#x4F8B;</h2><hr>
+<h4 id="&#x7535;&#x89C6;&#x8282;&#x76EE;&#x8868;-DTD"><a href="#&#x7535;&#x89C6;&#x8282;&#x76EE;&#x8868;-DTD" class="headerlink" title="&#x7535;&#x89C6;&#x8282;&#x76EE;&#x8868; DTD"></a>&#x7535;&#x89C6;&#x8282;&#x76EE;&#x8868; DTD</h4><p>&#x7531; David Moisan &#x521B;&#x9020;&#x3002;&#x62F7;&#x8D1D;&#x81EA;&#xFF1A; <a href="http://www.davidmoisan.org/" target="_blank" rel="noopener">http://www.davidmoisan.org/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE TVSCHEDULE [</span><br><span class="line">&lt;!ELEMENT TVSCHEDULE (CHANNEL+)&gt;</span><br><span class="line">&lt;!ELEMENT CHANNEL (BANNER,DAY+)&gt;</span><br><span class="line">&lt;!ELEMENT BANNER (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT DAY (DATE,(HOLIDAY|PROGRAMSLOT+)+)&gt;</span><br><span class="line">&lt;!ELEMENT HOLIDAY (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT DATE (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT PROGRAMSLOT (TIME,TITLE,DESCRIPTION?)&gt;</span><br><span class="line">&lt;!ELEMENT TIME (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT TITLE (#PCDATA)&gt; </span><br><span class="line">&lt;!ELEMENT DESCRIPTION (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST TVSCHEDULE NAME CDATA #REQUIRED&gt;</span><br><span class="line">&lt;!ATTLIST CHANNEL CHAN CDATA #REQUIRED&gt;</span><br><span class="line">&lt;!ATTLIST PROGRAMSLOT VTR CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ATTLIST TITLE RATING CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ATTLIST TITLE LANGUAGE CDATA #IMPLIED&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="&#x62A5;&#x7EB8;&#x6587;&#x7AE0;-DTD"><a href="#&#x62A5;&#x7EB8;&#x6587;&#x7AE0;-DTD" class="headerlink" title="&#x62A5;&#x7EB8;&#x6587;&#x7AE0; DTD"></a>&#x62A5;&#x7EB8;&#x6587;&#x7AE0; DTD</h4><p>&#x62F7;&#x8D1D;&#x81EA;&#xFF1A;<a href="http://www.vervet.com/" target="_blank" rel="noopener">http://www.vervet.com/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE NEWSPAPER [</span><br><span class="line">&lt;!ELEMENT NEWSPAPER (ARTICLE+)&gt;</span><br><span class="line">&lt;!ELEMENT ARTICLE (HEADLINE,BYLINE,LEAD,BODY,NOTES)&gt;</span><br><span class="line">&lt;!ELEMENT HEADLINE (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT BYLINE (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT LEAD (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT BODY (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT NOTES (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST ARTICLE AUTHOR CDATA #REQUIRED&gt;</span><br><span class="line">&lt;!ATTLIST ARTICLE EDITOR CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ATTLIST ARTICLE DATE CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ATTLIST ARTICLE EDITION CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ENTITY NEWSPAPER &quot;Vervet Logic Times&quot;&gt;</span><br><span class="line">&lt;!ENTITY PUBLISHER &quot;Vervet Logic Press&quot;&gt;</span><br><span class="line">&lt;!ENTITY COPYRIGHT &quot;Copyright 1998 Vervet Logic Press&quot;&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="&#x4EA7;&#x54C1;&#x76EE;&#x5F55;-DTD"><a href="#&#x4EA7;&#x54C1;&#x76EE;&#x5F55;-DTD" class="headerlink" title="&#x4EA7;&#x54C1;&#x76EE;&#x5F55; DTD"></a>&#x4EA7;&#x54C1;&#x76EE;&#x5F55; DTD</h4><p>&#x62F7;&#x8D1D;&#x81EA;&#xFF1A; <a href="http://www.vervet.com/" target="_blank" rel="noopener">http://www.vervet.com/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE CATALOG [</span><br><span class="line">&lt;!ENTITY AUTHOR &quot;John Doe&quot;&gt;</span><br><span class="line">&lt;!ENTITY COMPANY &quot;JD Power Tools, Inc.&quot;&gt;</span><br><span class="line">&lt;!ENTITY EMAIL &quot;jd@jd-tools.com&quot;&gt;</span><br><span class="line">&lt;!ELEMENT CATALOG (PRODUCT+)&gt;</span><br><span class="line">&lt;!ELEMENT PRODUCT</span><br><span class="line">(SPECIFICATIONS+,OPTIONS?,PRICE+,NOTES?)&gt;</span><br><span class="line">&lt;!ATTLIST PRODUCT</span><br><span class="line">NAME CDATA #IMPLIED</span><br><span class="line">CATEGORY (HandTool|Table|Shop-Professional) &quot;HandTool&quot;</span><br><span class="line">PARTNUM CDATA #IMPLIED</span><br><span class="line">PLANT (Pittsburgh|Milwaukee|Chicago) &quot;Chicago&quot;</span><br><span class="line">INVENTORY (InStock|Backordered|Discontinued) &quot;InStock&quot;&gt;</span><br><span class="line">&lt;!ELEMENT SPECIFICATIONS (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST SPECIFICATIONS</span><br><span class="line">WEIGHT CDATA #IMPLIED</span><br><span class="line">POWER CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ELEMENT OPTIONS (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST OPTIONS</span><br><span class="line">FINISH (Metal|Polished|Matte) &quot;Matte&quot;</span><br><span class="line">ADAPTER (Included|Optional|NotApplicable) &quot;Included&quot;</span><br><span class="line">CASE (HardShell|Soft|NotApplicable) &quot;HardShell&quot;&gt;</span><br><span class="line">&lt;!ELEMENT PRICE (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST PRICE</span><br><span class="line">MSRP CDATA #IMPLIED</span><br><span class="line">WHOLESALE CDATA #IMPLIED</span><br><span class="line">STREET CDATA #IMPLIED</span><br><span class="line">SHIPPING CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ELEMENT NOTES (#PCDATA)&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure></p>
+</payment>
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2018-08-09T07:06:43.000Z" itemprop="datePublished">2018-08-09</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/08/09/Backend/php入门/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    php入门
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/08/09/Mess/File structure/mp3文件格式/" class="ui tiny button">
+                    
+                    mp3文件格式
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#DTD-简介"><span>DTD 简介</span></a><ol><li><a href="#内部的-DOCTYPE-声明"><span>内部的 DOCTYPE 声明</span></a></li><li><a href="#外部文档声明"><span>外部文档声明</span></a></li><li><a href="#为什么使用-DTD？"><span>为什么使用 DTD？</span></a></li></ol></li></ol><li><a href="#DTD-元素"><span>DTD - 元素</span></a><ol><li><a href="#PCDATA"><span>PCDATA</span></a></li><li><a href="#CDATA"><span>CDATA</span></a></li><li><a href="#声明一个元素"><span>声明一个元素</span></a></li><li><a href="#空元素"><span>空元素</span></a></li><li><a href="#只有-PCDATA-的元素"><span>只有 PCDATA 的元素</span></a></li><li><a href="#带有任何内容的元素"><span>带有任何内容的元素</span></a></li><li><a href="#带有子元素（序列）的元素"><span>带有子元素（序列）的元素</span></a></li><li><a href="#声明只出现一次的元素"><span>声明只出现一次的元素</span></a></li><li><a href="#声明最少出现一次的元素"><span>声明最少出现一次的元素</span></a></li><li><a href="#声明出现零次或多次的元素"><span>声明出现零次或多次的元素</span></a></li><li><a href="#声明出现零次或一次的元素"><span>声明出现零次或一次的元素</span></a></li><li><a href="#声明”非…-既…”类型的内容"><span>声明”非…/既…”类型的内容</span></a></li><li><a href="#声明混合型的内容"><span>声明混合型的内容</span></a></li></ol></li><li><a href="#DTD-属性"><span>DTD - 属性</span></a><ol><li><a href="#声明属性"><span>声明属性</span></a><ol><li><a href="#列举属性值"><span>列举属性值</span></a></li></ol></li></ol></li><li><a href="#DTD-实体"><span>DTD - 实体</span></a><ol><li><a href="#内部实体声明"><span>内部实体声明</span></a></li><li><a href="#外部实体声明"><span>外部实体声明</span></a></li></ol></li><li><a href="#DTD-来自网络的实例"><span>DTD - 来自网络的实例</span></a><ol><li><a href="#电视节目表-DTD"><span>电视节目表 DTD</span></a></li><li><a href="#报纸文章-DTD"><span>报纸文章 DTD</span></a></li><li><a href="#产品目录-DTD"><span>产品目录 DTD</span></a></li></ol></li>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

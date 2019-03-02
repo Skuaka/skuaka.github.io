@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>awk 命令 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="&amp;#x7B80;&amp;#x4ECB;AWK&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x5904;&amp;#x7406;&amp;#x6587;&amp;#x672C;&amp;#x6587;&amp;#x4EF6;&amp;#x7684;&amp;#x8BED;&amp;#x8A00;&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F3A;&amp;#x5927;&amp;#x7684;&amp;#x6587;&amp;#x672C;&amp;#x5206;&amp;#x67">
+<meta property="og:type" content="article">
+<meta property="og:title" content="awk 命令">
+<meta property="og:url" content="http://yoursite.com/2018/11/12/Unix/Command/awk/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x7B80;&amp;#x4ECB;AWK&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x5904;&amp;#x7406;&amp;#x6587;&amp;#x672C;&amp;#x6587;&amp;#x4EF6;&amp;#x7684;&amp;#x8BED;&amp;#x8A00;&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F3A;&amp;#x5927;&amp;#x7684;&amp;#x6587;&amp;#x672C;&amp;#x5206;&amp;#x67">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-28T11:47:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="awk 命令">
+<meta name="twitter:description" content="&amp;#x7B80;&amp;#x4ECB;AWK&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x5904;&amp;#x7406;&amp;#x6587;&amp;#x672C;&amp;#x6587;&amp;#x4EF6;&amp;#x7684;&amp;#x8BED;&amp;#x8A00;&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F3A;&amp;#x5927;&amp;#x7684;&amp;#x6587;&amp;#x672C;&amp;#x5206;&amp;#x67">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Unix/Command/awk" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    awk 命令
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h2 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;" class="headerlink" title="&#x7B80;&#x4ECB;"></a>&#x7B80;&#x4ECB;</h2><p>AWK&#x662F;&#x4E00;&#x79CD;&#x5904;&#x7406;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x5F3A;&#x5927;&#x7684;&#x6587;&#x672C;&#x5206;&#x6790;&#x5DE5;&#x5177;&#x3002;</p>
+<p>&#x4E4B;&#x6240;&#x4EE5;&#x53EB;AWK&#x662F;&#x56E0;&#x4E3A;&#x5176;&#x53D6;&#x4E86;&#x4E09;&#x4F4D;&#x521B;&#x59CB;&#x4EBA; Alfred Aho&#xFF0C;Peter Weinberger, &#x548C; Brian Kernighan &#x7684;Family Name&#x7684;&#x9996;&#x5B57;&#x7B26;&#x3002;</p>
+<p><strong>awk&#x3001;sed&#x3001;grep&#x66F4;&#x9002;&#x5408;&#x7684;&#x65B9;&#x5411;&#xFF1A;</strong></p>
+<ul class="ui list">
+<li>grep &#x66F4;&#x9002;&#x5408;&#x5355;&#x7EAF;&#x7684;&#x67E5;&#x627E;&#x6216;&#x5339;&#x914D;&#x6587;&#x672C;</li>
+<li>sed &#x66F4;&#x9002;&#x5408;&#x7F16;&#x8F91;&#x5339;&#x914D;&#x5230;&#x7684;&#x6587;&#x672C;</li>
+<li>awk &#x66F4;&#x9002;&#x5408;&#x683C;&#x5F0F;&#x5316;&#x6587;&#x672C;&#xFF0C;&#x5BF9;&#x6587;&#x672C;&#x8FDB;&#x884C;&#x8F83;&#x590D;&#x6742;&#x683C;&#x5F0F;&#x5904;&#x7406;</li>
+</ul>
+<h2 id="&#x8BED;&#x6CD5;"><a href="#&#x8BED;&#x6CD5;" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">awk [&#x9009;&#x9879;&#x53C2;&#x6570;] <span class="string">&apos;script&apos;</span> var=value file(s)</span><br><span class="line">&#x6216;</span><br><span class="line">awk [&#x9009;&#x9879;&#x53C2;&#x6570;] -f scriptfile var=value file(s)</span><br></pre></td></tr></table></figure>
+<p><strong>&#x9009;&#x9879;&#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF1A;</strong></p>
+<ul class="ui list">
+<li>-F fs or &#x2013;field-separator fs<br>&#x6307;&#x5B9A;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x6298;&#x5206;&#x9694;&#x7B26;&#xFF0C;fs&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x8005;&#x662F;&#x4E00;&#x4E2A;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x5982;-F:&#x3002;</li>
+<li>-v var=value or &#x2013;asign var=value<br>&#x8D4B;&#x503C;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x5B9A;&#x4E49;&#x53D8;&#x91CF;&#x3002;</li>
+<li>-f scripfile or &#x2013;file scriptfile<br>&#x4ECE;&#x811A;&#x672C;&#x6587;&#x4EF6;&#x4E2D;&#x8BFB;&#x53D6;awk&#x547D;&#x4EE4;&#x3002;</li>
+<li>-mf nnn and -mr nnn<br>&#x5BF9;nnn&#x503C;&#x8BBE;&#x7F6E;&#x5185;&#x5728;&#x9650;&#x5236;&#xFF0C;-mf&#x9009;&#x9879;&#x9650;&#x5236;&#x5206;&#x914D;&#x7ED9;nnn&#x7684;&#x6700;&#x5927;&#x5757;&#x6570;&#x76EE;&#xFF1B;-mr&#x9009;&#x9879;&#x9650;&#x5236;&#x8BB0;&#x5F55;&#x7684;&#x6700;&#x5927;&#x6570;&#x76EE;&#x3002;&#x8FD9;&#x4E24;&#x4E2A;&#x529F;&#x80FD;&#x662F;Bell&#x5B9E;&#x9A8C;&#x5BA4;&#x7248;awk&#x7684;&#x6269;&#x5C55;&#x529F;&#x80FD;&#xFF0C;&#x5728;&#x6807;&#x51C6;awk&#x4E2D;&#x4E0D;&#x9002;&#x7528;&#x3002;</li>
+<li>-W compact or &#x2013;compat, -W traditional or &#x2013;traditional<br>&#x5728;&#x517C;&#x5BB9;&#x6A21;&#x5F0F;&#x4E0B;&#x8FD0;&#x884C;awk&#x3002;&#x6240;&#x4EE5;gawk&#x7684;&#x884C;&#x4E3A;&#x548C;&#x6807;&#x51C6;&#x7684;awk&#x5B8C;&#x5168;&#x4E00;&#x6837;&#xFF0C;&#x6240;&#x6709;&#x7684;awk&#x6269;&#x5C55;&#x90FD;&#x88AB;&#x5FFD;&#x7565;&#x3002;</li>
+<li>-W copyleft or &#x2013;copyleft, -W copyright or &#x2013;copyright<br>&#x6253;&#x5370;&#x7B80;&#x77ED;&#x7684;&#x7248;&#x6743;&#x4FE1;&#x606F;&#x3002;</li>
+<li>-W help or &#x2013;help, -W usage or &#x2013;usage<br>&#x6253;&#x5370;&#x5168;&#x90E8;awk&#x9009;&#x9879;&#x548C;&#x6BCF;&#x4E2A;&#x9009;&#x9879;&#x7684;&#x7B80;&#x77ED;&#x8BF4;&#x660E;&#x3002;</li>
+<li>-W lint or &#x2013;lint<br>&#x6253;&#x5370;&#x4E0D;&#x80FD;&#x5411;&#x4F20;&#x7EDF;unix&#x5E73;&#x53F0;&#x79FB;&#x690D;&#x7684;&#x7ED3;&#x6784;&#x7684;&#x8B66;&#x544A;&#x3002;</li>
+<li>-W lint-old or &#x2013;lint-old<br>&#x6253;&#x5370;&#x5173;&#x4E8E;&#x4E0D;&#x80FD;&#x5411;&#x4F20;&#x7EDF;unix&#x5E73;&#x53F0;&#x79FB;&#x690D;&#x7684;&#x7ED3;&#x6784;&#x7684;&#x8B66;&#x544A;&#x3002;</li>
+<li>-W posix<br>&#x6253;&#x5F00;&#x517C;&#x5BB9;&#x6A21;&#x5F0F;&#x3002;&#x4F46;&#x6709;&#x4EE5;&#x4E0B;&#x9650;&#x5236;&#xFF0C;&#x4E0D;&#x8BC6;&#x522B;&#xFF1A;/x&#x3001;&#x51FD;&#x6570;&#x5173;&#x952E;&#x5B57;&#x3001;func&#x3001;&#x6362;&#x7801;&#x5E8F;&#x5217;&#x4EE5;&#x53CA;&#x5F53;fs&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x683C;&#x65F6;&#xFF0C;&#x5C06;&#x65B0;&#x884C;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x57DF;&#x5206;&#x9694;&#x7B26;&#xFF1B;&#x64CD;&#x4F5C;&#x7B26;<strong>&#x548C;</strong>=&#x4E0D;&#x80FD;&#x4EE3;&#x66FF;^&#x548C;^=&#xFF1B;fflush&#x65E0;&#x6548;&#x3002;</li>
+<li>-W re-interval or &#x2013;re-inerval<br>&#x5141;&#x8BB8;&#x95F4;&#x9694;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x53C2;&#x8003;(grep&#x4E2D;&#x7684;Posix&#x5B57;&#x7B26;&#x7C7B;)&#xFF0C;&#x5982;&#x62EC;&#x53F7;&#x8868;&#x8FBE;&#x5F0F;[[:alpha:]]&#x3002;</li>
+<li>-W source program-text or &#x2013;source program-text<br>&#x4F7F;&#x7528;program-text&#x4F5C;&#x4E3A;&#x6E90;&#x4EE3;&#x7801;&#xFF0C;&#x53EF;&#x4E0E;-f&#x547D;&#x4EE4;&#x6DF7;&#x7528;&#x3002;</li>
+<li>-W version or &#x2013;version<br>&#x6253;&#x5370;bug&#x62A5;&#x544A;&#x4FE1;&#x606F;&#x7684;&#x7248;&#x672C;&#x3002;</li>
+</ul>
+<h2 id="&#x57FA;&#x672C;&#x7528;&#x6CD5;"><a href="#&#x57FA;&#x672C;&#x7528;&#x6CD5;" class="headerlink" title="&#x57FA;&#x672C;&#x7528;&#x6CD5;"></a>&#x57FA;&#x672C;&#x7528;&#x6CD5;</h2><h3 id="&#x793A;&#x4F8B;&#x6587;&#x672C;&#x5185;&#x5BB9;"><a href="#&#x793A;&#x4F8B;&#x6587;&#x672C;&#x5185;&#x5BB9;" class="headerlink" title="&#x793A;&#x4F8B;&#x6587;&#x672C;&#x5185;&#x5BB9;"></a>&#x793A;&#x4F8B;&#x6587;&#x672C;&#x5185;&#x5BB9;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2 this is a test</span><br><span class="line">3 Are you like awk</span><br><span class="line">This&apos;s a test</span><br><span class="line">10 There are orange,apple,mongo</span><br></pre></td></tr></table></figure>
+<h3 id="&#x65E0;&#x53C2;&#x6570;"><a href="#&#x65E0;&#x53C2;&#x6570;" class="headerlink" title="&#x65E0;&#x53C2;&#x6570;"></a>&#x65E0;&#x53C2;&#x6570;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&apos;{[pattern] action}&apos;</span> {filenames}   <span class="comment"># &#x884C;&#x5339;&#x914D;&#x8BED;&#x53E5; awk &apos;&apos; &#x53EA;&#x80FD;&#x7528;&#x5355;&#x5F15;&#x53F7;</span></span><br></pre></td></tr></table></figure>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#x6BCF;&#x884C;&#x6309;&#x7A7A;&#x683C;&#x6216;TAB&#x5206;&#x5272;&#xFF0C;&#x8F93;&#x51FA;&#x6587;&#x672C;&#x4E2D;&#x7684;1&#x3001;4&#x9879;</span></span><br><span class="line"> $ awk <span class="string">&apos;{print $1,$4}&apos;</span> log.txt</span><br><span class="line"> ---------------------------------------------</span><br><span class="line"> 2 a</span><br><span class="line"> 3 like</span><br><span class="line"> This<span class="string">&apos;s</span></span><br><span class="line"><span class="string"> 10 orange,apple,mongo</span></span><br><span class="line"><span class="string"> # &#x683C;&#x5F0F;&#x5316;&#x8F93;&#x51FA;</span></span><br><span class="line"><span class="string"> $ awk &apos;</span>{<span class="built_in">printf</span> <span class="string">&quot;%-8s %-10s\n&quot;</span>,<span class="variable">$1</span>,<span class="variable">$4</span>}<span class="string">&apos; log.txt</span></span><br><span class="line"><span class="string"> ---------------------------------------------</span></span><br><span class="line"><span class="string"> 2        a</span></span><br><span class="line"><span class="string"> 3        like</span></span><br><span class="line"><span class="string"> This&apos;</span>s</span><br><span class="line"> 10       orange,apple,mongo</span><br></pre></td></tr></table></figure>
+<h3 id="&#x6307;&#x5B9A;&#x5206;&#x5272;&#x7B26;"><a href="#&#x6307;&#x5B9A;&#x5206;&#x5272;&#x7B26;" class="headerlink" title="&#x6307;&#x5B9A;&#x5206;&#x5272;&#x7B26;"></a>&#x6307;&#x5B9A;&#x5206;&#x5272;&#x7B26;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F  <span class="comment">#-F&#x76F8;&#x5F53;&#x4E8E;&#x5185;&#x7F6E;&#x53D8;&#x91CF;FS, &#x6307;&#x5B9A;&#x5206;&#x5272;&#x5B57;&#x7B26;</span></span><br></pre></td></tr></table></figure>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#x4F7F;&#x7528;&quot;,&quot;&#x5206;&#x5272;</span></span><br><span class="line"> $  awk -F, <span class="string">&apos;{print $1,$2}&apos;</span>   log.txt</span><br><span class="line"> ---------------------------------------------</span><br><span class="line"> 2 this is a <span class="built_in">test</span></span><br><span class="line"> 3 Are you like awk</span><br><span class="line"> This<span class="string">&apos;s a test</span></span><br><span class="line"><span class="string"> 10 There are orange apple</span></span><br><span class="line"><span class="string"> # &#x6216;&#x8005;&#x4F7F;&#x7528;&#x5185;&#x5EFA;&#x53D8;&#x91CF;</span></span><br><span class="line"><span class="string"> $ awk &apos;</span>BEGIN{FS=<span class="string">&quot;,&quot;</span>} {<span class="built_in">print</span> <span class="variable">$1</span>,<span class="variable">$2</span>}<span class="string">&apos;     log.txt</span></span><br><span class="line"><span class="string"> ---------------------------------------------</span></span><br><span class="line"><span class="string"> 2 this is a test</span></span><br><span class="line"><span class="string"> 3 Are you like awk</span></span><br><span class="line"><span class="string"> This&apos;</span>s a <span class="built_in">test</span></span><br><span class="line"> 10 There are orange apple</span><br><span class="line"> <span class="comment"># &#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x5206;&#x9694;&#x7B26;.&#x5148;&#x4F7F;&#x7528;&#x7A7A;&#x683C;&#x5206;&#x5272;&#xFF0C;&#x7136;&#x540E;&#x5BF9;&#x5206;&#x5272;&#x7ED3;&#x679C;&#x518D;&#x4F7F;&#x7528;&quot;,&quot;&#x5206;&#x5272;</span></span><br><span class="line"> $ awk -F <span class="string">&apos;[ ,]&apos;</span>  <span class="string">&apos;{print $1,$2,$5}&apos;</span>   log.txt</span><br><span class="line"> ---------------------------------------------</span><br><span class="line"> 2 this <span class="built_in">test</span></span><br><span class="line"> 3 Are awk</span><br><span class="line"> This<span class="string">&apos;s a</span></span><br><span class="line"><span class="string"> 10 There apple</span></span><br></pre></td></tr></table></figure>
+<h3 id="&#x8BBE;&#x7F6E;&#x53D8;&#x91CF;"><a href="#&#x8BBE;&#x7F6E;&#x53D8;&#x91CF;" class="headerlink" title="&#x8BBE;&#x7F6E;&#x53D8;&#x91CF;"></a>&#x8BBE;&#x7F6E;&#x53D8;&#x91CF;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -v  <span class="comment"># &#x8BBE;&#x7F6E;&#x53D8;&#x91CF;</span></span><br></pre></td></tr></table></figure>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ awk -va=1 <span class="string">&apos;{print $1,$1+a}&apos;</span> log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">2 3</span><br><span class="line">3 4</span><br><span class="line">This<span class="string">&apos;s 1</span></span><br><span class="line"><span class="string">10 11</span></span><br><span class="line"><span class="string">$ awk -va=1 -vb=s &apos;</span>{<span class="built_in">print</span> <span class="variable">$1</span>,<span class="variable">$1</span>+a,<span class="variable">$1b</span>}<span class="string">&apos; log.txt</span></span><br><span class="line"><span class="string">---------------------------------------------</span></span><br><span class="line"><span class="string">2 3 2s</span></span><br><span class="line"><span class="string">3 4 3s</span></span><br><span class="line"><span class="string">This&apos;</span>s 1 This<span class="string">&apos;ss</span></span><br><span class="line"><span class="string">10 11 10s</span></span><br></pre></td></tr></table></figure>
+<h3 id="&#x8C03;&#x7528;awk&#x811A;&#x672C;"><a href="#&#x8C03;&#x7528;awk&#x811A;&#x672C;" class="headerlink" title="&#x8C03;&#x7528;awk&#x811A;&#x672C;"></a>&#x8C03;&#x7528;awk&#x811A;&#x672C;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -f {awk&#x811A;&#x672C;} {&#x6587;&#x4EF6;&#x540D;}</span><br></pre></td></tr></table></figure>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f cal.awk log.txt</span><br></pre></td></tr></table></figure>
+<h2 id="&#x8FD0;&#x7B97;&#x7B26;"><a href="#&#x8FD0;&#x7B97;&#x7B26;" class="headerlink" title="&#x8FD0;&#x7B97;&#x7B26;"></a>&#x8FD0;&#x7B97;&#x7B26;</h2><table>
+<thead>
+<tr>
+<th>&#x8FD0;&#x7B97;&#x7B26;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>= += -= *= /= %= ^= **=</td>
+<td>&#x8D4B;&#x503C;</td>
+</tr>
+<tr>
+<td>?:</td>
+<td>C&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;</td>
+</tr>
+<tr>
+<td>\</td>
+<td>\</td>
+<td></td>
+<td>&#x903B;&#x8F91;&#x6216;</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>&#x903B;&#x8F91;&#x4E0E;</td>
+</tr>
+<tr>
+<td>~ ~!</td>
+<td>&#x5339;&#x914D;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x548C;&#x4E0D;&#x5339;&#x914D;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</td>
+</tr>
+<tr>
+<td>&lt; &lt;= &gt; &gt;= != ==</td>
+<td>&#x5173;&#x7CFB;&#x8FD0;&#x7B97;&#x7B26;</td>
+</tr>
+<tr>
+<td>&#x7A7A;&#x683C;</td>
+<td>&#x8FDE;&#x63A5;</td>
+</tr>
+<tr>
+<td>+ -</td>
+<td>&#x52A0;&#xFF0C;&#x51CF;</td>
+</tr>
+<tr>
+<td>* / %</td>
+<td>&#x4E58;&#xFF0C;&#x9664;&#x4E0E;&#x6C42;&#x4F59;</td>
+</tr>
+<tr>
+<td>+ - !</td>
+<td>&#x4E00;&#x5143;&#x52A0;&#xFF0C;&#x51CF;&#x548C;&#x903B;&#x8F91;&#x975E;</td>
+</tr>
+<tr>
+<td>^ ***</td>
+<td>&#x6C42;&#x5E42;</td>
+</tr>
+<tr>
+<td>++ &#x2013;</td>
+<td>&#x589E;&#x52A0;&#x6216;&#x51CF;&#x5C11;&#xFF0C;&#x4F5C;&#x4E3A;&#x524D;&#x7F00;&#x6216;&#x540E;&#x7F00;</td>
+</tr>
+<tr>
+<td>$</td>
+<td>&#x5B57;&#x6BB5;&#x5F15;&#x7528;</td>
+</tr>
+<tr>
+<td>in</td>
+<td>&#x6570;&#x7EC4;&#x6210;&#x5458;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x8FC7;&#x6EE4;&#x7B2C;&#x4E00;&#x5217;&#x5927;&#x4E8E;2&#x7684;&#x884C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">&apos;$1&gt;2&apos;</span> log.txt    <span class="comment">#&#x547D;&#x4EE4;</span></span><br><span class="line"><span class="comment">#&#x8F93;&#x51FA;</span></span><br><span class="line">3 Are you like awk</span><br><span class="line">This<span class="string">&apos;s a test</span></span><br><span class="line"><span class="string">10 There are orange,apple,mongo</span></span><br></pre></td></tr></table></figure>
+<p>&#x8FC7;&#x6EE4;&#x7B2C;&#x4E00;&#x5217;&#x7B49;&#x4E8E;2&#x7684;&#x884C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">&apos;$1==2 {print $1,$3}&apos;</span> log.txt    <span class="comment">#&#x547D;&#x4EE4;</span></span><br><span class="line"><span class="comment">#&#x8F93;&#x51FA;</span></span><br><span class="line">2 is</span><br></pre></td></tr></table></figure>
+<p>&#x8FC7;&#x6EE4;&#x7B2C;&#x4E00;&#x5217;&#x5927;&#x4E8E;2&#x5E76;&#x4E14;&#x7B2C;&#x4E8C;&#x5217;&#x7B49;&#x4E8E;&#x2019;Are&#x2019;&#x7684;&#x884C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">&apos;$1&gt;2 &amp;&amp; $2==&quot;Are&quot; {print $1,$2,$3}&apos;</span> log.txt    <span class="comment">#&#x547D;&#x4EE4;</span></span><br><span class="line"><span class="comment">#&#x8F93;&#x51FA;</span></span><br><span class="line">3 Are you</span><br></pre></td></tr></table></figure>
+<h2 id="&#x5185;&#x5EFA;&#x53D8;&#x91CF;"><a href="#&#x5185;&#x5EFA;&#x53D8;&#x91CF;" class="headerlink" title="&#x5185;&#x5EFA;&#x53D8;&#x91CF;"></a>&#x5185;&#x5EFA;&#x53D8;&#x91CF;</h2><table>
+<thead>
+<tr>
+<th>&#x53D8;&#x91CF;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>$n</strong></td>
+<td>&#x5F53;&#x524D;&#x8BB0;&#x5F55;&#x7684;&#x7B2C;n&#x4E2A;&#x5B57;&#x6BB5;&#xFF0C;&#x5B57;&#x6BB5;&#x95F4;&#x7531;FS&#x5206;&#x9694;</td>
+</tr>
+<tr>
+<td><strong>$0</strong></td>
+<td>&#x5B8C;&#x6574;&#x7684;&#x8F93;&#x5165;&#x8BB0;&#x5F55;</td>
+</tr>
+<tr>
+<td>ARGC</td>
+<td>&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x7684;&#x6570;&#x76EE;</td>
+</tr>
+<tr>
+<td>ARGIND</td>
+<td>&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x5F53;&#x524D;&#x6587;&#x4EF6;&#x7684;&#x4F4D;&#x7F6E;(&#x4ECE;0&#x5F00;&#x59CB;&#x7B97;)</td>
+</tr>
+<tr>
+<td>ARGV</td>
+<td>&#x5305;&#x542B;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x7684;&#x6570;&#x7EC4;</td>
+</tr>
+<tr>
+<td>CONVFMT</td>
+<td>&#x6570;&#x5B57;&#x8F6C;&#x6362;&#x683C;&#x5F0F;(&#x9ED8;&#x8BA4;&#x503C;&#x4E3A;%.6g)ENVIRON&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5173;&#x8054;&#x6570;&#x7EC4;</td>
+</tr>
+<tr>
+<td>ERRNO</td>
+<td>&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x9519;&#x8BEF;&#x7684;&#x63CF;&#x8FF0;</td>
+</tr>
+<tr>
+<td>FIELDWIDTHS</td>
+<td>&#x5B57;&#x6BB5;&#x5BBD;&#x5EA6;&#x5217;&#x8868;(&#x7528;&#x7A7A;&#x683C;&#x952E;&#x5206;&#x9694;)</td>
+</tr>
+<tr>
+<td>FILENAME</td>
+<td>&#x5F53;&#x524D;&#x6587;&#x4EF6;&#x540D;</td>
+</tr>
+<tr>
+<td>FNR</td>
+<td>&#x5404;&#x6587;&#x4EF6;&#x5206;&#x522B;&#x8BA1;&#x6570;&#x7684;&#x884C;&#x53F7;</td>
+</tr>
+<tr>
+<td><strong>FS</strong></td>
+<td>&#x5B57;&#x6BB5;&#x5206;&#x9694;&#x7B26;(&#x9ED8;&#x8BA4;&#x662F;&#x4EFB;&#x4F55;&#x7A7A;&#x683C;)</td>
+</tr>
+<tr>
+<td>IGNORECASE</td>
+<td>&#x5982;&#x679C;&#x4E3A;&#x771F;&#xFF0C;&#x5219;&#x8FDB;&#x884C;&#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;&#x7684;&#x5339;&#x914D;</td>
+</tr>
+<tr>
+<td><strong>NF</strong></td>
+<td>&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#x7684;&#x5B57;&#x6BB5;&#x7684;&#x6570;&#x76EE;</td>
+</tr>
+<tr>
+<td><strong>NR</strong></td>
+<td>&#x5DF2;&#x7ECF;&#x8BFB;&#x51FA;&#x7684;&#x8BB0;&#x5F55;&#x6570;&#xFF0C;&#x5C31;&#x662F;&#x884C;&#x53F7;&#xFF0C;&#x4ECE;1&#x5F00;&#x59CB;</td>
+</tr>
+<tr>
+<td>OFMT</td>
+<td>&#x6570;&#x5B57;&#x7684;&#x8F93;&#x51FA;&#x683C;&#x5F0F;(&#x9ED8;&#x8BA4;&#x503C;&#x662F;%.6g)</td>
+</tr>
+<tr>
+<td><strong>OFS</strong></td>
+<td>&#x8F93;&#x51FA;&#x8BB0;&#x5F55;&#x5206;&#x9694;&#x7B26;&#xFF08;&#x8F93;&#x51FA;&#x6362;&#x884C;&#x7B26;&#xFF09;&#xFF0C;&#x8F93;&#x51FA;&#x65F6;&#x7528;&#x6307;&#x5B9A;&#x7684;&#x7B26;&#x53F7;&#x4EE3;&#x66FF;&#x6362;&#x884C;&#x7B26;</td>
+</tr>
+<tr>
+<td><strong>ORS</strong></td>
+<td>&#x8F93;&#x51FA;&#x8BB0;&#x5F55;&#x5206;&#x9694;&#x7B26;(&#x9ED8;&#x8BA4;&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x6362;&#x884C;&#x7B26;)</td>
+</tr>
+<tr>
+<td>RLENGTH</td>
+<td>&#x7531;match&#x51FD;&#x6570;&#x6240;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;</td>
+</tr>
+<tr>
+<td><strong>RS</strong></td>
+<td>&#x8BB0;&#x5F55;&#x5206;&#x9694;&#x7B26;(&#x9ED8;&#x8BA4;&#x662F;&#x4E00;&#x4E2A;&#x6362;&#x884C;&#x7B26;)</td>
+</tr>
+<tr>
+<td>RSTART</td>
+<td>&#x7531;match&#x51FD;&#x6570;&#x6240;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;</td>
+</tr>
+<tr>
+<td>SUBSEP</td>
+<td>&#x6570;&#x7EC4;&#x4E0B;&#x6807;&#x5206;&#x9694;&#x7B26;(&#x9ED8;&#x8BA4;&#x503C;&#x662F;/034)</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">&apos;BEGIN{printf &quot;%4s %4s %4s %4s %4s %4s %4s %4s %4s\n&quot;,&quot;FILENAME&quot;,&quot;ARGC&quot;,&quot;FNR&quot;,&quot;FS&quot;,&quot;NF&quot;,&quot;NR&quot;,&quot;OFS&quot;,&quot;ORS&quot;,&quot;RS&quot;;printf &quot;---------------------------------------------\n&quot;} {printf &quot;%4s %4s %4s %4s %4s %4s %4s %4s %4s\n&quot;,FILENAME,ARGC,FNR,FS,NF,NR,OFS,ORS,RS}&apos;</span>  log.txt</span><br><span class="line">FILENAME ARGC  FNR   FS   NF   NR  OFS  ORS   RS</span><br><span class="line">---------------------------------------------</span><br><span class="line">log.txt    2    1         5    1</span><br><span class="line">log.txt    2    2         5    2</span><br><span class="line">log.txt    2    3         3    3</span><br><span class="line">log.txt    2    4         4    4</span><br><span class="line">$ awk -F\<span class="string">&apos; &apos;</span>BEGIN{<span class="built_in">printf</span> <span class="string">&quot;%4s %4s %4s %4s %4s %4s %4s %4s %4s\n&quot;</span>,<span class="string">&quot;FILENAME&quot;</span>,<span class="string">&quot;ARGC&quot;</span>,<span class="string">&quot;FNR&quot;</span>,<span class="string">&quot;FS&quot;</span>,<span class="string">&quot;NF&quot;</span>,<span class="string">&quot;NR&quot;</span>,<span class="string">&quot;OFS&quot;</span>,<span class="string">&quot;ORS&quot;</span>,<span class="string">&quot;RS&quot;</span>;<span class="built_in">printf</span> <span class="string">&quot;---------------------------------------------\n&quot;</span>} {<span class="built_in">printf</span> <span class="string">&quot;%4s %4s %4s %4s %4s %4s %4s %4s %4s\n&quot;</span>,FILENAME,ARGC,FNR,FS,NF,NR,OFS,ORS,RS}<span class="string">&apos;  log.txt</span></span><br><span class="line"><span class="string">FILENAME ARGC  FNR   FS   NF   NR  OFS  ORS   RS</span></span><br><span class="line"><span class="string">---------------------------------------------</span></span><br><span class="line"><span class="string">log.txt    2    1    &apos;</span>    1    1</span><br><span class="line">log.txt    2    2    <span class="string">&apos;    1    2</span></span><br><span class="line"><span class="string">log.txt    2    3    &apos;</span>    2    3</span><br><span class="line">log.txt    2    4    <span class="string">&apos;    1    4</span></span><br><span class="line"><span class="string"># &#x8F93;&#x51FA;&#x987A;&#x5E8F;&#x53F7; NR, &#x5339;&#x914D;&#x6587;&#x672C;&#x884C;&#x53F7;</span></span><br><span class="line"><span class="string">$ awk &apos;</span>{<span class="built_in">print</span> NR,FNR,<span class="variable">$1</span>,<span class="variable">$2</span>,<span class="variable">$3</span>}<span class="string">&apos; log.txt</span></span><br><span class="line"><span class="string">---------------------------------------------</span></span><br><span class="line"><span class="string">1 1 2 this is</span></span><br><span class="line"><span class="string">2 2 3 Are you</span></span><br><span class="line"><span class="string">3 3 This&apos;</span>s a <span class="built_in">test</span></span><br><span class="line">4 4 10 There are</span><br><span class="line"><span class="comment"># &#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x5206;&#x5272;&#x7B26;</span></span><br><span class="line">$  awk <span class="string">&apos;{print $1,$2,$5}&apos;</span> OFS=<span class="string">&quot; $ &quot;</span>  log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">2 $ this $ <span class="built_in">test</span></span><br><span class="line">3 $ Are $ awk</span><br><span class="line">This<span class="string">&apos;s $ a $</span></span><br><span class="line"><span class="string">10 $ There $</span></span><br></pre></td></tr></table></figure>
+<h2 id="&#x4F7F;&#x7528;&#x6B63;&#x5219;"><a href="#&#x4F7F;&#x7528;&#x6B63;&#x5219;" class="headerlink" title="&#x4F7F;&#x7528;&#x6B63;&#x5219;"></a>&#x4F7F;&#x7528;&#x6B63;&#x5219;</h2><p>&#x7C7B;&#x4F3C; perl &#x7684;&#x6B63;&#x5219;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#x8F93;&#x51FA;&#x7B2C;&#x4E8C;&#x5217;&#x5305;&#x542B; &quot;th&quot;&#xFF0C;&#x5E76;&#x6253;&#x5370;&#x7B2C;&#x4E8C;&#x5217;&#x4E0E;&#x7B2C;&#x56DB;&#x5217;</span></span><br><span class="line">$ awk <span class="string">&apos;$2 ~ /th/ {print $2,$4}&apos;</span> log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">this a</span><br></pre></td></tr></table></figure>
+<p><strong>~ &#x8868;&#x793A;&#x6A21;&#x5F0F;&#x5F00;&#x59CB;&#x3002;// &#x4E2D;&#x662F;&#x6A21;&#x5F0F;&#x3002;</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#x8F93;&#x51FA;&#x5305;&#x542B;&quot;re&quot; &#x7684;&#x884C;</span></span><br><span class="line">$ awk <span class="string">&apos;/re/ &apos;</span> log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">3 Are you like awk</span><br><span class="line">10 There are orange,apple,mongo</span><br></pre></td></tr></table></figure>
+<h3 id="&#x6B63;&#x5219;&#x8868;"><a href="#&#x6B63;&#x5219;&#x8868;" class="headerlink" title="&#x6B63;&#x5219;&#x8868;"></a>&#x6B63;&#x5219;&#x8868;</h3><table>
+<thead>
+<tr>
+<th>&#x8868;&#x8FBE;&#x5F0F;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>&#x5339;&#x914D;&#x9664;&#x6362;&#x884C;&#x7B26;&#x4EE5;&#x5916;&#x7684;&#x6240;&#x6709;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>x?</td>
+<td>&#x5339;&#x914D; 0 &#x6B21;&#x6216;&#x4E00;&#x6B21; x &#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td>x*</td>
+<td>&#x5339;&#x914D; 0 &#x6B21;&#x6216;&#x591A;&#x6B21; x &#x5B57;&#x7B26;&#x4E32;,&#x4F46;&#x5339;&#x914D;&#x53EF;&#x80FD;&#x7684;&#x6700;&#x5C11;&#x6B21;&#x6570;</td>
+</tr>
+<tr>
+<td>x+</td>
+<td>&#x5339;&#x914D; 1 &#x6B21;&#x6216;&#x591A;&#x6B21; x &#x5B57;&#x7B26;&#x4E32;,&#x4F46;&#x5339;&#x914D;&#x53EF;&#x80FD;&#x7684;&#x6700;&#x5C11;&#x6B21;&#x6570;</td>
+</tr>
+<tr>
+<td>.*</td>
+<td>&#x5339;&#x914D; 0 &#x6B21;&#x6216;&#x591A;&#x6B21;&#x7684;&#x4EFB;&#x4F55;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>.+</td>
+<td>&#x5339;&#x914D; 1 &#x6B21;&#x6216;&#x591A;&#x6B21;&#x7684;&#x4EFB;&#x4F55;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>{m}</td>
+<td>&#x5339;&#x914D;&#x521A;&#x597D;&#x662F; m &#x4E2A; &#x7684;&#x6307;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>&#x5339;&#x914D;&#x5728; m&#x4E2A; &#x4EE5;&#x4E0A; n&#x4E2A; &#x4EE5;&#x4E0B; &#x7684;&#x6307;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td>{m,}</td>
+<td>&#x5339;&#x914D; m&#x4E2A; &#x4EE5;&#x4E0A; &#x7684;&#x6307;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>&#x5339;&#x914D;&#x7B26;&#x5408; [] &#x5185;&#x7684;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>&#x5339;&#x914D;&#x4E0D;&#x7B26;&#x5408; [] &#x5185;&#x7684;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>[0-9]</td>
+<td>&#x5339;&#x914D;&#x6240;&#x6709;&#x6570;&#x5B57;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>[a-z]</td>
+<td>&#x5339;&#x914D;&#x6240;&#x6709;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>[^0-9]</td>
+<td>&#x5339;&#x914D;&#x6240;&#x6709;&#x975E;&#x6570;&#x5B57;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>[^a-z]</td>
+<td>&#x5339;&#x914D;&#x6240;&#x6709;&#x975E;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>^</td>
+<td>&#x5339;&#x914D;&#x5B57;&#x7B26;&#x5F00;&#x5934;&#x7684;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>$</td>
+<td>&#x5339;&#x914D;&#x5B57;&#x7B26;&#x7ED3;&#x5C3E;&#x7684;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>&#x5339;&#x914D;&#x4E00;&#x4E2A;&#x6570;&#x5B57;&#x7684;&#x5B57;&#x7B26;,&#x548C; [0-9] &#x8BED;&#x6CD5;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\d+</td>
+<td>&#x5339;&#x914D;&#x591A;&#x4E2A;&#x6570;&#x5B57;&#x5B57;&#x7B26;&#x4E32;,&#x548C; [0-9]+ &#x8BED;&#x6CD5;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>&#x975E;&#x6570;&#x5B57;,&#x5176;&#x4ED6;&#x540C; \d</td>
+</tr>
+<tr>
+<td>\D+</td>
+<td>&#x975E;&#x6570;&#x5B57;,&#x5176;&#x4ED6;&#x540C; \d+</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>&#x82F1;&#x6587;&#x5B57;&#x6BCD;&#x6216;&#x6570;&#x5B57;&#x7684;&#x5B57;&#x7B26;&#x4E32;,&#x548C; [a-zA-Z0-9_] &#x8BED;&#x6CD5;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\w+</td>
+<td>&#x548C; [a-zA-Z0-9_]+ &#x8BED;&#x6CD5;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>&#x975E;&#x82F1;&#x6587;&#x5B57;&#x6BCD;&#x6216;&#x6570;&#x5B57;&#x7684;&#x5B57;&#x7B26;&#x4E32;,&#x548C; [^a-zA-Z0-9_] &#x8BED;&#x6CD5;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\W+</td>
+<td>&#x548C; [^a-zA-Z0-9_]+ &#x8BED;&#x6CD5;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>&#x7A7A;&#x683C;,&#x548C; [\n\t\r\f] &#x8BED;&#x6CD5;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\s+</td>
+<td>&#x548C; [\n\t\r\f]+ &#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>&#x975E;&#x7A7A;&#x683C;,&#x548C; [^\n\t\r\f] &#x8BED;&#x6CD5;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\S+</td>
+<td>&#x548C; [^\n\t\r\f]+ &#x8BED;&#x6CD5;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>&#x5339;&#x914D;&#x4EE5;&#x82F1;&#x6587;&#x5B57;&#x6BCD;,&#x6570;&#x5B57;&#x4E3A;&#x8FB9;&#x754C;&#x7684;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>&#x5339;&#x914D;&#x4E0D;&#x4EE5;&#x82F1;&#x6587;&#x5B57;&#x6BCD;,&#x6570;&#x503C;&#x4E3A;&#x8FB9;&#x754C;&#x7684;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td>a\</td>
+<td>b\</td>
+<td>c</td>
+<td>&#x5339;&#x914D;&#x7B26;&#x5408;a&#x5B57;&#x7B26; &#x6216;&#x662F;b&#x5B57;&#x7B26; &#x6216;&#x662F;c&#x5B57;&#x7B26; &#x7684;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td>abc</td>
+<td>&#x5339;&#x914D;&#x542B;&#x6709; abc &#x7684;&#x5B57;&#x7B26;&#x4E32; (pattern) () &#x8FD9;&#x4E2A;&#x7B26;&#x53F7;&#x4F1A;&#x8BB0;&#x4F4F;&#x6240;&#x627E;&#x5BFB;&#x5230;&#x7684;&#x5B57;&#x7B26;&#x4E32;,&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x5B9E;&#x7528;&#x7684;&#x8BED;&#x6CD5;.&#x7B2C;&#x4E00;&#x4E2A; () &#x5185;&#x6240;&#x627E;&#x5230;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x53D8;&#x6210; <code>$1</code> &#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x6216;&#x662F; \1 &#x53D8;&#x91CF;,&#x7B2C;&#x4E8C;&#x4E2A; () &#x5185;&#x6240;&#x627E;&#x5230;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x53D8;&#x6210; <code>$2</code> &#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x6216;&#x662F; \2 &#x53D8;&#x91CF;,&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;&#x4E0B;&#x53BB;.</td>
+</tr>
+<tr>
+<td>/pattern/i</td>
+<td>i &#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x8868;&#x793A;&#x5FFD;&#x7565;&#x82F1;&#x6587;&#x5927;&#x5C0F;&#x5199;,&#x4E5F;&#x5C31;&#x662F;&#x5728;&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x65F6;&#x5019;,&#x4E0D;&#x8003;&#x8651;&#x82F1;&#x6587;&#x7684;&#x5927;&#x5C0F;&#x5199;&#x95EE;&#x9898;. \ &#x5982;&#x679C;&#x8981;&#x5728; pattern &#x6A21;&#x5F0F;&#x4E2D;&#x627E;&#x5BFB;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x5B57;&#x7B26;,&#x5982; &#x201C;*&#x201D;,&#x5219;&#x8981;&#x5728;&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x524D;&#x52A0;&#x4E0A; \ &#x7B26;&#x53F7;,&#x8FD9;&#x6837;&#x624D;&#x4F1A;&#x8BA9;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x5931;&#x6548;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;"><a href="#&#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;" class="headerlink" title="&#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;"></a>&#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">&apos;BEGIN{IGNORECASE=1} /this/&apos;</span> log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">2 this is a <span class="built_in">test</span></span><br><span class="line">This<span class="string">&apos;s a test</span></span><br></pre></td></tr></table></figure>
+<h2 id="&#x6A21;&#x5F0F;&#x53D6;&#x53CD;"><a href="#&#x6A21;&#x5F0F;&#x53D6;&#x53CD;" class="headerlink" title="&#x6A21;&#x5F0F;&#x53D6;&#x53CD;"></a>&#x6A21;&#x5F0F;&#x53D6;&#x53CD;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">&apos;$2 !~ /th/ {print $2,$4}&apos;</span> log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">Are like</span><br><span class="line">a</span><br><span class="line">There orange,apple,mongo</span><br><span class="line">$ awk <span class="string">&apos;!/th/ {print $2,$4}&apos;</span> log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">Are like</span><br><span class="line">a</span><br><span class="line">There orange,apple,mongo</span><br></pre></td></tr></table></figure>
+<h2 id="awk&#x811A;&#x672C;"><a href="#awk&#x811A;&#x672C;" class="headerlink" title="awk&#x811A;&#x672C;"></a>awk&#x811A;&#x672C;</h2><p>&#x5173;&#x4E8E;awk&#x811A;&#x672C;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x4E24;&#x4E2A;&#x5173;&#x952E;&#x8BCD;BEGIN&#x548C;END&#x3002;</p>
+<ul class="ui list">
+<li>BEGIN{ &#x8FD9;&#x91CC;&#x9762;&#x653E;&#x7684;&#x662F;&#x6267;&#x884C;&#x524D;&#x7684;&#x8BED;&#x53E5; }</li>
+<li>END {&#x8FD9;&#x91CC;&#x9762;&#x653E;&#x7684;&#x662F;&#x5904;&#x7406;&#x5B8C;&#x6240;&#x6709;&#x7684;&#x884C;&#x540E;&#x8981;&#x6267;&#x884C;&#x7684;&#x8BED;&#x53E5; }</li>
+<li>{&#x8FD9;&#x91CC;&#x9762;&#x653E;&#x7684;&#x662F;&#x5904;&#x7406;&#x6BCF;&#x4E00;&#x884C;&#x65F6;&#x8981;&#x6267;&#x884C;&#x7684;&#x8BED;&#x53E5;}</li>
+</ul>
+<p>&#x5047;&#x8BBE;&#x6709;&#x8FD9;&#x4E48;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#xFF08;&#x5B66;&#x751F;&#x6210;&#x7EE9;&#x8868;&#xFF09;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cat score.txt</span><br><span class="line">Marry   2143 78 84 77</span><br><span class="line">Jack    2321 66 78 45</span><br><span class="line">Tom     2122 48 77 71</span><br><span class="line">Mike    2537 87 97 95</span><br><span class="line">Bob     2415 40 57 62</span><br></pre></td></tr></table></figure>
+<p>&#x6211;&#x4EEC;&#x7684;awk&#x811A;&#x672C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ cat cal.awk</span><br><span class="line"><span class="comment">#!/bin/awk -f</span></span><br><span class="line"><span class="comment">#&#x8FD0;&#x884C;&#x524D;</span></span><br><span class="line">BEGIN {</span><br><span class="line">    math = 0</span><br><span class="line">    english = 0</span><br><span class="line">    computer = 0</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">printf</span> <span class="string">&quot;NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL\n&quot;</span></span><br><span class="line">    <span class="built_in">printf</span> <span class="string">&quot;---------------------------------------------\n&quot;</span></span><br><span class="line">}</span><br><span class="line"><span class="comment">#&#x8FD0;&#x884C;&#x4E2D;</span></span><br><span class="line">{</span><br><span class="line">    math+=<span class="variable">$3</span></span><br><span class="line">    english+=<span class="variable">$4</span></span><br><span class="line">    computer+=<span class="variable">$5</span></span><br><span class="line">    <span class="built_in">printf</span> <span class="string">&quot;%-6s %-6s %4d %8d %8d %8d\n&quot;</span>, <span class="variable">$1</span>, <span class="variable">$2</span>, <span class="variable">$3</span>,<span class="variable">$4</span>,<span class="variable">$5</span>, <span class="variable">$3</span>+<span class="variable">$4</span>+<span class="variable">$5</span></span><br><span class="line">}</span><br><span class="line"><span class="comment">#&#x8FD0;&#x884C;&#x540E;</span></span><br><span class="line">END {</span><br><span class="line">    <span class="built_in">printf</span> <span class="string">&quot;---------------------------------------------\n&quot;</span></span><br><span class="line">    <span class="built_in">printf</span> <span class="string">&quot;  TOTAL:%10d %8d %8d \n&quot;</span>, math, english, computer</span><br><span class="line">    <span class="built_in">printf</span> <span class="string">&quot;AVERAGE:%10.2f %8.2f %8.2f\n&quot;</span>, math/NR, english/NR, computer/NR</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x6267;&#x884C;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f cal.awk score.txt</span><br><span class="line">NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL</span><br><span class="line">---------------------------------------------</span><br><span class="line">Marry  2143     78       84       77      239</span><br><span class="line">Jack   2321     66       78       45      189</span><br><span class="line">Tom    2122     48       77       71      196</span><br><span class="line">Mike   2537     87       97       95      279</span><br><span class="line">Bob    2415     40       57       62      159</span><br><span class="line">---------------------------------------------</span><br><span class="line">  TOTAL:       319      393      350</span><br><span class="line">AVERAGE:     63.80    78.60    70.00</span><br></pre></td></tr></table></figure>
+<h2 id="&#x53E6;&#x5916;&#x4E00;&#x4E9B;&#x5B9E;&#x4F8B;"><a href="#&#x53E6;&#x5916;&#x4E00;&#x4E9B;&#x5B9E;&#x4F8B;" class="headerlink" title="&#x53E6;&#x5916;&#x4E00;&#x4E9B;&#x5B9E;&#x4F8B;"></a>&#x53E6;&#x5916;&#x4E00;&#x4E9B;&#x5B9E;&#x4F8B;</h2><p>AWK&#x7684;hello world&#x7A0B;&#x5E8F;&#x4E3A;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BEGIN { print &quot;Hello, world!&quot; }</span><br></pre></td></tr></table></figure>
+<p>&#x8BA1;&#x7B97;&#x6240;&#x9009;&#x6587;&#x4EF6;&#x5927;&#x5C0F;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l *.txt | awk <span class="string">&apos;{sum+=$6} END {print sum}&apos;</span></span><br><span class="line">--------------------------------------------------</span><br><span class="line">666581</span><br></pre></td></tr></table></figure>
+<p>&#x4ECE;&#x6587;&#x4EF6;&#x4E2D;&#x627E;&#x51FA;&#x957F;&#x5EA6;&#x5927;&#x4E8E;80&#x7684;&#x884C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&apos;length&gt;80&apos;</span> log.txt</span><br></pre></td></tr></table></figure>
+<p>&#x6253;&#x5370;&#x4E5D;&#x4E5D;&#x4E58;&#x6CD5;&#x8868;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seq 9 | sed <span class="string">&apos;H;g&apos;</span> | awk -v RS=<span class="string">&apos;&apos;</span> <span class="string">&apos;{for(i=1;i&lt;=NF;i++)printf(&quot;%dx%d=%d%s&quot;, i, NR, i*NR, i==NR?&quot;\n&quot;:&quot;\t&quot;)}&apos;</span></span><br></pre></td></tr></table></figure>
+<h3 id="awk&#x51FD;&#x6570;"><a href="#awk&#x51FD;&#x6570;" class="headerlink" title="awk&#x51FD;&#x6570;"></a>awk&#x51FD;&#x6570;</h3><p><a href="http://www.runoob.com/w3cnote/awk-built-in-functions.html" target="_blank" rel="noopener">&#x5185;&#x7F6E;&#x51FD;&#x6570;</a></p>
+<p><code>sub(/&lt;\/?[a,p]&gt;/,&quot;&quot;)</code>&#x5220;&#x9664;html&#x6807;&#x7B7E;</p>
+<p>&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> function_name(argument1, argument2, ...)</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">function</span> body</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#x8FD4;&#x56DE;&#x6700;&#x5C0F;&#x503C;</span></span><br><span class="line"><span class="keyword">function</span> find_min(num1, num2)</span><br><span class="line">{</span><br><span class="line">  <span class="keyword">if</span> (num1 &lt; num2)</span><br><span class="line">    <span class="built_in">return</span> num1</span><br><span class="line">  <span class="built_in">return</span> num2</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x4E3B;&#x51FD;&#x6570;</span></span><br><span class="line"><span class="keyword">function</span> main(num1, num2)</span><br><span class="line">{</span><br><span class="line">  <span class="comment"># &#x67E5;&#x627E;&#x6700;&#x5C0F;&#x503C;</span></span><br><span class="line">  result = find_min(10, 20)</span><br><span class="line">  <span class="built_in">print</span> <span class="string">&quot;Minimum =&quot;</span>, result</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x811A;&#x672C;&#x4ECE;&#x8FD9;&#x91CC;&#x5F00;&#x59CB;&#x6267;&#x884C;</span></span><br><span class="line">BEGIN {</span><br><span class="line">  main(10, 20)</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h2 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h2>
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2018-11-12T13:24:38.000Z" itemprop="datePublished">2018-11-12</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/11/13/Unix/Command/sed/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    sed 命令
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/11/06/Unix/Command/nmap/" class="ui tiny button">
+                    
+                    (No Title)
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#简介"><span>简介</span></a></li><li><a href="#语法"><span>语法</span></a></li><li><a href="#基本用法"><span>基本用法</span></a><ol><li><a href="#示例文本内容"><span>示例文本内容</span></a></li><li><a href="#无参数"><span>无参数</span></a></li><li><a href="#指定分割符"><span>指定分割符</span></a></li><li><a href="#设置变量"><span>设置变量</span></a></li><li><a href="#调用awk脚本"><span>调用awk脚本</span></a></li></ol></li><li><a href="#运算符"><span>运算符</span></a></li><li><a href="#内建变量"><span>内建变量</span></a></li><li><a href="#使用正则"><span>使用正则</span></a><ol><li><a href="#正则表"><span>正则表</span></a></li></ol></li><li><a href="#忽略大小写"><span>忽略大小写</span></a></li><li><a href="#模式取反"><span>模式取反</span></a></li><li><a href="#awk脚本"><span>awk脚本</span></a></li><li><a href="#另外一些实例"><span>另外一些实例</span></a><ol><li><a href="#awk函数"><span>awk函数</span></a></li></ol></li><li><a href="#结束"><span>结束</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

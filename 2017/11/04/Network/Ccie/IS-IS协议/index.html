@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>IS-IS协议 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="&amp;#x2014;&amp;#x2014;2017.11.04 1&amp;#xFF1A;IS-IS&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;IGPS&amp;#x9635;&amp;#x8425;&amp;#x4E2D;&amp;#x7684;&amp;#x534F;&amp;#x8BAE; &amp;#x4E24;&amp;#x5927;&amp;#x9635;&amp;#x8425;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-IS协议">
+<meta property="og:url" content="http://yoursite.com/2017/11/04/Network/Ccie/IS-IS协议/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x2014;&amp;#x2014;2017.11.04 1&amp;#xFF1A;IS-IS&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;IGPS&amp;#x9635;&amp;#x8425;&amp;#x4E2D;&amp;#x7684;&amp;#x534F;&amp;#x8BAE; &amp;#x4E24;&amp;#x5927;&amp;#x9635;&amp;#x8425;&amp;#">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-11-04T09:23:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-IS协议">
+<meta name="twitter:description" content="&amp;#x2014;&amp;#x2014;2017.11.04 1&amp;#xFF1A;IS-IS&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;IGPS&amp;#x9635;&amp;#x8425;&amp;#x4E2D;&amp;#x7684;&amp;#x534F;&amp;#x8BAE; &amp;#x4E24;&amp;#x5927;&amp;#x9635;&amp;#x8425;&amp;#">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Network/Ccie/IS-IS协议" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    IS-IS协议
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <p>&#x2014;&#x2014;2017.11.04</p>
+<h3 id="1&#xFF1A;IS-IS&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;"><a href="#1&#xFF1A;IS-IS&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;" class="headerlink" title="1&#xFF1A;IS-IS&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;"></a>1&#xFF1A;IS-IS&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;</h3><p>IGPS&#x9635;&#x8425;&#x4E2D;&#x7684;&#x534F;&#x8BAE;</p>
+<p>&#x4E24;&#x5927;&#x9635;&#x8425;&#xFF1A;EGPS&#x548C;IGPS</p>
+<p>IGPS &#x5185;&#x90E8;&#x7F51;&#x5173;&#x534F;&#x8BAE;&#x96C6;</p>
+<p>IGPS&#xFF1A;RIP OSPF EIGRP IS-IS &#x90FD;&#x662F;AS&#x5185;&#x7684;&#x534F;&#x8BAE;</p>
+<p>EGPS&#xFF1A;BGP AS&#x95F4;&#x3001;AS&#x5185;</p>
+<p>IS-IS&#x6B63;&#x5728;&#x53D6;&#x4EE3;OSPF</p>
+<p>&#x5B66;&#x4E60;RIP, EIGRP&#x662F;&#x4E3A;&#x4E86;&#x5B66;&#x4E60;OSPF&#x548C;BGP&#xFF1F;</p>
+<p>Link State &#x94FE;&#x8DEF;&#x72B6;&#x6001;&#x8DEF;&#x7531;&#x534F;&#x8BAE;</p>
+<p>&#x6839;&#x636E;&#x534F;&#x8BAE;&#x81EA;&#x8EAB;&#x7279;&#x70B9;&#x5206;&#x7C7B;&#xFF1A;&#x3010;&#x5206;&#x7C7B;&#x8BB0;&#x4F4F;&#x8DEF;&#x7531;&#x534F;&#x8BAE;&#x3011;</p>
+<p>&#x8DDD;&#x79BB;&#x77E2;&#x91CF; RIP &#x9AD8;&#x7EA7;&#x8DDD;&#x79BB;&#x77E2;&#x91CF; EIGRP &#x4E0D;&#x662F;&#x9760;&#x8DF3;&#x6570; &#x516C;&#x5F0F;&#x3010;&#x57FA;&#x4E8E;&#x5E26;&#x5BBD;&#x5EF6;&#x8FDF;&#x3011;+Metric&#x503C; &#x4F46;&#x662F;&#x53D7;&#x8DDD;&#x79BB;&#x9650;&#x5236; OSPF &#x94FE;&#x8DEF;&#x72B6;&#x6001;</p>
+<p>*&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x4F7F;&#x7528;IS-IS&#x53D6;&#x4EE3;OSPF&#xFF1F;</p>
+<h3 id="2&#xFF1A;IS-IS&#x7684;&#x53D1;&#x5C55;&#x5386;&#x7A0B;"><a href="#2&#xFF1A;IS-IS&#x7684;&#x53D1;&#x5C55;&#x5386;&#x7A0B;" class="headerlink" title="2&#xFF1A;IS-IS&#x7684;&#x53D1;&#x5C55;&#x5386;&#x7A0B;"></a>2&#xFF1A;IS-IS&#x7684;&#x53D1;&#x5C55;&#x5386;&#x7A0B;</h3><p>&#x540C;&#x65F6;&#x8FDB;&#x884C;&#x7684;&#xFF0C;&#x6CA1;&#x6709;&#x8C01;&#x65E9;&#x8C01;&#x665A;&#x7684;&#x8BF4;&#x6CD5;&#x3002;</p>
+<p>OSI&#x4E03;&#x5C42;&#x6A21;&#x578B; &#x4F20;&#x8F93;&#x5C42; &#x9762;&#x5411;&#x94FE;&#x63A5;TCP &#x65E0;&#x94FE;&#x63A5;UDP</p>
+<p>OSI&#x4E2D;&#x540E;&#x671F;&#x4EA7;&#x7269; &#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x6700;&#x65E9;&#x7684;&#x53D1;&#x5C55;&#x9636;&#x6BB5;&#x63D0;&#x51FA;&#x7684;&#x662F;CLNS&#x548C;CONS</p>
+<p>CLNS&#x548C;CONS&#x7B97;&#x662F;OSI&#x7684;&#x524D;&#x8EAB;</p>
+<p>N&#x4EE3;&#x8868;&#x7F51;&#x7EDC;&#xFF0C;S&#x4EE3;&#x8868;&#x670D;&#x52A1;&#xFF0C;C&#x4EE3;&#x8868;&#x94FE;&#x63A5; O&#x4EE3;&#x8868;Of&#x201C;&#x6709;&#x94FE;&#x63A5;&#x7684;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x201D;&#x7C7B;&#x4F3C;&#x4E8E;TCP L&#x4EE3;&#x8868;Less &#x201C;&#x65E0;&#x94FE;&#x63A5;&#x7684;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x201D;</p>
+<p>&#x57FA;&#x4E8E;&#x5BF9;CONS&#x7684;&#x7814;&#x7A76;&#xFF0C;&#x5EF6;&#x4F38;&#x51FA;&#x4E86;IP&#x3010;&#x7F51;&#x7EDC;&#x6807;&#x8BC6;&#x3011;&#x548C;TCP</p>
+<p>TCP&#x6570;&#x636E;&#x4F20;&#x8F93;&#x63A7;&#x5236; IP&#x7F51;&#x7EDC;&#x6807;&#x8BC6;</p>
+<p>&#x56E0;&#x6B64;&#x5F00;&#x53D1;&#x51FA;&#x4E86;&#x52A8;&#x6001;&#x7684;&#x8DEF;&#x7531;&#x534F;&#x8BAE;&#xFF1A;RIP EIGRP OSPF BGP</p>
+<p>&#x53E6;&#x4E00;&#x9635;&#x8425;&#xFF1A;CLNS&#x575A;&#x6301;&#x4F7F;&#x7528;&#x65E0;&#x94FE;&#x63A5;&#x7684;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;</p>
+<p>&#x5F00;&#x53D1;&#x51FA;&#x4E86;CLNP&#xFF1A;CLNS&#x7F51;&#x7EDC;&#x6807;&#x8BC6;</p>
+<p>&#x8FD8;&#x9700;&#x8981;&#x7684;&#x673A;&#x5236;&#xFF1A;CLNS&#x3010;&#x540D;&#x5B57;&#x91CD;&#x590D;&#x3011;IS-IS</p>
+<p>OSPF&#x4E3A;IP&#x670D;&#x52A1;&#xFF0C;IS-IS&#x4E3A;CLNP&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x3002;</p>
+<p>&#x8FD9;&#x4E9B;&#x90FD;&#x662F;&#x4E0D;&#x540C;&#x7EC4;&#x7EC7;&#x5728;&#x540C;&#x65F6;&#x53D1;&#x5C55;&#x7684;&#xFF0C;&#x6700;&#x540E;CONS&#x9635;&#x8425;&#x7684;&#x65B9;&#x6848;&#x5F97;&#x5230;&#x516C;&#x53F8;&#x7684;&#x8BA4;&#x53EF;&#x3002;</p>
+<p>&#x6700;&#x540E;&#xFF0C;ISO&#x7EC4;&#x7EC7;&#x63D0;&#x51FA;&#x4E86;OSI&#x4E03;&#x5C42;&#x6A21;&#x578B;&#xFF0C;&#x4F46;&#x662F;CLNS&#x7684;&#x7406;&#x5FF5;&#x4E5F;&#x5F97;&#x5230;&#x8BA4;&#x53EF;&#xFF0C;&#x56E0;&#x6B64;&#x4FDD;&#x7559;&#x4E0B;&#x6765;&#xFF0C;&#x53EB;&#x505A;UDP</p>
+<p>&#x6700;&#x540E;&#xFF0C;IS-IS&#x5C31;&#x611F;&#x89C9;&#x8981;&#x6D88;&#x5931;&#x4E86;</p>
+<p>&#x8FD9;&#x662F;&#x4E3A;&#x4E86;&#x7EDF;&#x4E00;&#x884C;&#x4E1A;&#x6807;&#x51C6;&#x3002;</p>
+<p>OSPF&#x865A;&#x94FE;&#x8DEF;&#xFF1A;&#x2460;&#x514B;&#x670D;&#x5B64;&#x5C9B;&#x533A;&#x57DF;&#xFF1A;0&#xFF0C;1&#xFF0C;2&#x533A;&#x57DF;&#x4E0D;&#x4E92;&#x76F8;&#x5B66;&#x8DEF;&#x7531;</p>
+<p>&#x2461;&#x4E24;&#x8FB9;&#x533A;&#x57DF;0&#xFF0C;&#x4E2D;&#x95F4;&#x533A;&#x57DF;1&#xFF0C;&#x4F46;&#x662F;&#x4E24;&#x8FB9;&#x533A;&#x57DF;0&#x4E0D;&#x4E92;&#x76F8;&#x5B66;&#x8DEF;&#x7531;&#x3002;</p>
+<p>IS-IS&#x6CA1;&#x6709;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x5916;&#x4F01;&#x63A8;&#x8FD0;&#x8425;&#x5546;&#x7528;IS-IS &#x601D;&#x79D1;&#x6392;&#x7B2C;&#x4E00;</p>
+<p>&#x5272;&#x63A5;&#xFF1A;&#x5E72;&#x6389;&#x539F;&#x6709;&#x534F;&#x8BAE;&#xFF0C;&#x6362;&#x65B0;&#x534F;&#x8BAE;</p>
+<p>&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;&#x2460;&#x5347;&#x7EA7;OSPF&#xFF0C;&#x4F7F;&#x5176;&#x62E5;&#x6709;IS-IS&#x7279;&#x6027;</p>
+<p>&#x2461;&#x76F4;&#x63A5;&#x7528;IS-IS&#x53D6;&#x4EE3;OSPF</p>
+<p>&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x90FD;&#x4E0D;&#x592A;&#x79D1;&#x5B66;&#x2026;&#x2026;</p>
+<p>&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x4F7F;&#x7528;&#x7684;IS-IS&#xFF0C;&#x5E76;&#x4E0D;&#x662F;&#x7EAF;IS-IS</p>
+<p>&#x96C6;&#x6210;IS-IS&#x3001;&#x53CC;&#x6808;IS-IS</p>
+<p>&#x6240;&#x4EE5;&#x5F88;&#x591A;&#x6280;&#x672F;&#x539F;&#x6765;&#x4E0E;IP&#x5BF9;&#x7ACB;&#xFF0C;&#x540E;&#x6765;&#x88AB;IP&#x541E;&#x5E76;&#x2026;&#x2026;</p>
+<h3 id="3&#xFF1A;CLNP&#x6807;&#x8BC6;"><a href="#3&#xFF1A;CLNP&#x6807;&#x8BC6;" class="headerlink" title="3&#xFF1A;CLNP&#x6807;&#x8BC6;"></a>3&#xFF1A;CLNP&#x6807;&#x8BC6;</h3><p>3.1 NET &#x7F51;&#x7EDC;&#x5B9E;&#x4F53;&#x6807;&#x8BC6;</p>
+<p>&#x7C7B;&#x4F3C;&#x4E8E;IP+MAC&#x7EC4;&#x5408;</p>
+<p>3.2 NSAP &#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x63A5;&#x5165;&#x70B9;</p>
+<p>&#x5B9E;&#x73B0;IP+MAC+&#x7AEF;&#x53E3;&#x53F7;port_nam</p>
+<p>CLNP&#x89C9;&#x5F97;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x628A;IP+MAC&#x5206;&#x5F00;&#x3002;</p>
+<p>NSAP&#x5728;&#x8FD9;&#x4E2A;&#x57FA;&#x7840;&#x4E0A;&#x628A;&#x7AEF;&#x53E3;&#x53F7;&#x52A0;&#x5165;&#x3002;</p>
+<p>&#x4E00;&#x6B65;&#x5230;&#x4F4D;&#x3002;&#x5730;&#x5740;&#x5C31;&#x4F1A;&#x5F88;&#x957F;&#x3002;</p>
+<p>3.3 CLNP&#x6807;&#x8BC6;&#x683C;&#x5F0F;</p>
+<p>AFI A&#x5730;&#x5740; F&#x683C;&#x5F0F; I&#x6388;&#x6743;&#x7EC4;&#x7EC7;</p>
+<p>&#x6570;&#x5B57;&#x7531;&#x5B98;&#x65B9;&#x5B9A;&#x597D;&#x3002;47&#xFF0C;48&#xFF0C;49&#x662F;&#x7528;&#x5728;&#x5C40;&#x57DF;&#x7F51;&#x6216;&#x79C1;&#x7F51;&#x7684;&#x5730;&#x5740;</p>
+<p>&#x6240;&#x4EE5;&#x5B98;&#x65B9;&#x6709;&#x4E00;&#x5F20;&#x8868;&#x3002;</p>
+<p>0000 &#x5B8C;&#x6574;&#x7684;&#x4E00;&#x6BB5;&#xFF0C;&#x4F46;&#x6709;&#x4E24;&#x5757;&#x4FE1;&#x606F;&#x3002;&#x524D;&#x4E24;&#x4E2A;00&#x4EE3;&#x8868;&#x57DF;&#x6807;&#x8BC6;&#xFF0C;&#x540E;&#x4E24;&#x4E2A;00&#x4EE3;&#x8868;&#x533A;&#x57DF;&#x6807;&#x8BC6;</p>
+<p>&#x533A;&#x57DF;&#x88AB;&#x57DF;&#x5305;&#x542B; &#x57DF;&#x5C31;&#x662F;AS</p>
+<p>&#x5DE8;&#x578B;&#x7F51;&#x7EDC;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x57DF;&#x6807;&#x8BC6;</p>
+<p>0001 0002 0003 &#x540C;&#x4E00;&#x57DF;&#x4E2D;&#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;</p>
+<p>sys-ID&#x2014;&#x2014;MAC&#x5730;&#x5740;</p>
+<p>&#x6240;&#x4EE5;&#x8BF4;CLNP&#x5730;&#x5740;&#x7C7B;&#x4F3C;&#x4E8E;IP+MAC&#xFF0C;&#x4FDD;&#x8BC1;&#x4E86;&#x5168;&#x7403;&#x552F;&#x4E00;&#x72EC;&#x7ACB;&#x6027;</p>
+<p>&#x6700;&#x540E;&#x53C8;&#x6709;&#x4E24;&#x4E2A;00 &#x76F8;&#x5F53;&#x4E8E;&#x7AEF;&#x53E3;&#x53F7;</p>
+<p>CLNP&#x5168;&#x90FD;&#x662F;16&#x8FDB;&#x5236; 0A&#x4EE3;&#x8868;&#x7AEF;&#x53E3;10</p>
+<p>&#x5730;&#x5740;&#x683C;&#x5F0F;&#x548C;MAC&#x5730;&#x5740;&#x4E00;&#x6837;&#xFF0C;&#x4F46;&#x4E0D;&#x662F;MAC&#x5730;&#x5740;</p>
+<p>sys-id&#x53EA;&#x8981;&#x4E0D;&#x4E00;&#x6837;&#x5C31;&#x597D;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x8BBE;&#x5907;MAC&#x5730;&#x5740;&#x2026;&#x2026;</p>
+<p>*&#x5982;&#x4F55;&#x533A;&#x5206;&#x662F;NET&#x8FD8;&#x662F;NSAP&#xFF1F;</p>
+<p>&#x770B;&#x6700;&#x540E;&#x7684;&#x90E8;&#x5206;&#x662F;&#x4E0D;&#x662F;00</p>
+<p>IS-IS&#x542F;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5FC5;&#x987B;&#x8981;&#x6709;&#x4E00;&#x4E2A;NET&#x5730;&#x5740;&#x3002;</p>
+<p>&#x5176;&#x5B9E;&#x662F;&#x56E0;&#x4E3A;IS-IS&#x88AB;&#x540C;&#x5316;&#xFF0C;&#x7559;&#x7740;NET&#x5DF2;&#x7ECF;&#x6CA1;&#x5565;&#x7528;&#x4E86;&#x2026;&#x2026;</p>
+<p>&#x5C31;&#x7528;NET&#x5F53;ROUTE ID RID</p>
+<p>&#x7C7B;&#x4F3C;&#x4E8E;&#x5965;&#x8FD0;&#x4F1A;&#x4E0A;&#x7684;&#x4E2D;&#x534E;&#x53F0;&#x5317;</p>
+<p>3.4 IS-IS&#x672F;&#x8BED;</p>
+<p>1&#xFF09;ES &#x7EC8;&#x7AEF;&#x7CFB;&#x7EDF;</p>
+<p>&#x6240;&#x6709;&#x8BBE;&#x5907;&#x8FDE;&#x5165;CLNP&#x540E;&#x90FD;&#x53EB;ES</p>
+<p>TCP/IP CLNS/CLNP&#x5339;&#x914D;</p>
+<p>2&#xFF09;IS:ROUTER</p>
+<p>3&#xFF09;CLNP &#x65E0;&#x94FE;&#x63A5;&#x7F51;&#x7EDC;&#x534F;&#x8BAE; &#x91CC;&#x9762;&#x5BF9;&#x5E94;NET&#x548C;NSAP</p>
+<p>4&#xFF09;CLNS &#x65E0;&#x94FE;&#x63A5;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x2026;&#x2026;&#x7C7B;&#x4F3C;&#x4E8E;UDP</p>
+<p>5&#xFF09;DIS &#x6307;&#x5B9A;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF; &#x7C7B;&#x4F3C;DR</p>
+<h3 id="6&#xFF1A;IS-IS&#x4E2D;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x7C7B;&#x578B;-router-type"><a href="#6&#xFF1A;IS-IS&#x4E2D;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x7C7B;&#x578B;-router-type" class="headerlink" title="6&#xFF1A;IS-IS&#x4E2D;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x7C7B;&#x578B; router type"></a>6&#xFF1A;IS-IS&#x4E2D;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x7C7B;&#x578B; router type</h3><p>6.1&#xFF09;&#x6240;&#x6709;&#x542F;&#x7528;IS-IS&#x7684;&#x8DEF;&#x7531;&#x5668;&#xFF0C;&#x9ED8;&#x8BA4;&#x7C7B;&#x578B;&#x90FD;&#x662F;L1/L2&#xFF1A;&#x7C7B;&#x4F3C;&#x4E8E;ABR&#xFF1A;&#x5C06;&#x533A;&#x57DF;&#x5185;&#x8DEF;&#x7531;&#x5668;&#x548C;&#x9AA8;&#x5E72;&#x8DEF;&#x7531;&#x5668;&#x8FDE;&#x63A5;</p>
+<p>6.2&#xFF09;&#x53EF;&#x6539;&#x4E3A;L1&#xFF1A;&#x533A;&#x57DF;&#x5185;&#x8DEF;&#x7531;&#x5668;</p>
+<p>6.2&#xFF09;&#x53EF;&#x6539;&#x4E3A;L2&#xFF1A;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x8DEF;&#x7531;&#x5668;</p>
+<p>OSPF&#x4E2D;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x5FC5;&#x987B;&#x4ECE;0&#x5F00;&#x59CB;&#xFF0C;IS-IS&#x6CA1;&#x6709;&#x9650;&#x5236;&#x3002;</p>
+<h3 id="7&#xFF1A;IS-IS-neighbour-TYPE-&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x7C7B;&#x578B;"><a href="#7&#xFF1A;IS-IS-neighbour-TYPE-&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x7C7B;&#x578B;" class="headerlink" title="7&#xFF1A;IS-IS neighbour TYPE &#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x7C7B;&#x578B;"></a>7&#xFF1A;IS-IS neighbour TYPE &#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x7C7B;&#x578B;</h3><p>7.1&#xFF09;L1/L2 L1/L2&#x2014;&#x2014;L1/L2&#xFF08;X&#xFF09;&#x53D6;&#x4EA4;&#x96C6;</p>
+<p>7.2&#xFF09;L2</p>
+<p>7.3&#xFF09;L1</p>
+<p>&#x76F8;&#x540C;&#x533A;&#x57DF;ID &#x4E0D;&#x540C;&#x533A;&#x57DF;ID</p>
+<p>L1&#x2014;&#x2014;L1/L2 &#x53D6;L1 L1&#x2014;&#x2014;L1/L2 &#x3010;L1&#x662F;&#x533A;&#x57DF;&#x5185;&#x8DEF;&#x7531;&#x5668;&#x3011;&#xFF08;X&#xFF09;</p>
+<p>&#x3010;&#x516C;&#x52A1;&#x5458;&#x8003;&#x8BD5;&#x627E;&#x5171;&#x540C;&#x70B9;&#xFF1F;&#x3011;</p>
+<p>&#x4E2D;&#x56FD;&#x5171;&#x4EA7;&#x515A;&#x548C;&#x56FD;&#x6C11;&#x515A;&#x2026;&#x2026;</p>
+<p>L1&#x2014;&#x2014;L1 L1&#x2014;&#x2014;L1&#xFF08;X&#xFF09;</p>
+<p>&#x3010;L1&#x8BBE;&#x5907;&#x53EA;&#x548C;&#x76F8;&#x540C;&#x533A;&#x57DF;&#x8BBE;&#x5907;&#x5EFA;&#x7ACB;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3011;</p>
+<p>L1&#x2014;&#x2014;L2&#xFF08;X&#xFF09; L1&#x2014;&#x2014;L2&#xFF08;X&#xFF09;</p>
+<p>&#x4E0D;&#x7136;L1/L2&#x5C31;&#x6CA1;&#x610F;&#x4E49;&#x4E86;&#x5440;&#x3002;</p>
+<p>L1&#x8BBE;&#x5907;&#x53EA;&#x80FD;&#x548C;&#x76F8;&#x540C;&#x533A;&#x57DF;&#x5185;&#x5E26;L1&#x89D2;&#x8272;&#x7684;&#x8BBE;&#x5907;&#x5F62;&#x6210;L1&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3002;&#x3010;L1&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x2014;&#x2014;&#x533A;&#x57DF;&#x5185;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3011;</p>
+<p>L1/L2&#x2014;&#x2014;L1/L2 L1/L2&#x2014;&#x2014;L1/L2</p>
+<p>&#x3010;&#x6B64;&#x65F6;&#x65E2;&#x4E3A;L1&#x4E5F;&#x4E3A;L2&#x3011; &#x3010;L1&#x6CA1;&#x6709;L2&#x6709;&#x3011;</p>
+<p>L1&#x662F;&#x533A;&#x57DF;&#x5185;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#xFF0C;L2&#x9996;&#x5148;&#x662F;&#x533A;&#x57DF;&#x95F4;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3010;&#x533A;&#x57DF;&#x53F7;&#x4E0D;&#x4E00;&#x6837;&#x3011;&#xFF0C;&#x4F46;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x533A;&#x57DF;&#x5185;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3002;</p>
+<p>L1/L2&#x2014;&#x2014;L2&#x3010;L2&#x3011; L1/L2&#x2014;&#x2014;L2&#x3010;L2&#x3011;</p>
+<p>L2&#x2014;&#x2014;L1&#xFF08;X&#xFF09; L2&#x2014;&#x2014;L1&#xFF08;X&#xFF09;</p>
+<h3 id="8&#xFF1A;IS-IS&#x7684;&#x7279;&#x6027;"><a href="#8&#xFF1A;IS-IS&#x7684;&#x7279;&#x6027;" class="headerlink" title="8&#xFF1A;IS-IS&#x7684;&#x7279;&#x6027;"></a>8&#xFF1A;IS-IS&#x7684;&#x7279;&#x6027;</h3><p>8.1&#xFF09;IS-IS&#x4E2D;DIS&#x7684;&#x7279;&#x70B9;&#xFF1A;&#x7C7B;&#x4F3C;&#x4E8E;DR &#x6307;&#x5B9A;&#x8DEF;&#x7531;&#x5668;</p>
+<p>&#xFF01;&#xFF01;&#x56DE;&#x987E;</p>
+<p>OSPF&#x4E2D;DR&#x5E72;&#x561B;&#x7684;&#xFF1F;</p>
+<p>&#x2460;&#x51CF;&#x5C11;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#xFF1B;</p>
+<p>&#x2461;&#x7EDF;&#x7B79;&#x66F4;&#x65B0;&#x53D1;&#x9001;&#x8FC7;&#x7A0B;&#x3002;</p>
+<p>&#x56FE;</p>
+<p>EIGRP</p>
+<p>OSPF DR BDR</p>
+<p>1&#xFF09;DIS&#x7684;&#x9009;&#x4E3E;</p>
+<p>&#x5148;&#x6BD4;&#x8F83;&#x4F18;&#x5148;&#x7EA7;&#xFF08;&#x9ED8;&#x8BA4;&#x662F;64&#xFF0C;&#x6700;&#x5927;127&#xFF09;&#x5927;&#x5219;&#x4F18;</p>
+<p>&#x518D;&#x6BD4;&#x8F83;sys-id &#x5927;&#x5219;&#x4F18;</p>
+<p>&#x53C2;&#x6570;&#x4E0D;&#x540C;&#xFF0C;&#x673A;&#x5236;&#x76F8;&#x4F3C;&#x3002;</p>
+<p>2&#xFF09;&#x6CA1;&#x6709;B DIS&#xFF0C;&#x4E14;DIS&#x53EF;&#x4EE5;&#x968F;&#x610F;&#x88AB;&#x66FF;&#x4EE3;&#x3002;</p>
+<p>3&#xFF09;&#x6240;&#x6709;&#x975E;DIS&#x4E4B;&#x95F4;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x5F62;&#x6210;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3002;</p>
+<p>DIS&#x7528;&#x6765;&#x5E72;&#x5565;&#xFF1F;&#x539F;&#x56E0;&#xFF1A;DIS&#x88AB;&#x505A;&#x4E86;&#x4E00;&#x534A;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x5F53;&#x5B83;&#x4E0D;&#x5B58;&#x5728;&#x4E86;&#x3002;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x4F5C;&#x7528;&#x3002;</p>
+<p>&#x8FD9;&#x70B9;&#x4E0A;&#x4E0D;&#x5982;OSPF&#x3002;</p>
+<p>8.2&#xFF09;IS-IS&#x4E2D;&#x533A;&#x57DF;&#x7684;&#x7279;&#x70B9;</p>
+<p>IS-IS&#x4E5F;&#x662F;&#x5C42;&#x6B21;&#x5316;&#x7684;&#x8BBE;&#x8BA1;&#xFF0C;&#x9AA8;&#x5E72;&#x5C42;&#xFF0C;&#x5E38;&#x89C4;&#x5C42;&#x3002;&#x540C;&#x6837;&#x4E5F;&#x6709;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x548C;&#x5E38;&#x89C4;&#x533A;&#x57DF;</p>
+<p>IS-IS&#x4E0D;&#x8981;&#x6C42;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x7F16;&#x53F7;&#x4E00;&#x5B9A;&#x662F;0</p>
+<p>IS-IS&#x4E0D;&#x8981;&#x6C42;&#x6240;&#x6709;&#x5E38;&#x89C4;&#x533A;&#x57DF;&#x5FC5;&#x987B;&#x548C;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x8FDE;&#x63A5;&#x3002;</p>
+<p>*IS-IS&#x533A;&#x57DF;&#x7684;&#x8FB9;&#x754C;&#x662F;&#x5728;&#x8DEF;&#x7531;&#x5668;&#xFF0C;OSPF&#x533A;&#x57DF;&#x8FB9;&#x754C;&#x662F;&#x5728;&#x63A5;&#x53E3;</p>
+<p>IS-IS&#x5141;&#x8BB8;&#x63A5;&#x53E3;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x5728;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x3002;</p>
+<p>OSPF&#x4E2D;&#x62E5;&#x6709;&#x7279;&#x6B8A;&#x533A;&#x57DF;&#xFF1A;STUB T-STUB</p>
+<p>NSSA&#x3001;T-NSSA</p>
+<p>IS-IS &#x533A;&#x57DF;&#x5185;&#x8BBE;&#x5907;&#x53EA;&#x8981;&#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x6539;&#x4E3A;L1&#xFF0C;&#x5B83;&#x6240;&#x8FDE;&#x63A5;&#x7684;L1/L2&#x8BBE;&#x5907;&#x5C31;&#x81EA;&#x52A8;&#x7ED9;&#x5B83;&#x4E00;&#x6761;&#x7F3A;&#x7701;</p>
+<p>&#x5E76;&#x4E14;&#x4E0D;&#x4F1A;&#x5C06;&#x533A;&#x57DF;&#x95F4;&#x8DEF;&#x7531;&#xFF0C;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x653E;&#x5165;&#x533A;&#x57DF;&#x5185;&#x3002;</p>
+<h3 id="9&#xFF1A;IS-IS&#x8DEF;&#x5F84;&#x5EA6;&#x91CF;&#x503C;&#x8BA1;&#x7B97;"><a href="#9&#xFF1A;IS-IS&#x8DEF;&#x5F84;&#x5EA6;&#x91CF;&#x503C;&#x8BA1;&#x7B97;" class="headerlink" title="9&#xFF1A;IS-IS&#x8DEF;&#x5F84;&#x5EA6;&#x91CF;&#x503C;&#x8BA1;&#x7B97;"></a>9&#xFF1A;IS-IS&#x8DEF;&#x5F84;&#x5EA6;&#x91CF;&#x503C;&#x8BA1;&#x7B97;</h3><p>&#x8BA1;&#x7B97;&#x516C;&#x5F0F;&#x53CA;&#x65B9;&#x6CD5;&#x548C;OSPF&#x4E00;&#x6A21;&#x4E00;&#x6837;&#xFF0C;&#x90FD;&#x53EB;COST</p>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x6240;&#x6709;&#x63A5;&#x53E3;&#x90FD;&#x88AB;&#x8D4B;&#x4E88;&#x4E86;10&#x7684;&#x5F00;&#x9500;&#x3010;&#x4E0D;&#x662F;&#x52A8;&#x6001;&#x8BA1;&#x7B97;&#x3011;</p>
+<p>&#x6709;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;&#x4F46;&#x662F;&#x4E0D;&#x7528;</p>
+<h3 id="10&#xFF1A;IS-IS&#x7684;&#x6D88;&#x606F;&#x548C;&#x6D88;&#x606F;&#x7C7B;&#x578B;"><a href="#10&#xFF1A;IS-IS&#x7684;&#x6D88;&#x606F;&#x548C;&#x6D88;&#x606F;&#x7C7B;&#x578B;" class="headerlink" title="10&#xFF1A;IS-IS&#x7684;&#x6D88;&#x606F;&#x548C;&#x6D88;&#x606F;&#x7C7B;&#x578B;"></a>10&#xFF1A;IS-IS&#x7684;&#x6D88;&#x606F;&#x548C;&#x6D88;&#x606F;&#x7C7B;&#x578B;</h3><p>&#x9E21;&#x808B;&#x4E2D;&#x7684;&#x6218;&#x6597;&#x673A;&#xFF1F;</p>
+<p>1&#xFF09;IIH&#xFF1A;is-is hello &#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x51B3;&#x5B9A;&#x5B83;&#x7684;&#x6D88;&#x606F;&#x5206;L1 L2 &#x56FA;&#x5B9A;10s&#x4E00;&#x4E2A;&#xFF0C;&#x4E09;&#x500D;&#x8001;&#x5316;&#x65F6;&#x95F4;</p>
+<p>2&#xFF09;LSP&#xFF1A;link state pdu LSP=LSA OSI&#x547D;&#x540D;&#x6A21;&#x5F0F;&#x2026;&#x2026; &#x4E5F;&#x5206;L1 L2</p>
+<p>IS-IS&#x7684;&#x6570;&#x636E;&#x5E93;&#x4E5F;&#x5206;L1 L2</p>
+<p>&#x6D9B;&#x54E5;&#x548C;&#x5434;&#x8001;&#x5E08;&#x7684;&#x6FB3;&#x95E8;&#x8D4C;&#x573A;&#x4E4B;&#x65C5;</p>
+<h3 id="11&#xFF1A;IS-IS&#x7684;&#x914D;&#x7F6E;"><a href="#11&#xFF1A;IS-IS&#x7684;&#x914D;&#x7F6E;" class="headerlink" title="11&#xFF1A;IS-IS&#x7684;&#x914D;&#x7F6E;"></a>11&#xFF1A;IS-IS&#x7684;&#x914D;&#x7F6E;</h3><p>&#x6B65;&#x9AA4;1&#xFF1A;&#x542F;&#x7528;IS-IS&#x5E76;&#x4E14;&#x8BBE;&#x5B9A;NET&#x5730;&#x5740;</p>
+<p>Router isis</p>
+<p>Net 49.0000.0000.0000.0001.00</p>
+<p>log-adjacency-changes //&#x8BA9;&#x63A7;&#x5236;&#x53F0;&#x4EE5;&#x65E5;&#x5FD7;&#x5F62;&#x5F0F;&#x63D0;&#x9192;IS-IS&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x7684;&#x53D8;&#x5316;</p>
+<p>0000&#xFF1A;&#x57DF;0&#xFF0C;&#x533A;&#x57DF;0</p>
+<p>0000.0000.0001&#xFF1A;sys-id</p>
+<p>&#x6B65;&#x9AA4;2&#xFF1A;&#x63A5;&#x53E3;&#x52A0;&#x5165;IS-IS</p>
+<p>&#x4E0E;OSPF&#x4E0D;&#x540C;&#xFF0C;&#x5C06;&#x63A5;&#x53E3;&#x63A5;&#x5165;&#x67D0;&#x4E2A;&#x533A;&#x57DF;</p>
+<p>interface&lt; intf-id&gt;</p>
+<p>ip route isis</p>
+<h3 id="12&#xFF1A;IS-IS&#x7684;&#x67E5;&#x770B;"><a href="#12&#xFF1A;IS-IS&#x7684;&#x67E5;&#x770B;" class="headerlink" title="12&#xFF1A;IS-IS&#x7684;&#x67E5;&#x770B;"></a>12&#xFF1A;IS-IS&#x7684;&#x67E5;&#x770B;</h3><p>1&#xFF09;&#x67E5;&#x770B;&#x8DEF;&#x7531;&#x8868;&#x4E2D;IS-IS&#x7684;&#x6761;&#x76EE;</p>
+<p>show ip route isis</p>
+<p>i L1/L2 IS-IS&#x8DEF;&#x7531;&#x4E5F;&#x5206;L1 L2</p>
+<p>i L1 &#x533A;&#x57DF;&#x5185;&#x8DEF;&#x7531;</p>
+<p>i L2 &#x533A;&#x57DF;&#x95F4;&#x8DEF;&#x7531;&#x6216;&#x5916;&#x90E8;&#x8DEF;&#x7531;</p>
+<p>IS-IS&#x7BA1;&#x7406;&#x8DDD;&#x79BB;&#x5168;&#x662F;115</p>
+<p>2&#xFF09;&#x67E5;&#x770B;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x662F;&#x5426;&#x5EFA;&#x7ACB;&#x3001;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x7684;&#x7C7B;&#x578B;</p>
+<p>show clns neighbour L1/L2 &#x6240;&#x4EE5;&#x4E00;&#x822C;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;</p>
+<p>show isis neighbour &#x4E00;&#x884C;L1&#xFF0C;&#x4E00;&#x884C;L2</p>
+<p>12&#xFF1A;IS-IS&#x5B9E;&#x9A8C;</p>
+<p>log-adjacency-changes</p>
+<p>&#x63A7;&#x5236;&#x53F0;&#x62A5;&#x4E86;&#x4E24;&#x6B21;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#xFF1F;</p>
+<p>&#x9ED8;&#x8BA4;&#x89D2;&#x8272;&#x662F;L1/L2</p>
+<p>is-type ?</p>
+<p>is-type level-1 //&#x4FEE;&#x6539;&#x8DEF;&#x7531;&#x5668;&#x7C7B;&#x578B;&#x4E3A;L1</p>
+<p>is-type level-1-2</p>
+<p>&#x4E0D;&#x5141;&#x8BB8;L2&#x53D8;L1&#x8FDB;&#x5165;&#x533A;&#x57DF;</p>
+<p>show isis neighbours //&#x66F4;&#x591A;&#x7528;&#x6765;&#x770B;DIS&#x66F4;&#x65B9;&#x4FBF;</p>
+<p>Circuit ID &#x7535;&#x8DEF;ID DIS</p>
+<p>isis priority 127 //&#x66F4;&#x6539;DIS</p>
+<h3 id="13&#xFF1A;IS-IS-&#x7684;&#x91CD;&#x5206;&#x53D1;"><a href="#13&#xFF1A;IS-IS-&#x7684;&#x91CD;&#x5206;&#x53D1;" class="headerlink" title="13&#xFF1A;IS-IS &#x7684;&#x91CD;&#x5206;&#x53D1;"></a>13&#xFF1A;IS-IS &#x7684;&#x91CD;&#x5206;&#x53D1;</h3><p>&#x5916;&#x90E8;&#x7F51;&#x7EDC;&#x8FDB;&#x5165;isis&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;L2&#x8DEF;&#x7531;&#x7C7B;&#x578B;&#xFF0C;&#x9ED8;&#x8BA4;&#x5F00;&#x9500;&#x662F;10&#x3002;</p>
+<p>router isis</p>
+<p>redistribute [rip/eigrp as-id] metric &lt;&#x6307;&#x5B9A;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x521D;&#x59CB;&#x5EA6;&#x91CF;&#x503C;&gt; </p>
+<p>&lt; level-1 /level-2/level-1-2 &gt; //&#x6307;&#x5B9A;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x662F;&#x4EC0;&#x4E48;&#x7C7B;&#x578B;&#x8FDB;&#x5165;isis</p>
+<p>redistribute ospf pid metric-type &lt; external ospf &#x7684;&#x5916;&#x90E8;&#x8DEF;&#x7531;/internal ospf&#x7684;&#x533A;&#x57DF;&#x5185;&#x6216;&#x533A;&#x57DF;&#x95F4;&#x8DEF;&#x7531;&gt;</p>
+<p>&#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x4E3A;L1&#xFF0C;&#x90A3;&#x4E48;&#x91CD;&#x5206;&#x53D1;&#x4E00;&#x822C;&#x4E0D;&#x5141;&#x8BB8;&#x505A;&#x5728;&#x8FD9;&#x6837;&#x7684;&#x8BBE;&#x5907;&#x4E0A;&#x3002;</p>
+<p>&#x5982;&#x679C;L1&#x89D2;&#x8272;&#x8BBE;&#x5907;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x91CD;&#x5206;&#x53D1;&#xFF0C;&#x90A3;&#x4E48;&#x4E00;&#x5B9A;&#x8981;&#x5728;&#x6700;&#x540E;&#x52A0;&#x4E0A;level-1&#x3002;</p>
+<h3 id="14&#xFF1A;ISIS-&#x7684;&#x624B;&#x52A8;&#x6C47;&#x603B;"><a href="#14&#xFF1A;ISIS-&#x7684;&#x624B;&#x52A8;&#x6C47;&#x603B;" class="headerlink" title="14&#xFF1A;ISIS &#x7684;&#x624B;&#x52A8;&#x6C47;&#x603B;"></a>14&#xFF1A;ISIS &#x7684;&#x624B;&#x52A8;&#x6C47;&#x603B;</h3><p>&#x5EFA;&#x8BAE;&#x914D;&#x7F6E;&#x5728;L1/L2&#x89D2;&#x8272;&#x8BBE;&#x5907;&#x4E0A;&#x3002;</p>
+<p>&#x6C47;&#x603B;&#x540E;&#x8DEF;&#x7531;&#x7C7B;&#x578B;&#x4E3A;L2&#xFF0C;&#x5F00;&#x9500;&#x9ED8;&#x8BA4;10  &#x3002;</p>
+<p>L1&#x8BBE;&#x5907;&#x4E0A;&#x9ED8;&#x8BA4;&#x65E0;&#x6CD5;&#x5BF9;&#x672C;&#x5730; ISIS L1 &#x8DEF;&#x7531;&#x8FDB;&#x884C;&#x6C47;&#x603B;&#x3002;</p>
+<p>&#x672C;&#x5730;&#x76F4;&#x8FDE;&#x7F51;&#x7EDC;&#x4EE5;&#x5916;&#x90E8;&#x8DEF;&#x7531; L1 &#x5F62;&#x5F0F;&#x8FDB;&#x5165;&#xFF0C;&#x518D;&#x9488;&#x5BF9; L1 &#x8DEF;&#x7531;&#x6C47;&#x603B;&#x3002;</p>
+<p>router isis</p>
+<p>summary-address &lt;&#x6C47;&#x603B;&#x540E;&#x7F51;&#x7EDC;&gt; &lt;&#x6C47;&#x603B;&#x540E;&#x7F51;&#x7EDC;&#x63A9;&#x7801;&gt; level-1/level-2</p>
+<h3 id="15&#xFF1A;ISIS-&#x8BA4;&#x8BC1;-&#x53CA;-ISIS-&#x8DEF;&#x7531;&#x6CC4;&#x9732;"><a href="#15&#xFF1A;ISIS-&#x8BA4;&#x8BC1;-&#x53CA;-ISIS-&#x8DEF;&#x7531;&#x6CC4;&#x9732;" class="headerlink" title="15&#xFF1A;ISIS &#x8BA4;&#x8BC1; &#x53CA; ISIS &#x8DEF;&#x7531;&#x6CC4;&#x9732;"></a>15&#xFF1A;ISIS &#x8BA4;&#x8BC1; &#x53CA; ISIS &#x8DEF;&#x7531;&#x6CC4;&#x9732;</h3><p>15.1&#xFF09;ISIS &#x8BA4;&#x8BC1;</p>
+<ol class="ui list">
+<li><p>&#x94FE;&#x8DEF;&#x8BA4;&#x8BC1; isis password cisco</p>
+<p>&#x8BE5;&#x8BA4;&#x8BC1;&#x662F;&#x5229;&#x7528; IIH &#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x8BA4;&#x8BC1;&#x4E0D;&#x540C;&#x8FC7;&#x5F71;&#x54CD;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3002;&#x94FE;&#x8DEF;&#x8BA4;&#x8BC1;&#x662F;&#x6700;&#x9AD8;&#x7EA7;&#x522B;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x533A;&#x57DF;&#x8BA4;&#x8BC1;&#x901A;&#x8FC7;&#xFF0C;&#x94FE;&#x8DEF;&#x8BA4;&#x8BC1;&#x4E0D;&#x901A;&#x8FC7;&#x5C31;&#x662F;&#x4E0D;&#x901A;&#x8FC7;&#x3002;&#x4E00;&#x822C;&#x4E00;&#x4E2A;&#x8BA4;&#x8BC1;&#x5C31;&#x884C;&#x4E86;&#x3002;</p>
+</li>
+</ol>
+<ol start="2" class="ui list">
+<li><p>&#x533A;&#x57DF;&#x8BA4;&#x8BC1; area-password cisco</p>
+<p>&#x5229;&#x7528; LSP &#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x8BA4;&#x8BC1;&#x4E0D;&#x901A;&#x8FC7;&#x53EA;&#x5F71;&#x54CD;&#x8DEF;&#x7531;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x4E0D;&#x5F71;&#x54CD;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3002;</p>
+</li>
+</ol>
+<ol start="3" class="ui list">
+<li><p>&#x57DF;&#x8BA4;&#x8BC1; domain-password cisco</p>
+<p>&#x8BE5;&#x8BA4;&#x8BC1;&#x5982;&#x679C;&#x4E0D;&#x901A;&#x8FC7;&#xFF0C;&#x53EA;&#x5F71;&#x54CD;&#x8DEF;&#x7531;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x4E0D;&#x5F71;&#x54CD;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3002;</p>
+</li>
+</ol>
+<p>15.2&#xFF09;&#x8DEF;&#x7531;&#x6CC4;&#x9732;</p>
+<p>L1/L2 &#x8BBE;&#x5907;&#x9ED8;&#x8BA4;&#x4E0D;&#x5141;&#x8BB8; L2 &#x6570;&#x636E;&#x5E93;&#x4FE1;&#x606F;&#x8FDB;&#x5165; L1 &#x6570;&#x636E;&#x5E93;&#xFF0C;&#x53D8;&#x6210;&#x66F4;&#x65B0;&#x53D1;&#x9001;&#x3002;</p>
+<p>15.3&#xFF09;&#x8DEF;&#x7531;&#x6CC4;&#x9732;&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;</p>
+<p>&#x6B65;&#x9AA4;1&#xFF1A;L1/L2 &#x8BBE;&#x5907;&#x4E0A;&#x7F16;&#x5199; ACL&#xFF0C;&#x5339;&#x914D;&#x88AB;&#x6CC4;&#x9732;&#x7684;&#x76EE;&#x6807;&#x8DEF;&#x7531;</p>
+<p>&#x6B65;&#x9AA4;2&#xFF1A;L1/L2 &#x8BBE;&#x5907;&#x4E0A;&#x7F16;&#x5199; ROUTE-MAP &#x5F15;&#x7528; ACL&#x3002;</p>
+<p>&#x6B65;&#x9AA4;3&#xFF1A;L1/L2 &#x8BBE;&#x5907;&#x4E0A;&#x505A; ISIS &#x5230; ISIS &#x7684;&#x91CD;&#x5206;&#x53D1;&#xFF0C;&#x5E76;&#x4E14;&#x6307;&#x5B9A;&#x662F;&#x5229;&#x7528; route-map &#x5B8C;&#x6210; L2 &#x6570;&#x636E;&#x5E93;&#x6761;&#x76EE;&#x5230; L1 &#x6570;&#x636E;&#x5E93;&#x6761;&#x76EE;&#x7684;&#x6CC4;&#x9732;&#x3002;</p>
+<p>redistribute isis ip level-2 into level-1 route-map 2T1</p>
+<p>&#x66F4;&#x6539;&#x5F00;&#x9500; isis metric &lt; &#x5F00;&#x9500;&gt;</p>
+<h3 id="16&#xFF1A;ISIS-&#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x8FC1;&#x79FB;"><a href="#16&#xFF1A;ISIS-&#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x8FC1;&#x79FB;" class="headerlink" title="16&#xFF1A;ISIS &#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x8FC1;&#x79FB;"></a>16&#xFF1A;ISIS &#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x8FC1;&#x79FB;</h3><p>ISIS &#x5141;&#x8BB8;&#x4E00;&#x4E2A;&#x8BBE;&#x5907;&#x5C5E;&#x4E8E;&#x591A;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x533A;&#x57DF;&#x3002;</p>
+<p>router isis</p>
+<p>net</p>
+<p>net</p>
+<p>net</p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2017-11-04T09:23:09.000Z" itemprop="datePublished">2017-11-04</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/01/10/Mess/Markdown/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    Markdown标记语言
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a class="ui tiny button disabled">Next<i class="angle right icon"></i></a>
+
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#1：IS-IS中间系统到中间系统"><span>1：IS-IS中间系统到中间系统</span></a></li><li><a href="#2：IS-IS的发展历程"><span>2：IS-IS的发展历程</span></a></li><li><a href="#3：CLNP标识"><span>3：CLNP标识</span></a></li><li><a href="#6：IS-IS中路由器的类型-router-type"><span>6：IS-IS中路由器的类型 router type</span></a></li><li><a href="#7：IS-IS-neighbour-TYPE-邻居关系类型"><span>7：IS-IS neighbour TYPE 邻居关系类型</span></a></li><li><a href="#8：IS-IS的特性"><span>8：IS-IS的特性</span></a></li><li><a href="#9：IS-IS路径度量值计算"><span>9：IS-IS路径度量值计算</span></a></li><li><a href="#10：IS-IS的消息和消息类型"><span>10：IS-IS的消息和消息类型</span></a></li><li><a href="#11：IS-IS的配置"><span>11：IS-IS的配置</span></a></li><li><a href="#12：IS-IS的查看"><span>12：IS-IS的查看</span></a></li><li><a href="#13：IS-IS-的重分发"><span>13：IS-IS 的重分发</span></a></li><li><a href="#14：ISIS-的手动汇总"><span>14：ISIS 的手动汇总</span></a></li><li><a href="#15：ISIS-认证-及-ISIS-路由泄露"><span>15：ISIS 认证 及 ISIS 路由泄露</span></a></li><li><a href="#16：ISIS-的不同区域迁移"><span>16：ISIS 的不同区域迁移</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

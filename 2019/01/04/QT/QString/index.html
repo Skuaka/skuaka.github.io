@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>QString与char*的相互转换 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="QString &amp;#x8F6C;&amp;#x6362;&amp;#x4E3A; char *&amp;#x5C06; QString &amp;#x8F6C; char &amp;#xFF0C;&amp;#x9700;&amp;#x8981;&amp;#x7528;&amp;#x5230; QByteArray &amp;#x7C7B;&amp;#xFF0C;QByteArray &amp;#x7C7B;&amp;#x7684;&amp;#x8BF4;&amp;#x660E;&amp;#x8BE6;&amp;#x89C1; Qt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QString与char*的相互转换">
+<meta property="og:url" content="http://yoursite.com/2019/01/04/QT/QString/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="QString &amp;#x8F6C;&amp;#x6362;&amp;#x4E3A; char *&amp;#x5C06; QString &amp;#x8F6C; char &amp;#xFF0C;&amp;#x9700;&amp;#x8981;&amp;#x7528;&amp;#x5230; QByteArray &amp;#x7C7B;&amp;#xFF0C;QByteArray &amp;#x7C7B;&amp;#x7684;&amp;#x8BF4;&amp;#x660E;&amp;#x8BE6;&amp;#x89C1; Qt">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-26T09:33:18.548Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QString与char*的相互转换">
+<meta name="twitter:description" content="QString &amp;#x8F6C;&amp;#x6362;&amp;#x4E3A; char *&amp;#x5C06; QString &amp;#x8F6C; char &amp;#xFF0C;&amp;#x9700;&amp;#x8981;&amp;#x7528;&amp;#x5230; QByteArray &amp;#x7C7B;&amp;#xFF0C;QByteArray &amp;#x7C7B;&amp;#x7684;&amp;#x8BF4;&amp;#x660E;&amp;#x8BE6;&amp;#x89C1; Qt">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-QT/QString" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    QString与char*的相互转换
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h3 id="QString-&#x8F6C;&#x6362;&#x4E3A;-char"><a href="#QString-&#x8F6C;&#x6362;&#x4E3A;-char" class="headerlink" title="QString &#x8F6C;&#x6362;&#x4E3A; char *"></a>QString &#x8F6C;&#x6362;&#x4E3A; char *</h3><p>&#x5C06; QString &#x8F6C; char <em>&#xFF0C;&#x9700;&#x8981;&#x7528;&#x5230; QByteArray &#x7C7B;&#xFF0C;QByteArray &#x7C7B;&#x7684;&#x8BF4;&#x660E;&#x8BE6;&#x89C1; Qt &#x5E2E;&#x52A9;&#x6587;&#x6863;&#x3002;<br>&#x56E0;&#x4E3A; char </em> &#x6700;&#x540E;&#x90FD;&#x6709;&#x4E00;&#x4E2A;<code>&apos;\0&apos;</code>&#x4F5C;&#x4E3A;&#x7ED3;&#x675F;&#x7B26;&#xFF0C;&#x800C;&#x91C7;&#x7528; QString::toLatin1() &#x65F6;&#x4F1A;&#x5728;&#x5B57;&#x7B26;&#x4E32;&#x540E;&#x9762;&#x52A0;&#x4E0A;<code>&apos;\0&apos;</code>&#x3002;</p>
+<p>&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QString  qstr;</span><br><span class="line"><span class="keyword">char</span>*  cstr;</span><br><span class="line">QByteArray ba = qstr.toLatin1(); <span class="comment">// must</span></span><br><span class="line">cstr = ba.data();</span><br></pre></td></tr></table></figure>
+<h4 id="&#x4E2D;&#x6587;&#x4E71;&#x7801;"><a href="#&#x4E2D;&#x6587;&#x4E71;&#x7801;" class="headerlink" title="&#x4E2D;&#x6587;&#x4E71;&#x7801;&#x3000;"></a>&#x4E2D;&#x6587;&#x4E71;&#x7801;&#x3000;</h4><p>&#x4EE5;&#x4E0A;&#x65B9;&#x6CD5;&#x5F53; QString &#x5185;&#x542B;&#x6709;&#x4E2D;&#x6587;&#x65F6;&#xFF0C;&#x8F6C;&#x6362;&#x4E3A; char * &#x5C31;&#x662F;&#x4E71;&#x7801;&#xFF0C;&#x91C7;&#x7528;&#x5982;&#x4E0B;&#x65B9;&#x6CD5;&#x89E3;&#x51B3;&#xFF1A;</p>
+<p><strong>&#x65B9;&#x6CD5;1</strong></p>
+<p>&#x6DFB;&#x52A0;GBK&#x7F16;&#x7801;&#x652F;&#x6301;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QTextCodec&gt;</span></span></span><br><span class="line">QTextCodec::setCodecForTr(QTextCodec::codecForName(<span class="string">&quot;GBK&quot;</span>));</span><br><span class="line">QTextCodec::setCodecForLocale(QTextCodec::codecForName(<span class="string">&quot;GBK&quot;</span>));</span><br></pre></td></tr></table></figure>
+<p>&#x7136;&#x540E;&#x5C06;&#x4E0A;&#x9762;&#x7684;&#x7B2C;3&#x884C;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QByteArray ba = str.toLocal8Bit();  <span class="comment">// toLocal8Bit &#x652F;&#x6301;&#x4E2D;&#x6587;</span></span><br></pre></td></tr></table></figure>
+<p><strong>&#x65B9;&#x6CD5;2</strong></p>
+<p>&#x5148;&#x5C06; QString &#x8F6C;&#x4E3A;&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x7684; string &#x7C7B;&#x578B;&#xFF0C;&#x7136;&#x540E;&#x5C06; string &#x8F6C;&#x4E3A; char *&#x3002;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QString  filename;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> str = filename.toStdString();</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* ch = str.c_str();</span><br></pre></td></tr></table></figure>
+<h3 id="char-&#x8F6C;&#x6362;&#x4E3A;-QString"><a href="#char-&#x8F6C;&#x6362;&#x4E3A;-QString" class="headerlink" title="char * &#x8F6C;&#x6362;&#x4E3A; QString"></a>char * &#x8F6C;&#x6362;&#x4E3A; QString</h3><p>&#x4F7F;&#x7528; QString &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString(const QLatin1String &amp;str);</span><br></pre></td></tr></table></figure>
+<p>QLatin1String &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QLatin1String(const char *str);</span><br></pre></td></tr></table></figure>
+<p>&#x56E0;&#x6B64;&#x7528;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x8BED;&#x53E5;&#x5C31;&#x53EF;&#x4EE5;&#x5C06; char * ch &#x8F6C;&#x6362;&#x4E3A; QString str &#x4E86;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = QString(QLatin1String(ch));</span><br></pre></td></tr></table></figure>
+<h3 id="&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>&#x5E38;&#x7528;&#x65B9;&#x6CD5;</h3><p><strong>arg()</strong></p>
+<p>QString &#x7684; arg() &#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x66FF;&#x6362;&#x6389; QString &#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x5360;&#x4F4D;&#x7B26;&#x3002;&#x5176;&#x5360;&#x4F4D;&#x7B26;&#x4EE5; % &#x5F00;&#x59CB;&#xFF0C;&#x540E;&#x9762;&#x662F;&#x5360;&#x4F4D;&#x7B26;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x4F8B;&#x5982; %1&#xFF0C;%2 &#x8FD9;&#x79CD;&#x3002;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString(<span class="string">&quot;[%1, %2]&quot;</span>).arg(x, y);</span><br></pre></td></tr></table></figure>
+<p><strong>sprintf()</strong></p>
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C; C &#x98CE;&#x683C;&#x7684;&#x683C;&#x5F0F;&#x5316;&#x51FD;&#x6570; sprintf() &#x6765;&#x6784;&#x9020; QString&#x3002;</p>
+<p><strong>QString::number(long n, int base = 10)</strong></p>
+<p>&#x5C06;&#x6570;&#x5B57;&#x8F6C;&#x5316;&#x4E3A;QString</p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2019-01-04T08:40:29.000Z" itemprop="datePublished">2019-01-04</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2019/01/05/QT/QT入门/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    QT 入门
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/12/28/Algorithm/排序算法/" class="ui tiny button">
+                    
+                    排序算法
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#QString-转换为-char"><span>QString 转换为 char *</span></a><ol><li><a href="#中文乱码"><span>中文乱码　</span></a></li></ol></li><li><a href="#char-转换为-QString"><span>char * 转换为 QString</span></a></li><li><a href="#常用方法"><span>常用方法</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

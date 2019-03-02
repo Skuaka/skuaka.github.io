@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>IS-IS | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="IS-IS&amp;#xFF08;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#xFF09;&amp;#x6570;&amp;#x636E;&amp;#x4F20;&amp;#x9012;&amp;#x65B9;&amp;#x5F0F; &amp;#x9762;&amp;#x5411;&amp;#x8FDE;&amp;#x63A5; tcp/ip  &amp;#x975E;&amp;#x9762;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-IS">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/Network/Ccie/IS-IS/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="IS-IS&amp;#xFF08;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#xFF09;&amp;#x6570;&amp;#x636E;&amp;#x4F20;&amp;#x9012;&amp;#x65B9;&amp;#x5F0F; &amp;#x9762;&amp;#x5411;&amp;#x8FDE;&amp;#x63A5; tcp/ip  &amp;#x975E;&amp;#x9762;&amp;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-20T07:27:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-IS">
+<meta name="twitter:description" content="IS-IS&amp;#xFF08;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#xFF09;&amp;#x6570;&amp;#x636E;&amp;#x4F20;&amp;#x9012;&amp;#x65B9;&amp;#x5F0F; &amp;#x9762;&amp;#x5411;&amp;#x8FDE;&amp;#x63A5; tcp/ip  &amp;#x975E;&amp;#x9762;&amp;">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Network/Ccie/IS-IS" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    IS-IS
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h1 id="IS-IS&#xFF08;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#xFF09;"><a href="#IS-IS&#xFF08;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#xFF09;" class="headerlink" title="IS-IS&#xFF08;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#xFF09;"></a>IS-IS&#xFF08;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#xFF09;</h1><h3 id="&#x6570;&#x636E;&#x4F20;&#x9012;&#x65B9;&#x5F0F;"><a href="#&#x6570;&#x636E;&#x4F20;&#x9012;&#x65B9;&#x5F0F;" class="headerlink" title="&#x6570;&#x636E;&#x4F20;&#x9012;&#x65B9;&#x5F0F;"></a>&#x6570;&#x636E;&#x4F20;&#x9012;&#x65B9;&#x5F0F;</h3><ul class="ui list">
+<li><p>&#x9762;&#x5411;&#x8FDE;&#x63A5; tcp/ip</p>
+</li>
+<li><p>&#x975E;&#x9762;&#x5411;&#x8FDE;&#x63A5; clns/clnp &#x975E;&#x8FDE;&#x63A5;&#x7684;&#x7F51;&#x7EDC;&#x670D;&#x52A1;(&#x8D1F;&#x8D23;&#x63A7;&#x5236;&#x6570;&#x636E;&#x4F20;&#x9012;&#x8FC7;&#x7A0B;)/&#x975E;&#x8FDE;&#x63A5;&#x7684;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;(&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x6807;&#x8BC6;)</p>
+<p>&#x6700;&#x540E;&#xFF0C;ip&#x83B7;&#x5F97;&#x5E7F;&#x6CDB;&#x4F7F;&#x7528;&#xFF0C;&#x4F46;&#x662F;CLNS&#x7684;&#x7406;&#x5FF5;&#x4E5F;&#x5F97;&#x5230;&#x8BA4;&#x53EF;&#xFF0C;&#x56E0;&#x6B64;&#x4FDD;&#x7559;&#x4E0B;&#x6765;&#xFF0C;&#x53EB;&#x505A;UDP&#x3002;</p>
+</li>
+</ul>
+<h3 id="IS-IS&#x672F;&#x8BED;"><a href="#IS-IS&#x672F;&#x8BED;" class="headerlink" title="IS-IS&#x672F;&#x8BED;"></a>IS-IS&#x672F;&#x8BED;</h3><ul class="ui list">
+<li><p>IS&#xFF1A;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF; &#x5373; &#x8DEF;&#x7531;&#x5668;router</p>
+</li>
+<li><p>ES&#xFF1A;&#x7EC8;&#x7AEF;&#x7CFB;&#x7EDF; &#xFF08;&#x4F46;&#x662F;&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4F7F;&#x7528;clnp&#x6807;&#x8BC6;&#x7684;&#x8BBE;&#x5907;&#x4E86;&#xFF09;</p>
+</li>
+<li><p>clnp&#xFF1A;&#x6807;&#x8BC6;</p>
+<p>NET&#xFF1A;&#x7F51;&#x7EDC;&#x5B9E;&#x4F53;&#x6807;&#x8BC6;&#xFF08;&#x7F51;&#x7EDC;+&#x4E3B;&#x673A;&#xFF09;128bit</p>
+<p>clnp&#xFF1A;clnp&#x5730;&#x5740;  NSAP&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x5E94;&#x7528;&#x6807;&#x8BC6;</p>
+</li>
+</ul>
+<h3 id="clnp&#x5730;&#x5740;&#x89E3;&#x91CA;"><a href="#clnp&#x5730;&#x5740;&#x89E3;&#x91CA;" class="headerlink" title="clnp&#x5730;&#x5740;&#x89E3;&#x91CA;"></a>clnp&#x5730;&#x5740;&#x89E3;&#x91CA;</h3><p>49.0001.0000.0000.0001.00</p>
+<p>49.0002.0000.0000.0002.00</p>
+<p>49.0101.0000.0000.0001.00</p>
+<p>49&#xFF1A;AFI&#x5730;&#x5740;&#x683C;&#x5F0F;&#x6807;&#x8BC6; A&#x5730;&#x5740; F&#x683C;&#x5F0F; I&#x6388;&#x6743;&#x6807;&#x8BC6;  &#x6570;&#x5B57;&#x7531;&#x5B98;&#x65B9;&#x7684;&#x8868;&#x5B9A;&#x597D;&#x3002;47&#xFF0C;48&#xFF0C;49&#x7528;&#x4E8E;&#x79C1;&#x7F51;&#x3002;</p>
+<p>0101 01/01 &#x57DF;/&#x533A;&#x57DF; &#xFF08;&#x533A;&#x57DF;&#x5305;&#x542B;&#x5728;&#x57DF;&#x5185;&#xFF09;&#x8FD9;&#x91CC;&#x4E3A;&#x4E24;&#x4E2A;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x6570;</p>
+<p>0000.0000.0001 mac&#x5730;&#x5740;</p>
+<p>00 &#x670D;&#x52A1;&#x53F7;&#xFF08;&#x4F5C;&#x7528;&#x7C7B;&#x4F3C;&#x4E8E;&#x7AEF;&#x53E3;&#x53F7;&#xFF09;</p>
+<h3 id="IS-IS-&#x57DF;&#x3001;&#x533A;&#x57DF;-&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#xFF0C;&#x5E38;&#x89C4;&#x533A;&#x57DF;"><a href="#IS-IS-&#x57DF;&#x3001;&#x533A;&#x57DF;-&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#xFF0C;&#x5E38;&#x89C4;&#x533A;&#x57DF;" class="headerlink" title="IS-IS &#x57DF;&#x3001;&#x533A;&#x57DF;{&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#xFF0C;&#x5E38;&#x89C4;&#x533A;&#x57DF;}"></a>IS-IS &#x57DF;&#x3001;&#x533A;&#x57DF;{&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#xFF0C;&#x5E38;&#x89C4;&#x533A;&#x57DF;}</h3><p>&#x57DF;&#xFF1A;AS</p>
+<p>&#x533A;&#x57DF;&#xFF1A;0&#xFF0C;1&#xFF0C;2 &#x2026;&#x2026;</p>
+<h3 id="&#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x7C7B;&#x578B;"><a href="#&#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x7C7B;&#x578B;" class="headerlink" title="&#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x7C7B;&#x578B;"></a>&#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x7C7B;&#x578B;</h3><ul class="ui list">
+<li>OSPF{&#x89D2;&#x8272;&#xFF1A;DR BDR DR-other&#xFF0C;&#x7C7B;&#x578B;&#xFF1A;ABR ASBR}</li>
+<li>IS-IS {&#x89D2;&#x8272;&#xFF1A;Dis(&#x4E0D;&#x5B8C;&#x6574;)&#xFF0C;&#x7C7B;&#x578B;&#xFF1A;L1  L2  L1/L2}</li>
+</ul>
+<p>&#x4F2A;&#x8282;&#x70B9;</p>
+<ul class="ui list">
+<li>OSPF&#xFF1A;DR{&#x51CF;&#x5C11;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#xFF0C;&#x63D0;&#x9AD8;&#x66F4;&#x65B0;&#x6548;&#x7387;}</li>
+<li>IS-IS&#xFF1A;Dis</li>
+</ul>
+<p>IS-IS&#x7C7B;&#x578B;</p>
+<ul class="ui list">
+<li>L2 &#x9AA8;&#x5E72;&#x533A;&#x57DF;</li>
+<li>L1 &#x5E38;&#x89C4;&#x533A;&#x57DF;</li>
+<li>L1/L2(&#x9ED8;&#x8BA4;&#x7C7B;&#x578B;) &#x8FDE;&#x63A5;&#x4E24;&#x4E2A;&#x533A;&#x57DF;</li>
+</ul>
+<h3 id="OSPF-LSA-&#x7279;&#x6B8A;&#x533A;&#x57DF;"><a href="#OSPF-LSA-&#x7279;&#x6B8A;&#x533A;&#x57DF;" class="headerlink" title="OSPF LSA &#x7279;&#x6B8A;&#x533A;&#x57DF;"></a>OSPF LSA &#x7279;&#x6B8A;&#x533A;&#x57DF;</h3><p>LSA&#xFF1A;Link-State Advertisement &#x94FE;&#x8DEF;&#x72B6;&#x6001;&#x5E7F;&#x64AD;</p>
+<p>DBD&#xFF1A;&#x6570;&#x636E;&#x5E93;&#x63CF;&#x8FF0;&#x62A5;&#x6587;</p>
+<p>LSR&#xFF1A;&#x94FE;&#x8DEF;&#x72B6;&#x6001;&#x67E5;&#x8BE2;</p>
+<p>LSU&#xFF1A;&#x94FE;&#x8DEF;&#x72B6;&#x6001;&#x66F4;&#x65B0;</p>
+<h4 id="OSPF&#x4E03;&#x79CD;LSA&#x7C7B;&#x578B;"><a href="#OSPF&#x4E03;&#x79CD;LSA&#x7C7B;&#x578B;" class="headerlink" title="OSPF&#x4E03;&#x79CD;LSA&#x7C7B;&#x578B;"></a>OSPF&#x4E03;&#x79CD;LSA&#x7C7B;&#x578B;</h4><ul class="ui list">
+<li><p>LSA1&#xFF08;Router LSA&#xFF09;</p>
+<p>&#x8D77;&#x6E90;&#xFF1A;&#x533A;&#x57DF;&#x5185;&#x6BCF;&#x53F0;&#x8BBE;&#x5907;&#x90FD;&#x80FD;&#x4EA7;&#x751F;LSA1</p>
+<p>&#x5185;&#x5BB9;&#xFF1A;&#x8282;&#x70B9;&#x4FE1;&#x606F;{RID network cost}</p>
+<p>&#x6269;&#x6563;&#xFF1A;&#x4E0D;&#x5141;&#x8BB8;&#x7A7F;&#x8D8A;ABR&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x533A;&#x57DF;&#x5185;&#x6269;&#x6563;&#x3002;</p>
+<p>&#x8DEF;&#x7531;&#xFF1A;&#x533A;&#x57DF;&#x5185;&#x8DEF;&#x7531;</p>
+</li>
+<li><p>LSA2&#xFF08;Network LSA&#xFF09;</p>
+<p>&#x8D77;&#x6E90;&#xFF1A;&#x53EA;&#x6709;DR&#x53EF;&#x4EE5;&#x4EA7;&#x751F;</p>
+<p>&#x5185;&#x5BB9;&#xFF1A;&#x62D3;&#x6251;&#x4FE1;&#x606F;{&#x8282;&#x70B9;&#x7684;&#x76F4;&#x8FDE;&#x60C5;&#x51B5;&#xFF0C;&#x8C01;&#x662F;DR}</p>
+<p>&#x6269;&#x6563;&#xFF1A;&#x533A;&#x57DF;&#x5185;</p>
+</li>
+<li><p>LSA3&#xFF08;Network summary LSA&#xFF09;</p>
+<p>&#x8D77;&#x6E90;&#xFF1A;ABR</p>
+<p>&#x5185;&#x5BB9;&#xFF1A;&#x533A;&#x57DF;&#x7F51;&#x7EDC;&#x4FE1;&#x606F;</p>
+<p>&#x6269;&#x6563;&#xFF1A;&#x6574;&#x4E2A;OSPF AS</p>
+<p>&#x8DEF;&#x7531;&#xFF1A;&#x533A;&#x57DF;&#x95F4;&#x8DEF;&#x7531;</p>
+</li>
+<li><p>LSA4&#xFF08;ASBR summary LSA&#xFF09;</p>
+<p>&#x8D77;&#x6E90;&#xFF1A;ASBR&#x6240;&#x5728;&#x57DF;&#x7684;ABR</p>
+<p>&#x5185;&#x5BB9;&#xFF1A;ASBR&#x7684;RID</p>
+<p>&#x6269;&#x6563;&#xFF1A;&#x6574;&#x4E2A;OSPF</p>
+<p>&#x8DEF;&#x7531;&#xFF1A;&#x5916;&#x90E8;{OE1&#xFF0C;OE2}</p>
+</li>
+<li><p>LSA5&#xFF08;Autonomous system external LSA&#xFF09;</p>
+<p>&#x8D77;&#x6E90;&#xFF1A;ASBR</p>
+<p>&#x5185;&#x5BB9;&#xFF1A;&#x5916;&#x90E8;&#x8DEF;&#x7531;</p>
+<p>&#x6269;&#x6563;&#xFF1A;&#x6574;&#x4E2A;OSPF</p>
+<p>&#x8DEF;&#x7531;&#xFF1A;&#x5916;&#x90E8;{OE1&#xFF0C;OE2}</p>
+</li>
+</ul>
+<p>OSPF LSA &#x7279;&#x533A;</p>
+<p>LSA6 MOSPF&#x4E13;&#x7528;&#xFF08;&#x5E9F;&#x9664;&#xFF09;</p>
+<p>LSA7 NSSA</p>
+<p>LSA8 LSA9 &#xFF1A;OSPFv3</p>
+<p>LSA10 &#x53E3;&#x888B;&#x8DEF;&#x7531;</p>
+<p>LSA11 &#x6807;&#x8BB0;</p>
+<h3 id="IS-IS&#x8DEF;&#x7531;&#x7C7B;&#x578B;"><a href="#IS-IS&#x8DEF;&#x7531;&#x7C7B;&#x578B;" class="headerlink" title="IS-IS&#x8DEF;&#x7531;&#x7C7B;&#x578B;"></a>IS-IS&#x8DEF;&#x7531;&#x7C7B;&#x578B;</h3><p>L2&#x8DEF;&#x7531; &#x533A;&#x57DF;&#x95F4;&#x3001;&#x5916;&#x90E8;</p>
+<p>L1&#x8DEF;&#x7531; &#x533A;&#x57DF;&#x5185;&#x3001;&#x5185;&#x90E8;</p>
+<p>OSPF&#x4E0D;&#x5141;&#x8BB8;&#x540C;&#x4E00;&#x63A5;&#x53E3;&#x7F51;&#x7EDC;&#x5C5E;&#x4E8E;&#x540C;&#x4E00;&#x533A;&#x57DF;</p>
+<p>&#x5141;&#x8BB8;&#x4E00;&#x53F0;&#x8BBE;&#x5907;&#x52A0;&#x5165;&#x4E0D;&#x540C;&#x533A;&#x57DF;</p>
+<h3 id="&#x7761;&#x7740;&#x4E86;"><a href="#&#x7761;&#x7740;&#x4E86;" class="headerlink" title="&#x7761;&#x7740;&#x4E86;"></a>&#x7761;&#x7740;&#x4E86;</h3><p>log-adjacency-changes</p>
+<p>EIGRP</p>
+<p>show ip ei neighbor</p>
+<p>neighbor &#x5BF9;&#x7AEF;&#x63A5;&#x53E3;ip</p>
+<p>BGP</p>
+<p>peer-address&#x5BF9;&#x7AEF;RID</p>
+<p>IS-IS</p>
+<p>NET sys-id&#x5BF9;&#x65B9;</p>
+<h3 id="ISIS&#x7684;&#x6C47;&#x603B;&#x53CA;&#x91CD;&#x5206;&#x53D1;"><a href="#ISIS&#x7684;&#x6C47;&#x603B;&#x53CA;&#x91CD;&#x5206;&#x53D1;" class="headerlink" title="ISIS&#x7684;&#x6C47;&#x603B;&#x53CA;&#x91CD;&#x5206;&#x53D1;"></a>ISIS&#x7684;&#x6C47;&#x603B;&#x53CA;&#x91CD;&#x5206;&#x53D1;</h3><p>&#x6C47;&#x603B;&#x548C;&#x91CD;&#x5206;&#x53D1;&#x6700;&#x597D;&#x505A;&#x5728;&#x62E5;&#x6709;L2&#x89D2;&#x8272;&#x7684;&#x8BBE;&#x5907;&#x4E0A;&#x3002;</p>
+<p>&#x6C47;&#x603B;&#x540E;&#x7684;&#x8DEF;&#x7531;&#x548C;&#x91CD;&#x5206;&#x53D1;&#x7684;&#x8DEF;&#x7531;&#x90FD;&#x662F;L2&#x8BBE;&#x5907;&#x3002;</p>
+<h4 id="L1&#x8BBE;&#x5907;&#x4E0A;&#x5B8C;&#x6210;&#x91CD;&#x5206;&#x53D1;&#x548C;&#x6C47;&#x603B;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;"><a href="#L1&#x8BBE;&#x5907;&#x4E0A;&#x5B8C;&#x6210;&#x91CD;&#x5206;&#x53D1;&#x548C;&#x6C47;&#x603B;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;" class="headerlink" title="L1&#x8BBE;&#x5907;&#x4E0A;&#x5B8C;&#x6210;&#x91CD;&#x5206;&#x53D1;&#x548C;&#x6C47;&#x603B;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;"></a>L1&#x8BBE;&#x5907;&#x4E0A;&#x5B8C;&#x6210;&#x91CD;&#x5206;&#x53D1;&#x548C;&#x6C47;&#x603B;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;</h4><ul class="ui list">
+<li><p>L1&#x8BBE;&#x5907;&#x4E0A;&#x91CD;&#x5206;&#x53D1;</p>
+<p>&#x91CD;&#x5206;&#x53D1;&#x65F6;&#x6307;&#x5B9A;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x7C7B;&#x578B;&#x6539;&#x4E3A;L1</p>
+</li>
+<li><p>L1&#x8BBE;&#x5907;&#x4E0A;&#x505A;&#x6C47;&#x603B;</p>
+<p>&#x88AB;&#x6C47;&#x603B;&#x7684;&#x7F51;&#x7EDC;&#x5FC5;&#x987B;&#x4EE5;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x5F62;&#x5F0F;&#x8FDB;&#x5165;ISIS&#xFF0C;&#x518D;&#x6C47;&#x603B;&#x624D;&#x751F;&#x6548;</p>
+<p>&#xFF01;&#xFF01;&#x6CE8;&#x610F;</p>
+<p>ISIS&#x7684;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x7C7B;&#x578B;&#x662F;L2&#xFF0C;&#x90A3;&#x4E48;&#x63A5;&#x53D7;&#x8005;&#x4E0D;&#x7D2F;&#x52A0;&#x63A5;&#x53E3;&#x5F00;&#x9500;</p>
+<p>ISIS&#x7684;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x7C7B;&#x578B;&#x662F;L1&#xFF0C;&#x90A3;&#x4E48;&#x63A5;&#x53D7;&#x8005;&#x4F1A;&#x7D2F;&#x52A0;&#x63A5;&#x53E3;&#x5F00;&#x9500;</p>
+</li>
+</ul>
+<h3 id="ISIS&#x7684;&#x8BA4;&#x8BC1;"><a href="#ISIS&#x7684;&#x8BA4;&#x8BC1;" class="headerlink" title="ISIS&#x7684;&#x8BA4;&#x8BC1;"></a>ISIS&#x7684;&#x8BA4;&#x8BC1;</h3><p>&#x533A;&#x57DF;&#x8BA4;&#x8BC1;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">area-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
+<p>&#x94FE;&#x8DEF;&#x8BA4;&#x8BC1;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;id&gt;</span><br><span class="line">isis password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
+<p>&#x57DF;(AS)&#x8BA4;&#x8BC1;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">domain-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
+<p>~~&#x6CE8;&#x610F;</p>
+<p>&#x533A;&#x57DF;&#x8BA4;&#x8BC1;&#x3001;&#x57DF;&#x8BA4;&#x8BC1; &#x4E0D;&#x901A;&#x8FC7;&#x53EA;&#x5F71;&#x54CD;&#x8DEF;&#x7531;&#x5B66;&#x4E60;&#xFF1B;</p>
+<p>&#x94FE;&#x8DEF;&#x8BA4;&#x8BC1;&#x4E0D;&#x901A;&#x8FC7;&#x5F71;&#x54CD;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x5EFA;&#x7ACB;&#x3002;</p>
+<p>IIH&#xFF1A;HELLO&#xFF1A;&#x94FE;&#x8DEF;&#x8BA4;&#x8BC1;&#x662F;&#x5305;&#x542B;&#x5728;hello &#x4E2D;&#x7684;&#xFF1B;</p>
+<p>LSP&#xFF1A;&#x66F4;&#x65B0;&#xFF1A;&#x533A;&#x57DF;&#x8BA4;&#x8BC1;&#x3001;&#x57DF;&#x8BA4;&#x8BC1;&#x662F;&#x5305;&#x542B;&#x5728;&#x66F4;&#x65B0;&#x4E2D;&#x7684;&#x3002;</p>
+<h3 id="ISIS&#x7684;&#x8DEF;&#x7531;&#x6CC4;&#x9732;"><a href="#ISIS&#x7684;&#x8DEF;&#x7531;&#x6CC4;&#x9732;" class="headerlink" title="ISIS&#x7684;&#x8DEF;&#x7531;&#x6CC4;&#x9732;"></a>ISIS&#x7684;&#x8DEF;&#x7531;&#x6CC4;&#x9732;</h3><p>ISIS&#x8DEF;&#x7531;&#x6CC4;&#x9732; &#x6307; &#x5C06;&#x6307;&#x5B9A;&#x7684;L2&#x6570;&#x636E;&#x5E93;&#x76EE;&#x6807;&#x7F51;&#x7EDC;&#x4FE1;&#x606F;&#x8F6C;&#x5316;&#x6210;L1&#x7684;&#xFF0C;&#x53D1;&#x9001;&#x7ED9;L1&#x8BBE;&#x5907;&#x3002;</p>
+<h5 id="&#x8DEF;&#x7531;&#x6CC4;&#x9732;&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;"><a href="#&#x8DEF;&#x7531;&#x6CC4;&#x9732;&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8DEF;&#x7531;&#x6CC4;&#x9732;&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;"></a>&#x8DEF;&#x7531;&#x6CC4;&#x9732;&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;</h5><p>&#x6B65;&#x9AA4;1&#xFF1A;L1/L2 &#x8BBE;&#x5907;&#x4E0A;&#x7F16;&#x5199; ACL&#xFF0C;&#x5339;&#x914D;&#x88AB;&#x6CC4;&#x9732;&#x7684;&#x76EE;&#x6807;&#x8DEF;&#x7531;</p>
+<p>&#x6B65;&#x9AA4;2&#xFF1A;L1/L2 &#x8BBE;&#x5907;&#x4E0A;&#x7F16;&#x5199; ROUTE-MAP &#x5F15;&#x7528; ACL&#x3002;</p>
+<p>&#x6B65;&#x9AA4;3&#xFF1A;L1/L2 &#x8BBE;&#x5907;&#x4E0A;&#x505A; ISIS &#x5230; ISIS &#x7684;&#x91CD;&#x5206;&#x53D1;&#xFF0C;&#x5E76;&#x4E14;&#x6307;&#x5B9A;&#x662F;&#x5229;&#x7528; route-map &#x5B8C;&#x6210; L2 &#x6570;&#x636E;&#x5E93;&#x6761;&#x76EE;&#x5230; L1 &#x6570;&#x636E;&#x5E93;&#x6761;&#x76EE;&#x7684;&#x6CC4;&#x9732;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redistribute isis ip level-2 into level-1 route-map 2T1</span><br><span class="line">isis metric &lt;&#x5F00;&#x9500;&gt; //&#x66F4;&#x6539;&#x5F00;&#x9500;</span><br></pre></td></tr></table></figure>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2018-07-20T07:27:03.000Z" itemprop="datePublished">2018-07-20</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/07/23/Network/Ccie/多播/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    多播（multicast）
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/07/19/Network/Ccie/ipv6/" class="ui tiny button">
+                    
+                    ipv6
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#IS-IS（中间系统到中间系统）"><span>IS-IS（中间系统到中间系统）</span></a><ol><li><a href="#数据传递方式"><span>数据传递方式</span></a></li><li><a href="#IS-IS术语"><span>IS-IS术语</span></a></li><li><a href="#clnp地址解释"><span>clnp地址解释</span></a></li><li><a href="#IS-IS-域、区域-骨干区域，常规区域"><span>IS-IS 域、区域{骨干区域，常规区域}</span></a></li><li><a href="#路由器角色类型"><span>路由器角色类型</span></a></li><li><a href="#OSPF-LSA-特殊区域"><span>OSPF LSA 特殊区域</span></a><ol><li><a href="#OSPF七种LSA类型"><span>OSPF七种LSA类型</span></a></li></ol></li><li><a href="#IS-IS路由类型"><span>IS-IS路由类型</span></a></li><li><a href="#睡着了"><span>睡着了</span></a></li><li><a href="#ISIS的汇总及重分发"><span>ISIS的汇总及重分发</span></a><ol><li><a href="#L1设备上完成重分发和汇总的解决方法"><span>L1设备上完成重分发和汇总的解决方法</span></a></li></ol></li><li><a href="#ISIS的认证"><span>ISIS的认证</span></a></li><li><a href="#ISIS的路由泄露"><span>ISIS的路由泄露</span></a><ol><li><a href="#路由泄露的配置流程"><span>路由泄露的配置流程</span></a></li></ol></li></ol></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>

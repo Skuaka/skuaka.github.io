@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html>
+<html lang>
+<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content>
+    <title>Mac 下 PostgreSQL 配置 | Hexo</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="&amp;#x5728; mac &amp;#x4E0B;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x5229;&amp;#x7528; homebrew &amp;#x76F4;&amp;#x63A5;&amp;#x5B89;&amp;#x88C5; PostgreSQL&amp;#xFF1A; brew install postgresql &amp;#x521D;&amp;#x59CB;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF1A; init">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac 下 PostgreSQL 配置">
+<meta property="og:url" content="http://yoursite.com/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x5728; mac &amp;#x4E0B;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x5229;&amp;#x7528; homebrew &amp;#x76F4;&amp;#x63A5;&amp;#x5B89;&amp;#x88C5; PostgreSQL&amp;#xFF1A; brew install postgresql &amp;#x521D;&amp;#x59CB;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF1A; init">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-17T14:20:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac 下 PostgreSQL 配置">
+<meta name="twitter:description" content="&amp;#x5728; mac &amp;#x4E0B;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x5229;&amp;#x7528; homebrew &amp;#x76F4;&amp;#x63A5;&amp;#x5B89;&amp;#x88C5; PostgreSQL&amp;#xFF1A; brew install postgresql &amp;#x521D;&amp;#x59CB;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF1A; init">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "John Doe",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Hexo</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">John Doe</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item">
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Database/PostgreSQL/Mac 下 PostgreSQL " class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    Mac 下 PostgreSQL 配置
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <p>&#x5728; mac &#x4E0B;&#xFF0C;&#x53EF;&#x4EE5;&#x5229;&#x7528; <a href="http://dhq.me/mac-apt-get-homebrew" target="_blank" rel="noopener">homebrew</a> &#x76F4;&#x63A5;&#x5B89;&#x88C5; PostgreSQL&#xFF1A;</p>
+<p><code>brew install postgresql</code></p>
+<p>&#x521D;&#x59CB;&#x6570;&#x636E;&#x5E93;&#xFF1A;</p>
+<p><code>initdb /usr/local/var/postgres -E utf8</code></p>
+<p>&#x4E0A;&#x9762;&#x6307;&#x5B9A; &#x201C;/usr/local/var/postgres&#x201D; &#x4E3A; PostgreSQL &#x7684;&#x914D;&#x7F6E;&#x6570;&#x636E;&#x5B58;&#x653E;&#x76EE;&#x5F55;&#xFF0C;&#x5E76;&#x4E14;&#x8BBE;&#x7F6E;&#x6570;&#x636E;&#x5E93;&#x6570;&#x636E;&#x7F16;&#x7801;&#x662F; utf8&#xFF0C;&#x66F4;&#x591A;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x53EF;&#x4EE5; &#x201C;initdb &#x2013;help&#x201D; &#x67E5;&#x770B;&#x3002;</p>
+<p>&#x542F;&#x52A8; PostgreSQL&#xFF1A;</p>
+<p><code>pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start</code></p>
+<p>&#x5173;&#x95ED; PostgreSQL&#xFF1A;</p>
+<p><code>pg_ctl -D /usr/local/var/postgres stop -s -m fast</code></p>
+<p><strong>&#x521B;&#x5EFA;&#x4E00;&#x4E2A; PostgreSQL &#x7528;&#x6237;</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">createuser username -P</span><br><span class="line"></span><br><span class="line"><span class="comment">#Enter password for new role:`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Enter it again:</span></span><br></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x9762;&#x7684; username &#x662F;&#x7528;&#x6237;&#x540D;&#xFF0C;&#x56DE;&#x8F66;&#x8F93;&#x5165; 2 &#x6B21;&#x7528;&#x6237;&#x5BC6;&#x7801;&#x540E;&#x5373;&#x7528;&#x6237;&#x521B;&#x5EFA;&#x5B8C;&#x6210;&#x3002;&#x66F4;&#x591A;&#x7528;&#x6237;&#x521B;&#x5EFA;&#x4FE1;&#x606F;&#x53EF;&#x4EE5; &#x201C;createuser &#x2013;help&#x201D; &#x67E5;&#x770B;&#x3002;</p>
+<p><strong>&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;</strong></p>
+<p><code>createdb dbname -O username -E UTF8 -e</code></p>
+<p>&#x4E0A;&#x9762;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; dbname &#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5E76;&#x6307;&#x5B9A; username &#x4E3A;&#x6539;&#x6570;&#x636E;&#x5E93;&#x7684;&#x62E5;&#x6709;&#x8005;&#xFF08;owner&#xFF09;&#xFF0C;&#x6570;&#x636E;&#x5E93;&#x7684;&#x7F16;&#x7801;&#xFF08;encoding&#xFF09;&#x662F; UTF8&#xFF0C;&#x53C2;&#x6570; &#x201C;-e&#x201D; &#x662F;&#x6307;&#x628A;&#x6570;&#x636E;&#x5E93;&#x6267;&#x884C;&#x64CD;&#x4F5C;&#x7684;&#x547D;&#x4EE4;&#x663E;&#x793A;&#x51FA;&#x6765;&#x3002;</p>
+<p>&#x66F4;&#x591A;&#x6570;&#x636E;&#x5E93;&#x521B;&#x5EFA;&#x4FE1;&#x606F;&#x53EF;&#x4EE5; &#x201C;createdb &#x2013;help&#x201D; &#x67E5;&#x770B;&#x3002;</p>
+<p><strong>&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;</strong></p>
+<p><code>psql -U username -d dbname -h 127.0.0.1</code></p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2018-08-17T14:20:13.000Z" itemprop="datePublished">2018-08-17</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    PostgreSQL 命令
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2018/08/17/Macos/macos apache problem/" class="ui tiny button">
+                    
+                    macos apache problem
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2019 <a href="/">John Doe</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>
