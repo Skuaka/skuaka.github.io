@@ -264,11 +264,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Database/Redis/Redis设计与实现" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-QT/QT 贪吃蛇" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/01/18/Database/Redis/Redis设计与实现/" class="article-date">
-      <time datetime="2019-01-18T13:49:52.000Z" itemprop="datePublished">2019-01-18</time>
+      <a href="/2019/03/02/QT/QT 贪吃蛇/" class="article-date">
+      <time datetime="2019-03-02T15:30:42.000Z" itemprop="datePublished">2019-03-02</time>
 </a>
 
 
@@ -283,7 +283,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/18/Database/Redis/Redis设计与实现/">Redis 设计与实现</a>
+      <a class="article-title" href="/2019/03/02/QT/QT 贪吃蛇/">QT 贪吃蛇</a>
     </h1>
   
 
@@ -293,1155 +293,414 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Redis-设计与实现"><a href="#Redis-设计与实现" class="headerlink" title="Redis 设计与实现"></a>Redis 设计与实现</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><p>什么是redis</p>
-<p>Redis是一个开源的使用ANSI C语言编写、支持网络、可<strong>基于内存亦可持久化</strong>的日志型、<strong>Key-Value数据库</strong>，并提供多种语言的API。简而言之redis就是放在<strong>远程网络上的一个key-value数据结构</strong>。</p>
-</li>
-<li><p>redis有什么作用</p>
-<p>Redis可以用来做cache，也可以用来做持久化db，甚至用来做队列。队列就是存储临时性数据，而cache主要存储那些用户频繁使用的数据。当然也可以来做db，但是实现持久化存储需要付出昂贵的代价。</p>
-</li>
-<li><p>redis有什么优缺点</p>
-<p><strong>优点</strong></p>
-<p>–redis丰富的数据结构—-更加方便操作</p>
-<p>比如队列的先进先出，hash结构O(1)的快速查询，sorted-set有序集合方便获取排名</p>
-<p>–redis的数据都是在内存操作—更加快速操作</p>
-<p>—单线程处理—避免了锁</p>
-<p>—非阻塞式IO多路复用—充分利用网络IO</p>
-<p>—设计简单，效率快</p>
-<p>—方便扩展，不需要像mysql一样分库分表，只需要简单扩大内存，或者增加redis的个数</p>
-<p><strong>缺点</strong></p>
-<p>Rdb备份不具备实时性</p>
-<p>Aof持久化比较消耗内存和cpu，甚至当aof文件过大的时候占用磁盘</p>
-</li>
-</ul>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>下图说明了，外部数据结构和底层实际数据结构是通过realobject来连接的。一个外观类型里面必然存着一个realobject，通过它来访问底层数据结构。</p>
-<p><img src="Picture\01.png" alt="01"></p>
-<h3 id="外层数据结构"><a href="#外层数据结构" class="headerlink" title="外层数据结构"></a>外层数据结构</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>REDIS_STRING (字符串)是 Redis 使用得最为广泛的数据类型,它除了是 SET 、GET 等命令的操作对象之外,数据库中的所有键,以及执行命令时提供给 Redis 的参数,都是用这种类型保存的。</p>
-<p>字符串类型分别使用 REDIS_ENCODING_INT 和 REDIS_ENCODING_RAW 两种编码。</p>
-<p>只有能表示为 long 类型的值,才会以整数的形式保存,其他类型的整数、小数和字符串,都是用 sdshdr 结构来保存。</p>
-<h4 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h4><p>REDIS_HASH (哈希表)是HSET 、HLEN 等命令的操作对象</p>
-<p>它使用 REDIS_ENCODING_ZIPLIST和REDIS_ENCODING_HT 两种编码方式</p>
-<p>Redis 中每个hash可以存储2^32-1键值对（40多亿）</p>
-<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><p>REDIS_LIST(列表)是LPUSH 、LRANGE等命令的操作对象</p>
-<p>它使用 REDIS_ENCODING_ZIPLIST和REDIS_ENCODING_LINKEDLIST 这两种方式编码</p>
-<p>一个列表最多可以包含232-1 个元素(4294967295, 每个列表超过40亿个元素)。</p>
-<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p>REDIS_SET (集合) 是 SADD 、 SRANDMEMBER 等命令的操作对象</p>
-<p>它使用 REDIS_ENCODING_INTSET 和 REDIS_ENCODING_HT 两种方式编码</p>
-<p>Redis 中集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。</p>
-<p>集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)</p>
-<h4 id="有序集"><a href="#有序集" class="headerlink" title="有序集"></a>有序集</h4><p>REDIS_ZSET (有序集)是ZADD 、ZCOUNT 等命令的操作对象</p>
-<p>它使用 REDIS_ENCODING_ZIPLIST和REDIS_ENCODING_SKIPLIST 两种方式编码</p>
-<p>不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。</p>
-<p>有序集合的成员是唯一的,但分数(score)却可以重复。</p>
-<h3 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h3><h4 id="SDS-动态字符串"><a href="#SDS-动态字符串" class="headerlink" title="SDS 动态字符串"></a>SDS 动态字符串</h4><p>sds字符串是字符串的实现</p>
-<p>动态字符串是一个结构体，内部有一个buf数组，以及字符串长度，剩余长度等字段，优点是通过长度限制写入，避免缓冲区溢出，另外剩余长度不足时会自动扩容，扩展性较好，不需要频繁分配内存。</p>
-<p>并且sds支持写入二进制数据，而不一定是字符。</p>
-<h4 id="dict-字典"><a href="#dict-字典" class="headerlink" title="dict 字典"></a>dict 字典</h4><p>dict字典是哈希表的实现。</p>
-<p>dict字典与Java中的哈希表实现简直如出一辙，首先都是数组+链表组成的结构，通过dictentry保存节点。</p>
-<p>其中dict同时保存两个entry数组，当需要扩容时，把节点转移到第二个数组即可，平时只使用一个数组。</p>
-<p><img src="Picture\02.png" alt="02"></p>
-<h4 id="ziplist-压缩链表"><a href="#ziplist-压缩链表" class="headerlink" title="ziplist 压缩链表"></a>ziplist 压缩链表</h4><p>ziplist 是一个经过特殊编码的双向链表，它的设计目标就是为了提高存储效率。ziplist可以用于存储字符串或整数，其中整数是按真正的二进制表示进行编码的，而不是编码成字符串序列。它能以O(1)的时间复杂度在表的两端提供push和pop操作。</p>
+        <h3 id="贪吃蛇"><a href="#贪吃蛇" class="headerlink" title="贪吃蛇"></a>贪吃蛇</h3><p>要实现这个贪吃蛇游戏，会利用到事件系统、Graphics View Framework、QPainter 等相关内容，也会了解到一个游戏所具有的一些特性，比如游戏循环等。</p>
+<p>很明显，绘制图形和移动图形，是一个游戏的核心。对于游戏而言，将其中的每一个部分看做对象是非常合理的。因此，我们选择 Graphics View Framework 作为核心框架。同时，Graphics View Framework 的性能很好，即便是数千上万的图形也没有压力。这一点非常适合于游戏。</p>
+<p>对于游戏而言，我们需要一个QGraphicsScene，作为游戏发生的舞台；一个QGraphicsView，作为观察游戏舞台的组件；以及若干元素，用于表示游戏对象，比如蛇、食物以及障碍物等。</p>
+<p>大致分析过游戏组成以及各部分的实现方式后，我们可以开始编码了。这当然是一个 GUI 工程，主窗口应该是一个QGraphicsView。为了以后的实现方便（比如，我们希望向工具栏添加按钮等），我们不会直接以QGraphicsView 作为顶层窗口，而是<strong>将其添加到一个主窗口上</strong>。这里，我们不使用 QtDesigner 进行界面设计，而是直接编码完成。</p>
+<h4 id="MainWindow"><a href="#MainWindow" class="headerlink" title="MainWindow"></a>MainWindow</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMainWindow&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QGraphicsScene</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QGraphicsView</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GameController</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> :</span> <span class="keyword">public</span> QMainWindow</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MainWindow(QWidget *parent = <span class="number">0</span>);</span><br><span class="line">    ~MainWindow();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">adjustViewSize</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initScene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initSceneBackground</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    QGraphicsScene *scene;</span><br><span class="line">    QGraphicsView *view;</span><br><span class="line"></span><br><span class="line">    GameController *game;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>构造函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MainWindow::MainWindow(QWidget *parent) :</span><br><span class="line">    QMainWindow(parent),</span><br><span class="line">    scene(<span class="keyword">new</span> QGraphicsScene(<span class="keyword">this</span>)),</span><br><span class="line">    view(<span class="keyword">new</span> QGraphicsView(scene, <span class="keyword">this</span>)),</span><br><span class="line">    game(<span class="keyword">new</span> GameController(*scene, <span class="keyword">this</span>))</span><br><span class="line">&#123;</span><br><span class="line">    setCentralWidget(view);</span><br><span class="line">    resize(<span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line"></span><br><span class="line">    initScene();</span><br><span class="line">    initSceneBackground();</span><br><span class="line"></span><br><span class="line">    QTimer::singleShot(<span class="number">0</span>, <span class="keyword">this</span>, SLOT(adjustViewSize()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>一个普通的双向链表，链表中每一项都占用独立的一块内存，各项之间用地址指针（或引用）连接起来。这种方式会带来大量的内存碎片，而且地址指针也会占用额外的内存。</p>
-<p>ziplist 是将表中每一项存放在前后连续的地址空间内，一个ziplist整体占用一大块内存。它是一个表（list），但其实不是一个链表（linked list）。</p>
-</li>
-<li><p>另外，ziplist为了在细节上节省内存，对于值的存储采用了变长的编码方式，大概意思是说，对于大的整数，就多用一些字节来存储，而对于小的整数，就少用一些字节来存储。</p>
-</li>
-<li><p>实际上。redis的字典一开始的数据比较少时，会使用ziplist的方式来存储，也就是key1，value1，key2，value2这样的顺序存储，对于小数据量来说，这样存储既省空间，查询的效率也不低。</p>
-<p>当数据量超过阈值时，哈希表自动膨胀为之前我们讨论的dict。</p>
+<li><p>最后一行的 singleShot() 函数原型如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> QTimer::singleShot(<span class="keyword">int</span> msec, QObject * receiver, <span class="keyword">const</span> <span class="keyword">char</span> * member);</span><br></pre></td></tr></table></figure>
+<p>该函数接受三个参数，简单来说，它的意思是，在 msec 毫秒之后，调用 receiver 的 member <strong>槽函数</strong>。在我们的代码中，第一个参数传递的是 0，也就是 0ms 之后，调用<code>this-&gt;adjustViewSize()</code>。</p>
+<p>QTimer 的处理是将其放到事件列表中，等到下一次事件循环开始时去调用这个函数。那么，<code>QTimer::signleShot(0, ...)</code>意思是，在下一次事件循环开始时，立刻调用指定的槽函数。</p>
+<p>在我们的例子中，我们需要在视图绘制完毕后才去改变大小（视图绘制当然是在<code>paintEvent()</code>事件中），因此我们需要在下一次事件循环中调用<code>adjustViewSize()</code>函数。这就是为什么我们需要用<code>QTimer</code>而不是直接调用<code>adjustViewSize()</code>。</p>
+<p>上面看不懂，去stackflow看到了看得懂的：</p>
+<p><strong>Every call to QTimer::singleShot(…) is executed on the event loop of the thread where it is invoked. If invoked from the main thread, it’ll be the event loop started with app.exec().</strong></p>
 </li>
 </ul>
-<h4 id="quicklist"><a href="#quicklist" class="headerlink" title="quicklist"></a>quicklist</h4><p>quicklist是结合 ziplist存储优势 和 链表灵活性 于一身的双端链表。是一个空间和时间的折中：</p>
-<p>双向链表便于在表的两端进行push和pop操作，但是它的内存开销比较大。ziplist由于是一整块连续内存，所以存储效率很高。但是，它不利于修改操作，每次数据变动都会引发一次内存的realloc。特别是当ziplist长度很长的时候，一次realloc可能会导致大批量的数据拷贝，进一步降低性能。</p>
-<p><img src="Picture\03.png" alt="03"></p>
-<h4 id="zset"><a href="#zset" class="headerlink" title="zset"></a>zset</h4><p>zset其实是两种结构的合并。也就是dict和skiplist结合而成的。dict负责保存数据对分数的映射，而skiplist用于根据分数进行数据的查询（相辅相成）</p>
-<h4 id="skiplist-跳跃表"><a href="#skiplist-跳跃表" class="headerlink" title="skiplist 跳跃表"></a>skiplist 跳跃表</h4><p>sortedset是由skiplist，dict和ziplist组成的。</p>
-<p>当数据较少时，sorted set是由一个ziplist来实现的。 </p>
-<p>当数据多的时候，sorted set是由 zset 来实现的，这个 zset 包含一个 dict + 一个skiplist。dict用来查询数据到分数(score)的对应关系，而skiplist用来根据分数查询数据（可能是范围查找）。</p>
-<p>skiplist的节点中存着节点值和分数。并且跳表是根据节点的分数进行排序的，所以可以根据节点分数进行范围查找。</p>
-<p><img src="Picture\04.png" alt="04"></p>
-<p>结合下图，如果想查找19是否存在，从最高层开始，首先和头结点的最高层的后继结点9进行比较，19大于9，因此接着和9在该层上的后继结点21进行比较，小于21，那这个值肯定在9结点和21结点之间。</p>
-<p> 因此，下移一层，接着和9在该层上的后继结点17进行比较，19大于17，然后和21进行比较，小于21，此时肯定在17结点和21结点之间。<br>接着下移一层，和17在该层上的后继结点19进行比较，这样就最终找到了。</p>
-<p><img src="Picture\05.png" alt="05"></p>
-<h4 id="inset"><a href="#inset" class="headerlink" title="inset"></a>inset</h4><p>inset是一个数字集合，他使用灵活的数据类型来保存数字。</p>
-<p>新创建的intset只有一个header，总共8个字节。其中encoding = 2, length = 0。<br>添加13, 5两个元素之后，因为它们是比较小的整数，都能使用2个字节表示，所以encoding不变，值还是2。 </p>
-<p>当添加32768的时候，它不再能用2个字节来表示了（2个字节能表达的数据范围是-215~215-1，而32768等于215，超出范围了），因此encoding必须升级到INTSET_ENC_INT32（值为4），即用4个字节表示一个元素。</p>
-<p><img src="Picture\06.png" alt="06"></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>sds是一个灵活的字符串数组，并且支持直接存储二进制数据，同时提供长度和剩余空间的字段来保证伸缩性和防止溢出。</p>
-<p>dict是一个字典结构，实现方式就是Java中的hashmap实现，同时持有两个节点数组，但只使用其中一个，扩容时换成另外一个。</p>
-<p>ziplist是一个压缩链表，他放弃内存不连续的连接方式，而是直接分配连续内存进行存储，减少内存碎片。提高利用率，并且也支持存储二进制数据。</p>
-<p>quicklist是ziplist和传统链表的中和形成的链表结果，每个链表节点都是一个ziplist。</p>
-<p>zset是由skiplist和dict实现的。</p>
-<p>inset是一个数字集合，他根据插入元素的数据类型来决定数组元素的长度。并自动进行扩容。</p>
+<p>接下来看看<code>initScene()</code>和<code>initSceneBackground()</code>的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MainWindow::initScene()</span><br><span class="line">&#123;</span><br><span class="line">    scene-&gt;setSceneRect(<span class="number">-100</span>, <span class="number">-100</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::initSceneBackground()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPixmap <span class="title">bg</span><span class="params">(TILE_SIZE, TILE_SIZE)</span></span>;</span><br><span class="line">    <span class="function">QPainter <span class="title">p</span><span class="params">(&amp;bg)</span></span>;</span><br><span class="line">    p.setBrush(QBrush(Qt::gray));</span><br><span class="line">    p.drawRect(<span class="number">0</span>, <span class="number">0</span>, TILE_SIZE, TILE_SIZE);</span><br><span class="line"></span><br><span class="line">    view-&gt;setBackgroundBrush(QBrush(bg));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>他们实现了哪些结构？</p>
-<p>字符串由sds实现</p>
-<p>list由ziplist和quicklist实现</p>
-<p>sortset由ziplist和zset实现</p>
-<p>hash表由dict实现</p>
-<p>集合由inset实现。</p>
-</li>
+<li><code>initSceneBackground()</code>函数看似很长，实际却很简单。首先我们创建一个边长 TILE_SIZE 的 QPixmap，将其使用灰色填充矩形。我们没有设置边框颜色，默认就是黑色。然后将这个 QPixmap 作为背景画刷，铺满整个视图。</li>
 </ul>
-<h2 id="RedisDb"><a href="#RedisDb" class="headerlink" title="RedisDb"></a>RedisDb</h2><p>redis服务器中维护着一个数据库名为redisdb，实际上他是一个dict结构。</p>
-<p>Redis的数据库使用字典作为底层实现，数据库的增、删、查、改都是构建在字典的操作之上的。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Redis database representation. There are multiple databases identified</span></span><br><span class="line"><span class="comment"> * by integers from 0 (the default database) up to the max configured</span></span><br><span class="line"><span class="comment"> * database. The database number is the 'id' field in the structure. */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisDb</span> &#123;</span></span><br><span class="line">     <span class="comment">// 数据库键空间，保存着数据库中的所有键值对</span></span><br><span class="line">    dict *dict;                 <span class="comment">/* The keyspace for this DB */</span></span><br><span class="line">     <span class="comment">// 键的过期时间，字典的键为键，字典的值为过期事件 UNIX 时间戳</span></span><br><span class="line">    dict *expires;              <span class="comment">/* Timeout of keys with a timeout set */</span></span><br><span class="line">    <span class="comment">// 正处于阻塞状态的键</span></span><br><span class="line">    dict *blocking_keys;        <span class="comment">/* Keys with clients waiting for data (BLPOP) */</span></span><br><span class="line">    <span class="comment">// 可以解除阻塞的键</span></span><br><span class="line">    dict *ready_keys;           <span class="comment">/* Blocked keys that received a PUSH */</span></span><br><span class="line">    <span class="comment">// 正在被 WATCH 命令监视的键</span></span><br><span class="line">    dict *watched_keys;         <span class="comment">/* WATCHED keys for MULTI/EXEC CAS */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">evictionPoolEntry</span> *<span class="title">eviction_pool</span>;</span>    <span class="comment">/* Eviction pool of keys */</span></span><br><span class="line">    <span class="comment">// 数据库号码</span></span><br><span class="line">    <span class="keyword">int</span> id;                     <span class="comment">/* Database ID */</span></span><br><span class="line">    <span class="comment">// 数据库的键的平均 TTL ，统计信息</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> avg_ttl;          <span class="comment">/* Average TTL, just for stats */</span></span><br><span class="line"> &#125; redisDb;</span><br></pre></td></tr></table></figure>
-<p><img src="Picture\07.jpg" alt="07"></p>
-<h3 id="过期键的删除策略"><a href="#过期键的删除策略" class="headerlink" title="过期键的删除策略"></a>过期键的删除策略</h3><p>定时删除：在设置键的过期时间的同时，创建一个定时器，在定时结束的时候，将该键删除；</p>
-<p>惰性删除：放任键过期不管，在访问该键的时候，判断该键的过期时间是否已经到了，如果过期时间已经到了，就执行删除操作；</p>
-<p>定期删除：每隔一段时间，对数据库中的键进行一次遍历，删除过期的键。</p>
-<h2 id="Redis的事件模型"><a href="#Redis的事件模型" class="headerlink" title="Redis的事件模型"></a>Redis的事件模型</h2><p>redis处理请求的方式基于<strong>reactor线程模型</strong>，即一个线程处理连接，并且注册事件到IO多路复用器，复用器触发事件以后根据不同的处理器去执行不同的操作。总结以下</p>
-<h3 id="客户端到服务端的请求过程"><a href="#客户端到服务端的请求过程" class="headerlink" title="客户端到服务端的请求过程"></a>客户端到服务端的请求过程</h3><p>远程客户端连接到 redis 后，redis服务端会为远程客户端创建一个 redisClient 作为代理。</p>
-<p>redis 会读取嵌套字中的数据，写入 querybuf 中。</p>
-<p>解析 querybuf 中的命令，记录到 argc 和 argv 中。</p>
-<p>根据 argv[0] 查找对应的 recommand。</p>
-<p>执行 recommend 对应的执行函数。</p>
-<p>执行以后将结果存入 buf &amp; bufpos &amp; reply 中。</p>
-<p>返回给调用方。返回数据的时候，会控制写入数据量的大小，如果过大会分成若干次。保证 redis 的相应时间。</p>
-<p>Redis 作为单线程应用，一直贯彻的思想就是，每个步骤的执行都有一个上限（包括执行时间的上限或者文件尺寸的上限）一旦达到上限，就会记录下当前的执行进度，下次再执行。保证了 Redis 能够及时响应不发生阻塞。</p>
-<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Redis/">Redis</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Algorithm/DFS" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/03/25/Algorithm/DFS/" class="article-date">
-      <time datetime="2018-03-25T05:16:50.000Z" itemprop="datePublished">2018-03-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/25/Algorithm/DFS/">DFS BFS</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="DFS思路"><a href="#DFS思路" class="headerlink" title="DFS思路"></a>DFS思路</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">DFS</span><span class="params">(solution_Set, buildingAnswer, step)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">if</span> <span class="title">Avaliable</span><span class="params">(buildingAnswer)</span> :                        # 如果当前构造的解是可用的解，则添加到最终解之中</span></span><br><span class="line"><span class="function">       solution_Set.<span class="title">add</span><span class="params">(buildingAnswer)</span></span></span><br><span class="line"><span class="function">       return</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    <span class="keyword">for</span> bs in BuildingSpace:                                # 遍历构造空间，是当前构造解可添加处理操作的空间</span></span><br><span class="line"><span class="function">        <span class="keyword">if</span> <span class="title">feasible</span><span class="params">(bs)</span>:                                    # 如果当前遍历的操作对于当前阶段是可行的，则对当前构造解施加操作</span></span><br><span class="line"><span class="function">            <span class="title">Process</span><span class="params">(buildingAnswer, fs)</span></span></span><br><span class="line"><span class="function">            <span class="title">DFS</span><span class="params">(solution_Set, buildingAnswer, step + <span class="number">1</span>)</span>        # 在当前的处理上进入下一种处理，进一步搜索解</span></span><br><span class="line"><span class="function">            <span class="title">Restore</span><span class="params">(buildingAnswer, fs)</span>                        # 从下一个状态搜索中返回，无论下一层是否是什么状态。 恢复本阶段的状态，搜索本阶段另外可施加的状态。</span></span><br></pre></td></tr></table></figure>
-<h3 id="BFS和DFS选择"><a href="#BFS和DFS选择" class="headerlink" title="BFS和DFS选择"></a>BFS和DFS选择</h3><p>1.BFS是用来搜索最短径路的解是比较合适的，比如求最少步数的解，最少交换次数的解，因为BFS搜索过程中遇到的解一定是离根最近的，所以遇到一个解，一定就是最优解，此时搜索算法可以终止。这个时候不适宜使用DFS，因为DFS搜索到的解不一定是离根最近的，只有全局搜索完毕，才能从所有解中找出离根的最近的解。（当然这个DFS的不足，可以使用迭代加深搜索ID-DFS去弥补）<br>2.空间优劣上，DFS是有优势的，DFS不需要保存搜索过程中的状态，而BFS在搜索过程中需要保存搜索过的状态，而且一般情况需要一个队列来记录。<br>3.DFS适合搜索全部的解，因为要搜索全部的解，那么BFS搜索过程中，遇到离根最近的解，并没有什么用，也必须遍历完整棵搜索树，DFS搜索也会搜索全部，但是相比DFS不用记录过多信息，所以搜素全部解的问题，DFS显然更加合适。</p>
-<p>作者：知乎用户</p>
-<p>链接：<a href="https://www.zhihu.com/question/23780297/answer/167225829" target="_blank" rel="noopener">https://www.zhihu.com/question/23780297/answer/167225829</a></p>
-<p>来源：知乎</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS-BFS/">DFS,BFS</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Algorithm/排序算法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/28/Algorithm/排序算法/" class="article-date">
-      <time datetime="2018-12-28T14:19:14.000Z" itemprop="datePublished">2018-12-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/28/Algorithm/排序算法/">排序算法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h1><h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,t,temp;</span><br><span class="line">    <span class="keyword">if</span>(left &gt; right)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    temp=a[left];</span><br><span class="line">    i=left;</span><br><span class="line">    j=right;</span><br><span class="line">    <span class="keyword">while</span>(i!=j)&#123;</span><br><span class="line">        <span class="keyword">while</span>(a[j]&gt;=temp &amp;&amp; i&lt;j)</span><br><span class="line">            --j;</span><br><span class="line">        <span class="keyword">while</span>(a[i]&lt;=temp &amp;&amp; i&lt;j)</span><br><span class="line">            ++i;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(i&lt;j)&#123;</span><br><span class="line">            t=a[i];</span><br><span class="line">            a[i]=a[j];</span><br><span class="line">            a[j]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    a[left]=a[i];</span><br><span class="line">    a[i]=temp;</span><br><span class="line"></span><br><span class="line">    quicksort(left, i<span class="number">-1</span>);</span><br><span class="line">    quicksort(i+<span class="number">1</span>, right);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注释版</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 平均时间复杂度 O(NlogN)，最差O(N^2)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,t,temp;</span><br><span class="line">    <span class="keyword">if</span>(left &gt; right)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    temp=a[left];	<span class="comment">//存基准数</span></span><br><span class="line">    i=left;</span><br><span class="line">    j=right;</span><br><span class="line">    <span class="keyword">while</span>(i!=j)&#123;</span><br><span class="line">        <span class="comment">//顺序很重要，先从右往左找，因为要最后停在比基准数小的地方(，然后和基准数交换)</span></span><br><span class="line">        <span class="comment">//找到比基准数小的</span></span><br><span class="line">        <span class="keyword">while</span>(a[j]&gt;=temp &amp;&amp; i&lt;j)</span><br><span class="line">            --j;</span><br><span class="line">        <span class="comment">//找到比基准数大的</span></span><br><span class="line">        <span class="keyword">while</span>(a[i]&lt;=temp &amp;&amp; i&lt;j)</span><br><span class="line">            ++i;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//如果没有相遇时，交换位置</span></span><br><span class="line">        <span class="keyword">if</span>(i&lt;j)&#123;</span><br><span class="line">            t=a[i];</span><br><span class="line">            a[i]=a[j];</span><br><span class="line">            a[j]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//下面三行代码交换 最左处的基准数 和 相遇位置(这个数比基准数小)</span></span><br><span class="line">    <span class="comment">//temp=a[left]; 存基准数时已经写了</span></span><br><span class="line">    a[left]=a[i];</span><br><span class="line">    a[i]=temp;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//此时基准数归位，基准数左边的都小于基准数右边的</span></span><br><span class="line">    quicksort(left, i<span class="number">-1</span>);	<span class="comment">//继续处理左边</span></span><br><span class="line">    quicksort(i+<span class="number">1</span>, right);	<span class="comment">//继续处理右边</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">quicksort(<span class="number">0</span>, n);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*运行例子</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> 6 1 2 7 9 3 4 5 10 8</span></span><br><span class="line"><span class="comment"> 3 1 2 5 4(6)9 7 10 8</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> 2 1(3)5 4 6 9 7 10 8</span></span><br><span class="line"><span class="comment"> 1(2)3 5 4 6 9 7 10 8</span></span><br><span class="line"><span class="comment">(1)2 3 5 4 6 9 7 10 8</span></span><br><span class="line"><span class="comment"> 1 2 3 4(5)6 9 7 10 8</span></span><br><span class="line"><span class="comment"> 1 2 3(4)5 6 9 7 10 8</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> 1 2 3 4 5 6 8 7 (9)10</span></span><br><span class="line"><span class="comment"> 1 2 3 4 5 6 7(8) 9 10</span></span><br><span class="line"><span class="comment"> 1 2 3 4 5 6(7)8  9 10</span></span><br><span class="line"><span class="comment"> 1 2 3 4 5 6 7 8  9(10)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// n个数排序，只需进行n-1趟</span></span><br><span class="line"><span class="comment">// 一趟将一个最小的数冒泡到最后</span></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n<span class="number">-1</span>; ++i)&#123;</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;n<span class="number">-1</span>-i; ++j)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[j]&lt;a[j+<span class="number">1</span>])&#123;</span><br><span class="line">            t=a[j];</span><br><span class="line">            a[j]=a[j+<span class="number">1</span>];</span><br><span class="line">            a[j+<span class="number">1</span>]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="线性时间排序"><a href="#线性时间排序" class="headerlink" title="线性时间排序"></a>线性时间排序</h2><p>​    基于比较的排序算法是不能突破O(NlogN)的。简单证明如下：N个数有N!个可能的排列情况，也就是说基于比较的排序算法的判定树有N!个叶子结点，比较次数至少为log(N!)=O(NlogN)(斯特林公式)。</p>
-<p>　　而<strong>非基于比较的排序</strong>，如计数排序，桶排序，和在此基础上的基数排序，则可以突破O(NlogN)时间下限。但要注意的是，非基于比较的排序算法的使用都是有条件限制的，例如元素的大小限制，相反，基于比较的排序则没有这种限制(在一定范围内)。</p>
-<p>​    对于特定场合有着特殊的性质数据，非基于比较的排序算法则能够非常巧妙地解决。</p>
-<h3 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h3><p>前提：元素的最小值不小于0，最大值不超过K</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设 A[1..n]是输入数组，B[1..n]存放排序的输出，C[0..k]提供临时存储空间，记录不大于每个值的元素的个数。。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = <span class="number">5</span>, k = <span class="number">4</span>;</span><br><span class="line">	<span class="keyword">int</span> i, A[n+<span class="number">1</span>]=&#123;<span class="number">0</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>&#125;, B[n+<span class="number">1</span>], C[k+<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;=k; ++i)</span><br><span class="line">		C[i] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">		++C[A[i]];</span><br><span class="line">	<span class="comment">//C[i] now contains the number of elements equal to i.</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=k; ++i)</span><br><span class="line">		C[i] += C[i<span class="number">-1</span>];</span><br><span class="line">	<span class="comment">//C[i]now contains the number of elements less than or equal to i.</span></span><br><span class="line">	<span class="keyword">for</span>(i=n; i&gt;<span class="number">0</span>; --i)&#123;</span><br><span class="line">		B[C[A[i]]] = A[i];</span><br><span class="line">		C[A[i]]--;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; B[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>核心思想</strong></p>
-<p>最后的循环把每个元素A[j]放到它在输出数组B中的正确位置上。</p>
-<p>如果所有n个元素都是互异的，那么当第一次执行时，对每个A[j]值来说，C[A[j]]就是A[j]在输出数组中的最终正确的位置。这是因为共有C[A[j]]个元素小于等于A[j]。</p>
-<p>但是元素可能并不都是互异的，所以，我们每将一个值A[j]放入数组B中一后，都要将C[A[j]]的值减1.这样，当遇到下一个值等于A[j]的输入元素时，该元素可以直接被放在输出数组A[j]的前一个位置上。</p>
-<p>递减循环则是稳定排序，递增循环则为不稳定排序。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//c++ function</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CountingSort</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> len, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (A == <span class="literal">NULL</span> || len &lt;= <span class="number">0</span> || k &lt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> *B = <span class="keyword">new</span> <span class="keyword">int</span>[len]();</span><br><span class="line">    <span class="keyword">int</span> *C = <span class="keyword">new</span> <span class="keyword">int</span>[k+<span class="number">1</span>]();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</span><br><span class="line">        C[A[i]]++;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; ++i)</span><br><span class="line">        C[i] += C[i - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        B[C[A[i]] - <span class="number">1</span>] = A[i];</span><br><span class="line">        C[A[i]]--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</span><br><span class="line">        A[i] = B[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> [] C;</span><br><span class="line">    <span class="keyword">delete</span> [] B;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>分析</strong>：时间和空间都是 O(n + k)，n是输入数组长度，k是最大的数的大小。</p>
-<h3 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h3><p><strong>简单桶排序</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每次循环在编号为a[i]的桶里加一</span></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; ++i)&#123;</span><br><span class="line">    ++book[a[i]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 依次判断编号0~MAXNUM的桶(从小到大)</span></span><br><span class="line"><span class="comment">// 出现了几次就将桶的编号打印几次</span></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;MAXNUM; ++i)&#123;</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;book[i]; ++j)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>一般桶排序</strong></p>
-<p>每个桶存储一个区间内的数。元素的最小值不小于0，最大值不超过K。假设我们有M个桶，第i个桶Bucket[i]存储i*K/M至(i+1)*K/M之间的数，有如下桶排序的一般方法：</p>
-<ol>
-<li>扫描序列A，根据每个元素的值所属的区间，放入指定的桶中(顺序放置)。</li>
-<li>对每个桶中的元素进行排序，什么排序算法都可以，例如快速排序。</li>
-<li>依次收集每个桶中的元素，顺序放置到输出序列中。</li>
-</ol>
-<p><strong>分析</strong>：每个桶中的元素平均个数为N/M。如果对每个桶中的元素排序使用的算法是快速排序，每次排序的时间复杂度为<code>O(N/M*log(N/M))</code>。则总的时间复杂度为<code>O(N)+O(M)O(N/M*log(N/M))</code> = <code>O(N+ Nlog(N/M))</code> 。当M接近于N时，桶排序的时间复杂度就可以近似认为是O(N)的。即桶越多，时间效率就越高，而桶越多，空间却就越大。</p>
-<p>桶中元素的顺序放入和顺序取出是有必要的，因为这样可以确定桶排序的稳定性，配合基数排序是很好用的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//c++ 元素属于[0,1)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">	<span class="keyword">float</span> value;</span><br><span class="line">	Node* next;</span><br><span class="line"></span><br><span class="line">	Node(<span class="keyword">float</span> v = <span class="number">0</span>) :value(v), next(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Destruct</span><span class="params">(Node *p)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (p == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		Destruct(p-&gt;next);</span><br><span class="line">		<span class="keyword">delete</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BucketSort</span><span class="params">(<span class="keyword">float</span> A[],  <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	Node **B = <span class="keyword">new</span> Node*[n];</span><br><span class="line">	<span class="built_in">memset</span>(B, <span class="number">0</span>, <span class="keyword">sizeof</span>(Node*)*n);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> bi = n * A[i] ;</span><br><span class="line">		Node* q = <span class="keyword">new</span> Node(A[i]);</span><br><span class="line">		Node *p = B[bi];</span><br><span class="line">		<span class="keyword">if</span> (p == <span class="literal">NULL</span>) &#123;</span><br><span class="line">			B[bi] = q;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;next == <span class="literal">NULL</span> || p-&gt;value &gt; A[i]) &#123;</span><br><span class="line">			<span class="keyword">if</span> (A[i] &lt; p-&gt;value) &#123;</span><br><span class="line">				B[bi] = q;</span><br><span class="line">				q-&gt;next = p;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				p-&gt;next = q;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">while</span> ( p-&gt;next != <span class="literal">NULL</span> &amp;&amp; A[i] &gt; p-&gt;next-&gt;value)</span><br><span class="line">				p = p-&gt;next;</span><br><span class="line">			q-&gt;next = p-&gt;next;</span><br><span class="line">			p-&gt;next = q;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i = j = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		Node *p = B[i];</span><br><span class="line">		<span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">			A[j++] = p-&gt;value;</span><br><span class="line">			p = p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		Destruct(B[i]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span> []B;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">float</span> A[<span class="number">6</span>]=&#123;<span class="number">0.1</span>,<span class="number">0.3</span>,<span class="number">0.4</span>,<span class="number">0.1</span>,<span class="number">0</span>,<span class="number">0.2</span>&#125;;</span><br><span class="line">	BucketSort(A, <span class="number">6</span>);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i!=<span class="number">6</span>; ++i)</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; A[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3><p>　　下面说到我们的重头戏，<strong>基数排序(Radix Sort)</strong>。上述的基数排序和桶排序都只是在研究一个关键字的排序，现在我们来讨论有多个关键字的排序问题。</p>
-<p>　　假设我们有一些二元组(a,b)，要对它们进行以a为首要关键字，b的次要关键字的排序。我们可以先把它们先按照首要关键字排序，分成首要关键字相同的若干堆。然后，在按照次要关键值分别对每一堆进行单独排序。最后再把这些堆串连到一起，使首要关键字较小的一堆排在上面。按这种方式的基数排序称为<strong>MSD(Most Significant Dight)</strong>排序。</p>
-<p>　　第二种方式是从最低有效关键字开始排序，称为<strong>LSD(Least Significant Dight)</strong>排序。首先对所有的数据按照次要关键字排序，然后对所有的数据按照首要关键字排序。要注意的是，使用的排序算法必须是稳定的，否则就会取消前一次排序的结果。由于不需要分堆对每堆单独排序，LSD方法往往比MSD简单而开销小。下文介绍的方法全部是基于LSD的。先排序个位数，再十位。。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMax</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mx = arr[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &gt; mx)</span><br><span class="line">        mx = arr[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> mx;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CountSort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n, <span class="keyword">int</span> <span class="built_in">exp</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *output = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="keyword">int</span> i, count[<span class="number">10</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Store count of occurrences in count[]</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        count[(arr[i] / <span class="built_in">exp</span>) % <span class="number">10</span>]++;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Change count[i] so that count[i] now contains actual position of</span></span><br><span class="line">    <span class="comment">//this digit in output[]</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        count[i] += count[i - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Build the output array</span></span><br><span class="line">    <span class="keyword">for</span> (i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        output[count[(arr[i] / <span class="built_in">exp</span>) % <span class="number">10</span>] - <span class="number">1</span>] = arr[i];</span><br><span class="line">        count[(arr[i] / <span class="built_in">exp</span>) % <span class="number">10</span>]--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Copy the output array to arr[], so that arr[] now </span></span><br><span class="line">    <span class="comment">//contains sorted numbers according to current digit</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        arr[i] = output[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> []output;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RadixSort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//Find the maximum number fo know number of digits</span></span><br><span class="line">    <span class="keyword">int</span> m = getMax(arr, n);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Do counting sort for every digit. Note that instead of passing digit</span></span><br><span class="line">    <span class="comment">//number, exp is passed. exp is 10^i where i is current digit number</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> <span class="built_in">exp</span> = <span class="number">1</span>; m / <span class="built_in">exp</span> &gt; <span class="number">0</span>; <span class="built_in">exp</span> *= <span class="number">10</span>)</span><br><span class="line">        CountSort(arr, n, <span class="built_in">exp</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[] = &#123; <span class="number">170</span>, <span class="number">45</span>, <span class="number">90</span>, <span class="number">802</span>, <span class="number">24</span>, <span class="number">2</span>, <span class="number">66</span> &#125;;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">    RadixSort(arr, n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>三种排序算法的比较：</strong></p>
-<p>　　从整体上来说，计数排序，桶排序都是非基于比较的排序算法，而其时间复杂度依赖于数据的范围，桶排序还依赖于空间的开销和数据的分布。而基数排序是一种对多元组排序的有效方法，具体实现要用到计数排序或桶排序。</p>
-<p>相对于快速排序、堆排序等基于比较的排序算法，计数排序、桶排序和基数排序限制较多，不如快速排序、堆排序等算法灵活性好。但反过来讲，这三种线性排序算法之所以能够达到线性时间，是因为充分利用了待排序数据的特性，如果生硬得使用快速排序、堆排序等算法，就相当于浪费了这些特性，因而达不到更高的效率。</p>
-<p>　　在实际应用中，基数排序可以用于后缀数组的倍增算法，使时间复杂度从O(N<em>logN</em>logN)降到O(N*logN)。线性排序算法使用最重要的是，<strong>充分利用数据特殊的性质，以达到最佳效果</strong>。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sorting/">Sorting</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Backend/apache删除后Nginx显示Apache界面" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/15/Backend/apache删除后Nginx显示Apache界面/" class="article-date">
-      <time datetime="2018-11-15T14:09:42.000Z" itemprop="datePublished">2018-11-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/15/Backend/apache删除后Nginx显示Apache界面/">apache删除后使用Nginx服务仍然显示Apache界面</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Even after you <a href="https://askubuntu.com/questions/176964/permanently-removing-apache2" target="_blank" rel="noopener">remove apache2 completely</a>, you will still have its “default site” files sitting in <code>/var/www/</code>. By default, Nginx will attempt to serve these or its own version of these files for sites it cannot otherwise match. You can see this all in <code>/etc/nginx/sites-available/default</code>.</p>
-<p>What you’re seeing is by design, it was just unexpected.</p>
-<p>To fix it, you can edit or remove the default site… Or alter the files in <code>/var/www/</code> to better suit your needs. If you want rid of the default, you can delete <code>/etc/nginx/sites-available/default</code>. It’s just a symlink so if you want to restore it, you can with:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /etc/nginx/sites-&#123;available,enabled&#125;/default</span><br></pre></td></tr></table></figure>
-<p>And remember to reload after making configuration changes:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx configtest  # make sure the config is good before reloading!</span><br><span class="line">sudo service nginx reload</span><br></pre></td></tr></table></figure>
-<p><a href="https://askubuntu.com/questions/642238/why-do-i-still-see-an-apache-site-on-nginx" target="_blank" rel="noopener">https://askubuntu.com/questions/642238/why-do-i-still-see-an-apache-site-on-nginx</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Backend/">Backend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Backend/Dreamweaver服务器配置" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/04/Backend/Dreamweaver服务器配置/" class="article-date">
-      <time datetime="2018-12-04T14:13:08.000Z" itemprop="datePublished">2018-12-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/04/Backend/Dreamweaver服务器配置/">Dreamweaver 连接到 Linux 云服务器 php</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <ol>
-<li>首先要开启Linux的lamp服务（Linux、Apache、mysql、php），下载httpd、mysql、php。打开httpd服务和vsftpd服务。</li>
-<li>在DW站点设置里面添加服务器，协议选择SFTP，用户名和密码为Linux的用户名和密码。选择为testing server。</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Backend/">Backend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dreamweaver/">Dreamweaver</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Backend/base64原理" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/24/Backend/base64原理/" class="article-date">
-      <time datetime="2018-04-23T16:37:54.000Z" itemprop="datePublished">2018-04-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/Backend/base64原理/">Base64原理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h3><p>　　开发者对Base64编码肯定很熟悉，是否对它有很清晰的认识就不一定了。实际上Base64已经简单到不能再简单了，如果对它的理解还是模棱两可实在不应该。大概介绍一下Base64的相关内容，花几分钟时间就可以彻底理解它。文章下边贴了一个Base64的编解码器，方便阅读文章的同时来实验。</p>
-<p>　　<strong>一. Base64编码由来</strong></p>
-<p>　　为什么会有Base64编码呢？因为有些网络传送渠道并不支持所有的字节，例如传统的邮件只支持可见字符的传送，像ASCII码的<strong>控制字符</strong>就不能通过邮件传送。这样用途就受到了很大的限制，比如图片二进制流的每个字节不可能全部是可见字符，所以就传送不了。最好的方法就是在不改变传统协议的情况下，做一种扩展方案来支持二进制文件的传送。把不可打印的字符也能用可打印字符来表示，问题就解决了。Base64编码应运而生，Base64就是一种基于64个可打印字符来表示二进制数据的表示方法。</p>
-<p>　　<strong>二. Base64编码原理</strong></p>
-<p>　　看一下Base64的索引表，字符选用了”A-Z、a-z、0-9、+、/“ 64个可打印字符。数值代表字符的索引，这个是标准Base64协议规定的，不能更改。64个字符用6个bit位就可以全部表示，一个字节有8个bit位，剩下两个bit就浪费掉了，这样就不得不牺牲一部分空间了。这里需要弄明白的就是一个Base64字符是8个bit，但是有效部分只有右边的6个bit，左边两个永远是0。</p>
-<p><img src="https://images0.cnblogs.com/blog/238451/201408/291137095326660.png" alt="img"></p>
-<p>　　那么怎么用6个有效bit来表示传统字符的8个bit呢？8和6的最小公倍数是24，也就是说3个传统字节可以由4个Base64字符来表示，保证有效位数是一样的，这样就多了1/3的字节数来弥补Base64只有6个有效bit的不足。你也可以说用两个Base64字符也能表示一个传统字符，但是采用最小公倍数的方案其实是最减少浪费的。结合下边的图比较容易理解。Man是三个字符，一共24个有效bit，只好用4个Base64字符来凑齐24个有效位。红框表示的是对应的Base64，6个有效位转化成相应的索引值再对应Base64字符表，查出”Man”对应的Base64字符是”TWFU”。说到这里有个原则不知道你发现了没有，要转换成Base64的<strong>最小单位就是三个字节</strong>，对一个字符串来说每次都是三个字节三个字节的转换，对应的是Base64的四个字节。这个搞清楚了其实就差不多了。</p>
-<p><img src="https://images0.cnblogs.com/blog/238451/201408/291153483606946.png" alt="img">         <img src="https://images0.cnblogs.com/blog/238451/201408/291429131888725.png" alt="img"></p>
-<p>　　但是转换到最后你发现不够三个字节了怎么办呢？愿望终于实现了，我们可以用两个Base64来表示一个字符或用三个Base64表示两个字符，像下图的A对应的第二个Base64的二进制位只有两个，把后边的四个补0就是了。所以A对应的Base64字符就是QQ。上边已经说过了，原则是Base64字符的<strong>最小单位是四个字符一组</strong>，那这才两个字符，后边补两个”=”吧。其实不用”=”也不耽误解码，之所以用”=”，可能是考虑到多段编码后的Base64字符串拼起来也不会引起混淆。由此可见Base64字符串只可能最后出现一个或两个”=”，中间是不可能出现”=”的。下图中字符”BC”的编码过程也是一样的。</p>
-<p><img src="https://images0.cnblogs.com/blog/238451/201408/291217167983928.png" alt="img"></p>
-<p>　　<strong>三. 总结</strong>　　</p>
-<p>　　说起Base64编码可能有些奇怪，因为大多数的编码都是由字符转化成二进制的过程，而从二进制转成字符的过程称为解码。而Base64的概念就恰好反了，由二进制转到字符称为编码，由字符到二进制称为解码。</p>
-<p>　　Base64编码主要用在传输、存储、表示二进制等领域，还可以用来加密，但是这种加密比较简单，只是一眼看上去不知道什么内容罢了，当然也可以对Base64的字符序列进行定制来进行加密。</p>
-<p>　　Base64编码是从二进制到字符的过程，像一些中文字符用不同的编码转为二进制时，产生的二进制是不一样的，所以最终产生的Base64字符也不一样。例如”上网”对应utf-8格式的Base64编码是”5LiK572R”，对应GB2312格式的Base64编码是”yc/N+A==”。</p>
-<p>文章参考自 “<a href="http://zh.wikipedia.org/wiki/Base64" target="_blank" rel="noopener">维基百科-Base64</a>“</p>
-<h3 id="url-safe-base64"><a href="#url-safe-base64" class="headerlink" title="url safe base64"></a>url safe base64</h3><p>在上面的base64传统编码中会出现+, /两个会被url直接转义的符号，因此如果希望通过url传输这些编码字符串，我们</p>
-<p>需要先做传统base64编码，随后将+和/分别替换为- _两个字符，在接收端则做相反的动作解码</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Backend/">Backend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/base64/">base64</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Backend/php入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/09/Backend/php入门/" class="article-date">
-      <time datetime="2018-08-09T07:15:28.000Z" itemprop="datePublished">2018-08-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/09/Backend/php入门/">php入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="php四种界定符"><a href="#php四种界定符" class="headerlink" title="php四种界定符"></a>php四种界定符</h2><ul>
-<li>标准风格    <code>&lt;?php     ?&gt;</code></li>
-<li>短标记风格    <code>&lt;?        ?&gt;</code>      默认不支持短标记风格，要在php配置文件中（php.ini）开启支持短标记，然后重启服务器。</li>
-<li>asp风格         <code>&lt;%        %&gt;</code>      默认不支持，要在配置文件中开启。</li>
-<li>script风格      <code>&lt;script language=&quot;php&quot;&gt;  &lt;script&gt;</code></li>
-</ul>
-<h2 id="php执行原理"><a href="#php执行原理" class="headerlink" title="php执行原理"></a>php执行原理</h2><p>客户端向服务器发送一个请求，如果请求的是一个html页面，服务器直接将html页面发送到客户端给浏览器解析；如果请求的是php页面，则服务器会运行php页面然后生成标准的html，将生成的html发送到客户端。</p>
-<h2 id="php语法特点"><a href="#php语法特点" class="headerlink" title="php语法特点"></a>php语法特点</h2><ol>
-<li>以分号结尾</li>
-<li><strong>关键字不区分大小写</strong>，但是<strong>变量名区分大小写</strong>。</li>
-</ol>
-<p>变量</p>
-<ol>
-<li>变量以<code>$</code>开头，但<code>$</code>不是变量名的组成部分，仅仅表示变量名从这里开始。</li>
-<li>&amp;表示地址。<code>&amp;a=&amp;$b  //将$b的地址赋给&amp;a</code></li>
-<li>通过unset()来销毁变量名，值是由php的辣鸡回收机制来销毁。</li>
-</ol>
-<p>常量</p>
-<p>常量用define()声明。<code>define(&#39;name&#39;,&#39;value&#39;);</code>可以通过添加第三个参数为true来表明不区分大小写，false表明区分大小写（默认情况）。</p>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>字符串</p>
-<p>单引号字符串不修改内容，双引号字符串会将变量替换为值，如果变量名后面有其他内容，要用大括号将变量括起来：<code>&quot;{$name}_other_string&quot;</code></p>
-<p>数组</p>
+<hr>
+<p>我们的地图是建立在<code>QGraphicsScene</code>的基础之上的，所以，里面的对象应该是<code>QGraphicsItem</code>实例。通常，我们会把所有的图形元素（这里便是游戏中需要的对象，例如蛇、食物等）设计为<code>QGraphicsItem</code>的子类，在这个类中添加绘制自身的代码以及动画逻辑。这也是面向对象的开发方式：封装自己的属性和操作。在我们的游戏中，应该有三个对象：<strong>蛇 Snake</strong>、<strong>食物 Food</strong>、<strong>墙 Wall</strong>。</p>
+<h4 id="food"><a href="#food" class="headerlink" title="food"></a>food</h4><p>我们从食物开始。因为它是最简单的。我们将其作为一个红色的小圆饼，大小要比地图中的一个方格要小，因此我们可以将其放置在一个方格中。正如上面分析的那样，我们的Food 类需要继承<code>QGraphicsItem</code>。<strong>按照接口约束，<code>QGraphicsItem</code>的子类需要重写至少两个函数：<code>boundingRect()</code>和<code>paint()</code>。</strong></p>
 <ul>
-<li><p>索引数组，通过元素的位置做下标。默认从0开始，每次增长1，可以更改起始下标。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$stu=<span class="keyword">array</span>(<span class="string">'tom'</span>,<span class="string">'berry'</span>,<span class="string">'ketty'</span>,<span class="string">'rose'</span>);</span><br><span class="line"><span class="keyword">echo</span> $stu[<span class="number">0</span>],<span class="string">'&lt;br&gt;'</span>;	<span class="comment">//tom</span></span><br><span class="line"><span class="keyword">unset</span>($stu);</span><br><span class="line">$stu=<span class="keyword">array</span>(<span class="number">1</span>=&gt;<span class="string">'tom'</span>,<span class="string">'berry'</span>,<span class="string">'ketty'</span>,<span class="string">'rose'</span>);</span><br><span class="line"><span class="keyword">echo</span> $stu[<span class="number">1</span>],<span class="string">'&lt;br&gt;'</span>;	<span class="comment">//tom</span></span><br></pre></td></tr></table></figure>
+<li><p><code>boundingRect()</code>返回一个用于包裹住图形元素的矩形，也就是这个图形元素的范围。</p>
+<p>需要注意的是，这个矩形必须能够<strong>完全包含</strong>图形元素。所谓“完全包含”，意思是，在图形元素有动画的时候，这个矩形也必须将整个图形元素包含进去。如果范围矩形过小。图形会被剪切；如果范围矩形过大，就会影响性能。</p>
 </li>
-<li><p>关联数组，通过字符串做下标</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$stu=<span class="keyword">array</span>(<span class="string">'name'</span>=&gt;<span class="string">'skuaka'</span>,<span class="string">'sex'</span>=&gt;<span class="string">'man'</span>,<span class="string">'age'</span>=&gt;<span class="string">'19'</span>);</span><br><span class="line"><span class="keyword">echo</span> $stu[<span class="string">'name'</span>],<span class="string">'&lt;br&gt;'</span>;</span><br></pre></td></tr></table></figure>
+<li><p><code>paint()</code>的作用是使用<code>QPainter</code>将图形元素绘制出来。</p>
 </li>
 </ul>
-<p>多维数组</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$stu=<span class="keyword">array</span>(</span><br><span class="line">    <span class="keyword">array</span>(<span class="string">'tom'</span>,<span class="string">'berry'</span>,<span class="string">'ketty'</span>,<span class="string">'rose'</span>),</span><br><span class="line">    <span class="keyword">array</span>(<span class="string">'张三'</span>,<span class="string">'李四'</span>)</span><br><span class="line">    );</span><br><span class="line"><span class="keyword">echo</span> $stu[<span class="number">0</span>][<span class="number">0</span>],<span class="string">'&lt;br&gt;'</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$stu=<span class="keyword">array</span>(</span><br><span class="line">    <span class="keyword">array</span>(<span class="string">'name'</span>=&gt;<span class="string">'skuaka'</span>,<span class="string">'sex'</span>=&gt;<span class="string">'man'</span>,<span class="string">'age'</span>=&gt;<span class="string">'19'</span>),</span><br><span class="line">    <span class="keyword">array</span>(<span class="string">'name'</span>=&gt;<span class="string">'zzsy'</span>,<span class="string">'sex'</span>=&gt;<span class="string">'feman'</span>,<span class="string">'age'</span>=&gt;<span class="string">'8'</span>)</span><br><span class="line">    );</span><br><span class="line"><span class="keyword">echo</span> $stu[<span class="number">0</span>][<span class="string">'name'</span>],<span class="string">'&lt;br&gt;'</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="输出语句"><a href="#输出语句" class="headerlink" title="输出语句"></a>输出语句</h2><h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>只能输出数字、字符串</p>
-<p>对于boolen，true输出1，false输出空</p>
-<p>可以一次输出多个参数。</p>
-<p>没有返回值。</p>
-<h3 id="print"><a href="#print" class="headerlink" title="print"></a>print</h3><p>一次只能输出一个参数</p>
-<p>输出成功返回1，失败返回0</p>
-<h3 id="print-r"><a href="#print-r" class="headerlink" title="print_r()"></a>print_r()</h3><p>输出数组，输出内容包括键和值，不包括数据类型</p>
-<h3 id="var-dump"><a href="#var-dump" class="headerlink" title="var_dump()"></a>var_dump()</h3><p>如果输出普通变量，输出的是变量的值和变量的类型</p>
-<p>如果输出数组，包括键、值、值的数据类型</p>
-<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
-<li>在js中加法可以用于字符串，php不行。<code>echo &#39;10aa&#39;+&#39;20bb&#39;;</code>输出为30；<code>echo &#39;aa&#39;+&#39;bb&#39;;</code>输出为0</li>
-<li>==只比较值，===比较值和数据类型。<code>0==&#39;abc&#39;</code>把字符串转变为数字0，所以是true</li>
-<li></li>
-</ul>
-<h3 id="小例子：打陶宇昕的pp"><a href="#小例子：打陶宇昕的pp" class="headerlink" title="小例子：打陶宇昕的pp"></a>小例子：打陶宇昕的pp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;TYXPP&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form name=&quot;form1&quot; method=&quot;post&quot; action=&quot;&quot;&gt;</span><br><span class="line">&lt;table width=&quot;500&quot; border=&quot;1&quot; align=&quot;center&quot;&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">	&lt;th colspan=&quot;2&quot;&gt;陶宇昕的pp&lt;/th&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;想打几下&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;num&quot; id=&quot;num&quot;&gt;&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td colspan=&quot;2&quot; align=&quot;center&quot;&gt;&lt;input type=&quot;submit&quot; name=&quot;button&quot; id=&quot;button&quot; value=&quot;提交&quot;&gt;&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;/table&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">	if(isset($_POST[&apos;button&apos;]))&#123;//如果按了提交按钮</span><br><span class="line">		$num = $_POST[&apos;num&apos;];//取得表单提交的num值</span><br><span class="line">		if(is_numeric($num))&#123;//是否是数字</span><br><span class="line">			$num+=0;//将num从文本转化为数字</span><br><span class="line">			if($num&gt;0)</span><br><span class="line">				echo(&quot;你打了陶宇昕&#123;$num&#125;下&quot;);</span><br><span class="line">			else if($num == 0)</span><br><span class="line">				echo(&apos;打啊&apos;);</span><br><span class="line">			else&#123;</span><br><span class="line">				$num=-$num;//负数变正</span><br><span class="line">				echo(&quot;你被陶宇昕打了&#123;$num&#125;下&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">			echo(&apos;请输入数字&apos;);</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="条件-循环语句"><a href="#条件-循环语句" class="headerlink" title="条件/循环语句"></a>条件/循环语句</h2><p>和c语言一样，多了个 foreach</p>
-<p>foreach将数组元素赋一次一次地赋给as后面的变量（以及键）。</p>
-<ol>
-<li>foreach(数组 as 变量)</li>
-<li>foreach(数组 as 键=&gt;变量)</li>
-</ol>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>预定义函数：php已经定义好的函数。</p>
-<p>自定义函数：</p>
-<p>语法：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">Function</span> <span class="title">foo</span><span class="params">($a,$b)</span></span>&#123;</span><br><span class="line">    $c = $<span class="number">1</span> + $<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> $c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="在php语句内设置字符编码"><a href="#在php语句内设置字符编码" class="headerlink" title="在php语句内设置字符编码"></a>在php语句内设置字符编码</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    header(<span class="string">'Content-Type:text/html;charset=utf-8'</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Backend/">Backend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/C++11" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/10/C_C++/C++11/" class="article-date">
-      <time datetime="2018-04-10T04:16:16.000Z" itemprop="datePublished">2018-04-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/10/C_C++/C++11/">C++11（待续</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="新类型"><a href="#新类型" class="headerlink" title="新类型"></a>新类型</h2><p>long long / unsigned long long</p>
-<p>char16_t / char32_t</p>
-<p>原始字符串</p>
-<h2 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h2><p>c++11扩大了初始化列表的适用范围，使其可以用于所有内置类型和用户定义的类。</p>
-<p>提供了模版类initializer_list，STL提供了将其作为参数的构造函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;initializer_list&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sum</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">double</span>&gt; il)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">double</span>&gt; il = &#123;<span class="number">1.1</span>, <span class="number">2.2</span>, <span class="number">3.3</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; sum(dl) &lt;&lt; sum(&#123;<span class="number">1.1</span>, <span class="number">2.2</span> ,<span class="number">3.3</span>&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sum</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">double</span>&gt; il)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> p = il.begin(); p != il.end(); ++p)</span><br><span class="line">        total += *p;</span><br><span class="line">    <span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>PS：</strong></p>
+<p>下面是 food.h 和 food.cpp 的内容：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">////////// food.h //////////</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGraphicsItem&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Food</span> :</span> <span class="keyword">public</span> QGraphicsItem</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Food(qreal x, qreal y);</span><br><span class="line"></span><br><span class="line">    <span class="function">QRectF <span class="title">boundingRect</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">paint</span><span class="params">(QPainter *painter, <span class="keyword">const</span> QStyleOptionGraphicsItem *, QWidget *)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">QPainterPath <span class="title">shape</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////// food.cpp //////////</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPainter&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"constants.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"food.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> qreal FOOD_RADIUS = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">Food::Food(qreal x, qreal y)</span><br><span class="line">&#123;</span><br><span class="line">    setPos(x, y);</span><br><span class="line">    setData(GD_Type, GO_Food);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QRectF Food::boundingRect() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> QRectF(-TILE_SIZE,    -TILE_SIZE,</span><br><span class="line">                   TILE_SIZE * <span class="number">2</span>, TILE_SIZE * <span class="number">2</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Food::paint(QPainter *painter, <span class="keyword">const</span> QStyleOptionGraphicsItem *, QWidget *)</span><br><span class="line">&#123;</span><br><span class="line">    painter-&gt;save();</span><br><span class="line"></span><br><span class="line">    painter-&gt;setRenderHint(QPainter::Antialiasing);</span><br><span class="line">    painter-&gt;fillPath(shape(), Qt::red);</span><br><span class="line"></span><br><span class="line">    painter-&gt;restore();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QPainterPath Food::shape() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    QPainterPath p;</span><br><span class="line">    p.addEllipse(QPointF(TILE_SIZE / <span class="number">2</span>, TILE_SIZE / <span class="number">2</span>), FOOD_RADIUS, FOOD_RADIUS);</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>可按值传递也可按引用传递 initializer_list，没有什么大的性能差别。</li>
-<li>它的迭代器类型为 const，所以不能修改值。</li>
-<li>初始化列表能防止缩窄。</li>
-</ul>
-<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><h3 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h3><p>由存储类型说明符变为自动类型推断。</p>
-<h3 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h3><p>将变量的类型声明为表达式指定的类型。<code>decltype(x) y</code>将y声明为x的类型。</p>
-<h3 id="返回后置类型"><a href="#返回后置类型" class="headerlink" title="返回后置类型"></a>返回后置类型</h3><p>常规函数使用这个没有意义，但对于模版函数来说很有用，如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</span><br><span class="line">auto eff(T t, U u) -&gt; decltype(T*U)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为在编译器遇到eff的参数列表前，T和U还不在作用域内，所以必须在参数列表后使用decltype。</p>
-<h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>constexpr是C++11中新增的关键字，其语义是“常量表达式”，也就是在编译期可求值的表达式。最基础的常量表达式就是字面值或全局变量/函数的地址或sizeof等关键字返回的结果，而其它常量表达式都是由基础表达式通过各种确定的运算得到的。constexpr值可用于enum、switch、数组长度等场合。</p>
-<p>constexpr所修饰的变量一定是编译期可求值的，所修饰的函数在其所有参数都是constexpr时，一定会返回constexpr。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="keyword">constexpr</span>` `<span class="keyword">int</span>` `Inc(``<span class="keyword">int</span>` `i) &#123;``    ``<span class="keyword">return</span>` `i + <span class="number">1</span>;``&#125;` `<span class="keyword">constexpr</span>` `<span class="keyword">int</span>` `a = Inc(<span class="number">1</span>); ``<span class="comment">// ok``constexpr` `int` `b = Inc(cin.get()); ``// !error``constexpr` `int` `c = a * 2 + 1; ``// ok`</span></span><br></pre></td></tr></table></figure>
-<p>constexpr还能用于修饰类的构造函数，即保证如果提供给该构造函数的参数都是constexpr，那么产生的对象中的所有成员都会是constexpr，该对象也就是constexpr对象了，可用于各种只能使用constexpr的场合。注意，<strong>constexpr构造函数必须有一个空的函数体，即所有成员变量的初始化都放到初始化列表中。</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="class"><span class="keyword">struct</span>` `<span class="title">A</span> &#123;</span>``    ``<span class="keyword">constexpr</span>` `A(``<span class="keyword">int</span>` `xx, ``<span class="keyword">int</span>` `yy): x(xx), y(yy) &#123;&#125;``    ``<span class="keyword">int</span>` `x, y;``&#125;;` `<span class="keyword">constexpr</span>` `<span class="function">A <span class="title">a</span><span class="params">(<span class="number">1</span>, <span class="number">2</span>)</span></span>;``<span class="keyword">enum</span>` `&#123;SIZE_X = a.x, SIZE_Y = a.y&#125;;`</span><br></pre></td></tr></table></figure>
-<p><strong>好处</strong>：</p>
-<ol>
-<li>是一种很强的约束，更好地保证程序的正确语义不被破坏。</li>
-<li>编译器可以在编译期对constexpr的代码进行非常大的优化，比如将用到的constexpr表达式都直接替换成最终结果等。</li>
-<li>相比宏来说，没有额外的开销，但更安全可靠。</li>
-</ol>
-<h3 id="模版别名：using"><a href="#模版别名：using" class="headerlink" title="模版别名：using="></a>模版别名：using=</h3><p>可以部分具体化模版，但typedef就不行。</p>
-<h3 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a>nullptr</h3><p>为向后兼容，nullptr==0 为true。</p>
-<h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><p>摒弃了auto_ptr，新增了三种：unique_ptr , shared_ptr , weak_ptr 。</p>
-<h2 id="异常规范"><a href="#异常规范" class="headerlink" title="异常规范"></a>异常规范</h2><p>摒弃了异常规范，添加了关键字noexcept来指出函数不回引发异常。</p>
-<h2 id="作用域内枚举"><a href="#作用域内枚举" class="headerlink" title="作用域内枚举"></a>作用域内枚举</h2><p>使用class或struct定义的枚举，需要使用作用域解析运算符，可以避免发生名称冲突</p>
-<h2 id="对类的修改"><a href="#对类的修改" class="headerlink" title="对类的修改"></a>对类的修改</h2><h3 id="显式转换运算符explicit"><a href="#显式转换运算符explicit" class="headerlink" title="显式转换运算符explicit"></a>显式转换运算符explicit</h3><p>本来是禁止单参数构造函数导致的自动转换，c++11扩展了这种用法，使其可对转换函数做类似的处理。</p>
-<p><code>explicit operator double() const;</code></p>
-<h3 id="类内成员初始化"><a href="#类内成员初始化" class="headerlink" title="类内成员初始化"></a>类内成员初始化</h3><p>可以使用等号或大括号版本的初始化，但不能使用圆括号版本的初始化。</p>
-<p>如果构造函数在成员初始化列表中提供了相应的值，这些默认值将被覆盖。</p>
-<h2 id="模版和STL的修改"><a href="#模版和STL的修改" class="headerlink" title="模版和STL的修改"></a>模版和STL的修改</h2><h3 id="基于范围的for循环"><a href="#基于范围的for循环" class="headerlink" title="基于范围的for循环"></a>基于范围的for循环</h3><p><code>for(auto x : ss)</code></p>
-<h3 id="新的STL容器"><a href="#新的STL容器" class="headerlink" title="新的STL容器"></a>新的STL容器</h3><p>单向链表 forward_list</p>
-<p>无序集合 unordered_map、unordered_multimap、unordered_set、unordered_multiset。</p>
-<p>array模版</p>
-<h3 id="新的STL方法"><a href="#新的STL方法" class="headerlink" title="新的STL方法"></a>新的STL方法</h3><p>cbegin()和cend()、crbegin()和crend()。是对应于原来的const版本。</p>
-<h3 id="valarray-升级"><a href="#valarray-升级" class="headerlink" title="valarray 升级"></a>valarray 升级</h3><p>为它提供了begin() 和 end()</p>
-<h3 id="摒弃-export"><a href="#摒弃-export" class="headerlink" title="摒弃 export"></a>摒弃 export</h3><p>摈弃了C++98的关键字export，但仍保留了以供以后使用。</p>
-<h3 id="尖括号"><a href="#尖括号" class="headerlink" title="尖括号"></a>尖括号</h3><p>以前嵌套模版的&gt;&gt;可能会引起歧义，需要分开来，现在不需要了。</p>
-<h2 id="移动语义和右值引用"><a href="#移动语义和右值引用" class="headerlink" title="移动语义和右值引用"></a>移动语义和右值引用</h2><p>用&amp;&amp;表明右值引用。将右值关联到右值引用将导致该右值被存储到特定的位置，且可以获取该位置的地址，然后可以将&amp;用于右值引用变量。</p>
-<p>可以创建以右值引用为参数的移动构造函数和移动赋值函数。</p>
-<p>即使没有定义移动构造函数，智能的编译器（如g++）会自动使用移动语义来优化程序。</p>
-<p>以一个数组构造函数为列</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Useless::Useless(Useless &amp;&amp; f) : n(f.n) &#123;</span><br><span class="line">    ++ct;</span><br><span class="line">    pc = f.pc;</span><br><span class="line">    f.pc = <span class="literal">nullptr</span>;</span><br><span class="line">    f.n = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="包装器"><a href="#包装器" class="headerlink" title="包装器"></a>包装器</h3><h3 id="可变参数模版"><a href="#可变参数模版" class="headerlink" title="可变参数模版"></a>可变参数模版</h3><h3 id="并行编程"><a href="#并行编程" class="headerlink" title="并行编程"></a>并行编程</h3><h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/C++STL" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/07/C_C++/C++STL/" class="article-date">
-      <time datetime="2018-12-07T12:51:15.000Z" itemprop="datePublished">2018-12-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/07/C_C++/C++STL/">C++ STL</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="标准模板库"><a href="#标准模板库" class="headerlink" title="标准模板库"></a>标准模板库</h2><p>STL 提供了一组表示容器、迭代器、函数对象、算法的模板。</p>
-<p>STL 容器是同质的，即存储的值的类型相同。</p>
-<h3 id="通用方法"><a href="#通用方法" class="headerlink" title="通用方法"></a>通用方法</h3><p>对于已有的通用方法，类也有可能重新定义成员方法。因为针对特殊元素的成员方法一般比通用方法效率高。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a.size();	<span class="comment">//返回元素数目</span></span><br><span class="line">a.swap(b);	<span class="comment">//交换两个容器的内容</span></span><br><span class="line"></span><br><span class="line">a.begin();	<span class="comment">//返回指向容器中第一个元素的迭代器</span></span><br><span class="line">a.end();	<span class="comment">//返回一个表示超过容器尾的迭代器</span></span><br><span class="line">a.cbegin();	<span class="comment">//c++11 const迭代器</span></span><br><span class="line">a.cend();	<span class="comment">//c++11 const迭代器</span></span><br><span class="line"></span><br><span class="line">copy(it1, it2, it3);	<span class="comment">//前两个参数表示要复制的范围(输入迭代器)，第三个参数表示复制到的位置(输出迭代器)。</span></span><br><span class="line"></span><br><span class="line">for_each(it1, it2, pfun);	<span class="comment">//替换for循环，对指定区间每个元素使用函数对象。不能修改元素值。</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> x: books)&#123;*pfun(x)&#125;;	<span class="comment">//基于范围的for能修改元素值。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*__需要支持随机访问__*/</span></span><br><span class="line"><span class="comment">//随机排列区间中的元素</span></span><br><span class="line">random_shuffle(it1, it2);</span><br><span class="line"><span class="comment">//排列指定区间，默认按照 &lt; 运算符，或者函数对象(接收两个元素引用，返回值bool，false表示顺序不对)</span></span><br><span class="line">sort(it1, it2[, pfun] );</span><br></pre></td></tr></table></figure>
-<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>迭代器是广义指针。让 STL 能够为不同的容器类提供统一的接口。</p>
-<p>每个类都定义了一个合适的迭代器，该迭代器的类型是一个名为 iterator 的 typedef，其作用域为整个类。</p>
-<p>例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;::iterator pd;<span class="comment">// pd an iterator</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//迭代器的行为就像指针</span></span><br><span class="line"><span class="keyword">auto</span> pd = scores.begin(); <span class="comment">// c++ automatic tyoe deduction</span></span><br><span class="line">*pd = <span class="number">22.3</span>;</span><br><span class="line">++pd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(pd = scores.begin(); pd != scores.end(); ++pd)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *pd &lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="迭代器类型"><a href="#迭代器类型" class="headerlink" title="迭代器类型"></a>迭代器类型</h4><p>不同的算法对迭代器的要求也不同。STL定义了5种迭代器，并根据所需要的类型对算法进行了描述。</p>
-<p>例如，find()的原型与下面类似，指出了算法需要一个输入迭代器：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">InputIterator</span>, <span class="title">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">InputIterator</span> <span class="title">find</span>(<span class="title">InputIterator</span> <span class="title">first</span>, <span class="title">InputIterator</span> <span class="title">last</span>, <span class="title">const</span> <span class="title">T</span>&amp; <span class="title">value</span>);</span></span><br></pre></td></tr></table></figure>
-<h5 id="输入迭代器"><a href="#输入迭代器" class="headerlink" title="输入迭代器"></a>输入迭代器</h5><ul>
-<li>术语“输入”是从程序的角度说的，即来自容器的信息被视为输入。</li>
-<li>不能修改元素。</li>
-<li><p>必须能够访问容器中所有元素，通过支持两种形式的++运算符。</p>
+<li><p>setPos() 函数就是设置 item 的位置，其坐标是相对父对象的。</p>
 </li>
-<li><p>并不能保证第二次遍历容器时，顺序不变。</p>
+<li><p><code>setData()</code>函数是我们之后要用到的，这里简单提一句，它的作用为该图形元素添加额外的数据信息，类似于散列一样的键值对的形式。</p>
 </li>
-<li>是单向迭代器，可以递增，但不能倒退。</li>
-</ul>
-<h5 id="输出迭代器"><a href="#输出迭代器" class="headerlink" title="输出迭代器"></a>输出迭代器</h5><ul>
-<li><p>术语“输出”指用于将信息从程序传输给容器。</p>
+<li><p><code>boundingRect()</code>简单地返回一个<code>QRect</code>对象。由于我们的元素就是一个圆形，所以我们返回的是一个简单的矩形。注意，这个矩形的范围实际是四倍于实际区域的：以元素坐标 (x, y) 为中心，边长为<code>TILE_SIZE * 2</code>的正方形。</p>
 </li>
-<li><p>只能解引用修改容器值，不能读取。</p>
-<p>这点可能很奇怪。其实类似的，发送到显示器上的输出就是如此，cout 可以修改发送到显示器的字符流，却不能读取屏幕上的内容。STL足够通用，其容器可以表示输出设备。</p>
-</li>
-<li><p>单向迭代器。</p>
-</li>
-</ul>
-<p>简而言之：对于单通行、只读算法，可以使用输入迭代器；单通行、只写，输出迭代器。</p>
-<h5 id="正向迭代器"><a href="#正向迭代器" class="headerlink" title="正向迭代器"></a>正向迭代器</h5><ul>
-<li><p>只使用++运算符来遍历容器，与输入、输出迭代器不同的是，它总是按相同的顺序遍历。</p>
-<p>另外，将正向迭代器递增后，仍然可以对前面的迭代器值解引用，并得到相同的值。</p>
-</li>
-<li><p>即可以读写，也可以只读：</p>
-<p><code>int * pitrw;</code>    <code>const int * pitr;</code></p>
-</li>
-</ul>
-<h5 id="双向迭代器"><a href="#双向迭代器" class="headerlink" title="双向迭代器"></a>双向迭代器</h5><ul>
-<li>具有正向迭代器的所有特性，并支持两种递减运算符。</li>
-</ul>
-<p>比如 reverse() 函数，交换第一个和最后一个元素，并将指向第一个元素的指针加一、指向最后的减一，并重复这种过程。</p>
-<h5 id="随机访问迭代器"><a href="#随机访问迭代器" class="headerlink" title="随机访问迭代器"></a>随机访问迭代器</h5><ul>
-<li>有些算法要求能够直接跳到容器中的任何一个元素，这叫做随机访问。</li>
-<li>随机访问拥有双向迭代器的所有特性，并且支持随机访问（如指针增加运算）和用于对元素进行排序的关系运算符。</li>
-</ul>
-<h4 id="将指针用作迭代器"><a href="#将指针用作迭代器" class="headerlink" title="将指针用作迭代器"></a>将指针用作迭代器</h4><ul>
-<li>指针满足所有迭代器要求。</li>
-</ul>
-<h4 id="迭代器的输入输出适配器"><a href="#迭代器的输入输出适配器" class="headerlink" title="迭代器的输入输出适配器"></a>迭代器的输入输出适配器</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="comment">// *** ostream_iterator ***</span></span><br><span class="line"><span class="comment">// 第一个模板参数指出了被发送给输出流的数据类型</span></span><br><span class="line"><span class="comment">// 第二个模板参数指出输出流使用的字符类型&#123;char, wchar_t&#125;</span></span><br><span class="line"><span class="comment">// 构造函数的第一个参数指出了要用的输出流，可以是文件流</span></span><br><span class="line"><span class="comment">// 构造函数的第二个参数是发送给输出流的每个项后的分隔符</span></span><br><span class="line">ostream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt; out_iter(<span class="built_in">cout</span>, <span class="string">" "</span>);</span><br><span class="line">copy(dice.begin(), dice.end(), out_iter);	<span class="comment">// copy vector to output stream</span></span><br><span class="line"><span class="comment">// 也可使用匿名迭代器</span></span><br><span class="line">copy(dice.begin(), dice.end(), ostream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;(<span class="built_in">cout</span>, <span class="string">" "</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// *** istream_iterator ***</span></span><br><span class="line"><span class="comment">// 第一个模板参数指出要读取的数据类型</span></span><br><span class="line"><span class="comment">// 第二个模板参数指出输入流使用的字符类型&#123;char, wchar_t&#125;</span></span><br><span class="line"><span class="comment">// 构造函数参数标书使用的输入流，如果省略参数表示输入失败。</span></span><br><span class="line">copy(istream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;(<span class="built_in">cin</span>), </span><br><span class="line">    istream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;(), dice.begin());	</span><br><span class="line"><span class="comment">//从输入流读取，直到文件结尾、类型不匹配或其他输入故障</span></span><br></pre></td></tr></table></figure>
-<h4 id="反向迭代器"><a href="#反向迭代器" class="headerlink" title="反向迭代器"></a>反向迭代器</h4><ul>
-<li>对 reverse_iterator 执行<strong>递增</strong>操作将导致它被<strong>递减</strong>。</li>
-</ul>
-<p>vector 类有名为 rbegin() 和 rend() 的成员函数，分别返回指向超尾和第一个元素的反向迭代器。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy(dice.rbegin(), dice.rend(), out_iter);	<span class="comment">// display in reverse order</span></span><br></pre></td></tr></table></figure>
-<p>反向指针通过”先递减、再解引用”来访问到每一个项。</p>
-<h4 id="插入迭代器"><a href="#插入迭代器" class="headerlink" title="插入迭代器"></a>插入迭代器</h4><p>插入将添加新的元素，而不会覆盖已有的数据，并使用自动内存分配来确保能容纳新的元素。</p>
-<p><strong>三种类型</strong>：</p>
-<ul>
-<li>back_insert_iterator 将元素插入到容器尾部</li>
-<li>front_insert_iterator 将元素插入到容器前端</li>
-<li>insert_iterator 将元素插入到构造函数指定的位置的前面</li>
-</ul>
-<p><strong>使用</strong>：</p>
-<ul>
-<li><p>将容器作为模板参数，将实际的容器标识符作为构造函数参数。</p>
-<p><code>back_insert_iterator&lt;vector&lt;int&gt; &gt; back_iter(dice);</code></p>
-<p>back_insert_iterator 将假定传递给它的类型有一个 push_back() 方法。</p>
-</li>
-<li><p>对于 insert_iterator ，还需要一个指示插入位置的构造函数参数：</p>
-<p><code>insert_iterator&lt;vector&lt;int&gt; &gt; back_iter(dice, dice.begin() );</code></p>
-</li>
-</ul>
-<p><strong>限制</strong>：</p>
-<ul>
-<li>back_insert_iterator 只能用于允许在尾部快速插入的容器(时间固定的算法)，vector符合</li>
-<li>front_insert_iterator 只能用于允许在起始位置做时间固定插入的容器，vector不符合，但queue满足</li>
-<li>insert_iterator 没有这些限制，可以用它来插入到 vector 前端，但速度慢。</li>
-</ul>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><ul>
-<li><p>STL具有容器概念和容器类型。</p>
-<p><strong>容器概念</strong>是具有相同名称（如容器、序列容器、关联容器等）的通用类别；</p>
-<p><strong>容器类型</strong>是可用于创建具体容器对象的模板。</p>
-</li>
-<li><p>容器是存储其他对象的对象。被存储的对象必须是<strong>同类型</strong>的，可以是内置类型值。</p>
-</li>
-<li><p>不是任何类型的对象都能存储在容器中。</p>
-<p>类型必须是可复制构造的和可赋值的。</p>
-<p>基本类型满足要求；只要类定义没有将复制构造函数和赋值运算符声明为私有的，也满足要求。</p>
-</li>
-</ul>
-<p><strong>基本的容器特征</strong></p>
-<ol>
-<li>上文介绍的STL通用方法</li>
-<li><code>X::iterator</code> 指向 T 的迭代器类型。要求：满足正向迭代器的任何迭代器。</li>
-<li><code>X::value_type</code> T 的类型。</li>
-</ol>
-<h4 id="所有容器"><a href="#所有容器" class="headerlink" title="所有容器"></a>所有容器</h4><p><strong>11个基本容器</strong>：</p>
-<p>deque、list、</p>
-<p>queue、priority_queue、</p>
-<p>stack、vector、</p>
-<p>map、multimap、</p>
-<p>set、multiset、bitset。</p>
-<p><strong>5个c++11新增</strong>：</p>
-<p>forward_list、</p>
-<p>unordered_map、unordered_multimap、</p>
-<p>unordered_set、unordered_multiset。</p>
-<h4 id="序列容器"><a href="#序列容器" class="headerlink" title="序列容器"></a>序列容器</h4><p><strong>7种容器</strong>：</p>
-<p>deque、queue、priority_queue、</p>
-<p>list、forward_list (c++11)、</p>
-<p>stack、vector 。</p>
-<p><strong>要求</strong>：</p>
-<ul>
-<li><p>正向迭代器（保证了元素按特定顺序排列，不会在两次迭代之间发生变化）</p>
-</li>
-<li><p>线性顺序（树的分支结构就不是）</p>
-</li>
-</ul>
-<p><strong>通用成员</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">X <span class="title">a</span><span class="params">(n,t)</span></span>;	<span class="comment">// 声明一个名为a的由n个t值组成的序列</span></span><br><span class="line"><span class="function">X <span class="title">a</span><span class="params">(i,j)</span></span>;	<span class="comment">// 声明并初始化为区间[i,j)的内容</span></span><br><span class="line"></span><br><span class="line">a.insert(p,t);	<span class="comment">// 将t插入到p的前面。返回迭代器。</span></span><br><span class="line">a.insert(p,n,t);<span class="comment">// 将n个t插入到p的前面。返回void。</span></span><br><span class="line">a.insert(p,i,j);<span class="comment">// 将区间[i,j)中的元素插入到p的前面。返回void。</span></span><br><span class="line"></span><br><span class="line">a.erase(p);		<span class="comment">// 删除p指向的元素。返回迭代器。</span></span><br><span class="line">a.erase(p,q);	<span class="comment">// 删除区间[p,q)中的元素。返回迭代器。</span></span><br><span class="line">a.clear();		<span class="comment">// 等价于 erase(begin(), end() )</span></span><br></pre></td></tr></table></figure>
-<p><strong>可选成员</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*表达式*/</span>		<span class="comment">/*返回类型*/</span>	<span class="comment">/*含义*/</span>			<span class="comment">/*容器*/</span></span><br><span class="line">a.front();		  T&amp;		*a.begin()		<span class="built_in">list</span>、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a.back();		  T&amp;		*--a.end()		<span class="built_in">list</span>、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a.push_front(t);  <span class="keyword">void</span>						<span class="built_in">list</span>、<span class="built_in">deque</span>、</span><br><span class="line">a.push_back(t);	  <span class="keyword">void</span>						<span class="built_in">list</span>、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a.pop_front(t);   <span class="keyword">void</span>						<span class="built_in">list</span>、<span class="built_in">deque</span>、</span><br><span class="line">a.pop_back(t);    <span class="keyword">void</span>						<span class="built_in">list</span>、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a[n]			  T&amp;						    、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a.at(n)			  T&amp;						    、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line"><span class="comment">//at(n)和a[n]区别在于会检查n是否合法。必要时引发out_of_range异常。</span></span><br></pre></td></tr></table></figure>
-<h5 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h5><p>简单地说，vector是数组的一种类表示。</p>
-<p>除序列外，vector还是<strong>可反转容器概念</strong>的模型，增加了<code>rbegin()</code>和<code>rend()</code>。</p>
-<p>vector 是最简单的序列类型，除非其他类型的特殊优点能更好地满足程序的要求，否则应默认使用这种类型。</p>
-<h5 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h5><p>双端列队</p>
-<p>和vector差不多。</p>
-<p>主要区别：从deque的开始位置插入和删除元素的时间是固定的，而不像vector是线性的。</p>
-<h5 id="list"><a href="#list" class="headerlink" title="list"></a>list</h5><p>双向链表</p>
-<p>可反转容器，不支持随机访问。</p>
-<p>vector 强调的是通过随机访问进行快速访问，而 list 强调的是元素的快速插入和删除。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将链表x与调用链表合并。</span></span><br><span class="line"><span class="comment">//1.两个链表必须已经排序。</span></span><br><span class="line"><span class="comment">//2.合并后的经过排序的链表存在调用链表中，x清空</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="built_in">list</span>&lt;T,Alloc&gt;&amp; x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从链表中删除val的所有实例</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">const</span> T&amp; val)</span></span>;</span><br><span class="line"><span class="comment">// 如果谓词返回true,删除这些元素</span></span><br><span class="line">scores.remove_if(tooBig);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用&lt;运算符对链表进行排序。O(NlogN)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将链表x的内容插入到pos的前面，x清空</span></span><br><span class="line"><span class="comment">// 和insert()的区别在于：splice()是移动原内容，insert()是插入副本。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">splice</span><span class="params">(iterator pos, <span class="built_in">list</span>&lt;T,Alloc&gt; x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将连续的相同元素压缩为单个元素</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unique</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* sort()、merge()、unique() 还各自拥有接受另一个参数的版本，该参数用于指定用来比较元素的函数。</span></span><br><span class="line"><span class="comment">   remove() 也可以有另一个参数，用于确定是否删除元素的函数。</span></span><br><span class="line"><span class="comment">   这些参数都是谓词函数。 */</span></span><br></pre></td></tr></table></figure>
-<p>用途举例：</p>
-<p>假如有两个邮件列表要整理，可以对每个列表进行排序，合并它们，然后删除重复的元素。</p>
-<h5 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h5><p>单链表</p>
-<p>不可反转，只需要正向迭代器。</p>
-<h5 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h5><p>队列</p>
-<p>是一个适配器类，底层默认还是 deque。</p>
-<p>不允许随机访问，甚至不允许遍历。</p>
-<p>操作被限制在定义队列的基本操作上：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">size_type <span class="title">size</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">T&amp; <span class="title">front</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">T&amp; <span class="title">back</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; x)</span></span>;	<span class="comment">// 队尾插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>;		<span class="comment">// 队首弹出</span></span><br></pre></td></tr></table></figure>
-<h5 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h5><p>优先队列</p>
-<p>是另一个适配器类，默认的底层类是 vector。</p>
-<p>支持的操作和 queue 相同。</p>
-<p><strong>区别</strong>：</p>
-<ul>
-<li><p>最大的元素被移到队首。</p>
-<p>可以修改确定哪个元素放到队首的比较方式，方法是提供一个可选的构造函数参数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; pq1;				<span class="comment">// defult version</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; pq2(greater&lt;<span class="keyword">int</span>&gt;);	<span class="comment">// use greater&lt;int&gt; to order</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h5><p>栈</p>
-<p>也是一个适配器类，默认底层是 vector。</p>
-<p>不允许随机访问，甚至不允许遍历。</p>
-<p>操作被限制在定义栈的基本操作上：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">size_type <span class="title">size</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">T&amp; <span class="title">top</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; x)</span></span>;	<span class="comment">// 栈顶插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>;				<span class="comment">// 栈顶弹出</span></span><br></pre></td></tr></table></figure>
-<h5 id="array"><a href="#array" class="headerlink" title="array"></a>array</h5><p>不是STL容器，因为其长度是固定的。</p>
-<p>头文件：<code>&lt;array&gt;</code></p>
-<p>array没有定义调整容器大小的操作，但是定义了对它来说有意义的成员函数，比如 <code>operator[]()</code> 和 <code>at()</code></p>
-<p>可以将很多STL算法用于array，比如<code>copy()</code> 和 <code>for_each()</code>。</p>
-<h4 id="关联容器"><a href="#关联容器" class="headerlink" title="关联容器"></a>关联容器</h4><p><strong>4种容器</strong>：</p>
-<p>set、multiset、</p>
-<p>map、multimap。</p>
-<p><strong>要求</strong>：</p>
-<ul>
-<li><p>关联容器将值与键关联在一起，并使用键来查找值。键被看做常量。</p>
-</li>
-<li><p>对于容器 X，<code>X::value_type</code> 指出存储在容器中的值类型；</p>
-<p>对于关联容器，<code>X::key_type</code> 指出了键的类型。</p>
-</li>
-<li><p>关联容器通常是用树实现的，查找速度更快。</p>
-</li>
-</ul>
-<p><strong>4种容器都有的性质</strong>：</p>
-<ul>
-<li>可反转的</li>
-<li>本身就是排序的</li>
-</ul>
-<h5 id="multi-set"><a href="#multi-set" class="headerlink" title="(multi)set"></a>(multi)set</h5><p>值与键类型相同，对于set来说，值就是键。</p>
-<p>multiset 类似于 set，区别是可以有多个值的键相同。</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二个模板参数是可选的，用来指示对键进行排序的比较函数或对象。默认用 less&lt;T&gt;</span></span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; A;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>, greater&lt;<span class="built_in">string</span>&gt; &gt; A;</span><br><span class="line"></span><br><span class="line"><span class="comment">// set_union、set_intersection、set_difference</span></span><br><span class="line"><span class="comment">// 分别查找并集、交集、差集。</span></span><br><span class="line"><span class="comment">// 接口：前两个迭代器定义了第一个集合的区间，后两个定义第二个区间，最后一个是输出迭代器。</span></span><br><span class="line">set_union(A.begin(), A.end(), B.begin(), B.end(),</span><br><span class="line">         ostream_iterator&lt;<span class="built_in">string</span>, <span class="keyword">char</span>&gt; out(<span class="built_in">cout</span>, <span class="string">" "</span>) );</span><br><span class="line"><span class="comment">// 假设要将结果放到集合C，而不是显示它，则最后一个参数应是一个指向C的迭代器。</span></span><br><span class="line"><span class="comment">// 首先想到用C.begin()，但是存在问题：</span></span><br><span class="line"><span class="comment">// 	1.关联容器的键是常量，所以 C.begin()是const迭代器，不能用作输出迭代器。</span></span><br><span class="line"><span class="comment">// 	2.与 copy() 相似，set_union() 将覆盖容器中已有的数据，并要求容器有足够的空间容纳新信息。</span></span><br><span class="line"><span class="comment">// 模板 insert_iterator 可解决这两个问题，它将复制转换为插入，还模拟了输出迭代器概念。</span></span><br><span class="line">set_union(A.begin(), A.end(), B.begin(), B.end(),</span><br><span class="line">         insert_iterator&lt;<span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; &gt;(C, C.begin() ) );</span><br><span class="line"></span><br><span class="line"><span class="comment">// lower_bound()、upper_bound()</span></span><br><span class="line"><span class="comment">// 将键作为参数并返回一个迭代器，该迭代器指向集合中第一个&#123;不小于,大于&#125;键参数的成员。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// insert()</span></span><br><span class="line"><span class="comment">// 因为排序决定了插入的位置，所以不需要指定插入位置</span></span><br></pre></td></tr></table></figure>
-<h5 id="multi-map"><a href="#multi-map" class="headerlink" title="(multi)map"></a>(multi)map</h5><p>值与键类型不同</p>
-<p>multimap 类似于 map，区别是可以有多个值的键相同。</p>
-<ul>
-<li><p>STL 使用模板 <code>pair&lt;class T, class U&gt;</code> 将建类型和数据类型存储到一个对象(<strong>值</strong>)中。</p>
-<p>如果 keytype 是键类型， datatype 是存储的数据类型，则<strong>值类型</strong>为<code>pair&lt;const keytype, datatype&gt;</code></p>
-</li>
-<li><p>对于pair对象，可以使用 first 和 second 成员来访问其两部分</p>
-<p><code>cout &lt;&lt; item.first &lt;&lt; &#39; &#39; &lt;&lt; item.second &lt;&lt; endl;</code></p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板参数为：键类型，值类型，可选的排序比较函数或对象</span></span><br><span class="line"><span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>, less&lt;<span class="keyword">int</span>&gt; &gt; codes;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个pair，然后插入</span></span><br><span class="line">pair&lt;<span class="keyword">const</span> <span class="keyword">int</span>, <span class="built_in">string</span>&gt; item(<span class="number">213</span>, <span class="string">"Los"</span>);</span><br><span class="line">codes.insert(item);</span><br><span class="line"><span class="comment">// 或者直接插入匿名pair</span></span><br><span class="line">codes.insert(pair&lt;<span class="keyword">const</span> <span class="keyword">int</span>, <span class="built_in">string</span>&gt;(<span class="number">213</span>, <span class="string">"Los"</span>));</span><br><span class="line"><span class="comment">// 或者使用数组表示法</span></span><br><span class="line">code[<span class="number">213</span>] = <span class="string">"Los"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// count()</span></span><br><span class="line"><span class="comment">// 键作为参数，返回具有该键的元素数目。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// lower_bound()、upper_bound()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// equal_range()</span></span><br><span class="line"><span class="comment">// 键作为参数，返回两个迭代器，它们表示的区间与该键匹配。</span></span><br><span class="line"><span class="comment">// 为了返回两个值，该方法将它们封装在一个 pair 对象中，它的两个模板参数都是迭代器。</span></span><br></pre></td></tr></table></figure>
-<h4 id="无序关联容器"><a href="#无序关联容器" class="headerlink" title="无序关联容器"></a>无序关联容器</h4><p><strong>4种容器</strong>：</p>
-<p>unordered_set、unordered_multiset、</p>
-<p>unordered_map、unordered_multimap。</p>
-<p><strong>区别</strong>：</p>
-<ul>
-<li><p>关联容器基于树结构，而无序关联容器基于哈希表。</p>
-<p>这旨在提高添加和删除元素的速度以及查找算法的效率。</p>
-</li>
-</ul>
-<h3 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h3><ul>
-<li><p>很多STL算法都使用函数对象，也叫函数符（functor）。</p>
-</li>
-<li><p>函数符是可以以函数方式与( )结合使用的任意对象，包括：</p>
-<p>函数名、指向函数的指针、重载了( )运算符的类对象</p>
-</li>
-</ul>
-<h4 id="函数符概念"><a href="#函数符概念" class="headerlink" title="函数符概念"></a>函数符概念</h4><ul>
-<li><p><strong>生成器</strong>（generator）：不用参数就可以调用的函数符</p>
-</li>
-<li><p><strong>一元函数</strong>（unary function）：一个参数</p>
-</li>
-<li><p><strong>二元函数</strong>（binary function）：两个参数</p>
+<li><p>我们还重写了<code>shape()</code>函数。这也是一个虚函数，但是并不是必须覆盖的。这个函数返回的是元素实际的路径。所谓路径，可以理解成元素的矢量轮廓线，就是<code>QPainterPath</code>所表示的。</p>
+<p>我们使用<code>addEllipse()</code>函数，添加了一个圆心为 (TILE_SIZE / 2, TILE_SIZE / 2)，半径 FOOD_RADIUS 的圆，正好是矩形的右下角的中心点。由于设置了<code>shape()</code>函数，我们所要做的，就是用painter的fillPath()方法把<code>shape()</code>函数定义的路径绘制出来。注意，我们使用了<code>QPainter::save()</code>和<code>QPainter::restore()</code>两个函数，用于保存画笔状态。</p>
 </li>
 </ul>
 <hr>
-<ul>
-<li><strong>谓词</strong>（predicate）：返回bool值的一元函数</li>
-<li><strong>二元谓词</strong>（binary predicate）：返回bool值的二元函数</li>
-</ul>
-<p>一些 STL 函数需要谓词参数。比如 sort。</p>
-<h4 id="函数适配器概念"><a href="#函数适配器概念" class="headerlink" title="函数适配器概念"></a>函数适配器概念</h4><p>类函数符可以作为函数适配器，使函数能够满足不同的接口。</p>
-<p>例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//有一个接收两个参数的模板函数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">bool</span> <span class="title">tooBig</span>(<span class="title">const</span> <span class="title">T</span> &amp; <span class="title">val</span>, <span class="title">const</span> <span class="title">T</span> &amp; <span class="title">lim</span>)&#123;</span></span><br><span class="line">    <span class="keyword">return</span> val &gt; lim;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//可以将它转化为单个参数的函数对象</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">class</span>&#123;</span></span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">        T cutoff;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">        TooBig2(<span class="keyword">const</span> T &amp; t) : cutoff(t) &#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> T &amp; v)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tooBig&lt;T&gt;(v, cutoff);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 就可以这样做</span></span><br><span class="line">TooBig2&lt;<span class="keyword">int</span>&gt; tB100&#123;<span class="number">100</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> x;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line"><span class="keyword">if</span>(tB100(x))	<span class="comment">//same as if(tooBig(x,100))</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h4 id="预定义函数符"><a href="#预定义函数符" class="headerlink" title="预定义函数符"></a>预定义函数符</h4><p>STL 定义了多个基本函数符，这是为了支持将函数符作为参数的 STL 函数。</p>
-<p>例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">transform(gr.begin(), gr.end(), out, <span class="built_in">sqrt</span>);</span><br><span class="line">transform(gr.begin(), gr.end(), m.begin(), out, plus&lt;<span class="keyword">double</span>&gt;());</span><br><span class="line"><span class="comment">//plus&lt;double&gt;构造函数构造了一个函数符，以完成相加运算，括号表示调用默认构造函数。</span></span><br></pre></td></tr></table></figure>
-<p>头文件<code>functional</code>定义了多个模板函数对象。</p>
-<h5 id="运算符和相应的函数符"><a href="#运算符和相应的函数符" class="headerlink" title="运算符和相应的函数符"></a>运算符和相应的函数符</h5><table>
-<thead>
-<tr>
-<th style="text-align:center">运算符</th>
-<th style="text-align:center">函数符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">plus</td>
-</tr>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">minus</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>*</code></td>
-<td style="text-align:center">multiples</td>
-</tr>
-<tr>
-<td style="text-align:center">/</td>
-<td style="text-align:center">divides</td>
-</tr>
-<tr>
-<td style="text-align:center">%</td>
-<td style="text-align:center">modulus</td>
-</tr>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">negate</td>
-</tr>
-<tr>
-<td style="text-align:center">==</td>
-<td style="text-align:center">equal_to</td>
-</tr>
-<tr>
-<td style="text-align:center">!=</td>
-<td style="text-align:center">not_equal_to</td>
-</tr>
-<tr>
-<td style="text-align:center">&gt;</td>
-<td style="text-align:center">greater</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;</td>
-<td style="text-align:center">less</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>&gt;=</code></td>
-<td style="text-align:center">greater_equal</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>&lt;=</code></td>
-<td style="text-align:center">less_equal</td>
-</tr>
-<tr>
-<td style="text-align:center">&amp;&amp;</td>
-<td style="text-align:center">logical_and</td>
-</tr>
-<tr>
-<td style="text-align:center">\</td>
-<td style="text-align:center">\</td>
-<td></td>
-<td>logical_or</td>
-</tr>
-<tr>
-<td style="text-align:center">!</td>
-<td style="text-align:center">logical_not</td>
-</tr>
-</tbody>
-</table>
-<h4 id="自适应函数符"><a href="#自适应函数符" class="headerlink" title="自适应函数符"></a>自适应函数符</h4><p>上面列出的预定义函数符都是自适应的。</p>
-<ul>
-<li><p><strong>原因</strong>：它携带了标识参数类型和返回类型的 typedef 成员。</p>
-<p>这些成员分别是：result_type、first_argument_type、second_argument_type …</p>
-</li>
-<li><p><strong>意义</strong>：函数适配器对象可以使用函数对象，并认为存在这些typedef对象。</p>
-<p>例如，接受一个自适应函数符参数的函数可以使用result_type成员来声明一个与函数的返回类型匹配的变量。</p>
-</li>
-</ul>
-<h5 id="函数适配器"><a href="#函数适配器" class="headerlink" title="函数适配器"></a>函数适配器</h5><ul>
-<li><p>STL 使用<strong><em>类</em></strong>  <strong>binder1st</strong> 和 <strong>binder2st</strong> 将自适应二元函数转换为自适应一元函数。</p>
-<p>假设有一个自适应二元函数对象 f2()，则可以创建一个 binder1st 对象，该对象与一个将被用作 f2() 的第一个参数的特定值（val）相关联：</p>
-<p><code>binder1st(f2, val) f1;</code></p>
-</li>
-<li><p>STL 提供了<strong><em>函数</em></strong>  <strong>bind1st</strong> 和 <strong>bind2st</strong> 简化使用。它们返回上述类对象。</p>
-<p><code>transform(gr.begin(), gr.end(), out, bind1st(multiplies&lt;double&gt;(), 2.5))</code></p>
-</li>
-</ul>
-<h4 id="lambda表达式-C-11"><a href="#lambda表达式-C-11" class="headerlink" title="lambda表达式 C++11"></a>lambda表达式 C++11</h4><p>提供了函数指针和函数符的替代品</p>
-<p>待续。。。</p>
-<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul>
-<li><p>算法都是内联的。</p>
-</li>
-<li><p>对于算法函数设计，首先，它们都使用模板来提供泛型；其次，它们都使用迭代器来提供访问容器中数据的通用表示。</p>
-</li>
-<li><p>可以用==来比较不同类型的容器，因为容器重载的==运算符使用迭代器来比较内容，因此如果deque对象和vector对象的内容相同并且顺序相同，则它们是相等的。</p>
-</li>
-<li><p>STL 将算法库分成4组：</p>
+<h4 id="游戏循环"><a href="#游戏循环" class="headerlink" title="游戏循环"></a>游戏循环</h4><p>现在我们有了第一个图形元素，那么，就让我们把它添加到场景中吧！对于一个游戏，通常需要有一个中心控制的类，用于控制所有游戏相关的行为。我们将其取名为<code>GameController</code>。</p>
+<p><code>GameController</code>的工作是，初始化场景中的游戏对象，开始游戏循环。l</p>
+<p><strong>在 Graphics View Framework 中，每一帧都应该调用一个称为<code>advance()</code>的函数。<code>QGraphicsScene::advance()</code>会调用场景中每一个元素自己的<code>advance()</code>函数。所以，如果图形元素需要做什么事，必须重写<code>QGraphicsItem</code>的<code>advance()</code>，然后在游戏循环中调用这个函数。</strong></p>
+<p><code>GameController</code>创建并开始游戏循环。当然，我们也可以加入<code>pause()</code>和<code>resume()</code>函数。现在，我们来看看它的实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GameController::GameController(QGraphicsScene *scene, QObject *parent) :</span><br><span class="line">    QObject(parent),</span><br><span class="line">    scene(scene),</span><br><span class="line">    snake(<span class="keyword">new</span> Snake(<span class="keyword">this</span>))</span><br><span class="line">&#123;</span><br><span class="line">    timer.start(<span class="number">1000</span>/<span class="number">33</span>);</span><br><span class="line"></span><br><span class="line">    Food *a1 = <span class="keyword">new</span> Food(<span class="number">0</span>, <span class="number">-50</span>);</span><br><span class="line">    scene-&gt;addItem(a1);</span><br><span class="line">    scene-&gt;addItem(snake);</span><br><span class="line"></span><br><span class="line">    scene-&gt;installEventFilter(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    resume();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>GameController</code>的构造函数。首先开启充当游戏循环的定时器，定时间隔是 1000 / 33 毫秒，也就是每秒 30（1000 / 33 = 30）帧。<code>GameController</code>有两个成员变量：scene 和 snake，我们将第一个食物和蛇都加入到场景中。同时，我们为<code>GameController</code>添加了事件过滤器，以便监听键盘事件。这里我们先不管这个事件过滤器，直接看看后面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::pause()</span><br><span class="line">&#123;</span><br><span class="line">    disconnect(&amp;timer, SIGNAL(timeout()),</span><br><span class="line">               scene,  SLOT(advance()));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> GameController::resume()</span><br><span class="line">&#123;</span><br><span class="line">    connect(&amp;timer, SIGNAL(timeout()),</span><br><span class="line">            scene,  SLOT(advance()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>pause()</code>和<code>resume()</code>函数很简单：我们只是连接或者断开定时器的信号。</strong>当我们把这一切都准备好之后，我们把<code>GameController</code>添加到<code>MainWindow</code>中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent),</span><br><span class="line">      game(<span class="keyword">new</span> GameController(scene, <span class="keyword">this</span>))</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于<code>GameController</code>在构造时已经开始游戏循环，因此我们不需要另外调用一个所谓的“start”函数。这样，我们就把第一个食物添加到了游戏场景。</p>
+<hr>
+<h4 id="snake绘制"><a href="#snake绘制" class="headerlink" title="snake绘制"></a>snake绘制</h4><p>蛇要更复杂一些。在我们的游戏中，蛇是由黄色的小方块组成，这是最简单的实现方式了。第一个是蛇的头部，紧接着是它的身体。对此，我们有两个必须面对的困难：</p>
 <ol>
-<li>非修改式序列操作</li>
-<li>修改式序列操作</li>
-<li>排序和相关操作</li>
-<li>通用数字运算</li>
+<li>蛇具有复杂得多的形状。因为蛇的形状随着游戏者的控制而不同，因此，我们必须找出一个能够恰好包含蛇头和所有身体块的矩形。这也是 boundingRect() 函数所要解决的问题。</li>
+<li>蛇会长大（比如吃了食物之后）。因此，我们需要在蛇对象中增加一个用于代表蛇身体长度的<code>growing</code>变量：当<code>growing</code>为正数时，蛇的身体增加一格；当<code>growing</code>为负数时，蛇的身体减少一格。</li>
+<li><code>advance()</code>函数用于编码移动部分，这个函数会在一秒内调用 30 次（这是我们在<code>GameController</code>的定时器中决定的）。</li>
 </ol>
-<p>前三组在头文件 algorithm 中，第四组在 numeric 中。</p>
+<p>我们首先从<code>boundingRect()</code>开始看起：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">QRectF Snake::boundingRect() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    qreal minX = head.x();</span><br><span class="line">    qreal minY = head.y();</span><br><span class="line">    qreal maxX = head.x();</span><br><span class="line">    qreal maxY = head.y();</span><br><span class="line"></span><br><span class="line">    foreach (QPointF p, tail) &#123;</span><br><span class="line">        maxX = p.x() &gt; maxX ? p.x() : maxX;</span><br><span class="line">        maxY = p.y() &gt; maxY ? p.y() : maxY;</span><br><span class="line">        minX = p.x() &lt; minX ? p.x() : minX;</span><br><span class="line">        minY = p.y() &lt; minY ? p.y() : minY;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    QPointF tl = mapFromScene(QPointF(minX, minY));</span><br><span class="line">    QPointF br = mapFromScene(QPointF(maxX, maxY));</span><br><span class="line"></span><br><span class="line">    QRectF bound = QRectF(tl.x(),  <span class="comment">// x</span></span><br><span class="line">                          tl.y(),  <span class="comment">// y</span></span><br><span class="line">                          br.x() - tl.x() + SNAKE_SIZE,      <span class="comment">// width</span></span><br><span class="line">                          br.y() - tl.y() + SNAKE_SIZE       <span class="comment">//height</span></span><br><span class="line">                          );</span><br><span class="line">    <span class="keyword">return</span> bound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这个函数的算法是：遍历蛇身体的每一个方块，找出所有部分的最大的 x 坐标和 y 坐标，以及最小的 x 坐标和 y 坐标。这样，夹在其中的便是蛇身体的外围区域。</li>
+</ul>
+<p><code>shape()</code> 函数决定了蛇身体的形状，我们遍历蛇身体的每一个方块向路径中添加：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">QPainterPath Snake::shape() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    QPainterPath path;</span><br><span class="line">    path.setFillRule(Qt::WindingFill);</span><br><span class="line"></span><br><span class="line">    path.addRect(QRectF(<span class="number">0</span>, <span class="number">0</span>, SNAKE_SIZE, SNAKE_SIZE));</span><br><span class="line"></span><br><span class="line">    foreach (QPointF p, tail) &#123;</span><br><span class="line">        QPointF itemp = mapFromScene(p);</span><br><span class="line">        path.addRect(QRectF(itemp.x(), itemp.y(), SNAKE_SIZE, SNAKE_SIZE));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在我们实现了<code>shape()</code>函数的基础之上，<code>paint()</code>函数就很简单了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Snake::paint(QPainter *painter, <span class="keyword">const</span> QStyleOptionGraphicsItem *, QWidget *)</span><br><span class="line">&#123;</span><br><span class="line">    painter-&gt;save();</span><br><span class="line">    painter-&gt;fillPath(shape(), Qt::yellow);</span><br><span class="line">    painter-&gt;restore();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们已经把蛇“画”出来。</p>
+<hr>
+<h4 id="snake动画"><a href="#snake动画" class="headerlink" title="snake动画"></a>snake动画</h4><p>现在，我们开始添加游戏控制的代码。首先我们从最简单的四个方向键开始：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Snake::moveLeft()</span><br><span class="line">&#123;</span><br><span class="line">    head.rx() -= SNAKE_SIZE;</span><br><span class="line">    <span class="keyword">if</span> (head.rx() &lt; <span class="number">-100</span>) &#123;</span><br><span class="line">        head.rx() = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Snake::moveRight()</span><br><span class="line">&#123;</span><br><span class="line">    head.rx() += SNAKE_SIZE;</span><br><span class="line">    <span class="keyword">if</span> (head.rx() &gt; <span class="number">100</span>) &#123;</span><br><span class="line">        head.rx() = <span class="number">-100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Snake::moveUp()</span><br><span class="line">&#123;</span><br><span class="line">    head.ry() -= SNAKE_SIZE;</span><br><span class="line">    <span class="keyword">if</span> (head.ry() &lt; <span class="number">-100</span>) &#123;</span><br><span class="line">        head.ry() = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Snake::moveDown()</span><br><span class="line">&#123;</span><br><span class="line">    head.ry() += SNAKE_SIZE;</span><br><span class="line">    <span class="keyword">if</span> (head.ry() &gt; <span class="number">100</span>) &#123;</span><br><span class="line">        head.ry() = <span class="number">-100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们有四个以 move 开头的函数，内容都很类似：分别以 SNAKE_SIZE 为基准改变头部坐标，然后与场景边界比较，大于边界值时，设置为边界值。这么做的结果是，当蛇运动到场景最右侧时，会从最左侧出来；当运行到场景最上侧时，会从最下侧出来。</p>
+<p>然后我们添加一个比较复杂的函数，借此，我们可以看出 Graphics View Framework 的强大之处：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Snake::handleCollisions()</span><br><span class="line">&#123;</span><br><span class="line">    QList&lt;QGraphicsItem *&gt; collisions = collidingItems();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check collisions with other objects on screen</span></span><br><span class="line">    foreach (QGraphicsItem *collidingItem, collisions) &#123;</span><br><span class="line">        <span class="keyword">if</span> (collidingItem-&gt;data(GD_Type) == GO_Food) &#123;</span><br><span class="line">            <span class="comment">// Let GameController handle the event by putting another apple</span></span><br><span class="line">            controller.snakeAteFood(<span class="keyword">this</span>, (Food *)collidingItem);</span><br><span class="line">            growing += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Check snake eating itself</span></span><br><span class="line">    <span class="keyword">if</span> (tail.contains(head)) &#123;</span><br><span class="line">        controller.snakeAteItself(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>首先，我们使用<code>collidingItems()</code>取得所有碰撞的元素。这个函数的签名是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QList&lt;QGraphicsItem *&gt; QGraphicsItem::collidingItems(</span><br><span class="line">        Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) <span class="keyword">const</span></span><br></pre></td></tr></table></figure>
+<p>该函数返回与这个元素碰撞的所有元素。Graphcis View Framework 提供了四种碰撞检测的方式：</p>
+<ul>
+<li><code>Qt::ContainsItemShape</code>：如果被检测物的形状（<code>shape()</code>）完全包含在检测物内，算做碰撞；</li>
+<li><code>Qt::IntersectsItemShape</code>：如果被检测物的形状（<code>shape()</code>）与检测物有交集，算做碰撞；</li>
+<li><code>Qt::ContainsItemBoundingRect</code>：如果被检测物的包含矩形（<code>boundingRect()</code>）完全包含在检测物内，算做碰撞；</li>
+<li><code>Qt::IntersectsItemBoundingRect</code>：如果被检测物的包含矩形（<code>boundingRect()</code>）与检测物有交集，算做碰撞。</li>
+</ul>
+<p>注意，该函数默认是<code>Qt::IntersectsItemShape</code>。回忆一下，我们之前编写的代码，<code>Food</code>的<code>boundingRect()</code>要大于其实际值，却不影响我们的游戏逻辑判断，这就是原因：因为我们使用的是<code>Qt::IntersectsItemShape</code>判断检测，这与<code>boundingRect()</code>无关。</p>
+<p>后面的代码就很简单了。我们遍历所有被碰撞的元素，如果是食物，则进行吃食物的算法，同时将蛇的长度加 1；如果身体包含了头，那就是蛇吃了自己的身体。</p>
 </li>
-<li><p><code>_copy</code></p>
-<p><strong>就地算法</strong>在算法完成时，结果被放到原始数据的位置上；</p>
-<p><strong>复制算法</strong>将结果发送到另一个位置。</p>
-<p>STL的约定是：</p>
-<ol>
-<li>复制版本的名称以 <code>_copy</code> 结尾。</li>
-<li>复制版本将接受一个额外的输出迭代器参数。</li>
-<li>复制算法返回一个迭代器，该迭代器指向复制的最后一个值后面的位置。</li>
-</ol>
-</li>
-<li><p><code>_if</code><br>有些函数有另一个版本，即根据将函数应用于容器元素得到的结果来执行操作。它们的名字以 <code>_if</code> 结尾。</p>
-<p>它们需要一个额外的谓词参数：<code>&lt;..., class Predicate, ...&gt;</code></p>
-<p>同样，STL使用诸如 Generator 和 BinaryPredicate 等术语来表示需要模拟其他函数对象概念的参数。</p>
-</li>
-<li><p>string类</p>
-<p>string类虽然不是STL的组成部分，但设计它时考虑到了STL。例如它包含：<code>begin(),end(),rbegin(),rend()</code></p>
-<p>获得区间内容的排列组合：<code>next_permutation()</code> 算法将区间内容转换为下一种排列方式。对于字符串，排列按照字母递增的顺序进行。如果成功，返回true；如果区间已处于最后的序列中，则返回false。</p>
+<li><p>还记得我们在 Food 类中有这么一句：<code>setData(GD_Type, GO_Food);</code></p>
+<p><code>QGraphicsItem::setData()</code>以键值对的形式设置元素的自定义数据。所谓自定义数据，就是对应用程序有所帮助的用户数据。Qt 不会使用这种机制来存储数据，因此你可以放心地将所需要的数据存储到元素对象。例如，我们在Food的构造函数中，将GD_Type的值设置为GO_Food。那么，这里我们取出GD_Type，如果其值是GO_Food，意味着这个QGraphicsItem就是一个Food，因此我们可以将其安全地进行后面的类型转换。</p>
 </li>
 </ul>
-<h2 id="其他库"><a href="#其他库" class="headerlink" title="其他库"></a>其他库</h2><p>vector、valarray、array。</p>
-<p>它们是由不同的小组开发的，用于不同目的。</p>
-<p>vector 模板类是一个容器类和算法系统的一部分，它支持面向容器的操作。</p>
-<p>valarray 模板类是面向数值计算的，不是STL的一部分。</p>
-<p>array 是为替代内置数组而设计的，她通过提供更好、更安全的接口，让数组更紧凑、效率更高。很多STL算法也能使用。</p>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+<p>下面是<code>advance()</code>函数的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Snake::advance(<span class="keyword">int</span> step)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!step) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (tickCounter++ % speed != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (moveDirection == NoMove) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (growing &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        tail &lt;&lt; head;</span><br><span class="line">        growing -= <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        tail.takeFirst();</span><br><span class="line">        tail &lt;&lt; head;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (moveDirection) &#123;</span><br><span class="line">        <span class="keyword">case</span> MoveLeft:</span><br><span class="line">            moveLeft();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> MoveRight:</span><br><span class="line">            moveRight();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> MoveUp:</span><br><span class="line">            moveUp();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> MoveDown:</span><br><span class="line">            moveDown();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    setPos(head);</span><br><span class="line">    handleCollisions();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>QGraphicsItem::advance()</code>函数接受一个 int 作为参数。这个 int 代表该函数被调用的时间。<code>QGraphicsItem::advance()</code>函数会被<code>QGraphicsScene::advance()</code>函数调用两次：第一次时这个 int 为 0，代表即将开始调用；第二次这个 int 为 1，代表已经开始调用。在我们的代码中，我们只使用不为 0 的阶段，因此当 !step 时，函数直接返回。</li>
+<li><code>tickCounter</code>实际是我们内部的一个计时器。我们使用 speed 作为蛇的两次动作的间隔时间，直接影响到游戏的难度。speed 值越大，两次运动的间隔时间越大，游戏越简单。这是因为随着 speed 的增大，tickCounter % speed != 0 的次数响应越多，刷新的次数就会越少，蛇运动得越慢。</li>
+<li><code>moveDirection</code>显然就是运动方向，当是 NoMove 时，函数直接返回。</li>
+<li><code>growing</code>是正在增长的方格数。当其大于 0 时，我们将头部追加到尾部的位置，同时减少一个增长值；当其小于 0 时，我们删除第一个，然后把头部添加进去。我们可以把 growing 看做即将发生的变化。比如，我们将 growing 初始化为 7。第一次运行<code>advance()</code>时，由于 7 &gt; 1，因此将头部追加，然后 growing 减少 1。直到 growing 为 0，此时，蛇的长度不再发生变化，直到我们吃了一个食物。</li>
+<li>下面是相应的方向时需要调用对应的函数。最后，我们设置元素的坐标，同时检测碰撞。</li>
+</ul>
+<hr>
+<h4 id="用户控制"><a href="#用户控制" class="headerlink" title="用户控制"></a>用户控制</h4><p>接下来完成<code>GameController</code>中有关用户控制的相关代码。</p>
+<p>首先，我们来给<code>GameController</code>添加一个事件过滤器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> GameController::eventFilter(QObject *object, QEvent *event)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (event-&gt;type() == QEvent::KeyPress) &#123;</span><br><span class="line">        handleKeyPressed((QKeyEvent *)event);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> QObject::eventFilter(object, event);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>回忆一下，我们使用<code>QGraphicsScene</code>作为游戏场景。为什么不直接继承<code>QGprahicsScene</code>，重写其<code>keyPressEvent()</code>函数呢？这里的考虑是：</p>
+<ul>
+<li>第一，我们不想只为重写一个键盘事件而继承<code>QGraphicScene</code>。这不符合面向对象设计的要求。继承首先应该有“是一个（is-a）”的关系。我们将游戏场景继承<code>QGraphcisScene</code>当然满足这个关系，无可厚非。但是，继承还有一个“特化”的含义，我们只想控制键盘事件，并没有添加其它额外的代码，因此感觉并不应该作此继承。</li>
+<li>第二，我们希望将表示层与控制层分离：明明已经有了<code>GameController</code>，显然，这是一个用于控制游戏的类，那么，为什么键盘控制还要放在场景中呢？这岂不将控制与表现层耦合起来了吗？</li>
+</ul>
+<p>基于以上两点考虑，我们选择不继承<code>QGraphicsScene</code>，而是在<code>GameController</code>中为场景添加事件过滤器，从而完成键盘事件的处理。下面我们看看这个<code>handleKeyPressed()</code>函数是怎样的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::handleKeyPressed(QKeyEvent *event)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span> (event-&gt;key()) &#123;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Left:</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveLeft);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Right:</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveRight);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Up:</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveUp);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Down:</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveDown);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码并不复杂：只是设置蛇的运动方向。我们在前面的代码中，已经为蛇添加了运动方向的控制，因此，我们只需要修改这个状态，即可完成对蛇的控制。</p>
+<h4 id="游戏逻辑"><a href="#游戏逻辑" class="headerlink" title="游戏逻辑"></a>游戏逻辑</h4><p>接下来，我们要完成游戏逻辑：吃食物、生成新的食物以及咬到自己这三个逻辑：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::snakeAteFood(Snake *snake, Food *food)</span><br><span class="line">&#123;</span><br><span class="line">    scene.removeItem(food);</span><br><span class="line">    <span class="keyword">delete</span> food;</span><br><span class="line"></span><br><span class="line">    addNewFood();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先是蛇吃到食物。如果蛇吃到了食物，那么，我们将食物从场景中移除，然后添加新的食物。为了避免内存泄露，我们需要在这里 delete 食物，以释放占用的空间。当然，你应该想到，我们肯定会在<code>addNewFood()</code>函数中使用 new 运算符重新生成新的食物。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::addNewFood()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        x = (<span class="keyword">int</span>) (qrand() % <span class="number">100</span>) / <span class="number">10</span>;</span><br><span class="line">        y = (<span class="keyword">int</span>) (qrand() % <span class="number">100</span>) / <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">        x *= <span class="number">10</span>;</span><br><span class="line">        y *= <span class="number">10</span>;</span><br><span class="line">    &#125; <span class="keyword">while</span> (snake-&gt;shape().contains(snake-&gt;mapFromScene(QPointF(x + <span class="number">5</span>, y + <span class="number">5</span>))));</span><br><span class="line"></span><br><span class="line">    Food *food = <span class="keyword">new</span> Food(x , y);</span><br><span class="line">    scene.addItem(food);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>addNewFood()</code>代码中，我们首先计算新的食物的坐标：使用一个循环，直到找到一个不在蛇身体中的坐标。为了判断一个坐标是不是位于蛇的身体上，我们利用蛇的shape()函数。需要注意的是，shape()返回元素坐标系中的坐标，而我们计算而得的 x，y 坐标位于场景坐标系，因此我们必须利用<code>QGraphicsItem::mapFromScene()</code>将场景坐标系映射为元素坐标系。当我们计算出食物坐标后，我们在堆上重新创建这个食物，并将其添加到游戏场景。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::snakeAteItself(Snake *snake)</span><br><span class="line">&#123;</span><br><span class="line">    QTimer::singleShot(<span class="number">0</span>, <span class="keyword">this</span>, SLOT(gameOver()));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> GameController::gameOver()</span><br><span class="line">&#123;</span><br><span class="line">    scene.clear();</span><br><span class="line"></span><br><span class="line">    snake = <span class="keyword">new</span> Snake(*<span class="keyword">this</span>);</span><br><span class="line">    scene.addItem(snake);</span><br><span class="line">    addNewFood();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果蛇咬到了它自己，游戏即宣告结束。因此，我们直接调用<code>gameOver()</code>函数。这个函数将场景清空，然后重新创建蛇并增加第一个食物。为什么我们不直接调用gameOver()函数，而是利用QTimer调用呢？这是因为，我们不应该在一个 update 操作中去清空整个场景。因此我们使用QTimer，在 update 事件之后完成这个操作。否则程序会奔溃。</p>
+<p>至此，我们已经把这个简单的贪吃蛇游戏全部完成。其实还没有完成整个游戏：<code>Wall</code>对象完全没有实现，难度控制也没有完成。</p>
+<hr>
+<h4 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h4><ol>
+<li><p>物品坐标是 -100到100，但是显示在右下角 10 像素的正方形内，所以长宽应该是210。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MainWindow::initScene()</span><br><span class="line">&#123;</span><br><span class="line">    scene-&gt;setSceneRect(<span class="number">-100</span>, <span class="number">-100</span>, <span class="number">210</span>, <span class="number">210</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写event()，通过监听Resize事件设置了窗口的等比例缩放</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> MainWindow::event(QEvent *e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (e-&gt;type() == QEvent::Resize) &#123;</span><br><span class="line">        <span class="comment">//QTimer::singleShot(0, this, SLOT(adjustViewSize()));</span></span><br><span class="line">        <span class="keyword">int</span> InnerWidth = <span class="keyword">this</span>-&gt;width();</span><br><span class="line">        <span class="keyword">int</span> InnerHeight = <span class="keyword">this</span>-&gt;height();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (InnerWidth &gt; InnerHeight)&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;resize(InnerWidth, InnerWidth);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;resize(InnerHeight, InnerHeight);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        adjustViewSize();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> QWidget::event(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/QT/">QT</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-OpenGl/OpenGL编程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/02/OpenGl/OpenGL编程/" class="article-date">
+      <time datetime="2019-03-02T12:50:39.000Z" itemprop="datePublished">2019-03-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/02/OpenGl/OpenGL编程/">OpenGL编程(待续</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><p>在Mac OS X下，一般是<br>#include &lt;OpenGL/gl.h&gt;<br>#include &lt;OpenGL/glu.h&gt;<br>#include &lt;GLUT/glut.h&gt; </p>
+<p>在编译的时候，需要用到Mac OS X里gcc的-framework参数，例如<br>g++ -framework OpenGL -framework GLUT -framework Foundation -o test my.cpp </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/OpenGL/">OpenGL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-OpenGl/OpenGL概念" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/02/OpenGl/OpenGL概念/" class="article-date">
+      <time datetime="2019-03-02T12:44:11.000Z" itemprop="datePublished">2019-03-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/02/OpenGl/OpenGL概念/">OpenGL概念(待续</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="OpenCV和OpenGL"><a href="#OpenCV和OpenGL" class="headerlink" title="OpenCV和OpenGL"></a>OpenCV和OpenGL</h3><p>两者的区别就是Computer Vision和Computer Graphics这两个学科之间的区别，前者专注于从采集到的视觉图像中获取信息，是用机器来理解图像；后者是用机器绘制合适的视觉图像给人看</p>
+<h4 id="DirectX"><a href="#DirectX" class="headerlink" title="DirectX"></a>DirectX</h4><p>OpenCV 算法合集，多用于图像识别,和matlab,CxImage这个两库功能相同</p>
+<p>OpenGL 3D绘制，和direct3D做的是同一件事</p>
+<p>DirectX 微软做的一个超大的多媒体处理合集，包括音频，视频,direct3D只是其中之一<br>  Dx做的音视频的采集和显示部分，算法涉及不多<br>  Dx做的事都是和硬件有关系的，都要依赖硬件的，由于ms的强大，现在硬件大都支持dx<br>  Dx显示视频的时候没有通过gdi,是直接通过显卡实现的，非常的快</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/OpenGL/">OpenGL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-QT/PaintEvent" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/01/QT/PaintEvent/" class="article-date">
+      <time datetime="2019-03-01T12:46:22.000Z" itemprop="datePublished">2019-03-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/01/QT/PaintEvent/">QT PaintEvent</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="PaintEvent"><a href="#PaintEvent" class="headerlink" title="PaintEvent"></a>PaintEvent</h3><p>当发生一下情况时会产生绘制事件并调用paintEvent()函数:</p>
+<ol>
+<li><p>在窗口部件第一次显示时，系统会自动产生一个绘图事件，从而强制绘制这个窗口部件。</p>
+</li>
+<li><p>当重新调整窗口部件的大小时，系统也会产生一个绘制事件。</p>
+</li>
+<li><p>当窗口部件被其他窗口部件遮挡，然后又再次显示出来的时候，就会对那些隐藏的区域产生一个绘制事件。</p>
+</li>
+</ol>
+<p>可以调用QWidget::update()或者QWidget::repaint()来强制产生一个绘制事件。二者的区别是:</p>
+<p>repaint()函数会强制产生一个即时的重绘事件；</p>
+<p>update()函数只是在Qt下一次处理事件时才调用一次绘制事件。</p>
+<p>如果多次调用update()，Qt会把连续多次的绘制事件压缩成一个单一的绘制事件，这样可避免闪烁现象。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/QT/">QT</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/C_Tips" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/01/C_C++/C_Tips/" class="article-date">
+      <time datetime="2019-03-01T01:04:15.000Z" itemprop="datePublished">2019-03-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/01/C_C++/C_Tips/">C_tips</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="格式化输入输出的-l-标签"><a href="#格式化输入输出的-l-标签" class="headerlink" title="格式化输入输出的 l 标签"></a>格式化输入输出的 l 标签</h3><p>printf 不需要 lf，因为浮点数都是存储为double。</p>
+<p>其他的 l 都有用。</p>
+
       
     </div>
     
@@ -1475,11 +734,11 @@
 
 
   
-    <article id="post-C_C++/C++Tips" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-OpenGl/窗口视口" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/11/25/C_C++/C++Tips/" class="article-date">
-      <time datetime="2018-11-25T08:44:38.000Z" itemprop="datePublished">2018-11-25</time>
+      <a href="/2019/02/28/OpenGl/窗口视口/" class="article-date">
+      <time datetime="2019-02-28T12:02:10.000Z" itemprop="datePublished">2019-02-28</time>
 </a>
 
 
@@ -1494,7 +753,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/25/C_C++/C++Tips/">C++ Tips</a>
+      <a class="article-title" href="/2019/02/28/OpenGl/窗口视口/">窗口视口</a>
     </h1>
   
 
@@ -1504,23 +763,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="重载和转换"><a href="#重载和转换" class="headerlink" title="重载和转换"></a>重载和转换</h3><p><strong>重载和转换</strong>：两种实现系统预定义类型和类类型相加的方法</p>
-<p>第一种：用转化函数将系统预定义类型转化为类类型，然后调用加法重载</p>
-<p>第二种：将加法定义为显式使用系统预定义类型的函数</p>
-<p>应该使用第二种，第一种有额外开销。</p>
-<p><strong>重载和转换</strong>：两种实现char*赋值给string类的方法</p>
-<p>第一种：自动调用构造函数将char*赋值给string，然后赋值。</p>
-<p>第二种：直接定义运算符重载</p>
-<p>应该使用第二种，第一种有额外开销。</p>
-<h3 id="new-char-和-new-char-1"><a href="#new-char-和-new-char-1" class="headerlink" title="new char 和 new char[1]"></a>new char 和 new char[1]</h3><p>有时候要用new char[1] 来匹配析构函数中的 delete[]。</p>
-<p>如果有多个构造函数，则必须用相同的方式使用new，要么都带中括号，要么都不带。因为只有一个析构函数，所有的构造函数都必须和它兼容。</p>
-<p>同时，也可以在某个构造函数中初始化指针为空指针，因为delete和delete[]可以用于空指针。</p>
-<h3 id="定位new运算符和delete的问题"><a href="#定位new运算符和delete的问题" class="headerlink" title="定位new运算符和delete的问题"></a>定位new运算符和delete的问题</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> * buffer = <span class="keyword">char</span>[BUF];</span><br><span class="line">Test * pc1 = <span class="keyword">new</span> (buffer) Test;</span><br><span class="line"><span class="keyword">delete</span> [] buffer;</span><br></pre></td></tr></table></figure>
-<p>将delete用于buffer时，不会为内存块内存储的Test对象调用析构函数。</p>
-<p><strong>解决方法</strong>：显式调用析构函数</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pc1-&gt;~Test();</span><br></pre></td></tr></table></figure>
-<p>ps：对于用定位new运算符创建的对象，应该与创建顺序相反的顺序进行删除。因为晚创建的对象可能依赖于早创建的对象。</p>
-<h3 id="C-中的匿名对象是pure-RValue"><a href="#C-中的匿名对象是pure-RValue" class="headerlink" title="C++中的匿名对象是pure RValue"></a>C++中的匿名对象是pure RValue</h3>
+        <h3 id="窗口视口"><a href="#窗口视口" class="headerlink" title="窗口视口"></a>窗口视口</h3><p>屏幕：即计算机的整个屏幕大小。</p>
+<p>窗口：即屏幕中的某一个窗口，可放大放小和移动关闭。 </p>
+<p>视口：即窗口还可以分为若干个区域，称为视口，窗口中用来绘图的区域。一般设置视口大小等于窗口大小。</p>
+<p>裁剪窗口：即在视口中让你看到的图形，即显示出来的那部分。</p>
+<p>关系：当要把图形绘制在屏幕之前，首先要建立图形的几何描述，即建模，这往往是在世界坐标系内进行的。而图形最终是要显示在屏幕上，即屏幕坐标系。在模型的二维区域内选择一个区域，映射到屏幕坐标系的指定区域（窗口）中。在这个映射过程中包括平移、旋转、缩放操作及删除位于显示区域范围以外的图形部分。也就是OpenGL绘制图形时，并不是把整个模型直接绘制在整个屏幕上，而是把模型的部分绘制在窗口内。窗口还可以分为若干个区域，称为视口。模型在裁剪窗口内的部分映射到显示窗口中的指定视口中。窗口选择显示模型的那个部分，而视口指定显示在窗口的什么位置。</p>
+
       
     </div>
     
@@ -1528,13 +776,280 @@
       
       
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    <a class="article-category-link" href="/categories/OpenGL/">OpenGL</a>
     </div>
 
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Tcp/TCP半关闭,半连接,半打开" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/" class="article-date">
+      <time datetime="2019-02-28T11:42:11.000Z" itemprop="datePublished">2019-02-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/">TCP 半关闭,半连接,半打开</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="半关闭"><a href="#半关闭" class="headerlink" title="半关闭"></a>半关闭</h4><p>当TCP链接中A向B发送 FIN 请求关闭，另一端B回应ACK之后，并没有立即发送 FIN 给A,A方处于半连接状态（半开关），此时A可以接收B发送的数据，但是A已经不能再向B发送数据。</p>
+<h4 id="半连接"><a href="#半连接" class="headerlink" title="半连接"></a>半连接</h4><p>发生在TCP三次握手中</p>
+<p>如果A向B发起链接，B也按照正常情况响应了，但是A不进行三次握手，这就是半连接。 </p>
+<p>半连接攻击：半连接，会造成B分配的内存资源就一直这么耗着，直到资源耗尽。（SYN攻击）</p>
+<h4 id="半打开"><a href="#半打开" class="headerlink" title="半打开"></a>半打开</h4><p>如果一方关闭或者异常关闭（断电，断网），而另一方并不知情，这样的链接称之为半打开。处于半打开的连接，如果双方不进行数据通信，是发现不了问题的，只有在通信是才真正的察觉到这个连接已经处于半打开状态，如果双方不传输数据的话，仍处于连接状态的一方就不会检测另外一方已经出现异常。</p>
+<p><strong>解决方法</strong>：</p>
+<p>如何解决半打开问题，引入心跳机制就可以察觉半打开。</p>
+<p>如果需要发数据的话，这边收到之后 其实发现这个连接并不存在了，就会回复RST包告知，这个时候就需要重新建立连接了！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Tcp/Tcp_ip协议栈" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/02/27/Network/Tcp/Tcp_ip协议栈/" class="article-date">
+      <time datetime="2019-02-27T13:06:38.000Z" itemprop="datePublished">2019-02-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/Network/Tcp/Tcp_ip协议栈/">Tcp_ip协议栈</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="Tcp-ip协议栈"><a href="#Tcp-ip协议栈" class="headerlink" title="Tcp_ip协议栈"></a>Tcp_ip协议栈</h3><p><img src="Picture/tcp_ip.png" alt="tcp_ip"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Unix/Command/内存cpu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/02/05/Unix/Command/内存cpu/" class="article-date">
+      <time datetime="2019-02-04T16:32:00.000Z" itemprop="datePublished">2019-02-05</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/05/Unix/Command/内存cpu/">Linux 内存Cpu 查看</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>内存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure>
+<p>cpu</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top -bn 1 -i -c</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Unix/Command/tar" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/02/01/Unix/Command/tar/" class="article-date">
+      <time datetime="2019-02-01T10:22:25.000Z" itemprop="datePublished">2019-02-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/01/Unix/Command/tar/">tar</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><code>tar -cvf test.tar test</code></p>
+<p><code>tar -xvf test.tar test</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
     </div>
 
       
