@@ -1,316 +1,140 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>PostgreSQL 命令 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>PostgreSQL 命令 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x67E5;&amp;#x770B;&amp;#x547D;&amp;#x4EE4;&amp;#x67E5;&amp;#x770B;&amp;#x6240;&amp;#x6709;&amp;#x547D;&amp;#x4EE4; \? &amp;#x663E;&amp;#x793A;&amp;#x5DF2;&amp;#x521B;&amp;#x5EFA;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5E93; \l  &amp;#x6216;&amp;#x8005; SELECT datname FROM pg">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PostgreSQL 命令">
-<meta property="og:url" content="http://yoursite.com/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x67E5;&amp;#x770B;&amp;#x547D;&amp;#x4EE4;&amp;#x67E5;&amp;#x770B;&amp;#x6240;&amp;#x6709;&amp;#x547D;&amp;#x4EE4; \? &amp;#x663E;&amp;#x793A;&amp;#x5DF2;&amp;#x521B;&amp;#x5EFA;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5E93; \l  &amp;#x6216;&amp;#x8005; SELECT datname FROM pg">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-17T14:49:50.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PostgreSQL 命令">
-<meta name="twitter:description" content="&amp;#x67E5;&amp;#x770B;&amp;#x547D;&amp;#x4EE4;&amp;#x67E5;&amp;#x770B;&amp;#x6240;&amp;#x6709;&amp;#x547D;&amp;#x4EE4; \? &amp;#x663E;&amp;#x793A;&amp;#x5DF2;&amp;#x521B;&amp;#x5EFA;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5E93; \l  &amp;#x6216;&amp;#x8005; SELECT datname FROM pg">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看命令"><span class="toc-number">1.</span> <span class="toc-text">查看命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#d命令"><span class="toc-number">1.0.1.</span> <span class="toc-text">\d命令</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#操作命令"><span class="toc-number">2.</span> <span class="toc-text">操作命令</span></a></li>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Database/PostgreSQL/PostgreSQL 命令" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    PostgreSQL 命令
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h3 id="&#x67E5;&#x770B;&#x547D;&#x4EE4;"><a href="#&#x67E5;&#x770B;&#x547D;&#x4EE4;" class="headerlink" title="&#x67E5;&#x770B;&#x547D;&#x4EE4;"></a>&#x67E5;&#x770B;&#x547D;&#x4EE4;</h3><p>&#x67E5;&#x770B;&#x6240;&#x6709;&#x547D;&#x4EE4;</p>
+  <div class="container">
+    <article>
+      <h1>PostgreSQL 命令</h1>
+      <h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><p>查看所有命令</p>
 <p><code>\?</code></p>
-<p>&#x663E;&#x793A;&#x5DF2;&#x521B;&#x5EFA;&#x7684;&#x6570;&#x636E;&#x5E93;</p>
-<p><code>\l</code>  &#x6216;&#x8005;</p>
+<p>显示已创建的数据库</p>
+<p><code>\l</code>  或者</p>
 <p><code>SELECT datname FROM pg_database;</code></p>
-<p>&#x5728;&#x4E0D;&#x8FDE;&#x63A5;&#x8FDB; PostgreSQL &#x6570;&#x636E;&#x5E93;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x7EC8;&#x7AEF;&#x4E0A;&#x67E5;&#x770B;&#x663E;&#x793A;&#x5DF2;&#x521B;&#x5EFA;&#x7684;&#x5217;&#x8868;&#xFF1A;</p>
+<p>在不连接进 PostgreSQL 数据库的情况下，也可以在终端上查看显示已创建的列表：</p>
 <p><code>psql -l</code></p>
-<p>&#x67E5;&#x770B;postgresql&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;</p>
+<p>查看postgresql数据库用户</p>
 <p><code>\du</code></p>
-<p>&#x663E;&#x793A;&#x6570;&#x636E;&#x5E93;&#x8868;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1&#x3001;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x67E5;&#x8BE2;</span><br><span class="line">\d &#x6570;&#x636E;&#x5E93; &#x2014;&#x2014; &#x5F97;&#x5230;&#x6240;&#x6709;&#x8868;&#x7684;&#x540D;&#x5B57;</span><br><span class="line">\d &#x8868;&#x540D; &#x2014;&#x2014; &#x5F97;&#x5230;&#x8868;&#x7ED3;&#x6784;</span><br><span class="line"></span><br><span class="line">2&#x3001;&#x901A;&#x8FC7;SQL&#x8BED;&#x53E5;&#x67E5;&#x8BE2;</span><br><span class="line">select * from pg_tables;	//&#x5F97;&#x5230;&#x5F53;&#x524D;db&#x4E2D;&#x6240;&#x6709;&#x8868;&#x7684;&#x4FE1;&#x606F;&#xFF08;&#x8FD9;&#x91CC;pg_tables&#x662F;&#x7CFB;&#x7EDF;&#x89C6;&#x56FE;&#xFF09;</span><br><span class="line">select tablename from pg_tables where schemaname=&apos;public&apos;	//&#x5F97;&#x5230;&#x6240;&#x6709;&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;&#x8868;&#x7684;&#x540D;&#x5B57;&#xFF08;&#x8FD9;&#x91CC;&quot;tablename&quot;&#x5B57;&#x6BB5;&#x662F;&#x8868;&#x7684;&#x540D;&#x5B57;&#xFF0C;&quot;schemaname&quot;&#x662F;schema&#x7684;&#x540D;&#x5B57;&#x3002;&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x8868;&#xFF0C;&#x5982;&#x679C;&#x672A;&#x7ECF;&#x7279;&#x6B8A;&#x5904;&#x7406;&#xFF0C;&#x9ED8;&#x8BA4;&#x90FD;&#x662F;&#x653E;&#x5728;&#x540D;&#x4E3A;public&#x7684;schema&#x4E0B;&#xFF09;</span><br></pre></td></tr></table></figure>
-<h5 id="d&#x547D;&#x4EE4;"><a href="#d&#x547D;&#x4EE4;" class="headerlink" title="\d&#x547D;&#x4EE4;"></a>\d&#x547D;&#x4EE4;</h5><p>&#x8BE5;&#x547D;&#x4EE4;&#x5C06;&#x663E;&#x793A;&#x6BCF;&#x4E2A;&#x5339;&#x914D;&#x5173;&#x7CFB;&#xFF08;&#x8868;&#xFF0C;&#x89C6;&#x56FE;&#xFF0C;&#x7D22;&#x5F15;&#xFF0C;&#x5E8F;&#x5217;&#xFF09;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x62EC;&#x5BF9;&#x8C61;&#x6240;&#x6709;&#x7684;&#x5217;&#xFF0C;&#x5B83;&#x4EEC;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x8868;&#x7A7A;&#x95F4;&#xFF08;&#x5982;&#x679C;&#x4E0D;&#x662F;&#x9ED8;&#x8BA4;&#x7684;&#xFF09;&#x548C;&#x4EFB;&#x4F55;&#x7279;&#x6B8A;&#x5C5E;&#x6027;&#xFF08;&#x5982;NOT NULL&#x6216;&#x9ED8;&#x8BA4;&#x503C;&#x7B49;&#xFF09;&#x3002;&#x4E0E;&#x552F;&#x4E00;&#x7EA6;&#x675F;&#x76F8;&#x5173;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x89C4;&#x5219;&#xFF0C;&#x7EA6;&#x675F;&#xFF0C;&#x89E6;&#x53D1;&#x5668;&#x4E5F;&#x540C;&#x6837;&#x4F1A;&#x663E;&#x793A;&#x51FA;&#x6765;&#x3002;&#x5982;&#x679C;&#x5173;&#x7CFB;&#x662F;&#x4E00;&#x4E2A;&#x89C6;&#x56FE;&#xFF0C;&#x8FD8;&#x4F1A;&#x663E;&#x793A;&#x89C6;&#x56FE;&#x7684;&#x5B9A;&#x4E49;&#x3002;</p>
-<ol class="ui list">
-<li>&#x5982;&#x679C;\d&#x547D;&#x4EE4;&#x4EC0;&#x4E48;&#x90FD;&#x4E0D;&#x5E26;&#xFF0C;&#x5C06;&#x5217;&#x51FA;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x8868;&#x3002;</li>
-<li>\d&#x540E;&#x9762;&#x8DDF;&#x4E00;&#x4E2A;&#x8868;&#x540D;&#xFF0C;&#x8868;&#x793A;&#x663E;&#x793A;&#x8FD9;&#x4E2A;&#x8868;&#x7684;&#x7ED3;&#x6784;&#x5B9A;&#x4E49;&#x3002;</li>
-<li>\d&#x4E5F;&#x53EF;&#x4EE5;&#x663E;&#x793A;&#x7D22;&#x5F15;&#x4FE1;&#x606F;</li>
-<li>\d&#x540E;&#x9762;&#x53EF;&#x4EE5;&#x8DDF;&#x4E00;&#x901A;&#x914D;&#x7B26;&#x201D;*&#x201C;&#x6216;&#x201D;?&#x201D;</li>
-<li><p>\d+&#x547D;&#x4EE4;&#xFF0C;&#x8BE5;&#x547D;&#x4EE4;&#x5C06;&#x663E;&#x793A;&#x6BD4;\d&#x547D;&#x4EE4;&#x66F4;&#x8BE6;&#x7EC6;&#x7684;&#x4FE1;&#x606F;</p>
+<p>显示数据库表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、通过命令行查询</span><br><span class="line">\d 数据库 —— 得到所有表的名字</span><br><span class="line">\d 表名 —— 得到表结构</span><br><span class="line"></span><br><span class="line">2、通过SQL语句查询</span><br><span class="line">select * from pg_tables;	//得到当前db中所有表的信息（这里pg_tables是系统视图）</span><br><span class="line">select tablename from pg_tables where schemaname=&apos;public&apos;	//得到所有用户自定义表的名字（这里&quot;tablename&quot;字段是表的名字，&quot;schemaname&quot;是schema的名字。用户自定义的表，如果未经特殊处理，默认都是放在名为public的schema下）</span><br></pre></td></tr></table></figure>
+<h5 id="d命令"><a href="#d命令" class="headerlink" title="\d命令"></a>\d命令</h5><p>该命令将显示每个匹配关系（表，视图，索引，序列）的信息，包括对象所有的列，它们的类型，表空间（如果不是默认的）和任何特殊属性（如NOT NULL或默认值等）。与唯一约束相关的索引，规则，约束，触发器也同样会显示出来。如果关系是一个视图，还会显示视图的定义。</p>
+<ol>
+<li>如果\d命令什么都不带，将列出当前数据库中的所有表。</li>
+<li>\d后面跟一个表名，表示显示这个表的结构定义。</li>
+<li>\d也可以显示索引信息</li>
+<li>\d后面可以跟一通配符”*“或”?”</li>
+<li><p>\d+命令，该命令将显示比\d命令更详细的信息</p>
 </li>
-<li><p>&#x5339;&#x914D;&#x4E0D;&#x540C;&#x5BF9;&#x8C61;&#x7C7B;&#x578B;&#x7684;\d&#x547D;&#x4EE4;</p>
-<p>&#x5982;&#x679C;&#x60F3;&#x53EA;&#x663E;&#x793A;&#x5339;&#x914D;&#x7684;&#x8868;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;\dt&#x547D;&#x4EE4;</p>
-<p>&#x5982;&#x679C;&#x60F3;&#x53EA;&#x663E;&#x793A;&#x7D22;&#x5F15;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;\di&#x547D;&#x4EE4;</p>
-<p>&#x5982;&#x679C;&#x60F3;&#x53EA;&#x663E;&#x793A;&#x5E8F;&#x53F7;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;\ds&#x547D;&#x4EE4;</p>
-<p>&#x5982;&#x679C;&#x60F3;&#x53EA;&#x663E;&#x793A;&#x89C6;&#x56FE;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;\dv&#x547D;&#x4EE4;</p>
-<p>&#x5982;&#x679C;&#x60F3;&#x53EA;&#x663E;&#x793A;&#x51FD;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;\df&#x547D;&#x4EE4;</p>
+<li><p>匹配不同对象类型的\d命令</p>
+<p>如果想只显示匹配的表，可以使用\dt命令</p>
+<p>如果想只显示索引，可以使用\di命令</p>
+<p>如果想只显示序号，可以使用\ds命令</p>
+<p>如果想只显示视图，可以使用\dv命令</p>
+<p>如果想只显示函数，可以使用\df命令</p>
 </li>
-<li><p>&#x5982;&#x679C;&#x60F3;&#x663E;&#x793A;SQL&#x5DF2;&#x6267;&#x884C;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;\timing&#x547D;&#x4EE4;</p>
+<li><p>如果想显示SQL已执行的时间，可以用\timing命令</p>
 </li>
-<li><p>&#x5217;&#x51FA;&#x6240;&#x6709;&#x7684;schemas&#x53EF;&#x4EE5;&#x4F7F;&#x7528;\dn&#x547D;&#x4EE4;</p>
+<li><p>列出所有的schemas可以使用\dn命令</p>
 </li>
-<li><p>&#x663E;&#x793A;&#x6240;&#x6709;&#x7684;&#x8868;&#x7A7A;&#x95F4;&#x53EF;&#x4EE5;&#x7528;\db&#x547D;&#x4EE4;</p>
-<p>&#x8868;&#x7A7A;&#x95F4;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x653E;&#x5728;&#x8FD9;&#x4E2A;&#x8868;&#x7A7A;&#x95F4;&#x7684;&#x8868;&#xFF0C;&#x5C31;&#x662F;&#x628A;&#x8868;&#x7684;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x653E;&#x5230;&#x8FD9;&#x4E2A;&#x8868;&#x7A7A;&#x95F4;&#x4E0B;&#x3002;</p>
+<li><p>显示所有的表空间可以用\db命令</p>
+<p>表空间就是一个目录，放在这个表空间的表，就是把表的数据文件放到这个表空间下。</p>
 </li>
-<li><p>&#x5217;&#x51FA;&#x6570;&#x636E;&#x5E93;&#x6240;&#x6709;&#x89D2;&#x8272;&#x6216;&#x7528;&#x6237;\du&#x6216;\dg</p>
+<li><p>列出数据库所有角色或用户\du或\dg</p>
 </li>
-<li>\dp&#x6216;\z&#x547D;&#x4EE4;&#x7528;&#x4E8E;&#x663E;&#x793A;&#x8868;&#x7684;&#x6743;&#x9650;&#x5206;&#x914D;&#x60C5;&#x51B5;</li>
+<li>\dp或\z命令用于显示表的权限分配情况</li>
 </ol>
-<h3 id="&#x64CD;&#x4F5C;&#x547D;&#x4EE4;"><a href="#&#x64CD;&#x4F5C;&#x547D;&#x4EE4;" class="headerlink" title="&#x64CD;&#x4F5C;&#x547D;&#x4EE4;"></a>&#x64CD;&#x4F5C;&#x547D;&#x4EE4;</h3><p>&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;</p>
+<h3 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h3><p>连接数据库</p>
 <p><code>\c dbname</code></p>
-<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; test &#x7684;&#x8868;</p>
+<p>创建一个名为 test 的表</p>
 <p><code>CREATE TABLE test(id int, text VARCHAR(255));</code></p>
-<p>&#x63D2;&#x5165;&#x4E00;&#x6761;&#x8BB0;&#x5F55;</p>
-<p><code>insert into test(id,text) values ( 1,&apos;heihei&apos;);</code></p>
-<p>&#x67E5;&#x8BE2;&#x8BB0;&#x5F55;</p>
+<p>插入一条记录</p>
+<p><code>insert into test(id,text) values ( 1,&#39;heihei&#39;);</code></p>
+<p>查询记录</p>
 <p><code>select * from test where id = 1;</code></p>
-<p>&#x66F4;&#x65B0;&#x8BB0;&#x5F55;</p>
-<p><code>update test set text =&apos;update&apos; where id =5;</code></p>
-<p>&#x5220;&#x9664;&#x6307;&#x5B9A;&#x7684;&#x8BB0;&#x5F55;</p>
+<p>更新记录</p>
+<p><code>update test set text =&#39;update&#39; where id =5;</code></p>
+<p>删除指定的记录</p>
 <p><code>delete from test where id = 1;</code></p>
-<p>&#x5220;&#x9664;&#x8868;</p>
+<p>删除表</p>
 <p><code>drop table test;</code></p>
-<p>&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;</p>
+<p>删除数据库</p>
 <p><code>drop database test_db0;</code></p>
-<p>&#x6216;&#x8005;&#x5229;&#x7528; dropdb &#x6307;&#x4EE4;&#xFF0C;&#x5728;&#x7EC8;&#x7AEF;&#x4E0A;&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;</p>
+<p>或者利用 dropdb 指令，在终端上删除数据库</p>
 <p><code>dropdb test0</code></p>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-08-17T14:49:49.000Z" itemprop="datePublished">2018-08-17</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/08/20/Database/PostgreSQL/C++ connector for PostgreSQL/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    C++ connector for PostgreSQL
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /" class="ui tiny button">
-                    
-                    Mac 下 PostgreSQL 配置
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#查看命令"><span>查看命令</span></a><ol><li><a href="#d命令"><span>\d命令</span></a></li></ol></li></ol><li><a href="#操作命令"><span>操作命令</span></a></li>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

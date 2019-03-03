@@ -1,460 +1,287 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE IS-IS协议 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE IS-IS协议 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x2014;&amp;#x2014;2017.11.04 1&amp;#xFF1A;IS-IS&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;IGPS&amp;#x9635;&amp;#x8425;&amp;#x4E2D;&amp;#x7684;&amp;#x534F;&amp;#x8BAE; &amp;#x4E24;&amp;#x5927;&amp;#x9635;&amp;#x8425;&amp;#">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE IS-IS协议">
-<meta property="og:url" content="http://yoursite.com/2017/11/04/Network/Ccie/IS-IS协议/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x2014;&amp;#x2014;2017.11.04 1&amp;#xFF1A;IS-IS&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;IGPS&amp;#x9635;&amp;#x8425;&amp;#x4E2D;&amp;#x7684;&amp;#x534F;&amp;#x8BAE; &amp;#x4E24;&amp;#x5927;&amp;#x9635;&amp;#x8425;&amp;#">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:38:11.497Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE IS-IS协议">
-<meta name="twitter:description" content="&amp;#x2014;&amp;#x2014;2017.11.04 1&amp;#xFF1A;IS-IS&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;&amp;#x4E2D;&amp;#x95F4;&amp;#x7CFB;&amp;#x7EDF;IGPS&amp;#x9635;&amp;#x8425;&amp;#x4E2D;&amp;#x7684;&amp;#x534F;&amp;#x8BAE; &amp;#x4E24;&amp;#x5927;&amp;#x9635;&amp;#x8425;&amp;#">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1：IS-IS中间系统到中间系统"><span class="toc-number">1.</span> <span class="toc-text">1：IS-IS中间系统到中间系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2：IS-IS的发展历程"><span class="toc-number">2.</span> <span class="toc-text">2：IS-IS的发展历程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3：CLNP标识"><span class="toc-number">3.</span> <span class="toc-text">3：CLNP标识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6：IS-IS中路由器的类型-router-type"><span class="toc-number">4.</span> <span class="toc-text">6：IS-IS中路由器的类型 router type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7：IS-IS-neighbour-TYPE-邻居关系类型"><span class="toc-number">5.</span> <span class="toc-text">7：IS-IS neighbour TYPE 邻居关系类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8：IS-IS的特性"><span class="toc-number">6.</span> <span class="toc-text">8：IS-IS的特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9：IS-IS路径度量值计算"><span class="toc-number">7.</span> <span class="toc-text">9：IS-IS路径度量值计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10：IS-IS的消息和消息类型"><span class="toc-number">8.</span> <span class="toc-text">10：IS-IS的消息和消息类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11：IS-IS的配置"><span class="toc-number">9.</span> <span class="toc-text">11：IS-IS的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12：IS-IS的查看"><span class="toc-number">10.</span> <span class="toc-text">12：IS-IS的查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13：IS-IS-的重分发"><span class="toc-number">11.</span> <span class="toc-text">13：IS-IS 的重分发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14：ISIS-的手动汇总"><span class="toc-number">12.</span> <span class="toc-text">14：ISIS 的手动汇总</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15：ISIS-认证-及-ISIS-路由泄露"><span class="toc-number">13.</span> <span class="toc-text">15：ISIS 认证 及 ISIS 路由泄露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16：ISIS-的不同区域迁移"><span class="toc-number">14.</span> <span class="toc-text">16：ISIS 的不同区域迁移</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/IS-IS协议" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE IS-IS协议
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <p>&#x2014;&#x2014;2017.11.04</p>
-<h3 id="1&#xFF1A;IS-IS&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;"><a href="#1&#xFF1A;IS-IS&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;" class="headerlink" title="1&#xFF1A;IS-IS&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;"></a>1&#xFF1A;IS-IS&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;&#x5230;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF;</h3><p>IGPS&#x9635;&#x8425;&#x4E2D;&#x7684;&#x534F;&#x8BAE;</p>
-<p>&#x4E24;&#x5927;&#x9635;&#x8425;&#xFF1A;EGPS&#x548C;IGPS</p>
-<p>IGPS &#x5185;&#x90E8;&#x7F51;&#x5173;&#x534F;&#x8BAE;&#x96C6;</p>
-<p>IGPS&#xFF1A;RIP OSPF EIGRP IS-IS &#x90FD;&#x662F;AS&#x5185;&#x7684;&#x534F;&#x8BAE;</p>
-<p>EGPS&#xFF1A;BGP AS&#x95F4;&#x3001;AS&#x5185;</p>
-<p>IS-IS&#x6B63;&#x5728;&#x53D6;&#x4EE3;OSPF</p>
-<p>&#x5B66;&#x4E60;RIP, EIGRP&#x662F;&#x4E3A;&#x4E86;&#x5B66;&#x4E60;OSPF&#x548C;BGP&#xFF1F;</p>
-<p>Link State &#x94FE;&#x8DEF;&#x72B6;&#x6001;&#x8DEF;&#x7531;&#x534F;&#x8BAE;</p>
-<p>&#x6839;&#x636E;&#x534F;&#x8BAE;&#x81EA;&#x8EAB;&#x7279;&#x70B9;&#x5206;&#x7C7B;&#xFF1A;&#x3010;&#x5206;&#x7C7B;&#x8BB0;&#x4F4F;&#x8DEF;&#x7531;&#x534F;&#x8BAE;&#x3011;</p>
-<p>&#x8DDD;&#x79BB;&#x77E2;&#x91CF; RIP &#x9AD8;&#x7EA7;&#x8DDD;&#x79BB;&#x77E2;&#x91CF; EIGRP &#x4E0D;&#x662F;&#x9760;&#x8DF3;&#x6570; &#x516C;&#x5F0F;&#x3010;&#x57FA;&#x4E8E;&#x5E26;&#x5BBD;&#x5EF6;&#x8FDF;&#x3011;+Metric&#x503C; &#x4F46;&#x662F;&#x53D7;&#x8DDD;&#x79BB;&#x9650;&#x5236; OSPF &#x94FE;&#x8DEF;&#x72B6;&#x6001;</p>
-<p>*&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x4F7F;&#x7528;IS-IS&#x53D6;&#x4EE3;OSPF&#xFF1F;</p>
-<h3 id="2&#xFF1A;IS-IS&#x7684;&#x53D1;&#x5C55;&#x5386;&#x7A0B;"><a href="#2&#xFF1A;IS-IS&#x7684;&#x53D1;&#x5C55;&#x5386;&#x7A0B;" class="headerlink" title="2&#xFF1A;IS-IS&#x7684;&#x53D1;&#x5C55;&#x5386;&#x7A0B;"></a>2&#xFF1A;IS-IS&#x7684;&#x53D1;&#x5C55;&#x5386;&#x7A0B;</h3><p>&#x540C;&#x65F6;&#x8FDB;&#x884C;&#x7684;&#xFF0C;&#x6CA1;&#x6709;&#x8C01;&#x65E9;&#x8C01;&#x665A;&#x7684;&#x8BF4;&#x6CD5;&#x3002;</p>
-<p>OSI&#x4E03;&#x5C42;&#x6A21;&#x578B; &#x4F20;&#x8F93;&#x5C42; &#x9762;&#x5411;&#x94FE;&#x63A5;TCP &#x65E0;&#x94FE;&#x63A5;UDP</p>
-<p>OSI&#x4E2D;&#x540E;&#x671F;&#x4EA7;&#x7269; &#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x6700;&#x65E9;&#x7684;&#x53D1;&#x5C55;&#x9636;&#x6BB5;&#x63D0;&#x51FA;&#x7684;&#x662F;CLNS&#x548C;CONS</p>
-<p>CLNS&#x548C;CONS&#x7B97;&#x662F;OSI&#x7684;&#x524D;&#x8EAB;</p>
-<p>N&#x4EE3;&#x8868;&#x7F51;&#x7EDC;&#xFF0C;S&#x4EE3;&#x8868;&#x670D;&#x52A1;&#xFF0C;C&#x4EE3;&#x8868;&#x94FE;&#x63A5; O&#x4EE3;&#x8868;Of&#x201C;&#x6709;&#x94FE;&#x63A5;&#x7684;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x201D;&#x7C7B;&#x4F3C;&#x4E8E;TCP L&#x4EE3;&#x8868;Less &#x201C;&#x65E0;&#x94FE;&#x63A5;&#x7684;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x201D;</p>
-<p>&#x57FA;&#x4E8E;&#x5BF9;CONS&#x7684;&#x7814;&#x7A76;&#xFF0C;&#x5EF6;&#x4F38;&#x51FA;&#x4E86;IP&#x3010;&#x7F51;&#x7EDC;&#x6807;&#x8BC6;&#x3011;&#x548C;TCP</p>
-<p>TCP&#x6570;&#x636E;&#x4F20;&#x8F93;&#x63A7;&#x5236; IP&#x7F51;&#x7EDC;&#x6807;&#x8BC6;</p>
-<p>&#x56E0;&#x6B64;&#x5F00;&#x53D1;&#x51FA;&#x4E86;&#x52A8;&#x6001;&#x7684;&#x8DEF;&#x7531;&#x534F;&#x8BAE;&#xFF1A;RIP EIGRP OSPF BGP</p>
-<p>&#x53E6;&#x4E00;&#x9635;&#x8425;&#xFF1A;CLNS&#x575A;&#x6301;&#x4F7F;&#x7528;&#x65E0;&#x94FE;&#x63A5;&#x7684;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;</p>
-<p>&#x5F00;&#x53D1;&#x51FA;&#x4E86;CLNP&#xFF1A;CLNS&#x7F51;&#x7EDC;&#x6807;&#x8BC6;</p>
-<p>&#x8FD8;&#x9700;&#x8981;&#x7684;&#x673A;&#x5236;&#xFF1A;CLNS&#x3010;&#x540D;&#x5B57;&#x91CD;&#x590D;&#x3011;IS-IS</p>
-<p>OSPF&#x4E3A;IP&#x670D;&#x52A1;&#xFF0C;IS-IS&#x4E3A;CLNP&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x3002;</p>
-<p>&#x8FD9;&#x4E9B;&#x90FD;&#x662F;&#x4E0D;&#x540C;&#x7EC4;&#x7EC7;&#x5728;&#x540C;&#x65F6;&#x53D1;&#x5C55;&#x7684;&#xFF0C;&#x6700;&#x540E;CONS&#x9635;&#x8425;&#x7684;&#x65B9;&#x6848;&#x5F97;&#x5230;&#x516C;&#x53F8;&#x7684;&#x8BA4;&#x53EF;&#x3002;</p>
-<p>&#x6700;&#x540E;&#xFF0C;ISO&#x7EC4;&#x7EC7;&#x63D0;&#x51FA;&#x4E86;OSI&#x4E03;&#x5C42;&#x6A21;&#x578B;&#xFF0C;&#x4F46;&#x662F;CLNS&#x7684;&#x7406;&#x5FF5;&#x4E5F;&#x5F97;&#x5230;&#x8BA4;&#x53EF;&#xFF0C;&#x56E0;&#x6B64;&#x4FDD;&#x7559;&#x4E0B;&#x6765;&#xFF0C;&#x53EB;&#x505A;UDP</p>
-<p>&#x6700;&#x540E;&#xFF0C;IS-IS&#x5C31;&#x611F;&#x89C9;&#x8981;&#x6D88;&#x5931;&#x4E86;</p>
-<p>&#x8FD9;&#x662F;&#x4E3A;&#x4E86;&#x7EDF;&#x4E00;&#x884C;&#x4E1A;&#x6807;&#x51C6;&#x3002;</p>
-<p>OSPF&#x865A;&#x94FE;&#x8DEF;&#xFF1A;&#x2460;&#x514B;&#x670D;&#x5B64;&#x5C9B;&#x533A;&#x57DF;&#xFF1A;0&#xFF0C;1&#xFF0C;2&#x533A;&#x57DF;&#x4E0D;&#x4E92;&#x76F8;&#x5B66;&#x8DEF;&#x7531;</p>
-<p>&#x2461;&#x4E24;&#x8FB9;&#x533A;&#x57DF;0&#xFF0C;&#x4E2D;&#x95F4;&#x533A;&#x57DF;1&#xFF0C;&#x4F46;&#x662F;&#x4E24;&#x8FB9;&#x533A;&#x57DF;0&#x4E0D;&#x4E92;&#x76F8;&#x5B66;&#x8DEF;&#x7531;&#x3002;</p>
-<p>IS-IS&#x6CA1;&#x6709;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
-<p>&#x5916;&#x4F01;&#x63A8;&#x8FD0;&#x8425;&#x5546;&#x7528;IS-IS &#x601D;&#x79D1;&#x6392;&#x7B2C;&#x4E00;</p>
-<p>&#x5272;&#x63A5;&#xFF1A;&#x5E72;&#x6389;&#x539F;&#x6709;&#x534F;&#x8BAE;&#xFF0C;&#x6362;&#x65B0;&#x534F;&#x8BAE;</p>
-<p>&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;&#x2460;&#x5347;&#x7EA7;OSPF&#xFF0C;&#x4F7F;&#x5176;&#x62E5;&#x6709;IS-IS&#x7279;&#x6027;</p>
-<p>&#x2461;&#x76F4;&#x63A5;&#x7528;IS-IS&#x53D6;&#x4EE3;OSPF</p>
-<p>&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x90FD;&#x4E0D;&#x592A;&#x79D1;&#x5B66;&#x2026;&#x2026;</p>
-<p>&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x4F7F;&#x7528;&#x7684;IS-IS&#xFF0C;&#x5E76;&#x4E0D;&#x662F;&#x7EAF;IS-IS</p>
-<p>&#x96C6;&#x6210;IS-IS&#x3001;&#x53CC;&#x6808;IS-IS</p>
-<p>&#x6240;&#x4EE5;&#x5F88;&#x591A;&#x6280;&#x672F;&#x539F;&#x6765;&#x4E0E;IP&#x5BF9;&#x7ACB;&#xFF0C;&#x540E;&#x6765;&#x88AB;IP&#x541E;&#x5E76;&#x2026;&#x2026;</p>
-<h3 id="3&#xFF1A;CLNP&#x6807;&#x8BC6;"><a href="#3&#xFF1A;CLNP&#x6807;&#x8BC6;" class="headerlink" title="3&#xFF1A;CLNP&#x6807;&#x8BC6;"></a>3&#xFF1A;CLNP&#x6807;&#x8BC6;</h3><p>3.1 NET &#x7F51;&#x7EDC;&#x5B9E;&#x4F53;&#x6807;&#x8BC6;</p>
-<p>&#x7C7B;&#x4F3C;&#x4E8E;IP+MAC&#x7EC4;&#x5408;</p>
-<p>3.2 NSAP &#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x63A5;&#x5165;&#x70B9;</p>
-<p>&#x5B9E;&#x73B0;IP+MAC+&#x7AEF;&#x53E3;&#x53F7;port_nam</p>
-<p>CLNP&#x89C9;&#x5F97;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x628A;IP+MAC&#x5206;&#x5F00;&#x3002;</p>
-<p>NSAP&#x5728;&#x8FD9;&#x4E2A;&#x57FA;&#x7840;&#x4E0A;&#x628A;&#x7AEF;&#x53E3;&#x53F7;&#x52A0;&#x5165;&#x3002;</p>
-<p>&#x4E00;&#x6B65;&#x5230;&#x4F4D;&#x3002;&#x5730;&#x5740;&#x5C31;&#x4F1A;&#x5F88;&#x957F;&#x3002;</p>
-<p>3.3 CLNP&#x6807;&#x8BC6;&#x683C;&#x5F0F;</p>
-<p>AFI A&#x5730;&#x5740; F&#x683C;&#x5F0F; I&#x6388;&#x6743;&#x7EC4;&#x7EC7;</p>
-<p>&#x6570;&#x5B57;&#x7531;&#x5B98;&#x65B9;&#x5B9A;&#x597D;&#x3002;47&#xFF0C;48&#xFF0C;49&#x662F;&#x7528;&#x5728;&#x5C40;&#x57DF;&#x7F51;&#x6216;&#x79C1;&#x7F51;&#x7684;&#x5730;&#x5740;</p>
-<p>&#x6240;&#x4EE5;&#x5B98;&#x65B9;&#x6709;&#x4E00;&#x5F20;&#x8868;&#x3002;</p>
-<p>0000 &#x5B8C;&#x6574;&#x7684;&#x4E00;&#x6BB5;&#xFF0C;&#x4F46;&#x6709;&#x4E24;&#x5757;&#x4FE1;&#x606F;&#x3002;&#x524D;&#x4E24;&#x4E2A;00&#x4EE3;&#x8868;&#x57DF;&#x6807;&#x8BC6;&#xFF0C;&#x540E;&#x4E24;&#x4E2A;00&#x4EE3;&#x8868;&#x533A;&#x57DF;&#x6807;&#x8BC6;</p>
-<p>&#x533A;&#x57DF;&#x88AB;&#x57DF;&#x5305;&#x542B; &#x57DF;&#x5C31;&#x662F;AS</p>
-<p>&#x5DE8;&#x578B;&#x7F51;&#x7EDC;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x57DF;&#x6807;&#x8BC6;</p>
-<p>0001 0002 0003 &#x540C;&#x4E00;&#x57DF;&#x4E2D;&#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;</p>
-<p>sys-ID&#x2014;&#x2014;MAC&#x5730;&#x5740;</p>
-<p>&#x6240;&#x4EE5;&#x8BF4;CLNP&#x5730;&#x5740;&#x7C7B;&#x4F3C;&#x4E8E;IP+MAC&#xFF0C;&#x4FDD;&#x8BC1;&#x4E86;&#x5168;&#x7403;&#x552F;&#x4E00;&#x72EC;&#x7ACB;&#x6027;</p>
-<p>&#x6700;&#x540E;&#x53C8;&#x6709;&#x4E24;&#x4E2A;00 &#x76F8;&#x5F53;&#x4E8E;&#x7AEF;&#x53E3;&#x53F7;</p>
-<p>CLNP&#x5168;&#x90FD;&#x662F;16&#x8FDB;&#x5236; 0A&#x4EE3;&#x8868;&#x7AEF;&#x53E3;10</p>
-<p>&#x5730;&#x5740;&#x683C;&#x5F0F;&#x548C;MAC&#x5730;&#x5740;&#x4E00;&#x6837;&#xFF0C;&#x4F46;&#x4E0D;&#x662F;MAC&#x5730;&#x5740;</p>
-<p>sys-id&#x53EA;&#x8981;&#x4E0D;&#x4E00;&#x6837;&#x5C31;&#x597D;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x8BBE;&#x5907;MAC&#x5730;&#x5740;&#x2026;&#x2026;</p>
-<p>*&#x5982;&#x4F55;&#x533A;&#x5206;&#x662F;NET&#x8FD8;&#x662F;NSAP&#xFF1F;</p>
-<p>&#x770B;&#x6700;&#x540E;&#x7684;&#x90E8;&#x5206;&#x662F;&#x4E0D;&#x662F;00</p>
-<p>IS-IS&#x542F;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5FC5;&#x987B;&#x8981;&#x6709;&#x4E00;&#x4E2A;NET&#x5730;&#x5740;&#x3002;</p>
-<p>&#x5176;&#x5B9E;&#x662F;&#x56E0;&#x4E3A;IS-IS&#x88AB;&#x540C;&#x5316;&#xFF0C;&#x7559;&#x7740;NET&#x5DF2;&#x7ECF;&#x6CA1;&#x5565;&#x7528;&#x4E86;&#x2026;&#x2026;</p>
-<p>&#x5C31;&#x7528;NET&#x5F53;ROUTE ID RID</p>
-<p>&#x7C7B;&#x4F3C;&#x4E8E;&#x5965;&#x8FD0;&#x4F1A;&#x4E0A;&#x7684;&#x4E2D;&#x534E;&#x53F0;&#x5317;</p>
-<p>3.4 IS-IS&#x672F;&#x8BED;</p>
-<p>1&#xFF09;ES &#x7EC8;&#x7AEF;&#x7CFB;&#x7EDF;</p>
-<p>&#x6240;&#x6709;&#x8BBE;&#x5907;&#x8FDE;&#x5165;CLNP&#x540E;&#x90FD;&#x53EB;ES</p>
-<p>TCP/IP CLNS/CLNP&#x5339;&#x914D;</p>
-<p>2&#xFF09;IS:ROUTER</p>
-<p>3&#xFF09;CLNP &#x65E0;&#x94FE;&#x63A5;&#x7F51;&#x7EDC;&#x534F;&#x8BAE; &#x91CC;&#x9762;&#x5BF9;&#x5E94;NET&#x548C;NSAP</p>
-<p>4&#xFF09;CLNS &#x65E0;&#x94FE;&#x63A5;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x2026;&#x2026;&#x7C7B;&#x4F3C;&#x4E8E;UDP</p>
-<p>5&#xFF09;DIS &#x6307;&#x5B9A;&#x4E2D;&#x95F4;&#x7CFB;&#x7EDF; &#x7C7B;&#x4F3C;DR</p>
-<h3 id="6&#xFF1A;IS-IS&#x4E2D;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x7C7B;&#x578B;-router-type"><a href="#6&#xFF1A;IS-IS&#x4E2D;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x7C7B;&#x578B;-router-type" class="headerlink" title="6&#xFF1A;IS-IS&#x4E2D;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x7C7B;&#x578B; router type"></a>6&#xFF1A;IS-IS&#x4E2D;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x7C7B;&#x578B; router type</h3><p>6.1&#xFF09;&#x6240;&#x6709;&#x542F;&#x7528;IS-IS&#x7684;&#x8DEF;&#x7531;&#x5668;&#xFF0C;&#x9ED8;&#x8BA4;&#x7C7B;&#x578B;&#x90FD;&#x662F;L1/L2&#xFF1A;&#x7C7B;&#x4F3C;&#x4E8E;ABR&#xFF1A;&#x5C06;&#x533A;&#x57DF;&#x5185;&#x8DEF;&#x7531;&#x5668;&#x548C;&#x9AA8;&#x5E72;&#x8DEF;&#x7531;&#x5668;&#x8FDE;&#x63A5;</p>
-<p>6.2&#xFF09;&#x53EF;&#x6539;&#x4E3A;L1&#xFF1A;&#x533A;&#x57DF;&#x5185;&#x8DEF;&#x7531;&#x5668;</p>
-<p>6.2&#xFF09;&#x53EF;&#x6539;&#x4E3A;L2&#xFF1A;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x8DEF;&#x7531;&#x5668;</p>
-<p>OSPF&#x4E2D;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x5FC5;&#x987B;&#x4ECE;0&#x5F00;&#x59CB;&#xFF0C;IS-IS&#x6CA1;&#x6709;&#x9650;&#x5236;&#x3002;</p>
-<h3 id="7&#xFF1A;IS-IS-neighbour-TYPE-&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x7C7B;&#x578B;"><a href="#7&#xFF1A;IS-IS-neighbour-TYPE-&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x7C7B;&#x578B;" class="headerlink" title="7&#xFF1A;IS-IS neighbour TYPE &#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x7C7B;&#x578B;"></a>7&#xFF1A;IS-IS neighbour TYPE &#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x7C7B;&#x578B;</h3><p>7.1&#xFF09;L1/L2 L1/L2&#x2014;&#x2014;L1/L2&#xFF08;X&#xFF09;&#x53D6;&#x4EA4;&#x96C6;</p>
-<p>7.2&#xFF09;L2</p>
-<p>7.3&#xFF09;L1</p>
-<p>&#x76F8;&#x540C;&#x533A;&#x57DF;ID &#x4E0D;&#x540C;&#x533A;&#x57DF;ID</p>
-<p>L1&#x2014;&#x2014;L1/L2 &#x53D6;L1 L1&#x2014;&#x2014;L1/L2 &#x3010;L1&#x662F;&#x533A;&#x57DF;&#x5185;&#x8DEF;&#x7531;&#x5668;&#x3011;&#xFF08;X&#xFF09;</p>
-<p>&#x3010;&#x516C;&#x52A1;&#x5458;&#x8003;&#x8BD5;&#x627E;&#x5171;&#x540C;&#x70B9;&#xFF1F;&#x3011;</p>
-<p>&#x4E2D;&#x56FD;&#x5171;&#x4EA7;&#x515A;&#x548C;&#x56FD;&#x6C11;&#x515A;&#x2026;&#x2026;</p>
-<p>L1&#x2014;&#x2014;L1 L1&#x2014;&#x2014;L1&#xFF08;X&#xFF09;</p>
-<p>&#x3010;L1&#x8BBE;&#x5907;&#x53EA;&#x548C;&#x76F8;&#x540C;&#x533A;&#x57DF;&#x8BBE;&#x5907;&#x5EFA;&#x7ACB;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3011;</p>
-<p>L1&#x2014;&#x2014;L2&#xFF08;X&#xFF09; L1&#x2014;&#x2014;L2&#xFF08;X&#xFF09;</p>
-<p>&#x4E0D;&#x7136;L1/L2&#x5C31;&#x6CA1;&#x610F;&#x4E49;&#x4E86;&#x5440;&#x3002;</p>
-<p>L1&#x8BBE;&#x5907;&#x53EA;&#x80FD;&#x548C;&#x76F8;&#x540C;&#x533A;&#x57DF;&#x5185;&#x5E26;L1&#x89D2;&#x8272;&#x7684;&#x8BBE;&#x5907;&#x5F62;&#x6210;L1&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3002;&#x3010;L1&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x2014;&#x2014;&#x533A;&#x57DF;&#x5185;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3011;</p>
-<p>L1/L2&#x2014;&#x2014;L1/L2 L1/L2&#x2014;&#x2014;L1/L2</p>
-<p>&#x3010;&#x6B64;&#x65F6;&#x65E2;&#x4E3A;L1&#x4E5F;&#x4E3A;L2&#x3011; &#x3010;L1&#x6CA1;&#x6709;L2&#x6709;&#x3011;</p>
-<p>L1&#x662F;&#x533A;&#x57DF;&#x5185;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#xFF0C;L2&#x9996;&#x5148;&#x662F;&#x533A;&#x57DF;&#x95F4;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3010;&#x533A;&#x57DF;&#x53F7;&#x4E0D;&#x4E00;&#x6837;&#x3011;&#xFF0C;&#x4F46;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x533A;&#x57DF;&#x5185;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x3002;</p>
-<p>L1/L2&#x2014;&#x2014;L2&#x3010;L2&#x3011; L1/L2&#x2014;&#x2014;L2&#x3010;L2&#x3011;</p>
-<p>L2&#x2014;&#x2014;L1&#xFF08;X&#xFF09; L2&#x2014;&#x2014;L1&#xFF08;X&#xFF09;</p>
-<h3 id="8&#xFF1A;IS-IS&#x7684;&#x7279;&#x6027;"><a href="#8&#xFF1A;IS-IS&#x7684;&#x7279;&#x6027;" class="headerlink" title="8&#xFF1A;IS-IS&#x7684;&#x7279;&#x6027;"></a>8&#xFF1A;IS-IS&#x7684;&#x7279;&#x6027;</h3><p>8.1&#xFF09;IS-IS&#x4E2D;DIS&#x7684;&#x7279;&#x70B9;&#xFF1A;&#x7C7B;&#x4F3C;&#x4E8E;DR &#x6307;&#x5B9A;&#x8DEF;&#x7531;&#x5668;</p>
-<p>&#xFF01;&#xFF01;&#x56DE;&#x987E;</p>
-<p>OSPF&#x4E2D;DR&#x5E72;&#x561B;&#x7684;&#xFF1F;</p>
-<p>&#x2460;&#x51CF;&#x5C11;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#xFF1B;</p>
-<p>&#x2461;&#x7EDF;&#x7B79;&#x66F4;&#x65B0;&#x53D1;&#x9001;&#x8FC7;&#x7A0B;&#x3002;</p>
-<p>&#x56FE;</p>
+  <div class="container">
+    <article>
+      <h1>CCIE IS-IS协议</h1>
+      <p>——2017.11.04</p>
+<h3 id="1：IS-IS中间系统到中间系统"><a href="#1：IS-IS中间系统到中间系统" class="headerlink" title="1：IS-IS中间系统到中间系统"></a>1：IS-IS中间系统到中间系统</h3><p>IGPS阵营中的协议</p>
+<p>两大阵营：EGPS和IGPS</p>
+<p>IGPS 内部网关协议集</p>
+<p>IGPS：RIP OSPF EIGRP IS-IS 都是AS内的协议</p>
+<p>EGPS：BGP AS间、AS内</p>
+<p>IS-IS正在取代OSPF</p>
+<p>学习RIP, EIGRP是为了学习OSPF和BGP？</p>
+<p>Link State 链路状态路由协议</p>
+<p>根据协议自身特点分类：【分类记住路由协议】</p>
+<p>距离矢量 RIP 高级距离矢量 EIGRP 不是靠跳数 公式【基于带宽延迟】+Metric值 但是受距离限制 OSPF 链路状态</p>
+<p>*为什么要使用IS-IS取代OSPF？</p>
+<h3 id="2：IS-IS的发展历程"><a href="#2：IS-IS的发展历程" class="headerlink" title="2：IS-IS的发展历程"></a>2：IS-IS的发展历程</h3><p>同时进行的，没有谁早谁晚的说法。</p>
+<p>OSI七层模型 传输层 面向链接TCP 无链接UDP</p>
+<p>OSI中后期产物 计算机网络最早的发展阶段提出的是CLNS和CONS</p>
+<p>CLNS和CONS算是OSI的前身</p>
+<p>N代表网络，S代表服务，C代表链接 O代表Of“有链接的网络服务”类似于TCP L代表Less “无链接的网络服务”</p>
+<p>基于对CONS的研究，延伸出了IP【网络标识】和TCP</p>
+<p>TCP数据传输控制 IP网络标识</p>
+<p>因此开发出了动态的路由协议：RIP EIGRP OSPF BGP</p>
+<p>另一阵营：CLNS坚持使用无链接的网络协议</p>
+<p>开发出了CLNP：CLNS网络标识</p>
+<p>还需要的机制：CLNS【名字重复】IS-IS</p>
+<p>OSPF为IP服务，IS-IS为CLNP网络服务。</p>
+<p>这些都是不同组织在同时发展的，最后CONS阵营的方案得到公司的认可。</p>
+<p>最后，ISO组织提出了OSI七层模型，但是CLNS的理念也得到认可，因此保留下来，叫做UDP</p>
+<p>最后，IS-IS就感觉要消失了</p>
+<p>这是为了统一行业标准。</p>
+<p>OSPF虚链路：①克服孤岛区域：0，1，2区域不互相学路由</p>
+<p>②两边区域0，中间区域1，但是两边区域0不互相学路由。</p>
+<p>IS-IS没有这个问题。</p>
+<p>外企推运营商用IS-IS 思科排第一</p>
+<p>割接：干掉原有协议，换新协议</p>
+<p>两种方法：①升级OSPF，使其拥有IS-IS特性</p>
+<p>②直接用IS-IS取代OSPF</p>
+<p>两种方法都不太科学……</p>
+<p>所以我们现在使用的IS-IS，并不是纯IS-IS</p>
+<p>集成IS-IS、双栈IS-IS</p>
+<p>所以很多技术原来与IP对立，后来被IP吞并……</p>
+<h3 id="3：CLNP标识"><a href="#3：CLNP标识" class="headerlink" title="3：CLNP标识"></a>3：CLNP标识</h3><p>3.1 NET 网络实体标识</p>
+<p>类似于IP+MAC组合</p>
+<p>3.2 NSAP 网络服务接入点</p>
+<p>实现IP+MAC+端口号port_nam</p>
+<p>CLNP觉得没有必要把IP+MAC分开。</p>
+<p>NSAP在这个基础上把端口号加入。</p>
+<p>一步到位。地址就会很长。</p>
+<p>3.3 CLNP标识格式</p>
+<p>AFI A地址 F格式 I授权组织</p>
+<p>数字由官方定好。47，48，49是用在局域网或私网的地址</p>
+<p>所以官方有一张表。</p>
+<p>0000 完整的一段，但有两块信息。前两个00代表域标识，后两个00代表区域标识</p>
+<p>区域被域包含 域就是AS</p>
+<p>巨型网络有不同的域标识</p>
+<p>0001 0002 0003 同一域中的不同区域</p>
+<p>sys-ID——MAC地址</p>
+<p>所以说CLNP地址类似于IP+MAC，保证了全球唯一独立性</p>
+<p>最后又有两个00 相当于端口号</p>
+<p>CLNP全都是16进制 0A代表端口10</p>
+<p>地址格式和MAC地址一样，但不是MAC地址</p>
+<p>sys-id只要不一样就好，建议使用设备MAC地址……</p>
+<p>*如何区分是NET还是NSAP？</p>
+<p>看最后的部分是不是00</p>
+<p>IS-IS启用的时候，必须要有一个NET地址。</p>
+<p>其实是因为IS-IS被同化，留着NET已经没啥用了……</p>
+<p>就用NET当ROUTE ID RID</p>
+<p>类似于奥运会上的中华台北</p>
+<p>3.4 IS-IS术语</p>
+<p>1）ES 终端系统</p>
+<p>所有设备连入CLNP后都叫ES</p>
+<p>TCP/IP CLNS/CLNP匹配</p>
+<p>2）IS:ROUTER</p>
+<p>3）CLNP 无链接网络协议 里面对应NET和NSAP</p>
+<p>4）CLNS 无链接网络服务……类似于UDP</p>
+<p>5）DIS 指定中间系统 类似DR</p>
+<h3 id="6：IS-IS中路由器的类型-router-type"><a href="#6：IS-IS中路由器的类型-router-type" class="headerlink" title="6：IS-IS中路由器的类型 router type"></a>6：IS-IS中路由器的类型 router type</h3><p>6.1）所有启用IS-IS的路由器，默认类型都是L1/L2：类似于ABR：将区域内路由器和骨干路由器连接</p>
+<p>6.2）可改为L1：区域内路由器</p>
+<p>6.2）可改为L2：骨干区域路由器</p>
+<p>OSPF中骨干区域必须从0开始，IS-IS没有限制。</p>
+<h3 id="7：IS-IS-neighbour-TYPE-邻居关系类型"><a href="#7：IS-IS-neighbour-TYPE-邻居关系类型" class="headerlink" title="7：IS-IS neighbour TYPE 邻居关系类型"></a>7：IS-IS neighbour TYPE 邻居关系类型</h3><p>7.1）L1/L2 L1/L2——L1/L2（X）取交集</p>
+<p>7.2）L2</p>
+<p>7.3）L1</p>
+<p>相同区域ID 不同区域ID</p>
+<p>L1——L1/L2 取L1 L1——L1/L2 【L1是区域内路由器】（X）</p>
+<p>【公务员考试找共同点？】</p>
+<p>中国共产党和国民党……</p>
+<p>L1——L1 L1——L1（X）</p>
+<p>【L1设备只和相同区域设备建立邻居关系】</p>
+<p>L1——L2（X） L1——L2（X）</p>
+<p>不然L1/L2就没意义了呀。</p>
+<p>L1设备只能和相同区域内带L1角色的设备形成L1邻居关系。【L1邻居关系——区域内邻居关系】</p>
+<p>L1/L2——L1/L2 L1/L2——L1/L2</p>
+<p>【此时既为L1也为L2】 【L1没有L2有】</p>
+<p>L1是区域内邻居关系，L2首先是区域间邻居关系【区域号不一样】，但也可以是区域内邻居关系。</p>
+<p>L1/L2——L2【L2】 L1/L2——L2【L2】</p>
+<p>L2——L1（X） L2——L1（X）</p>
+<h3 id="8：IS-IS的特性"><a href="#8：IS-IS的特性" class="headerlink" title="8：IS-IS的特性"></a>8：IS-IS的特性</h3><p>8.1）IS-IS中DIS的特点：类似于DR 指定路由器</p>
+<p>！！回顾</p>
+<p>OSPF中DR干嘛的？</p>
+<p>①减少不必要的邻接关系；</p>
+<p>②统筹更新发送过程。</p>
+<p>图</p>
 <p>EIGRP</p>
 <p>OSPF DR BDR</p>
-<p>1&#xFF09;DIS&#x7684;&#x9009;&#x4E3E;</p>
-<p>&#x5148;&#x6BD4;&#x8F83;&#x4F18;&#x5148;&#x7EA7;&#xFF08;&#x9ED8;&#x8BA4;&#x662F;64&#xFF0C;&#x6700;&#x5927;127&#xFF09;&#x5927;&#x5219;&#x4F18;</p>
-<p>&#x518D;&#x6BD4;&#x8F83;sys-id &#x5927;&#x5219;&#x4F18;</p>
-<p>&#x53C2;&#x6570;&#x4E0D;&#x540C;&#xFF0C;&#x673A;&#x5236;&#x76F8;&#x4F3C;&#x3002;</p>
-<p>2&#xFF09;&#x6CA1;&#x6709;B DIS&#xFF0C;&#x4E14;DIS&#x53EF;&#x4EE5;&#x968F;&#x610F;&#x88AB;&#x66FF;&#x4EE3;&#x3002;</p>
-<p>3&#xFF09;&#x6240;&#x6709;&#x975E;DIS&#x4E4B;&#x95F4;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x5F62;&#x6210;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3002;</p>
-<p>DIS&#x7528;&#x6765;&#x5E72;&#x5565;&#xFF1F;&#x539F;&#x56E0;&#xFF1A;DIS&#x88AB;&#x505A;&#x4E86;&#x4E00;&#x534A;&#x3002;</p>
-<p>&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x5F53;&#x5B83;&#x4E0D;&#x5B58;&#x5728;&#x4E86;&#x3002;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x4F5C;&#x7528;&#x3002;</p>
-<p>&#x8FD9;&#x70B9;&#x4E0A;&#x4E0D;&#x5982;OSPF&#x3002;</p>
-<p>8.2&#xFF09;IS-IS&#x4E2D;&#x533A;&#x57DF;&#x7684;&#x7279;&#x70B9;</p>
-<p>IS-IS&#x4E5F;&#x662F;&#x5C42;&#x6B21;&#x5316;&#x7684;&#x8BBE;&#x8BA1;&#xFF0C;&#x9AA8;&#x5E72;&#x5C42;&#xFF0C;&#x5E38;&#x89C4;&#x5C42;&#x3002;&#x540C;&#x6837;&#x4E5F;&#x6709;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x548C;&#x5E38;&#x89C4;&#x533A;&#x57DF;</p>
-<p>IS-IS&#x4E0D;&#x8981;&#x6C42;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x7F16;&#x53F7;&#x4E00;&#x5B9A;&#x662F;0</p>
-<p>IS-IS&#x4E0D;&#x8981;&#x6C42;&#x6240;&#x6709;&#x5E38;&#x89C4;&#x533A;&#x57DF;&#x5FC5;&#x987B;&#x548C;&#x9AA8;&#x5E72;&#x533A;&#x57DF;&#x8FDE;&#x63A5;&#x3002;</p>
-<p>*IS-IS&#x533A;&#x57DF;&#x7684;&#x8FB9;&#x754C;&#x662F;&#x5728;&#x8DEF;&#x7531;&#x5668;&#xFF0C;OSPF&#x533A;&#x57DF;&#x8FB9;&#x754C;&#x662F;&#x5728;&#x63A5;&#x53E3;</p>
-<p>IS-IS&#x5141;&#x8BB8;&#x63A5;&#x53E3;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x5728;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x3002;</p>
-<p>OSPF&#x4E2D;&#x62E5;&#x6709;&#x7279;&#x6B8A;&#x533A;&#x57DF;&#xFF1A;STUB T-STUB</p>
-<p>NSSA&#x3001;T-NSSA</p>
-<p>IS-IS &#x533A;&#x57DF;&#x5185;&#x8BBE;&#x5907;&#x53EA;&#x8981;&#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x6539;&#x4E3A;L1&#xFF0C;&#x5B83;&#x6240;&#x8FDE;&#x63A5;&#x7684;L1/L2&#x8BBE;&#x5907;&#x5C31;&#x81EA;&#x52A8;&#x7ED9;&#x5B83;&#x4E00;&#x6761;&#x7F3A;&#x7701;</p>
-<p>&#x5E76;&#x4E14;&#x4E0D;&#x4F1A;&#x5C06;&#x533A;&#x57DF;&#x95F4;&#x8DEF;&#x7531;&#xFF0C;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x653E;&#x5165;&#x533A;&#x57DF;&#x5185;&#x3002;</p>
-<h3 id="9&#xFF1A;IS-IS&#x8DEF;&#x5F84;&#x5EA6;&#x91CF;&#x503C;&#x8BA1;&#x7B97;"><a href="#9&#xFF1A;IS-IS&#x8DEF;&#x5F84;&#x5EA6;&#x91CF;&#x503C;&#x8BA1;&#x7B97;" class="headerlink" title="9&#xFF1A;IS-IS&#x8DEF;&#x5F84;&#x5EA6;&#x91CF;&#x503C;&#x8BA1;&#x7B97;"></a>9&#xFF1A;IS-IS&#x8DEF;&#x5F84;&#x5EA6;&#x91CF;&#x503C;&#x8BA1;&#x7B97;</h3><p>&#x8BA1;&#x7B97;&#x516C;&#x5F0F;&#x53CA;&#x65B9;&#x6CD5;&#x548C;OSPF&#x4E00;&#x6A21;&#x4E00;&#x6837;&#xFF0C;&#x90FD;&#x53EB;COST</p>
-<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x6240;&#x6709;&#x63A5;&#x53E3;&#x90FD;&#x88AB;&#x8D4B;&#x4E88;&#x4E86;10&#x7684;&#x5F00;&#x9500;&#x3010;&#x4E0D;&#x662F;&#x52A8;&#x6001;&#x8BA1;&#x7B97;&#x3011;</p>
-<p>&#x6709;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;&#x4F46;&#x662F;&#x4E0D;&#x7528;</p>
-<h3 id="10&#xFF1A;IS-IS&#x7684;&#x6D88;&#x606F;&#x548C;&#x6D88;&#x606F;&#x7C7B;&#x578B;"><a href="#10&#xFF1A;IS-IS&#x7684;&#x6D88;&#x606F;&#x548C;&#x6D88;&#x606F;&#x7C7B;&#x578B;" class="headerlink" title="10&#xFF1A;IS-IS&#x7684;&#x6D88;&#x606F;&#x548C;&#x6D88;&#x606F;&#x7C7B;&#x578B;"></a>10&#xFF1A;IS-IS&#x7684;&#x6D88;&#x606F;&#x548C;&#x6D88;&#x606F;&#x7C7B;&#x578B;</h3><p>&#x9E21;&#x808B;&#x4E2D;&#x7684;&#x6218;&#x6597;&#x673A;&#xFF1F;</p>
-<p>1&#xFF09;IIH&#xFF1A;is-is hello &#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x51B3;&#x5B9A;&#x5B83;&#x7684;&#x6D88;&#x606F;&#x5206;L1 L2 &#x56FA;&#x5B9A;10s&#x4E00;&#x4E2A;&#xFF0C;&#x4E09;&#x500D;&#x8001;&#x5316;&#x65F6;&#x95F4;</p>
-<p>2&#xFF09;LSP&#xFF1A;link state pdu LSP=LSA OSI&#x547D;&#x540D;&#x6A21;&#x5F0F;&#x2026;&#x2026; &#x4E5F;&#x5206;L1 L2</p>
-<p>IS-IS&#x7684;&#x6570;&#x636E;&#x5E93;&#x4E5F;&#x5206;L1 L2</p>
-<p>&#x6D9B;&#x54E5;&#x548C;&#x5434;&#x8001;&#x5E08;&#x7684;&#x6FB3;&#x95E8;&#x8D4C;&#x573A;&#x4E4B;&#x65C5;</p>
-<h3 id="11&#xFF1A;IS-IS&#x7684;&#x914D;&#x7F6E;"><a href="#11&#xFF1A;IS-IS&#x7684;&#x914D;&#x7F6E;" class="headerlink" title="11&#xFF1A;IS-IS&#x7684;&#x914D;&#x7F6E;"></a>11&#xFF1A;IS-IS&#x7684;&#x914D;&#x7F6E;</h3><p>&#x6B65;&#x9AA4;1&#xFF1A;&#x542F;&#x7528;IS-IS&#x5E76;&#x4E14;&#x8BBE;&#x5B9A;NET&#x5730;&#x5740;</p>
+<p>1）DIS的选举</p>
+<p>先比较优先级（默认是64，最大127）大则优</p>
+<p>再比较sys-id 大则优</p>
+<p>参数不同，机制相似。</p>
+<p>2）没有B DIS，且DIS可以随意被替代。</p>
+<p>3）所有非DIS之间，都可以正常形成邻接关系。</p>
+<p>DIS用来干啥？原因：DIS被做了一半。</p>
+<p>所以可以当它不存在了。没有任何作用。</p>
+<p>这点上不如OSPF。</p>
+<p>8.2）IS-IS中区域的特点</p>
+<p>IS-IS也是层次化的设计，骨干层，常规层。同样也有骨干区域和常规区域</p>
+<p>IS-IS不要求骨干区域编号一定是0</p>
+<p>IS-IS不要求所有常规区域必须和骨干区域连接。</p>
+<p>*IS-IS区域的边界是在路由器，OSPF区域边界是在接口</p>
+<p>IS-IS允许接口和路由器在不同区域。</p>
+<p>OSPF中拥有特殊区域：STUB T-STUB</p>
+<p>NSSA、T-NSSA</p>
+<p>IS-IS 区域内设备只要路由器角色改为L1，它所连接的L1/L2设备就自动给它一条缺省</p>
+<p>并且不会将区域间路由，外部路由放入区域内。</p>
+<h3 id="9：IS-IS路径度量值计算"><a href="#9：IS-IS路径度量值计算" class="headerlink" title="9：IS-IS路径度量值计算"></a>9：IS-IS路径度量值计算</h3><p>计算公式及方法和OSPF一模一样，都叫COST</p>
+<p>默认情况下所有接口都被赋予了10的开销【不是动态计算】</p>
+<p>有计算公式但是不用</p>
+<h3 id="10：IS-IS的消息和消息类型"><a href="#10：IS-IS的消息和消息类型" class="headerlink" title="10：IS-IS的消息和消息类型"></a>10：IS-IS的消息和消息类型</h3><p>鸡肋中的战斗机？</p>
+<p>1）IIH：is-is hello 路由器角色决定它的消息分L1 L2 固定10s一个，三倍老化时间</p>
+<p>2）LSP：link state pdu LSP=LSA OSI命名模式…… 也分L1 L2</p>
+<p>IS-IS的数据库也分L1 L2</p>
+<p>涛哥和吴老师的澳门赌场之旅</p>
+<h3 id="11：IS-IS的配置"><a href="#11：IS-IS的配置" class="headerlink" title="11：IS-IS的配置"></a>11：IS-IS的配置</h3><p>步骤1：启用IS-IS并且设定NET地址</p>
 <p>Router isis</p>
 <p>Net 49.0000.0000.0000.0001.00</p>
-<p>log-adjacency-changes //&#x8BA9;&#x63A7;&#x5236;&#x53F0;&#x4EE5;&#x65E5;&#x5FD7;&#x5F62;&#x5F0F;&#x63D0;&#x9192;IS-IS&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x7684;&#x53D8;&#x5316;</p>
-<p>0000&#xFF1A;&#x57DF;0&#xFF0C;&#x533A;&#x57DF;0</p>
-<p>0000.0000.0001&#xFF1A;sys-id</p>
-<p>&#x6B65;&#x9AA4;2&#xFF1A;&#x63A5;&#x53E3;&#x52A0;&#x5165;IS-IS</p>
-<p>&#x4E0E;OSPF&#x4E0D;&#x540C;&#xFF0C;&#x5C06;&#x63A5;&#x53E3;&#x63A5;&#x5165;&#x67D0;&#x4E2A;&#x533A;&#x57DF;</p>
+<p>log-adjacency-changes //让控制台以日志形式提醒IS-IS邻接关系的变化</p>
+<p>0000：域0，区域0</p>
+<p>0000.0000.0001：sys-id</p>
+<p>步骤2：接口加入IS-IS</p>
+<p>与OSPF不同，将接口接入某个区域</p>
 <p>interface&lt; intf-id&gt;</p>
 <p>ip route isis</p>
-<h3 id="12&#xFF1A;IS-IS&#x7684;&#x67E5;&#x770B;"><a href="#12&#xFF1A;IS-IS&#x7684;&#x67E5;&#x770B;" class="headerlink" title="12&#xFF1A;IS-IS&#x7684;&#x67E5;&#x770B;"></a>12&#xFF1A;IS-IS&#x7684;&#x67E5;&#x770B;</h3><p>1&#xFF09;&#x67E5;&#x770B;&#x8DEF;&#x7531;&#x8868;&#x4E2D;IS-IS&#x7684;&#x6761;&#x76EE;</p>
+<h3 id="12：IS-IS的查看"><a href="#12：IS-IS的查看" class="headerlink" title="12：IS-IS的查看"></a>12：IS-IS的查看</h3><p>1）查看路由表中IS-IS的条目</p>
 <p>show ip route isis</p>
-<p>i L1/L2 IS-IS&#x8DEF;&#x7531;&#x4E5F;&#x5206;L1 L2</p>
-<p>i L1 &#x533A;&#x57DF;&#x5185;&#x8DEF;&#x7531;</p>
-<p>i L2 &#x533A;&#x57DF;&#x95F4;&#x8DEF;&#x7531;&#x6216;&#x5916;&#x90E8;&#x8DEF;&#x7531;</p>
-<p>IS-IS&#x7BA1;&#x7406;&#x8DDD;&#x79BB;&#x5168;&#x662F;115</p>
-<p>2&#xFF09;&#x67E5;&#x770B;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x662F;&#x5426;&#x5EFA;&#x7ACB;&#x3001;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x7684;&#x7C7B;&#x578B;</p>
-<p>show clns neighbour L1/L2 &#x6240;&#x4EE5;&#x4E00;&#x822C;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;</p>
-<p>show isis neighbour &#x4E00;&#x884C;L1&#xFF0C;&#x4E00;&#x884C;L2</p>
-<p>12&#xFF1A;IS-IS&#x5B9E;&#x9A8C;</p>
+<p>i L1/L2 IS-IS路由也分L1 L2</p>
+<p>i L1 区域内路由</p>
+<p>i L2 区域间路由或外部路由</p>
+<p>IS-IS管理距离全是115</p>
+<p>2）查看邻接关系是否建立、邻接关系的类型</p>
+<p>show clns neighbour L1/L2 所以一般使用这个命令</p>
+<p>show isis neighbour 一行L1，一行L2</p>
+<p>12：IS-IS实验</p>
 <p>log-adjacency-changes</p>
-<p>&#x63A7;&#x5236;&#x53F0;&#x62A5;&#x4E86;&#x4E24;&#x6B21;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#xFF1F;</p>
-<p>&#x9ED8;&#x8BA4;&#x89D2;&#x8272;&#x662F;L1/L2</p>
+<p>控制台报了两次，为什么？</p>
+<p>默认角色是L1/L2</p>
 <p>is-type ?</p>
-<p>is-type level-1 //&#x4FEE;&#x6539;&#x8DEF;&#x7531;&#x5668;&#x7C7B;&#x578B;&#x4E3A;L1</p>
+<p>is-type level-1 //修改路由器类型为L1</p>
 <p>is-type level-1-2</p>
-<p>&#x4E0D;&#x5141;&#x8BB8;L2&#x53D8;L1&#x8FDB;&#x5165;&#x533A;&#x57DF;</p>
-<p>show isis neighbours //&#x66F4;&#x591A;&#x7528;&#x6765;&#x770B;DIS&#x66F4;&#x65B9;&#x4FBF;</p>
-<p>Circuit ID &#x7535;&#x8DEF;ID DIS</p>
-<p>isis priority 127 //&#x66F4;&#x6539;DIS</p>
-<h3 id="13&#xFF1A;IS-IS-&#x7684;&#x91CD;&#x5206;&#x53D1;"><a href="#13&#xFF1A;IS-IS-&#x7684;&#x91CD;&#x5206;&#x53D1;" class="headerlink" title="13&#xFF1A;IS-IS &#x7684;&#x91CD;&#x5206;&#x53D1;"></a>13&#xFF1A;IS-IS &#x7684;&#x91CD;&#x5206;&#x53D1;</h3><p>&#x5916;&#x90E8;&#x7F51;&#x7EDC;&#x8FDB;&#x5165;isis&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;L2&#x8DEF;&#x7531;&#x7C7B;&#x578B;&#xFF0C;&#x9ED8;&#x8BA4;&#x5F00;&#x9500;&#x662F;10&#x3002;</p>
+<p>不允许L2变L1进入区域</p>
+<p>show isis neighbours //更多用来看DIS更方便</p>
+<p>Circuit ID 电路ID DIS</p>
+<p>isis priority 127 //更改DIS</p>
+<h3 id="13：IS-IS-的重分发"><a href="#13：IS-IS-的重分发" class="headerlink" title="13：IS-IS 的重分发"></a>13：IS-IS 的重分发</h3><p>外部网络进入isis，默认是L2路由类型，默认开销是10。</p>
 <p>router isis</p>
-<p>redistribute [rip/eigrp as-id] metric &lt;&#x6307;&#x5B9A;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x521D;&#x59CB;&#x5EA6;&#x91CF;&#x503C;&gt; </p>
-<p>&lt; level-1 /level-2/level-1-2 &gt; //&#x6307;&#x5B9A;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x662F;&#x4EC0;&#x4E48;&#x7C7B;&#x578B;&#x8FDB;&#x5165;isis</p>
-<p>redistribute ospf pid metric-type &lt; external ospf &#x7684;&#x5916;&#x90E8;&#x8DEF;&#x7531;/internal ospf&#x7684;&#x533A;&#x57DF;&#x5185;&#x6216;&#x533A;&#x57DF;&#x95F4;&#x8DEF;&#x7531;&gt;</p>
-<p>&#x8DEF;&#x7531;&#x5668;&#x89D2;&#x8272;&#x4E3A;L1&#xFF0C;&#x90A3;&#x4E48;&#x91CD;&#x5206;&#x53D1;&#x4E00;&#x822C;&#x4E0D;&#x5141;&#x8BB8;&#x505A;&#x5728;&#x8FD9;&#x6837;&#x7684;&#x8BBE;&#x5907;&#x4E0A;&#x3002;</p>
-<p>&#x5982;&#x679C;L1&#x89D2;&#x8272;&#x8BBE;&#x5907;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x91CD;&#x5206;&#x53D1;&#xFF0C;&#x90A3;&#x4E48;&#x4E00;&#x5B9A;&#x8981;&#x5728;&#x6700;&#x540E;&#x52A0;&#x4E0A;level-1&#x3002;</p>
-<h3 id="14&#xFF1A;ISIS-&#x7684;&#x624B;&#x52A8;&#x6C47;&#x603B;"><a href="#14&#xFF1A;ISIS-&#x7684;&#x624B;&#x52A8;&#x6C47;&#x603B;" class="headerlink" title="14&#xFF1A;ISIS &#x7684;&#x624B;&#x52A8;&#x6C47;&#x603B;"></a>14&#xFF1A;ISIS &#x7684;&#x624B;&#x52A8;&#x6C47;&#x603B;</h3><p>&#x5EFA;&#x8BAE;&#x914D;&#x7F6E;&#x5728;L1/L2&#x89D2;&#x8272;&#x8BBE;&#x5907;&#x4E0A;&#x3002;</p>
-<p>&#x6C47;&#x603B;&#x540E;&#x8DEF;&#x7531;&#x7C7B;&#x578B;&#x4E3A;L2&#xFF0C;&#x5F00;&#x9500;&#x9ED8;&#x8BA4;10  &#x3002;</p>
-<p>L1&#x8BBE;&#x5907;&#x4E0A;&#x9ED8;&#x8BA4;&#x65E0;&#x6CD5;&#x5BF9;&#x672C;&#x5730; ISIS L1 &#x8DEF;&#x7531;&#x8FDB;&#x884C;&#x6C47;&#x603B;&#x3002;</p>
-<p>&#x672C;&#x5730;&#x76F4;&#x8FDE;&#x7F51;&#x7EDC;&#x4EE5;&#x5916;&#x90E8;&#x8DEF;&#x7531; L1 &#x5F62;&#x5F0F;&#x8FDB;&#x5165;&#xFF0C;&#x518D;&#x9488;&#x5BF9; L1 &#x8DEF;&#x7531;&#x6C47;&#x603B;&#x3002;</p>
+<p>redistribute [rip/eigrp as-id] metric &lt;指定外部路由初始度量值&gt; </p>
+<p>&lt; level-1 /level-2/level-1-2 &gt; //指定外部路由是什么类型进入isis</p>
+<p>redistribute ospf pid metric-type &lt; external ospf 的外部路由/internal ospf的区域内或区域间路由&gt;</p>
+<p>路由器角色为L1，那么重分发一般不允许做在这样的设备上。</p>
+<p>如果L1角色设备需要配置重分发，那么一定要在最后加上level-1。</p>
+<h3 id="14：ISIS-的手动汇总"><a href="#14：ISIS-的手动汇总" class="headerlink" title="14：ISIS 的手动汇总"></a>14：ISIS 的手动汇总</h3><p>建议配置在L1/L2角色设备上。</p>
+<p>汇总后路由类型为L2，开销默认10  。</p>
+<p>L1设备上默认无法对本地 ISIS L1 路由进行汇总。</p>
+<p>本地直连网络以外部路由 L1 形式进入，再针对 L1 路由汇总。</p>
 <p>router isis</p>
-<p>summary-address &lt;&#x6C47;&#x603B;&#x540E;&#x7F51;&#x7EDC;&gt; &lt;&#x6C47;&#x603B;&#x540E;&#x7F51;&#x7EDC;&#x63A9;&#x7801;&gt; level-1/level-2</p>
-<h3 id="15&#xFF1A;ISIS-&#x8BA4;&#x8BC1;-&#x53CA;-ISIS-&#x8DEF;&#x7531;&#x6CC4;&#x9732;"><a href="#15&#xFF1A;ISIS-&#x8BA4;&#x8BC1;-&#x53CA;-ISIS-&#x8DEF;&#x7531;&#x6CC4;&#x9732;" class="headerlink" title="15&#xFF1A;ISIS &#x8BA4;&#x8BC1; &#x53CA; ISIS &#x8DEF;&#x7531;&#x6CC4;&#x9732;"></a>15&#xFF1A;ISIS &#x8BA4;&#x8BC1; &#x53CA; ISIS &#x8DEF;&#x7531;&#x6CC4;&#x9732;</h3><p>15.1&#xFF09;ISIS &#x8BA4;&#x8BC1;</p>
-<ol class="ui list">
-<li><p>&#x94FE;&#x8DEF;&#x8BA4;&#x8BC1; isis password cisco</p>
-<p>&#x8BE5;&#x8BA4;&#x8BC1;&#x662F;&#x5229;&#x7528; IIH &#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x8BA4;&#x8BC1;&#x4E0D;&#x540C;&#x8FC7;&#x5F71;&#x54CD;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3002;&#x94FE;&#x8DEF;&#x8BA4;&#x8BC1;&#x662F;&#x6700;&#x9AD8;&#x7EA7;&#x522B;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x533A;&#x57DF;&#x8BA4;&#x8BC1;&#x901A;&#x8FC7;&#xFF0C;&#x94FE;&#x8DEF;&#x8BA4;&#x8BC1;&#x4E0D;&#x901A;&#x8FC7;&#x5C31;&#x662F;&#x4E0D;&#x901A;&#x8FC7;&#x3002;&#x4E00;&#x822C;&#x4E00;&#x4E2A;&#x8BA4;&#x8BC1;&#x5C31;&#x884C;&#x4E86;&#x3002;</p>
+<p>summary-address &lt;汇总后网络&gt; &lt;汇总后网络掩码&gt; level-1/level-2</p>
+<h3 id="15：ISIS-认证-及-ISIS-路由泄露"><a href="#15：ISIS-认证-及-ISIS-路由泄露" class="headerlink" title="15：ISIS 认证 及 ISIS 路由泄露"></a>15：ISIS 认证 及 ISIS 路由泄露</h3><p>15.1）ISIS 认证</p>
+<ol>
+<li><p>链路认证 isis password cisco</p>
+<p>该认证是利用 IIH 完成的，所以认证不同过影响邻接关系。链路认证是最高级别的，如果区域认证通过，链路认证不通过就是不通过。一般一个认证就行了。</p>
 </li>
 </ol>
-<ol start="2" class="ui list">
-<li><p>&#x533A;&#x57DF;&#x8BA4;&#x8BC1; area-password cisco</p>
-<p>&#x5229;&#x7528; LSP &#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x8BA4;&#x8BC1;&#x4E0D;&#x901A;&#x8FC7;&#x53EA;&#x5F71;&#x54CD;&#x8DEF;&#x7531;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x4E0D;&#x5F71;&#x54CD;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3002;</p>
+<ol start="2">
+<li><p>区域认证 area-password cisco</p>
+<p>利用 LSP 完成的，认证不通过只影响路由的学习，不影响邻接关系。</p>
 </li>
 </ol>
-<ol start="3" class="ui list">
-<li><p>&#x57DF;&#x8BA4;&#x8BC1; domain-password cisco</p>
-<p>&#x8BE5;&#x8BA4;&#x8BC1;&#x5982;&#x679C;&#x4E0D;&#x901A;&#x8FC7;&#xFF0C;&#x53EA;&#x5F71;&#x54CD;&#x8DEF;&#x7531;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x4E0D;&#x5F71;&#x54CD;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3002;</p>
+<ol start="3">
+<li><p>域认证 domain-password cisco</p>
+<p>该认证如果不通过，只影响路由的学习，不影响邻接关系。</p>
 </li>
 </ol>
-<p>15.2&#xFF09;&#x8DEF;&#x7531;&#x6CC4;&#x9732;</p>
-<p>L1/L2 &#x8BBE;&#x5907;&#x9ED8;&#x8BA4;&#x4E0D;&#x5141;&#x8BB8; L2 &#x6570;&#x636E;&#x5E93;&#x4FE1;&#x606F;&#x8FDB;&#x5165; L1 &#x6570;&#x636E;&#x5E93;&#xFF0C;&#x53D8;&#x6210;&#x66F4;&#x65B0;&#x53D1;&#x9001;&#x3002;</p>
-<p>15.3&#xFF09;&#x8DEF;&#x7531;&#x6CC4;&#x9732;&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;</p>
-<p>&#x6B65;&#x9AA4;1&#xFF1A;L1/L2 &#x8BBE;&#x5907;&#x4E0A;&#x7F16;&#x5199; ACL&#xFF0C;&#x5339;&#x914D;&#x88AB;&#x6CC4;&#x9732;&#x7684;&#x76EE;&#x6807;&#x8DEF;&#x7531;</p>
-<p>&#x6B65;&#x9AA4;2&#xFF1A;L1/L2 &#x8BBE;&#x5907;&#x4E0A;&#x7F16;&#x5199; ROUTE-MAP &#x5F15;&#x7528; ACL&#x3002;</p>
-<p>&#x6B65;&#x9AA4;3&#xFF1A;L1/L2 &#x8BBE;&#x5907;&#x4E0A;&#x505A; ISIS &#x5230; ISIS &#x7684;&#x91CD;&#x5206;&#x53D1;&#xFF0C;&#x5E76;&#x4E14;&#x6307;&#x5B9A;&#x662F;&#x5229;&#x7528; route-map &#x5B8C;&#x6210; L2 &#x6570;&#x636E;&#x5E93;&#x6761;&#x76EE;&#x5230; L1 &#x6570;&#x636E;&#x5E93;&#x6761;&#x76EE;&#x7684;&#x6CC4;&#x9732;&#x3002;</p>
+<p>15.2）路由泄露</p>
+<p>L1/L2 设备默认不允许 L2 数据库信息进入 L1 数据库，变成更新发送。</p>
+<p>15.3）路由泄露的配置流程</p>
+<p>步骤1：L1/L2 设备上编写 ACL，匹配被泄露的目标路由</p>
+<p>步骤2：L1/L2 设备上编写 ROUTE-MAP 引用 ACL。</p>
+<p>步骤3：L1/L2 设备上做 ISIS 到 ISIS 的重分发，并且指定是利用 route-map 完成 L2 数据库条目到 L1 数据库条目的泄露。</p>
 <p>redistribute isis ip level-2 into level-1 route-map 2T1</p>
-<p>&#x66F4;&#x6539;&#x5F00;&#x9500; isis metric &lt; &#x5F00;&#x9500;&gt;</p>
-<h3 id="16&#xFF1A;ISIS-&#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x8FC1;&#x79FB;"><a href="#16&#xFF1A;ISIS-&#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x8FC1;&#x79FB;" class="headerlink" title="16&#xFF1A;ISIS &#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x8FC1;&#x79FB;"></a>16&#xFF1A;ISIS &#x7684;&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x8FC1;&#x79FB;</h3><p>ISIS &#x5141;&#x8BB8;&#x4E00;&#x4E2A;&#x8BBE;&#x5907;&#x5C5E;&#x4E8E;&#x591A;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x533A;&#x57DF;&#x3002;</p>
+<p>更改开销 isis metric &lt; 开销&gt;</p>
+<h3 id="16：ISIS-的不同区域迁移"><a href="#16：ISIS-的不同区域迁移" class="headerlink" title="16：ISIS 的不同区域迁移"></a>16：ISIS 的不同区域迁移</h3><p>ISIS 允许一个设备属于多个不同的区域。</p>
 <p>router isis</p>
 <p>net</p>
 <p>net</p>
 <p>net</p>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2017-11-04T09:23:09.000Z" itemprop="datePublished">2017-11-04</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/01/10/Mess/Markdown/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    Markdown标记语言
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a class="ui tiny button disabled">Next<i class="angle right icon"></i></a>
-
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#1：IS-IS中间系统到中间系统"><span>1：IS-IS中间系统到中间系统</span></a></li><li><a href="#2：IS-IS的发展历程"><span>2：IS-IS的发展历程</span></a></li><li><a href="#3：CLNP标识"><span>3：CLNP标识</span></a></li><li><a href="#6：IS-IS中路由器的类型-router-type"><span>6：IS-IS中路由器的类型 router type</span></a></li><li><a href="#7：IS-IS-neighbour-TYPE-邻居关系类型"><span>7：IS-IS neighbour TYPE 邻居关系类型</span></a></li><li><a href="#8：IS-IS的特性"><span>8：IS-IS的特性</span></a></li><li><a href="#9：IS-IS路径度量值计算"><span>9：IS-IS路径度量值计算</span></a></li><li><a href="#10：IS-IS的消息和消息类型"><span>10：IS-IS的消息和消息类型</span></a></li><li><a href="#11：IS-IS的配置"><span>11：IS-IS的配置</span></a></li><li><a href="#12：IS-IS的查看"><span>12：IS-IS的查看</span></a></li><li><a href="#13：IS-IS-的重分发"><span>13：IS-IS 的重分发</span></a></li><li><a href="#14：ISIS-的手动汇总"><span>14：ISIS 的手动汇总</span></a></li><li><a href="#15：ISIS-认证-及-ISIS-路由泄露"><span>15：ISIS 认证 及 ISIS 路由泄露</span></a></li><li><a href="#16：ISIS-的不同区域迁移"><span>16：ISIS 的不同区域迁移</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

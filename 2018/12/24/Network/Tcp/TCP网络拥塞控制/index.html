@@ -1,267 +1,91 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>TCP网络拥塞控制 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>TCP网络拥塞控制 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x7F51;&amp;#x7EDC;&amp;#x62E5;&amp;#x585E;&amp;#x63A7;&amp;#x5236;&amp;#x7684;&amp;#x56DB;&amp;#x79CD;&amp;#x7B97;&amp;#x6CD5;cnwd - &amp;#x62E5;&amp;#x585E;&amp;#x7A97;&amp;#x53E3;&amp;#x7684;&amp;#x5927;&amp;#x5C0F;&amp;#xFF08;&amp;#x4EE5;&amp;#x5B57;&amp;#x8282;&amp;#x4E3A;&amp;#x5355;&amp;">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="TCP网络拥塞控制">
-<meta property="og:url" content="http://yoursite.com/2018/12/24/Network/Tcp/TCP网络拥塞控制/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x7F51;&amp;#x7EDC;&amp;#x62E5;&amp;#x585E;&amp;#x63A7;&amp;#x5236;&amp;#x7684;&amp;#x56DB;&amp;#x79CD;&amp;#x7B97;&amp;#x6CD5;cnwd - &amp;#x62E5;&amp;#x585E;&amp;#x7A97;&amp;#x53E3;&amp;#x7684;&amp;#x5927;&amp;#x5C0F;&amp;#xFF08;&amp;#x4EE5;&amp;#x5B57;&amp;#x8282;&amp;#x4E3A;&amp;#x5355;&amp;">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:37:33.229Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP网络拥塞控制">
-<meta name="twitter:description" content="&amp;#x7F51;&amp;#x7EDC;&amp;#x62E5;&amp;#x585E;&amp;#x63A7;&amp;#x5236;&amp;#x7684;&amp;#x56DB;&amp;#x79CD;&amp;#x7B97;&amp;#x6CD5;cnwd - &amp;#x62E5;&amp;#x585E;&amp;#x7A97;&amp;#x53E3;&amp;#x7684;&amp;#x5927;&amp;#x5C0F;&amp;#xFF08;&amp;#x4EE5;&amp;#x5B57;&amp;#x8282;&amp;#x4E3A;&amp;#x5355;&amp;">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Tcp/TCP网络拥塞控制" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    TCP网络拥塞控制
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h3 id="&#x7F51;&#x7EDC;&#x62E5;&#x585E;&#x63A7;&#x5236;&#x7684;&#x56DB;&#x79CD;&#x7B97;&#x6CD5;"><a href="#&#x7F51;&#x7EDC;&#x62E5;&#x585E;&#x63A7;&#x5236;&#x7684;&#x56DB;&#x79CD;&#x7B97;&#x6CD5;" class="headerlink" title="&#x7F51;&#x7EDC;&#x62E5;&#x585E;&#x63A7;&#x5236;&#x7684;&#x56DB;&#x79CD;&#x7B97;&#x6CD5;"></a>&#x7F51;&#x7EDC;&#x62E5;&#x585E;&#x63A7;&#x5236;&#x7684;&#x56DB;&#x79CD;&#x7B97;&#x6CD5;</h3><p>cnwd - &#x62E5;&#x585E;&#x7A97;&#x53E3;&#x7684;&#x5927;&#x5C0F;&#xFF08;&#x4EE5;&#x5B57;&#x8282;&#x4E3A;&#x5355;&#x4F4D;&#xFF0C;&#x8FD9;&#x91CC;&#x4EE5;&#x6570;&#x636E;&#x6BB5;&#x7684;&#x4E2A;&#x6570;&#x4E3A;&#x5355;&#x4F4D;&#x65B9;&#x4FBF;&#x8BA1;&#x7B97;&#xFF09;&#xFF0C;&#x53D1;&#x9001;&#x65B9;&#x8BA9;&#x81EA;&#x5DF1;&#x7684;&#x53D1;&#x9001;&#x7A97;&#x53E3;&#x7B49;&#x4E8E;&#x62E5;&#x585E;&#x7A97;&#x53E3;&#x3002;<br>RTT- &#x4E00;&#x4E2A;&#x4F20;&#x8F93;&#x8F6E;&#x6B21;&#x7ECF;&#x5386;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
-<h4 id="&#x6162;&#x5F00;&#x59CB;"><a href="#&#x6162;&#x5F00;&#x59CB;" class="headerlink" title="&#x6162;&#x5F00;&#x59CB;"></a>&#x6162;&#x5F00;&#x59CB;</h4><p>&#x6700;&#x521D;&#x7684;TCP&#x5728;&#x8FDE;&#x63A5;&#x5EFA;&#x7ACB;&#x6210;&#x529F;&#x540E;&#x4F1A;&#x5411;&#x7F51;&#x7EDC;&#x4E2D;&#x53D1;&#x9001;&#x5927;&#x91CF;&#x7684;&#x6570;&#x636E;&#x5305;&#xFF0C;&#x8FD9;&#x6837;&#x5F88;&#x5BB9;&#x6613;&#x5BFC;&#x81F4;&#x7F51;&#x7EDC;&#x4E2D;&#x8DEF;&#x7531;&#x5668;&#x7F13;&#x5B58;&#x7A7A;&#x95F4;&#x8017;&#x5C3D;&#xFF0C;&#x4ECE;&#x800C;&#x53D1;&#x751F;&#x62E5;&#x585E;&#x3002;&#x56E0;&#x6B64;&#x65B0;&#x5EFA;&#x7ACB;&#x7684;&#x8FDE;&#x63A5;&#x4E0D;&#x80FD;&#x591F;&#x4E00;&#x5F00;&#x59CB;&#x5C31;&#x5927;&#x91CF;&#x53D1;&#x9001;&#x6570;&#x636E;&#x5305;&#xFF0C;&#x800C;&#x53EA;&#x80FD;&#x6839;&#x636E;&#x7F51;&#x7EDC;&#x60C5;&#x51B5;&#x9010;&#x6B65;&#x589E;&#x52A0;&#x6BCF;&#x6B21;&#x53D1;&#x9001;&#x7684;&#x6570;&#x636E;&#x91CF;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x4E0A;&#x8FF0;&#x73B0;&#x8C61;&#x7684;&#x53D1;&#x751F;&#x3002;&#x5177;&#x4F53;&#x6765;&#x8BF4;&#xFF0C;&#x5F53;&#x65B0;&#x5EFA;&#x8FDE;&#x63A5;&#x65F6;&#xFF0C;cwnd&#x521D;&#x59CB;&#x5316;&#x4E3A;1&#x4E2A;&#x62A5;&#x6587;&#x6BB5;(MSS)&#x5927;&#x5C0F;&#xFF0C;&#x53D1;&#x9001;&#x7AEF;&#x5F00;&#x59CB;&#x6309;&#x7167;&#x62E5;&#x585E;&#x7A97;&#x53E3;&#x5927;&#x5C0F;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;&#x6BCF;&#x5F53;&#x6709;&#x4E00;&#x4E2A;&#x62A5;&#x6587;&#x6BB5;&#x88AB;&#x786E;&#x8BA4;&#xFF0C;cwnd&#x5C31;&#x589E;&#x52A0;1&#x500D;&#x3002;&#x8FD9;&#x6837;cwnd&#x7684;&#x503C;&#x5C31;&#x968F;&#x7740;&#x7F51;&#x7EDC;&#x5F80;&#x8FD4;&#x65F6;&#x95F4;RTT&#x5448;&#x6307;&#x6570;&#x7EA7;&#x589E;&#x957F;.<br>&#x8FD9;&#x91CC;&#x8BBE;&#x7F6E;&#x4E86;&#x4E00;&#x4E2A;&#x6162;&#x5F00;&#x59CB;&#x95E8;&#x9650;ssthresh&#x3002;<br>cwnd &lt; ssthresh&#x65F6;,&#x8FDB;&#x884C;&#x6162;&#x5F00;&#x59CB;&#x7B97;&#x6CD5;&#x3002;<br>cwnd&gt;ssthresh&#x65F6;,&#x8FDB;&#x884C;&#x62E5;&#x585E;&#x907F;&#x514D;&#x7B97;&#x3002;<br>cwnd = ssthresh&#x65F6;,&#x4E24;&#x8005;&#x7686;&#x53EF;&#x3002;</p>
-<h4 id="&#x62E5;&#x585E;&#x907F;&#x514D;"><a href="#&#x62E5;&#x585E;&#x907F;&#x514D;" class="headerlink" title="&#x62E5;&#x585E;&#x907F;&#x514D;"></a>&#x62E5;&#x585E;&#x907F;&#x514D;</h4><p>&#x6BCF;&#x4E2A;&#x8F6E;&#x6B21;&#x7ED3;&#x675F;&#x90FD;&#x8BA9;cwnd&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x500D;&#xFF0C;&#x589E;&#x52A0;&#x7684;&#x66F4;&#x52A0;&#x7F13;&#x6162;&#x3002;<br>&#x4E0D;&#x8BBA;&#x662F;&#x6162;&#x5F00;&#x59CB;&#x8FD8;&#x662F;&#x62E5;&#x585E;&#x907F;&#x514D;&#x53EA;&#x8981;&#x7F51;&#x7EDC;&#x51FA;&#x73B0;&#x62E5;&#x585E;&#xFF08;&#x6CA1;&#x6709;&#x6309;&#x65F6;&#x5230;&#x8FBE;&#xFF09;&#x65F6;&#xFF0C;&#x5C31;&#x628A;ssthresh&#x7684;&#x503C;&#x7F6E;&#x4E3A;&#x51FA;&#x73B0;&#x62E5;&#x585E;&#x65F6;&#x7684;&#x62E5;&#x585E;&#x7A97;&#x53E3;&#x7684;&#x4E00;&#x534A;&#xFF0C;&#x4EE5;&#x53CA;cwnd&#x7F6E;&#x4E3A;1&#xFF0C;&#x8FDB;&#x884C;&#x6162;&#x5F00;&#x59CB;&#x3002; </p>
-<h4 id="&#x5FEB;&#x91CD;&#x4F20;&#x548C;&#x5FEB;&#x6062;&#x590D;&#x7B97;&#x6CD5;"><a href="#&#x5FEB;&#x91CD;&#x4F20;&#x548C;&#x5FEB;&#x6062;&#x590D;&#x7B97;&#x6CD5;" class="headerlink" title="&#x5FEB;&#x91CD;&#x4F20;&#x548C;&#x5FEB;&#x6062;&#x590D;&#x7B97;&#x6CD5;"></a>&#x5FEB;&#x91CD;&#x4F20;&#x548C;&#x5FEB;&#x6062;&#x590D;&#x7B97;&#x6CD5;</h4><p>&#x5FEB;&#x91CD;&#x4F20;&#x7B97;&#x6CD5;&#x8981;&#x6C42;&#x63A5;&#x6536;&#x65B9;&#x6BCF;&#x6536;&#x5230;&#x4E00;&#x4E2A;&#x5931;&#x5E8F;&#x7684;&#x62A5;&#x6587;&#x6BB5;&#x540E;&#x5C31;&#x7ACB;&#x5373;&#x8FDB;&#x884C;&#x91CD;&#x590D;&#x786E;&#x8BA4;&#x3002; </p>
-<p>&#x5F53;&#x63A5;&#x6536;&#x65B9;&#x63A5;&#x6536;&#x5230;&#x4E86;M4,&#x5374;&#x6CA1;&#x6709;&#x63A5;&#x6536;&#x5230;M3&#xFF0C;&#x8FD9;&#x65F6;&#x62A5;&#x6587;&#x6BB5;&#x5DF2;&#x7ECF;&#x5931;&#x5E8F;&#xFF0C;&#x4E0D;&#x80FD;&#x786E;&#x8BA4;M4,&#x6839;&#x636E;&#x5FEB;&#x91CD;&#x4F20;&#x7B97;&#x6CD5;&#x89C4;&#x5B9A;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;M2&#x91CD;&#x590D;&#x786E;&#x8BA4;&#x63D0;&#x9192;&#x63A5;&#x6536;&#x65B9;M3&#x6CA1;&#x6709;&#x63A5;&#x6536;&#x5230;&#xFF0C; &#x5728;&#x63A5;&#x6536;&#x5230;M5,M6&#x540E;&#x7EE7;&#x7EED;&#x8FD4;&#x56DE;&#x4E24;&#x4E2A;&#x91CD;&#x590D;&#x786E;&#x8BA4;&#x3002;&#x5FEB;&#x91CD;&#x4F20;&#x7B97;&#x6CD5;&#x89C4;&#x5B9A;&#x53D1;&#x9001;&#x65B9;&#x4E00;&#x8FDE;&#x63A5;&#x6536;&#x5230;&#x4E09;&#x4E2A;&#x91CD;&#x590D;&#x786E;&#x8BA4;&#x5C31;&#x7ACB;&#x5373;&#x91CD;&#x4F20;&#x5BF9;&#x65B9;&#x5C1A;&#x672A;&#x6536;&#x5230;&#x7684;&#x62A5;&#x6587;&#x6BB5;M3&#x3002;<br>&#xFF08;&#x8FD8;&#x6709;&#x4E00;&#x79CD;&#x5FEB;&#x91CD;&#x4F20;&#x628A;cwnd&#x589E;&#x52A0;&#x5230;ssthresh+3MSS&#xFF09;.<br>&#x5FEB;&#x6062;&#x590D;&#x7B97;&#x6CD5;&#x4E0E;&#x5FEB;&#x91CD;&#x4F20;&#x7B97;&#x6CD5;&#x914D;&#x5408;&#x4F7F;&#x7528;&#x3002;<br>&#x4E00;&#x8FDE;&#x6536;&#x5230;&#x4E09;&#x4E2A;&#x91CD;&#x590D;&#x786E;&#x8BA4;&#x4FE1;&#x53F7;&#x540E;&#x5C31;&#x628A;ssthresh&#x51CF;&#x534A;&#xFF0C;&#x7136;&#x540E;cwnd&#x8BBE;&#x7F6E;&#x4E3A;ssthresh&#x51CF;&#x534A;&#x540E;&#x7684;&#x6570;&#x503C;&#xFF0C;&#x6267;&#x884C;&#x62E5;&#x585E;&#x907F;&#x514D;&#x7B97;&#x6CD5;&#x3002; </p>
-<p>&#x5728;&#x91C7;&#x7528;&#x5FEB;&#x6062;&#x590D;&#x7B97;&#x6CD5;&#x65F6;&#xFF0C;&#x6162;&#x5F00;&#x59CB;&#x7B97;&#x6CD5;&#x53EA;&#x6709;&#x5728;&#x5EFA;&#x7ACB;TCP&#x8FDE;&#x63A5;&#x65F6;&#x548C;&#x7F51;&#x7EDC;&#x8D85;&#x65F6;&#x624D;&#x4F7F;&#x7528;&#x3002; </p>
-
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-12-24T06:55:49.000Z" itemprop="datePublished">2018-12-24</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络拥塞控制的四种算法"><span class="toc-number">1.</span> <span class="toc-text">网络拥塞控制的四种算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#慢开始"><span class="toc-number">1.1.</span> <span class="toc-text">慢开始</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#拥塞避免"><span class="toc-number">1.2.</span> <span class="toc-text">拥塞避免</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#快重传和快恢复算法"><span class="toc-number">1.3.</span> <span class="toc-text">快重传和快恢复算法</span></a></li></ol></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
+
+
+  <div class="container">
+    <article>
+      <h1>TCP网络拥塞控制</h1>
+      <h3 id="网络拥塞控制的四种算法"><a href="#网络拥塞控制的四种算法" class="headerlink" title="网络拥塞控制的四种算法"></a>网络拥塞控制的四种算法</h3><p>cnwd - 拥塞窗口的大小（以字节为单位，这里以数据段的个数为单位方便计算），发送方让自己的发送窗口等于拥塞窗口。<br>RTT- 一个传输轮次经历的时间。</p>
+<h4 id="慢开始"><a href="#慢开始" class="headerlink" title="慢开始"></a>慢开始</h4><p>最初的TCP在连接建立成功后会向网络中发送大量的数据包，这样很容易导致网络中路由器缓存空间耗尽，从而发生拥塞。因此新建立的连接不能够一开始就大量发送数据包，而只能根据网络情况逐步增加每次发送的数据量，以避免上述现象的发生。具体来说，当新建连接时，cwnd初始化为1个报文段(MSS)大小，发送端开始按照拥塞窗口大小发送数据，每当有一个报文段被确认，cwnd就增加1倍。这样cwnd的值就随着网络往返时间RTT呈指数级增长.<br>这里设置了一个慢开始门限ssthresh。<br>cwnd &lt; ssthresh时,进行慢开始算法。<br>cwnd&gt;ssthresh时,进行拥塞避免算。<br>cwnd = ssthresh时,两者皆可。</p>
+<h4 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h4><p>每个轮次结束都让cwnd增加一个，而不是一倍，增加的更加缓慢。<br>不论是慢开始还是拥塞避免只要网络出现拥塞（没有按时到达）时，就把ssthresh的值置为出现拥塞时的拥塞窗口的一半，以及cwnd置为1，进行慢开始。 </p>
+<h4 id="快重传和快恢复算法"><a href="#快重传和快恢复算法" class="headerlink" title="快重传和快恢复算法"></a>快重传和快恢复算法</h4><p>快重传算法要求接收方每收到一个失序的报文段后就立即进行重复确认。 </p>
+<p>当接收方接收到了M4,却没有接收到M3，这时报文段已经失序，不能确认M4,根据快重传算法规定，返回一个M2重复确认提醒接收方M3没有接收到， 在接收到M5,M6后继续返回两个重复确认。快重传算法规定发送方一连接收到三个重复确认就立即重传对方尚未收到的报文段M3。<br>（还有一种快重传把cwnd增加到ssthresh+3MSS）.<br>快恢复算法与快重传算法配合使用。<br>一连收到三个重复确认信号后就把ssthresh减半，然后cwnd设置为ssthresh减半后的数值，执行拥塞避免算法。 </p>
+<p>在采用快恢复算法时，慢开始算法只有在建立TCP连接时和网络超时才使用。 </p>
+
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/12/28/Algorithm/排序算法/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    排序算法
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/12/15/Unix/Programming/Makefile学习/" class="ui tiny button">
-                    
-                    Makefile学习
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#网络拥塞控制的四种算法"><span>网络拥塞控制的四种算法</span></a><ol><li><a href="#慢开始"><span>慢开始</span></a></li><li><a href="#拥塞避免"><span>拥塞避免</span></a></li><li><a href="#快重传和快恢复算法"><span>快重传和快恢复算法</span></a></li></ol></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

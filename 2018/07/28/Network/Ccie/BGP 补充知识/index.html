@@ -1,299 +1,123 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE BGP 补充知识 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE BGP 补充知识 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="BGP &amp;#x7684;&amp;#x8DEF;&amp;#x7531;&amp;#x66F4;&amp;#x65B0;&amp;#x8FC7;&amp;#x6EE4;route-map&amp;#x3001;prefix-list&amp;#x3001;filter-list&amp;#xFF08;&amp;#x7B5B;&amp;#x9009;&amp;#x5217;&amp;#x8868;&amp;#xFF09; &amp;#x5229;&amp;#x7528; route-map&amp;#x53EF;&amp;#x4EE5;&amp;#">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE BGP 补充知识">
-<meta property="og:url" content="http://yoursite.com/2018/07/28/Network/Ccie/BGP 补充知识/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="BGP &amp;#x7684;&amp;#x8DEF;&amp;#x7531;&amp;#x66F4;&amp;#x65B0;&amp;#x8FC7;&amp;#x6EE4;route-map&amp;#x3001;prefix-list&amp;#x3001;filter-list&amp;#xFF08;&amp;#x7B5B;&amp;#x9009;&amp;#x5217;&amp;#x8868;&amp;#xFF09; &amp;#x5229;&amp;#x7528; route-map&amp;#x53EF;&amp;#x4EE5;&amp;#">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:39:48.549Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE BGP 补充知识">
-<meta name="twitter:description" content="BGP &amp;#x7684;&amp;#x8DEF;&amp;#x7531;&amp;#x66F4;&amp;#x65B0;&amp;#x8FC7;&amp;#x6EE4;route-map&amp;#x3001;prefix-list&amp;#x3001;filter-list&amp;#xFF08;&amp;#x7B5B;&amp;#x9009;&amp;#x5217;&amp;#x8868;&amp;#xFF09; &amp;#x5229;&amp;#x7528; route-map&amp;#x53EF;&amp;#x4EE5;&amp;#">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP-的路由更新过滤"><span class="toc-number">1.</span> <span class="toc-text">BGP 的路由更新过滤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#利用-route-map"><span class="toc-number">1.1.</span> <span class="toc-text">利用 route-map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用-prefix-list"><span class="toc-number">1.2.</span> <span class="toc-text">利用 prefix-list</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用-正则表达式"><span class="toc-number">1.3.</span> <span class="toc-text">利用 正则表达式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP-的公认团体属性限制路由更新的发送"><span class="toc-number">2.</span> <span class="toc-text">BGP 的公认团体属性限制路由更新的发送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP-自定义团体属性标记及策略设置"><span class="toc-number">3.</span> <span class="toc-text">BGP 自定义团体属性标记及策略设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义团体属性的配置步骤"><span class="toc-number">3.1.</span> <span class="toc-text">自定义团体属性的配置步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP-联邦"><span class="toc-number">4.</span> <span class="toc-text">BGP 联邦</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP-知识点"><span class="toc-number">5.</span> <span class="toc-text">BGP 知识点</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/BGP 补充知识" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE BGP 补充知识
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h3 id="BGP-&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x8FC7;&#x6EE4;"><a href="#BGP-&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x8FC7;&#x6EE4;" class="headerlink" title="BGP &#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x8FC7;&#x6EE4;"></a>BGP &#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x8FC7;&#x6EE4;</h3><p>route-map&#x3001;prefix-list&#x3001;filter-list&#xFF08;&#x7B5B;&#x9009;&#x5217;&#x8868;&#xFF09;</p>
-<h4 id="&#x5229;&#x7528;-route-map"><a href="#&#x5229;&#x7528;-route-map" class="headerlink" title="&#x5229;&#x7528; route-map"></a>&#x5229;&#x7528; route-map</h4><p>&#x53EF;&#x4EE5;&#x662F; in &#x65B9;&#x5411;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x662F; out &#x65B9;&#x5411;&#x3002;</p>
-<p>route-map &#x6709;&#x9690;&#x85CF;&#x7684; deny all&#x3002;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">access-list 10 permit 10.1.1.0 0.0.0.255</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 permit 20 //route-map&#x7684;permit&#x662F;&#x653E;&#x884C;&#x66F4;&#x65B0;</span><br><span class="line">	//route-map&#x5982;&#x679C;&#x4E0D;&#x5199;&#x5982;&#x4F55;match&#x8BED;&#x53E5;&#xFF0C;&#x610F;&#x601D;&#x662F;&#x5339;&#x914D;&#x6240;&#x6709;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor 10.1.1.2 route-map R1 out</span><br></pre></td></tr></table></figure>
-<h4 id="&#x5229;&#x7528;-prefix-list"><a href="#&#x5229;&#x7528;-prefix-list" class="headerlink" title="&#x5229;&#x7528; prefix-list"></a>&#x5229;&#x7528; prefix-list</h4><p>route-map &#x4E0D;&#x5149;&#x53EF;&#x4EE5;&#x5B8C;&#x6210;&#x8FC7;&#x6EE4;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x5BF9;&#x653E;&#x884C;&#x7684;&#x7F51;&#x7EDC;&#x8BBE;&#x7F6E;&#x7B56;&#x7565;&#x3002;</p>
-<p>prefix-list &#x53EA;&#x80FD;&#x5B8C;&#x6210;&#x8FC7;&#x6EE4;&#x3002;</p>
-<p>prefix-list &#x4E5F;&#x6709;&#x9ED8;&#x8BA4;&#x7684; deny all&#x3002;</p>
-<p>prefix-list &#x7684;&#x653E;&#x884C;&#x6240;&#x6709; <code>ip prefix-list x permit 0.0.0.0/0</code></p>
-<h4 id="&#x5229;&#x7528;-&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;"><a href="#&#x5229;&#x7528;-&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;" class="headerlink" title="&#x5229;&#x7528; &#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;"></a>&#x5229;&#x7528; &#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</h4><p>&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x5339;&#x914D;&#x51FB;&#x4E2D;&#x7684;&#x662F; AS &#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#x3002;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_ &#x4EE3;&#x8868; &#x7A7A;&#x683C;</span><br><span class="line">^ &#x4EE3;&#x8868; &#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x5F00;&#x59CB;</span><br><span class="line">$ &#x4EE3;&#x8868; &#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x7ED3;&#x675F;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_2_ &#xFF1A;&#x6293;&#x53D6;&#x4EFB;&#x610F;&#x8D77;&#x6E90;&#x3001;&#x4EFB;&#x610F;&#x7ED3;&#x5C3E;&#xFF0C;&#x4F46;&#x7ECF;&#x8FC7; AS2 &#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x3002;</span><br><span class="line">^1$ &#xFF1A;&#x6293;&#x53D6;AS1&#x5185;&#x7684;&#x6240;&#x6709;&#x8DEF;&#x7531;&#x3002;</span><br><span class="line">_1$ &#xFF1A;&#x6293;&#x53D6;&#x8D77;&#x6E90;&#x4E8E;AS1&#xFF0C;&#x7ECF;&#x8FC7;&#x5176;&#x4ED6;&#x4EFB;&#x610F;AS&#x7684;&#x6240;&#x6709;&#x8DEF;&#x7531;&#x3002; </span><br><span class="line">^4_ &#xFF1A;&#x6293;&#x53D6;AS4&#x5171;&#x4EAB;&#x7ED9;&#x5F53;&#x524D;&#x8BBE;&#x5907;&#x7684;&#x8DEF;&#x7531;&#x3002;</span><br></pre></td></tr></table></figure>
+  <div class="container">
+    <article>
+      <h1>CCIE BGP 补充知识</h1>
+      <h3 id="BGP-的路由更新过滤"><a href="#BGP-的路由更新过滤" class="headerlink" title="BGP 的路由更新过滤"></a>BGP 的路由更新过滤</h3><p>route-map、prefix-list、filter-list（筛选列表）</p>
+<h4 id="利用-route-map"><a href="#利用-route-map" class="headerlink" title="利用 route-map"></a>利用 route-map</h4><p>可以是 in 方向，也可以是 out 方向。</p>
+<p>route-map 有隐藏的 deny all。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">access-list 10 permit 10.1.1.0 0.0.0.255</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 permit 20 //route-map的permit是放行更新</span><br><span class="line">	//route-map如果不写如何match语句，意思是匹配所有</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor 10.1.1.2 route-map R1 out</span><br></pre></td></tr></table></figure>
+<h4 id="利用-prefix-list"><a href="#利用-prefix-list" class="headerlink" title="利用 prefix-list"></a>利用 prefix-list</h4><p>route-map 不光可以完成过滤，还可以对放行的网络设置策略。</p>
+<p>prefix-list 只能完成过滤。</p>
+<p>prefix-list 也有默认的 deny all。</p>
+<p>prefix-list 的放行所有 <code>ip prefix-list x permit 0.0.0.0/0</code></p>
+<h4 id="利用-正则表达式"><a href="#利用-正则表达式" class="headerlink" title="利用 正则表达式"></a>利用 正则表达式</h4><p>正则表达式匹配击中的是 AS 路径信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_ 代表 空格</span><br><span class="line">^ 代表 正则表达式的开始</span><br><span class="line">$ 代表 正则表达式的结束</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_2_ ：抓取任意起源、任意结尾，但经过 AS2 的路由更新。</span><br><span class="line">^1$ ：抓取AS1内的所有路由。</span><br><span class="line">_1$ ：抓取起源于AS1，经过其他任意AS的所有路由。 </span><br><span class="line">^4_ ：抓取AS4共享给当前设备的路由。</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route-map AS permit 10</span><br><span class="line">match ip address 10</span><br><span class="line">set as-pasth prepend 3 5</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip as-path access-list 1 permit _4_</span><br><span class="line">router bgp 2</span><br><span class="line">neighbor 12.12.12.1 filter-list 1 in</span><br></pre></td></tr></table></figure>
-<p>&#x653E;&#x884C;&#x6240;&#x6709;&#xFF1A;<code>ip as-path &lt;id&gt; permit _</code></p>
-<h3 id="BGP-&#x7684;&#x516C;&#x8BA4;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x9650;&#x5236;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x7684;&#x53D1;&#x9001;"><a href="#BGP-&#x7684;&#x516C;&#x8BA4;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x9650;&#x5236;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x7684;&#x53D1;&#x9001;" class="headerlink" title="BGP &#x7684;&#x516C;&#x8BA4;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x9650;&#x5236;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x7684;&#x53D1;&#x9001;"></a>BGP &#x7684;&#x516C;&#x8BA4;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x9650;&#x5236;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x7684;&#x53D1;&#x9001;</h3><p>&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x643A;&#x5E26; no-advertise&#xFF0C;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x88AB;&#x63A5;&#x6536;&#x540E;&#x4E0D;&#x53D1;&#x9001;&#x7ED9;&#x4EFB;&#x4F55; BGP peer&#x3002;</p>
-<p>&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x643A;&#x5E26; no-export &#x6216; local-as&#xFF0C;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x88AB;&#x63A5;&#x6536;&#x540E;&#x4E0D;&#x53D1;&#x9001;&#x7ED9;&#x4EFB;&#x4F55; eBGP peer&#x3002;</p>
+<p>放行所有：<code>ip as-path &lt;id&gt; permit _</code></p>
+<h3 id="BGP-的公认团体属性限制路由更新的发送"><a href="#BGP-的公认团体属性限制路由更新的发送" class="headerlink" title="BGP 的公认团体属性限制路由更新的发送"></a>BGP 的公认团体属性限制路由更新的发送</h3><p>路由更新携带 no-advertise，路由更新被接收后不发送给任何 BGP peer。</p>
+<p>路由更新携带 no-export 或 local-as，路由更新被接收后不发送给任何 eBGP peer。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">route-map COMM permit 10</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;no-advertise/no-export/local-as&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; route-map COMM out</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
-<p>&#x67E5;&#x770B;BGP&#x8F6C;&#x53D1;&#x8868;&#x4E2D;&#x643A;&#x5E26;&#x7279;&#x5B9A;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;<code>show ip bgp community &lt;no-export/no-advertise&gt;</code></p>
-<h3 id="BGP-&#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x6807;&#x8BB0;&#x53CA;&#x7B56;&#x7565;&#x8BBE;&#x7F6E;"><a href="#BGP-&#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x6807;&#x8BB0;&#x53CA;&#x7B56;&#x7565;&#x8BBE;&#x7F6E;" class="headerlink" title="BGP &#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x6807;&#x8BB0;&#x53CA;&#x7B56;&#x7565;&#x8BBE;&#x7F6E;"></a>BGP &#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x6807;&#x8BB0;&#x53CA;&#x7B56;&#x7565;&#x8BBE;&#x7F6E;</h3><p>&#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x683C;&#x5F0F;&#xFF1A;</p>
-<p>AA&#xFF1A;NN&#xFF08;AA &#x662F; AS &#x53F7;&#xFF0C;NN &#x662F;&#x6807;&#x8BB0;&#x503C; 0~65440&#xFF09;</p>
-<h4 id="&#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x7684;&#x914D;&#x7F6E;&#x6B65;&#x9AA4;"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x7684;&#x914D;&#x7F6E;&#x6B65;&#x9AA4;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x7684;&#x914D;&#x7F6E;&#x6B65;&#x9AA4;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x7684;&#x914D;&#x7F6E;&#x6B65;&#x9AA4;</h4><p>&#x6B65;&#x9AA4;1&#xFF1A;&#x66F4;&#x65B0;&#x6E90;&#x5904;&#x6253;&#x4E0A;&#x6807;&#x8BB0;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ACL &#x6293;&#x53D6;&#x7F51;&#x7EDC;</span><br><span class="line">!</span><br><span class="line">route-map &lt;name&gt; permit &lt;10&gt;</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;aa:nn&gt;</span><br><span class="line">!</span><br><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; send-community</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;2&#xFF1A;&#x5728;&#x66F4;&#x65B0;&#x63A5;&#x6536;&#x8005;&#x5339;&#x914D;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#xFF0C;&#x5E76;&#x4E14;&#x5B9A;&#x4E49;&#x4E0D;&#x540C;&#x7684;&#x7B56;&#x7565;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ip community-list &lt;id&gt; permit &lt;aa:nn&gt; //&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x5217;&#x8868;&#xFF0C;&#x5339;&#x914D;&#x7279;&#x5B9A;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x66F4;&#x65B0;</span><br><span class="line">route-map &lt;name&gt; permit 10</span><br><span class="line">match community &lt;id&gt;</span><br><span class="line">set &lt;&#x7B56;&#x7565;&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br></pre></td></tr></table></figure>
-<p>&#x6240;&#x6709;&#x9700;&#x8981;&#x4F20;&#x9012;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#x7684;&#x8DEF;&#x7531;&#x5668;&#x90FD;&#x9700;&#x8981;&#x5F55;&#x5165;&#xFF1A;</p>
+<p>查看BGP转发表中携带特定团体属性的路由更新<code>show ip bgp community &lt;no-export/no-advertise&gt;</code></p>
+<h3 id="BGP-自定义团体属性标记及策略设置"><a href="#BGP-自定义团体属性标记及策略设置" class="headerlink" title="BGP 自定义团体属性标记及策略设置"></a>BGP 自定义团体属性标记及策略设置</h3><p>自定义团体属性格式：</p>
+<p>AA：NN（AA 是 AS 号，NN 是标记值 0~65440）</p>
+<h4 id="自定义团体属性的配置步骤"><a href="#自定义团体属性的配置步骤" class="headerlink" title="自定义团体属性的配置步骤"></a>自定义团体属性的配置步骤</h4><p>步骤1：更新源处打上标记</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ACL 抓取网络</span><br><span class="line">!</span><br><span class="line">route-map &lt;name&gt; permit &lt;10&gt;</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;aa:nn&gt;</span><br><span class="line">!</span><br><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; send-community</span><br></pre></td></tr></table></figure>
+<p>步骤2：在更新接收者匹配团体属性，并且定义不同的策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ip community-list &lt;id&gt; permit &lt;aa:nn&gt; //团体属性列表，匹配特定团体属性更新</span><br><span class="line">route-map &lt;name&gt; permit 10</span><br><span class="line">match community &lt;id&gt;</span><br><span class="line">set &lt;策略&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br></pre></td></tr></table></figure>
+<p>所有需要传递团体属性的路由器都需要录入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip bgp-community new-format</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
-<h3 id="BGP-&#x8054;&#x90A6;"><a href="#BGP-&#x8054;&#x90A6;" class="headerlink" title="BGP &#x8054;&#x90A6;"></a>BGP &#x8054;&#x90A6;</h3><p>&#x628A;&#x591A;&#x4E2A; AS &#x878D;&#x5165;&#x5230;&#x4E00;&#x4E2A;&#x8054;&#x90A6;&#x4E2D;&#xFF0C;&#x8054;&#x90A6;&#x4E2D;&#x4E0D;&#x540C; AS &#x7684;&#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#xFF0C;&#x4E0D;&#x4F1A;&#x6CC4;&#x9732;&#x51FA;&#x53BB;&#x3002;</p>
-<p>&#x8054;&#x90A6;&#x5185;&#x6240;&#x6709;&#x8BBE;&#x5907;&#x5FC5;&#x987B;&#x58F0;&#x660E;&#x8054;&#x90A6;&#x53F7;&#xFF0C;&#x8054;&#x90A6;&#x5185; eBGP &#x8FD8;&#x8981;&#x58F0;&#x660E;&#x662F;&#x8054;&#x90A6;&#x5185; eBGP peer&#x3002;</p>
+<h3 id="BGP-联邦"><a href="#BGP-联邦" class="headerlink" title="BGP 联邦"></a>BGP 联邦</h3><p>把多个 AS 融入到一个联邦中，联邦中不同 AS 的路径信息，不会泄露出去。</p>
+<p>联邦内所有设备必须声明联邦号，联邦内 eBGP 还要声明是联邦内 eBGP peer。</p>
 <p><code>bgp confederation identifier 234</code></p>
 <p><code>bgp confederation peer 4</code></p>
-<h3 id="BGP-&#x77E5;&#x8BC6;&#x70B9;"><a href="#BGP-&#x77E5;&#x8BC6;&#x70B9;" class="headerlink" title="BGP &#x77E5;&#x8BC6;&#x70B9;"></a>BGP &#x77E5;&#x8BC6;&#x70B9;</h3><p>BGP &#x540C;&#x6B65;&#xFF0C;BGP &#x4E0B;&#x4E00;&#x8DF3;&#x5224;&#x65AD;&#x3002;</p>
-<p>BGP eBGP peer &#x591A;&#x8DF3;</p>
-<p>BGP &#x9009;&#x8DEF;&#x539F;&#x5219;&#x3001;&#x5229;&#x7528; route-map &#x5F71;&#x54CD;</p>
-<p>BGP &#x7684;&#x6C47;&#x603B; summary-only as-set</p>
-<p>BGP &#x7684;&#x56E2;&#x4F53;&#x5C5E;&#x6027;</p>
-<p>BGP &#x7684;&#x8FC7;&#x6EE4;</p>
-<p>BGP &#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;</p>
-<p>BGP &#x8054;&#x90A6;</p>
+<h3 id="BGP-知识点"><a href="#BGP-知识点" class="headerlink" title="BGP 知识点"></a>BGP 知识点</h3><p>BGP 同步，BGP 下一跳判断。</p>
+<p>BGP eBGP peer 多跳</p>
+<p>BGP 选路原则、利用 route-map 影响</p>
+<p>BGP 的汇总 summary-only as-set</p>
+<p>BGP 的团体属性</p>
+<p>BGP 的过滤</p>
+<p>BGP 路由反射器</p>
+<p>BGP 联邦</p>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-07-28T03:24:23.000Z" itemprop="datePublished">2018-07-28</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/07/28/Network/Ccie/DM-VPN/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    CCIE DM-VPN
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/07/28/Network/Ccie/网络知识总结/" class="ui tiny button">
-                    
-                    CCIE 网络知识总结
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#BGP-的路由更新过滤"><span>BGP 的路由更新过滤</span></a><ol><li><a href="#利用-route-map"><span>利用 route-map</span></a></li><li><a href="#利用-prefix-list"><span>利用 prefix-list</span></a></li><li><a href="#利用-正则表达式"><span>利用 正则表达式</span></a></li></ol></li><li><a href="#BGP-的公认团体属性限制路由更新的发送"><span>BGP 的公认团体属性限制路由更新的发送</span></a></li><li><a href="#BGP-自定义团体属性标记及策略设置"><span>BGP 自定义团体属性标记及策略设置</span></a><ol><li><a href="#自定义团体属性的配置步骤"><span>自定义团体属性的配置步骤</span></a></li></ol></li><li><a href="#BGP-联邦"><span>BGP 联邦</span></a></li><li><a href="#BGP-知识点"><span>BGP 知识点</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

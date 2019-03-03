@@ -1,347 +1,171 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>Makefile学习 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Makefile学习 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x6458;&amp;#x81EA;&amp;#x9648;&amp;#x7693;&amp;#x535A;&amp;#x5BA2;https://blog.csdn.net/haoel/article/details/2886 &amp;#x6587;&amp;#x4EF6;&amp;#x4F9D;&amp;#x8D56;&amp;#x89C4;&amp;#x5219; &amp;#x5982;&amp;#x679C;&amp;#x8FD9;&amp;#x4E2A;&amp;#x5DE5;&amp;#x7A0B;&amp;#x6CA">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Makefile学习">
-<meta property="og:url" content="http://yoursite.com/2018/12/15/Unix/Programming/Makefile学习/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x6458;&amp;#x81EA;&amp;#x9648;&amp;#x7693;&amp;#x535A;&amp;#x5BA2;https://blog.csdn.net/haoel/article/details/2886 &amp;#x6587;&amp;#x4EF6;&amp;#x4F9D;&amp;#x8D56;&amp;#x89C4;&amp;#x5219; &amp;#x5982;&amp;#x679C;&amp;#x8FD9;&amp;#x4E2A;&amp;#x5DE5;&amp;#x7A0B;&amp;#x6CA">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-28T06:17:48.518Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Makefile学习">
-<meta name="twitter:description" content="&amp;#x6458;&amp;#x81EA;&amp;#x9648;&amp;#x7693;&amp;#x535A;&amp;#x5BA2;https://blog.csdn.net/haoel/article/details/2886 &amp;#x6587;&amp;#x4EF6;&amp;#x4F9D;&amp;#x8D56;&amp;#x89C4;&amp;#x5219; &amp;#x5982;&amp;#x679C;&amp;#x8FD9;&amp;#x4E2A;&amp;#x5DE5;&amp;#x7A0B;&amp;#x6CA">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Unix/Programming/Makefile学习" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    Makefile学习
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <p>&#x6458;&#x81EA;&#x9648;&#x7693;&#x535A;&#x5BA2;<a href="https://blog.csdn.net/haoel/article/details/2886" target="_blank" rel="noopener">https://blog.csdn.net/haoel/article/details/2886</a></p>
-<h3 id="&#x6587;&#x4EF6;&#x4F9D;&#x8D56;&#x89C4;&#x5219;"><a href="#&#x6587;&#x4EF6;&#x4F9D;&#x8D56;&#x89C4;&#x5219;" class="headerlink" title="&#x6587;&#x4EF6;&#x4F9D;&#x8D56;&#x89C4;&#x5219;"></a>&#x6587;&#x4EF6;&#x4F9D;&#x8D56;&#x89C4;&#x5219;</h3><ol class="ui list">
-<li>&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x5DE5;&#x7A0B;&#x6CA1;&#x6709;&#x7F16;&#x8BD1;&#x8FC7;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x7684;&#x6240;&#x6709;C&#x6587;&#x4EF6;&#x90FD;&#x8981;&#x7F16;&#x8BD1;&#x5E76;&#x88AB;&#x94FE;&#x63A5;&#x3002;    </li>
-<li>&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x5DE5;&#x7A0B;&#x7684;&#x67D0;&#x51E0;&#x4E2A;C&#x6587;&#x4EF6;&#x88AB;&#x4FEE;&#x6539;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x53EA;&#x7F16;&#x8BD1;&#x88AB;&#x4FEE;&#x6539;&#x7684;C&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x94FE;&#x63A5;&#x76EE;&#x6807;&#x7A0B;&#x5E8F;&#x3002;</li>
-<li>&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x5DE5;&#x7A0B;&#x7684;&#x5934;&#x6587;&#x4EF6;&#x88AB;&#x6539;&#x53D8;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7F16;&#x8BD1;&#x5F15;&#x7528;&#x4E86;&#x8FD9;&#x51E0;&#x4E2A;&#x5934;&#x6587;&#x4EF6;&#x7684;C&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x94FE;&#x63A5;&#x76EE;&#x6807;&#x7A0B;&#x5E8F;&#x3002;</li>
-</ol>
-<p><strong>&#x8BED;&#x6CD5;</strong></p>
-<p>target &#x2026; : prerequisites &#x2026;   ;  command             </p>
-<p>&#x200B;    command</p>
-<p>target&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x662F;Object File&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;&#x8FD8;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#xFF08;Label&#xFF09;&#x3002;</p>
-<p>prerequisites&#x5C31;&#x662F;&#x8981;&#x751F;&#x6210;&#x90A3;&#x4E2A;target&#x6240;&#x9700;&#x8981;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x662F;&#x76EE;&#x6807;&#x3002;</p>
-<p>command&#x4E5F;&#x5C31;&#x662F;make&#x9700;&#x8981;&#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x3002;&#xFF08;&#x4EFB;&#x610F;&#x7684;Shell&#x547D;&#x4EE4;&#xFF09;</p>
-<p>&#x8BF4;&#x767D;&#x4E00;&#x70B9;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;prerequisites&#x4E2D;&#x5982;&#x679C;&#x6709;&#x4E00;&#x4E2A;&#x4EE5;&#x4E0A;&#x7684;&#x6587;&#x4EF6;&#x6BD4;target&#x6587;&#x4EF6;&#x8981;&#x65B0;&#x7684;&#x8BDD;&#xFF0C;command&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x547D;&#x4EE4;&#x5C31;&#x4F1A;&#x88AB;&#x6267;&#x884C;&#x3002;&#x8FD9;&#x5C31;&#x662F;Makefile&#x7684;&#x89C4;&#x5219;&#x3002;&#x4E5F;&#x5C31;&#x662F;Makefile&#x4E2D;&#x6700;&#x6838;&#x5FC3;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
-<h3 id="&#x4E00;&#x4E2A;&#x793A;&#x4F8B;"><a href="#&#x4E00;&#x4E2A;&#x793A;&#x4F8B;" class="headerlink" title="&#x4E00;&#x4E2A;&#x793A;&#x4F8B;"></a>&#x4E00;&#x4E2A;&#x793A;&#x4F8B;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">edit : main.o kbd.o command.o display.o /</span><br><span class="line">       insert.o search.o files.o utils.o</span><br><span class="line">        cc -o edit main.o kbd.o command.o display.o /</span><br><span class="line">                   insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">main.o : main.c defs.h</span><br><span class="line">        cc -c main.c</span><br><span class="line">kbd.o : kbd.c defs.h command.h</span><br><span class="line">        cc -c kbd.c</span><br><span class="line">command.o : command.c defs.h command.h</span><br><span class="line">        cc -c command.c</span><br><span class="line">display.o : display.c defs.h buffer.h</span><br><span class="line">        cc -c display.c</span><br><span class="line">insert.o : insert.c defs.h buffer.h</span><br><span class="line">        cc -c insert.c</span><br><span class="line">search.o : search.c defs.h buffer.h</span><br><span class="line">        cc -c search.c</span><br><span class="line">files.o : files.c defs.h buffer.h command.h</span><br><span class="line">        cc -c files.c</span><br><span class="line">utils.o : utils.c defs.h</span><br><span class="line">        cc -c utils.c</span><br><span class="line">clean :</span><br><span class="line">        rm edit main.o kbd.o command.o display.o /</span><br><span class="line">           insert.o search.o files.o utils.o</span><br></pre></td></tr></table></figure>
-<p>&#x53CD;&#x659C;&#x6760;&#xFF08;/&#xFF09;&#x662F;&#x6362;&#x884C;&#x7B26;&#x7684;&#x610F;&#x601D;&#x3002;&#x8FD9;&#x6837;&#x6BD4;&#x8F83;&#x4FBF;&#x4E8E;Makefile&#x7684;&#x6613;&#x8BFB;&#x3002;</p>
-<p>&#x628A;&#x8FD9;&#x4E2A;&#x5185;&#x5BB9;&#x4FDD;&#x5B58;&#x5728;&#x6587;&#x4EF6;&#x4E3A;&#x201C;Makefile&#x201D;&#x6216;&#x201C;makefile&#x201D;&#x7684;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x8BE5;&#x76EE;&#x5F55;&#x4E0B;&#x76F4;&#x63A5;&#x8F93;&#x5165;&#x547D;&#x4EE4;&#x201C;make&#x201D;&#x5C31;&#x53EF;&#x4EE5;&#x751F;&#x6210;&#x6267;&#x884C;&#x6587;&#x4EF6;edit&#x3002;&#x5982;&#x679C;&#x8981;&#x5220;&#x9664;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x548C;&#x6240;&#x6709;&#x7684;&#x4E2D;&#x95F4;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;&#x53EA;&#x8981;&#x7B80;&#x5355;&#x5730;&#x6267;&#x884C;&#x4E00;&#x4E0B;&#x201C;make clean&#x201D;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
-<p>&#x5728;&#x5B9A;&#x4E49;&#x597D;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x540E;&#xFF0C;&#x540E;&#x7EED;&#x7684;&#x90A3;&#x4E00;&#x884C;&#x5B9A;&#x4E49;&#x4E86;&#x5982;&#x4F55;&#x751F;&#x6210;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x547D;&#x4EE4;&#xFF0C;&#x4E00;&#x5B9A;&#x8981;&#x4EE5;&#x4E00;&#x4E2A;Tab&#x952E;&#x4F5C;&#x4E3A;&#x5F00;&#x5934;&#x3002;</p>
-<p>clean&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x5B83;&#x53EA;&#x4E0D;&#x8FC7;&#x662F;&#x4E00;&#x4E2A;&#x52A8;&#x4F5C;&#x540D;&#x5B57;&#xFF0C;&#x6709;&#x70B9;&#x50CF;C&#x8BED;&#x8A00;&#x4E2D;&#x7684;lable&#x4E00;&#x6837;&#xFF0C;&#x5176;&#x5192;&#x53F7;&#x540E;&#x4EC0;&#x4E48;&#x4E5F;&#x6CA1;&#x6709;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;make&#x5C31;&#x4E0D;&#x4F1A;&#x81EA;&#x52A8;&#x53BB;&#x627E;&#x6587;&#x4EF6;&#x7684;&#x4F9D;&#x8D56;&#x6027;&#xFF0C;&#x4E5F;&#x5C31;&#x4E0D;&#x4F1A;&#x81EA;&#x52A8;&#x6267;&#x884C;&#x5176;&#x540E;&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x547D;&#x4EE4;&#x3002;&#x8981;&#x6267;&#x884C;&#x5176;&#x540E;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x5C31;&#x8981;&#x5728;make&#x547D;&#x4EE4;&#x540E;&#x660E;&#x663E;&#x5F97;&#x6307;&#x51FA;&#x8FD9;&#x4E2A;lable&#x7684;&#x540D;&#x5B57;&#x3002;&#x8FD9;&#x6837;&#x7684;&#x65B9;&#x6CD5;&#x975E;&#x5E38;&#x6709;&#x7528;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x4E00;&#x4E2A;makefile&#x4E2D;&#x5B9A;&#x4E49;&#x4E0D;&#x7528;&#x7684;&#x7F16;&#x8BD1;&#x6216;&#x662F;&#x548C;&#x7F16;&#x8BD1;&#x65E0;&#x5173;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x6BD4;&#x5982;&#x7A0B;&#x5E8F;&#x7684;&#x6253;&#x5305;&#xFF0C;&#x7A0B;&#x5E8F;&#x7684;&#x5907;&#x4EFD;&#xFF0C;&#x7B49;&#x7B49;&#x3002;</p>
-<h3 id="&#x4F7F;&#x7528;&#x53D8;&#x91CF;"><a href="#&#x4F7F;&#x7528;&#x53D8;&#x91CF;" class="headerlink" title="&#x4F7F;&#x7528;&#x53D8;&#x91CF;"></a>&#x4F7F;&#x7528;&#x53D8;&#x91CF;</h3><p>&#x5982;&#x679C;makefile&#x53D8;&#x5F97;&#x590D;&#x6742;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x5C31;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x5FD8;&#x6389;&#x4E00;&#x4E2A;&#x9700;&#x8981;&#x52A0;&#x5165;&#x6587;&#x4EF6;&#x540D;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x800C;&#x5BFC;&#x81F4;&#x7F16;&#x8BD1;&#x5931;&#x8D25;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x4E3A;&#x4E86;makefile&#x7684;&#x6613;&#x7EF4;&#x62A4;&#xFF0C;&#x5728;makefile&#x4E2D;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x53D8;&#x91CF;&#x3002;makefile&#x7684;&#x53D8;&#x91CF;&#x4E5F;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x7406;&#x89E3;&#x6210;C&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x5B8F;&#x53EF;&#x80FD;&#x4F1A;&#x66F4;&#x597D;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x5728;makefile&#x4E00;&#x5F00;&#x59CB;&#x5C31;&#x8FD9;&#x6837;&#x5B9A;&#x4E49;&#xFF1A;</p>
-<p>&#x200B;     objects = main.o kbd.o command.o display.o /<br>&#x200B;              insert.o search.o files.o utils.o</p>
-<p>&#x4E8E;&#x662F;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x5728;&#x6211;&#x4EEC;&#x7684;makefile&#x4E2D;&#x4EE5;&#x201C;$(objects)&#x201D;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x4E86;&#xFF0C;&#x4E8E;&#x662F;&#x6211;&#x4EEC;&#x7684;&#x6539;&#x826F;&#x7248;makefile&#x5C31;&#x53D8;&#x6210;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x6837;&#x5B50;&#xFF1A;</p>
-<p>&#x200B;    objects = main.o kbd.o command.o display.o /<br>&#x200B;              insert.o search.o files.o utils.o</p>
-<p>&#x200B;    edit : $(objects)<br>&#x200B;            cc -o edit $(objects)</p>
-<p>&#x4E8E;&#x662F;&#x5982;&#x679C;&#x6709;&#x65B0;&#x7684; .o &#x6587;&#x4EF6;&#x52A0;&#x5165;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x7B80;&#x5355;&#x5730;&#x4FEE;&#x6539;&#x4E00;&#x4E0B; objects &#x53D8;&#x91CF;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
-<h3 id="&#x8BA9;make&#x81EA;&#x52A8;&#x63A8;&#x5BFC;"><a href="#&#x8BA9;make&#x81EA;&#x52A8;&#x63A8;&#x5BFC;" class="headerlink" title="&#x8BA9;make&#x81EA;&#x52A8;&#x63A8;&#x5BFC;"></a>&#x8BA9;make&#x81EA;&#x52A8;&#x63A8;&#x5BFC;</h3><p>&#x53EA;&#x8981;make&#x770B;&#x5230;&#x4E00;&#x4E2A;[.o]&#x6587;&#x4EF6;&#xFF0C;&#x5B83;&#x5C31;&#x4F1A;&#x81EA;&#x52A8;&#x7684;&#x628A;[.c]&#x6587;&#x4EF6;&#x52A0;&#x5728;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x4E2D;&#xFF0C;&#x5982;&#x679C;make&#x627E;&#x5230;&#x4E00;&#x4E2A;whatever.o&#xFF0C;&#x90A3;&#x4E48;whatever.c&#xFF0C;&#x5C31;&#x4F1A;&#x662F;whatever.o&#x7684;&#x4F9D;&#x8D56;&#x6587;&#x4EF6;&#x3002;&#x5E76;&#x4E14; cc -c whatever.c &#x4E5F;&#x4F1A;&#x88AB;&#x63A8;&#x5BFC;&#x51FA;&#x6765;&#xFF0C;&#x4E8E;&#x662F;&#xFF0C;&#x6211;&#x4EEC;&#x7684;makefile&#x518D;&#x4E5F;&#x4E0D;&#x7528;&#x5199;&#x5F97;&#x8FD9;&#x4E48;&#x590D;&#x6742;&#x3002;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">objects = main.o kbd.o command.o display.o /</span><br><span class="line">          insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">edit : $(objects)</span><br><span class="line">        cc -o edit $(objects)</span><br><span class="line"></span><br><span class="line">main.o : defs.h</span><br><span class="line">kbd.o : defs.h command.h</span><br><span class="line">command.o : defs.h command.h</span><br><span class="line">display.o : defs.h buffer.h</span><br><span class="line">insert.o : defs.h buffer.h</span><br><span class="line">search.o : defs.h buffer.h</span><br><span class="line">files.o : defs.h buffer.h command.h</span><br><span class="line">utils.o : defs.h</span><br><span class="line"></span><br><span class="line">.PHONY : clean</span><br><span class="line">clean :</span><br><span class="line">        rm edit $(objects)</span><br></pre></td></tr></table></figure>
-<p>&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;make&#x7684;&#x201C;&#x9690;&#x6666;&#x89C4;&#x5219;&#x201D;&#x3002;&#x4E0A;&#x9762;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x4E2D;&#xFF0C;&#x201C;.PHONY&#x201D;&#x8868;&#x793A;&#xFF0C;clean&#x662F;&#x4E2A;&#x4F2A;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x3002;</p>
-<h3 id="&#x53E6;&#x7C7B;&#x98CE;&#x683C;&#x7684;makefile"><a href="#&#x53E6;&#x7C7B;&#x98CE;&#x683C;&#x7684;makefile" class="headerlink" title="&#x53E6;&#x7C7B;&#x98CE;&#x683C;&#x7684;makefile"></a>&#x53E6;&#x7C7B;&#x98CE;&#x683C;&#x7684;makefile</h3><p>&#x5373;&#x7136;&#x6211;&#x4EEC;&#x7684;make&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x63A8;&#x5BFC;&#x547D;&#x4EE4;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x770B;&#x5230;&#x90A3;&#x5806;[.o]&#x548C;[.h]&#x7684;&#x4F9D;&#x8D56;&#x5C31;&#x6709;&#x70B9;&#x4E0D;&#x723D;&#xFF0C;&#x90A3;&#x4E48;&#x591A;&#x7684;&#x91CD;&#x590D;&#x7684;[.h]&#xFF0C;&#x80FD;&#x4E0D;&#x80FD;&#x628A;&#x5176;&#x6536;&#x62E2;&#x8D77;&#x6765;&#xFF0C;&#x597D;&#x5427;&#xFF0C;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x4E8E;make&#x6765;&#x8BF4;&#x5F88;&#x5BB9;&#x6613;&#xFF0C;&#x8C01;&#x53EB;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#x81EA;&#x52A8;&#x63A8;&#x5BFC;&#x547D;&#x4EE4;&#x548C;&#x6587;&#x4EF6;&#x7684;&#x529F;&#x80FD;&#x5462;&#xFF1F;&#x6765;&#x770B;&#x770B;&#x6700;&#x65B0;&#x98CE;&#x683C;&#x7684;makefile&#x5427;&#x3002;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">objects = main.o kbd.o command.o display.o /</span><br><span class="line"></span><br><span class="line">          insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">edit : $(objects)</span><br><span class="line"></span><br><span class="line">        cc -o edit $(objects)</span><br><span class="line"></span><br><span class="line">$(objects) : defs.h</span><br><span class="line"></span><br><span class="line">kbd.o command.o files.o : command.h</span><br><span class="line"></span><br><span class="line">display.o insert.o search.o files.o : buffer.h</span><br><span class="line"></span><br><span class="line">.PHONY : clean</span><br><span class="line"></span><br><span class="line">clean :</span><br><span class="line"></span><br><span class="line">        rm edit $(objects)</span><br></pre></td></tr></table></figure>
-<p>&#x8FD9;&#x79CD;&#x98CE;&#x683C;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x7684;makefile&#x53D8;&#x5F97;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x7684;&#x6587;&#x4EF6;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x5C31;&#x663E;&#x5F97;&#x6709;&#x70B9;&#x51CC;&#x4E71;&#x4E86;&#x3002;&#x9C7C;&#x548C;&#x718A;&#x638C;&#x4E0D;&#x53EF;&#x517C;&#x5F97;&#x3002;&#x8FD8;&#x770B;&#x4F60;&#x7684;&#x559C;&#x597D;&#x4E86;&#x3002;&#x6211;&#x662F;&#x4E0D;&#x559C;&#x6B22;&#x8FD9;&#x79CD;&#x98CE;&#x683C;&#x7684;&#xFF0C;&#x4E00;&#x662F;&#x6587;&#x4EF6;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x770B;&#x4E0D;&#x6E05;&#x695A;&#xFF0C;&#x4E8C;&#x662F;&#x5982;&#x679C;&#x6587;&#x4EF6;&#x4E00;&#x591A;&#xFF0C;&#x8981;&#x52A0;&#x5165;&#x51E0;&#x4E2A;&#x65B0;&#x7684;.o&#x6587;&#x4EF6;&#xFF0C;&#x90A3;&#x5C31;&#x7406;&#x4E0D;&#x6E05;&#x695A;&#x4E86;&#x3002;</p>
-<h3 id="amp-amp"><a href="#amp-amp" class="headerlink" title="@ &amp; - &amp;"></a>@ &amp; - &amp;</h3><p>&#x5982;&#x679C;<code>make</code>&#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x524D;&#x9762;&#x52A0;&#x4E86;@&#x5B57;&#x7B26;&#xFF0C;&#x5219;&#x4E0D;&#x663E;&#x793A;&#x547D;&#x4EE4;&#x672C;&#x8EAB;&#x800C;&#x53EA;&#x663E;&#x793A;&#x5B83;&#x7684;&#x7ED3;&#x679C;&#x3002;</p>
-<p>&#x901A;&#x5E38;<code>make</code>&#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x5982;&#x679C;&#x51FA;&#x9519;&#xFF08;&#x8BE5;&#x547D;&#x4EE4;&#x7684;&#x9000;&#x51FA;&#x72B6;&#x6001;&#x975E;0&#xFF09;&#x5C31;&#x7ACB;&#x523B;&#x7EC8;&#x6B62;&#xFF0C;&#x4E0D;&#x518D;&#x6267;&#x884C;&#x540E;&#x7EED;&#x547D;&#x4EE4;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x547D;&#x4EE4;&#x524D;&#x9762;&#x52A0;&#x4E86;<code>-</code>&#x53F7;&#xFF0C;&#x5373;&#x4F7F;&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x51FA;&#x9519;&#xFF0C;<code>make</code>&#x4E5F;&#x4F1A;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x540E;&#x7EED;&#x547D;&#x4EE4;&#x3002;</p>
-<p>&#x901A;&#x5E38;<code>rm</code>&#x547D;&#x4EE4;&#x548C;<code>mkdir</code>&#x547D;&#x4EE4;&#x524D;&#x9762;&#x8981;&#x52A0;<code>-</code>&#x53F7;&#xFF0C;&#x56E0;&#x4E3A;<code>rm</code>&#x8981;&#x5220;&#x9664;&#x7684;&#x6587;&#x4EF6;&#x53EF;&#x80FD;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;<code>mkdir</code>&#x8981;&#x521B;&#x5EFA;&#x7684;&#x76EE;&#x5F55;&#x53EF;&#x80FD;&#x5DF2;&#x5B58;&#x5728;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x547D;&#x4EE4;&#x90FD;&#x6709;&#x53EF;&#x80FD;&#x51FA;&#x9519;&#xFF0C;&#x4F46;&#x8FD9;&#x79CD;&#x9519;&#x8BEF;&#x662F;&#x5E94;&#x8BE5;&#x5FFD;&#x7565;&#x7684;&#x3002;</p>
-<p>Makefile&#x4E2D;&#x53EA;&#x6709;&#x884C;&#x6CE8;&#x91CA;&#xFF0C;&#x548C;UNIX&#x7684;Shell&#x811A;&#x672C;&#x4E00;&#x6837;&#xFF0C;&#x5176;&#x6CE8;&#x91CA;&#x662F;&#x7528;&#x201C;#&#x201D;&#x5B57;&#x7B26;&#xFF0C;&#x8FD9;&#x4E2A;&#x5C31;&#x50CF;C/C++&#x4E2D;&#x7684;&#x201C;//&#x201D;&#x4E00;&#x6837;&#x3002;&#x5982;&#x679C;&#x4F60;&#x8981;&#x5728;&#x4F60;&#x7684;Makefile&#x4E2D;&#x4F7F;&#x7528;&#x201C;#&#x201D;&#x5B57;&#x7B26;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x53CD;&#x659C;&#x6846;&#x8FDB;&#x884C;&#x8F6C;&#x4E49;&#xFF0C;&#x5982;&#xFF1A;&#x201C;/#&#x201D;&#x3002;</p>
-<h3 id="makefile&#x7684;&#x6587;&#x4EF6;&#x540D;"><a href="#makefile&#x7684;&#x6587;&#x4EF6;&#x540D;" class="headerlink" title="makefile&#x7684;&#x6587;&#x4EF6;&#x540D;"></a>makefile&#x7684;&#x6587;&#x4EF6;&#x540D;</h3><p>&#x9ED8;&#x8BA4;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;make&#x547D;&#x4EE4;&#x4F1A;&#x5728;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E0B;&#x6309;&#x987A;&#x5E8F;&#x627E;&#x5BFB;&#x6587;&#x4EF6;&#x540D;&#x4E3A;&#x201C;GNUmakefile&#x201D;&#x3001;&#x201C;makefile&#x201D;&#x3001;&#x201C;Makefile&#x201D;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x627E;&#x5230;&#x4E86;&#x89E3;&#x91CA;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x3002;&#x5728;&#x8FD9;&#x4E09;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#x4E2D;&#xFF0C;&#x6700;&#x597D;&#x4F7F;&#x7528;&#x201C;Makefile&#x201D;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x56E0;&#x4E3A;&#xFF0C;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E3A;&#x5927;&#x5199;&#xFF0C;&#x8FD9;&#x6837;&#x6709;&#x4E00;&#x79CD;&#x663E;&#x76EE;&#x7684;&#x611F;&#x89C9;&#x3002;&#x6700;&#x597D;&#x4E0D;&#x8981;&#x7528;&#x201C;GNUmakefile&#x201D;&#xFF0C;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x662F;GNU&#x7684;make&#x8BC6;&#x522B;&#x7684;&#x3002;&#x6709;&#x53E6;&#x5916;&#x4E00;&#x4E9B;make&#x53EA;&#x5BF9;&#x5168;&#x5C0F;&#x5199;&#x7684;&#x201C;makefile&#x201D;&#x6587;&#x4EF6;&#x540D;&#x654F;&#x611F;&#xFF0C;&#x4F46;&#x662F;&#x57FA;&#x672C;&#x4E0A;&#x6765;&#x8BF4;&#xFF0C;&#x5927;&#x591A;&#x6570;&#x7684;make&#x90FD;&#x652F;&#x6301;&#x201C;makefile&#x201D;&#x548C;&#x201C;Makefile&#x201D;&#x8FD9;&#x4E24;&#x79CD;&#x9ED8;&#x8BA4;&#x6587;&#x4EF6;&#x540D;&#x3002;</p>
-<p>&#x5F53;&#x7136;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x522B;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x6765;&#x4E66;&#x5199;Makefile&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;&#x201C;Make.Linux&#x201D;&#xFF0C;&#x201C;Make.Solaris&#x201D;&#xFF0C;&#x201C;Make.AIX&#x201D;&#x7B49;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x6307;&#x5B9A;&#x7279;&#x5B9A;&#x7684;Makefile&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;make&#x7684;&#x201C;-f&#x201D;&#x548C;&#x201C;&#x2013;file&#x201D;&#x53C2;&#x6570;&#x3002;</p>
-<h3 id="&#x5F15;&#x7528;&#x5176;&#x5B83;&#x7684;Makefile"><a href="#&#x5F15;&#x7528;&#x5176;&#x5B83;&#x7684;Makefile" class="headerlink" title="&#x5F15;&#x7528;&#x5176;&#x5B83;&#x7684;Makefile"></a>&#x5F15;&#x7528;&#x5176;&#x5B83;&#x7684;Makefile</h3><p>&#x5728;Makefile&#x4F7F;&#x7528;include&#x5173;&#x952E;&#x5B57;&#x53EF;&#x4EE5;&#x628A;&#x522B;&#x7684;Makefile&#x5305;&#x542B;&#x8FDB;&#x6765;&#xFF0C;&#x8FD9;&#x5F88;&#x50CF;C&#x8BED;&#x8A00;&#x7684;#include&#xFF0C;&#x88AB;&#x5305;&#x542B;&#x7684;&#x6587;&#x4EF6;&#x4F1A;&#x539F;&#x6A21;&#x539F;&#x6837;&#x7684;&#x653E;&#x5728;&#x5F53;&#x524D;&#x6587;&#x4EF6;&#x7684;&#x5305;&#x542B;&#x4F4D;&#x7F6E;&#x3002;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">include &lt;filename&gt;</span><br><span class="line"></span><br><span class="line">#filename&#x53EF;&#x4EE5;&#x662F;&#x5F53;&#x524D;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;Shell&#x7684;&#x6587;&#x4EF6;&#x6A21;&#x5F0F;&#xFF08;&#x53EF;&#x4EE5;&#x4FDD;&#x542B;&#x8DEF;&#x5F84;&#x548C;&#x901A;&#x914D;&#x7B26;&#xFF09;</span><br></pre></td></tr></table></figure>
-<p>&#x5728;include&#x524D;&#x9762;&#x53EF;&#x4EE5;&#x6709;&#x4E00;&#x4E9B;&#x7A7A;&#x5B57;&#x7B26;&#xFF0C;&#x4F46;&#x662F;&#x7EDD;&#x4E0D;&#x80FD;&#x662F;[Tab]&#x952E;&#x5F00;&#x59CB;&#x3002;include&#x548C;<code>&lt;filename&gt;</code>&#x53EF;&#x4EE5;&#x7528;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7A7A;&#x683C;&#x9694;&#x5F00;&#x3002;</p>
-<p>make&#x547D;&#x4EE4;&#x5F00;&#x59CB;&#x65F6;&#xFF0C;&#x4F1A;&#x628A;&#x627E;&#x5BFB;include&#x6240;&#x6307;&#x51FA;&#x7684;&#x5176;&#x5B83;Makefile&#xFF0C;&#x5E76;&#x628A;&#x5176;&#x5185;&#x5BB9;&#x5B89;&#x7F6E;&#x5728;&#x5F53;&#x524D;&#x7684;&#x4F4D;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x6587;&#x4EF6;&#x90FD;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x6216;&#x662F;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x7684;&#x8BDD;&#xFF0C;make&#x4F1A;&#x5728;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E0B;&#x9996;&#x5148;&#x5BFB;&#x627E;&#xFF0C;&#x5982;&#x679C;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E0B;&#x6CA1;&#x6709;&#x627E;&#x5230;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;make&#x8FD8;&#x4F1A;&#x5728;&#x4E0B;&#x9762;&#x7684;&#x51E0;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;&#x627E;&#xFF1A;</p>
-<p>&#x200B;    1&#x3001;&#x5982;&#x679C;make&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x6709;&#x201C;-I&#x201D;&#x6216;&#x201C;&#x2013;include-dir&#x201D;&#x53C2;&#x6570;&#xFF0C;&#x90A3;&#x4E48;make&#x5C31;&#x4F1A;&#x5728;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x6240;&#x6307;&#x5B9A;&#x7684;&#x76EE;&#x5F55;&#x4E0B;&#x53BB;&#x5BFB;&#x627E;&#x3002;<br>&#x200B;    2&#x3001;&#x5982;&#x679C;&#x76EE;&#x5F55;<code>&lt;prefix&gt;/include</code>&#xFF08;&#x4E00;&#x822C;&#x662F;&#xFF1A;/usr/local/bin&#x6216;/usr/include&#xFF09;&#x5B58;&#x5728;&#x7684;&#x8BDD;&#xFF0C;make&#x4E5F;&#x4F1A;&#x53BB;&#x627E;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x6709;&#x6587;&#x4EF6;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x7684;&#x8BDD;&#xFF0C;make&#x4F1A;&#x751F;&#x6210;&#x4E00;&#x6761;&#x8B66;&#x544A;&#x4FE1;&#x606F;&#xFF0C;&#x4F46;&#x4E0D;&#x4F1A;&#x9A6C;&#x4E0A;&#x51FA;&#x73B0;&#x81F4;&#x547D;&#x9519;&#x8BEF;&#x3002;&#x5B83;&#x4F1A;&#x7EE7;&#x7EED;&#x8F7D;&#x5165;&#x5176;&#x5B83;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x4E00;&#x65E6;&#x5B8C;&#x6210;makefile&#x7684;&#x8BFB;&#x53D6;&#xFF0C;make&#x4F1A;&#x518D;&#x91CD;&#x8BD5;&#x8FD9;&#x4E9B;&#x6CA1;&#x6709;&#x627E;&#x5230;&#xFF0C;&#x6216;&#x662F;&#x4E0D;&#x80FD;&#x8BFB;&#x53D6;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x8FD8;&#x662F;&#x4E0D;&#x884C;&#xFF0C;make&#x624D;&#x4F1A;&#x51FA;&#x73B0;&#x4E00;&#x6761;&#x81F4;&#x547D;&#x4FE1;&#x606F;&#x3002;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x8BA9;make&#x4E0D;&#x7406;&#x90A3;&#x4E9B;&#x65E0;&#x6CD5;&#x8BFB;&#x53D6;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x800C;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;include&#x524D;&#x52A0;&#x4E00;&#x4E2A;&#x51CF;&#x53F7;&#x201C;-&#x201D;&#x3002;</p>
-<h3 id="&#x73AF;&#x5883;&#x53D8;&#x91CF;-MAKEFILES"><a href="#&#x73AF;&#x5883;&#x53D8;&#x91CF;-MAKEFILES" class="headerlink" title="&#x73AF;&#x5883;&#x53D8;&#x91CF; MAKEFILES"></a>&#x73AF;&#x5883;&#x53D8;&#x91CF; MAKEFILES</h3><p>&#x5982;&#x679C;&#x4F60;&#x7684;&#x5F53;&#x524D;&#x73AF;&#x5883;&#x4E2D;&#x5B9A;&#x4E49;&#x4E86;&#x73AF;&#x5883;&#x53D8;&#x91CF;MAKEFILES&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;make&#x4F1A;&#x628A;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x4E2D;&#x7684;&#x503C;&#x505A;&#x4E00;&#x4E2A;&#x7C7B;&#x4F3C;&#x4E8E;include&#x7684;&#x52A8;&#x4F5C;&#x3002;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x4E2D;&#x7684;&#x503C;&#x662F;&#x5176;&#x5B83;&#x7684;Makefile&#xFF0C;&#x7528;&#x7A7A;&#x683C;&#x5206;&#x9694;&#x3002;&#x53EA;&#x662F;&#xFF0C;&#x5B83;&#x548C;include&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;&#x4ECE;&#x8FD9;&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x4E2D;&#x5F15;&#x5165;&#x7684;Makefile&#x7684;&#x201C;&#x76EE;&#x6807;&#x201D;&#x4E0D;&#x4F1A;&#x8D77;&#x4F5C;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x6587;&#x4EF6;&#x53D1;&#x73B0;&#x9519;&#x8BEF;&#xFF0C;make&#x4E5F;&#x4F1A;&#x4E0D;&#x7406;&#x3002;</p>
-<p>&#x5EFA;&#x8BAE;<strong>&#x4E0D;&#x8981;&#x4F7F;&#x7528;</strong>&#x8FD9;&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF0C;&#x56E0;&#x4E3A;&#x53EA;&#x8981;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x4E00;&#x88AB;&#x5B9A;&#x4E49;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x4F60;&#x4F7F;&#x7528;make&#x65F6;&#xFF0C;&#x6240;&#x6709;&#x7684;Makefile&#x90FD;&#x4F1A;&#x53D7;&#x5230;&#x5B83;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x8FD9;&#x7EDD;&#x4E0D;&#x662F;&#x4F60;&#x60F3;&#x770B;&#x5230;&#x7684;&#x3002;&#x5728;&#x8FD9;&#x91CC;&#x63D0;&#x8FD9;&#x4E2A;&#x4E8B;&#xFF0C;&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x544A;&#x8BC9;&#x5927;&#x5BB6;&#xFF0C;&#x4E5F;&#x8BB8;&#x6709;&#x65F6;&#x5019;&#x4F60;&#x7684;Makefile&#x51FA;&#x73B0;&#x4E86;&#x602A;&#x4E8B;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x770B;&#x5F53;&#x524D;&#x73AF;&#x5883;&#x4E2D;&#x6709;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x3002; </p>
-<h3 id="make&#x5DE5;&#x4F5C;&#x65B9;&#x5F0F;"><a href="#make&#x5DE5;&#x4F5C;&#x65B9;&#x5F0F;" class="headerlink" title="make&#x5DE5;&#x4F5C;&#x65B9;&#x5F0F;"></a>make&#x5DE5;&#x4F5C;&#x65B9;&#x5F0F;</h3><p>&#x200B;    1&#x3001;&#x8BFB;&#x5165;&#x6240;&#x6709;&#x7684;Makefile&#x3002;<br>&#x200B;    2&#x3001;&#x8BFB;&#x5165;&#x88AB;include&#x7684;&#x5176;&#x5B83;Makefile&#x3002;<br>&#x200B;    3&#x3001;&#x521D;&#x59CB;&#x5316;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x3002;<br>&#x200B;    4&#x3001;&#x63A8;&#x5BFC;&#x9690;&#x6666;&#x89C4;&#x5219;&#xFF0C;&#x5E76;&#x5206;&#x6790;&#x6240;&#x6709;&#x89C4;&#x5219;&#x3002;<br>&#x200B;    5&#x3001;&#x4E3A;&#x6240;&#x6709;&#x7684;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x521B;&#x5EFA;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x94FE;&#x3002;<br>&#x200B;    6&#x3001;&#x6839;&#x636E;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x51B3;&#x5B9A;&#x54EA;&#x4E9B;&#x76EE;&#x6807;&#x8981;&#x91CD;&#x65B0;&#x751F;&#x6210;&#x3002;<br>&#x200B;    7&#x3001;&#x6267;&#x884C;&#x751F;&#x6210;&#x547D;&#x4EE4;&#x3002;</p>
-<p>1-5&#x6B65;&#x4E3A;&#x7B2C;&#x4E00;&#x4E2A;&#x9636;&#x6BB5;&#xFF0C;6-7&#x4E3A;&#x7B2C;&#x4E8C;&#x4E2A;&#x9636;&#x6BB5;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x9636;&#x6BB5;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#x88AB;&#x4F7F;&#x7528;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;make&#x4F1A;&#x628A;&#x5176;&#x5C55;&#x5F00;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x4F4D;&#x7F6E;&#x3002;&#x4F46;make&#x5E76;&#x4E0D;&#x4F1A;&#x5B8C;&#x5168;&#x9A6C;&#x4E0A;&#x5C55;&#x5F00;&#xFF0C;make&#x4F7F;&#x7528;&#x7684;&#x662F;&#x62D6;&#x5EF6;&#x6218;&#x672F;&#xFF0C;&#x5982;&#x679C;&#x53D8;&#x91CF;&#x51FA;&#x73B0;&#x5728;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x7684;&#x89C4;&#x5219;&#x4E2D;&#xFF0C;&#x90A3;&#x4E48;&#x4EC5;&#x5F53;&#x8FD9;&#x6761;&#x4F9D;&#x8D56;&#x88AB;&#x51B3;&#x5B9A;&#x8981;&#x4F7F;&#x7528;&#x4E86;&#xFF0C;&#x53D8;&#x91CF;&#x624D;&#x4F1A;&#x5728;&#x5176;&#x5185;&#x90E8;&#x5C55;&#x5F00;&#x3002;</p>
-<h3 id="&#x4F7F;&#x7528;&#x901A;&#x914D;&#x7B26;"><a href="#&#x4F7F;&#x7528;&#x901A;&#x914D;&#x7B26;" class="headerlink" title="&#x4F7F;&#x7528;&#x901A;&#x914D;&#x7B26;"></a>&#x4F7F;&#x7528;&#x901A;&#x914D;&#x7B26;</h3><p>make&#x652F;&#x6301;&#x4E09;&#x5404;&#x901A;&#x914D;&#x7B26;&#xFF1A;&#x201C;*&#x201D;&#xFF0C;&#x201C;?&#x201D;&#x548C;&#x201C;[&#x2026;]&#x201D;&#x3002;&#x8FD9;&#x662F;&#x548C;Unix&#x7684;B-Shell&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;</p>
-<p>&#x6CE2;&#x6D6A;&#x53F7;&#xFF08;&#x201C;~&#x201D;&#xFF09;&#x5B57;&#x7B26;&#x5728;&#x6587;&#x4EF6;&#x540D;&#x4E2D;&#x4E5F;&#x6709;&#x6BD4;&#x8F83;&#x7279;&#x6B8A;&#x7684;&#x7528;&#x9014;&#xFF0C;&#x8868;&#x793A;&#x5F53;&#x524D;&#x7528;&#x6237;&#x7684;$HOME&#x76EE;&#x5F55;&#x3002;</p>
-<h3 id="&#x81EA;&#x52A8;&#x6587;&#x4EF6;&#x641C;&#x5BFB;"><a href="#&#x81EA;&#x52A8;&#x6587;&#x4EF6;&#x641C;&#x5BFB;" class="headerlink" title="&#x81EA;&#x52A8;&#x6587;&#x4EF6;&#x641C;&#x5BFB;"></a>&#x81EA;&#x52A8;&#x6587;&#x4EF6;&#x641C;&#x5BFB;</h3><p>Makefile&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x7279;&#x6B8A;&#x53D8;&#x91CF;&#x201C;VPATH&#x201D;&#x5C31;&#x662F;&#x5B8C;&#x6210;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x660E;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;make&#x53EA;&#x4F1A;&#x5728;&#x5F53;&#x524D;&#x7684;&#x76EE;&#x5F55;&#x4E2D;&#x53BB;&#x627E;&#x5BFB;&#x4F9D;&#x8D56;&#x6587;&#x4EF6;&#x548C;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x3002;&#x5982;&#x679C;&#x5B9A;&#x4E49;&#x4E86;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;make&#x5C31;&#x4F1A;&#x5728;&#x5F53;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x627E;&#x4E0D;&#x5230;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5230;&#x6240;&#x6307;&#x5B9A;&#x7684;&#x76EE;&#x5F55;&#x4E2D;&#x53BB;&#x627E;&#x5BFB;&#x6587;&#x4EF6;&#x4E86;&#x3002;</p>
-<p>&#x200B;    VPATH = src:../headers</p>
-<p>&#x4E0A;&#x9762;&#x7684;&#x7684;&#x5B9A;&#x4E49;&#x6307;&#x5B9A;&#x4E24;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x201C;src&#x201D;&#x548C;&#x201C;../headers&#x201D;&#xFF0C;make&#x4F1A;&#x6309;&#x7167;&#x8FD9;&#x4E2A;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x641C;&#x7D22;&#x3002;&#x76EE;&#x5F55;&#x7531;&#x201C;&#x5192;&#x53F7;&#x201D;&#x5206;&#x9694;&#x3002;&#xFF08;&#x5F53;&#x7136;&#xFF0C;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x6C38;&#x8FDC;&#x662F;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x641C;&#x7D22;&#x7684;&#x5730;&#x65B9;&#xFF09;</p>
-<hr>
-<p>&#x53E6;&#x4E00;&#x4E2A;&#x8BBE;&#x7F6E;&#x6587;&#x4EF6;&#x641C;&#x7D22;&#x8DEF;&#x5F84;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x4F7F;&#x7528;make&#x7684;&#x201C;vpath&#x201D;&#x5173;&#x952E;&#x5B57;&#xFF08;&#x6CE8;&#x610F;&#xFF0C;&#x5B83;&#x662F;&#x5168;&#x5C0F;&#x5199;&#x7684;&#xFF09;&#xFF0C;&#x8FD9;&#x4E0D;&#x662F;&#x53D8;&#x91CF;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;make&#x7684;&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x8FD9;&#x548C;&#x4E0A;&#x9762;&#x63D0;&#x5230;&#x7684;&#x90A3;&#x4E2A;VPATH&#x53D8;&#x91CF;&#x5F88;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x66F4;&#x4E3A;&#x7075;&#x6D3B;&#x3002;&#x5B83;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x4E0D;&#x540C;&#x7684;&#x6587;&#x4EF6;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x641C;&#x7D22;&#x76EE;&#x5F55;&#x4E2D;&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x7075;&#x6D3B;&#x7684;&#x529F;&#x80FD;&#x3002;&#x5B83;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x6709;&#x4E09;&#x79CD;&#xFF1A;</p>
-<p>&#x200B;    1&#x3001;<code>vpath &lt;pattern&gt; &lt;directories&gt;</code></p>
-<p>&#x200B;    &#x4E3A;&#x7B26;&#x5408;&#x6A21;&#x5F0F;<code>&lt;pattern&gt;</code>&#x7684;&#x6587;&#x4EF6;&#x6307;&#x5B9A;&#x641C;&#x7D22;&#x76EE;&#x5F55;<code>&lt;directories&gt;</code>&#x3002;</p>
-<p>&#x200B;    2&#x3001;<code>vpath &lt;pattern&gt;</code></p>
-<p>&#x200B;    &#x6E05;&#x9664;&#x7B26;&#x5408;&#x6A21;&#x5F0F;<code>&lt;pattern&gt;</code>&#x7684;&#x6587;&#x4EF6;&#x7684;&#x641C;&#x7D22;&#x76EE;&#x5F55;&#x3002;</p>
-<p>&#x200B;    3&#x3001;vpath</p>
-<p>&#x200B;    &#x6E05;&#x9664;&#x6240;&#x6709;&#x5DF2;&#x88AB;&#x8BBE;&#x7F6E;&#x597D;&#x4E86;&#x7684;&#x6587;&#x4EF6;&#x641C;&#x7D22;&#x76EE;&#x5F55;&#x3002;</p>
-<p>vapth&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x4E2D;&#x7684;<code>&lt;pattern&gt;</code>&#x9700;&#x8981;&#x5305;&#x542B;&#x201C;%&#x201D;&#x5B57;&#x7B26;&#x3002;&#x201C;%&#x201D;&#x7684;&#x610F;&#x601D;&#x662F;&#x5339;&#x914D;&#x96F6;&#x6216;&#x82E5;&#x5E72;&#x5B57;&#x7B26;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x201C;%.h&#x201D;&#x8868;&#x793A;&#x6240;&#x6709;&#x4EE5;&#x201C;.h&#x201D;&#x7ED3;&#x5C3E;&#x7684;&#x6587;&#x4EF6;&#x3002;</p>
-<p>&#x53EF;&#x4EE5;&#x8FDE;&#x7EED;&#x5730;&#x4F7F;&#x7528;vpath&#x8BED;&#x53E5;&#xFF0C;&#x4EE5;&#x6307;&#x5B9A;&#x4E0D;&#x540C;&#x641C;&#x7D22;&#x7B56;&#x7565;&#x3002;&#x5982;&#x679C;&#x8FDE;&#x7EED;&#x7684;vpath&#x8BED;&#x53E5;&#x4E2D;&#x51FA;&#x73B0;&#x4E86;&#x76F8;&#x540C;&#x7684;<code>&lt;pattern&gt;</code>&#xFF0C;&#x6216;&#x662F;&#x88AB;&#x91CD;&#x590D;&#x4E86;&#x7684;<code>&lt;pattern&gt;</code>&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;make&#x4F1A;&#x6309;&#x7167;vpath&#x8BED;&#x53E5;&#x7684;&#x5148;&#x540E;&#x987A;&#x5E8F;&#x6765;&#x6267;&#x884C;&#x641C;&#x7D22;&#x3002;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vpath %.c foo:bar</span><br><span class="line">vpath %   blish</span><br></pre></td></tr></table></figure>
-<p>&#x4E0A;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x5219;&#x8868;&#x793A;&#x201C;.c&#x201D;&#x7ED3;&#x5C3E;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x5148;&#x5728;&#x201C;foo&#x201D;&#x76EE;&#x5F55;&#xFF0C;&#x7136;&#x540E;&#x662F;&#x201C;bar&#x201D;&#x76EE;&#x5F55;&#xFF0C;&#x6700;&#x540E;&#x624D;&#x662F;&#x201C;blish&#x201D;&#x76EE;&#x5F55;&#x3002;</p>
-<h3 id="&#x4F2A;&#x76EE;&#x6807;"><a href="#&#x4F2A;&#x76EE;&#x6807;" class="headerlink" title="&#x4F2A;&#x76EE;&#x6807;"></a>&#x4F2A;&#x76EE;&#x6807;</h3><p>&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x548C;&#x6587;&#x4EF6;&#x91CD;&#x540D;&#x7684;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x6807;&#x8BB0;&#x201C;.PHONY&#x201D;&#x6765;&#x663E;&#x793A;&#x5730;&#x6307;&#x660E;&#x4E00;&#x4E2A;&#x76EE;&#x6807;&#x662F;&#x201C;&#x4F2A;&#x76EE;&#x6807;&#x201D;&#xFF0C;&#x5411;make&#x8BF4;&#x660E;&#xFF0C;&#x4E0D;&#x7BA1;&#x662F;&#x5426;&#x6709;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x4E2A;&#x76EE;&#x6807;&#x5C31;&#x662F;&#x201C;&#x4F2A;&#x76EE;&#x6807;&#x201D;&#x3002;</p>
-<p>&#x200B;    .PHONY : clean</p>
-<p>&#x53EA;&#x8981;&#x6709;&#x8FD9;&#x4E2A;&#x58F0;&#x660E;&#xFF0C;&#x4E0D;&#x7BA1;&#x662F;&#x5426;&#x6709;&#x201C;clean&#x201D;&#x6587;&#x4EF6;&#xFF0C;&#x8981;&#x8FD0;&#x884C;&#x201C;clean&#x201D;&#x8FD9;&#x4E2A;&#x76EE;&#x6807;&#xFF0C;&#x53EA;&#x6709;&#x201C;make clean&#x201D;&#x8FD9;&#x6837;&#x3002;&#x4E8E;&#x662F;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x5199;&#xFF1A;</p>
-<p>&#x200B;     .PHONY: clean<br>&#x200B;    clean:<br>&#x200B;            rm *.o temp</p>
-<hr>
-<p>&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x4E3A;&#x4F2A;&#x76EE;&#x6807;&#x6307;&#x5B9A;&#x6240;&#x4F9D;&#x8D56;&#x7684;&#x6587;&#x4EF6;&#x3002;&#x4F2A;&#x76EE;&#x6807;&#x540C;&#x6837;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x201C;&#x9ED8;&#x8BA4;&#x76EE;&#x6807;&#x201D;&#xFF0C;&#x53EA;&#x8981;&#x5C06;&#x5176;&#x653E;&#x5728;&#x7B2C;&#x4E00;&#x4E2A;&#x3002;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#x5C31;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7684;Makefile&#x9700;&#x8981;&#x4E00;&#x53E3;&#x6C14;&#x751F;&#x6210;&#x82E5;&#x5E72;&#x4E2A;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF0C;&#x4F46;&#x4F60;&#x53EA;&#x60F3;&#x7B80;&#x5355;&#x5730;&#x6572;&#x4E00;&#x4E2A;make&#x5B8C;&#x4E8B;&#xFF0C;&#x5E76;&#x4E14;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x90FD;&#x5199;&#x5728;&#x4E00;&#x4E2A;Makefile&#x4E2D;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x201C;&#x4F2A;&#x76EE;&#x6807;&#x201D;&#x8FD9;&#x4E2A;&#x7279;&#x6027;&#xFF1A;</p>
-<p>&#x200B;    all : prog1 prog2 prog3<br>&#x200B;    .PHONY : all</p>
-<p>&#x200B;    prog1 : prog1.o utils.o<br>&#x200B;            cc -o prog1 prog1.o utils.o</p>
-<p>&#x200B;    prog2 : prog2.o<br>&#x200B;            cc -o prog2 prog2.o</p>
-<p>&#x200B;    prog3 : prog3.o sort.o utils.o<br>&#x200B;            cc -o prog3 prog3.o sort.o utils.o</p>
-<h3 id="&#x9759;&#x6001;&#x6A21;&#x5F0F;"><a href="#&#x9759;&#x6001;&#x6A21;&#x5F0F;" class="headerlink" title="&#x9759;&#x6001;&#x6A21;&#x5F0F;"></a>&#x9759;&#x6001;&#x6A21;&#x5F0F;</h3><p>&#x9759;&#x6001;&#x6A21;&#x5F0F;&#x53EF;&#x4EE5;&#x66F4;&#x52A0;&#x5BB9;&#x6613;&#x5730;&#x5B9A;&#x4E49;&#x591A;&#x76EE;&#x6807;&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA9;&#x6211;&#x4EEC;&#x7684;&#x89C4;&#x5219;&#x53D8;&#x5F97;&#x66F4;&#x52A0;&#x7684;&#x6709;&#x5F39;&#x6027;&#x548C;&#x7075;&#x6D3B;&#x3002;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x8BED;&#x6CD5;&#xFF1A;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;targets ...&gt;: &lt;target-pattern&gt;: &lt;prereq-patterns ...&gt;</span><br><span class="line">        &lt;commands&gt;</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
-<p>&#x200B;    targets&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x6709;&#x901A;&#x914D;&#x7B26;&#x3002;&#x662F;&#x76EE;&#x6807;&#x7684;&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#x3002;</p>
-<p>&#x200B;    target-parrtern&#x662F;&#x6307;&#x660E;&#x4E86;targets&#x7684;&#x6A21;&#x5F0F;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x7684;&#x76EE;&#x6807;&#x96C6;&#x6A21;&#x5F0F;&#x3002;</p>
-<p>&#x200B;    prereq-parrterns&#x662F;&#x76EE;&#x6807;&#x7684;&#x4F9D;&#x8D56;&#x6A21;&#x5F0F;&#xFF0C;&#x5B83;&#x5BF9;target-parrtern&#x5F62;&#x6210;&#x7684;&#x6A21;&#x5F0F;&#x518D;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x4F9D;&#x8D56;&#x76EE;&#x6807;&#x7684;&#x5B9A;&#x4E49;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x7684;&#x201C;&#x76EE;&#x6807;&#x6A21;&#x5F0F;&#x201D;&#x6216;&#x662F;&#x201C;&#x4F9D;&#x8D56;&#x6A21;&#x5F0F;&#x201D;&#x4E2D;&#x90FD;&#x5E94;&#x8BE5;&#x6709;&#x201C;%&#x201D;&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x4E2D;&#x6709;&#x201C;%&#x201D;&#x90A3;&#x4E48;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x53CD;&#x659C;&#x6760;&#x201C;\&#x201D;&#x8FDB;&#x884C;&#x8F6C;&#x4E49;&#xFF0C;&#x6765;&#x6807;&#x660E;&#x771F;&#x5B9E;&#x7684;&#x201C;%&#x201D;&#x5B57;&#x7B26;&#x3002;</p>
-<p>&#x770B;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">objects = foo.o bar.o</span><br><span class="line"></span><br><span class="line">all: $(objects)</span><br><span class="line"></span><br><span class="line">$(objects): %.o: %.c</span><br><span class="line">        $(CC) -c $(CFLAGS) $&lt; -o $@</span><br></pre></td></tr></table></figure>
-<p>&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x6307;&#x660E;&#x4E86;&#x6211;&#x4EEC;&#x7684;&#x76EE;&#x6807;&#x4ECE;<code>$object</code>&#x4E2D;&#x83B7;&#x53D6;&#xFF0C;&#x201C;%.o&#x201D;&#x8868;&#x660E;&#x8981;&#x6240;&#x6709;&#x4EE5;&#x201C;.o&#x201D;&#x7ED3;&#x5C3E;&#x7684;&#x76EE;&#x6807;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x201C;foo.o bar.o&#x201D;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x53D8;&#x91CF;<code>$object</code>&#x96C6;&#x5408;&#x7684;&#x6A21;&#x5F0F;&#xFF0C;&#x800C;&#x4F9D;&#x8D56;&#x6A21;&#x5F0F;&#x201C;%.c&#x201D;&#x5219;&#x53D6;&#x6A21;&#x5F0F;&#x201C;%.o&#x201D;&#x7684;&#x201C;%&#x201D;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x201C;foo bar&#x201D;&#xFF0C;&#x5E76;&#x4E3A;&#x5176;&#x52A0;&#x4E0B;&#x201C;.c&#x201D;&#x7684;&#x540E;&#x7F00;&#xFF0C;&#x4E8E;&#x662F;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x4F9D;&#x8D56;&#x76EE;&#x6807;&#x5C31;&#x662F;&#x201C;foo.c bar.c&#x201D;&#x3002;&#x800C;&#x547D;&#x4EE4;&#x4E2D;&#x7684;&#x201C;<code>$&lt;</code>&#x201D;&#x548C;&#x201C;<code>$@</code>&#x201D;&#x5219;&#x662F;&#x81EA;&#x52A8;&#x5316;&#x53D8;&#x91CF;&#xFF0C;&#x201C;<code>$&lt;</code>&#x201D;&#x8868;&#x793A;&#x6240;&#x6709;&#x7684;&#x4F9D;&#x8D56;&#x76EE;&#x6807;&#x96C6;&#xFF08;&#x4E5F;&#x5C31;&#x662F;&#x201C;foo.c bar.c&#x201D;&#xFF09;&#xFF0C;&#x201C;<code>$@</code>&#x201D;&#x8868;&#x793A;&#x76EE;&#x6807;&#x96C6;&#xFF08;&#x4E5F;&#x5C31;&#x662F;&#x201C;foo.o bar.o&#x201D;&#xFF09;&#x3002;&#x4E8E;&#x662F;&#xFF0C;&#x4E0A;&#x9762;&#x7684;&#x89C4;&#x5219;&#x5C55;&#x5F00;&#x540E;&#x7B49;&#x4EF7;&#x4E8E;&#x4E0B;&#x9762;&#x7684;&#x89C4;&#x5219;&#xFF1A;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foo.o : foo.c</span><br><span class="line">        $(CC) -c $(CFLAGS) foo.c -o foo.o</span><br><span class="line">bar.o : bar.c</span><br><span class="line">        $(CC) -c $(CFLAGS) bar.c -o bar.o</span><br></pre></td></tr></table></figure>
-<p>&#x201C;&#x9759;&#x6001;&#x6A21;&#x5F0F;&#x89C4;&#x5219;&#x201D;&#x7684;&#x7528;&#x6CD5;&#x5F88;&#x7075;&#x6D3B;&#xFF0C;&#x5982;&#x679C;&#x7528;&#x5F97;&#x597D;&#xFF0C;&#x90A3;&#x4F1A;&#x4E00;&#x4E2A;&#x5F88;&#x5F3A;&#x5927;&#x7684;&#x529F;&#x80FD;&#x3002;&#x518D;&#x770B;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">files = foo.elc bar.o lose.o</span><br><span class="line"></span><br><span class="line">$(filter %.o,$(files)): %.o: %.c</span><br><span class="line">        $(CC) -c $(CFLAGS) $&lt; -o $@</span><br><span class="line">$(filter %.elc,$(files)): %.elc: %.el</span><br><span class="line">        emacs -f batch-byte-compile $&lt;</span><br></pre></td></tr></table></figure></p>
-<p><code>$(filter %.o,$(files))</code>&#x8868;&#x793A;&#x8C03;&#x7528;Makefile&#x7684;filter&#x51FD;&#x6570;&#xFF0C;&#x8FC7;&#x6EE4;&#x201C;<code>$filter</code>&#x201D;&#x96C6;&#xFF0C;&#x53EA;&#x8981;&#x5176;&#x4E2D;&#x6A21;&#x5F0F;&#x4E3A;&#x201C;%.o&#x201D;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
-<h2 id="&#x5F85;&#x7EED;"><a href="#&#x5F85;&#x7EED;" class="headerlink" title="&#x5F85;&#x7EED;"></a>&#x5F85;&#x7EED;</h2>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-12-15T12:58:57.000Z" itemprop="datePublished">2018-12-15</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件依赖规则"><span class="toc-number">1.</span> <span class="toc-text">文件依赖规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一个示例"><span class="toc-number">2.</span> <span class="toc-text">一个示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用变量"><span class="toc-number">3.</span> <span class="toc-text">使用变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#让make自动推导"><span class="toc-number">4.</span> <span class="toc-text">让make自动推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#另类风格的makefile"><span class="toc-number">5.</span> <span class="toc-text">另类风格的makefile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#amp-amp"><span class="toc-number">6.</span> <span class="toc-text">@ &amp; - &amp;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#makefile的文件名"><span class="toc-number">7.</span> <span class="toc-text">makefile的文件名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用其它的Makefile"><span class="toc-number">8.</span> <span class="toc-text">引用其它的Makefile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境变量-MAKEFILES"><span class="toc-number">9.</span> <span class="toc-text">环境变量 MAKEFILES</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#make工作方式"><span class="toc-number">10.</span> <span class="toc-text">make工作方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用通配符"><span class="toc-number">11.</span> <span class="toc-text">使用通配符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动文件搜寻"><span class="toc-number">12.</span> <span class="toc-text">自动文件搜寻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪目标"><span class="toc-number">13.</span> <span class="toc-text">伪目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态模式"><span class="toc-number">14.</span> <span class="toc-text">静态模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#待续"><span class="toc-number">15.</span> <span class="toc-text">待续</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
+
+
+  <div class="container">
+    <article>
+      <h1>Makefile学习</h1>
+      <p>摘自陈皓博客<a href="https://blog.csdn.net/haoel/article/details/2886" target="_blank" rel="noopener">https://blog.csdn.net/haoel/article/details/2886</a></p>
+<h3 id="文件依赖规则"><a href="#文件依赖规则" class="headerlink" title="文件依赖规则"></a>文件依赖规则</h3><ol>
+<li>如果这个工程没有编译过，那么我们的所有C文件都要编译并被链接。    </li>
+<li>如果这个工程的某几个C文件被修改，那么我们只编译被修改的C文件，并链接目标程序。</li>
+<li>如果这个工程的头文件被改变了，那么我们需要编译引用了这几个头文件的C文件，并链接目标程序。</li>
+</ol>
+<p><strong>语法</strong></p>
+<p>target … : prerequisites …   ;  command             </p>
+<p>​    command</p>
+<p>target就是一个目标文件，可以是Object File，也可以是执行文件。还可以是一个标签（Label）。</p>
+<p>prerequisites就是要生成那个target所需要的文件或是目标。</p>
+<p>command也就是make需要执行的命令。（任意的Shell命令）</p>
+<p>说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行。这就是Makefile的规则。也就是Makefile中最核心的内容。</p>
+<h3 id="一个示例"><a href="#一个示例" class="headerlink" title="一个示例"></a>一个示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">edit : main.o kbd.o command.o display.o /</span><br><span class="line">       insert.o search.o files.o utils.o</span><br><span class="line">        cc -o edit main.o kbd.o command.o display.o /</span><br><span class="line">                   insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">main.o : main.c defs.h</span><br><span class="line">        cc -c main.c</span><br><span class="line">kbd.o : kbd.c defs.h command.h</span><br><span class="line">        cc -c kbd.c</span><br><span class="line">command.o : command.c defs.h command.h</span><br><span class="line">        cc -c command.c</span><br><span class="line">display.o : display.c defs.h buffer.h</span><br><span class="line">        cc -c display.c</span><br><span class="line">insert.o : insert.c defs.h buffer.h</span><br><span class="line">        cc -c insert.c</span><br><span class="line">search.o : search.c defs.h buffer.h</span><br><span class="line">        cc -c search.c</span><br><span class="line">files.o : files.c defs.h buffer.h command.h</span><br><span class="line">        cc -c files.c</span><br><span class="line">utils.o : utils.c defs.h</span><br><span class="line">        cc -c utils.c</span><br><span class="line">clean :</span><br><span class="line">        rm edit main.o kbd.o command.o display.o /</span><br><span class="line">           insert.o search.o files.o utils.o</span><br></pre></td></tr></table></figure>
+<p>反斜杠（/）是换行符的意思。这样比较便于Makefile的易读。</p>
+<p>把这个内容保存在文件为“Makefile”或“makefile”的文件中，然后在该目录下直接输入命令“make”就可以生成执行文件edit。如果要删除执行文件和所有的中间目标文件，那么，只要简单地执行一下“make clean”就可以了。</p>
+<p>在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。</p>
+<p>clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等。</p>
+<h3 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h3><p>如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入文件名的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量。makefile的变量也就是一个字符串，理解成C语言中的宏可能会更好。</p>
+<p>我们在makefile一开始就这样定义：</p>
+<p>​     objects = main.o kbd.o command.o display.o /<br>​              insert.o search.o files.o utils.o</p>
+<p>于是，我们就可以很方便地在我们的makefile中以“$(objects)”的方式来使用这个变量了，于是我们的改良版makefile就变成下面这个样子：</p>
+<p>​    objects = main.o kbd.o command.o display.o /<br>​              insert.o search.o files.o utils.o</p>
+<p>​    edit : $(objects)<br>​            cc -o edit $(objects)</p>
+<p>于是如果有新的 .o 文件加入，我们只需简单地修改一下 objects 变量就可以了。</p>
+<h3 id="让make自动推导"><a href="#让make自动推导" class="headerlink" title="让make自动推导"></a>让make自动推导</h3><p>只要make看到一个[.o]文件，它就会自动的把[.c]文件加在依赖关系中，如果make找到一个whatever.o，那么whatever.c，就会是whatever.o的依赖文件。并且 cc -c whatever.c 也会被推导出来，于是，我们的makefile再也不用写得这么复杂。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">objects = main.o kbd.o command.o display.o /</span><br><span class="line">          insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">edit : $(objects)</span><br><span class="line">        cc -o edit $(objects)</span><br><span class="line"></span><br><span class="line">main.o : defs.h</span><br><span class="line">kbd.o : defs.h command.h</span><br><span class="line">command.o : defs.h command.h</span><br><span class="line">display.o : defs.h buffer.h</span><br><span class="line">insert.o : defs.h buffer.h</span><br><span class="line">search.o : defs.h buffer.h</span><br><span class="line">files.o : defs.h buffer.h command.h</span><br><span class="line">utils.o : defs.h</span><br><span class="line"></span><br><span class="line">.PHONY : clean</span><br><span class="line">clean :</span><br><span class="line">        rm edit $(objects)</span><br></pre></td></tr></table></figure>
+<p>这种方法，也就是make的“隐晦规则”。上面文件内容中，“.PHONY”表示，clean是个伪目标文件。</p>
+<h3 id="另类风格的makefile"><a href="#另类风格的makefile" class="headerlink" title="另类风格的makefile"></a>另类风格的makefile</h3><p>即然我们的make可以自动推导命令，那么我看到那堆[.o]和[.h]的依赖就有点不爽，那么多的重复的[.h]，能不能把其收拢起来，好吧，没有问题，这个对于make来说很容易，谁叫它提供了自动推导命令和文件的功能呢？来看看最新风格的makefile吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">objects = main.o kbd.o command.o display.o /</span><br><span class="line"></span><br><span class="line">          insert.o search.o files.o utils.o</span><br><span class="line"></span><br><span class="line">edit : $(objects)</span><br><span class="line"></span><br><span class="line">        cc -o edit $(objects)</span><br><span class="line"></span><br><span class="line">$(objects) : defs.h</span><br><span class="line"></span><br><span class="line">kbd.o command.o files.o : command.h</span><br><span class="line"></span><br><span class="line">display.o insert.o search.o files.o : buffer.h</span><br><span class="line"></span><br><span class="line">.PHONY : clean</span><br><span class="line"></span><br><span class="line">clean :</span><br><span class="line"></span><br><span class="line">        rm edit $(objects)</span><br></pre></td></tr></table></figure>
+<p>这种风格，让我们的makefile变得很简单，但我们的文件依赖关系就显得有点凌乱了。鱼和熊掌不可兼得。还看你的喜好了。我是不喜欢这种风格的，一是文件的依赖关系看不清楚，二是如果文件一多，要加入几个新的.o文件，那就理不清楚了。</p>
+<h3 id="amp-amp"><a href="#amp-amp" class="headerlink" title="@ &amp; - &amp;"></a>@ &amp; - &amp;</h3><p>如果<code>make</code>执行的命令前面加了@字符，则不显示命令本身而只显示它的结果。</p>
+<p>通常<code>make</code>执行的命令如果出错（该命令的退出状态非0）就立刻终止，不再执行后续命令，但如果命令前面加了<code>-</code>号，即使这条命令出错，<code>make</code>也会继续执行后续命令。</p>
+<p>通常<code>rm</code>命令和<code>mkdir</code>命令前面要加<code>-</code>号，因为<code>rm</code>要删除的文件可能不存在，<code>mkdir</code>要创建的目录可能已存在，这两个命令都有可能出错，但这种错误是应该忽略的。</p>
+<p>Makefile中只有行注释，和UNIX的Shell脚本一样，其注释是用“#”字符，这个就像C/C++中的“//”一样。如果你要在你的Makefile中使用“#”字符，可以用反斜框进行转义，如：“/#”。</p>
+<h3 id="makefile的文件名"><a href="#makefile的文件名" class="headerlink" title="makefile的文件名"></a>makefile的文件名</h3><p>默认的情况下，make命令会在当前目录下按顺序找寻文件名为“GNUmakefile”、“makefile”、“Makefile”的文件，找到了解释这个文件。在这三个文件名中，最好使用“Makefile”这个文件名，因为，这个文件名第一个字符为大写，这样有一种显目的感觉。最好不要用“GNUmakefile”，这个文件是GNU的make识别的。有另外一些make只对全小写的“makefile”文件名敏感，但是基本上来说，大多数的make都支持“makefile”和“Makefile”这两种默认文件名。</p>
+<p>当然，你可以使用别的文件名来书写Makefile，比如：“Make.Linux”，“Make.Solaris”，“Make.AIX”等，如果要指定特定的Makefile，你可以使用make的“-f”和“–file”参数。</p>
+<h3 id="引用其它的Makefile"><a href="#引用其它的Makefile" class="headerlink" title="引用其它的Makefile"></a>引用其它的Makefile</h3><p>在Makefile使用include关键字可以把别的Makefile包含进来，这很像C语言的#include，被包含的文件会原模原样的放在当前文件的包含位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">include &lt;filename&gt;</span><br><span class="line"></span><br><span class="line">#filename可以是当前操作系统Shell的文件模式（可以保含路径和通配符）</span><br></pre></td></tr></table></figure>
+<p>在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和<code>&lt;filename&gt;</code>可以用一个或多个空格隔开。</p>
+<p>make命令开始时，会把找寻include所指出的其它Makefile，并把其内容安置在当前的位置。如果文件都没有指定绝对路径或是相对路径的话，make会在当前目录下首先寻找，如果当前目录下没有找到，那么，make还会在下面的几个目录下找：</p>
+<p>​    1、如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找。<br>​    2、如果目录<code>&lt;prefix&gt;/include</code>（一般是：/usr/local/bin或/usr/include）存在的话，make也会去找。</p>
+<p>如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。</p>
+<h3 id="环境变量-MAKEFILES"><a href="#环境变量-MAKEFILES" class="headerlink" title="环境变量 MAKEFILES"></a>环境变量 MAKEFILES</h3><p>如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理。</p>
+<p>建议<strong>不要使用</strong>这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的。在这里提这个事，只是为了告诉大家，也许有时候你的Makefile出现了怪事，那么你可以看看当前环境中有没有定义这个变量。 </p>
+<h3 id="make工作方式"><a href="#make工作方式" class="headerlink" title="make工作方式"></a>make工作方式</h3><p>​    1、读入所有的Makefile。<br>​    2、读入被include的其它Makefile。<br>​    3、初始化文件中的变量。<br>​    4、推导隐晦规则，并分析所有规则。<br>​    5、为所有的目标文件创建依赖关系链。<br>​    6、根据依赖关系，决定哪些目标要重新生成。<br>​    7、执行生成命令。</p>
+<p>1-5步为第一个阶段，6-7为第二个阶段。第一个阶段中，如果定义的变量被使用了，那么，make会把其展开在使用的位置。但make并不会完全马上展开，make使用的是拖延战术，如果变量出现在依赖关系的规则中，那么仅当这条依赖被决定要使用了，变量才会在其内部展开。</p>
+<h3 id="使用通配符"><a href="#使用通配符" class="headerlink" title="使用通配符"></a>使用通配符</h3><p>make支持三各通配符：“*”，“?”和“[…]”。这是和Unix的B-Shell是相同的。</p>
+<p>波浪号（“~”）字符在文件名中也有比较特殊的用途，表示当前用户的$HOME目录。</p>
+<h3 id="自动文件搜寻"><a href="#自动文件搜寻" class="headerlink" title="自动文件搜寻"></a>自动文件搜寻</h3><p>Makefile文件中的特殊变量“VPATH”就是完成这个功能的，如果没有指明这个变量，make只会在当前的目录中去找寻依赖文件和目标文件。如果定义了这个变量，那么，make就会在当当前目录找不到的情况下，到所指定的目录中去找寻文件了。</p>
+<p>​    VPATH = src:../headers</p>
+<p>上面的的定义指定两个目录，“src”和“../headers”，make会按照这个顺序进行搜索。目录由“冒号”分隔。（当然，当前目录永远是最高优先搜索的地方）</p>
+<hr>
+<p>另一个设置文件搜索路径的方法是使用make的“vpath”关键字（注意，它是全小写的），这不是变量，这是一个make的关键字，这和上面提到的那个VPATH变量很类似，但是它更为灵活。它可以指定不同的文件在不同的搜索目录中。这是一个很灵活的功能。它的使用方法有三种：</p>
+<p>​    1、<code>vpath &lt;pattern&gt; &lt;directories&gt;</code></p>
+<p>​    为符合模式<code>&lt;pattern&gt;</code>的文件指定搜索目录<code>&lt;directories&gt;</code>。</p>
+<p>​    2、<code>vpath &lt;pattern&gt;</code></p>
+<p>​    清除符合模式<code>&lt;pattern&gt;</code>的文件的搜索目录。</p>
+<p>​    3、vpath</p>
+<p>​    清除所有已被设置好了的文件搜索目录。</p>
+<p>vapth使用方法中的<code>&lt;pattern&gt;</code>需要包含“%”字符。“%”的意思是匹配零或若干字符，例如，“%.h”表示所有以“.h”结尾的文件。</p>
+<p>可以连续地使用vpath语句，以指定不同搜索策略。如果连续的vpath语句中出现了相同的<code>&lt;pattern&gt;</code>，或是被重复了的<code>&lt;pattern&gt;</code>，那么，make会按照vpath语句的先后顺序来执行搜索。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vpath %.c foo:bar</span><br><span class="line">vpath %   blish</span><br></pre></td></tr></table></figure>
+<p>上面的语句则表示“.c”结尾的文件，先在“foo”目录，然后是“bar”目录，最后才是“blish”目录。</p>
+<h3 id="伪目标"><a href="#伪目标" class="headerlink" title="伪目标"></a>伪目标</h3><p>为了避免和文件重名的这种情况，我们可以使用一个特殊的标记“.PHONY”来显示地指明一个目标是“伪目标”，向make说明，不管是否有这个文件，这个目标就是“伪目标”。</p>
+<p>​    .PHONY : clean</p>
+<p>只要有这个声明，不管是否有“clean”文件，要运行“clean”这个目标，只有“make clean”这样。于是整个过程可以这样写：</p>
+<p>​     .PHONY: clean<br>​    clean:<br>​            rm *.o temp</p>
+<hr>
+<p>我们也可以为伪目标指定所依赖的文件。伪目标同样可以作为“默认目标”，只要将其放在第一个。一个示例就是，如果你的Makefile需要一口气生成若干个可执行文件，但你只想简单地敲一个make完事，并且，所有的目标文件都写在一个Makefile中，那么你可以使用“伪目标”这个特性：</p>
+<p>​    all : prog1 prog2 prog3<br>​    .PHONY : all</p>
+<p>​    prog1 : prog1.o utils.o<br>​            cc -o prog1 prog1.o utils.o</p>
+<p>​    prog2 : prog2.o<br>​            cc -o prog2 prog2.o</p>
+<p>​    prog3 : prog3.o sort.o utils.o<br>​            cc -o prog3 prog3.o sort.o utils.o</p>
+<h3 id="静态模式"><a href="#静态模式" class="headerlink" title="静态模式"></a>静态模式</h3><p>静态模式可以更加容易地定义多目标的规则，可以让我们的规则变得更加的有弹性和灵活。我们还是先来看一下语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;targets ...&gt;: &lt;target-pattern&gt;: &lt;prereq-patterns ...&gt;</span><br><span class="line">        &lt;commands&gt;</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<p>​    targets定义了一系列的目标文件，可以有通配符。是目标的一个集合。</p>
+<p>​    target-parrtern是指明了targets的模式，也就是的目标集模式。</p>
+<p>​    prereq-parrterns是目标的依赖模式，它对target-parrtern形成的模式再进行一次依赖目标的定义。</p>
+<p>我们的“目标模式”或是“依赖模式”中都应该有“%”这个字符，如果你的文件名中有“%”那么你可以使用反斜杠“\”进行转义，来标明真实的“%”字符。</p>
+<p>看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">objects = foo.o bar.o</span><br><span class="line"></span><br><span class="line">all: $(objects)</span><br><span class="line"></span><br><span class="line">$(objects): %.o: %.c</span><br><span class="line">        $(CC) -c $(CFLAGS) $&lt; -o $@</span><br></pre></td></tr></table></figure>
+<p>上面的例子中，指明了我们的目标从<code>$object</code>中获取，“%.o”表明要所有以“.o”结尾的目标，也就是“foo.o bar.o”，也就是变量<code>$object</code>集合的模式，而依赖模式“%.c”则取模式“%.o”的“%”，也就是“foo bar”，并为其加下“.c”的后缀，于是，我们的依赖目标就是“foo.c bar.c”。而命令中的“<code>$&lt;</code>”和“<code>$@</code>”则是自动化变量，“<code>$&lt;</code>”表示所有的依赖目标集（也就是“foo.c bar.c”），“<code>$@</code>”表示目标集（也就是“foo.o bar.o”）。于是，上面的规则展开后等价于下面的规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foo.o : foo.c</span><br><span class="line">        $(CC) -c $(CFLAGS) foo.c -o foo.o</span><br><span class="line">bar.o : bar.c</span><br><span class="line">        $(CC) -c $(CFLAGS) bar.c -o bar.o</span><br></pre></td></tr></table></figure>
+<p>“静态模式规则”的用法很灵活，如果用得好，那会一个很强大的功能。再看一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">files = foo.elc bar.o lose.o</span><br><span class="line"></span><br><span class="line">$(filter %.o,$(files)): %.o: %.c</span><br><span class="line">        $(CC) -c $(CFLAGS) $&lt; -o $@</span><br><span class="line">$(filter %.elc,$(files)): %.elc: %.el</span><br><span class="line">        emacs -f batch-byte-compile $&lt;</span><br></pre></td></tr></table></figure></p>
+<p><code>$(filter %.o,$(files))</code>表示调用Makefile的filter函数，过滤“<code>$filter</code>”集，只要其中模式为“%.o”的内容。</p>
+<h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/12/24/Network/Tcp/TCP网络拥塞控制/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    TCP网络拥塞控制
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/12/07/C_C++/C++STL/" class="ui tiny button">
-                    
-                    C++ STL
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#文件依赖规则"><span>文件依赖规则</span></a></li><li><a href="#一个示例"><span>一个示例</span></a></li><li><a href="#使用变量"><span>使用变量</span></a></li><li><a href="#让make自动推导"><span>让make自动推导</span></a></li><li><a href="#另类风格的makefile"><span>另类风格的makefile</span></a></li><li><a href="#amp-amp"><span>@ & - &</span></a></li><li><a href="#makefile的文件名"><span>makefile的文件名</span></a></li><li><a href="#引用其它的Makefile"><span>引用其它的Makefile</span></a></li><li><a href="#环境变量-MAKEFILES"><span>环境变量 MAKEFILES</span></a></li><li><a href="#make工作方式"><span>make工作方式</span></a></li><li><a href="#使用通配符"><span>使用通配符</span></a></li><li><a href="#自动文件搜寻"><span>自动文件搜寻</span></a></li><li><a href="#伪目标"><span>伪目标</span></a></li><li><a href="#静态模式"><span>静态模式</span></a></li></ol><li><a href="#待续"><span>待续</span></a>
-                </li></div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

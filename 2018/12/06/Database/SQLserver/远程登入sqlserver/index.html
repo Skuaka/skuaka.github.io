@@ -1,271 +1,90 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>远程登入 SQL server | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>远程登入 SQL server | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html  &amp;#x767B;&amp;#x5F55;sqlserver manager &amp;#x540E;&amp;#xFF0C;&amp;#x53F3;&amp;#x952E;&amp;#x9009;&amp;#x62E9;&amp;#x201C;&amp;#x5C5E;&amp;#x6027;&amp;#x201D;&amp;#x3002;&amp;#x5DE6;&amp;#x4F">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="远程登入 SQL server">
-<meta property="og:url" content="http://yoursite.com/2018/12/06/Database/SQLserver/远程登入sqlserver/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html  &amp;#x767B;&amp;#x5F55;sqlserver manager &amp;#x540E;&amp;#xFF0C;&amp;#x53F3;&amp;#x952E;&amp;#x9009;&amp;#x62E9;&amp;#x201C;&amp;#x5C5E;&amp;#x6027;&amp;#x201D;&amp;#x3002;&amp;#x5DE6;&amp;#x4F">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-06T06:18:58.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="远程登入 SQL server">
-<meta name="twitter:description" content="https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html  &amp;#x767B;&amp;#x5F55;sqlserver manager &amp;#x540E;&amp;#xFF0C;&amp;#x53F3;&amp;#x952E;&amp;#x9009;&amp;#x62E9;&amp;#x201C;&amp;#x5C5E;&amp;#x6027;&amp;#x201D;&amp;#x3002;&amp;#x5DE6;&amp;#x4F">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Database/SQLserver/远程登入sqlserver" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    远程登入 SQL server
-</h1>
-
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
 
 
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <p><a href="https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html</a></p>
-<ol class="ui list">
-<li><p>&#x767B;&#x5F55;sqlserver manager &#x540E;&#xFF0C;&#x53F3;&#x952E;&#x9009;&#x62E9;&#x201C;&#x5C5E;&#x6027;&#x201D;&#x3002;&#x5DE6;&#x4FA7;&#x9009;&#x62E9;&#x201C;&#x5B89;&#x5168;&#x6027;&#x201D;&#xFF0C;&#x9009;&#x4E2D;&#x53F3;&#x4FA7;&#x7684;&#x201C;SQL Server &#x548C; Windows &#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x6A21;&#x5F0F;&#x201D;&#x4EE5;&#x542F;&#x7528;&#x6DF7;&#x5408;&#x767B;&#x5F55;&#x6A21;&#x5F0F;</p>
+  <div class="container">
+    <article>
+      <h1>远程登入 SQL server</h1>
+      <p><a href="https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html</a></p>
+<ol>
+<li><p>登录sqlserver manager 后，右键选择“属性”。左侧选择“安全性”，选中右侧的“SQL Server 和 Windows 身份验证模式”以启用混合登录模式</p>
 </li>
-<li><p>&#x9009;&#x62E9;&#x201C;&#x8FDE;&#x63A5;&#x201D;&#xFF0C;&#x52FE;&#x9009;&#x201C;&#x5141;&#x8BB8;&#x8FDC;&#x7A0B;&#x8FDE;&#x63A5;&#x6B64;&#x670D;&#x52A1;&#x5668;&#x201D;&#xFF0C;&#x7136;&#x540E;&#x70B9;&#x201C;&#x786E;&#x5B9A;&#x201D;</p>
+<li><p>选择“连接”，勾选“允许远程连接此服务器”，然后点“确定”</p>
 </li>
-<li>&#x5C55;&#x5F00;&#x201C;&#x5B89;&#x5168;&#x6027;&#x201D;&#xFF0C;&#x201C;&#x767B;&#x5F55;&#x540D;&#x201D;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x767B;&#x5165;&#x540D;&#xFF0C;&#x53F3;&#x952E;&#x9009;&#x62E9;&#x201C;&#x5C5E;&#x6027;&#x201D;&#xFF0C;&#x5DE6;&#x4FA7;&#x9009;&#x62E9;&#x201C;&#x5E38;&#x89C4;&#x201D;&#xFF0C;&#x53F3;&#x4FA7;&#x9009;&#x62E9;&#x201C;SQL Server &#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x201D;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;</li>
-<li>&#x6253;&#x5F00;sql server&#x914D;&#x7F6E;&#x7BA1;&#x7406;&#x5668;&#xFF0C;&#x5728;&#x5DE6;&#x5219;&#x9009;&#x62E9;sql server&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#x8282;&#x70B9;&#x4E0B;&#x7684;sqlexpress&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x5728;&#x53F3;&#x4FA7;&#x7684;TCP/IP&#x9ED8;&#x8BA4;&#x662F;&#x201C;&#x5426;&#x201D;&#xFF0C;&#x53F3;&#x952E;&#x542F;&#x7528;&#x6216;&#x8005;&#x53CC;&#x51FB;&#x6253;&#x5F00;&#x8BBE;&#x7F6E;&#x9762;&#x677F;&#x5C06;&#x5176;&#x4FEE;&#x6539;&#x4E3A;&#x201C;&#x662F;&#x201D;&#x3002;</li>
-<li>&#x91CD;&#x542F;&#x670D;&#x52A1;&#x5668;</li>
+<li>展开“安全性”，“登录名”选择一个服务器登入名，右键选择“属性”，左侧选择“常规”，右侧选择“SQL Server 身份验证”，并设置密码</li>
+<li>打开sql server配置管理器，在左则选择sql server网络配置节点下的sqlexpress的协议，在右侧的TCP/IP默认是“否”，右键启用或者双击打开设置面板将其修改为“是”。</li>
+<li>重启服务器</li>
 </ol>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-12-06T06:18:57.000Z" itemprop="datePublished">2018-12-06</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/12/07/Algorithm/查找树/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    查找树
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/12/04/Database/Mysql/mysql c api/" class="ui tiny button">
-                    
-                    mysql c&amp;c++ api
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

@@ -1,464 +1,288 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>mysql 命令 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>mysql 命令 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x57FA;&amp;#x7840;&amp;#x547D;&amp;#x4EE4;&amp;#x521B;&amp;#x5EFA;&amp;#x6570;&amp;#x636E;&amp;#x5E93;12[root@host]# mysqladmin -u root -p create RUNOOBEnter password:****** &amp;#x5220;&amp;#x9664;&amp;#x6570;&amp;#x636E;&amp;#x5E93;1mysql&amp;gt; drop">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mysql 命令">
-<meta property="og:url" content="http://yoursite.com/2018/10/06/Database/Mysql/mysql 命令/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x57FA;&amp;#x7840;&amp;#x547D;&amp;#x4EE4;&amp;#x521B;&amp;#x5EFA;&amp;#x6570;&amp;#x636E;&amp;#x5E93;12[root@host]# mysqladmin -u root -p create RUNOOBEnter password:****** &amp;#x5220;&amp;#x9664;&amp;#x6570;&amp;#x636E;&amp;#x5E93;1mysql&amp;gt; drop">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-06T13:06:00.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql 命令">
-<meta name="twitter:description" content="&amp;#x57FA;&amp;#x7840;&amp;#x547D;&amp;#x4EE4;&amp;#x521B;&amp;#x5EFA;&amp;#x6570;&amp;#x636E;&amp;#x5E93;12[root@host]# mysqladmin -u root -p create RUNOOBEnter password:****** &amp;#x5220;&amp;#x9664;&amp;#x6570;&amp;#x636E;&amp;#x5E93;1mysql&amp;gt; drop">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础命令"><span class="toc-number">1.</span> <span class="toc-text">基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建数据库"><span class="toc-number">1.1.</span> <span class="toc-text">创建数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除数据库"><span class="toc-number">1.2.</span> <span class="toc-text">删除数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择-切换数据库"><span class="toc-number">1.3.</span> <span class="toc-text">选择/切换数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表"><span class="toc-number">1.4.</span> <span class="toc-text">创建表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除表"><span class="toc-number">1.5.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#插入数据"><span class="toc-number">1.6.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询数据"><span class="toc-number">1.7.</span> <span class="toc-text">查询数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新数据"><span class="toc-number">1.8.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除数据"><span class="toc-number">1.9.</span> <span class="toc-text">删除数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询进阶"><span class="toc-number">2.</span> <span class="toc-text">查询进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#like条件"><span class="toc-number">2.1.</span> <span class="toc-text">like条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#合并-UNION"><span class="toc-number">2.2.</span> <span class="toc-text">合并 UNION</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#排序-ORDER-BY"><span class="toc-number">2.3.</span> <span class="toc-text">排序 ORDER BY</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组-GROUP-BY"><span class="toc-number">2.4.</span> <span class="toc-text">分组 GROUP BY</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#WITH-ROLLUP"><span class="toc-number">2.4.1.</span> <span class="toc-text">WITH ROLLUP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#coalesce-a-b-c"><span class="toc-number">2.4.2.</span> <span class="toc-text">coalesce(a,b,c)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#连接-JOIN"><span class="toc-number">2.5.</span> <span class="toc-text">连接 JOIN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#where和having区别"><span class="toc-number">2.6.</span> <span class="toc-text">where和having区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NULL值处理"><span class="toc-number">3.1.</span> <span class="toc-text">NULL值处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则表达式"><span class="toc-number">3.2.</span> <span class="toc-text">正则表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事务处理"><span class="toc-number">3.3.</span> <span class="toc-text">事务处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改表-ALTER"><span class="toc-number">3.4.</span> <span class="toc-text">修改表 ALTER</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#删除，添加或修改表字段"><span class="toc-number">3.4.1.</span> <span class="toc-text">删除，添加或修改表字段</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改字段类型及名称"><span class="toc-number">3.4.2.</span> <span class="toc-text">修改字段类型及名称</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改字段默认值"><span class="toc-number">3.4.3.</span> <span class="toc-text">修改字段默认值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改表名"><span class="toc-number">3.4.4.</span> <span class="toc-text">修改表名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改存储引擎"><span class="toc-number">3.4.5.</span> <span class="toc-text">修改存储引擎</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#删除外键约束"><span class="toc-number">3.4.6.</span> <span class="toc-text">删除外键约束</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改字段的相对位置"><span class="toc-number">3.4.7.</span> <span class="toc-text">修改字段的相对位置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#临时表"><span class="toc-number">3.5.</span> <span class="toc-text">临时表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复制表"><span class="toc-number">3.6.</span> <span class="toc-text">复制表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#序列"><span class="toc-number">3.7.</span> <span class="toc-text">序列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#重置序列"><span class="toc-number">3.7.1.</span> <span class="toc-text">重置序列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#设置序列的开始值"><span class="toc-number">3.7.2.</span> <span class="toc-text">设置序列的开始值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#处理重复数据"><span class="toc-number">3.8.</span> <span class="toc-text">处理重复数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#防止"><span class="toc-number">3.8.1.</span> <span class="toc-text">防止</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#统计"><span class="toc-number">3.8.2.</span> <span class="toc-text">统计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#过滤"><span class="toc-number">3.8.3.</span> <span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#删除"><span class="toc-number">3.8.4.</span> <span class="toc-text">删除</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#显示信息"><span class="toc-number">4.</span> <span class="toc-text">显示信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tips"><span class="toc-number">5.</span> <span class="toc-text">Tips</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束"><span class="toc-number">6.</span> <span class="toc-text">结束</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Database/Mysql/mysql 命令" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    mysql 命令
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="&#x57FA;&#x7840;&#x547D;&#x4EE4;"><a href="#&#x57FA;&#x7840;&#x547D;&#x4EE4;" class="headerlink" title="&#x57FA;&#x7840;&#x547D;&#x4EE4;"></a>&#x57FA;&#x7840;&#x547D;&#x4EE4;</h2><h4 id="&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;"><a href="#&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;"></a>&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root -p create RUNOOB</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure>
-<h4 id="&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;"><a href="#&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;"></a>&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; drop database RUNOOB;</span><br></pre></td></tr></table></figure>
-<p>&#x200B;      &#x6216;&#x8005;</p>
+  <div class="container">
+    <article>
+      <h1>mysql 命令</h1>
+      <h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root -p create RUNOOB</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure>
+<h4 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; drop database RUNOOB;</span><br></pre></td></tr></table></figure>
+<p>​      或者</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root -p drop RUNOOB</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure>
-<h4 id="&#x9009;&#x62E9;-&#x5207;&#x6362;&#x6570;&#x636E;&#x5E93;"><a href="#&#x9009;&#x62E9;-&#x5207;&#x6362;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="&#x9009;&#x62E9;/&#x5207;&#x6362;&#x6570;&#x636E;&#x5E93;"></a>&#x9009;&#x62E9;/&#x5207;&#x6362;&#x6570;&#x636E;&#x5E93;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure>
-<h4 id="&#x521B;&#x5EFA;&#x8868;"><a href="#&#x521B;&#x5EFA;&#x8868;" class="headerlink" title="&#x521B;&#x5EFA;&#x8868;"></a>&#x521B;&#x5EFA;&#x8868;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `runoob_tbl`(</span><br><span class="line">   `runoob_id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   `runoob_title` VARCHAR(100) NOT NULL,</span><br><span class="line">   `runoob_author` VARCHAR(40) NOT NULL,</span><br><span class="line">   `submission_date` DATE,</span><br><span class="line">   PRIMARY KEY ( `runoob_id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
-<p>&#x5B9E;&#x4F8B;&#x89E3;&#x6790;&#xFF1A;</p>
-<ul class="ui list">
-<li>&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x60F3;&#x5B57;&#x6BB5;&#x4E3A; <strong>NULL</strong> &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5B57;&#x6BB5;&#x7684;&#x5C5E;&#x6027;&#x4E3A; <strong>NOT NULL</strong>&#xFF0C; &#x5728;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;&#x65F6;&#x5982;&#x679C;&#x8F93;&#x5165;&#x8BE5;&#x5B57;&#x6BB5;&#x7684;&#x6570;&#x636E;&#x4E3A;<strong>NULL</strong> &#xFF0C;&#x5C31;&#x4F1A;&#x62A5;&#x9519;&#x3002;</li>
-<li>AUTO_INCREMENT&#x5B9A;&#x4E49;&#x5217;&#x4E3A;&#x81EA;&#x589E;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x4E00;&#x822C;&#x7528;&#x4E8E;&#x4E3B;&#x952E;&#xFF0C;&#x6570;&#x503C;&#x4F1A;&#x81EA;&#x52A8;&#x52A0;1&#x3002;</li>
-<li>PRIMARY KEY&#x5173;&#x952E;&#x5B57;&#x7528;&#x4E8E;&#x5B9A;&#x4E49;&#x5217;&#x4E3A;&#x4E3B;&#x952E;&#x3002; &#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x591A;&#x5217;&#x6765;&#x5B9A;&#x4E49;&#x4E3B;&#x952E;&#xFF0C;&#x5217;&#x95F4;&#x4EE5;&#x9017;&#x53F7;&#x5206;&#x9694;&#x3002;</li>
-<li>ENGINE &#x8BBE;&#x7F6E;&#x5B58;&#x50A8;&#x5F15;&#x64CE;&#xFF0C;CHARSET &#x8BBE;&#x7F6E;&#x7F16;&#x7801;</li>
+<h4 id="选择-切换数据库"><a href="#选择-切换数据库" class="headerlink" title="选择/切换数据库"></a>选择/切换数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure>
+<h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `runoob_tbl`(</span><br><span class="line">   `runoob_id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   `runoob_title` VARCHAR(100) NOT NULL,</span><br><span class="line">   `runoob_author` VARCHAR(40) NOT NULL,</span><br><span class="line">   `submission_date` DATE,</span><br><span class="line">   PRIMARY KEY ( `runoob_id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+<p>实例解析：</p>
+<ul>
+<li>如果你不想字段为 <strong>NULL</strong> 可以设置字段的属性为 <strong>NOT NULL</strong>， 在操作数据库时如果输入该字段的数据为<strong>NULL</strong> ，就会报错。</li>
+<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
+<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
+<li>ENGINE 设置存储引擎，CHARSET 设置编码</li>
 </ul>
-<h4 id="&#x5220;&#x9664;&#x8868;"><a href="#&#x5220;&#x9664;&#x8868;" class="headerlink" title="&#x5220;&#x9664;&#x8868;"></a>&#x5220;&#x9664;&#x8868;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table_name ;</span><br></pre></td></tr></table></figure>
-<h4 id="&#x63D2;&#x5165;&#x6570;&#x636E;"><a href="#&#x63D2;&#x5165;&#x6570;&#x636E;" class="headerlink" title="&#x63D2;&#x5165;&#x6570;&#x636E;"></a>&#x63D2;&#x5165;&#x6570;&#x636E;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure>
-<h4 id="&#x67E5;&#x8BE2;&#x6570;&#x636E;"><a href="#&#x67E5;&#x8BE2;&#x6570;&#x636E;" class="headerlink" title="&#x67E5;&#x8BE2;&#x6570;&#x636E;"></a>&#x67E5;&#x8BE2;&#x6570;&#x636E;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE [WHERE condition1 [AND/OR condition2].....]</span><br><span class="line">[LIMIT N][ OFFSET M]</span><br></pre></td></tr></table></figure>
-<h4 id="&#x66F4;&#x65B0;&#x6570;&#x636E;"><a href="#&#x66F4;&#x65B0;&#x6570;&#x636E;" class="headerlink" title="&#x66F4;&#x65B0;&#x6570;&#x636E;"></a>&#x66F4;&#x65B0;&#x6570;&#x636E;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name SET field1=new-value1, field2=new-value2</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure>
-<h4 id="&#x5220;&#x9664;&#x6570;&#x636E;"><a href="#&#x5220;&#x9664;&#x6570;&#x636E;" class="headerlink" title="&#x5220;&#x9664;&#x6570;&#x636E;"></a>&#x5220;&#x9664;&#x6570;&#x636E;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name [WHERE Clause]</span><br></pre></td></tr></table></figure>
-<h2 id="&#x67E5;&#x8BE2;&#x8FDB;&#x9636;"><a href="#&#x67E5;&#x8BE2;&#x8FDB;&#x9636;" class="headerlink" title="&#x67E5;&#x8BE2;&#x8FDB;&#x9636;"></a>&#x67E5;&#x8BE2;&#x8FDB;&#x9636;</h2><h4 id="like&#x6761;&#x4EF6;"><a href="#like&#x6761;&#x4EF6;" class="headerlink" title="like&#x6761;&#x4EF6;"></a>like&#x6761;&#x4EF6;</h4><p>SQL LIKE &#x5B50;&#x53E5;&#x4E2D;&#x4F7F;&#x7528;&#x767E;&#x5206;&#x53F7; %&#x5B57;&#x7B26;&#x6765;&#x8868;&#x793A;&#x4EFB;&#x610F;&#x5B57;&#x7B26;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;UNIX&#x6216;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#x7684;&#x661F;&#x53F7; *&#x3002;</p>
-<p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x767E;&#x5206;&#x53F7; %, LIKE &#x5B50;&#x53E5;&#x4E0E;&#x7B49;&#x53F7; = &#x7684;&#x6548;&#x679C;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;</p>
+<h4 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table_name ;</span><br></pre></td></tr></table></figure>
+<h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure>
+<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE [WHERE condition1 [AND/OR condition2].....]</span><br><span class="line">[LIMIT N][ OFFSET M]</span><br></pre></td></tr></table></figure>
+<h4 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name SET field1=new-value1, field2=new-value2</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure>
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name [WHERE Clause]</span><br></pre></td></tr></table></figure>
+<h3 id="查询进阶"><a href="#查询进阶" class="headerlink" title="查询进阶"></a>查询进阶</h3><h4 id="like条件"><a href="#like条件" class="headerlink" title="like条件"></a>like条件</h4><p>SQL LIKE 子句中使用百分号 %字符来表示任意字符，类似于UNIX或正则表达式中的星号 *。</p>
+<p>如果没有使用百分号 %, LIKE 子句与等号 = 的效果是一样的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT field1, field2,...fieldN </span><br><span class="line">FROM table_name</span><br><span class="line">WHERE field1 LIKE condition1 [AND [OR]] filed2 = &apos;somevalue&apos;</span><br></pre></td></tr></table></figure>
-<h4 id="&#x5408;&#x5E76;-UNION"><a href="#&#x5408;&#x5E76;-UNION" class="headerlink" title="&#x5408;&#x5E76; UNION"></a>&#x5408;&#x5E76; UNION</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions]</span><br><span class="line">UNION [ALL | DISTINCT]</span><br><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions];</span><br></pre></td></tr></table></figure>
-<ul class="ui list">
-<li><strong>DISTINCT:</strong> &#x53EF;&#x9009;&#xFF0C;&#x5220;&#x9664;&#x7ED3;&#x679C;&#x96C6;&#x4E2D;&#x91CD;&#x590D;&#x7684;&#x6570;&#x636E;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B; UNION &#x64CD;&#x4F5C;&#x7B26;&#x5DF2;&#x7ECF;&#x5220;&#x9664;&#x4E86;&#x91CD;&#x590D;&#x6570;&#x636E;&#xFF0C;&#x6240;&#x4EE5; DISTINCT &#x4FEE;&#x9970;&#x7B26;&#x5BF9;&#x7ED3;&#x679C;&#x6CA1;&#x5565;&#x5F71;&#x54CD;&#x3002;</li>
-<li><strong>ALL:</strong> &#x53EF;&#x9009;&#xFF0C;&#x8FD4;&#x56DE;&#x6240;&#x6709;&#x7ED3;&#x679C;&#x96C6;&#xFF0C;&#x5305;&#x542B;&#x91CD;&#x590D;&#x6570;&#x636E;&#x3002;</li>
+<h4 id="合并-UNION"><a href="#合并-UNION" class="headerlink" title="合并 UNION"></a>合并 UNION</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions]</span><br><span class="line">UNION [ALL | DISTINCT]</span><br><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions];</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>DISTINCT:</strong> 可选，删除结果集中重复的数据。默认情况下 UNION 操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。</li>
+<li><strong>ALL:</strong> 可选，返回所有结果集，包含重复数据。</li>
 </ul>
-<h4 id="&#x6392;&#x5E8F;-ORDER-BY"><a href="#&#x6392;&#x5E8F;-ORDER-BY" class="headerlink" title="&#x6392;&#x5E8F; ORDER BY"></a>&#x6392;&#x5E8F; ORDER BY</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT field1, field2,...fieldN table_name1, table_name2...</span><br><span class="line">ORDER BY field1, [field2...] [ASC [DESC]]</span><br></pre></td></tr></table></figure>
-<ul class="ui list">
-<li>&#x4F7F;&#x7528; ASC &#x6216; DESC &#x5173;&#x952E;&#x5B57;&#x6765;&#x8BBE;&#x7F6E;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x662F;&#x6309;&#x5347;&#x5E8F;&#x6216;&#x964D;&#x5E8F;&#x6392;&#x5217;&#x3002; &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5B83;&#x662F;&#x6309;&#x5347;&#x5E8F;&#x6392;&#x5217;&#x3002;</li>
+<h4 id="排序-ORDER-BY"><a href="#排序-ORDER-BY" class="headerlink" title="排序 ORDER BY"></a>排序 ORDER BY</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT field1, field2,...fieldN table_name1, table_name2...</span><br><span class="line">ORDER BY field1, [field2...] [ASC [DESC]]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。 默认情况下，它是按升序排列。</li>
 </ul>
-<h4 id="&#x5206;&#x7EC4;-GROUP-BY"><a href="#&#x5206;&#x7EC4;-GROUP-BY" class="headerlink" title="&#x5206;&#x7EC4; GROUP BY"></a>&#x5206;&#x7EC4; GROUP BY</h4><p>GROUP BY &#x8BED;&#x53E5;&#x6839;&#x636E;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x5217;&#x5BF9;&#x7ED3;&#x679C;&#x96C6;&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#x3002;</p>
-<p>&#x5728;&#x5206;&#x7EC4;&#x7684;&#x5217;&#x4E0A;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; COUNT, SUM, AVG,&#x7B49;&#x51FD;&#x6570;&#x3002;</p>
+<h4 id="分组-GROUP-BY"><a href="#分组-GROUP-BY" class="headerlink" title="分组 GROUP BY"></a>分组 GROUP BY</h4><p>GROUP BY 语句根据一个或多个列对结果集进行分组。</p>
+<p>在分组的列上我们可以使用 COUNT, SUM, AVG,等函数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name, function(column_name)</span><br><span class="line">FROM table_name</span><br><span class="line">WHERE column_name operator value</span><br><span class="line">GROUP BY column_name;</span><br></pre></td></tr></table></figure>
-<h5 id="WITH-ROLLUP"><a href="#WITH-ROLLUP" class="headerlink" title="WITH ROLLUP"></a>WITH ROLLUP</h5><p>WITH ROLLUP &#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5728;&#x5206;&#x7EC4;&#x7EDF;&#x8BA1;&#x6570;&#x636E;&#x57FA;&#x7840;&#x4E0A;&#x518D;&#x8FDB;&#x884C;&#x76F8;&#x540C;&#x7684;&#x7EDF;&#x8BA1;&#xFF08;SUM,AVG,COUNT&#x2026;&#xFF09;&#x3002;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT name, SUM(singin) as singin_count FROM  employee_tbl GROUP BY name WITH ROLLUP;</span><br><span class="line">+--------+--------------+</span><br><span class="line">| name   | singin_count |</span><br><span class="line">+--------+--------------+</span><br><span class="line">| &#x5C0F;&#x4E3D;    |            2 |</span><br><span class="line">| &#x5C0F;&#x660E;    |            7 |</span><br><span class="line">| &#x5C0F;&#x738B;    |            7 |</span><br><span class="line">| NULL   |           16 |</span><br><span class="line">+--------+--------------+</span><br></pre></td></tr></table></figure>
-<p>&#x5176;&#x4E2D;&#x8BB0;&#x5F55; NULL &#x8868;&#x793A;&#x6240;&#x6709;&#x4EBA;&#x7684;&#x767B;&#x5F55;&#x6B21;&#x6570;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; coalesce &#x6765;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x53D6;&#x4EE3; NUll &#x7684;&#x540D;&#x79F0;</p>
+<h5 id="WITH-ROLLUP"><a href="#WITH-ROLLUP" class="headerlink" title="WITH ROLLUP"></a>WITH ROLLUP</h5><p>WITH ROLLUP 可以实现在分组统计数据基础上再进行相同的统计（SUM,AVG,COUNT…）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT name, SUM(singin) as singin_count FROM  employee_tbl GROUP BY name WITH ROLLUP;</span><br><span class="line">+--------+--------------+</span><br><span class="line">| name   | singin_count |</span><br><span class="line">+--------+--------------+</span><br><span class="line">| 小丽    |            2 |</span><br><span class="line">| 小明    |            7 |</span><br><span class="line">| 小王    |            7 |</span><br><span class="line">| NULL   |           16 |</span><br><span class="line">+--------+--------------+</span><br></pre></td></tr></table></figure>
+<p>其中记录 NULL 表示所有人的登录次数。</p>
+<p>我们可以使用 coalesce 来设置一个可以取代 NUll 的名称</p>
 <h5 id="coalesce-a-b-c"><a href="#coalesce-a-b-c" class="headerlink" title="coalesce(a,b,c)"></a>coalesce(a,b,c)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select coalesce(a,b,c);</span><br></pre></td></tr></table></figure>
-<p>&#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF1A;&#x5982;&#x679C;a==null,&#x5219;&#x9009;&#x62E9;b&#xFF1B;&#x5982;&#x679C;b==null,&#x5219;&#x9009;&#x62E9;c&#xFF1B;&#x5982;&#x679C;a!=null,&#x5219;&#x9009;&#x62E9;a&#xFF1B;&#x5982;&#x679C;a b c &#x90FD;&#x4E3A;null &#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x4E3A;null&#xFF08;&#x6CA1;&#x610F;&#x4E49;&#xFF09;&#x3002;</p>
-<p>&#x4EE5;&#x4E0B;&#x5B9E;&#x4F8B;&#x4E2D;&#x5982;&#x679C;&#x540D;&#x5B57;&#x4E3A;&#x7A7A;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x603B;&#x6570;&#x4EE3;&#x66FF;&#xFF1A;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT coalesce(name, &apos;&#x603B;&#x6570;&apos;), SUM(singin) as singin_count FROM  employee_tbl GROUP BY name WITH ROLLUP;</span><br><span class="line">+--------------------------+--------------+</span><br><span class="line">| coalesce(name, &apos;&#x603B;&#x6570;&apos;) | singin_count |</span><br><span class="line">+--------------------------+--------------+</span><br><span class="line">| &#x5C0F;&#x4E3D;                   |            2 |</span><br><span class="line">| &#x5C0F;&#x660E;                   |            7 |</span><br><span class="line">| &#x5C0F;&#x738B;                   |            7 |</span><br><span class="line">| &#x603B;&#x6570;                   |           16 |</span><br><span class="line">+--------------------------+--------------+</span><br></pre></td></tr></table></figure>
-<h4 id="&#x8FDE;&#x63A5;-JOIN"><a href="#&#x8FDE;&#x63A5;-JOIN" class="headerlink" title="&#x8FDE;&#x63A5; JOIN"></a>&#x8FDE;&#x63A5; JOIN</h4><ul class="ui list">
-<li><strong>INNER JOIN&#xFF08;&#x5185;&#x8FDE;&#x63A5;,&#x6216;&#x7B49;&#x503C;&#x8FDE;&#x63A5;&#xFF09;</strong>&#xFF1A;&#x83B7;&#x53D6;&#x4E24;&#x4E2A;&#x8868;&#x4E2D;&#x5B57;&#x6BB5;&#x5339;&#x914D;&#x5173;&#x7CFB;&#x7684;&#x8BB0;&#x5F55;&#x3002;&#x53EF;&#x4EE5;&#x7701;&#x7565; INNER&#x3002;</li>
-<li><strong>LEFT JOIN&#xFF08;&#x5DE6;&#x8FDE;&#x63A5;&#xFF09;&#xFF1A;</strong>&#x83B7;&#x53D6;&#x5DE6;&#x8868;&#x6240;&#x6709;&#x8BB0;&#x5F55;&#xFF0C;&#x5373;&#x4F7F;&#x53F3;&#x8868;&#x6CA1;&#x6709;&#x5BF9;&#x5E94;&#x5339;&#x914D;&#x7684;&#x8BB0;&#x5F55;&#x3002;</li>
-<li><strong>RIGHT JOIN&#xFF08;&#x53F3;&#x8FDE;&#x63A5;&#xFF09;&#xFF1A;</strong> &#x4E0E; LEFT JOIN &#x76F8;&#x53CD;&#xFF0C;&#x7528;&#x4E8E;&#x83B7;&#x53D6;&#x53F3;&#x8868;&#x6240;&#x6709;&#x8BB0;&#x5F55;&#xFF0C;&#x5373;&#x4F7F;&#x5DE6;&#x8868;&#x6CA1;&#x6709;&#x5BF9;&#x5E94;&#x5339;&#x914D;&#x7684;&#x8BB0;&#x5F55;&#x3002;</li>
+<p>参数说明：如果a==null,则选择b；如果b==null,则选择c；如果a!=null,则选择a；如果a b c 都为null ，则返回为null（没意义）。</p>
+<p>以下实例中如果名字为空我们使用总数代替：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT coalesce(name, &apos;总数&apos;), SUM(singin) as singin_count FROM  employee_tbl GROUP BY name WITH ROLLUP;</span><br><span class="line">+--------------------------+--------------+</span><br><span class="line">| coalesce(name, &apos;总数&apos;) | singin_count |</span><br><span class="line">+--------------------------+--------------+</span><br><span class="line">| 小丽                   |            2 |</span><br><span class="line">| 小明                   |            7 |</span><br><span class="line">| 小王                   |            7 |</span><br><span class="line">| 总数                   |           16 |</span><br><span class="line">+--------------------------+--------------+</span><br></pre></td></tr></table></figure>
+<h4 id="连接-JOIN"><a href="#连接-JOIN" class="headerlink" title="连接 JOIN"></a>连接 JOIN</h4><ul>
+<li><strong>INNER JOIN（内连接,或等值连接）</strong>：获取两个表中字段匹配关系的记录。可以省略 INNER。</li>
+<li><strong>LEFT JOIN（左连接）：</strong>获取左表所有记录，即使右表没有对应匹配的记录。</li>
+<li><strong>RIGHT JOIN（右连接）：</strong> 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录。</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT a.runoob_id, a.runoob_author FROM runoob_tbl a INNER JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;</span><br></pre></td></tr></table></figure>
-<p>&#x7B49;&#x4EF7;&#x4E8E;where&#x8BED;&#x53E5;&#xFF1A;</p>
+<p>等价于where语句：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a, tcount_tbl b WHERE a.runoob_author = b.runoob_author;</span><br></pre></td></tr></table></figure>
-<h4 id="where&#x548C;having&#x533A;&#x522B;"><a href="#where&#x548C;having&#x533A;&#x522B;" class="headerlink" title="where&#x548C;having&#x533A;&#x522B;"></a>where&#x548C;having&#x533A;&#x522B;</h4><p>having&#x662F;&#x4ECE;&#x7B5B;&#x9009;&#x51FA;&#x7684;&#x5B57;&#x6BB5;&#x518D;&#x7B5B;&#x9009;&#xFF0C;&#x800C;where&#x662F;&#x4ECE;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x7684;&#x7B5B;&#x9009;&#x3002;</p>
-<h2 id="&#x5176;&#x4ED6;"><a href="#&#x5176;&#x4ED6;" class="headerlink" title="&#x5176;&#x4ED6;"></a>&#x5176;&#x4ED6;</h2><h4 id="NULL&#x503C;&#x5904;&#x7406;"><a href="#NULL&#x503C;&#x5904;&#x7406;" class="headerlink" title="NULL&#x503C;&#x5904;&#x7406;"></a>NULL&#x503C;&#x5904;&#x7406;</h4><p>&#x5173;&#x4E8E; NULL &#x7684;&#x6761;&#x4EF6;&#x6BD4;&#x8F83;&#x8FD0;&#x7B97;&#x662F;&#x6BD4;&#x8F83;&#x7279;&#x6B8A;&#x7684;&#x3002;&#x4F60;&#x4E0D;&#x80FD;&#x4F7F;&#x7528; = NULL &#x6216; != NULL &#x5728;&#x5217;&#x4E2D;&#x67E5;&#x627E; NULL &#x503C; &#x3002;</p>
-<p>&#x5728; MySQL &#x4E2D;&#xFF0C;NULL &#x503C;&#x4E0E;&#x4EFB;&#x4F55;&#x5176;&#x5B83;&#x503C;&#x7684;&#x6BD4;&#x8F83;&#xFF08;&#x5373;&#x4F7F;&#x662F; NULL&#xFF09;&#x6C38;&#x8FDC;&#x8FD4;&#x56DE; false&#xFF0C;&#x5373; NULL = NULL &#x8FD4;&#x56DE;false &#x3002;</p>
-<p>&#x4E3A;&#x4E86;&#x5904;&#x7406;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;MySQL&#x63D0;&#x4F9B;&#x4E86;&#x4E09;&#x5927;&#x8FD0;&#x7B97;&#x7B26;:</p>
-<ul class="ui list">
-<li><strong>IS NULL:</strong> &#x5F53;&#x5217;&#x7684;&#x503C;&#x662F; NULL,&#x6B64;&#x8FD0;&#x7B97;&#x7B26;&#x8FD4;&#x56DE; true&#x3002;</li>
-<li><strong>IS NOT NULL:</strong> &#x5F53;&#x5217;&#x7684;&#x503C;&#x4E0D;&#x4E3A; NULL, &#x8FD0;&#x7B97;&#x7B26;&#x8FD4;&#x56DE; true&#x3002;</li>
-<li><strong>&lt;=&gt;:</strong> &#x6BD4;&#x8F83;&#x64CD;&#x4F5C;&#x7B26;&#xFF08;&#x4E0D;&#x540C;&#x4E8E;=&#x8FD0;&#x7B97;&#x7B26;&#xFF09;&#xFF0C;&#x5F53;&#x6BD4;&#x8F83;&#x7684;&#x7684;&#x4E24;&#x4E2A;&#x503C;&#x4E3A; NULL &#x65F6;&#x8FD4;&#x56DE; true&#x3002;</li>
+<h4 id="where和having区别"><a href="#where和having区别" class="headerlink" title="where和having区别"></a>where和having区别</h4><p>having是从筛选出的字段再筛选，而where是从数据表中的字段直接进行的筛选。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="NULL值处理"><a href="#NULL值处理" class="headerlink" title="NULL值处理"></a>NULL值处理</h4><p>关于 NULL 的条件比较运算是比较特殊的。你不能使用 = NULL 或 != NULL 在列中查找 NULL 值 。</p>
+<p>在 MySQL 中，NULL 值与任何其它值的比较（即使是 NULL）永远返回 false，即 NULL = NULL 返回false 。</p>
+<p>为了处理这种情况，MySQL提供了三大运算符:</p>
+<ul>
+<li><strong>IS NULL:</strong> 当列的值是 NULL,此运算符返回 true。</li>
+<li><strong>IS NOT NULL:</strong> 当列的值不为 NULL, 运算符返回 true。</li>
+<li><strong>&lt;=&gt;:</strong> 比较操作符（不同于=运算符），当比较的的两个值为 NULL 时返回 true。</li>
 </ul>
-<h4 id="&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;"><a href="#&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;" class="headerlink" title="&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;"></a>&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</h4><p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x4E86;&#x89E3;&#x5230;MySQL&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <strong>LIKE &#x2026;%</strong> &#x6765;&#x8FDB;&#x884C;&#x6A21;&#x7CCA;&#x5339;&#x914D;&#x3002;</p>
-<p>MySQL &#x540C;&#x6837;&#x4E5F;&#x652F;&#x6301;&#x5176;&#x4ED6;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x5339;&#x914D;&#xFF0C;&#x4F7F;&#x7528; REGEXP &#x64CD;&#x4F5C;&#x7B26;&#x6765;&#x8FDB;&#x884C;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x5339;&#x914D;&#x3002;</p>
+<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>我们已经了解到MySQL可以通过 <strong>LIKE …%</strong> 来进行模糊匹配。</p>
+<p>MySQL 同样也支持其他正则表达式的匹配，使用 REGEXP 操作符来进行正则表达式匹配。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT name FROM person_tbl WHERE name REGEXP &apos;^st&apos;;</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
-<th>&#x6A21;&#x5F0F;</th>
-<th>&#x63CF;&#x8FF0;</th>
+<th>模式</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>^</td>
-<td>&#x5339;&#x914D;&#x8F93;&#x5165;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5F00;&#x59CB;&#x4F4D;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E86; RegExp &#x5BF9;&#x8C61;&#x7684; Multiline &#x5C5E;&#x6027;&#xFF0C;^ &#x4E5F;&#x5339;&#x914D; &#x2018;\n&#x2019; &#x6216; &#x2018;\r&#x2019; &#x4E4B;&#x540E;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</td>
+<td>匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 ‘\n’ 或 ‘\r’ 之后的位置。</td>
 </tr>
 <tr>
 <td>$</td>
-<td>&#x5339;&#x914D;&#x8F93;&#x5165;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x7ED3;&#x675F;&#x4F4D;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E86;RegExp &#x5BF9;&#x8C61;&#x7684; Multiline &#x5C5E;&#x6027;&#xFF0C;$ &#x4E5F;&#x5339;&#x914D; &#x2018;\n&#x2019; &#x6216; &#x2018;\r&#x2019; &#x4E4B;&#x524D;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</td>
+<td>匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 ‘\n’ 或 ‘\r’ 之前的位置。</td>
 </tr>
 <tr>
 <td>.</td>
-<td>&#x5339;&#x914D;&#x9664; &#x201C;\n&#x201D; &#x4E4B;&#x5916;&#x7684;&#x4EFB;&#x4F55;&#x5355;&#x4E2A;&#x5B57;&#x7B26;&#x3002;&#x8981;&#x5339;&#x914D;&#x5305;&#x62EC; <code>&apos;\n&apos;</code> &#x5728;&#x5185;&#x7684;&#x4EFB;&#x4F55;&#x5B57;&#x7B26;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x8C61; <code>&apos;[.\n]&apos;</code> &#x7684;&#x6A21;&#x5F0F;&#x3002;</td>
+<td>匹配除 “\n” 之外的任何单个字符。要匹配包括 <code>&#39;\n&#39;</code> 在内的任何字符，请使用象 <code>&#39;[.\n]&#39;</code> 的模式。</td>
 </tr>
 <tr>
-<td>[&#x2026;]</td>
-<td>&#x5B57;&#x7B26;&#x96C6;&#x5408;&#x3002;&#x5339;&#x914D;&#x6240;&#x5305;&#x542B;&#x7684;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x3002;&#x4F8B;&#x5982;&#xFF0C; <code>&apos;[abc]&apos;</code> &#x53EF;&#x4EE5;&#x5339;&#x914D; &#x201C;plain&#x201D; &#x4E2D;&#x7684; &#x2018;a&#x2019;&#x3002;</td>
+<td>[…]</td>
+<td>字符集合。匹配所包含的任意一个字符。例如， <code>&#39;[abc]&#39;</code> 可以匹配 “plain” 中的 ‘a’。</td>
 </tr>
 <tr>
-<td>[^&#x2026;]</td>
-<td>&#x8D1F;&#x503C;&#x5B57;&#x7B26;&#x96C6;&#x5408;&#x3002;&#x5339;&#x914D;&#x672A;&#x5305;&#x542B;&#x7684;&#x4EFB;&#x610F;&#x5B57;&#x7B26;&#x3002;&#x4F8B;&#x5982;&#xFF0C;<code>&apos;[^abc]&apos;</code>&#x53EF;&#x4EE5;&#x5339;&#x914D; &#x201C;plain&#x201D; &#x4E2D;&#x7684;&#x2019;p&#x2019;&#x3002;</td>
+<td>[^…]</td>
+<td>负值字符集合。匹配未包含的任意字符。例如，<code>&#39;[^abc]&#39;</code>可以匹配 “plain” 中的’p’。</td>
 </tr>
 <tr>
 <td>p1\</td>
 <td>p2\</td>
 <td>p3</td>
-<td>&#x5339;&#x914D; p1 &#x6216; p2 &#x6216; p3&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x2019;z\</td>
-<td>food&#x2019; &#x80FD;&#x5339;&#x914D; &#x201C;z&#x201D; &#x6216; &#x201C;food&#x201D;&#x3002;&#x2019;(z\</td>
-<td>f)ood&#x2019; &#x5219;&#x5339;&#x914D; &#x201C;zood&#x201D; &#x6216; &#x201C;food&#x201D;&#x3002;</td>
+<td>匹配 p1 或 p2 或 p3。例如，’z\</td>
+<td>food’ 能匹配 “z” 或 “food”。’(z\</td>
+<td>f)ood’ 则匹配 “zood” 或 “food”。</td>
 </tr>
 <tr>
 <td>*</td>
-<td>&#x5339;&#x914D;&#x524D;&#x9762;&#x7684;&#x5B50;&#x8868;&#x8FBE;&#x5F0F;&#x96F6;&#x6B21;&#x6216;&#x591A;&#x6B21;&#x3002;&#x4F8B;&#x5982;&#xFF0C;zo<em> &#x80FD;&#x5339;&#x914D; &#x201C;z&#x201D; &#x4EE5;&#x53CA; &#x201C;zoo&#x201D;&#x3002;</em> &#x7B49;&#x4EF7;&#x4E8E;{0,}&#x3002;</td>
+<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
 </tr>
 <tr>
 <td>+</td>
-<td>&#x5339;&#x914D;&#x524D;&#x9762;&#x7684;&#x5B50;&#x8868;&#x8FBE;&#x5F0F;&#x4E00;&#x6B21;&#x6216;&#x591A;&#x6B21;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x2019;zo+&#x2019; &#x80FD;&#x5339;&#x914D; &#x201C;zo&#x201D; &#x4EE5;&#x53CA; &#x201C;zoo&#x201D;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x5339;&#x914D; &#x201C;z&#x201D;&#x3002;+ &#x7B49;&#x4EF7;&#x4E8E; {1,}&#x3002;</td>
+<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
 </tr>
 <tr>
 <td>{n}</td>
-<td>n &#x662F;&#x4E00;&#x4E2A;&#x975E;&#x8D1F;&#x6574;&#x6570;&#x3002;&#x5339;&#x914D;&#x786E;&#x5B9A;&#x7684; n &#x6B21;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x2019;o{2}&#x2019; &#x4E0D;&#x80FD;&#x5339;&#x914D; &#x201C;Bob&#x201D; &#x4E2D;&#x7684; &#x2018;o&#x2019;&#xFF0C;&#x4F46;&#x662F;&#x80FD;&#x5339;&#x914D; &#x201C;food&#x201D; &#x4E2D;&#x7684;&#x4E24;&#x4E2A; o&#x3002;</td>
+<td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
 </tr>
 <tr>
 <td>{n,m}</td>
-<td>m &#x548C; n &#x5747;&#x4E3A;&#x975E;&#x8D1F;&#x6574;&#x6570;&#xFF0C;&#x5176;&#x4E2D;n &lt;= m&#x3002;&#x6700;&#x5C11;&#x5339;&#x914D; n &#x6B21;&#x4E14;&#x6700;&#x591A;&#x5339;&#x914D; m &#x6B21;&#x3002;</td>
+<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。</td>
 </tr>
 </tbody>
 </table>
-<h4 id="&#x4E8B;&#x52A1;&#x5904;&#x7406;"><a href="#&#x4E8B;&#x52A1;&#x5904;&#x7406;" class="headerlink" title="&#x4E8B;&#x52A1;&#x5904;&#x7406;"></a>&#x4E8B;&#x52A1;&#x5904;&#x7406;</h4><ul class="ui list">
-<li>&#x5728; MySQL &#x4E2D;&#x53EA;&#x6709;&#x4F7F;&#x7528;&#x4E86; Innodb &#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;&#x7684;&#x6570;&#x636E;&#x5E93;&#x6216;&#x8868;&#x624D;&#x652F;&#x6301;&#x4E8B;&#x52A1;&#x3002;</li>
-<li>&#x4E8B;&#x52A1;&#x5904;&#x7406;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x7EF4;&#x62A4;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5B8C;&#x6574;&#x6027;&#xFF0C;&#x4FDD;&#x8BC1;&#x6210;&#x6279;&#x7684; SQL &#x8BED;&#x53E5;&#x8981;&#x4E48;&#x5168;&#x90E8;&#x6267;&#x884C;&#xFF0C;&#x8981;&#x4E48;&#x5168;&#x90E8;&#x4E0D;&#x6267;&#x884C;&#x3002;</li>
+<h4 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h4><ul>
+<li>在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。</li>
+<li>事务处理可以用来维护数据库的完整性，保证成批的 SQL 语句要么全部执行，要么全部不执行。</li>
 </ul>
-<p>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x4E8B;&#x52A1;&#x662F;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;4&#x4E2A;&#x6761;&#x4EF6;&#xFF08;ACID&#xFF09;&#xFF1A;&#xFF1A;&#x539F;&#x5B50;&#x6027;&#xFF08;<strong>A</strong>tomicity&#xFF0C;&#x6216;&#x79F0;&#x4E0D;&#x53EF;&#x5206;&#x5272;&#x6027;&#xFF09;&#x3001;&#x4E00;&#x81F4;&#x6027;&#xFF08;<strong>C</strong>onsistency&#xFF09;&#x3001;&#x9694;&#x79BB;&#x6027;&#xFF08;<strong>I</strong>solation&#xFF0C;&#x53C8;&#x79F0;&#x72EC;&#x7ACB;&#x6027;&#xFF09;&#x3001;&#x6301;&#x4E45;&#x6027;&#xFF08;<strong>D</strong>urability&#xFF09;&#x3002;</p>
-<p>MYSQL &#x4E8B;&#x52A1;&#x5904;&#x7406;&#x4E3B;&#x8981;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;</p>
-<ol class="ui list">
-<li>&#x7528; BEGIN, ROLLBACK, COMMIT&#x6765;&#x5B9E;&#x73B0;<ul>
-<li><strong>BEGIN</strong> &#x5F00;&#x59CB;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;</li>
-<li><strong>ROLLBACK</strong> &#x4E8B;&#x52A1;&#x56DE;&#x6EDA;</li>
-<li><strong>COMMIT</strong> &#x4E8B;&#x52A1;&#x786E;&#x8BA4;</li>
+<p>一般来说，事务是必须满足4个条件（ACID）：：原子性（<strong>A</strong>tomicity，或称不可分割性）、一致性（<strong>C</strong>onsistency）、隔离性（<strong>I</strong>solation，又称独立性）、持久性（<strong>D</strong>urability）。</p>
+<p>MYSQL 事务处理主要有两种方法：</p>
+<ol>
+<li>用 BEGIN, ROLLBACK, COMMIT来实现<ul>
+<li><strong>BEGIN</strong> 开始一个事务</li>
+<li><strong>ROLLBACK</strong> 事务回滚</li>
+<li><strong>COMMIT</strong> 事务确认</li>
 </ul>
 </li>
-<li>&#x76F4;&#x63A5;&#x7528; SET &#x6765;&#x6539;&#x53D8; MySQL &#x7684;&#x81EA;&#x52A8;&#x63D0;&#x4EA4;&#x6A21;&#x5F0F;: <ul>
-<li><strong>SET AUTOCOMMIT=0</strong> &#x7981;&#x6B62;&#x81EA;&#x52A8;&#x63D0;&#x4EA4;</li>
-<li><strong>SET AUTOCOMMIT=1</strong> &#x5F00;&#x542F;&#x81EA;&#x52A8;&#x63D0;&#x4EA4;</li>
+<li>直接用 SET 来改变 MySQL 的自动提交模式: <ul>
+<li><strong>SET AUTOCOMMIT=0</strong> 禁止自动提交</li>
+<li><strong>SET AUTOCOMMIT=1</strong> 开启自动提交</li>
 </ul>
 </li>
 </ol>
-<h4 id="&#x4FEE;&#x6539;&#x8868;-ALTER"><a href="#&#x4FEE;&#x6539;&#x8868;-ALTER" class="headerlink" title="&#x4FEE;&#x6539;&#x8868; ALTER"></a>&#x4FEE;&#x6539;&#x8868; ALTER</h4><p>//&#x67E5;&#x770B;&#x6570;&#x636E;&#x8868;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; SHOW TABLE STATUS &#x8BED;&#x53E5;&#x3002;</p>
+<h4 id="修改表-ALTER"><a href="#修改表-ALTER" class="headerlink" title="修改表 ALTER"></a>修改表 ALTER</h4><p>//查看数据表类型可以使用 SHOW TABLE STATUS 语句。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  SHOW TABLE STATUS LIKE &apos;testalter_tbl&apos;\G</span><br></pre></td></tr></table></figure>
-<h5 id="&#x5220;&#x9664;&#xFF0C;&#x6DFB;&#x52A0;&#x6216;&#x4FEE;&#x6539;&#x8868;&#x5B57;&#x6BB5;"><a href="#&#x5220;&#x9664;&#xFF0C;&#x6DFB;&#x52A0;&#x6216;&#x4FEE;&#x6539;&#x8868;&#x5B57;&#x6BB5;" class="headerlink" title="&#x5220;&#x9664;&#xFF0C;&#x6DFB;&#x52A0;&#x6216;&#x4FEE;&#x6539;&#x8868;&#x5B57;&#x6BB5;"></a>&#x5220;&#x9664;&#xFF0C;&#x6DFB;&#x52A0;&#x6216;&#x4FEE;&#x6539;&#x8868;&#x5B57;&#x6BB5;</h5><p>&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#x4F7F;&#x7528;&#x4E86; ALTER &#x547D;&#x4EE4;&#x53CA; DROP &#x5B50;&#x53E5;&#x6765;&#x5220;&#x9664;&#x4EE5;&#x4E0A;&#x521B;&#x5EFA;&#x8868;&#x7684; i &#x5B57;&#x6BB5;&#xFF1A;</p>
+<h5 id="删除，添加或修改表字段"><a href="#删除，添加或修改表字段" class="headerlink" title="删除，添加或修改表字段"></a>删除，添加或修改表字段</h5><p>如下命令使用了 ALTER 命令及 DROP 子句来删除以上创建表的 i 字段：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl  DROP i;</span><br></pre></td></tr></table></figure>
-<p>&#x5982;&#x679C;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x53EA;&#x5269;&#x4F59;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#x5219;&#x65E0;&#x6CD5;&#x4F7F;&#x7528;DROP&#x6765;&#x5220;&#x9664;&#x5B57;&#x6BB5;&#x3002;</p>
-<p>MySQL &#x4E2D;&#x4F7F;&#x7528; ADD &#x5B50;&#x53E5;&#x6765;&#x5411;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x6DFB;&#x52A0;&#x5217;&#xFF0C;&#x5982;&#x4E0B;&#x5B9E;&#x4F8B;&#x5728;&#x8868; testalter_tbl &#x4E2D;&#x6DFB;&#x52A0; i &#x5B57;&#x6BB5;&#xFF0C;&#x5E76;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x7C7B;&#x578B;:</p>
+<p>如果数据表中只剩余一个字段则无法使用DROP来删除字段。</p>
+<p>MySQL 中使用 ADD 子句来向数据表中添加列，如下实例在表 testalter_tbl 中添加 i 字段，并定义数据类型:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl ADD i INT;</span><br></pre></td></tr></table></figure>
-<p>&#x5982;&#x679C;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x65B0;&#x589E;&#x5B57;&#x6BB5;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;MySQL&#x63D0;&#x4F9B;&#x7684;&#x5173;&#x952E;&#x5B57; FIRST (&#x8BBE;&#x5B9A;&#x4F4D;&#x7B2C;&#x4E00;&#x5217;)&#xFF0C; AFTER &#x5B57;&#x6BB5;&#x540D;&#xFF08;&#x8BBE;&#x5B9A;&#x4F4D;&#x4E8E;&#x67D0;&#x4E2A;&#x5B57;&#x6BB5;&#x4E4B;&#x540E;&#xFF09;&#x3002;</p>
-<h5 id="&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#x53CA;&#x540D;&#x79F0;"><a href="#&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#x53CA;&#x540D;&#x79F0;" class="headerlink" title="&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#x53CA;&#x540D;&#x79F0;"></a>&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#x53CA;&#x540D;&#x79F0;</h5><p>&#x5982;&#x679C;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#x53CA;&#x540D;&#x79F0;, &#x4F60;&#x53EF;&#x4EE5;&#x5728;ALTER&#x547D;&#x4EE4;&#x4E2D;&#x4F7F;&#x7528; MODIFY &#x6216; CHANGE &#x5B50;&#x53E5; &#x3002;</p>
-<p>&#x4F8B;&#x5982;&#xFF0C;&#x628A;&#x5B57;&#x6BB5; c &#x7684;&#x7C7B;&#x578B;&#x4ECE; CHAR(1) &#x6539;&#x4E3A; CHAR(10)&#xFF0C;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;:</p>
+<p>如果需要指定新增字段的位置，可以使用MySQL提供的关键字 FIRST (设定位第一列)， AFTER 字段名（设定位于某个字段之后）。</p>
+<h5 id="修改字段类型及名称"><a href="#修改字段类型及名称" class="headerlink" title="修改字段类型及名称"></a>修改字段类型及名称</h5><p>如果需要修改字段类型及名称, 你可以在ALTER命令中使用 MODIFY 或 CHANGE 子句 。</p>
+<p>例如，把字段 c 的类型从 CHAR(1) 改为 CHAR(10)，可以执行以下命令:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl MODIFY c CHAR(10);</span><br></pre></td></tr></table></figure>
-<p>&#x4F7F;&#x7528; CHANGE &#x5B50;&#x53E5;, &#x8BED;&#x6CD5;&#x6709;&#x5F88;&#x5927;&#x7684;&#x4E0D;&#x540C;&#x3002; &#x5728; CHANGE &#x5173;&#x952E;&#x5B57;&#x4E4B;&#x540E;&#xFF0C;&#x7D27;&#x8DDF;&#x7740;&#x7684;&#x662F;&#x4F60;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x7136;&#x540E;&#x6307;&#x5B9A;&#x65B0;&#x5B57;&#x6BB5;&#x540D;&#x53CA;&#x7C7B;&#x578B;:</p>
+<p>使用 CHANGE 子句, 语法有很大的不同。 在 CHANGE 关键字之后，紧跟着的是你要修改的字段名，然后指定新字段名及类型:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl CHANGE i j BIGINT;</span><br></pre></td></tr></table></figure>
-<h5 id="&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x9ED8;&#x8BA4;&#x503C;"><a href="#&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x9ED8;&#x8BA4;&#x503C;" class="headerlink" title="&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x9ED8;&#x8BA4;&#x503C;"></a>&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x9ED8;&#x8BA4;&#x503C;</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl ALTER i SET DEFAULT 1000;</span><br></pre></td></tr></table></figure>
+<h5 id="修改字段默认值"><a href="#修改字段默认值" class="headerlink" title="修改字段默认值"></a>修改字段默认值</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl ALTER i SET DEFAULT 1000;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl ALTER i DROP DEFAULT;</span><br></pre></td></tr></table></figure>
-<h5 id="&#x4FEE;&#x6539;&#x8868;&#x540D;"><a href="#&#x4FEE;&#x6539;&#x8868;&#x540D;" class="headerlink" title="&#x4FEE;&#x6539;&#x8868;&#x540D;"></a>&#x4FEE;&#x6539;&#x8868;&#x540D;</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl RENAME TO alter_tbl;</span><br></pre></td></tr></table></figure>
-<h5 id="&#x4FEE;&#x6539;&#x5B58;&#x50A8;&#x5F15;&#x64CE;"><a href="#&#x4FEE;&#x6539;&#x5B58;&#x50A8;&#x5F15;&#x64CE;" class="headerlink" title="&#x4FEE;&#x6539;&#x5B58;&#x50A8;&#x5F15;&#x64CE;"></a>&#x4FEE;&#x6539;&#x5B58;&#x50A8;&#x5F15;&#x64CE;</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName engine=myisam;</span><br></pre></td></tr></table></figure>
-<h5 id="&#x5220;&#x9664;&#x5916;&#x952E;&#x7EA6;&#x675F;"><a href="#&#x5220;&#x9664;&#x5916;&#x952E;&#x7EA6;&#x675F;" class="headerlink" title="&#x5220;&#x9664;&#x5916;&#x952E;&#x7EA6;&#x675F;"></a>&#x5220;&#x9664;&#x5916;&#x952E;&#x7EA6;&#x675F;</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName drop foreign key keyName;</span><br></pre></td></tr></table></figure>
-<h5 id="&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x7684;&#x76F8;&#x5BF9;&#x4F4D;&#x7F6E;"><a href="#&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x7684;&#x76F8;&#x5BF9;&#x4F4D;&#x7F6E;" class="headerlink" title="&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x7684;&#x76F8;&#x5BF9;&#x4F4D;&#x7F6E;"></a>&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x7684;&#x76F8;&#x5BF9;&#x4F4D;&#x7F6E;</h5><p>&#x8FD9;&#x91CC;name1&#x4E3A;&#x60F3;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;type1&#x4E3A;&#x8BE5;&#x5B57;&#x6BB5;&#x539F;&#x6765;&#x7C7B;&#x578B;&#xFF0C;first&#x548C;after&#x4E8C;&#x9009;&#x4E00;&#xFF0C;&#x8FD9;&#x5E94;&#x8BE5;&#x663E;&#x800C;&#x6613;&#x89C1;&#xFF0C;first&#x653E;&#x5728;&#x7B2C;&#x4E00;&#x4F4D;&#xFF0C;after&#x653E;&#x5728;name2&#x5B57;&#x6BB5;&#x540E;&#x9762;</p>
+<h5 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl RENAME TO alter_tbl;</span><br></pre></td></tr></table></figure>
+<h5 id="修改存储引擎"><a href="#修改存储引擎" class="headerlink" title="修改存储引擎"></a>修改存储引擎</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName engine=myisam;</span><br></pre></td></tr></table></figure>
+<h5 id="删除外键约束"><a href="#删除外键约束" class="headerlink" title="删除外键约束"></a>删除外键约束</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName drop foreign key keyName;</span><br></pre></td></tr></table></figure>
+<h5 id="修改字段的相对位置"><a href="#修改字段的相对位置" class="headerlink" title="修改字段的相对位置"></a>修改字段的相对位置</h5><p>这里name1为想要修改的字段，type1为该字段原来类型，first和after二选一，这应该显而易见，first放在第一位，after放在name2字段后面</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName modify name1 type1 first|after name2;</span><br></pre></td></tr></table></figure>
-<h4 id="&#x4E34;&#x65F6;&#x8868;"><a href="#&#x4E34;&#x65F6;&#x8868;" class="headerlink" title="&#x4E34;&#x65F6;&#x8868;"></a>&#x4E34;&#x65F6;&#x8868;</h4><p>MySQL&#x4E34;&#x65F6;&#x8868;&#x53EA;&#x5728;&#x5F53;&#x524D;&#x8FDE;&#x63A5;&#x53EF;&#x89C1;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;PHP&#x811A;&#x672C;&#x6765;&#x521B;&#x5EFA;MySQL&#x4E34;&#x65F6;&#x8868;&#xFF0C;&#x90A3;&#x6BCF;&#x5F53;PHP&#x811A;&#x672C;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x8BE5;&#x4E34;&#x65F6;&#x8868;&#x4E5F;&#x4F1A;&#x81EA;&#x52A8;&#x9500;&#x6BC1;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;&#x4E86;&#x5176;&#x4ED6;MySQL&#x5BA2;&#x6237;&#x7AEF;&#x7A0B;&#x5E8F;&#x8FDE;&#x63A5;MySQL&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;&#x5668;&#x6765;&#x521B;&#x5EFA;&#x4E34;&#x65F6;&#x8868;&#xFF0C;&#x90A3;&#x4E48;&#x53EA;&#x6709;&#x5728;&#x5173;&#x95ED;&#x5BA2;&#x6237;&#x7AEF;&#x7A0B;&#x5E8F;&#x65F6;&#x624D;&#x4F1A;&#x9500;&#x6BC1;&#x4E34;&#x65F6;&#x8868;&#xFF0C;&#x5F53;&#x7136;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x624B;&#x52A8;&#x9500;&#x6BC1;&#x3002;</p>
+<h4 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a>临时表</h4><p>MySQL临时表只在当前连接可见，如果你使用PHP脚本来创建MySQL临时表，那每当PHP脚本执行完成后，该临时表也会自动销毁。</p>
+<p>如果你使用了其他MySQL客户端程序连接MySQL数据库服务器来创建临时表，那么只有在关闭客户端程序时才会销毁临时表，当然你也可以手动销毁。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TEMPORARY TABLE SalesSummary (</span><br><span class="line">    -&gt; product_name VARCHAR(50) NOT NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>&#x5220;&#x9664;&#x4E34;&#x65F6;&#x8868;</p>
+<p>删除临时表</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DROP TABLE SalesSummary;</span><br></pre></td></tr></table></figure>
-<h4 id="&#x590D;&#x5236;&#x8868;"><a href="#&#x590D;&#x5236;&#x8868;" class="headerlink" title="&#x590D;&#x5236;&#x8868;"></a>&#x590D;&#x5236;&#x8868;</h4><ul class="ui list">
-<li>&#x4F7F;&#x7528; <strong>SHOW CREATE TABLE</strong> &#x547D;&#x4EE4;&#x83B7;&#x53D6;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x8868;(<strong>CREATE TABLE</strong>) &#x8BED;&#x53E5;&#xFF0C;&#x8BE5;&#x8BED;&#x53E5;&#x5305;&#x542B;&#x4E86;&#x539F;&#x6570;&#x636E;&#x8868;&#x7684;&#x7ED3;&#x6784;&#xFF0C;&#x7D22;&#x5F15;&#x7B49;&#x3002;&#x200B;</li>
-<li>&#x590D;&#x5236;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x663E;&#x793A;&#x7684;SQL&#x8BED;&#x53E5;&#xFF0C;&#x4FEE;&#x6539;&#x6570;&#x636E;&#x8868;&#x540D;&#xFF0C;&#x5E76;&#x6267;&#x884C;SQL&#x8BED;&#x53E5;&#xFF0C;&#x901A;&#x8FC7;&#x4EE5;&#x4E0A;&#x547D;&#x4EE4; &#x5C06;&#x5B8C;&#x5168;&#x7684;&#x590D;&#x5236;&#x6570;&#x636E;&#x8868;&#x7ED3;&#x6784;&#x3002;</li>
-<li>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x590D;&#x5236;&#x8868;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <strong>INSERT INTO &#x2026; SELECT</strong> &#x8BED;&#x53E5;&#x6765;&#x5B9E;&#x73B0;&#x3002;</li>
+<h4 id="复制表"><a href="#复制表" class="headerlink" title="复制表"></a>复制表</h4><ul>
+<li>使用 <strong>SHOW CREATE TABLE</strong> 命令获取创建数据表(<strong>CREATE TABLE</strong>) 语句，该语句包含了原数据表的结构，索引等。​</li>
+<li>复制以下命令显示的SQL语句，修改数据表名，并执行SQL语句，通过以上命令 将完全的复制数据表结构。</li>
+<li>如果你想复制表的内容，你就可以使用 <strong>INSERT INTO … SELECT</strong> 语句来实现。</li>
 </ul>
-<p><strong>&#x6B65;&#x9AA4;&#x4E00;&#xFF1A;</strong></p>
-<p>&#x83B7;&#x53D6;&#x6570;&#x636E;&#x8868;&#x7684;&#x5B8C;&#x6574;&#x7ED3;&#x6784;&#x3002;</p>
+<p><strong>步骤一：</strong></p>
+<p>获取数据表的完整结构。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW CREATE TABLE runoob_tbl \G;</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">       Table: runoob_tbl</span><br><span class="line">Create Table: CREATE TABLE `runoob_tbl` (</span><br><span class="line">  `runoob_id` int(11) NOT NULL auto_increment,</span><br><span class="line">  `runoob_title` varchar(100) NOT NULL default &apos;&apos;,</span><br><span class="line">  `runoob_author` varchar(40) NOT NULL default &apos;&apos;,</span><br><span class="line">  `submission_date` date default NULL,</span><br><span class="line">  PRIMARY KEY  (`runoob_id`),</span><br><span class="line">  UNIQUE KEY `AUTHOR_INDEX` (`runoob_author`)</span><br><span class="line">) ENGINE=InnoDB </span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">ERROR:</span><br><span class="line">No query specified</span><br></pre></td></tr></table></figure>
-<p><strong>&#x6B65;&#x9AA4;&#x4E8C;&#xFF1A;</strong></p>
-<p>&#x4FEE;&#x6539;SQL&#x8BED;&#x53E5;&#x7684;&#x6570;&#x636E;&#x8868;&#x540D;&#xFF0C;&#x5E76;&#x6267;&#x884C;SQL&#x8BED;&#x53E5;&#x3002;</p>
+<p><strong>步骤二：</strong></p>
+<p>修改SQL语句的数据表名，并执行SQL语句。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE `clone_tbl` (</span><br><span class="line">  -&gt; `runoob_id` int(11) NOT NULL auto_increment,</span><br><span class="line">  -&gt; `runoob_title` varchar(100) NOT NULL default &apos;&apos;,</span><br><span class="line">  -&gt; `runoob_author` varchar(40) NOT NULL default &apos;&apos;,</span><br><span class="line">  -&gt; `submission_date` date default NULL,</span><br><span class="line">  -&gt; PRIMARY KEY  (`runoob_id`),</span><br><span class="line">  -&gt; UNIQUE KEY `AUTHOR_INDEX` (`runoob_author`)</span><br><span class="line">-&gt; ) ENGINE=InnoDB;</span><br><span class="line">Query OK, 0 rows affected (1.80 sec)</span><br></pre></td></tr></table></figure>
-<p><strong>&#x6B65;&#x9AA4;&#x4E09;&#xFF1A;</strong></p>
-<p>&#x6267;&#x884C;&#x5B8C;&#x7B2C;&#x4E8C;&#x6B65;&#x9AA4;&#x540E;&#xFF0C;&#x4F60;&#x5C06;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x514B;&#x9686;&#x8868; clone_tbl&#x3002; &#x5982;&#x679C;&#x4F60;&#x60F3;&#x62F7;&#x8D1D;&#x6570;&#x636E;&#x8868;&#x7684;&#x6570;&#x636E;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <strong>INSERT INTO&#x2026; SELECT</strong> &#x8BED;&#x53E5;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+<p><strong>步骤三：</strong></p>
+<p>执行完第二步骤后，你将在数据库中创建新的克隆表 clone_tbl。 如果你想拷贝数据表的数据你可以使用 <strong>INSERT INTO… SELECT</strong> 语句来实现。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; INSERT INTO clone_tbl (runoob_id,</span><br><span class="line">    -&gt;                        runoob_title,</span><br><span class="line">    -&gt;                        runoob_author,</span><br><span class="line">    -&gt;                        submission_date)</span><br><span class="line">    -&gt; SELECT runoob_id,runoob_title,</span><br><span class="line">    -&gt;        runoob_author,submission_date</span><br><span class="line">    -&gt; FROM runoob_tbl;</span><br><span class="line">Query OK, 3 rows affected (0.07 sec)</span><br><span class="line">Records: 3  Duplicates: 0  Warnings: 0</span><br></pre></td></tr></table></figure>
-<h4 id="&#x5E8F;&#x5217;"><a href="#&#x5E8F;&#x5217;" class="headerlink" title="&#x5E8F;&#x5217;"></a>&#x5E8F;&#x5217;</h4><p>MySQL&#x5E8F;&#x5217;&#x662F;&#x4E00;&#x7EC4;&#x6574;&#x6570;&#xFF1A;1, 2, 3, &#x2026;&#xFF0C;&#x7531;&#x4E8E;&#x4E00;&#x5F20;&#x6570;&#x636E;&#x8868;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#x81EA;&#x589E;&#x4E3B;&#x952E;&#xFF0C; &#x5982;&#x679C;&#x4F60;&#x60F3;&#x5B9E;&#x73B0;&#x5176;&#x4ED6;&#x5B57;&#x6BB5;&#x4E5F;&#x5B9E;&#x73B0;&#x81EA;&#x52A8;&#x589E;&#x52A0;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;MySQL&#x5E8F;&#x5217;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE insect</span><br><span class="line">    -&gt; (</span><br><span class="line">    -&gt; id INT UNSIGNED NOT NULL AUTO_INCREMENT,</span><br><span class="line">    -&gt; PRIMARY KEY (id),</span><br><span class="line">	&#x2026;&#x2026;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h5 id="&#x91CD;&#x7F6E;&#x5E8F;&#x5217;"><a href="#&#x91CD;&#x7F6E;&#x5E8F;&#x5217;" class="headerlink" title="&#x91CD;&#x7F6E;&#x5E8F;&#x5217;"></a>&#x91CD;&#x7F6E;&#x5E8F;&#x5217;</h5><p>&#x5982;&#x679C;&#x4F60;&#x5220;&#x9664;&#x4E86;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x7684;&#x591A;&#x6761;&#x8BB0;&#x5F55;&#xFF0C;&#x5E76;&#x5E0C;&#x671B;&#x5BF9;&#x5269;&#x4E0B;&#x6570;&#x636E;&#x7684;AUTO_INCREMENT&#x5217;&#x8FDB;&#x884C;&#x91CD;&#x65B0;&#x6392;&#x5217;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5220;&#x9664;&#x81EA;&#x589E;&#x7684;&#x5217;&#xFF0C;&#x7136;&#x540E;&#x91CD;&#x65B0;&#x6DFB;&#x52A0;&#x6765;&#x5B9E;&#x73B0;&#x3002; &#x4E0D;&#x8FC7;&#x8BE5;&#x64CD;&#x4F5C;&#x8981;&#x975E;&#x5E38;&#x5C0F;&#x5FC3;&#xFF0C;&#x5982;&#x679C;&#x5728;&#x5220;&#x9664;&#x7684;&#x540C;&#x65F6;&#x53C8;&#x6709;&#x65B0;&#x8BB0;&#x5F55;&#x6DFB;&#x52A0;&#xFF0C;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x73B0;&#x6570;&#x636E;&#x6DF7;&#x4E71;&#x3002;</p>
-<h5 id="&#x8BBE;&#x7F6E;&#x5E8F;&#x5217;&#x7684;&#x5F00;&#x59CB;&#x503C;"><a href="#&#x8BBE;&#x7F6E;&#x5E8F;&#x5217;&#x7684;&#x5F00;&#x59CB;&#x503C;" class="headerlink" title="&#x8BBE;&#x7F6E;&#x5E8F;&#x5217;&#x7684;&#x5F00;&#x59CB;&#x503C;"></a>&#x8BBE;&#x7F6E;&#x5E8F;&#x5217;&#x7684;&#x5F00;&#x59CB;&#x503C;</h5><p>&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#x5E8F;&#x5217;&#x7684;&#x5F00;&#x59CB;&#x503C;&#x4E3A;1&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x5F00;&#x59CB;&#x503C;100&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x8BED;&#x53E5;&#x6765;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<h4 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h4><p>MySQL序列是一组整数：1, 2, 3, …，由于一张数据表只能有一个字段自增主键， 如果你想实现其他字段也实现自动增加，就可以使用MySQL序列来实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE insect</span><br><span class="line">    -&gt; (</span><br><span class="line">    -&gt; id INT UNSIGNED NOT NULL AUTO_INCREMENT,</span><br><span class="line">    -&gt; PRIMARY KEY (id),</span><br><span class="line">	……</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h5 id="重置序列"><a href="#重置序列" class="headerlink" title="重置序列"></a>重置序列</h5><p>如果你删除了数据表中的多条记录，并希望对剩下数据的AUTO_INCREMENT列进行重新排列，那么你可以通过删除自增的列，然后重新添加来实现。 不过该操作要非常小心，如果在删除的同时又有新记录添加，有可能会出现数据混乱。</p>
+<h5 id="设置序列的开始值"><a href="#设置序列的开始值" class="headerlink" title="设置序列的开始值"></a>设置序列的开始值</h5><p>一般情况下序列的开始值为1，但如果你需要指定一个开始值100，那我们可以通过以下语句来实现：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE insect</span><br><span class="line">    -&gt; (</span><br><span class="line">    -&gt; id INT UNSIGNED NOT NULL AUTO_INCREMENT,</span><br><span class="line">    -&gt; PRIMARY KEY (id),</span><br><span class="line">    -&gt; name VARCHAR(30) NOT NULL, </span><br><span class="line">    -&gt; date DATE NOT NULL,</span><br><span class="line">    -&gt; origin VARCHAR(30) NOT NULL</span><br><span class="line">)engine=innodb auto_increment=100 charset=utf8;</span><br></pre></td></tr></table></figure>
-<p>&#x6216;&#x8005;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x8868;&#x521B;&#x5EFA;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x8BED;&#x53E5;&#x6765;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<p>或者你也可以在表创建成功后，通过以下语句来实现：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE t AUTO_INCREMENT = 100;</span><br></pre></td></tr></table></figure>
-<h4 id="&#x5904;&#x7406;&#x91CD;&#x590D;&#x6570;&#x636E;"><a href="#&#x5904;&#x7406;&#x91CD;&#x590D;&#x6570;&#x636E;" class="headerlink" title="&#x5904;&#x7406;&#x91CD;&#x590D;&#x6570;&#x636E;"></a>&#x5904;&#x7406;&#x91CD;&#x590D;&#x6570;&#x636E;</h4><h5 id="&#x9632;&#x6B62;"><a href="#&#x9632;&#x6B62;" class="headerlink" title="&#x9632;&#x6B62;"></a>&#x9632;&#x6B62;</h5><p>&#x53EF;&#x4EE5;&#x5728;MySQL&#x6570;&#x636E;&#x8868;&#x4E2D;&#x8BBE;&#x7F6E;&#x6307;&#x5B9A;&#x7684;&#x5B57;&#x6BB5;&#x4E3A; <strong>PRIMARY KEY&#xFF08;&#x4E3B;&#x952E;&#xFF09;</strong> &#x6216;&#x8005; <strong>UNIQUE&#xFF08;&#x552F;&#x4E00;&#xFF09;</strong> &#x7D22;&#x5F15;&#x6765;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x7684;&#x552F;&#x4E00;&#x6027;&#x3002;</p>
-<p>INSERT IGNORE INTO&#x5F53;&#x63D2;&#x5165;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x5728;&#x8BBE;&#x7F6E;&#x4E86;&#x8BB0;&#x5F55;&#x7684;&#x552F;&#x4E00;&#x6027;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x63D2;&#x5165;&#x91CD;&#x590D;&#x6570;&#x636E;&#xFF0C;&#x5C06;&#x4E0D;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;&#xFF0C;<strong>&#x8DF3;&#x8FC7;</strong>&#x8FD9;&#x6761;&#x6570;&#x636E;&#xFF0C;&#x53EA;&#x4EE5;&#x8B66;&#x544A;&#x5F62;&#x5F0F;&#x8FD4;&#x56DE;&#x3002; &#x800C;REPLACE INTO into&#x5982;&#x679C;&#x5B58;&#x5728;primary &#x6216; unique&#x76F8;&#x540C;&#x7684;&#x8BB0;&#x5F55;&#xFF0C;&#x5219;&#x5148;&#x5220;&#x9664;&#x6389;&#x3002;&#x518D;&#x63D2;&#x5165;&#x65B0;&#x8BB0;&#x5F55;&#x3002;</p>
-<p>&#x53E6;&#x4E00;&#x79CD;&#x8BBE;&#x7F6E;&#x6570;&#x636E;&#x7684;&#x552F;&#x4E00;&#x6027;&#x65B9;&#x6CD5;&#x662F;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;UNIQUE&#x7D22;&#x5F15;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<h4 id="处理重复数据"><a href="#处理重复数据" class="headerlink" title="处理重复数据"></a>处理重复数据</h4><h5 id="防止"><a href="#防止" class="headerlink" title="防止"></a>防止</h5><p>可以在MySQL数据表中设置指定的字段为 <strong>PRIMARY KEY（主键）</strong> 或者 <strong>UNIQUE（唯一）</strong> 索引来保证数据的唯一性。</p>
+<p>INSERT IGNORE INTO当插入数据时，在设置了记录的唯一性后，如果插入重复数据，将不返回错误，<strong>跳过</strong>这条数据，只以警告形式返回。 而REPLACE INTO into如果存在primary 或 unique相同的记录，则先删除掉。再插入新记录。</p>
+<p>另一种设置数据的唯一性方法是添加一个UNIQUE索引，如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE person_tbl</span><br><span class="line">(</span><br><span class="line">   first_name CHAR(20) NOT NULL,</span><br><span class="line">   last_name CHAR(20) NOT NULL,</span><br><span class="line">   sex CHAR(10)</span><br><span class="line">   UNIQUE (last_name, first_name)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h5 id="&#x7EDF;&#x8BA1;"><a href="#&#x7EDF;&#x8BA1;" class="headerlink" title="&#x7EDF;&#x8BA1;"></a>&#x7EDF;&#x8BA1;</h5><p>&#x4EE5;&#x4E0B;&#x6211;&#x4EEC;&#x5C06;&#x7EDF;&#x8BA1;&#x8868;&#x4E2D; first_name &#x548C; last_name&#x7684;&#x91CD;&#x590D;&#x8BB0;&#x5F55;&#x6570;&#xFF1A;</p>
+<h5 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h5><p>以下我们将统计表中 first_name 和 last_name的重复记录数：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT COUNT(*) as repetitions, last_name, first_name</span><br><span class="line">    -&gt; FROM person_tbl</span><br><span class="line">    -&gt; GROUP BY last_name, first_name</span><br><span class="line">    -&gt; HAVING repetitions &gt; 1;</span><br></pre></td></tr></table></figure>
-<p>&#x4EE5;&#x4E0A;&#x67E5;&#x8BE2;&#x8BED;&#x53E5;&#x5C06;&#x8FD4;&#x56DE; person_tbl &#x8868;&#x4E2D;&#x91CD;&#x590D;&#x7684;&#x8BB0;&#x5F55;&#x6570;&#x3002; &#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x67E5;&#x8BE2;&#x91CD;&#x590D;&#x7684;&#x503C;&#xFF0C;&#x8BF7;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x64CD;&#x4F5C;&#xFF1A;</p>
-<ul class="ui list">
-<li>&#x786E;&#x5B9A;&#x54EA;&#x4E00;&#x5217;&#x5305;&#x542B;&#x7684;&#x503C;&#x53EF;&#x80FD;&#x4F1A;&#x91CD;&#x590D;&#x3002;</li>
-<li>&#x5728;&#x5217;&#x9009;&#x62E9;&#x5217;&#x8868;&#x4F7F;&#x7528;COUNT(*)&#x5217;&#x51FA;&#x7684;&#x90A3;&#x4E9B;&#x5217;&#x3002;</li>
-<li>&#x5728;GROUP BY&#x5B50;&#x53E5;&#x4E2D;&#x5217;&#x51FA;&#x7684;&#x5217;&#x3002;</li>
-<li>HAVING&#x5B50;&#x53E5;&#x8BBE;&#x7F6E;&#x91CD;&#x590D;&#x6570;&#x5927;&#x4E8E;1&#x3002;</li>
+<p>以上查询语句将返回 person_tbl 表中重复的记录数。 一般情况下，查询重复的值，请执行以下操作：</p>
+<ul>
+<li>确定哪一列包含的值可能会重复。</li>
+<li>在列选择列表使用COUNT(*)列出的那些列。</li>
+<li>在GROUP BY子句中列出的列。</li>
+<li>HAVING子句设置重复数大于1。</li>
 </ul>
-<h5 id="&#x8FC7;&#x6EE4;"><a href="#&#x8FC7;&#x6EE4;" class="headerlink" title="&#x8FC7;&#x6EE4;"></a>&#x8FC7;&#x6EE4;</h5><p>&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x8BFB;&#x53D6;&#x4E0D;&#x91CD;&#x590D;&#x7684;&#x6570;&#x636E;&#x53EF;&#x4EE5;&#x5728; SELECT &#x8BED;&#x53E5;&#x4E2D;&#x4F7F;&#x7528; DISTINCT &#x5173;&#x952E;&#x5B57;&#x6765;&#x8FC7;&#x6EE4;&#x91CD;&#x590D;&#x6570;&#x636E;&#x3002;</p>
+<h5 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h5><p>如果你需要读取不重复的数据可以在 SELECT 语句中使用 DISTINCT 关键字来过滤重复数据。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT DISTINCT last_name, first_name</span><br><span class="line">    -&gt; FROM person_tbl;</span><br></pre></td></tr></table></figure>
-<p>&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; GROUP BY &#x6765;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x4E0D;&#x91CD;&#x590D;&#x7684;&#x6570;&#x636E;&#xFF1A;</p>
+<p>你也可以使用 GROUP BY 来读取数据表中不重复的数据：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT last_name, first_name</span><br><span class="line">    -&gt; FROM person_tbl</span><br><span class="line">    -&gt; GROUP BY (last_name, first_name);</span><br></pre></td></tr></table></figure>
-<h5 id="&#x5220;&#x9664;"><a href="#&#x5220;&#x9664;" class="headerlink" title="&#x5220;&#x9664;"></a>&#x5220;&#x9664;</h5><p>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x5220;&#x9664;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x7684;&#x91CD;&#x590D;&#x6570;&#x636E;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EE5;&#x4E0B;&#x7684;SQL&#x8BED;&#x53E5;&#xFF1A;</p>
+<h5 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h5><p>如果你想删除数据表中的重复数据，你可以使用以下的SQL语句：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE tmp SELECT last_name, first_name, sex FROM person_tbl  GROUP BY (last_name, first_name, sex);</span><br><span class="line">mysql&gt; DROP TABLE person_tbl;</span><br><span class="line">mysql&gt; ALTER TABLE tmp RENAME TO person_tbl;</span><br></pre></td></tr></table></figure>
-<p>&#x5F53;&#x7136;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x6DFB;&#x52A0; INDEX&#xFF08;&#x7D22;&#x5F15;&#xFF09; &#x548C; PRIMAY KEY&#xFF08;&#x4E3B;&#x952E;&#xFF09;&#x8FD9;&#x79CD;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x5220;&#x9664;&#x8868;&#x4E2D;&#x7684;&#x91CD;&#x590D;&#x8BB0;&#x5F55;&#x3002;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>当然你也可以在数据表中添加 INDEX（索引） 和 PRIMAY KEY（主键）这种简单的方法来删除表中的重复记录。方法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER IGNORE TABLE person_tbl</span><br><span class="line">    -&gt; ADD PRIMARY KEY (last_name, first_name);</span><br></pre></td></tr></table></figure>
-<h3 id="&#x663E;&#x793A;&#x4FE1;&#x606F;"><a href="#&#x663E;&#x793A;&#x4FE1;&#x606F;" class="headerlink" title="&#x663E;&#x793A;&#x4FE1;&#x606F;"></a>&#x663E;&#x793A;&#x4FE1;&#x606F;</h3><p>SHOW DATABASES                                //&#x5217;&#x51FA; MySQL Server &#x6570;&#x636E;&#x5E93;&#x3002;<br>SHOW TABLES [FROM db_name]                    //&#x5217;&#x51FA;&#x6570;&#x636E;&#x5E93;&#x6570;&#x636E;&#x8868;&#x3002;<br>SHOW TABLE STATUS [FROM db_name]              //&#x5217;&#x51FA;&#x6570;&#x636E;&#x8868;&#x53CA;&#x8868;&#x72B6;&#x6001;&#x4FE1;&#x606F;&#x3002;<br>SHOW COLUMNS FROM tbl_name [FROM db_name]     //&#x5217;&#x51FA;&#x8D44;&#x6599;&#x8868;&#x5B57;&#x6BB5;<br>SHOW FIELDS FROM tbl_name [FROM db_name]&#xFF0C;DESCRIBE tbl_name [col_name]&#x3002;<br>SHOW FULL COLUMNS FROM tbl_name [FROM db_name]//&#x5217;&#x51FA;&#x5B57;&#x6BB5;&#x53CA;&#x8BE6;&#x60C5;<br>SHOW FULL FIELDS FROM tbl_name [FROM db_name] //&#x5217;&#x51FA;&#x5B57;&#x6BB5;&#x5B8C;&#x6574;&#x5C5E;&#x6027;<br>SHOW INDEX FROM tbl_name [FROM db_name]       //&#x5217;&#x51FA;&#x8868;&#x7D22;&#x5F15;&#x3002;<br>SHOW STATUS                                  //&#x5217;&#x51FA; DB Server &#x72B6;&#x6001;&#x3002;<br>SHOW VARIABLES                               //&#x5217;&#x51FA; MySQL &#x7CFB;&#x7EDF;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x3002;<br>SHOW PROCESSLIST                             //&#x5217;&#x51FA;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x3002;<br>SHOW GRANTS FOR user                         //&#x5217;&#x51FA;&#x67D0;&#x7528;&#x6237;&#x6743;&#x9650;</p>
-<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>&#x591A;&#x884C;&#x6A21;&#x5F0F;&#x8F93;&#x5165;&#x9519;&#x8BEF;&#xFF0C;&#x53EF;&#x4EE5;&#x8F93;&#x5165;\c &#x5E9F;&#x5F03;&#x672C;&#x6B21;&#x8BED;&#x53E5;&#x3002;</p>
-<h2 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h2>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-10-06T13:05:59.000Z" itemprop="datePublished">2018-10-06</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+<h3 id="显示信息"><a href="#显示信息" class="headerlink" title="显示信息"></a>显示信息</h3><p>SHOW DATABASES                                //列出 MySQL Server 数据库。<br>SHOW TABLES [FROM db_name]                    //列出数据库数据表。<br>SHOW TABLE STATUS [FROM db_name]              //列出数据表及表状态信息。<br>SHOW COLUMNS FROM tbl_name [FROM db_name]     //列出资料表字段<br>SHOW FIELDS FROM tbl_name [FROM db_name]，DESCRIBE tbl_name [col_name]。<br>SHOW FULL COLUMNS FROM tbl_name [FROM db_name]//列出字段及详情<br>SHOW FULL FIELDS FROM tbl_name [FROM db_name] //列出字段完整属性<br>SHOW INDEX FROM tbl_name [FROM db_name]       //列出表索引。<br>SHOW STATUS                                  //列出 DB Server 状态。<br>SHOW VARIABLES                               //列出 MySQL 系统环境变量。<br>SHOW PROCESSLIST                             //列出执行命令。<br>SHOW GRANTS FOR user                         //列出某用户权限</p>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>多行模式输入错误，可以输入\c 废弃本次语句。</p>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/10/18/Database/SQLserver/mssql实验/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    mssql实验(放弃更新)
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/10/06/Database/Mysql/mysql大小写区分/" class="ui tiny button">
-                    
-                    mysql大小写区分
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#基础命令"><span>基础命令</span></a><ol><li><a href="#创建数据库"><span>创建数据库</span></a></li><li><a href="#删除数据库"><span>删除数据库</span></a></li><li><a href="#选择-切换数据库"><span>选择/切换数据库</span></a></li><li><a href="#创建表"><span>创建表</span></a></li><li><a href="#删除表"><span>删除表</span></a></li><li><a href="#插入数据"><span>插入数据</span></a></li><li><a href="#查询数据"><span>查询数据</span></a></li><li><a href="#更新数据"><span>更新数据</span></a></li><li><a href="#删除数据"><span>删除数据</span></a></li></ol></li></ol><li><a href="#查询进阶"><span>查询进阶</span></a><ol><li><a href="#like条件"><span>like条件</span></a></li><li><a href="#合并-UNION"><span>合并 UNION</span></a></li><li><a href="#排序-ORDER-BY"><span>排序 ORDER BY</span></a></li><li><a href="#分组-GROUP-BY"><span>分组 GROUP BY</span></a><ol><li><a href="#WITH-ROLLUP"><span>WITH ROLLUP</span></a></li><li><a href="#coalesce-a-b-c"><span>coalesce(a,b,c)</span></a></li></ol></li><li><a href="#连接-JOIN"><span>连接 JOIN</span></a></li><li><a href="#where和having区别"><span>where和having区别</span></a></li></ol></li><li><a href="#其他"><span>其他</span></a><ol><li><a href="#NULL值处理"><span>NULL值处理</span></a></li><li><a href="#正则表达式"><span>正则表达式</span></a></li><li><a href="#事务处理"><span>事务处理</span></a></li><li><a href="#修改表-ALTER"><span>修改表 ALTER</span></a><ol><li><a href="#删除，添加或修改表字段"><span>删除，添加或修改表字段</span></a></li><li><a href="#修改字段类型及名称"><span>修改字段类型及名称</span></a></li><li><a href="#修改字段默认值"><span>修改字段默认值</span></a></li><li><a href="#修改表名"><span>修改表名</span></a></li><li><a href="#修改存储引擎"><span>修改存储引擎</span></a></li><li><a href="#删除外键约束"><span>删除外键约束</span></a></li><li><a href="#修改字段的相对位置"><span>修改字段的相对位置</span></a></li></ol></li><li><a href="#临时表"><span>临时表</span></a></li><li><a href="#复制表"><span>复制表</span></a></li><li><a href="#序列"><span>序列</span></a><ol><li><a href="#重置序列"><span>重置序列</span></a></li><li><a href="#设置序列的开始值"><span>设置序列的开始值</span></a></li></ol></li><li><a href="#处理重复数据"><span>处理重复数据</span></a><ol><li><a href="#防止"><span>防止</span></a></li><li><a href="#统计"><span>统计</span></a></li><li><a href="#过滤"><span>过滤</span></a></li><li><a href="#删除"><span>删除</span></a></li></ol></li></ol></li><li><a href="#显示信息"><span>显示信息</span></a></li><li><a href="#Tips"><span>Tips</span></a></li><li><a href="#结束"><span>结束</span></a></li>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

@@ -1,412 +1,236 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE bgp | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE bgp | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x8FB9;&amp;#x754C;&amp;#x7F51;&amp;#x5173;&amp;#x8DEF;&amp;#x7531;&amp;#x534F;&amp;#x8BAE;BGP&amp;#x7B80;&amp;#x4ECB;&amp;#x5DE5;&amp;#x4F5C;&amp;#x7C7B;&amp;#x578B;&amp;#xFF1A;&amp;#x8DEF;&amp;#x5F84;&amp;#x77E2;&amp;#x91CF;&amp;#x8DEF;&amp;#x7531;&amp;#x9009;&amp;#x62E9;&amp;#x534F;&amp;#x8B">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE bgp">
-<meta property="og:url" content="http://yoursite.com/2018/07/16/Network/Ccie/bgp/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x8FB9;&amp;#x754C;&amp;#x7F51;&amp;#x5173;&amp;#x8DEF;&amp;#x7531;&amp;#x534F;&amp;#x8BAE;BGP&amp;#x7B80;&amp;#x4ECB;&amp;#x5DE5;&amp;#x4F5C;&amp;#x7C7B;&amp;#x578B;&amp;#xFF1A;&amp;#x8DEF;&amp;#x5F84;&amp;#x77E2;&amp;#x91CF;&amp;#x8DEF;&amp;#x7531;&amp;#x9009;&amp;#x62E9;&amp;#x534F;&amp;#x8B">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:38:33.733Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE bgp">
-<meta name="twitter:description" content="&amp;#x8FB9;&amp;#x754C;&amp;#x7F51;&amp;#x5173;&amp;#x8DEF;&amp;#x7531;&amp;#x534F;&amp;#x8BAE;BGP&amp;#x7B80;&amp;#x4ECB;&amp;#x5DE5;&amp;#x4F5C;&amp;#x7C7B;&amp;#x578B;&amp;#xFF1A;&amp;#x8DEF;&amp;#x5F84;&amp;#x77E2;&amp;#x91CF;&amp;#x8DEF;&amp;#x7531;&amp;#x9009;&amp;#x62E9;&amp;#x534F;&amp;#x8B">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#边界网关路由协议"><span class="toc-number">1.</span> <span class="toc-text">边界网关路由协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP简介"><span class="toc-number">1.0.1.</span> <span class="toc-text">BGP简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BGP版本"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">BGP版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BGP优缺点"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">BGP优缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AS-和-邻居类型"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">AS 和 邻居类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP消息"><span class="toc-number">1.0.2.</span> <span class="toc-text">BGP消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#peer关系建立过程"><span class="toc-number">1.0.3.</span> <span class="toc-text">peer关系建立过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bgp的防环机制"><span class="toc-number">1.0.4.</span> <span class="toc-text">bgp的防环机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#iBGP-水平分隔原则"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">iBGP-水平分隔原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#eBGP"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">eBGP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊拓扑下路由反射器的防环机制"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">特殊拓扑下路由反射器的防环机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同步与下一跳判断"><span class="toc-number">1.0.5.</span> <span class="toc-text">同步与下一跳判断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#同步机制"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">同步机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#bgp路由黑洞"><span class="toc-number">1.0.5.1.1.</span> <span class="toc-text">bgp路由黑洞</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#下一跳判断"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">下一跳判断</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP的路由更新属性"><span class="toc-number">1.0.6.</span> <span class="toc-text">BGP的路由更新属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP选路原则"><span class="toc-number">1.0.7.</span> <span class="toc-text">BGP选路原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGP基本配置"><span class="toc-number">1.0.8.</span> <span class="toc-text">BGP基本配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动汇总-auto-summary"><span class="toc-number">1.0.9.</span> <span class="toc-text">自动汇总 auto-summary</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由更新属性"><span class="toc-number">1.0.10.</span> <span class="toc-text">路由更新属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何修改路由更新属性-三个步骤"><span class="toc-number">1.0.10.1.</span> <span class="toc-text">如何修改路由更新属性(三个步骤)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#weight-修改命令"><span class="toc-number">1.0.10.2.</span> <span class="toc-text">weight 修改命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过-LP-影响出站路径"><span class="toc-number">1.0.10.3.</span> <span class="toc-text">通过 LP 影响出站路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过增加-AS-PATH-路径信息影响选路"><span class="toc-number">1.0.10.4.</span> <span class="toc-text">通过增加 AS-PATH 路径信息影响选路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过修改起源代码"><span class="toc-number">1.0.10.5.</span> <span class="toc-text">通过修改起源代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过修改MED影响选路抉择"><span class="toc-number">1.0.10.6.</span> <span class="toc-text">通过修改MED影响选路抉择</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束"><span class="toc-number">1.1.</span> <span class="toc-text">结束</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/bgp" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE bgp
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h1 id="&#x8FB9;&#x754C;&#x7F51;&#x5173;&#x8DEF;&#x7531;&#x534F;&#x8BAE;"><a href="#&#x8FB9;&#x754C;&#x7F51;&#x5173;&#x8DEF;&#x7531;&#x534F;&#x8BAE;" class="headerlink" title="&#x8FB9;&#x754C;&#x7F51;&#x5173;&#x8DEF;&#x7531;&#x534F;&#x8BAE;"></a>&#x8FB9;&#x754C;&#x7F51;&#x5173;&#x8DEF;&#x7531;&#x534F;&#x8BAE;</h1><h3 id="BGP&#x7B80;&#x4ECB;"><a href="#BGP&#x7B80;&#x4ECB;" class="headerlink" title="BGP&#x7B80;&#x4ECB;"></a>BGP&#x7B80;&#x4ECB;</h3><p>&#x5DE5;&#x4F5C;&#x7C7B;&#x578B;&#xFF1A;&#x8DEF;&#x5F84;&#x77E2;&#x91CF;&#x8DEF;&#x7531;&#x9009;&#x62E9;&#x534F;&#x8BAE;</p>
-<p>&#x57FA;&#x4E8E;tcp(&#x4E09;&#x6B21;&#x63E1;&#x624B;)</p>
-<p>&#x4E09;&#x5F20;&#x8868;&#xFF1A;&#x90BB;&#x5C45;&#x8868;&#xFF08;peer&#x8868;&#xFF09;  bgp&#x8F6C;&#x53D1;&#x8868;  &#x8DEF;&#x7531;&#x8868;</p>
-<h4 id="BGP&#x7248;&#x672C;"><a href="#BGP&#x7248;&#x672C;" class="headerlink" title="BGP&#x7248;&#x672C;"></a>BGP&#x7248;&#x672C;</h4><p>BGPv4&#xFF1A;IPv4</p>
-<p>BGPv4+&#xFF1A;IPv6</p>
-<p>MP-BGP&#xFF1A;&#x534F;&#x8BAE;npls</p>
-<p>M-BGP&#xFF1A;&#x591A;&#x64AD;</p>
-<h4 id="BGP&#x4F18;&#x7F3A;&#x70B9;"><a href="#BGP&#x4F18;&#x7F3A;&#x70B9;" class="headerlink" title="BGP&#x4F18;&#x7F3A;&#x70B9;"></a>BGP&#x4F18;&#x7F3A;&#x70B9;</h4><p><strong>&#x4F18;&#x70B9;</strong></p>
-<p>1EGP&#x8DEF;&#x7531;&#x8868;&#x53EA;&#x80FD;&#x5B58;&#x50A8;&#x5343;&#x6761;&#x4FE1;&#x606F;&#xFF0C;bgp&#x53EF;&#x4E0A;&#x4E07;&#x6761;&#x3002;</p>
-<p>2&#x4E30;&#x5BCC;&#x7684;&#x8DEF;&#x5F84;&#x5C5E;&#x6027;&#xFF0C;13&#x6761;&#x9009;&#x8DEF;&#x539F;&#x5219;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x4E30;&#x5BCC;&#x7684;&#x8DEF;&#x7531;&#x64CD;&#x63A7;&#x7B56;&#x7565;&#x3002;</p>
-<p><strong>&#x7F3A;&#x70B9;</strong></p>
-<p>1&#x5BF9;&#x8DEF;&#x7531;&#x5668;&#x6027;&#x80FD;&#x8981;&#x6C42;&#x8F83;&#x9AD8;&#x3002;</p>
-<p>2&#x914D;&#x7F6E;&#x7A0B;&#x5E8F;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#x3002;</p>
-<p>3&#x4E00;&#x822C;&#x5C0F;&#x7F51;&#x7EDC;&#x4E0D;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;bgp</p>
-<h4 id="AS-&#x548C;-&#x90BB;&#x5C45;&#x7C7B;&#x578B;"><a href="#AS-&#x548C;-&#x90BB;&#x5C45;&#x7C7B;&#x578B;" class="headerlink" title="AS &#x548C; &#x90BB;&#x5C45;&#x7C7B;&#x578B;"></a>AS &#x548C; &#x90BB;&#x5C45;&#x7C7B;&#x578B;</h4><p>bgp AS &#x4E00;&#x53F0;&#x8DEF;&#x7531;&#x5668;&#x53EA;&#x80FD;&#x5C5E;&#x4E8E;&#x4E00;&#x4E2A;</p>
-<p>&#x516C;&#x7F51;AS1-65411    65412-65535&#x79C1;&#x6709;AS</p>
-<p>iBGP&#xFF1A;&#x5904;&#x4E8E;&#x540C;&#x4E00;AS&#x5185;&#x7684;BGP&#x8DEF;&#x7531;&#x5668;&#x6240;&#x5EFA;&#x7ACB;&#x7684;BGP&#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;</p>
-<p>eBGP&#xFF1A;&#x4E0D;&#x540C;AS&#x5185;&#x7684;BGP&#x8DEF;&#x7531;&#x5668;&#x5EFA;&#x7ACB;&#x7684;&#x2026;</p>
+  <div class="container">
+    <article>
+      <h1>CCIE bgp</h1>
+      <h1 id="边界网关路由协议"><a href="#边界网关路由协议" class="headerlink" title="边界网关路由协议"></a>边界网关路由协议</h1><h3 id="BGP简介"><a href="#BGP简介" class="headerlink" title="BGP简介"></a>BGP简介</h3><p>工作类型：路径矢量路由选择协议</p>
+<p>基于tcp(三次握手)</p>
+<p>三张表：邻居表（peer表）  bgp转发表  路由表</p>
+<h4 id="BGP版本"><a href="#BGP版本" class="headerlink" title="BGP版本"></a>BGP版本</h4><p>BGPv4：IPv4</p>
+<p>BGPv4+：IPv6</p>
+<p>MP-BGP：协议npls</p>
+<p>M-BGP：多播</p>
+<h4 id="BGP优缺点"><a href="#BGP优缺点" class="headerlink" title="BGP优缺点"></a>BGP优缺点</h4><p><strong>优点</strong></p>
+<p>1EGP路由表只能存储千条信息，bgp可上万条。</p>
+<p>2丰富的路径属性，13条选路原则，提供了更丰富的路由操控策略。</p>
+<p><strong>缺点</strong></p>
+<p>1对路由器性能要求较高。</p>
+<p>2配置程序比较复杂。</p>
+<p>3一般小网络不建议使用bgp</p>
+<h4 id="AS-和-邻居类型"><a href="#AS-和-邻居类型" class="headerlink" title="AS 和 邻居类型"></a>AS 和 邻居类型</h4><p>bgp AS 一台路由器只能属于一个</p>
+<p>公网AS1-65411    65412-65535私有AS</p>
+<p>iBGP：处于同一AS内的BGP路由器所建立的BGP对等体关系</p>
+<p>eBGP：不同AS内的BGP路由器建立的…</p>
 <p>### </p>
-<h3 id="BGP&#x6D88;&#x606F;"><a href="#BGP&#x6D88;&#x606F;" class="headerlink" title="BGP&#x6D88;&#x606F;"></a>BGP&#x6D88;&#x606F;</h3><p>open&#xFF1A;&#x5EFA;&#x7ACB;&#x6210;&#x529F;&#xFF0C;&#x4F1A;&#x4E92;&#x76F8;&#x53D1;&#x9001;open&#x4FE1;&#x606F;(&#x7C7B;&#x4F3C;hello)&#x534F;&#x5546;&#x90BB;&#x5C45;&#x5173;&#x7CFB;&#x7684;&#x5404;&#x9879;&#x53C2;&#x6570;&#xFF0C;&#x7B49;&#x5F85;&#x5BF9;&#x65B9;&#x786E;&#x8BA4;&#x3002;</p>
-<p>keeplive&#xFF1A;&#x7EF4;&#x6301;&#x5BF9;&#x7B49;&#x4F53;(&#x7C7B;&#x4F3C;&#x90BB;&#x5C45;)&#x5173;&#x7CFB;&#x7684;&#x5EFA;&#x7ACB;&#xFF0C;60s&#x53D1;&#x4E00;&#x6B21;&#xFF0C;180s&#x540E;peer&#x5173;&#x7CFB;&#x7ED3;&#x675F;</p>
-<p>update&#xFF1A;&#x4E0D;&#x4F1A;&#x5468;&#x671F;&#x6027;&#x66F4;&#x65B0;&#xFF0C;&#x53EA;&#x4F1A;&#x589E;&#x91CF;&#x66F4;&#x65B0;&#x6216;&#x89E6;&#x53D1;&#x66F4;&#x65B0;&#x3002;</p>
-<p>Notification&#xFF1A;&#x5F53;BGP&#x68C0;&#x6D4B;&#x5230;&#x9519;&#x8BEF;&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x5C31;&#x5411;&#x5BF9;&#x7B49;&#x4F53;&#x53D1;&#x51FA;Notification&#x6D88;&#x606F;&#xFF0C;&#x4E4B;&#x540E;BGP&#x8FDE;&#x63A5;&#x4F1A;&#x7ACB;&#x5373;&#x4E2D;&#x65AD;&#x3002;</p>
-<h3 id="peer&#x5173;&#x7CFB;&#x5EFA;&#x7ACB;&#x8FC7;&#x7A0B;"><a href="#peer&#x5173;&#x7CFB;&#x5EFA;&#x7ACB;&#x8FC7;&#x7A0B;" class="headerlink" title="peer&#x5173;&#x7CFB;&#x5EFA;&#x7ACB;&#x8FC7;&#x7A0B;"></a>peer&#x5173;&#x7CFB;&#x5EFA;&#x7ACB;&#x8FC7;&#x7A0B;</h3><p>IDLE&#xFF08;&#x7A7A;&#x95F2;&#x72B6;&#x6001;&#xFF09;&#xFF1A;&#x672C;&#x5730;&#x8DEF;&#x7531;&#x5411;&#x5916;&#x53D1;&#x9001;tcp(&#x7AEF;&#x53E3;179)&#x8BF7;&#x6C42;&#xFF0C;&#x7B49;&#x56DE;&#x590D;</p>
-<p>connect&#x72B6;&#x6001;&#xFF1A;tcp&#x5EFA;&#x7ACB;</p>
-<p>active&#xFF1A;&#x5EFA;&#x7ACB;&#x4E0D;&#x6210;&#x529F;&#xFF0C;&#x518D;&#x6B21;&#x8BF7;&#x6C42;tcp&#x8FDE;&#x63A5;&#x7684;&#x5EFA;&#x7ACB;&#xFF08;&#x56DE;&#x5230;IDLE&#xFF09;&#x3002;</p>
-<p>open sent&#xFF1A;&#x5EFA;&#x7ACB;&#x6210;&#x529F;&#xFF0C;&#x53D1;&#x9001;open&#x6D88;&#x606F;</p>
-<p>openconfirm&#xFF1A;&#x6536;&#x5230;&#x5BF9;&#x65B9;&#x7684;&#x4FE1;&#x606F;&#x8FDB;&#x884C;&#x53C2;&#x6570;&#x5BF9;&#x6BD4;&#xFF0C;&#x53C2;&#x6570;&#x4E00;&#x81F4;&#x5219;&#x5EFA;&#x7ACB;&#x5B8C;&#x6210;&#x3002;</p>
-<p>established&#xFF1A;&#x8FDE;&#x63A5;&#x5EFA;&#x7ACB;&#x3002;&#x3002;update&#x3002;&#x3002;keepalive&#x3002;&#x3002;</p>
-<h3 id="bgp&#x7684;&#x9632;&#x73AF;&#x673A;&#x5236;"><a href="#bgp&#x7684;&#x9632;&#x73AF;&#x673A;&#x5236;" class="headerlink" title="bgp&#x7684;&#x9632;&#x73AF;&#x673A;&#x5236;"></a>bgp&#x7684;&#x9632;&#x73AF;&#x673A;&#x5236;</h3><h4 id="iBGP-&#x6C34;&#x5E73;&#x5206;&#x9694;&#x539F;&#x5219;"><a href="#iBGP-&#x6C34;&#x5E73;&#x5206;&#x9694;&#x539F;&#x5219;" class="headerlink" title="iBGP-&#x6C34;&#x5E73;&#x5206;&#x9694;&#x539F;&#x5219;"></a>iBGP-&#x6C34;&#x5E73;&#x5206;&#x9694;&#x539F;&#x5219;</h4><p>BGP&#x5BF9;&#x7B49;&#x4F53;&#x8DEF;&#x7531;&#x5668;&#x6536;&#x5230;iBGP&#x8DEF;&#x7531;&#xFF0C;&#x4E0D;&#x4F1A;&#x53D1;&#x9001;&#x7ED9;&#x5176;&#x4ED6;iBGP&#x5BF9;&#x7B49;&#x4F53;&#x8DEF;&#x7531;&#x5668;&#x3002;</p>
-<p>&#x4F46;&#x662F;&#x7EAF;&#x6C34;&#x5E73;&#x62D3;&#x6251;&#x4E0A;&#x8BE5;&#x539F;&#x5219;&#x4F1A;&#x5BFC;&#x81F4;&#x8DEF;&#x7531;&#x4E0D;&#x88AB;&#x4F20;&#x9012;&#x5B66;&#x4E60;&#x3002;&#x4E24;&#x4E2A;&#x89E3;&#x51B3;&#x65B9;&#x6848;</p>
-<p>&#x5168;&#x4E92;&#x8054;&#x62D3;&#x6251;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;&#x6240;&#x6709;&#x8DEF;&#x7531;&#x5668;&#x95F4;&#x90FD;&#x5EFA;&#x7ACB;iBGP&#x5173;&#x7CFB;&#x3002;&#xFF08;&#x5783;&#x573E;&#x65B9;&#x6848;&#xFF09;</p>
-<p>&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;</p>
-<h4 id="eBGP"><a href="#eBGP" class="headerlink" title="eBGP"></a>eBGP</h4><p>&#x57FA;&#x4E8E;AS PATH&#x4FE1;&#x606F;&#x7684;&#x68C0;&#x6D4B;&#x3002;&#x63A5;&#x6536;&#x5230;&#x6765;&#x81EA;&#x4E8E;eBGP peer&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#xFF0C;&#x66F4;&#x65B0;&#x6240;&#x5E26;AS-PATH &#x4FE1;&#x606F;&#x5305;&#x542B;&#x4E86;&#x5F53;&#x524D;&#x8BBE;&#x5907;AS&#x53F7;&#xFF0C;&#x5219;&#x8BE5;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5FFD;&#x7565;&#x3002;</p>
-<h4 id="&#x7279;&#x6B8A;&#x62D3;&#x6251;&#x4E0B;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x7684;&#x9632;&#x73AF;&#x673A;&#x5236;"><a href="#&#x7279;&#x6B8A;&#x62D3;&#x6251;&#x4E0B;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x7684;&#x9632;&#x73AF;&#x673A;&#x5236;" class="headerlink" title="&#x7279;&#x6B8A;&#x62D3;&#x6251;&#x4E0B;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x7684;&#x9632;&#x73AF;&#x673A;&#x5236;"></a>&#x7279;&#x6B8A;&#x62D3;&#x6251;&#x4E0B;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x7684;&#x9632;&#x73AF;&#x673A;&#x5236;</h4><p>originate id&#xFF1A;&#x8D77;&#x6E90;id&#x3002;&#x8DEF;&#x7531;&#x5668;&#x5C06;&#x8BBE;&#x5907;&#x7684;RID&#x8BBE;&#x7F6E;&#x4E3A;&#x8D77;&#x6E90;ID&#x3002;&#x8D77;&#x6E90;ID&#x548C;&#x5F53;&#x524D;&#x8BBE;&#x5907;RID&#x4E00;&#x6837;&#xFF0C;&#x5219;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x4E0D;&#x5B66;&#x4E60;&#x3002;</p>
-<p>cluster id&#xFF1A;&#x7C07;id&#x3002;&#x7BA1;&#x7406;&#x5458;&#x5728;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x4E0A;&#x8BBE;&#x7F6E;&#xFF0C;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x643A;&#x5E26;&#x7684;&#x7C07;ID&#x4E00;&#x81F4;&#xFF0C;&#x5219;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x4E0D;&#x5B66;&#x4E60;&#x3002;</p>
-<h3 id="&#x540C;&#x6B65;&#x4E0E;&#x4E0B;&#x4E00;&#x8DF3;&#x5224;&#x65AD;"><a href="#&#x540C;&#x6B65;&#x4E0E;&#x4E0B;&#x4E00;&#x8DF3;&#x5224;&#x65AD;" class="headerlink" title="&#x540C;&#x6B65;&#x4E0E;&#x4E0B;&#x4E00;&#x8DF3;&#x5224;&#x65AD;"></a>&#x540C;&#x6B65;&#x4E0E;&#x4E0B;&#x4E00;&#x8DF3;&#x5224;&#x65AD;</h3><p>&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x6765;&#x81EA;&#x4E8E;iBGP peer&#x65F6;&#x624D;&#x8003;&#x8651;&#x540C;&#x6B65;&#x548C;&#x4E0B;&#x4E00;&#x8DF3;&#x3002;</p>
-<h4 id="&#x540C;&#x6B65;&#x673A;&#x5236;"><a href="#&#x540C;&#x6B65;&#x673A;&#x5236;" class="headerlink" title="&#x540C;&#x6B65;&#x673A;&#x5236;"></a>&#x540C;&#x6B65;&#x673A;&#x5236;</h4><p>&#x5BF9;&#x4E8E;&#x5F53;&#x524D;&#x542F;&#x7528;BGP&#x7684;&#x8BBE;&#x5907;&#xFF0C;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5BF9;&#x5E94;&#x7684;&#x7F51;&#x7EDC;&#x5E95;&#x5C42;&#x534F;&#x8BAE;&#x4E5F;&#x5FC5;&#x987B;&#x80FD;&#x5B66;&#x4E60;&#x5230;&#xFF0C;&#x8FD9;&#x624D;&#x53EB;&#x540C;&#x6B65;&#x3002;&#x540C;&#x6B65;&#x662F;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x8DEF;&#x7531;&#x9ED1;&#x6D1E;&#x3002;</p>
-<p>&#x73B0;&#x5B9E;&#x4E2D;&#x540C;&#x6B65;&#x88AB;&#x5173;&#x95ED;&#xFF0C;&#x8DEF;&#x7531;&#x9ED1;&#x6D1E;&#x95EE;&#x9898;&#x65E0;&#x6CD5;&#x907F;&#x514D;&#xFF0C;&#x4F46;&#x5229;&#x7528;MPLS&#x80FD;&#x89E3;&#x51B3;&#x3002;</p>
-<h5 id="bgp&#x8DEF;&#x7531;&#x9ED1;&#x6D1E;"><a href="#bgp&#x8DEF;&#x7531;&#x9ED1;&#x6D1E;" class="headerlink" title="bgp&#x8DEF;&#x7531;&#x9ED1;&#x6D1E;"></a>bgp&#x8DEF;&#x7531;&#x9ED1;&#x6D1E;</h5><p>&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x7684;&#x4F20;&#x9012;&#x8BBE;&#x5907;&#x4E5F;&#x5C31;&#x662F;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x7684;&#x6CBF;&#x9014;&#x8BBE;&#x5907;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x53C2;&#x4E0E;BGP &#xFF0C;&#x5B66;&#x4E60;&#x8BE5;&#x8DEF;&#x7531;&#xFF0C;&#x6240;&#x4EE5;&#x6570;&#x636E;&#x62B5;&#x8FBE;&#x540E;&#xFF0C;&#x53EA;&#x80FD;&#x4E22;&#x5305;&#x3002;</p>
-<p>&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;</p>
-<p>1&#x91CD;&#x5206;&#x53D1;(&#x4E0D;&#x5EFA;&#x8BAE;&#xFF0C;&#x4F1A;&#x589E;&#x5927;&#x8DEF;&#x7531;&#x8868;)</p>
-<p>2&#x5168;&#x4E92;&#x8054;&#x7684;&#x7F51;&#x7EDC;&#x62D3;&#x6251;(&#x4E24;&#x4E24;&#x4E4B;&#x95F4;&#x5EFA;&#x7ACB;ibgp&#x5BF9;&#x7B49;&#x4F53;)</p>
-<h4 id="&#x4E0B;&#x4E00;&#x8DF3;&#x5224;&#x65AD;"><a href="#&#x4E0B;&#x4E00;&#x8DF3;&#x5224;&#x65AD;" class="headerlink" title="&#x4E0B;&#x4E00;&#x8DF3;&#x5224;&#x65AD;"></a>&#x4E0B;&#x4E00;&#x8DF3;&#x5224;&#x65AD;</h4><p>&#x6765;&#x81EA;&#x4E8E;iBGP peer&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#xFF0C;&#x5982;&#x679C;&#x4E0B;&#x4E00;&#x8DF3;&#x4E0D;&#x53EF;&#x8FBE;&#xFF0C;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x4E0D;&#x5B66;&#x4E60;&#x3002;</p>
-<p>&#x8DEF;&#x7531;&#x6E90;&#x4E8E;AS&#x5916;&#xFF0C;&#x901A;&#x544A;&#x8005;&#x662F;eBGP peer&#xFF0C;&#x4E0B;&#x4E00;&#x8DF3;&#x5C31;&#x662F;eBGP peer&#x5730;&#x5740;&#x3002;</p>
-<p>&#x8DEF;&#x7531;&#x6E90;&#x4E8E;AS&#x5916;&#xFF0C;&#x901A;&#x544A;&#x8005;&#x662F;iBGP peer&#xFF0C;&#x4E0B;&#x4E00;&#x8DF3;&#x4F9D;&#x65E7;&#x662F;eBGP peer&#x5730;&#x5740;&#x3002;&#x6B64;&#x65F6;&#x4E0B;&#x4E00;&#x8DF3;&#x53EF;&#x80FD;&#x4E0D;&#x53EF;&#x8FBE;&#x3002;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Router bgp &lt;as&gt;</span><br><span class="line">Neighbor &lt;peer-address&gt; next-hop-self</span><br><span class="line">//&#x6240;&#x6709;&#x53D1;&#x7ED9;&#x5BF9;&#x7B49;&#x4F53;&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#xFF0C;&#x4E0B;&#x4E00;&#x8DF3;&#x5F3A;&#x5236;&#x4FEE;&#x6539;&#x6210;&#x81EA;&#x5DF1;</span><br></pre></td></tr></table></figure>
-<p>&#x8DEF;&#x7531;&#x6E90;&#x4E8E;iBGP peer&#xFF0C;&#x901A;&#x544A;&#x8005;&#x662F;iBGP peer&#xFF0C;&#x4E0B;&#x4E00;&#x8DF3;&#x5C31;&#x662F;iBGP peer&#x5730;&#x5740;&#x3002;</p>
-<p>&#x8865;&#x5145;&#x5185;&#x5BB9;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Neighbor &lt;peer-address&gt; next-hop-unchange</span><br><span class="line">//eBGP &#x4E0B;&#x4E00;&#x8DF3;&#x7EF4;&#x6301;&#x4E0D;&#x53D8;</span><br></pre></td></tr></table></figure>
-<h3 id="BGP&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;"><a href="#BGP&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;" class="headerlink" title="BGP&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;"></a>BGP&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;</h3><ol class="ui list">
-<li><p>&#x516C;&#x8BA4;&#x5FC5;&#x9009;</p>
-<p>NEXT-HOP&#xFF1A;&#x4E0B;&#x4E00;&#x8DF3;</p>
-<p>AS-PATH&#xFF1A;AS&#x8DEF;&#x5F84;&#x4FE1;&#x606F;</p>
-<p>Originate code&#xFF1A;&#x8D77;&#x6E90;&#x4EE3;&#x7801;</p>
-<p>&#x200B;    &#x63CF;&#x8FF0;&#x4E86;&#x76EE;&#x6807;&#x7F51;&#x7EDC;&#x8FDB;&#x5165;BGP&#x7684;&#x65B9;&#x5F0F;&#xFF08;I E ?&#xFF09;</p>
-<p>&#x200B;    I &#xFF1A;&#x76EE;&#x6807;&#x7F51;&#x7EDC;&#x6E90;&#x4E8E;&#x5E95;&#x5C42;&#x534F;&#x8BAE;&#x901A;&#x8FC7;network&#x8FDB;&#x5165;BGP</p>
-<p>&#x200B;    E&#xFF1A;EGP&#x5171;&#x4EAB;&#x7684;&#x76EE;&#x6807;&#x7F51;&#x7EDC;&#x4FE1;&#x606F;</p>
-<p>&#x200B;    ?&#xFF1A;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x4EE5;&#x91CD;&#x5206;&#x53D1;&#x7684;&#x65B9;&#x5F0F;&#x8FDB;&#x5165;BGP</p>
+<h3 id="BGP消息"><a href="#BGP消息" class="headerlink" title="BGP消息"></a>BGP消息</h3><p>open：建立成功，会互相发送open信息(类似hello)协商邻居关系的各项参数，等待对方确认。</p>
+<p>keeplive：维持对等体(类似邻居)关系的建立，60s发一次，180s后peer关系结束</p>
+<p>update：不会周期性更新，只会增量更新或触发更新。</p>
+<p>Notification：当BGP检测到错误状态时，就向对等体发出Notification消息，之后BGP连接会立即中断。</p>
+<h3 id="peer关系建立过程"><a href="#peer关系建立过程" class="headerlink" title="peer关系建立过程"></a>peer关系建立过程</h3><p>IDLE（空闲状态）：本地路由向外发送tcp(端口179)请求，等回复</p>
+<p>connect状态：tcp建立</p>
+<p>active：建立不成功，再次请求tcp连接的建立（回到IDLE）。</p>
+<p>open sent：建立成功，发送open消息</p>
+<p>openconfirm：收到对方的信息进行参数对比，参数一致则建立完成。</p>
+<p>established：连接建立。。update。。keepalive。。</p>
+<h3 id="bgp的防环机制"><a href="#bgp的防环机制" class="headerlink" title="bgp的防环机制"></a>bgp的防环机制</h3><h4 id="iBGP-水平分隔原则"><a href="#iBGP-水平分隔原则" class="headerlink" title="iBGP-水平分隔原则"></a>iBGP-水平分隔原则</h4><p>BGP对等体路由器收到iBGP路由，不会发送给其他iBGP对等体路由器。</p>
+<p>但是纯水平拓扑上该原则会导致路由不被传递学习。两个解决方案</p>
+<p>全互联拓扑解决方案：所有路由器间都建立iBGP关系。（垃圾方案）</p>
+<p>路由反射器解决方案：</p>
+<h4 id="eBGP"><a href="#eBGP" class="headerlink" title="eBGP"></a>eBGP</h4><p>基于AS PATH信息的检测。接收到来自于eBGP peer的路由更新，更新所带AS-PATH 信息包含了当前设备AS号，则该路由更新忽略。</p>
+<h4 id="特殊拓扑下路由反射器的防环机制"><a href="#特殊拓扑下路由反射器的防环机制" class="headerlink" title="特殊拓扑下路由反射器的防环机制"></a>特殊拓扑下路由反射器的防环机制</h4><p>originate id：起源id。路由器将设备的RID设置为起源ID。起源ID和当前设备RID一样，则路由更新不学习。</p>
+<p>cluster id：簇id。管理员在路由反射器上设置，路由更新携带的簇ID一致，则路由更新不学习。</p>
+<h3 id="同步与下一跳判断"><a href="#同步与下一跳判断" class="headerlink" title="同步与下一跳判断"></a>同步与下一跳判断</h3><p>路由更新来自于iBGP peer时才考虑同步和下一跳。</p>
+<h4 id="同步机制"><a href="#同步机制" class="headerlink" title="同步机制"></a>同步机制</h4><p>对于当前启用BGP的设备，路由更新对应的网络底层协议也必须能学习到，这才叫同步。同步是为了避免路由黑洞。</p>
+<p>现实中同步被关闭，路由黑洞问题无法避免，但利用MPLS能解决。</p>
+<h5 id="bgp路由黑洞"><a href="#bgp路由黑洞" class="headerlink" title="bgp路由黑洞"></a>bgp路由黑洞</h5><p>路由更新的传递设备也就是数据传输的沿途设备，并没有参与BGP ，学习该路由，所以数据抵达后，只能丢包。</p>
+<p>解决方法：</p>
+<p>1重分发(不建议，会增大路由表)</p>
+<p>2全互联的网络拓扑(两两之间建立ibgp对等体)</p>
+<h4 id="下一跳判断"><a href="#下一跳判断" class="headerlink" title="下一跳判断"></a>下一跳判断</h4><p>来自于iBGP peer的路由更新，如果下一跳不可达，路由更新不学习。</p>
+<p>路由源于AS外，通告者是eBGP peer，下一跳就是eBGP peer地址。</p>
+<p>路由源于AS外，通告者是iBGP peer，下一跳依旧是eBGP peer地址。此时下一跳可能不可达。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Router bgp &lt;as&gt;</span><br><span class="line">Neighbor &lt;peer-address&gt; next-hop-self</span><br><span class="line">//所有发给对等体的路由更新，下一跳强制修改成自己</span><br></pre></td></tr></table></figure>
+<p>路由源于iBGP peer，通告者是iBGP peer，下一跳就是iBGP peer地址。</p>
+<p>补充内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Neighbor &lt;peer-address&gt; next-hop-unchange</span><br><span class="line">//eBGP 下一跳维持不变</span><br></pre></td></tr></table></figure>
+<h3 id="BGP的路由更新属性"><a href="#BGP的路由更新属性" class="headerlink" title="BGP的路由更新属性"></a>BGP的路由更新属性</h3><ol>
+<li><p>公认必选</p>
+<p>NEXT-HOP：下一跳</p>
+<p>AS-PATH：AS路径信息</p>
+<p>Originate code：起源代码</p>
+<p>​    描述了目标网络进入BGP的方式（I E ?）</p>
+<p>​    I ：目标网络源于底层协议通过network进入BGP</p>
+<p>​    E：EGP共享的目标网络信息</p>
+<p>​    ?：外部路由以重分发的方式进入BGP</p>
 </li>
-<li><p>&#x516C;&#x8BA4;&#x4EFB;&#x9009;&#xFF08;&#x81EA;&#x9009;&#xFF09;</p>
-<p>LP&#xFF1A;&#x672C;&#x5730;&#x4F18;&#x5148;</p>
-<p>&#x200B;    &#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5728;IBGP peer&#x95F4;&#x4F20;&#x9012;&#x65F6;&#xFF0C;LP&#x503C;&#x624D;&#x51FA;&#x73B0;&#xFF0C;&#x4E14;&#x4E3A;100</p>
-<p>&#x200B;    &#x4F5C;&#x7528;&#xFF1A;&#x5F71;&#x54CD;iBGP peer &#x51FA;&#x7AD9;&#x8DEF;&#x5F84;&#x7684;&#x9009;&#x62E9;&#xFF0C;LP&#x53C2;&#x6570;&#x8D8A;&#x5927;&#x8D8A;&#x4F18;&#x3002;</p>
-<p>automatic aggregate&#xFF1A;&#x539F;&#x5B50;&#x805A;&#x5408;</p>
-<p>&#x200B;    BGP&#x53D1;&#x751F;&#x4E86;&#x81EA;&#x52A8;&#x805A;&#x5408;&#x6216;&#x624B;&#x52A8;&#x805A;&#x5408;&#x65F6;&#xFF0C;&#x805A;&#x5408;&#x540E;&#x7F51;&#x7EDC;&#x643A;&#x5E26;&#x8BE5;&#x5C5E;&#x6027;&#x3002;</p>
-<p>&#x200B;    &#x539F;&#x5B50;&#x805A;&#x5408;&#x5C5E;&#x6027;&#x7528;&#x4E8E;&#x63D0;&#x9192;&#x66F4;&#x65B0;&#x63A5;&#x53D7;&#x8005;&#xFF0C;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x76EE;&#x6807;&#x7F51;&#x7EDC;&#x53EF;&#x80FD;&#x4E22;&#x5931;&#x4E86;&#x90E8;&#x5206;&#x539F;&#x6709;&#x5C5E;&#x6027;&#x3002;</p>
+<li><p>公认任选（自选）</p>
+<p>LP：本地优先</p>
+<p>​    路由更新在IBGP peer间传递时，LP值才出现，且为100</p>
+<p>​    作用：影响iBGP peer 出站路径的选择，LP参数越大越优。</p>
+<p>automatic aggregate：原子聚合</p>
+<p>​    BGP发生了自动聚合或手动聚合时，聚合后网络携带该属性。</p>
+<p>​    原子聚合属性用于提醒更新接受者，路由更新目标网络可能丢失了部分原有属性。</p>
 </li>
-<li><p>&#x4EFB;&#x9009;&#x53EF;&#x4F20;&#x9012;</p>
-<p>Aggregated&#xFF1A;&#x88AB;&#x805A;&#x5408;&#x5C5E;&#x6027;&#x2014;&#x2014;&#x805A;&#x5408;&#x540E;&#x7684;&#x7F51;&#x7EDC;&#x643A;&#x5E26;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x8868;&#x660E;&#x8BE5;&#x7F51;&#x7EDC;&#x662F;&#x805A;&#x5408;&#x6765;&#x7684;&#x3002;</p>
-<p>Community&#xFF1A;&#x56E2;&#x4F53;&#x5C5E;&#x6027;  &#x662F;&#x643A;&#x5E26;&#x7279;&#x5B9A;&#x7B56;&#x7565;&#x7684;&#x6807;&#x8BB0;</p>
-<p>&#x200B;    &#x516C;&#x8BA4;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#xFF1A;</p>
-<p>&#x200B;        Internet&#xFF1A;&#x6240;&#x6709;&#x7684;BGP&#x8DEF;&#x7531;&#x9ED8;&#x8BA4;&#x643A;&#x5E26;&#x8BE5;&#x5C5E;&#x6027;&#xFF0C;&#x8BE5;&#x5C5E;&#x6027;&#x5BF9;&#x5E94;&#x7684;&#x7B56;&#x7565;&#x662F;&#xFF0C;&#x5171;&#x4EAB;&#x7ED9;&#x6240;&#x6709;&#x7684;BGP peer&#x3002;</p>
-<p>&#x200B;        no-export&#xFF1A;&#x4E0D;&#x5BFC;&#x51FA;&#xFF0C;&#x643A;&#x5E26;&#x8BE5;&#x5C5E;&#x6027;&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x4E0D;&#x5171;&#x4EAB;&#x7ED9;eBGP peer&#x3002;</p>
-<p>&#x200B;        no-advertise&#xFF1A;&#x4E0D;&#x901A;&#x544A;&#xFF0C;&#x643A;&#x5E26;&#x8BE5;&#x5C5E;&#x6027;&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x4E0D;&#x5171;&#x4EAB;&#x7ED9;&#x4EFB;&#x4F55;BGP peer&#x3002;</p>
-<p>&#x200B;        local-as&#xFF1A;&#x672C;&#x5730;as&#xFF0C;&#x643A;&#x5E26;&#x8BE5;&#x5C5E;&#x6027;&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x4E0D;&#x5171;&#x4EAB;&#x7ED9;&#x8054;&#x76DF;&#x5185;&#x5176;&#x4ED6;eBGP peer&#x3002;</p>
-<p>&#x200B;    &#x81EA;&#x5B9A;&#x4E49;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#xFF1A;</p>
-<p>&#x200B;        AA:NN</p>
-<p>&#x200B;        AS&#x53F7;&#xFF1A;&#x6807;&#x8BB0;&#x503C;</p>
+<li><p>任选可传递</p>
+<p>Aggregated：被聚合属性——聚合后的网络携带的属性，表明该网络是聚合来的。</p>
+<p>Community：团体属性  是携带特定策略的标记</p>
+<p>​    公认团体属性：</p>
+<p>​        Internet：所有的BGP路由默认携带该属性，该属性对应的策略是，共享给所有的BGP peer。</p>
+<p>​        no-export：不导出，携带该属性的路由更新不共享给eBGP peer。</p>
+<p>​        no-advertise：不通告，携带该属性的路由更新不共享给任何BGP peer。</p>
+<p>​        local-as：本地as，携带该属性的路由更新不共享给联盟内其他eBGP peer。</p>
+<p>​    自定义团体属性：</p>
+<p>​        AA:NN</p>
+<p>​        AS号：标记值</p>
 </li>
-<li><p>&#x4EFB;&#x9009;&#x4E0D;&#x53EF;&#x4F20;&#x9012;&#xFF08;&#x5C5E;&#x6027;&#x4FDD;&#x7559;&#xFF0C;&#x4F46;&#x503C;&#x4E3A;&#x7A7A;&#xFF09;</p>
-<p>MED&#xFF1A;&#x591A;&#x51FA;&#x53E3;&#x8DDD;&#x79BB;</p>
-<p>&#x200B;    eBGP&#x95F4;&#x8DEF;&#x7531;&#x5171;&#x4EAB;&#x643A;&#x5E26;&#x8BE5;&#x5C5E;&#x6027;&#xFF0C;MED&#x503C;&#x7528;&#x4E8E;&#x5F71;&#x54CD;eBGP peer&#x5165;&#x7AD9;&#x8DEF;&#x5F84;&#x9009;&#x62E9;&#x3002;MED&#x503C;&#x9ED8;&#x8BA4;&#x4E3A;0&#xFF0C;&#x8D8A;&#x5C0F;&#x8D8A;&#x4F18;&#x3002;</p>
-<p>Originate id&#x3001;cluster id</p>
+<li><p>任选不可传递（属性保留，但值为空）</p>
+<p>MED：多出口距离</p>
+<p>​    eBGP间路由共享携带该属性，MED值用于影响eBGP peer入站路径选择。MED值默认为0，越小越优。</p>
+<p>Originate id、cluster id</p>
 </li>
 </ol>
-<h3 id="BGP&#x9009;&#x8DEF;&#x539F;&#x5219;"><a href="#BGP&#x9009;&#x8DEF;&#x539F;&#x5219;" class="headerlink" title="BGP&#x9009;&#x8DEF;&#x539F;&#x5219;"></a>BGP&#x9009;&#x8DEF;&#x539F;&#x5219;</h3><p>&#x9009;&#x8DEF;&#x539F;&#x5219;&#x51B3;&#x5B9A;&#x4E86;BGP&#x6309;&#x4EC0;&#x4E48;&#x6807;&#x51C6;&#x8FDB;&#x884C;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;&#x7684;&#x6BD4;&#x8F83;</p>
-<ol class="ui list">
-<li><p>&#x4F18;&#x9009;&#x62E5;&#x6709;&#x6700;&#x9AD8;&#x6743;&#x91CD;&#x503C;&#x7684;&#x8DEF;&#x5F84; weight</p>
-<p>&#x7528;&#x4E8E;&#x5F71;&#x54CD;&#x5F53;&#x524D;&#x8DEF;&#x7531;&#x5668;&#x51FA;&#x7AD9;&#x8DEF;&#x5F84;&#x9009;&#x62E9;</p>
-<p>&#x9ED8;&#x8BA4;32768&#xFF0C;&#x8D8A;&#x5927;&#x8D8A;&#x4F18;</p>
-<p>&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x7B49;&#x4F53;&#x51FA;&#x73B0;&#xFF0C;&#x9700;&#x8981;&#x5F71;&#x54CD;&#x8DEF;&#x5F84;&#x6289;&#x62E9;&#xFF0C;&#x6743;&#x91CD;&#x66F4;&#x4F18;&#x3002;</p>
+<h3 id="BGP选路原则"><a href="#BGP选路原则" class="headerlink" title="BGP选路原则"></a>BGP选路原则</h3><p>选路原则决定了BGP按什么标准进行路由更新属性的比较</p>
+<ol>
+<li><p>优选拥有最高权重值的路径 weight</p>
+<p>用于影响当前路由器出站路径选择</p>
+<p>默认32768，越大越优</p>
+<p>不同类型的对等体出现，需要影响路径抉择，权重更优。</p>
 </li>
-<li><p>&#x4F18;&#x9009;LP&#x5927;&#x7684;</p>
+<li><p>优选LP大的</p>
 </li>
-<li><p>&#x4F18;&#x9009;&#x8D77;&#x6E90;&#x4E8E;&#x672C;&#x5730;&#x7684;&#x8DEF;&#x5F84;</p>
+<li><p>优选起源于本地的路径</p>
 <p>next-hop=0.0.0.0</p>
 </li>
-<li><p>&#x4F18;&#x9009;&#x62E5;&#x6709;&#x6700;&#x77ED;AS-PATH &#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#x7684;</p>
+<li><p>优选拥有最短AS-PATH 路径信息的</p>
 </li>
-<li><p>&#x6BD4;&#x8F83;Origin&#x5C5E;&#x6027;&lt;IGP&#x4F18;&#x5148;&#x4E8E;EGP&#x4F18;&#x5148;&#x4E8E;Incomplete&gt;</p>
+<li><p>比较Origin属性&lt;IGP优先于EGP优先于Incomplete&gt;</p>
 </li>
-<li><p>&#x4F18;&#x9009;&#x62E5;&#x6709;&#x6700;&#x4F73;MED&#x503C;&#x7684;</p>
+<li><p>优选拥有最佳MED值的</p>
 </li>
-<li><p>eBGP peer &#x7684;&#x8DEF;&#x5F84;&#x4F18;&#x4E8E; iBGP peer&#x7684;&#x8DEF;&#x5F84;</p>
+<li><p>eBGP peer 的路径优于 iBGP peer的路径</p>
 </li>
-<li><p>&#x4F18;&#x9009;&#x79BB;&#x4E0B;&#x4E00;&#x8DF3;&#x66F4;&#x8FD1;&#x7684;&#x8DEF;&#x5F84;</p>
+<li><p>优选离下一跳更近的路径</p>
 </li>
-<li><p>&#x9488;&#x5BF9;eBGP peer&#x7684;&#x8DEF;&#x7531;&#xFF0C;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x5141;&#x8BB8;&#x591A;&#x6761;&#x8DEF;&#x5F84;&#xFF0C;&#x6210;&#x4E3A;&#x6700;&#x4F73;&#x8FDB;&#x5165;&#x8DEF;&#x7531;&#x8868;</p>
+<li><p>针对eBGP peer的路由，通过命令行允许多条路径，成为最佳进入路由表</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">maximun-path &lt;n&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>&#x4F18;&#x9009;&#x6700;&#x65E9;&#x88AB;&#x5B66;&#x4E60;&#x7684;&#x8DEF;&#x7531;&#xFF0C;&#x53EA;&#x9488;&#x5BF9; eBGP peer</p>
+<li><p>优选最早被学习的路由，只针对 eBGP peer</p>
 </li>
-<li><p>&#x4F18;&#x9009;&#x62E5;&#x6709;&#x6700;&#x5C0F;RID&#x7684;BGP peer&#x63D0;&#x4F9B;&#x7684;&#x8DEF;&#x7531;</p>
+<li><p>优选拥有最小RID的BGP peer提供的路由</p>
 </li>
-<li><p>&#x4F18;&#x9009;&#x62E5;&#x6709;&#x6700;&#x77ED;cluster-id &#x7684;&#x8DEF;&#x5F84;</p>
+<li><p>优选拥有最短cluster-id 的路径</p>
 </li>
-<li><p>&#x4F18;&#x9009;&#x62E5;&#x6709;&#x6700;&#x4F4E;peer&#x5730;&#x5740;&#x7684;&#x90BB;&#x5C45;&#x63D0;&#x4F9B;&#x7684;&#x8DEF;&#x5F84;</p>
+<li><p>优选拥有最低peer地址的邻居提供的路径</p>
 </li>
 </ol>
-<h3 id="BGP&#x57FA;&#x672C;&#x914D;&#x7F6E;"><a href="#BGP&#x57FA;&#x672C;&#x914D;&#x7F6E;" class="headerlink" title="BGP&#x57FA;&#x672C;&#x914D;&#x7F6E;"></a>BGP&#x57FA;&#x672C;&#x914D;&#x7F6E;</h3><p>&#x5BF9;&#x7B49;&#x4F53;&#x4F53;&#x5FC5;&#x987B;&#x624B;&#x52A8;&#x6307;&#x5B9A;&#xFF0C;&#x5E76;&#x4E14;&#x6307;&#x5B9A;&#x7684;&#x5730;&#x5740;&#x53EF;&#x8FBE;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">bgp router-id &lt;a.b.c.d&gt; //&#x8BBE;&#x7F6E;bgp rid</span><br><span class="line">address-family ipv4 unicast //&#x8FDB;&#x5165; bgpv4</span><br><span class="line"></span><br><span class="line">neighbor &lt;ip&gt; remote-as &lt;&#x5BF9;&#x7AEF;as&#x53F7;&gt;</span><br><span class="line">neighbor &lt;ip&gt; updat-source lo0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x4EE5;&#x73AF;&#x56DE;&#x53E3;&#x5EFA;&#x7ACB;ebgp&#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;&#x65F6;&#xFF0C;&#x5FC5;&#x987B;&#x6307;&#x5B9A;ebgp&#x591A;&#x8DF3;&#xFF0C;&#x4E24;&#x7AEF;&#x90FD;&#x8981;&#x8BBE;&#x7F6E;&#x3002;</span><br><span class="line"></span><br><span class="line">nei ip ebgp-multihop 1-255(&#x9ED8;&#x8BA4;255)</span><br><span class="line"></span><br><span class="line">&#x5185;&#x90E8;&#x6761;&#x76EE;&#x901A;&#x8FC7;&#x5BA3;&#x544A;&#x6216;&#x91CD;&#x5206;&#x53D1;</span><br><span class="line"></span><br><span class="line">bgp&#x5BA3;&#x544A;&#x7684;&#x6761;&#x76EE;&#x53EF;&#x4EE5;&#x662F;&#x672C;&#x5730;&#x76F4;&#x8FDE;&#x7F51;&#x6BB5;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x901A;&#x8FC7;igp&#x534F;&#x8BAE;&#x6240;&#x5B66;&#x5230;&#x7684;&#x7F51;&#x6BB5;&#x5E26;&#x5165;&#x6240;&#x5F97;&#x3002;</span><br><span class="line"></span><br><span class="line">net ip mask &#x5B50;&#x7F51;&#x63A9;&#x7801;</span><br><span class="line"></span><br><span class="line">&#x5BA3;&#x544A;&#x7684;ip&#x5FC5;&#x987B;&#x5728;&#x672C;&#x5730;&#x8DEF;&#x7531;&#x8868;&#x5185;&#x5B58;&#x5728;&#xFF0C;&#x5426;&#x5219;&#x5BA3;&#x544A;&#x4E0D;&#x51FA;&#x53BB;&#x3002;</span><br><span class="line"></span><br><span class="line">sh ip bgp&#x67E5;&#x770B;bgp&#x8868;</span><br><span class="line"></span><br><span class="line">&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;(&#x5E38;&#x5728;ibgp&#x5185;&#x542F;&#x7528;)</span><br><span class="line"></span><br><span class="line">nei ip route-reflection-client</span><br><span class="line"></span><br><span class="line">&#x505A;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x7684;&#x8BBE;&#x5907;&#x53EB;RR&#x8DEF;&#x7531;&#x5668;</span><br><span class="line"></span><br><span class="line">next-hop-self&#x4E0B;&#x4E00;&#x8DF3;&#x662F;&#x81EA;&#x5DF1;</span><br><span class="line"></span><br><span class="line">&#x7279;&#x6743;&#x6A21;&#x5F0F; clear ip bgp *      &#x786C;&#x6E05;&#x9664;</span><br><span class="line"></span><br><span class="line">                 clear ip bgp * soft &#x8F6F;&#x6E05;&#x9664;</span><br><span class="line"></span><br><span class="line">AS&#x6B3A;&#x9A97;&#xFF0C;&#x7528;&#x4E8E;EBGP&#x4E4B;&#x95F4;&#xFF0C;&#x4E0D;&#x80FD;ibgp&#x4E4B;&#x95F4;&#x3002;</span><br><span class="line"></span><br><span class="line">AS&#x91CD;&#x5199;&#x3002;as-override&#x6765;&#x81EA;&#x4E8E;&#x540C;&#x4E00;as&#x7684;&#x8DEF;&#x7531;&#x4E0D;&#x63A5;&#x6536;&#x3002;</span><br><span class="line"></span><br><span class="line">bgp 7.25</span><br><span class="line"></span><br><span class="line">&#x805A;&#x5408;(&#x7C7B;&#x4F3C;&#x4E8E;&#x6C47;&#x603B;)</span><br><span class="line"></span><br><span class="line">aggregate-address +&#x7F51;&#x6BB5; +&#x5B50;&#x7F51;&#x63A9;&#x7801; +(summary-only)</span><br><span class="line"></span><br><span class="line">&#x53EA;&#x80FD;&#x805A;&#x5408;&#x5B66;&#x4E60;&#x5230;&#x7684;&#xFF0C;&#x8D77;&#x6E90;&#x4E8E;&#x672C;&#x5730;&#x7684;&#x8DEF;&#x7531;&#x65E0;&#x6CD5;&#x805A;&#x5408;&#x3002;</span><br><span class="line"></span><br><span class="line">&#x7528;&#x5BF9;&#x7B49;&#x4F53;&#x7EC4;&#x5EFA;&#x7ACB;bgp&#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;</span><br><span class="line"></span><br><span class="line">1. nei &#x540D;&#x5B57; peer-group</span><br><span class="line"></span><br><span class="line">         &#x2026;&#x4E00;&#x7CFB;&#x5217;&#x5171;&#x540C;&#x64CD;&#x4F5C;&#x2026;</span><br><span class="line"></span><br><span class="line">1. nei Rid peer-group &#x540D;&#x5B57;</span><br></pre></td></tr></table></figure></p>
-<h3 id="&#x81EA;&#x52A8;&#x6C47;&#x603B;-auto-summary"><a href="#&#x81EA;&#x52A8;&#x6C47;&#x603B;-auto-summary" class="headerlink" title="&#x81EA;&#x52A8;&#x6C47;&#x603B; auto-summary"></a>&#x81EA;&#x52A8;&#x6C47;&#x603B; auto-summary</h3><p>&#x81EA;&#x52A8;&#x6C47;&#x603B;&#x7528;&#x6765;&#x8BBE;&#x5B9A;BGP&#x5BA3;&#x544A;&#x662F;&#x7CBE;&#x786E;&#x8FD8;&#x662F;&#x4E0D;&#x7CBE;&#x786E;&#x7684;</p>
+<h3 id="BGP基本配置"><a href="#BGP基本配置" class="headerlink" title="BGP基本配置"></a>BGP基本配置</h3><p>对等体体必须手动指定，并且指定的地址可达<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">bgp router-id &lt;a.b.c.d&gt; //设置bgp rid</span><br><span class="line">address-family ipv4 unicast //进入 bgpv4</span><br><span class="line"></span><br><span class="line">neighbor &lt;ip&gt; remote-as &lt;对端as号&gt;</span><br><span class="line">neighbor &lt;ip&gt; updat-source lo0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">以环回口建立ebgp对等体关系时，必须指定ebgp多跳，两端都要设置。</span><br><span class="line"></span><br><span class="line">nei ip ebgp-multihop 1-255(默认255)</span><br><span class="line"></span><br><span class="line">内部条目通过宣告或重分发</span><br><span class="line"></span><br><span class="line">bgp宣告的条目可以是本地直连网段，也可以是通过igp协议所学到的网段带入所得。</span><br><span class="line"></span><br><span class="line">net ip mask 子网掩码</span><br><span class="line"></span><br><span class="line">宣告的ip必须在本地路由表内存在，否则宣告不出去。</span><br><span class="line"></span><br><span class="line">sh ip bgp查看bgp表</span><br><span class="line"></span><br><span class="line">路由反射器(常在ibgp内启用)</span><br><span class="line"></span><br><span class="line">nei ip route-reflection-client</span><br><span class="line"></span><br><span class="line">做路由反射器的设备叫RR路由器</span><br><span class="line"></span><br><span class="line">next-hop-self下一跳是自己</span><br><span class="line"></span><br><span class="line">特权模式 clear ip bgp *      硬清除</span><br><span class="line"></span><br><span class="line">                 clear ip bgp * soft 软清除</span><br><span class="line"></span><br><span class="line">AS欺骗，用于EBGP之间，不能ibgp之间。</span><br><span class="line"></span><br><span class="line">AS重写。as-override来自于同一as的路由不接收。</span><br><span class="line"></span><br><span class="line">bgp 7.25</span><br><span class="line"></span><br><span class="line">聚合(类似于汇总)</span><br><span class="line"></span><br><span class="line">aggregate-address +网段 +子网掩码 +(summary-only)</span><br><span class="line"></span><br><span class="line">只能聚合学习到的，起源于本地的路由无法聚合。</span><br><span class="line"></span><br><span class="line">用对等体组建立bgp对等体关系</span><br><span class="line"></span><br><span class="line">1. nei 名字 peer-group</span><br><span class="line"></span><br><span class="line">         …一系列共同操作…</span><br><span class="line"></span><br><span class="line">1. nei Rid peer-group 名字</span><br></pre></td></tr></table></figure></p>
+<h3 id="自动汇总-auto-summary"><a href="#自动汇总-auto-summary" class="headerlink" title="自动汇总 auto-summary"></a>自动汇总 auto-summary</h3><p>自动汇总用来设定BGP宣告是精确还是不精确的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10.1.1.0/24</span><br><span class="line">RIP: network 1.0.0.0</span><br><span class="line">EIGRP OSPF ISIS: 10.1.1.0 0.0.0.255</span><br></pre></td></tr></table></figure>
-<p>auto-summary &#x5173;&#x95ED;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;BGP &#x5904;&#x4E8E;&#x7CBE;&#x786E;&#x5BA3;&#x544A;&#x72B6;&#x6001;</p>
-<p>auto-summary &#x5F00;&#x542F;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;BGP &#x5904;&#x4E8E;&#x975E;&#x7CBE;&#x786E;&#x5BA3;&#x544A;&#x72B6;&#x6001;</p>
-<p>&#x88AB;&#x5BA3;&#x544A;&#x7684;&#x7F51;&#x7EDC;&#x53EA;&#x8981;&#x62E5;&#x6709;&#x672C;&#x5730;&#x5BF9;&#x5E94;&#x7684;&#x5B50;&#x7F51;&#xFF0C;&#x88AB;&#x5BA3;&#x544A;&#x7F51;&#x7EDC;&#x5C31;&#x53EF;&#x4EE5;&#x5F53;&#x505A;&#x66F4;&#x65B0;&#x53D1;&#x9001;&#x51FA;&#x53BB;&#x3002;</p>
-<p>&#x9488;&#x5BF9;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#xFF0C;auto-summary &#x5F00;&#x542F;&#xFF0C;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x81EA;&#x52A8;&#x6C47;&#x603B;&#xFF0C;&#x5426;&#x5219;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x5C31;&#x660E;&#x7EC6;&#x8FDB;&#x5165;&#x3002;</p>
-<h3 id="&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;"><a href="#&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;" class="headerlink" title="&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;"></a>&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;</h3><h4 id="&#x5982;&#x4F55;&#x4FEE;&#x6539;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;-&#x4E09;&#x4E2A;&#x6B65;&#x9AA4;"><a href="#&#x5982;&#x4F55;&#x4FEE;&#x6539;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;-&#x4E09;&#x4E2A;&#x6B65;&#x9AA4;" class="headerlink" title="&#x5982;&#x4F55;&#x4FEE;&#x6539;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;(&#x4E09;&#x4E2A;&#x6B65;&#x9AA4;)"></a>&#x5982;&#x4F55;&#x4FEE;&#x6539;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;(&#x4E09;&#x4E2A;&#x6B65;&#x9AA4;)</h4><ol class="ui list">
-<li><p>&#x6293;&#x53D6;&#x88AB;&#x4FEE;&#x6539;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;&#x7684;&#x76EE;&#x6807;&#x7F51;&#x7EDC;</p>
+<p>auto-summary 关闭的情况下，BGP 处于精确宣告状态</p>
+<p>auto-summary 开启的情况下，BGP 处于非精确宣告状态</p>
+<p>被宣告的网络只要拥有本地对应的子网，被宣告网络就可以当做更新发送出去。</p>
+<p>针对外部路由，auto-summary 开启，外部路由自动汇总，否则外部路由就明细进入。</p>
+<h3 id="路由更新属性"><a href="#路由更新属性" class="headerlink" title="路由更新属性"></a>路由更新属性</h3><h4 id="如何修改路由更新属性-三个步骤"><a href="#如何修改路由更新属性-三个步骤" class="headerlink" title="如何修改路由更新属性(三个步骤)"></a>如何修改路由更新属性(三个步骤)</h4><ol>
+<li><p>抓取被修改路由更新属性的目标网络</p>
 <ul>
-<li>&#x5229;&#x7528;ACL&#x6293;&#x53D6;</li>
+<li>利用ACL抓取</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip access-list stand &lt;name&gt;</span><br><span class="line">permit &lt;x.x.x.x&gt; &lt;x.x.x.x&gt;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>&#x524D;&#x7F00;&#x5217;&#x8868; prefix-list</li>
+<li>前缀列表 prefix-list</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip prefix-list &lt;&#x7F16;&#x53F7;&gt; &lt;permit/deny&gt; &lt;x.x.x.x/8&gt; [le &lt;xx&gt;/ge &lt;xx&gt;]</span><br><span class="line">//  &#x5176;&#x4E2D;/8&#x662F;&#x901A;&#x914D;&#x7B26;</span><br><span class="line">//  le &#x4E0E; ge &#x540E;&#x9762;&#x662F;&#x524D;&#x7F00;&#x957F;&#x5EA6;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip prefix-list &lt;编号&gt; &lt;permit/deny&gt; &lt;x.x.x.x/8&gt; [le &lt;xx&gt;/ge &lt;xx&gt;]</span><br><span class="line">//  其中/8是通配符</span><br><span class="line">//  le 与 ge 后面是前缀长度</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>&#x5229;&#x7528;&#x8DEF;&#x7531;&#x6620;&#x5C04;&#x8C03;&#x7528; acl &#x6216;prefix-list &#x5B8C;&#x6210;&#x5C5E;&#x6027;&#x4FEE;&#x6539;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">route-map [name] [permit/deny] &lt;&#x7B56;&#x7565;&#x7F16;&#x53F7;&#xFF1A;&#x9ED8;&#x8BA4;10&gt;</span><br><span class="line">//&#x8FD9;&#x91CC;&#x7684;permit&#x6709;&#x4E24;&#x4E2A;&#x4F5C;&#x7528;&#xFF1A;</span><br><span class="line">//	1. &#x5728;BGP&#x91CC;&#x9762;&#xFF0C;permit&#x7684;&#x7F51;&#x7EDC;&#x88AB;&#x5F53;&#x505A;&#x66F4;&#x65B0;&#x53D1;&#x9001;&#xFF0C;deny&#x7684;&#x7F51;&#x7EDC;&#x662F;&#x88AB;&#x8FC7;&#x6EE4;&#x7684;&#x3002;</span><br><span class="line">//  2. &#x5728;&#x975E;BGP&#x91CC;&#xFF0C;permit&#x542B;&#x4E49;&#x662F;&#x5173;&#x6CE8;&#x4E14;&#x6267;&#x884C;&#x7B56;&#x7565;&#xFF0C;deny&#x662F;&#x4E0D;&#x5173;&#x6CE8;&#x3001;&#x4E0D;&#x6267;&#x884C;&#x7B56;&#x7565;&#x3002;</span><br><span class="line">//  route-map &#x521B;&#x5EFA;&#x540E;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;&#x9690;&#x85CF;&#x7684; deny all</span><br><span class="line">match ip address &lt;ack-id&gt; //&#x8C03;&#x7528;ACL</span><br><span class="line">match ip address prefix &lt;id&gt; //&#x8C03;&#x7528;&#x524D;&#x7F00;&#x5217;&#x8868;</span><br><span class="line">set &lt;xxxxxx&gt; //&#x8BBE;&#x7F6E;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5C5E;&#x6027;</span><br></pre></td></tr></table></figure>
+<li><p>利用路由映射调用 acl 或prefix-list 完成属性修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">route-map [name] [permit/deny] &lt;策略编号：默认10&gt;</span><br><span class="line">//这里的permit有两个作用：</span><br><span class="line">//	1. 在BGP里面，permit的网络被当做更新发送，deny的网络是被过滤的。</span><br><span class="line">//  2. 在非BGP里，permit含义是关注且执行策略，deny是不关注、不执行策略。</span><br><span class="line">//  route-map 创建后，有一个隐藏的 deny all</span><br><span class="line">match ip address &lt;ack-id&gt; //调用ACL</span><br><span class="line">match ip address prefix &lt;id&gt; //调用前缀列表</span><br><span class="line">set &lt;xxxxxx&gt; //设置路由更新属性</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>BGP&#x91CC;&#x5F15;&#x7528; route-map</p>
+<li><p>BGP里引用 route-map</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as&gt;</span><br><span class="line">neighbor &lt;a.b.c.d&gt; route-map &lt;name&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h4 id="weight-&#x4FEE;&#x6539;&#x547D;&#x4EE4;"><a href="#weight-&#x4FEE;&#x6539;&#x547D;&#x4EE4;" class="headerlink" title="weight &#x4FEE;&#x6539;&#x547D;&#x4EE4;"></a>weight &#x4FEE;&#x6539;&#x547D;&#x4EE4;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;xx&gt;</span><br><span class="line">neighbor &lt;peer-address&gt; weight &lt;xxxx&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="&#x901A;&#x8FC7;-LP-&#x5F71;&#x54CD;&#x51FA;&#x7AD9;&#x8DEF;&#x5F84;"><a href="#&#x901A;&#x8FC7;-LP-&#x5F71;&#x54CD;&#x51FA;&#x7AD9;&#x8DEF;&#x5F84;" class="headerlink" title="&#x901A;&#x8FC7; LP &#x5F71;&#x54CD;&#x51FA;&#x7AD9;&#x8DEF;&#x5F84;"></a>&#x901A;&#x8FC7; LP &#x5F71;&#x54CD;&#x51FA;&#x7AD9;&#x8DEF;&#x5F84;</h4><h4 id="&#x901A;&#x8FC7;&#x589E;&#x52A0;-AS-PATH-&#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#x5F71;&#x54CD;&#x9009;&#x8DEF;"><a href="#&#x901A;&#x8FC7;&#x589E;&#x52A0;-AS-PATH-&#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#x5F71;&#x54CD;&#x9009;&#x8DEF;" class="headerlink" title="&#x901A;&#x8FC7;&#x589E;&#x52A0; AS-PATH &#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#x5F71;&#x54CD;&#x9009;&#x8DEF;"></a>&#x901A;&#x8FC7;&#x589E;&#x52A0; AS-PATH &#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#x5F71;&#x54CD;&#x9009;&#x8DEF;</h4><p>&#x53EA;&#x6709; eBGP peer &#x95F4;&#x8BE5;&#x5C5E;&#x6027;&#x624D;&#x80FD;&#x4FEE;&#x6539;&#xFF0C;&#x5F53;&#x524D;&#x8DEF;&#x7531;&#x5668;&#x53EA;&#x5173;&#x5FC3; AS-PATH &#x7684;&#x957F;&#x77ED;&#xFF0C;&#x4E0D;&#x5173;&#x5FC3;&#x662F;&#x5426;&#x4F5C;&#x7528;&#x4E8E; eBGP&#x6216; iBGP</p>
-<p>&#xFF01;&#xFF01;&#x6CE8;&#x610F;</p>
-<p>AS-PATH &#x4FE1;&#x606F;&#x7684;&#x9644;&#x52A0; in &#x548C;out &#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;</p>
-<p>1 i out&#x65B9;&#x5411;&#x9644;&#x52A0;666&#xFF0C;&#x5C31;&#x53D8;&#x6210; 1 666i</p>
-<p>1 i in  &#x65B9; &#x5411;&#x9644;&#x52A0;666&#xFF0C;&#x5C31;&#x53D8;&#x6210; 666 1</p>
-<h4 id="&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x8D77;&#x6E90;&#x4EE3;&#x7801;"><a href="#&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x8D77;&#x6E90;&#x4EE3;&#x7801;" class="headerlink" title="&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x8D77;&#x6E90;&#x4EE3;&#x7801;"></a>&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x8D77;&#x6E90;&#x4EE3;&#x7801;</h4><h4 id="&#x901A;&#x8FC7;&#x4FEE;&#x6539;MED&#x5F71;&#x54CD;&#x9009;&#x8DEF;&#x6289;&#x62E9;"><a href="#&#x901A;&#x8FC7;&#x4FEE;&#x6539;MED&#x5F71;&#x54CD;&#x9009;&#x8DEF;&#x6289;&#x62E9;" class="headerlink" title="&#x901A;&#x8FC7;&#x4FEE;&#x6539;MED&#x5F71;&#x54CD;&#x9009;&#x8DEF;&#x6289;&#x62E9;"></a>&#x901A;&#x8FC7;&#x4FEE;&#x6539;MED&#x5F71;&#x54CD;&#x9009;&#x8DEF;&#x6289;&#x62E9;</h4><h2 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h2>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-07-16T07:25:55.000Z" itemprop="datePublished">2018-07-16</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+<h4 id="weight-修改命令"><a href="#weight-修改命令" class="headerlink" title="weight 修改命令"></a>weight 修改命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;xx&gt;</span><br><span class="line">neighbor &lt;peer-address&gt; weight &lt;xxxx&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="通过-LP-影响出站路径"><a href="#通过-LP-影响出站路径" class="headerlink" title="通过 LP 影响出站路径"></a>通过 LP 影响出站路径</h4><h4 id="通过增加-AS-PATH-路径信息影响选路"><a href="#通过增加-AS-PATH-路径信息影响选路" class="headerlink" title="通过增加 AS-PATH 路径信息影响选路"></a>通过增加 AS-PATH 路径信息影响选路</h4><p>只有 eBGP peer 间该属性才能修改，当前路由器只关心 AS-PATH 的长短，不关心是否作用于 eBGP或 iBGP</p>
+<p>！！注意</p>
+<p>AS-PATH 信息的附加 in 和out 是不一样的</p>
+<p>1 i out方向附加666，就变成 1 666i</p>
+<p>1 i in  方 向附加666，就变成 666 1</p>
+<h4 id="通过修改起源代码"><a href="#通过修改起源代码" class="headerlink" title="通过修改起源代码"></a>通过修改起源代码</h4><h4 id="通过修改MED影响选路抉择"><a href="#通过修改MED影响选路抉择" class="headerlink" title="通过修改MED影响选路抉择"></a>通过修改MED影响选路抉择</h4><h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/07/18/Network/Ccie/路由协议分类/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    CCIE 路由协议分类
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/06/13/Unix/Programming/gcc_gdb备忘录/" class="ui tiny button">
-                    
-                    gcc_gdb备忘录
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#边界网关路由协议"><span>边界网关路由协议</span></a><ol><li><a href="#BGP简介"><span>BGP简介</span></a><ol><li><a href="#BGP版本"><span>BGP版本</span></a></li><li><a href="#BGP优缺点"><span>BGP优缺点</span></a></li><li><a href="#AS-和-邻居类型"><span>AS 和 邻居类型</span></a></li></ol></li><li><a href="#BGP消息"><span>BGP消息</span></a></li><li><a href="#peer关系建立过程"><span>peer关系建立过程</span></a></li><li><a href="#bgp的防环机制"><span>bgp的防环机制</span></a><ol><li><a href="#iBGP-水平分隔原则"><span>iBGP-水平分隔原则</span></a></li><li><a href="#eBGP"><span>eBGP</span></a></li><li><a href="#特殊拓扑下路由反射器的防环机制"><span>特殊拓扑下路由反射器的防环机制</span></a></li></ol></li><li><a href="#同步与下一跳判断"><span>同步与下一跳判断</span></a><ol><li><a href="#同步机制"><span>同步机制</span></a><ol><li><a href="#bgp路由黑洞"><span>bgp路由黑洞</span></a></li></ol></li><li><a href="#下一跳判断"><span>下一跳判断</span></a></li></ol></li><li><a href="#BGP的路由更新属性"><span>BGP的路由更新属性</span></a></li><li><a href="#BGP选路原则"><span>BGP选路原则</span></a></li><li><a href="#BGP基本配置"><span>BGP基本配置</span></a></li><li><a href="#自动汇总-auto-summary"><span>自动汇总 auto-summary</span></a></li><li><a href="#路由更新属性"><span>路由更新属性</span></a><ol><li><a href="#如何修改路由更新属性-三个步骤"><span>如何修改路由更新属性(三个步骤)</span></a></li><li><a href="#weight-修改命令"><span>weight 修改命令</span></a></li><li><a href="#通过-LP-影响出站路径"><span>通过 LP 影响出站路径</span></a></li><li><a href="#通过增加-AS-PATH-路径信息影响选路"><span>通过增加 AS-PATH 路径信息影响选路</span></a></li><li><a href="#通过修改起源代码"><span>通过修改起源代码</span></a></li><li><a href="#通过修改MED影响选路抉择"><span>通过修改MED影响选路抉择</span></a></li></ol></li></ol></li><li><a href="#结束"><span>结束</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

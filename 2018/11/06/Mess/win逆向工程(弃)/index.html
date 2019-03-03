@@ -1,281 +1,105 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>win逆向工程（放弃） | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>win逆向工程（放弃） | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x540D;&amp;#x8BCD;&amp;#x89E3;&amp;#x91CA;PE&amp;#x6587;&amp;#x4EF6;&amp;#x5168;&amp;#x79F0;Portable Execute- &amp;#x53EF;&amp;#x79FB;&amp;#x690D;&amp;#x7684;&amp;#x6267;&amp;#x884C;&amp;#x4F53;&amp;#xFF0C;&amp;#x662F;windows&amp;#x5E73;&amp;#x53F0;&amp;#x7EC4;&amp;#x7EC7;&amp;#x7A">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="win逆向工程（放弃）">
-<meta property="og:url" content="http://yoursite.com/2018/11/06/Mess/win逆向工程(弃)/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x540D;&amp;#x8BCD;&amp;#x89E3;&amp;#x91CA;PE&amp;#x6587;&amp;#x4EF6;&amp;#x5168;&amp;#x79F0;Portable Execute- &amp;#x53EF;&amp;#x79FB;&amp;#x690D;&amp;#x7684;&amp;#x6267;&amp;#x884C;&amp;#x4F53;&amp;#xFF0C;&amp;#x662F;windows&amp;#x5E73;&amp;#x53F0;&amp;#x7EC4;&amp;#x7EC7;&amp;#x7A">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-16T07:56:15.900Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="win逆向工程（放弃）">
-<meta name="twitter:description" content="&amp;#x540D;&amp;#x8BCD;&amp;#x89E3;&amp;#x91CA;PE&amp;#x6587;&amp;#x4EF6;&amp;#x5168;&amp;#x79F0;Portable Execute- &amp;#x53EF;&amp;#x79FB;&amp;#x690D;&amp;#x7684;&amp;#x6267;&amp;#x884C;&amp;#x4F53;&amp;#xFF0C;&amp;#x662F;windows&amp;#x5E73;&amp;#x53F0;&amp;#x7EC4;&amp;#x7EC7;&amp;#x7A">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Mess/win逆向工程(弃)" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    win逆向工程（放弃）
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="&#x540D;&#x8BCD;&#x89E3;&#x91CA;"><a href="#&#x540D;&#x8BCD;&#x89E3;&#x91CA;" class="headerlink" title="&#x540D;&#x8BCD;&#x89E3;&#x91CA;"></a>&#x540D;&#x8BCD;&#x89E3;&#x91CA;</h2><h4 id="PE&#x6587;&#x4EF6;"><a href="#PE&#x6587;&#x4EF6;" class="headerlink" title="PE&#x6587;&#x4EF6;"></a>PE&#x6587;&#x4EF6;</h4><p>&#x5168;&#x79F0;Portable Execute- &#x53EF;&#x79FB;&#x690D;&#x7684;&#x6267;&#x884C;&#x4F53;&#xFF0C;&#x662F;windows&#x5E73;&#x53F0;&#x7EC4;&#x7EC7;&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;&#x7684;&#x4E00;&#x79CD;&#x6587;&#x4EF6;&#x683C;&#x5F0F;&#x3002;<br>&#x5E38;&#x89C1;&#x7684;exe&#x3001;dll&#x3001;sys&#x3001;ocx&#x3001;com&#x90FD;&#x5C5E;&#x4E8E;PE&#x6587;&#x4EF6;&#x3002;</p>
-<h4 id="&#x6587;&#x4EF6;&#x504F;&#x79FB;&#x5730;&#x5740;"><a href="#&#x6587;&#x4EF6;&#x504F;&#x79FB;&#x5730;&#x5740;" class="headerlink" title="&#x6587;&#x4EF6;&#x504F;&#x79FB;&#x5730;&#x5740;"></a>&#x6587;&#x4EF6;&#x504F;&#x79FB;&#x5730;&#x5740;</h4><p>PE&#x6587;&#x4EF6;&#x5B58;&#x50A8;&#x5728;&#x78C1;&#x76D8;&#x4E0A;&#xFF0C;&#x5404;&#x6570;&#x636E;&#x6BB5;&#x7684;&#x5730;&#x5740;&#x79F0;&#x4E3A;&#x6587;&#x4EF6;&#x504F;&#x79FB;&#x5730;&#x5740;&#x6216;&#x7269;&#x7406;&#x5730;&#x5740;(raw offset )&#x3002;&#x6587;&#x4EF6;&#x504F;&#x79FB;&#x5730;&#x5740;&#x4ECE;PE&#x6587;&#x4EF6;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x5F00;&#x59CB;&#x8BA1;&#x6570;&#xFF0C;&#x8D77;&#x59CB;&#x503C;&#x4E3A;0&#x3002;</p>
-<h4 id="&#x5165;&#x53E3;&#x70B9;-Entry-point"><a href="#&#x5165;&#x53E3;&#x70B9;-Entry-point" class="headerlink" title="&#x5165;&#x53E3;&#x70B9;(Entry point )"></a>&#x5165;&#x53E3;&#x70B9;(Entry point )</h4><p>&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x7684;&#x7B2C;&#x4E00;&#x884C;&#x4EE3;&#x7801;</p>
-<h4 id="&#x57FA;&#x5730;&#x5740;-Image-base"><a href="#&#x57FA;&#x5730;&#x5740;-Image-base" class="headerlink" title="&#x57FA;&#x5730;&#x5740;(Image base)"></a>&#x57FA;&#x5730;&#x5740;(Image base)</h4><p>&#x6587;&#x4EF6;&#x6267;&#x884C;&#x65F6;&#x5C06;&#x88AB;&#x6620;&#x5C04;&#x5230;&#x6307;&#x5B9A;&#x5185;&#x5B58;&#x5730;&#x5740;&#x7684;&#x521D;&#x59CB;&#x5730;&#x5740;&#xFF0C;&#x7531;PE&#x6587;&#x4EF6;&#x672C;&#x8EAB;&#x51B3;&#x5B9A;&#x3002;<br>&#x9ED8;&#x8BA4;&#xFF0C;EXE: 0x00400000, DLL :0X1000000&#x3002;&#x7528;&#x94FE;&#x63A5;&#x7A0B;&#x5E8F;&#x7684;/BASE&#x9009;&#x9879;&#x6539;&#x53D8;&#x8BE5;&#x503C;</p>
-<h4 id="&#x865A;&#x62DF;&#x5730;&#x5740;-Virtual-Address-VA"><a href="#&#x865A;&#x62DF;&#x5730;&#x5740;-Virtual-Address-VA" class="headerlink" title="&#x865A;&#x62DF;&#x5730;&#x5740;(Virtual Address,VA)"></a>&#x865A;&#x62DF;&#x5730;&#x5740;(Virtual Address,VA)</h4><p>&#x4FDD;&#x62A4;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x7A0B;&#x5E8F;&#x8BBF;&#x95EE;&#x5B58;&#x50A8;&#x5668;&#x6240;&#x4F7F;&#x7528;&#x7684;&#x903B;&#x8F91;&#x5730;&#x5740;&#x79F0;&#x4E3A;&#x865A;&#x62DF;&#x5730;&#x5740;(VA),&#x5185;&#x5B58;&#x504F;&#x79FB;&#x5730;&#x5740;(memory offset)</p>
-<h4 id="&#x76F8;&#x5BF9;&#x865A;&#x62DF;&#x5730;&#x5740;-Relative-Virtual-Address-RVA"><a href="#&#x76F8;&#x5BF9;&#x865A;&#x62DF;&#x5730;&#x5740;-Relative-Virtual-Address-RVA" class="headerlink" title="&#x76F8;&#x5BF9;&#x865A;&#x62DF;&#x5730;&#x5740;(Relative Virtual Address,RVA)"></a>&#x76F8;&#x5BF9;&#x865A;&#x62DF;&#x5730;&#x5740;(Relative Virtual Address,RVA)</h4><p>&#x6307;&#x5185;&#x5B58;&#x4E2D;&#x76F8;&#x5BF9;&#x4E8E;PE&#x6587;&#x4EF6;&#x88C5;&#x5165;&#x5730;&#x5740;( &#x57FA;&#x5730;&#x5740;) &#x7684;&#x504F;&#x79FB;&#x91CF;&#x3002;RVA=VA - imagebase</p>
-<h2 id="&#x5E38;&#x7528;&#x6C47;&#x7F16;"><a href="#&#x5E38;&#x7528;&#x6C47;&#x7F16;" class="headerlink" title="&#x5E38;&#x7528;&#x6C47;&#x7F16;"></a>&#x5E38;&#x7528;&#x6C47;&#x7F16;</h2><p><code>jmp label</code> &#x8DF3;&#x8F6C;&#x5230;label&#x6807;&#x53F7;&#x6307;&#x5B9A;&#x7684;&#x5730;&#x5740;&#xFF08;&#x6807;&#x53F7;&#x8981;&#x5728;&#x7A0B;&#x5E8F;&#x5176;&#x4ED6;&#x4F4D;&#x7F6E;&#x6807;&#x51FA;&#xFF09;</p>
-<p><code>jcc label</code> &#x6761;&#x4EF6;&#x6EE1;&#x8DB3;&#xFF0C;&#x53D1;&#x751F;&#x8F6C;&#x79FB;&#xFF0C;IP &lt;&#x2014; IP + 8&#x4F4D; &#x4F4D;&#x79FB;&#x91CF;&#xFF1B;&#x6761;&#x4EF6;&#x4E0D;&#x6EE1;&#x8DB3;&#x5219;&#x987A;&#x5E8F;&#x6267;&#x884C;&#x3002;</p>
-<ul class="ui list">
-<li>label&#x662F;&#x77ED;&#x8F6C;&#x79FB;&#x6807;&#x53F7;&#xFF0C;&#x8981;&#x8DF3;&#x8F6C;&#x7684;&#x5730;&#x5740;&#x5FC5;&#x987B;&#x8DDD;&#x79BB;&#x5F53;&#x524D;IP&#x5730;&#x5740; -128&#xFF5E;+127&#x4E2A;&#x5355;&#x5143;&#x7684;&#x8303;&#x56F4;&#x4E4B;&#x5185;&#x3002;</li>
-</ul>
-<h2 id="&#x4EE3;&#x7801;&#x5206;&#x6790;"><a href="#&#x4EE3;&#x7801;&#x5206;&#x6790;" class="headerlink" title="&#x4EE3;&#x7801;&#x5206;&#x6790;"></a>&#x4EE3;&#x7801;&#x5206;&#x6790;</h2><h3 id="&#x4EE3;&#x7801;&#x9759;&#x6001;&#x5206;&#x6790;"><a href="#&#x4EE3;&#x7801;&#x9759;&#x6001;&#x5206;&#x6790;" class="headerlink" title="&#x4EE3;&#x7801;&#x9759;&#x6001;&#x5206;&#x6790;"></a>&#x4EE3;&#x7801;&#x9759;&#x6001;&#x5206;&#x6790;</h3><h4 id="&#x5B9A;&#x4E49;"><a href="#&#x5B9A;&#x4E49;" class="headerlink" title="&#x5B9A;&#x4E49;"></a>&#x5B9A;&#x4E49;</h4><p>&#x4EE3;&#x7801;&#x9759;&#x6001;&#x5206;&#x6790;&#x662F;&#x5728;&#x4E0D;&#x6267;&#x884C;&#x8BA1;&#x7B97;&#x673A;&#x7A0B;&#x5E8F;&#x7684;&#x6761;&#x4EF6;&#x4E0B;&#xFF0C;&#x5BF9;&#x6E90;&#x4EE3;&#x7801;&#x8FDB;&#x884C;&#x5206;&#x6790;&#xFF0C;&#x627E;&#x51FA;&#x4EE3;&#x7801;&#x7F3A;&#x9677;&#x3002;</p>
-<h4 id="&#x6267;&#x884C;&#x65B9;&#x5F0F;"><a href="#&#x6267;&#x884C;&#x65B9;&#x5F0F;" class="headerlink" title="&#x6267;&#x884C;&#x65B9;&#x5F0F;"></a>&#x6267;&#x884C;&#x65B9;&#x5F0F;</h4><p>&#x4E00;&#x822C;&#x914D;&#x5408;&#x9759;&#x6001;&#x7A0B;&#x5E8F;&#x5206;&#x6790;&#x5DE5;&#x5177;&#x8FDB;&#x884C;&#x3002;</p>
-<h4 id="&#x91C7;&#x7528;&#x6280;&#x672F;"><a href="#&#x91C7;&#x7528;&#x6280;&#x672F;" class="headerlink" title="&#x91C7;&#x7528;&#x6280;&#x672F;"></a>&#x91C7;&#x7528;&#x6280;&#x672F;</h4><p>&#x6570;&#x636E;&#x6D41;&#x5206;&#x6790;&#x3001;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x3001;&#x8BED;&#x4E49;&#x7CBE;&#x7B80;&#x2026;</p>
-<h4 id="&#x53EF;&#x68C0;&#x6D4B;&#x7C7B;&#x578B;"><a href="#&#x53EF;&#x68C0;&#x6D4B;&#x7C7B;&#x578B;" class="headerlink" title="&#x53EF;&#x68C0;&#x6D4B;&#x7C7B;&#x578B;"></a>&#x53EF;&#x68C0;&#x6D4B;&#x7C7B;&#x578B;</h4><p>&#x6B7B;&#x9501;&#xFF0C;&#x7A7A;&#x6307;&#x9488;&#xFF0C;&#x8D44;&#x6E90;&#x6CC4;&#x9732;&#xFF0C;&#x7F13;&#x51B2;&#x533A;&#x6EA2;&#x51FA;&#xFF0C;&#x5B89;&#x5168;&#x6F0F;&#x6D1E;&#xFF0C;&#x7ADE;&#x6001;&#x6761;&#x4EF6;&#x2026;</p>
-<h4 id="&#x7528;&#x9014;"><a href="#&#x7528;&#x9014;" class="headerlink" title="&#x7528;&#x9014;"></a>&#x7528;&#x9014;</h4><p>&#x7A0B;&#x5E8F;&#x7FFB;&#x8BD1;/&#x7F16;&#x8BD1;(&#x7F16;&#x8BD1;&#x5668;) &#xFF0C;&#x7A0B;&#x5E8F;&#x4F18;&#x5316;&#x91CD;&#x6784;&#xFF0C;&#x8F6F;&#x4EF6;&#x7F3A;&#x9677;&#x68C0;&#x6D4B;&#x7B49;&#x3002;</p>
-<h4 id="&#x5BF9;&#x6BD4;"><a href="#&#x5BF9;&#x6BD4;" class="headerlink" title="&#x5BF9;&#x6BD4;"></a>&#x5BF9;&#x6BD4;</h4><p>&#x7A0B;&#x5E8F;&#x52A8;&#x6001;&#x5206;&#x6790;:&#x9700;&#x8981;&#x5B9E;&#x9645;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x3002;<br>&#x7A0B;&#x5E8F;&#x7406;&#x89E3;: &#x9759;&#x6001;&#x5206;&#x6790;&#x8FD9;&#x4E00;&#x672F;&#x8BED;&#x4E00;&#x822C;&#x7528;&#x6765;&#x5F62;&#x5BB9;&#x81EA;&#x52A8;&#x5316;&#x5DE5;&#x5177;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x800C;&#x4EBA;&#x5DE5;&#x5206;&#x6790;&#x5219;&#x5F80;&#x5F80;&#x53EB;&#x505A;&#x7A0B;&#x5E8F;&#x7406;&#x89E3;&#x3002;</p>
-<h4 id="&#x4F18;&#x70B9;"><a href="#&#x4F18;&#x70B9;" class="headerlink" title="&#x4F18;&#x70B9;"></a>&#x4F18;&#x70B9;</h4><p>&#x80FD;&#x591F;&#x68C0;&#x6D4B;&#x6240;&#x6709;&#x7684;&#x4EE3;&#x7801;&#x7EA7;&#x522B;&#x7684;&#x53EF;&#x6267;&#x884C;&#x8DEF;&#x5F84;&#x7EC4;&#x5408;&#xFF0C;&#x5FEB;&#x901F;&#xFF0C;&#x51C6;&#x786E;&#x3002;<br>&#x76F4;&#x63A5;&#x9762;&#x5411;&#x6E90;&#x7801;,&#x5206;&#x6790;&#x591A;&#x79CD;&#x95EE;&#x9898;&#x3002;<br>&#x5728;&#x7814;&#x53D1;&#x9636;&#x6BB5;&#x5F00;&#x59CB;&#x627E;&#x5230;&#x5E76;&#x4FEE;&#x590D;&#x591A;&#x79CD;&#x95EE;&#x9898;&#xFF0C;&#x8282;&#x7701;&#x5927;&#x91CF;&#x65F6;&#x95F4;/&#x4EBA;&#x529B;&#x6210;&#x672C;&#x3002;</p>
-<p><strong>&#x6CE8;&#x610F;</strong>: &#x9759;&#x6001;&#x5206;&#x6790;&#x4E0D;&#x662F;&#x4E07;&#x80FD;&#x7684;&#xFF0C;&#x6D4B;&#x8BD5;&#x662F;&#x6301;&#x7EED;&#x7684;&#x8FC7;&#x7A0B;,&#x975E;&#x4E00;&#x52B3;&#x6C38;&#x9038;&#x3002;</p>
-<h4 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;" class="headerlink" title="&#x7B80;&#x4ECB;"></a>&#x7B80;&#x4ECB;</h4><p>&#x200B;    &#x9759;&#x6001;&#x5206;&#x6790;&#x7684;&#x5BF9;&#x8C61;&#x662F;Windows&#x5185;&#x6838;&#x6A21;&#x5757;&#x3001;&#x7B2C;&#x4E09;&#x65B9;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x7B49;&#x4E0D;&#x5F00;&#x6E90;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x4EE3;&#x7801;&#x3002;<br>&#x9996;&#x5148;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x53CD;&#x6C47;&#x7F16;&#x5DE5;&#x5177;&#x5BF9;&#x6A21;&#x5757;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x751F;&#x6210;&#x76F8;&#x5E94;&#x7684;&#x6C47;&#x7F16;&#x4EE3;&#x7801;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x6B64;&#x57FA;&#x7840;&#x4E0A;&#x5206;&#x6790;&#x3001;&#x68C0;&#x67E5;&#x7A0B;&#x5E8F;&#x7684;&#x8BED;&#x6CD5;&#x3001;&#x7ED3;&#x6784;&#x3001;&#x8FC7;&#x7A0B;&#x3001;    &#x63A5;&#x53E3;&#x7B49;,&#x6062;&#x590D;&#x548C;&#x91CD;&#x5EFA;&#x7A0B;&#x5E8F;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3001;&#x7ED3;&#x6784;&#x548C;&#x6846;&#x67B6;&#xFF0C;&#x9A8C;&#x8BC1;&#x7A0B;&#x5E8F;&#x529F;&#x80FD;&#x903B;&#x8F91;&#x662F;&#x5426;&#x6B63;&#x786E;&#x3002;<br>&#x200B;    &#x5728;&#x9759;&#x6001;&#x5206;&#x6790;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5173;&#x952E;&#x7684;&#x5730;&#x65B9;&#x662F;&#x8981;&#x505A;&#x5230;&#x51C6;&#x786E;&#x63D0;&#x53D6;&#x4FE1;&#x606F;&#x3002;&#x4E0D;&#x8BBA;&#x662F;&#x6E90;&#x7A0B;&#x5E8F;&#x6216;&#x4E8C;&#x8FDB;&#x5236;&#x7A0B;&#x5E8F;&#xFF0C;&#x5229;&#x7528;&#x9759;&#x6001;&#x5206;&#x6790;&#x6280;&#x672F;&#x90FD;&#x53EF;&#x4EE5;&#x4ECE;&#x4E2D;&#x63D0;&#x53D6;&#x51FA;&#x63A7;&#x5236;&#x6D41;&#x3001;&#x8868;&#x8FBE;&#x5F0F;&#x3001;&#x63A5;&#x53E3;&#x548C;&#x6570;&#x636E;&#x6D41;&#x7B49;&#x76F8;&#x5173;&#x7684;&#x4FE1;&#x606F;&#x3002;<br>&#x200B;    &#x7531;&#x4E8E;&#x7A0B;&#x5E8F;&#x672C;&#x8EAB;&#x53EF;&#x4EE5;&#x770B;&#x4F5C;&#x662F;&#x62BD;&#x8C61;&#x7684;&#x3001;&#x590D;&#x6742;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x96C6;&#x5408;&#xFF0C;&#x56E0;&#x6B64;&#x7A0B;&#x5E8F;&#x7684;&#x9759;&#x6001;&#x5206;&#x6790;&#x6280;&#x672F;&#x4E3B;&#x8981;&#x662F;&#x6839;&#x636E;&#x4ECE;&#x7A0B;&#x5E8F;&#x4E2D;&#x63D0;&#x53D6;&#x7684;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#xFF0C;&#x4ECE;&#x4E0D;&#x540C;&#x89D2;&#x5EA6;&#x5BF9;&#x7A0B;&#x5E8F;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8FDB;&#x884C;&#x91CD;&#x5EFA;,&#x6839;&#x636E;&#x6A21;&#x578B;&#x63A8;&#x5BFC;&#x6570;&#x636E;&#x4E4B;&#x95F4;&#x7684;&#x903B;&#x8F91;&#x8F6C;&#x6362;&#x5173;&#x7CFB;&#x3002;</p>
-<h1 id="&#x653E;&#x5F03;&#x5B66;&#x4E60;"><a href="#&#x653E;&#x5F03;&#x5B66;&#x4E60;" class="headerlink" title="&#x653E;&#x5F03;&#x5B66;&#x4E60;"></a>&#x653E;&#x5F03;&#x5B66;&#x4E60;</h1>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-11-06T14:34:30.000Z" itemprop="datePublished">2018-11-06</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#名词解释"><span class="toc-number">1.</span> <span class="toc-text">名词解释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PE文件"><span class="toc-number">1.1.</span> <span class="toc-text">PE文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件偏移地址"><span class="toc-number">1.2.</span> <span class="toc-text">文件偏移地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#入口点-Entry-point"><span class="toc-number">1.3.</span> <span class="toc-text">入口点(Entry point )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基地址-Image-base"><span class="toc-number">1.4.</span> <span class="toc-text">基地址(Image base)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟地址-Virtual-Address-VA"><span class="toc-number">1.5.</span> <span class="toc-text">虚拟地址(Virtual Address,VA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相对虚拟地址-Relative-Virtual-Address-RVA"><span class="toc-number">1.6.</span> <span class="toc-text">相对虚拟地址(Relative Virtual Address,RVA)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用汇编"><span class="toc-number">2.</span> <span class="toc-text">常用汇编</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码分析"><span class="toc-number">3.</span> <span class="toc-text">代码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码静态分析"><span class="toc-number">3.1.</span> <span class="toc-text">代码静态分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-number">3.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行方式"><span class="toc-number">3.1.2.</span> <span class="toc-text">执行方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#采用技术"><span class="toc-number">3.1.3.</span> <span class="toc-text">采用技术</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可检测类型"><span class="toc-number">3.1.4.</span> <span class="toc-text">可检测类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用途"><span class="toc-number">3.1.5.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对比"><span class="toc-number">3.1.6.</span> <span class="toc-text">对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-number">3.1.7.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#简介"><span class="toc-number">3.1.8.</span> <span class="toc-text">简介</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#放弃学习"><span class="toc-number">4.</span> <span class="toc-text">放弃学习</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
+
+
+  <div class="container">
+    <article>
+      <h1>win逆向工程（放弃）</h1>
+      <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h3 id="PE文件"><a href="#PE文件" class="headerlink" title="PE文件"></a>PE文件</h3><p>全称Portable Execute- 可移植的执行体，是windows平台组织程序代码的一种文件格式。<br>常见的exe、dll、sys、ocx、com都属于PE文件。</p>
+<h3 id="文件偏移地址"><a href="#文件偏移地址" class="headerlink" title="文件偏移地址"></a>文件偏移地址</h3><p>PE文件存储在磁盘上，各数据段的地址称为文件偏移地址或物理地址(raw offset )。文件偏移地址从PE文件的第一个字节开始计数，起始值为0。</p>
+<h3 id="入口点-Entry-point"><a href="#入口点-Entry-point" class="headerlink" title="入口点(Entry point )"></a>入口点(Entry point )</h3><p>程序执行的第一行代码</p>
+<h3 id="基地址-Image-base"><a href="#基地址-Image-base" class="headerlink" title="基地址(Image base)"></a>基地址(Image base)</h3><p>文件执行时将被映射到指定内存地址的初始地址，由PE文件本身决定。<br>默认，EXE: 0x00400000, DLL :0X1000000。用链接程序的/BASE选项改变该值</p>
+<h3 id="虚拟地址-Virtual-Address-VA"><a href="#虚拟地址-Virtual-Address-VA" class="headerlink" title="虚拟地址(Virtual Address,VA)"></a>虚拟地址(Virtual Address,VA)</h3><p>保护模式下，程序访问存储器所使用的逻辑地址称为虚拟地址(VA),内存偏移地址(memory offset)</p>
+<h3 id="相对虚拟地址-Relative-Virtual-Address-RVA"><a href="#相对虚拟地址-Relative-Virtual-Address-RVA" class="headerlink" title="相对虚拟地址(Relative Virtual Address,RVA)"></a>相对虚拟地址(Relative Virtual Address,RVA)</h3><p>指内存中相对于PE文件装入地址( 基地址) 的偏移量。RVA=VA - imagebase</p>
+<h2 id="常用汇编"><a href="#常用汇编" class="headerlink" title="常用汇编"></a>常用汇编</h2><p><code>jmp label</code> 跳转到label标号指定的地址（标号要在程序其他位置标出）</p>
+<p><code>jcc label</code> 条件满足，发生转移，IP &lt;— IP + 8位 位移量；条件不满足则顺序执行。</p>
+<ul>
+<li>label是短转移标号，要跳转的地址必须距离当前IP地址 -128～+127个单元的范围之内。</li>
+</ul>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><h3 id="代码静态分析"><a href="#代码静态分析" class="headerlink" title="代码静态分析"></a>代码静态分析</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>代码静态分析是在不执行计算机程序的条件下，对源代码进行分析，找出代码缺陷。</p>
+<h4 id="执行方式"><a href="#执行方式" class="headerlink" title="执行方式"></a>执行方式</h4><p>一般配合静态程序分析工具进行。</p>
+<h4 id="采用技术"><a href="#采用技术" class="headerlink" title="采用技术"></a>采用技术</h4><p>数据流分析、机器学习、语义精简…</p>
+<h4 id="可检测类型"><a href="#可检测类型" class="headerlink" title="可检测类型"></a>可检测类型</h4><p>死锁，空指针，资源泄露，缓冲区溢出，安全漏洞，竞态条件…</p>
+<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><p>程序翻译/编译(编译器) ，程序优化重构，软件缺陷检测等。</p>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p>程序动态分析:需要实际执行程序。<br>程序理解: 静态分析这一术语一般用来形容自动化工具的分析，而人工分析则往往叫做程序理解。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>能够检测所有的代码级别的可执行路径组合，快速，准确。<br>直接面向源码,分析多种问题。<br>在研发阶段开始找到并修复多种问题，节省大量时间/人力成本。</p>
+<p><strong>注意</strong>: 静态分析不是万能的，测试是持续的过程,非一劳永逸。</p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>​    静态分析的对象是Windows内核模块、第三方驱动程序等不开源的二进制代码。<br>首先需要通过反汇编工具对模块进行处理，生成相应的汇编代码，然后在此基础上分析、检查程序的语法、结构、过程、    接口等,恢复和重建程序的数据类型、结构和框架，验证程序功能逻辑是否正确。<br>​    在静态分析过程中，关键的地方是要做到准确提取信息。不论是源程序或二进制程序，利用静态分析技术都可以从中提取出控制流、表达式、接口和数据流等相关的信息。<br>​    由于程序本身可以看作是抽象的、复杂的数据结构集合，因此程序的静态分析技术主要是根据从程序中提取的相关信息，从不同角度对程序的数据结构进行重建,根据模型推导数据之间的逻辑转换关系。</p>
+<h2 id="放弃学习"><a href="#放弃学习" class="headerlink" title="放弃学习"></a>放弃学习</h2>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/11/06/Macos/mac显示隐藏文件/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    macos 显示隐藏文件
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/11/01/Mess/计算机专业名词/" class="ui tiny button">
-                    
-                    计算机专业名词记录(放弃更新）
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#名词解释"><span>名词解释</span></a><ol><li><a href="#PE文件"><span>PE文件</span></a></li><li><a href="#文件偏移地址"><span>文件偏移地址</span></a></li><li><a href="#入口点-Entry-point"><span>入口点(Entry point )</span></a></li><li><a href="#基地址-Image-base"><span>基地址(Image base)</span></a></li><li><a href="#虚拟地址-Virtual-Address-VA"><span>虚拟地址(Virtual Address,VA)</span></a></li><li><a href="#相对虚拟地址-Relative-Virtual-Address-RVA"><span>相对虚拟地址(Relative Virtual Address,RVA)</span></a></li></ol></li></ol><li><a href="#常用汇编"><span>常用汇编</span></a></li><li><a href="#代码分析"><span>代码分析</span></a><ol><li><a href="#代码静态分析"><span>代码静态分析</span></a><ol><li><a href="#定义"><span>定义</span></a></li><li><a href="#执行方式"><span>执行方式</span></a></li><li><a href="#采用技术"><span>采用技术</span></a></li><li><a href="#可检测类型"><span>可检测类型</span></a></li><li><a href="#用途"><span>用途</span></a></li><li><a href="#对比"><span>对比</span></a></li><li><a href="#优点"><span>优点</span></a></li><li><a href="#简介"><span>简介</span></a></li></ol></li></ol></li><li><a href="#放弃学习"><span>放弃学习</span></a>
-                </li></div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

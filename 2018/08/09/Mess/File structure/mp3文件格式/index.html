@@ -1,224 +1,134 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>mp3文件格式 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>mp3文件格式 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="MP3 &amp;#x6587;&amp;#x4EF6;&amp;#x7ED3;&amp;#x6784;MP3&amp;#x6587;&amp;#x4EF6;&amp;#x5927;&amp;#x4F53;&amp;#x5206;&amp;#x4E3A;&amp;#x4E09;&amp;#x90E8;&amp;#x5206;:TAG_V2(ID3V2)&amp;#xFF0C;Frame, TAG_V1(ID3V1)     ID3V2 &amp;#x5305;&amp;#x542B;&amp;#x4E86;&amp;#x4F5C;&amp;#x8">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mp3文件格式">
-<meta property="og:url" content="http://yoursite.com/2018/08/09/Mess/File structure/mp3文件格式/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="MP3 &amp;#x6587;&amp;#x4EF6;&amp;#x7ED3;&amp;#x6784;MP3&amp;#x6587;&amp;#x4EF6;&amp;#x5927;&amp;#x4F53;&amp;#x5206;&amp;#x4E3A;&amp;#x4E09;&amp;#x90E8;&amp;#x5206;:TAG_V2(ID3V2)&amp;#xFF0C;Frame, TAG_V1(ID3V1)     ID3V2 &amp;#x5305;&amp;#x542B;&amp;#x4E86;&amp;#x4F5C;&amp;#x8">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-09T07:05:28.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mp3文件格式">
-<meta name="twitter:description" content="MP3 &amp;#x6587;&amp;#x4EF6;&amp;#x7ED3;&amp;#x6784;MP3&amp;#x6587;&amp;#x4EF6;&amp;#x5927;&amp;#x4F53;&amp;#x5206;&amp;#x4E3A;&amp;#x4E09;&amp;#x90E8;&amp;#x5206;:TAG_V2(ID3V2)&amp;#xFF0C;Frame, TAG_V1(ID3V1)     ID3V2 &amp;#x5305;&amp;#x542B;&amp;#x4E86;&amp;#x4F5C;&amp;#x8">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MP3-文件结构"><span class="toc-number">1.</span> <span class="toc-text">MP3 文件结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ID3V2"><span class="toc-number">1.1.</span> <span class="toc-text">ID3V2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、标签头"><span class="toc-number">1.1.1.</span> <span class="toc-text">1、标签头</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1）标志字节"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1）标志字节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2）标签大小"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">2）标签大小</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、标签帧"><span class="toc-number">1.1.2.</span> <span class="toc-text">2、标签帧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1）帧标识"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1）帧标识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2）大小"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">2）大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3）标志"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">3）标志</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FRAME"><span class="toc-number">1.2.</span> <span class="toc-text">FRAME</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、帧头"><span class="toc-number">1.2.1.</span> <span class="toc-text">1、帧头</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Bitrate-index"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Bitrate index</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sampling-rate-frequency-index"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Sampling rate frequency index</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mode-extension"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Mode extension</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1）计算帧长度"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">1）计算帧长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2）每帧的持续时间"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">2）每帧的持续时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3）CRC校验"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">3）CRC校验</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ID3v1"><span class="toc-number">1.3.</span> <span class="toc-text">ID3v1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unicode与FFFE"><span class="toc-number">1.4.</span> <span class="toc-text">Unicode与FFFE</span></a></li></ol></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Mess/File structure/mp3文件格式" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    mp3文件格式
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h1 id="MP3-&#x6587;&#x4EF6;&#x7ED3;&#x6784;"><a href="#MP3-&#x6587;&#x4EF6;&#x7ED3;&#x6784;" class="headerlink" title="MP3 &#x6587;&#x4EF6;&#x7ED3;&#x6784;"></a>MP3 &#x6587;&#x4EF6;&#x7ED3;&#x6784;</h1><p>MP3&#x6587;&#x4EF6;&#x5927;&#x4F53;&#x5206;&#x4E3A;&#x4E09;&#x90E8;&#x5206;:TAG_V2(ID3V2)&#xFF0C;Frame, TAG_V1(ID3V1) </p>
+  <div class="container">
+    <article>
+      <h1>mp3文件格式</h1>
+      <h1 id="MP3-文件结构"><a href="#MP3-文件结构" class="headerlink" title="MP3 文件结构"></a>MP3 文件结构</h1><p>MP3文件大体分为三部分:TAG_V2(ID3V2)，Frame, TAG_V1(ID3V1) </p>
 <table>
 <thead>
 <tr>
 <th style="text-align:right">ID3V2</th>
-<th>&#x5305;&#x542B;&#x4E86;&#x4F5C;&#x8005;&#xFF0C;&#x4F5C;&#x66F2;&#xFF0C;&#x4E13;&#x8F91;&#x7B49;&#x4FE1;&#x606F;&#xFF0C;&#x957F;&#x5EA6;&#x4E0D;&#x56FA;&#x5B9A;&#xFF0C;&#x6269;&#x5C55;&#x4E86; ID3V1 &#x7684;&#x4FE1;&#x606F;&#x91CF;&#x3002;</th>
+<th>包含了作者，作曲，专辑等信息，长度不固定，扩展了 ID3V1 的信息量。</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:right"><code>Frame   .   .   . Frame</code></td>
-<td>&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x5E27;&#xFF0C;&#x4E2A;&#x6570;&#x7531;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#x548C;&#x5E27;&#x957F;&#x51B3;&#x5B9A;  &#x6BCF;&#x4E2A; FRAME &#x7684;&#x957F;&#x5EA6;&#x53EF;&#x80FD;&#x4E0D;&#x56FA;&#x5B9A;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x56FA;&#x5B9A;&#xFF0C;&#x7531;&#x4F4D;&#x7387; bitrate &#x51B3;&#x5B9A; &#x6BCF;&#x4E2A; FRAME &#x53C8;&#x5206;&#x4E3A;&#x5E27;&#x5934;&#x548C;&#x6570;&#x636E;&#x5B9E;&#x4F53;&#x4E24;&#x90E8;&#x5206;  &#x5E27;&#x5934;&#x8BB0;&#x5F55;&#x4E86; mp3 &#x7684;&#x4F4D;&#x7387;&#xFF0C;&#x91C7;&#x6837;&#x7387;&#xFF0C;&#x7248;&#x672C;&#x7B49;&#x4FE1;&#x606F;&#xFF0C;&#x6BCF;&#x4E2A;&#x5E27;&#x4E4B;&#x95F4;&#x76F8;&#x4E92;&#x72EC;&#x7ACB;</td>
+<td>一系列的帧，个数由文件大小和帧长决定  每个 FRAME 的长度可能不固定，也可能固定，由位率 bitrate 决定 每个 FRAME 又分为帧头和数据实体两部分  帧头记录了 mp3 的位率，采样率，版本等信息，每个帧之间相互独立</td>
 </tr>
 <tr>
 <td style="text-align:right">ID3V1</td>
-<td>&#x5305;&#x542B;&#x4E86;&#x4F5C;&#x8005;&#xFF0C;&#x4F5C;&#x66F2;&#xFF0C;&#x4E13;&#x8F91;&#x7B49;&#x4FE1;&#x606F;&#xFF0C;&#x957F;&#x5EA6;&#x4E3A; 128BYTE&#x3002;</td>
+<td>包含了作者，作曲，专辑等信息，长度为 128BYTE。</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ID3V2"><a href="#ID3V2" class="headerlink" title="ID3V2"></a>ID3V2</h2><p>ID3V2 &#x5230;&#x73B0;&#x5728;&#x4E00;&#x5171;&#x6709;4 &#x4E2A;&#x7248;&#x672C;&#xFF0C;&#x4F46;&#x6D41;&#x884C;&#x7684;&#x64AD;&#x653E;&#x8F6F;&#x4EF6;&#x4E00;&#x822C;&#x53EA;&#x652F;&#x6301;&#x7B2C;3 &#x7248;&#xFF0C; &#x65E2;ID3v2.3&#x3002;</p>
-<p>&#x7531;&#x4E8E;ID3V1 &#x8BB0;&#x5F55;&#x5728;MP3 &#x6587;&#x4EF6;&#x7684;&#x672B;&#x5C3E;&#xFF0C;ID3V2&#x5C31;&#x53EA;&#x597D;&#x8BB0;&#x5F55;&#x5728;MP3 &#x6587;&#x4EF6;&#x7684;&#x9996;&#x90E8;&#x4E86;(&#x5982;&#x679C;&#x6709;&#x4E00;&#x5929;&#x53D1;&#x5E03;ID3V3&#xFF0C;&#x771F;&#x4E0D;&#x77E5;&#x9053;&#x8BE5;&#x8BB0;&#x5F55;&#x5728;&#x54EA;&#x91CC;)&#x3002;&#x4E5F;&#x6B63;&#x662F;&#x7531;&#x4E8E;&#x8FD9;&#x4E2A;&#x539F;&#x56E0;&#xFF0C;&#x5BF9;ID3V2 &#x7684;&#x64CD;&#x4F5C;&#x6BD4;ID3V1 &#x8981;&#x6162;&#x3002;&#x800C;&#x4E14;ID3V2 &#x7ED3;&#x6784;&#x6BD4;ID3V1 &#x7684;&#x7ED3;&#x6784;&#x8981;&#x590D;&#x6742;&#x5F97;&#x591A;&#xFF0C;&#x4F46;&#x6BD4;&#x524D;&#x8005;&#x5168;&#x9762;&#x4E14;&#x53EF;&#x4EE5;&#x4F38;&#x7F29;&#x548C;&#x6269;&#x5C55;&#x3002;</p>
-<p>&#x4E0B;&#x9762;&#x5C31;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B;ID3V2.3&#xFF1A;</p>
-<p><strong>&#x6BCF;&#x4E2A;ID3V2.3 &#x7684;&#x6807;&#x7B7E;&#x90FD;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#x5934;&#x548C;&#x82E5;&#x5E72;&#x4E2A;&#x6807;&#x7B7E;&#x5E27;&#x6216;&#x4E00;&#x4E2A;&#x6269;&#x5C55;&#x6807;&#x7B7E;&#x5934;&#x7EC4;&#x6210;&#x3002;</strong>&#x5173;&#x4E8E;&#x66F2;&#x76EE;&#x7684;&#x4FE1;&#x606F;&#x5982;&#x6807;&#x9898;&#x3001;&#x4F5C;&#x8005;&#x7B49;&#x90FD;&#x5B58;&#x653E;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x6807;&#x7B7E;&#x5E27;&#x4E2D;&#xFF0C;&#x6269;&#x5C55;&#x6807;&#x7B7E;&#x5934;&#x548C;&#x6807;&#x7B7E;&#x5E27;&#x5E76;&#x4E0D;&#x662F;&#x5FC5;&#x8981;&#x7684;&#xFF0C;&#x4F46;&#x6BCF;&#x4E2A;&#x6807;&#x7B7E;&#x81F3;&#x5C11;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#x5E27;&#x3002;&#x6807;&#x7B7E;&#x5934;&#x548C;&#x6807;&#x7B7E;&#x5E27;&#x4E00;&#x8D77;&#x987A;&#x5E8F;&#x5B58;&#x653E;&#x5728;MP3 &#x6587;&#x4EF6;&#x7684;&#x9996;&#x90E8;&#x3002;</p>
-<h3 id="1&#x3001;&#x6807;&#x7B7E;&#x5934;"><a href="#1&#x3001;&#x6807;&#x7B7E;&#x5934;" class="headerlink" title="1&#x3001;&#x6807;&#x7B7E;&#x5934;"></a>1&#x3001;&#x6807;&#x7B7E;&#x5934;</h3><p>&#x5728;&#x6587;&#x4EF6;&#x7684;&#x9996;&#x90E8;&#x987A;&#x5E8F;&#x8BB0;&#x5F55;10&#x4E2A;&#x5B57;&#x8282;&#x7684;ID3V2.3 &#x7684;&#x5934;&#x90E8;&#x3002;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p>char Header[3];  /<em>&#x5FC5;&#x987B;&#x4E3A;&#x201D;ID3&#x201D;&#x5426;&#x5219;&#x8BA4;&#x4E3A;&#x6807;&#x7B7E;&#x4E0D;&#x5B58;&#x5728;</em>/</p>
-<p>char Ver;        /<em>&#x7248;&#x672C;&#x53F7;ID3V2.3 &#x5C31;&#x8BB0;&#x5F55;3</em>/</p>
-<p>char Revision;   /<em>&#x526F;&#x7248;&#x672C;&#x53F7;&#x6B64;&#x7248;&#x672C;&#x8BB0;&#x5F55;&#x4E3A;0</em>/</p>
-<p>char Flag;       /<em>&#x5B58;&#x653E;&#x6807;&#x5FD7;&#x7684;&#x5B57;&#x8282;&#xFF0C;&#x8FD9;&#x4E2A;&#x7248;&#x672C;&#x53EA;&#x5B9A;&#x4E49;&#x4E86;&#x4E09;&#x4F4D;&#xFF0C;&#x7A0D;&#x540E;&#x8BE6;&#x7EC6;&#x89E3;&#x8BF4;</em>/</p>
-<p>char Size[4];    /<em>&#x6807;&#x7B7E;&#x5927;&#x5C0F;&#xFF0C;&#x5305;&#x62EC;&#x6807;&#x7B7E;&#x5934;&#x7684;10&#x4E2A;&#x5B57;&#x8282;&#x548C;&#x6240;&#x6709;&#x7684;&#x6807;&#x7B7E;&#x5E27;&#x7684;&#x5927;&#x5C0F;</em>/</p>
-<h4 id="1&#xFF09;&#x6807;&#x5FD7;&#x5B57;&#x8282;"><a href="#1&#xFF09;&#x6807;&#x5FD7;&#x5B57;&#x8282;" class="headerlink" title="1&#xFF09;&#x6807;&#x5FD7;&#x5B57;&#x8282;"></a>1&#xFF09;&#x6807;&#x5FD7;&#x5B57;&#x8282;</h4><p>&#x6807;&#x5FD7;&#x5B57;&#x8282;&#x4E00;&#x822C;&#x4E3A;0&#xFF0C;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A; abc00000</p>
-<p>a &#x2013; &#x8868;&#x793A;&#x662F;&#x5426;&#x4F7F;&#x7528;Unsynchronisation(&#x4E00;&#x822C;&#x4E0D;&#x8BBE;&#x7F6E;)</p>
-<p>b &#x2013; &#x8868;&#x793A;&#x662F;&#x5426;&#x6709;&#x6269;&#x5C55;&#x5934;&#x90E8;(&#x4E00;&#x822C;&#x4E0D;&#x8BBE;&#x7F6E;)</p>
-<p>c &#x2013; &#x8868;&#x793A;&#x662F;&#x5426;&#x4E3A;&#x6D4B;&#x8BD5;&#x6807;&#x7B7E;(&#x4E00;&#x822C;&#x4E0D;&#x8BBE;&#x7F6E;)</p>
-<p><em>&#x7B2C;6&#x4E2A;&#x5B57;&#x8282;&#xFF1A;&#x5B58;&#x653E;&#x6807;&#x5FD7;&#x7684;&#x5B57;&#x8282;&#xFF0C;&#x53EA;&#x5B9A;&#x4E49;&#x4E86;&#x4E09;&#x4F4D;&#xFF0C;&#x8FD9;&#x91CC;&#x503C;&#x4E3A;0</em> </p>
-<h4 id="2&#xFF09;&#x6807;&#x7B7E;&#x5927;&#x5C0F;"><a href="#2&#xFF09;&#x6807;&#x7B7E;&#x5927;&#x5C0F;" class="headerlink" title="2&#xFF09;&#x6807;&#x7B7E;&#x5927;&#x5C0F;"></a>2&#xFF09;&#x6807;&#x7B7E;&#x5927;&#x5C0F;</h4><p>&#x4E00;&#x5171;&#x56DB;&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x4F46;&#x6BCF;&#x4E2A;&#x5B57;&#x8282;&#x53EA;&#x7528;7&#x4F4D;&#xFF0C;&#x6700;&#x9AD8;&#x4F4D;&#x4E0D;&#x4F7F;&#x7528;&#x6052;&#x4E3A;0&#x3002;&#x6240;&#x4EE5;&#x683C;&#x5F0F;&#x5982;&#x4E0B;</p>
+<h2 id="ID3V2"><a href="#ID3V2" class="headerlink" title="ID3V2"></a>ID3V2</h2><p>ID3V2 到现在一共有4 个版本，但流行的播放软件一般只支持第3 版， 既ID3v2.3。</p>
+<p>由于ID3V1 记录在MP3 文件的末尾，ID3V2就只好记录在MP3 文件的首部了(如果有一天发布ID3V3，真不知道该记录在哪里)。也正是由于这个原因，对ID3V2 的操作比ID3V1 要慢。而且ID3V2 结构比ID3V1 的结构要复杂得多，但比前者全面且可以伸缩和扩展。</p>
+<p>下面就介绍一下ID3V2.3：</p>
+<p><strong>每个ID3V2.3 的标签都一个标签头和若干个标签帧或一个扩展标签头组成。</strong>关于曲目的信息如标题、作者等都存放在不同的标签帧中，扩展标签头和标签帧并不是必要的，但每个标签至少要有一个标签帧。标签头和标签帧一起顺序存放在MP3 文件的首部。</p>
+<h3 id="1、标签头"><a href="#1、标签头" class="headerlink" title="1、标签头"></a>1、标签头</h3><p>在文件的首部顺序记录10个字节的ID3V2.3 的头部。数据结构如下：</p>
+<p>char Header[3];  /<em>必须为”ID3”否则认为标签不存在</em>/</p>
+<p>char Ver;        /<em>版本号ID3V2.3 就记录3</em>/</p>
+<p>char Revision;   /<em>副版本号此版本记录为0</em>/</p>
+<p>char Flag;       /<em>存放标志的字节，这个版本只定义了三位，稍后详细解说</em>/</p>
+<p>char Size[4];    /<em>标签大小，包括标签头的10个字节和所有的标签帧的大小</em>/</p>
+<h4 id="1）标志字节"><a href="#1）标志字节" class="headerlink" title="1）标志字节"></a>1）标志字节</h4><p>标志字节一般为0，定义如下： abc00000</p>
+<p>a – 表示是否使用Unsynchronisation(一般不设置)</p>
+<p>b – 表示是否有扩展头部(一般不设置)</p>
+<p>c – 表示是否为测试标签(一般不设置)</p>
+<p><em>第6个字节：存放标志的字节，只定义了三位，这里值为0</em> </p>
+<h4 id="2）标签大小"><a href="#2）标签大小" class="headerlink" title="2）标签大小"></a>2）标签大小</h4><p>一共四个字节，但每个字节只用7位，最高位不使用恒为0。所以格式如下</p>
 <p>0xxxxxxx 0xxxxxxx 0xxxxxxx 0xxxxxxx</p>
-<p>&#x8BA1;&#x7B97;&#x5927;&#x5C0F;&#x65F6;&#x8981;&#x5C06;0 &#x53BB;&#x6389;&#xFF0C;&#x5F97;&#x5230;&#x4E00;&#x4E2A;28 &#x4F4D;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#xFF0C;&#x5C31;&#x662F;&#x6807;&#x7B7E;&#x5927;&#x5C0F;&#xFF0C;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>计算大小时要将0 去掉，得到一个28 位的二进制数，就是标签大小，计算公式如下：</p>
 <p>total_size  = (Size[0]&amp;0x7F)<em>0x200000+ (Size[1]&amp;0x7F)</em>0x4000 + (Size[2]&amp;0x7F)*0x80 +(Size[3]&amp;0x7F)</p>
-<p><strong>&#x6CE8;&#x610F;&#xFF1A;&#x8FD9;&#x91CC;&#x7684;&#x5E27;&#x5927;&#x5C0F;&#xFF0C;&#x5E76;&#x4E0D;&#x5305;&#x542B;&#x5E27;&#x5934;&#x7684;10&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x53EA;&#x8868;&#x793A;&#x5E27;&#x5185;&#x5BB9;&#x7684;&#x5927;&#x5C0F;.</strong></p>
-<h3 id="2&#x3001;&#x6807;&#x7B7E;&#x5E27;"><a href="#2&#x3001;&#x6807;&#x7B7E;&#x5E27;" class="headerlink" title="2&#x3001;&#x6807;&#x7B7E;&#x5E27;"></a>2&#x3001;&#x6807;&#x7B7E;&#x5E27;</h3><p>&#x6BCF;&#x4E2A;&#x6807;&#x7B7E;&#x5E27;&#x90FD;&#x6709;&#x4E00;&#x4E2A;10&#x4E2A;&#x5B57;&#x8282;&#x7684;&#x5E27;&#x5934;&#x548C;&#x81F3;&#x5C11;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x7684;&#x4E0D;&#x56FA;&#x5B9A;&#x957F;&#x5EA6;&#x7684;&#x5185;&#x5BB9;&#x7EC4;&#x6210;&#x3002;&#x5B83;&#x4EEC;&#x4E5F;&#x662F;&#x987A;&#x5E8F;&#x5B58;&#x653E;&#x5728;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x548C;&#x6807;&#x7B7E;&#x5934;&#x548C;&#x5176;&#x4ED6;&#x7684;&#x6807;&#x7B7E;&#x5E27;&#x4E5F;&#x6CA1;&#x6709;&#x7279;&#x6B8A;&#x7684;&#x5B57;&#x7B26;&#x5206;&#x9694;&#x3002;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x5E27;&#x7684;&#x5185;&#x5BB9;&#x53EA;&#x6709;&#x4ECE;&#x5E27;&#x5934;&#x4E2D;&#x7684;&#x5230;&#x5185;&#x5BB9;&#x5927;&#x5C0F;&#x540E;&#x624D;&#x80FD;&#x8BFB;&#x51FA;&#xFF0C;&#x8BFB;&#x53D6;&#x65F6;&#x8981;&#x6CE8;&#x610F;&#x5927;&#x5C0F;&#xFF0C;&#x4E0D;&#x8981;&#x5C06;&#x5176;&#x4ED6;&#x5E27;&#x7684;&#x5185;&#x5BB9;&#x6216;&#x5E27;&#x5934;&#x8BFB;&#x5165;&#x3002; </p>
-<p><strong>&#x5E27;&#x5934;&#x7684;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</strong></p>
-<p>char ID[4];  /<em>&#x7528;&#x56DB;&#x4E2A;&#x5B57;&#x7B26;&#x6807;&#x8BC6;&#x4E00;&#x4E2A;&#x5E27;&#xFF0C;&#x8BF4;&#x660E;&#x5176;&#x5185;&#x5BB9;&#xFF0C;&#x7A0D;&#x540E;&#x6709;&#x5E38;&#x7528;&#x7684;&#x6807;&#x8BC6;&#x5BF9;&#x7167;&#x8868;</em>/</p>
-<p>char Size[4]; /<em>&#x5E27;&#x5185;&#x5BB9;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x4E0D;&#x5305;&#x62EC;&#x5E27;&#x5934;&#xFF0C;&#x4E0D;&#x5F97;&#x5C0F;&#x4E8E;1</em>/</p>
-<p>char Flags[2]; /<em>&#x5B58;&#x653E;&#x6807;&#x5FD7;&#xFF0C;&#x53EA;&#x5B9A;&#x4E49;&#x4E86;6 &#x4F4D;</em>/</p>
-<h4 id="1&#xFF09;&#x5E27;&#x6807;&#x8BC6;"><a href="#1&#xFF09;&#x5E27;&#x6807;&#x8BC6;" class="headerlink" title="1&#xFF09;&#x5E27;&#x6807;&#x8BC6;"></a>1&#xFF09;&#x5E27;&#x6807;&#x8BC6;</h4><p>&#x7528;&#x56DB;&#x4E2A;&#x5B57;&#x7B26;&#x6807;&#x8BC6;&#x4E00;&#x4E2A;&#x5E27;&#xFF0C;&#x8BF4;&#x660E;&#x4E00;&#x4E2A;&#x5E27;&#x7684;&#x5185;&#x5BB9;&#x542B;&#x4E49;&#xFF0C;&#x5E38;&#x7528;&#x7684;&#x5BF9;&#x7167;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p>TIT2=&#x6807;&#x9898;&#x8868;&#x793A;&#x5185;&#x5BB9;&#x4E3A;&#x8FD9;&#x9996;&#x6B4C;&#x7684;&#x6807;&#x9898;&#xFF0C;&#x4E0B;&#x540C;</p>
-<p>TPE1=&#x4F5C;&#x8005;</p>
-<p>TALB=&#x4E13;&#x96C6;</p>
-<p>TRCK=&#x97F3;&#x8F68;&#x683C;&#x5F0F;&#xFF1A;N/M &#x5176;&#x4E2D;N &#x4E3A;&#x4E13;&#x96C6;&#x4E2D;&#x7684;&#x7B2C;N &#x9996;&#xFF0C;M&#x4E3A;&#x4E13;&#x96C6;&#x4E2D;&#x5171;M &#x9996;&#xFF0C;N&#x548C;M &#x4E3A;ASCII &#x7801;&#x8868;&#x793A;&#x7684;&#x6570;&#x5B57;</p>
-<p>TYER=&#x5E74;&#x4EE3;&#x662F;&#x7528;ASCII &#x7801;&#x8868;&#x793A;&#x7684;&#x6570;&#x5B57;</p>
-<p>TCON=&#x7C7B;&#x578B;&#x76F4;&#x63A5;&#x7528;&#x5B57;&#x7B26;&#x4E32;&#x8868;&#x793A;</p>
-<p>COMM=&#x5907;&#x6CE8;&#x683C;&#x5F0F;&#xFF1A;&#x201D;eng\0&#x5907;&#x6CE8;&#x5185;&#x5BB9;&#x201D;&#xFF0C;&#x5176;&#x4E2D;eng &#x8868;&#x793A;&#x5907;&#x6CE8;&#x6240;&#x4F7F;&#x7528;&#x7684;&#x81EA;&#x7136;&#x8BED;&#x8A00;</p>
-<h4 id="2&#xFF09;&#x5927;&#x5C0F;"><a href="#2&#xFF09;&#x5927;&#x5C0F;" class="headerlink" title="2&#xFF09;&#x5927;&#x5C0F;"></a>2&#xFF09;&#x5927;&#x5C0F;</h4><p>&#x8FD9;&#x4E2A;&#x53EF;&#x6CA1;&#x6709;&#x6807;&#x7B7E;&#x5934;&#x7684;&#x7B97;&#x6CD5;&#x90A3;&#x4E48;&#x9EBB;&#x70E6;&#xFF0C;&#x6BCF;&#x4E2A;&#x5B57;&#x8282;&#x7684;8 &#x4F4D;&#x5168;&#x7528;&#xFF0C;&#x683C;&#x5F0F;&#x5982;&#x4E0B;</p>
+<p><strong>注意：这里的帧大小，并不包含帧头的10个字节，只表示帧内容的大小.</strong></p>
+<h3 id="2、标签帧"><a href="#2、标签帧" class="headerlink" title="2、标签帧"></a>2、标签帧</h3><p>每个标签帧都有一个10个字节的帧头和至少一个字节的不固定长度的内容组成。它们也是顺序存放在文件中，和标签头和其他的标签帧也没有特殊的字符分隔。得到一个完整的帧的内容只有从帧头中的到内容大小后才能读出，读取时要注意大小，不要将其他帧的内容或帧头读入。 </p>
+<p><strong>帧头的定义如下：</strong></p>
+<p>char ID[4];  /<em>用四个字符标识一个帧，说明其内容，稍后有常用的标识对照表</em>/</p>
+<p>char Size[4]; /<em>帧内容的大小，不包括帧头，不得小于1</em>/</p>
+<p>char Flags[2]; /<em>存放标志，只定义了6 位</em>/</p>
+<h4 id="1）帧标识"><a href="#1）帧标识" class="headerlink" title="1）帧标识"></a>1）帧标识</h4><p>用四个字符标识一个帧，说明一个帧的内容含义，常用的对照如下：</p>
+<p>TIT2=标题表示内容为这首歌的标题，下同</p>
+<p>TPE1=作者</p>
+<p>TALB=专集</p>
+<p>TRCK=音轨格式：N/M 其中N 为专集中的第N 首，M为专集中共M 首，N和M 为ASCII 码表示的数字</p>
+<p>TYER=年代是用ASCII 码表示的数字</p>
+<p>TCON=类型直接用字符串表示</p>
+<p>COMM=备注格式：”eng\0备注内容”，其中eng 表示备注所使用的自然语言</p>
+<h4 id="2）大小"><a href="#2）大小" class="headerlink" title="2）大小"></a>2）大小</h4><p>这个可没有标签头的算法那么麻烦，每个字节的8 位全用，格式如下</p>
 <p>xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx</p>
-<p>&#x7B97;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>算法如下：</p>
 <p>int FSize = Size[0]<em>0x100000000 + Size[1]</em>0x10000+ Size[2]*0x100 + Size[3];</p>
-<p><strong>&#x6CE8;&#x610F;&#xFF1A;&#x8FD9;&#x91CC;&#x7684;&#x5E27;&#x5927;&#x5C0F;&#xFF0C;&#x5E76;&#x4E0D;&#x5305;&#x542B;&#x5E27;&#x5934;&#x7684;10&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x53EA;&#x8868;&#x793A;&#x5E27;&#x5185;&#x5BB9;&#x7684;&#x5927;&#x5C0F;</strong></p>
-<h4 id="3&#xFF09;&#x6807;&#x5FD7;"><a href="#3&#xFF09;&#x6807;&#x5FD7;" class="headerlink" title="3&#xFF09;&#x6807;&#x5FD7;"></a>3&#xFF09;&#x6807;&#x5FD7;</h4><p>&#x53EA;&#x5B9A;&#x4E49;&#x4E86;6 &#x4F4D;&#xFF0C;&#x53E6;&#x5916;&#x7684;10 &#x4F4D;&#x4E3A;0&#xFF0C;&#x4F46;&#x5927;&#x90E8;&#x5206;&#x7684;&#x60C5;&#x51B5;&#x4E0B;16 &#x4F4D;&#x90FD;&#x4E3A;0 &#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;<strong>abc00000ijk00000</strong> </p>
-<p>a &#x2013; &#x6807;&#x7B7E;&#x4FDD;&#x62A4;&#x6807;&#x5FD7;&#xFF0C;&#x8BBE;&#x7F6E;&#x65F6;&#x8BA4;&#x4E3A;&#x6B64;&#x5E27;&#x4F5C;&#x5E9F;</p>
-<p>b &#x2013; &#x6587;&#x4EF6;&#x4FDD;&#x62A4;&#x6807;&#x5FD7;&#xFF0C;&#x8BBE;&#x7F6E;&#x65F6;&#x8BA4;&#x4E3A;&#x6B64;&#x5E27;&#x4F5C;&#x5E9F;</p>
-<p>c &#x2013; &#x53EA;&#x8BFB;&#x6807;&#x5FD7;&#xFF0C;&#x8BBE;&#x7F6E;&#x65F6;&#x8BA4;&#x4E3A;&#x6B64;&#x5E27;&#x4E0D;&#x80FD;&#x4FEE;&#x6539;(&#x4F46;&#x6211;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x8F6F;&#x4EF6;&#x7406;&#x4F1A;&#x8FD9;&#x4E2A;&#x6807;&#x5FD7;)</p>
-<p>i &#x2013; &#x538B;&#x7F29;&#x6807;&#x5FD7;&#xFF0C;&#x8BBE;&#x7F6E;&#x65F6;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x5B58;&#x653E;&#x4E24;&#x4E2A;BCD &#x7801;&#x8868;&#x793A;&#x6570;&#x5B57;</p>
-<p>j &#x2013; &#x52A0;&#x5BC6;&#x6807;&#x5FD7;(&#x6CA1;&#x6709;&#x89C1;&#x8FC7;&#x54EA;&#x4E2A;MP3 &#x6587;&#x4EF6;&#x7684;&#x6807;&#x7B7E;&#x7528;&#x4E86;&#x52A0;&#x5BC6;)</p>
-<p>k &#x2013; &#x7EC4;&#x6807;&#x5FD7;&#xFF0C;&#x8BBE;&#x7F6E;&#x65F6;&#x8BF4;&#x660E;&#x6B64;&#x5E27;&#x548C;&#x5176;&#x4ED6;&#x7684;&#x67D0;&#x5E27;&#x662F;&#x4E00;&#x7EC4;</p>
-<h2 id="FRAME"><a href="#FRAME" class="headerlink" title="FRAME"></a>FRAME</h2><p> &#x6BCF;&#x4E2A; FRAME &#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x5E27;&#x5934; FRAMEHEADER&#xFF0C;&#x957F;&#x5EA6;&#x662F; 4BYTE(32bit),&#x5E27;&#x5934;&#x540E;&#x9762;&#x53EF;&#x80FD;&#x6709;&#x4E24;&#x4E2A;&#x5B57;&#x8282;&#x7684; CRC &#x6821; </p>
-<p>&#x9A8C;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x5B57;&#x8282;&#x7684;&#x662F;&#x5426;&#x5B58;&#x5728;&#x51B3;&#x5B9A;&#x4E8E; FRAMEHEADER &#x4FE1;&#x606F;&#x7684;&#x7B2C; 16bit&#xFF0C;&#x4E3A; 0 &#x5219;&#x5E27;&#x5934;&#x540E;&#x9762;&#x65E0;&#x6821;&#x9A8C;&#xFF0C;&#x4E3A; 1 &#x5219;&#x6709;&#x6821;&#x9A8C;, &#x6821;&#x9A8C;&#x503C;&#x957F;&#x5EA6;&#x4E3A; 2 &#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x7D27;&#x8DDF;&#x5728; FRAMEHEADER &#x540E;&#x9762;&#xFF0C;&#x63A5;&#x7740;&#x5C31;&#x662F;&#x5E27;&#x7684;&#x5B9E;&#x4F53;&#x6570;&#x636E;&#x4E86;&#xFF0C;&#x683C;&#x5F0F;&#x5982;&#x4E0B;: </p>
+<p><strong>注意：这里的帧大小，并不包含帧头的10个字节，只表示帧内容的大小</strong></p>
+<h4 id="3）标志"><a href="#3）标志" class="headerlink" title="3）标志"></a>3）标志</h4><p>只定义了6 位，另外的10 位为0，但大部分的情况下16 位都为0 就可以了。格式如下：<strong>abc00000ijk00000</strong> </p>
+<p>a – 标签保护标志，设置时认为此帧作废</p>
+<p>b – 文件保护标志，设置时认为此帧作废</p>
+<p>c – 只读标志，设置时认为此帧不能修改(但我没有找到一个软件理会这个标志)</p>
+<p>i – 压缩标志，设置时一个字节存放两个BCD 码表示数字</p>
+<p>j – 加密标志(没有见过哪个MP3 文件的标签用了加密)</p>
+<p>k – 组标志，设置时说明此帧和其他的某帧是一组</p>
+<h2 id="FRAME"><a href="#FRAME" class="headerlink" title="FRAME"></a>FRAME</h2><p> 每个 FRAME 都有一个帧头 FRAMEHEADER，长度是 4BYTE(32bit),帧头后面可能有两个字节的 CRC 校 </p>
+<p>验，这两个字节的是否存在决定于 FRAMEHEADER 信息的第 16bit，为 0 则帧头后面无校验，为 1 则有校验, 校验值长度为 2 个字节，紧跟在 FRAMEHEADER 后面，接着就是帧的实体数据了，格式如下: </p>
 <table>
 <thead>
 <tr>
@@ -231,11 +141,11 @@
 <tr>
 <td>4 BYTE</td>
 <td>0 OR 2 BYTE</td>
-<td>&#x957F;&#x5EA6;&#x7531;&#x5E27;&#x5934;&#x8BA1;&#x7B97;&#x5F97;&#x51FA;</td>
+<td>长度由帧头计算得出</td>
 </tr>
 </tbody>
 </table>
-<h3 id="1&#x3001;&#x5E27;&#x5934;"><a href="#1&#x3001;&#x5E27;&#x5934;" class="headerlink" title="1&#x3001;&#x5E27;&#x5934;"></a>1&#x3001;&#x5E27;&#x5934;</h3><p>FRAMEHEADER &#x683C;&#x5F0F;&#x5982;&#x4E0B;:<br><strong>AAAAAAAA AAABBCCD EEEEFFGH IIJJKLMM</strong> </p>
+<h3 id="1、帧头"><a href="#1、帧头" class="headerlink" title="1、帧头"></a>1、帧头</h3><p>FRAMEHEADER 格式如下:<br><strong>AAAAAAAA AAABBCCD EEEEFFGH IIJJKLMM</strong> </p>
 <table>
 <thead>
 <tr>
@@ -489,8 +399,8 @@
 <p>V1  -  MPEG  Version  1</p>
 <p>V2 - MPEG Version 2 and Version 2.5</p>
 <p>L1 - Layer I L2 - Layer II L3 - Layer III</p>
-<p>&#x201C;free&#x201D; means variable bitrate.</p>
-<p>&#x201C;bad&#x201D; means that this is not an allowed value</p>
+<p>“free” means variable bitrate.</p>
+<p>“bad” means that this is not an allowed value</p>
 <h4 id="Sampling-rate-frequency-index"><a href="#Sampling-rate-frequency-index" class="headerlink" title="Sampling rate frequency index"></a>Sampling rate frequency index</h4><p>(values are in Hz)</p>
 <table>
 <thead>
@@ -559,7 +469,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="1&#xFF09;&#x8BA1;&#x7B97;&#x5E27;&#x957F;&#x5EA6;"><a href="#1&#xFF09;&#x8BA1;&#x7B97;&#x5E27;&#x957F;&#x5EA6;" class="headerlink" title="1&#xFF09;&#x8BA1;&#x7B97;&#x5E27;&#x957F;&#x5EA6;"></a>1&#xFF09;&#x8BA1;&#x7B97;&#x5E27;&#x957F;&#x5EA6;</h4><p>&#x6211;&#x4EEC;&#x9996;&#x5148;&#x533A;&#x5206;&#x4E24;&#x4E2A;&#x672F;&#x8BED;&#xFF1A;&#x5E27;&#x5927;&#x5C0F;&#x548C;&#x5E27;&#x957F;&#x5EA6;&#x3002;&#x5E27;&#x5927;&#x5C0F;&#x5373;&#x6BCF;&#x5E27;&#x91C7;&#x6837;&#x6570;&#x8868;&#x793A;&#x4E00;&#x5E27;&#x4E2D;&#x91C7;&#x6837;&#x7684;&#x4E2A;&#x6570;&#xFF0C;&#x8FD9;&#x662F;&#x6052;&#x5B9A;&#x503C;&#x3002;&#x5176;&#x503C;&#x5982;&#x4E0B;&#x8868;&#x6240;&#x793A;</p>
+<h4 id="1）计算帧长度"><a href="#1）计算帧长度" class="headerlink" title="1）计算帧长度"></a>1）计算帧长度</h4><p>我们首先区分两个术语：帧大小和帧长度。帧大小即每帧采样数表示一帧中采样的个数，这是恒定值。其值如下表所示</p>
 <table>
 <thead>
 <tr>
@@ -590,193 +500,107 @@
 </tr>
 </tbody>
 </table>
-<p> &#x5E27;&#x957F;&#x5EA6;&#x662F;&#x538B;&#x7F29;&#x65F6;&#x6BCF;&#x4E00;&#x5E27;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x5305;&#x62EC;&#x5E27;&#x5934;&#x3002;&#x5B83;&#x5C06;&#x586B;&#x5145;&#x7684;&#x7A7A;&#x4F4D;&#x4E5F;&#x8BA1;&#x7B97;&#x5728;&#x5185;&#x3002;LayerI&#x7684;&#x4E00;&#x4E2A;&#x7A7A;&#x4F4D;&#x957F;4&#x5B57;&#x8282;&#xFF0C;LayerII&#x548C;LayerIII&#x7684;&#x7A7A;&#x4F4D;&#x662F;1&#x5B57;&#x8282;&#x3002;&#x5F53;&#x8BFB;&#x53D6;MPEG&#x6587;&#x4EF6;&#x65F6;&#x5FC5;&#x987B;&#x8BA1;&#x7B97;&#x8BE5;&#x503C;&#x4EE5;&#x4FBF;&#x627E;&#x5230;&#x76F8;&#x90BB;&#x7684;&#x5E27;&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x56E0;&#x4E3A;&#x6709;&#x586B;&#x5145;&#x548C;&#x6BD4;&#x7279;&#x7387;&#x53D8;&#x6362;&#xFF0C;&#x5E27;&#x957F;&#x5EA6;&#x53EF;&#x80FD;&#x53D8;&#x5316;&#x3002;</p>
-<p>&#x4ECE;&#x5934;&#x4E2D;&#x8BFB;&#x53D6;&#x6BD4;&#x7279;&#x7387;&#xFF0C;&#x91C7;&#x6837;&#x9891;&#x7387;&#x548C;&#x586B;&#x5145;&#x7684;&#x503C;&#x540E;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#xFF0C;</p>
-<p>LyaerI&#x4F7F;&#x7528;&#x516C;&#x5F0F;&#xFF1A;</p>
-<p><strong>&#x5E27;&#x957F;&#x5EA6;&#xFF08;&#x5B57;&#x8282;&#xFF09; = (( &#x6BCF;&#x5E27;&#x91C7;&#x6837;&#x6570;/ 8 * &#x6BD4;&#x7279;&#x7387; ) / &#x91C7;&#x6837;&#x9891;&#x7387; ) + &#x586B;&#x5145; * 4</strong></p>
-<p>LyerII&#x548C;LyaerIII&#x4F7F;&#x7528;&#x516C;&#x5F0F;&#xFF1A;</p>
-<p><strong>&#x5E27;&#x957F;&#x5EA6;&#xFF08;&#x5B57;&#x8282;&#xFF09;= (( &#x6BCF;&#x5E27;&#x91C7;&#x6837;&#x6570;/ 8 * &#x6BD4;&#x7279;&#x7387; ) / &#x91C7;&#x6837;&#x9891;&#x7387; ) + &#x586B;&#x5145;</strong></p>
-<p>&#x4F8B;&#xFF1A;LayerIII &#x6BD4;&#x7279;&#x7387; 128000&#xFF0C;&#x91C7;&#x6837;&#x9891;&#x7387; 44100&#xFF0C;&#x586B;&#x5145;0  =&#x3009;&#x5E27;&#x5927;&#x5C0F; 417&#x5B57;&#x8282;&#x3002;</p>
-<p>(1152 / 8 * 128K)/44.1K = 417 (&#x5B57;&#x8282;)</p>
-<h4 id="2&#xFF09;&#x6BCF;&#x5E27;&#x7684;&#x6301;&#x7EED;&#x65F6;&#x95F4;"><a href="#2&#xFF09;&#x6BCF;&#x5E27;&#x7684;&#x6301;&#x7EED;&#x65F6;&#x95F4;" class="headerlink" title="2&#xFF09;&#x6BCF;&#x5E27;&#x7684;&#x6301;&#x7EED;&#x65F6;&#x95F4;"></a>2&#xFF09;&#x6BCF;&#x5E27;&#x7684;&#x6301;&#x7EED;&#x65F6;&#x95F4;</h4><p>&#x6BCF;&#x5E27;&#x6301;&#x7EED;&#x65F6;&#x95F4;(&#x6BEB;&#x79D2;) = &#x6BCF;&#x5E27;&#x91C7;&#x6837;&#x6570; / &#x91C7;&#x6837;&#x9891;&#x7387; * 1000</p>
-<h4 id="3&#xFF09;CRC&#x6821;&#x9A8C;"><a href="#3&#xFF09;CRC&#x6821;&#x9A8C;" class="headerlink" title="3&#xFF09;CRC&#x6821;&#x9A8C;"></a>3&#xFF09;CRC&#x6821;&#x9A8C;</h4><p>&#x5982;&#x679C;&#x5E27;&#x5934;&#x7684;&#x6821;&#x9A8C;&#x4F4D;&#x4E3A;0&#xFF0C;&#x5219;&#x5E27;&#x5934;&#x540E;&#x5C31;&#x6709;&#x4E00;&#x4E2A;16&#x4F4D;&#x7684;CRC&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x662F;big-endian&#x7684;&#x503C;&#xFF0C;&#x628A;&#x8FD9;&#x4E2A;&#x503C;&#x548C;&#x8BE5;&#x5E27;&#x901A;&#x8FC7;&#x8BA1;&#x7B97;&#x5F97;&#x51FA;&#x7684;CRC&#x503C;&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#x5C31;&#x53EF;&#x4EE5;&#x5F97;&#x77E5;&#x8BE5;&#x5E27;&#x662F;&#x5426;&#x6709;&#x6548;&#x3002;</p>
-<h2 id="ID3v1"><a href="#ID3v1" class="headerlink" title="ID3v1"></a>ID3v1</h2><p>ID3V1&#x6807;&#x51C6;&#x5E76;&#x4E0D;&#x5468;&#x5168;&#xFF0C;&#x5B58;&#x653E;&#x7684;&#x4FE1;&#x606F;&#x5C11;&#xFF0C;&#x65E0;&#x6CD5;&#x5B58;&#x653E;&#x6B4C;&#x8BCD;&#xFF0C;&#x65E0;&#x6CD5;&#x5F55;&#x5165;&#x4E13;&#x8F91;&#x5C01;&#x9762;&#x3001;&#x56FE;&#x7247;&#x7B49;&#x3002;ID3V2&#x662F;&#x4E00;&#x4E2A;&#x76F8;&#x5F53;&#x5B8C;&#x5907;&#x7684;&#x6807;&#x51C6;&#xFF0C;&#x4F46;&#x7ED9;&#x7F16;&#x5199;&#x8F6F;&#x4EF6;&#x5E26;&#x6765;&#x56F0;&#x96BE;&#xFF0C;&#x867D;&#x7136;&#x8D5E;&#x6210;&#x6B64;&#x683C;&#x5F0F;&#x7684;&#x4EBA;&#x5F88;&#x591A;&#xFF0C;&#x5728;&#x8F6F;&#x4EF6;&#x4E2D;&#x7EDD;&#x5927;&#x591A;&#x6570;MP3&#x4ECD;&#x5728;&#x4F7F;&#x7528;ID3V1&#x6807;&#x51C6;&#x3002;ID3v1&#x6807;&#x7B7E;&#x5305;&#x542B;&#x827A;&#x672F;&#x5BB6;&#xFF0C;&#x6807;&#x9898;&#xFF0C;&#x5531;&#x7247;&#x96C6;&#xFF0C;&#x53D1;&#x5E03;&#x5E74;&#x4EE3;&#x548C;&#x6D41;&#x6D3E;&#x3002;&#x53E6;&#x5916;&#x8FD8;&#x6709;&#x989D;&#x5916;&#x7684;&#x6CE8;&#x91CA;&#x7A7A;&#x95F4;&#x3002;&#x4F4D;&#x4E8E;&#x97F3;&#x9891;&#x6587;&#x4EF6;&#x7684;&#x6700;&#x540E;&#x56FA;&#x5B9A;&#x4E3A;128&#x5B57;&#x8282;&#x3002;&#x53EF;&#x4EE5;&#x8BFB;&#x53D6;&#x8BE5;&#x6587;&#x4EF6;&#x7684;&#x6700;&#x540E;&#x8FD9;128&#x5B57;&#x8282;&#x83B7;&#x5F97;&#x6807;&#x7B7E;&#x3002;</p>
-<p>ID3V1&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p> 帧长度是压缩时每一帧的长度，包括帧头。它将填充的空位也计算在内。LayerI的一个空位长4字节，LayerII和LayerIII的空位是1字节。当读取MPEG文件时必须计算该值以便找到相邻的帧。注意：因为有填充和比特率变换，帧长度可能变化。</p>
+<p>从头中读取比特率，采样频率和填充的值后可以进行计算，</p>
+<p>LyaerI使用公式：</p>
+<p><strong>帧长度（字节） = (( 每帧采样数/ 8 * 比特率 ) / 采样频率 ) + 填充 * 4</strong></p>
+<p>LyerII和LyaerIII使用公式：</p>
+<p><strong>帧长度（字节）= (( 每帧采样数/ 8 * 比特率 ) / 采样频率 ) + 填充</strong></p>
+<p>例：LayerIII 比特率 128000，采样频率 44100，填充0  =〉帧大小 417字节。</p>
+<p>(1152 / 8 * 128K)/44.1K = 417 (字节)</p>
+<h4 id="2）每帧的持续时间"><a href="#2）每帧的持续时间" class="headerlink" title="2）每帧的持续时间"></a>2）每帧的持续时间</h4><p>每帧持续时间(毫秒) = 每帧采样数 / 采样频率 * 1000</p>
+<h4 id="3）CRC校验"><a href="#3）CRC校验" class="headerlink" title="3）CRC校验"></a>3）CRC校验</h4><p>如果帧头的校验位为0，则帧头后就有一个16位的CRC值，这个值是big-endian的值，把这个值和该帧通过计算得出的CRC值进行比较就可以得知该帧是否有效。</p>
+<h2 id="ID3v1"><a href="#ID3v1" class="headerlink" title="ID3v1"></a>ID3v1</h2><p>ID3V1标准并不周全，存放的信息少，无法存放歌词，无法录入专辑封面、图片等。ID3V2是一个相当完备的标准，但给编写软件带来困难，虽然赞成此格式的人很多，在软件中绝大多数MP3仍在使用ID3V1标准。ID3v1标签包含艺术家，标题，唱片集，发布年代和流派。另外还有额外的注释空间。位于音频文件的最后固定为128字节。可以读取该文件的最后这128字节获得标签。</p>
+<p>ID3V1结构如下：</p>
 <p>AAABBBBB BBBBBBBB BBBBBBBB BBBBBBBB<br>BCCCCCCC CCCCCCCC CCCCCCCC CCCCCCCD<br>DDDDDDDD DDDDDDDD DDDDDDDD DDDDDEEE<br>EFFFFFFF FFFFFFFF FFFFFFFF FFFFFGHI</p>
-<p>  <strong>&#x8868;3.1  ID3 V1.0&#x6587;&#x4EF6;&#x5C3E;&#x8BF4;&#x660E;</strong></p>
+<p>  <strong>表3.1  ID3 V1.0文件尾说明</strong></p>
 <table>
 <thead>
 <tr>
-<th>&#x5B57;&#x8282;</th>
-<th>&#x957F;&#x5EA6; (&#x5B57;&#x8282;)</th>
-<th>&#x8BF4; &#x660E;</th>
+<th>字节</th>
+<th>长度 (字节)</th>
+<th>说 明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1-3(A)</td>
 <td>3</td>
-<td>&#x5B58;&#x653E;&#x201C;TAG&#x201D;&#x5B57;&#x7B26;&#xFF0C;&#x8868;&#x793A;ID3 V1.0&#x6807;&#x51C6;&#xFF0C;&#x7D27;&#x63A5;&#x5176;&#x540E;&#x7684;&#x662F;&#x6B4C;&#x66F2;&#x4FE1;&#x606F;&#x3002;</td>
+<td>存放“TAG”字符，表示ID3 V1.0标准，紧接其后的是歌曲信息。</td>
 </tr>
 <tr>
 <td>4-33(B)</td>
 <td>30</td>
-<td>&#x6B4C;&#x540D;</td>
+<td>歌名</td>
 </tr>
 <tr>
 <td>34-63(C)</td>
 <td>30</td>
-<td>&#x4F5C;&#x8005;</td>
+<td>作者</td>
 </tr>
 <tr>
 <td>64-93(D)</td>
 <td>30</td>
-<td>&#x4E13;&#x8F91;&#x540D;</td>
+<td>专辑名</td>
 </tr>
 <tr>
 <td>94-97(E)</td>
 <td>4</td>
-<td>&#x5E74;&#x4EFD;</td>
+<td>年份</td>
 </tr>
 <tr>
 <td>98-125(F)</td>
 <td>28</td>
-<td>&#x9644;&#x6CE8;</td>
+<td>附注</td>
 </tr>
 <tr>
 <td>126(G)</td>
 <td>1</td>
-<td>&#x4FDD;&#x7559;&#x4F4D;</td>
+<td>保留位</td>
 </tr>
 <tr>
 <td>127(H)</td>
 <td>1</td>
-<td>&#x97F3;&#x8F68;&#x53F7;</td>
+<td>音轨号</td>
 </tr>
 <tr>
 <td>128(I)</td>
 <td>1</td>
-<td>MP3&#x97F3;&#x4E50;&#x7C7B;&#x522B;&#xFF0C;&#x5171;147&#x79CD;&#x3002;</td>
+<td>MP3音乐类别，共147种。</td>
 </tr>
 </tbody>
 </table>
-<p>ID3V1 &#x7684;&#x5404;&#x9879;&#x4FE1;&#x606F;&#x90FD;&#x662F;&#x987A;&#x5E8F;&#x5B58;&#x653E;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6807;&#x8BC6;&#x5C06;&#x5176;&#x5206;&#x5F00;&#xFF0C;&#x6BD4;&#x5982;&#x6807;&#x9898;&#x4FE1;&#x606F;&#x4E0D;&#x8DB3;30 &#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x5219;&#x4F7F;&#x7528;&#x2019;&#x2019;\0&#x2019;&#x2019;&#x586B;&#x5145;&#xFF0C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>ID3V1 的各项信息都是顺序存放，没有任何标识将其分开，比如标题信息不足30 个字节，则使用’’\0’’填充，数据结构定义如下：</p>
 <p>typedef struct tagID3V1  {</p>
-<p>charHeader[3];         /<em>&#x6807;&#x7B7E;&#x5934;&#x5FC5;&#x987B;&#x662F;&#x201D;TAG&#x201D;&#x5426;&#x5219;&#x8BA4;&#x4E3A;&#x6CA1;&#x6709;&#x6807;&#x7B7E;</em>/</p>
-<p>charTitle[30];         /<em>&#x6807;&#x9898;</em>/</p>
-<p>charArtist[30];        /<em>&#x4F5C;&#x8005;</em>/</p>
-<p>charAlbum[30];         /<em>&#x4E13;&#x96C6;</em>/</p>
-<p>charYear[4];           /<em>&#x51FA;&#x54C1;&#x5E74;&#x4EE3;</em>/</p>
-<p>charComment[28];       /<em>&#x5907;&#x6CE8;</em>/</p>
-<p>charreserve;           /<em>&#x4FDD;&#x7559;</em>/</p>
-<p>chartrack;             /<em>&#x97F3;&#x8F68;</em>/</p>
-<p>charGenre;             /<em>&#x7C7B;&#x578B;</em>/</p>
+<p>charHeader[3];         /<em>标签头必须是”TAG”否则认为没有标签</em>/</p>
+<p>charTitle[30];         /<em>标题</em>/</p>
+<p>charArtist[30];        /<em>作者</em>/</p>
+<p>charAlbum[30];         /<em>专集</em>/</p>
+<p>charYear[4];           /<em>出品年代</em>/</p>
+<p>charComment[28];       /<em>备注</em>/</p>
+<p>charreserve;           /<em>保留</em>/</p>
+<p>chartrack;             /<em>音轨</em>/</p>
+<p>charGenre;             /<em>类型</em>/</p>
 <p>} ID3V1, *pID3V1;</p>
-<h2 id="Unicode&#x4E0E;FFFE"><a href="#Unicode&#x4E0E;FFFE" class="headerlink" title="Unicode&#x4E0E;FFFE"></a>Unicode&#x4E0E;FFFE</h2><p>&#x6807;&#x7B7E;&#x5E27;&#x7684;&#x5185;&#x5BB9;&#x5F00;&#x5934;&#x90FD;&#x6709; 01 ff fe &#x4E09;&#x4E2A;&#x5B57;&#x8282;&#x3002;&#x539F;&#x56E0;&#x662F;&#x4E3A;&#x4E86;&#x5224;&#x522B;&#x5927;&#x7AEF;&#x8FD8;&#x662F;&#x5C0F;&#x7AEF;&#x7F16;&#x7801;&#x3002;</p>
-<p>&#x5728;UCS&#x7F16;&#x7801;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;&#x53EB;&#x505A;&#x201D;ZERO WIDTH NO-BREAK SPACE&#x201D;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x5B83;&#x7684;&#x7F16;&#x7801;&#x662F;FEFF&#x3002;&#x800C;FFFE&#x5728;UCS&#x4E2D;&#x662F;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x5E94;&#x8BE5;&#x51FA;&#x73B0;&#x5728;&#x5B9E;&#x9645;&#x4F20;&#x8F93;&#x4E2D;&#x3002;UCS&#x89C4;&#x8303;&#x5EFA;&#x8BAE;&#x6211;&#x4EEC;&#x5728;&#x4F20;&#x8F93;&#x5B57;&#x8282;&#x6D41;&#x524D;&#xFF0C;&#x5148;&#x4F20;&#x8F93;&#x5B57;&#x7B26;&#x201D;ZERO WIDTH NO-BREAK SPACE&#x201D;&#x3002;<br>&#x8FD9;&#x6837;&#x5982;&#x679C;&#x63A5;&#x6536;&#x8005;&#x6536;&#x5230;FEFF&#xFF0C;&#x5C31;&#x8868;&#x660E;&#x8FD9;&#x4E2A;&#x5B57;&#x8282;&#x6D41;&#x662F;Big-Endian&#x7684;&#xFF1B;&#x5982;&#x679C;&#x6536;&#x5230;FFFE&#xFF0C;&#x5C31;&#x8868;&#x660E;&#x8FD9;&#x4E2A;&#x5B57;&#x8282;&#x6D41;&#x662F;Little-Endian&#x7684;&#x3002;&#x56E0;&#x6B64;&#x5B57;&#x7B26;&#x201D;ZERO WIDTH NO-BREAK SPACE&#x201D;&#x53C8;&#x88AB;&#x79F0;&#x4F5C;BOM&#x3002;</p>
+<h2 id="Unicode与FFFE"><a href="#Unicode与FFFE" class="headerlink" title="Unicode与FFFE"></a>Unicode与FFFE</h2><p>标签帧的内容开头都有 01 ff fe 三个字节。原因是为了判别大端还是小端编码。</p>
+<p>在UCS编码中有一个叫做”ZERO WIDTH NO-BREAK SPACE”的字符，它的编码是FEFF。而FFFE在UCS中是不存在的字符，所以不应该出现在实际传输中。UCS规范建议我们在传输字节流前，先传输字符”ZERO WIDTH NO-BREAK SPACE”。<br>这样如果接收者收到FEFF，就表明这个字节流是Big-Endian的；如果收到FFFE，就表明这个字节流是Little-Endian的。因此字符”ZERO WIDTH NO-BREAK SPACE”又被称作BOM。</p>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-08-09T07:05:27.000Z" itemprop="datePublished">2018-08-09</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/08/09/Frontend/DTD入门/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    DTD入门
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/07/28/Network/Ccie/DM-VPN/" class="ui tiny button">
-                    
-                    CCIE DM-VPN
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#MP3-文件结构"><span>MP3 文件结构</span></a><ol><li><a href="#ID3V2"><span>ID3V2</span></a><ol><li><a href="#1、标签头"><span>1、标签头</span></a><ol><li><a href="#1）标志字节"><span>1）标志字节</span></a></li><li><a href="#2）标签大小"><span>2）标签大小</span></a></li></ol></li><li><a href="#2、标签帧"><span>2、标签帧</span></a><ol><li><a href="#1）帧标识"><span>1）帧标识</span></a></li><li><a href="#2）大小"><span>2）大小</span></a></li><li><a href="#3）标志"><span>3）标志</span></a></li></ol></li></ol></li><li><a href="#FRAME"><span>FRAME</span></a><ol><li><a href="#1、帧头"><span>1、帧头</span></a><ol><li><a href="#Bitrate-index"><span>Bitrate index</span></a></li><li><a href="#Sampling-rate-frequency-index"><span>Sampling rate frequency index</span></a></li><li><a href="#Mode-extension"><span>Mode extension</span></a></li><li><a href="#1）计算帧长度"><span>1）计算帧长度</span></a></li><li><a href="#2）每帧的持续时间"><span>2）每帧的持续时间</span></a></li><li><a href="#3）CRC校验"><span>3）CRC校验</span></a></li></ol></li></ol></li><li><a href="#ID3v1"><span>ID3v1</span></a></li><li><a href="#Unicode与FFFE"><span>Unicode与FFFE</span></a></li></ol></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

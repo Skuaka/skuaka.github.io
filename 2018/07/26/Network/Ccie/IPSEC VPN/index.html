@@ -1,356 +1,180 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE IPSEC VPN | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE IPSEC VPN | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="IPSEC VPNIp security vpn&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5DE5;&amp;#x4F5C;&amp;#x5728;&amp;#x7F51;&amp;#x7EDC;&amp;#x5C42;&amp;#x7684; VPN &amp;#x6280;&amp;#x672F;&amp;#x3002; &amp;#x6570;&amp;#x636E;&amp;#x5728;&amp;#x516C;&amp;#x5171;&amp;#x7F51;&amp;#x7EDC;&amp;#">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE IPSEC VPN">
-<meta property="og:url" content="http://yoursite.com/2018/07/26/Network/Ccie/IPSEC VPN/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="IPSEC VPNIp security vpn&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5DE5;&amp;#x4F5C;&amp;#x5728;&amp;#x7F51;&amp;#x7EDC;&amp;#x5C42;&amp;#x7684; VPN &amp;#x6280;&amp;#x672F;&amp;#x3002; &amp;#x6570;&amp;#x636E;&amp;#x5728;&amp;#x516C;&amp;#x5171;&amp;#x7F51;&amp;#x7EDC;&amp;#">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:39:41.473Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE IPSEC VPN">
-<meta name="twitter:description" content="IPSEC VPNIp security vpn&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5DE5;&amp;#x4F5C;&amp;#x5728;&amp;#x7F51;&amp;#x7EDC;&amp;#x5C42;&amp;#x7684; VPN &amp;#x6280;&amp;#x672F;&amp;#x3002; &amp;#x6570;&amp;#x636E;&amp;#x5728;&amp;#x516C;&amp;#x5171;&amp;#x7F51;&amp;#x7EDC;&amp;#">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IPSEC-VPN"><span class="toc-number">1.</span> <span class="toc-text">IPSEC VPN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据在公共网络上面临的风险"><span class="toc-number">1.1.</span> <span class="toc-text">数据在公共网络上面临的风险</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPSEC-VPN-解决的问题"><span class="toc-number">1.2.</span> <span class="toc-text">IPSEC VPN 解决的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KEY：密匙"><span class="toc-number">1.3.</span> <span class="toc-text">KEY：密匙</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对称密钥、非对称密钥"><span class="toc-number">1.3.1.</span> <span class="toc-text">对称密钥、非对称密钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IPSEC-VPN-的加密密钥"><span class="toc-number">1.3.2.</span> <span class="toc-text">IPSEC VPN 的加密密钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#密钥产生过程和共享方法"><span class="toc-number">1.3.3.</span> <span class="toc-text">密钥产生过程和共享方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPSEC-VPN-的关键组件"><span class="toc-number">1.4.</span> <span class="toc-text">IPSEC VPN 的关键组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPSEC-VPN-配置流程"><span class="toc-number">1.5.</span> <span class="toc-text">IPSEC VPN 配置流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESP-和-AH"><span class="toc-number">1.6.</span> <span class="toc-text">ESP 和 AH</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPSEC-VPN-的模式"><span class="toc-number">1.7.</span> <span class="toc-text">IPSEC VPN 的模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NAT-对-IPSEC-VPN-的影响"><span class="toc-number">1.8.</span> <span class="toc-text">NAT 对 IPSEC VPN 的影响</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束"><span class="toc-number">2.</span> <span class="toc-text">结束</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/IPSEC VPN" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE IPSEC VPN
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h1 id="IPSEC-VPN"><a href="#IPSEC-VPN" class="headerlink" title="IPSEC VPN"></a>IPSEC VPN</h1><p>Ip security vpn&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x5DE5;&#x4F5C;&#x5728;&#x7F51;&#x7EDC;&#x5C42;&#x7684; VPN &#x6280;&#x672F;&#x3002;</p>
-<h3 id="&#x6570;&#x636E;&#x5728;&#x516C;&#x5171;&#x7F51;&#x7EDC;&#x4E0A;&#x9762;&#x4E34;&#x7684;&#x98CE;&#x9669;"><a href="#&#x6570;&#x636E;&#x5728;&#x516C;&#x5171;&#x7F51;&#x7EDC;&#x4E0A;&#x9762;&#x4E34;&#x7684;&#x98CE;&#x9669;" class="headerlink" title="&#x6570;&#x636E;&#x5728;&#x516C;&#x5171;&#x7F51;&#x7EDC;&#x4E0A;&#x9762;&#x4E34;&#x7684;&#x98CE;&#x9669;"></a>&#x6570;&#x636E;&#x5728;&#x516C;&#x5171;&#x7F51;&#x7EDC;&#x4E0A;&#x9762;&#x4E34;&#x7684;&#x98CE;&#x9669;</h3><ol class="ui list">
-<li>&#x4E0D;&#x52A0;&#x5BC6;&#xFF0C;&#x660E;&#x6587;&#x4F20;&#x9012;</li>
-<li>&#x6CA1;&#x6709;&#x5B8C;&#x6574;&#x6027;&#x4FDD;&#x62A4;&#xFF0C;&#x6570;&#x636E;&#x5BB9;&#x6613;&#x88AB;&#x7BE1;&#x6539;</li>
-<li>&#x6CA1;&#x6709;&#x5BF9;&#x7B49;&#x4F53;&#x8BA4;&#x8BC1;&#xFF0C;&#x5BB9;&#x6613;&#x53D7;&#x5230;&#x4E2D;&#x95F4;&#x4EBA;&#x653B;&#x51FB;</li>
-<li>&#x62B5;&#x8D56;</li>
+  <div class="container">
+    <article>
+      <h1>CCIE IPSEC VPN</h1>
+      <h2 id="IPSEC-VPN"><a href="#IPSEC-VPN" class="headerlink" title="IPSEC VPN"></a>IPSEC VPN</h2><p>Ip security vpn，是一个工作在网络层的 VPN 技术。</p>
+<h3 id="数据在公共网络上面临的风险"><a href="#数据在公共网络上面临的风险" class="headerlink" title="数据在公共网络上面临的风险"></a>数据在公共网络上面临的风险</h3><ol>
+<li>不加密，明文传递</li>
+<li>没有完整性保护，数据容易被篡改</li>
+<li>没有对等体认证，容易受到中间人攻击</li>
+<li>抵赖</li>
 </ol>
-<h3 id="IPSEC-VPN-&#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;"><a href="#IPSEC-VPN-&#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;" class="headerlink" title="IPSEC VPN &#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;"></a>IPSEC VPN &#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;</h3><ol class="ui list">
-<li><p>&#x5BF9;&#x7B49;&#x4F53;&#x8BA4;&#x8BC1;&#xFF0C;&#x6570;&#x636E;&#x53D1;&#x9001;&#x4E4B;&#x524D;&#x5FC5;&#x987B;&#x7ECF;&#x8FC7;&#x8BA4;&#x8BC1;&#x4E14;&#x901A;&#x8FC7;</p>
-<p>&#x53E3;&#x4EE4;&#x8BA4;&#x8BC1;&#x3001;&#x6570;&#x5B57;&#x8BC1;&#x4E66;&#xFF08;&#x8BA1;&#x7B97;&#x673A;&#x4E16;&#x754C;&#x7684;&#x8EAB;&#x4EFD;&#x8BC1;&#xFF09;&#x3001;&#x52A0;&#x5BC6;&#x968F;&#x673A;&#x6570;</p>
+<h3 id="IPSEC-VPN-解决的问题"><a href="#IPSEC-VPN-解决的问题" class="headerlink" title="IPSEC VPN 解决的问题"></a>IPSEC VPN 解决的问题</h3><ol>
+<li><p>对等体认证，数据发送之前必须经过认证且通过</p>
+<p>口令认证、数字证书（计算机世界的身份证）、加密随机数</p>
 </li>
-<li><p>&#x6570;&#x636E;&#x52A0;&#x5BC6;</p>
-<p>des&#x3001;3des&#x3001;aes</p>
+<li><p>数据加密</p>
+<p>des、3des、aes</p>
 </li>
-<li><p>&#x6570;&#x636E;&#x5B8C;&#x6574;&#x6027;&#x4FDD;&#x62A4;</p>
-<p>HMAC&#xFF1A;&#x54C8;&#x5E0C;&#x6D88;&#x606F;&#x8BA4;&#x8BC1;&#x7801;</p>
+<li><p>数据完整性保护</p>
+<p>HMAC：哈希消息认证码</p>
 </li>
-<li><p>&#x6570;&#x5B57;&#x7B7E;&#x540D;&#xFF0C;&#x9632;&#x62B5;&#x8D56;</p>
-<p>DSA&#xFF08;RSA &#x516C;&#x53F8;&#x5F00;&#x53D1;&#xFF09;</p>
-</li>
-</ol>
-<h3 id="KEY&#xFF1A;&#x5BC6;&#x5319;"><a href="#KEY&#xFF1A;&#x5BC6;&#x5319;" class="headerlink" title="KEY&#xFF1A;&#x5BC6;&#x5319;"></a>KEY&#xFF1A;&#x5BC6;&#x5319;</h3><p>KEY &#x662F;&#x4E00;&#x4E2A;&#x5DE5;&#x5177;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x4E0E;&#x7B97;&#x6CD5;&#x4F5C;&#x4E3A;&#x53D8;&#x91CF;&#x51FA;&#x73B0;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x53C2;&#x4E0E;&#x8BA4;&#x8BC1;&#x4F5C;&#x4E3A;&#x53E3;&#x4EE4;&#x51FA;&#x73B0;&#x3002;</p>
-<h4 id="&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x3001;&#x975E;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;"><a href="#&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x3001;&#x975E;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;" class="headerlink" title="&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x3001;&#x975E;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;"></a>&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x3001;&#x975E;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;</h4><p>&#xFF08;&#x52A0;&#x5BC6;&#x7B97;&#x6CD5;&#x4E2D;&#x7684; KEY &#x7684;&#x7406;&#x89E3;&#xFF09;</p>
-<ol class="ui list">
-<li><p>&#x5BF9;&#x7B49;&#x5BC6;&#x94A5;&#x53CA;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x52A0;&#x5BC6;&#x7B97;&#x6CD5;</p>
-<p>&#x52A0;&#x5BC6;&#x89E3;&#x5BC6;&#x5BC6;&#x94A5;&#x662F;&#x540C;&#x4E00;&#x628A;</p>
-<p><strong>&#x574F;&#x5904;</strong>&#xFF1A;&#x4E0D;&#x591F;&#x5B89;&#x5168;&#x3001;Key &#x7684;&#x5171;&#x4EAB;&#x5B58;&#x5728;&#x98CE;&#x9669;</p>
-<p><strong>&#x597D;&#x5904;</strong>&#xFF1A;&#x7B80;&#x5355;&#x9AD8;&#x6548;</p>
-</li>
-<li><p>&#x975E;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x53CA;&#x975E;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x7B97;&#x6CD5;</p>
-<p>&#x975E;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x662F;&#x4E00;&#x5BF9;KEY&#xFF0C;&#x516C;&#x94A5;&#x548C;&#x5BC6;&#x94A5;&#x3002;</p>
-<p>&#x516C;&#x94A5;&#x6700;&#x540E;&#x4F1A;&#x516C;&#x5F00;&#xFF0C;&#x5BC6;&#x94A5;&#x4E0D;&#x516C;&#x5F00;&#x3002;</p>
-<p>&#x516C;&#x94A5;&#x52A0;&#x5BC6;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x53EA;&#x6709;&#x79C1;&#x94A5;&#x53EF;&#x4EE5;&#x89E3;&#x5F00;&#x3002;</p>
-<p>&#x79C1;&#x94A5;&#x52A0;&#x5BC6;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x53EA;&#x6709;&#x516C;&#x94A5;&#x53EF;&#x4EE5;&#x89E3;&#x5F00;&#x3002;</p>
-<p><strong>&#x574F;&#x5904;</strong>&#xFF1A;&#x590D;&#x6742;&#xFF0C;&#x6570;&#x636E;&#x4F1A;&#x53D8;&#x5E9E;&#x5927;</p>
-<p><strong>&#x597D;&#x5904;</strong>&#xFF1A;&#x5B89;&#x5168;&#x53EF;&#x9760;</p>
+<li><p>数字签名，防抵赖</p>
+<p>DSA（RSA 公司开发）</p>
 </li>
 </ol>
-<h4 id="IPSEC-VPN-&#x7684;&#x52A0;&#x5BC6;&#x5BC6;&#x94A5;"><a href="#IPSEC-VPN-&#x7684;&#x52A0;&#x5BC6;&#x5BC6;&#x94A5;" class="headerlink" title="IPSEC VPN &#x7684;&#x52A0;&#x5BC6;&#x5BC6;&#x94A5;"></a>IPSEC VPN &#x7684;&#x52A0;&#x5BC6;&#x5BC6;&#x94A5;</h4><p>&#x975E;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x5171;&#x4EAB;&#x662F;&#x7528;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x53CA;&#x7B97;&#x6CD5;&#x4FDD;&#x62A4;</p>
-<p>&#x6570;&#x636E;&#x672C;&#x8EAB;&#x662F;&#x7528;&#x975E;&#x5BF9;&#x79F0;&#x5BC6;&#x94A5;&#x53CA;&#x7B97;&#x6CD5;&#x4FDD;&#x62A4;</p>
-<h4 id="&#x5BC6;&#x94A5;&#x4EA7;&#x751F;&#x8FC7;&#x7A0B;&#x548C;&#x5171;&#x4EAB;&#x65B9;&#x6CD5;"><a href="#&#x5BC6;&#x94A5;&#x4EA7;&#x751F;&#x8FC7;&#x7A0B;&#x548C;&#x5171;&#x4EAB;&#x65B9;&#x6CD5;" class="headerlink" title="&#x5BC6;&#x94A5;&#x4EA7;&#x751F;&#x8FC7;&#x7A0B;&#x548C;&#x5171;&#x4EAB;&#x65B9;&#x6CD5;"></a>&#x5BC6;&#x94A5;&#x4EA7;&#x751F;&#x8FC7;&#x7A0B;&#x548C;&#x5171;&#x4EAB;&#x65B9;&#x6CD5;</h4><p>DH &#x7B97;&#x6CD5;&#x8D1F;&#x8D23;&#x4EA7;&#x751F;&#x5BC6;&#x94A5;&#x548C;&#x5171;&#x4EAB;&#x5BC6;&#x94A5;</p>
-<h3 id="IPSEC-VPN-&#x7684;&#x5173;&#x952E;&#x7EC4;&#x4EF6;"><a href="#IPSEC-VPN-&#x7684;&#x5173;&#x952E;&#x7EC4;&#x4EF6;" class="headerlink" title="IPSEC VPN &#x7684;&#x5173;&#x952E;&#x7EC4;&#x4EF6;"></a>IPSEC VPN &#x7684;&#x5173;&#x952E;&#x7EC4;&#x4EF6;</h3><p>ISAKMP&#xFF1A;&#x4E92;&#x8054;&#x7F51;&#x5B89;&#x5168;&#x5173;&#x8054;&#x5BC6;&#x94A5;&#x7BA1;&#x7406;&#x534F;&#x8BAE;</p>
-<ul class="ui list">
-<li><p>ISA&#xFF1A;&#x901A;&#x8BAF;&#x53CC;&#x65B9;&#x5EFA;&#x7ACB;&#x4E86;&#x5B89;&#x5168;&#x8FDE;&#x63A5;&#x5C31;&#x53EB;&#x505A;&#x4E00;&#x4E2A; SA &#x6210;&#x529F;&#x4E86;&#x3002;</p>
-<p>IPSEC VPN &#x7684; SA &#x6709;&#x4E24;&#x4E2A;&#xFF1A;&#x4E00;&#x4E2A;&#x662F;&#x4FDD;&#x62A4; VPN &#x7684;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x4FDD;&#x62A4;&#x6570;&#x636E;&#x7684;&#x3002;</p>
+<h3 id="KEY：密匙"><a href="#KEY：密匙" class="headerlink" title="KEY：密匙"></a>KEY：密匙</h3><p>KEY 是一个工具，可以参与算法作为变量出现，也可以参与认证作为口令出现。</p>
+<h4 id="对称密钥、非对称密钥"><a href="#对称密钥、非对称密钥" class="headerlink" title="对称密钥、非对称密钥"></a>对称密钥、非对称密钥</h4><p>（加密算法中的 KEY 的理解）</p>
+<ol>
+<li><p>对等密钥及对称密钥加密算法</p>
+<p>加密解密密钥是同一把</p>
+<p><strong>坏处</strong>：不够安全、Key 的共享存在风险</p>
+<p><strong>好处</strong>：简单高效</p>
 </li>
-<li><p>KMP&#xFF1A;KMP &#x662F;&#x901A;&#x8FC7; IKE&#xFF08;&#x4E92;&#x8054;&#x7F51;&#x5BC6;&#x94A5;&#x4EA4;&#x6362;&#x673A;&#x5236;&#xFF09;&#x5B8C;&#x6210;&#x7684;&#xFF0C;IKE &#x4E13;&#x95E8;&#x8D1F;&#x8D23;&#x4EA7;&#x751F;&#x5BC6;&#x94A5;&#xFF0C;&#x5171;&#x4EAB;&#x5BC6;&#x94A5;&#x3002;</p>
-<p>IKE &#x5206;&#x4E24;&#x4E2A;&#x9636;&#x6BB5;&#xFF1A;&#x9636;&#x6BB5;1&#x4EA7;&#x751F;&#x548C;&#x5171;&#x4EAB;VPN&#x81EA;&#x8EAB;&#x6240;&#x9700;&#x7684;&#x5BC6;&#x94A5;&#xFF0C;&#x9636;&#x6BB5;2&#x5229;&#x7528;&#x9636;&#x6BB5;1&#x7684;&#x5BC6;&#x94A5;&#x7B97;&#x51FA;&#x65B0;&#x5BC6;&#x94A5;&#xFF0C;&#x7528;&#x4E8E;&#x4FDD;&#x62A4;&#x7528;&#x6237;&#x6570;&#x636E;&#x3002;</p>
+<li><p>非对称密钥及非对称密钥算法</p>
+<p>非对称密钥是一对KEY，公钥和密钥。</p>
+<p>公钥最后会公开，密钥不公开。</p>
+<p>公钥加密的数据，只有私钥可以解开。</p>
+<p>私钥加密的数据，只有公钥可以解开。</p>
+<p><strong>坏处</strong>：复杂，数据会变庞大</p>
+<p><strong>好处</strong>：安全可靠</p>
+</li>
+</ol>
+<h4 id="IPSEC-VPN-的加密密钥"><a href="#IPSEC-VPN-的加密密钥" class="headerlink" title="IPSEC VPN 的加密密钥"></a>IPSEC VPN 的加密密钥</h4><p>非对称密钥共享是用对称密钥及算法保护</p>
+<p>数据本身是用非对称密钥及算法保护</p>
+<h4 id="密钥产生过程和共享方法"><a href="#密钥产生过程和共享方法" class="headerlink" title="密钥产生过程和共享方法"></a>密钥产生过程和共享方法</h4><p>DH 算法负责产生密钥和共享密钥</p>
+<h3 id="IPSEC-VPN-的关键组件"><a href="#IPSEC-VPN-的关键组件" class="headerlink" title="IPSEC VPN 的关键组件"></a>IPSEC VPN 的关键组件</h3><p>ISAKMP：互联网安全关联密钥管理协议</p>
+<ul>
+<li><p>ISA：通讯双方建立了安全连接就叫做一个 SA 成功了。</p>
+<p>IPSEC VPN 的 SA 有两个：一个是保护 VPN 的，一个是保护数据的。</p>
+</li>
+<li><p>KMP：KMP 是通过 IKE（互联网密钥交换机制）完成的，IKE 专门负责产生密钥，共享密钥。</p>
+<p>IKE 分两个阶段：阶段1产生和共享VPN自身所需的密钥，阶段2利用阶段1的密钥算出新密钥，用于保护用户数据。</p>
 </li>
 </ul>
-<h3 id="IPSEC-VPN-&#x914D;&#x7F6E;&#x6D41;&#x7A0B;"><a href="#IPSEC-VPN-&#x914D;&#x7F6E;&#x6D41;&#x7A0B;" class="headerlink" title="IPSEC VPN &#x914D;&#x7F6E;&#x6D41;&#x7A0B;"></a>IPSEC VPN &#x914D;&#x7F6E;&#x6D41;&#x7A0B;</h3><p>IOS &#x4E2D;&#x5FC5;&#x987B;&#x5E26; K9 &#x5B57;&#x6837;&#xFF0C;&#x624D;&#x652F;&#x6301;&#x52A0;&#x5BC6;&#x7B97;&#x6CD5;&#xFF1A; <code>show version</code></p>
-<p>&#x6B65;&#x9AA4;1&#xFF1A;&#x5F00;&#x542F; ISAKMP</p>
+<h3 id="IPSEC-VPN-配置流程"><a href="#IPSEC-VPN-配置流程" class="headerlink" title="IPSEC VPN 配置流程"></a>IPSEC VPN 配置流程</h3><p>IOS 中必须带 K9 字样，才支持加密算法： <code>show version</code></p>
+<p>步骤1：开启 ISAKMP</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp enable</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;2&#xFF1A;&#x914D;&#x7F6E; IPSEC VPN &#x7B56;&#x7565;1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crypto policy &lt;seq&gt;</span><br><span class="line">authentication &lt;pre-share/rsa&gt; //&#x8BA4;&#x8BC1;&#x65B9;&#x5F0F;</span><br><span class="line">hash &lt;md5/sha&gt; //&#x5B9A;&#x4E49;&#x5B8C;&#x6574;&#x6027;&#x4FDD;&#x62A4;&#x7B97;&#x6CD5;</span><br><span class="line">group &lt;1/2/5&gt; //&#x5B9A;&#x4E49; DH &#x7B97;&#x6CD5;&#x7B49;&#x7EA7;</span><br><span class="line">encryption &lt;des/3des/aes&gt; //&#x5B9A;&#x4E49;&#x52A0;&#x5BC6;&#x7B97;&#x6CD5;</span><br><span class="line">lifetime &lt;xxs&gt; //&#x5B9A;&#x4E49;&#x751F;&#x547D;&#x5468;&#x671F;</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;3&#xFF1A;&#x914D;&#x7F6E; IPSEC VPN peer</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp key 0 &lt;&#x53E3;&#x4EE4;&gt; address &lt;peer-address&gt; //&#x5BF9;&#x7B49;&#x4F53;&#x5730;&#x5740;&#x5FC5;&#x987B;&#x53EF;&#x8FBE;</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;4&#xFF1A;&#x914D;&#x7F6E;&#x611F;&#x5174;&#x8DA3;&#x6D41;&#xFF0C;&#x544A;&#x8BC9; VPN &#x4FDD;&#x62A4;&#x4EC0;&#x4E48;&#x6D41;&#x91CF;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list permit ip &lt;&#x6E90;&gt; &lt;&#x76EE;&#x7684;&gt;</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;5&#xFF1A;&#x914D;&#x7F6E;&#x8F6C;&#x6362;&#x96C6;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x52A0;&#x5BC6;&#x65B9;&#x5F0F;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto ipsec trans &lt;name&gt; &lt;&#x52A0;&#x5BC6;&#x7B97;&#x6CD5;&gt; &lt;&#x5B8C;&#x6574;&#x6027;&#x4FDD;&#x62A4;&#x7B97;&#x6CD5;&gt;</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;6&#xFF1A;&#x5B9A;&#x4E49;&#x52A0;&#x5BC6;&#x6620;&#x5C04;&#xFF0C;&#x5C06;&#x6570;&#x636E;&#x52A0;&#x5BC6;&#x8F6C;&#x6362;&#x96C6;&#x3001;&#x5BF9;&#x7B49;&#x4F53;&#x3001;&#x611F;&#x5174;&#x8DA3;&#x6D41;&#x7ED1;&#x5B9A;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crypto map &lt;&#x540D;&#x5B57;&gt; &lt;&#x5E8F;&#x5217;&#x53F7;&gt; ipsec-isakmp</span><br><span class="line">set peer &lt;peer-address&gt; //&#x8BBE;&#x7F6E;&#x5BF9;&#x7B49;&#x4F53;&#x5730;&#x5740;</span><br><span class="line">match address &lt;acl-id&gt; //&#x5339;&#x914D;&#x611F;&#x5174;&#x8DA3;&#x6D41;</span><br><span class="line">trans-set &lt;&#x8F6C;&#x6362;&#x96C6;&#x540D;&#x79F0;&gt; //&#x8BBE;&#x7F6E;&#x8F6C;&#x5316;&#x96C6;</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;7&#xFF1A;&#x5E94;&#x7528;&#x52A0;&#x5BC6;&#x6620;&#x5C04;&#xFF08;&#x53EA;&#x80FD;&#x7528;&#x5728;&#x53D1;&#x9001;&#x6D41;&#x91CF;&#x7684;&#x63A5;&#x53E3;&#xFF09;</p>
+<p>步骤2：配置 IPSEC VPN 策略1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crypto policy &lt;seq&gt;</span><br><span class="line">authentication &lt;pre-share/rsa&gt; //认证方式</span><br><span class="line">hash &lt;md5/sha&gt; //定义完整性保护算法</span><br><span class="line">group &lt;1/2/5&gt; //定义 DH 算法等级</span><br><span class="line">encryption &lt;des/3des/aes&gt; //定义加密算法</span><br><span class="line">lifetime &lt;xxs&gt; //定义生命周期</span><br></pre></td></tr></table></figure>
+<p>步骤3：配置 IPSEC VPN peer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp key 0 &lt;口令&gt; address &lt;peer-address&gt; //对等体地址必须可达</span><br></pre></td></tr></table></figure>
+<p>步骤4：配置感兴趣流，告诉 VPN 保护什么流量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list permit ip &lt;源&gt; &lt;目的&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤5：配置转换集定义数据加密方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto ipsec trans &lt;name&gt; &lt;加密算法&gt; &lt;完整性保护算法&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤6：定义加密映射，将数据加密转换集、对等体、感兴趣流绑定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crypto map &lt;名字&gt; &lt;序列号&gt; ipsec-isakmp</span><br><span class="line">set peer &lt;peer-address&gt; //设置对等体地址</span><br><span class="line">match address &lt;acl-id&gt; //匹配感兴趣流</span><br><span class="line">trans-set &lt;转换集名称&gt; //设置转化集</span><br></pre></td></tr></table></figure>
+<p>步骤7：应用加密映射（只能用在发送流量的接口）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">crypto map &lt;name&gt;</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;8&#xFF1A;&#x67E5;&#x770B;&#x547D;&#x4EE4;</p>
-<p>&#x67E5;&#x770B;&#x6570;&#x636E;&#x662F;&#x5426;&#x88AB;&#x52A0;&#x5BC6;<code>show crypto engine connections active</code></p>
-<h3 id="ESP-&#x548C;-AH"><a href="#ESP-&#x548C;-AH" class="headerlink" title="ESP &#x548C; AH"></a>ESP &#x548C; AH</h3><p>ESP &#x548C; AH &#x90FD;&#x662F; VPN &#x5934;&#x90E8;&#x4FE1;&#x606F;&#x7684;&#x7F29;&#x5199;</p>
-<p>&#x5E27;&#x5934;&#x3001;&#x5305;&#x5934;&#x3001;&#x6BB5;&#x5934;&#x3001;&#x6570;&#x636E;&#x3001;&#x5E27;&#x5C3E;</p>
-<p>&#x6570;&#x636E;&#x7ECF;&#x5386; VPN &#x4FDD;&#x62A4;&#x540E;&#x53D8;&#x5316;&#x6210;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p>&#x5E27;&#x5934;&#x3001;VPN &#x5934;&#x3001;&#x5305;&#x5934;&#x3001;&#x6BB5;&#x5934;&#x3001;&#x6570;&#x636E;&#x3001;&#x5E27;&#x5C3E;</p>
-<p>VPN &#x5934;&#x5C31;&#x5206;&#x4E24;&#x79CD;&#xFF1A;</p>
-<ol class="ui list">
-<li><p>ESP&#xFF1A;&#x5C01;&#x88C5;&#x5B89;&#x5168;&#x9759;&#x8377;</p>
-<p>&#x8BE5;&#x5934;&#x8D1F;&#x8D23;&#x4FDD;&#x62A4;&#x6570;&#x636E;&#x7684;&#x5B8C;&#x6574;&#x6027;&#xFF0C;&#x540C;&#x65F6;&#x52A0;&#x5BC6;&#x6570;&#x636E;</p>
+<p>步骤8：查看命令</p>
+<p>查看数据是否被加密<code>show crypto engine connections active</code></p>
+<h3 id="ESP-和-AH"><a href="#ESP-和-AH" class="headerlink" title="ESP 和 AH"></a>ESP 和 AH</h3><p>ESP 和 AH 都是 VPN 头部信息的缩写</p>
+<p>帧头、包头、段头、数据、帧尾</p>
+<p>数据经历 VPN 保护后变化成如下：</p>
+<p>帧头、VPN 头、包头、段头、数据、帧尾</p>
+<p>VPN 头就分两种：</p>
+<ol>
+<li><p>ESP：封装安全静荷</p>
+<p>该头负责保护数据的完整性，同时加密数据</p>
 </li>
-<li><p>AH&#xFF1A;&#x8BA4;&#x8BC1;&#x5934;</p>
-<p>&#x8BE5;&#x5934;&#x53EA;&#x8D1F;&#x8D23;&#x4FDD;&#x62A4;&#x6570;&#x636E;&#x5B8C;&#x6574;&#x6027;&#xFF0C;&#x4E0D;&#x52A0;&#x5BC6;&#x6570;&#x636E;</p>
-</li>
-</ol>
-<h3 id="IPSEC-VPN-&#x7684;&#x6A21;&#x5F0F;"><a href="#IPSEC-VPN-&#x7684;&#x6A21;&#x5F0F;" class="headerlink" title="IPSEC VPN &#x7684;&#x6A21;&#x5F0F;"></a>IPSEC VPN &#x7684;&#x6A21;&#x5F0F;</h3><ol class="ui list">
-<li><p>&#x96A7;&#x9053;&#x6A21;&#x5F0F;&#xFF08;tunnel&#xFF09;</p>
-<p>VPN &#x7F51;&#x5173;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x96A7;&#x9053;&#x6A21;&#x5F0F;&#x7684; VPN &#x8FDE;&#x63A5;&#xFF0C;&#x4FDD;&#x62A4;&#x8EAB;&#x540E;&#x6240;&#x6709;&#x7684;&#x901A;&#x8BAF;&#x6570;&#x636E;&#x3002;</p>
-</li>
-<li><p>&#x4F20;&#x8F93;&#x6A21;&#x5F0F;&#xFF08;transport&#xFF09;</p>
-<p>&#x901A;&#x8BAF;&#x53CC;&#x65B9;&#x81EA;&#x8EAB;&#x5EFA;&#x7ACB; VPN &#x8FDE;&#x63A5;&#xFF0C;&#x4FDD;&#x62A4;&#x901A;&#x8BAF;&#x6570;&#x636E;&#x3002;</p>
+<li><p>AH：认证头</p>
+<p>该头只负责保护数据完整性，不加密数据</p>
 </li>
 </ol>
-<p><strong>&#x533A;&#x522B;</strong>&#xFF1A;</p>
-<p>&#x96A7;&#x9053;&#x6A21;&#x5F0F;&#x7684;&#x65B0;&#x5305;&#x5934;&#xFF0C;&#x76EE;&#x7684; IP &#x548C;&#x6E90; IP &#x662F; VPN &#x7684;&#x5BF9;&#x7B49;&#x4F53;&#x5730;&#x5740;&#x3002;</p>
-<p>&#x4F20;&#x8F93;&#x6A21;&#x5F0F;&#x7684;&#x65B0;&#x5305;&#x5934;&#xFF0C;&#x76EE;&#x7684; IP &#x548C;&#x6E90; IP &#x590D;&#x5236;&#x4E86;&#x539F;&#x6709;&#x7684; IP &#x5730;&#x5740;&#x3002;</p>
-<h3 id="NAT-&#x5BF9;-IPSEC-VPN-&#x7684;&#x5F71;&#x54CD;"><a href="#NAT-&#x5BF9;-IPSEC-VPN-&#x7684;&#x5F71;&#x54CD;" class="headerlink" title="NAT &#x5BF9; IPSEC VPN &#x7684;&#x5F71;&#x54CD;"></a>NAT &#x5BF9; IPSEC VPN &#x7684;&#x5F71;&#x54CD;</h3><p>VPN &#x6D41;&#x91CF;&#x51E0;&#x4E4E;&#x6C38;&#x8FDC;&#x662F;&#x5148;&#x88AB; inside &#x63A5;&#x53E3;&#x63A5;&#x6536;&#xFF0C;&#x6240;&#x4EE5; NAT &#x4F1A;&#x76F4;&#x63A5;&#x4FEE;&#x6539; IP &#x5305;&#x5934;&#xFF0C;&#x5BFC;&#x81F4; VPN &#x65E0;&#x6CD5;&#x8BC6;&#x522B;&#x611F;&#x5174;&#x8DA3;&#x6D41;&#x3002;</p>
-<p>&#x89E3;&#x51B3;&#x65B9;&#x6848;</p>
-<p>NAT &#x914D;&#x7F6E;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x6807;&#x51C6; ACL&#xFF0C;&#x7528;&#x6269;&#x5C55; ACL&#xFF0C;&#x4E66;&#x5199;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<h3 id="IPSEC-VPN-的模式"><a href="#IPSEC-VPN-的模式" class="headerlink" title="IPSEC VPN 的模式"></a>IPSEC VPN 的模式</h3><ol>
+<li><p>隧道模式（tunnel）</p>
+<p>VPN 网关通过一个隧道模式的 VPN 连接，保护身后所有的通讯数据。</p>
+</li>
+<li><p>传输模式（transport）</p>
+<p>通讯双方自身建立 VPN 连接，保护通讯数据。</p>
+</li>
+</ol>
+<p><strong>区别</strong>：</p>
+<p>隧道模式的新包头，目的 IP 和源 IP 是 VPN 的对等体地址。</p>
+<p>传输模式的新包头，目的 IP 和源 IP 复制了原有的 IP 地址。</p>
+<h3 id="NAT-对-IPSEC-VPN-的影响"><a href="#NAT-对-IPSEC-VPN-的影响" class="headerlink" title="NAT 对 IPSEC VPN 的影响"></a>NAT 对 IPSEC VPN 的影响</h3><p>VPN 流量几乎永远是先被 inside 接口接收，所以 NAT 会直接修改 IP 包头，导致 VPN 无法识别感兴趣流。</p>
+<p>解决方案</p>
+<p>NAT 配置的时候不要使用标准 ACL，用扩展 ACL，书写方法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access-list 100 deny ip 10.5.5.0 0.0.0.255 10.7.7.0 0.0.0.255</span><br><span class="line">access-list 100 permit ip 10.5.5.0 0.0.0.255 any</span><br><span class="line">ip nat inside source list 100 interface e0/2 overload</span><br></pre></td></tr></table></figure>
-<h1 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h1>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-07-26T11:22:57.000Z" itemprop="datePublished">2018-07-26</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/07/28/Network/Ccie/网络知识总结/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    CCIE 网络知识总结
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/07/24/Network/Ccie/防火墙/" class="ui tiny button">
-                    
-                    CCIE 防火墙
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#IPSEC-VPN"><span>IPSEC VPN</span></a><ol><li><a href="#数据在公共网络上面临的风险"><span>数据在公共网络上面临的风险</span></a></li><li><a href="#IPSEC-VPN-解决的问题"><span>IPSEC VPN 解决的问题</span></a></li><li><a href="#KEY：密匙"><span>KEY：密匙</span></a><ol><li><a href="#对称密钥、非对称密钥"><span>对称密钥、非对称密钥</span></a></li><li><a href="#IPSEC-VPN-的加密密钥"><span>IPSEC VPN 的加密密钥</span></a></li><li><a href="#密钥产生过程和共享方法"><span>密钥产生过程和共享方法</span></a></li></ol></li><li><a href="#IPSEC-VPN-的关键组件"><span>IPSEC VPN 的关键组件</span></a></li><li><a href="#IPSEC-VPN-配置流程"><span>IPSEC VPN 配置流程</span></a></li><li><a href="#ESP-和-AH"><span>ESP 和 AH</span></a></li><li><a href="#IPSEC-VPN-的模式"><span>IPSEC VPN 的模式</span></a></li><li><a href="#NAT-对-IPSEC-VPN-的影响"><span>NAT 对 IPSEC VPN 的影响</span></a></li></ol></li></ol><li><a href="#结束"><span>结束</span></a></li>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

@@ -1,264 +1,88 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>C++ connector for PostgreSQL | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>C++ connector for PostgreSQL | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x5B89;&amp;#x88C5;libpqxx123456wget http://pqxx.org/download/software/libpqxx/libpqxx-4.0.tar.gztar xvfz libpqxx-4.0.tar.gzcd libpqxx-4.0./configuremakemake install &amp;#x5934;&amp;#x6587;&amp;#x4EF6;12#include &amp;l">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C++ connector for PostgreSQL">
-<meta property="og:url" content="http://yoursite.com/2018/08/20/Database/PostgreSQL/C++ connector for PostgreSQL/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x5B89;&amp;#x88C5;libpqxx123456wget http://pqxx.org/download/software/libpqxx/libpqxx-4.0.tar.gztar xvfz libpqxx-4.0.tar.gzcd libpqxx-4.0./configuremakemake install &amp;#x5934;&amp;#x6587;&amp;#x4EF6;12#include &amp;l">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T13:44:38.831Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++ connector for PostgreSQL">
-<meta name="twitter:description" content="&amp;#x5B89;&amp;#x88C5;libpqxx123456wget http://pqxx.org/download/software/libpqxx/libpqxx-4.0.tar.gztar xvfz libpqxx-4.0.tar.gzcd libpqxx-4.0./configuremakemake install &amp;#x5934;&amp;#x6587;&amp;#x4EF6;12#include &amp;l">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Database/PostgreSQL/C++ connector for PostgreSQL" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    C++ connector for PostgreSQL
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h3 id="&#x5B89;&#x88C5;libpqxx"><a href="#&#x5B89;&#x88C5;libpqxx" class="headerlink" title="&#x5B89;&#x88C5;libpqxx"></a>&#x5B89;&#x88C5;libpqxx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://pqxx.org/download/software/libpqxx/libpqxx-4.0.tar.gz</span><br><span class="line">tar xvfz libpqxx-4.0.tar.gz</span><br><span class="line">cd libpqxx-4.0</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<h3 id="&#x5934;&#x6587;&#x4EF6;"><a href="#&#x5934;&#x6587;&#x4EF6;" class="headerlink" title="&#x5934;&#x6587;&#x4EF6;"></a>&#x5934;&#x6587;&#x4EF6;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pqxx/pqxx&gt;</span><br><span class="line">using namespace pqxx;</span><br></pre></td></tr></table></figure>
-<h3 id="&#x7F16;&#x8BD1;&#x547D;&#x4EE4;"><a href="#&#x7F16;&#x8BD1;&#x547D;&#x4EE4;" class="headerlink" title="&#x7F16;&#x8BD1;&#x547D;&#x4EE4;"></a>&#x7F16;&#x8BD1;&#x547D;&#x4EE4;</h3><p><code>g++ main.c -lpqxx -lpq</code></p>
-
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-08-20T06:33:37.000Z" itemprop="datePublished">2018-08-20</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装libpqxx"><span class="toc-number">1.</span> <span class="toc-text">安装libpqxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#头文件"><span class="toc-number">2.</span> <span class="toc-text">头文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译命令"><span class="toc-number">3.</span> <span class="toc-text">编译命令</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
+
+
+  <div class="container">
+    <article>
+      <h1>C++ connector for PostgreSQL</h1>
+      <h3 id="安装libpqxx"><a href="#安装libpqxx" class="headerlink" title="安装libpqxx"></a>安装libpqxx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://pqxx.org/download/software/libpqxx/libpqxx-4.0.tar.gz</span><br><span class="line">tar xvfz libpqxx-4.0.tar.gz</span><br><span class="line">cd libpqxx-4.0</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pqxx/pqxx&gt;</span><br><span class="line">using namespace pqxx;</span><br></pre></td></tr></table></figure>
+<h3 id="编译命令"><a href="#编译命令" class="headerlink" title="编译命令"></a>编译命令</h3><p><code>g++ main.c -lpqxx -lpq</code></p>
+
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/09/20/Network/Unp/unp_code/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    《unp》源代码问题笔记
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/" class="ui tiny button">
-                    
-                    PostgreSQL 命令
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#安装libpqxx"><span>安装libpqxx</span></a></li><li><a href="#头文件"><span>头文件</span></a></li><li><a href="#编译命令"><span>编译命令</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

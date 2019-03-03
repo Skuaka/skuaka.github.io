@@ -1,357 +1,181 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>epoll | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>epoll | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="I/O&amp;#x590D;&amp;#x7528;&amp;#x6A21;&amp;#x578B;&amp;#x4E4B;epollepoll&amp;#x6A21;&amp;#x578B;&amp;#x7B80;&amp;#x4ECB;epoll&amp;#x662F;Linux&amp;#x591A;&amp;#x8DEF;&amp;#x670D;&amp;#x7528;IO&amp;#x63A5;&amp;#x53E3;select/poll&amp;#x7684;&amp;#x52A0;&amp;#x5F3A;&amp;#x7248;&amp;#xF">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="epoll">
-<meta property="og:url" content="http://yoursite.com/2018/11/14/Network/IO模型/epoll/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="I/O&amp;#x590D;&amp;#x7528;&amp;#x6A21;&amp;#x578B;&amp;#x4E4B;epollepoll&amp;#x6A21;&amp;#x578B;&amp;#x7B80;&amp;#x4ECB;epoll&amp;#x662F;Linux&amp;#x591A;&amp;#x8DEF;&amp;#x670D;&amp;#x7528;IO&amp;#x63A5;&amp;#x53E3;select/poll&amp;#x7684;&amp;#x52A0;&amp;#x5F3A;&amp;#x7248;&amp;#xF">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-14T13:06:04.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="epoll">
-<meta name="twitter:description" content="I/O&amp;#x590D;&amp;#x7528;&amp;#x6A21;&amp;#x578B;&amp;#x4E4B;epollepoll&amp;#x6A21;&amp;#x578B;&amp;#x7B80;&amp;#x4ECB;epoll&amp;#x662F;Linux&amp;#x591A;&amp;#x8DEF;&amp;#x670D;&amp;#x7528;IO&amp;#x63A5;&amp;#x53E3;select/poll&amp;#x7684;&amp;#x52A0;&amp;#x5F3A;&amp;#x7248;&amp;#xF">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/IO模型/epoll" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    epoll
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="I-O&#x590D;&#x7528;&#x6A21;&#x578B;&#x4E4B;epoll"><a href="#I-O&#x590D;&#x7528;&#x6A21;&#x578B;&#x4E4B;epoll" class="headerlink" title="I/O&#x590D;&#x7528;&#x6A21;&#x578B;&#x4E4B;epoll"></a>I/O&#x590D;&#x7528;&#x6A21;&#x578B;&#x4E4B;epoll</h2><h3 id="epoll&#x6A21;&#x578B;&#x7B80;&#x4ECB;"><a href="#epoll&#x6A21;&#x578B;&#x7B80;&#x4ECB;" class="headerlink" title="epoll&#x6A21;&#x578B;&#x7B80;&#x4ECB;"></a>epoll&#x6A21;&#x578B;&#x7B80;&#x4ECB;</h3><p>epoll&#x662F;Linux&#x591A;&#x8DEF;&#x670D;&#x7528;IO&#x63A5;&#x53E3;select/poll&#x7684;&#x52A0;&#x5F3A;&#x7248;&#xFF0C;e&#x5BF9;&#x5E94;&#x7684;&#x82F1;&#x6587;&#x5355;&#x8BCD;&#x5C31;&#x662F;enhancement&#xFF0C;&#x4E2D;&#x6587;&#x7FFB;&#x8BD1;&#x4E3A;&#x589E;&#x5F3A;&#xFF0C;&#x52A0;&#x5F3A;&#xFF0C;&#x63D0;&#x9AD8;&#xFF0C;&#x5145;&#x5B9E;&#x7684;&#x610F;&#x601D;&#x3002;&#x6240;&#x4EE5;epoll&#x6A21;&#x578B;&#x4F1A;&#x663E;&#x8457;&#x63D0;&#x9AD8;&#x7A0B;&#x5E8F;&#x5728;&#x5927;&#x91CF;&#x5E76;&#x53D1;&#x8FDE;&#x63A5;&#x4E2D;&#x53EA;&#x6709;&#x5C11;&#x91CF;&#x6D3B;&#x8DC3;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x7684;&#x7CFB;&#x7EDF;CPU&#x5229;&#x7528;&#x7387;&#x3002;</p>
-<ul class="ui list">
-<li>epoll&#x628A;&#x7528;&#x6237;&#x5173;&#x5FC3;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x4E0A;&#x7684;&#x65F6;&#x95F4;&#x653E;&#x5728;&#x5185;&#x6838;&#x7684;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x8868;&#x4E2D;&#xFF0C;&#x65E0;&#x9700;&#x50CF;select&#x548C;poll&#x90A3;&#x6837;&#x6BCF;&#x6B21;&#x8C03;&#x7528;&#x90FD;&#x91CD;&#x590D;&#x4F20;&#x5165;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x96C6;&#x3002;</li>
-<li>epoll&#x5728;&#x83B7;&#x53D6;&#x4E8B;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x65E0;&#x9700;&#x904D;&#x5386;&#x6574;&#x4E2A;&#x88AB;&#x76D1;&#x542C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x96C6;&#x5408;&#xFF0C;&#x800C;&#x662F;&#x904D;&#x5386;&#x90A3;&#x4E9B;&#x88AB;&#x5185;&#x6838;IO&#x4E8B;&#x4EF6;&#x5F02;&#x6B65;&#x5524;&#x9192;&#x800C;&#x52A0;&#x5165;ready&#x961F;&#x5217;&#x7684;&#x63CF;&#x8FF0;&#x7B26;&#x96C6;&#x5408;&#x3002;</li>
-</ul>
-<p>&#x6240;&#x4EE5;&#xFF0C;epoll&#x662F;Linux&#x5927;&#x89C4;&#x6A21;&#x9AD8;&#x5E76;&#x53D1;&#x7F51;&#x7EDC;&#x7A0B;&#x5E8F;&#x7684;&#x9996;&#x9009;&#x6A21;&#x578B;&#x3002;</p>
-<h3 id="epoll&#x6A21;&#x578B;&#x7684;API"><a href="#epoll&#x6A21;&#x578B;&#x7684;API" class="headerlink" title="epoll&#x6A21;&#x578B;&#x7684;API"></a>epoll&#x6A21;&#x578B;&#x7684;API</h3><p>epoll&#x4F7F;&#x7528;&#x4E00;&#x7EC4;&#x51FD;&#x6570;&#x6765;&#x5B8C;&#x6210;&#x4EFB;&#x52A1;</p>
-<p>&#x6700;&#x540E;&#x522B;&#x5FD8;&#x8BB0;&#x8C03;&#x7528;&#x7CFB;&#x7EDF;&#x51FD;&#x6570; close() &#x6765;&#x5173;&#x95ED;&#x521B;&#x5EFA;&#x51FA;&#x7684;epoll&#x53E5;&#x67C4;</p>
-<h4 id="epoll-create"><a href="#epoll-create" class="headerlink" title="epoll_create()"></a>epoll_create()</h4><p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;epoll&#x53E5;&#x67C4;&#xFF0C;&#x53E5;&#x67C4;&#x7684;&#x82F1;&#x6587;&#x662F;handle&#xFF0C;&#x76F8;&#x901A;&#x7684;&#x610F;&#x601D;&#x662F;&#x628A;&#x624B;&#xFF0C;&#x628A;&#x67C4;&#x3002;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;</span><br><span class="line"><span class="comment">//&#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x82E5;&#x6210;&#x529F;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x975E;&#x8D1F;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x82E5;&#x51FA;&#x9519;&#xFF0C;&#x8FD4;&#x56DE;-1&#x3002;</span></span><br></pre></td></tr></table></figure>
-<p>&#x8BE5;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x7528;&#x6765;&#x552F;&#x4E00;&#x6807;&#x793A;&#x5185;&#x6838;&#x4E2D;&#x8FD9;&#x4E2A;&#x4E8B;&#x4EF6;&#x8868;&#xFF0C;size&#x53C2;&#x6570;&#x63D0;&#x793A;&#x5185;&#x6838;&#x8981;&#x76D1;&#x542C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x4E2A;&#x6570;&#xFF0C;&#x8FD9;&#x4E0E;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x6709;&#x5173;&#x3002;</p>
-<p>&#x8FD4;&#x56DE;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x5C06;&#x662F;&#x5176;&#x4ED6;&#x6240;&#x6709;epoll&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x4EE5;&#x6307;&#x5B9A;&#x8981;&#x8BBF;&#x95EE;&#x7684;&#x5185;&#x6838;&#x4E8B;&#x4EF6;&#x8868;&#xFF0C;&#x6240;&#x4EE5;&#x7528;&#x8BE5;&#x8FD4;&#x56DE;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x76F8;&#x5F53;&#x4E0E;&#x5176;&#x4ED6;epoll&#x8C03;&#x7528;&#x7684;&#x628A;&#x624B;&#x3001;&#x628A;&#x67C4;&#x4E00;&#x6837;&#x3002;</p>
-<p><strong>&#x67E5;&#x770B;&#x8FDB;&#x7A0B;&#x80FD;&#x591F;&#x6253;&#x5F00;&#x7684;&#x6700;&#x5927;&#x6570;&#x76EE;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/sys/fs/file-max</span><br><span class="line">//&#x8BE5;&#x503C;&#x4E0E;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x6709;&#x5173;</span><br></pre></td></tr></table></figure>
-<p><strong>&#x4FEE;&#x6539;&#x6700;&#x5927;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x9650;&#x5236;</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/security/limits.conf</span><br><span class="line">//&#x91CD;&#x542F;&#x751F;&#x6548;</span><br></pre></td></tr></table></figure>
-<h4 id="epoll-ctl"><a href="#epoll-ctl" class="headerlink" title="epoll_ctl()"></a>epoll_ctl()</h4><p>&#x8BE5;&#x51FD;&#x6570;&#x7528;&#x6765;&#x64CD;&#x4F5C;epoll&#x7684;&#x5185;&#x6838;&#x4E8B;&#x4EF6;&#x8868;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event *event)</span></span>;</span><br><span class="line"><span class="comment">//&#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x82E5;&#x6210;&#x529F;&#xFF0C;&#x8FD4;&#x56DE;0&#xFF0C;&#x82E5;&#x51FA;&#x9519;&#x8FD4;&#x56DE;-1&#x3002;</span></span><br></pre></td></tr></table></figure>
-<ul class="ui list">
-<li><p><strong>op</strong> &#x662F;&#x6307;&#x5B9A;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;&#xFF0C;&#x6709;&#x4E00;&#x4E0B;&#x4E09;&#x79CD; </p>
-<ul>
-<li>EPOLL_CTL_ADD&#xFF0C;&#x5411;epfd&#x6CE8;&#x518C;fd&#x7684;&#x4E0A;&#x7684;event</li>
-<li>EPOLL_CTL_MOD&#xFF0C;&#x4FEE;&#x6539;fd&#x5DF2;&#x6CE8;&#x518C;&#x7684;event</li>
-<li>EPOLL_CTL_DEL&#xFF0C;&#x4ECE;epfd&#x4E0A;&#x5220;&#x9664;fd&#x7684;event </li>
-</ul>
-</li>
-<li><p><strong>fd</strong> &#x662F;&#x64CD;&#x4F5C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;</p>
-</li>
-<li><p><strong>event</strong> &#x6307;&#x5B9A;&#x5185;&#x6838;&#x8981;&#x76D1;&#x542C;&#x4E8B;&#x4EF6;,&#x5B83;&#x662F; epoll_event &#x7ED3;&#x6784;&#x7C7B;&#x578B;&#x7684;&#x6307;&#x9488;&#x3002;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> {</span></span><br><span class="line">    <span class="keyword">uint32_t</span>     events;      <span class="comment">/* Epoll events */</span></span><br><span class="line">    <span class="keyword">epoll_data_t</span> data;        <span class="comment">/* User data variable */</span></span><br><span class="line">};</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><strong>events</strong> &#x6210;&#x5458;&#x63CF;&#x8FF0;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#xFF0C;&#x5C06;&#x4EE5;&#x4E0B;&#x5B8F;&#x5B9A;&#x4E49;&#x901A;&#x8FC7;<strong>&#x4F4D;&#x6216;</strong> ( | ) &#x65B9;&#x5F0F;&#x7EC4;&#x5408;</p>
-<ul>
-<li><strong>EPOLLIN</strong> : &#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;<strong>&#x53EF;&#x8BFB;</strong>(&#x5305;&#x62EC;&#x5BF9;&#x7AEF;SOCKET&#x6B63;&#x5E38;&#x5173;&#x95ED;)</li>
-<li><strong>POLLOUT</strong> : &#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;<strong>&#x53EF;&#x5199;</strong></li>
-<li><strong>EPOLLPRI</strong> : &#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x6709;&#x7D27;&#x6025;&#x7684;&#x6570;&#x636E;&#x53EF;&#x8BFB;(&#x8FD9;&#x91CC;&#x5E94;&#x8BE5;&#x8868;&#x793A;&#x6709;<strong>&#x5E26;&#x5916;&#x6570;&#x636E;</strong>&#x5230;&#x6765;)</li>
-<li><strong>EPOLLERR</strong> : &#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x53D1;&#x751F;<strong>&#x9519;&#x8BEF;</strong></li>
-<li><strong>EPOLLHUP</strong> : &#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x88AB;<strong>&#x6302;&#x65AD;</strong></li>
-<li><strong>EPOLLET</strong> : &#x5C06;EPOLL&#x8BBE;&#x4E3A;<strong>&#x8FB9;&#x7F18;&#x89E6;&#x53D1;</strong>(Edge Triggered)&#x6A21;&#x5F0F;,&#x8FD9;&#x662F;&#x76F8;&#x5BF9;&#x4E8E;&#x6C34;&#x5E73;&#x89E6;&#x53D1;(Level Triggered)&#x6765;&#x8BF4;&#x7684;</li>
-<li><strong>EPOLLONESHOT</strong> : <strong>&#x53EA;&#x76D1;&#x542C;&#x4E00;&#x6B21;</strong>&#x4E8B;&#x4EF6;,&#x5F53;&#x76D1;&#x542C;&#x5B8C;&#x8FD9;&#x6B21;&#x4E8B;&#x4EF6;&#x4E4B;&#x540E;,&#x5982;&#x679C;&#x8FD8;&#x9700;&#x8981;&#x7EE7;&#x7EED;&#x76D1;&#x542C;&#x8FD9;&#x4E2A;socket&#x7684;&#x8BDD;,&#x9700;&#x8981;&#x518D;&#x6B21;&#x628A;&#x8FD9;&#x4E2A;socket&#x52A0;&#x5165;&#x5230;EPOLL&#x961F;&#x5217;&#x91CC;</li>
-</ul>
-</li>
-<li><p><strong>data</strong> &#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x7528;&#x6237;&#x6570;&#x636E;&#xFF0C;&#x662F; epoll_data_t &#x8054;&#x5408;&#x4F53;&#xFF0C;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> epoll_data {</span><br><span class="line">    <span class="keyword">void</span>        *ptr;</span><br><span class="line">    <span class="keyword">int</span>          fd;</span><br><span class="line">    <span class="keyword">uint32_t</span>     u32;</span><br><span class="line">    <span class="keyword">uint64_t</span>     u64;</span><br><span class="line">} <span class="keyword">epoll_data_t</span>;</span><br></pre></td></tr></table></figure>
-<p>epoll_data_t &#x662F;&#x4E00;&#x4E2A;&#x8054;&#x5408;&#x4F53;&#xFF0C;</p>
-<ul>
-<li>fd &#x6307;&#x5B9A;&#x4E8B;&#x4EF6;&#x6240;&#x4ECE;&#x5C5E;&#x7684;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x3002;</li>
-<li>ptr &#x6307;&#x5B9A; fd &#x76F8;&#x5173;&#x7684;&#x7528;&#x6237;&#x6570;&#x636E;&#xFF0C;&#x4F46;&#x4E24;&#x8005;&#x4E0D;&#x80FD;&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x3002;</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="epoll-wait"><a href="#epoll-wait" class="headerlink" title="epoll_wait()"></a>epoll_wait()</h4><p>&#x51FD;&#x6570;epoll_wait&#x7528;&#x6765;&#x7B49;&#x5F85;&#x6240;&#x76D1;&#x542C;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x4E0A;&#x6709;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event *events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"><span class="comment">//&#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x82E5;&#x6210;&#x529F;&#xFF0C;&#x8FD4;&#x56DE;&#x5C31;&#x7EEA;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x4E2A;&#x6570;&#xFF0C;&#x82E5;&#x51FA;&#x9519;&#xFF0C;&#x8FD4;&#x56DE;-1&#xFF0C;&#x65F6;&#x95F4;&#x8D85;&#x65F6;&#x8FD4;&#x56DE;0</span></span><br></pre></td></tr></table></figure>
-<ul class="ui list">
-<li><strong>epfd</strong> &#x5C31;&#x662F;&#x51FD;&#x6570;epoll_create&#x521B;&#x5EFA;&#x7684;&#x53E5;&#x67C4;</li>
-<li><strong>events</strong> &#x662F;&#x4E00;&#x4E2A;&#x4F20;&#x5165;&#x4F20;&#x51FA;&#x53C2;&#x6570;&#xFF0C;&#x5B83;&#x662F;epoll_event&#x7ED3;&#x6784;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x7528;&#x6765;&#x4ECE;&#x5185;&#x6838;&#x5F97;&#x5230;&#x4E8B;&#x4EF6;&#x7684;&#x96C6;&#x5408;</li>
-<li><strong>maxevents</strong> &#x544A;&#x77E5;&#x5185;&#x6838;events&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x5927;&#x4E8E;epoll_create()&#x65F6;&#x521B;&#x5EFA;&#x7684;size</li>
-<li><strong>timeout</strong> &#x662F;&#x8D85;&#x65F6;&#x4E8B;&#x4EF6;&#xFF0C;-1&#x4E3A;&#x963B;&#x585E;&#xFF0C;0&#x4E3A;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#xFF0C;&#x975E;&#x963B;&#x585E;&#xFF0C;&#x5927;&#x4E8E;0&#x662F;&#x6307;&#x5B9A;&#x7684;&#x5FAE;&#x79D2;</li>
-</ul>
-<h3 id="LT&#x548C;ET&#x6A21;&#x5F0F;"><a href="#LT&#x548C;ET&#x6A21;&#x5F0F;" class="headerlink" title="LT&#x548C;ET&#x6A21;&#x5F0F;"></a>LT&#x548C;ET&#x6A21;&#x5F0F;</h3><ul class="ui list">
-<li>LT&#xFF08;Level Triggered&#xFF0C;&#x7535;&#x5E73;&#x89E6;&#x53D1;&#xFF09;&#xFF1A;LT&#x6A21;&#x5F0F;&#x662F;epoll&#x9ED8;&#x8BA4;&#x7684;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;&#xFF0C;&#x4E5F;&#x662F;select&#x548C;poll&#x7684;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;&#xFF0C;&#x5728;LT&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;epoll&#x76F8;&#x5F53;&#x4E8E;&#x4E00;&#x4E2A;&#x6548;&#x7387;&#x8F83;&#x9AD8;&#x7684;poll&#x3002;<ul>
-<li>&#x91C7;&#x7528;LT&#x6A21;&#x5F0F;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x5F53;epoll_wait&#x68C0;&#x6D4B;&#x5230;&#x5176;&#x4E0A;&#x6709;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x5E76;&#x5C06;&#x6B64;&#x4E8B;&#x4EF6;&#x901A;&#x77E5;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x540E;&#xFF0C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x4E0D;&#x7ACB;&#x5373;&#x5904;&#x7406;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5F53;&#x4E0B;&#x4E00;&#x6B21;&#x8C03;&#x7528;epoll_wait&#x662F;&#xFF0C;epoll_wait&#x8FD8;&#x4F1A;&#x5C06;&#x6B64;&#x4E8B;&#x4EF6;&#x901A;&#x544A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;</li>
-</ul>
-</li>
-<li>ET&#xFF08;Edge Triggered&#xFF0C;&#x8FB9;&#x6CBF;&#x89E6;&#x53D1;&#xFF09;: &#x5F53;&#x8C03;&#x7528;epoll_ctl&#xFF0C;&#x5411;&#x53C2;&#x6570;event&#x6CE8;&#x518C;EPOLLET&#x4E8B;&#x4EF6;&#x65F6;&#xFF0C;epoll&#x5C06;&#x4EE5;ET&#x6A21;&#x5F0F;&#x6765;&#x64CD;&#x4F5C;&#x8BE5;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;ET&#x6A21;&#x5F0F;&#x662F;epoll&#x7684;&#x9AD8;&#x6548;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;. <ul>
-<li>&#x5BF9;&#x4E8E;&#x91C7;&#x7528;ET&#x6A21;&#x5F0F;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x5F53; epoll_wait &#x68C0;&#x6D4B;&#x5230;&#x5176;&#x4E0A;&#x6709;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x5E76;&#x5C06;&#x6B64;&#x901A;&#x77E5;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x540E;&#xFF0C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5FC5;&#x987B;&#x7ACB;&#x5373;&#x5904;&#x7406;&#x8BE5;&#x4E8B;&#x4EF6;&#xFF0C;&#x56E0;&#x4E3A;&#x540E;&#x7EED;&#x7684; epoll_wait &#x8C03;&#x7528;&#x5C06;&#x4E0D;&#x518D;&#x5411;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x901A;&#x77E5;&#x8FD9;&#x4E00;&#x4E8B;&#x4EF6;&#x3002;ET&#x6A21;&#x5F0F;&#x964D;&#x4F4E;&#x4E86;&#x540C;&#x4E00; epoll &#x4E8B;&#x4EF6;&#x88AB;&#x89E6;&#x53D1;&#x7684;&#x6B21;&#x6570;&#xFF0C;&#x6548;&#x7387;&#x6BD4;LT&#x6A21;&#x5F0F;&#x9AD8;&#x3002;</li>
-</ul>
-</li>
-</ul>
-<p>ET&#x6A21;&#x5F0F;&#x4EC5;&#x5F53;&#x72B6;&#x6001;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x7684;&#x65F6;&#x5019;&#x624D;&#x83B7;&#x5F97;&#x901A;&#x77E5;,&#x8FD9;&#x91CC;&#x6240;&#x8C13;&#x7684;&#x72B6;&#x6001;&#x7684;&#x53D8;&#x5316;&#x5E76;&#x4E0D;&#x5305;&#x62EC;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x8FD8;&#x6709;&#x672A;&#x5904;&#x7406;&#x7684;&#x6570;&#x636E;,&#x4E5F;&#x5C31;&#x662F;&#x8BF4;,&#x5982;&#x679C;&#x8981;&#x91C7;&#x7528;ET&#x6A21;&#x5F0F;,&#x9700;&#x8981;&#x4E00;&#x76F4;read/write&#x76F4;&#x5230;&#x51FA;&#x9519;&#x4E3A;&#x6B62;&#x3002;</p>
-<hr>
-<p>&#x5047;&#x5982;&#x6709;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
-<p>\1. &#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x628A;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x4ECE;&#x7BA1;&#x9053;&#x4E2D;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x7684;&#x6587;&#x4EF6;&#x53E5;&#x67C4;(RFD)&#x6DFB;&#x52A0;&#x5230;epoll&#x63CF;&#x8FF0;&#x7B26;</p>
-<p>\2. &#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x4ECE;&#x7BA1;&#x9053;&#x7684;&#x53E6;&#x4E00;&#x7AEF;&#x88AB;&#x5199;&#x5165;&#x4E86;2KB&#x7684;&#x6570;&#x636E;</p>
-<p>\3. &#x8C03;&#x7528;epoll_wait&#xFF0C;&#x5E76;&#x4E14;&#x5B83;&#x4F1A;&#x8FD4;&#x56DE;RFD&#xFF0C;&#x8BF4;&#x660E;&#x5B83;&#x5DF2;&#x7ECF;&#x51C6;&#x5907;&#x597D;&#x8BFB;&#x53D6;&#x64CD;&#x4F5C;</p>
-<p>\4. &#x7136;&#x540E;&#x6211;&#x4EEC;&#x8BFB;&#x53D6;&#x4E86;1KB&#x7684;&#x6570;&#x636E;</p>
-<p>\5. &#x8C03;&#x7528;epoll_wait&#x2026;&#x2026;</p>
-<hr>
-<p>epoll&#x5DE5;&#x4F5C;&#x5728;ET&#x6A21;&#x5F0F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x975E;&#x963B;&#x585E;&#x5957;&#x63A5;&#x53E3;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x7531;&#x4E8E;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x53E5;&#x67C4;&#x7684;&#x963B;&#x585E;&#x8BFB;/&#x963B;&#x585E;&#x5199;&#x64CD;&#x4F5C;&#x628A;&#x5904;&#x7406;&#x591A;&#x4E2A;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x7684;&#x4EFB;&#x52A1;&#x997F;&#x6B7B;&#x3002;&#x6700;&#x597D;&#x4EE5;&#x4E0B;&#x9762;&#x7684;&#x65B9;&#x5F0F;&#x8C03;&#x7528;ET&#x6A21;&#x5F0F;&#x7684;epoll&#x63A5;&#x53E3;&#xFF0C;&#x5728;&#x540E;&#x9762;&#x4F1A;&#x4ECB;&#x7ECD;&#x907F;&#x514D;&#x53EF;&#x80FD;&#x7684;&#x7F3A;&#x9677;&#x3002;</p>
-<ul class="ui list">
-<li><p>&#x57FA;&#x4E8E;&#x975E;&#x963B;&#x585E;&#x6587;&#x4EF6;&#x53E5;&#x67C4;</p>
-</li>
-<li><p>&#x53EA;&#x6709;&#x5F53;read&#x6216;&#x8005;write&#x8FD4;&#x56DE;EAGAIN&#x65F6;&#x624D;&#x9700;&#x8981;&#x6302;&#x8D77;&#xFF0C;&#x7B49;&#x5F85;&#x3002;&#x4F46;&#x8FD9;&#x5E76;&#x4E0D;&#x662F;&#x8BF4;&#x6BCF;&#x6B21;read()&#x65F6;&#x90FD;&#x9700;&#x8981;&#x5FAA;&#x73AF;&#x8BFB;&#xFF0C;&#x76F4;&#x5230;&#x8BFB;&#x5230;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;EAGAIN&#x624D;&#x8BA4;&#x4E3A;&#x6B64;&#x6B21;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x5B8C;&#x6210;&#xFF0C;&#x5F53;read()&#x8FD4;&#x56DE;&#x7684;&#x8BFB;&#x5230;&#x7684;&#x6570;&#x636E;&#x957F;&#x5EA6;&#x5C0F;&#x4E8E;&#x8BF7;&#x6C42;&#x7684;&#x6570;&#x636E;&#x957F;&#x5EA6;&#x65F6;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x786E;&#x5B9A;&#x6B64;&#x65F6;&#x7F13;&#x51B2;&#x4E2D;&#x5DF2;&#x6CA1;&#x6709;&#x6570;&#x636E;&#x4E86;&#xFF0C;&#x4E5F;&#x5C31;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x6B64;&#x4E8B;&#x8BFB;&#x4E8B;&#x4EF6;&#x5DF2;&#x5904;&#x7406;&#x5B8C;&#x6210;&#x3002;</p>
-<ul>
-<li>&#x4EE5; O_NONBLOCK&#x7684;&#x6807;&#x5FD7;&#x6253;&#x5F00;&#x6587;&#x4EF6;/socket/FIFO&#xFF0C;<strong>&#x5982;&#x679C;&#x4F60;&#x8FDE;&#x7EED;&#x505A;read&#x64CD;&#x4F5C;&#x800C;&#x6CA1;&#x6709;&#x6570;&#x636E;&#x53EF;&#x8BFB;&#xFF0C;&#x6B64;&#x65F6;&#x7A0B;&#x5E8F;&#x4E0D;&#x4F1A;&#x963B;&#x585E;&#x8D77;&#x6765;&#x7B49;&#x5F85;&#x6570;&#x636E;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#x8FD4;&#x56DE;&#xFF0C;read&#x51FD;&#x6570;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;EAGAIN</strong>&#xFF0C;&#x63D0;&#x793A;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x73B0;&#x5728;&#x6CA1;&#x6709;&#x6570;&#x636E;&#x53EF;&#x8BFB;&#x8BF7;&#x7A0D;&#x540E;&#x518D;&#x8BD5;&#x3002;</li>
-</ul>
-</li>
-</ul>
-<p>&#x53E6;&#x5916;&#xFF0C;&#x5F53;&#x4F7F;&#x7528;epoll&#x7684;ET&#x6A21;&#x578B;&#x6765;&#x5DE5;&#x4F5C;&#x65F6;&#xFF0C;&#x5F53;&#x4EA7;&#x751F;&#x4E86;&#x4E00;&#x4E2A;EPOLLIN&#x4E8B;&#x4EF6;&#x540E;&#xFF0C;&#x8BFB;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#x9700;&#x8981;&#x8003;&#x8651;&#x7684;&#x662F;&#x5F53;recv()&#x8FD4;&#x56DE;&#x7684;&#x5927;&#x5C0F;&#x5982;&#x679C;&#x7B49;&#x4E8E;&#x8BF7;&#x6C42;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x90A3;&#x4E48;&#x5F88;&#x6709;&#x53EF;&#x80FD;&#x662F;&#x7F13;&#x51B2;&#x533A;&#x8FD8;&#x6709;&#x6570;&#x636E;&#x672A;&#x8BFB;&#x5B8C;&#xFF0C;&#x4E5F;&#x610F;&#x5473;&#x7740;&#x8BE5;&#x6B21;&#x4E8B;&#x4EF6;&#x8FD8;&#x6CA1;&#x6709;&#x5904;&#x7406;&#x5B8C;&#xFF0C;&#x6240;&#x4EE5;&#x8FD8;&#x9700;&#x8981;&#x518D;&#x6B21;&#x8BFB;&#x53D6;&#xFF1A;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(rs)</span><br><span class="line">{</span><br><span class="line">	buflen = recv(activeevents[i].data.fd, buf, <span class="keyword">sizeof</span>(buf), <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span>(buflen &lt; <span class="number">0</span>)</span><br><span class="line">  	{</span><br><span class="line">    <span class="comment">// &#x7531;&#x4E8E;&#x662F;&#x975E;&#x963B;&#x585E;&#x7684;&#x6A21;&#x5F0F;,&#x6240;&#x4EE5;&#x5F53;errno&#x4E3A;EAGAIN&#x65F6;,&#x8868;&#x793A;&#x5F53;&#x524D;&#x7F13;&#x51B2;&#x533A;&#x5DF2;&#x65E0;&#x6570;&#x636E;&#x53EF;&#x8BFB;</span></span><br><span class="line">    <span class="comment">// &#x5728;&#x8FD9;&#x91CC;&#x5C31;&#x5F53;&#x4F5C;&#x662F;&#x8BE5;&#x6B21;&#x4E8B;&#x4EF6;&#x5DF2;&#x5904;&#x7406;&#x5904;.</span></span><br><span class="line">    <span class="keyword">if</span>(errno == EAGAIN)</span><br><span class="line">    	<span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    	<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(buflen == <span class="number">0</span>)</span><br><span class="line">	{</span><br><span class="line">	<span class="comment">// &#x8FD9;&#x91CC;&#x8868;&#x793A;&#x5BF9;&#x7AEF;&#x7684;socket&#x5DF2;&#x6B63;&#x5E38;&#x5173;&#x95ED;.</span></span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span>(buflen == <span class="keyword">sizeof</span>(buf)</span><br><span class="line">		rs = <span class="number">1</span>;   <span class="comment">// &#x9700;&#x8981;&#x518D;&#x6B21;&#x8BFB;&#x53D6;</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		rs = <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p>&#x8FD8;&#x6709;&#xFF0C;<strong>&#x5047;&#x5982;&#x53D1;&#x9001;&#x7AEF;&#x6D41;&#x91CF;&#x5927;&#x4E8E;&#x63A5;&#x6536;&#x7AEF;&#x7684;&#x6D41;&#x91CF;</strong>(&#x610F;&#x601D;&#x662F;epoll&#x6240;&#x5728;&#x7684;&#x7A0B;&#x5E8F;&#x8BFB;&#x6BD4;&#x8F6C;&#x53D1;&#x7684;socket&#x8981;&#x5FEB;),&#x7531;&#x4E8E;&#x662F;&#x975E;&#x963B;&#x585E;&#x7684;socket,&#x90A3;&#x4E48;send()&#x51FD;&#x6570;&#x867D;&#x7136;&#x8FD4;&#x56DE;,&#x4F46;&#x5B9E;&#x9645;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x6570;&#x636E;&#x5E76;&#x672A;&#x771F;&#x6B63;&#x53D1;&#x7ED9;&#x63A5;&#x6536;&#x7AEF;,&#x8FD9;&#x6837;&#x4E0D;&#x65AD;&#x7684;&#x8BFB;&#x548C;&#x53D1;&#xFF0C;&#x5F53;&#x7F13;&#x51B2;&#x533A;&#x6EE1;&#x540E;&#x4F1A;&#x4EA7;&#x751F;EAGAIN&#x9519;&#x8BEF;(&#x53C2;&#x8003;man send),&#x540C;&#x65F6;,&#x4E0D;&#x7406;&#x4F1A;&#x8FD9;&#x6B21;&#x8BF7;&#x6C42;&#x53D1;&#x9001;&#x7684;&#x6570;&#x636E;.&#x6240;&#x4EE5;,&#x9700;&#x8981;&#x5C01;&#x88C5;socket_send()&#x7684;&#x51FD;&#x6570;&#x7528;&#x6765;&#x5904;&#x7406;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;,&#x8BE5;&#x51FD;&#x6570;&#x4F1A;&#x5C3D;&#x91CF;&#x5C06;&#x6570;&#x636E;&#x5199;&#x5B8C;&#x518D;&#x8FD4;&#x56DE;&#xFF0C;&#x8FD4;&#x56DE;-1&#x8868;&#x793A;&#x51FA;&#x9519;&#x3002;&#x5728;socket_send()&#x5185;&#x90E8;,&#x5F53;&#x5199;&#x7F13;&#x51B2;&#x5DF2;&#x6EE1;(send()&#x8FD4;&#x56DE;-1,&#x4E14;errno&#x4E3A;EAGAIN),&#x90A3;&#x4E48;&#x4F1A;&#x7B49;&#x5F85;&#x540E;&#x518D;&#x91CD;&#x8BD5;.&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5E76;&#x4E0D;&#x5F88;&#x5B8C;&#x7F8E;,&#x5728;&#x7406;&#x8BBA;&#x4E0A;&#x53EF;&#x80FD;&#x4F1A;&#x957F;&#x65F6;&#x95F4;&#x7684;&#x963B;&#x585E;&#x5728;socket_send()&#x5185;&#x90E8;,&#x4F46;&#x6682;&#x6CA1;&#x6709;&#x66F4;&#x597D;&#x7684;&#x529E;&#x6CD5;.</p>
-<h3 id="&#x670D;&#x52A1;&#x5668;&#x7AEF;epoll&#x7A0B;&#x5E8F;&#x6846;&#x67B6;"><a href="#&#x670D;&#x52A1;&#x5668;&#x7AEF;epoll&#x7A0B;&#x5E8F;&#x6846;&#x67B6;" class="headerlink" title="&#x670D;&#x52A1;&#x5668;&#x7AEF;epoll&#x7A0B;&#x5E8F;&#x6846;&#x67B6;"></a>&#x670D;&#x52A1;&#x5668;&#x7AEF;epoll&#x7A0B;&#x5E8F;&#x6846;&#x67B6;</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( ; ; )</span><br><span class="line">    {</span><br><span class="line">        nfds = epoll_wait(epfd,events,<span class="number">20</span>,<span class="number">500</span>);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;nfds;++i)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">if</span>(events[i].data.fd==listenfd) <span class="comment">//&#x5982;&#x679C;&#x662F;&#x4E3B;socket&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x5219;&#x8868;&#x793A;&#x6709;&#x65B0;&#x7684;&#x8FDE;&#x63A5;</span></span><br><span class="line">            {</span><br><span class="line">                <span class="comment">//accept&#x8FD9;&#x4E2A;&#x8FDE;&#x63A5;</span></span><br><span class="line">                connfd = accept(listenfd,(sockaddr *)&amp;clientaddr, &amp;clilen); </span><br><span class="line">                ev.data.fd=connfd;</span><br><span class="line">                ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">                <span class="comment">//&#x5C06;&#x65B0;&#x7684;fd&#x6DFB;&#x52A0;&#x5230;epoll&#x7684;&#x76D1;&#x542C;&#x961F;&#x5217;&#x4E2D;</span></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&amp;ev); </span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>( events[i].events&amp;EPOLLIN ) <span class="comment">//&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#xFF0C;&#x8BFB;socket</span></span><br><span class="line">            {</span><br><span class="line">                <span class="keyword">if</span> ( (sockfd = events[i].data.fd) &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                    n = read(sockfd, line, MAXLINE)) &lt; <span class="number">0</span>    <span class="comment">//&#x8BFB;</span></span><br><span class="line">                    ev.data.ptr = md;     <span class="comment">//md&#x4E3A;&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x578B;&#xFF0C;&#x6DFB;&#x52A0;&#x6570;&#x636E;</span></span><br><span class="line">                    ev.events=EPOLLOUT|EPOLLET;</span><br><span class="line">                    <span class="comment">//&#x4FEE;&#x6539;&#x6807;&#x8BC6;&#x7B26;&#xFF0C;&#x7B49;&#x5F85;&#x4E0B;&#x4E00;&#x4E2A;&#x5FAA;&#x73AF;&#x65F6;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x7684;&#x7CBE;&#x9AD3;</span></span><br><span class="line">                    epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(events[i].events&amp;EPOLLOUT) <span class="comment">//&#x6709;&#x6570;&#x636E;&#x5F85;&#x53D1;&#x9001;&#xFF0C;&#x5199;socket</span></span><br><span class="line">            {</span><br><span class="line">                <span class="comment">//&#x53D6;&#x6570;&#x636E;</span></span><br><span class="line">                struct myepoll_data* md = (myepoll_data*)events[i].data.ptr;</span><br><span class="line">                sockfd = md-&gt;fd;</span><br><span class="line">                <span class="comment">//&#x53D1;&#x9001;&#x6570;&#x636E;</span></span><br><span class="line">                send( sockfd, md-&gt;ptr, <span class="built_in">strlen</span>((<span class="keyword">char</span>*)md-&gt;ptr), <span class="number">0</span> );</span><br><span class="line">                ev.data.fd=sockfd;</span><br><span class="line">                ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">                <span class="comment">//&#x4FEE;&#x6539;&#x6807;&#x8BC6;&#x7B26;&#xFF0C;&#x7B49;&#x5F85;&#x4E0B;&#x4E00;&#x4E2A;&#x5FAA;&#x73AF;&#x65F6;&#x63A5;&#x6536;&#x6570;&#x636E;</span></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev); </span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            {</span><br><span class="line">                <span class="comment">//&#x5176;&#x4ED6;&#x60C5;&#x51B5;&#x7684;&#x5904;&#x7406;</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></table></figure>
-<p>&#x4E0B;&#x9762;&#x7ED9;&#x51FA;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x4F8B;&#x5B50;&#xFF1A;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLINE 5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OPEN_MAX 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTENQ 20</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERV_PORT 5000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INFTIM 1000</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setnonblocking</span><span class="params">(<span class="keyword">int</span> sock)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">int</span> opts;</span><br><span class="line">    opts=fcntl(sock,F_GETFL);</span><br><span class="line">    <span class="keyword">if</span>(opts&lt;<span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        perror(<span class="string">&quot;fcntl(sock,GETFL)&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line">    opts = opts|O_NONBLOCK;</span><br><span class="line">    <span class="keyword">if</span>(fcntl(sock,F_SETFL,opts)&lt;<span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        perror(<span class="string">&quot;fcntl(sock,SETFL,opts)&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">int</span> i, maxi, listenfd, connfd, sockfd,epfd,nfds, portnumber;</span><br><span class="line">    <span class="keyword">ssize_t</span> n;</span><br><span class="line">    <span class="keyword">char</span> line[MAXLINE];</span><br><span class="line">    <span class="keyword">socklen_t</span> clilen;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( <span class="number">2</span> == argc )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>( (portnumber = atoi(argv[<span class="number">1</span>])) &lt; <span class="number">0</span> )</span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;Usage:%s portnumber/a/n&quot;</span>,argv[<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;Usage:%s portnumber/a/n&quot;</span>,argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//&#x58F0;&#x660E;epoll_event&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x53D8;&#x91CF;,ev&#x7528;&#x4E8E;&#x6CE8;&#x518C;&#x4E8B;&#x4EF6;,&#x6570;&#x7EC4;&#x7528;&#x4E8E;&#x56DE;&#x4F20;&#x8981;&#x5904;&#x7406;&#x7684;&#x4E8B;&#x4EF6;</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">ev</span>,<span class="title">events</span>[20];</span></span><br><span class="line">    <span class="comment">//&#x751F;&#x6210;&#x7528;&#x4E8E;&#x5904;&#x7406;accept&#x7684;epoll&#x4E13;&#x7528;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;</span></span><br><span class="line"></span><br><span class="line">    epfd=epoll_create(<span class="number">256</span>);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">clientaddr</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serveraddr</span>;</span></span><br><span class="line">    listenfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">//&#x628A;socket&#x8BBE;&#x7F6E;&#x4E3A;&#x975E;&#x963B;&#x585E;&#x65B9;&#x5F0F;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//setnonblocking(listenfd);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//&#x8BBE;&#x7F6E;&#x4E0E;&#x8981;&#x5904;&#x7406;&#x7684;&#x4E8B;&#x4EF6;&#x76F8;&#x5173;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;</span></span><br><span class="line"></span><br><span class="line">    ev.data.fd=listenfd;</span><br><span class="line">    <span class="comment">//&#x8BBE;&#x7F6E;&#x8981;&#x5904;&#x7406;&#x7684;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;</span></span><br><span class="line"></span><br><span class="line">    ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">    <span class="comment">//ev.events=EPOLLIN;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//&#x6CE8;&#x518C;epoll&#x4E8B;&#x4EF6;</span></span><br><span class="line"></span><br><span class="line">    epoll_ctl(epfd,EPOLL_CTL_ADD,listenfd,&amp;ev);</span><br><span class="line">    bzero(&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line">    serveraddr.sin_family = AF_INET;</span><br><span class="line">    <span class="keyword">char</span> *local_addr=<span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line">    inet_aton(local_addr,&amp;(serveraddr.sin_addr));<span class="comment">//htons(portnumber);</span></span><br><span class="line"></span><br><span class="line">    serveraddr.sin_port=htons(portnumber);</span><br><span class="line">    bind(listenfd,(sockaddr *)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line">    listen(listenfd, LISTENQ);</span><br><span class="line">    maxi = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( ; ; ) {</span><br><span class="line">        <span class="comment">//&#x7B49;&#x5F85;epoll&#x4E8B;&#x4EF6;&#x7684;&#x53D1;&#x751F;</span></span><br><span class="line"></span><br><span class="line">        nfds=epoll_wait(epfd,events,<span class="number">20</span>,<span class="number">500</span>);</span><br><span class="line">        <span class="comment">//&#x5904;&#x7406;&#x6240;&#x53D1;&#x751F;&#x7684;&#x6240;&#x6709;&#x4E8B;&#x4EF6;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;nfds;++i)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">if</span>(events[i].data.fd==listenfd)<span class="comment">//&#x5982;&#x679C;&#x65B0;&#x76D1;&#x6D4B;&#x5230;&#x4E00;&#x4E2A;SOCKET&#x7528;&#x6237;&#x8FDE;&#x63A5;&#x5230;&#x4E86;&#x7ED1;&#x5B9A;&#x7684;SOCKET&#x7AEF;&#x53E3;&#xFF0C;&#x5EFA;&#x7ACB;&#x65B0;&#x7684;&#x8FDE;&#x63A5;&#x3002;</span></span><br><span class="line"></span><br><span class="line">            {</span><br><span class="line">                connfd = accept(listenfd,(sockaddr *)&amp;clientaddr,&amp;clilen);</span><br><span class="line">                <span class="keyword">if</span>(connfd&lt;<span class="number">0</span>){</span><br><span class="line">                    perror(<span class="string">&quot;connfd&lt;0&quot;</span>);</span><br><span class="line">                    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">                }</span><br><span class="line">                <span class="comment">//setnonblocking(connfd);</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">char</span> *str = inet_ntoa(clientaddr.sin_addr);</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;accapt a connection from &quot;</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="comment">//&#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x8BFB;&#x64CD;&#x4F5C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;</span></span><br><span class="line"></span><br><span class="line">                ev.data.fd=connfd;</span><br><span class="line">                <span class="comment">//&#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x6CE8;&#x6D4B;&#x7684;&#x8BFB;&#x64CD;&#x4F5C;&#x4E8B;&#x4EF6;</span></span><br><span class="line"></span><br><span class="line">                ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">                <span class="comment">//ev.events=EPOLLIN;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//&#x6CE8;&#x518C;ev</span></span><br><span class="line"></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&amp;ev);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(events[i].events&amp;EPOLLIN)<span class="comment">//&#x5982;&#x679C;&#x662F;&#x5DF2;&#x7ECF;&#x8FDE;&#x63A5;&#x7684;&#x7528;&#x6237;&#xFF0C;&#x5E76;&#x4E14;&#x6536;&#x5230;&#x6570;&#x636E;&#xFF0C;&#x90A3;&#x4E48;&#x8FDB;&#x884C;&#x8BFB;&#x5165;&#x3002;</span></span><br><span class="line"></span><br><span class="line">            {</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;EPOLLIN&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">if</span> ( (sockfd = events[i].data.fd) &lt; <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span> ( (n = read(sockfd, line, MAXLINE)) &lt; <span class="number">0</span>) {</span><br><span class="line">                    <span class="keyword">if</span> (errno == ECONNRESET) {</span><br><span class="line">                        close(sockfd);</span><br><span class="line">                        events[i].data.fd = <span class="number">-1</span>;</span><br><span class="line">                    } <span class="keyword">else</span></span><br><span class="line">                        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;readline error&quot;</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">                } <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">0</span>) {</span><br><span class="line">                    close(sockfd);</span><br><span class="line">                    events[i].data.fd = <span class="number">-1</span>;</span><br><span class="line">                }</span><br><span class="line">                line[n] = &apos;/0&apos;;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;read &quot;</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="comment">//&#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x5199;&#x64CD;&#x4F5C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;</span></span><br><span class="line"></span><br><span class="line">                ev.data.fd=sockfd;</span><br><span class="line">                <span class="comment">//&#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x6CE8;&#x6D4B;&#x7684;&#x5199;&#x64CD;&#x4F5C;&#x4E8B;&#x4EF6;</span></span><br><span class="line"></span><br><span class="line">                ev.events=EPOLLOUT|EPOLLET;</span><br><span class="line">                <span class="comment">//&#x4FEE;&#x6539;sockfd&#x4E0A;&#x8981;&#x5904;&#x7406;&#x7684;&#x4E8B;&#x4EF6;&#x4E3A;EPOLLOUT</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev);</span></span><br><span class="line"></span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(events[i].events&amp;EPOLLOUT) <span class="comment">// &#x5982;&#x679C;&#x6709;&#x6570;&#x636E;&#x53D1;&#x9001;</span></span><br><span class="line">            {</span><br><span class="line">                sockfd = events[i].data.fd;</span><br><span class="line">                write(sockfd, line, n);</span><br><span class="line">                <span class="comment">//&#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x8BFB;&#x64CD;&#x4F5C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;</span></span><br><span class="line"></span><br><span class="line">                ev.data.fd=sockfd;</span><br><span class="line">                <span class="comment">//&#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x6CE8;&#x6D4B;&#x7684;&#x8BFB;&#x64CD;&#x4F5C;&#x4E8B;&#x4EF6;</span></span><br><span class="line"></span><br><span class="line">                ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">                <span class="comment">//&#x4FEE;&#x6539;sockfd&#x4E0A;&#x8981;&#x5904;&#x7406;&#x7684;&#x4E8B;&#x4EF6;&#x4E3A;EPOLIN</span></span><br><span class="line"></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-11-14T13:06:03.000Z" itemprop="datePublished">2018-11-14</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O复用模型之epoll"><span class="toc-number">1.</span> <span class="toc-text">I/O复用模型之epoll</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#epoll模型简介"><span class="toc-number">1.1.</span> <span class="toc-text">epoll模型简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#epoll模型的API"><span class="toc-number">1.2.</span> <span class="toc-text">epoll模型的API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#epoll-create"><span class="toc-number">1.2.1.</span> <span class="toc-text">epoll_create()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#epoll-ctl"><span class="toc-number">1.2.2.</span> <span class="toc-text">epoll_ctl()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#epoll-wait"><span class="toc-number">1.2.3.</span> <span class="toc-text">epoll_wait()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LT和ET模式"><span class="toc-number">1.3.</span> <span class="toc-text">LT和ET模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器端epoll程序框架"><span class="toc-number">1.4.</span> <span class="toc-text">服务器端epoll程序框架</span></a></li></ol></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
+
+
+  <div class="container">
+    <article>
+      <h1>epoll</h1>
+      <h2 id="I-O复用模型之epoll"><a href="#I-O复用模型之epoll" class="headerlink" title="I/O复用模型之epoll"></a>I/O复用模型之epoll</h2><h3 id="epoll模型简介"><a href="#epoll模型简介" class="headerlink" title="epoll模型简介"></a>epoll模型简介</h3><p>epoll是Linux多路服用IO接口select/poll的加强版，e对应的英文单词就是enhancement，中文翻译为增强，加强，提高，充实的意思。所以epoll模型会显著提高程序在大量并发连接中只有少量活跃的情况下的系统CPU利用率。</p>
+<ul>
+<li>epoll把用户关心的文件描述符上的时间放在内核的一个事件表中，无需像select和poll那样每次调用都重复传入文件描述符集。</li>
+<li>epoll在获取事件的时候，无需遍历整个被监听的文件描述符集合，而是遍历那些被内核IO事件异步唤醒而加入ready队列的描述符集合。</li>
+</ul>
+<p>所以，epoll是Linux大规模高并发网络程序的首选模型。</p>
+<h3 id="epoll模型的API"><a href="#epoll模型的API" class="headerlink" title="epoll模型的API"></a>epoll模型的API</h3><p>epoll使用一组函数来完成任务</p>
+<p>最后别忘记调用系统函数 close() 来关闭创建出的epoll句柄</p>
+<h4 id="epoll-create"><a href="#epoll-create" class="headerlink" title="epoll_create()"></a>epoll_create()</h4><p>创建一个epoll句柄，句柄的英文是handle，相通的意思是把手，把柄。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;</span><br><span class="line"><span class="comment">//返回值：若成功，返回一个非负的文件描述符，若出错，返回-1。</span></span><br></pre></td></tr></table></figure>
+<p>该函数返回一个文件描述符，用来唯一标示内核中这个事件表，size参数提示内核要监听的文件描述符个数，这与内存大小有关。</p>
+<p>返回的文件描述符将是其他所有epoll系统调用的第一个参数，以指定要访问的内核事件表，所以用该返回的文件描述符相当与其他epoll调用的把手、把柄一样。</p>
+<p><strong>查看进程能够打开的最大数目的文件描述符</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/sys/fs/file-max</span><br><span class="line">//该值与内存大小有关</span><br></pre></td></tr></table></figure>
+<p><strong>修改最大文件描述符限制</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/security/limits.conf</span><br><span class="line">//重启生效</span><br></pre></td></tr></table></figure>
+<h4 id="epoll-ctl"><a href="#epoll-ctl" class="headerlink" title="epoll_ctl()"></a>epoll_ctl()</h4><p>该函数用来操作epoll的内核事件表</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event *event)</span></span>;</span><br><span class="line"><span class="comment">//返回值：若成功，返回0，若出错返回-1。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>op</strong> 是指定操作类型，有一下三种 </p>
+<ul>
+<li>EPOLL_CTL_ADD，向epfd注册fd的上的event</li>
+<li>EPOLL_CTL_MOD，修改fd已注册的event</li>
+<li>EPOLL_CTL_DEL，从epfd上删除fd的event </li>
+</ul>
+</li>
+<li><p><strong>fd</strong> 是操作的文件描述符</p>
+</li>
+<li><p><strong>event</strong> 指定内核要监听事件,它是 epoll_event 结构类型的指针。定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span>     events;      <span class="comment">/* Epoll events */</span></span><br><span class="line">    <span class="keyword">epoll_data_t</span> data;        <span class="comment">/* User data variable */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>events</strong> 成员描述事件类型，将以下宏定义通过<strong>位或</strong> ( | ) 方式组合</p>
+<ul>
+<li><strong>EPOLLIN</strong> : 表示对应的文件描述符<strong>可读</strong>(包括对端SOCKET正常关闭)</li>
+<li><strong>POLLOUT</strong> : 表示对应的文件描述符<strong>可写</strong></li>
+<li><strong>EPOLLPRI</strong> : 表示对应的文件描述符有紧急的数据可读(这里应该表示有<strong>带外数据</strong>到来)</li>
+<li><strong>EPOLLERR</strong> : 表示对应的文件描述符发生<strong>错误</strong></li>
+<li><strong>EPOLLHUP</strong> : 表示对应的文件描述符被<strong>挂断</strong></li>
+<li><strong>EPOLLET</strong> : 将EPOLL设为<strong>边缘触发</strong>(Edge Triggered)模式,这是相对于水平触发(Level Triggered)来说的</li>
+<li><strong>EPOLLONESHOT</strong> : <strong>只监听一次</strong>事件,当监听完这次事件之后,如果还需要继续监听这个socket的话,需要再次把这个socket加入到EPOLL队列里</li>
+</ul>
+</li>
+<li><p><strong>data</strong> 用于存储用户数据，是 epoll_data_t 联合体，定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> epoll_data &#123;</span><br><span class="line">    <span class="keyword">void</span>        *ptr;</span><br><span class="line">    <span class="keyword">int</span>          fd;</span><br><span class="line">    <span class="keyword">uint32_t</span>     u32;</span><br><span class="line">    <span class="keyword">uint64_t</span>     u64;</span><br><span class="line">&#125; <span class="keyword">epoll_data_t</span>;</span><br></pre></td></tr></table></figure>
+<p>epoll_data_t 是一个联合体，</p>
+<ul>
+<li>fd 指定事件所从属的目标文件描述符。</li>
+<li>ptr 指定 fd 相关的用户数据，但两者不能同时使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="epoll-wait"><a href="#epoll-wait" class="headerlink" title="epoll_wait()"></a>epoll_wait()</h4><p>函数epoll_wait用来等待所监听文件描述符上有事件发生</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event *events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"><span class="comment">//返回值：若成功，返回就绪的文件描述符个数，若出错，返回-1，时间超时返回0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>epfd</strong> 就是函数epoll_create创建的句柄</li>
+<li><strong>events</strong> 是一个传入传出参数，它是epoll_event结构的指针，用来从内核得到事件的集合</li>
+<li><strong>maxevents</strong> 告知内核events的大小，但不能大于epoll_create()时创建的size</li>
+<li><strong>timeout</strong> 是超时事件，-1为阻塞，0为立即返回，非阻塞，大于0是指定的微秒</li>
+</ul>
+<h3 id="LT和ET模式"><a href="#LT和ET模式" class="headerlink" title="LT和ET模式"></a>LT和ET模式</h3><ul>
+<li>LT（Level Triggered，电平触发）：LT模式是epoll默认的工作模式，也是select和poll的工作模式，在LT模式下，epoll相当于一个效率较高的poll。<ul>
+<li>采用LT模式的文件描述符，当epoll_wait检测到其上有事件发生并将此事件通知应用程序后，应用程序可以不立即处理此事件，当下一次调用epoll_wait是，epoll_wait还会将此事件通告应用程序。</li>
+</ul>
+</li>
+<li>ET（Edge Triggered，边沿触发）: 当调用epoll_ctl，向参数event注册EPOLLET事件时，epoll将以ET模式来操作该文件描述符，ET模式是epoll的高效工作模式. <ul>
+<li>对于采用ET模式的文件描述符，当 epoll_wait 检测到其上有事件发生并将此通知应用程序后，应用程序必须立即处理该事件，因为后续的 epoll_wait 调用将不再向应用程序通知这一事件。ET模式降低了同一 epoll 事件被触发的次数，效率比LT模式高。</li>
+</ul>
+</li>
+</ul>
+<p>ET模式仅当状态发生变化的时候才获得通知,这里所谓的状态的变化并不包括缓冲区中还有未处理的数据,也就是说,如果要采用ET模式,需要一直read/write直到出错为止。</p>
+<hr>
+<p>假如有这样一个例子：</p>
+<p>\1. 我们已经把一个用来从管道中读取数据的文件句柄(RFD)添加到epoll描述符</p>
+<p>\2. 这个时候从管道的另一端被写入了2KB的数据</p>
+<p>\3. 调用epoll_wait，并且它会返回RFD，说明它已经准备好读取操作</p>
+<p>\4. 然后我们读取了1KB的数据</p>
+<p>\5. 调用epoll_wait……</p>
+<hr>
+<p>epoll工作在ET模式的时候，必须使用非阻塞套接口，以避免由于一个文件句柄的阻塞读/阻塞写操作把处理多个文件描述符的任务饿死。最好以下面的方式调用ET模式的epoll接口，在后面会介绍避免可能的缺陷。</p>
+<ul>
+<li><p>基于非阻塞文件句柄</p>
+</li>
+<li><p>只有当read或者write返回EAGAIN时才需要挂起，等待。但这并不是说每次read()时都需要循环读，直到读到产生一个EAGAIN才认为此次事件处理完成，当read()返回的读到的数据长度小于请求的数据长度时，就可以确定此时缓冲中已没有数据了，也就可以认为此事读事件已处理完成。</p>
+<ul>
+<li>以 O_NONBLOCK的标志打开文件/socket/FIFO，<strong>如果你连续做read操作而没有数据可读，此时程序不会阻塞起来等待数据准备就绪返回，read函数会返回一个错误EAGAIN</strong>，提示你的应用程序现在没有数据可读请稍后再试。</li>
+</ul>
+</li>
+</ul>
+<p>另外，当使用epoll的ET模型来工作时，当产生了一个EPOLLIN事件后，读数据的时候需要考虑的是当recv()返回的大小如果等于请求的大小，那么很有可能是缓冲区还有数据未读完，也意味着该次事件还没有处理完，所以还需要再次读取：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(rs)</span><br><span class="line">&#123;</span><br><span class="line">	buflen = recv(activeevents[i].data.fd, buf, <span class="keyword">sizeof</span>(buf), <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span>(buflen &lt; <span class="number">0</span>)</span><br><span class="line">  	&#123;</span><br><span class="line">    <span class="comment">// 由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可读</span></span><br><span class="line">    <span class="comment">// 在这里就当作是该次事件已处理处.</span></span><br><span class="line">    <span class="keyword">if</span>(errno == EAGAIN)</span><br><span class="line">    	<span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    	<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(buflen == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">// 这里表示对端的socket已正常关闭.</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span>(buflen == <span class="keyword">sizeof</span>(buf)</span><br><span class="line">		rs = <span class="number">1</span>;   <span class="comment">// 需要再次读取</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		rs = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有，<strong>假如发送端流量大于接收端的流量</strong>(意思是epoll所在的程序读比转发的socket要快),由于是非阻塞的socket,那么send()函数虽然返回,但实际缓冲区的数据并未真正发给接收端,这样不断的读和发，当缓冲区满后会产生EAGAIN错误(参考man send),同时,不理会这次请求发送的数据.所以,需要封装socket_send()的函数用来处理这种情况,该函数会尽量将数据写完再返回，返回-1表示出错。在socket_send()内部,当写缓冲已满(send()返回-1,且errno为EAGAIN),那么会等待后再重试.这种方式并不很完美,在理论上可能会长时间的阻塞在socket_send()内部,但暂没有更好的办法.</p>
+<h3 id="服务器端epoll程序框架"><a href="#服务器端epoll程序框架" class="headerlink" title="服务器端epoll程序框架"></a>服务器端epoll程序框架</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( ; ; )</span><br><span class="line">    &#123;</span><br><span class="line">        nfds = epoll_wait(epfd,events,<span class="number">20</span>,<span class="number">500</span>);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;nfds;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(events[i].data.fd==listenfd) <span class="comment">//如果是主socket的事件，则表示有新的连接</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//accept这个连接</span></span><br><span class="line">                connfd = accept(listenfd,(sockaddr *)&amp;clientaddr, &amp;clilen); </span><br><span class="line">                ev.data.fd=connfd;</span><br><span class="line">                ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">                <span class="comment">//将新的fd添加到epoll的监听队列中</span></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&amp;ev); </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>( events[i].events&amp;EPOLLIN ) <span class="comment">//接收到数据，读socket</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> ( (sockfd = events[i].data.fd) &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                    n = read(sockfd, line, MAXLINE)) &lt; <span class="number">0</span>    <span class="comment">//读</span></span><br><span class="line">                    ev.data.ptr = md;     <span class="comment">//md为自定义类型，添加数据</span></span><br><span class="line">                    ev.events=EPOLLOUT|EPOLLET;</span><br><span class="line">                    <span class="comment">//修改标识符，等待下一个循环时发送数据，异步处理的精髓</span></span><br><span class="line">                    epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(events[i].events&amp;EPOLLOUT) <span class="comment">//有数据待发送，写socket</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//取数据</span></span><br><span class="line">                struct myepoll_data* md = (myepoll_data*)events[i].data.ptr;</span><br><span class="line">                sockfd = md-&gt;fd;</span><br><span class="line">                <span class="comment">//发送数据</span></span><br><span class="line">                send( sockfd, md-&gt;ptr, <span class="built_in">strlen</span>((<span class="keyword">char</span>*)md-&gt;ptr), <span class="number">0</span> );</span><br><span class="line">                ev.data.fd=sockfd;</span><br><span class="line">                ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">                <span class="comment">//修改标识符，等待下一个循环时接收数据</span></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev); </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//其他情况的处理</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>下面给出一个完整的服务器端例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLINE 5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OPEN_MAX 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTENQ 20</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERV_PORT 5000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INFTIM 1000</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setnonblocking</span><span class="params">(<span class="keyword">int</span> sock)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> opts;</span><br><span class="line">    opts=fcntl(sock,F_GETFL);</span><br><span class="line">    <span class="keyword">if</span>(opts&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">"fcntl(sock,GETFL)"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    opts = opts|O_NONBLOCK;</span><br><span class="line">    <span class="keyword">if</span>(fcntl(sock,F_SETFL,opts)&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">"fcntl(sock,SETFL,opts)"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, maxi, listenfd, connfd, sockfd,epfd,nfds, portnumber;</span><br><span class="line">    <span class="keyword">ssize_t</span> n;</span><br><span class="line">    <span class="keyword">char</span> line[MAXLINE];</span><br><span class="line">    <span class="keyword">socklen_t</span> clilen;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( <span class="number">2</span> == argc )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( (portnumber = atoi(argv[<span class="number">1</span>])) &lt; <span class="number">0</span> )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"Usage:%s portnumber/a/n"</span>,argv[<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"Usage:%s portnumber/a/n"</span>,argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明epoll_event结构体的变量,ev用于注册事件,数组用于回传要处理的事件</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">ev</span>,<span class="title">events</span>[20];</span></span><br><span class="line">    <span class="comment">//生成用于处理accept的epoll专用的文件描述符</span></span><br><span class="line"></span><br><span class="line">    epfd=epoll_create(<span class="number">256</span>);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">clientaddr</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serveraddr</span>;</span></span><br><span class="line">    listenfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">//把socket设置为非阻塞方式</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//setnonblocking(listenfd);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//设置与要处理的事件相关的文件描述符</span></span><br><span class="line"></span><br><span class="line">    ev.data.fd=listenfd;</span><br><span class="line">    <span class="comment">//设置要处理的事件类型</span></span><br><span class="line"></span><br><span class="line">    ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">    <span class="comment">//ev.events=EPOLLIN;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//注册epoll事件</span></span><br><span class="line"></span><br><span class="line">    epoll_ctl(epfd,EPOLL_CTL_ADD,listenfd,&amp;ev);</span><br><span class="line">    bzero(&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line">    serveraddr.sin_family = AF_INET;</span><br><span class="line">    <span class="keyword">char</span> *local_addr=<span class="string">"127.0.0.1"</span>;</span><br><span class="line">    inet_aton(local_addr,&amp;(serveraddr.sin_addr));<span class="comment">//htons(portnumber);</span></span><br><span class="line"></span><br><span class="line">    serveraddr.sin_port=htons(portnumber);</span><br><span class="line">    bind(listenfd,(sockaddr *)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line">    listen(listenfd, LISTENQ);</span><br><span class="line">    maxi = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( ; ; ) &#123;</span><br><span class="line">        <span class="comment">//等待epoll事件的发生</span></span><br><span class="line"></span><br><span class="line">        nfds=epoll_wait(epfd,events,<span class="number">20</span>,<span class="number">500</span>);</span><br><span class="line">        <span class="comment">//处理所发生的所有事件</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;nfds;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(events[i].data.fd==listenfd)<span class="comment">//如果新监测到一个SOCKET用户连接到了绑定的SOCKET端口，建立新的连接。</span></span><br><span class="line"></span><br><span class="line">            &#123;</span><br><span class="line">                connfd = accept(listenfd,(sockaddr *)&amp;clientaddr,&amp;clilen);</span><br><span class="line">                <span class="keyword">if</span>(connfd&lt;<span class="number">0</span>)&#123;</span><br><span class="line">                    perror(<span class="string">"connfd&lt;0"</span>);</span><br><span class="line">                    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//setnonblocking(connfd);</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">char</span> *str = inet_ntoa(clientaddr.sin_addr);</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"accapt a connection from "</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="comment">//设置用于读操作的文件描述符</span></span><br><span class="line"></span><br><span class="line">                ev.data.fd=connfd;</span><br><span class="line">                <span class="comment">//设置用于注测的读操作事件</span></span><br><span class="line"></span><br><span class="line">                ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">                <span class="comment">//ev.events=EPOLLIN;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//注册ev</span></span><br><span class="line"></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&amp;ev);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(events[i].events&amp;EPOLLIN)<span class="comment">//如果是已经连接的用户，并且收到数据，那么进行读入。</span></span><br><span class="line"></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"EPOLLIN"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">if</span> ( (sockfd = events[i].data.fd) &lt; <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span> ( (n = read(sockfd, line, MAXLINE)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (errno == ECONNRESET) &#123;</span><br><span class="line">                        close(sockfd);</span><br><span class="line">                        events[i].data.fd = <span class="number">-1</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span></span><br><span class="line">                        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"readline error"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">                    close(sockfd);</span><br><span class="line">                    events[i].data.fd = <span class="number">-1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                line[n] = '/0';</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"read "</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="comment">//设置用于写操作的文件描述符</span></span><br><span class="line"></span><br><span class="line">                ev.data.fd=sockfd;</span><br><span class="line">                <span class="comment">//设置用于注测的写操作事件</span></span><br><span class="line"></span><br><span class="line">                ev.events=EPOLLOUT|EPOLLET;</span><br><span class="line">                <span class="comment">//修改sockfd上要处理的事件为EPOLLOUT</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev);</span></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(events[i].events&amp;EPOLLOUT) <span class="comment">// 如果有数据发送</span></span><br><span class="line">            &#123;</span><br><span class="line">                sockfd = events[i].data.fd;</span><br><span class="line">                write(sockfd, line, n);</span><br><span class="line">                <span class="comment">//设置用于读操作的文件描述符</span></span><br><span class="line"></span><br><span class="line">                ev.data.fd=sockfd;</span><br><span class="line">                <span class="comment">//设置用于注测的读操作事件</span></span><br><span class="line"></span><br><span class="line">                ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">                <span class="comment">//修改sockfd上要处理的事件为EPOLIN</span></span><br><span class="line"></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/11/15/Unix/Proxy/Socks5/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    Linux搭建Socks5 Proxy
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/11/13/Unix/Command/sed/" class="ui tiny button">
-                    
-                    sed 命令
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#I-O复用模型之epoll"><span>I/O复用模型之epoll</span></a><ol><li><a href="#epoll模型简介"><span>epoll模型简介</span></a></li><li><a href="#epoll模型的API"><span>epoll模型的API</span></a><ol><li><a href="#epoll-create"><span>epoll_create()</span></a></li><li><a href="#epoll-ctl"><span>epoll_ctl()</span></a></li><li><a href="#epoll-wait"><span>epoll_wait()</span></a></li></ol></li><li><a href="#LT和ET模式"><span>LT和ET模式</span></a></li><li><a href="#服务器端epoll程序框架"><span>服务器端epoll程序框架</span></a></li></ol></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

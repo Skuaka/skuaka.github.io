@@ -1,264 +1,88 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>mac 使用 mysql | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>mac 使用 mysql | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x5B89;&amp;#x88C5;&amp;#x4E0E;&amp;#x914D;&amp;#x7F6E;1&amp;#x3001;&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;sunyichaodeMacBook-Pro:~ sunyichao$ brew install mysql2&amp;#x3001;&amp;#x5F00;&amp;#x542F;mysql&amp;#xFF1A;mysql.server start(Linux&amp;#x4E0B;&amp;#x">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mac 使用 mysql">
-<meta property="og:url" content="http://yoursite.com/2018/12/04/Database/Mysql/mac 使用 mysql/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x5B89;&amp;#x88C5;&amp;#x4E0E;&amp;#x914D;&amp;#x7F6E;1&amp;#x3001;&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;sunyichaodeMacBook-Pro:~ sunyichao$ brew install mysql2&amp;#x3001;&amp;#x5F00;&amp;#x542F;mysql&amp;#xFF1A;mysql.server start(Linux&amp;#x4E0B;&amp;#x">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-04T14:17:58.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac 使用 mysql">
-<meta name="twitter:description" content="&amp;#x5B89;&amp;#x88C5;&amp;#x4E0E;&amp;#x914D;&amp;#x7F6E;1&amp;#x3001;&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;sunyichaodeMacBook-Pro:~ sunyichao$ brew install mysql2&amp;#x3001;&amp;#x5F00;&amp;#x542F;mysql&amp;#xFF1A;mysql.server start(Linux&amp;#x4E0B;&amp;#x">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Database/Mysql/mac 使用 mysql" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    mac 使用 mysql
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="&#x5B89;&#x88C5;&#x4E0E;&#x914D;&#x7F6E;"><a href="#&#x5B89;&#x88C5;&#x4E0E;&#x914D;&#x7F6E;" class="headerlink" title="&#x5B89;&#x88C5;&#x4E0E;&#x914D;&#x7F6E;"></a>&#x5B89;&#x88C5;&#x4E0E;&#x914D;&#x7F6E;</h2><p>1&#x3001;&#x5B89;&#x88C5;&#xFF1A;<code>sunyichaodeMacBook-Pro:~ sunyichao$ brew install mysql</code><br>2&#x3001;&#x5F00;&#x542F;mysql&#xFF1A;<code>mysql.server start</code>(Linux&#x4E0B;&#x662F;<code>service mysql start</code>)<br>2&#x3001;&#x4F7F;&#x7528;mysql&#x7684;&#x914D;&#x7F6E;&#x811A;&#x672C;&#xFF1A;<code>/usr/local/opt/mysql/bin/mysql_secure_installation //mysql &#x63D0;&#x4F9B;&#x7684;&#x914D;&#x7F6E;&#x5411;&#x5BFC;</code><br>&#x542F;&#x52A8;&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#x540E;&#xFF0C;&#x5373;&#x53EF;&#x6839;&#x636E;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#x63D0;&#x793A;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x8BBE;&#x7F6E;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$ /usr/local/opt/mysql/bin/mysql_secure_installation   //mysql &#x63D0;&#x4F9B;&#x7684;&#x914D;&#x7F6E;&#x5411;&#x5BFC;</span><br><span class="line">Securing the MySQL server deployment.</span><br><span class="line">Connecting to MySQL using a blank password.</span><br><span class="line">VALIDATE PASSWORD PLUGIN can be used to test passwordsand improve security. It     checks the strength of password and allows the users to set only those passwords which are secure enough. Would you like to setup VALIDATE PASSWORD plugin?</span><br><span class="line"></span><br><span class="line">Press y|Y for Yes, any other key for No: k //&#x662F;&#x5426;&#x91C7;&#x7528;mysql&#x5BC6;&#x7801;&#x5B89;&#x5168;&#x68C0;&#x6D4B;&#x63D2;&#x4EF6;&#xFF08;&#x8FD9;&#x91CC;&#x4F5C;&#x4E3A;&#x6F14;&#x793A;&#x9009;&#x62E9;&#x5426;&#xFF0C;&#x5BC6;&#x7801;&#x68C0;&#x67E5;&#x63D2;&#x4EF6;&#x8981;&#x6C42;&#x5BC6;&#x7801;&#x590D;&#x6742;&#x7A0B;&#x5EA6;&#x9AD8;&#xFF0C;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;+&#x6570;&#x5B57;+&#x5B57;&#x7B26;&#x7B49;&#xFF09;</span><br><span class="line">Please set the password for root here. // &#x9996;&#x6B21;&#x4F7F;&#x7528;&#x81EA;&#x5E26;&#x914D;&#x7F6E;&#x811A;&#x672C;&#xFF0C;&#x8BBE;&#x7F6E;root&#x5BC6;&#x7801;</span><br><span class="line"></span><br><span class="line">New password:</span><br><span class="line"></span><br><span class="line">Re-enter new password:</span><br><span class="line"></span><br><span class="line">By default, a MySQL installation has an anonymous user, allowing anyone to log into MySQL without having to have a user account created for This is intended only for testing, and to make the installation go a bit smoother. You should remove them before moving into a production environment.    </span><br><span class="line">Remove anonymous users? [Y/n] Y //&#x662F;&#x5426;&#x5220;&#x9664;&#x533F;&#x540D;&#x7528;&#x6237;</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed to connect from &apos;localhost&apos;.This</span><br><span class="line">ensures that someone cannot guess at the root password from the network.</span><br><span class="line"></span><br><span class="line">Disallow root login remotely? [Y/n] Y //&#x662F;&#x5426;&#x7981;&#x6B62;&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">By default, MySQL comes with a database named &apos;test&apos; that anyone can</span><br><span class="line">access.This is also intended only for testing, and should be removed</span><br><span class="line">before moving into a production environment.</span><br><span class="line"></span><br><span class="line">Remove test database and access to it? [Y/n] Y //&#x5220;&#x9664;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5E76;&#x767B;&#x5F55;</span><br><span class="line"> Dropping test database...</span><br><span class="line"> ... Success!</span><br><span class="line"> Removing privileges on test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will take effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? [Y/n] Y//&#x91CD;&#x65B0;&#x8F7D;&#x5165;&#x6743;&#x9650;&#x8868;</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">All done!  If you&apos;ve completed all of the above steps, your MySQL</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks for using MySQL!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$</span><br></pre></td></tr></table></figure>
-<p>//&#x4EE5;&#x4E0A;&#x5185;&#x5BB9;&#x6765;&#x81EA;<a href="https://segmentfault.com/q/1010000000475470&#x91CC;&#x7684;&#x56DE;&#x7B54;" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000475470&#x91CC;&#x7684;&#x56DE;&#x7B54;</a></p>
-
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-12-04T14:17:57.000Z" itemprop="datePublished">2018-12-04</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装与配置"><span class="toc-number">1.</span> <span class="toc-text">安装与配置</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
+
+
+  <div class="container">
+    <article>
+      <h1>mac 使用 mysql</h1>
+      <h2 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h2><p>1、安装：<code>sunyichaodeMacBook-Pro:~ sunyichao$ brew install mysql</code><br>2、开启mysql：<code>mysql.server start</code>(Linux下是<code>service mysql start</code>)<br>2、使用mysql的配置脚本：<code>/usr/local/opt/mysql/bin/mysql_secure_installation //mysql 提供的配置向导</code><br>启动这个脚本后，即可根据如下命令提示进行初始化设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$ /usr/local/opt/mysql/bin/mysql_secure_installation   //mysql 提供的配置向导</span><br><span class="line">Securing the MySQL server deployment.</span><br><span class="line">Connecting to MySQL using a blank password.</span><br><span class="line">VALIDATE PASSWORD PLUGIN can be used to test passwordsand improve security. It     checks the strength of password and allows the users to set only those passwords which are secure enough. Would you like to setup VALIDATE PASSWORD plugin?</span><br><span class="line"></span><br><span class="line">Press y|Y for Yes, any other key for No: k //是否采用mysql密码安全检测插件（这里作为演示选择否，密码检查插件要求密码复杂程度高，大小写字母+数字+字符等）</span><br><span class="line">Please set the password for root here. // 首次使用自带配置脚本，设置root密码</span><br><span class="line"></span><br><span class="line">New password:</span><br><span class="line"></span><br><span class="line">Re-enter new password:</span><br><span class="line"></span><br><span class="line">By default, a MySQL installation has an anonymous user, allowing anyone to log into MySQL without having to have a user account created for This is intended only for testing, and to make the installation go a bit smoother. You should remove them before moving into a production environment.    </span><br><span class="line">Remove anonymous users? [Y/n] Y //是否删除匿名用户</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed to connect from &apos;localhost&apos;.This</span><br><span class="line">ensures that someone cannot guess at the root password from the network.</span><br><span class="line"></span><br><span class="line">Disallow root login remotely? [Y/n] Y //是否禁止远程登录</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">By default, MySQL comes with a database named &apos;test&apos; that anyone can</span><br><span class="line">access.This is also intended only for testing, and should be removed</span><br><span class="line">before moving into a production environment.</span><br><span class="line"></span><br><span class="line">Remove test database and access to it? [Y/n] Y //删除测试数据库，并登录</span><br><span class="line"> Dropping test database...</span><br><span class="line"> ... Success!</span><br><span class="line"> Removing privileges on test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will take effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? [Y/n] Y//重新载入权限表</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">All done!  If you&apos;ve completed all of the above steps, your MySQL</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks for using MySQL!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$</span><br></pre></td></tr></table></figure>
+<p>//以上内容来自<a href="https://segmentfault.com/q/1010000000475470里的回答" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000475470里的回答</a></p>
+
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/12/04/Database/Mysql/mysql c api/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    mysql c&amp;c++ api
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/12/04/C_C++/Mess/C++显式实例化的用途/" class="ui tiny button">
-                    
-                    C++显式实例化的用途
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#安装与配置"><span>安装与配置</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

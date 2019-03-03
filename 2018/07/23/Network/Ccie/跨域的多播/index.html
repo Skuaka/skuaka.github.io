@@ -1,321 +1,145 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE 跨域的多播 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE 跨域的多播 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x8DE8;&amp;#x57DF;&amp;#x7684;&amp;#x591A;&amp;#x64AD;&amp;#x6E90;&amp;#x548C;&amp;#x7EC4;&amp;#x6210;&amp;#x5458;&amp;#x5728;&amp;#x4E0D;&amp;#x540C;&amp;#x7684;AS&amp;#xFF0C;&amp;#x9700;&amp;#x8981;&amp;#x4F20;&amp;#x9012;&amp;#x591A;&amp;#x64AD;&amp;#x6570;&amp;#x636E;&amp;#x6D41;&amp;#x300">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE 跨域的多播">
-<meta property="og:url" content="http://yoursite.com/2018/07/23/Network/Ccie/跨域的多播/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x8DE8;&amp;#x57DF;&amp;#x7684;&amp;#x591A;&amp;#x64AD;&amp;#x6E90;&amp;#x548C;&amp;#x7EC4;&amp;#x6210;&amp;#x5458;&amp;#x5728;&amp;#x4E0D;&amp;#x540C;&amp;#x7684;AS&amp;#xFF0C;&amp;#x9700;&amp;#x8981;&amp;#x4F20;&amp;#x9012;&amp;#x591A;&amp;#x64AD;&amp;#x6570;&amp;#x636E;&amp;#x6D41;&amp;#x300">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:39:30.809Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE 跨域的多播">
-<meta name="twitter:description" content="&amp;#x8DE8;&amp;#x57DF;&amp;#x7684;&amp;#x591A;&amp;#x64AD;&amp;#x6E90;&amp;#x548C;&amp;#x7EC4;&amp;#x6210;&amp;#x5458;&amp;#x5728;&amp;#x4E0D;&amp;#x540C;&amp;#x7684;AS&amp;#xFF0C;&amp;#x9700;&amp;#x8981;&amp;#x4F20;&amp;#x9012;&amp;#x591A;&amp;#x64AD;&amp;#x6570;&amp;#x636E;&amp;#x6D41;&amp;#x300">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#跨域的多播"><span class="toc-number">1.</span> <span class="toc-text">跨域的多播</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#跨域多播的问题和挑战"><span class="toc-number">1.0.1.</span> <span class="toc-text">跨域多播的问题和挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MSDP-多播源发现协议"><span class="toc-number">1.0.2.</span> <span class="toc-text">MSDP 多播源发现协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MSDP-配置流程"><span class="toc-number">1.0.3.</span> <span class="toc-text">MSDP 配置流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排错手段"><span class="toc-number">1.0.4.</span> <span class="toc-text">排错手段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#多播排错"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">多播排错</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束"><span class="toc-number">1.1.</span> <span class="toc-text">结束</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/跨域的多播" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE 跨域的多播
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h1 id="&#x8DE8;&#x57DF;&#x7684;&#x591A;&#x64AD;"><a href="#&#x8DE8;&#x57DF;&#x7684;&#x591A;&#x64AD;" class="headerlink" title="&#x8DE8;&#x57DF;&#x7684;&#x591A;&#x64AD;"></a>&#x8DE8;&#x57DF;&#x7684;&#x591A;&#x64AD;</h1><p>&#x6E90;&#x548C;&#x7EC4;&#x6210;&#x5458;&#x5728;&#x4E0D;&#x540C;&#x7684;AS&#xFF0C;&#x9700;&#x8981;&#x4F20;&#x9012;&#x591A;&#x64AD;&#x6570;&#x636E;&#x6D41;&#x3002;</p>
-<h3 id="&#x8DE8;&#x57DF;&#x591A;&#x64AD;&#x7684;&#x95EE;&#x9898;&#x548C;&#x6311;&#x6218;"><a href="#&#x8DE8;&#x57DF;&#x591A;&#x64AD;&#x7684;&#x95EE;&#x9898;&#x548C;&#x6311;&#x6218;" class="headerlink" title="&#x8DE8;&#x57DF;&#x591A;&#x64AD;&#x7684;&#x95EE;&#x9898;&#x548C;&#x6311;&#x6218;"></a>&#x8DE8;&#x57DF;&#x591A;&#x64AD;&#x7684;&#x95EE;&#x9898;&#x548C;&#x6311;&#x6218;</h3><p>&#x7EC4;&#x6210;&#x5458;&#x65E0;&#x6CD5;&#x53D1;&#x73B0;&#x6E90;&#x3001;&#x6E90;&#x65E0;&#x6CD5;&#x53D1;&#x73B0;&#x7EC4;&#x6210;&#x5458;&#x3001;&#x591A;&#x64AD;&#x6811;&#x65E0;&#x6CD5;&#x5EFA;&#x7ACB;&#x3002;</p>
-<h3 id="MSDP-&#x591A;&#x64AD;&#x6E90;&#x53D1;&#x73B0;&#x534F;&#x8BAE;"><a href="#MSDP-&#x591A;&#x64AD;&#x6E90;&#x53D1;&#x73B0;&#x534F;&#x8BAE;" class="headerlink" title="MSDP &#x591A;&#x64AD;&#x6E90;&#x53D1;&#x73B0;&#x534F;&#x8BAE;"></a>MSDP &#x591A;&#x64AD;&#x6E90;&#x53D1;&#x73B0;&#x534F;&#x8BAE;</h3><p>MSDP &#x662F;&#x914D;&#x7F6E;&#x5728;&#x4E0D;&#x540C; AS RP &#x4E0A;&#x7684;&#xFF0C;&#x5B83;&#x4F1A;&#x5EFA;&#x7ACB;&#x57FA;&#x4E8E; TCP &#x7684;&#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;&#xFF0C;&#x5229;&#x7528;&#x81EA;&#x8EAB;&#x7684; SA&#xFF08;&#x6E90;&#x5173;&#x8054;&#xFF09;&#x6D88;&#x606F;&#x5171;&#x4EAB;&#x201D;&#x6E90;&#x5730;&#x5740;&#x4FE1;&#x606F;&#x3001;&#x591A;&#x64AD;&#x7EC4;&#x5730;&#x5740;&#x4FE1;&#x606F;&#x3001;RP &#x4FE1;&#x606F;&#x201D;&#x7ED9;&#x5BF9;&#x7AEF; RP&#x3002;</p>
-<h3 id="MSDP-&#x914D;&#x7F6E;&#x6D41;&#x7A0B;"><a href="#MSDP-&#x914D;&#x7F6E;&#x6D41;&#x7A0B;" class="headerlink" title="MSDP &#x914D;&#x7F6E;&#x6D41;&#x7A0B;"></a>MSDP &#x914D;&#x7F6E;&#x6D41;&#x7A0B;</h3><p>&#x6B65;&#x9AA4;1&#xFF1A;RP&#x4E0A;&#x914D;&#x7F6E;&#x65B0;&#x7684; loopback &#x63A5;&#x53E3;&#xFF0C;&#x5E76;&#x4E14;&#x5BA3;&#x544A;&#x8FDB; BGP&#x3002;</p>
-<p>&#x6B65;&#x9AA4;2&#xFF1A;RP&#x4E0A;&#x5B8C;&#x6210; MSDP &#x7684;&#x914D;&#x7F6E;</p>
+  <div class="container">
+    <article>
+      <h1>CCIE 跨域的多播</h1>
+      <h1 id="跨域的多播"><a href="#跨域的多播" class="headerlink" title="跨域的多播"></a>跨域的多播</h1><p>源和组成员在不同的AS，需要传递多播数据流。</p>
+<h3 id="跨域多播的问题和挑战"><a href="#跨域多播的问题和挑战" class="headerlink" title="跨域多播的问题和挑战"></a>跨域多播的问题和挑战</h3><p>组成员无法发现源、源无法发现组成员、多播树无法建立。</p>
+<h3 id="MSDP-多播源发现协议"><a href="#MSDP-多播源发现协议" class="headerlink" title="MSDP 多播源发现协议"></a>MSDP 多播源发现协议</h3><p>MSDP 是配置在不同 AS RP 上的，它会建立基于 TCP 的对等体关系，利用自身的 SA（源关联）消息共享”源地址信息、多播组地址信息、RP 信息”给对端 RP。</p>
+<h3 id="MSDP-配置流程"><a href="#MSDP-配置流程" class="headerlink" title="MSDP 配置流程"></a>MSDP 配置流程</h3><p>步骤1：RP上配置新的 loopback 接口，并且宣告进 BGP。</p>
+<p>步骤2：RP上完成 MSDP 的配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip msdp peer 8.8.8.8</span><br><span class="line">ip msdp peer 8.8.8.8 connect-source lo44</span><br><span class="line">ip msdp origin lo88</span><br><span class="line"></span><br><span class="line">show ip msdp summary</span><br></pre></td></tr></table></figure>
-<h3 id="&#x6392;&#x9519;&#x624B;&#x6BB5;"><a href="#&#x6392;&#x9519;&#x624B;&#x6BB5;" class="headerlink" title="&#x6392;&#x9519;&#x624B;&#x6BB5;"></a>&#x6392;&#x9519;&#x624B;&#x6BB5;</h3><p>ip &#x8DEF;&#x7531;&#x7591;&#x96BE;&#x89E3;&#x6790;</p>
-<h4 id="&#x591A;&#x64AD;&#x6392;&#x9519;"><a href="#&#x591A;&#x64AD;&#x6392;&#x9519;" class="headerlink" title="&#x591A;&#x64AD;&#x6392;&#x9519;"></a>&#x591A;&#x64AD;&#x6392;&#x9519;</h4><p>ping &#x591A;&#x64AD;&#x7EC4;&#x5730;&#x5740; &#x4E0D;&#x540C;</p>
-<ol class="ui list">
-<li><p>&#x786E;&#x8BA4;&#x53D1;&#x73B0;&#x7EC4;&#x6210;&#x5458;</p>
+<h3 id="排错手段"><a href="#排错手段" class="headerlink" title="排错手段"></a>排错手段</h3><p>ip 路由疑难解析</p>
+<h4 id="多播排错"><a href="#多播排错" class="headerlink" title="多播排错"></a>多播排错</h4><p>ping 多播组地址 不同</p>
+<ol>
+<li><p>确认发现组成员</p>
 <p><code>show ip igmp group</code></p>
-<p>&#x67E5;&#x770B;&#x7EC4;&#x5730;&#x5740;&#x3001;&#x672C;&#x5730;&#x63A5;&#x53E3;&#x3001;&#x62A5;&#x544A;&#x8005; &#x662F;&#x5426;&#x51FA;&#x73B0;</p>
-<p><strong>&#x9519;&#x70B9;</strong></p>
+<p>查看组地址、本地接口、报告者 是否出现</p>
+<p><strong>错点</strong></p>
 <ul>
-<li>&#x6CA1;&#x6709;&#x6A21;&#x62DF;&#x6210;&#x7EC4;&#x6210;&#x5458;&#xFF0C;&#x7F3A;&#x4E4F;&#x63A5;&#x53E3;&#x4E0B;&#xFF1A;<code>ip igmp join-group &lt;a.b.c.d&gt;</code></li>
-<li>&#x8DEF;&#x7531;&#x5668;&#x63A5;&#x53E3;&#x6CA1;&#x6709;&#x52A0;&#x5165;PIM&#xFF0C;&#x7F3A;&#x4E4F;&#x63A5;&#x53E3;&#x4E0B;:<code>ip pim &lt;x&gt;</code></li>
-<li>&#x8FDE;&#x901A;&#x6027;&#x95EE;&#x9898;</li>
+<li>没有模拟成组成员，缺乏接口下：<code>ip igmp join-group &lt;a.b.c.d&gt;</code></li>
+<li>路由器接口没有加入PIM，缺乏接口下:<code>ip pim &lt;x&gt;</code></li>
+<li>连通性问题</li>
 </ul>
 </li>
-<li><p>&#x786E;&#x8BA4;&#x7A00;&#x758F;&#x6A21;&#x5F0F;&#x83B7;&#x53D6; RP &#x4FE1;&#x606F;</p>
-<p><code>show ip pim rp mapping</code> &#x67E5;&#x770B; RP &#x6620;&#x5C04;&#xFF0C;&#x67E5;&#x770B; RP &#x7684;&#x7ED3;&#x679C;</p>
-<p><code>show ip pim rp</code> &#x67E5;&#x770B;&#x591A;&#x64AD;&#x7EC4;&#x548C; RP &#x7684;&#x5173;&#x8054;</p>
-<p><strong>&#x9519;&#x70B9;</strong></p>
+<li><p>确认稀疏模式获取 RP 信息</p>
+<p><code>show ip pim rp mapping</code> 查看 RP 映射，查看 RP 的结果</p>
+<p><code>show ip pim rp</code> 查看多播组和 RP 的关联</p>
+<p><strong>错点</strong></p>
 <ul>
-<li>&#x6CA1;&#x6709;&#x901A;&#x8FC7;&#x9759;&#x6001; RP &#x6307;&#x660E; RP &#x5730;&#x5740;</li>
-<li>BSR &#x7684; C-BSR &#x6216; C-RP &#x914D;&#x7F6E;&#x95EE;&#x9898;</li>
-<li>auto-rp &#x7684;&#x914D;&#x7F6E;&#x95EE;&#x9898;</li>
-<li>&#x7F3A;&#x4E4F;auto-rp &#x4FA6;&#x542C;&#x7684;&#x914D;&#x7F6E;</li>
-<li>&#x8BBE;&#x5907;&#x95F4;&#x7F3A;&#x4E4F;&#x5FC5;&#x8981;&#x7684;PIM &#x90BB;&#x5C45;&#xFF1A;<code>show ip pim neighbor</code><ul>
-<li>&#x8BBE;&#x5907;&#x7F3A;&#x4E4F;&#x591A;&#x64AD;&#x8DEF;&#x7531;&#x529F;&#x80FD;&#x548C;&#x63A5;&#x53E3;&#x5FD8;&#x8BB0;&#x52A0;&#x5165;PIM</li>
-<li>&#x63A5;&#x53E3;&#x5FD8;&#x8BB0;&#x6FC0;&#x6D3B;&#x3001;&#x9519;&#x8BEF;&#x7684;&#x5B89;&#x5168;&#x7B56;&#x7565;&#x6321;&#x4F4F;&#x4E86;PIM&#x6D88;&#x606F;</li>
+<li>没有通过静态 RP 指明 RP 地址</li>
+<li>BSR 的 C-BSR 或 C-RP 配置问题</li>
+<li>auto-rp 的配置问题</li>
+<li>缺乏auto-rp 侦听的配置</li>
+<li>设备间缺乏必要的PIM 邻居：<code>show ip pim neighbor</code><ul>
+<li>设备缺乏多播路由功能和接口忘记加入PIM</li>
+<li>接口忘记激活、错误的安全策略挡住了PIM消息</li>
 </ul>
 </li>
-<li>&#x8BBE;&#x5907;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x62B5;&#x8FBE; RP &#x5730;&#x5740;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x663E;&#x793A;&#x83B7;&#x53D6;&#x7684; RP &#x6D88;&#x606F;<ul>
-<li>&#x8DEF;&#x7531;&#x5C42;&#x9762;&#x95EE;&#x9898;&#x3001;&#x5FD8;&#x8BB0;&#x5BA3;&#x544A;&#x3001;&#x5FD8;&#x8BB0;&#x91CD;&#x5206;&#x53D1;&#x3001;&#x9519;&#x8BEF;&#x7684;&#x8FC7;&#x6EE4;</li>
+<li>设备无法正常抵达 RP 地址，所以不显示获取的 RP 消息<ul>
+<li>路由层面问题、忘记宣告、忘记重分发、错误的过滤</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>RPF &#x68C0;&#x6D4B;&#x672A;&#x901A;&#x8FC7;</p>
+<li><p>RPF 检测未通过</p>
 <ul>
-<li>&#x7F3A;&#x4E4F;&#x5FC5;&#x8981;&#x7684;&#x66F4;&#x65B0;&#x6E90;&#x8DEF;&#x7531;</li>
-<li>&#x5FD8;&#x8BB0;&#x5BA3;&#x544A;&#x3001;&#x5FD8;&#x8BB0;&#x91CD;&#x5206;&#x53D1;&#x3001;&#x9519;&#x8BEF;&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x8FC7;&#x6EE4;</li>
+<li>缺乏必要的更新源路由</li>
+<li>忘记宣告、忘记重分发、错误的路由更新过滤</li>
 </ul>
 </li>
-<li><p>&#x662F;&#x5426;&#x662F;&#x8DE8;&#x57DF;&#x591A;&#x64AD;&#x3001;&#x7F3A;&#x4E4F;&#x5FC5;&#x8981;&#x7684;&#x914D;&#x7F6E;&#x548C;&#x8FDE;&#x901A;&#x6027;</p>
+<li><p>是否是跨域多播、缺乏必要的配置和连通性</p>
 <ul>
-<li><p>&#x7F3A;&#x4E4F;&#x5FC5;&#x8981;&#x7684; MSDP &#x914D;&#x7F6E;&#x548C; MSDP &#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;</p>
+<li><p>缺乏必要的 MSDP 配置和 MSDP 对等体关系</p>
 <p><code>show run | sec ip msdp</code></p>
 <p><code>show ip msdp summary</code></p>
-<p>MSDP peer &#x5730;&#x5740;&#x4E0D;&#x53EF;&#x8FBE;</p>
-<p>MSDP &#x94FE;&#x63A5;&#x6E90;&#x548C;&#x8D77;&#x6E90; ID &#x8BBE;&#x7F6E;&#x9519;&#x8BEF;</p>
+<p>MSDP peer 地址不可达</p>
+<p>MSDP 链接源和起源 ID 设置错误</p>
 </li>
-<li><p>RPF &#x68C0;&#x6D4B;&#x4E0D;&#x901A;&#x8FC7;</p>
+<li><p>RPF 检测不通过</p>
 </li>
 </ul>
 </li>
-<li><p>&#x9519;&#x8BEF;&#x7684;&#x5B89;&#x5168;&#x7B56;&#x7565;</p>
+<li><p>错误的安全策略</p>
 </li>
 </ol>
-<h2 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h2>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-07-23T06:10:31.000Z" itemprop="datePublished">2018-07-23</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/07/24/Network/Ccie/MPLS VPN/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    CCIE MPLS VPN
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/07/23/Network/Ccie/多播/" class="ui tiny button">
-                    
-                    CCIE 多播（multicast）
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#跨域的多播"><span>跨域的多播</span></a><ol><li><a href="#跨域多播的问题和挑战"><span>跨域多播的问题和挑战</span></a></li><li><a href="#MSDP-多播源发现协议"><span>MSDP 多播源发现协议</span></a></li><li><a href="#MSDP-配置流程"><span>MSDP 配置流程</span></a></li><li><a href="#排错手段"><span>排错手段</span></a><ol><li><a href="#多播排错"><span>多播排错</span></a></li></ol></li></ol></li><li><a href="#结束"><span>结束</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

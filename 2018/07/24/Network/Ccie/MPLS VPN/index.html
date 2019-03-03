@@ -1,466 +1,290 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE MPLS VPN | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE MPLS VPN | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="VPN&amp;#x865A;&amp;#x62DF;&amp;#x7684;&amp;#x79C1;&amp;#x6709;&amp;#x7F51;&amp;#x7EDC;&amp;#xFF0C;&amp;#x901A;&amp;#x8FC7;&amp;#x7EC4;&amp;#x5EFA;&amp;#x865A;&amp;#x62DF;&amp;#x7684;&amp;#x4E13;&amp;#x7F51;&amp;#x5B9E;&amp;#x73B0;&amp;#x6570;&amp;#x636E;&amp;#x7684;&amp;#x5B89;&amp;#x5168;&amp;#x4F">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE MPLS VPN">
-<meta property="og:url" content="http://yoursite.com/2018/07/24/Network/Ccie/MPLS VPN/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="VPN&amp;#x865A;&amp;#x62DF;&amp;#x7684;&amp;#x79C1;&amp;#x6709;&amp;#x7F51;&amp;#x7EDC;&amp;#xFF0C;&amp;#x901A;&amp;#x8FC7;&amp;#x7EC4;&amp;#x5EFA;&amp;#x865A;&amp;#x62DF;&amp;#x7684;&amp;#x4E13;&amp;#x7F51;&amp;#x5B9E;&amp;#x73B0;&amp;#x6570;&amp;#x636E;&amp;#x7684;&amp;#x5B89;&amp;#x5168;&amp;#x4F">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:39:34.963Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE MPLS VPN">
-<meta name="twitter:description" content="VPN&amp;#x865A;&amp;#x62DF;&amp;#x7684;&amp;#x79C1;&amp;#x6709;&amp;#x7F51;&amp;#x7EDC;&amp;#xFF0C;&amp;#x901A;&amp;#x8FC7;&amp;#x7EC4;&amp;#x5EFA;&amp;#x865A;&amp;#x62DF;&amp;#x7684;&amp;#x4E13;&amp;#x7F51;&amp;#x5B9E;&amp;#x73B0;&amp;#x6570;&amp;#x636E;&amp;#x7684;&amp;#x5B89;&amp;#x5168;&amp;#x4F">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VPN"><span class="toc-number">1.</span> <span class="toc-text">VPN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VPN的分类"><span class="toc-number">1.1.</span> <span class="toc-text">VPN的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OSI-参考模型分类"><span class="toc-number">1.1.1.</span> <span class="toc-text">OSI 参考模型分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实际应用分类"><span class="toc-number">1.1.2.</span> <span class="toc-text">实际应用分类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPLS-VPN"><span class="toc-number">2.</span> <span class="toc-text">MPLS VPN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MPLS-VPN术语"><span class="toc-number">2.1.</span> <span class="toc-text">MPLS VPN术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPLS-VPN-的双标签"><span class="toc-number">2.2.</span> <span class="toc-text">MPLS VPN 的双标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全加密"><span class="toc-number">2.3.</span> <span class="toc-text">安全加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPLS-VPN-的配置流程"><span class="toc-number">2.4.</span> <span class="toc-text">MPLS VPN 的配置流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#步骤1：完成-P-NETWORK-的配置"><span class="toc-number">2.4.1.</span> <span class="toc-text">步骤1：完成 P-NETWORK 的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#步骤2：完成-PE-和-CE-设备的路由信息共享"><span class="toc-number">2.4.2.</span> <span class="toc-text">步骤2：完成 PE 和 CE 设备的路由信息共享</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#步骤3：完成-PE-上-VRF-和-MP-BGP-的路由信息重分发"><span class="toc-number">2.4.3.</span> <span class="toc-text">步骤3：完成 PE 上 VRF 和 MP-BGP 的路由信息重分发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#show命令"><span class="toc-number">2.4.4.</span> <span class="toc-text">show命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-number">2.5.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#UNTAGE-对-MPLS-VPN-通讯的影响"><span class="toc-number">2.5.1.</span> <span class="toc-text">UNTAGE 对 MPLS VPN 通讯的影响</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PE-上-OSPF-的问题"><span class="toc-number">2.5.2.</span> <span class="toc-text">PE 上 OSPF 的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#新的-OSPF-层次化架构"><span class="toc-number">2.5.2.1.</span> <span class="toc-text">新的 OSPF 层次化架构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#PE-设备-OSPF-的限制"><span class="toc-number">2.5.2.2.</span> <span class="toc-text">PE 设备 OSPF 的限制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#OSPF-通过-MPLS-VPN-共享路由后的类型"><span class="toc-number">2.5.2.3.</span> <span class="toc-text">OSPF 通过 MPLS VPN 共享路由后的类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#利用-sham-link（伪链路）还原相同区域的路由"><span class="toc-number">2.5.2.4.</span> <span class="toc-text">利用 sham-link（伪链路）还原相同区域的路由</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPLS-VPN-总结"><span class="toc-number">3.</span> <span class="toc-text">MPLS VPN 总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPLS-VPN-排错"><span class="toc-number">4.</span> <span class="toc-text">MPLS VPN 排错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域MPLS-VPN-解决方案详解"><span class="toc-number">5.</span> <span class="toc-text">跨域MPLS VPN 解决方案详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一：option-A：背靠背：back-to-back"><span class="toc-number">5.1.</span> <span class="toc-text">方法一：option A：背靠背：back to back</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二：option-B-2a"><span class="toc-number">5.2.</span> <span class="toc-text">方法二：option B 2a</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法三：option-B-2b"><span class="toc-number">5.3.</span> <span class="toc-text">方法三：option B 2b</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法四：option-C"><span class="toc-number">5.4.</span> <span class="toc-text">方法四：option C</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何共享不同站点的路由"><span class="toc-number">5.4.1.</span> <span class="toc-text">如何共享不同站点的路由</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束"><span class="toc-number">6.</span> <span class="toc-text">结束</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/MPLS VPN" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE MPLS VPN
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h2><p>&#x865A;&#x62DF;&#x7684;&#x79C1;&#x6709;&#x7F51;&#x7EDC;&#xFF0C;&#x901A;&#x8FC7;&#x7EC4;&#x5EFA;&#x865A;&#x62DF;&#x7684;&#x4E13;&#x7F51;&#x5B9E;&#x73B0;&#x6570;&#x636E;&#x7684;&#x5B89;&#x5168;&#x4F20;&#x9012;&#x3002;</p>
-<h3 id="VPN&#x7684;&#x5206;&#x7C7B;"><a href="#VPN&#x7684;&#x5206;&#x7C7B;" class="headerlink" title="VPN&#x7684;&#x5206;&#x7C7B;"></a>VPN&#x7684;&#x5206;&#x7C7B;</h3><h5 id="OSI-&#x53C2;&#x8003;&#x6A21;&#x578B;&#x5206;&#x7C7B;"><a href="#OSI-&#x53C2;&#x8003;&#x6A21;&#x578B;&#x5206;&#x7C7B;" class="headerlink" title="OSI &#x53C2;&#x8003;&#x6A21;&#x578B;&#x5206;&#x7C7B;"></a>OSI &#x53C2;&#x8003;&#x6A21;&#x578B;&#x5206;&#x7C7B;</h5><ul class="ui list">
-<li>&#x5E94;&#x7528;&#x5C42;VPN&#xFF1A;&#x5F00;&#x6E90;&#x7684;&#x7B2C;&#x4E09;&#x65B9;VPN&#x8F6F;&#x4EF6;&#xFF08;open vpn&#xFF09;</li>
-<li>&#x4F20;&#x8F93;&#x5C42;VPN&#xFF1A;SSL VPN&#xFF08;&#x5B89;&#x5168;&#x5957;&#x5B57;&#x8282;&#x5C42; VPN&#xFF09;&#x4E3B;&#x8981;&#x7528;&#x4E8E;HTTP&#x7684;&#x5B89;&#x5168;&#x52A0;&#x56FA;&#x548C;&#x9632;&#x62A4;&#x3002;</li>
-<li>&#x7F51;&#x7EDC;&#x5C42;VPN&#xFF1A;IPSEC VPN&#xFF08;ip&#x5B89;&#x5168;VPN&#xFF09;&#x3001;DM-VPN&#xFF08;&#x52A8;&#x6001;&#x591A;&#x70B9;VPN&#xFF0C;&#x601D;&#x79D1;&#x79C1;&#x6709;&#xFF09;</li>
-<li>&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;VPN&#xFF1A;L2TP&#xFF08;&#x5C42;2&#x96A7;&#x9053;VPN&#xFF09;&#x3001;PPTP&#xFF08;&#x70B9;&#x5230;&#x70B9;&#x96A7;&#x9053;VPN&#xFF09;&#x5FAE;&#x8F6F;&#x601D;&#x79D1;&#x8054;&#x5408;&#x5F00;&#x53D1;</li>
-<li>&#x7269;&#x7406;&#x5C42;VPN&#xFF1A;&#x4E13;&#x7EBF;</li>
+  <div class="container">
+    <article>
+      <h1>CCIE MPLS VPN</h1>
+      <h2 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h2><p>虚拟的私有网络，通过组建虚拟的专网实现数据的安全传递。</p>
+<h3 id="VPN的分类"><a href="#VPN的分类" class="headerlink" title="VPN的分类"></a>VPN的分类</h3><h4 id="OSI-参考模型分类"><a href="#OSI-参考模型分类" class="headerlink" title="OSI 参考模型分类"></a>OSI 参考模型分类</h4><ul>
+<li>应用层VPN：开源的第三方VPN软件（open vpn）</li>
+<li>传输层VPN：SSL VPN（安全套字节层 VPN）主要用于HTTP的安全加固和防护。</li>
+<li>网络层VPN：IPSEC VPN（ip安全VPN）、DM-VPN（动态多点VPN，思科私有）</li>
+<li>数据链路层VPN：L2TP（层2隧道VPN）、PPTP（点到点隧道VPN）微软思科联合开发</li>
+<li>物理层VPN：专线</li>
 </ul>
-<h5 id="&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x5206;&#x7C7B;"><a href="#&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x5206;&#x7C7B;" class="headerlink" title="&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x5206;&#x7C7B;"></a>&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x5206;&#x7C7B;</h5><ol class="ui list">
-<li><p>site to site&#xFF1A;&#x7AD9;&#x70B9;&#x5230;&#x7AD9;&#x70B9;&#xFF1A;L2L&#xFF08;lan to lan&#xFF09;</p>
-<p>IPSEC VPN&#x3001;DM-VPN&#x3001;MPLS VPN</p>
+<h4 id="实际应用分类"><a href="#实际应用分类" class="headerlink" title="实际应用分类"></a>实际应用分类</h4><ol>
+<li><p>site to site：站点到站点：L2L（lan to lan）</p>
+<p>IPSEC VPN、DM-VPN、MPLS VPN</p>
 </li>
-<li><p>remote vpn&#xFF1A;&#x8FDC;&#x7A0B;&#x63A5;&#x5165;VPN</p>
-<p>L2TP&#x3001;PPTP&#x3001;SSL VPN&#x3001;EZ-VPN&#xFF08;&#x601D;&#x79D1;&#x79C1;&#x6709;&#xFF09;&#x3001;anyconnect VPN&#xFF08;&#x4EFB;&#x8FDE;VPN&#xFF09;</p>
+<li><p>remote vpn：远程接入VPN</p>
+<p>L2TP、PPTP、SSL VPN、EZ-VPN（思科私有）、anyconnect VPN（任连VPN）</p>
 </li>
 </ol>
-<h2 id="MPLS-VPN"><a href="#MPLS-VPN" class="headerlink" title="MPLS VPN"></a>MPLS VPN</h2><p>MPLS VPN&#x662F;&#x5728;BGP peer&#x4E4B;&#x95F4;&#x5EFA;&#x7ACB;&#xFF08;peer to peer VPN&#xFF09;&#xFF0C;&#x5229;&#x7528;&#x4E86;BGP&#x7684;&#x5BF9;&#x7B49;&#x4F53;&#x5171;&#x4EAB;&#x4E86;&#x4F01;&#x4E1A;&#x5185;&#x7F51;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#xFF0C;&#x6784;&#x5EFA;&#x4E13;&#x6709;&#x901A;&#x8DEF;&#xFF0C;&#x5B9E;&#x73B0;&#x5B89;&#x5168;&#x7684;&#x901A;&#x8BAF;&#x3002;</p>
-<h3 id="MPLS-VPN&#x672F;&#x8BED;"><a href="#MPLS-VPN&#x672F;&#x8BED;" class="headerlink" title="MPLS VPN&#x672F;&#x8BED;"></a>MPLS VPN&#x672F;&#x8BED;</h3><ul class="ui list">
-<li><p>P-NETWORK&#xFF1A;&#x8FD0;&#x8425;&#x5546;&#x6838;&#x5FC3;&#x7F51;&#x7EDC;</p>
+<h2 id="MPLS-VPN"><a href="#MPLS-VPN" class="headerlink" title="MPLS VPN"></a>MPLS VPN</h2><p>MPLS VPN是在BGP peer之间建立（peer to peer VPN），利用了BGP的对等体共享了企业内网路由信息，构建专有通路，实现安全的通讯。</p>
+<h3 id="MPLS-VPN术语"><a href="#MPLS-VPN术语" class="headerlink" title="MPLS VPN术语"></a>MPLS VPN术语</h3><ul>
+<li><p>P-NETWORK：运营商核心网络</p>
 </li>
-<li><p>PE &#x8BBE;&#x5907;&#xFF1A;&#x8FD0;&#x8425;&#x5546;&#x8FB9;&#x754C;&#x8BBE;&#x5907;</p>
+<li><p>PE 设备：运营商边界设备</p>
 </li>
-<li><p>P &#x8BBE;&#x5907;&#xFF1A;&#x8FD0;&#x8425;&#x5546;&#x6838;&#x5FC3;&#x8BBE;&#x5907;</p>
+<li><p>P 设备：运营商核心设备</p>
 </li>
-<li><p>C-NETWORK&#xFF1A;&#x5BA2;&#x6237;&#x7F51;&#x7EDC;</p>
+<li><p>C-NETWORK：客户网络</p>
 </li>
-<li><p>CE &#x8BBE;&#x5907;&#xFF1A;&#x5BA2;&#x6237;&#x7F51;&#x7EDC;&#x8FB9;&#x754C;&#x8DEF;&#x7531;&#x5668;</p>
+<li><p>CE 设备：客户网络边界路由器</p>
 </li>
-<li><p>VRF&#xFF1A;&#x865A;&#x62DF;&#x8DEF;&#x7531;&#x8F6C;&#x53D1;&#x8868;</p>
-<p>&#x8DEF;&#x7531;&#x5668;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x8DEF;&#x7531;&#x8868;&#x548C;&#x82E5;&#x5E72;&#x4E2A;VRF&#xFF0C;&#x6BCF;&#x4E2A;VRF&#x5BF9;&#x5E94;&#x5230;&#x4E00;&#x4E2A;C-NETWORK&#x3002;</p>
-<p><strong>&#x4F5C;&#x7528;</strong>&#xFF1A;&#x5B58;&#x50A8;&#x4E0D;&#x540C; C-NETWORK &#x7684;&#x8DEF;&#x7531;&#xFF0C;&#x4FDD;&#x969C;&#x8FD9;&#x4E9B;&#x8DEF;&#x7531;&#x4E0D;&#x5F71;&#x54CD;&#x5168;&#x5C40;&#x8DEF;&#x7531;&#x8868;&#xFF0C;&#x800C;&#x4E14;&#x4E0D;&#x4F1A;&#x51B2;&#x7A81;&#xFF0C;&#x4E14;&#x76F8;&#x4E92;&#x72EC;&#x7ACB;&#x3002;</p>
+<li><p>VRF：虚拟路由转发表</p>
+<p>路由器拥有一个全局路由表和若干个VRF，每个VRF对应到一个C-NETWORK。</p>
+<p><strong>作用</strong>：存储不同 C-NETWORK 的路由，保障这些路由不影响全局路由表，而且不会冲突，且相互独立。</p>
 <ul>
-<li><p>VRF &#x7684; RD &#x503C;&#xFF1A;&#x8DEF;&#x7531;&#x533A;&#x5206;&#x503C;</p>
-<p>RD &#x503C;&#x4E66;&#x5199;&#x683C;&#x5F0F;&#xFF1A;XX:YY</p>
-<p>&#x4E0D;&#x540C; VRF &#x7684;&#x8DEF;&#x7531;&#x8FDB;&#x5165;BGP &#x540E;&#xFF0C;&#x5229;&#x7528; RD&#x503C;&#x8FDB;&#x884C;&#x533A;&#x522B;&#x3002;</p>
-<p>MPLS VPN peer &#x4E4B;&#x95F4;&#x5EFA;&#x7ACB;&#x7684;&#x662F; <strong>MP-BGP</strong> peer &#x5173;&#x7CFB;&#xFF0C;MP-BGP &#x63D0;&#x4F9B;&#x4E13;&#x95E8;&#x7684;&#x8F6C;&#x53D1;&#x8868;&#xFF0C;&#x5B58;&#x50A8;&#x6765;&#x81EA;&#x4E0D;&#x540C; VRF&#x7684;&#x8DEF;&#x7531;&#x3002;</p>
+<li><p>VRF 的 RD 值：路由区分值</p>
+<p>RD 值书写格式：XX:YY</p>
+<p>不同 VRF 的路由进入BGP 后，利用 RD值进行区别。</p>
+<p>MPLS VPN peer 之间建立的是 <strong>MP-BGP</strong> peer 关系，MP-BGP 提供专门的转发表，存储来自不同 VRF的路由。</p>
 </li>
-<li><p>VRF &#x7684; RT &#x503C;&#xFF1A;&#x8DEF;&#x7531;&#x76EE;&#x6807;&#x503C;</p>
-<p>RT &#x503C;&#x4E66;&#x5199;&#x683C;&#x5F0F;&#xFF1A;XX:YY</p>
-<p>RT &#x503C;&#x5206;&#x4E3A;&#x5BFC;&#x5165;&#x548C;&#x5BFC;&#x51FA;&#x4E24;&#x4E2A;&#x65B9;&#x5411;&#xFF1A;</p>
-<p>&#x5BFC;&#x5165;&#x503C;&#x662F;&#x7528;&#x6765;&#x786E;&#x8BA4;&#x662F;&#x5426;&#x5B66;&#x4E60;&#x8FDC;&#x7AEF;&#x7684;&#x8DEF;&#x7531;</p>
-<p>&#x5BFC;&#x51FA;&#x503C;&#x662F;&#x8DEF;&#x7531;&#x88AB;&#x5171;&#x4EAB;&#x65F6;&#x643A;&#x5E26;</p>
-<p>&#x5BFC;&#x5165;&#x548C;&#x5BFC;&#x51FA;&#x503C;&#x53EF;&#x4EE5;&#x662F;&#x591A;&#x4E2A;</p>
-</li>
-</ul>
-</li>
-<li><p>MP-BGP VPNv4 &#x66F4;&#x65B0;&#xFF1A;&#x5373; MP-BGP &#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;</p>
+<li><p>VRF 的 RT 值：路由目标值</p>
+<p>RT 值书写格式：XX:YY</p>
+<p>RT 值分为导入和导出两个方向：</p>
+<p>导入值是用来确认是否学习远端的路由</p>
+<p>导出值是路由被共享时携带</p>
+<p>导入和导出值可以是多个</p>
 </li>
 </ul>
-<h3 id="MPLS-VPN-&#x7684;&#x53CC;&#x6807;&#x7B7E;"><a href="#MPLS-VPN-&#x7684;&#x53CC;&#x6807;&#x7B7E;" class="headerlink" title="MPLS VPN &#x7684;&#x53CC;&#x6807;&#x7B7E;"></a>MPLS VPN &#x7684;&#x53CC;&#x6807;&#x7B7E;</h3><p>&#x6808;&#x5E95;&#x6807;&#x7B7E;&#xFF1A;PE &#x8BBE;&#x5907;&#x4E0A; MP-BGP &#x7ED9;&#x4E88;&#x7684;&#xFF0C;&#x7528;&#x6765;&#x5E2E;&#x52A9;&#x6570;&#x636E;&#x5BFB;&#x627E;&#x6B63;&#x786E;&#x7684; VRF&#x8DEF;&#x7531;</p>
-<p>&#x6808;&#x9876;&#x6807;&#x7B7E;&#xFF1A;MPLS LDP &#x7ED9;&#x4E88;&#x7684;&#xFF0C;&#x7528;&#x6765;&#x7A7F;&#x8D8A;P-NETWORK&#x3002;</p>
-<h3 id="&#x5B89;&#x5168;&#x52A0;&#x5BC6;"><a href="#&#x5B89;&#x5168;&#x52A0;&#x5BC6;" class="headerlink" title="&#x5B89;&#x5168;&#x52A0;&#x5BC6;"></a>&#x5B89;&#x5168;&#x52A0;&#x5BC6;</h3><p>GET-VPN&#xFF08;&#x96A7;&#x9053;&#x52A0;&#x5BC6;&#x4F20;&#x8F93;VPN&#xFF0C;&#x601D;&#x79D1;&#x79C1;&#x6709;&#xFF09;&#x4E13;&#x95E8;&#x5728;MPLS VPN &#x57FA;&#x7840;&#x4E0A;&#x52A0;&#x5BC6;&#x6570;&#x636E;&#x3002;</p>
-<h3 id="MPLS-VPN-&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;"><a href="#MPLS-VPN-&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;" class="headerlink" title="MPLS VPN &#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;"></a>MPLS VPN &#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;</h3><h4 id="&#x6B65;&#x9AA4;1&#xFF1A;&#x5B8C;&#x6210;-P-NETWORK-&#x7684;&#x914D;&#x7F6E;"><a href="#&#x6B65;&#x9AA4;1&#xFF1A;&#x5B8C;&#x6210;-P-NETWORK-&#x7684;&#x914D;&#x7F6E;" class="headerlink" title="&#x6B65;&#x9AA4;1&#xFF1A;&#x5B8C;&#x6210; P-NETWORK &#x7684;&#x914D;&#x7F6E;"></a>&#x6B65;&#x9AA4;1&#xFF1A;&#x5B8C;&#x6210; P-NETWORK &#x7684;&#x914D;&#x7F6E;</h4><ol class="ui list">
-<li><p>&#x5B8C;&#x6210; P-NETWORK &#x5E95;&#x5C42;&#x534F;&#x8BAE;&#x7684;&#x542F;&#x7528;&#xFF08;OSPF &#x6216; ISIS&#xFF09;</p>
-<p>&#x8BBE;&#x5907;loopback&#x53E3;&#x5FC5;&#x987B;&#x53EF;&#x8FBE;&#xFF0C;&#x56E0;&#x4E3A;BGP MPLS MP-BGP &#x9700;&#x8981;&#x5B83;&#x3002;</p>
 </li>
-<li><p>&#x5B8C;&#x6210; P-NETWORK &#x4E2D; P &#x4E0E; PE &#x8BBE;&#x5907;&#x7684; MPLS &#x7684;&#x914D;&#x7F6E;</p>
-<p>&#x786E;&#x4FDD;&#x8BBE;&#x5907;&#x95F4;&#x7684; LDP &#x90BB;&#x5C45;&#x6B63;&#x5E38;&#x5EFA;&#x7ACB;&#x3002;</p>
+<li><p>MP-BGP VPNv4 更新：即 MP-BGP 的路由更新</p>
 </li>
-<li><p>&#x5B8C;&#x6210; PE &#x8BBE;&#x5907;&#x7684; BGP &#x4E0E; MP-BGP &#x7684;&#x542F;&#x7528;&#x914D;&#x7F6E;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">bgp router-id &lt;a.b.c.d&gt;</span><br><span class="line">neighbor &lt;peer-address&gt; remote-as &lt;as-id&gt;</span><br><span class="line">neighbor &lt;peer-address&gt; update-source loopback &lt;id&gt;</span><br><span class="line">address-family vpnv4 unicast <span class="comment">//&#x542F;&#x7528;&#x57FA;&#x4E8E;BGP&#x7684;MP-BGP&#xFF0C;&#x5E76;&#x8FDB;&#x5165;&#x914D;&#x7F6E;&#x6A21;&#x5F0F;</span></span><br><span class="line">neighbor &lt;peer-address&gt; activity <span class="comment">//&#x6FC0;&#x6D3B;&#x67D0;&#x4E2A;&#x4F20;&#x7EDF;BGP peer&#x7684; MP-BGP &#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;</span></span><br><span class="line">neighbor &lt;peer-address&gt; send-community-extended <span class="comment">//&#x7ED9; MP-BGP&#x5BF9;&#x7B49;&#x4F53;&#x53D1;&#x9001;&#x6269;&#x5C55;&#x56E2;&#x4F53;&#x5C5E;&#x6027;&#xFF0C;&#x5982;RD RT &#x6808;&#x5E95;&#x6807;&#x7B7E;&#xFF0C;&#x8BE5;&#x547D;&#x4EE4;&#x884C;&#x9ED8;&#x8BA4;&#x5B58;&#x5728;</span></span><br></pre></td></tr></table></figure>
-<p>&#x6CE8;&#x610F;&#xFF01;&#xFF01;MPLS&#x4E00;&#x5B9A;&#x8981;&#x914D;&#x7F6E;&#x5728; MP-BGP &#x4E4B;&#x524D;&#xFF0C;&#x5426;&#x5219; MPLS VPN &#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x5DE5;&#x4F5C;&#x3002;</p>
+</ul>
+<h3 id="MPLS-VPN-的双标签"><a href="#MPLS-VPN-的双标签" class="headerlink" title="MPLS VPN 的双标签"></a>MPLS VPN 的双标签</h3><p>栈底标签：PE 设备上 MP-BGP 给予的，用来帮助数据寻找正确的 VRF路由</p>
+<p>栈顶标签：MPLS LDP 给予的，用来穿越P-NETWORK。</p>
+<h3 id="安全加密"><a href="#安全加密" class="headerlink" title="安全加密"></a>安全加密</h3><p>GET-VPN（隧道加密传输VPN，思科私有）专门在MPLS VPN 基础上加密数据。</p>
+<h3 id="MPLS-VPN-的配置流程"><a href="#MPLS-VPN-的配置流程" class="headerlink" title="MPLS VPN 的配置流程"></a>MPLS VPN 的配置流程</h3><h4 id="步骤1：完成-P-NETWORK-的配置"><a href="#步骤1：完成-P-NETWORK-的配置" class="headerlink" title="步骤1：完成 P-NETWORK 的配置"></a>步骤1：完成 P-NETWORK 的配置</h4><ol>
+<li><p>完成 P-NETWORK 底层协议的启用（OSPF 或 ISIS）</p>
+<p>设备loopback口必须可达，因为BGP MPLS MP-BGP 需要它。</p>
 </li>
-<li><p>&#x5B8C;&#x6210; P-NETWORK &#x4E2D; PE&#x8BBE;&#x5907;&#x4E0A; VRF &#x7684;&#x521B;&#x5EFA;&#x4E8E;&#x914D;&#x7F6E;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ip vrf &lt;name&gt; <span class="comment">//&#x521B;&#x5EFA;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x7684;VRF</span></span><br><span class="line">id &lt;xx:yy&gt; <span class="comment">//&#x5B9A;&#x4E49;VRF&#x7684;RD&#x503C;</span></span><br><span class="line">route-target [both/<span class="keyword">export</span>/<span class="keyword">import</span>] &lt;xx:yy&gt; <span class="comment">//&#x8BBE;&#x5B9A;RT&#x503C;&#xFF0C;&#x9ED8;&#x8BA4;&#x53C2;&#x6570;&#x662F;both</span></span><br><span class="line"><span class="comment">//&#x5047;&#x5982;&#x5982;&#x5F53;&#x524D;VRF&#x7684;RT&#x503C;&#x51FA;&#x5165;&#x90FD;&#x662F;4:7   route-target 4:7</span></span><br><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">ip vrf forward &lt;vrf-name&gt; <span class="comment">//&#x5C06;&#x8FDE;&#x63A5; &#x6307;&#x5B9A;C-NETWORK &#x7684;&#x63A5;&#x53E3;&#x5212;&#x5165;VRF</span></span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br><span class="line"><span class="comment">//!!&#x63A5;&#x53E3;&#x5FC5;&#x987B;&#x662F;&#x5148;&#x5212;&#x5165; VRF&#xFF0C;&#x518D;&#x6DFB;&#x52A0; IP&#xFF0C;&#x5426;&#x5219;IP&#x4F1A;&#x88AB;&#x6D17;&#x6389;&#x3002;</span></span><br></pre></td></tr></table></figure>
+<li><p>完成 P-NETWORK 中 P 与 PE 设备的 MPLS 的配置</p>
+<p>确保设备间的 LDP 邻居正常建立。</p>
+</li>
+<li><p>完成 PE 设备的 BGP 与 MP-BGP 的启用配置</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">bgp router-id &lt;a.b.c.d&gt;</span><br><span class="line">neighbor &lt;peer-address&gt; remote-as &lt;as-id&gt;</span><br><span class="line">neighbor &lt;peer-address&gt; update-source loopback &lt;id&gt;</span><br><span class="line">address-family vpnv4 unicast <span class="comment">//启用基于BGP的MP-BGP，并进入配置模式</span></span><br><span class="line">neighbor &lt;peer-address&gt; activity <span class="comment">//激活某个传统BGP peer的 MP-BGP 对等体关系</span></span><br><span class="line">neighbor &lt;peer-address&gt; send-community-extended <span class="comment">//给 MP-BGP对等体发送扩展团体属性，如RD RT 栈底标签，该命令行默认存在</span></span><br></pre></td></tr></table></figure>
+<p>注意！！MPLS一定要配置在 MP-BGP 之前，否则 MPLS VPN 无法正常工作。</p>
+</li>
+<li><p>完成 P-NETWORK 中 PE设备上 VRF 的创建于配置</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ip vrf &lt;name&gt; <span class="comment">//创建指定名称的VRF</span></span><br><span class="line">id &lt;xx:yy&gt; <span class="comment">//定义VRF的RD值</span></span><br><span class="line">route-target [both/<span class="keyword">export</span>/<span class="keyword">import</span>] &lt;xx:yy&gt; <span class="comment">//设定RT值，默认参数是both</span></span><br><span class="line"><span class="comment">//假如如当前VRF的RT值出入都是4:7   route-target 4:7</span></span><br><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">ip vrf forward &lt;vrf-name&gt; <span class="comment">//将连接 指定C-NETWORK 的接口划入VRF</span></span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br><span class="line"><span class="comment">//!!接口必须是先划入 VRF，再添加 IP，否则IP会被洗掉。</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h4 id="&#x6B65;&#x9AA4;2&#xFF1A;&#x5B8C;&#x6210;-PE-&#x548C;-CE-&#x8BBE;&#x5907;&#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x5171;&#x4EAB;"><a href="#&#x6B65;&#x9AA4;2&#xFF1A;&#x5B8C;&#x6210;-PE-&#x548C;-CE-&#x8BBE;&#x5907;&#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x5171;&#x4EAB;" class="headerlink" title="&#x6B65;&#x9AA4;2&#xFF1A;&#x5B8C;&#x6210; PE &#x548C; CE &#x8BBE;&#x5907;&#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x5171;&#x4EAB;"></a>&#x6B65;&#x9AA4;2&#xFF1A;&#x5B8C;&#x6210; PE &#x548C; CE &#x8BBE;&#x5907;&#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x5171;&#x4EAB;</h4><ol class="ui list">
-<li><p>CE &#x4E0E; PE &#x914D;&#x7F6E;&#x9759;&#x6001;&#x8DEF;&#x7531;</p>
-<p>CE &#x4E0A;&#x7684;&#x9759;&#x6001;&#x8DEF;&#x7531;&#x914D;&#x7F6E;&#x662F;&#x5E38;&#x89C4;&#x7684;</p>
-<p>PE &#x4E0A;&#x7684;&#x9759;&#x6001;&#x8DEF;&#x7531;&#x6CE8;&#x5165;&#xFF1A;</p>
+<h4 id="步骤2：完成-PE-和-CE-设备的路由信息共享"><a href="#步骤2：完成-PE-和-CE-设备的路由信息共享" class="headerlink" title="步骤2：完成 PE 和 CE 设备的路由信息共享"></a>步骤2：完成 PE 和 CE 设备的路由信息共享</h4><ol>
+<li><p>CE 与 PE 配置静态路由</p>
+<p>CE 上的静态路由配置是常规的</p>
+<p>PE 上的静态路由注入：</p>
 <p><code>ip route vrf &lt;vrf-name&gt; &lt;target-network&gt; &lt;mask&gt; &lt;next-hop-address&gt;</code></p>
-<p>&#x67E5;&#x770B;&#x7279;&#x5B9A; VRF &#x8DEF;&#x7531;&#x8868;&#xFF1A;<code>show ip route vrf &lt;name&gt;</code></p>
-<p>PING&#x547D;&#x4EE4;&#xFF1A;<code>ping vrf &lt;name&gt; &lt;target-network&gt;</code></p>
+<p>查看特定 VRF 路由表：<code>show ip route vrf &lt;name&gt;</code></p>
+<p>PING命令：<code>ping vrf &lt;name&gt; &lt;target-network&gt;</code></p>
 </li>
-<li><p>CE &#x4E0E; PE &#x914D;&#x7F6E; RIP &#x5171;&#x4EAB;&#x8DEF;&#x7531;</p>
-<p>PE &#x4E0A; RIP&#x7684;&#x914D;&#x7F6E;&#xFF1A;</p>
+<li><p>CE 与 PE 配置 RIP 共享路由</p>
+<p>PE 上 RIP的配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router rip</span><br><span class="line">address-family ipv4 vrf &lt;name&gt;</span><br><span class="line">no auto-summary</span><br><span class="line">version 2</span><br><span class="line">network &lt;a.b.c.d&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>CE &#x4E0E; PE &#x4E0A;&#x542F;&#x7528; EIGRP</p>
-<p>PE &#x4E0A;&#x9700;&#x8981;&#x914D;&#x7F6E;&#xFF1A;</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router eigrp &lt;as-id&gt;</span><br><span class="line">address-family ipv4 vrf &lt;vrf-name&gt;</span><br><span class="line">autonomous-system &lt;as-id&gt; <span class="comment">//&#x5FC5;&#x987B;&#x6B65;&#x9AA4;&#xFF0C;&#x5426;&#x5219;EIGRP&#x4E0D;&#x5DE5;&#x4F5C;(&#x9690;&#x85CF;&#x547D;&#x4EE4;&#xFF0C;&#x547D;&#x4EE4;&#x65E0;&#x6CD5;&#x8865;&#x5168;)</span></span><br><span class="line">no auto-summary</span><br><span class="line">network &lt;a.b.c.d&gt; &lt;wild-mask&gt;</span><br></pre></td></tr></table></figure>
+<li><p>CE 与 PE 上启用 EIGRP</p>
+<p>PE 上需要配置：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router eigrp &lt;as-id&gt;</span><br><span class="line">address-family ipv4 vrf &lt;vrf-name&gt;</span><br><span class="line">autonomous-system &lt;as-id&gt; <span class="comment">//必须步骤，否则EIGRP不工作(隐藏命令，命令无法补全)</span></span><br><span class="line">no auto-summary</span><br><span class="line">network &lt;a.b.c.d&gt; &lt;wild-mask&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>CE &#x4E0E; PE &#x4E0A;&#x542F;&#x7528; OSPF</p>
-<p>PE &#x4E0A;&#x9700;&#x8981;&#x914D;&#x7F6E;&#xFF1A;</p>
+<li><p>CE 与 PE 上启用 OSPF</p>
+<p>PE 上需要配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router ospf &lt;p-id&gt; vrf &lt;name&gt;</span><br><span class="line">router-id &lt;a.b.c.d&gt;</span><br><span class="line">network &lt;a.b.c.d&gt; &lt;wild-mask&gt; area &lt;area-id&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h4 id="&#x6B65;&#x9AA4;3&#xFF1A;&#x5B8C;&#x6210;-PE-&#x4E0A;-VRF-&#x548C;-MP-BGP-&#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x91CD;&#x5206;&#x53D1;"><a href="#&#x6B65;&#x9AA4;3&#xFF1A;&#x5B8C;&#x6210;-PE-&#x4E0A;-VRF-&#x548C;-MP-BGP-&#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x91CD;&#x5206;&#x53D1;" class="headerlink" title="&#x6B65;&#x9AA4;3&#xFF1A;&#x5B8C;&#x6210; PE &#x4E0A; VRF &#x548C; MP-BGP &#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x91CD;&#x5206;&#x53D1;"></a>&#x6B65;&#x9AA4;3&#xFF1A;&#x5B8C;&#x6210; PE &#x4E0A; VRF &#x548C; MP-BGP &#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x91CD;&#x5206;&#x53D1;</h4><ol class="ui list">
-<li><p>VRF &#x8FDB;&#x5165; MP-BGP</p>
+<h4 id="步骤3：完成-PE-上-VRF-和-MP-BGP-的路由信息重分发"><a href="#步骤3：完成-PE-上-VRF-和-MP-BGP-的路由信息重分发" class="headerlink" title="步骤3：完成 PE 上 VRF 和 MP-BGP 的路由信息重分发"></a>步骤3：完成 PE 上 VRF 和 MP-BGP 的路由信息重分发</h4><ol>
+<li><p>VRF 进入 MP-BGP</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">address-family ipv4 vrf &lt;name&gt;</span><br><span class="line">redistribute &lt;static/rip/eigrp as-id/ospf p-id&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>MP-BGP &#x8FDB;&#x5165; VRF</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">router rip</span><br><span class="line">address-family ipv4 vrf &lt;name&gt;</span><br><span class="line">redistribute bgp &lt;as-id&gt; metric &lt;&#x79CD;&#x5B50;&#x5EA6;&#x91CF;&#x503C;&gt;</span><br><span class="line"></span><br><span class="line">router eigrp &lt;as-id&gt;</span><br><span class="line">address-family ipv4 vrf &lt;name&gt;</span><br><span class="line">redistribute bgp &lt;as-id&gt; metric 10000 100 255 1 1500</span><br><span class="line"></span><br><span class="line">router ospf &lt;pid&gt; vrf &lt;name&gt;</span><br><span class="line">redistribute bgp &lt;as-id&gt; subnets</span><br></pre></td></tr></table></figure>
+<li><p>MP-BGP 进入 VRF</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">router rip</span><br><span class="line">address-family ipv4 vrf &lt;name&gt;</span><br><span class="line">redistribute bgp &lt;as-id&gt; metric &lt;种子度量值&gt;</span><br><span class="line"></span><br><span class="line">router eigrp &lt;as-id&gt;</span><br><span class="line">address-family ipv4 vrf &lt;name&gt;</span><br><span class="line">redistribute bgp &lt;as-id&gt; metric 10000 100 255 1 1500</span><br><span class="line"></span><br><span class="line">router ospf &lt;pid&gt; vrf &lt;name&gt;</span><br><span class="line">redistribute bgp &lt;as-id&gt; subnets</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h4 id="show&#x547D;&#x4EE4;"><a href="#show&#x547D;&#x4EE4;" class="headerlink" title="show&#x547D;&#x4EE4;"></a>show&#x547D;&#x4EE4;</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show ip bgp vpnv4 all summary <span class="comment">//&#x67E5;&#x770B; MP-BGP peer &#x5173;&#x7CFB;&#x662F;&#x5426;&#x5EFA;&#x7ACB;&#x6210;&#x529F;</span></span><br><span class="line">show ip bgp vpnv4 all <span class="comment">//&#x67E5;&#x770B; MP-BGP &#x8F6C;&#x53D1;&#x8868;</span></span><br><span class="line">show ip vrf</span><br><span class="line">show ip bgp vpnv4 all label <span class="comment">//PE&#x8BBE;&#x5907;&#x67E5;&#x770B; BGP &#x6808;&#x5E95;&#x6807;&#x7B7E;</span></span><br></pre></td></tr></table></figure>
-<h3 id="&#x5176;&#x4ED6;"><a href="#&#x5176;&#x4ED6;" class="headerlink" title="&#x5176;&#x4ED6;"></a>&#x5176;&#x4ED6;</h3><h4 id="UNTAGE-&#x5BF9;-MPLS-VPN-&#x901A;&#x8BAF;&#x7684;&#x5F71;&#x54CD;"><a href="#UNTAGE-&#x5BF9;-MPLS-VPN-&#x901A;&#x8BAF;&#x7684;&#x5F71;&#x54CD;" class="headerlink" title="UNTAGE &#x5BF9; MPLS VPN &#x901A;&#x8BAF;&#x7684;&#x5F71;&#x54CD;"></a>UNTAGE &#x5BF9; MPLS VPN &#x901A;&#x8BAF;&#x7684;&#x5F71;&#x54CD;</h4><p>&#x6808;&#x9876;&#x6807;&#x7B7E;&#x5BF9;&#x5E94;&#x7684;&#x914D;&#x7F6E;&#x51FA;&#x7AD9;&#x6807;&#x7B7E;&#x5982;&#x679C;&#x662F;UNTAGE&#xFF0C;&#x90A3;&#x4E48;&#x4F1A;&#x5BFC;&#x81F4;&#x6240;&#x6709;&#x6807;&#x7B7E;&#x88AB;&#x79FB;&#x9664;&#xFF0C;&#x6570;&#x636E;&#x53D8;&#x56DE;IP&#x5305;&#xFF0C;&#x5F88;&#x53EF;&#x80FD;&#x4F1A;&#x9762;&#x5BF9;&#x8DEF;&#x7531;&#x9ED1;&#x6D1E;&#x6216;&#x8005;&#x662F;&#x65E0;&#x6CD5;&#x8DEF;&#x7531;&#x7684;&#x5C40;&#x9762;&#xFF0C;&#x6570;&#x636E;&#x5305;&#x4E22;&#x5305;&#x3002;</p>
-<p>&#x5E95;&#x5C42;&#x534F;&#x8BAE;&#x5982;&#x679C;&#x662F;OSPF&#xFF0C;&#x90A3;&#x4E48;loopback&#x63A5;&#x53E3;&#x5FC5;&#x987B;&#x5F55;&#x5165;</p>
+<h4 id="show命令"><a href="#show命令" class="headerlink" title="show命令"></a>show命令</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show ip bgp vpnv4 all summary <span class="comment">//查看 MP-BGP peer 关系是否建立成功</span></span><br><span class="line">show ip bgp vpnv4 all <span class="comment">//查看 MP-BGP 转发表</span></span><br><span class="line">show ip vrf</span><br><span class="line">show ip bgp vpnv4 all label <span class="comment">//PE设备查看 BGP 栈底标签</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="UNTAGE-对-MPLS-VPN-通讯的影响"><a href="#UNTAGE-对-MPLS-VPN-通讯的影响" class="headerlink" title="UNTAGE 对 MPLS VPN 通讯的影响"></a>UNTAGE 对 MPLS VPN 通讯的影响</h4><p>栈顶标签对应的配置出站标签如果是UNTAGE，那么会导致所有标签被移除，数据变回IP包，很可能会面对路由黑洞或者是无法路由的局面，数据包丢包。</p>
+<p>底层协议如果是OSPF，那么loopback接口必须录入</p>
 <p><code>ip ospf network point-to-point</code></p>
-<h4 id="PE-&#x4E0A;-OSPF-&#x7684;&#x95EE;&#x9898;"><a href="#PE-&#x4E0A;-OSPF-&#x7684;&#x95EE;&#x9898;" class="headerlink" title="PE &#x4E0A; OSPF &#x7684;&#x95EE;&#x9898;"></a>PE &#x4E0A; OSPF &#x7684;&#x95EE;&#x9898;</h4><h5 id="&#x65B0;&#x7684;-OSPF-&#x5C42;&#x6B21;&#x5316;&#x67B6;&#x6784;"><a href="#&#x65B0;&#x7684;-OSPF-&#x5C42;&#x6B21;&#x5316;&#x67B6;&#x6784;" class="headerlink" title="&#x65B0;&#x7684; OSPF &#x5C42;&#x6B21;&#x5316;&#x67B6;&#x6784;"></a>&#x65B0;&#x7684; OSPF &#x5C42;&#x6B21;&#x5316;&#x67B6;&#x6784;</h5><p>MPLS VPN &#x4E2D; OSPF &#x5C06;&#x6574;&#x4E2A;&#x81EA;&#x6CBB;&#x7CFB;&#x7EDF;&#x5206;&#x6210;&#x4E86;&#xFF1A;</p>
-<p>&#x8D85;&#x7EA7;&#x9AA8;&#x5E72;&#x5C42;&#xFF08;P-NETWORK&#xFF09;&#x3001;&#x9AA8;&#x5E72;&#x5C42;&#x3001;&#x5E38;&#x89C4;&#x5C42;&#x3002;</p>
-<p>PE &#x626E;&#x6F14; ABR&#x3002;</p>
-<h5 id="PE-&#x8BBE;&#x5907;-OSPF-&#x7684;&#x9650;&#x5236;"><a href="#PE-&#x8BBE;&#x5907;-OSPF-&#x7684;&#x9650;&#x5236;" class="headerlink" title="PE &#x8BBE;&#x5907; OSPF &#x7684;&#x9650;&#x5236;"></a>PE &#x8BBE;&#x5907; OSPF &#x7684;&#x9650;&#x5236;</h5><p>PE &#x8BBE;&#x5907;&#x548C; CE &#x8BBE;&#x5907;&#x95F4; OSPF &#x7684;&#x533A;&#x57DF;&#x6700;&#x597D;&#x662F;&#x533A;&#x57DF;0&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x51FA;&#x73B0;&#x8DEF;&#x7531;&#x4E0D;&#x5B66;&#x4E60;&#x95EE;&#x9898;&#xFF0C;&#x9700;&#x8981;&#x865A;&#x94FE;&#x8DEF;&#x89E3;&#x51B3;&#x8BE5;&#x95EE;&#x9898;&#x3002;</p>
-<h5 id="OSPF-&#x901A;&#x8FC7;-MPLS-VPN-&#x5171;&#x4EAB;&#x8DEF;&#x7531;&#x540E;&#x7684;&#x7C7B;&#x578B;"><a href="#OSPF-&#x901A;&#x8FC7;-MPLS-VPN-&#x5171;&#x4EAB;&#x8DEF;&#x7531;&#x540E;&#x7684;&#x7C7B;&#x578B;" class="headerlink" title="OSPF &#x901A;&#x8FC7; MPLS VPN &#x5171;&#x4EAB;&#x8DEF;&#x7531;&#x540E;&#x7684;&#x7C7B;&#x578B;"></a>OSPF &#x901A;&#x8FC7; MPLS VPN &#x5171;&#x4EAB;&#x8DEF;&#x7531;&#x540E;&#x7684;&#x7C7B;&#x578B;</h5><ol class="ui list">
-<li>&#x76F8;&#x540C;&#x533A;&#x57DF;&#x8DEF;&#x7531;&#x901A;&#x8FC7; MPLS VPN &#x5171;&#x4EAB;&#xFF0C;&#x6700;&#x540E;&#x7ED3;&#x679C;&#x662F;O IA</li>
-<li>&#x4E0D;&#x540C;&#x533A;&#x57DF;&#x8DEF;&#x7531;&#x901A;&#x8FC7; MPLS VPN &#x5171;&#x4EAB;&#xFF0C;&#x6700;&#x540E;&#x7ED3;&#x679C;&#x662F;O IA</li>
-<li>&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x901A;&#x8FC7;MPLS VPN &#x5171;&#x4EAB;&#xFF0C;&#x6700;&#x540E;&#x7ED3;&#x679C;&#x4F9D;&#x65E7;&#x662F;O E2</li>
+<h4 id="PE-上-OSPF-的问题"><a href="#PE-上-OSPF-的问题" class="headerlink" title="PE 上 OSPF 的问题"></a>PE 上 OSPF 的问题</h4><h5 id="新的-OSPF-层次化架构"><a href="#新的-OSPF-层次化架构" class="headerlink" title="新的 OSPF 层次化架构"></a>新的 OSPF 层次化架构</h5><p>MPLS VPN 中 OSPF 将整个自治系统分成了：</p>
+<p>超级骨干层（P-NETWORK）、骨干层、常规层。</p>
+<p>PE 扮演 ABR。</p>
+<h5 id="PE-设备-OSPF-的限制"><a href="#PE-设备-OSPF-的限制" class="headerlink" title="PE 设备 OSPF 的限制"></a>PE 设备 OSPF 的限制</h5><p>PE 设备和 CE 设备间 OSPF 的区域最好是区域0，否则会出现路由不学习问题，需要虚链路解决该问题。</p>
+<h5 id="OSPF-通过-MPLS-VPN-共享路由后的类型"><a href="#OSPF-通过-MPLS-VPN-共享路由后的类型" class="headerlink" title="OSPF 通过 MPLS VPN 共享路由后的类型"></a>OSPF 通过 MPLS VPN 共享路由后的类型</h5><ol>
+<li>相同区域路由通过 MPLS VPN 共享，最后结果是O IA</li>
+<li>不同区域路由通过 MPLS VPN 共享，最后结果是O IA</li>
+<li>外部路由通过MPLS VPN 共享，最后结果依旧是O E2</li>
 </ol>
-<h5 id="&#x5229;&#x7528;-sham-link&#xFF08;&#x4F2A;&#x94FE;&#x8DEF;&#xFF09;&#x8FD8;&#x539F;&#x76F8;&#x540C;&#x533A;&#x57DF;&#x7684;&#x8DEF;&#x7531;"><a href="#&#x5229;&#x7528;-sham-link&#xFF08;&#x4F2A;&#x94FE;&#x8DEF;&#xFF09;&#x8FD8;&#x539F;&#x76F8;&#x540C;&#x533A;&#x57DF;&#x7684;&#x8DEF;&#x7531;" class="headerlink" title="&#x5229;&#x7528; sham-link&#xFF08;&#x4F2A;&#x94FE;&#x8DEF;&#xFF09;&#x8FD8;&#x539F;&#x76F8;&#x540C;&#x533A;&#x57DF;&#x7684;&#x8DEF;&#x7531;"></a>&#x5229;&#x7528; sham-link&#xFF08;&#x4F2A;&#x94FE;&#x8DEF;&#xFF09;&#x8FD8;&#x539F;&#x76F8;&#x540C;&#x533A;&#x57DF;&#x7684;&#x8DEF;&#x7531;</h5><h2 id="MPLS-VPN-&#x603B;&#x7ED3;"><a href="#MPLS-VPN-&#x603B;&#x7ED3;" class="headerlink" title="MPLS VPN &#x603B;&#x7ED3;"></a>MPLS VPN &#x603B;&#x7ED3;</h2><ol class="ui list">
-<li><p>MPLS VPN &#x4F5C;&#x7528;</p>
+<h5 id="利用-sham-link（伪链路）还原相同区域的路由"><a href="#利用-sham-link（伪链路）还原相同区域的路由" class="headerlink" title="利用 sham-link（伪链路）还原相同区域的路由"></a>利用 sham-link（伪链路）还原相同区域的路由</h5><h2 id="MPLS-VPN-总结"><a href="#MPLS-VPN-总结" class="headerlink" title="MPLS VPN 总结"></a>MPLS VPN 总结</h2><ol>
+<li><p>MPLS VPN 作用</p>
 </li>
-<li><p>MPLS VPN &#x672F;&#x8BED;</p>
-<p>P-NETWORK&#x3001;C-NETWORK&#x3001;PE&#x3001;P&#x3001;CE&#x3001;VRF&#x3001;RD&#x3001;RT&#x3001;VPNv4&#x66F4;&#x65B0;</p>
+<li><p>MPLS VPN 术语</p>
+<p>P-NETWORK、C-NETWORK、PE、P、CE、VRF、RD、RT、VPNv4更新</p>
 </li>
-<li><p>MPLS VPN &#x53CC;&#x6807;&#x7B7E;&#x4F5C;&#x7528;</p>
+<li><p>MPLS VPN 双标签作用</p>
 </li>
-<li><p>MPLS VPN &#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;&#x3001;&#x6821;&#x9A8C;&#x6D41;&#x7A0B;</p>
+<li><p>MPLS VPN 的配置流程、校验流程</p>
 </li>
-<li><p>&#x7406;&#x89E3; MPLS VPN &#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x5171;&#x4EAB;&#x7684;&#x8FC7;&#x7A0B;&#x548C;&#x6700;&#x7EC8;&#x7684;&#x6570;&#x636E;&#x901A;&#x8BAF;&#x8FC7;&#x7A0B;</p>
+<li><p>理解 MPLS VPN 的路由更新共享的过程和最终的数据通讯过程</p>
 </li>
 </ol>
-<h2 id="MPLS-VPN-&#x6392;&#x9519;"><a href="#MPLS-VPN-&#x6392;&#x9519;" class="headerlink" title="MPLS VPN &#x6392;&#x9519;"></a>MPLS VPN &#x6392;&#x9519;</h2><p>C-NETWORK &#x4E4B;&#x95F4;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x901A;&#x8BAF;</p>
-<ol class="ui list">
-<li><p>&#x5F53;&#x524D;&#x8BBE;&#x5907;&#x662F;&#x5426;&#x5B66;&#x4E60;&#x5BF9;&#x7AEF; C-NETWORK &#x8DEF;&#x7531;</p>
+<h2 id="MPLS-VPN-排错"><a href="#MPLS-VPN-排错" class="headerlink" title="MPLS VPN 排错"></a>MPLS VPN 排错</h2><p>C-NETWORK 之间无法正常通讯</p>
+<ol>
+<li><p>当前设备是否学习对端 C-NETWORK 路由</p>
 <ul>
-<li><p>CE &#x662F;&#x5426;&#x5C06;&#x8DEF;&#x7531;&#x5171;&#x4EAB;&#x7ED9;&#x5F53;&#x524D;&#x8BBE;&#x5907;&#xFF0C;&#x5BFC;&#x81F4;&#x5F53;&#x524D;&#x8BBE;&#x5907;&#x7F3A;&#x4E4F;&#x5FC5;&#x8981;&#x8DEF;&#x7531;&#x3002;</p>
-<p>&#x52A8;&#x6001;&#x8DEF;&#x7531;&#x534F;&#x8BAE;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x6CA1;&#x5EFA;&#x7ACB;&#xFF0C;&#x9519;&#x8BEF;&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x8FC7;&#x6EE4;&#x7B56;&#x7565;&#x3002;</p>
+<li><p>CE 是否将路由共享给当前设备，导致当前设备缺乏必要路由。</p>
+<p>动态路由协议邻接关系没建立，错误的路由更新过滤策略。</p>
 </li>
-<li><p>CE &#x4E0E; PE &#x95F4;&#x662F;&#x5426;&#x6B63;&#x5E38;&#x4EA4;&#x6362;&#x8DEF;&#x7531;&#x66F4;&#x65B0;</p>
-<p>&#x9519;&#x8BEF;&#x7684;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3001;PE &#x548C; CE &#x95F4;&#x4E3A;&#x6EE1;&#x8DB3; MPLS VPN &#x5BF9; OSPF &#x7684;&#x8981;&#x6C42;</p>
-<p>PE &#x4E0A;&#x5FD8;&#x8BB0;&#x628A; BGP &#x91CD;&#x5206;&#x53D1;&#x8FDB;&#x5E95;&#x5C42; VRF</p>
+<li><p>CE 与 PE 间是否正常交换路由更新</p>
+<p>错误的邻接关系、PE 和 CE 间为满足 MPLS VPN 对 OSPF 的要求</p>
+<p>PE 上忘记把 BGP 重分发进底层 VRF</p>
 </li>
-<li><p>PE &#x8BBE;&#x5907;&#x6CA1;&#x6709;&#x4ECE;&#x5BF9;&#x7AEF; PE &#x5B66;&#x4E60;&#x8DEF;&#x7531;</p>
-<p><code>show ip bgp vpnv4 all</code> &#x67E5;&#x770B;MPBGP &#x8F6C;&#x53D1;&#x8868;&#xFF0C;&#x627E;&#x5BF9;&#x7AEF;&#x7684;&#x8DEF;&#x7531;&#x6761;&#x76EE;&#x3002;</p>
-<p>MP-BGP &#x7684;&#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;&#x6709;&#x95EE;&#x9898;</p>
-<p><code>show ip bgp vpnv4 all summary</code> &#x67E5;&#x770B;&#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;&#xFF1A;</p>
-<p>&#x5FD8;&#x8BB0;&#x6307;&#x5B9A;&#x5BF9;&#x7B49;&#x4F53;&#x3001;&#x5FD8;&#x8BB0;&#x8BBE;&#x7F6E;&#x66F4;&#x65B0;&#x6E90;&#x3001;&#x5FD8;&#x8BB0;&#x6FC0;&#x6D3B; MP-BGP peer &#x5173;&#x7CFB;&#xFF0C;peer &#x5730;&#x5740;&#x4E0D;&#x53EF;&#x8FBE;&#xFF0C;&#x9519;&#x8BEF;&#x7684;&#x5B89;&#x5168;&#x7B56;&#x7565;&#x5BFC;&#x81F4; BGP TCP &#x8FDE;&#x63A5;&#x65E0;&#x6CD5;&#x5EFA;&#x7ACB;&#x3002;</p>
-<p><code>show ip vrf</code> &#x5F53;&#x524D;&#x8BBE;&#x5907;&#x7F3A;&#x4E4F; vrf &#x7684;&#x914D;&#x7F6E;</p>
-<p>AS&#x5185;&#x7F3A;&#x4E4F;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x7684;&#x914D;&#x7F6E;</p>
+<li><p>PE 设备没有从对端 PE 学习路由</p>
+<p><code>show ip bgp vpnv4 all</code> 查看MPBGP 转发表，找对端的路由条目。</p>
+<p>MP-BGP 的对等体关系有问题</p>
+<p><code>show ip bgp vpnv4 all summary</code> 查看对等体关系：</p>
+<p>忘记指定对等体、忘记设置更新源、忘记激活 MP-BGP peer 关系，peer 地址不可达，错误的安全策略导致 BGP TCP 连接无法建立。</p>
+<p><code>show ip vrf</code> 当前设备缺乏 vrf 的配置</p>
+<p>AS内缺乏路由反射器的配置</p>
 </li>
-<li><p>&#x5BF9;&#x7AEF; PE &#x8BBE;&#x5907;&#x65E0;&#x6CD5;&#x4ECE; CE &#x8BBE;&#x5907;&#x83B7;&#x53D6;&#x8DEF;&#x7531;&#x4FE1;&#x606F;</p>
+<li><p>对端 PE 设备无法从 CE 设备获取路由信息</p>
 </li>
 </ul>
 </li>
-<li><p>&#x6807;&#x7B7E;&#x95EE;&#x9898;</p>
-<p>PE &#x4E0A;&#x67E5;&#x770B; BGP &#x8DEF;&#x7531;&#x7684;&#x4E0B;&#x4E00;&#x8DF3;&#xFF0C;&#x786E;&#x8BA4;&#x6808;&#x9876;&#x6807;&#x7B7E;&#x5173;&#x8054;&#x7684;&#x76EE;&#x6807;&#x3002;</p>
-<p><code>show ip bgp vpnv4 all</code> &#x901A;&#x8FC7;&#x8BE5;&#x547D;&#x4EE4;&#x67E5;&#x770B;&#x4E0B;&#x4E00;&#x8DF3;</p>
-<p><strong>&#x9519;&#x70B9;</strong></p>
+<li><p>标签问题</p>
+<p>PE 上查看 BGP 路由的下一跳，确认栈顶标签关联的目标。</p>
+<p><code>show ip bgp vpnv4 all</code> 通过该命令查看下一跳</p>
+<p><strong>错点</strong></p>
 <ul>
-<li><p>&#x6807;&#x7B7E;&#x8DEF;&#x5F84;&#x4E0D;&#x5173;&#x8054;</p>
-<p>&#x51FA;&#x73B0;&#x4E86;&#x4E0D;&#x5FC5;&#x8981;&#x7684; UNTAGE&#xFF0C;&#x7F3A;&#x4E4F; loopback &#x4E0B; ip OSPF network point-to-point</p>
-<p>&#x51FA;&#x73B0;&#x4E86;&#x4E0D;&#x5FC5;&#x8981;&#x7684; NO LABEL&#xFF0C;&#x6CA1;&#x6709;&#x8FDC;&#x7AEF; LDP &#x90BB;&#x5C45;&#x5171;&#x4EAB;&#x6807;&#x7B7E;&#xFF08;&#x5F53;&#x524D;&#x8BBE;&#x5907;&#x662F;&#x5426;&#x7F3A;&#x4E4F;&#x5FC5;&#x8981;&#x7684; LDP &#x90BB;&#x5C45;&#xFF0C;&#x5BF9;&#x65B9;&#x6CA1;&#x6709;&#x5B66;&#x4E60;&#x76EE;&#x6807;&#x7F51;&#x7EDC;&#x8DEF;&#x7531;&#xFF09;</p>
+<li><p>标签路径不关联</p>
+<p>出现了不必要的 UNTAGE，缺乏 loopback 下 ip OSPF network point-to-point</p>
+<p>出现了不必要的 NO LABEL，没有远端 LDP 邻居共享标签（当前设备是否缺乏必要的 LDP 邻居，对方没有学习目标网络路由）</p>
 </li>
 </ul>
 </li>
-<li><p>ping &#x5305;&#x6E90;&#x5BF9;&#x65B9;&#x662F;&#x5426;&#x53EF;&#x8FBE;</p>
+<li><p>ping 包源对方是否可达</p>
 </li>
-<li><p>&#x9519;&#x8BEF;&#x7684;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#x7B56;&#x7565;</p>
-</li>
-</ol>
-<h2 id="&#x8DE8;&#x57DF;MPLS-VPN-&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x8BE6;&#x89E3;"><a href="#&#x8DE8;&#x57DF;MPLS-VPN-&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x8BE6;&#x89E3;" class="headerlink" title="&#x8DE8;&#x57DF;MPLS VPN &#x89E3;&#x51B3;&#x65B9;&#x6848;&#x8BE6;&#x89E3;"></a>&#x8DE8;&#x57DF;MPLS VPN &#x89E3;&#x51B3;&#x65B9;&#x6848;&#x8BE6;&#x89E3;</h2><h3 id="&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;option-A&#xFF1A;&#x80CC;&#x9760;&#x80CC;&#xFF1A;back-to-back"><a href="#&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;option-A&#xFF1A;&#x80CC;&#x9760;&#x80CC;&#xFF1A;back-to-back" class="headerlink" title="&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;option A&#xFF1A;&#x80CC;&#x9760;&#x80CC;&#xFF1A;back to back"></a>&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;option A&#xFF1A;&#x80CC;&#x9760;&#x80CC;&#xFF1A;back to back</h3><ol class="ui list">
-<li><p>&#x6B65;&#x9AA4;1&#xFF1A;ASBR &#x4E0A;&#x521B;&#x5EFA; VRF&#xFF0C;&#x8BBE;&#x5B9A; RD &#x548C; RT&#xFF0C;&#x5C06;&#x76F4;&#x8FDE;&#x63A5;&#x53E3;&#x5212;&#x5165; VRF&#x3002;</p>
-<p>R3&#x3001;R4 &#x521B;&#x5EFA; VRF &#x7684;&#x539F;&#x56E0;&#xFF1A;</p>
+<li><p>错误的访问控制策略</p>
 </li>
 </ol>
-<ul class="ui list">
-<li><p>&#x5229;&#x7528; VRF &#x63A5;&#x6536;&#x6765;&#x81EA;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#xFF0C;&#x5F53;&#x524D; ASBR &#x8BBE;&#x5907;&#x5B66;&#x4E60;&#x672C; AS &#x7AD9;&#x70B9;&#x8DEF;&#x7531;&#x3002;</p>
+<h2 id="跨域MPLS-VPN-解决方案详解"><a href="#跨域MPLS-VPN-解决方案详解" class="headerlink" title="跨域MPLS VPN 解决方案详解"></a>跨域MPLS VPN 解决方案详解</h2><h3 id="方法一：option-A：背靠背：back-to-back"><a href="#方法一：option-A：背靠背：back-to-back" class="headerlink" title="方法一：option A：背靠背：back to back"></a>方法一：option A：背靠背：back to back</h3><ol>
+<li><p>步骤1：ASBR 上创建 VRF，设定 RD 和 RT，将直连接口划入 VRF。</p>
+<p>R3、R4 创建 VRF 的原因：</p>
 </li>
-<li><p>&#x521B;&#x5EFA;&#x57FA;&#x4E8E; VRF &#x7684; EBGP PEER &#x5173;&#x7CFB;&#xFF0C;&#x5E2E;&#x52A9;&#x5F53;&#x524D; ASBR &#x8BBE;&#x5907;&#x5B66;&#x4E60;&#x5BF9;&#x7AEF; C-NETWORK &#x8DEF;&#x7531;&#xFF0C;&#x5E76;&#x4E14;&#x88C5;&#x8F7D;&#x8FDB; VRF &#x8868;&#x3002;</p>
-<p>&#x6CE8;&#x610F;&#xFF01;&#xFF01; PE &#x4E0A;&#x542F;&#x7528; VRF&#xFF0C;&#x5207;&#x8BB0;&#x8981;&#x5C06; VRF &#x548C; BGP &#x76F8;&#x4E92;&#x505A;&#x91CD;&#x5206;&#x53D1;&#xFF0C;&#x5982;&#x679C; PE &#x548C; CE &#x95F4;&#x662F; BGP&#xFF0C;&#x90A3;&#x4E48;&#x6765;&#x81EA; CE &#x7684;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x76F4;&#x63A5;&#x8FDB; PE &#x7684; MP-BGP &#x8F6C;&#x53D1;&#x8868;&#x3002;</p>
+</ol>
+<ul>
+<li><p>利用 VRF 接收来自路由反射器的路由更新，当前 ASBR 设备学习本 AS 站点路由。</p>
 </li>
-<li><p>ASBR &#x521B;&#x5EFA; VRF &#x7ED9;&#x5BF9;&#x7AEF; C-NETWORK &#x8DEF;&#x7531;&#x65B0;&#x7684;&#x6808;&#x5E95;&#x6807;&#x7B7E;&#x3002;</p>
+<li><p>创建基于 VRF 的 EBGP PEER 关系，帮助当前 ASBR 设备学习对端 C-NETWORK 路由，并且装载进 VRF 表。</p>
+<p>注意！！ PE 上启用 VRF，切记要将 VRF 和 BGP 相互做重分发，如果 PE 和 CE 间是 BGP，那么来自 CE 的路由更新直接进 PE 的 MP-BGP 转发表。</p>
+</li>
+<li><p>ASBR 创建 VRF 给对端 C-NETWORK 路由新的栈底标签。</p>
 </li>
 </ul>
-<p>&#x65B9;&#x6CD5;&#x4E00;&#x5982;&#x4F55;&#x4F20;&#x9012;&#x6570;&#x636E;</p>
-<p>&#x65B9;&#x6CD5;&#x4E00;&#x7684;&#x7279;&#x70B9;&#xFF1A;ASBR &#x95F4;&#x53EA;&#x6709;&#x4F20;&#x7EDF;&#x7684; EBGP peer&#xFF0C;ASBR &#x95F4;&#x6CA1;&#x6709; MPLS&#xFF0C;ASBR &#x95F4;&#x6570;&#x636E;&#x6700;&#x540E;&#x662F; IP &#x5F62;&#x5F0F;&#x7A7F;&#x8D8A;&#x3002;</p>
-<h3 id="&#x65B9;&#x6CD5;&#x4E8C;&#xFF1A;option-B-2a"><a href="#&#x65B9;&#x6CD5;&#x4E8C;&#xFF1A;option-B-2a" class="headerlink" title="&#x65B9;&#x6CD5;&#x4E8C;&#xFF1A;option B 2a"></a>&#x65B9;&#x6CD5;&#x4E8C;&#xFF1A;option B 2a</h3><p>&#x6B65;&#x9AA4;&#x4E00;&#xFF1A;ASBR&#x4E0A;&#x5173;&#x95ED; RT &#x8FC7;&#x6EE4;&#x529F;&#x80FD;&#xFF0C;&#x5728;&#x4E0D;&#x521B;&#x5EFA; VRF &#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x5B66;&#x4E60; MP-BGP &#x8DEF;&#x7531;&#x66F4;&#x65B0;&#xFF0C;&#x8FBE;&#x5230;&#x5B66;&#x4E60;&#x5404;&#x81EA; AS &#x5185;&#x90E8;&#x8DEF;&#x7531;&#x7684;&#x76EE;&#x7684;</p>
+<p>方法一如何传递数据</p>
+<p>方法一的特点：ASBR 间只有传统的 EBGP peer，ASBR 间没有 MPLS，ASBR 间数据最后是 IP 形式穿越。</p>
+<h3 id="方法二：option-B-2a"><a href="#方法二：option-B-2a" class="headerlink" title="方法二：option B 2a"></a>方法二：option B 2a</h3><p>步骤一：ASBR上关闭 RT 过滤功能，在不创建 VRF 的情况下学习 MP-BGP 路由更新，达到学习各自 AS 内部路由的目的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp 1</span><br><span class="line">no bgp default route-target filter</span><br></pre></td></tr></table></figure>
-<p>&#x6B64;&#x65F6;&#x6808;&#x5E95;&#x6807;&#x7B7E;&#x4E5F;&#x8DDF;&#x7740;&#x5171;&#x4EAB;&#x8FC7;&#x6765;&#x4E86;</p>
-<p>&#x6B65;&#x9AA4;&#x4E8C;&#xFF1A;ASBR &#x95F4;&#x5229;&#x7528;&#x76F4;&#x8FDE;&#x7F51;&#x7EDC;&#x5EFA;&#x7ACB; MP-BGP &#x5173;&#x7CFB;</p>
-<h3 id="&#x65B9;&#x6CD5;&#x4E09;&#xFF1A;option-B-2b"><a href="#&#x65B9;&#x6CD5;&#x4E09;&#xFF1A;option-B-2b" class="headerlink" title="&#x65B9;&#x6CD5;&#x4E09;&#xFF1A;option B 2b"></a>&#x65B9;&#x6CD5;&#x4E09;&#xFF1A;option B 2b</h3><p>&#x6B65;&#x9AA4;1&#xFF1A;ASBR &#x81EA;&#x8EAB;&#x5173;&#x95ED; RT &#x7B5B;&#x9009;</p>
+<p>此时栈底标签也跟着共享过来了</p>
+<p>步骤二：ASBR 间利用直连网络建立 MP-BGP 关系</p>
+<h3 id="方法三：option-B-2b"><a href="#方法三：option-B-2b" class="headerlink" title="方法三：option B 2b"></a>方法三：option B 2b</h3><p>步骤1：ASBR 自身关闭 RT 筛选</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp 1</span><br><span class="line">no bgp default route-target filter</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;2&#xFF1A;ASBR &#x5229;&#x7528;&#x9759;&#x6001;&#x8DEF;&#x7531;&#x6307;&#x660E;&#x62B5;&#x8FBE;&#x5BF9;&#x7AEF; ASBR &#x7684; loopback 0 &#x53E3;&#x5730;&#x5740;</p>
-<p>&#x6B65;&#x9AA4;3&#xFF1A;ASBR &#x95F4;&#x542F;&#x7528; MPLS</p>
-<p>&#x5982;&#x4E0A;&#x6B65;&#x9AA4;&#x662F;&#x8003;&#x8651;&#x5230; ASBR &#x95F4;&#x53EF;&#x80FD;&#x975E;&#x76F4;&#x8FDE;&#xFF0C;&#x5B58;&#x5728;&#x8DEF;&#x7531;&#x9ED1;&#x6D1E;&#xFF0C;&#x6240;&#x4EE5;&#x5229;&#x7528; MPLS &#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5173;&#x8054;&#x5E2E;&#x52A9;&#x6570;&#x636E;&#x7A7F;&#x8D8A;&#x9ED1;&#x6D1E;&#x3002;</p>
-<p>&#x6B65;&#x9AA4;4&#xFF1A;ASBR &#x95F4;&#x5229;&#x7528;&#x73AF;&#x56DE;&#x53E3;&#x5EFA;&#x7ACB; MP-BGP EBGP peer</p>
-<p>&#x6B65;&#x9AA4;5&#xFF1A;&#x5C06; ASBR &#x4E0A;&#x7684;&#x9759;&#x6001;&#x8DEF;&#x7531;&#x91CD;&#x5206;&#x53D1;&#x8FDB; BGP</p>
-<h3 id="&#x65B9;&#x6CD5;&#x56DB;&#xFF1A;option-C"><a href="#&#x65B9;&#x6CD5;&#x56DB;&#xFF1A;option-C" class="headerlink" title="&#x65B9;&#x6CD5;&#x56DB;&#xFF1A;option C"></a>&#x65B9;&#x6CD5;&#x56DB;&#xFF1A;option C</h3><p>&#x6B65;&#x9AA4;1&#xFF1A;ASBR &#x95F4;&#x5EFA;&#x7ACB; BGPv4 EBGP peer&#xFF0C;&#x5E76;&#x4E14;&#x7ED9;&#x5BF9;&#x65B9;&#x5171;&#x4EAB;&#x6807;&#x7B7E;&#x4FE1;&#x606F;&#xFF0C;&#x5BF9;&#x5BF9;&#x65B9;&#x8BBE;&#x7F6E;&#x6743;&#x91CD;&#x503C;&#x4E3A;1.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">router bgp 1</span><br><span class="line">nei 34.34.34.4 remote 2</span><br><span class="line">nei 34.34.34.4 send-label //&#x628A;&#x672C;&#x5730;&#x6240;&#x6709;&#x7F51;&#x7EDC;&#x7684;&#x6807;&#x7B7E;&#x5206;&#x53D1;&#x7ED9;&#x5BF9;&#x7B49;&#x4F53;&#xFF0C;&#x7528; BGP &#x53D6;&#x4EE3; LDP &#x5206;&#x53D1;&#x6807;&#x7B7E;&#xFF0C;&#x6808;&#x5E95;&#x6807;&#x7B7E;</span><br><span class="line">nei 34.34.34.4 weight 1</span><br></pre></td></tr></table></figure>
-<p>&#x6B65;&#x9AA4;2&#xFF1A;ASBR &#x4E0A;&#x5C06; PE &#x548C; RR &#x7684; lo0 &#x5BA3;&#x544A;&#x8FDB; BGP</p>
-<p>&#x5982;&#x4E0A;&#x6B65;&#x9AA4;&#x662F;&#x4E3A;&#x4E86; ASBR &#x4EA4;&#x6362;&#x5404;&#x81EA; AS &#x5185;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x53CA; PE &#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#xFF0C;</p>
-<p>ASBR &#x4E00;&#x5B9A;&#x8981;&#x5BF9; AS &#x5185;&#x8BBE;&#x5907;&#x914D;&#x7F6E; NEXT-HOP-SELF&#x3002;</p>
-<p>&#x6B65;&#x9AA4;3&#xFF1A;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7684; AS &#x5229;&#x7528;&#x5404;&#x81EA;&#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668; lo0 &#x5EFA;&#x7ACB; MP-BGP EBGP peer &#x5173;&#x7CFB;&#xFF0C;&#x9488;&#x5BF9;&#x5BF9;&#x7AEF;&#x505A; next-hop-unchange&#x3002;</p>
-<p>&#x6B65;&#x9AA4;4&#xFF1A;ASBR &#x4E0A;&#x628A;&#x6765;&#x81EA;&#x4E8E;&#x5BF9;&#x7AEF; AS &#x7684;&#x8DEF;&#x7531;&#x91CD;&#x5206;&#x53D1;&#x8FDB;&#x5E95;&#x5C42; ISIS&#xFF0C;&#x5C06;&#x539F;&#x672C;&#x88AB; BGP &#x5B66;&#x4E60;&#x7684;&#x8DEF;&#x7531;&#x5E26;&#x5165; ISIS&#xFF0C;&#x4F7F;&#x5F97;&#x5F53;&#x524D; AS &#x7684; MPLS &#x53EF;&#x4EE5;&#x5206;&#x914D;&#x6808;&#x9876;&#x6807;&#x7B7E;&#x3002;</p>
-<p>&#x65B9;&#x6CD5;&#x56DB;&#x7279;&#x70B9;&#xFF1A;&#x4E0D;&#x540C; AS &#x8DEF;&#x7531;&#x53CD;&#x5C04;&#x5668;&#x76F4;&#x63A5;&#x5EFA;&#x7ACB; MP-BGP &#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;&#xFF0C;&#x4F7F;&#x5F97;&#x4E0D;&#x540C; AS &#x7684; PE &#x4F3C;&#x4E4E;&#x548C;&#x5BF9;&#x7AEF;&#x662F;&#x76F4;&#x63A5;&#x4EA4;&#x6362;&#x8DEF;&#x7531;&#x66F4;&#x65B0;&#x3002;</p>
-<h4 id="&#x5982;&#x4F55;&#x5171;&#x4EAB;&#x4E0D;&#x540C;&#x7AD9;&#x70B9;&#x7684;&#x8DEF;&#x7531;"><a href="#&#x5982;&#x4F55;&#x5171;&#x4EAB;&#x4E0D;&#x540C;&#x7AD9;&#x70B9;&#x7684;&#x8DEF;&#x7531;" class="headerlink" title="&#x5982;&#x4F55;&#x5171;&#x4EAB;&#x4E0D;&#x540C;&#x7AD9;&#x70B9;&#x7684;&#x8DEF;&#x7531;"></a>&#x5982;&#x4F55;&#x5171;&#x4EAB;&#x4E0D;&#x540C;&#x7AD9;&#x70B9;&#x7684;&#x8DEF;&#x7531;</h4><ol class="ui list">
-<li><p>R2 &#x4E0E; R5 &#x5EFA;&#x7ACB; MP-BGP peer&#xFF0C;&#x5171;&#x4EAB; VPNv4 &#x8DEF;&#x7531;&#x66F4;&#x65B0;</p>
-<p>R3 R4 &#x5229;&#x7528;&#x76F4;&#x8FDE;&#x5EFA;&#x7ACB;&#x4E86; eBGP peer&#x3001;R3 R4&#x5C06; R1 R2 R5 R6 &#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x6CA1;&#x8BB0;</p>
+<p>步骤2：ASBR 利用静态路由指明抵达对端 ASBR 的 loopback 0 口地址</p>
+<p>步骤3：ASBR 间启用 MPLS</p>
+<p>如上步骤是考虑到 ASBR 间可能非直连，存在路由黑洞，所以利用 MPLS 的标签，关联帮助数据穿越黑洞。</p>
+<p>步骤4：ASBR 间利用环回口建立 MP-BGP EBGP peer</p>
+<p>步骤5：将 ASBR 上的静态路由重分发进 BGP</p>
+<h3 id="方法四：option-C"><a href="#方法四：option-C" class="headerlink" title="方法四：option C"></a>方法四：option C</h3><p>步骤1：ASBR 间建立 BGPv4 EBGP peer，并且给对方共享标签信息，对对方设置权重值为1.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">router bgp 1</span><br><span class="line">nei 34.34.34.4 remote 2</span><br><span class="line">nei 34.34.34.4 send-label //把本地所有网络的标签分发给对等体，用 BGP 取代 LDP 分发标签，栈底标签</span><br><span class="line">nei 34.34.34.4 weight 1</span><br></pre></td></tr></table></figure>
+<p>步骤2：ASBR 上将 PE 和 RR 的 lo0 宣告进 BGP</p>
+<p>如上步骤是为了 ASBR 交换各自 AS 内路由反射器及 PE 的路由信息，</p>
+<p>ASBR 一定要对 AS 内设备配置 NEXT-HOP-SELF。</p>
+<p>步骤3：两个不同的 AS 利用各自路由反射器 lo0 建立 MP-BGP EBGP peer 关系，针对对端做 next-hop-unchange。</p>
+<p>步骤4：ASBR 上把来自于对端 AS 的路由重分发进底层 ISIS，将原本被 BGP 学习的路由带入 ISIS，使得当前 AS 的 MPLS 可以分配栈顶标签。</p>
+<p>方法四特点：不同 AS 路由反射器直接建立 MP-BGP 对等体关系，使得不同 AS 的 PE 似乎和对端是直接交换路由更新。</p>
+<h4 id="如何共享不同站点的路由"><a href="#如何共享不同站点的路由" class="headerlink" title="如何共享不同站点的路由"></a>如何共享不同站点的路由</h4><ol>
+<li><p>R2 与 R5 建立 MP-BGP peer，共享 VPNv4 路由更新</p>
+<p>R3 R4 利用直连建立了 eBGP peer、R3 R4将 R1 R2 R5 R6 ——————没记</p>
 </li>
-<li><p>&#x6570;&#x636E;&#x4F20;&#x9012;&#x65F6;&#x6807;&#x7B7E;&#x7684;&#x95EE;&#x9898;&#xFF1A;&#x9876;&#x90E8;&#x6807;&#x7B7E;&#x3001;&#x5E95;&#x90E8;&#x6807;&#x7B7E;</p>
-<p>LDP &#x5BF9;&#x672C;&#x5730;&#x76F4;&#x8FDE;&#x3001;IGPS &#x534F;&#x8BAE;&#x6240;&#x5B66;&#x4E60;&#x7684;&#x8DEF;&#x7531;&#x5206;&#x914D;&#x6807;&#x7B7E;</p>
-<p>LDP &#x65E0;&#x6CD5;&#x5BF9; BGP &#x8DEF;&#x7531;&#x5206;&#x914D;&#x6807;&#x7B7E;</p>
+<li><p>数据传递时标签的问题：顶部标签、底部标签</p>
+<p>LDP 对本地直连、IGPS 协议所学习的路由分配标签</p>
+<p>LDP 无法对 BGP 路由分配标签</p>
 </li>
 </ol>
-<h1 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h1>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-07-24T05:36:23.000Z" itemprop="datePublished">2018-07-24</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/07/24/Network/Ccie/防火墙/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    CCIE 防火墙
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/07/23/Network/Ccie/跨域的多播/" class="ui tiny button">
-                    
-                    CCIE 跨域的多播
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#VPN"><span>VPN</span></a><ol><li><a href="#VPN的分类"><span>VPN的分类</span></a><ol><li><a href="#OSI-参考模型分类"><span>OSI 参考模型分类</span></a></li><li><a href="#实际应用分类"><span>实际应用分类</span></a></li></ol></li></ol></li></ol><li><a href="#MPLS-VPN"><span>MPLS VPN</span></a><ol><li><a href="#MPLS-VPN术语"><span>MPLS VPN术语</span></a></li><li><a href="#MPLS-VPN-的双标签"><span>MPLS VPN 的双标签</span></a></li><li><a href="#安全加密"><span>安全加密</span></a></li><li><a href="#MPLS-VPN-的配置流程"><span>MPLS VPN 的配置流程</span></a><ol><li><a href="#步骤1：完成-P-NETWORK-的配置"><span>步骤1：完成 P-NETWORK 的配置</span></a></li><li><a href="#步骤2：完成-PE-和-CE-设备的路由信息共享"><span>步骤2：完成 PE 和 CE 设备的路由信息共享</span></a></li><li><a href="#步骤3：完成-PE-上-VRF-和-MP-BGP-的路由信息重分发"><span>步骤3：完成 PE 上 VRF 和 MP-BGP 的路由信息重分发</span></a></li><li><a href="#show命令"><span>show命令</span></a></li></ol></li><li><a href="#其他"><span>其他</span></a><ol><li><a href="#UNTAGE-对-MPLS-VPN-通讯的影响"><span>UNTAGE 对 MPLS VPN 通讯的影响</span></a></li><li><a href="#PE-上-OSPF-的问题"><span>PE 上 OSPF 的问题</span></a><ol><li><a href="#新的-OSPF-层次化架构"><span>新的 OSPF 层次化架构</span></a></li><li><a href="#PE-设备-OSPF-的限制"><span>PE 设备 OSPF 的限制</span></a></li><li><a href="#OSPF-通过-MPLS-VPN-共享路由后的类型"><span>OSPF 通过 MPLS VPN 共享路由后的类型</span></a></li><li><a href="#利用-sham-link（伪链路）还原相同区域的路由"><span>利用 sham-link（伪链路）还原相同区域的路由</span></a></li></ol></li></ol></li></ol></li><li><a href="#MPLS-VPN-总结"><span>MPLS VPN 总结</span></a></li><li><a href="#MPLS-VPN-排错"><span>MPLS VPN 排错</span></a></li><li><a href="#跨域MPLS-VPN-解决方案详解"><span>跨域MPLS VPN 解决方案详解</span></a><ol><li><a href="#方法一：option-A：背靠背：back-to-back"><span>方法一：option A：背靠背：back to back</span></a></li><li><a href="#方法二：option-B-2a"><span>方法二：option B 2a</span></a></li><li><a href="#方法三：option-B-2b"><span>方法三：option B 2b</span></a></li><li><a href="#方法四：option-C"><span>方法四：option C</span></a><ol><li><a href="#如何共享不同站点的路由"><span>如何共享不同站点的路由</span></a></li></ol></li></ol></li><li><a href="#结束"><span>结束</span></a>
-                </li></div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

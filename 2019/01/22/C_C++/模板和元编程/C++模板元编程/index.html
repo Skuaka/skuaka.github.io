@@ -1,255 +1,165 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>C++模板元编程(待续 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>C++模板元编程(待续 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x521A;&amp;#x5F00;&amp;#x59CB;&amp;#x5B66;&amp;#x4F8B;&amp;#x5B50;(&amp;#x6211;&amp;#x60F3;&amp;#x4E86;&amp;#x4E0B;&amp;#x4E3A;&amp;#x4EC0;&amp;#x4E48;&amp;#x8981;&amp;#x7528;struct&amp;#xFF1F;&amp;#x6211;&amp;#x731C;&amp;#x662F;&amp;#x56E0;&amp;#x4E3A;struct&amp;#x">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C++模板元编程(待续">
-<meta property="og:url" content="http://yoursite.com/2019/01/22/C_C++/模板和元编程/C++模板元编程/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x521A;&amp;#x5F00;&amp;#x59CB;&amp;#x5B66;&amp;#x4F8B;&amp;#x5B50;(&amp;#x6211;&amp;#x60F3;&amp;#x4E86;&amp;#x4E0B;&amp;#x4E3A;&amp;#x4EC0;&amp;#x4E48;&amp;#x8981;&amp;#x7528;struct&amp;#xFF1F;&amp;#x6211;&amp;#x731C;&amp;#x662F;&amp;#x56E0;&amp;#x4E3A;struct&amp;#x">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:33:01.267Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++模板元编程(待续">
-<meta name="twitter:description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x521A;&amp;#x5F00;&amp;#x59CB;&amp;#x5B66;&amp;#x4F8B;&amp;#x5B50;(&amp;#x6211;&amp;#x60F3;&amp;#x4E86;&amp;#x4E0B;&amp;#x4E3A;&amp;#x4EC0;&amp;#x4E48;&amp;#x8981;&amp;#x7528;struct&amp;#xFF1F;&amp;#x6211;&amp;#x731C;&amp;#x662F;&amp;#x56E0;&amp;#x4E3A;struct&amp;#x">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#今天刚开始学"><span class="toc-number">1.</span> <span class="toc-text">今天刚开始学</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-number">1.1.</span> <span class="toc-text">例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#阶乘计算"><span class="toc-number">1.1.1.</span> <span class="toc-text">阶乘计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制计算"><span class="toc-number">1.1.2.</span> <span class="toc-text">二进制计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#交换迭代器指向的内容"><span class="toc-number">1.1.3.</span> <span class="toc-text">交换迭代器指向的内容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#blob"><span class="toc-number">1.2.</span> <span class="toc-text">blob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元数据"><span class="toc-number">1.3.</span> <span class="toc-text">元数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态-动态多态"><span class="toc-number">1.4.</span> <span class="toc-text">静态/动态多态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boost-库的多态"><span class="toc-number">1.5.</span> <span class="toc-text">Boost 库的多态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#整型常量外覆器"><span class="toc-number">1.5.1.</span> <span class="toc-text">整型常量外覆器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boost元函数库"><span class="toc-number">2.</span> <span class="toc-text">Boost元函数库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简介"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主类型归类"><span class="toc-number">2.2.</span> <span class="toc-text">主类型归类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#次类型归类"><span class="toc-number">2.3.</span> <span class="toc-text">次类型归类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型属性"><span class="toc-number">2.4.</span> <span class="toc-text">类型属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型之间的关系"><span class="toc-number">2.5.</span> <span class="toc-text">类型之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型转化"><span class="toc-number">2.6.</span> <span class="toc-text">类型转化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元函数的定义"><span class="toc-number">3.</span> <span class="toc-text">元函数的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#待续"><span class="toc-number">4.</span> <span class="toc-text">待续</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-C_C++/模板和元编程/C++模板元编程" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    C++模板元编程(待续
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="&#x4ECA;&#x5929;&#x521A;&#x5F00;&#x59CB;&#x5B66;"><a href="#&#x4ECA;&#x5929;&#x521A;&#x5F00;&#x59CB;&#x5B66;" class="headerlink" title="&#x4ECA;&#x5929;&#x521A;&#x5F00;&#x59CB;&#x5B66;"></a>&#x4ECA;&#x5929;&#x521A;&#x5F00;&#x59CB;&#x5B66;</h2><h4 id="&#x4F8B;&#x5B50;"><a href="#&#x4F8B;&#x5B50;" class="headerlink" title="&#x4F8B;&#x5B50;"></a>&#x4F8B;&#x5B50;</h4><p>(&#x6211;&#x60F3;&#x4E86;&#x4E0B;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x7528;struct&#xFF1F;&#x6211;&#x731C;&#x662F;&#x56E0;&#x4E3A;struct&#x9ED8;&#x8BA4;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#x662F;public&#xFF0C;&#x5982;&#x679C;&#x7528;class&#x8FD8;&#x8981;&#x591A;&#x5199;&#x4E00;&#x884C;public)</p>
-<h5 id="&#x9636;&#x4E58;&#x8BA1;&#x7B97;"><a href="#&#x9636;&#x4E58;&#x8BA1;&#x7B97;" class="headerlink" title="&#x9636;&#x4E58;&#x8BA1;&#x7B97;"></a>&#x9636;&#x4E58;&#x8BA1;&#x7B97;</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">unsigned</span> n&gt; <span class="comment">// general case: the value of</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Factorial</span> {</span> <span class="comment">// Factorial&lt;n&gt; is n times the value</span></span><br><span class="line"><span class="comment">// of Factorial&lt;n-1&gt;</span></span><br><span class="line">    <span class="keyword">enum</span> { value = n * Factorial&lt;n<span class="number">-1</span>&gt;::value };</span><br><span class="line">};</span><br><span class="line"><span class="keyword">template</span>&lt;&gt; <span class="comment">// special case: the value of</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Factorial</span>&lt;0&gt; {</span> <span class="comment">// Factorial&lt;0&gt; is 1</span></span><br><span class="line">    <span class="keyword">enum</span> { value = <span class="number">1</span> };</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
-<h5 id="&#x4E8C;&#x8FDB;&#x5236;&#x8BA1;&#x7B97;"><a href="#&#x4E8C;&#x8FDB;&#x5236;&#x8BA1;&#x7B97;" class="headerlink" title="&#x4E8C;&#x8FDB;&#x5236;&#x8BA1;&#x7B97;"></a>&#x4E8C;&#x8FDB;&#x5236;&#x8BA1;&#x7B97;</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">int</span> N&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Binary</span>{</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> value = Binary&lt;N/<span class="number">10</span>&gt;::value * <span class="number">2</span> + N % <span class="number">10</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Binary</span>&lt;0&gt;{</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> value = <span class="number">0</span>;</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
-<h5 id="&#x4EA4;&#x6362;&#x8FED;&#x4EE3;&#x5668;&#x6307;&#x5411;&#x7684;&#x5185;&#x5BB9;"><a href="#&#x4EA4;&#x6362;&#x8FED;&#x4EE3;&#x5668;&#x6307;&#x5411;&#x7684;&#x5185;&#x5BB9;" class="headerlink" title="&#x4EA4;&#x6362;&#x8FED;&#x4EE3;&#x5668;&#x6307;&#x5411;&#x7684;&#x5185;&#x5BB9;"></a>&#x4EA4;&#x6362;&#x8FED;&#x4EE3;&#x5668;&#x6307;&#x5411;&#x7684;&#x5185;&#x5BB9;</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/type_traits/is_reference.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/type_traits/is_same.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iterator&gt; // &#x9488;&#x5BF9;iterator_traits</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt; // &#x9488;&#x5BF9;swap</span></span></span><br><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> {</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">bool</span> use_swap&gt; <span class="class"><span class="keyword">struct</span> <span class="title">iter_swap_impl</span>;</span></span><br><span class="line">    <span class="comment">// &#x5FEB;&#x901F;&#x7248;&#x672C;</span></span><br><span class="line">    <span class="keyword">template</span> &lt;&gt;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">iter_swap_impl</span>&lt;true&gt;{</span></span><br><span class="line">    	<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator1</span>, <span class="title">class</span> <span class="title">ForwardIterator2</span>&gt;</span></span><br><span class="line"><span class="class">    	<span class="title">static</span> <span class="title">void</span> <span class="title">do_it</span>(<span class="title">ForwardIterator1</span> <span class="title">i1</span>, <span class="title">ForwardIterator2</span> <span class="title">i2</span>){</span></span><br><span class="line">			<span class="built_in">std</span>::swap(*i1, *i2);</span><br><span class="line">        }</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// &#x603B;&#x662F;&#x53EF;&#x884C;&#x7684;&#x7248;&#x672C;</span></span><br><span class="line">    <span class="keyword">template</span> &lt;&gt;</span><br><span class="line">   	<span class="class"><span class="keyword">struct</span> <span class="title">iter_swap_impl</span>&lt;false&gt;{</span></span><br><span class="line">       	<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator1</span>, <span class="title">class</span> <span class="title">ForwardIterator2</span>&gt;</span></span><br><span class="line"><span class="class">       	<span class="title">static</span> <span class="title">void</span> <span class="title">do_it</span>(<span class="title">ForwardIterator1</span> <span class="title">i1</span>, <span class="title">ForwardIterator2</span> <span class="title">i2</span>){</span></span><br><span class="line">       		<span class="keyword">typename</span> iterator_traits&lt;ForwardIterator1&gt;::value_type</span><br><span class="line">            tmp = *i1;</span><br><span class="line">           	*i1 = *i2;</span><br><span class="line">          	*i2 = tmp;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator1</span>, <span class="title">class</span> <span class="title">ForwardIterator2</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">iter_swap</span>(<span class="title">ForwardIterator1</span> <span class="title">i1</span>, <span class="title">ForwardIterator2</span> <span class="title">i2</span>){</span></span><br><span class="line">    	<span class="keyword">typedef</span> iterator_traits&lt;ForwardsIterator1&gt; traits1;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits1::value_type v1;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits1::reference r1;</span><br><span class="line">    	</span><br><span class="line">    	<span class="keyword">typedef</span> iterator_traits&lt;ForwardsIterator1&gt; traits2;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits2::value_type v2;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits2::reference r2; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">bool</span> <span class="keyword">const</span> use_swap = boost::is_same&lt;v1,v2&gt;::value</span><br><span class="line">        						&amp;&amp; boost::isreference&lt;r1&gt;::value</span><br><span class="line">        						&amp;&amp; boost::isreference&lt;r2&gt;::value;</span><br><span class="line">		</span><br><span class="line">        iter_swap_impl&lt;use_swap&gt;::do_it(i1,i2);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<h3 id="blob"><a href="#blob" class="headerlink" title="blob"></a>blob</h3><p>&#x5728;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7F16;&#x7A0B;&#x4E2D;&#x5C06;&#x4E00;&#x4E2A;&#x5E26;&#x6709;&#x5927;&#x91CF;&#x6210;&#x5458;&#x7684;&#x7C7B;&#x79F0;&#x4F5C;&#x201D;blob&#x201D;&#x3002;&#x7C7B;&#x7684;&#x6210;&#x5458;&#x5F7C;&#x6B64;&#x8026;&#x5408;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x5FC5;&#x987B;&#x88AB;&#x58F0;&#x660E;&#x5728;&#x4E00;&#x8D77;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x8026;&#x5408;&#x5E76;&#x63D0;&#x9AD8;&#x6A21;&#x5757;&#x5316;&#x7684;&#x7A0B;&#x5EA6;&#xFF0C;&#x5E94;&#x8BE5;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x6A21;&#x5F0F;&#x3002;&#x4EE3;&#x66FF;&#x65B9;&#x6848;&#x662F;&#x91C7;&#x7528;&#x72EC;&#x7ACB;&#x7684;&#x5143;&#x51FD;&#x6570;&#x6765;&#x5B9A;&#x4E49;&#x5355;&#x72EC;&#x7684;traits&#x3002;</p>
-<h3 id="&#x5143;&#x6570;&#x636E;"><a href="#&#x5143;&#x6570;&#x636E;" class="headerlink" title="&#x5143;&#x6570;&#x636E;"></a>&#x5143;&#x6570;&#x636E;</h3><p>&#x53EF;&#x88AB;C++&#x7F16;&#x8BD1;&#x5668;&#x7CFB;&#x7EDF;&#x64CD;&#x7EB5;&#x7684;&#x201D;&#x503C;&#x201D;&#x53EF;&#x4EE5;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x5143;&#x6570;&#x636E;&#x3002;&#x5728;&#x6A21;&#x677F;&#x5143;&#x7F16;&#x7A0B;&#x4E2D;&#xFF0C;&#x4E24;&#x79CD;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x5143;&#x6570;&#x636E;&#x662F;<strong>&#x7C7B;&#x578B;</strong>&#x548C;<strong>&#x6574;&#x6570;&#x5E38;&#x91CF;</strong>(&#x5305;&#x62EC;bool)&#x3002;</p>
-<p>C++&#x7684;&#x7F16;&#x8BD1;&#x5668;&#x90E8;&#x5206;&#x901A;&#x5E38;&#x88AB;&#x79F0;&#x4E3A;&#x201D;&#x7EAF;&#x51FD;&#x6570;&#x5F0F;&#x8BED;&#x8A00;&#x201D;&#xFF0C;&#x56E0;&#x4E3A;&#x5143;&#x6570;&#x636E;&#x662F;&#x4E0D;&#x53EF;&#x53D8;&#x7684;&#x5E76;&#x4E14;&#x5143;&#x51FD;&#x6570;&#x4E0D;&#x53EF;&#x4EE5;&#x6709;&#x4EFB;&#x4F55;&#x526F;&#x4F5C;&#x7528;&#x3002;</p>
-<h3 id="&#x9759;&#x6001;-&#x52A8;&#x6001;&#x591A;&#x6001;"><a href="#&#x9759;&#x6001;-&#x52A8;&#x6001;&#x591A;&#x6001;" class="headerlink" title="&#x9759;&#x6001;/&#x52A8;&#x6001;&#x591A;&#x6001;"></a>&#x9759;&#x6001;/&#x52A8;&#x6001;&#x591A;&#x6001;</h3><p>&#x52A8;&#x6001;&#x591A;&#x6001;</p>
-<ul class="ui list">
-<li>&#x5141;&#x8BB8;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x5355;&#x4E2A;&#x57FA;&#x6307;&#x9488;&#x6216;&#x5F15;&#x7528;&#x5904;&#x7406;&#x591A;&#x4E2A;&#x6D3E;&#x751F;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;</li>
-<li>&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x51B3;&#x5B9A;&#x4E8E;&#x8FD0;&#x884C;&#x671F;</li>
-<li>&#x662F;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x5173;&#x952E;&#x7279;&#x6027;</li>
+  <div class="container">
+    <article>
+      <h1>C++模板元编程(待续</h1>
+      <h2 id="今天刚开始学"><a href="#今天刚开始学" class="headerlink" title="今天刚开始学"></a>今天刚开始学</h2><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>(我想了下为什么要用struct？我猜是因为struct默认访问权限是public，如果用class还要多写一行public)</p>
+<h4 id="阶乘计算"><a href="#阶乘计算" class="headerlink" title="阶乘计算"></a>阶乘计算</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">unsigned</span> n&gt; <span class="comment">// general case: the value of</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Factorial</span> &#123;</span> <span class="comment">// Factorial&lt;n&gt; is n times the value</span></span><br><span class="line"><span class="comment">// of Factorial&lt;n-1&gt;</span></span><br><span class="line">    <span class="keyword">enum</span> &#123; value = n * Factorial&lt;n<span class="number">-1</span>&gt;::value &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;&gt; <span class="comment">// special case: the value of</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Factorial</span>&lt;0&gt; &#123;</span> <span class="comment">// Factorial&lt;0&gt; is 1</span></span><br><span class="line">    <span class="keyword">enum</span> &#123; value = <span class="number">1</span> &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="二进制计算"><a href="#二进制计算" class="headerlink" title="二进制计算"></a>二进制计算</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">int</span> N&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Binary</span>&#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> value = Binary&lt;N/<span class="number">10</span>&gt;::value * <span class="number">2</span> + N % <span class="number">10</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Binary</span>&lt;0&gt;&#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> value = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="交换迭代器指向的内容"><a href="#交换迭代器指向的内容" class="headerlink" title="交换迭代器指向的内容"></a>交换迭代器指向的内容</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/type_traits/is_reference.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/type_traits/is_same.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iterator&gt; // 针对iterator_traits</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt; // 针对swap</span></span></span><br><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">bool</span> use_swap&gt; <span class="class"><span class="keyword">struct</span> <span class="title">iter_swap_impl</span>;</span></span><br><span class="line">    <span class="comment">// 快速版本</span></span><br><span class="line">    <span class="keyword">template</span> &lt;&gt;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">iter_swap_impl</span>&lt;true&gt;&#123;</span></span><br><span class="line">    	<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator1</span>, <span class="title">class</span> <span class="title">ForwardIterator2</span>&gt;</span></span><br><span class="line"><span class="class">    	<span class="title">static</span> <span class="title">void</span> <span class="title">do_it</span>(<span class="title">ForwardIterator1</span> <span class="title">i1</span>, <span class="title">ForwardIterator2</span> <span class="title">i2</span>)&#123;</span></span><br><span class="line">			<span class="built_in">std</span>::swap(*i1, *i2);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 总是可行的版本</span></span><br><span class="line">    <span class="keyword">template</span> &lt;&gt;</span><br><span class="line">   	<span class="class"><span class="keyword">struct</span> <span class="title">iter_swap_impl</span>&lt;false&gt;&#123;</span></span><br><span class="line">       	<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator1</span>, <span class="title">class</span> <span class="title">ForwardIterator2</span>&gt;</span></span><br><span class="line"><span class="class">       	<span class="title">static</span> <span class="title">void</span> <span class="title">do_it</span>(<span class="title">ForwardIterator1</span> <span class="title">i1</span>, <span class="title">ForwardIterator2</span> <span class="title">i2</span>)&#123;</span></span><br><span class="line">       		<span class="keyword">typename</span> iterator_traits&lt;ForwardIterator1&gt;::value_type</span><br><span class="line">            tmp = *i1;</span><br><span class="line">           	*i1 = *i2;</span><br><span class="line">          	*i2 = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator1</span>, <span class="title">class</span> <span class="title">ForwardIterator2</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">iter_swap</span>(<span class="title">ForwardIterator1</span> <span class="title">i1</span>, <span class="title">ForwardIterator2</span> <span class="title">i2</span>)&#123;</span></span><br><span class="line">    	<span class="keyword">typedef</span> iterator_traits&lt;ForwardsIterator1&gt; traits1;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits1::value_type v1;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits1::reference r1;</span><br><span class="line">    	</span><br><span class="line">    	<span class="keyword">typedef</span> iterator_traits&lt;ForwardsIterator1&gt; traits2;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits2::value_type v2;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits2::reference r2; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">bool</span> <span class="keyword">const</span> use_swap = boost::is_same&lt;v1,v2&gt;::value</span><br><span class="line">        						&amp;&amp; boost::isreference&lt;r1&gt;::value</span><br><span class="line">        						&amp;&amp; boost::isreference&lt;r2&gt;::value;</span><br><span class="line">		</span><br><span class="line">        iter_swap_impl&lt;use_swap&gt;::do_it(i1,i2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="blob"><a href="#blob" class="headerlink" title="blob"></a>blob</h3><p>在面向对象的编程中将一个带有大量成员的类称作”blob”。类的成员彼此耦合，因为它们必须被声明在一起。为了避免耦合并提高模块化的程度，应该避免使用这种模式。代替方案是采用独立的元函数来定义单独的traits。</p>
+<h3 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h3><p>可被C++编译器系统操纵的”值”可以被认为是元数据。在模板元编程中，两种最常见的元数据是<strong>类型</strong>和<strong>整数常量</strong>(包括bool)。</p>
+<p>C++的编译器部分通常被称为”纯函数式语言”，因为元数据是不可变的并且元函数不可以有任何副作用。</p>
+<h3 id="静态-动态多态"><a href="#静态-动态多态" class="headerlink" title="静态/动态多态"></a>静态/动态多态</h3><p>动态多态</p>
+<ul>
+<li>允许我们通过单个基指针或引用处理多个派生类型的对象</li>
+<li>实际类型决定于运行期</li>
+<li>是面向对象的关键特性</li>
 </ul>
-<p>&#x9759;&#x6001;&#x591A;&#x6001;</p>
-<ul class="ui list">
-<li>&#x5141;&#x8BB8;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x4EE5;&#x540C;&#x6837;&#x7684;&#x65B9;&#x5F0F;&#x88AB;&#x64CD;&#x7EB5;&#xFF0C;&#x53EA;&#x8981;&#x5B83;&#x4EEC;&#x652F;&#x6301;&#x67D0;&#x79CD;&#x5171;&#x901A;&#x7684;&#x8BED;&#x6CD5;&#x3002;</li>
-<li>&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x51B3;&#x5B9A;&#x4E8E;&#x7F16;&#x8BD1;&#x671F;</li>
-<li>&#x662F;&#x6CDB;&#x578B;&#x7F16;&#x7A0B;&#x7684;&#x672C;&#x8D28;&#x8981;&#x7D20;</li>
+<p>静态多态</p>
+<ul>
+<li>允许不同类型的对象以同样的方式被操纵，只要它们支持某种共通的语法。</li>
+<li>实际类型决定于编译期</li>
+<li>是泛型编程的本质要素</li>
 </ul>
-<h3 id="Boost-&#x5E93;&#x7684;&#x591A;&#x6001;"><a href="#Boost-&#x5E93;&#x7684;&#x591A;&#x6001;" class="headerlink" title="Boost &#x5E93;&#x7684;&#x591A;&#x6001;"></a>Boost &#x5E93;&#x7684;&#x591A;&#x6001;</h3><p>&#x4E3A;&#x4E86;&#x5728;&#x5143;&#x51FD;&#x6570;&#x4E4B;&#x95F4;&#x5B9E;&#x73B0;&#x591A;&#x6001;&#xFF0C;Boost &#x7A0B;&#x5E8F;&#x5E93;&#x4F7F;&#x7528;&#x7684;&#x7EA6;&#x5B9A;&#x5982;&#x4E0B;&#xFF1A;</p>
+<h3 id="Boost-库的多态"><a href="#Boost-库的多态" class="headerlink" title="Boost 库的多态"></a>Boost 库的多态</h3><p>为了在元函数之间实现多态，Boost 程序库使用的约定如下：</p>
 <p><code>metafunction-name&lt;type-arguments...&gt;::type</code></p>
-<p>&#x4ECE;&#x73B0;&#x5728;&#x5F00;&#x59CB;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x672F;&#x8BED;&#x5143;&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x5C31;&#x662F;&#x6307;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x8FD9;&#x79CD;&#x8BED;&#x6CD5;&#x8FDB;&#x884C;&#x8C03;&#x7528;&#x7684;&#x6A21;&#x677F;&#x3002;</p>
-<h4 id="&#x6574;&#x578B;&#x5E38;&#x91CF;&#x5916;&#x8986;&#x5668;"><a href="#&#x6574;&#x578B;&#x5E38;&#x91CF;&#x5916;&#x8986;&#x5668;" class="headerlink" title="&#x6574;&#x578B;&#x5E38;&#x91CF;&#x5916;&#x8986;&#x5668;"></a>&#x6574;&#x578B;&#x5E38;&#x91CF;&#x5916;&#x8986;&#x5668;</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">five</span> // &#x6570;&#x503C;5&#x7684;&#x6574;&#x578B;&#x5E38;&#x91CF;&#x5916;&#x8986;&#x5668;</span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> <span class="keyword">const</span> value = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">int</span> value_type;</span><br><span class="line">    <span class="comment">// ... more</span></span><br><span class="line">}</span><br><span class="line"><span class="comment">// to get a int value</span></span><br><span class="line">metafunction-name&lt;type arguments...&gt;::type::value</span><br></pre></td></tr></table></figure>
-<h2 id="Boost&#x5143;&#x51FD;&#x6570;&#x5E93;"><a href="#Boost&#x5143;&#x51FD;&#x6570;&#x5E93;" class="headerlink" title="Boost&#x5143;&#x51FD;&#x6570;&#x5E93;"></a>Boost&#x5143;&#x51FD;&#x6570;&#x5E93;</h2><h3 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;" class="headerlink" title="&#x7B80;&#x4ECB;"></a>&#x7B80;&#x4ECB;</h3><ul class="ui list">
-<li>&#x6240;&#x6709;&#x5143;&#x51FD;&#x6570;&#x90FD;&#x4F4D;&#x4E8E;<strong>&#x547D;&#x540D;&#x7A7A;&#x95F4;</strong>boost&#x4E2D;</li>
-<li><strong>&#x5934;&#x6587;&#x4EF6;</strong>&#x683C;&#x5F0F;&#xFF1A;<code>#include &lt;boost/type_traits/metafunction-name.hpp&gt;</code></li>
-<li>&#x6240;&#x6709;<strong>&#x6570;&#x503C;&#x5143;&#x51FD;&#x6570;</strong>(&#x5305;&#x62EC;bool, char &#x7C7B;&#x578B;)&#x90FD;&#x5728;&#x5176;&#x81EA;&#x8EAB;&#x5185;&#x76F4;&#x63A5;&#x63D0;&#x4F9B;&#x4E86;<code>::value</code></li>
-<li>&#x6709;&#x5C11;&#x6570;type_traits &#x4E3A;&#x4E86;&#x53D1;&#x6325;&#x5B8C;&#x6574;&#x7684;&#x529F;&#x80FD;&#x9700;&#x8981;&#x4E00;&#x4E9B;&#x975E;&#x6807;&#x51C6;&#x7F16;&#x8BD1;&#x5668;&#x652F;&#x6301;&#xFF08;&#x5426;&#x5219;&#x529F;&#x80FD;&#x964D;&#x7EA7;&#xFF0C;&#x4F46;&#x80AF;&#x5B9A;&#x5B89;&#x5168;&#x3001;&#x80FD;&#x7F16;&#x8BD1;&#x6210;&#x529F;&#xFF09;&#x3002;</li>
-<li>&#x7C7B;&#x578B;&#x5F52;&#x7C7B;&#x5143;&#x51FD;&#x6570;&#x901A;&#x5E38;&#x4F1A;&#x5FFD;&#x89C6;cv&#x4FEE;&#x9970;&#x7B26;&#x3002;</li>
+<p>从现在开始，当我们使用术语元函数时，就是指可以采用这种语法进行调用的模板。</p>
+<h4 id="整型常量外覆器"><a href="#整型常量外覆器" class="headerlink" title="整型常量外覆器"></a>整型常量外覆器</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">five</span> // 数值5的整型常量外覆器</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> <span class="keyword">const</span> value = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">int</span> value_type;</span><br><span class="line">    <span class="comment">// ... more</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// to get a int value</span></span><br><span class="line">metafunction-name&lt;type arguments...&gt;::type::value</span><br></pre></td></tr></table></figure>
+<h2 id="Boost元函数库"><a href="#Boost元函数库" class="headerlink" title="Boost元函数库"></a>Boost元函数库</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
+<li>所有元函数都位于<strong>命名空间</strong>boost中</li>
+<li><strong>头文件</strong>格式：<code>#include &lt;boost/type_traits/metafunction-name.hpp&gt;</code></li>
+<li>所有<strong>数值元函数</strong>(包括bool, char 类型)都在其自身内直接提供了<code>::value</code></li>
+<li>有少数type_traits 为了发挥完整的功能需要一些非标准编译器支持（否则功能降级，但肯定安全、能编译成功）。</li>
+<li>类型归类元函数通常会忽视cv修饰符。</li>
 </ul>
-<h3 id="&#x4E3B;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;"><a href="#&#x4E3B;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;" class="headerlink" title="&#x4E3B;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;"></a>&#x4E3B;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;</h3><p>Primary Type Categorization</p>
-<p>&#x5BF9;&#x4E8E;&#x7ED9;&#x5B9A;&#x7684;&#x7C7B;&#x578B;T&#xFF0C;&#x8FD9;&#x4E9B;&#x5143;&#x51FD;&#x6570;&#x4E2D;&#x6709;&#x4E14;&#x4EC5;&#x6709;&#x4E00;&#x4E2A;&#x4F1A;&#x4EA7;&#x751F;&#x7ED3;&#x679C;true&#x3002;</p>
+<h3 id="主类型归类"><a href="#主类型归类" class="headerlink" title="主类型归类"></a>主类型归类</h3><p>Primary Type Categorization</p>
+<p>对于给定的类型T，这些元函数中有且仅有一个会产生结果true。</p>
 <table>
 <thead>
 <tr>
-<th>&#x4E3B;&#x7C7B;&#x578B;Trait</th>
-<th>::type::value &#x548C; ::value &#x4E3A; ture &#x7684;&#x60C5;&#x51B5;</th>
+<th>主类型Trait</th>
+<th>::type::value 和 ::value 为 ture 的情况</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>is_array&lt;T&gt;</code></td>
-<td>T &#x662F;&#x6570;&#x7EC4;&#x7C7B;&#x578B;</td>
+<td>T 是数组类型</td>
 </tr>
 <tr>
 <td><code>is_class&lt;T&gt;</code></td>
-<td>T &#x662F;&#x7C7B;&#x7C7B;&#x578B;&#xFF0C;&#x5982;&#x679C;&#x7F3A;&#x4E4F;&#x7F16;&#x8BD1;&#x5668;&#x652F;&#x6301;&#xFF0C;T &#x662F;&#x8054;&#x5408;&#x4F53;&#x65F6;&#x4E5F;&#x662F; true</td>
+<td>T 是类类型，如果缺乏编译器支持，T 是联合体时也是 true</td>
 </tr>
 <tr>
 <td><code>is_enum&lt;T&gt;</code></td>
-<td>T &#x662F;&#x679A;&#x4E3E;&#x7C7B;&#x578B;</td>
+<td>T 是枚举类型</td>
 </tr>
 <tr>
 <td><code>is_float&lt;T&gt;</code></td>
-<td>T &#x662F;&#x6D6E;&#x70B9;&#x7C7B;&#x578B;</td>
+<td>T 是浮点类型</td>
 </tr>
 <tr>
 <td><code>is_function&lt;T&gt;</code></td>
-<td>T &#x662F;&#x51FD;&#x6570;&#x7C7B;&#x578B;&#xFF0C;<code>R(*)(args...)</code>/<code>R(&amp;)(args...)</code></td>
+<td>T 是函数类型，<code>R(*)(args...)</code>/<code>R(&amp;)(args...)</code></td>
 </tr>
 <tr>
 <td><code>is_integral&lt;T&gt;</code></td>
-<td>T &#x662F;&#x6574;&#x578B;</td>
+<td>T 是整型</td>
 </tr>
 <tr>
 <td><code>is_member_pointer&lt;T&gt;</code></td>
-<td>T &#x662F;&#x6307;&#x5411;&#x51FD;&#x6570;&#x6210;&#x5458;&#x6216;&#x6570;&#x636E;&#x6210;&#x5458;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x6CE8;&#x610F;<code>is_pointer</code>&#x8BC6;&#x522B;&#x4E0D;&#x4E86;&#x8FD9;&#x4E9B;&#x7C7B;&#x578B;&#x3002;</td>
+<td>T 是指向函数成员或数据成员的指针，注意<code>is_pointer</code>识别不了这些类型。</td>
 </tr>
 <tr>
 <td><code>is_pointer&lt;T&gt;</code></td>
-<td>T &#x662F;&#x6307;&#x9488;&#x7C7B;&#x578B;&#xFF08;&#x4F46;&#x4E0D;&#x6307;&#x5411;&#x6210;&#x5458;&#xFF09;</td>
+<td>T 是指针类型（但不指向成员）</td>
 </tr>
 <tr>
 <td><code>is_reference&lt;T&gt;</code></td>
-<td>T &#x662F;&#x5F15;&#x7528;</td>
+<td>T 是引用</td>
 </tr>
 <tr>
 <td><code>is_union&lt;T&gt;</code></td>
-<td>T &#x662F;&#x8054;&#x5408;&#x4F53;&#xFF0C;&#x82E5;&#x7F3A;&#x4E4F;&#x7F16;&#x8BD1;&#x5668;&#x652F;&#x6301;&#x5219;&#x603B;&#x662F;false</td>
+<td>T 是联合体，若缺乏编译器支持则总是false</td>
 </tr>
 <tr>
 <td><code>is_void&lt;T&gt;</code></td>
-<td>T &#x5177;&#x6709;cv void&#x5F62;&#x5F0F;</td>
+<td>T 具有cv void形式</td>
 </tr>
 </tbody>
 </table>
-<p><strong>&#x6307;&#x5411;&#x6210;&#x5458;&#x7684;&#x6307;&#x9488;</strong></p>
-<p>&#x6307;&#x5411;&#x6210;&#x5458;&#x51FD;&#x6570;&#x7684;&#x6307;&#x9488;&#xFF1A;<code>R(C::*)(args...)cv</code></p>
-<p>&#x6307;&#x5411;&#x6570;&#x636E;&#x6210;&#x5458;&#x7684;&#x6307;&#x9488;&#xFF1A;<code>D C::*</code></p>
-<p>&#x5B9E;&#x9645;&#x4E0A;&#x5B83;&#x4EEC;&#x6839;&#x672C;&#x4E0D;&#x662F;&#x6307;&#x9488;&#xFF0C;&#x800C;&#x662F;&#x4E00;&#x79CD;&#x504F;&#x79FB;&#x91CF;&#x3002;&#x6240;&#x4EE5;&#x548C;&#x6307;&#x9488;&#x7C7B;&#x578B;&#x4E0D;&#x540C;&#x3002;</p>
-<h3 id="&#x6B21;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;"><a href="#&#x6B21;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;" class="headerlink" title="&#x6B21;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;"></a>&#x6B21;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;</h3><p>Secondary Type Categorization</p>
-<p>&#x8868;&#x793A;&#x5BF9;&#x4E3B;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;&#x7684;&#x5206;&#x7EC4;&#x6216;&#x533A;&#x5206;&#x3002;</p>
+<p><strong>指向成员的指针</strong></p>
+<p>指向成员函数的指针：<code>R(C::*)(args...)cv</code></p>
+<p>指向数据成员的指针：<code>D C::*</code></p>
+<p>实际上它们根本不是指针，而是一种偏移量。所以和指针类型不同。</p>
+<h3 id="次类型归类"><a href="#次类型归类" class="headerlink" title="次类型归类"></a>次类型归类</h3><p>Secondary Type Categorization</p>
+<p>表示对主类型归类的分组或区分。</p>
 <table>
 <thead>
 <tr>
-<th>&#x6B21;&#x7C7B;&#x578B;Trait</th>
-<th>::type::value &#x548C; ::value</th>
+<th>次类型Trait</th>
+<th>::type::value 和 ::value</th>
 </tr>
 </thead>
 <tbody>
@@ -271,7 +181,7 @@
 </tr>
 <tr>
 <td><code>is_member_function_pointer&lt;T&gt;</code></td>
-<td>T&#x662F;&#x6307;&#x5411;&#x6210;&#x5458;&#x51FD;&#x6570;&#x7684;&#x6307;&#x9488;&#xFF1F;</td>
+<td>T是指向成员函数的指针？</td>
 </tr>
 <tr>
 <td><code>is_object&lt;T&gt;</code></td>
@@ -293,43 +203,43 @@
 </tr>
 </tbody>
 </table>
-<h3 id="&#x7C7B;&#x578B;&#x5C5E;&#x6027;"><a href="#&#x7C7B;&#x578B;&#x5C5E;&#x6027;" class="headerlink" title="&#x7C7B;&#x578B;&#x5C5E;&#x6027;"></a>&#x7C7B;&#x578B;&#x5C5E;&#x6027;</h3><p>&#x5BF9;&#x4E8E;&#x90A3;&#x4E9B;&#x4E0D;&#x662F;&#x548C;&#x6807;&#x51C6;&#x7C7B;&#x578B;&#x5F52;&#x7C7B;&#x76F4;&#x63A5;&#x76F8;&#x5173;&#x7684;traits&#xFF0C;type traits&#x7A0B;&#x5E8F;&#x5E93;&#x4F7F;&#x7528;&#x201C;&#x5C5E;&#x6027;&#x201D;&#x4F5C;&#x4E3A;&#x5305;&#x7F57;&#x4E07;&#x8C61;&#x7684;&#x672F;&#x8BED;&#x6765;&#x6307;&#x5B9A;&#x5B83;&#x4EEC;&#x3002;</p>
-<p>&#x8FD9;&#x4E2A;&#x5206;&#x7EC4;&#x4E2D;&#xFF0C;&#x6700;&#x7B80;&#x5355;&#x7684;&#x662F;<code>is_const&lt;T&gt;</code>&#x548C;<code>is_volatile&lt;T&gt;</code>&#x3002;</p>
-<p>&#x5176;&#x4F59;&#x5C5E;&#x6027;&#xFF0C;&#x7565;&#x3002;</p>
-<h3 id="&#x7C7B;&#x578B;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;"><a href="#&#x7C7B;&#x578B;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;" class="headerlink" title="&#x7C7B;&#x578B;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;"></a>&#x7C7B;&#x578B;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;</h3><table>
+<h3 id="类型属性"><a href="#类型属性" class="headerlink" title="类型属性"></a>类型属性</h3><p>对于那些不是和标准类型归类直接相关的traits，type traits程序库使用“属性”作为包罗万象的术语来指定它们。</p>
+<p>这个分组中，最简单的是<code>is_const&lt;T&gt;</code>和<code>is_volatile&lt;T&gt;</code>。</p>
+<p>其余属性，略。</p>
+<h3 id="类型之间的关系"><a href="#类型之间的关系" class="headerlink" title="类型之间的关系"></a>类型之间的关系</h3><table>
 <thead>
 <tr>
-<th>&#x5143;&#x51FD;&#x6570;</th>
-<th>::value &#x4E3A; true&#x7684;&#x6761;&#x4EF6;</th>
+<th>元函数</th>
+<th>::value 为 true的条件</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>is_same&lt;T,U&gt;</code></td>
-<td>T &#x548C; U &#x7C7B;&#x578B;&#x4E00;&#x81F4;</td>
+<td>T 和 U 类型一致</td>
 </tr>
 <tr>
 <td><code>is_convertible&lt;T,U&gt;</code></td>
-<td>T &#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x88AB;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x4E3A; U &#x7C7B;&#x578B;</td>
+<td>T 类型可以被隐式转换为 U 类型</td>
 </tr>
 <tr>
 <td><code>is_base_and_derived&lt;B,D&gt;</code></td>
-<td>B &#x662F; D &#x7684;&#x4E00;&#x4E2A;&#x57FA;&#x7C7B;</td>
+<td>B 是 D 的一个基类</td>
 </tr>
 </tbody>
 </table>
-<h3 id="&#x7C7B;&#x578B;&#x8F6C;&#x5316;"><a href="#&#x7C7B;&#x578B;&#x8F6C;&#x5316;" class="headerlink" title="&#x7C7B;&#x578B;&#x8F6C;&#x5316;"></a>&#x7C7B;&#x578B;&#x8F6C;&#x5316;</h3><p>&#x4E0D;&#x540C;&#x4E8E;&#x4E4B;&#x524D;&#x7684;&#xFF0C;&#x8FD9;&#x7EC4;&#x5143;&#x51FD;&#x6570;&#x4EA7;&#x751F;&#x7C7B;&#x578B;&#x7ED3;&#x679C;&#x800C;&#x4E0D;&#x662F;&#x5E03;&#x5C14;&#x503C;&#x3002;</p>
+<h3 id="类型转化"><a href="#类型转化" class="headerlink" title="类型转化"></a>类型转化</h3><p>不同于之前的，这组元函数产生类型结果而不是布尔值。</p>
 <table>
 <thead>
 <tr>
-<th>&#x8F6C;&#x5316;</th>
+<th>转化</th>
 <th>::type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>remove_const&lt;T&gt;</code></td>
-<td>T&#x4E0D;&#x5E26;&#x4EFB;&#x4F55;&#x9876;&#x5C42;const&#x3002;<code>const int</code>&#x53D8;&#x6210;int&#xFF0C;&#x4F46;<code>const int*</code>&#x4E0D;&#x53D8;</td>
+<td>T不带任何顶层const。<code>const int</code>变成int，但<code>const int*</code>不变</td>
 </tr>
 <tr>
 <td><code>remove_volatile&lt;T&gt;</code></td>
@@ -341,23 +251,23 @@
 </tr>
 <tr>
 <td><code>remove_reference&lt;T&gt;</code></td>
-<td>T&#x4E0D;&#x5E26;&#x4EFB;&#x4F55;&#x9876;&#x5C42;&#x5F15;&#x7528;&#x3002;<code>int&amp;</code>&#x53D8;&#x6210;int&#xFF0C;&#x4F46;<code>int*</code>&#x4E0D;&#x53D8;</td>
+<td>T不带任何顶层引用。<code>int&amp;</code>变成int，但<code>int*</code>不变</td>
 </tr>
 <tr>
 <td><code>remove_bounds&lt;T&gt;</code></td>
-<td>T&#x4E0D;&#x5E26;&#x4EFB;&#x4F55;&#x9876;&#x5C42;&#x6570;&#x7EC4;&#x4E2D;&#x62EC;&#x53F7;&#x3002;<code>int[2][3]</code>&#x53D8;&#x6210;<code>int[3]</code></td>
+<td>T不带任何顶层数组中括号。<code>int[2][3]</code>变成<code>int[3]</code></td>
 </tr>
 <tr>
 <td><code>remove_pointer&lt;T&gt;</code></td>
-<td>T&#x4E0D;&#x5E26;&#x4EFB;&#x4F55;&#x9876;&#x5C42;&#x6307;&#x9488;&#x3002;<code>int*</code>&#x53D8;&#x6210;int&#xFF0C;&#x4F46;<code>int&amp;</code>&#x4E0D;&#x53D8;</td>
+<td>T不带任何顶层指针。<code>int*</code>变成int，但<code>int&amp;</code>不变</td>
 </tr>
 <tr>
 <td><code>add_reference&lt;T&gt;</code></td>
-<td>&#x5982;&#x679C;T&#x662F;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#xFF0C;&#x7ED3;&#x679C;&#x4E3A;T&#xFF0C;&#x5426;&#x5219;&#x4E3A;<code>T&amp;</code></td>
+<td>如果T是引用类型，结果为T，否则为<code>T&amp;</code></td>
 </tr>
 <tr>
 <td><code>add_pointer&lt;T&gt;</code></td>
-<td><code>remove_reference&lt;T&gt;::type*</code>&#x3002;&#x5982;<code>int</code>&#x548C;<code>int&amp;</code>&#x90FD;&#x53D8;&#x6210;<code>int*</code></td>
+<td><code>remove_reference&lt;T&gt;::type*</code>。如<code>int</code>和<code>int&amp;</code>都变成<code>int*</code></td>
 </tr>
 <tr>
 <td><code>add_const&lt;T&gt;</code></td>
@@ -373,118 +283,32 @@
 </tr>
 </tbody>
 </table>
-<h2 id="&#x5143;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;"><a href="#&#x5143;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;" class="headerlink" title="&#x5143;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;"></a>&#x5143;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;</h2><p><strong>&#x65E0;&#x53C2;&#x5143;&#x51FD;&#x6570;</strong></p>
-<p>&#x7F16;&#x5199;&#x65E0;&#x53C2;&#x5143;&#x51FD;&#x6570;&#x6700;&#x5BB9;&#x6613;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x501F;&#x52A9;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;struct&#xFF1A;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">always_int</span>{</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">int</span> type;</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
-<p><strong>&#x5143;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;</strong></p>
-<p>&#x4E00;&#x4E2A;&#x5143;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x662F;</p>
-<ul class="ui list">
-<li>&#x4E00;&#x4E2A;&#x7C7B;&#x6A21;&#x677F;&#xFF0C;&#x5B83;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x90FD;&#x662F;&#x7C7B;&#x578B;</li>
-<li>&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x5E26;&#x6709;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;&#x201D;type&#x201D;&#x7684;&#x53EF;&#x516C;&#x5F00;&#x8BBF;&#x95EE;&#x7684;&#x5D4C;&#x5957;&#x7ED3;&#x679C;&#x7C7B;&#x578B;</li>
+<h2 id="元函数的定义"><a href="#元函数的定义" class="headerlink" title="元函数的定义"></a>元函数的定义</h2><p><strong>无参元函数</strong></p>
+<p>编写无参元函数最容易的方式是借助一个简单的struct：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">always_int</span>&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">int</span> type;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>元函数的定义</strong></p>
+<p>一个元函数可以是</p>
+<ul>
+<li>一个类模板，它的所有参数都是类型</li>
+<li>一个类，带有一个名为”type”的可公开访问的嵌套结果类型</li>
 </ul>
-<h2 id="&#x5F85;&#x7EED;"><a href="#&#x5F85;&#x7EED;" class="headerlink" title="&#x5F85;&#x7EED;"></a>&#x5F85;&#x7EED;</h2>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2019-01-21T17:08:27.000Z" itemprop="datePublished">2019-01-22</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2019/01/25/C_C++/模板和元编程/C++模板元编程书上习题/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    C++模板元编程书上习题（待续
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2019/01/20/C_C++/C++基础/" class="ui tiny button">
-                    
-                    C++ 基础
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#今天刚开始学"><span>今天刚开始学</span></a><ol><li><a href="#例子"><span>例子</span></a><ol><li><a href="#阶乘计算"><span>阶乘计算</span></a></li><li><a href="#二进制计算"><span>二进制计算</span></a></li><li><a href="#交换迭代器指向的内容"><span>交换迭代器指向的内容</span></a></li></ol></li></ol></li><li><a href="#blob"><span>blob</span></a></li><li><a href="#元数据"><span>元数据</span></a></li><li><a href="#静态-动态多态"><span>静态/动态多态</span></a></li><li><a href="#Boost-库的多态"><span>Boost 库的多态</span></a><ol><li><a href="#整型常量外覆器"><span>整型常量外覆器</span></a></li></ol></li></ol><li><a href="#Boost元函数库"><span>Boost元函数库</span></a><ol><li><a href="#简介"><span>简介</span></a></li><li><a href="#主类型归类"><span>主类型归类</span></a></li><li><a href="#次类型归类"><span>次类型归类</span></a></li><li><a href="#类型属性"><span>类型属性</span></a></li><li><a href="#类型之间的关系"><span>类型之间的关系</span></a></li><li><a href="#类型转化"><span>类型转化</span></a></li></ol></li><li><a href="#元函数的定义"><span>元函数的定义</span></a></li><li><a href="#待续"><span>待续</span></a></li>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

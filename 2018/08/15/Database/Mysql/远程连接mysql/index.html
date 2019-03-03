@@ -1,275 +1,94 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>远程连接mysql | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>远程连接mysql | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x548C;root&amp;#x4E00;&amp;#x6837;&amp;#x6743;&amp;#x9650;&amp;#x7684;&amp;#x65B0;&amp;#x7528;&amp;#x6237;&amp;#xFF0C;&amp;#x5DEE;&amp;#x522B;&amp;#x662F;&amp;#x53EF;&amp;#x4EE5;&amp;#x4ECE;&amp;#x4EFB;&amp;#x4F55;IP&amp;#x767B;&amp;#x5165;&amp;#">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="远程连接mysql">
-<meta property="og:url" content="http://yoursite.com/2018/08/15/Database/Mysql/远程连接mysql/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x548C;root&amp;#x4E00;&amp;#x6837;&amp;#x6743;&amp;#x9650;&amp;#x7684;&amp;#x65B0;&amp;#x7528;&amp;#x6237;&amp;#xFF0C;&amp;#x5DEE;&amp;#x522B;&amp;#x662F;&amp;#x53EF;&amp;#x4EE5;&amp;#x4ECE;&amp;#x4EFB;&amp;#x4F55;IP&amp;#x767B;&amp;#x5165;&amp;#">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-15T06:30:34.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="远程连接mysql">
-<meta name="twitter:description" content="&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x548C;root&amp;#x4E00;&amp;#x6837;&amp;#x6743;&amp;#x9650;&amp;#x7684;&amp;#x65B0;&amp;#x7528;&amp;#x6237;&amp;#xFF0C;&amp;#x5DEE;&amp;#x522B;&amp;#x662F;&amp;#x53EF;&amp;#x4EE5;&amp;#x4ECE;&amp;#x4EFB;&amp;#x4F55;IP&amp;#x767B;&amp;#x5165;&amp;#">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Database/Mysql/远程连接mysql" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    远程连接mysql
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x548C;root&#x4E00;&#x6837;&#x6743;&#x9650;&#x7684;&#x65B0;&#x7528;&#x6237;&#xFF0C;&#x5DEE;&#x522B;&#x662F;&#x53EF;&#x4EE5;&#x4ECE;&#x4EFB;&#x4F55;IP&#x767B;&#x5165;&#xFF08;@&#x2019;%&#x2019;&#xFF0C;%&#x5339;&#x914D;&#x4EFB;&#x4F55;IP&#xFF09;&#x3002;</p>
-<p><code>mysql&gt; grant all privileges on *.* to &apos;skuaka&apos;@&apos;%&apos; identified by &apos;&#x4F60;&#x60F3;&#x8BBE;&#x7F6E;&#x7684;&#x5BC6;&#x7801;&apos; with grant option;</code></p>
-<ul class="ui list">
-<li>all privileges&#xFF1A;&#x8868;&#x793A;&#x5C06;&#x6240;&#x6709;&#x6743;&#x9650;&#x6388;&#x4E88;&#x7ED9;&#x7528;&#x6237;&#x3002;&#x4E5F;&#x53EF;&#x6307;&#x5B9A;&#x5177;&#x4F53;&#x7684;&#x6743;&#x9650;&#xFF0C;&#x5982;&#xFF1A;SELECT&#x3001;CREATE&#x3001;DROP&#x7B49;&#x3002;</li>
-<li>on&#xFF1A;&#x8868;&#x793A;&#x8FD9;&#x4E9B;&#x6743;&#x9650;&#x5BF9;&#x54EA;&#x4E9B;&#x6570;&#x636E;&#x5E93;&#x548C;&#x8868;&#x751F;&#x6548;&#xFF0C;&#x683C;&#x5F0F;&#xFF1A;&#x6570;&#x636E;&#x5E93;&#x540D;.&#x8868;&#x540D;&#xFF0C;&#x8FD9;&#x91CC;&#x5199;<code>*.*</code>&#x8868;&#x793A;&#x6240;&#x6709;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x6240;&#x6709;&#x8868;&#x3002;&#x5982;&#x679C;&#x6211;&#x8981;&#x6307;&#x5B9A;&#x5C06;&#x6743;&#x9650;&#x5E94;&#x7528;&#x5230;test&#x5E93;&#x7684;user&#x8868;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x8FD9;&#x4E48;&#x5199;&#xFF1A;test.user</li>
-<li>to&#xFF1A;&#x5C06;&#x6743;&#x9650;&#x6388;&#x4E88;&#x54EA;&#x4E2A;&#x7528;&#x6237;&#x3002;&#x683C;&#x5F0F;&#xFF1A;&#x201D;&#x7528;&#x6237;&#x540D;&#x201D;@&#x201D;&#x767B;&#x5F55;IP&#x6216;&#x57DF;&#x540D;&#x201D;&#x3002;%&#x8868;&#x793A;&#x6CA1;&#x6709;&#x9650;&#x5236;&#xFF0C;&#x5728;&#x4EFB;&#x4F55;&#x4E3B;&#x673A;&#x90FD;&#x53EF;&#x4EE5;&#x767B;&#x5F55;&#x3002;&#x6BD4;&#x5982;&#xFF1A;&#x201D;skuaka&#x201D;@&#x201D;192.168.0.%&#x201D;&#xFF0C;&#x8868;&#x793A;yangxin&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#x53EA;&#x80FD;&#x5728;192.168.0IP&#x6BB5;&#x767B;&#x5F55;&#x3002;</li>
-<li>identified by&#xFF1A;&#x6307;&#x5B9A;&#x7528;&#x6237;&#x7684;&#x767B;&#x5F55;&#x5BC6;&#x7801;</li>
-<li>with grant option&#xFF1A;&#x8868;&#x793A;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x5C06;&#x81EA;&#x5DF1;&#x7684;&#x6743;&#x9650;&#x6388;&#x6743;&#x7ED9;&#x5176;&#x5B83;&#x7528;&#x6237;</li>
-</ul>
-<p>&#x5BF9;&#x7528;&#x6237;&#x505A;&#x4E86;&#x6743;&#x9650;&#x53D8;&#x66F4;&#x4E4B;&#x540E;&#xFF0C;&#x4E00;&#x5B9A;&#x8BB0;&#x5F97;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x4E00;&#x4E0B;&#x6743;&#x9650;&#xFF0C;&#x5C06;&#x6743;&#x9650;&#x4FE1;&#x606F;&#x4ECE;&#x5185;&#x5B58;&#x4E2D;&#x5199;&#x5165;&#x6570;&#x636E;&#x5E93;&#x3002;</p>
-<p><code>mysql&gt; flush privileges;</code></p>
-<p>&#x53EF;&#x80FD;&#x8FD8;&#x8981;&#x91CD;&#x542F;&#x4E00;&#x4E0B;mysqld&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5F53;&#x65F6;&#x76F4;&#x63A5;&#x91CD;&#x542F;&#xFF0C;&#x5FD8;&#x8BB0;&#x6D4B;&#x8BD5;&#x6CA1;&#x91CD;&#x542F;&#x80FD;&#x4E0D;&#x80FD;&#x8FDE;&#x63A5;&#x4E86;&#x3002;</p>
-<p><code>service mysqld restart</code></p>
-<p>&#x7EC8;&#x4E8E;&#x53EF;&#x4EE5;&#x8FDC;&#x7A0B;&#x8FDE;&#x63A5;&#x4E86;&#x3002;</p>
-
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-08-15T06:30:33.000Z" itemprop="datePublished">2018-08-15</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+
+
+  <div class="container">
+    <article>
+      <h1>远程连接mysql</h1>
+      <p>创建一个和root一样权限的新用户，差别是可以从任何IP登入（@’%’，%匹配任何IP）。</p>
+<p><code>mysql&gt; grant all privileges on *.* to &#39;skuaka&#39;@&#39;%&#39; identified by &#39;你想设置的密码&#39; with grant option;</code></p>
+<ul>
+<li>all privileges：表示将所有权限授予给用户。也可指定具体的权限，如：SELECT、CREATE、DROP等。</li>
+<li>on：表示这些权限对哪些数据库和表生效，格式：数据库名.表名，这里写<code>*.*</code>表示所有数据库，所有表。如果我要指定将权限应用到test库的user表中，可以这么写：test.user</li>
+<li>to：将权限授予哪个用户。格式：”用户名”@”登录IP或域名”。%表示没有限制，在任何主机都可以登录。比如：”skuaka”@”192.168.0.%”，表示yangxin这个用户只能在192.168.0IP段登录。</li>
+<li>identified by：指定用户的登录密码</li>
+<li>with grant option：表示允许用户将自己的权限授权给其它用户</li>
+</ul>
+<p>对用户做了权限变更之后，一定记得重新加载一下权限，将权限信息从内存中写入数据库。</p>
+<p><code>mysql&gt; flush privileges;</code></p>
+<p>可能还要重启一下mysqld服务器，当时直接重启，忘记测试没重启能不能连接了。</p>
+<p><code>service mysqld restart</code></p>
+<p>终于可以远程连接了。</p>
+
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/08/15/Database/Mysql/mysql创建时间和更新时间/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    mysql创建时间和更新时间
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/08/14/Database/PostgreSQL/Linux 下 PostgreSQL/" class="ui tiny button">
-                    
-                    Linux 下 PostgreSQL 配置
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

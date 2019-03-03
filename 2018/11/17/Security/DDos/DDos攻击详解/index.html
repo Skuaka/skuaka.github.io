@@ -1,274 +1,98 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>DDos 攻击详解 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>DDos 攻击详解 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x653B;&amp;#x51FB;&amp;#x65B9;&amp;#x5F0F; Synflood&amp;#x8BE5;&amp;#x653B;&amp;#x51FB;&amp;#x4EE5;&amp;#x591A;&amp;#x4E2A;&amp;#x968F;&amp;#x673A;&amp;#x7684;&amp;#x6E90;&amp;#x4E3B;&amp;#x673A;&amp;#x5730;&amp;#x5740;&amp;#x5411;&amp;#x76EE;&amp;#x7684;&amp;#x4E3B;&amp;#x673A;&amp;#x53D1">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="DDos 攻击详解">
-<meta property="og:url" content="http://yoursite.com/2018/11/17/Security/DDos/DDos攻击详解/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x653B;&amp;#x51FB;&amp;#x65B9;&amp;#x5F0F; Synflood&amp;#x8BE5;&amp;#x653B;&amp;#x51FB;&amp;#x4EE5;&amp;#x591A;&amp;#x4E2A;&amp;#x968F;&amp;#x673A;&amp;#x7684;&amp;#x6E90;&amp;#x4E3B;&amp;#x673A;&amp;#x5730;&amp;#x5740;&amp;#x5411;&amp;#x76EE;&amp;#x7684;&amp;#x4E3B;&amp;#x673A;&amp;#x53D1">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-17T12:01:50.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DDos 攻击详解">
-<meta name="twitter:description" content="&amp;#x653B;&amp;#x51FB;&amp;#x65B9;&amp;#x5F0F; Synflood&amp;#x8BE5;&amp;#x653B;&amp;#x51FB;&amp;#x4EE5;&amp;#x591A;&amp;#x4E2A;&amp;#x968F;&amp;#x673A;&amp;#x7684;&amp;#x6E90;&amp;#x4E3B;&amp;#x673A;&amp;#x5730;&amp;#x5740;&amp;#x5411;&amp;#x76EE;&amp;#x7684;&amp;#x4E3B;&amp;#x673A;&amp;#x53D1">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Security/DDos/DDos攻击详解" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    DDos 攻击详解
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h3 id="&#x653B;&#x51FB;&#x65B9;&#x5F0F;"><a href="#&#x653B;&#x51FB;&#x65B9;&#x5F0F;" class="headerlink" title="&#x653B;&#x51FB;&#x65B9;&#x5F0F;"></a>&#x653B;&#x51FB;&#x65B9;&#x5F0F;</h3><ol class="ui list">
-<li>Synflood<br>&#x8BE5;&#x653B;&#x51FB;&#x4EE5;&#x591A;&#x4E2A;&#x968F;&#x673A;&#x7684;&#x6E90;&#x4E3B;&#x673A;&#x5730;&#x5740;&#x5411;&#x76EE;&#x7684;&#x4E3B;&#x673A;&#x53D1;&#x9001;SYN&#x5305;&#xFF0C;&#x800C;&#x5728;&#x6536;&#x5230;&#x76EE;&#x7684;&#x4E3B;&#x673A;&#x7684;SYN ACK&#x540E;&#x5E76;&#x4E0D;&#x56DE;&#x5E94;&#xFF0C;&#x8FD9;&#x6837;&#xFF0C;&#x76EE;&#x7684;&#x4E3B;&#x673A;&#x5C31;&#x4E3A;&#x8FD9;&#x4E9B;&#x6E90;&#x4E3B;&#x673A;&#x5EFA;&#x7ACB;&#x4E86;&#x5927;&#x91CF;&#x7684;&#x8FDE;&#x63A5;&#x961F;&#x5217;&#xFF0C;&#x800C;&#x4E14;&#x7531;&#x4E8E;&#x6CA1;&#x6709;&#x6536;&#x5230;ACK&#x4E00;&#x76F4;&#x7EF4;&#x62A4;&#x7740;&#x8FD9;&#x4E9B;&#x961F;&#x5217;&#xFF0C;&#x9020;&#x6210;&#x4E86;&#x8D44;&#x6E90;&#x7684;&#x5927;&#x91CF;&#x6D88;&#x8017;&#xFF0C;&#x6700;&#x7EC8;&#x5BFC;&#x81F4;&#x62D2;&#x7EDD;&#x670D;&#x52A1;&#x3002;</li>
-<li>Smurf<br>&#x8BE5;&#x653B;&#x51FB;&#x5411;&#x4E00;&#x4E2A;&#x5B50;&#x7F51;&#x7684;&#x5E7F;&#x64AD;&#x5730;&#x5740;&#x53D1;&#x4E00;&#x4E2A;&#x5E26;&#x6709;&#x7279;&#x5B9A;&#x8BF7;&#x6C42;(&#x5982;ICMP&#x56DE;&#x5E94;&#x8BF7;&#x6C42;)&#x7684;&#x5305;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x6E90;&#x5730;&#x5740;&#x4F2A;&#x88C5;&#x6210;&#x60F3;&#x8981;&#x653B;&#x51FB;&#x7684;&#x4E3B;&#x673A;&#x5730;&#x5740;&#x3002;&#x5B50;&#x7F51;&#x4E0A;&#x6240;&#x6709;&#x4E3B;&#x673A;&#x90FD;&#x56DE;&#x5E94;&#x5E7F;&#x64AD;&#x5305;&#x8BF7;&#x6C42;&#x800C;&#x5411;&#x88AB;&#x653B;&#x51FB;&#x4E3B;&#x673A;&#x53D1;&#x5305;&#xFF0C;&#x4F7F;&#x8BE5;&#x4E3B;&#x673A;&#x53D7;&#x5230;&#x653B;&#x51FB;&#x3002;</li>
-<li>Land-based<br>&#x653B;&#x51FB;&#x8005;&#x5C06;&#x4E00;&#x4E2A;&#x5305;&#x7684;&#x6E90;&#x5730;&#x5740;&#x548C;&#x76EE;&#x7684;&#x5730;&#x5740;&#x90FD;&#x8BBE;&#x7F6E;&#x4E3A;&#x76EE;&#x6807;&#x4E3B;&#x673A;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x8BE5;&#x5305;&#x901A;&#x8FC7;IP&#x6B3A;&#x9A97;&#x7684;&#x65B9;&#x5F0F;&#x53D1;&#x9001;&#x7ED9;&#x88AB;&#x653B;&#x51FB;&#x4E3B;&#x673A;&#xFF0C;&#x8FD9;&#x79CD;&#x5305;&#x53EF;&#x4EE5;&#x9020;&#x6210;&#x88AB;&#x653B;&#x51FB;&#x4E3B;&#x673A;&#x56E0;&#x8BD5;&#x56FE;&#x4E0E;&#x81EA;&#x5DF1;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#x800C;&#x9677;&#x5165;&#x6B7B;&#x5FAA;&#x73AF;&#xFF0C;&#x4ECE;&#x800C;&#x5F88;&#x5927;&#x7A0B;&#x5EA6;&#x5730;&#x964D;&#x4F4E;&#x4E86;&#x7CFB;&#x7EDF;&#x6027;&#x80FD;&#x3002;</li>
-<li>Ping of Death<br>&#x6839;&#x636E;TCP/IP&#x7684;&#x89C4;&#x8303;&#xFF0C;&#x4E00;&#x4E2A;&#x5305;&#x7684;&#x957F;&#x5EA6;&#x6700;&#x5927;&#x4E3A;65536&#x5B57;&#x8282;&#x3002;&#x5C3D;&#x7BA1;&#x4E00;&#x4E2A;&#x5305;&#x7684;&#x957F;&#x5EA6;&#x4E0D;&#x80FD;&#x8D85;&#x8FC7;65536&#x5B57;&#x8282;&#xFF0C;&#x4F46;&#x662F;&#x4E00;&#x4E2A;&#x5305;&#x5206;&#x6210;&#x7684;&#x591A;&#x4E2A;&#x7247;&#x6BB5;&#x7684;&#x53E0;&#x52A0;&#x5374;&#x80FD;&#x505A;&#x5230;&#x3002;&#x5F53;&#x4E00;&#x4E2A;&#x4E3B;&#x673A;&#x6536;&#x5230;&#x4E86;&#x957F;&#x5EA6;&#x5927;&#x4E8E;65536&#x5B57;&#x8282;&#x7684;&#x5305;&#x65F6;&#xFF0C;&#x5C31;&#x662F;&#x53D7;&#x5230;&#x4E86;Ping of Death&#x653B;&#x51FB;&#xFF0C;&#x8BE5;&#x653B;&#x51FB;&#x4F1A;&#x9020;&#x6210;&#x4E3B;&#x673A;&#x7684;&#x5B95;&#x673A;&#x3002;</li>
-<li>Teardrop<br>IP&#x6570;&#x636E;&#x5305;&#x5728;&#x7F51;&#x7EDC;&#x4F20;&#x9012;&#x65F6;&#xFF0C;&#x6570;&#x636E;&#x5305;&#x53EF;&#x4EE5;&#x5206;&#x6210;&#x66F4;&#x5C0F;&#x7684;&#x7247;&#x6BB5;&#x3002;&#x653B;&#x51FB;&#x8005;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x53D1;&#x9001;&#x4E24;&#x6BB5;(&#x6216;&#x8005;&#x66F4;&#x591A;)&#x6570;&#x636E;&#x5305;&#x6765;&#x5B9E;&#x73B0;TearDrop&#x653B;&#x51FB;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x5305;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x4E3A;0&#xFF0C;&#x957F;&#x5EA6;&#x4E3A;N&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x5305;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x5C0F;&#x4E8E;N&#x3002;&#x4E3A;&#x4E86;&#x5408;&#x5E76;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x6BB5;&#xFF0C;TCP/IP&#x5806;&#x6808;&#x4F1A;&#x5206;&#x914D;&#x8D85;&#x4E4E;&#x5BFB;&#x5E38;&#x7684;&#x5DE8;&#x5927;&#x8D44;&#x6E90;&#xFF0C;&#x4ECE;&#x800C;&#x9020;&#x6210;&#x7CFB;&#x7EDF;&#x8D44;&#x6E90;&#x7684;&#x7F3A;&#x4E4F;&#x751A;&#x81F3;&#x673A;&#x5668;&#x7684;&#x91CD;&#x65B0;&#x542F;&#x52A8;&#x3002;</li>
-<li>PingSweep<br>&#x4F7F;&#x7528;ICMP Echo&#x8F6E;&#x8BE2;&#x591A;&#x4E2A;&#x4E3B;&#x673A;&#x3002;</li>
-<li>Pingflood<br>&#x8BE5;&#x653B;&#x51FB;&#x5728;&#x77ED;&#x65F6;&#x95F4;&#x5185;&#x5411;&#x76EE;&#x7684;&#x4E3B;&#x673A;&#x53D1;&#x9001;&#x5927;&#x91CF;ping&#x5305;&#xFF0C;&#x9020;&#x6210;&#x7F51;&#x7EDC;&#x5835;&#x585E;&#x6216;&#x4E3B;&#x673A;&#x8D44;&#x6E90;&#x8017;&#x5C3D;&#x3002;</li>
-</ol>
-<h3 id="&#x9632;&#x5FA1;&#x65B9;&#x6CD5;"><a href="#&#x9632;&#x5FA1;&#x65B9;&#x6CD5;" class="headerlink" title="&#x9632;&#x5FA1;&#x65B9;&#x6CD5;"></a>&#x9632;&#x5FA1;&#x65B9;&#x6CD5;</h3><ol class="ui list">
-<li>&#x6309;&#x653B;&#x51FB;&#x6D41;&#x91CF;&#x89C4;&#x6A21;&#x5206;&#x7C7B;<br>(1) &#x8F83;&#x5C0F;&#x6D41;&#x91CF;&#xFF1A;<br>&#x5C0F;&#x4E8E;1000Mbps&#xFF0C;&#x4E14;&#x5728;&#x670D;&#x52A1;&#x5668;&#x786C;&#x4EF6;&#x4E0E;&#x5E94;&#x7528;&#x63A5;&#x53D7;&#x8303;&#x56F4;&#x4E4B;&#x5185;&#xFF0C;&#x5E76;&#x4E0D;&#x5F71;&#x54CD;&#x4E1A;&#x52A1;&#x7684;&#xFF1A; &#x5229;&#x7528;iptables&#x6216;&#x8005;DDoS&#x9632;&#x62A4;&#x5E94;&#x7528;&#x5B9E;&#x73B0;&#x8F6F;&#x4EF6;&#x5C42;&#x9632;&#x62A4;&#x3002;<br>(2) &#x5927;&#x578B;&#x6D41;&#x91CF;&#xFF1A;<br>&#x5927;&#x4E8E;1000Mbps&#xFF0C;&#x4F46;&#x5728;DDoS&#x6E05;&#x6D17;&#x8BBE;&#x5907;&#x6027;&#x80FD;&#x8303;&#x56F4;&#x4E4B;&#x5185;&#xFF0C;&#x4E14;&#x5C0F;&#x4E8E;&#x673A;&#x623F;&#x51FA;&#x53E3;&#xFF0C;&#x53EF;&#x80FD;&#x5F71;&#x54CD;&#x76F8;&#x540C;&#x673A;&#x623F;&#x7684;&#x5176;&#x4ED6;&#x4E1A;&#x52A1;&#x7684;&#xFF1A;&#x5229;&#x7528;iptables&#x6216;&#x8005;DDoS&#x9632;&#x62A4;&#x5E94;&#x7528;&#x5B9E;&#x73B0;&#x8F6F;&#x4EF6;&#x5C42;&#x9632;&#x62A4;&#xFF0C;&#x6216;&#x8005;&#x5728;&#x673A;&#x623F;&#x51FA;&#x53E3;&#x8BBE;&#x5907;&#x76F4;&#x63A5;&#x914D;&#x7F6E;&#x9ED1;&#x6D1E;&#x7B49;&#x9632;&#x62A4;&#x7B56;&#x7565;&#xFF0C;&#x6216;&#x8005;&#x540C;&#x65F6;&#x5207;&#x6362;&#x57DF;&#x540D;&#xFF0C;&#x5C06;&#x5BF9;&#x5916;&#x670D;&#x52A1;IP&#x4FEE;&#x6539;&#x4E3A;&#x9AD8;&#x8D1F;&#x8F7D;Proxy&#x96C6;&#x7FA4;&#x5916;&#x7F51;IP&#xFF0C;&#x6216;&#x8005;CDN&#x9AD8;&#x4EFF;IP&#xFF0C;&#x6216;&#x8005;&#x516C;&#x6709;&#x4E91;DDoS&#x7F51;&#x5173;IP&#xFF0C;&#x7531;&#x5176;&#x4EE3;&#x7406;&#x5230;RealServer;&#x6216;&#x8005;&#x76F4;&#x63A5;&#x63A5;&#x5165;DDoS&#x6E05;&#x6D17;&#x8BBE;&#x5907;&#x3002;<br>(3) &#x8D85;&#x5927;&#x89C4;&#x6A21;&#x6D41;&#x91CF;&#xFF1A;<br>&#x5728;DDoS&#x6E05;&#x6D17;&#x8BBE;&#x5907;&#x6027;&#x80FD;&#x8303;&#x56F4;&#x4E4B;&#x5916;&#xFF0C;&#x4F46;&#x5728;&#x673A;&#x623F;&#x51FA;&#x53E3;&#x6027;&#x80FD;&#x4E4B;&#x5185;&#xFF0C;&#x53EF;&#x80FD;&#x5F71;&#x54CD;&#x76F8;&#x540C;&#x673A;&#x623F;&#x7684;&#x5176;&#x4ED6;&#x4E1A;&#x52A1;&#xFF0C;&#x6216;&#x8005;&#x5927;&#x4E8E;&#x673A;&#x623F;&#x51FA;&#x53E3;&#xFF0C;&#x5DF2;&#x7ECF;&#x5F71;&#x54CD;&#x76F8;&#x540C;&#x673A;&#x623F;&#x7684;&#x6240;&#x6709;&#x4E1A;&#x52A1;&#x6216;&#x5927;&#x90E8;&#x5206;&#x4E1A;&#x52A1;&#x7684;&#xFF1A;&#x8054;&#x7CFB;&#x8FD0;&#x8425;&#x5546;&#x68C0;&#x67E5;&#x5206;&#x7EC4;&#x9650;&#x6D41;&#x914D;&#x7F6E;&#x90E8;&#x7F72;&#x60C5;&#x51B5;&#x5E76;&#x89C2;&#x5BDF;&#x4E1A;&#x52A1;&#x6062;&#x590D;&#x60C5;&#x51B5;&#x3002;</li>
-<li>&#x6309;&#x653B;&#x51FB;&#x6D41;&#x91CF;&#x534F;&#x8BAE;&#x5206;&#x7C7B;<br>(1) syn/fin/ack&#x7B49;tcp&#x534F;&#x8BAE;&#x5305;&#xFF1A;<br>&#x8BBE;&#x7F6E;&#x9884;&#x8B66;&#x9600;&#x503C;&#x548C;&#x54CD;&#x5E94;&#x9600;&#x503C;&#xFF0C;&#x524D;&#x8005;&#x5F00;&#x59CB;&#x62A5;&#x8B66;&#xFF0C;&#x540E;&#x8005;&#x5F00;&#x59CB;&#x5904;&#x7406;&#xFF0C;&#x6839;&#x636E;&#x6D41;&#x91CF;&#x5927;&#x5C0F;&#x548C;&#x5F71;&#x54CD;&#x7A0B;&#x5EA6;&#x8C03;&#x6574;&#x9632;&#x62A4;&#x7B56;&#x7565;&#x548C;&#x9632;&#x62A4;&#x624B;&#x6BB5;&#xFF0C;&#x9010;&#x6B65;&#x5347;&#x7EA7;&#x3002;<br>(2) UDP/DNS query&#x7B49;UDP&#x534F;&#x8BAE;&#x5305;&#xFF1A;<br>&#x5BF9;&#x4E8E;&#x5927;&#x90E8;&#x5206;&#x6E38;&#x620F;&#x4E1A;&#x52A1;&#x6765;&#x8BF4;&#xFF0C;&#x90FD;&#x662F;TCP&#x534F;&#x8BAE;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4E1A;&#x52A1;&#x534F;&#x8BAE;&#x5236;&#x5B9A;&#x4E00;&#x4EFD;TCP&#x534F;&#x8BAE;&#x767D;&#x540D;&#x5355;&#xFF0C;&#x5982;&#x679C;&#x9047;&#x5230;&#x5927;&#x91CF;UDP&#x8BF7;&#x6C42;&#xFF0C;&#x53EF;&#x4EE5;&#x4E0D;&#x7ECF;&#x4EA7;&#x54C1;&#x786E;&#x8BA4;&#x6216;&#x8005;&#x5EF6;&#x8FDF;&#x8DDF;&#x4EA7;&#x54C1;&#x786E;&#x8BA4;&#xFF0C;&#x76F4;&#x63A5;&#x5728;&#x7CFB;&#x7EDF;&#x5C42;&#x9762;/HPPS&#x6216;&#x8005;&#x6E05;&#x6D17;&#x8BBE;&#x5907;&#x4E0A;&#x4E22;&#x5F03;UDP&#x5305;&#x3002;<br>(3) http flood/CC&#x7B49;&#x9700;&#x8981;&#x8DDF;&#x6570;&#x636E;&#x5E93;&#x4EA4;&#x4E92;&#x7684;&#x653B;&#x51FB;&#xFF1A;<br>&#x8FD9;&#x79CD;&#x4E00;&#x822C;&#x4F1A;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x5E93;&#x6216;&#x8005;webserver&#x8D1F;&#x8F7D;&#x5F88;&#x9AD8;&#x6216;&#x8005;&#x8FDE;&#x63A5;&#x6570;&#x8FC7;&#x9AD8;&#xFF0C;&#x5728;&#x9650;&#x6D41;&#x6216;&#x8005;&#x6E05;&#x6D17;&#x6D41;&#x91CF;&#x540E;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x91CD;&#x542F;&#x670D;&#x52A1;&#x624D;&#x80FD;&#x91CA;&#x653E;&#x8FDE;&#x63A5;&#x6570;&#xFF0C;&#x56E0;&#x6B64;&#x66F4;&#x503E;&#x5411;&#x5728;&#x7CFB;&#x7EDF;&#x8D44;&#x6E90;&#x80FD;&#x591F;&#x652F;&#x6491;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x8C03;&#x5927;&#x652F;&#x6301;&#x7684;&#x8FDE;&#x63A5;&#x6570;&#x3002;&#x76F8;&#x5BF9;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x79CD;&#x653B;&#x51FB;&#x9632;&#x62A4;&#x96BE;&#x5EA6;&#x8F83;&#x5927;&#xFF0C;&#x5BF9;&#x9632;&#x62A4;&#x8BBE;&#x5907;&#x6027;&#x80FD;&#x6D88;&#x8017;&#x5F88;&#x5927;&#x3002;<br>(4) &#x5176;&#x4ED6;&#xFF1A;<br>icmp&#x5305;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4E22;&#x5F03;&#xFF0C;&#x5148;&#x5728;&#x673A;&#x623F;&#x51FA;&#x53E3;&#x4EE5;&#x4E0B;&#x5404;&#x4E2A;&#x5C42;&#x9762;&#x505A;&#x4E22;&#x5F03;&#x6216;&#x8005;&#x9650;&#x6D41;&#x7B56;&#x7565;&#x3002;&#x73B0;&#x5728;&#x8FD9;&#x79CD;&#x653B;&#x51FB;&#x5DF2;&#x7ECF;&#x5F88;&#x5C11;&#x89C1;&#xFF0C;&#x5BF9;&#x4E1A;&#x52A1;&#x7834;&#x574F;&#x529B;&#x6709;&#x9650;&#x3002;</li>
-</ol>
-
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-11-17T12:01:49.000Z" itemprop="datePublished">2018-11-17</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#攻击方式"><span class="toc-number">1.</span> <span class="toc-text">攻击方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防御方法"><span class="toc-number">2.</span> <span class="toc-text">防御方法</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
+
+
+  <div class="container">
+    <article>
+      <h1>DDos 攻击详解</h1>
+      <h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><ol>
+<li>Synflood<br>该攻击以多个随机的源主机地址向目的主机发送SYN包，而在收到目的主机的SYN ACK后并不回应，这样，目的主机就为这些源主机建立了大量的连接队列，而且由于没有收到ACK一直维护着这些队列，造成了资源的大量消耗，最终导致拒绝服务。</li>
+<li>Smurf<br>该攻击向一个子网的广播地址发一个带有特定请求(如ICMP回应请求)的包，并且将源地址伪装成想要攻击的主机地址。子网上所有主机都回应广播包请求而向被攻击主机发包，使该主机受到攻击。</li>
+<li>Land-based<br>攻击者将一个包的源地址和目的地址都设置为目标主机的地址，然后将该包通过IP欺骗的方式发送给被攻击主机，这种包可以造成被攻击主机因试图与自己建立连接而陷入死循环，从而很大程度地降低了系统性能。</li>
+<li>Ping of Death<br>根据TCP/IP的规范，一个包的长度最大为65536字节。尽管一个包的长度不能超过65536字节，但是一个包分成的多个片段的叠加却能做到。当一个主机收到了长度大于65536字节的包时，就是受到了Ping of Death攻击，该攻击会造成主机的宕机。</li>
+<li>Teardrop<br>IP数据包在网络传递时，数据包可以分成更小的片段。攻击者可以通过发送两段(或者更多)数据包来实现TearDrop攻击。第一个包的偏移量为0，长度为N，第二个包的偏移量小于N。为了合并这些数据段，TCP/IP堆栈会分配超乎寻常的巨大资源，从而造成系统资源的缺乏甚至机器的重新启动。</li>
+<li>PingSweep<br>使用ICMP Echo轮询多个主机。</li>
+<li>Pingflood<br>该攻击在短时间内向目的主机发送大量ping包，造成网络堵塞或主机资源耗尽。</li>
+</ol>
+<h3 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h3><ol>
+<li>按攻击流量规模分类<br>(1) 较小流量：<br>小于1000Mbps，且在服务器硬件与应用接受范围之内，并不影响业务的： 利用iptables或者DDoS防护应用实现软件层防护。<br>(2) 大型流量：<br>大于1000Mbps，但在DDoS清洗设备性能范围之内，且小于机房出口，可能影响相同机房的其他业务的：利用iptables或者DDoS防护应用实现软件层防护，或者在机房出口设备直接配置黑洞等防护策略，或者同时切换域名，将对外服务IP修改为高负载Proxy集群外网IP，或者CDN高仿IP，或者公有云DDoS网关IP，由其代理到RealServer;或者直接接入DDoS清洗设备。<br>(3) 超大规模流量：<br>在DDoS清洗设备性能范围之外，但在机房出口性能之内，可能影响相同机房的其他业务，或者大于机房出口，已经影响相同机房的所有业务或大部分业务的：联系运营商检查分组限流配置部署情况并观察业务恢复情况。</li>
+<li>按攻击流量协议分类<br>(1) syn/fin/ack等tcp协议包：<br>设置预警阀值和响应阀值，前者开始报警，后者开始处理，根据流量大小和影响程度调整防护策略和防护手段，逐步升级。<br>(2) UDP/DNS query等UDP协议包：<br>对于大部分游戏业务来说，都是TCP协议的，所以可以根据业务协议制定一份TCP协议白名单，如果遇到大量UDP请求，可以不经产品确认或者延迟跟产品确认，直接在系统层面/HPPS或者清洗设备上丢弃UDP包。<br>(3) http flood/CC等需要跟数据库交互的攻击：<br>这种一般会导致数据库或者webserver负载很高或者连接数过高，在限流或者清洗流量后可能需要重启服务才能释放连接数，因此更倾向在系统资源能够支撑的情况下调大支持的连接数。相对来说，这种攻击防护难度较大，对防护设备性能消耗很大。<br>(4) 其他：<br>icmp包可以直接丢弃，先在机房出口以下各个层面做丢弃或者限流策略。现在这种攻击已经很少见，对业务破坏力有限。</li>
+</ol>
+
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/11/22/C_C++/Mess/C++类与结构区别/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    C++中结构体和类的区别
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/11/17/Network/Wireshark/qq好友IP定位/" class="ui tiny button">
-                    
-                    qq好友IP定位
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#攻击方式"><span>攻击方式</span></a></li><li><a href="#防御方法"><span>防御方法</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

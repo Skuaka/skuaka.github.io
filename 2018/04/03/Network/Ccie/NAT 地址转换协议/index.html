@@ -1,297 +1,121 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE NAT 地址转换协议 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE NAT 地址转换协议 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="NAT &amp;#x5730;&amp;#x5740;&amp;#x8F6C;&amp;#x6362;&amp;#x534F;&amp;#x8BAE;&amp;#x4F18;&amp;#x7F3A;&amp;#x70B9;&amp;#x4F18;&amp;#x70B9;&amp;#x5728;&amp;#x5730;&amp;#x5740;&amp;#x91CD;&amp;#x53E0;&amp;#x65F6;&amp;#x63D0;&amp;#x4F9B;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848; &amp;#x5728;&amp;#x">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE NAT 地址转换协议">
-<meta property="og:url" content="http://yoursite.com/2018/04/03/Network/Ccie/NAT 地址转换协议/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="NAT &amp;#x5730;&amp;#x5740;&amp;#x8F6C;&amp;#x6362;&amp;#x534F;&amp;#x8BAE;&amp;#x4F18;&amp;#x7F3A;&amp;#x70B9;&amp;#x4F18;&amp;#x70B9;&amp;#x5728;&amp;#x5730;&amp;#x5740;&amp;#x91CD;&amp;#x53E0;&amp;#x65F6;&amp;#x63D0;&amp;#x4F9B;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848; &amp;#x5728;&amp;#x">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:38:30.234Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE NAT 地址转换协议">
-<meta name="twitter:description" content="NAT &amp;#x5730;&amp;#x5740;&amp;#x8F6C;&amp;#x6362;&amp;#x534F;&amp;#x8BAE;&amp;#x4F18;&amp;#x7F3A;&amp;#x70B9;&amp;#x4F18;&amp;#x70B9;&amp;#x5728;&amp;#x5730;&amp;#x5740;&amp;#x91CD;&amp;#x53E0;&amp;#x65F6;&amp;#x63D0;&amp;#x4F9B;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848; &amp;#x5728;&amp;#x">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NAT-地址转换协议"><span class="toc-number">1.</span> <span class="toc-text">NAT 地址转换协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优缺点"><span class="toc-number">1.1.</span> <span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络地址转换类型"><span class="toc-number">1.2.</span> <span class="toc-text">网络地址转换类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置方式"><span class="toc-number">1.3.</span> <span class="toc-text">配置方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#静态NAT"><span class="toc-number">1.3.1.</span> <span class="toc-text">静态NAT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动态NAT"><span class="toc-number">1.3.2.</span> <span class="toc-text">动态NAT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PAT-NAT重载"><span class="toc-number">1.3.3.</span> <span class="toc-text">PAT(NAT重载)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证与修改"><span class="toc-number">1.4.</span> <span class="toc-text">验证与修改</span></a></li></ol></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/NAT 地址转换协议" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE NAT 地址转换协议
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="NAT-&#x5730;&#x5740;&#x8F6C;&#x6362;&#x534F;&#x8BAE;"><a href="#NAT-&#x5730;&#x5740;&#x8F6C;&#x6362;&#x534F;&#x8BAE;" class="headerlink" title="NAT &#x5730;&#x5740;&#x8F6C;&#x6362;&#x534F;&#x8BAE;"></a>NAT &#x5730;&#x5740;&#x8F6C;&#x6362;&#x534F;&#x8BAE;</h2><h3 id="&#x4F18;&#x7F3A;&#x70B9;"><a href="#&#x4F18;&#x7F3A;&#x70B9;" class="headerlink" title="&#x4F18;&#x7F3A;&#x70B9;"></a>&#x4F18;&#x7F3A;&#x70B9;</h3><p><strong>&#x4F18;&#x70B9;</strong><br>&#x5728;&#x5730;&#x5740;&#x91CD;&#x53E0;&#x65F6;&#x63D0;&#x4F9B;&#x89E3;&#x51B3;&#x65B9;&#x6848;</p>
-<p>&#x5728;&#x7F51;&#x7EDC;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x65F6;&#x907F;&#x514D;&#x91CD;&#x65B0;&#x7F16;&#x7EC7;</p>
-<p>&#x6700;&#x5927;&#x4F5C;&#x7528;&#x4E3A;&#x53EF;&#x5C06;&#x79C1;&#x7F51;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x4E3A;&#x516C;&#x7F51;&#x5730;&#x5740;&#xFF0C;&#x63D0;&#x5347;&#x4E86;ip&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x7684;&#x4F7F;&#x7528;&#x7387;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;ipv4&#x81F3;&#x4ECA;&#x8FD8;&#x672A;&#x8017;&#x5C3D;&#x7684;&#x539F;&#x56E0;</p>
-<p><strong>&#x7F3A;&#x70B9;</strong></p>
-<p>&#x589E;&#x52A0;&#x4EA4;&#x6362;&#x5EF6;&#x8FDF;</p>
-<p>&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x7AEF;&#x5230;&#x7AEF;ip&#x8DDF;&#x8E2A;</p>
-<p>&#x6709;&#x4E9B;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x8FD0;&#x884C;</p>
-<h3 id="&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x7C7B;&#x578B;"><a href="#&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x7C7B;&#x578B;" class="headerlink" title="&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x7C7B;&#x578B;"></a>&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;&#x7C7B;&#x578B;</h3><p><strong>&#x9759;&#x6001;NAT</strong>&#xFF1A;&#x5728;&#x672C;&#x5730;&#x5730;&#x5740;&#x548C;&#x5168;&#x5C40;&#x5730;&#x5740;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x4E00;&#x5BF9;&#x4E00;&#x7684;&#x6620;&#x5C04;&#x3002;&#x5FC5;&#x987B;&#x4E3A;&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x6BCF;&#x53F0;&#x4E3B;&#x673A;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x516C;&#x6709;ip&#x5730;&#x5740;&#x3002;</p>
-<p><strong>&#x52A8;&#x6001;NAT</strong>&#xFF1A;&#x5C06;&#x672A;&#x6CE8;&#x518C;&#x7684;ip&#x5730;&#x5740;&#x6620;&#x5C04;&#x5230;&#x6CE8;&#x518C;ip&#x5730;&#x5740;&#x6C60;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x5730;&#x5740;&#x3002;&#x5FC5;&#x987B;&#x6709;&#x8DB3;&#x591F;&#x591A;&#x7684;&#x516C;&#x6709;ip&#x5730;&#x5740;&#xFF0C;&#x8BA9;&#x8FDE;&#x63A5;&#x5230;&#x56E0;&#x7279;&#x7F51;&#x7684;&#x4E3B;&#x673A;&#x90FD;&#x80FD;&#x591F;&#x540C;&#x65F6;&#x53D1;&#x9001;&#x548C;&#x63A5;&#x6536;&#x5206;&#x7EC4;&#x3002;</p>
-<p><strong>NAT&#x91CD;&#x8F7D;</strong>&#xFF1A;<em>&#x6700;&#x5E38;&#x7528;&#x7684;NAT&#x7C7B;&#x578B;</em></p>
-<p>&#x4E5F;&#x88AB;&#x79F0;&#x4E3A;&#x7AEF;&#x53E3;&#x5730;&#x5740;&#x8F6C;&#x6362;(PAT) </p>
-<p>&#x5229;&#x7528;&#x6E90;&#x7AEF;&#x53E3;&#x5C06;&#x591A;&#x4E2A;&#x975E;&#x6CE8;&#x518C;ip&#x5730;&#x5740;&#x6620;&#x5C04;&#x5230;&#x4E00;&#x4E2A;&#x6CE8;&#x518C;ip&#x5730;&#x5740;(&#x591A;&#x5BF9;&#x4E00;)</p>
-<p>&#x4F7F;&#x7528;&#x4F20;&#x8F93;&#x5C42;&#x7AEF;&#x53E3;&#x53F7;&#x6765;&#x6807;&#x8BC6;&#x4E3B;&#x673A;&#xFF0C;&#x56E0;&#x6B64;&#x7406;&#x8BBA;&#x4E0A;&#x6700;&#x591A;&#x53EF;&#x8BA9;&#x5927;&#x7EA6;65 000&#x53F0;&#x4E3B;&#x673A;&#x5171;&#x7528;&#x4E00;&#x4E2A;&#x516C;&#x6709;ip&#x5730;&#x5740;</p>
-<p><strong>&#x672C;&#x5730;&#x5730;&#x5740;</strong>&#xFF1A;&#x8FDB;&#x884C;NAT&#x8F6C;&#x6362;&#x524D;&#x7684;&#x5730;&#x5740;</p>
-<p>&#x5185;&#x90E8;&#x672C;&#x5730;&#x5730;&#x5740;&#xFF1A;&#x8F6C;&#x6362;&#x524D;&#x7684;&#x5185;&#x90E8;&#x6E90;&#x5730;&#x5740;&#xFF0C;&#x4E3B;&#x673A;&#x7684;&#x79C1;&#x7F51;&#x5730;&#x5740;</p>
-<p>&#x5916;&#x90E8;&#x672C;&#x5730;&#x5730;&#x5740;&#xFF1A;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x76EE;&#x6807;&#x5730;&#x5740;&#xFF0C;&#x4E0E;ISP&#x76F8;&#x8FDE;&#x7684;&#x8DEF;&#x7531;&#x5668;&#x63A5;&#x53E3;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x901A;&#x5E38;&#x4E3A;&#x5171;&#x6709;&#x5730;&#x5740;</p>
-<p><strong>&#x5168;&#x5C40;&#x5730;&#x5740;</strong>&#xFF1A;&#x8FDB;&#x884C;NAT&#x8F6C;&#x6362;&#x540E;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x901A;&#x5E38;&#x4E3A;&#x56E0;&#x7279;&#x7F51;&#x5171;&#x6709;&#x5730;&#x5740;</p>
-<p>&#x5185;&#x90E8;&#x5168;&#x5C40;&#x5730;&#x5740;&#xFF1A;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x6E90;&#x5730;&#x5740;</p>
-<p>&#x5916;&#x90E8;&#x5168;&#x5C40;&#x5730;&#x5740;&#xFF1A;&#x8F6C;&#x6362;&#x524D;&#x7684;&#x5916;&#x90E8;&#x76EE;&#x6807;&#x5730;&#x5740;</p>
-<h3 id="&#x914D;&#x7F6E;&#x65B9;&#x5F0F;"><a href="#&#x914D;&#x7F6E;&#x65B9;&#x5F0F;" class="headerlink" title="&#x914D;&#x7F6E;&#x65B9;&#x5F0F;"></a>&#x914D;&#x7F6E;&#x65B9;&#x5F0F;</h3><p>&#x63A5;&#x53E3;&#x89D2;&#x8272;&#xFF1A;<br>inside&#xFF1A;&#x8FDE;&#x63A5;&#x5728;&#x5185;&#x90E8;&#x5E7F;&#x64AD;&#x57DF;<br>outside&#xFF1A;&#x8FDE;&#x63A5;&#x516C;&#x7F51;</p>
-<p>&#x8F6C;&#x6362;&#x63A5;&#x53E3;&#x89D2;&#x8272;<br>int xx<br>ip nat inside/outside</p>
-<h4 id="&#x9759;&#x6001;NAT"><a href="#&#x9759;&#x6001;NAT" class="headerlink" title="&#x9759;&#x6001;NAT"></a>&#x9759;&#x6001;NAT</h4><p>ip nat inside source static &#x5185;&#x90E8;ip &#x5916;&#x90E8;ip</p>
-<h4 id="&#x52A8;&#x6001;NAT"><a href="#&#x52A8;&#x6001;NAT" class="headerlink" title="&#x52A8;&#x6001;NAT"></a>&#x52A8;&#x6001;NAT</h4><p>ip nat pool todd 170.168.2.3 170.168.2.254 netmask 255.255.255.0</p>
-<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5730;&#x5740;&#x6C60;todd&#xFF0C;&#x7528;&#x4E8E;&#x5C06;&#x5168;&#x5C40;&#x5730;&#x5740;&#x5206;&#x914D;&#x7ED9;&#x4E3B;&#x673A;</p>
+  <div class="container">
+    <article>
+      <h1>CCIE NAT 地址转换协议</h1>
+      <h2 id="NAT-地址转换协议"><a href="#NAT-地址转换协议" class="headerlink" title="NAT 地址转换协议"></a>NAT 地址转换协议</h2><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p><strong>优点</strong><br>在地址重叠时提供解决方案</p>
+<p>在网络发生变化时避免重新编织</p>
+<p>最大作用为可将私网地址转换为公网地址，提升了ip地址空间的使用率，这也是ipv4至今还未耗尽的原因</p>
+<p><strong>缺点</strong></p>
+<p>增加交换延迟</p>
+<p>无法进行端到端ip跟踪</p>
+<p>有些应用程序无法正常运行</p>
+<h3 id="网络地址转换类型"><a href="#网络地址转换类型" class="headerlink" title="网络地址转换类型"></a>网络地址转换类型</h3><p><strong>静态NAT</strong>：在本地地址和全局地址直接进行一对一的映射。必须为网络中的每台主机提供一个公有ip地址。</p>
+<p><strong>动态NAT</strong>：将未注册的ip地址映射到注册ip地址池中的一个地址。必须有足够多的公有ip地址，让连接到因特网的主机都能够同时发送和接收分组。</p>
+<p><strong>NAT重载</strong>：<em>最常用的NAT类型</em></p>
+<p>也被称为端口地址转换(PAT) </p>
+<p>利用源端口将多个非注册ip地址映射到一个注册ip地址(多对一)</p>
+<p>使用传输层端口号来标识主机，因此理论上最多可让大约65 000台主机共用一个公有ip地址</p>
+<p><strong>本地地址</strong>：进行NAT转换前的地址</p>
+<p>内部本地地址：转换前的内部源地址，主机的私网地址</p>
+<p>外部本地地址：转换后的目标地址，与ISP相连的路由器接口的地址，通常为共有地址</p>
+<p><strong>全局地址</strong>：进行NAT转换后的地址，通常为因特网共有地址</p>
+<p>内部全局地址：转换后的源地址</p>
+<p>外部全局地址：转换前的外部目标地址</p>
+<h3 id="配置方式"><a href="#配置方式" class="headerlink" title="配置方式"></a>配置方式</h3><p>接口角色：<br>inside：连接在内部广播域<br>outside：连接公网</p>
+<p>转换接口角色<br>int xx<br>ip nat inside/outside</p>
+<h4 id="静态NAT"><a href="#静态NAT" class="headerlink" title="静态NAT"></a>静态NAT</h4><p>ip nat inside source static 内部ip 外部ip</p>
+<h4 id="动态NAT"><a href="#动态NAT" class="headerlink" title="动态NAT"></a>动态NAT</h4><p>ip nat pool todd 170.168.2.3 170.168.2.254 netmask 255.255.255.0</p>
+<p>创建一个地址池todd，用于将全局地址分配给主机</p>
 <p>ip nat inside source list 1 pool todd</p>
-<p>&#x5C06;&#x4E0E;access-list 1&#x5339;&#x914D;&#x7684;ip&#x5730;&#x5740;&#x8F6C;&#x6362;&#x4E3A;ip&#x5730;&#x5740;&#x6C60;todd&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x53EF;&#x7528;&#x5730;&#x5740;</p>
-<h4 id="PAT-NAT&#x91CD;&#x8F7D;"><a href="#PAT-NAT&#x91CD;&#x8F7D;" class="headerlink" title="PAT(NAT&#x91CD;&#x8F7D;)"></a>PAT(NAT&#x91CD;&#x8F7D;)</h4><p>&#x4E0E;&#x52A8;&#x6001;NAT&#x76F8;&#x6BD4;&#xFF0C;PAT&#x5730;&#x5740;&#x6C60;&#x53EA;&#x5305;&#x542B;&#x4E00;&#x4E2A;ip&#x5730;&#x5740;&#xFF0C;&#x4E14;&#x914D;&#x7F6E;&#x547D;&#x4EE4;&#x672B;&#x5C3E;&#x5305;&#x542B;&#x5173;&#x952E;&#x5B57;overload</p>
+<p>将与access-list 1匹配的ip地址转换为ip地址池todd中的一个可用地址</p>
+<h4 id="PAT-NAT重载"><a href="#PAT-NAT重载" class="headerlink" title="PAT(NAT重载)"></a>PAT(NAT重载)</h4><p>与动态NAT相比，PAT地址池只包含一个ip地址，且配置命令末尾包含关键字overload</p>
 <p>ip nat pool globalnet 170.168.2.1170.168.2.1 netmask 255.255.255.0 </p>
 <p>ip nat inside source list 1 pool overload</p>
-<p>(&#x91CD;&#x590D;&#x4F7F;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x5730;&#x5740;&#x6C60;&#x6709;&#x5176;&#x4ED6;&#x5730;&#x5740;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#xFF0C;&#x9002;&#x5408;&#x5927;&#x578B;&#x7F51;&#x7EDC;&#xFF0C;&#x5FC5;&#x987B;&#x91CD;&#x8F7D;&#x591A;&#x4E2A;&#x516C;&#x6709;ip&#x5730;&#x5740;)</p>
-<h3 id="&#x9A8C;&#x8BC1;&#x4E0E;&#x4FEE;&#x6539;"><a href="#&#x9A8C;&#x8BC1;&#x4E0E;&#x4FEE;&#x6539;" class="headerlink" title="&#x9A8C;&#x8BC1;&#x4E0E;&#x4FEE;&#x6539;"></a>&#x9A8C;&#x8BC1;&#x4E0E;&#x4FEE;&#x6539;</h3><p>show ip nat translation</p>
+<p>(重复使用，如果地址池有其他地址，也可以使用它，适合大型网络，必须重载多个公有ip地址)</p>
+<h3 id="验证与修改"><a href="#验证与修改" class="headerlink" title="验证与修改"></a>验证与修改</h3><p>show ip nat translation</p>
 <p>debug ip nat</p>
 <p>show ip nat statistics</p>
-<p>&#x547D;&#x4EE4;claer ip nat translations &#x6E05;&#x9664;&#x8F6C;&#x6362;&#x6761;&#x76EE;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5168;&#x5C40;&#x5730;&#x5740;&#x3001;&#x672C;&#x5730;&#x5730;&#x5740;&#x3001;tcp(udp)&#x7AEF;&#x53E3;&#x3001;*&#xFF08;&#x661F;&#x53F7;&#xFF0C;&#x6E05;&#x9664;&#x6240;&#x6709;&#x8F6C;&#x6362;&#x6761;&#x76EE;&#xFF09;</p>
-<p>&#x53EA;&#x8981;NAT&#x8868;&#x4E2D;&#x6709;&#x5305;&#x542B;&#x5730;&#x5740;&#x6C60;&#x4E2D;&#x5730;&#x5740;&#x7684;&#x8F6C;&#x6362;&#x6761;&#x76EE;&#xFF0C;&#x601D;&#x79D1;ios&#x5C31;&#x4E0D;&#x5141;&#x8BB8;&#x4FEE;&#x6539;&#x6216;&#x5220;&#x9664;&#x76F8;&#x5E94;&#x7684;&#x5730;&#x5740;&#x6C60;</p>
-<p>&#x8F6C;&#x6362;&#x6761;&#x76EE;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF1A;&#x9ED8;&#x8BA4;&#x4E3A;24&#x5C0F;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x547D;&#x4EE4;ip nat translation timeout&#x4FEE;&#x6539;&#x3002;&#x5982;&#x679C;&#x5B9A;&#x65F6;&#x5668;&#x5230;&#x671F;&#xFF0C;&#x76F8;&#x5E94;&#x7684;&#x8F6C;&#x6362;&#x6761;&#x76EE;&#x5C06;&#x4ECE;NAT&#x8868;&#x4E2D;&#x5220;&#x9664;&#xFF0C;&#x52A8;&#x6001;&#x5206;&#x914D;&#x7ED9;&#x5B83;&#x7684;&#x5730;&#x5740;&#x5C06;&#x5F52;&#x8FD8;&#x7ED9;&#x5730;&#x5740;&#x6C60;&#x3002;</p>
+<p>命令claer ip nat translations 清除转换条目，可以使用全局地址、本地地址、tcp(udp)端口、*（星号，清除所有转换条目）</p>
+<p>只要NAT表中有包含地址池中地址的转换条目，思科ios就不允许修改或删除相应的地址池</p>
+<p>转换条目超时时间：默认为24小时，可以使用命令ip nat translation timeout修改。如果定时器到期，相应的转换条目将从NAT表中删除，动态分配给它的地址将归还给地址池。</p>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-04-03T04:16:51.000Z" itemprop="datePublished">2018-04-03</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/04/03/Frontend/CSS入门/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    CSS入门
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/03/25/Algorithm/DFS/" class="ui tiny button">
-                    
-                    algorithm
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#NAT-地址转换协议"><span>NAT 地址转换协议</span></a><ol><li><a href="#优缺点"><span>优缺点</span></a></li><li><a href="#网络地址转换类型"><span>网络地址转换类型</span></a></li><li><a href="#配置方式"><span>配置方式</span></a><ol><li><a href="#静态NAT"><span>静态NAT</span></a></li><li><a href="#动态NAT"><span>动态NAT</span></a></li><li><a href="#PAT-NAT重载"><span>PAT(NAT重载)</span></a></li></ol></li><li><a href="#验证与修改"><span>验证与修改</span></a></li></ol></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

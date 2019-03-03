@@ -1,299 +1,123 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE ipv6 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE ipv6 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="IPv6128&amp;#x4F4D; 8&amp;#x6BB5;x16 &amp;#x5730;&amp;#x5740;&amp;#x5206;&amp;#x7C7B; &amp;#x5355;&amp;#x64AD;&amp;#x5730;&amp;#x5740; &amp;#x5168;&amp;#x7403;&amp;#x53EF;&amp;#x805A;&amp;#x5408;&amp;#x5355;&amp;#x64AD;&amp;#x5730;&amp;#x5740;(&amp;#x516C;&amp;#x7F51; 2000:0000&amp;#x202">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE ipv6">
-<meta property="og:url" content="http://yoursite.com/2018/07/19/Network/Ccie/ipv6/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="IPv6128&amp;#x4F4D; 8&amp;#x6BB5;x16 &amp;#x5730;&amp;#x5740;&amp;#x5206;&amp;#x7C7B; &amp;#x5355;&amp;#x64AD;&amp;#x5730;&amp;#x5740; &amp;#x5168;&amp;#x7403;&amp;#x53EF;&amp;#x805A;&amp;#x5408;&amp;#x5355;&amp;#x64AD;&amp;#x5730;&amp;#x5740;(&amp;#x516C;&amp;#x7F51; 2000:0000&amp;#x202">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:39:19.802Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE ipv6">
-<meta name="twitter:description" content="IPv6128&amp;#x4F4D; 8&amp;#x6BB5;x16 &amp;#x5730;&amp;#x5740;&amp;#x5206;&amp;#x7C7B; &amp;#x5355;&amp;#x64AD;&amp;#x5730;&amp;#x5740; &amp;#x5168;&amp;#x7403;&amp;#x53EF;&amp;#x805A;&amp;#x5408;&amp;#x5355;&amp;#x64AD;&amp;#x5730;&amp;#x5740;(&amp;#x516C;&amp;#x7F51; 2000:0000&amp;#x202">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6"><span class="toc-number">1.</span> <span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#地址分类"><span class="toc-number">1.1.</span> <span class="toc-text">地址分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地址书写规则"><span class="toc-number">1.2.</span> <span class="toc-text">地址书写规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">1.3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v6和v4的过渡融合"><span class="toc-number">1.4.</span> <span class="toc-text">v6和v4的过渡融合</span></a></li></ol></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/ipv6" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE ipv6
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>128&#x4F4D; 8&#x6BB5;x16</p>
-<h3 id="&#x5730;&#x5740;&#x5206;&#x7C7B;"><a href="#&#x5730;&#x5740;&#x5206;&#x7C7B;" class="headerlink" title="&#x5730;&#x5740;&#x5206;&#x7C7B;"></a>&#x5730;&#x5740;&#x5206;&#x7C7B;</h3><ol class="ui list">
-<li><p>&#x5355;&#x64AD;&#x5730;&#x5740;</p>
-<p>&#x5168;&#x7403;&#x53EF;&#x805A;&#x5408;&#x5355;&#x64AD;&#x5730;&#x5740;(&#x516C;&#x7F51;</p>
-<p>2000:0000&#x2026;&#x2026;&#xFF5E;3fff:ffff&#x2026;&#x2026;   1/8</p>
-<p>&#x7AD9;&#x70B9;&#x672C;&#x5730;&#x5355;&#x64AD;&#x5730;&#x5740;(&#x79C1;&#x6709;</p>
+  <div class="container">
+    <article>
+      <h1>CCIE ipv6</h1>
+      <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>128位 8段x16</p>
+<h3 id="地址分类"><a href="#地址分类" class="headerlink" title="地址分类"></a>地址分类</h3><ol>
+<li><p>单播地址</p>
+<p>全球可聚合单播地址(公网</p>
+<p>2000:0000……～3fff:ffff……   1/8</p>
+<p>站点本地单播地址(私有</p>
 <p>fec0::/10</p>
-<p>&#x94FE;&#x8DEF;&#x672C;&#x5730;&#x5355;&#x64AD;&#x5730;&#x5740;(mac</p>
-<p>&#x81EA;&#x52A8;&#x751F;&#x6210;&#xFF0C;&#x8BE5;&#x5730;&#x5740;&#x4E0D;&#x80FD;&#x88AB;&#x4F20;&#x9012;&#xFF0C;&#x53EA;&#x5728;&#x8BE5;   &#x6BB5;&#x94FE;&#x8DEF;&#x6709;&#x6548;&#x3002;</p>
+<p>链路本地单播地址(mac</p>
+<p>自动生成，该地址不能被传递，只在该   段链路有效。</p>
 <p>fe80::/10</p>
 </li>
-<li><p>&#x7EC4;&#x64AD;&#x5730;&#x5740;</p>
+<li><p>组播地址</p>
 <p>ff00::/10</p>
 </li>
-<li><p>&#x4EFB;&#x64AD;&#x5730;&#x5740;</p>
-<p>&#x5730;&#x5740;&#x76EE;&#x524D;&#x8FD8;&#x5728;&#x7528;&#x5168;&#x7403;&#x53EF;&#x805A;&#x5408;&#x5355;&#x64AD;&#x5730;&#x5740;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x7EC4;&#x64AD;&#x5730;&#x5740;&#xFF0C;&#x9009;&#x62E9;&#x6700;&#x8FD1;&#x7684;&#x5730;&#x5740;&#x53D1;&#x9001;&#xFF0C;&#x53EA;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x5730;&#x65B9;&#x3002;</p>
-<p>&#x524D;48&#x4F4D;&#x4E3A;&#x516C;&#x7F51;&#x62D3;&#x6251;&#xFF0C;&#x7EDF;&#x4E00;&#x5206;&#x914D;&#xFF1B;</p>
-<p>&#x540E;16&#x4F4D;&#x4E3A;&#x5B50;&#x7F51;&#x62D3;&#x6251;&#xFF0C;&#x53EF;&#x81EA;&#x5B9A;&#x4E49;&#xFF1B;</p>
-<p>&#x5269;&#x4E0B;64&#x4F4D;&#x4E3A;&#x4E3B;&#x673A;&#x4F4D;&#x3002;</p>
+<li><p>任播地址</p>
+<p>地址目前还在用全球可聚合单播地址，类似于组播地址，选择最近的地址发送，只发送一个地方。</p>
+<p>前48位为公网拓扑，统一分配；</p>
+<p>后16位为子网拓扑，可自定义；</p>
+<p>剩下64位为主机位。</p>
 </li>
 </ol>
-<h3 id="&#x5730;&#x5740;&#x4E66;&#x5199;&#x89C4;&#x5219;"><a href="#&#x5730;&#x5740;&#x4E66;&#x5199;&#x89C4;&#x5219;" class="headerlink" title="&#x5730;&#x5740;&#x4E66;&#x5199;&#x89C4;&#x5219;"></a>&#x5730;&#x5740;&#x4E66;&#x5199;&#x89C4;&#x5219;</h3><ol class="ui list">
-<li>&#x5B8C;&#x6574;&#x4E66;&#x5199;</li>
-<li>&#x7B80;&#x5316;&#x65B9;&#x5F0F;    1.&#xFF09;&#x8FDE;&#x7EED;&#x5B58;&#x5728;&#x7684;0&#x53EF;&#x4EE5;::&#x4EE3;&#x66FF;&#xFF0C;&#x4F46;&#x4E00;&#x4E2A;&#x5730;&#x5740;&#x5F53;&#x4E2D;&#x53EA;&#x80FD;&#x7528;&#x4E00;&#x6B21;&#x3002;2&#xFF09;&#x6BB5;&#x4E2D;&#x7684;0&#x82E5;&#x5728;&#x5DE6;&#x8FB9;&#x53EF;&#x4E0D;&#x5199;&#xFF0C;&#x4F46;&#x662F;&#x56DB;&#x4E2A;&#x90FD;&#x4E3A;0&#x8FD8;&#x662F;&#x8981;&#x5199;&#x4E00;&#x4E2A;0</li>
-<li>&#x5D4C;&#x5165;&#x5F0F;  X:X:X:X:X:X:d.d.d.d                                 ::FFFF:192.168.0.1</li>
+<h3 id="地址书写规则"><a href="#地址书写规则" class="headerlink" title="地址书写规则"></a>地址书写规则</h3><ol>
+<li>完整书写</li>
+<li>简化方式    1.）连续存在的0可以::代替，但一个地址当中只能用一次。2）段中的0若在左边可不写，但是四个都为0还是要写一个0</li>
+<li>嵌入式  X:X:X:X:X:X:d.d.d.d                                 ::FFFF:192.168.0.1</li>
 </ol>
-<p>&#x4F7F;&#x7528;&#x6D4F;&#x89C8;&#x5668;&#x8FDE;&#x63A5;&#x5230;IPv6&#x8BBE;&#x5907;&#x7684;http&#x94FE;&#x63A5;&#x65F6;&#xFF0C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x65B9;&#x62EC;&#x53F7;&#x62EC;&#x8D77;&#xFF08;&#x4E0E;IPv4&#x7684;&#x5192;&#x53F7;&#x533A;&#x5206;&#x5F00;&#x6765;&#xFF09;</p>
+<p>使用浏览器连接到IPv6设备的http链接时，必须使用方括号括起（与IPv4的冒号区分开来）</p>
 <p>http://[::]/default.html</p>
-<h3 id="&#x914D;&#x7F6E;"><a href="#&#x914D;&#x7F6E;" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</h3><ol class="ui list">
-<li><p>&#x63A5;&#x53E3;ip&#x7684;&#x914D;&#x7F6E;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(config)#ipv6 unicast-routing </span><br><span class="line"></span><br><span class="line">&#x5F00;&#x542F;ipv6&#x5355;&#x64AD;&#x8DEF;&#x7531;&#x529F;&#x80FD;&#x3002;</span><br><span class="line"></span><br><span class="line">interface xx</span><br><span class="line"></span><br><span class="line">ipv6 address 2001&#xFF1A;:1/64 &#x4E0D;&#x80FD;&#x5199;&#x63A9;&#x7801;</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
+<li><p>接口ip的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(config)#ipv6 unicast-routing </span><br><span class="line"></span><br><span class="line">开启ipv6单播路由功能。</span><br><span class="line"></span><br><span class="line">interface xx</span><br><span class="line"></span><br><span class="line">ipv6 address 2001：:1/64 不能写掩码</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>&#x534F;&#x8BAE;&#x7684;&#x542F;&#x7528;</p>
-<p>&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x5BA3;&#x544A;&#xFF0C;&#x53EA;&#x80FD;&#x5728;&#x63A5;&#x53E3;&#x4E0B;&#x542F;&#x7528;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipv6 router [IGP] </span><br><span class="line">int xx</span><br><span class="line">ipv6 rip enable</span><br><span class="line">ipv6 ospf x area x</span><br><span class="line">ipv6 eigrp x </span><br><span class="line">router ospfv3 &#x8FDB;&#x7A0B;id</span><br><span class="line">int xx</span><br><span class="line">ospfv3 &#x8FDB;&#x7A0B; area xx</span><br><span class="line">ipv6 router &#x76EE;&#x7684;&#x5730;&#x7F51;&#x6BB5; /x &#x51FA;&#x63A5;&#x53E3;</span><br><span class="line">router bgp xx</span><br><span class="line">address-family ipv6 unicast</span><br><span class="line">nei xxxx remot-as xx</span><br><span class="line">net xxxx /xx(&#x53EA;&#x6709;bgp&#x8981;&#x5BA3;&#x544A;)</span><br><span class="line">&#x53EF;&#x4F7F;&#x7528;ipv4&#x5730;&#x5740;&#x6FC0;&#x6D3B;ipv6&#x7684;&#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;&#xFF0C;&#x53CD;&#x4E4B;&#x4E0D;&#x884C;&#x3002;</span><br></pre></td></tr></table></figure>
+<li><p>协议的启用</p>
+<p>不能使用宣告，只能在接口下启用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipv6 router [IGP] </span><br><span class="line">int xx</span><br><span class="line">ipv6 rip enable</span><br><span class="line">ipv6 ospf x area x</span><br><span class="line">ipv6 eigrp x </span><br><span class="line">router ospfv3 进程id</span><br><span class="line">int xx</span><br><span class="line">ospfv3 进程 area xx</span><br><span class="line">ipv6 router 目的地网段 /x 出接口</span><br><span class="line">router bgp xx</span><br><span class="line">address-family ipv6 unicast</span><br><span class="line">nei xxxx remot-as xx</span><br><span class="line">net xxxx /xx(只有bgp要宣告)</span><br><span class="line">可使用ipv4地址激活ipv6的对等体关系，反之不行。</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="v6&#x548C;v4&#x7684;&#x8FC7;&#x6E21;&#x878D;&#x5408;"><a href="#v6&#x548C;v4&#x7684;&#x8FC7;&#x6E21;&#x878D;&#x5408;" class="headerlink" title="v6&#x548C;v4&#x7684;&#x8FC7;&#x6E21;&#x878D;&#x5408;"></a>v6&#x548C;v4&#x7684;&#x8FC7;&#x6E21;&#x878D;&#x5408;</h3><p>&#x96A7;&#x9053;&#x6280;&#x672F; tunnel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tunnel source ip</span><br><span class="line">tunnel destination ip</span><br><span class="line">tunnel mode ipv6</span><br><span class="line"></span><br><span class="line">ping ipv6 &#x2026;</span><br></pre></td></tr></table></figure></p>
+<h3 id="v6和v4的过渡融合"><a href="#v6和v4的过渡融合" class="headerlink" title="v6和v4的过渡融合"></a>v6和v4的过渡融合</h3><p>隧道技术 tunnel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tunnel source ip</span><br><span class="line">tunnel destination ip</span><br><span class="line">tunnel mode ipv6</span><br><span class="line"></span><br><span class="line">ping ipv6 …</span><br></pre></td></tr></table></figure></p>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-07-19T05:52:45.000Z" itemprop="datePublished">2018-07-19</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/07/20/Network/Ccie/IS-IS/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    CCIE IS-IS
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/07/19/Network/Ccie/逻辑子接口/" class="ui tiny button">
-                    
-                    CCIE 逻辑子接口
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#IPv6"><span>IPv6</span></a><ol><li><a href="#地址分类"><span>地址分类</span></a></li><li><a href="#地址书写规则"><span>地址书写规则</span></a></li><li><a href="#配置"><span>配置</span></a></li><li><a href="#v6和v4的过渡融合"><span>v6和v4的过渡融合</span></a></li></ol></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

@@ -1,306 +1,125 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE acl控制 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE acl控制 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x6570;&amp;#x5B57;acl &amp;#x5168;&amp;#x5C40;&amp;#x914D;&amp;#x7F6E; access-list 1 deny/permit ip&amp;#x6216;&amp;#x7F51;&amp;#x6BB5; &amp;#x901A;&amp;#x914D;&amp;#x7B26; &amp;#x4E0D;&amp;#x7BA1;&amp;#x662F;&amp;#x4F55;&amp;#x79CD;acl&amp;#xFF0C;&amp;#x6700;&amp;#x540E;&amp;#">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE acl控制">
-<meta property="og:url" content="http://yoursite.com/2018/02/26/Network/Ccie/acl控制/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x6570;&amp;#x5B57;acl &amp;#x5168;&amp;#x5C40;&amp;#x914D;&amp;#x7F6E; access-list 1 deny/permit ip&amp;#x6216;&amp;#x7F51;&amp;#x6BB5; &amp;#x901A;&amp;#x914D;&amp;#x7B26; &amp;#x4E0D;&amp;#x7BA1;&amp;#x662F;&amp;#x4F55;&amp;#x79CD;acl&amp;#xFF0C;&amp;#x6700;&amp;#x540E;&amp;#">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:38:22.006Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE acl控制">
-<meta name="twitter:description" content="&amp;#x6570;&amp;#x5B57;acl &amp;#x5168;&amp;#x5C40;&amp;#x914D;&amp;#x7F6E; access-list 1 deny/permit ip&amp;#x6216;&amp;#x7F51;&amp;#x6BB5; &amp;#x901A;&amp;#x914D;&amp;#x7B26; &amp;#x4E0D;&amp;#x7BA1;&amp;#x662F;&amp;#x4F55;&amp;#x79CD;acl&amp;#xFF0C;&amp;#x6700;&amp;#x540E;&amp;#">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/acl控制" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE acl控制
-</h1>
-
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
 
 
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <p>&#x6570;&#x5B57;acl</p>
-<p>&#x5168;&#x5C40;&#x914D;&#x7F6E;</p>
-<p>access-list 1 deny/permit ip&#x6216;&#x7F51;&#x6BB5; &#x901A;&#x914D;&#x7B26;</p>
-<p>&#x4E0D;&#x7BA1;&#x662F;&#x4F55;&#x79CD;acl&#xFF0C;&#x6700;&#x540E;&#x90FD;&#x4F1A;&#x5B58;&#x5728;&#x4E00;&#x6761;&#x62D2;&#x7EDD;&#x6240;&#x6709;&#x6570;&#x636E;&#x7684;&#x547D;&#x4EE4;</p>
-<p>&#x4E00;&#x822C;&#x90FD;&#x4F1A;&#x5728;&#x7ED3;&#x5C3E;&#x52A0;&#x4E0A;&#x653E;&#x884C;&#x6240;&#x6709;&#x6D41;&#x91CF;&#x7684;&#x547D;&#x4EE4;</p>
+  <div class="container">
+    <article>
+      <h1>CCIE acl控制</h1>
+      <p>数字acl</p>
+<p>全局配置</p>
+<p>access-list 1 deny/permit ip或网段 通配符</p>
+<p>不管是何种acl，最后都会存在一条拒绝所有数据的命令</p>
+<p>一般都会在结尾加上放行所有流量的命令</p>
 <p>access-list 1 permit any</p>
-<p>&#x63A5;&#x53E3;&#x914D;&#x7F6E; ip access-group 1 in/out</p>
-<p>&#x547D;&#x540D;acl</p>
-<p>&#x5168;&#x5C40;ip access-list standard &#x540D;&#x5B57;</p>
+<p>接口配置 ip access-group 1 in/out</p>
+<p>命名acl</p>
+<p>全局ip access-list standard 名字</p>
 <p>deny 11.11.11.0 0.0.0.255</p>
 <p>deny 12.12.12.0 0.0.0.255</p>
 <p>pe any</p>
-<p>&#x63A5;&#x53E3;&#x540C;&#x7406;</p>
-<p>&#x547D;&#x540D;acl&#x80FD;no&#x6389;&#x67D0;&#x6761;&#x4EE5;&#x53CA;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x6240;&#x6709;&#x63A7;&#x5236;&#xFF0C;&#x4FDD;&#x7559;&#x4E0A;&#x5C42;&#xFF0C;&#x6570;&#x5B57;acl&#x53EA;&#x80FD;&#x5168;&#x90E8;no</p>
-<p>&#x5168;&#x5C40; enable password/secret &#x5BC6;&#x7801;</p>
-<p>&#x200B;                         &#x660E;&#x6587;/&#x5BC6;&#x6587; &#x5BC6;&#x6587;&#x4F18;&#x5148;&#x7EA7;&#x9AD8;</p>
-<p>&#x5168;&#x5C40; line vty 0 4 &#x53EF;&#x540C;&#x65F6;&#x767B;&#x5165;5&#x4E2A; 0 2 &#x4E09;&#x4E2A;</p>
-<p>   password &#x5BC6;&#x7801;</p>
-<p>telnet ip &#x8F93;&#x5165;&#x5BC6;&#x7801; </p>
-<p>&#x8FDC;&#x7A0B;&#x767B;&#x5165;&#x7AEF;&#x53E3;&#x53F7;telnet:23 http:80</p>
-<p>&#x6570;&#x5B57;&#x6269;&#x5C55;acl</p>
-<p>ping&#x547D;&#x4EE4;&#x662F;icmp&#x534F;&#x8BAE;</p>
-<p>access-list 100 deny icmp 12.12.12.0 0.0.0.255 host 3.3.3.3 &#xFF1F;&#xFF08;ping &#x662F;echo&#xFF09;</p>
+<p>接口同理</p>
+<p>命名acl能no掉某条以及接下来的所有控制，保留上层，数字acl只能全部no</p>
+<p>全局 enable password/secret 密码</p>
+<p>​                         明文/密文 密文优先级高</p>
+<p>全局 line vty 0 4 可同时登入5个 0 2 三个</p>
+<p>   password 密码</p>
+<p>telnet ip 输入密码 </p>
+<p>远程登入端口号telnet:23 http:80</p>
+<p>数字扩展acl</p>
+<p>ping命令是icmp协议</p>
+<p>access-list 100 deny icmp 12.12.12.0 0.0.0.255 host 3.3.3.3 ？（ping 是echo）</p>
 <p>access-list 100 permit ip any any</p>
-<p>&#x5168;&#x5C40;ip access-list extended &#x540D;&#x5B57;</p>
-<p>access-list&#x547D;&#x4EE4;</p>
-<p>&#xFF08;1&#xFF09;&#x6807;&#x51C6;&#x8BBF;&#x95EE;&#x5217;&#x8868;</p>
+<p>全局ip access-list extended 名字</p>
+<p>access-list命令</p>
+<p>（1）标准访问列表</p>
 <p>access-list access-list-number { permit | deny } {source [source-wildcard] | any}</p>
-<p>&#x547D;&#x4EE4;&#x89E3;&#x91CA;&#x5982;&#x4E0B;&#x3002;</p>
-<p>access-list&#xFF1A;&#x8BBF;&#x95EE;&#x5217;&#x8868;&#x547D;&#x4EE4;&#x3002;</p>
-<p>access-list-number&#xFF1A;&#x8BBF;&#x95EE;&#x5217;&#x8868;&#x53F7;&#x7801;&#xFF0C;&#x503C;&#x4E3A;1~99.</p>
-<p>permit&#xFF1A;&#x5141;&#x8BB8;&#x3002;</p>
-<p>deny&#xFF1A;&#x62D2;&#x7EDD;&#x3002;</p>
-<p>source&#xFF1A;&#x6E90;IP&#x5730;&#x5740;&#x3002;</p>
-<p>source-wildcard&#xFF1A;&#x6E90;IP&#x5730;&#x5740;&#x7684;&#x901A;&#x914D;&#x7B26;&#x3002;</p>
-<p>&#xFF08;2&#xFF09;&#x6269;&#x5C55;&#x8BBF;&#x95EE;&#x5217;&#x8868;</p>
+<p>命令解释如下。</p>
+<p>access-list：访问列表命令。</p>
+<p>access-list-number：访问列表号码，值为1~99.</p>
+<p>permit：允许。</p>
+<p>deny：拒绝。</p>
+<p>source：源IP地址。</p>
+<p>source-wildcard：源IP地址的通配符。</p>
+<p>（2）扩展访问列表</p>
 <p>access-list access-list-number { permit | deny } { protocol \ protocol-keyword } { source [ source-wildcard ] | any } { destination destination-wildcard } | any }[protocol-specific options][log]</p>
-<p>&#x547D;&#x4EE4;&#x89E3;&#x91CA;&#x5982;&#x4E0B;&#x3002;</p>
-<p>access-list-number&#xFF1A;&#x8BBF;&#x95EE;&#x5217;&#x8868;&#x53F7;&#x7801;&#xFF0C;&#x503C;&#x4E3A;100~199.</p>
-<p>protocol \ protocol-keyword&#xFF1A;&#x53EF;&#x4F7F;&#x7528;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x5305;&#x62EC;IP&#x3001;ICMP&#x3001;IGRP&#x3001;EIGRP&#x3001;OSPF&#x7B49;&#x3002;</p>
-<p>destination destination-wild&#xFF1A;&#x76EE;&#x7684;IP&#x5730;&#x5740;&#xFF0C;&#x683C;&#x5F0F;&#x4E0E;&#x6E90;IP&#x5730;&#x5740;&#x76F8;&#x540C;&#x3002;</p>
-<p>protocol-specific options&#xFF1A;&#x534F;&#x8BAE;&#x5236;&#x5B9A;&#x7684;&#x9009;&#x9879;&#x3002;</p>
-<p>log&#xFF1A;&#x8BB0;&#x5F55;&#x6709;&#x5173;&#x6570;&#x636E;&#x62A5;&#x8FDB;&#x5165;&#x8BBF;&#x95EE;&#x5217;&#x8868;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
-<p>rip &#x8DF3;&#x6570;</p>
-<p>offset-list acc&#x53F7; in/out &#x8DF3;&#x6570;&#x589E;&#x52A0;&#x503C;</p>
+<p>命令解释如下。</p>
+<p>access-list-number：访问列表号码，值为100~199.</p>
+<p>protocol \ protocol-keyword：可使用的协议，包括IP、ICMP、IGRP、EIGRP、OSPF等。</p>
+<p>destination destination-wild：目的IP地址，格式与源IP地址相同。</p>
+<p>protocol-specific options：协议制定的选项。</p>
+<p>log：记录有关数据报进入访问列表的信息。</p>
+<p>rip 跳数</p>
+<p>offset-list acc号 in/out 跳数增加值</p>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-02-25T17:26:55.000Z" itemprop="datePublished">2018-02-26</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/02/26/Network/Ccie/重分发 /" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    CCIE 重分发
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/02/26/Network/Ccie/交换机基础/" class="ui tiny button">
-                    
-                    CCIE 交换机基础
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

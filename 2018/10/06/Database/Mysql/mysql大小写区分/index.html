@@ -1,265 +1,84 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>mysql大小写区分 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>mysql大小写区分 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="mysql&amp;#x67E5;&amp;#x8BE2;&amp;#x9ED8;&amp;#x8BA4;&amp;#x662F;&amp;#x4E0D;&amp;#x533A;&amp;#x5206;&amp;#x5927;&amp;#x5C0F;&amp;#x5199;&amp;#x7684; &amp;#x5982;:select  from some_table where str=&amp;#x2018;abc&amp;#x2019;;select  from some_table where str=&amp;">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mysql大小写区分">
-<meta property="og:url" content="http://yoursite.com/2018/10/06/Database/Mysql/mysql大小写区分/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="mysql&amp;#x67E5;&amp;#x8BE2;&amp;#x9ED8;&amp;#x8BA4;&amp;#x662F;&amp;#x4E0D;&amp;#x533A;&amp;#x5206;&amp;#x5927;&amp;#x5C0F;&amp;#x5199;&amp;#x7684; &amp;#x5982;:select  from some_table where str=&amp;#x2018;abc&amp;#x2019;;select  from some_table where str=&amp;">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-06T12:44:52.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql大小写区分">
-<meta name="twitter:description" content="mysql&amp;#x67E5;&amp;#x8BE2;&amp;#x9ED8;&amp;#x8BA4;&amp;#x662F;&amp;#x4E0D;&amp;#x533A;&amp;#x5206;&amp;#x5927;&amp;#x5C0F;&amp;#x5199;&amp;#x7684; &amp;#x5982;:select  from some_table where str=&amp;#x2018;abc&amp;#x2019;;select  from some_table where str=&amp;">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Database/Mysql/mysql大小写区分" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    mysql大小写区分
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <p>mysql&#x67E5;&#x8BE2;&#x9ED8;&#x8BA4;&#x662F;&#x4E0D;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;&#x7684; &#x5982;:<br>select <em> from some_table where str=&#x2018;abc&#x2019;;<br>select </em> from some_table where str=&#x2019;ABC&#x2019;;<br>&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x533A;&#x5206;&#x7684;&#x8BDD;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x5982;&#x4E0B;&#x65B9;&#x6CD5;&#x6765;&#x505A;&#xFF1A;<br>&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;<br>&#x8981;&#x8BA9;mysql&#x67E5;&#x8BE2;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;&#xFF0C;&#x53EF;&#x4EE5;&#xFF1A;<br><code>select * from some_table where binary str=&apos;abc&apos;</code><br><code>select * from some_table where binary str=&apos;ABC&apos;</code></p>
-<p>&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;<br>&#x5728;&#x5EFA;&#x8868;&#x65F6;&#x65F6;&#x5019;&#x52A0;&#x4EE5;&#x6807;&#x8BC6;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table some_table(</span><br><span class="line">str char(20) binary </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>&#x539F;&#x7406;&#xFF1A;<br>&#x5BF9;&#x4E8E;CHAR&#x3001;VARCHAR&#x548C;TEXT&#x7C7B;&#x578B;&#xFF0C;BINARY&#x5C5E;&#x6027;&#x53EF;&#x4EE5;&#x4E3A;&#x5217;&#x5206;&#x914D;&#x8BE5;&#x5217;&#x5B57;&#x7B26;&#x96C6;&#x7684; &#x6821;&#x5BF9;&#x89C4;&#x5219;&#x3002;<br>BINARY&#x5C5E;&#x6027;&#x662F;&#x6307;&#x5B9A;&#x5217;&#x5B57;&#x7B26;&#x96C6;&#x7684;<strong>&#x4E8C;&#x5143; &#x6821;&#x5BF9;&#x89C4;&#x5219;</strong>&#x7684;&#x7B80;&#x5199;&#x3002;<br>&#x6392;&#x5E8F;&#x548C;&#x6BD4;&#x8F83;<strong>&#x57FA;&#x4E8E;&#x6570;&#x503C;&#x5B57;&#x7B26;&#x503C;</strong>&#x3002;&#x56E0;&#x6B64;&#x4E5F;&#x5C31;&#x81EA;&#x7136;&#x533A;&#x5206;&#x4E86;&#x5927;&#x5C0F;&#x5199;&#x3002;</p>
-
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-10-06T12:44:51.000Z" itemprop="datePublished">2018-10-06</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+
+
+  <div class="container">
+    <article>
+      <h1>mysql大小写区分</h1>
+      <p>mysql查询默认是不区分大小写的 如:<br>select <em> from some_table where str=‘abc’;<br>select </em> from some_table where str=’ABC’;<br>得到的结果是一样的，如果我们需要进行区分的话可以按照如下方法来做：<br>第一种方法：<br>要让mysql查询区分大小写，可以：<br><code>select * from some_table where binary str=&#39;abc&#39;</code><br><code>select * from some_table where binary str=&#39;ABC&#39;</code></p>
+<p>第二种方法：<br>在建表时时候加以标识</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table some_table(</span><br><span class="line">str char(20) binary </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>原理：<br>对于CHAR、VARCHAR和TEXT类型，BINARY属性可以为列分配该列字符集的 校对规则。<br>BINARY属性是指定列字符集的<strong>二元 校对规则</strong>的简写。<br>排序和比较<strong>基于数值字符值</strong>。因此也就自然区分了大小写。</p>
+
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/10/06/Database/Mysql/mysql 命令/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    mysql 命令
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/10/05/Unix/Programming/CMake入门/" class="ui tiny button">
-                    
-                    CMake入门
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

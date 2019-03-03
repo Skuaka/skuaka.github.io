@@ -1,392 +1,302 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>C++ STL | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>C++ STL | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x6807;&amp;#x51C6;&amp;#x6A21;&amp;#x677F;&amp;#x5E93;STL &amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x4E00;&amp;#x7EC4;&amp;#x8868;&amp;#x793A;&amp;#x5BB9;&amp;#x5668;&amp;#x3001;&amp;#x8FED;&amp;#x4EE3;&amp;#x5668;&amp;#x3001;&amp;#x51FD;&amp;#x6570;&amp;#x5BF9;&amp;#x8C61;&amp;#x3001;&amp;#x7">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C++ STL">
-<meta property="og:url" content="http://yoursite.com/2018/12/07/C_C++/C++STL/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x6807;&amp;#x51C6;&amp;#x6A21;&amp;#x677F;&amp;#x5E93;STL &amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x4E00;&amp;#x7EC4;&amp;#x8868;&amp;#x793A;&amp;#x5BB9;&amp;#x5668;&amp;#x3001;&amp;#x8FED;&amp;#x4EE3;&amp;#x5668;&amp;#x3001;&amp;#x51FD;&amp;#x6570;&amp;#x5BF9;&amp;#x8C61;&amp;#x3001;&amp;#x7">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-16T07:29:11.100Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++ STL">
-<meta name="twitter:description" content="&amp;#x6807;&amp;#x51C6;&amp;#x6A21;&amp;#x677F;&amp;#x5E93;STL &amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x4E00;&amp;#x7EC4;&amp;#x8868;&amp;#x793A;&amp;#x5BB9;&amp;#x5668;&amp;#x3001;&amp;#x8FED;&amp;#x4EE3;&amp;#x5668;&amp;#x3001;&amp;#x51FD;&amp;#x6570;&amp;#x5BF9;&amp;#x8C61;&amp;#x3001;&amp;#x7">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#标准模板库"><span class="toc-number">1.</span> <span class="toc-text">标准模板库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通用方法"><span class="toc-number">1.1.</span> <span class="toc-text">通用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代器"><span class="toc-number">1.2.</span> <span class="toc-text">迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#迭代器类型"><span class="toc-number">1.2.1.</span> <span class="toc-text">迭代器类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#输入迭代器"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">输入迭代器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#输出迭代器"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">输出迭代器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#正向迭代器"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">正向迭代器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#双向迭代器"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">双向迭代器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#随机访问迭代器"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">随机访问迭代器</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将指针用作迭代器"><span class="toc-number">1.2.2.</span> <span class="toc-text">将指针用作迭代器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#迭代器的输入输出适配器"><span class="toc-number">1.2.3.</span> <span class="toc-text">迭代器的输入输出适配器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向迭代器"><span class="toc-number">1.2.4.</span> <span class="toc-text">反向迭代器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#插入迭代器"><span class="toc-number">1.2.5.</span> <span class="toc-text">插入迭代器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器"><span class="toc-number">1.3.</span> <span class="toc-text">容器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#所有容器"><span class="toc-number">1.3.1.</span> <span class="toc-text">所有容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#序列容器"><span class="toc-number">1.3.2.</span> <span class="toc-text">序列容器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#vector"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">vector</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#deque"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">deque</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#list"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#forward-list"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">forward_list</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#queue"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">queue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#priority-queue"><span class="toc-number">1.3.2.6.</span> <span class="toc-text">priority_queue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#stack"><span class="toc-number">1.3.2.7.</span> <span class="toc-text">stack</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#array"><span class="toc-number">1.3.2.8.</span> <span class="toc-text">array</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关联容器"><span class="toc-number">1.3.3.</span> <span class="toc-text">关联容器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#multi-set"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">(multi)set</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#multi-map"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">(multi)map</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#无序关联容器"><span class="toc-number">1.3.4.</span> <span class="toc-text">无序关联容器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数对象"><span class="toc-number">1.4.</span> <span class="toc-text">函数对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#函数符概念"><span class="toc-number">1.4.1.</span> <span class="toc-text">函数符概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数适配器概念"><span class="toc-number">1.4.2.</span> <span class="toc-text">函数适配器概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#预定义函数符"><span class="toc-number">1.4.3.</span> <span class="toc-text">预定义函数符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#运算符和相应的函数符"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">运算符和相应的函数符</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自适应函数符"><span class="toc-number">1.4.4.</span> <span class="toc-text">自适应函数符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#函数适配器"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">函数适配器</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式-C-11"><span class="toc-number">1.4.5.</span> <span class="toc-text">lambda表达式 C++11</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法"><span class="toc-number">1.5.</span> <span class="toc-text">算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他库"><span class="toc-number">2.</span> <span class="toc-text">其他库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束"><span class="toc-number">3.</span> <span class="toc-text">结束</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-C_C++/C++STL" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    C++ STL
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="&#x6807;&#x51C6;&#x6A21;&#x677F;&#x5E93;"><a href="#&#x6807;&#x51C6;&#x6A21;&#x677F;&#x5E93;" class="headerlink" title="&#x6807;&#x51C6;&#x6A21;&#x677F;&#x5E93;"></a>&#x6807;&#x51C6;&#x6A21;&#x677F;&#x5E93;</h2><p>STL &#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x7EC4;&#x8868;&#x793A;&#x5BB9;&#x5668;&#x3001;&#x8FED;&#x4EE3;&#x5668;&#x3001;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x3001;&#x7B97;&#x6CD5;&#x7684;&#x6A21;&#x677F;&#x3002;</p>
-<p>STL &#x5BB9;&#x5668;&#x662F;&#x540C;&#x8D28;&#x7684;&#xFF0C;&#x5373;&#x5B58;&#x50A8;&#x7684;&#x503C;&#x7684;&#x7C7B;&#x578B;&#x76F8;&#x540C;&#x3002;</p>
-<h3 id="&#x901A;&#x7528;&#x65B9;&#x6CD5;"><a href="#&#x901A;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x901A;&#x7528;&#x65B9;&#x6CD5;"></a>&#x901A;&#x7528;&#x65B9;&#x6CD5;</h3><p>&#x5BF9;&#x4E8E;&#x5DF2;&#x6709;&#x7684;&#x901A;&#x7528;&#x65B9;&#x6CD5;&#xFF0C;&#x7C7B;&#x4E5F;&#x6709;&#x53EF;&#x80FD;&#x91CD;&#x65B0;&#x5B9A;&#x4E49;&#x6210;&#x5458;&#x65B9;&#x6CD5;&#x3002;&#x56E0;&#x4E3A;&#x9488;&#x5BF9;&#x7279;&#x6B8A;&#x5143;&#x7D20;&#x7684;&#x6210;&#x5458;&#x65B9;&#x6CD5;&#x4E00;&#x822C;&#x6BD4;&#x901A;&#x7528;&#x65B9;&#x6CD5;&#x6548;&#x7387;&#x9AD8;&#x3002;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a.size();	<span class="comment">//&#x8FD4;&#x56DE;&#x5143;&#x7D20;&#x6570;&#x76EE;</span></span><br><span class="line">a.swap(b);	<span class="comment">//&#x4EA4;&#x6362;&#x4E24;&#x4E2A;&#x5BB9;&#x5668;&#x7684;&#x5185;&#x5BB9;</span></span><br><span class="line"></span><br><span class="line">a.begin();	<span class="comment">//&#x8FD4;&#x56DE;&#x6307;&#x5411;&#x5BB9;&#x5668;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x8FED;&#x4EE3;&#x5668;</span></span><br><span class="line">a.end();	<span class="comment">//&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x8868;&#x793A;&#x8D85;&#x8FC7;&#x5BB9;&#x5668;&#x5C3E;&#x7684;&#x8FED;&#x4EE3;&#x5668;</span></span><br><span class="line">a.cbegin();	<span class="comment">//c++11 const&#x8FED;&#x4EE3;&#x5668;</span></span><br><span class="line">a.cend();	<span class="comment">//c++11 const&#x8FED;&#x4EE3;&#x5668;</span></span><br><span class="line"></span><br><span class="line">copy(it1, it2, it3);	<span class="comment">//&#x524D;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x8868;&#x793A;&#x8981;&#x590D;&#x5236;&#x7684;&#x8303;&#x56F4;(&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;)&#xFF0C;&#x7B2C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#x8868;&#x793A;&#x590D;&#x5236;&#x5230;&#x7684;&#x4F4D;&#x7F6E;(&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;)&#x3002;</span></span><br><span class="line"></span><br><span class="line">for_each(it1, it2, pfun);	<span class="comment">//&#x66FF;&#x6362;for&#x5FAA;&#x73AF;&#xFF0C;&#x5BF9;&#x6307;&#x5B9A;&#x533A;&#x95F4;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x3002;&#x4E0D;&#x80FD;&#x4FEE;&#x6539;&#x5143;&#x7D20;&#x503C;&#x3002;</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> x: books){*pfun(x)};	<span class="comment">//&#x57FA;&#x4E8E;&#x8303;&#x56F4;&#x7684;for&#x80FD;&#x4FEE;&#x6539;&#x5143;&#x7D20;&#x503C;&#x3002;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*__&#x9700;&#x8981;&#x652F;&#x6301;&#x968F;&#x673A;&#x8BBF;&#x95EE;__*/</span></span><br><span class="line"><span class="comment">//&#x968F;&#x673A;&#x6392;&#x5217;&#x533A;&#x95F4;&#x4E2D;&#x7684;&#x5143;&#x7D20;</span></span><br><span class="line">random_shuffle(it1, it2);</span><br><span class="line"><span class="comment">//&#x6392;&#x5217;&#x6307;&#x5B9A;&#x533A;&#x95F4;&#xFF0C;&#x9ED8;&#x8BA4;&#x6309;&#x7167; &lt; &#x8FD0;&#x7B97;&#x7B26;&#xFF0C;&#x6216;&#x8005;&#x51FD;&#x6570;&#x5BF9;&#x8C61;(&#x63A5;&#x6536;&#x4E24;&#x4E2A;&#x5143;&#x7D20;&#x5F15;&#x7528;&#xFF0C;&#x8FD4;&#x56DE;&#x503C;bool&#xFF0C;false&#x8868;&#x793A;&#x987A;&#x5E8F;&#x4E0D;&#x5BF9;)</span></span><br><span class="line">sort(it1, it2[, pfun] );</span><br></pre></td></tr></table></figure>
-<h3 id="&#x8FED;&#x4EE3;&#x5668;"><a href="#&#x8FED;&#x4EE3;&#x5668;" class="headerlink" title="&#x8FED;&#x4EE3;&#x5668;"></a>&#x8FED;&#x4EE3;&#x5668;</h3><p>&#x8FED;&#x4EE3;&#x5668;&#x662F;&#x5E7F;&#x4E49;&#x6307;&#x9488;&#x3002;&#x8BA9; STL &#x80FD;&#x591F;&#x4E3A;&#x4E0D;&#x540C;&#x7684;&#x5BB9;&#x5668;&#x7C7B;&#x63D0;&#x4F9B;&#x7EDF;&#x4E00;&#x7684;&#x63A5;&#x53E3;&#x3002;</p>
-<p>&#x6BCF;&#x4E2A;&#x7C7B;&#x90FD;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x8BE5;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x7C7B;&#x578B;&#x662F;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; iterator &#x7684; typedef&#xFF0C;&#x5176;&#x4F5C;&#x7528;&#x57DF;&#x4E3A;&#x6574;&#x4E2A;&#x7C7B;&#x3002;</p>
-<p>&#x4F8B;&#x5982;&#xFF1A;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;::iterator pd;<span class="comment">// pd an iterator</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x884C;&#x4E3A;&#x5C31;&#x50CF;&#x6307;&#x9488;</span></span><br><span class="line"><span class="keyword">auto</span> pd = scores.begin(); <span class="comment">// c++ automatic tyoe deduction</span></span><br><span class="line">*pd = <span class="number">22.3</span>;</span><br><span class="line">++pd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(pd = scores.begin(); pd != scores.end(); ++pd)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *pd &lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="&#x8FED;&#x4EE3;&#x5668;&#x7C7B;&#x578B;"><a href="#&#x8FED;&#x4EE3;&#x5668;&#x7C7B;&#x578B;" class="headerlink" title="&#x8FED;&#x4EE3;&#x5668;&#x7C7B;&#x578B;"></a>&#x8FED;&#x4EE3;&#x5668;&#x7C7B;&#x578B;</h4><p>&#x4E0D;&#x540C;&#x7684;&#x7B97;&#x6CD5;&#x5BF9;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x8981;&#x6C42;&#x4E5F;&#x4E0D;&#x540C;&#x3002;STL&#x5B9A;&#x4E49;&#x4E86;5&#x79CD;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x5E76;&#x6839;&#x636E;&#x6240;&#x9700;&#x8981;&#x7684;&#x7C7B;&#x578B;&#x5BF9;&#x7B97;&#x6CD5;&#x8FDB;&#x884C;&#x4E86;&#x63CF;&#x8FF0;&#x3002;</p>
-<p>&#x4F8B;&#x5982;&#xFF0C;find()&#x7684;&#x539F;&#x578B;&#x4E0E;&#x4E0B;&#x9762;&#x7C7B;&#x4F3C;&#xFF0C;&#x6307;&#x51FA;&#x4E86;&#x7B97;&#x6CD5;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;&#xFF1A;</p>
+  <div class="container">
+    <article>
+      <h1>C++ STL</h1>
+      <h2 id="标准模板库"><a href="#标准模板库" class="headerlink" title="标准模板库"></a>标准模板库</h2><p>STL 提供了一组表示容器、迭代器、函数对象、算法的模板。</p>
+<p>STL 容器是同质的，即存储的值的类型相同。</p>
+<h3 id="通用方法"><a href="#通用方法" class="headerlink" title="通用方法"></a>通用方法</h3><p>对于已有的通用方法，类也有可能重新定义成员方法。因为针对特殊元素的成员方法一般比通用方法效率高。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a.size();	<span class="comment">//返回元素数目</span></span><br><span class="line">a.swap(b);	<span class="comment">//交换两个容器的内容</span></span><br><span class="line"></span><br><span class="line">a.begin();	<span class="comment">//返回指向容器中第一个元素的迭代器</span></span><br><span class="line">a.end();	<span class="comment">//返回一个表示超过容器尾的迭代器</span></span><br><span class="line">a.cbegin();	<span class="comment">//c++11 const迭代器</span></span><br><span class="line">a.cend();	<span class="comment">//c++11 const迭代器</span></span><br><span class="line"></span><br><span class="line">copy(it1, it2, it3);	<span class="comment">//前两个参数表示要复制的范围(输入迭代器)，第三个参数表示复制到的位置(输出迭代器)。</span></span><br><span class="line"></span><br><span class="line">for_each(it1, it2, pfun);	<span class="comment">//替换for循环，对指定区间每个元素使用函数对象。不能修改元素值。</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> x: books)&#123;*pfun(x)&#125;;	<span class="comment">//基于范围的for能修改元素值。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*__需要支持随机访问__*/</span></span><br><span class="line"><span class="comment">//随机排列区间中的元素</span></span><br><span class="line">random_shuffle(it1, it2);</span><br><span class="line"><span class="comment">//排列指定区间，默认按照 &lt; 运算符，或者函数对象(接收两个元素引用，返回值bool，false表示顺序不对)</span></span><br><span class="line">sort(it1, it2[, pfun] );</span><br></pre></td></tr></table></figure>
+<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>迭代器是广义指针。让 STL 能够为不同的容器类提供统一的接口。</p>
+<p>每个类都定义了一个合适的迭代器，该迭代器的类型是一个名为 iterator 的 typedef，其作用域为整个类。</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;::iterator pd;<span class="comment">// pd an iterator</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//迭代器的行为就像指针</span></span><br><span class="line"><span class="keyword">auto</span> pd = scores.begin(); <span class="comment">// c++ automatic tyoe deduction</span></span><br><span class="line">*pd = <span class="number">22.3</span>;</span><br><span class="line">++pd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(pd = scores.begin(); pd != scores.end(); ++pd)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *pd &lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="迭代器类型"><a href="#迭代器类型" class="headerlink" title="迭代器类型"></a>迭代器类型</h4><p>不同的算法对迭代器的要求也不同。STL定义了5种迭代器，并根据所需要的类型对算法进行了描述。</p>
+<p>例如，find()的原型与下面类似，指出了算法需要一个输入迭代器：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">InputIterator</span>, <span class="title">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">InputIterator</span> <span class="title">find</span>(<span class="title">InputIterator</span> <span class="title">first</span>, <span class="title">InputIterator</span> <span class="title">last</span>, <span class="title">const</span> <span class="title">T</span>&amp; <span class="title">value</span>);</span></span><br></pre></td></tr></table></figure>
-<h5 id="&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;"><a href="#&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;" class="headerlink" title="&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;"></a>&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;</h5><ul class="ui list">
-<li>&#x672F;&#x8BED;&#x201C;&#x8F93;&#x5165;&#x201D;&#x662F;&#x4ECE;&#x7A0B;&#x5E8F;&#x7684;&#x89D2;&#x5EA6;&#x8BF4;&#x7684;&#xFF0C;&#x5373;&#x6765;&#x81EA;&#x5BB9;&#x5668;&#x7684;&#x4FE1;&#x606F;&#x88AB;&#x89C6;&#x4E3A;&#x8F93;&#x5165;&#x3002;</li>
-<li>&#x4E0D;&#x80FD;&#x4FEE;&#x6539;&#x5143;&#x7D20;&#x3002;</li>
-<li><p>&#x5FC5;&#x987B;&#x80FD;&#x591F;&#x8BBF;&#x95EE;&#x5BB9;&#x5668;&#x4E2D;&#x6240;&#x6709;&#x5143;&#x7D20;&#xFF0C;&#x901A;&#x8FC7;&#x652F;&#x6301;&#x4E24;&#x79CD;&#x5F62;&#x5F0F;&#x7684;++&#x8FD0;&#x7B97;&#x7B26;&#x3002;</p>
+<h5 id="输入迭代器"><a href="#输入迭代器" class="headerlink" title="输入迭代器"></a>输入迭代器</h5><ul>
+<li>术语“输入”是从程序的角度说的，即来自容器的信息被视为输入。</li>
+<li>不能修改元素。</li>
+<li><p>必须能够访问容器中所有元素，通过支持两种形式的++运算符。</p>
 </li>
-<li><p>&#x5E76;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x7B2C;&#x4E8C;&#x6B21;&#x904D;&#x5386;&#x5BB9;&#x5668;&#x65F6;&#xFF0C;&#x987A;&#x5E8F;&#x4E0D;&#x53D8;&#x3002;</p>
+<li><p>并不能保证第二次遍历容器时，顺序不变。</p>
 </li>
-<li>&#x662F;&#x5355;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x53EF;&#x4EE5;&#x9012;&#x589E;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x5012;&#x9000;&#x3002;</li>
+<li>是单向迭代器，可以递增，但不能倒退。</li>
 </ul>
-<h5 id="&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;"><a href="#&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;" class="headerlink" title="&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;"></a>&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;</h5><ul class="ui list">
-<li><p>&#x672F;&#x8BED;&#x201C;&#x8F93;&#x51FA;&#x201D;&#x6307;&#x7528;&#x4E8E;&#x5C06;&#x4FE1;&#x606F;&#x4ECE;&#x7A0B;&#x5E8F;&#x4F20;&#x8F93;&#x7ED9;&#x5BB9;&#x5668;&#x3002;</p>
+<h5 id="输出迭代器"><a href="#输出迭代器" class="headerlink" title="输出迭代器"></a>输出迭代器</h5><ul>
+<li><p>术语“输出”指用于将信息从程序传输给容器。</p>
 </li>
-<li><p>&#x53EA;&#x80FD;&#x89E3;&#x5F15;&#x7528;&#x4FEE;&#x6539;&#x5BB9;&#x5668;&#x503C;&#xFF0C;&#x4E0D;&#x80FD;&#x8BFB;&#x53D6;&#x3002;</p>
-<p>&#x8FD9;&#x70B9;&#x53EF;&#x80FD;&#x5F88;&#x5947;&#x602A;&#x3002;&#x5176;&#x5B9E;&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;&#x53D1;&#x9001;&#x5230;&#x663E;&#x793A;&#x5668;&#x4E0A;&#x7684;&#x8F93;&#x51FA;&#x5C31;&#x662F;&#x5982;&#x6B64;&#xFF0C;cout &#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x53D1;&#x9001;&#x5230;&#x663E;&#x793A;&#x5668;&#x7684;&#x5B57;&#x7B26;&#x6D41;&#xFF0C;&#x5374;&#x4E0D;&#x80FD;&#x8BFB;&#x53D6;&#x5C4F;&#x5E55;&#x4E0A;&#x7684;&#x5185;&#x5BB9;&#x3002;STL&#x8DB3;&#x591F;&#x901A;&#x7528;&#xFF0C;&#x5176;&#x5BB9;&#x5668;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x8F93;&#x51FA;&#x8BBE;&#x5907;&#x3002;</p>
+<li><p>只能解引用修改容器值，不能读取。</p>
+<p>这点可能很奇怪。其实类似的，发送到显示器上的输出就是如此，cout 可以修改发送到显示器的字符流，却不能读取屏幕上的内容。STL足够通用，其容器可以表示输出设备。</p>
 </li>
-<li><p>&#x5355;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x3002;</p>
+<li><p>单向迭代器。</p>
 </li>
 </ul>
-<p>&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;&#x5BF9;&#x4E8E;&#x5355;&#x901A;&#x884C;&#x3001;&#x53EA;&#x8BFB;&#x7B97;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8F93;&#x5165;&#x8FED;&#x4EE3;&#x5668;&#xFF1B;&#x5355;&#x901A;&#x884C;&#x3001;&#x53EA;&#x5199;&#xFF0C;&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x3002;</p>
-<h5 id="&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;"><a href="#&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;" class="headerlink" title="&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;"></a>&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;</h5><ul class="ui list">
-<li><p>&#x53EA;&#x4F7F;&#x7528;++&#x8FD0;&#x7B97;&#x7B26;&#x6765;&#x904D;&#x5386;&#x5BB9;&#x5668;&#xFF0C;&#x4E0E;&#x8F93;&#x5165;&#x3001;&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;&#x5B83;&#x603B;&#x662F;&#x6309;&#x76F8;&#x540C;&#x7684;&#x987A;&#x5E8F;&#x904D;&#x5386;&#x3002;</p>
-<p>&#x53E6;&#x5916;&#xFF0C;&#x5C06;&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x9012;&#x589E;&#x540E;&#xFF0C;&#x4ECD;&#x7136;&#x53EF;&#x4EE5;&#x5BF9;&#x524D;&#x9762;&#x7684;&#x8FED;&#x4EE3;&#x5668;&#x503C;&#x89E3;&#x5F15;&#x7528;&#xFF0C;&#x5E76;&#x5F97;&#x5230;&#x76F8;&#x540C;&#x7684;&#x503C;&#x3002;</p>
+<p>简而言之：对于单通行、只读算法，可以使用输入迭代器；单通行、只写，输出迭代器。</p>
+<h5 id="正向迭代器"><a href="#正向迭代器" class="headerlink" title="正向迭代器"></a>正向迭代器</h5><ul>
+<li><p>只使用++运算符来遍历容器，与输入、输出迭代器不同的是，它总是按相同的顺序遍历。</p>
+<p>另外，将正向迭代器递增后，仍然可以对前面的迭代器值解引用，并得到相同的值。</p>
 </li>
-<li><p>&#x5373;&#x53EF;&#x4EE5;&#x8BFB;&#x5199;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x53EA;&#x8BFB;&#xFF1A;</p>
+<li><p>即可以读写，也可以只读：</p>
 <p><code>int * pitrw;</code>    <code>const int * pitr;</code></p>
 </li>
 </ul>
-<h5 id="&#x53CC;&#x5411;&#x8FED;&#x4EE3;&#x5668;"><a href="#&#x53CC;&#x5411;&#x8FED;&#x4EE3;&#x5668;" class="headerlink" title="&#x53CC;&#x5411;&#x8FED;&#x4EE3;&#x5668;"></a>&#x53CC;&#x5411;&#x8FED;&#x4EE3;&#x5668;</h5><ul class="ui list">
-<li>&#x5177;&#x6709;&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x6240;&#x6709;&#x7279;&#x6027;&#xFF0C;&#x5E76;&#x652F;&#x6301;&#x4E24;&#x79CD;&#x9012;&#x51CF;&#x8FD0;&#x7B97;&#x7B26;&#x3002;</li>
+<h5 id="双向迭代器"><a href="#双向迭代器" class="headerlink" title="双向迭代器"></a>双向迭代器</h5><ul>
+<li>具有正向迭代器的所有特性，并支持两种递减运算符。</li>
 </ul>
-<p>&#x6BD4;&#x5982; reverse() &#x51FD;&#x6570;&#xFF0C;&#x4EA4;&#x6362;&#x7B2C;&#x4E00;&#x4E2A;&#x548C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5E76;&#x5C06;&#x6307;&#x5411;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x6307;&#x9488;&#x52A0;&#x4E00;&#x3001;&#x6307;&#x5411;&#x6700;&#x540E;&#x7684;&#x51CF;&#x4E00;&#xFF0C;&#x5E76;&#x91CD;&#x590D;&#x8FD9;&#x79CD;&#x8FC7;&#x7A0B;&#x3002;</p>
-<h5 id="&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x8FED;&#x4EE3;&#x5668;"><a href="#&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x8FED;&#x4EE3;&#x5668;" class="headerlink" title="&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x8FED;&#x4EE3;&#x5668;"></a>&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x8FED;&#x4EE3;&#x5668;</h5><ul class="ui list">
-<li>&#x6709;&#x4E9B;&#x7B97;&#x6CD5;&#x8981;&#x6C42;&#x80FD;&#x591F;&#x76F4;&#x63A5;&#x8DF3;&#x5230;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x8FD9;&#x53EB;&#x505A;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x3002;</li>
-<li>&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x62E5;&#x6709;&#x53CC;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x6240;&#x6709;&#x7279;&#x6027;&#xFF0C;&#x5E76;&#x4E14;&#x652F;&#x6301;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#xFF08;&#x5982;&#x6307;&#x9488;&#x589E;&#x52A0;&#x8FD0;&#x7B97;&#xFF09;&#x548C;&#x7528;&#x4E8E;&#x5BF9;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#x7684;&#x5173;&#x7CFB;&#x8FD0;&#x7B97;&#x7B26;&#x3002;</li>
+<p>比如 reverse() 函数，交换第一个和最后一个元素，并将指向第一个元素的指针加一、指向最后的减一，并重复这种过程。</p>
+<h5 id="随机访问迭代器"><a href="#随机访问迭代器" class="headerlink" title="随机访问迭代器"></a>随机访问迭代器</h5><ul>
+<li>有些算法要求能够直接跳到容器中的任何一个元素，这叫做随机访问。</li>
+<li>随机访问拥有双向迭代器的所有特性，并且支持随机访问（如指针增加运算）和用于对元素进行排序的关系运算符。</li>
 </ul>
-<h4 id="&#x5C06;&#x6307;&#x9488;&#x7528;&#x4F5C;&#x8FED;&#x4EE3;&#x5668;"><a href="#&#x5C06;&#x6307;&#x9488;&#x7528;&#x4F5C;&#x8FED;&#x4EE3;&#x5668;" class="headerlink" title="&#x5C06;&#x6307;&#x9488;&#x7528;&#x4F5C;&#x8FED;&#x4EE3;&#x5668;"></a>&#x5C06;&#x6307;&#x9488;&#x7528;&#x4F5C;&#x8FED;&#x4EE3;&#x5668;</h4><ul class="ui list">
-<li>&#x6307;&#x9488;&#x6EE1;&#x8DB3;&#x6240;&#x6709;&#x8FED;&#x4EE3;&#x5668;&#x8981;&#x6C42;&#x3002;</li>
+<h4 id="将指针用作迭代器"><a href="#将指针用作迭代器" class="headerlink" title="将指针用作迭代器"></a>将指针用作迭代器</h4><ul>
+<li>指针满足所有迭代器要求。</li>
 </ul>
-<h4 id="&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x9002;&#x914D;&#x5668;"><a href="#&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x9002;&#x914D;&#x5668;" class="headerlink" title="&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x9002;&#x914D;&#x5668;"></a>&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x9002;&#x914D;&#x5668;</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="comment">// *** ostream_iterator ***</span></span><br><span class="line"><span class="comment">// &#x7B2C;&#x4E00;&#x4E2A;&#x6A21;&#x677F;&#x53C2;&#x6570;&#x6307;&#x51FA;&#x4E86;&#x88AB;&#x53D1;&#x9001;&#x7ED9;&#x8F93;&#x51FA;&#x6D41;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;</span></span><br><span class="line"><span class="comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x6A21;&#x677F;&#x53C2;&#x6570;&#x6307;&#x51FA;&#x8F93;&#x51FA;&#x6D41;&#x4F7F;&#x7528;&#x7684;&#x5B57;&#x7B26;&#x7C7B;&#x578B;{char, wchar_t}</span></span><br><span class="line"><span class="comment">// &#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x6307;&#x51FA;&#x4E86;&#x8981;&#x7528;&#x7684;&#x8F93;&#x51FA;&#x6D41;&#xFF0C;&#x53EF;&#x4EE5;&#x662F;&#x6587;&#x4EF6;&#x6D41;</span></span><br><span class="line"><span class="comment">// &#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x53D1;&#x9001;&#x7ED9;&#x8F93;&#x51FA;&#x6D41;&#x7684;&#x6BCF;&#x4E2A;&#x9879;&#x540E;&#x7684;&#x5206;&#x9694;&#x7B26;</span></span><br><span class="line">ostream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt; out_iter(<span class="built_in">cout</span>, <span class="string">&quot; &quot;</span>);</span><br><span class="line">copy(dice.begin(), dice.end(), out_iter);	<span class="comment">// copy vector to output stream</span></span><br><span class="line"><span class="comment">// &#x4E5F;&#x53EF;&#x4F7F;&#x7528;&#x533F;&#x540D;&#x8FED;&#x4EE3;&#x5668;</span></span><br><span class="line">copy(dice.begin(), dice.end(), ostream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;(<span class="built_in">cout</span>, <span class="string">&quot; &quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// *** istream_iterator ***</span></span><br><span class="line"><span class="comment">// &#x7B2C;&#x4E00;&#x4E2A;&#x6A21;&#x677F;&#x53C2;&#x6570;&#x6307;&#x51FA;&#x8981;&#x8BFB;&#x53D6;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;</span></span><br><span class="line"><span class="comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x6A21;&#x677F;&#x53C2;&#x6570;&#x6307;&#x51FA;&#x8F93;&#x5165;&#x6D41;&#x4F7F;&#x7528;&#x7684;&#x5B57;&#x7B26;&#x7C7B;&#x578B;{char, wchar_t}</span></span><br><span class="line"><span class="comment">// &#x6784;&#x9020;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x6807;&#x4E66;&#x4F7F;&#x7528;&#x7684;&#x8F93;&#x5165;&#x6D41;&#xFF0C;&#x5982;&#x679C;&#x7701;&#x7565;&#x53C2;&#x6570;&#x8868;&#x793A;&#x8F93;&#x5165;&#x5931;&#x8D25;&#x3002;</span></span><br><span class="line">copy(istream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;(<span class="built_in">cin</span>), </span><br><span class="line">    istream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;(), dice.begin());	</span><br><span class="line"><span class="comment">//&#x4ECE;&#x8F93;&#x5165;&#x6D41;&#x8BFB;&#x53D6;&#xFF0C;&#x76F4;&#x5230;&#x6587;&#x4EF6;&#x7ED3;&#x5C3E;&#x3001;&#x7C7B;&#x578B;&#x4E0D;&#x5339;&#x914D;&#x6216;&#x5176;&#x4ED6;&#x8F93;&#x5165;&#x6545;&#x969C;</span></span><br></pre></td></tr></table></figure>
-<h4 id="&#x53CD;&#x5411;&#x8FED;&#x4EE3;&#x5668;"><a href="#&#x53CD;&#x5411;&#x8FED;&#x4EE3;&#x5668;" class="headerlink" title="&#x53CD;&#x5411;&#x8FED;&#x4EE3;&#x5668;"></a>&#x53CD;&#x5411;&#x8FED;&#x4EE3;&#x5668;</h4><ul class="ui list">
-<li>&#x5BF9; reverse_iterator &#x6267;&#x884C;<strong>&#x9012;&#x589E;</strong>&#x64CD;&#x4F5C;&#x5C06;&#x5BFC;&#x81F4;&#x5B83;&#x88AB;<strong>&#x9012;&#x51CF;</strong>&#x3002;</li>
+<h4 id="迭代器的输入输出适配器"><a href="#迭代器的输入输出适配器" class="headerlink" title="迭代器的输入输出适配器"></a>迭代器的输入输出适配器</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="comment">// *** ostream_iterator ***</span></span><br><span class="line"><span class="comment">// 第一个模板参数指出了被发送给输出流的数据类型</span></span><br><span class="line"><span class="comment">// 第二个模板参数指出输出流使用的字符类型&#123;char, wchar_t&#125;</span></span><br><span class="line"><span class="comment">// 构造函数的第一个参数指出了要用的输出流，可以是文件流</span></span><br><span class="line"><span class="comment">// 构造函数的第二个参数是发送给输出流的每个项后的分隔符</span></span><br><span class="line">ostream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt; out_iter(<span class="built_in">cout</span>, <span class="string">" "</span>);</span><br><span class="line">copy(dice.begin(), dice.end(), out_iter);	<span class="comment">// copy vector to output stream</span></span><br><span class="line"><span class="comment">// 也可使用匿名迭代器</span></span><br><span class="line">copy(dice.begin(), dice.end(), ostream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;(<span class="built_in">cout</span>, <span class="string">" "</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// *** istream_iterator ***</span></span><br><span class="line"><span class="comment">// 第一个模板参数指出要读取的数据类型</span></span><br><span class="line"><span class="comment">// 第二个模板参数指出输入流使用的字符类型&#123;char, wchar_t&#125;</span></span><br><span class="line"><span class="comment">// 构造函数参数标书使用的输入流，如果省略参数表示输入失败。</span></span><br><span class="line">copy(istream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;(<span class="built_in">cin</span>), </span><br><span class="line">    istream_iterator&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;(), dice.begin());	</span><br><span class="line"><span class="comment">//从输入流读取，直到文件结尾、类型不匹配或其他输入故障</span></span><br></pre></td></tr></table></figure>
+<h4 id="反向迭代器"><a href="#反向迭代器" class="headerlink" title="反向迭代器"></a>反向迭代器</h4><ul>
+<li>对 reverse_iterator 执行<strong>递增</strong>操作将导致它被<strong>递减</strong>。</li>
 </ul>
-<p>vector &#x7C7B;&#x6709;&#x540D;&#x4E3A; rbegin() &#x548C; rend() &#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#xFF0C;&#x5206;&#x522B;&#x8FD4;&#x56DE;&#x6307;&#x5411;&#x8D85;&#x5C3E;&#x548C;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x53CD;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x3002;</p>
+<p>vector 类有名为 rbegin() 和 rend() 的成员函数，分别返回指向超尾和第一个元素的反向迭代器。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy(dice.rbegin(), dice.rend(), out_iter);	<span class="comment">// display in reverse order</span></span><br></pre></td></tr></table></figure>
-<p>&#x53CD;&#x5411;&#x6307;&#x9488;&#x901A;&#x8FC7;&#x201D;&#x5148;&#x9012;&#x51CF;&#x3001;&#x518D;&#x89E3;&#x5F15;&#x7528;&#x201D;&#x6765;&#x8BBF;&#x95EE;&#x5230;&#x6BCF;&#x4E00;&#x4E2A;&#x9879;&#x3002;</p>
-<h4 id="&#x63D2;&#x5165;&#x8FED;&#x4EE3;&#x5668;"><a href="#&#x63D2;&#x5165;&#x8FED;&#x4EE3;&#x5668;" class="headerlink" title="&#x63D2;&#x5165;&#x8FED;&#x4EE3;&#x5668;"></a>&#x63D2;&#x5165;&#x8FED;&#x4EE3;&#x5668;</h4><p>&#x63D2;&#x5165;&#x5C06;&#x6DFB;&#x52A0;&#x65B0;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x800C;&#x4E0D;&#x4F1A;&#x8986;&#x76D6;&#x5DF2;&#x6709;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x81EA;&#x52A8;&#x5185;&#x5B58;&#x5206;&#x914D;&#x6765;&#x786E;&#x4FDD;&#x80FD;&#x5BB9;&#x7EB3;&#x65B0;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
-<p><strong>&#x4E09;&#x79CD;&#x7C7B;&#x578B;</strong>&#xFF1A;</p>
-<ul class="ui list">
-<li>back_insert_iterator &#x5C06;&#x5143;&#x7D20;&#x63D2;&#x5165;&#x5230;&#x5BB9;&#x5668;&#x5C3E;&#x90E8;</li>
-<li>front_insert_iterator &#x5C06;&#x5143;&#x7D20;&#x63D2;&#x5165;&#x5230;&#x5BB9;&#x5668;&#x524D;&#x7AEF;</li>
-<li>insert_iterator &#x5C06;&#x5143;&#x7D20;&#x63D2;&#x5165;&#x5230;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6307;&#x5B9A;&#x7684;&#x4F4D;&#x7F6E;&#x7684;&#x524D;&#x9762;</li>
+<p>反向指针通过”先递减、再解引用”来访问到每一个项。</p>
+<h4 id="插入迭代器"><a href="#插入迭代器" class="headerlink" title="插入迭代器"></a>插入迭代器</h4><p>插入将添加新的元素，而不会覆盖已有的数据，并使用自动内存分配来确保能容纳新的元素。</p>
+<p><strong>三种类型</strong>：</p>
+<ul>
+<li>back_insert_iterator 将元素插入到容器尾部</li>
+<li>front_insert_iterator 将元素插入到容器前端</li>
+<li>insert_iterator 将元素插入到构造函数指定的位置的前面</li>
 </ul>
-<p><strong>&#x4F7F;&#x7528;</strong>&#xFF1A;</p>
-<ul class="ui list">
-<li><p>&#x5C06;&#x5BB9;&#x5668;&#x4F5C;&#x4E3A;&#x6A21;&#x677F;&#x53C2;&#x6570;&#xFF0C;&#x5C06;&#x5B9E;&#x9645;&#x7684;&#x5BB9;&#x5668;&#x6807;&#x8BC6;&#x7B26;&#x4F5C;&#x4E3A;&#x6784;&#x9020;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x3002;</p>
+<p><strong>使用</strong>：</p>
+<ul>
+<li><p>将容器作为模板参数，将实际的容器标识符作为构造函数参数。</p>
 <p><code>back_insert_iterator&lt;vector&lt;int&gt; &gt; back_iter(dice);</code></p>
-<p>back_insert_iterator &#x5C06;&#x5047;&#x5B9A;&#x4F20;&#x9012;&#x7ED9;&#x5B83;&#x7684;&#x7C7B;&#x578B;&#x6709;&#x4E00;&#x4E2A; push_back() &#x65B9;&#x6CD5;&#x3002;</p>
+<p>back_insert_iterator 将假定传递给它的类型有一个 push_back() 方法。</p>
 </li>
-<li><p>&#x5BF9;&#x4E8E; insert_iterator &#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x6307;&#x793A;&#x63D2;&#x5165;&#x4F4D;&#x7F6E;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x53C2;&#x6570;&#xFF1A;</p>
+<li><p>对于 insert_iterator ，还需要一个指示插入位置的构造函数参数：</p>
 <p><code>insert_iterator&lt;vector&lt;int&gt; &gt; back_iter(dice, dice.begin() );</code></p>
 </li>
 </ul>
-<p><strong>&#x9650;&#x5236;</strong>&#xFF1A;</p>
-<ul class="ui list">
-<li>back_insert_iterator &#x53EA;&#x80FD;&#x7528;&#x4E8E;&#x5141;&#x8BB8;&#x5728;&#x5C3E;&#x90E8;&#x5FEB;&#x901F;&#x63D2;&#x5165;&#x7684;&#x5BB9;&#x5668;(&#x65F6;&#x95F4;&#x56FA;&#x5B9A;&#x7684;&#x7B97;&#x6CD5;)&#xFF0C;vector&#x7B26;&#x5408;</li>
-<li>front_insert_iterator &#x53EA;&#x80FD;&#x7528;&#x4E8E;&#x5141;&#x8BB8;&#x5728;&#x8D77;&#x59CB;&#x4F4D;&#x7F6E;&#x505A;&#x65F6;&#x95F4;&#x56FA;&#x5B9A;&#x63D2;&#x5165;&#x7684;&#x5BB9;&#x5668;&#xFF0C;vector&#x4E0D;&#x7B26;&#x5408;&#xFF0C;&#x4F46;queue&#x6EE1;&#x8DB3;</li>
-<li>insert_iterator &#x6CA1;&#x6709;&#x8FD9;&#x4E9B;&#x9650;&#x5236;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x5B83;&#x6765;&#x63D2;&#x5165;&#x5230; vector &#x524D;&#x7AEF;&#xFF0C;&#x4F46;&#x901F;&#x5EA6;&#x6162;&#x3002;</li>
+<p><strong>限制</strong>：</p>
+<ul>
+<li>back_insert_iterator 只能用于允许在尾部快速插入的容器(时间固定的算法)，vector符合</li>
+<li>front_insert_iterator 只能用于允许在起始位置做时间固定插入的容器，vector不符合，但queue满足</li>
+<li>insert_iterator 没有这些限制，可以用它来插入到 vector 前端，但速度慢。</li>
 </ul>
-<h3 id="&#x5BB9;&#x5668;"><a href="#&#x5BB9;&#x5668;" class="headerlink" title="&#x5BB9;&#x5668;"></a>&#x5BB9;&#x5668;</h3><ul class="ui list">
-<li><p>STL&#x5177;&#x6709;&#x5BB9;&#x5668;&#x6982;&#x5FF5;&#x548C;&#x5BB9;&#x5668;&#x7C7B;&#x578B;&#x3002;</p>
-<p><strong>&#x5BB9;&#x5668;&#x6982;&#x5FF5;</strong>&#x662F;&#x5177;&#x6709;&#x76F8;&#x540C;&#x540D;&#x79F0;&#xFF08;&#x5982;&#x5BB9;&#x5668;&#x3001;&#x5E8F;&#x5217;&#x5BB9;&#x5668;&#x3001;&#x5173;&#x8054;&#x5BB9;&#x5668;&#x7B49;&#xFF09;&#x7684;&#x901A;&#x7528;&#x7C7B;&#x522B;&#xFF1B;</p>
-<p><strong>&#x5BB9;&#x5668;&#x7C7B;&#x578B;</strong>&#x662F;&#x53EF;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x5177;&#x4F53;&#x5BB9;&#x5668;&#x5BF9;&#x8C61;&#x7684;&#x6A21;&#x677F;&#x3002;</p>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><ul>
+<li><p>STL具有容器概念和容器类型。</p>
+<p><strong>容器概念</strong>是具有相同名称（如容器、序列容器、关联容器等）的通用类别；</p>
+<p><strong>容器类型</strong>是可用于创建具体容器对象的模板。</p>
 </li>
-<li><p>&#x5BB9;&#x5668;&#x662F;&#x5B58;&#x50A8;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x88AB;&#x5B58;&#x50A8;&#x7684;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x662F;<strong>&#x540C;&#x7C7B;&#x578B;</strong>&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x662F;&#x5185;&#x7F6E;&#x7C7B;&#x578B;&#x503C;&#x3002;</p>
+<li><p>容器是存储其他对象的对象。被存储的对象必须是<strong>同类型</strong>的，可以是内置类型值。</p>
 </li>
-<li><p>&#x4E0D;&#x662F;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x90FD;&#x80FD;&#x5B58;&#x50A8;&#x5728;&#x5BB9;&#x5668;&#x4E2D;&#x3002;</p>
-<p>&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x662F;&#x53EF;&#x590D;&#x5236;&#x6784;&#x9020;&#x7684;&#x548C;&#x53EF;&#x8D4B;&#x503C;&#x7684;&#x3002;</p>
-<p>&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x6EE1;&#x8DB3;&#x8981;&#x6C42;&#xFF1B;&#x53EA;&#x8981;&#x7C7B;&#x5B9A;&#x4E49;&#x6CA1;&#x6709;&#x5C06;&#x590D;&#x5236;&#x6784;&#x9020;&#x51FD;&#x6570;&#x548C;&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x58F0;&#x660E;&#x4E3A;&#x79C1;&#x6709;&#x7684;&#xFF0C;&#x4E5F;&#x6EE1;&#x8DB3;&#x8981;&#x6C42;&#x3002;</p>
+<li><p>不是任何类型的对象都能存储在容器中。</p>
+<p>类型必须是可复制构造的和可赋值的。</p>
+<p>基本类型满足要求；只要类定义没有将复制构造函数和赋值运算符声明为私有的，也满足要求。</p>
 </li>
 </ul>
-<p><strong>&#x57FA;&#x672C;&#x7684;&#x5BB9;&#x5668;&#x7279;&#x5F81;</strong></p>
-<ol class="ui list">
-<li>&#x4E0A;&#x6587;&#x4ECB;&#x7ECD;&#x7684;STL&#x901A;&#x7528;&#x65B9;&#x6CD5;</li>
-<li><code>X::iterator</code> &#x6307;&#x5411; T &#x7684;&#x8FED;&#x4EE3;&#x5668;&#x7C7B;&#x578B;&#x3002;&#x8981;&#x6C42;&#xFF1A;&#x6EE1;&#x8DB3;&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x4EFB;&#x4F55;&#x8FED;&#x4EE3;&#x5668;&#x3002;</li>
-<li><code>X::value_type</code> T &#x7684;&#x7C7B;&#x578B;&#x3002;</li>
+<p><strong>基本的容器特征</strong></p>
+<ol>
+<li>上文介绍的STL通用方法</li>
+<li><code>X::iterator</code> 指向 T 的迭代器类型。要求：满足正向迭代器的任何迭代器。</li>
+<li><code>X::value_type</code> T 的类型。</li>
 </ol>
-<h4 id="&#x6240;&#x6709;&#x5BB9;&#x5668;"><a href="#&#x6240;&#x6709;&#x5BB9;&#x5668;" class="headerlink" title="&#x6240;&#x6709;&#x5BB9;&#x5668;"></a>&#x6240;&#x6709;&#x5BB9;&#x5668;</h4><p><strong>11&#x4E2A;&#x57FA;&#x672C;&#x5BB9;&#x5668;</strong>&#xFF1A;</p>
-<p>deque&#x3001;list&#x3001;</p>
-<p>queue&#x3001;priority_queue&#x3001;</p>
-<p>stack&#x3001;vector&#x3001;</p>
-<p>map&#x3001;multimap&#x3001;</p>
-<p>set&#x3001;multiset&#x3001;bitset&#x3002;</p>
-<p><strong>5&#x4E2A;c++11&#x65B0;&#x589E;</strong>&#xFF1A;</p>
-<p>forward_list&#x3001;</p>
-<p>unordered_map&#x3001;unordered_multimap&#x3001;</p>
-<p>unordered_set&#x3001;unordered_multiset&#x3002;</p>
-<h4 id="&#x5E8F;&#x5217;&#x5BB9;&#x5668;"><a href="#&#x5E8F;&#x5217;&#x5BB9;&#x5668;" class="headerlink" title="&#x5E8F;&#x5217;&#x5BB9;&#x5668;"></a>&#x5E8F;&#x5217;&#x5BB9;&#x5668;</h4><p><strong>7&#x79CD;&#x5BB9;&#x5668;</strong>&#xFF1A;</p>
-<p>deque&#x3001;queue&#x3001;priority_queue&#x3001;</p>
-<p>list&#x3001;forward_list (c++11)&#x3001;</p>
-<p>stack&#x3001;vector &#x3002;</p>
-<p><strong>&#x8981;&#x6C42;</strong>&#xFF1A;</p>
-<ul class="ui list">
-<li><p>&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#xFF08;&#x4FDD;&#x8BC1;&#x4E86;&#x5143;&#x7D20;&#x6309;&#x7279;&#x5B9A;&#x987A;&#x5E8F;&#x6392;&#x5217;&#xFF0C;&#x4E0D;&#x4F1A;&#x5728;&#x4E24;&#x6B21;&#x8FED;&#x4EE3;&#x4E4B;&#x95F4;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF09;</p>
+<h4 id="所有容器"><a href="#所有容器" class="headerlink" title="所有容器"></a>所有容器</h4><p><strong>11个基本容器</strong>：</p>
+<p>deque、list、</p>
+<p>queue、priority_queue、</p>
+<p>stack、vector、</p>
+<p>map、multimap、</p>
+<p>set、multiset、bitset。</p>
+<p><strong>5个c++11新增</strong>：</p>
+<p>forward_list、</p>
+<p>unordered_map、unordered_multimap、</p>
+<p>unordered_set、unordered_multiset。</p>
+<h4 id="序列容器"><a href="#序列容器" class="headerlink" title="序列容器"></a>序列容器</h4><p><strong>7种容器</strong>：</p>
+<p>deque、queue、priority_queue、</p>
+<p>list、forward_list (c++11)、</p>
+<p>stack、vector 。</p>
+<p><strong>要求</strong>：</p>
+<ul>
+<li><p>正向迭代器（保证了元素按特定顺序排列，不会在两次迭代之间发生变化）</p>
 </li>
-<li><p>&#x7EBF;&#x6027;&#x987A;&#x5E8F;&#xFF08;&#x6811;&#x7684;&#x5206;&#x652F;&#x7ED3;&#x6784;&#x5C31;&#x4E0D;&#x662F;&#xFF09;</p>
+<li><p>线性顺序（树的分支结构就不是）</p>
 </li>
 </ul>
-<p><strong>&#x901A;&#x7528;&#x6210;&#x5458;</strong>&#xFF1A;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">X <span class="title">a</span><span class="params">(n,t)</span></span>;	<span class="comment">// &#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;a&#x7684;&#x7531;n&#x4E2A;t&#x503C;&#x7EC4;&#x6210;&#x7684;&#x5E8F;&#x5217;</span></span><br><span class="line"><span class="function">X <span class="title">a</span><span class="params">(i,j)</span></span>;	<span class="comment">// &#x58F0;&#x660E;&#x5E76;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x533A;&#x95F4;[i,j)&#x7684;&#x5185;&#x5BB9;</span></span><br><span class="line"></span><br><span class="line">a.insert(p,t);	<span class="comment">// &#x5C06;t&#x63D2;&#x5165;&#x5230;p&#x7684;&#x524D;&#x9762;&#x3002;&#x8FD4;&#x56DE;&#x8FED;&#x4EE3;&#x5668;&#x3002;</span></span><br><span class="line">a.insert(p,n,t);<span class="comment">// &#x5C06;n&#x4E2A;t&#x63D2;&#x5165;&#x5230;p&#x7684;&#x524D;&#x9762;&#x3002;&#x8FD4;&#x56DE;void&#x3002;</span></span><br><span class="line">a.insert(p,i,j);<span class="comment">// &#x5C06;&#x533A;&#x95F4;[i,j)&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x63D2;&#x5165;&#x5230;p&#x7684;&#x524D;&#x9762;&#x3002;&#x8FD4;&#x56DE;void&#x3002;</span></span><br><span class="line"></span><br><span class="line">a.erase(p);		<span class="comment">// &#x5220;&#x9664;p&#x6307;&#x5411;&#x7684;&#x5143;&#x7D20;&#x3002;&#x8FD4;&#x56DE;&#x8FED;&#x4EE3;&#x5668;&#x3002;</span></span><br><span class="line">a.erase(p,q);	<span class="comment">// &#x5220;&#x9664;&#x533A;&#x95F4;[p,q)&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x3002;&#x8FD4;&#x56DE;&#x8FED;&#x4EE3;&#x5668;&#x3002;</span></span><br><span class="line">a.clear();		<span class="comment">// &#x7B49;&#x4EF7;&#x4E8E; erase(begin(), end() )</span></span><br></pre></td></tr></table></figure>
-<p><strong>&#x53EF;&#x9009;&#x6210;&#x5458;</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*&#x8868;&#x8FBE;&#x5F0F;*/</span>		<span class="comment">/*&#x8FD4;&#x56DE;&#x7C7B;&#x578B;*/</span>	<span class="comment">/*&#x542B;&#x4E49;*/</span>			<span class="comment">/*&#x5BB9;&#x5668;*/</span></span><br><span class="line">a.front();		  T&amp;		*a.begin()		<span class="built_in">list</span>&#x3001;<span class="built_in">deque</span>&#x3001;<span class="built_in">vector</span></span><br><span class="line">a.back();		  T&amp;		*--a.end()		<span class="built_in">list</span>&#x3001;<span class="built_in">deque</span>&#x3001;<span class="built_in">vector</span></span><br><span class="line">a.push_front(t);  <span class="keyword">void</span>						<span class="built_in">list</span>&#x3001;<span class="built_in">deque</span>&#x3001;</span><br><span class="line">a.push_back(t);	  <span class="keyword">void</span>						<span class="built_in">list</span>&#x3001;<span class="built_in">deque</span>&#x3001;<span class="built_in">vector</span></span><br><span class="line">a.pop_front(t);   <span class="keyword">void</span>						<span class="built_in">list</span>&#x3001;<span class="built_in">deque</span>&#x3001;</span><br><span class="line">a.pop_back(t);    <span class="keyword">void</span>						<span class="built_in">list</span>&#x3001;<span class="built_in">deque</span>&#x3001;<span class="built_in">vector</span></span><br><span class="line">a[n]			  T&amp;						    &#x3001;<span class="built_in">deque</span>&#x3001;<span class="built_in">vector</span></span><br><span class="line">a.at(n)			  T&amp;						    &#x3001;<span class="built_in">deque</span>&#x3001;<span class="built_in">vector</span></span><br><span class="line"><span class="comment">//at(n)&#x548C;a[n]&#x533A;&#x522B;&#x5728;&#x4E8E;&#x4F1A;&#x68C0;&#x67E5;n&#x662F;&#x5426;&#x5408;&#x6CD5;&#x3002;&#x5FC5;&#x8981;&#x65F6;&#x5F15;&#x53D1;out_of_range&#x5F02;&#x5E38;&#x3002;</span></span><br></pre></td></tr></table></figure>
-<h5 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h5><p>&#x7B80;&#x5355;&#x5730;&#x8BF4;&#xFF0C;vector&#x662F;&#x6570;&#x7EC4;&#x7684;&#x4E00;&#x79CD;&#x7C7B;&#x8868;&#x793A;&#x3002;</p>
-<p>&#x9664;&#x5E8F;&#x5217;&#x5916;&#xFF0C;vector&#x8FD8;&#x662F;<strong>&#x53EF;&#x53CD;&#x8F6C;&#x5BB9;&#x5668;&#x6982;&#x5FF5;</strong>&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x589E;&#x52A0;&#x4E86;<code>rbegin()</code>&#x548C;<code>rend()</code>&#x3002;</p>
-<p>vector &#x662F;&#x6700;&#x7B80;&#x5355;&#x7684;&#x5E8F;&#x5217;&#x7C7B;&#x578B;&#xFF0C;&#x9664;&#x975E;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x7684;&#x7279;&#x6B8A;&#x4F18;&#x70B9;&#x80FD;&#x66F4;&#x597D;&#x5730;&#x6EE1;&#x8DB3;&#x7A0B;&#x5E8F;&#x7684;&#x8981;&#x6C42;&#xFF0C;&#x5426;&#x5219;&#x5E94;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x7C7B;&#x578B;&#x3002;</p>
-<h5 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h5><p>&#x53CC;&#x7AEF;&#x5217;&#x961F;</p>
-<p>&#x548C;vector&#x5DEE;&#x4E0D;&#x591A;&#x3002;</p>
-<p>&#x4E3B;&#x8981;&#x533A;&#x522B;&#xFF1A;&#x4ECE;deque&#x7684;&#x5F00;&#x59CB;&#x4F4D;&#x7F6E;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x5143;&#x7D20;&#x7684;&#x65F6;&#x95F4;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x800C;&#x4E0D;&#x50CF;vector&#x662F;&#x7EBF;&#x6027;&#x7684;&#x3002;</p>
-<h5 id="list"><a href="#list" class="headerlink" title="list"></a>list</h5><p>&#x53CC;&#x5411;&#x94FE;&#x8868;</p>
-<p>&#x53EF;&#x53CD;&#x8F6C;&#x5BB9;&#x5668;&#xFF0C;&#x4E0D;&#x652F;&#x6301;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x3002;</p>
-<p>vector &#x5F3A;&#x8C03;&#x7684;&#x662F;&#x901A;&#x8FC7;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x8FDB;&#x884C;&#x5FEB;&#x901F;&#x8BBF;&#x95EE;&#xFF0C;&#x800C; list &#x5F3A;&#x8C03;&#x7684;&#x662F;&#x5143;&#x7D20;&#x7684;&#x5FEB;&#x901F;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x3002;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#x5C06;&#x94FE;&#x8868;x&#x4E0E;&#x8C03;&#x7528;&#x94FE;&#x8868;&#x5408;&#x5E76;&#x3002;</span></span><br><span class="line"><span class="comment">//1.&#x4E24;&#x4E2A;&#x94FE;&#x8868;&#x5FC5;&#x987B;&#x5DF2;&#x7ECF;&#x6392;&#x5E8F;&#x3002;</span></span><br><span class="line"><span class="comment">//2.&#x5408;&#x5E76;&#x540E;&#x7684;&#x7ECF;&#x8FC7;&#x6392;&#x5E8F;&#x7684;&#x94FE;&#x8868;&#x5B58;&#x5728;&#x8C03;&#x7528;&#x94FE;&#x8868;&#x4E2D;&#xFF0C;x&#x6E05;&#x7A7A;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="built_in">list</span>&lt;T,Alloc&gt;&amp; x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#x4ECE;&#x94FE;&#x8868;&#x4E2D;&#x5220;&#x9664;val&#x7684;&#x6240;&#x6709;&#x5B9E;&#x4F8B;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">const</span> T&amp; val)</span></span>;</span><br><span class="line"><span class="comment">// &#x5982;&#x679C;&#x8C13;&#x8BCD;&#x8FD4;&#x56DE;true,&#x5220;&#x9664;&#x8FD9;&#x4E9B;&#x5143;&#x7D20;</span></span><br><span class="line">scores.remove_if(tooBig);</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#x7528;&lt;&#x8FD0;&#x7B97;&#x7B26;&#x5BF9;&#x94FE;&#x8868;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#x3002;O(NlogN)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#x5C06;&#x94FE;&#x8868;x&#x7684;&#x5185;&#x5BB9;&#x63D2;&#x5165;&#x5230;pos&#x7684;&#x524D;&#x9762;&#xFF0C;x&#x6E05;&#x7A7A;</span></span><br><span class="line"><span class="comment">// &#x548C;insert()&#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E;&#xFF1A;splice()&#x662F;&#x79FB;&#x52A8;&#x539F;&#x5185;&#x5BB9;&#xFF0C;insert()&#x662F;&#x63D2;&#x5165;&#x526F;&#x672C;&#x3002;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">splice</span><span class="params">(iterator pos, <span class="built_in">list</span>&lt;T,Alloc&gt; x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#x5C06;&#x8FDE;&#x7EED;&#x7684;&#x76F8;&#x540C;&#x5143;&#x7D20;&#x538B;&#x7F29;&#x4E3A;&#x5355;&#x4E2A;&#x5143;&#x7D20;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unique</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* sort()&#x3001;merge()&#x3001;unique() &#x8FD8;&#x5404;&#x81EA;&#x62E5;&#x6709;&#x63A5;&#x53D7;&#x53E6;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x8BE5;&#x53C2;&#x6570;&#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x7528;&#x6765;&#x6BD4;&#x8F83;&#x5143;&#x7D20;&#x7684;&#x51FD;&#x6570;&#x3002;</span></span><br><span class="line"><span class="comment">   remove() &#x4E5F;&#x53EF;&#x4EE5;&#x6709;&#x53E6;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x7528;&#x4E8E;&#x786E;&#x5B9A;&#x662F;&#x5426;&#x5220;&#x9664;&#x5143;&#x7D20;&#x7684;&#x51FD;&#x6570;&#x3002;</span></span><br><span class="line"><span class="comment">   &#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x90FD;&#x662F;&#x8C13;&#x8BCD;&#x51FD;&#x6570;&#x3002; */</span></span><br></pre></td></tr></table></figure>
-<p>&#x7528;&#x9014;&#x4E3E;&#x4F8B;&#xFF1A;</p>
-<p>&#x5047;&#x5982;&#x6709;&#x4E24;&#x4E2A;&#x90AE;&#x4EF6;&#x5217;&#x8868;&#x8981;&#x6574;&#x7406;&#xFF0C;&#x53EF;&#x4EE5;&#x5BF9;&#x6BCF;&#x4E2A;&#x5217;&#x8868;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF0C;&#x5408;&#x5E76;&#x5B83;&#x4EEC;&#xFF0C;&#x7136;&#x540E;&#x5220;&#x9664;&#x91CD;&#x590D;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
-<h5 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h5><p>&#x5355;&#x94FE;&#x8868;</p>
-<p>&#x4E0D;&#x53EF;&#x53CD;&#x8F6C;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x6B63;&#x5411;&#x8FED;&#x4EE3;&#x5668;&#x3002;</p>
-<h5 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h5><p>&#x961F;&#x5217;</p>
-<p>&#x662F;&#x4E00;&#x4E2A;&#x9002;&#x914D;&#x5668;&#x7C7B;&#xFF0C;&#x5E95;&#x5C42;&#x9ED8;&#x8BA4;&#x8FD8;&#x662F; deque&#x3002;</p>
-<p>&#x4E0D;&#x5141;&#x8BB8;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#xFF0C;&#x751A;&#x81F3;&#x4E0D;&#x5141;&#x8BB8;&#x904D;&#x5386;&#x3002;</p>
-<p>&#x64CD;&#x4F5C;&#x88AB;&#x9650;&#x5236;&#x5728;&#x5B9A;&#x4E49;&#x961F;&#x5217;&#x7684;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x4E0A;&#xFF1A;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">size_type <span class="title">size</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">T&amp; <span class="title">front</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">T&amp; <span class="title">back</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; x)</span></span>;	<span class="comment">// &#x961F;&#x5C3E;&#x63D2;&#x5165;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>;		<span class="comment">// &#x961F;&#x9996;&#x5F39;&#x51FA;</span></span><br></pre></td></tr></table></figure>
-<h5 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h5><p>&#x4F18;&#x5148;&#x961F;&#x5217;</p>
-<p>&#x662F;&#x53E6;&#x4E00;&#x4E2A;&#x9002;&#x914D;&#x5668;&#x7C7B;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;&#x5E95;&#x5C42;&#x7C7B;&#x662F; vector&#x3002;</p>
-<p>&#x652F;&#x6301;&#x7684;&#x64CD;&#x4F5C;&#x548C; queue &#x76F8;&#x540C;&#x3002;</p>
-<p><strong>&#x533A;&#x522B;</strong>&#xFF1A;</p>
-<ul class="ui list">
-<li><p>&#x6700;&#x5927;&#x7684;&#x5143;&#x7D20;&#x88AB;&#x79FB;&#x5230;&#x961F;&#x9996;&#x3002;</p>
-<p>&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x786E;&#x5B9A;&#x54EA;&#x4E2A;&#x5143;&#x7D20;&#x653E;&#x5230;&#x961F;&#x9996;&#x7684;&#x6BD4;&#x8F83;&#x65B9;&#x5F0F;&#xFF0C;&#x65B9;&#x6CD5;&#x662F;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x3002;</p>
+<p><strong>通用成员</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">X <span class="title">a</span><span class="params">(n,t)</span></span>;	<span class="comment">// 声明一个名为a的由n个t值组成的序列</span></span><br><span class="line"><span class="function">X <span class="title">a</span><span class="params">(i,j)</span></span>;	<span class="comment">// 声明并初始化为区间[i,j)的内容</span></span><br><span class="line"></span><br><span class="line">a.insert(p,t);	<span class="comment">// 将t插入到p的前面。返回迭代器。</span></span><br><span class="line">a.insert(p,n,t);<span class="comment">// 将n个t插入到p的前面。返回void。</span></span><br><span class="line">a.insert(p,i,j);<span class="comment">// 将区间[i,j)中的元素插入到p的前面。返回void。</span></span><br><span class="line"></span><br><span class="line">a.erase(p);		<span class="comment">// 删除p指向的元素。返回迭代器。</span></span><br><span class="line">a.erase(p,q);	<span class="comment">// 删除区间[p,q)中的元素。返回迭代器。</span></span><br><span class="line">a.clear();		<span class="comment">// 等价于 erase(begin(), end() )</span></span><br></pre></td></tr></table></figure>
+<p><strong>可选成员</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*表达式*/</span>		<span class="comment">/*返回类型*/</span>	<span class="comment">/*含义*/</span>			<span class="comment">/*容器*/</span></span><br><span class="line">a.front();		  T&amp;		*a.begin()		<span class="built_in">list</span>、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a.back();		  T&amp;		*--a.end()		<span class="built_in">list</span>、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a.push_front(t);  <span class="keyword">void</span>						<span class="built_in">list</span>、<span class="built_in">deque</span>、</span><br><span class="line">a.push_back(t);	  <span class="keyword">void</span>						<span class="built_in">list</span>、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a.pop_front(t);   <span class="keyword">void</span>						<span class="built_in">list</span>、<span class="built_in">deque</span>、</span><br><span class="line">a.pop_back(t);    <span class="keyword">void</span>						<span class="built_in">list</span>、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a[n]			  T&amp;						    、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line">a.at(n)			  T&amp;						    、<span class="built_in">deque</span>、<span class="built_in">vector</span></span><br><span class="line"><span class="comment">//at(n)和a[n]区别在于会检查n是否合法。必要时引发out_of_range异常。</span></span><br></pre></td></tr></table></figure>
+<h5 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h5><p>简单地说，vector是数组的一种类表示。</p>
+<p>除序列外，vector还是<strong>可反转容器概念</strong>的模型，增加了<code>rbegin()</code>和<code>rend()</code>。</p>
+<p>vector 是最简单的序列类型，除非其他类型的特殊优点能更好地满足程序的要求，否则应默认使用这种类型。</p>
+<h5 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h5><p>双端列队</p>
+<p>和vector差不多。</p>
+<p>主要区别：从deque的开始位置插入和删除元素的时间是固定的，而不像vector是线性的。</p>
+<h5 id="list"><a href="#list" class="headerlink" title="list"></a>list</h5><p>双向链表</p>
+<p>可反转容器，不支持随机访问。</p>
+<p>vector 强调的是通过随机访问进行快速访问，而 list 强调的是元素的快速插入和删除。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将链表x与调用链表合并。</span></span><br><span class="line"><span class="comment">//1.两个链表必须已经排序。</span></span><br><span class="line"><span class="comment">//2.合并后的经过排序的链表存在调用链表中，x清空</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="built_in">list</span>&lt;T,Alloc&gt;&amp; x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从链表中删除val的所有实例</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">const</span> T&amp; val)</span></span>;</span><br><span class="line"><span class="comment">// 如果谓词返回true,删除这些元素</span></span><br><span class="line">scores.remove_if(tooBig);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用&lt;运算符对链表进行排序。O(NlogN)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将链表x的内容插入到pos的前面，x清空</span></span><br><span class="line"><span class="comment">// 和insert()的区别在于：splice()是移动原内容，insert()是插入副本。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">splice</span><span class="params">(iterator pos, <span class="built_in">list</span>&lt;T,Alloc&gt; x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将连续的相同元素压缩为单个元素</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unique</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* sort()、merge()、unique() 还各自拥有接受另一个参数的版本，该参数用于指定用来比较元素的函数。</span></span><br><span class="line"><span class="comment">   remove() 也可以有另一个参数，用于确定是否删除元素的函数。</span></span><br><span class="line"><span class="comment">   这些参数都是谓词函数。 */</span></span><br></pre></td></tr></table></figure>
+<p>用途举例：</p>
+<p>假如有两个邮件列表要整理，可以对每个列表进行排序，合并它们，然后删除重复的元素。</p>
+<h5 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h5><p>单链表</p>
+<p>不可反转，只需要正向迭代器。</p>
+<h5 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h5><p>队列</p>
+<p>是一个适配器类，底层默认还是 deque。</p>
+<p>不允许随机访问，甚至不允许遍历。</p>
+<p>操作被限制在定义队列的基本操作上：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">size_type <span class="title">size</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">T&amp; <span class="title">front</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">T&amp; <span class="title">back</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; x)</span></span>;	<span class="comment">// 队尾插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>;		<span class="comment">// 队首弹出</span></span><br></pre></td></tr></table></figure>
+<h5 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h5><p>优先队列</p>
+<p>是另一个适配器类，默认的底层类是 vector。</p>
+<p>支持的操作和 queue 相同。</p>
+<p><strong>区别</strong>：</p>
+<ul>
+<li><p>最大的元素被移到队首。</p>
+<p>可以修改确定哪个元素放到队首的比较方式，方法是提供一个可选的构造函数参数。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; pq1;				<span class="comment">// defult version</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; pq2(greater&lt;<span class="keyword">int</span>&gt;);	<span class="comment">// use greater&lt;int&gt; to order</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h5><p>&#x6808;</p>
-<p>&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x9002;&#x914D;&#x5668;&#x7C7B;&#xFF0C;&#x9ED8;&#x8BA4;&#x5E95;&#x5C42;&#x662F; vector&#x3002;</p>
-<p>&#x4E0D;&#x5141;&#x8BB8;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#xFF0C;&#x751A;&#x81F3;&#x4E0D;&#x5141;&#x8BB8;&#x904D;&#x5386;&#x3002;</p>
-<p>&#x64CD;&#x4F5C;&#x88AB;&#x9650;&#x5236;&#x5728;&#x5B9A;&#x4E49;&#x6808;&#x7684;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x4E0A;&#xFF1A;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">size_type <span class="title">size</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">T&amp; <span class="title">top</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; x)</span></span>;	<span class="comment">// &#x6808;&#x9876;&#x63D2;&#x5165;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>;				<span class="comment">// &#x6808;&#x9876;&#x5F39;&#x51FA;</span></span><br></pre></td></tr></table></figure>
-<h5 id="array"><a href="#array" class="headerlink" title="array"></a>array</h5><p>&#x4E0D;&#x662F;STL&#x5BB9;&#x5668;&#xFF0C;&#x56E0;&#x4E3A;&#x5176;&#x957F;&#x5EA6;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#x3002;</p>
-<p>&#x5934;&#x6587;&#x4EF6;&#xFF1A;<code>&lt;array&gt;</code></p>
-<p>array&#x6CA1;&#x6709;&#x5B9A;&#x4E49;&#x8C03;&#x6574;&#x5BB9;&#x5668;&#x5927;&#x5C0F;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x4F46;&#x662F;&#x5B9A;&#x4E49;&#x4E86;&#x5BF9;&#x5B83;&#x6765;&#x8BF4;&#x6709;&#x610F;&#x4E49;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#xFF0C;&#x6BD4;&#x5982; <code>operator[]()</code> &#x548C; <code>at()</code></p>
-<p>&#x53EF;&#x4EE5;&#x5C06;&#x5F88;&#x591A;STL&#x7B97;&#x6CD5;&#x7528;&#x4E8E;array&#xFF0C;&#x6BD4;&#x5982;<code>copy()</code> &#x548C; <code>for_each()</code>&#x3002;</p>
-<h4 id="&#x5173;&#x8054;&#x5BB9;&#x5668;"><a href="#&#x5173;&#x8054;&#x5BB9;&#x5668;" class="headerlink" title="&#x5173;&#x8054;&#x5BB9;&#x5668;"></a>&#x5173;&#x8054;&#x5BB9;&#x5668;</h4><p><strong>4&#x79CD;&#x5BB9;&#x5668;</strong>&#xFF1A;</p>
-<p>set&#x3001;multiset&#x3001;</p>
-<p>map&#x3001;multimap&#x3002;</p>
-<p><strong>&#x8981;&#x6C42;</strong>&#xFF1A;</p>
-<ul class="ui list">
-<li><p>&#x5173;&#x8054;&#x5BB9;&#x5668;&#x5C06;&#x503C;&#x4E0E;&#x952E;&#x5173;&#x8054;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x952E;&#x6765;&#x67E5;&#x627E;&#x503C;&#x3002;&#x952E;&#x88AB;&#x770B;&#x505A;&#x5E38;&#x91CF;&#x3002;</p>
+<h5 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h5><p>栈</p>
+<p>也是一个适配器类，默认底层是 vector。</p>
+<p>不允许随机访问，甚至不允许遍历。</p>
+<p>操作被限制在定义栈的基本操作上：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">size_type <span class="title">size</span><span class="params">()</span><span class="keyword">const</span> </span>;</span><br><span class="line"><span class="function">T&amp; <span class="title">top</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; x)</span></span>;	<span class="comment">// 栈顶插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>;				<span class="comment">// 栈顶弹出</span></span><br></pre></td></tr></table></figure>
+<h5 id="array"><a href="#array" class="headerlink" title="array"></a>array</h5><p>不是STL容器，因为其长度是固定的。</p>
+<p>头文件：<code>&lt;array&gt;</code></p>
+<p>array没有定义调整容器大小的操作，但是定义了对它来说有意义的成员函数，比如 <code>operator[]()</code> 和 <code>at()</code></p>
+<p>可以将很多STL算法用于array，比如<code>copy()</code> 和 <code>for_each()</code>。</p>
+<h4 id="关联容器"><a href="#关联容器" class="headerlink" title="关联容器"></a>关联容器</h4><p><strong>4种容器</strong>：</p>
+<p>set、multiset、</p>
+<p>map、multimap。</p>
+<p><strong>要求</strong>：</p>
+<ul>
+<li><p>关联容器将值与键关联在一起，并使用键来查找值。键被看做常量。</p>
 </li>
-<li><p>&#x5BF9;&#x4E8E;&#x5BB9;&#x5668; X&#xFF0C;<code>X::value_type</code> &#x6307;&#x51FA;&#x5B58;&#x50A8;&#x5728;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x503C;&#x7C7B;&#x578B;&#xFF1B;</p>
-<p>&#x5BF9;&#x4E8E;&#x5173;&#x8054;&#x5BB9;&#x5668;&#xFF0C;<code>X::key_type</code> &#x6307;&#x51FA;&#x4E86;&#x952E;&#x7684;&#x7C7B;&#x578B;&#x3002;</p>
+<li><p>对于容器 X，<code>X::value_type</code> 指出存储在容器中的值类型；</p>
+<p>对于关联容器，<code>X::key_type</code> 指出了键的类型。</p>
 </li>
-<li><p>&#x5173;&#x8054;&#x5BB9;&#x5668;&#x901A;&#x5E38;&#x662F;&#x7528;&#x6811;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x67E5;&#x627E;&#x901F;&#x5EA6;&#x66F4;&#x5FEB;&#x3002;</p>
-</li>
-</ul>
-<p><strong>4&#x79CD;&#x5BB9;&#x5668;&#x90FD;&#x6709;&#x7684;&#x6027;&#x8D28;</strong>&#xFF1A;</p>
-<ul class="ui list">
-<li>&#x53EF;&#x53CD;&#x8F6C;&#x7684;</li>
-<li>&#x672C;&#x8EAB;&#x5C31;&#x662F;&#x6392;&#x5E8F;&#x7684;</li>
-</ul>
-<h5 id="multi-set"><a href="#multi-set" class="headerlink" title="(multi)set"></a>(multi)set</h5><p>&#x503C;&#x4E0E;&#x952E;&#x7C7B;&#x578B;&#x76F8;&#x540C;&#xFF0C;&#x5BF9;&#x4E8E;set&#x6765;&#x8BF4;&#xFF0C;&#x503C;&#x5C31;&#x662F;&#x952E;&#x3002;</p>
-<p>multiset &#x7C7B;&#x4F3C;&#x4E8E; set&#xFF0C;&#x533A;&#x522B;&#x662F;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x503C;&#x7684;&#x952E;&#x76F8;&#x540C;&#x3002;</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x6A21;&#x677F;&#x53C2;&#x6570;&#x662F;&#x53EF;&#x9009;&#x7684;&#xFF0C;&#x7528;&#x6765;&#x6307;&#x793A;&#x5BF9;&#x952E;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#x7684;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#x6216;&#x5BF9;&#x8C61;&#x3002;&#x9ED8;&#x8BA4;&#x7528; less&lt;T&gt;</span></span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; A;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>, greater&lt;<span class="built_in">string</span>&gt; &gt; A;</span><br><span class="line"></span><br><span class="line"><span class="comment">// set_union&#x3001;set_intersection&#x3001;set_difference</span></span><br><span class="line"><span class="comment">// &#x5206;&#x522B;&#x67E5;&#x627E;&#x5E76;&#x96C6;&#x3001;&#x4EA4;&#x96C6;&#x3001;&#x5DEE;&#x96C6;&#x3002;</span></span><br><span class="line"><span class="comment">// &#x63A5;&#x53E3;&#xFF1A;&#x524D;&#x4E24;&#x4E2A;&#x8FED;&#x4EE3;&#x5668;&#x5B9A;&#x4E49;&#x4E86;&#x7B2C;&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#x7684;&#x533A;&#x95F4;&#xFF0C;&#x540E;&#x4E24;&#x4E2A;&#x5B9A;&#x4E49;&#x7B2C;&#x4E8C;&#x4E2A;&#x533A;&#x95F4;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x662F;&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x3002;</span></span><br><span class="line">set_union(A.begin(), A.end(), B.begin(), B.end(),</span><br><span class="line">         ostream_iterator&lt;<span class="built_in">string</span>, <span class="keyword">char</span>&gt; out(<span class="built_in">cout</span>, <span class="string">&quot; &quot;</span>) );</span><br><span class="line"><span class="comment">// &#x5047;&#x8BBE;&#x8981;&#x5C06;&#x7ED3;&#x679C;&#x653E;&#x5230;&#x96C6;&#x5408;C&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x663E;&#x793A;&#x5B83;&#xFF0C;&#x5219;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5E94;&#x662F;&#x4E00;&#x4E2A;&#x6307;&#x5411;C&#x7684;&#x8FED;&#x4EE3;&#x5668;&#x3002;</span></span><br><span class="line"><span class="comment">// &#x9996;&#x5148;&#x60F3;&#x5230;&#x7528;C.begin()&#xFF0C;&#x4F46;&#x662F;&#x5B58;&#x5728;&#x95EE;&#x9898;&#xFF1A;</span></span><br><span class="line"><span class="comment">// 	1.&#x5173;&#x8054;&#x5BB9;&#x5668;&#x7684;&#x952E;&#x662F;&#x5E38;&#x91CF;&#xFF0C;&#x6240;&#x4EE5; C.begin()&#x662F;const&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x4E0D;&#x80FD;&#x7528;&#x4F5C;&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x3002;</span></span><br><span class="line"><span class="comment">// 	2.&#x4E0E; copy() &#x76F8;&#x4F3C;&#xFF0C;set_union() &#x5C06;&#x8986;&#x76D6;&#x5BB9;&#x5668;&#x4E2D;&#x5DF2;&#x6709;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x8981;&#x6C42;&#x5BB9;&#x5668;&#x6709;&#x8DB3;&#x591F;&#x7684;&#x7A7A;&#x95F4;&#x5BB9;&#x7EB3;&#x65B0;&#x4FE1;&#x606F;&#x3002;</span></span><br><span class="line"><span class="comment">// &#x6A21;&#x677F; insert_iterator &#x53EF;&#x89E3;&#x51B3;&#x8FD9;&#x4E24;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x5B83;&#x5C06;&#x590D;&#x5236;&#x8F6C;&#x6362;&#x4E3A;&#x63D2;&#x5165;&#xFF0C;&#x8FD8;&#x6A21;&#x62DF;&#x4E86;&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x6982;&#x5FF5;&#x3002;</span></span><br><span class="line">set_union(A.begin(), A.end(), B.begin(), B.end(),</span><br><span class="line">         insert_iterator&lt;<span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; &gt;(C, C.begin() ) );</span><br><span class="line"></span><br><span class="line"><span class="comment">// lower_bound()&#x3001;upper_bound()</span></span><br><span class="line"><span class="comment">// &#x5C06;&#x952E;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x8BE5;&#x8FED;&#x4EE3;&#x5668;&#x6307;&#x5411;&#x96C6;&#x5408;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;{&#x4E0D;&#x5C0F;&#x4E8E;,&#x5927;&#x4E8E;}&#x952E;&#x53C2;&#x6570;&#x7684;&#x6210;&#x5458;&#x3002;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// insert()</span></span><br><span class="line"><span class="comment">// &#x56E0;&#x4E3A;&#x6392;&#x5E8F;&#x51B3;&#x5B9A;&#x4E86;&#x63D2;&#x5165;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x63D2;&#x5165;&#x4F4D;&#x7F6E;</span></span><br></pre></td></tr></table></figure>
-<h5 id="multi-map"><a href="#multi-map" class="headerlink" title="(multi)map"></a>(multi)map</h5><p>&#x503C;&#x4E0E;&#x952E;&#x7C7B;&#x578B;&#x4E0D;&#x540C;</p>
-<p>multimap &#x7C7B;&#x4F3C;&#x4E8E; map&#xFF0C;&#x533A;&#x522B;&#x662F;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x503C;&#x7684;&#x952E;&#x76F8;&#x540C;&#x3002;</p>
-<ul class="ui list">
-<li><p>STL &#x4F7F;&#x7528;&#x6A21;&#x677F; <code>pair&lt;class T, class U&gt;</code> &#x5C06;&#x5EFA;&#x7C7B;&#x578B;&#x548C;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x5B58;&#x50A8;&#x5230;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;(<strong>&#x503C;</strong>)&#x4E2D;&#x3002;</p>
-<p>&#x5982;&#x679C; keytype &#x662F;&#x952E;&#x7C7B;&#x578B;&#xFF0C; datatype &#x662F;&#x5B58;&#x50A8;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x5219;<strong>&#x503C;&#x7C7B;&#x578B;</strong>&#x4E3A;<code>pair&lt;const keytype, datatype&gt;</code></p>
-</li>
-<li><p>&#x5BF9;&#x4E8E;pair&#x5BF9;&#x8C61;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; first &#x548C; second &#x6210;&#x5458;&#x6765;&#x8BBF;&#x95EE;&#x5176;&#x4E24;&#x90E8;&#x5206;</p>
-<p><code>cout &lt;&lt; item.first &lt;&lt; &apos; &apos; &lt;&lt; item.second &lt;&lt; endl;</code></p>
+<li><p>关联容器通常是用树实现的，查找速度更快。</p>
 </li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#x6A21;&#x677F;&#x53C2;&#x6570;&#x4E3A;&#xFF1A;&#x952E;&#x7C7B;&#x578B;&#xFF0C;&#x503C;&#x7C7B;&#x578B;&#xFF0C;&#x53EF;&#x9009;&#x7684;&#x6392;&#x5E8F;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#x6216;&#x5BF9;&#x8C61;</span></span><br><span class="line"><span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>, less&lt;<span class="keyword">int</span>&gt; &gt; codes;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;pair&#xFF0C;&#x7136;&#x540E;&#x63D2;&#x5165;</span></span><br><span class="line">pair&lt;<span class="keyword">const</span> <span class="keyword">int</span>, <span class="built_in">string</span>&gt; item(<span class="number">213</span>, <span class="string">&quot;Los&quot;</span>);</span><br><span class="line">codes.insert(item);</span><br><span class="line"><span class="comment">// &#x6216;&#x8005;&#x76F4;&#x63A5;&#x63D2;&#x5165;&#x533F;&#x540D;pair</span></span><br><span class="line">codes.insert(pair&lt;<span class="keyword">const</span> <span class="keyword">int</span>, <span class="built_in">string</span>&gt;(<span class="number">213</span>, <span class="string">&quot;Los&quot;</span>));</span><br><span class="line"><span class="comment">// &#x6216;&#x8005;&#x4F7F;&#x7528;&#x6570;&#x7EC4;&#x8868;&#x793A;&#x6CD5;</span></span><br><span class="line">code[<span class="number">213</span>] = <span class="string">&quot;Los&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// count()</span></span><br><span class="line"><span class="comment">// &#x952E;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x5177;&#x6709;&#x8BE5;&#x952E;&#x7684;&#x5143;&#x7D20;&#x6570;&#x76EE;&#x3002;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// lower_bound()&#x3001;upper_bound()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// equal_range()</span></span><br><span class="line"><span class="comment">// &#x952E;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x4E24;&#x4E2A;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x5B83;&#x4EEC;&#x8868;&#x793A;&#x7684;&#x533A;&#x95F4;&#x4E0E;&#x8BE5;&#x952E;&#x5339;&#x914D;&#x3002;</span></span><br><span class="line"><span class="comment">// &#x4E3A;&#x4E86;&#x8FD4;&#x56DE;&#x4E24;&#x4E2A;&#x503C;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x5C06;&#x5B83;&#x4EEC;&#x5C01;&#x88C5;&#x5728;&#x4E00;&#x4E2A; pair &#x5BF9;&#x8C61;&#x4E2D;&#xFF0C;&#x5B83;&#x7684;&#x4E24;&#x4E2A;&#x6A21;&#x677F;&#x53C2;&#x6570;&#x90FD;&#x662F;&#x8FED;&#x4EE3;&#x5668;&#x3002;</span></span><br></pre></td></tr></table></figure>
-<h4 id="&#x65E0;&#x5E8F;&#x5173;&#x8054;&#x5BB9;&#x5668;"><a href="#&#x65E0;&#x5E8F;&#x5173;&#x8054;&#x5BB9;&#x5668;" class="headerlink" title="&#x65E0;&#x5E8F;&#x5173;&#x8054;&#x5BB9;&#x5668;"></a>&#x65E0;&#x5E8F;&#x5173;&#x8054;&#x5BB9;&#x5668;</h4><p><strong>4&#x79CD;&#x5BB9;&#x5668;</strong>&#xFF1A;</p>
-<p>unordered_set&#x3001;unordered_multiset&#x3001;</p>
-<p>unordered_map&#x3001;unordered_multimap&#x3002;</p>
-<p><strong>&#x533A;&#x522B;</strong>&#xFF1A;</p>
-<ul class="ui list">
-<li><p>&#x5173;&#x8054;&#x5BB9;&#x5668;&#x57FA;&#x4E8E;&#x6811;&#x7ED3;&#x6784;&#xFF0C;&#x800C;&#x65E0;&#x5E8F;&#x5173;&#x8054;&#x5BB9;&#x5668;&#x57FA;&#x4E8E;&#x54C8;&#x5E0C;&#x8868;&#x3002;</p>
-<p>&#x8FD9;&#x65E8;&#x5728;&#x63D0;&#x9AD8;&#x6DFB;&#x52A0;&#x548C;&#x5220;&#x9664;&#x5143;&#x7D20;&#x7684;&#x901F;&#x5EA6;&#x4EE5;&#x53CA;&#x67E5;&#x627E;&#x7B97;&#x6CD5;&#x7684;&#x6548;&#x7387;&#x3002;</p>
+<p><strong>4种容器都有的性质</strong>：</p>
+<ul>
+<li>可反转的</li>
+<li>本身就是排序的</li>
+</ul>
+<h5 id="multi-set"><a href="#multi-set" class="headerlink" title="(multi)set"></a>(multi)set</h5><p>值与键类型相同，对于set来说，值就是键。</p>
+<p>multiset 类似于 set，区别是可以有多个值的键相同。</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二个模板参数是可选的，用来指示对键进行排序的比较函数或对象。默认用 less&lt;T&gt;</span></span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; A;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>, greater&lt;<span class="built_in">string</span>&gt; &gt; A;</span><br><span class="line"></span><br><span class="line"><span class="comment">// set_union、set_intersection、set_difference</span></span><br><span class="line"><span class="comment">// 分别查找并集、交集、差集。</span></span><br><span class="line"><span class="comment">// 接口：前两个迭代器定义了第一个集合的区间，后两个定义第二个区间，最后一个是输出迭代器。</span></span><br><span class="line">set_union(A.begin(), A.end(), B.begin(), B.end(),</span><br><span class="line">         ostream_iterator&lt;<span class="built_in">string</span>, <span class="keyword">char</span>&gt; out(<span class="built_in">cout</span>, <span class="string">" "</span>) );</span><br><span class="line"><span class="comment">// 假设要将结果放到集合C，而不是显示它，则最后一个参数应是一个指向C的迭代器。</span></span><br><span class="line"><span class="comment">// 首先想到用C.begin()，但是存在问题：</span></span><br><span class="line"><span class="comment">// 	1.关联容器的键是常量，所以 C.begin()是const迭代器，不能用作输出迭代器。</span></span><br><span class="line"><span class="comment">// 	2.与 copy() 相似，set_union() 将覆盖容器中已有的数据，并要求容器有足够的空间容纳新信息。</span></span><br><span class="line"><span class="comment">// 模板 insert_iterator 可解决这两个问题，它将复制转换为插入，还模拟了输出迭代器概念。</span></span><br><span class="line">set_union(A.begin(), A.end(), B.begin(), B.end(),</span><br><span class="line">         insert_iterator&lt;<span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; &gt;(C, C.begin() ) );</span><br><span class="line"></span><br><span class="line"><span class="comment">// lower_bound()、upper_bound()</span></span><br><span class="line"><span class="comment">// 将键作为参数并返回一个迭代器，该迭代器指向集合中第一个&#123;不小于,大于&#125;键参数的成员。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// insert()</span></span><br><span class="line"><span class="comment">// 因为排序决定了插入的位置，所以不需要指定插入位置</span></span><br></pre></td></tr></table></figure>
+<h5 id="multi-map"><a href="#multi-map" class="headerlink" title="(multi)map"></a>(multi)map</h5><p>值与键类型不同</p>
+<p>multimap 类似于 map，区别是可以有多个值的键相同。</p>
+<ul>
+<li><p>STL 使用模板 <code>pair&lt;class T, class U&gt;</code> 将建类型和数据类型存储到一个对象(<strong>值</strong>)中。</p>
+<p>如果 keytype 是键类型， datatype 是存储的数据类型，则<strong>值类型</strong>为<code>pair&lt;const keytype, datatype&gt;</code></p>
+</li>
+<li><p>对于pair对象，可以使用 first 和 second 成员来访问其两部分</p>
+<p><code>cout &lt;&lt; item.first &lt;&lt; &#39; &#39; &lt;&lt; item.second &lt;&lt; endl;</code></p>
 </li>
 </ul>
-<h3 id="&#x51FD;&#x6570;&#x5BF9;&#x8C61;"><a href="#&#x51FD;&#x6570;&#x5BF9;&#x8C61;" class="headerlink" title="&#x51FD;&#x6570;&#x5BF9;&#x8C61;"></a>&#x51FD;&#x6570;&#x5BF9;&#x8C61;</h3><ul class="ui list">
-<li><p>&#x5F88;&#x591A;STL&#x7B97;&#x6CD5;&#x90FD;&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#xFF0C;&#x4E5F;&#x53EB;&#x51FD;&#x6570;&#x7B26;&#xFF08;functor&#xFF09;&#x3002;</p>
-</li>
-<li><p>&#x51FD;&#x6570;&#x7B26;&#x662F;&#x53EF;&#x4EE5;&#x4EE5;&#x51FD;&#x6570;&#x65B9;&#x5F0F;&#x4E0E;( )&#x7ED3;&#x5408;&#x4F7F;&#x7528;&#x7684;&#x4EFB;&#x610F;&#x5BF9;&#x8C61;&#xFF0C;&#x5305;&#x62EC;&#xFF1A;</p>
-<p>&#x51FD;&#x6570;&#x540D;&#x3001;&#x6307;&#x5411;&#x51FD;&#x6570;&#x7684;&#x6307;&#x9488;&#x3001;&#x91CD;&#x8F7D;&#x4E86;( )&#x8FD0;&#x7B97;&#x7B26;&#x7684;&#x7C7B;&#x5BF9;&#x8C61;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板参数为：键类型，值类型，可选的排序比较函数或对象</span></span><br><span class="line"><span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>, less&lt;<span class="keyword">int</span>&gt; &gt; codes;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个pair，然后插入</span></span><br><span class="line">pair&lt;<span class="keyword">const</span> <span class="keyword">int</span>, <span class="built_in">string</span>&gt; item(<span class="number">213</span>, <span class="string">"Los"</span>);</span><br><span class="line">codes.insert(item);</span><br><span class="line"><span class="comment">// 或者直接插入匿名pair</span></span><br><span class="line">codes.insert(pair&lt;<span class="keyword">const</span> <span class="keyword">int</span>, <span class="built_in">string</span>&gt;(<span class="number">213</span>, <span class="string">"Los"</span>));</span><br><span class="line"><span class="comment">// 或者使用数组表示法</span></span><br><span class="line">code[<span class="number">213</span>] = <span class="string">"Los"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// count()</span></span><br><span class="line"><span class="comment">// 键作为参数，返回具有该键的元素数目。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// lower_bound()、upper_bound()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// equal_range()</span></span><br><span class="line"><span class="comment">// 键作为参数，返回两个迭代器，它们表示的区间与该键匹配。</span></span><br><span class="line"><span class="comment">// 为了返回两个值，该方法将它们封装在一个 pair 对象中，它的两个模板参数都是迭代器。</span></span><br></pre></td></tr></table></figure>
+<h4 id="无序关联容器"><a href="#无序关联容器" class="headerlink" title="无序关联容器"></a>无序关联容器</h4><p><strong>4种容器</strong>：</p>
+<p>unordered_set、unordered_multiset、</p>
+<p>unordered_map、unordered_multimap。</p>
+<p><strong>区别</strong>：</p>
+<ul>
+<li><p>关联容器基于树结构，而无序关联容器基于哈希表。</p>
+<p>这旨在提高添加和删除元素的速度以及查找算法的效率。</p>
 </li>
 </ul>
-<h4 id="&#x51FD;&#x6570;&#x7B26;&#x6982;&#x5FF5;"><a href="#&#x51FD;&#x6570;&#x7B26;&#x6982;&#x5FF5;" class="headerlink" title="&#x51FD;&#x6570;&#x7B26;&#x6982;&#x5FF5;"></a>&#x51FD;&#x6570;&#x7B26;&#x6982;&#x5FF5;</h4><ul class="ui list">
-<li><p><strong>&#x751F;&#x6210;&#x5668;</strong>&#xFF08;generator&#xFF09;&#xFF1A;&#x4E0D;&#x7528;&#x53C2;&#x6570;&#x5C31;&#x53EF;&#x4EE5;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;&#x7B26;</p>
+<h3 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h3><ul>
+<li><p>很多STL算法都使用函数对象，也叫函数符（functor）。</p>
 </li>
-<li><p><strong>&#x4E00;&#x5143;&#x51FD;&#x6570;</strong>&#xFF08;unary function&#xFF09;&#xFF1A;&#x4E00;&#x4E2A;&#x53C2;&#x6570;</p>
+<li><p>函数符是可以以函数方式与( )结合使用的任意对象，包括：</p>
+<p>函数名、指向函数的指针、重载了( )运算符的类对象</p>
 </li>
-<li><p><strong>&#x4E8C;&#x5143;&#x51FD;&#x6570;</strong>&#xFF08;binary function&#xFF09;&#xFF1A;&#x4E24;&#x4E2A;&#x53C2;&#x6570;</p>
+</ul>
+<h4 id="函数符概念"><a href="#函数符概念" class="headerlink" title="函数符概念"></a>函数符概念</h4><ul>
+<li><p><strong>生成器</strong>（generator）：不用参数就可以调用的函数符</p>
+</li>
+<li><p><strong>一元函数</strong>（unary function）：一个参数</p>
+</li>
+<li><p><strong>二元函数</strong>（binary function）：两个参数</p>
 </li>
 </ul>
 <hr>
-<ul class="ui list">
-<li><strong>&#x8C13;&#x8BCD;</strong>&#xFF08;predicate&#xFF09;&#xFF1A;&#x8FD4;&#x56DE;bool&#x503C;&#x7684;&#x4E00;&#x5143;&#x51FD;&#x6570;</li>
-<li><strong>&#x4E8C;&#x5143;&#x8C13;&#x8BCD;</strong>&#xFF08;binary predicate&#xFF09;&#xFF1A;&#x8FD4;&#x56DE;bool&#x503C;&#x7684;&#x4E8C;&#x5143;&#x51FD;&#x6570;</li>
+<ul>
+<li><strong>谓词</strong>（predicate）：返回bool值的一元函数</li>
+<li><strong>二元谓词</strong>（binary predicate）：返回bool值的二元函数</li>
 </ul>
-<p>&#x4E00;&#x4E9B; STL &#x51FD;&#x6570;&#x9700;&#x8981;&#x8C13;&#x8BCD;&#x53C2;&#x6570;&#x3002;&#x6BD4;&#x5982; sort&#x3002;</p>
-<h4 id="&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;&#x6982;&#x5FF5;"><a href="#&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;&#x6982;&#x5FF5;" class="headerlink" title="&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;&#x6982;&#x5FF5;"></a>&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;&#x6982;&#x5FF5;</h4><p>&#x7C7B;&#x51FD;&#x6570;&#x7B26;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;&#xFF0C;&#x4F7F;&#x51FD;&#x6570;&#x80FD;&#x591F;&#x6EE1;&#x8DB3;&#x4E0D;&#x540C;&#x7684;&#x63A5;&#x53E3;&#x3002;</p>
-<p>&#x4F8B;&#x5B50;&#xFF1A;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//&#x6709;&#x4E00;&#x4E2A;&#x63A5;&#x6536;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x6A21;&#x677F;&#x51FD;&#x6570;</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">bool</span> <span class="title">tooBig</span>(<span class="title">const</span> <span class="title">T</span> &amp; <span class="title">val</span>, <span class="title">const</span> <span class="title">T</span> &amp; <span class="title">lim</span>){</span></span><br><span class="line">    <span class="keyword">return</span> val &gt; lim;</span><br><span class="line">}</span><br><span class="line"><span class="comment">//&#x53EF;&#x4EE5;&#x5C06;&#x5B83;&#x8F6C;&#x5316;&#x4E3A;&#x5355;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;&#x5BF9;&#x8C61;</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">class</span>{</span></span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">        T cutoff;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">        TooBig2(<span class="keyword">const</span> T &amp; t) : cutoff(t) {};</span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> T &amp; v)</span> </span>{</span><br><span class="line">            <span class="keyword">return</span> tooBig&lt;T&gt;(v, cutoff);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="comment">// &#x5C31;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x505A;</span></span><br><span class="line">TooBig2&lt;<span class="keyword">int</span>&gt; tB100{<span class="number">100</span>};</span><br><span class="line"><span class="keyword">int</span> x;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line"><span class="keyword">if</span>(tB100(x))	<span class="comment">//same as if(tooBig(x,100))</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h4 id="&#x9884;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7B26;"><a href="#&#x9884;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7B26;" class="headerlink" title="&#x9884;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7B26;"></a>&#x9884;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7B26;</h4><p>STL &#x5B9A;&#x4E49;&#x4E86;&#x591A;&#x4E2A;&#x57FA;&#x672C;&#x51FD;&#x6570;&#x7B26;&#xFF0C;&#x8FD9;&#x662F;&#x4E3A;&#x4E86;&#x652F;&#x6301;&#x5C06;&#x51FD;&#x6570;&#x7B26;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x7684; STL &#x51FD;&#x6570;&#x3002;</p>
-<p>&#x4F8B;&#x5B50;&#xFF1A;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">transform(gr.begin(), gr.end(), out, <span class="built_in">sqrt</span>);</span><br><span class="line">transform(gr.begin(), gr.end(), m.begin(), out, plus&lt;<span class="keyword">double</span>&gt;());</span><br><span class="line"><span class="comment">//plus&lt;double&gt;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6784;&#x9020;&#x4E86;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x7B26;&#xFF0C;&#x4EE5;&#x5B8C;&#x6210;&#x76F8;&#x52A0;&#x8FD0;&#x7B97;&#xFF0C;&#x62EC;&#x53F7;&#x8868;&#x793A;&#x8C03;&#x7528;&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;</span></span><br></pre></td></tr></table></figure>
-<p>&#x5934;&#x6587;&#x4EF6;<code>functional</code>&#x5B9A;&#x4E49;&#x4E86;&#x591A;&#x4E2A;&#x6A21;&#x677F;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x3002;</p>
-<h5 id="&#x8FD0;&#x7B97;&#x7B26;&#x548C;&#x76F8;&#x5E94;&#x7684;&#x51FD;&#x6570;&#x7B26;"><a href="#&#x8FD0;&#x7B97;&#x7B26;&#x548C;&#x76F8;&#x5E94;&#x7684;&#x51FD;&#x6570;&#x7B26;" class="headerlink" title="&#x8FD0;&#x7B97;&#x7B26;&#x548C;&#x76F8;&#x5E94;&#x7684;&#x51FD;&#x6570;&#x7B26;"></a>&#x8FD0;&#x7B97;&#x7B26;&#x548C;&#x76F8;&#x5E94;&#x7684;&#x51FD;&#x6570;&#x7B26;</h5><table>
+<p>一些 STL 函数需要谓词参数。比如 sort。</p>
+<h4 id="函数适配器概念"><a href="#函数适配器概念" class="headerlink" title="函数适配器概念"></a>函数适配器概念</h4><p>类函数符可以作为函数适配器，使函数能够满足不同的接口。</p>
+<p>例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//有一个接收两个参数的模板函数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">bool</span> <span class="title">tooBig</span>(<span class="title">const</span> <span class="title">T</span> &amp; <span class="title">val</span>, <span class="title">const</span> <span class="title">T</span> &amp; <span class="title">lim</span>)&#123;</span></span><br><span class="line">    <span class="keyword">return</span> val &gt; lim;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//可以将它转化为单个参数的函数对象</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">class</span>&#123;</span></span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">        T cutoff;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">        TooBig2(<span class="keyword">const</span> T &amp; t) : cutoff(t) &#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> T &amp; v)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tooBig&lt;T&gt;(v, cutoff);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 就可以这样做</span></span><br><span class="line">TooBig2&lt;<span class="keyword">int</span>&gt; tB100&#123;<span class="number">100</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> x;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line"><span class="keyword">if</span>(tB100(x))	<span class="comment">//same as if(tooBig(x,100))</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="预定义函数符"><a href="#预定义函数符" class="headerlink" title="预定义函数符"></a>预定义函数符</h4><p>STL 定义了多个基本函数符，这是为了支持将函数符作为参数的 STL 函数。</p>
+<p>例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">transform(gr.begin(), gr.end(), out, <span class="built_in">sqrt</span>);</span><br><span class="line">transform(gr.begin(), gr.end(), m.begin(), out, plus&lt;<span class="keyword">double</span>&gt;());</span><br><span class="line"><span class="comment">//plus&lt;double&gt;构造函数构造了一个函数符，以完成相加运算，括号表示调用默认构造函数。</span></span><br></pre></td></tr></table></figure>
+<p>头文件<code>functional</code>定义了多个模板函数对象。</p>
+<h5 id="运算符和相应的函数符"><a href="#运算符和相应的函数符" class="headerlink" title="运算符和相应的函数符"></a>运算符和相应的函数符</h5><table>
 <thead>
 <tr>
-<th style="text-align:center">&#x8FD0;&#x7B97;&#x7B26;</th>
-<th style="text-align:center">&#x51FD;&#x6570;&#x7B26;</th>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">函数符</th>
 </tr>
 </thead>
 <tbody>
@@ -454,169 +364,83 @@
 </tr>
 </tbody>
 </table>
-<h4 id="&#x81EA;&#x9002;&#x5E94;&#x51FD;&#x6570;&#x7B26;"><a href="#&#x81EA;&#x9002;&#x5E94;&#x51FD;&#x6570;&#x7B26;" class="headerlink" title="&#x81EA;&#x9002;&#x5E94;&#x51FD;&#x6570;&#x7B26;"></a>&#x81EA;&#x9002;&#x5E94;&#x51FD;&#x6570;&#x7B26;</h4><p>&#x4E0A;&#x9762;&#x5217;&#x51FA;&#x7684;&#x9884;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7B26;&#x90FD;&#x662F;&#x81EA;&#x9002;&#x5E94;&#x7684;&#x3002;</p>
-<ul class="ui list">
-<li><p><strong>&#x539F;&#x56E0;</strong>&#xFF1A;&#x5B83;&#x643A;&#x5E26;&#x4E86;&#x6807;&#x8BC6;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x548C;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x7684; typedef &#x6210;&#x5458;&#x3002;</p>
-<p>&#x8FD9;&#x4E9B;&#x6210;&#x5458;&#x5206;&#x522B;&#x662F;&#xFF1A;result_type&#x3001;first_argument_type&#x3001;second_argument_type &#x2026;</p>
+<h4 id="自适应函数符"><a href="#自适应函数符" class="headerlink" title="自适应函数符"></a>自适应函数符</h4><p>上面列出的预定义函数符都是自适应的。</p>
+<ul>
+<li><p><strong>原因</strong>：它携带了标识参数类型和返回类型的 typedef 成员。</p>
+<p>这些成员分别是：result_type、first_argument_type、second_argument_type …</p>
 </li>
-<li><p><strong>&#x610F;&#x4E49;</strong>&#xFF1A;&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x8BA4;&#x4E3A;&#x5B58;&#x5728;&#x8FD9;&#x4E9B;typedef&#x5BF9;&#x8C61;&#x3002;</p>
-<p>&#x4F8B;&#x5982;&#xFF0C;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x81EA;&#x9002;&#x5E94;&#x51FD;&#x6570;&#x7B26;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;result_type&#x6210;&#x5458;&#x6765;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x4E0E;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;&#x53D8;&#x91CF;&#x3002;</p>
+<li><p><strong>意义</strong>：函数适配器对象可以使用函数对象，并认为存在这些typedef对象。</p>
+<p>例如，接受一个自适应函数符参数的函数可以使用result_type成员来声明一个与函数的返回类型匹配的变量。</p>
 </li>
 </ul>
-<h5 id="&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;"><a href="#&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;" class="headerlink" title="&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;"></a>&#x51FD;&#x6570;&#x9002;&#x914D;&#x5668;</h5><ul class="ui list">
-<li><p>STL &#x4F7F;&#x7528;<strong><em>&#x7C7B;</em></strong>  <strong>binder1st</strong> &#x548C; <strong>binder2st</strong> &#x5C06;&#x81EA;&#x9002;&#x5E94;&#x4E8C;&#x5143;&#x51FD;&#x6570;&#x8F6C;&#x6362;&#x4E3A;&#x81EA;&#x9002;&#x5E94;&#x4E00;&#x5143;&#x51FD;&#x6570;&#x3002;</p>
-<p>&#x5047;&#x8BBE;&#x6709;&#x4E00;&#x4E2A;&#x81EA;&#x9002;&#x5E94;&#x4E8C;&#x5143;&#x51FD;&#x6570;&#x5BF9;&#x8C61; f2()&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; binder1st &#x5BF9;&#x8C61;&#xFF0C;&#x8BE5;&#x5BF9;&#x8C61;&#x4E0E;&#x4E00;&#x4E2A;&#x5C06;&#x88AB;&#x7528;&#x4F5C; f2() &#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x7279;&#x5B9A;&#x503C;&#xFF08;val&#xFF09;&#x76F8;&#x5173;&#x8054;&#xFF1A;</p>
+<h5 id="函数适配器"><a href="#函数适配器" class="headerlink" title="函数适配器"></a>函数适配器</h5><ul>
+<li><p>STL 使用<strong><em>类</em></strong>  <strong>binder1st</strong> 和 <strong>binder2st</strong> 将自适应二元函数转换为自适应一元函数。</p>
+<p>假设有一个自适应二元函数对象 f2()，则可以创建一个 binder1st 对象，该对象与一个将被用作 f2() 的第一个参数的特定值（val）相关联：</p>
 <p><code>binder1st(f2, val) f1;</code></p>
 </li>
-<li><p>STL &#x63D0;&#x4F9B;&#x4E86;<strong><em>&#x51FD;&#x6570;</em></strong>  <strong>bind1st</strong> &#x548C; <strong>bind2st</strong> &#x7B80;&#x5316;&#x4F7F;&#x7528;&#x3002;&#x5B83;&#x4EEC;&#x8FD4;&#x56DE;&#x4E0A;&#x8FF0;&#x7C7B;&#x5BF9;&#x8C61;&#x3002;</p>
+<li><p>STL 提供了<strong><em>函数</em></strong>  <strong>bind1st</strong> 和 <strong>bind2st</strong> 简化使用。它们返回上述类对象。</p>
 <p><code>transform(gr.begin(), gr.end(), out, bind1st(multiplies&lt;double&gt;(), 2.5))</code></p>
 </li>
 </ul>
-<h4 id="lambda&#x8868;&#x8FBE;&#x5F0F;-C-11"><a href="#lambda&#x8868;&#x8FBE;&#x5F0F;-C-11" class="headerlink" title="lambda&#x8868;&#x8FBE;&#x5F0F; C++11"></a>lambda&#x8868;&#x8FBE;&#x5F0F; C++11</h4><p>&#x63D0;&#x4F9B;&#x4E86;&#x51FD;&#x6570;&#x6307;&#x9488;&#x548C;&#x51FD;&#x6570;&#x7B26;&#x7684;&#x66FF;&#x4EE3;&#x54C1;</p>
-<p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;</p>
-<h3 id="&#x7B97;&#x6CD5;"><a href="#&#x7B97;&#x6CD5;" class="headerlink" title="&#x7B97;&#x6CD5;"></a>&#x7B97;&#x6CD5;</h3><ul class="ui list">
-<li><p>&#x7B97;&#x6CD5;&#x90FD;&#x662F;&#x5185;&#x8054;&#x7684;&#x3002;</p>
+<h4 id="lambda表达式-C-11"><a href="#lambda表达式-C-11" class="headerlink" title="lambda表达式 C++11"></a>lambda表达式 C++11</h4><p>提供了函数指针和函数符的替代品</p>
+<p>待续。。。</p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul>
+<li><p>算法都是内联的。</p>
 </li>
-<li><p>&#x5BF9;&#x4E8E;&#x7B97;&#x6CD5;&#x51FD;&#x6570;&#x8BBE;&#x8BA1;&#xFF0C;&#x9996;&#x5148;&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x6765;&#x63D0;&#x4F9B;&#x6CDB;&#x578B;&#xFF1B;&#x5176;&#x6B21;&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x4F7F;&#x7528;&#x8FED;&#x4EE3;&#x5668;&#x6765;&#x63D0;&#x4F9B;&#x8BBF;&#x95EE;&#x5BB9;&#x5668;&#x4E2D;&#x6570;&#x636E;&#x7684;&#x901A;&#x7528;&#x8868;&#x793A;&#x3002;</p>
+<li><p>对于算法函数设计，首先，它们都使用模板来提供泛型；其次，它们都使用迭代器来提供访问容器中数据的通用表示。</p>
 </li>
-<li><p>&#x53EF;&#x4EE5;&#x7528;==&#x6765;&#x6BD4;&#x8F83;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x5BB9;&#x5668;&#xFF0C;&#x56E0;&#x4E3A;&#x5BB9;&#x5668;&#x91CD;&#x8F7D;&#x7684;==&#x8FD0;&#x7B97;&#x7B26;&#x4F7F;&#x7528;&#x8FED;&#x4EE3;&#x5668;&#x6765;&#x6BD4;&#x8F83;&#x5185;&#x5BB9;&#xFF0C;&#x56E0;&#x6B64;&#x5982;&#x679C;deque&#x5BF9;&#x8C61;&#x548C;vector&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x5BB9;&#x76F8;&#x540C;&#x5E76;&#x4E14;&#x987A;&#x5E8F;&#x76F8;&#x540C;&#xFF0C;&#x5219;&#x5B83;&#x4EEC;&#x662F;&#x76F8;&#x7B49;&#x7684;&#x3002;</p>
+<li><p>可以用==来比较不同类型的容器，因为容器重载的==运算符使用迭代器来比较内容，因此如果deque对象和vector对象的内容相同并且顺序相同，则它们是相等的。</p>
 </li>
-<li><p>STL &#x5C06;&#x7B97;&#x6CD5;&#x5E93;&#x5206;&#x6210;4&#x7EC4;&#xFF1A;</p>
+<li><p>STL 将算法库分成4组：</p>
 <ol>
-<li>&#x975E;&#x4FEE;&#x6539;&#x5F0F;&#x5E8F;&#x5217;&#x64CD;&#x4F5C;</li>
-<li>&#x4FEE;&#x6539;&#x5F0F;&#x5E8F;&#x5217;&#x64CD;&#x4F5C;</li>
-<li>&#x6392;&#x5E8F;&#x548C;&#x76F8;&#x5173;&#x64CD;&#x4F5C;</li>
-<li>&#x901A;&#x7528;&#x6570;&#x5B57;&#x8FD0;&#x7B97;</li>
+<li>非修改式序列操作</li>
+<li>修改式序列操作</li>
+<li>排序和相关操作</li>
+<li>通用数字运算</li>
 </ol>
-<p>&#x524D;&#x4E09;&#x7EC4;&#x5728;&#x5934;&#x6587;&#x4EF6; algorithm &#x4E2D;&#xFF0C;&#x7B2C;&#x56DB;&#x7EC4;&#x5728; numeric &#x4E2D;&#x3002;</p>
+<p>前三组在头文件 algorithm 中，第四组在 numeric 中。</p>
 </li>
 <li><p><code>_copy</code></p>
-<p><strong>&#x5C31;&#x5730;&#x7B97;&#x6CD5;</strong>&#x5728;&#x7B97;&#x6CD5;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x7ED3;&#x679C;&#x88AB;&#x653E;&#x5230;&#x539F;&#x59CB;&#x6570;&#x636E;&#x7684;&#x4F4D;&#x7F6E;&#x4E0A;&#xFF1B;</p>
-<p><strong>&#x590D;&#x5236;&#x7B97;&#x6CD5;</strong>&#x5C06;&#x7ED3;&#x679C;&#x53D1;&#x9001;&#x5230;&#x53E6;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#x3002;</p>
-<p>STL&#x7684;&#x7EA6;&#x5B9A;&#x662F;&#xFF1A;</p>
+<p><strong>就地算法</strong>在算法完成时，结果被放到原始数据的位置上；</p>
+<p><strong>复制算法</strong>将结果发送到另一个位置。</p>
+<p>STL的约定是：</p>
 <ol>
-<li>&#x590D;&#x5236;&#x7248;&#x672C;&#x7684;&#x540D;&#x79F0;&#x4EE5; <code>_copy</code> &#x7ED3;&#x5C3E;&#x3002;</li>
-<li>&#x590D;&#x5236;&#x7248;&#x672C;&#x5C06;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x8F93;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x53C2;&#x6570;&#x3002;</li>
-<li>&#x590D;&#x5236;&#x7B97;&#x6CD5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x8BE5;&#x8FED;&#x4EE3;&#x5668;&#x6307;&#x5411;&#x590D;&#x5236;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#x540E;&#x9762;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</li>
+<li>复制版本的名称以 <code>_copy</code> 结尾。</li>
+<li>复制版本将接受一个额外的输出迭代器参数。</li>
+<li>复制算法返回一个迭代器，该迭代器指向复制的最后一个值后面的位置。</li>
 </ol>
 </li>
-<li><p><code>_if</code><br>&#x6709;&#x4E9B;&#x51FD;&#x6570;&#x6709;&#x53E6;&#x4E00;&#x4E2A;&#x7248;&#x672C;&#xFF0C;&#x5373;&#x6839;&#x636E;&#x5C06;&#x51FD;&#x6570;&#x5E94;&#x7528;&#x4E8E;&#x5BB9;&#x5668;&#x5143;&#x7D20;&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x6765;&#x6267;&#x884C;&#x64CD;&#x4F5C;&#x3002;&#x5B83;&#x4EEC;&#x7684;&#x540D;&#x5B57;&#x4EE5; <code>_if</code> &#x7ED3;&#x5C3E;&#x3002;</p>
-<p>&#x5B83;&#x4EEC;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x8C13;&#x8BCD;&#x53C2;&#x6570;&#xFF1A;<code>&lt;..., class Predicate, ...&gt;</code></p>
-<p>&#x540C;&#x6837;&#xFF0C;STL&#x4F7F;&#x7528;&#x8BF8;&#x5982; Generator &#x548C; BinaryPredicate &#x7B49;&#x672F;&#x8BED;&#x6765;&#x8868;&#x793A;&#x9700;&#x8981;&#x6A21;&#x62DF;&#x5176;&#x4ED6;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x6982;&#x5FF5;&#x7684;&#x53C2;&#x6570;&#x3002;</p>
+<li><p><code>_if</code><br>有些函数有另一个版本，即根据将函数应用于容器元素得到的结果来执行操作。它们的名字以 <code>_if</code> 结尾。</p>
+<p>它们需要一个额外的谓词参数：<code>&lt;..., class Predicate, ...&gt;</code></p>
+<p>同样，STL使用诸如 Generator 和 BinaryPredicate 等术语来表示需要模拟其他函数对象概念的参数。</p>
 </li>
-<li><p>string&#x7C7B;</p>
-<p>string&#x7C7B;&#x867D;&#x7136;&#x4E0D;&#x662F;STL&#x7684;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#xFF0C;&#x4F46;&#x8BBE;&#x8BA1;&#x5B83;&#x65F6;&#x8003;&#x8651;&#x5230;&#x4E86;STL&#x3002;&#x4F8B;&#x5982;&#x5B83;&#x5305;&#x542B;&#xFF1A;<code>begin(),end(),rbegin(),rend()</code></p>
-<p>&#x83B7;&#x5F97;&#x533A;&#x95F4;&#x5185;&#x5BB9;&#x7684;&#x6392;&#x5217;&#x7EC4;&#x5408;&#xFF1A;<code>next_permutation()</code> &#x7B97;&#x6CD5;&#x5C06;&#x533A;&#x95F4;&#x5185;&#x5BB9;&#x8F6C;&#x6362;&#x4E3A;&#x4E0B;&#x4E00;&#x79CD;&#x6392;&#x5217;&#x65B9;&#x5F0F;&#x3002;&#x5BF9;&#x4E8E;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x6392;&#x5217;&#x6309;&#x7167;&#x5B57;&#x6BCD;&#x9012;&#x589E;&#x7684;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x3002;&#x5982;&#x679C;&#x6210;&#x529F;&#xFF0C;&#x8FD4;&#x56DE;true&#xFF1B;&#x5982;&#x679C;&#x533A;&#x95F4;&#x5DF2;&#x5904;&#x4E8E;&#x6700;&#x540E;&#x7684;&#x5E8F;&#x5217;&#x4E2D;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;false&#x3002;</p>
+<li><p>string类</p>
+<p>string类虽然不是STL的组成部分，但设计它时考虑到了STL。例如它包含：<code>begin(),end(),rbegin(),rend()</code></p>
+<p>获得区间内容的排列组合：<code>next_permutation()</code> 算法将区间内容转换为下一种排列方式。对于字符串，排列按照字母递增的顺序进行。如果成功，返回true；如果区间已处于最后的序列中，则返回false。</p>
 </li>
 </ul>
-<h2 id="&#x5176;&#x4ED6;&#x5E93;"><a href="#&#x5176;&#x4ED6;&#x5E93;" class="headerlink" title="&#x5176;&#x4ED6;&#x5E93;"></a>&#x5176;&#x4ED6;&#x5E93;</h2><p>vector&#x3001;valarray&#x3001;array&#x3002;</p>
-<p>&#x5B83;&#x4EEC;&#x662F;&#x7531;&#x4E0D;&#x540C;&#x7684;&#x5C0F;&#x7EC4;&#x5F00;&#x53D1;&#x7684;&#xFF0C;&#x7528;&#x4E8E;&#x4E0D;&#x540C;&#x76EE;&#x7684;&#x3002;</p>
-<p>vector &#x6A21;&#x677F;&#x7C7B;&#x662F;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x7C7B;&#x548C;&#x7B97;&#x6CD5;&#x7CFB;&#x7EDF;&#x7684;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x5B83;&#x652F;&#x6301;&#x9762;&#x5411;&#x5BB9;&#x5668;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
-<p>valarray &#x6A21;&#x677F;&#x7C7B;&#x662F;&#x9762;&#x5411;&#x6570;&#x503C;&#x8BA1;&#x7B97;&#x7684;&#xFF0C;&#x4E0D;&#x662F;STL&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002;</p>
-<p>array &#x662F;&#x4E3A;&#x66FF;&#x4EE3;&#x5185;&#x7F6E;&#x6570;&#x7EC4;&#x800C;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;&#x5979;&#x901A;&#x8FC7;&#x63D0;&#x4F9B;&#x66F4;&#x597D;&#x3001;&#x66F4;&#x5B89;&#x5168;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x8BA9;&#x6570;&#x7EC4;&#x66F4;&#x7D27;&#x51D1;&#x3001;&#x6548;&#x7387;&#x66F4;&#x9AD8;&#x3002;&#x5F88;&#x591A;STL&#x7B97;&#x6CD5;&#x4E5F;&#x80FD;&#x4F7F;&#x7528;&#x3002;</p>
-<h1 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h1>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-12-07T12:51:14.000Z" itemprop="datePublished">2018-12-07</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+<h2 id="其他库"><a href="#其他库" class="headerlink" title="其他库"></a>其他库</h2><p>vector、valarray、array。</p>
+<p>它们是由不同的小组开发的，用于不同目的。</p>
+<p>vector 模板类是一个容器类和算法系统的一部分，它支持面向容器的操作。</p>
+<p>valarray 模板类是面向数值计算的，不是STL的一部分。</p>
+<p>array 是为替代内置数组而设计的，她通过提供更好、更安全的接口，让数组更紧凑、效率更高。很多STL算法也能使用。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/12/15/Unix/Programming/Makefile学习/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    Makefile学习
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/12/07/Algorithm/查找树/" class="ui tiny button">
-                    
-                    查找树
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#标准模板库"><span>标准模板库</span></a><ol><li><a href="#通用方法"><span>通用方法</span></a></li><li><a href="#迭代器"><span>迭代器</span></a><ol><li><a href="#迭代器类型"><span>迭代器类型</span></a><ol><li><a href="#输入迭代器"><span>输入迭代器</span></a></li><li><a href="#输出迭代器"><span>输出迭代器</span></a></li><li><a href="#正向迭代器"><span>正向迭代器</span></a></li><li><a href="#双向迭代器"><span>双向迭代器</span></a></li><li><a href="#随机访问迭代器"><span>随机访问迭代器</span></a></li></ol></li><li><a href="#将指针用作迭代器"><span>将指针用作迭代器</span></a></li><li><a href="#迭代器的输入输出适配器"><span>迭代器的输入输出适配器</span></a></li><li><a href="#反向迭代器"><span>反向迭代器</span></a></li><li><a href="#插入迭代器"><span>插入迭代器</span></a></li></ol></li><li><a href="#容器"><span>容器</span></a><ol><li><a href="#所有容器"><span>所有容器</span></a></li><li><a href="#序列容器"><span>序列容器</span></a><ol><li><a href="#vector"><span>vector</span></a></li><li><a href="#deque"><span>deque</span></a></li><li><a href="#list"><span>list</span></a></li><li><a href="#forward-list"><span>forward_list</span></a></li><li><a href="#queue"><span>queue</span></a></li><li><a href="#priority-queue"><span>priority_queue</span></a></li><li><a href="#stack"><span>stack</span></a></li><li><a href="#array"><span>array</span></a></li></ol></li><li><a href="#关联容器"><span>关联容器</span></a><ol><li><a href="#multi-set"><span>(multi)set</span></a></li><li><a href="#multi-map"><span>(multi)map</span></a></li></ol></li><li><a href="#无序关联容器"><span>无序关联容器</span></a></li></ol></li><li><a href="#函数对象"><span>函数对象</span></a><ol><li><a href="#函数符概念"><span>函数符概念</span></a></li><li><a href="#函数适配器概念"><span>函数适配器概念</span></a></li><li><a href="#预定义函数符"><span>预定义函数符</span></a><ol><li><a href="#运算符和相应的函数符"><span>运算符和相应的函数符</span></a></li></ol></li><li><a href="#自适应函数符"><span>自适应函数符</span></a><ol><li><a href="#函数适配器"><span>函数适配器</span></a></li></ol></li><li><a href="#lambda表达式-C-11"><span>lambda表达式 C++11</span></a></li></ol></li><li><a href="#算法"><span>算法</span></a></li></ol></li><li><a href="#其他库"><span>其他库</span></a></li></ol><li><a href="#结束"><span>结束</span></a>
-                </li></div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

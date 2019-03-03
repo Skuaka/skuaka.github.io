@@ -1,398 +1,222 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>CCIE MPLS | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>CCIE MPLS | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x57FA;&amp;#x7840;&amp;#x77E5;&amp;#x8BC6;&amp;#x4EE3;&amp;#x7406;arparp &amp;#x8BF7;&amp;#x6C42;&amp;#xFF1A;&amp;#x5E7F;&amp;#x64AD; &amp;#x56DE;&amp;#x5E94;&amp;#xFF1A;&amp;#x5355;&amp;#x64AD; proxy arp&amp;#xFF08;&amp;#x4EE3;&amp;#x7406;arp&amp;#xFF09; &amp;#x4EE3;&amp;#x4E3A;&amp;#">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CCIE MPLS">
-<meta property="og:url" content="http://yoursite.com/2018/07/18/Network/Ccie/MPLS/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x57FA;&amp;#x7840;&amp;#x77E5;&amp;#x8BC6;&amp;#x4EE3;&amp;#x7406;arparp &amp;#x8BF7;&amp;#x6C42;&amp;#xFF1A;&amp;#x5E7F;&amp;#x64AD; &amp;#x56DE;&amp;#x5E94;&amp;#xFF1A;&amp;#x5355;&amp;#x64AD; proxy arp&amp;#xFF08;&amp;#x4EE3;&amp;#x7406;arp&amp;#xFF09; &amp;#x4EE3;&amp;#x4E3A;&amp;#">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T15:38:40.447Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCIE MPLS">
-<meta name="twitter:description" content="&amp;#x57FA;&amp;#x7840;&amp;#x77E5;&amp;#x8BC6;&amp;#x4EE3;&amp;#x7406;arparp &amp;#x8BF7;&amp;#x6C42;&amp;#xFF1A;&amp;#x5E7F;&amp;#x64AD; &amp;#x56DE;&amp;#x5E94;&amp;#xFF1A;&amp;#x5355;&amp;#x64AD; proxy arp&amp;#xFF08;&amp;#x4EE3;&amp;#x7406;arp&amp;#xFF09; &amp;#x4EE3;&amp;#x4E3A;&amp;#">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础知识"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代理arp"><span class="toc-number">1.1.</span> <span class="toc-text">代理arp</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#帧头重写"><span class="toc-number">1.1.1.</span> <span class="toc-text">帧头重写</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由器数据转发机制"><span class="toc-number">1.2.</span> <span class="toc-text">路由器数据转发机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CEF"><span class="toc-number">1.2.1.</span> <span class="toc-text">CEF</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPLS详解"><span class="toc-number">2.</span> <span class="toc-text">MPLS详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MPLS作用"><span class="toc-number">2.1.</span> <span class="toc-text">MPLS作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPLS术语"><span class="toc-number">2.2.</span> <span class="toc-text">MPLS术语</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#label-标签"><span class="toc-number">2.2.1.</span> <span class="toc-text">label 标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MPLS-模式"><span class="toc-number">2.2.2.</span> <span class="toc-text">MPLS 模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSR：标签交换路由器"><span class="toc-number">2.2.3.</span> <span class="toc-text">LSR：标签交换路由器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#压入、交换、移除、弹出"><span class="toc-number">2.2.4.</span> <span class="toc-text">压入、交换、移除、弹出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSP：链路标签路径"><span class="toc-number">2.2.5.</span> <span class="toc-text">LSP：链路标签路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标签分配、分发、关联、维护协议"><span class="toc-number">2.2.6.</span> <span class="toc-text">标签分配、分发、关联、维护协议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LDP详解"><span class="toc-number">2.3.</span> <span class="toc-text">LDP详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LDP作用"><span class="toc-number">2.3.1.</span> <span class="toc-text">LDP作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LDP邻接关系的建立"><span class="toc-number">2.3.2.</span> <span class="toc-text">LDP邻接关系的建立</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LDP标签的分配"><span class="toc-number">2.3.3.</span> <span class="toc-text">LDP标签的分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LDP标签的共享"><span class="toc-number">2.3.4.</span> <span class="toc-text">LDP标签的共享</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LDP标签的关联"><span class="toc-number">2.3.5.</span> <span class="toc-text">LDP标签的关联</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LDP的特殊标签"><span class="toc-number">2.3.6.</span> <span class="toc-text">LDP的特殊标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LDP的两张表"><span class="toc-number">2.3.7.</span> <span class="toc-text">LDP的两张表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CEF、LDP-数据转发过程"><span class="toc-number">2.3.8.</span> <span class="toc-text">CEF、LDP 数据转发过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPLS的配置流程"><span class="toc-number">2.4.</span> <span class="toc-text">MPLS的配置流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LDP的查看校验命令"><span class="toc-number">2.4.1.</span> <span class="toc-text">LDP的查看校验命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过-IGP的路径改变来影响-LSP"><span class="toc-number">2.4.2.</span> <span class="toc-text">通过 IGP的路径改变来影响 LSP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CEF-FIB-和-ADJ-TABLE-详解"><span class="toc-number">2.4.3.</span> <span class="toc-text">CEF FIB 和 ADJ-TABLE 详解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束"><span class="toc-number">4.</span> <span class="toc-text">结束</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Network/Ccie/MPLS" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    CCIE MPLS
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h2 id="&#x57FA;&#x7840;&#x77E5;&#x8BC6;"><a href="#&#x57FA;&#x7840;&#x77E5;&#x8BC6;" class="headerlink" title="&#x57FA;&#x7840;&#x77E5;&#x8BC6;"></a>&#x57FA;&#x7840;&#x77E5;&#x8BC6;</h2><h3 id="&#x4EE3;&#x7406;arp"><a href="#&#x4EE3;&#x7406;arp" class="headerlink" title="&#x4EE3;&#x7406;arp"></a>&#x4EE3;&#x7406;arp</h3><p>arp</p>
-<p>&#x8BF7;&#x6C42;&#xFF1A;&#x5E7F;&#x64AD;</p>
-<p>&#x56DE;&#x5E94;&#xFF1A;&#x5355;&#x64AD;</p>
-<p>proxy arp&#xFF08;&#x4EE3;&#x7406;arp&#xFF09;</p>
-<p>&#x4EE3;&#x4E3A;&#x8BF7;&#x6C42;&#x548C;&#x56DE;&#x5E94;</p>
-<h4 id="&#x5E27;&#x5934;&#x91CD;&#x5199;"><a href="#&#x5E27;&#x5934;&#x91CD;&#x5199;" class="headerlink" title="&#x5E27;&#x5934;&#x91CD;&#x5199;"></a>&#x5E27;&#x5934;&#x91CD;&#x5199;</h4><p>&#x91CD;&#x5199;=switch&#xFF08;&#x4ECE;mac&#x8868;&#x5185;&#x62FF;&#x51FA;&#x7F6E;&#x6362;&#xFF09;</p>
-<p>&#x76EE;&#x7684;mac&#x6539;&#x4E3A;arp&#x8BF7;&#x6C42;&#x7ED3;&#x679C;</p>
-<p>&#x6E90;mac&#x6539;&#x4E3A;&#x51FA;&#x53E3;mac</p>
-<h3 id="&#x8DEF;&#x7531;&#x5668;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x673A;&#x5236;"><a href="#&#x8DEF;&#x7531;&#x5668;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x673A;&#x5236;" class="headerlink" title="&#x8DEF;&#x7531;&#x5668;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x673A;&#x5236;"></a>&#x8DEF;&#x7531;&#x5668;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x673A;&#x5236;</h3><ol class="ui list">
-<li><p>process forward&#x8FDB;&#x7A0B;&#x8F6C;&#x53D1;&#xFF08;&#x4E0D;&#x7F13;&#x5B58;&#xFF09;</p>
+  <div class="container">
+    <article>
+      <h1>CCIE MPLS</h1>
+      <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="代理arp"><a href="#代理arp" class="headerlink" title="代理arp"></a>代理arp</h3><p>arp</p>
+<p>请求：广播</p>
+<p>回应：单播</p>
+<p>proxy arp（代理arp）</p>
+<p>代为请求和回应</p>
+<h4 id="帧头重写"><a href="#帧头重写" class="headerlink" title="帧头重写"></a>帧头重写</h4><p>重写=switch（从mac表内拿出置换）</p>
+<p>目的mac改为arp请求结果</p>
+<p>源mac改为出口mac</p>
+<h3 id="路由器数据转发机制"><a href="#路由器数据转发机制" class="headerlink" title="路由器数据转发机制"></a>路由器数据转发机制</h3><ol>
+<li><p>process forward进程转发（不缓存）</p>
 </li>
-<li><p>cache forward&#x7F13;&#x5B58;&#x8F6C;&#x53D1;&#xFF08;&#x7ED3;&#x679C;&#x7F13;&#x5B58;10s&#xFF09;</p>
-<p>&#x4E0A;&#x4E24;&#x8005;&#x90FD;&#x662F;&#x57FA;&#x4E8E;&#x6D41;&#x91CF;&#x89E6;&#x53D1;&#xFF08;&#x7B2C;&#x4E00;&#x6B21;&#x4F1A;&#x4E22;&#x5305;&#xFF09;</p>
+<li><p>cache forward缓存转发（结果缓存10s）</p>
+<p>上两者都是基于流量触发（第一次会丢包）</p>
 </li>
-<li><p><strong>CEF  Cisco&#x7684;&#x5FEB;&#x901F;&#x8F6C;&#x53D1;&#x6280;&#x672F;</strong></p>
-<p>&#x57FA;&#x4E8E;&#x62D3;&#x6251;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x6D41;&#x91CF;&#x89E6;&#x53D1;</p>
+<li><p><strong>CEF  Cisco的快速转发技术</strong></p>
+<p>基于拓扑，不需要流量触发</p>
 </li>
 </ol>
-<h4 id="CEF"><a href="#CEF" class="headerlink" title="CEF"></a>CEF</h4><p>FIB &#x8F6C;&#x53D1;&#x4FE1;&#x606F;&#x5E93;&#xFF08;&#x672C;&#x8EAB;&#x5C31;&#x662F;&#x8DEF;&#x7531;&#x8868;&#x7684;&#x526F;&#x672C;&#xFF09;</p>
-<p>RIB &#x8DEF;&#x7531;&#x8868;&#xFF08;&#x7ED9;FIB&#x63D0;&#x4F9B;&#x8981;&#x7D20;&#xFF09;</p>
-<h2 id="MPLS&#x8BE6;&#x89E3;"><a href="#MPLS&#x8BE6;&#x89E3;" class="headerlink" title="MPLS&#x8BE6;&#x89E3;"></a>MPLS&#x8BE6;&#x89E3;</h2><p>multiple protocol label switch&#xFF08;&#x591A;&#x534F;&#x8BAE;&#x6807;&#x7B7E;&#x4EA4;&#x6362;&#xFF09;</p>
-<h3 id="MPLS&#x4F5C;&#x7528;"><a href="#MPLS&#x4F5C;&#x7528;" class="headerlink" title="MPLS&#x4F5C;&#x7528;"></a>MPLS&#x4F5C;&#x7528;</h3><p>MPLS&#x662F;&#x4E00;&#x79CD;&#x6570;&#x636E;&#x4EA4;&#x6362;&#x673A;&#x5236;&#xFF0C;&#x57FA;&#x4E8E;&#x6807;&#x7B7E;&#x5E93;&#x548C;&#x6570;&#x636E;&#x643A;&#x5E26;&#x7684;&#x6807;&#x7B7E;&#x3002;</p>
-<p>&#x8FDB;&#x884C;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#xFF0C;&#x540C;&#x65F6;&#x652F;&#x6301;&#x591A;&#x79CD;&#x534F;&#x8BAE;&#x3002;</p>
-<p>MPLS&#x5728;&#x5B9E;&#x9645;&#x5DE5;&#x4F5C;&#x4E2D;&#xFF0C;&#x80FD;&#x5B9E;&#x73B0;&#x5982;&#x4E0B;&#x4E24;&#x4E2A;&#x57FA;&#x672C;&#x529F;&#x80FD;&#xFF1A;</p>
-<ol class="ui list">
-<li>&#x6570;&#x636E;&#x5305;&#x7684;&#x9AD8;&#x901F;&#x8F6C;&#x53D1;</li>
-<li>&#x51CF;&#x5C11;&#x53C2;&#x4E0E;BGP&#x7684;&#x8BBE;&#x5907;&#x6570;&#x91CF;&#x3001;&#x51CF;&#x5C11;&#x5BF9;&#x7B49;&#x4F53;&#x5173;&#x7CFB;&#x3001;&#x51CF;&#x5C11;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x8DEF;&#x7531;&#x5B66;&#x4E60;</li>
+<h4 id="CEF"><a href="#CEF" class="headerlink" title="CEF"></a>CEF</h4><p>FIB 转发信息库（本身就是路由表的副本）</p>
+<p>RIB 路由表（给FIB提供要素）</p>
+<h2 id="MPLS详解"><a href="#MPLS详解" class="headerlink" title="MPLS详解"></a>MPLS详解</h2><p>multiple protocol label switch（多协议标签交换）</p>
+<h3 id="MPLS作用"><a href="#MPLS作用" class="headerlink" title="MPLS作用"></a>MPLS作用</h3><p>MPLS是一种数据交换机制，基于标签库和数据携带的标签。</p>
+<p>进行数据转发，同时支持多种协议。</p>
+<p>MPLS在实际工作中，能实现如下两个基本功能：</p>
+<ol>
+<li>数据包的高速转发</li>
+<li>减少参与BGP的设备数量、减少对等体关系、减少不必要的路由学习</li>
 </ol>
-<h3 id="MPLS&#x672F;&#x8BED;"><a href="#MPLS&#x672F;&#x8BED;" class="headerlink" title="MPLS&#x672F;&#x8BED;"></a>MPLS&#x672F;&#x8BED;</h3><h5 id="label-&#x6807;&#x7B7E;"><a href="#label-&#x6807;&#x7B7E;" class="headerlink" title="label &#x6807;&#x7B7E;"></a>label &#x6807;&#x7B7E;</h5><p>&#x603B;&#x957F; <strong>32bit</strong> &#x7531;&#x5982;&#x4E0B;&#x51E0;&#x4E2A;&#x90E8;&#x5206;&#x7EC4;&#x6210;&#xFF1A;</p>
-<p><strong>&#x524D;20bit</strong> &#x662F;&#x6807;&#x7B7E;&#x53D6;&#x503C;&#x8303;&#x56F4;</p>
-<p><strong>&#x7B2C;21bit</strong> &#x662F;&#x6808;&#x5E95;&#x4F4D;&#xFF0C;&#x6808;&#x5E95;&#x4F4D;&#x4E3A;1&#x5219;&#x8868;&#x660E;&#x8BE5;&#x6807;&#x7B7E;&#x5DF2;&#x7ECF;&#x662F;&#x6700;&#x540E;&#x4E00;&#x4E2A;</p>
-<p><strong>&#x7B2C;22~24bit</strong> &#x662F;&#x4F53;&#x9A8C;&#x4F4D;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x6807;&#x7B7E;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5206;&#x6210;8&#x4E2A;&#x7EA7;&#x522B;&#xFF0C;&#x7ED9;&#x4E88;&#x4E0D;&#x540C;&#x7684;&#x4F20;&#x8F93;&#x7B56;&#x7565;&#x3002;</p>
-<p><strong>&#x6700;&#x540E;8bit</strong> &#x662F;TTL&#xFF0C;&#x9650;&#x5236;&#x643A;&#x5E26;&#x6807;&#x7B7E;&#x7684;&#x6570;&#x636E;&#x4F20;&#x9012;&#x8303;&#x56F4;&#x3002;</p>
-<h5 id="MPLS-&#x6A21;&#x5F0F;"><a href="#MPLS-&#x6A21;&#x5F0F;" class="headerlink" title="MPLS &#x6A21;&#x5F0F;"></a>MPLS &#x6A21;&#x5F0F;</h5><p>&#x5E27;&#x6A21;&#x5F0F;&#xFF1A;frame mode&#xFF08;&#x4E3B;&#x6D41;&#x6A21;&#x5F0F;&#xFF09;&#xFF0C;&#x6807;&#x7B7E;&#x88AB;&#x63D2;&#x5728;&#x5E27;&#x5934;&#x7684;&#x540E;&#x9762;&#xFF0C;&#x5305;&#x5934;&#x524D;&#x9762;&#x3002;</p>
-<p>&#x4FE1;&#x4EE4;&#x6A21;&#x5F0F;&#xFF1A;cell mode &#x6807;&#x7B7E;&#x88AB;&#x63D2;&#x5728;&#x4FE1;&#x4EE4;&#x5934;&#x540E;&#x9762;&#x3002;</p>
-<h5 id="LSR&#xFF1A;&#x6807;&#x7B7E;&#x4EA4;&#x6362;&#x8DEF;&#x7531;&#x5668;"><a href="#LSR&#xFF1A;&#x6807;&#x7B7E;&#x4EA4;&#x6362;&#x8DEF;&#x7531;&#x5668;" class="headerlink" title="LSR&#xFF1A;&#x6807;&#x7B7E;&#x4EA4;&#x6362;&#x8DEF;&#x7531;&#x5668;"></a>LSR&#xFF1A;&#x6807;&#x7B7E;&#x4EA4;&#x6362;&#x8DEF;&#x7531;&#x5668;</h5><p>&#x542F;&#x7528;&#x4E86;MPLS&#x7684;&#x8DEF;&#x7531;&#x5668;&#x7EDF;&#x79F0;LSR&#x3002;</p>
-<p>&#x5165;&#x7AD9; LSR &#xFF08;inbound LSR&#xFF09;&#xFF1A;&#x63A5;&#x6536;&#x5230; IP &#x6570;&#x636E;&#x5305;&#xFF0C;&#x538B;&#x5165;&#x6807;&#x7B7E;&#xFF0C;&#x4F20;&#x9012;&#x7ED9; MPLS &#x7F51;&#x7EDC;&#x3002;</p>
-<p>&#x94FE;&#x8DEF;&#x4E2D; LSR &#xFF08;link LSR&#xFF09;&#xFF1A;&#x63A5;&#x6536;&#x5230;&#x643A;&#x5E26;&#x6807;&#x7B7E;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x57FA;&#x4E8E;&#x6807;&#x7B7E;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x3002;</p>
-<p>&#x51FA;&#x7AD9; LSR &#xFF08;outbound LSR&#xFF09;&#xFF1A;&#x8D1F;&#x8D23;&#x5C06;&#x6807;&#x7B7E;&#x79FB;&#x9664;&#xFF0C;&#x5E76;&#x4E14;&#x53D8;&#x56DE; IP &#x6570;&#x636E;&#x62A5;&#x6587;&#x3002;</p>
-<h5 id="&#x538B;&#x5165;&#x3001;&#x4EA4;&#x6362;&#x3001;&#x79FB;&#x9664;&#x3001;&#x5F39;&#x51FA;"><a href="#&#x538B;&#x5165;&#x3001;&#x4EA4;&#x6362;&#x3001;&#x79FB;&#x9664;&#x3001;&#x5F39;&#x51FA;" class="headerlink" title="&#x538B;&#x5165;&#x3001;&#x4EA4;&#x6362;&#x3001;&#x79FB;&#x9664;&#x3001;&#x5F39;&#x51FA;"></a>&#x538B;&#x5165;&#x3001;&#x4EA4;&#x6362;&#x3001;&#x79FB;&#x9664;&#x3001;&#x5F39;&#x51FA;</h5><p>&#x538B;&#x5165;&#xFF1A;&#x5165;&#x7AD9;LSR&#x5C06;&#x6807;&#x7B7E;&#x538B;&#x5165;&#x6570;&#x636E;&#x3002;</p>
-<p>&#x4EA4;&#x6362;&#xFF1A;&#x94FE;&#x8DEF;&#x4E2D;LSR&#x57FA;&#x4E8E;&#x6807;&#x7B7E;&#x5E93;&#xFF0C;&#x8FDB;&#x884C;&#x6807;&#x7B7E;&#x7684;&#x7F6E;&#x6362;&#x3001;&#x6570;&#x636E;&#x7684;&#x4F20;&#x9012;&#x3002;</p>
-<p>&#x79FB;&#x9664;&#xFF1A;&#x51FA;&#x7AD9;LSR&#x5C06;&#x6570;&#x636E;&#x643A;&#x5E26;&#x7684;&#x6240;&#x6709;&#x6807;&#x7B7E;&#x5168;&#x90E8;&#x5220;&#x9664;&#x3002;</p>
-<p>&#x5F39;&#x51FA;&#xFF1A;&#x51FA;&#x7AD9;LSR&#x5C06;&#x6570;&#x636E;&#x643A;&#x5E26;&#x7684;&#x6808;&#x9876;&#x6807;&#x7B7E;&#x5F39;&#x51FA;&#xFF0C;&#x5176;&#x4ED6;&#x6807;&#x7B7E;&#x4FDD;&#x7559;&#x3002;</p>
-<h5 id="LSP&#xFF1A;&#x94FE;&#x8DEF;&#x6807;&#x7B7E;&#x8DEF;&#x5F84;"><a href="#LSP&#xFF1A;&#x94FE;&#x8DEF;&#x6807;&#x7B7E;&#x8DEF;&#x5F84;" class="headerlink" title="LSP&#xFF1A;&#x94FE;&#x8DEF;&#x6807;&#x7B7E;&#x8DEF;&#x5F84;"></a>LSP&#xFF1A;&#x94FE;&#x8DEF;&#x6807;&#x7B7E;&#x8DEF;&#x5F84;</h5><p>&#x662F;MPLS&#x8BBE;&#x5907;&#x4F20;&#x9012;&#x6570;&#x636E;&#x6240;&#x9700;&#x7684;&#x8DEF;&#x5F84;&#x3002;&#xFF08;&#x5373;&#x8DEF;&#x7531;&#xFF09;</p>
-<p>LSP&#x662F;&#x901A;&#x8FC7;&#x6807;&#x7B7E;&#x7684;&#x5173;&#x8054;&#x4EA7;&#x751F;&#x7684;&#x3002;</p>
-<h5 id="&#x6807;&#x7B7E;&#x5206;&#x914D;&#x3001;&#x5206;&#x53D1;&#x3001;&#x5173;&#x8054;&#x3001;&#x7EF4;&#x62A4;&#x534F;&#x8BAE;"><a href="#&#x6807;&#x7B7E;&#x5206;&#x914D;&#x3001;&#x5206;&#x53D1;&#x3001;&#x5173;&#x8054;&#x3001;&#x7EF4;&#x62A4;&#x534F;&#x8BAE;" class="headerlink" title="&#x6807;&#x7B7E;&#x5206;&#x914D;&#x3001;&#x5206;&#x53D1;&#x3001;&#x5173;&#x8054;&#x3001;&#x7EF4;&#x62A4;&#x534F;&#x8BAE;"></a>&#x6807;&#x7B7E;&#x5206;&#x914D;&#x3001;&#x5206;&#x53D1;&#x3001;&#x5173;&#x8054;&#x3001;&#x7EF4;&#x62A4;&#x534F;&#x8BAE;</h5><p>TDP&#xFF1A;&#x6807;&#x8BB0;&#x5206;&#x53D1;&#x534F;&#x8BAE;&#x3001;&#x601D;&#x79D1;&#x79C1;&#x6709;</p>
-<p>LDP&#xFF1A;<strong>&#x6807;&#x7B7E;&#x5206;&#x53D1;&#x534F;&#x8BAE;</strong>&#x3001;&#x516C;&#x6709;&#x516C;&#x5F00;</p>
-<h3 id="LDP&#x8BE6;&#x89E3;"><a href="#LDP&#x8BE6;&#x89E3;" class="headerlink" title="LDP&#x8BE6;&#x89E3;"></a>LDP&#x8BE6;&#x89E3;</h3><h4 id="LDP&#x4F5C;&#x7528;"><a href="#LDP&#x4F5C;&#x7528;" class="headerlink" title="LDP&#x4F5C;&#x7528;"></a>LDP&#x4F5C;&#x7528;</h4><ol class="ui list">
-<li>&#x5229;&#x7528; hello &#x6D88;&#x606F;&#x5EFA;&#x7ACB; LDP &#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x3002;</li>
-<li>&#x57FA;&#x4E8E;CEF&#x7ED9;&#x672C;&#x5730;&#x7F51;&#x7EDC;&#x5206;&#x914D;&#x672C;&#x5730;&#x6807;&#x7B7E;&#x3002;</li>
-<li>&#x5C06;&#x7F51;&#x7EDC;&#x5BF9;&#x5E94;&#x7684;&#x6807;&#x7B7E;&#x5206;&#x53D1;&#x5171;&#x4EAB;&#x7ED9;&#x90BB;&#x5C45;</li>
-<li>&#x57FA;&#x4E8E;&#x5E95;&#x5C42;&#x534F;&#x8BAE;&#x5B8C;&#x6210;&#x672C;&#x5730;&#x6807;&#x7B7E;&#x4E0E;&#x8FDC;&#x7A0B;&#x5171;&#x4EAB;&#x6807;&#x7B7E;&#x7684;&#x5173;&#x8054;&#xFF0C;&#x6700;&#x7EC8;&#x5F62;&#x6210;LSP&#x3002;</li>
-<li>&#x8D1F;&#x8D23;&#x76D1;&#x63A7;LSP&#x7684;&#x6709;&#x6548;&#x6027;&#xFF0C;&#x5E76;&#x4E14;&#x7EF4;&#x62A4;&#x5B83;&#x3002;</li>
+<h3 id="MPLS术语"><a href="#MPLS术语" class="headerlink" title="MPLS术语"></a>MPLS术语</h3><h4 id="label-标签"><a href="#label-标签" class="headerlink" title="label 标签"></a>label 标签</h4><p>总长 <strong>32bit</strong> 由如下几个部分组成：</p>
+<p><strong>前20bit</strong> 是标签取值范围</p>
+<p><strong>第21bit</strong> 是栈底位，栈底位为1则表明该标签已经是最后一个</p>
+<p><strong>第22~24bit</strong> 是体验位，可以将标签对应的数据分成8个级别，给予不同的传输策略。</p>
+<p><strong>最后8bit</strong> 是TTL，限制携带标签的数据传递范围。</p>
+<h4 id="MPLS-模式"><a href="#MPLS-模式" class="headerlink" title="MPLS 模式"></a>MPLS 模式</h4><p>帧模式：frame mode（主流模式），标签被插在帧头的后面，包头前面。</p>
+<p>信令模式：cell mode 标签被插在信令头后面。</p>
+<h4 id="LSR：标签交换路由器"><a href="#LSR：标签交换路由器" class="headerlink" title="LSR：标签交换路由器"></a>LSR：标签交换路由器</h4><p>启用了MPLS的路由器统称LSR。</p>
+<p>入站 LSR （inbound LSR）：接收到 IP 数据包，压入标签，传递给 MPLS 网络。</p>
+<p>链路中 LSR （link LSR）：接收到携带标签的数据，基于标签进行数据转发。</p>
+<p>出站 LSR （outbound LSR）：负责将标签移除，并且变回 IP 数据报文。</p>
+<h4 id="压入、交换、移除、弹出"><a href="#压入、交换、移除、弹出" class="headerlink" title="压入、交换、移除、弹出"></a>压入、交换、移除、弹出</h4><p>压入：入站LSR将标签压入数据。</p>
+<p>交换：链路中LSR基于标签库，进行标签的置换、数据的传递。</p>
+<p>移除：出站LSR将数据携带的所有标签全部删除。</p>
+<p>弹出：出站LSR将数据携带的栈顶标签弹出，其他标签保留。</p>
+<h4 id="LSP：链路标签路径"><a href="#LSP：链路标签路径" class="headerlink" title="LSP：链路标签路径"></a>LSP：链路标签路径</h4><p>是MPLS设备传递数据所需的路径。（即路由）</p>
+<p>LSP是通过标签的关联产生的。</p>
+<h4 id="标签分配、分发、关联、维护协议"><a href="#标签分配、分发、关联、维护协议" class="headerlink" title="标签分配、分发、关联、维护协议"></a>标签分配、分发、关联、维护协议</h4><p>TDP：标记分发协议、思科私有</p>
+<p>LDP：<strong>标签分发协议</strong>、公有公开</p>
+<h3 id="LDP详解"><a href="#LDP详解" class="headerlink" title="LDP详解"></a>LDP详解</h3><h4 id="LDP作用"><a href="#LDP作用" class="headerlink" title="LDP作用"></a>LDP作用</h4><ol>
+<li>利用 hello 消息建立 LDP 邻接关系。</li>
+<li>基于CEF给本地网络分配本地标签。</li>
+<li>将网络对应的标签分发共享给邻居</li>
+<li>基于底层协议完成本地标签与远程共享标签的关联，最终形成LSP。</li>
+<li>负责监控LSP的有效性，并且维护它。</li>
 </ol>
-<h4 id="LDP&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x7684;&#x5EFA;&#x7ACB;"><a href="#LDP&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x7684;&#x5EFA;&#x7ACB;" class="headerlink" title="LDP&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x7684;&#x5EFA;&#x7ACB;"></a>LDP&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x7684;&#x5EFA;&#x7ACB;</h4><p>LDP &#x90BB;&#x5C45;&#x7684;&#x53D1;&#x73B0;&#xFF0C;&#x901A;&#x8FC7;hello&#x6D88;&#x606F;&#xFF0C;&#x57FA;&#x4E8E;UDP&#xFF0C;&#x76EE;&#x6807;&#x7AEF;&#x53E3;646&#x3002;</p>
-<p>LDP &#x5229;&#x7528;TCP&#xFF0C;&#x76EE;&#x6807;&#x7AEF;&#x53E3;646&#x5B8C;&#x6210;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x5EFA;&#x7ACB;&#x3002;</p>
-<p>LDP&#x53EF;&#x4EE5;&#x8BBE;&#x5B9A;RID&#xFF0C;RID&#x626E;&#x6F14;&#x66F4;&#x65B0;&#x6E90;&#xFF0C;&#x66F4;&#x65B0;&#x6E90;&#x4F1A;&#x6210;&#x4E3A;&#x5BF9;&#x7AEF;TCP&#x7684;&#x76EE;&#x6807;&#x63A5;&#x6536;&#x5730;&#x5740;&#xFF0C;&#x6240;&#x4EE5;&#x66F4;&#x65B0;&#x6E90;&#x5FC5;&#x987B;&#x53EF;&#x8FBE;&#x3002;</p>
-<h4 id="LDP&#x6807;&#x7B7E;&#x7684;&#x5206;&#x914D;"><a href="#LDP&#x6807;&#x7B7E;&#x7684;&#x5206;&#x914D;" class="headerlink" title="LDP&#x6807;&#x7B7E;&#x7684;&#x5206;&#x914D;"></a>LDP&#x6807;&#x7B7E;&#x7684;&#x5206;&#x914D;</h4><p>&#x9664;BGP&#x8DEF;&#x7531;&#xFF0C;LDP&#x53EF;&#x4EE5;&#x7ED9;&#x672C;&#x5730;&#x76F4;&#x8FDE;&#x7F51;&#x7EDC;&#x4EE5;&#x53CA;&#x975E;&#x76F4;&#x8FDE;&#x7F51;&#x7EDC;&#x5206;&#x914D;&#x6807;&#x7B7E;&#x3002;</p>
-<h4 id="LDP&#x6807;&#x7B7E;&#x7684;&#x5171;&#x4EAB;"><a href="#LDP&#x6807;&#x7B7E;&#x7684;&#x5171;&#x4EAB;" class="headerlink" title="LDP&#x6807;&#x7B7E;&#x7684;&#x5171;&#x4EAB;"></a>LDP&#x6807;&#x7B7E;&#x7684;&#x5171;&#x4EAB;</h4><p>&#x4E24;&#x79CD;&#x5F62;&#x5F0F;&#xFF1A;&#x4E0B;&#x6E38;&#x4E3B;&#x52A8;&#x3001;&#x4E0A;&#x6E38;&#x4E3B;&#x52A8;&#x3002;</p>
-<p>&#x5B9E;&#x9645;&#x4E0A;&#x6807;&#x7B7E;&#x7684;&#x5206;&#x4EAB;&#x662F;&#x7ED9;&#x6240;&#x6709;&#x7684;&#x90BB;&#x5C45;&#xFF0C;&#x4E0D;&#x9075;&#x5FAA;&#x6240;&#x8C13;&#x7684;&#x4E0A;&#x4E0B;&#x6E38;&#x3002;</p>
-<h4 id="LDP&#x6807;&#x7B7E;&#x7684;&#x5173;&#x8054;"><a href="#LDP&#x6807;&#x7B7E;&#x7684;&#x5173;&#x8054;" class="headerlink" title="LDP&#x6807;&#x7B7E;&#x7684;&#x5173;&#x8054;"></a>LDP&#x6807;&#x7B7E;&#x7684;&#x5173;&#x8054;</h4><p>LDP&#x6C38;&#x8FDC;&#x5C06;&#x8DEF;&#x7531;&#x8DEF;&#x5F84;&#x4E0B;&#x4E00;&#x8DF3;&#x5171;&#x4EAB;&#x7684;&#x6807;&#x7B7E;&#x4E0E;&#x5BF9;&#x5E94;&#x7F51;&#x7EDC;&#x7684;&#x672C;&#x5730;&#x6807;&#x7B7E;&#x5173;&#x8054;&#x3002;</p>
-<p>boundaddress&#xFF1A;&#x7ED1;&#x5B9A;&#x5730;&#x5740;&#xFF0C;&#x53C2;&#x4E0E;MPLS&#x8BBE;&#x5907;&#x7684;IP&#x4F1A;&#x6210;&#x4E3A;&#x7ED1;&#x5B9A;&#x5730;&#x5740;&#x548C;&#xFF0C;&#x4F1A;&#x8DDF;&#x7740;&#x672C;&#x5730;&#x6807;&#x7B7E;&#x4E00;&#x8D77;&#x5171;&#x4EAB;&#x7ED9;LDP&#x90BB;&#x5C45;&#xFF0C;&#x90BB;&#x5C45;&#x6839;&#x636E;&#x5E95;&#x5C42;&#x534F;&#x8BAE;&#x4E0B;&#x4E00;&#x8DF3;&#x5730;&#x5740;&#x548C;&#x7ED1;&#x5B9A;&#x5730;&#x5740;&#x7684;&#x5224;&#x65AD;&#x6765;&#x786E;&#x8BA4;&#x54EA;&#x4E2A;LDP&#x90BB;&#x5C45;&#x662F;&#x4E0B;&#x4E00;&#x8DF3;&#xFF0C;&#x518D;&#x7ED1;&#x5B9A;&#x3002;</p>
-<h4 id="LDP&#x7684;&#x7279;&#x6B8A;&#x6807;&#x7B7E;"><a href="#LDP&#x7684;&#x7279;&#x6B8A;&#x6807;&#x7B7E;" class="headerlink" title="LDP&#x7684;&#x7279;&#x6B8A;&#x6807;&#x7B7E;"></a>LDP&#x7684;&#x7279;&#x6B8A;&#x6807;&#x7B7E;</h4><ul class="ui list">
-<li>UNTAGE&#xFF1A;&#x672A;&#x6807;&#x8BB0;</li>
+<h4 id="LDP邻接关系的建立"><a href="#LDP邻接关系的建立" class="headerlink" title="LDP邻接关系的建立"></a>LDP邻接关系的建立</h4><p>LDP 邻居的发现，通过hello消息，基于UDP，目标端口646。</p>
+<p>LDP 利用TCP，目标端口646完成邻接关系建立。</p>
+<p>LDP可以设定RID，RID扮演更新源，更新源会成为对端TCP的目标接收地址，所以更新源必须可达。</p>
+<h4 id="LDP标签的分配"><a href="#LDP标签的分配" class="headerlink" title="LDP标签的分配"></a>LDP标签的分配</h4><p>除BGP路由，LDP可以给本地直连网络以及非直连网络分配标签。</p>
+<h4 id="LDP标签的共享"><a href="#LDP标签的共享" class="headerlink" title="LDP标签的共享"></a>LDP标签的共享</h4><p>两种形式：下游主动、上游主动。</p>
+<p>实际上标签的分享是给所有的邻居，不遵循所谓的上下游。</p>
+<h4 id="LDP标签的关联"><a href="#LDP标签的关联" class="headerlink" title="LDP标签的关联"></a>LDP标签的关联</h4><p>LDP永远将路由路径下一跳共享的标签与对应网络的本地标签关联。</p>
+<p>boundaddress：绑定地址，参与MPLS设备的IP会成为绑定地址和，会跟着本地标签一起共享给LDP邻居，邻居根据底层协议下一跳地址和绑定地址的判断来确认哪个LDP邻居是下一跳，再绑定。</p>
+<h4 id="LDP的特殊标签"><a href="#LDP的特殊标签" class="headerlink" title="LDP的特殊标签"></a>LDP的特殊标签</h4><ul>
+<li>UNTAGE：未标记</li>
 </ul>
-<p>&#x51FA;&#x73B0;&#x539F;&#x56E0;&#xFF1A;&#x5E95;&#x5C42;&#x662F;ospf,&#x672C;&#x5730;&#x7F51;&#x7EDC;&#x65E0;&#x6CD5;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x8FDC;&#x7A0B;&#x6807;&#x7B7E;&#xFF0C;LDP&#x7ED9;&#x7F51;&#x7EDC;&#x5206;&#x914D;untage&#x3002;</p>
-<p>&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF1A;&#x76EE;&#x6807;&#x7F51;&#x7EDC;&#x8FDC;&#x7A0B;&#x6807;&#x7B7E;&#x5982;&#x679C;&#x662F;untage&#xFF0C;&#x90A3;&#x4E48;LSR&#x4F1A;&#x5C06;&#x6240;&#x6709;&#x6807;&#x7B7E;&#x79FB;&#x9664;&#xFF0C;&#x5411;&#x5916;&#x4F20;&#x9012;&#x3002;</p>
-<ul class="ui list">
-<li>POP&#xFF1A;&#x5012;&#x6570;&#x7B2C;&#x4E8C;&#x8DF3;&#x6807;&#x7B7E;</li>
+<p>出现原因：底层是ospf,本地网络无法找到对应的远程标签，LDP给网络分配untage。</p>
+<p>处理方式：目标网络远程标签如果是untage，那么LSR会将所有标签移除，向外传递。</p>
+<ul>
+<li>POP：倒数第二跳标签</li>
 </ul>
-<p>&#x51FA;&#x73B0;&#x539F;&#x56E0;&#xFF1A;&#x5F53;&#x524D;&#x8DEF;&#x7531;&#x5668;&#x7ED9;&#x672C;&#x5730;&#x76F4;&#x8FDE;&#x7F51;&#x7EDC;&#x5206;&#x914D;&#x7684;&#x672C;&#x5730;&#x6807;&#x7B7E;&#x5C31;&#x662F;POP&#x3002;</p>
-<p>&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF1A;&#x5982;&#x679C;&#x51FA;&#x7AD9;&#x6807;&#x7B7E;&#x662F;POP&#xFF0C;&#x90A3;&#x4E48;LSR &#x4F1A;&#x5C06;&#x6808;&#x9876;&#x6807;&#x7B7E;&#x5F39;&#x51FA;&#x3002;</p>
-<p>&#x610F;&#x4E49;&#xFF1A;&#x63D0;&#x9AD8;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x6548;&#x7387;&#xFF0C;&#x51CF;&#x5C11;&#x4E00;&#x6B21;&#x6807;&#x7B7E;&#x5E93;&#x67E5;&#x627E;&#x3002;</p>
-<h4 id="LDP&#x7684;&#x4E24;&#x5F20;&#x8868;"><a href="#LDP&#x7684;&#x4E24;&#x5F20;&#x8868;" class="headerlink" title="LDP&#x7684;&#x4E24;&#x5F20;&#x8868;"></a>LDP&#x7684;&#x4E24;&#x5F20;&#x8868;</h4><p>LIB&#xFF1A;&#x6807;&#x7B7E;&#x4FE1;&#x606F;&#x5E93;</p>
-<p>&#x76EE;&#x6807;&#x7F51;&#x7EDC;&#x672C;&#x5730;&#x6807;&#x7B7E;&#x548C;&#x5B66;&#x4E60;&#x5230;&#x7684;&#x8FDC;&#x7A0B;&#x6807;&#x7B7E;&#x5B58;&#x50A8;&#x5728;&#x8FD9;&#x91CC;&#x3002;&#xFF08;&#x672A;&#x5173;&#x8054;&#xFF09;</p>
-<p>LFIB&#xFF1A;&#x6807;&#x7B7E;&#x8F6C;&#x53D1;&#x4FE1;&#x606F;&#x5E93;</p>
-<p>&#x6807;&#x7B7E;&#x5173;&#x8054;&#x540E;&#x7684;&#x7ED3;&#x679C; &#x5373; LSP  &#x5B58;&#x50A8;&#x5728;&#x8FD9;&#x91CC;&#x3002;</p>
-<h4 id="CEF&#x3001;LDP-&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x8FC7;&#x7A0B;"><a href="#CEF&#x3001;LDP-&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x8FC7;&#x7A0B;" class="headerlink" title="CEF&#x3001;LDP &#x6570;&#x636E;&#x8F6C;&#x53D1;&#x8FC7;&#x7A0B;"></a>CEF&#x3001;LDP &#x6570;&#x636E;&#x8F6C;&#x53D1;&#x8FC7;&#x7A0B;</h4><p>&#x7565;</p>
-<h3 id="MPLS&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;"><a href="#MPLS&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;" class="headerlink" title="MPLS&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;"></a>MPLS&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;</h3><p>&#x6B65;&#x9AA4;1&#xFF1A;&#x5F00;&#x542F; CEF&#xFF08;&#x9ED8;&#x8BA4;&#x5F00;&#x542F;&#xFF0C;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0D;&#x9700;&#x8981;&#x6B64;&#x547D;&#x4EE4;&#xFF09;</p>
+<p>出现原因：当前路由器给本地直连网络分配的本地标签就是POP。</p>
+<p>处理方式：如果出站标签是POP，那么LSR 会将栈顶标签弹出。</p>
+<p>意义：提高数据转发效率，减少一次标签库查找。</p>
+<h4 id="LDP的两张表"><a href="#LDP的两张表" class="headerlink" title="LDP的两张表"></a>LDP的两张表</h4><p>LIB：标签信息库</p>
+<p>目标网络本地标签和学习到的远程标签存储在这里。（未关联）</p>
+<p>LFIB：标签转发信息库</p>
+<p>标签关联后的结果 即 LSP  存储在这里。</p>
+<h4 id="CEF、LDP-数据转发过程"><a href="#CEF、LDP-数据转发过程" class="headerlink" title="CEF、LDP 数据转发过程"></a>CEF、LDP 数据转发过程</h4><p>略</p>
+<h3 id="MPLS的配置流程"><a href="#MPLS的配置流程" class="headerlink" title="MPLS的配置流程"></a>MPLS的配置流程</h3><p>步骤1：开启 CEF（默认开启，一般情况不需要此命令）</p>
 <p><code>ip cef</code></p>
-<p>&#x6B65;&#x9AA4;2&#xFF1A;&#x8BBE;&#x7F6E;&#x6807;&#x7B7E;&#x5206;&#x914D;&#x3001;&#x5206;&#x53D1;&#x5173;&#x8054;&#x534F;&#x8BAE;&#xFF08;&#x9ED8;&#x8BA4;&#x662F;LDP&#xFF09;</p>
+<p>步骤2：设置标签分配、分发关联协议（默认是LDP）</p>
 <p><code>mpls label protocol &lt;ldp/tdp&gt;</code></p>
-<p>&#x6B65;&#x9AA4;3&#xFF1A;&#x8BBE;&#x7F6E;&#x6807;&#x7B7E;&#x53D6;&#x503C;&#x8303;&#x56F4;&#xFF08;&#x901A;&#x5E38;&#x4E0D;&#x8BBE;&#x7F6E;&#xFF09;</p>
+<p>步骤3：设置标签取值范围（通常不设置）</p>
 <p><code>mpls label range &lt;xx-yy&gt;</code></p>
-<p>&#x6B65;&#x9AA4;4&#xFF1A;&#x8BBE;&#x7F6E; LDP &#x7684; RID  &#x5373;&#x8BBE;&#x7F6E;&#x66F4;&#x65B0;&#x6E90;&#xFF08;&#x4E0D;&#x8BBE;&#x7F6E;&#x5219;&#x548C;OSPF&#x4E00;&#x6837;&#x81EA;&#x52A8;&#x9009;&#x53D6;RID&#xFF09;</p>
-<p><code>mpls ldp router-id loopback x [force]  //RID &#x5FC5;&#x987B;&#x53EF;&#x8FBE;&#x3001;force &#x5F3A;&#x5236;&#x6539;&#x53D8; RID</code></p>
-<p>&#x6B65;&#x9AA4;5&#xFF1A;&#x63A5;&#x53E3;&#x4E0B;&#x542F;&#x7528;MPLS</p>
+<p>步骤4：设置 LDP 的 RID  即设置更新源（不设置则和OSPF一样自动选取RID）</p>
+<p><code>mpls ldp router-id loopback x [force]  //RID 必须可达、force 强制改变 RID</code></p>
+<p>步骤5：接口下启用MPLS</p>
 <p><code>mpls ip</code></p>
-<h4 id="LDP&#x7684;&#x67E5;&#x770B;&#x6821;&#x9A8C;&#x547D;&#x4EE4;"><a href="#LDP&#x7684;&#x67E5;&#x770B;&#x6821;&#x9A8C;&#x547D;&#x4EE4;" class="headerlink" title="LDP&#x7684;&#x67E5;&#x770B;&#x6821;&#x9A8C;&#x547D;&#x4EE4;"></a>LDP&#x7684;&#x67E5;&#x770B;&#x6821;&#x9A8C;&#x547D;&#x4EE4;</h4><ul class="ui list">
-<li><p>&#x67E5;&#x770B;LDP&#x662F;&#x5426;&#x53D1;&#x73B0;&#x4E86;&#x90BB;&#x5C45;</p>
+<h4 id="LDP的查看校验命令"><a href="#LDP的查看校验命令" class="headerlink" title="LDP的查看校验命令"></a>LDP的查看校验命令</h4><ul>
+<li><p>查看LDP是否发现了邻居</p>
 <p><code>show mpls idp discovery</code></p>
-<p>&#x90BB;&#x5C45;&#x88AB;&#x53D1;&#x73B0;&#x540E;&#xFF0C;no host route &#x6307;&#x6CA1;&#x6709;&#x62B5;&#x8FBE;&#x5BF9;&#x65B9;&#x7684;&#x4E3B;&#x673A;&#x8DEF;&#x7531;&#xFF0C;&#x4F46;&#x6709;&#x7F51;&#x7EDC;&#x8DEF;&#x7531;&#xFF0C;&#x603B;&#x4F53;&#x53EF;&#x8FBE;&#x3002;</p>
-<p>&#x90BB;&#x5C45;&#x88AB;&#x53D1;&#x73B0;&#x540E;&#xFF0C;no route &#x6307;&#x6CA1;&#x6709;&#x62B5;&#x8FBE;&#x5BF9;&#x65B9;&#x7684;&#x8DEF;&#x7531;&#x8DEF;&#x5F84;&#xFF0C;&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x6700;&#x7EC8;&#x65E0;&#x6CD5;&#x5EFA;&#x7ACB;&#x3002;</p>
+<p>邻居被发现后，no host route 指没有抵达对方的主机路由，但有网络路由，总体可达。</p>
+<p>邻居被发现后，no route 指没有抵达对方的路由路径，邻接关系最终无法建立。</p>
 </li>
-<li><p>&#x67E5;&#x770B;LDP&#x90BB;&#x63A5;&#x5173;&#x7CFB;&#x662F;&#x5426;&#x5EFA;&#x7ACB;</p>
+<li><p>查看LDP邻接关系是否建立</p>
 <p><code>show mpls idp neighbor</code></p>
 </li>
-<li><p>&#x67E5;&#x770B; LIB</p>
+<li><p>查看 LIB</p>
 <p><code>show mpls ldp binding</code></p>
 </li>
-<li><p>&#x67E5;&#x770B;LFIB</p>
+<li><p>查看LFIB</p>
 <p><code>show mpls forwarding-table</code></p>
 </li>
 </ul>
-<h4 id="&#x901A;&#x8FC7;-IGP&#x7684;&#x8DEF;&#x5F84;&#x6539;&#x53D8;&#x6765;&#x5F71;&#x54CD;-LSP"><a href="#&#x901A;&#x8FC7;-IGP&#x7684;&#x8DEF;&#x5F84;&#x6539;&#x53D8;&#x6765;&#x5F71;&#x54CD;-LSP" class="headerlink" title="&#x901A;&#x8FC7; IGP&#x7684;&#x8DEF;&#x5F84;&#x6539;&#x53D8;&#x6765;&#x5F71;&#x54CD; LSP"></a>&#x901A;&#x8FC7; IGP&#x7684;&#x8DEF;&#x5F84;&#x6539;&#x53D8;&#x6765;&#x5F71;&#x54CD; LSP</h4><p>LSP&#x662F;&#x4F1A;&#x5B58;&#x5728;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7684;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#x5E95;&#x5C42;&#x534F;&#x8BAE;&#x7684;&#x8DEF;&#x5F84;&#x51B3;&#x5B9A;&#x4E86; LSP&#x8DEF;&#x5F84;&#x3002;</p>
-<h4 id="CEF-FIB-&#x548C;-ADJ-TABLE-&#x8BE6;&#x89E3;"><a href="#CEF-FIB-&#x548C;-ADJ-TABLE-&#x8BE6;&#x89E3;" class="headerlink" title="CEF FIB &#x548C; ADJ-TABLE &#x8BE6;&#x89E3;"></a>CEF FIB &#x548C; ADJ-TABLE &#x8BE6;&#x89E3;</h4><p><code>show ip cef detail | begin 172.16.1.0</code></p>
-<p>&#x67E5;&#x770B;cef&#x90BB;&#x63A5;&#x8868;</p>
+<h4 id="通过-IGP的路径改变来影响-LSP"><a href="#通过-IGP的路径改变来影响-LSP" class="headerlink" title="通过 IGP的路径改变来影响 LSP"></a>通过 IGP的路径改变来影响 LSP</h4><p>LSP是会存在负载均衡的。实际上底层协议的路径决定了 LSP路径。</p>
+<h4 id="CEF-FIB-和-ADJ-TABLE-详解"><a href="#CEF-FIB-和-ADJ-TABLE-详解" class="headerlink" title="CEF FIB 和 ADJ-TABLE 详解"></a>CEF FIB 和 ADJ-TABLE 详解</h4><p><code>show ip cef detail | begin 172.16.1.0</code></p>
+<p>查看cef邻接表</p>
 <p><code>show adjacency detail</code></p>
-<h2 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h2><ol class="ui list">
-<li><p>arp&#x7684;&#x4F5C;&#x7528;&#x3001;&#x4EE3;&#x7406;arp&#x7684;&#x4F5C;&#x7528;</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>arp的作用、代理arp的作用</p>
 </li>
-<li><p>&#x8DEF;&#x7531;&#x5668;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x7684;&#x4E09;&#x4E2A;&#x673A;&#x5236;</p>
+<li><p>路由器数据转发的三个机制</p>
 </li>
-<li><p>CEF&#x4E24;&#x5F20;&#x8868;&#x548C;&#x5DE5;&#x4F5C;&#x673A;&#x5236;</p>
+<li><p>CEF两张表和工作机制</p>
 </li>
-<li><p>RIB FIB ADJ-TABLE &#x5728;&#x6570;&#x636E;&#x4F20;&#x9012;&#x65F6;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</p>
+<li><p>RIB FIB ADJ-TABLE 在数据传递时使用方法</p>
 </li>
-<li><p>MPLS &#x7684;&#x5168;&#x79F0;&#x3001;&#x6A21;&#x5F0F;</p>
+<li><p>MPLS 的全称、模式</p>
 </li>
-<li><p>&#x6807;&#x7B7E;&#x957F;&#x5EA6;&#x548C;&#x6BCF;&#x6BB5;&#x7684;&#x542B;&#x4E49;</p>
+<li><p>标签长度和每段的含义</p>
 </li>
-<li><p>MPLS &#x672F;&#x8BED;</p>
+<li><p>MPLS 术语</p>
 <p>LSR(in/out/link)    LSP</p>
-<p>&#x6807;&#x7B7E;&#x7684;&#x52A8;&#x4F5C;&#xFF1A;&#x538B;&#x5165;&#x3001;&#x4EA4;&#x6362;&#x3001;&#x79FB;&#x9664;&#x3001;&#x5F39;&#x51FA;</p>
-<p>POP&#x548C;UNTAGE</p>
-<p>LDP&#x548C;TDP&#x7684;&#x4F5C;&#x7528;</p>
-<p>LDP&#x7684;&#x6807;&#x7B7E;&#x5206;&#x914D;&#x3001;&#x5206;&#x53D1;&#x3001;&#x5173;&#x8054;</p>
+<p>标签的动作：压入、交换、移除、弹出</p>
+<p>POP和UNTAGE</p>
+<p>LDP和TDP的作用</p>
+<p>LDP的标签分配、分发、关联</p>
 </li>
-<li><p>MPLS&#x7684;&#x914D;&#x7F6E;&#x6D41;&#x7A0B;</p>
+<li><p>MPLS的配置流程</p>
 </li>
-<li><p>&#x67E5;&#x770B;&#x548C;&#x7406;&#x89E3;LDP&#x7684;&#x90BB;&#x5C45;&#x53D1;&#x73B0;&#x3001;&#x90BB;&#x63A5;&#x5EFA;&#x7ACB;</p>
+<li><p>查看和理解LDP的邻居发现、邻接建立</p>
 </li>
-<li><p>&#x67E5;&#x770B;&#x548C;&#x7406;&#x89E3;LIB &#x548C;LFIB</p>
+<li><p>查看和理解LIB 和LFIB</p>
 </li>
-<li><p>&#x7406;&#x89E3;</p>
+<li><p>理解</p>
 </li>
 </ol>
-<h1 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h1>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-07-18T08:54:05.000Z" itemprop="datePublished">2018-07-18</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/07/19/Network/Ccie/逻辑子接口/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    CCIE 逻辑子接口
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/07/18/Network/Ccie/路由协议分类/" class="ui tiny button">
-                    
-                    CCIE 路由协议分类
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#基础知识"><span>基础知识</span></a><ol><li><a href="#代理arp"><span>代理arp</span></a><ol><li><a href="#帧头重写"><span>帧头重写</span></a></li></ol></li><li><a href="#路由器数据转发机制"><span>路由器数据转发机制</span></a><ol><li><a href="#CEF"><span>CEF</span></a></li></ol></li></ol></li><li><a href="#MPLS详解"><span>MPLS详解</span></a><ol><li><a href="#MPLS作用"><span>MPLS作用</span></a></li><li><a href="#MPLS术语"><span>MPLS术语</span></a><ol><li><a href="#label-标签"><span>label 标签</span></a></li><li><a href="#MPLS-模式"><span>MPLS 模式</span></a></li><li><a href="#LSR：标签交换路由器"><span>LSR：标签交换路由器</span></a></li><li><a href="#压入、交换、移除、弹出"><span>压入、交换、移除、弹出</span></a></li><li><a href="#LSP：链路标签路径"><span>LSP：链路标签路径</span></a></li><li><a href="#标签分配、分发、关联、维护协议"><span>标签分配、分发、关联、维护协议</span></a></li></ol></li></ol></li><li><a href="#LDP详解"><span>LDP详解</span></a><ol><li><a href="#LDP作用"><span>LDP作用</span></a></li><li><a href="#LDP邻接关系的建立"><span>LDP邻接关系的建立</span></a></li><li><a href="#LDP标签的分配"><span>LDP标签的分配</span></a></li><li><a href="#LDP标签的共享"><span>LDP标签的共享</span></a></li><li><a href="#LDP标签的关联"><span>LDP标签的关联</span></a></li><li><a href="#LDP的特殊标签"><span>LDP的特殊标签</span></a></li><li><a href="#LDP的两张表"><span>LDP的两张表</span></a></li><li><a href="#CEF、LDP-数据转发过程"><span>CEF、LDP 数据转发过程</span></a></li></ol></li><li><a href="#MPLS的配置流程"><span>MPLS的配置流程</span></a><ol><li><a href="#LDP的查看校验命令"><span>LDP的查看校验命令</span></a></li><li><a href="#通过-IGP的路径改变来影响-LSP"><span>通过 IGP的路径改变来影响 LSP</span></a></li><li><a href="#CEF-FIB-和-ADJ-TABLE-详解"><span>CEF FIB 和 ADJ-TABLE 详解</span></a></li></ol></li></ol><li><a href="#总结"><span>总结</span></a></li><li><a href="#结束"><span>结束</span></a>
-                </li></div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

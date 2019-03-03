@@ -1,163 +1,73 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>Linux备忘录 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Linux备忘录 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x7CFB;&amp;#x7EDF;&amp;#x5B89;&amp;#x88C5;&amp;#x540E;&amp;#x7684;&amp;#x914D;&amp;#x7F6E; &amp;#x5173;&amp;#x95ED;&amp;#x9632;&amp;#x706B;&amp;#x5899; chkconfig iptables off  &amp;#x5173;&amp;#x95ED;selinux /etc/selinux/config SELINUX=disabled  chkconfi">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux备忘录">
-<meta property="og:url" content="http://yoursite.com/2018/10/02/Unix/System/Linux备忘录/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x7CFB;&amp;#x7EDF;&amp;#x5B89;&amp;#x88C5;&amp;#x540E;&amp;#x7684;&amp;#x914D;&amp;#x7F6E; &amp;#x5173;&amp;#x95ED;&amp;#x9632;&amp;#x706B;&amp;#x5899; chkconfig iptables off  &amp;#x5173;&amp;#x95ED;selinux /etc/selinux/config SELINUX=disabled  chkconfi">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-01T16:20:34.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux备忘录">
-<meta name="twitter:description" content="&amp;#x7CFB;&amp;#x7EDF;&amp;#x5B89;&amp;#x88C5;&amp;#x540E;&amp;#x7684;&amp;#x914D;&amp;#x7F6E; &amp;#x5173;&amp;#x95ED;&amp;#x9632;&amp;#x706B;&amp;#x5899; chkconfig iptables off  &amp;#x5173;&amp;#x95ED;selinux /etc/selinux/config SELINUX=disabled  chkconfi">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#系统安装后的配置"><span class="toc-number">1.</span> <span class="toc-text">系统安装后的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动加载文件系统-etc-fstab"><span class="toc-number">2.</span> <span class="toc-text">自动加载文件系统/etc/fstab</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络配置的相关文件"><span class="toc-number">3.</span> <span class="toc-text">网络配置的相关文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#软件包管理"><span class="toc-number">4.</span> <span class="toc-text">软件包管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用rpm从镜像文件下载软件包"><span class="toc-number">4.1.</span> <span class="toc-text">使用rpm从镜像文件下载软件包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用本地yum源下载软件包"><span class="toc-number">4.2.</span> <span class="toc-text">使用本地yum源下载软件包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑卷管理"><span class="toc-number">5.</span> <span class="toc-text">逻辑卷管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#新建逻辑卷"><span class="toc-number">5.1.</span> <span class="toc-text">新建逻辑卷</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除逻辑卷"><span class="toc-number">5.2.</span> <span class="toc-text">删除逻辑卷</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩充逻辑卷"><span class="toc-number">5.3.</span> <span class="toc-text">扩充逻辑卷</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缩容逻辑卷"><span class="toc-number">5.4.</span> <span class="toc-text">缩容逻辑卷</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网卡绑定"><span class="toc-number">6.</span> <span class="toc-text">网卡绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS服务配置"><span class="toc-number">7.</span> <span class="toc-text">NFS服务配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache服务"><span class="toc-number">8.</span> <span class="toc-text">Apache服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阻止重定向操作覆盖已有文件"><span class="toc-number">9.</span> <span class="toc-text">阻止重定向操作覆盖已有文件</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Unix/System/Linux备忘录" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    Linux备忘录
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h3 id="&#x7CFB;&#x7EDF;&#x5B89;&#x88C5;&#x540E;&#x7684;&#x914D;&#x7F6E;"><a href="#&#x7CFB;&#x7EDF;&#x5B89;&#x88C5;&#x540E;&#x7684;&#x914D;&#x7F6E;" class="headerlink" title="&#x7CFB;&#x7EDF;&#x5B89;&#x88C5;&#x540E;&#x7684;&#x914D;&#x7F6E;"></a>&#x7CFB;&#x7EDF;&#x5B89;&#x88C5;&#x540E;&#x7684;&#x914D;&#x7F6E;</h3><ul class="ui list">
-<li><p>&#x5173;&#x95ED;&#x9632;&#x706B;&#x5899;</p>
+  <div class="container">
+    <article>
+      <h1>Linux备忘录</h1>
+      <h3 id="系统安装后的配置"><a href="#系统安装后的配置" class="headerlink" title="系统安装后的配置"></a>系统安装后的配置</h3><ul>
+<li><p>关闭防火墙</p>
 <p>chkconfig iptables off</p>
 </li>
-<li><p>&#x5173;&#x95ED;selinux</p>
+<li><p>关闭selinux</p>
 <p>/etc/selinux/config</p>
 <p>SELINUX=disabled</p>
 </li>
@@ -167,112 +77,112 @@
 <li><p>reboot</p>
 </li>
 </ul>
-<h3 id="&#x81EA;&#x52A8;&#x52A0;&#x8F7D;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;-etc-fstab"><a href="#&#x81EA;&#x52A8;&#x52A0;&#x8F7D;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;-etc-fstab" class="headerlink" title="&#x81EA;&#x52A8;&#x52A0;&#x8F7D;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;/etc/fstab"></a>&#x81EA;&#x52A8;&#x52A0;&#x8F7D;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;/etc/fstab</h3><ol class="ui list">
-<li>&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x5BF9;&#x5E94;&#x7684;&#x8BBE;&#x5907;&#x540D;&#x3002;&#x8FD9;&#x4E00;&#x5217;&#x5185;&#x5BB9;&#x53EF;&#x4EE5;&#x662F;&#x5206;&#x533A;&#x6216;&#x8BBE;&#x5907;</li>
-<li>&#x6302;&#x8F7D;&#x70B9;</li>
-<li>&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x683C;&#x5F0F;&#x3002;&#x5982; ext3&#xFF0C; vfat &#x7B49;</li>
-<li>&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x6302;&#x8F7D;&#x53C2;&#x6570;&#x3002;&#x4E0D;&#x540C;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x53EF;&#x80FD;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x53C2;&#x6570;</li>
-<li>&#x5907;&#x4EFD;&#x6807;&#x5FD7;&#x3002;&#x8BBE;&#x5B9A;&#x4E3A; 1 &#x65F6;&#xFF0C;&#x8868;&#x793A;&#x5907;&#x4EFD;&#x8BE5;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF1B;0 &#x8868;&#x793A;&#x4E0D;&#x5907;&#x4EFD;</li>
-<li>&#x7CFB;&#x7EDF;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;&#x68C0;&#x67E5;&#x987A;&#x5E8F;&#x3002;&#x53EA;&#x6709;&#x6839;&#x5206;&#x533A;&#x624D;&#x53EF;&#x4EE5;&#x8BBE;&#x5B9A;&#x4E3A; 1&#xFF0C;&#x5176;&#x4F59;&#x9700;&#x8981;&#x68C0;&#x67E5;&#x7684;&#x5206;&#x533A;&#x5E94;&#x8BE5;&#x8BBE;&#x5B9A;&#x4E3A; 2&#xFF0C;&#x8BBE;&#x5B9A;&#x4E3A; 0 &#x8868;&#x793A;&#x4E0D;&#x68C0;&#x67E5;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</li>
+<h3 id="自动加载文件系统-etc-fstab"><a href="#自动加载文件系统-etc-fstab" class="headerlink" title="自动加载文件系统/etc/fstab"></a>自动加载文件系统/etc/fstab</h3><ol>
+<li>文件系统对应的设备名。这一列内容可以是分区或设备</li>
+<li>挂载点</li>
+<li>文件系统格式。如 ext3， vfat 等</li>
+<li>文件系统挂载参数。不同的文件系统可能有不同的参数</li>
+<li>备份标志。设定为 1 时，表示备份该文件系统；0 表示不备份</li>
+<li>系统启动时，文件系统的检查顺序。只有根分区才可以设定为 1，其余需要检查的分区应该设定为 2，设定为 0 表示不检查文件系统</li>
 </ol>
-<h3 id="&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#x7684;&#x76F8;&#x5173;&#x6587;&#x4EF6;"><a href="#&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#x7684;&#x76F8;&#x5173;&#x6587;&#x4EF6;" class="headerlink" title="&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#x7684;&#x76F8;&#x5173;&#x6587;&#x4EF6;"></a>&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#x7684;&#x76F8;&#x5173;&#x6587;&#x4EF6;</h3><ol class="ui list">
-<li>IP&#x5730;&#x5740;&#x914D;&#x7F6E;&#x6587;&#x4EF6;    /etc/sysconfig/network-scripts/ifcfg-&#x7F51;&#x5361;</li>
-<li>&#x4E3B;&#x673A;&#x540D;&#x6620;&#x5C04;&#x6587;&#x4EF6;/etc/hosts</li>
-<li>&#x4E3B;&#x673A;&#x540D;&#x6587;&#x4EF6;/etc/sysconfig/network</li>
-<li>DNS&#x89E3;&#x6790;&#x6587;&#x4EF6;/etc/reslov.conf</li>
+<h3 id="网络配置的相关文件"><a href="#网络配置的相关文件" class="headerlink" title="网络配置的相关文件"></a>网络配置的相关文件</h3><ol>
+<li>IP地址配置文件    /etc/sysconfig/network-scripts/ifcfg-网卡</li>
+<li>主机名映射文件/etc/hosts</li>
+<li>主机名文件/etc/sysconfig/network</li>
+<li>DNS解析文件/etc/reslov.conf</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure>
-<p>&#x4FEE;&#x6539;&#x4FE1;&#x606F;&#x5982;&#x4E0B;&#xFF1A;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">E=eth0 //&#x7F51;&#x5361;&#x540D;&#x79F0;</span><br><span class="line"></span><br><span class="line">HWADDR=00:0c:29:5c:94:74 //&#x7269;&#x7406;&#x5730;&#x5740;</span><br><span class="line"></span><br><span class="line">TYPE=Ethernet</span><br><span class="line"></span><br><span class="line">UUID=36c43db3-95a9-427c-af8f-ba130189de85</span><br><span class="line"></span><br><span class="line">ONBOOT=yes //&#x5C06;ONBOOT=&quot;no&quot;&#x6539;&#x4E3A;ONBOOT=&quot;yes&quot;</span><br><span class="line"></span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line"></span><br><span class="line">BOOTPROTO=none</span><br><span class="line"></span><br><span class="line">IPADDR=192.168.1.98 //&#x4FEE;&#x6539;IP&#x5730;&#x5740;</span><br><span class="line"></span><br><span class="line">NETMASK=255.255.255.0 //&#x4FEE;&#x6539;&#x5B50;&#x7F51;&#x63A9;&#x7801;</span><br><span class="line"></span><br><span class="line">GATEWAY=192.168.1.1 //&#x4FEE;&#x6539;&#x7F51;&#x5173;</span><br><span class="line"></span><br><span class="line">DNS1=8.8.8.8 //&#x4FEE;&#x6539;DNS&#x670D;&#x52A1;&#x5668;</span><br><span class="line"></span><br><span class="line">IPV6INIT=no</span><br><span class="line"></span><br><span class="line">USERCTL=no</span><br></pre></td></tr></table></figure>
-<p>&#xFF08;2&#xFF09;&#x91CD;&#x542F;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#xFF1A;</p>
-<p>&#x8981;&#x60F3;&#x751F;&#x6548;&#xFF0C;&#x5FC5;&#x987B;&#x91CD;&#x542F;Linux&#x6216;&#x8005;&#x91CD;&#x542F;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#xFF0C;&#x6211;&#x4EEC;&#x91CD;&#x542F;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#xFF0C;&#x6267;&#x884C;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;</p>
+<p>修改信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">E=eth0 //网卡名称</span><br><span class="line"></span><br><span class="line">HWADDR=00:0c:29:5c:94:74 //物理地址</span><br><span class="line"></span><br><span class="line">TYPE=Ethernet</span><br><span class="line"></span><br><span class="line">UUID=36c43db3-95a9-427c-af8f-ba130189de85</span><br><span class="line"></span><br><span class="line">ONBOOT=yes //将ONBOOT=&quot;no&quot;改为ONBOOT=&quot;yes&quot;</span><br><span class="line"></span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line"></span><br><span class="line">BOOTPROTO=none</span><br><span class="line"></span><br><span class="line">IPADDR=192.168.1.98 //修改IP地址</span><br><span class="line"></span><br><span class="line">NETMASK=255.255.255.0 //修改子网掩码</span><br><span class="line"></span><br><span class="line">GATEWAY=192.168.1.1 //修改网关</span><br><span class="line"></span><br><span class="line">DNS1=8.8.8.8 //修改DNS服务器</span><br><span class="line"></span><br><span class="line">IPV6INIT=no</span><br><span class="line"></span><br><span class="line">USERCTL=no</span><br></pre></td></tr></table></figure>
+<p>（2）重启网络服务：</p>
+<p>要想生效，必须重启Linux或者重启网络服务，我们重启网络服务，执行如下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
-<h3 id="&#x8F6F;&#x4EF6;&#x5305;&#x7BA1;&#x7406;"><a href="#&#x8F6F;&#x4EF6;&#x5305;&#x7BA1;&#x7406;" class="headerlink" title="&#x8F6F;&#x4EF6;&#x5305;&#x7BA1;&#x7406;"></a>&#x8F6F;&#x4EF6;&#x5305;&#x7BA1;&#x7406;</h3><h4 id="&#x4F7F;&#x7528;rpm&#x4ECE;&#x955C;&#x50CF;&#x6587;&#x4EF6;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;"><a href="#&#x4F7F;&#x7528;rpm&#x4ECE;&#x955C;&#x50CF;&#x6587;&#x4EF6;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;" class="headerlink" title="&#x4F7F;&#x7528;rpm&#x4ECE;&#x955C;&#x50CF;&#x6587;&#x4EF6;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;"></a>&#x4F7F;&#x7528;rpm&#x4ECE;&#x955C;&#x50CF;&#x6587;&#x4EF6;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;</h4><ol class="ui list">
-<li>ls  /dev &#x770B;&#x5230;scd0(ISO&#x955C;&#x50CF;&#x6587;&#x4EF6;)</li>
-<li>mount  /dev/scd0  /mnt/cdrom &#x955C;&#x50CF;&#x6587;&#x4EF6;&#x6302;&#x8F7D;</li>
+<h3 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h3><h4 id="使用rpm从镜像文件下载软件包"><a href="#使用rpm从镜像文件下载软件包" class="headerlink" title="使用rpm从镜像文件下载软件包"></a>使用rpm从镜像文件下载软件包</h4><ol>
+<li>ls  /dev 看到scd0(ISO镜像文件)</li>
+<li>mount  /dev/scd0  /mnt/cdrom 镜像文件挂载</li>
 <li>cd  /mnt/cdrom/Packages/</li>
-<li>ls | grep +&#x5305;&#x540D;</li>
-<li>rpm  -ivh  &#x5305;&#x540D;</li>
+<li>ls | grep +包名</li>
+<li>rpm  -ivh  包名</li>
 </ol>
-<h4 id="&#x4F7F;&#x7528;&#x672C;&#x5730;yum&#x6E90;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;"><a href="#&#x4F7F;&#x7528;&#x672C;&#x5730;yum&#x6E90;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;" class="headerlink" title="&#x4F7F;&#x7528;&#x672C;&#x5730;yum&#x6E90;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;"></a>&#x4F7F;&#x7528;&#x672C;&#x5730;yum&#x6E90;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;</h4><ol class="ui list">
-<li><p>&#x6302;&#x8F7D;&#x5149;&#x76D8;&#x955C;&#x50CF;&#xFF08;&#x5982;&#x4E0A;&#xFF09;</p>
+<h4 id="使用本地yum源下载软件包"><a href="#使用本地yum源下载软件包" class="headerlink" title="使用本地yum源下载软件包"></a>使用本地yum源下载软件包</h4><ol>
+<li><p>挂载光盘镜像（如上）</p>
 </li>
-<li><p>&#x4FEE;&#x6539;/etc/yum.repos.d/&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x4EE5;.repo&#x7ED3;&#x5C3E;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+<li><p>修改/etc/yum.repos.d/目录下的以.repo结尾的配置文件</p>
 <p>baseurl=file:///mnt/cdrom/</p>
 <p>enable=1</p>
 <p>gpgcheck=0</p>
 </li>
 </ol>
-<h3 id="&#x903B;&#x8F91;&#x5377;&#x7BA1;&#x7406;"><a href="#&#x903B;&#x8F91;&#x5377;&#x7BA1;&#x7406;" class="headerlink" title="&#x903B;&#x8F91;&#x5377;&#x7BA1;&#x7406;"></a>&#x903B;&#x8F91;&#x5377;&#x7BA1;&#x7406;</h3><h4 id="&#x65B0;&#x5EFA;&#x903B;&#x8F91;&#x5377;"><a href="#&#x65B0;&#x5EFA;&#x903B;&#x8F91;&#x5377;" class="headerlink" title="&#x65B0;&#x5EFA;&#x903B;&#x8F91;&#x5377;"></a>&#x65B0;&#x5EFA;&#x903B;&#x8F91;&#x5377;</h4><ol class="ui list">
-<li><p>&#x78C1;&#x76D8;&#x5206;&#x533A;</p>
+<h3 id="逻辑卷管理"><a href="#逻辑卷管理" class="headerlink" title="逻辑卷管理"></a>逻辑卷管理</h3><h4 id="新建逻辑卷"><a href="#新建逻辑卷" class="headerlink" title="新建逻辑卷"></a>新建逻辑卷</h4><ol>
+<li><p>磁盘分区</p>
 <p>fdisk /dev/sdb  # 8e Linux LVM</p>
 </li>
-<li><p>&#x521B;&#x5EFA;PV</p>
+<li><p>创建PV</p>
 <p>pvcreate /dev/sdb1  /dev/sdb2</p>
 </li>
-<li><p>&#x521B;&#x5EFA;VG</p>
+<li><p>创建VG</p>
 <p>vgcreate myVG /dev/sdb1 /dev/sdb2</p>
 </li>
-<li><p>&#x521B;&#x5EFA;LV</p>
+<li><p>创建LV</p>
 <p>lvcreate -L 400M -n vol01 myVG</p>
 </li>
-<li><p>&#x521B;&#x5EFA;Filesystem</p>
+<li><p>创建Filesystem</p>
 <p>mkfs.ext3 /dev/myVG/vol01</p>
 </li>
 </ol>
-<h4 id="&#x5220;&#x9664;&#x903B;&#x8F91;&#x5377;"><a href="#&#x5220;&#x9664;&#x903B;&#x8F91;&#x5377;" class="headerlink" title="&#x5220;&#x9664;&#x903B;&#x8F91;&#x5377;"></a>&#x5220;&#x9664;&#x903B;&#x8F91;&#x5377;</h4><ol class="ui list">
-<li>&#x9996;&#x5148;&#x5C06;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x903B;&#x8F91;&#x5377;&#x5378;&#x8F7D;&#x6389;   umount &#x547D;&#x4EE4;<ol start="2">
-<li>&#x5C06;&#x903B;&#x8F91;&#x5377;&#x5148;&#x5220;&#x9664;&#x3000;&#x3000;   lvremove &#x547D;&#x4EE4;</li>
+<h4 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h4><ol>
+<li>首先将正在使用的逻辑卷卸载掉   umount 命令<ol start="2">
+<li>将逻辑卷先删除　　   lvremove 命令</li>
 </ol>
 </li>
-<li>&#x5220;&#x9664;&#x5377;&#x7EC4;&#x3000;&#x3000;   vgremove &#x547D;&#x4EE4;</li>
-<li>&#x6700;&#x540E;&#x518D;&#x5220;&#x9664;&#x7269;&#x7406;&#x5377;&#x3000;&#x3000;  pvremove &#x547D;&#x4EE4;</li>
+<li>删除卷组　　   vgremove 命令</li>
+<li>最后再删除物理卷　　  pvremove 命令</li>
 </ol>
-<h4 id="&#x6269;&#x5145;&#x903B;&#x8F91;&#x5377;"><a href="#&#x6269;&#x5145;&#x903B;&#x8F91;&#x5377;" class="headerlink" title="&#x6269;&#x5145;&#x903B;&#x8F91;&#x5377;"></a>&#x6269;&#x5145;&#x903B;&#x8F91;&#x5377;</h4><ol class="ui list">
-<li><p>&#x5C06;&#x8981;&#x6DFB;&#x52A0;&#x5230;VG&#x7684;&#x786C;&#x76D8;&#x683C;&#x5F0F;&#x5316;&#x6210;PV</p>
+<h4 id="扩充逻辑卷"><a href="#扩充逻辑卷" class="headerlink" title="扩充逻辑卷"></a>扩充逻辑卷</h4><ol>
+<li><p>将要添加到VG的硬盘格式化成PV</p>
 <p>pvcreate /dev/sdd</p>
 </li>
-<li><p>&#x5C06;&#x65B0;&#x7684;PV&#x6DFB;&#x52A0;&#x5230;&#x6307;&#x5B9A;&#x7684;VG&#x5F53;&#x4E2D;</p>
+<li><p>将新的PV添加到指定的VG当中</p>
 <p>vgextend xiaoluo /dev/sdd</p>
 </li>
-<li><p>&#x6269;&#x5145;&#x903B;&#x8F91;&#x5377;</p>
+<li><p>扩充逻辑卷</p>
 <p>lvextend -L +1G /dev/xiaoluo/mylv</p>
 </li>
-<li><p>&#x66F4;&#x65B0;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</p>
+<li><p>更新文件系统</p>
 <p>resize2fs /dev/xiaoluo/mylv</p>
 </li>
 </ol>
-<h4 id="&#x7F29;&#x5BB9;&#x903B;&#x8F91;&#x5377;"><a href="#&#x7F29;&#x5BB9;&#x903B;&#x8F91;&#x5377;" class="headerlink" title="&#x7F29;&#x5BB9;&#x903B;&#x8F91;&#x5377;"></a>&#x7F29;&#x5BB9;&#x903B;&#x8F91;&#x5377;</h4><p>&#x903B;&#x8F91;&#x5377;&#x7684;&#x7F29;&#x5C0F;&#x64CD;&#x4F5C;&#x5FC5;&#x987B;&#x79BB;&#x7EBF;&#x6267;&#x884C;&#xFF0C;&#x8981;&#x5148;&#x5378;&#x8F7D;&#x6389;&#x903B;&#x8F91;&#x5377;&#x624D;&#x53EF;&#x4EE5;</p>
-<p><strong>&#x7B2C;&#x4E00;&#x79CD;</strong></p>
-<ol class="ui list">
-<li><p>&#x5378;&#x8F7D;&#x5DF2;&#x7ECF;&#x6302;&#x8F7D;&#x7684;&#x903B;&#x8F91;&#x5377;&#x3000;&#x3000;&#x901A;&#x8FC7; umount &#x547D;&#x4EE4;</p>
+<h4 id="缩容逻辑卷"><a href="#缩容逻辑卷" class="headerlink" title="缩容逻辑卷"></a>缩容逻辑卷</h4><p>逻辑卷的缩小操作必须离线执行，要先卸载掉逻辑卷才可以</p>
+<p><strong>第一种</strong></p>
+<ol>
+<li><p>卸载已经挂载的逻辑卷　　通过 umount 命令</p>
 </li>
-<li><p>&#x7F29;&#x5C0F;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;(&#x4F1A;&#x63D0;&#x793A;&#x9700;&#x8981;&#x8FD0;&#x884C;fsck&#x6765;&#x68C0;&#x67E5;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;)</p>
+<li><p>缩小文件系统(会提示需要运行fsck来检查文件系统)</p>
 <p>resize2fs /dev/xiaoluo/mylv 10G</p>
 </li>
-<li><p>&#x7F29;&#x5C0F;LV</p>
+<li><p>缩小LV</p>
 <p>lvreduce -L -4G /dev/xiaoluo/mylv </p>
 </li>
-<li><p>&#x7F29;&#x5C0F;&#x5B8C;&#x903B;&#x8F91;&#x5377;&#x4EE5;&#x540E;&#xFF0C;&#x518D;&#x5C06;&#x903B;&#x8F91;&#x5377;&#x6302;&#x8F7D;</p>
+<li><p>缩小完逻辑卷以后，再将逻辑卷挂载</p>
 </li>
 </ol>
-<p><strong>&#x7B2C;&#x4E8C;&#x79CD;</strong></p>
-<ol class="ui list">
-<li><p>&#x5378;&#x8F7D;&#x903B;&#x8F91;&#x5377;&#x3000;&#x3000;&#x901A;&#x8FC7; umount &#x547D;&#x4EE4;</p>
+<p><strong>第二种</strong></p>
+<ol>
+<li><p>卸载逻辑卷　　通过 umount 命令</p>
 </li>
-<li><p>&#x5C06;&#x4E00;&#x4E2A;PV&#x4ECE;&#x6307;&#x5B9A;&#x5377;&#x7EC4;&#x4E2D;&#x79FB;&#x9664;&#x6389;</p>
+<li><p>将一个PV从指定卷组中移除掉</p>
 <p>vgreduce xiaoluo /dev/sdd</p>
 </li>
-<li><p>&#x5C06;PV&#x5220;&#x9664;&#x6389;</p>
+<li><p>将PV删除掉</p>
 <p>pvremove /dev/sdd</p>
 </li>
 </ol>
-<h3 id="&#x7F51;&#x5361;&#x7ED1;&#x5B9A;"><a href="#&#x7F51;&#x5361;&#x7ED1;&#x5B9A;" class="headerlink" title="&#x7F51;&#x5361;&#x7ED1;&#x5B9A;"></a>&#x7F51;&#x5361;&#x7ED1;&#x5B9A;</h3><ol class="ui list">
-<li><p>&#x5173;&#x95ED;NetworkManager&#x670D;&#x52A1;</p>
+<h3 id="网卡绑定"><a href="#网卡绑定" class="headerlink" title="网卡绑定"></a>网卡绑定</h3><ol>
+<li><p>关闭NetworkManager服务</p>
 </li>
-<li><p>&#x521B;&#x5EFA;bonding.conf&#x6587;&#x4EF6;&#x5728;/etc/modprobe.d/&#x76EE;&#x5F55;&#x4E2D;alias bond0 bonding</p>
+<li><p>创建bonding.conf文件在/etc/modprobe.d/目录中alias bond0 bonding</p>
 </li>
-<li><p>&#x521B;&#x5EFA;ifcfg-bond0&#x6587;&#x4EF6;&#x5728;/etc/sysconfig/network-scripts/&#x76EE;&#x5F55;&#x4E2D;</p>
+<li><p>创建ifcfg-bond0文件在/etc/sysconfig/network-scripts/目录中</p>
 <p>DEVICE=bond0</p>
 <p>NAME=bond0</p>
 <p>TYPE=Ethernet</p>
@@ -281,9 +191,9 @@
 <p>IPADDR=192.168.50.111</p>
 <p>NETMASK=255.255.255.0</p>
 <p>GATEWAY=192.168.50.1</p>
-<p>BONDING_OPTS=&#x201D;mode=1 miimon=100&#x201D;</p>
+<p>BONDING_OPTS=”mode=1 miimon=100”</p>
 </li>
-<li><p>&#x4FEE;&#x6539;&#x771F;&#x5B9E;&#x7F51;&#x5361;&#x7684;&#x914D;&#x7F6E;   /etc/sysconfig/network-scripts/ifcfg-&#x8981;&#x52A0;&#x5165;&#x7684;&#x4E24;&#x5757;&#x7F51;&#x5361;</p>
+<li><p>修改真实网卡的配置   /etc/sysconfig/network-scripts/ifcfg-要加入的两块网卡</p>
 <p>DEVICE=eth0</p>
 <p>NAME=eth0</p>
 <p>ONBOOT=yes</p>
@@ -291,132 +201,46 @@
 <p>MASTER=bond0</p>
 <p>SLAVE=yes</p>
 </li>
-<li><p>&#x91CD;&#x542F;&#x7F51;&#x7EDC;&#x670D;&#x52A1;service network restart</p>
+<li><p>重启网络服务service network restart</p>
 </li>
-<li>&#x67E5;&#x770B;&#x72B6;&#x6001;cat /proc/net/bonding/bond0</li>
+<li>查看状态cat /proc/net/bonding/bond0</li>
 </ol>
-<h3 id="NFS&#x670D;&#x52A1;&#x914D;&#x7F6E;"><a href="#NFS&#x670D;&#x52A1;&#x914D;&#x7F6E;" class="headerlink" title="NFS&#x670D;&#x52A1;&#x914D;&#x7F6E;"></a>NFS&#x670D;&#x52A1;&#x914D;&#x7F6E;</h3><p>&#x4F7F;&#x7528;NFS&#x670D;&#x52A1;&#xFF0C;&#x81F3;&#x5C11;&#x9700;&#x8981;&#x542F;&#x52A8;&#x4EE5;&#x4E0B;3&#x4E2A;&#x7CFB;&#x7EDF;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</p>
-<ol class="ui list">
+<h3 id="NFS服务配置"><a href="#NFS服务配置" class="headerlink" title="NFS服务配置"></a>NFS服务配置</h3><p>使用NFS服务，至少需要启动以下3个系统守护进程</p>
+<ol>
 <li>rpc.nfsd</li>
 <li>rpc.mountd</li>
-<li>portmap&#xFF08;rhel5&#xFF09;        rpcbind&#xFF08;rhel6&#xFF09;</li>
+<li>portmap（rhel5）        rpcbind（rhel6）</li>
 </ol>
-<h3 id="Apache&#x670D;&#x52A1;"><a href="#Apache&#x670D;&#x52A1;" class="headerlink" title="Apache&#x670D;&#x52A1;"></a>Apache&#x670D;&#x52A1;</h3><ul class="ui list">
-<li><p>&#x542F;&#x52A8;httpd&#x670D;&#x52A1;</p>
+<h3 id="Apache服务"><a href="#Apache服务" class="headerlink" title="Apache服务"></a>Apache服务</h3><ul>
+<li><p>启动httpd服务</p>
 <p>service httpd start</p>
-<p>&#x5982;&#x5728;&#x5730;&#x5740;&#x680F;&#x8F93;&#x5165;<a href="http://192.168.100.101&#xFF0C;&#x6210;&#x529F;&#x52A0;&#x8F7D;&#x9875;&#x9762;&#xFF0C;&#x5C31;&#x8BF4;&#x660E;httpd&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#x4E86;" target="_blank" rel="noopener">http://192.168.100.101&#xFF0C;&#x6210;&#x529F;&#x52A0;&#x8F7D;&#x9875;&#x9762;&#xFF0C;&#x5C31;&#x8BF4;&#x660E;httpd&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#x4E86;</a></p>
+<p>如在地址栏输入<a href="http://192.168.100.101，成功加载页面，就说明httpd正常运行了" target="_blank" rel="noopener">http://192.168.100.101，成功加载页面，就说明httpd正常运行了</a></p>
 </li>
-<li><p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;/etc/httpd/conf/httpd.conf</p>
-<p>&#x7AEF;&#x53E3;&#x76D1;&#x542C;&#xFF1A;Listen *:80</p>
-<p>&#x5BFC;&#x5411;&#x56FA;&#x5B9A;ip&#xFF1A;ServerName *:80</p>
-<p>&#x9ED8;&#x8BA4;&#x76EE;&#x5F55;&#xFF1A;DocumentRoot &#x201C;/var/www/html/&#x201C;</p>
+<li><p>配置文件/etc/httpd/conf/httpd.conf</p>
+<p>端口监听：Listen *:80</p>
+<p>导向固定ip：ServerName *:80</p>
+<p>默认目录：DocumentRoot “/var/www/html/“</p>
 </li>
 </ul>
-<h3 id="&#x963B;&#x6B62;&#x91CD;&#x5B9A;&#x5411;&#x64CD;&#x4F5C;&#x8986;&#x76D6;&#x5DF2;&#x6709;&#x6587;&#x4EF6;"><a href="#&#x963B;&#x6B62;&#x91CD;&#x5B9A;&#x5411;&#x64CD;&#x4F5C;&#x8986;&#x76D6;&#x5DF2;&#x6709;&#x6587;&#x4EF6;" class="headerlink" title="&#x963B;&#x6B62;&#x91CD;&#x5B9A;&#x5411;&#x64CD;&#x4F5C;&#x8986;&#x76D6;&#x5DF2;&#x6709;&#x6587;&#x4EF6;"></a>&#x963B;&#x6B62;&#x91CD;&#x5B9A;&#x5411;&#x64CD;&#x4F5C;&#x8986;&#x76D6;&#x5DF2;&#x6709;&#x6587;&#x4EF6;</h3><p><code>set -o noclobber</code>&#x963B;&#x6B62;&#x91CD;&#x5B9A;&#x5411;&#x64CD;&#x4F5C;&#x8986;&#x76D6;&#x5DF2;&#x6709;&#x6587;&#x4EF6;</p>
-<p><code>set +o noclobber</code>&#x53D6;&#x6D88;&#x4E0A;&#x9762;&#x7684;&#x64CD;&#x4F5C;</p>
+<h3 id="阻止重定向操作覆盖已有文件"><a href="#阻止重定向操作覆盖已有文件" class="headerlink" title="阻止重定向操作覆盖已有文件"></a>阻止重定向操作覆盖已有文件</h3><p><code>set -o noclobber</code>阻止重定向操作覆盖已有文件</p>
+<p><code>set +o noclobber</code>取消上面的操作</p>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-10-01T16:20:33.000Z" itemprop="datePublished">2018-10-02</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/10/02/Mess/vultr问题集/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    vultr 问题集
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/09/20/Network/Unp/unp_code/" class="ui tiny button">
-                    
-                    《unp》源代码问题笔记
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#系统安装后的配置"><span>系统安装后的配置</span></a></li><li><a href="#自动加载文件系统-etc-fstab"><span>自动加载文件系统/etc/fstab</span></a></li><li><a href="#网络配置的相关文件"><span>网络配置的相关文件</span></a></li><li><a href="#软件包管理"><span>软件包管理</span></a><ol><li><a href="#使用rpm从镜像文件下载软件包"><span>使用rpm从镜像文件下载软件包</span></a></li><li><a href="#使用本地yum源下载软件包"><span>使用本地yum源下载软件包</span></a></li></ol></li><li><a href="#逻辑卷管理"><span>逻辑卷管理</span></a><ol><li><a href="#新建逻辑卷"><span>新建逻辑卷</span></a></li><li><a href="#删除逻辑卷"><span>删除逻辑卷</span></a></li><li><a href="#扩充逻辑卷"><span>扩充逻辑卷</span></a></li><li><a href="#缩容逻辑卷"><span>缩容逻辑卷</span></a></li></ol></li><li><a href="#网卡绑定"><span>网卡绑定</span></a></li><li><a href="#NFS服务配置"><span>NFS服务配置</span></a></li><li><a href="#Apache服务"><span>Apache服务</span></a></li><li><a href="#阻止重定向操作覆盖已有文件"><span>阻止重定向操作覆盖已有文件</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

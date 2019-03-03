@@ -1,333 +1,157 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>树莓派安装kali | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>树莓派安装kali | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x70E7;&amp;#x5F55;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;sd&amp;#x5361; &amp;#x4E0B;&amp;#x8F7D;Kali Linux &amp;#x6811;&amp;#x8393;&amp;#x6D3E;TFT&amp;#x5C4F;&amp;#x7248;&amp;#x955C;&amp;#x50CF;&amp;#xFF0C;&amp;#x5E76;&amp;#x89E3;&amp;#x538B;&amp;#x3002;&amp;#xFF08;&amp;#x5982;&amp;#x4E0D">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="树莓派安装kali">
-<meta property="og:url" content="http://yoursite.com/2018/12/04/Raspberrypi/树莓派安装kali/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="&amp;#x70E7;&amp;#x5F55;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;sd&amp;#x5361; &amp;#x4E0B;&amp;#x8F7D;Kali Linux &amp;#x6811;&amp;#x8393;&amp;#x6D3E;TFT&amp;#x5C4F;&amp;#x7248;&amp;#x955C;&amp;#x50CF;&amp;#xFF0C;&amp;#x5E76;&amp;#x89E3;&amp;#x538B;&amp;#x3002;&amp;#xFF08;&amp;#x5982;&amp;#x4E0D">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-04T14:08:32.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="树莓派安装kali">
-<meta name="twitter:description" content="&amp;#x70E7;&amp;#x5F55;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5230;sd&amp;#x5361; &amp;#x4E0B;&amp;#x8F7D;Kali Linux &amp;#x6811;&amp;#x8393;&amp;#x6D3E;TFT&amp;#x5C4F;&amp;#x7248;&amp;#x955C;&amp;#x50CF;&amp;#xFF0C;&amp;#x5E76;&amp;#x89E3;&amp;#x538B;&amp;#x3002;&amp;#xFF08;&amp;#x5982;&amp;#x4E0D">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#烧录系统到sd卡"><span class="toc-number">1.</span> <span class="toc-text">烧录系统到sd卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载raspi-config（树莓派最好的扩展工具）"><span class="toc-number">2.</span> <span class="toc-text">下载raspi-config（树莓派最好的扩展工具）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装中文字体"><span class="toc-number">3.</span> <span class="toc-text">安装中文字体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vnc远程登入"><span class="toc-number">4.</span> <span class="toc-text">vnc远程登入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LED亮灯状态"><span class="toc-number">5.</span> <span class="toc-text">LED亮灯状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快捷键打开终端"><span class="toc-number">6.</span> <span class="toc-text">快捷键打开终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启ssh"><span class="toc-number">7.</span> <span class="toc-text">开启ssh</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
 
-    
 
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Raspberrypi/树莓派安装kali" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    树莓派安装kali
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h3 id="&#x70E7;&#x5F55;&#x7CFB;&#x7EDF;&#x5230;sd&#x5361;"><a href="#&#x70E7;&#x5F55;&#x7CFB;&#x7EDF;&#x5230;sd&#x5361;" class="headerlink" title="&#x70E7;&#x5F55;&#x7CFB;&#x7EDF;&#x5230;sd&#x5361;"></a>&#x70E7;&#x5F55;&#x7CFB;&#x7EDF;&#x5230;sd&#x5361;</h3><ol class="ui list">
-<li>&#x4E0B;&#x8F7D;<a href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/" target="_blank" rel="noopener">Kali Linux &#x6811;&#x8393;&#x6D3E;TFT&#x5C4F;&#x7248;&#x955C;&#x50CF;</a>&#xFF0C;&#x5E76;&#x89E3;&#x538B;&#x3002;&#xFF08;&#x5982;&#x4E0D;&#x4F7F;&#x7528;&#x89E6;&#x6478;&#x5C4F;&#x663E;&#x793A;&#x5668;<a href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/" target="_blank" rel="noopener">&#x4E0B;&#x8F7D;kali For&#x6811;&#x8393;&#x6D3E;&#x7684;regular&#x7248;&#x672C;&#x955C;&#x50CF;</a>&#xFF09;;</li>
-<li>&#x4E0B;&#x8F7D;Win32DiskImager;</li>
-<li>&#x7528;&#x8BFB;&#x5361;&#x5668;&#x628A;SD&#x8FDE;&#x63A5;&#x5230;Windows&#x4E3B;&#x673A;&#xFF1B;</li>
-<li>&#x8FD0;&#x884C;Win32DiskImager.exe&#xFF1B;</li>
-<li>&#x5728;&#x53F3;&#x4FA7;&#x201C;&#x8BBE;&#x5907;Device&#x201D;&#x680F;&#x76EE;&#x9009;&#x62E9;SD&#x5361;&#x7684;&#x76D8;&#x7B26;&#xFF1B;</li>
-<li>&#x6D4F;&#x89C8;&#x627E;&#x5230;&#x6811;&#x8393;&#x6D3E;&#x7684;&#x8FDB;&#x884C;&#x6587;&#x4EF6;&#xFF1B;</li>
-<li>&#x70B9;&#x51FB;&#x201C;Write&#x201D;&#x6309;&#x94AE;&#xFF0C;&#x628A;&#x955C;&#x50CF;&#x6587;&#x4EF6;&#x5199;&#x5165;SD&#x5361;&#xFF0C;&#x5236;&#x4F5C;&#x542F;&#x52A8;&#x76D8;&#xFF0C;&#x64CD;&#x4F5C;&#x5B8C;&#x6210;&#x4EE5;&#x540E;&#x628A;SD&#x5361;&#x63D2;&#x5165;&#x6811;&#x8393;&#x6D3E;</li>
+  <div class="container">
+    <article>
+      <h1>树莓派安装kali</h1>
+      <h3 id="烧录系统到sd卡"><a href="#烧录系统到sd卡" class="headerlink" title="烧录系统到sd卡"></a>烧录系统到sd卡</h3><ol>
+<li>下载<a href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/" target="_blank" rel="noopener">Kali Linux 树莓派TFT屏版镜像</a>，并解压。（如不使用触摸屏显示器<a href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/" target="_blank" rel="noopener">下载kali For树莓派的regular版本镜像</a>）;</li>
+<li>下载Win32DiskImager;</li>
+<li>用读卡器把SD连接到Windows主机；</li>
+<li>运行Win32DiskImager.exe；</li>
+<li>在右侧“设备Device”栏目选择SD卡的盘符；</li>
+<li>浏览找到树莓派的进行文件；</li>
+<li>点击“Write”按钮，把镜像文件写入SD卡，制作启动盘，操作完成以后把SD卡插入树莓派</li>
 </ol>
-<h3 id="&#x4E0B;&#x8F7D;raspi-config&#xFF08;&#x6811;&#x8393;&#x6D3E;&#x6700;&#x597D;&#x7684;&#x6269;&#x5C55;&#x5DE5;&#x5177;&#xFF09;"><a href="#&#x4E0B;&#x8F7D;raspi-config&#xFF08;&#x6811;&#x8393;&#x6D3E;&#x6700;&#x597D;&#x7684;&#x6269;&#x5C55;&#x5DE5;&#x5177;&#xFF09;" class="headerlink" title="&#x4E0B;&#x8F7D;raspi-config&#xFF08;&#x6811;&#x8393;&#x6D3E;&#x6700;&#x597D;&#x7684;&#x6269;&#x5C55;&#x5DE5;&#x5177;&#xFF09;"></a>&#x4E0B;&#x8F7D;raspi-config&#xFF08;&#x6811;&#x8393;&#x6D3E;&#x6700;&#x597D;&#x7684;&#x6269;&#x5C55;&#x5DE5;&#x5177;&#xFF09;</h3><p><a href="http://archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20180406+1.tar.xz" target="_blank" rel="noopener">http://archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20180406+1.tar.xz</a></p>
-<ul class="ui list">
-<li><p>&#x6309;&#x7167;&#x91CC;&#x9762;&#x7684;&#x9009;&#x9879;&#x4FEE;&#x6539;root&#x5BC6;&#x7801;&#x3002;</p>
+<h3 id="下载raspi-config（树莓派最好的扩展工具）"><a href="#下载raspi-config（树莓派最好的扩展工具）" class="headerlink" title="下载raspi-config（树莓派最好的扩展工具）"></a>下载raspi-config（树莓派最好的扩展工具）</h3><p><a href="http://archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20180406+1.tar.xz" target="_blank" rel="noopener">http://archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20180406+1.tar.xz</a></p>
+<ul>
+<li><p>按照里面的选项修改root密码。</p>
 </li>
-<li><p>&#x6811;&#x8393;&#x6D3E;&#x9ED8;&#x8BA4;&#x4E0D;&#x4F1A;&#x5B8C;&#x6574;&#x7684;&#x4F7F;&#x7528;&#x6574;&#x4E2A;SD&#x5361;&#x7A7A;&#x95F4;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x6269;&#x5C55;&#x5206;&#x533A; &#xFF0C;&#x5728;advance&#x91CC;&#x9762;&#x6709;&#x6269;&#x5C55;&#x9009;&#x9879;</p>
+<li><p>树莓派默认不会完整的使用整个SD卡空间，所以需要扩展分区 ，在advance里面有扩展选项</p>
 </li>
 </ul>
-<h3 id="&#x5B89;&#x88C5;&#x4E2D;&#x6587;&#x5B57;&#x4F53;"><a href="#&#x5B89;&#x88C5;&#x4E2D;&#x6587;&#x5B57;&#x4F53;" class="headerlink" title="&#x5B89;&#x88C5;&#x4E2D;&#x6587;&#x5B57;&#x4F53;"></a>&#x5B89;&#x88C5;&#x4E2D;&#x6587;&#x5B57;&#x4F53;</h3><p>sudo apt-get install ttf-wqy-zenhei</p>
-<p>&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x540E;&#x8F93;&#x5165;sudo dpkg-reconfigure locales&#xFF0C;&#x9009;&#x62E9;en_US.UTF-8&#x3001;zh_CN.GBK&#x3001;zh_CN.UTF-8&#x3002;</p>
-<p>table &#x952E;&#x9009;&#x62E9;ok&#x7136;&#x540E;&#x9009;&#x62E9;zh_CN.UTF-8</p>
-<p>&#x5B8C;&#x6210;&#x540E;&#x91CD;&#x65B0;&#x542F;&#x52A8;&#xFF08;&#x7136;&#x540E;&#x4E2D;&#x6587;&#x7CFB;&#x7EDF;&#x8FDE;&#x63A5;vncserver&#x4E0D;&#x4F1A;&#x4E71;&#x7801;&#x4E86;&#xFF09;</p>
-<h3 id="vnc&#x8FDC;&#x7A0B;&#x767B;&#x5165;"><a href="#vnc&#x8FDC;&#x7A0B;&#x767B;&#x5165;" class="headerlink" title="vnc&#x8FDC;&#x7A0B;&#x767B;&#x5165;"></a>vnc&#x8FDC;&#x7A0B;&#x767B;&#x5165;</h3><p>apt-get install vnc-server</p>
-<p>&#x9009;&#x62E9;&#x4E00;&#x4E2A;vnc&#x670D;&#x52A1;&#x5668;&#x8F6F;&#x4EF6;&#x5E76;&#x4E0B;&#x8F7D;</p>
-<p>&#x7136;&#x540E;vncserver&#x5F00;&#x542F;vnc&#x670D;&#x52A1;</p>
-<p>&#x5173;&#x95ED;vnc&#xFF1A;vncserver -kill :1</p>
-<p>&#xFF08;&#x5192;&#x53F7;&#x540E;&#x9762;&#x6570;&#x5B57;&#x662F;&#x60F3;&#x5173;&#x95ED;&#x7684;vnc&#x684C;&#x9762;&#x7F16;&#x53F7;&#xFF0C;&#x4ECE;1&#x5F00;&#x59CB;&#x9012;&#x589E;&#xFF09;</p>
-<h3 id="LED&#x4EAE;&#x706F;&#x72B6;&#x6001;"><a href="#LED&#x4EAE;&#x706F;&#x72B6;&#x6001;" class="headerlink" title="LED&#x4EAE;&#x706F;&#x72B6;&#x6001;"></a>LED&#x4EAE;&#x706F;&#x72B6;&#x6001;</h3><table>
+<h3 id="安装中文字体"><a href="#安装中文字体" class="headerlink" title="安装中文字体"></a>安装中文字体</h3><p>sudo apt-get install ttf-wqy-zenhei</p>
+<p>安装完成后输入sudo dpkg-reconfigure locales，选择en_US.UTF-8、zh_CN.GBK、zh_CN.UTF-8。</p>
+<p>table 键选择ok然后选择zh_CN.UTF-8</p>
+<p>完成后重新启动（然后中文系统连接vncserver不会乱码了）</p>
+<h3 id="vnc远程登入"><a href="#vnc远程登入" class="headerlink" title="vnc远程登入"></a>vnc远程登入</h3><p>apt-get install vnc-server</p>
+<p>选择一个vnc服务器软件并下载</p>
+<p>然后vncserver开启vnc服务</p>
+<p>关闭vnc：vncserver -kill :1</p>
+<p>（冒号后面数字是想关闭的vnc桌面编号，从1开始递增）</p>
+<h3 id="LED亮灯状态"><a href="#LED亮灯状态" class="headerlink" title="LED亮灯状态"></a>LED亮灯状态</h3><table>
 <thead>
 <tr>
 <th>LED</th>
-<th>&#x989C;&#x8272;</th>
-<th>&#x529F;&#x80FD;</th>
-<th>&#x6B63;&#x5E38;&#x72B6;&#x6001;</th>
+<th>颜色</th>
+<th>功能</th>
+<th>正常状态</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>ACT</td>
-<td>&#x7EFF;&#x8272;</td>
+<td>绿色</td>
 <td>card status</td>
-<td>&#x95EA;&#x70C1;:SD&#x5361;&#x6B63;&#x5728;&#x6D3B;&#x52A8;&#xFF08;&#x7C7B;&#x4F3C;&#x7535;&#x8111;&#x7684;&#x786C;&#x76D8;&#x706F;&#xFF09;</td>
+<td>闪烁:SD卡正在活动（类似电脑的硬盘灯）</td>
 </tr>
 <tr>
 <td>PWR</td>
-<td>&#x7EA2;&#x8272;</td>
+<td>红色</td>
 <td>power</td>
-<td>&#x4E0D;&#x95EA;&#x70C1;:&#x6B63;&#x5E38;</td>
+<td>不闪烁:正常</td>
 </tr>
 <tr>
 <td>FDX</td>
-<td>&#x6A59;</td>
+<td>橙</td>
 <td>full duplex</td>
-<td>&#x4EAE;:&#x5168;&#x53CC;&#x5DE5;/&#x4E0D;&#x4EAE;:&#x534A;&#x53CC;&#x5DE5;</td>
+<td>亮:全双工/不亮:半双工</td>
 </tr>
 <tr>
 <td>LNK</td>
-<td>&#x6A59;</td>
+<td>橙</td>
 <td>link</td>
-<td>&#x4EAE;:&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x6210;&#x529F;</td>
+<td>亮:网络连接成功</td>
 </tr>
 <tr>
 <td>100</td>
-<td>&#x6A59;</td>
+<td>橙</td>
 <td>100 Mbps</td>
-<td>&#x4EAE;:100 Mbps/&#x4E0D;&#x4EAE;:10 Mbps</td>
+<td>亮:100 Mbps/不亮:10 Mbps</td>
 </tr>
 </tbody>
 </table>
-<h3 id="&#x5FEB;&#x6377;&#x952E;&#x6253;&#x5F00;&#x7EC8;&#x7AEF;"><a href="#&#x5FEB;&#x6377;&#x952E;&#x6253;&#x5F00;&#x7EC8;&#x7AEF;" class="headerlink" title="&#x5FEB;&#x6377;&#x952E;&#x6253;&#x5F00;&#x7EC8;&#x7AEF;"></a>&#x5FEB;&#x6377;&#x952E;&#x6253;&#x5F00;&#x7EC8;&#x7AEF;</h3><p>&#x9996;&#x5148;&#x67E5;&#x770B;&#x81EA;&#x5DF1;&#x7EC8;&#x7AEF;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x6253;&#x5F00;&#x7EC8;&#x7AEF;-&gt;help-&gt;about&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x540D;&#x5B57;&#xFF0C;&#x6211;&#x7684;&#x662F;xfce4-terminal&#x3002;</p>
-<p>&#x7136;&#x540E;&#x53BB;&#x5DE6;&#x4E0A;&#x89D2;&#x627E;&#x5230;&#x8BBE;&#x7F6E;-&gt;&#x952E;&#x76D8;-&gt;&#x5FEB;&#x6377;&#x952E;-&gt;&#x6DFB;&#x52A0;&#xFF0C;&#x547D;&#x4EE4;&#x5C31;&#x662F;&#x4E0A;&#x4E00;&#x6B65;&#x770B;&#x5230;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x5FEB;&#x6377;&#x952E;&#x81EA;&#x5DF1;&#x6309;&#x3002;</p>
-<p>&#xFF08;&#x672C;&#x4EBA;&#x6700;&#x65B0;kali&#x955C;&#x50CF;&#x7684;&#x7EC8;&#x7AEF;&#x662F; gnome-terminal&#xFF09;</p>
-<h3 id="&#x5F00;&#x542F;ssh"><a href="#&#x5F00;&#x542F;ssh" class="headerlink" title="&#x5F00;&#x542F;ssh"></a>&#x5F00;&#x542F;ssh</h3><p>1.sudo systemctl enable ssh</p>
+<h3 id="快捷键打开终端"><a href="#快捷键打开终端" class="headerlink" title="快捷键打开终端"></a>快捷键打开终端</h3><p>首先查看自己终端的名字，打开终端-&gt;help-&gt;about，就可以发现名字，我的是xfce4-terminal。</p>
+<p>然后去左上角找到设置-&gt;键盘-&gt;快捷键-&gt;添加，命令就是上一步看到的名字，快捷键自己按。</p>
+<p>（本人最新kali镜像的终端是 gnome-terminal）</p>
+<h3 id="开启ssh"><a href="#开启ssh" class="headerlink" title="开启ssh"></a>开启ssh</h3><p>1.sudo systemctl enable ssh</p>
 <p>2.sudo systemctl start ssh</p>
 
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2018-12-04T14:08:31.000Z" itemprop="datePublished">2018-12-04</time>
-
-    </span>
-    <span class="post-description-item">
-        
-    </span>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2018/12/04/Macos/mac软件推荐/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    mac软件推荐
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2018/12/04/Raspberrypi/树莓派系统安装/" class="ui tiny button">
-                    
-                    树莓派系统安装问题
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#烧录系统到sd卡"><span>烧录系统到sd卡</span></a></li><li><a href="#下载raspi-config（树莓派最好的扩展工具）"><span>下载raspi-config（树莓派最好的扩展工具）</span></a></li><li><a href="#安装中文字体"><span>安装中文字体</span></a></li><li><a href="#vnc远程登入"><span>vnc远程登入</span></a></li><li><a href="#LED亮灯状态"><span>LED亮灯状态</span></a></li><li><a href="#快捷键打开终端"><span>快捷键打开终端</span></a></li><li><a href="#开启ssh"><span>开启ssh</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>

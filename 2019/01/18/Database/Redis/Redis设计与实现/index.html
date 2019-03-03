@@ -1,374 +1,190 @@
-
-
 <!DOCTYPE html>
-<html lang>
-<head prefix="og: http://ogp.me/ns#"><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="For you, a thousand times over.">
-    <title>Redis 设计与实现 | Skuaka</title>
+<html lang="zh-cmn-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta http-equiv="”Cache-Control”" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Redis 设计与实现 | Skuaka</title>
+  <link rel="icon" type="image/png" sizes="32x32" href>
+  
 
-    <!-- Open Graph -->
-    <meta name="description" content="Redis &amp;#x8BBE;&amp;#x8BA1;&amp;#x4E0E;&amp;#x5B9E;&amp;#x73B0;&amp;#x524D;&amp;#x8A00; &amp;#x4EC0;&amp;#x4E48;&amp;#x662F;redis Redis&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F00;&amp;#x6E90;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;ANSI C&amp;#x8BED;&amp;#x8A00;&amp;#x7F16;&amp;#x5199;">
-<meta name="keywords" content="skuaka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Redis 设计与实现">
-<meta property="og:url" content="http://yoursite.com/2019/01/18/Database/Redis/Redis设计与实现/index.html">
-<meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="Redis &amp;#x8BBE;&amp;#x8BA1;&amp;#x4E0E;&amp;#x5B9E;&amp;#x73B0;&amp;#x524D;&amp;#x8A00; &amp;#x4EC0;&amp;#x4E48;&amp;#x662F;redis Redis&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F00;&amp;#x6E90;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;ANSI C&amp;#x8BED;&amp;#x8A00;&amp;#x7F16;&amp;#x5199;">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/01/18/Database/Redis/Redis设计与实现/Picture/01.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/18/Database/Redis/Redis设计与实现/Picture/02.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/18/Database/Redis/Redis设计与实现/Picture/03.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/18/Database/Redis/Redis设计与实现/Picture/04.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/18/Database/Redis/Redis设计与实现/Picture/05.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/18/Database/Redis/Redis设计与实现/Picture/06.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/18/Database/Redis/Redis设计与实现/Picture/07.jpg">
-<meta property="og:updated_time" content="2019-03-02T14:12:12.827Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis 设计与实现">
-<meta name="twitter:description" content="Redis &amp;#x8BBE;&amp;#x8BA1;&amp;#x4E0E;&amp;#x5B9E;&amp;#x73B0;&amp;#x524D;&amp;#x8A00; &amp;#x4EC0;&amp;#x4E48;&amp;#x662F;redis Redis&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F00;&amp;#x6E90;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;ANSI C&amp;#x8BED;&amp;#x8A00;&amp;#x7F16;&amp;#x5199;">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/18/Database/Redis/Redis设计与实现/Picture/01.png">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Skuaka",
-  "url": "http://yoursite.com"
-}
-</script>
-    <script>
-    var algoliaEnabled = false;
-    
-</script>
 
-    
+<link rel="stylesheet" href="/./vendor.ec1199.css"><link rel="stylesheet" href="/./app.5ed5af.css">
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
 
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
-
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
-
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Skuaka</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Skuaka</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-    
-    
-
-    
-
-    
-    <a href="/index.html" class="item">
-        <i class="home icon"></i>
-        HOME
+  <body>
+    <header class="main-header">
+  <div class="container">
+    <a href="/" " class="logo">
+      <img src="logo.jpg" alt="Skuaka" class="logo-img">
     </a>
-
-    
-    
-
-    
-
-    
-    <a href="/about" class="item">
-        <i class="about icon"></i>
-        ABOUT
+    <span class="nav-separator"></span>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索文章"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <a href="javascript:void(0);" class="nav-icon">
+      <i class="fas fa-bars"></i>
     </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Database/Redis/Redis设计与实现" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    Redis 设计与实现
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h1 id="Redis-&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;"><a href="#Redis-&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;" class="headerlink" title="Redis &#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;"></a>Redis &#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;</h1><h2 id="&#x524D;&#x8A00;"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</h2><ul class="ui list">
-<li><p>&#x4EC0;&#x4E48;&#x662F;redis</p>
-<p>Redis&#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#x7684;&#x4F7F;&#x7528;ANSI C&#x8BED;&#x8A00;&#x7F16;&#x5199;&#x3001;&#x652F;&#x6301;&#x7F51;&#x7EDC;&#x3001;&#x53EF;<strong>&#x57FA;&#x4E8E;&#x5185;&#x5B58;&#x4EA6;&#x53EF;&#x6301;&#x4E45;&#x5316;</strong>&#x7684;&#x65E5;&#x5FD7;&#x578B;&#x3001;<strong>Key-Value&#x6570;&#x636E;&#x5E93;</strong>&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x591A;&#x79CD;&#x8BED;&#x8A00;&#x7684;API&#x3002;&#x7B80;&#x800C;&#x8A00;&#x4E4B;redis&#x5C31;&#x662F;&#x653E;&#x5728;<strong>&#x8FDC;&#x7A0B;&#x7F51;&#x7EDC;&#x4E0A;&#x7684;&#x4E00;&#x4E2A;key-value&#x6570;&#x636E;&#x7ED3;&#x6784;</strong>&#x3002;</p>
-</li>
-<li><p>redis&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;</p>
-<p>Redis&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x505A;cache&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x505A;&#x6301;&#x4E45;&#x5316;db&#xFF0C;&#x751A;&#x81F3;&#x7528;&#x6765;&#x505A;&#x961F;&#x5217;&#x3002;&#x961F;&#x5217;&#x5C31;&#x662F;&#x5B58;&#x50A8;&#x4E34;&#x65F6;&#x6027;&#x6570;&#x636E;&#xFF0C;&#x800C;cache&#x4E3B;&#x8981;&#x5B58;&#x50A8;&#x90A3;&#x4E9B;&#x7528;&#x6237;&#x9891;&#x7E41;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x3002;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x6765;&#x505A;db&#xFF0C;&#x4F46;&#x662F;&#x5B9E;&#x73B0;&#x6301;&#x4E45;&#x5316;&#x5B58;&#x50A8;&#x9700;&#x8981;&#x4ED8;&#x51FA;&#x6602;&#x8D35;&#x7684;&#x4EE3;&#x4EF7;&#x3002;</p>
-</li>
-<li><p>redis&#x6709;&#x4EC0;&#x4E48;&#x4F18;&#x7F3A;&#x70B9;</p>
-<p><strong>&#x4F18;&#x70B9;</strong></p>
-<p>&#x2013;redis&#x4E30;&#x5BCC;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x2014;-&#x66F4;&#x52A0;&#x65B9;&#x4FBF;&#x64CD;&#x4F5C;</p>
-<p>&#x6BD4;&#x5982;&#x961F;&#x5217;&#x7684;&#x5148;&#x8FDB;&#x5148;&#x51FA;&#xFF0C;hash&#x7ED3;&#x6784;O(1)&#x7684;&#x5FEB;&#x901F;&#x67E5;&#x8BE2;&#xFF0C;sorted-set&#x6709;&#x5E8F;&#x96C6;&#x5408;&#x65B9;&#x4FBF;&#x83B7;&#x53D6;&#x6392;&#x540D;</p>
-<p>&#x2013;redis&#x7684;&#x6570;&#x636E;&#x90FD;&#x662F;&#x5728;&#x5185;&#x5B58;&#x64CD;&#x4F5C;&#x2014;&#x66F4;&#x52A0;&#x5FEB;&#x901F;&#x64CD;&#x4F5C;</p>
-<p>&#x2014;&#x5355;&#x7EBF;&#x7A0B;&#x5904;&#x7406;&#x2014;&#x907F;&#x514D;&#x4E86;&#x9501;</p>
-<p>&#x2014;&#x975E;&#x963B;&#x585E;&#x5F0F;IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x2014;&#x5145;&#x5206;&#x5229;&#x7528;&#x7F51;&#x7EDC;IO</p>
-<p>&#x2014;&#x8BBE;&#x8BA1;&#x7B80;&#x5355;&#xFF0C;&#x6548;&#x7387;&#x5FEB;</p>
-<p>&#x2014;&#x65B9;&#x4FBF;&#x6269;&#x5C55;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x50CF;mysql&#x4E00;&#x6837;&#x5206;&#x5E93;&#x5206;&#x8868;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x7B80;&#x5355;&#x6269;&#x5927;&#x5185;&#x5B58;&#xFF0C;&#x6216;&#x8005;&#x589E;&#x52A0;redis&#x7684;&#x4E2A;&#x6570;</p>
-<p><strong>&#x7F3A;&#x70B9;</strong></p>
-<p>Rdb&#x5907;&#x4EFD;&#x4E0D;&#x5177;&#x5907;&#x5B9E;&#x65F6;&#x6027;</p>
-<p>Aof&#x6301;&#x4E45;&#x5316;&#x6BD4;&#x8F83;&#x6D88;&#x8017;&#x5185;&#x5B58;&#x548C;cpu&#xFF0C;&#x751A;&#x81F3;&#x5F53;aof&#x6587;&#x4EF6;&#x8FC7;&#x5927;&#x7684;&#x65F6;&#x5019;&#x5360;&#x7528;&#x78C1;&#x76D8;</p>
-</li>
-</ul>
-<h2 id="&#x6570;&#x636E;&#x7ED3;&#x6784;"><a href="#&#x6570;&#x636E;&#x7ED3;&#x6784;" class="headerlink" title="&#x6570;&#x636E;&#x7ED3;&#x6784;"></a>&#x6570;&#x636E;&#x7ED3;&#x6784;</h2><p>&#x4E0B;&#x56FE;&#x8BF4;&#x660E;&#x4E86;&#xFF0C;&#x5916;&#x90E8;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x5E95;&#x5C42;&#x5B9E;&#x9645;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x662F;&#x901A;&#x8FC7;realobject&#x6765;&#x8FDE;&#x63A5;&#x7684;&#x3002;&#x4E00;&#x4E2A;&#x5916;&#x89C2;&#x7C7B;&#x578B;&#x91CC;&#x9762;&#x5FC5;&#x7136;&#x5B58;&#x7740;&#x4E00;&#x4E2A;realobject&#xFF0C;&#x901A;&#x8FC7;&#x5B83;&#x6765;&#x8BBF;&#x95EE;&#x5E95;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;</p>
-<p><a class="magnific-img" href="Picture\01.png"><img src="Picture\01.png" alt="01" class="ui centered image"></a></p>
-<h3 id="&#x5916;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;"><a href="#&#x5916;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;" class="headerlink" title="&#x5916;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;"></a>&#x5916;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;</h3><h4 id="&#x5B57;&#x7B26;&#x4E32;"><a href="#&#x5B57;&#x7B26;&#x4E32;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;"></a>&#x5B57;&#x7B26;&#x4E32;</h4><p>REDIS_STRING (&#x5B57;&#x7B26;&#x4E32;)&#x662F; Redis &#x4F7F;&#x7528;&#x5F97;&#x6700;&#x4E3A;&#x5E7F;&#x6CDB;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;,&#x5B83;&#x9664;&#x4E86;&#x662F; SET &#x3001;GET &#x7B49;&#x547D;&#x4EE4;&#x7684;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;&#x4E4B;&#x5916;,&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x952E;,&#x4EE5;&#x53CA;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x65F6;&#x63D0;&#x4F9B;&#x7ED9; Redis &#x7684;&#x53C2;&#x6570;,&#x90FD;&#x662F;&#x7528;&#x8FD9;&#x79CD;&#x7C7B;&#x578B;&#x4FDD;&#x5B58;&#x7684;&#x3002;</p>
-<p>&#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#x5206;&#x522B;&#x4F7F;&#x7528; REDIS_ENCODING_INT &#x548C; REDIS_ENCODING_RAW &#x4E24;&#x79CD;&#x7F16;&#x7801;&#x3002;</p>
-<p>&#x53EA;&#x6709;&#x80FD;&#x8868;&#x793A;&#x4E3A; long &#x7C7B;&#x578B;&#x7684;&#x503C;,&#x624D;&#x4F1A;&#x4EE5;&#x6574;&#x6570;&#x7684;&#x5F62;&#x5F0F;&#x4FDD;&#x5B58;,&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x7684;&#x6574;&#x6570;&#x3001;&#x5C0F;&#x6570;&#x548C;&#x5B57;&#x7B26;&#x4E32;,&#x90FD;&#x662F;&#x7528; sdshdr &#x7ED3;&#x6784;&#x6765;&#x4FDD;&#x5B58;&#x3002;</p>
-<h4 id="&#x54C8;&#x5E0C;&#x8868;"><a href="#&#x54C8;&#x5E0C;&#x8868;" class="headerlink" title="&#x54C8;&#x5E0C;&#x8868;"></a>&#x54C8;&#x5E0C;&#x8868;</h4><p>REDIS_HASH (&#x54C8;&#x5E0C;&#x8868;)&#x662F;HSET &#x3001;HLEN &#x7B49;&#x547D;&#x4EE4;&#x7684;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;</p>
-<p>&#x5B83;&#x4F7F;&#x7528; REDIS_ENCODING_ZIPLIST&#x548C;REDIS_ENCODING_HT &#x4E24;&#x79CD;&#x7F16;&#x7801;&#x65B9;&#x5F0F;</p>
-<p>Redis &#x4E2D;&#x6BCF;&#x4E2A;hash&#x53EF;&#x4EE5;&#x5B58;&#x50A8;2^32-1&#x952E;&#x503C;&#x5BF9;&#xFF08;40&#x591A;&#x4EBF;&#xFF09;</p>
-<h4 id="&#x5217;&#x8868;"><a href="#&#x5217;&#x8868;" class="headerlink" title="&#x5217;&#x8868;"></a>&#x5217;&#x8868;</h4><p>REDIS_LIST(&#x5217;&#x8868;)&#x662F;LPUSH &#x3001;LRANGE&#x7B49;&#x547D;&#x4EE4;&#x7684;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;</p>
-<p>&#x5B83;&#x4F7F;&#x7528; REDIS_ENCODING_ZIPLIST&#x548C;REDIS_ENCODING_LINKEDLIST &#x8FD9;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x7F16;&#x7801;</p>
-<p>&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x5305;&#x542B;232-1 &#x4E2A;&#x5143;&#x7D20;(4294967295, &#x6BCF;&#x4E2A;&#x5217;&#x8868;&#x8D85;&#x8FC7;40&#x4EBF;&#x4E2A;&#x5143;&#x7D20;)&#x3002;</p>
-<h4 id="&#x96C6;&#x5408;"><a href="#&#x96C6;&#x5408;" class="headerlink" title="&#x96C6;&#x5408;"></a>&#x96C6;&#x5408;</h4><p>REDIS_SET (&#x96C6;&#x5408;) &#x662F; SADD &#x3001; SRANDMEMBER &#x7B49;&#x547D;&#x4EE4;&#x7684;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;</p>
-<p>&#x5B83;&#x4F7F;&#x7528; REDIS_ENCODING_INTSET &#x548C; REDIS_ENCODING_HT &#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x7F16;&#x7801;</p>
-<p>Redis &#x4E2D;&#x96C6;&#x5408;&#x662F;&#x901A;&#x8FC7;&#x54C8;&#x5E0C;&#x8868;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6DFB;&#x52A0;&#xFF0C;&#x5220;&#x9664;&#xFF0C;&#x67E5;&#x627E;&#x7684;&#x590D;&#x6742;&#x5EA6;&#x90FD;&#x662F;O(1)&#x3002;</p>
-<p>&#x96C6;&#x5408;&#x4E2D;&#x6700;&#x5927;&#x7684;&#x6210;&#x5458;&#x6570;&#x4E3A; 232 - 1 (4294967295, &#x6BCF;&#x4E2A;&#x96C6;&#x5408;&#x53EF;&#x5B58;&#x50A8;40&#x591A;&#x4EBF;&#x4E2A;&#x6210;&#x5458;)</p>
-<h4 id="&#x6709;&#x5E8F;&#x96C6;"><a href="#&#x6709;&#x5E8F;&#x96C6;" class="headerlink" title="&#x6709;&#x5E8F;&#x96C6;"></a>&#x6709;&#x5E8F;&#x96C6;</h4><p>REDIS_ZSET (&#x6709;&#x5E8F;&#x96C6;)&#x662F;ZADD &#x3001;ZCOUNT &#x7B49;&#x547D;&#x4EE4;&#x7684;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;</p>
-<p>&#x5B83;&#x4F7F;&#x7528; REDIS_ENCODING_ZIPLIST&#x548C;REDIS_ENCODING_SKIPLIST &#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x7F16;&#x7801;</p>
-<p>&#x4E0D;&#x540C;&#x7684;&#x662F;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x90FD;&#x4F1A;&#x5173;&#x8054;&#x4E00;&#x4E2A;double&#x7C7B;&#x578B;&#x7684;&#x5206;&#x6570;&#x3002;redis&#x6B63;&#x662F;&#x901A;&#x8FC7;&#x5206;&#x6570;&#x6765;&#x4E3A;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x6210;&#x5458;&#x8FDB;&#x884C;&#x4ECE;&#x5C0F;&#x5230;&#x5927;&#x7684;&#x6392;&#x5E8F;&#x3002;</p>
-<p>&#x6709;&#x5E8F;&#x96C6;&#x5408;&#x7684;&#x6210;&#x5458;&#x662F;&#x552F;&#x4E00;&#x7684;,&#x4F46;&#x5206;&#x6570;(score)&#x5374;&#x53EF;&#x4EE5;&#x91CD;&#x590D;&#x3002;</p>
-<h3 id="&#x5E95;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;"><a href="#&#x5E95;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;" class="headerlink" title="&#x5E95;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;"></a>&#x5E95;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;</h3><h4 id="SDS-&#x52A8;&#x6001;&#x5B57;&#x7B26;&#x4E32;"><a href="#SDS-&#x52A8;&#x6001;&#x5B57;&#x7B26;&#x4E32;" class="headerlink" title="SDS &#x52A8;&#x6001;&#x5B57;&#x7B26;&#x4E32;"></a>SDS &#x52A8;&#x6001;&#x5B57;&#x7B26;&#x4E32;</h4><p>sds&#x5B57;&#x7B26;&#x4E32;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B9E;&#x73B0;</p>
-<p>&#x52A8;&#x6001;&#x5B57;&#x7B26;&#x4E32;&#x662F;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x5185;&#x90E8;&#x6709;&#x4E00;&#x4E2A;buf&#x6570;&#x7EC4;&#xFF0C;&#x4EE5;&#x53CA;&#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;&#xFF0C;&#x5269;&#x4F59;&#x957F;&#x5EA6;&#x7B49;&#x5B57;&#x6BB5;&#xFF0C;&#x4F18;&#x70B9;&#x662F;&#x901A;&#x8FC7;&#x957F;&#x5EA6;&#x9650;&#x5236;&#x5199;&#x5165;&#xFF0C;&#x907F;&#x514D;&#x7F13;&#x51B2;&#x533A;&#x6EA2;&#x51FA;&#xFF0C;&#x53E6;&#x5916;&#x5269;&#x4F59;&#x957F;&#x5EA6;&#x4E0D;&#x8DB3;&#x65F6;&#x4F1A;&#x81EA;&#x52A8;&#x6269;&#x5BB9;&#xFF0C;&#x6269;&#x5C55;&#x6027;&#x8F83;&#x597D;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x9891;&#x7E41;&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002;</p>
-<p>&#x5E76;&#x4E14;sds&#x652F;&#x6301;&#x5199;&#x5165;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#xFF0C;&#x800C;&#x4E0D;&#x4E00;&#x5B9A;&#x662F;&#x5B57;&#x7B26;&#x3002;</p>
-<h4 id="dict-&#x5B57;&#x5178;"><a href="#dict-&#x5B57;&#x5178;" class="headerlink" title="dict &#x5B57;&#x5178;"></a>dict &#x5B57;&#x5178;</h4><p>dict&#x5B57;&#x5178;&#x662F;&#x54C8;&#x5E0C;&#x8868;&#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
-<p>dict&#x5B57;&#x5178;&#x4E0E;Java&#x4E2D;&#x7684;&#x54C8;&#x5E0C;&#x8868;&#x5B9E;&#x73B0;&#x7B80;&#x76F4;&#x5982;&#x51FA;&#x4E00;&#x8F99;&#xFF0C;&#x9996;&#x5148;&#x90FD;&#x662F;&#x6570;&#x7EC4;+&#x94FE;&#x8868;&#x7EC4;&#x6210;&#x7684;&#x7ED3;&#x6784;&#xFF0C;&#x901A;&#x8FC7;dictentry&#x4FDD;&#x5B58;&#x8282;&#x70B9;&#x3002;</p>
-<p>&#x5176;&#x4E2D;dict&#x540C;&#x65F6;&#x4FDD;&#x5B58;&#x4E24;&#x4E2A;entry&#x6570;&#x7EC4;&#xFF0C;&#x5F53;&#x9700;&#x8981;&#x6269;&#x5BB9;&#x65F6;&#xFF0C;&#x628A;&#x8282;&#x70B9;&#x8F6C;&#x79FB;&#x5230;&#x7B2C;&#x4E8C;&#x4E2A;&#x6570;&#x7EC4;&#x5373;&#x53EF;&#xFF0C;&#x5E73;&#x65F6;&#x53EA;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x3002;</p>
-<p><a class="magnific-img" href="Picture\02.png"><img src="Picture\02.png" alt="02" class="ui centered image"></a></p>
-<h4 id="ziplist-&#x538B;&#x7F29;&#x94FE;&#x8868;"><a href="#ziplist-&#x538B;&#x7F29;&#x94FE;&#x8868;" class="headerlink" title="ziplist &#x538B;&#x7F29;&#x94FE;&#x8868;"></a>ziplist &#x538B;&#x7F29;&#x94FE;&#x8868;</h4><p>ziplist &#x662F;&#x4E00;&#x4E2A;&#x7ECF;&#x8FC7;&#x7279;&#x6B8A;&#x7F16;&#x7801;&#x7684;&#x53CC;&#x5411;&#x94FE;&#x8868;&#xFF0C;&#x5B83;&#x7684;&#x8BBE;&#x8BA1;&#x76EE;&#x6807;&#x5C31;&#x662F;&#x4E3A;&#x4E86;&#x63D0;&#x9AD8;&#x5B58;&#x50A8;&#x6548;&#x7387;&#x3002;ziplist&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x6574;&#x6570;&#xFF0C;&#x5176;&#x4E2D;&#x6574;&#x6570;&#x662F;&#x6309;&#x771F;&#x6B63;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x8868;&#x793A;&#x8FDB;&#x884C;&#x7F16;&#x7801;&#x7684;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x7F16;&#x7801;&#x6210;&#x5B57;&#x7B26;&#x4E32;&#x5E8F;&#x5217;&#x3002;&#x5B83;&#x80FD;&#x4EE5;O(1)&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x5728;&#x8868;&#x7684;&#x4E24;&#x7AEF;&#x63D0;&#x4F9B;push&#x548C;pop&#x64CD;&#x4F5C;&#x3002;</p>
-<ul class="ui list">
-<li><p>&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684;&#x53CC;&#x5411;&#x94FE;&#x8868;&#xFF0C;&#x94FE;&#x8868;&#x4E2D;&#x6BCF;&#x4E00;&#x9879;&#x90FD;&#x5360;&#x7528;&#x72EC;&#x7ACB;&#x7684;&#x4E00;&#x5757;&#x5185;&#x5B58;&#xFF0C;&#x5404;&#x9879;&#x4E4B;&#x95F4;&#x7528;&#x5730;&#x5740;&#x6307;&#x9488;&#xFF08;&#x6216;&#x5F15;&#x7528;&#xFF09;&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x4F1A;&#x5E26;&#x6765;&#x5927;&#x91CF;&#x7684;&#x5185;&#x5B58;&#x788E;&#x7247;&#xFF0C;&#x800C;&#x4E14;&#x5730;&#x5740;&#x6307;&#x9488;&#x4E5F;&#x4F1A;&#x5360;&#x7528;&#x989D;&#x5916;&#x7684;&#x5185;&#x5B58;&#x3002;</p>
-<p>ziplist &#x662F;&#x5C06;&#x8868;&#x4E2D;&#x6BCF;&#x4E00;&#x9879;&#x5B58;&#x653E;&#x5728;&#x524D;&#x540E;&#x8FDE;&#x7EED;&#x7684;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x5185;&#xFF0C;&#x4E00;&#x4E2A;ziplist&#x6574;&#x4F53;&#x5360;&#x7528;&#x4E00;&#x5927;&#x5757;&#x5185;&#x5B58;&#x3002;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x8868;&#xFF08;list&#xFF09;&#xFF0C;&#x4F46;&#x5176;&#x5B9E;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x94FE;&#x8868;&#xFF08;linked list&#xFF09;&#x3002;</p>
-</li>
-<li><p>&#x53E6;&#x5916;&#xFF0C;ziplist&#x4E3A;&#x4E86;&#x5728;&#x7EC6;&#x8282;&#x4E0A;&#x8282;&#x7701;&#x5185;&#x5B58;&#xFF0C;&#x5BF9;&#x4E8E;&#x503C;&#x7684;&#x5B58;&#x50A8;&#x91C7;&#x7528;&#x4E86;&#x53D8;&#x957F;&#x7684;&#x7F16;&#x7801;&#x65B9;&#x5F0F;&#xFF0C;&#x5927;&#x6982;&#x610F;&#x601D;&#x662F;&#x8BF4;&#xFF0C;&#x5BF9;&#x4E8E;&#x5927;&#x7684;&#x6574;&#x6570;&#xFF0C;&#x5C31;&#x591A;&#x7528;&#x4E00;&#x4E9B;&#x5B57;&#x8282;&#x6765;&#x5B58;&#x50A8;&#xFF0C;&#x800C;&#x5BF9;&#x4E8E;&#x5C0F;&#x7684;&#x6574;&#x6570;&#xFF0C;&#x5C31;&#x5C11;&#x7528;&#x4E00;&#x4E9B;&#x5B57;&#x8282;&#x6765;&#x5B58;&#x50A8;&#x3002;</p>
-</li>
-<li><p>&#x5B9E;&#x9645;&#x4E0A;&#x3002;redis&#x7684;&#x5B57;&#x5178;&#x4E00;&#x5F00;&#x59CB;&#x7684;&#x6570;&#x636E;&#x6BD4;&#x8F83;&#x5C11;&#x65F6;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;ziplist&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x5B58;&#x50A8;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;key1&#xFF0C;value1&#xFF0C;key2&#xFF0C;value2&#x8FD9;&#x6837;&#x7684;&#x987A;&#x5E8F;&#x5B58;&#x50A8;&#xFF0C;&#x5BF9;&#x4E8E;&#x5C0F;&#x6570;&#x636E;&#x91CF;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x6837;&#x5B58;&#x50A8;&#x65E2;&#x7701;&#x7A7A;&#x95F4;&#xFF0C;&#x67E5;&#x8BE2;&#x7684;&#x6548;&#x7387;&#x4E5F;&#x4E0D;&#x4F4E;&#x3002;</p>
-<p>&#x5F53;&#x6570;&#x636E;&#x91CF;&#x8D85;&#x8FC7;&#x9608;&#x503C;&#x65F6;&#xFF0C;&#x54C8;&#x5E0C;&#x8868;&#x81EA;&#x52A8;&#x81A8;&#x80C0;&#x4E3A;&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x8BA8;&#x8BBA;&#x7684;dict&#x3002;</p>
-</li>
-</ul>
-<h4 id="quicklist"><a href="#quicklist" class="headerlink" title="quicklist"></a>quicklist</h4><p>quicklist&#x662F;&#x7ED3;&#x5408; ziplist&#x5B58;&#x50A8;&#x4F18;&#x52BF; &#x548C; &#x94FE;&#x8868;&#x7075;&#x6D3B;&#x6027; &#x4E8E;&#x4E00;&#x8EAB;&#x7684;&#x53CC;&#x7AEF;&#x94FE;&#x8868;&#x3002;&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x95F4;&#x548C;&#x65F6;&#x95F4;&#x7684;&#x6298;&#x4E2D;&#xFF1A;</p>
-<p>&#x53CC;&#x5411;&#x94FE;&#x8868;&#x4FBF;&#x4E8E;&#x5728;&#x8868;&#x7684;&#x4E24;&#x7AEF;&#x8FDB;&#x884C;push&#x548C;pop&#x64CD;&#x4F5C;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x7684;&#x5185;&#x5B58;&#x5F00;&#x9500;&#x6BD4;&#x8F83;&#x5927;&#x3002;ziplist&#x7531;&#x4E8E;&#x662F;&#x4E00;&#x6574;&#x5757;&#x8FDE;&#x7EED;&#x5185;&#x5B58;&#xFF0C;&#x6240;&#x4EE5;&#x5B58;&#x50A8;&#x6548;&#x7387;&#x5F88;&#x9AD8;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x5B83;&#x4E0D;&#x5229;&#x4E8E;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;&#xFF0C;&#x6BCF;&#x6B21;&#x6570;&#x636E;&#x53D8;&#x52A8;&#x90FD;&#x4F1A;&#x5F15;&#x53D1;&#x4E00;&#x6B21;&#x5185;&#x5B58;&#x7684;realloc&#x3002;&#x7279;&#x522B;&#x662F;&#x5F53;ziplist&#x957F;&#x5EA6;&#x5F88;&#x957F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E00;&#x6B21;realloc&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x5927;&#x6279;&#x91CF;&#x7684;&#x6570;&#x636E;&#x62F7;&#x8D1D;&#xFF0C;&#x8FDB;&#x4E00;&#x6B65;&#x964D;&#x4F4E;&#x6027;&#x80FD;&#x3002;</p>
-<p><a class="magnific-img" href="Picture\03.png"><img src="Picture\03.png" alt="03" class="ui centered image"></a></p>
-<h4 id="zset"><a href="#zset" class="headerlink" title="zset"></a>zset</h4><p>zset&#x5176;&#x5B9E;&#x662F;&#x4E24;&#x79CD;&#x7ED3;&#x6784;&#x7684;&#x5408;&#x5E76;&#x3002;&#x4E5F;&#x5C31;&#x662F;dict&#x548C;skiplist&#x7ED3;&#x5408;&#x800C;&#x6210;&#x7684;&#x3002;dict&#x8D1F;&#x8D23;&#x4FDD;&#x5B58;&#x6570;&#x636E;&#x5BF9;&#x5206;&#x6570;&#x7684;&#x6620;&#x5C04;&#xFF0C;&#x800C;skiplist&#x7528;&#x4E8E;&#x6839;&#x636E;&#x5206;&#x6570;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x7684;&#x67E5;&#x8BE2;&#xFF08;&#x76F8;&#x8F85;&#x76F8;&#x6210;&#xFF09;</p>
-<h4 id="skiplist-&#x8DF3;&#x8DC3;&#x8868;"><a href="#skiplist-&#x8DF3;&#x8DC3;&#x8868;" class="headerlink" title="skiplist &#x8DF3;&#x8DC3;&#x8868;"></a>skiplist &#x8DF3;&#x8DC3;&#x8868;</h4><p>sortedset&#x662F;&#x7531;skiplist&#xFF0C;dict&#x548C;ziplist&#x7EC4;&#x6210;&#x7684;&#x3002;</p>
-<p>&#x5F53;&#x6570;&#x636E;&#x8F83;&#x5C11;&#x65F6;&#xFF0C;sorted set&#x662F;&#x7531;&#x4E00;&#x4E2A;ziplist&#x6765;&#x5B9E;&#x73B0;&#x7684;&#x3002; </p>
-<p>&#x5F53;&#x6570;&#x636E;&#x591A;&#x7684;&#x65F6;&#x5019;&#xFF0C;sorted set&#x662F;&#x7531; zset &#x6765;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x8FD9;&#x4E2A; zset &#x5305;&#x542B;&#x4E00;&#x4E2A; dict + &#x4E00;&#x4E2A;skiplist&#x3002;dict&#x7528;&#x6765;&#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5230;&#x5206;&#x6570;(score)&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#xFF0C;&#x800C;skiplist&#x7528;&#x6765;&#x6839;&#x636E;&#x5206;&#x6570;&#x67E5;&#x8BE2;&#x6570;&#x636E;&#xFF08;&#x53EF;&#x80FD;&#x662F;&#x8303;&#x56F4;&#x67E5;&#x627E;&#xFF09;&#x3002;</p>
-<p>skiplist&#x7684;&#x8282;&#x70B9;&#x4E2D;&#x5B58;&#x7740;&#x8282;&#x70B9;&#x503C;&#x548C;&#x5206;&#x6570;&#x3002;&#x5E76;&#x4E14;&#x8DF3;&#x8868;&#x662F;&#x6839;&#x636E;&#x8282;&#x70B9;&#x7684;&#x5206;&#x6570;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x8282;&#x70B9;&#x5206;&#x6570;&#x8FDB;&#x884C;&#x8303;&#x56F4;&#x67E5;&#x627E;&#x3002;</p>
-<p><a class="magnific-img" href="Picture\04.png"><img src="Picture\04.png" alt="04" class="ui centered image"></a></p>
-<p>&#x7ED3;&#x5408;&#x4E0B;&#x56FE;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x67E5;&#x627E;19&#x662F;&#x5426;&#x5B58;&#x5728;&#xFF0C;&#x4ECE;&#x6700;&#x9AD8;&#x5C42;&#x5F00;&#x59CB;&#xFF0C;&#x9996;&#x5148;&#x548C;&#x5934;&#x7ED3;&#x70B9;&#x7684;&#x6700;&#x9AD8;&#x5C42;&#x7684;&#x540E;&#x7EE7;&#x7ED3;&#x70B9;9&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#xFF0C;19&#x5927;&#x4E8E;9&#xFF0C;&#x56E0;&#x6B64;&#x63A5;&#x7740;&#x548C;9&#x5728;&#x8BE5;&#x5C42;&#x4E0A;&#x7684;&#x540E;&#x7EE7;&#x7ED3;&#x70B9;21&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#xFF0C;&#x5C0F;&#x4E8E;21&#xFF0C;&#x90A3;&#x8FD9;&#x4E2A;&#x503C;&#x80AF;&#x5B9A;&#x5728;9&#x7ED3;&#x70B9;&#x548C;21&#x7ED3;&#x70B9;&#x4E4B;&#x95F4;&#x3002;</p>
-<p> &#x56E0;&#x6B64;&#xFF0C;&#x4E0B;&#x79FB;&#x4E00;&#x5C42;&#xFF0C;&#x63A5;&#x7740;&#x548C;9&#x5728;&#x8BE5;&#x5C42;&#x4E0A;&#x7684;&#x540E;&#x7EE7;&#x7ED3;&#x70B9;17&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#xFF0C;19&#x5927;&#x4E8E;17&#xFF0C;&#x7136;&#x540E;&#x548C;21&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#xFF0C;&#x5C0F;&#x4E8E;21&#xFF0C;&#x6B64;&#x65F6;&#x80AF;&#x5B9A;&#x5728;17&#x7ED3;&#x70B9;&#x548C;21&#x7ED3;&#x70B9;&#x4E4B;&#x95F4;&#x3002;<br>&#x63A5;&#x7740;&#x4E0B;&#x79FB;&#x4E00;&#x5C42;&#xFF0C;&#x548C;17&#x5728;&#x8BE5;&#x5C42;&#x4E0A;&#x7684;&#x540E;&#x7EE7;&#x7ED3;&#x70B9;19&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x6700;&#x7EC8;&#x627E;&#x5230;&#x4E86;&#x3002;</p>
-<p><a class="magnific-img" href="Picture\05.png"><img src="Picture\05.png" alt="05" class="ui centered image"></a></p>
-<h4 id="inset"><a href="#inset" class="headerlink" title="inset"></a>inset</h4><p>inset&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x5B57;&#x96C6;&#x5408;&#xFF0C;&#x4ED6;&#x4F7F;&#x7528;&#x7075;&#x6D3B;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x6765;&#x4FDD;&#x5B58;&#x6570;&#x5B57;&#x3002;</p>
-<p>&#x65B0;&#x521B;&#x5EFA;&#x7684;intset&#x53EA;&#x6709;&#x4E00;&#x4E2A;header&#xFF0C;&#x603B;&#x5171;8&#x4E2A;&#x5B57;&#x8282;&#x3002;&#x5176;&#x4E2D;encoding = 2, length = 0&#x3002;<br>&#x6DFB;&#x52A0;13, 5&#x4E24;&#x4E2A;&#x5143;&#x7D20;&#x4E4B;&#x540E;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x662F;&#x6BD4;&#x8F83;&#x5C0F;&#x7684;&#x6574;&#x6570;&#xFF0C;&#x90FD;&#x80FD;&#x4F7F;&#x7528;2&#x4E2A;&#x5B57;&#x8282;&#x8868;&#x793A;&#xFF0C;&#x6240;&#x4EE5;encoding&#x4E0D;&#x53D8;&#xFF0C;&#x503C;&#x8FD8;&#x662F;2&#x3002; </p>
-<p>&#x5F53;&#x6DFB;&#x52A0;32768&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x4E0D;&#x518D;&#x80FD;&#x7528;2&#x4E2A;&#x5B57;&#x8282;&#x6765;&#x8868;&#x793A;&#x4E86;&#xFF08;2&#x4E2A;&#x5B57;&#x8282;&#x80FD;&#x8868;&#x8FBE;&#x7684;&#x6570;&#x636E;&#x8303;&#x56F4;&#x662F;-215~215-1&#xFF0C;&#x800C;32768&#x7B49;&#x4E8E;215&#xFF0C;&#x8D85;&#x51FA;&#x8303;&#x56F4;&#x4E86;&#xFF09;&#xFF0C;&#x56E0;&#x6B64;encoding&#x5FC5;&#x987B;&#x5347;&#x7EA7;&#x5230;INTSET_ENC_INT32&#xFF08;&#x503C;&#x4E3A;4&#xFF09;&#xFF0C;&#x5373;&#x7528;4&#x4E2A;&#x5B57;&#x8282;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x3002;</p>
-<p><a class="magnific-img" href="Picture\06.png"><img src="Picture\06.png" alt="06" class="ui centered image"></a></p>
-<h3 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h3><p>sds&#x662F;&#x4E00;&#x4E2A;&#x7075;&#x6D3B;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#xFF0C;&#x5E76;&#x4E14;&#x652F;&#x6301;&#x76F4;&#x63A5;&#x5B58;&#x50A8;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#xFF0C;&#x540C;&#x65F6;&#x63D0;&#x4F9B;&#x957F;&#x5EA6;&#x548C;&#x5269;&#x4F59;&#x7A7A;&#x95F4;&#x7684;&#x5B57;&#x6BB5;&#x6765;&#x4FDD;&#x8BC1;&#x4F38;&#x7F29;&#x6027;&#x548C;&#x9632;&#x6B62;&#x6EA2;&#x51FA;&#x3002;</p>
-<p>dict&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x5178;&#x7ED3;&#x6784;&#xFF0C;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x5C31;&#x662F;Java&#x4E2D;&#x7684;hashmap&#x5B9E;&#x73B0;&#xFF0C;&#x540C;&#x65F6;&#x6301;&#x6709;&#x4E24;&#x4E2A;&#x8282;&#x70B9;&#x6570;&#x7EC4;&#xFF0C;&#x4F46;&#x53EA;&#x4F7F;&#x7528;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#xFF0C;&#x6269;&#x5BB9;&#x65F6;&#x6362;&#x6210;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x3002;</p>
-<p>ziplist&#x662F;&#x4E00;&#x4E2A;&#x538B;&#x7F29;&#x94FE;&#x8868;&#xFF0C;&#x4ED6;&#x653E;&#x5F03;&#x5185;&#x5B58;&#x4E0D;&#x8FDE;&#x7EED;&#x7684;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;&#xFF0C;&#x800C;&#x662F;&#x76F4;&#x63A5;&#x5206;&#x914D;&#x8FDE;&#x7EED;&#x5185;&#x5B58;&#x8FDB;&#x884C;&#x5B58;&#x50A8;&#xFF0C;&#x51CF;&#x5C11;&#x5185;&#x5B58;&#x788E;&#x7247;&#x3002;&#x63D0;&#x9AD8;&#x5229;&#x7528;&#x7387;&#xFF0C;&#x5E76;&#x4E14;&#x4E5F;&#x652F;&#x6301;&#x5B58;&#x50A8;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#x3002;</p>
-<p>quicklist&#x662F;ziplist&#x548C;&#x4F20;&#x7EDF;&#x94FE;&#x8868;&#x7684;&#x4E2D;&#x548C;&#x5F62;&#x6210;&#x7684;&#x94FE;&#x8868;&#x7ED3;&#x679C;&#xFF0C;&#x6BCF;&#x4E2A;&#x94FE;&#x8868;&#x8282;&#x70B9;&#x90FD;&#x662F;&#x4E00;&#x4E2A;ziplist&#x3002;</p>
-<p>zset&#x662F;&#x7531;skiplist&#x548C;dict&#x5B9E;&#x73B0;&#x7684;&#x3002;</p>
-<p>inset&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x5B57;&#x96C6;&#x5408;&#xFF0C;&#x4ED6;&#x6839;&#x636E;&#x63D2;&#x5165;&#x5143;&#x7D20;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x6765;&#x51B3;&#x5B9A;&#x6570;&#x7EC4;&#x5143;&#x7D20;&#x7684;&#x957F;&#x5EA6;&#x3002;&#x5E76;&#x81EA;&#x52A8;&#x8FDB;&#x884C;&#x6269;&#x5BB9;&#x3002;</p>
-<ul class="ui list">
-<li><p>&#x4ED6;&#x4EEC;&#x5B9E;&#x73B0;&#x4E86;&#x54EA;&#x4E9B;&#x7ED3;&#x6784;&#xFF1F;</p>
-<p>&#x5B57;&#x7B26;&#x4E32;&#x7531;sds&#x5B9E;&#x73B0;</p>
-<p>list&#x7531;ziplist&#x548C;quicklist&#x5B9E;&#x73B0;</p>
-<p>sortset&#x7531;ziplist&#x548C;zset&#x5B9E;&#x73B0;</p>
-<p>hash&#x8868;&#x7531;dict&#x5B9E;&#x73B0;</p>
-<p>&#x96C6;&#x5408;&#x7531;inset&#x5B9E;&#x73B0;&#x3002;</p>
-</li>
-</ul>
-<h2 id="RedisDb"><a href="#RedisDb" class="headerlink" title="RedisDb"></a>RedisDb</h2><p>redis&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x7EF4;&#x62A4;&#x7740;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x540D;&#x4E3A;redisdb&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x4ED6;&#x662F;&#x4E00;&#x4E2A;dict&#x7ED3;&#x6784;&#x3002;</p>
-<p>Redis&#x7684;&#x6570;&#x636E;&#x5E93;&#x4F7F;&#x7528;&#x5B57;&#x5178;&#x4F5C;&#x4E3A;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#xFF0C;&#x6570;&#x636E;&#x5E93;&#x7684;&#x589E;&#x3001;&#x5220;&#x3001;&#x67E5;&#x3001;&#x6539;&#x90FD;&#x662F;&#x6784;&#x5EFA;&#x5728;&#x5B57;&#x5178;&#x7684;&#x64CD;&#x4F5C;&#x4E4B;&#x4E0A;&#x7684;&#x3002;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Redis database representation. There are multiple databases identified</span></span><br><span class="line"><span class="comment"> * by integers from 0 (the default database) up to the max configured</span></span><br><span class="line"><span class="comment"> * database. The database number is the &apos;id&apos; field in the structure. */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisDb</span> {</span></span><br><span class="line">     <span class="comment">// &#x6570;&#x636E;&#x5E93;&#x952E;&#x7A7A;&#x95F4;&#xFF0C;&#x4FDD;&#x5B58;&#x7740;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x952E;&#x503C;&#x5BF9;</span></span><br><span class="line">    dict *dict;                 <span class="comment">/* The keyspace for this DB */</span></span><br><span class="line">     <span class="comment">// &#x952E;&#x7684;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#xFF0C;&#x5B57;&#x5178;&#x7684;&#x952E;&#x4E3A;&#x952E;&#xFF0C;&#x5B57;&#x5178;&#x7684;&#x503C;&#x4E3A;&#x8FC7;&#x671F;&#x4E8B;&#x4EF6; UNIX &#x65F6;&#x95F4;&#x6233;</span></span><br><span class="line">    dict *expires;              <span class="comment">/* Timeout of keys with a timeout set */</span></span><br><span class="line">    <span class="comment">// &#x6B63;&#x5904;&#x4E8E;&#x963B;&#x585E;&#x72B6;&#x6001;&#x7684;&#x952E;</span></span><br><span class="line">    dict *blocking_keys;        <span class="comment">/* Keys with clients waiting for data (BLPOP) */</span></span><br><span class="line">    <span class="comment">// &#x53EF;&#x4EE5;&#x89E3;&#x9664;&#x963B;&#x585E;&#x7684;&#x952E;</span></span><br><span class="line">    dict *ready_keys;           <span class="comment">/* Blocked keys that received a PUSH */</span></span><br><span class="line">    <span class="comment">// &#x6B63;&#x5728;&#x88AB; WATCH &#x547D;&#x4EE4;&#x76D1;&#x89C6;&#x7684;&#x952E;</span></span><br><span class="line">    dict *watched_keys;         <span class="comment">/* WATCHED keys for MULTI/EXEC CAS */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">evictionPoolEntry</span> *<span class="title">eviction_pool</span>;</span>    <span class="comment">/* Eviction pool of keys */</span></span><br><span class="line">    <span class="comment">// &#x6570;&#x636E;&#x5E93;&#x53F7;&#x7801;</span></span><br><span class="line">    <span class="keyword">int</span> id;                     <span class="comment">/* Database ID */</span></span><br><span class="line">    <span class="comment">// &#x6570;&#x636E;&#x5E93;&#x7684;&#x952E;&#x7684;&#x5E73;&#x5747; TTL &#xFF0C;&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> avg_ttl;          <span class="comment">/* Average TTL, just for stats */</span></span><br><span class="line"> } redisDb;</span><br></pre></td></tr></table></figure>
-<p><a class="magnific-img" href="Picture\07.jpg"><img src="Picture\07.jpg" alt="07" class="ui centered image"></a></p>
-<h3 id="&#x8FC7;&#x671F;&#x952E;&#x7684;&#x5220;&#x9664;&#x7B56;&#x7565;"><a href="#&#x8FC7;&#x671F;&#x952E;&#x7684;&#x5220;&#x9664;&#x7B56;&#x7565;" class="headerlink" title="&#x8FC7;&#x671F;&#x952E;&#x7684;&#x5220;&#x9664;&#x7B56;&#x7565;"></a>&#x8FC7;&#x671F;&#x952E;&#x7684;&#x5220;&#x9664;&#x7B56;&#x7565;</h3><p>&#x5B9A;&#x65F6;&#x5220;&#x9664;&#xFF1A;&#x5728;&#x8BBE;&#x7F6E;&#x952E;&#x7684;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#x7684;&#x540C;&#x65F6;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B9A;&#x65F6;&#x5668;&#xFF0C;&#x5728;&#x5B9A;&#x65F6;&#x7ED3;&#x675F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C06;&#x8BE5;&#x952E;&#x5220;&#x9664;&#xFF1B;</p>
-<p>&#x60F0;&#x6027;&#x5220;&#x9664;&#xFF1A;&#x653E;&#x4EFB;&#x952E;&#x8FC7;&#x671F;&#x4E0D;&#x7BA1;&#xFF0C;&#x5728;&#x8BBF;&#x95EE;&#x8BE5;&#x952E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5224;&#x65AD;&#x8BE5;&#x952E;&#x7684;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x5230;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#x5DF2;&#x7ECF;&#x5230;&#x4E86;&#xFF0C;&#x5C31;&#x6267;&#x884C;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#xFF1B;</p>
-<p>&#x5B9A;&#x671F;&#x5220;&#x9664;&#xFF1A;&#x6BCF;&#x9694;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#xFF0C;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x952E;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x904D;&#x5386;&#xFF0C;&#x5220;&#x9664;&#x8FC7;&#x671F;&#x7684;&#x952E;&#x3002;</p>
-<h2 id="Redis&#x7684;&#x4E8B;&#x4EF6;&#x6A21;&#x578B;"><a href="#Redis&#x7684;&#x4E8B;&#x4EF6;&#x6A21;&#x578B;" class="headerlink" title="Redis&#x7684;&#x4E8B;&#x4EF6;&#x6A21;&#x578B;"></a>Redis&#x7684;&#x4E8B;&#x4EF6;&#x6A21;&#x578B;</h2><p>redis&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x7684;&#x65B9;&#x5F0F;&#x57FA;&#x4E8E;<strong>reactor&#x7EBF;&#x7A0B;&#x6A21;&#x578B;</strong>&#xFF0C;&#x5373;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5904;&#x7406;&#x8FDE;&#x63A5;&#xFF0C;&#x5E76;&#x4E14;&#x6CE8;&#x518C;&#x4E8B;&#x4EF6;&#x5230;IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x5668;&#xFF0C;&#x590D;&#x7528;&#x5668;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#x4EE5;&#x540E;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x7684;&#x5904;&#x7406;&#x5668;&#x53BB;&#x6267;&#x884C;&#x4E0D;&#x540C;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x603B;&#x7ED3;&#x4EE5;&#x4E0B;</p>
-<h3 id="&#x5BA2;&#x6237;&#x7AEF;&#x5230;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x8FC7;&#x7A0B;"><a href="#&#x5BA2;&#x6237;&#x7AEF;&#x5230;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x8FC7;&#x7A0B;" class="headerlink" title="&#x5BA2;&#x6237;&#x7AEF;&#x5230;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x8FC7;&#x7A0B;"></a>&#x5BA2;&#x6237;&#x7AEF;&#x5230;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x8FC7;&#x7A0B;</h3><p>&#x8FDC;&#x7A0B;&#x5BA2;&#x6237;&#x7AEF;&#x8FDE;&#x63A5;&#x5230; redis &#x540E;&#xFF0C;redis&#x670D;&#x52A1;&#x7AEF;&#x4F1A;&#x4E3A;&#x8FDC;&#x7A0B;&#x5BA2;&#x6237;&#x7AEF;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; redisClient &#x4F5C;&#x4E3A;&#x4EE3;&#x7406;&#x3002;</p>
-<p>redis &#x4F1A;&#x8BFB;&#x53D6;&#x5D4C;&#x5957;&#x5B57;&#x4E2D;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5199;&#x5165; querybuf &#x4E2D;&#x3002;</p>
-<p>&#x89E3;&#x6790; querybuf &#x4E2D;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x8BB0;&#x5F55;&#x5230; argc &#x548C; argv &#x4E2D;&#x3002;</p>
-<p>&#x6839;&#x636E; argv[0] &#x67E5;&#x627E;&#x5BF9;&#x5E94;&#x7684; recommand&#x3002;</p>
-<p>&#x6267;&#x884C; recommend &#x5BF9;&#x5E94;&#x7684;&#x6267;&#x884C;&#x51FD;&#x6570;&#x3002;</p>
-<p>&#x6267;&#x884C;&#x4EE5;&#x540E;&#x5C06;&#x7ED3;&#x679C;&#x5B58;&#x5165; buf &amp; bufpos &amp; reply &#x4E2D;&#x3002;</p>
-<p>&#x8FD4;&#x56DE;&#x7ED9;&#x8C03;&#x7528;&#x65B9;&#x3002;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x63A7;&#x5236;&#x5199;&#x5165;&#x6570;&#x636E;&#x91CF;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x5982;&#x679C;&#x8FC7;&#x5927;&#x4F1A;&#x5206;&#x6210;&#x82E5;&#x5E72;&#x6B21;&#x3002;&#x4FDD;&#x8BC1; redis &#x7684;&#x76F8;&#x5E94;&#x65F6;&#x95F4;&#x3002;</p>
-<p>Redis &#x4F5C;&#x4E3A;&#x5355;&#x7EBF;&#x7A0B;&#x5E94;&#x7528;&#xFF0C;&#x4E00;&#x76F4;&#x8D2F;&#x5F7B;&#x7684;&#x601D;&#x60F3;&#x5C31;&#x662F;&#xFF0C;&#x6BCF;&#x4E2A;&#x6B65;&#x9AA4;&#x7684;&#x6267;&#x884C;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x4E0A;&#x9650;&#xFF08;&#x5305;&#x62EC;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x7684;&#x4E0A;&#x9650;&#x6216;&#x8005;&#x6587;&#x4EF6;&#x5C3A;&#x5BF8;&#x7684;&#x4E0A;&#x9650;&#xFF09;&#x4E00;&#x65E6;&#x8FBE;&#x5230;&#x4E0A;&#x9650;&#xFF0C;&#x5C31;&#x4F1A;&#x8BB0;&#x5F55;&#x4E0B;&#x5F53;&#x524D;&#x7684;&#x6267;&#x884C;&#x8FDB;&#x5EA6;&#xFF0C;&#x4E0B;&#x6B21;&#x518D;&#x6267;&#x884C;&#x3002;&#x4FDD;&#x8BC1;&#x4E86; Redis &#x80FD;&#x591F;&#x53CA;&#x65F6;&#x54CD;&#x5E94;&#x4E0D;&#x53D1;&#x751F;&#x963B;&#x585E;&#x3002;</p>
-<h1 id="&#x7ED3;&#x675F;"><a href="#&#x7ED3;&#x675F;" class="headerlink" title="&#x7ED3;&#x675F;"></a>&#x7ED3;&#x675F;</h1>
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2019-01-18T13:49:51.000Z" itemprop="datePublished">2019-01-18</time>
-
-    </span>
-    <span class="post-description-item">
+    <nav class="main-nav">
+      <ul class="nav-list">
         
-    </span>
+          <li class="nav-link ">
+            <a href="/">首页</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/archives/">归档</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/categories">分类</a>
+          </li>
+        
+          <li class="nav-link ">
+            <a href="/about.html">关于</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="page--article">
+  
+    <div class="toc-container">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis-设计与实现"><span class="toc-number">1.</span> <span class="toc-text">Redis 设计与实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构"><span class="toc-number">1.2.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#外层数据结构"><span class="toc-number">1.2.1.</span> <span class="toc-text">外层数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#哈希表"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">哈希表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#列表"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有序集"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">有序集</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#底层数据结构"><span class="toc-number">1.2.2.</span> <span class="toc-text">底层数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SDS-动态字符串"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">SDS 动态字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dict-字典"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">dict 字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ziplist-压缩链表"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">ziplist 压缩链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#quicklist"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">quicklist</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#zset"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">zset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#skiplist-跳跃表"><span class="toc-number">1.2.2.6.</span> <span class="toc-text">skiplist 跳跃表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inset"><span class="toc-number">1.2.2.7.</span> <span class="toc-text">inset</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.2.3.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisDb"><span class="toc-number">1.3.</span> <span class="toc-text">RedisDb</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过期键的删除策略"><span class="toc-number">1.3.1.</span> <span class="toc-text">过期键的删除策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis的事件模型"><span class="toc-number">1.4.</span> <span class="toc-text">Redis的事件模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端到服务端的请求过程"><span class="toc-number">1.4.1.</span> <span class="toc-text">客户端到服务端的请求过程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束"><span class="toc-number">2.</span> <span class="toc-text">结束</span></a></li></ol>
+      <div class="toc-tip">Table of Contents ▼</div>
+    </div>
+  
+
+
+  <div class="container">
+    <article>
+      <h1>Redis 设计与实现</h1>
+      <h1 id="Redis-设计与实现"><a href="#Redis-设计与实现" class="headerlink" title="Redis 设计与实现"></a>Redis 设计与实现</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><p>什么是redis</p>
+<p>Redis是一个开源的使用ANSI C语言编写、支持网络、可<strong>基于内存亦可持久化</strong>的日志型、<strong>Key-Value数据库</strong>，并提供多种语言的API。简而言之redis就是放在<strong>远程网络上的一个key-value数据结构</strong>。</p>
+</li>
+<li><p>redis有什么作用</p>
+<p>Redis可以用来做cache，也可以用来做持久化db，甚至用来做队列。队列就是存储临时性数据，而cache主要存储那些用户频繁使用的数据。当然也可以来做db，但是实现持久化存储需要付出昂贵的代价。</p>
+</li>
+<li><p>redis有什么优缺点</p>
+<p><strong>优点</strong></p>
+<p>–redis丰富的数据结构—-更加方便操作</p>
+<p>比如队列的先进先出，hash结构O(1)的快速查询，sorted-set有序集合方便获取排名</p>
+<p>–redis的数据都是在内存操作—更加快速操作</p>
+<p>—单线程处理—避免了锁</p>
+<p>—非阻塞式IO多路复用—充分利用网络IO</p>
+<p>—设计简单，效率快</p>
+<p>—方便扩展，不需要像mysql一样分库分表，只需要简单扩大内存，或者增加redis的个数</p>
+<p><strong>缺点</strong></p>
+<p>Rdb备份不具备实时性</p>
+<p>Aof持久化比较消耗内存和cpu，甚至当aof文件过大的时候占用磁盘</p>
+</li>
+</ul>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>下图说明了，外部数据结构和底层实际数据结构是通过realobject来连接的。一个外观类型里面必然存着一个realobject，通过它来访问底层数据结构。</p>
+<p><img src="Picture\01.png" alt="01"></p>
+<h3 id="外层数据结构"><a href="#外层数据结构" class="headerlink" title="外层数据结构"></a>外层数据结构</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>REDIS_STRING (字符串)是 Redis 使用得最为广泛的数据类型,它除了是 SET 、GET 等命令的操作对象之外,数据库中的所有键,以及执行命令时提供给 Redis 的参数,都是用这种类型保存的。</p>
+<p>字符串类型分别使用 REDIS_ENCODING_INT 和 REDIS_ENCODING_RAW 两种编码。</p>
+<p>只有能表示为 long 类型的值,才会以整数的形式保存,其他类型的整数、小数和字符串,都是用 sdshdr 结构来保存。</p>
+<h4 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h4><p>REDIS_HASH (哈希表)是HSET 、HLEN 等命令的操作对象</p>
+<p>它使用 REDIS_ENCODING_ZIPLIST和REDIS_ENCODING_HT 两种编码方式</p>
+<p>Redis 中每个hash可以存储2^32-1键值对（40多亿）</p>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><p>REDIS_LIST(列表)是LPUSH 、LRANGE等命令的操作对象</p>
+<p>它使用 REDIS_ENCODING_ZIPLIST和REDIS_ENCODING_LINKEDLIST 这两种方式编码</p>
+<p>一个列表最多可以包含232-1 个元素(4294967295, 每个列表超过40亿个元素)。</p>
+<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p>REDIS_SET (集合) 是 SADD 、 SRANDMEMBER 等命令的操作对象</p>
+<p>它使用 REDIS_ENCODING_INTSET 和 REDIS_ENCODING_HT 两种方式编码</p>
+<p>Redis 中集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。</p>
+<p>集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)</p>
+<h4 id="有序集"><a href="#有序集" class="headerlink" title="有序集"></a>有序集</h4><p>REDIS_ZSET (有序集)是ZADD 、ZCOUNT 等命令的操作对象</p>
+<p>它使用 REDIS_ENCODING_ZIPLIST和REDIS_ENCODING_SKIPLIST 两种方式编码</p>
+<p>不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。</p>
+<p>有序集合的成员是唯一的,但分数(score)却可以重复。</p>
+<h3 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h3><h4 id="SDS-动态字符串"><a href="#SDS-动态字符串" class="headerlink" title="SDS 动态字符串"></a>SDS 动态字符串</h4><p>sds字符串是字符串的实现</p>
+<p>动态字符串是一个结构体，内部有一个buf数组，以及字符串长度，剩余长度等字段，优点是通过长度限制写入，避免缓冲区溢出，另外剩余长度不足时会自动扩容，扩展性较好，不需要频繁分配内存。</p>
+<p>并且sds支持写入二进制数据，而不一定是字符。</p>
+<h4 id="dict-字典"><a href="#dict-字典" class="headerlink" title="dict 字典"></a>dict 字典</h4><p>dict字典是哈希表的实现。</p>
+<p>dict字典与Java中的哈希表实现简直如出一辙，首先都是数组+链表组成的结构，通过dictentry保存节点。</p>
+<p>其中dict同时保存两个entry数组，当需要扩容时，把节点转移到第二个数组即可，平时只使用一个数组。</p>
+<p><img src="Picture\02.png" alt="02"></p>
+<h4 id="ziplist-压缩链表"><a href="#ziplist-压缩链表" class="headerlink" title="ziplist 压缩链表"></a>ziplist 压缩链表</h4><p>ziplist 是一个经过特殊编码的双向链表，它的设计目标就是为了提高存储效率。ziplist可以用于存储字符串或整数，其中整数是按真正的二进制表示进行编码的，而不是编码成字符串序列。它能以O(1)的时间复杂度在表的两端提供push和pop操作。</p>
+<ul>
+<li><p>一个普通的双向链表，链表中每一项都占用独立的一块内存，各项之间用地址指针（或引用）连接起来。这种方式会带来大量的内存碎片，而且地址指针也会占用额外的内存。</p>
+<p>ziplist 是将表中每一项存放在前后连续的地址空间内，一个ziplist整体占用一大块内存。它是一个表（list），但其实不是一个链表（linked list）。</p>
+</li>
+<li><p>另外，ziplist为了在细节上节省内存，对于值的存储采用了变长的编码方式，大概意思是说，对于大的整数，就多用一些字节来存储，而对于小的整数，就少用一些字节来存储。</p>
+</li>
+<li><p>实际上。redis的字典一开始的数据比较少时，会使用ziplist的方式来存储，也就是key1，value1，key2，value2这样的顺序存储，对于小数据量来说，这样存储既省空间，查询的效率也不低。</p>
+<p>当数据量超过阈值时，哈希表自动膨胀为之前我们讨论的dict。</p>
+</li>
+</ul>
+<h4 id="quicklist"><a href="#quicklist" class="headerlink" title="quicklist"></a>quicklist</h4><p>quicklist是结合 ziplist存储优势 和 链表灵活性 于一身的双端链表。是一个空间和时间的折中：</p>
+<p>双向链表便于在表的两端进行push和pop操作，但是它的内存开销比较大。ziplist由于是一整块连续内存，所以存储效率很高。但是，它不利于修改操作，每次数据变动都会引发一次内存的realloc。特别是当ziplist长度很长的时候，一次realloc可能会导致大批量的数据拷贝，进一步降低性能。</p>
+<p><img src="Picture\03.png" alt="03"></p>
+<h4 id="zset"><a href="#zset" class="headerlink" title="zset"></a>zset</h4><p>zset其实是两种结构的合并。也就是dict和skiplist结合而成的。dict负责保存数据对分数的映射，而skiplist用于根据分数进行数据的查询（相辅相成）</p>
+<h4 id="skiplist-跳跃表"><a href="#skiplist-跳跃表" class="headerlink" title="skiplist 跳跃表"></a>skiplist 跳跃表</h4><p>sortedset是由skiplist，dict和ziplist组成的。</p>
+<p>当数据较少时，sorted set是由一个ziplist来实现的。 </p>
+<p>当数据多的时候，sorted set是由 zset 来实现的，这个 zset 包含一个 dict + 一个skiplist。dict用来查询数据到分数(score)的对应关系，而skiplist用来根据分数查询数据（可能是范围查找）。</p>
+<p>skiplist的节点中存着节点值和分数。并且跳表是根据节点的分数进行排序的，所以可以根据节点分数进行范围查找。</p>
+<p><img src="Picture\04.png" alt="04"></p>
+<p>结合下图，如果想查找19是否存在，从最高层开始，首先和头结点的最高层的后继结点9进行比较，19大于9，因此接着和9在该层上的后继结点21进行比较，小于21，那这个值肯定在9结点和21结点之间。</p>
+<p> 因此，下移一层，接着和9在该层上的后继结点17进行比较，19大于17，然后和21进行比较，小于21，此时肯定在17结点和21结点之间。<br>接着下移一层，和17在该层上的后继结点19进行比较，这样就最终找到了。</p>
+<p><img src="Picture\05.png" alt="05"></p>
+<h4 id="inset"><a href="#inset" class="headerlink" title="inset"></a>inset</h4><p>inset是一个数字集合，他使用灵活的数据类型来保存数字。</p>
+<p>新创建的intset只有一个header，总共8个字节。其中encoding = 2, length = 0。<br>添加13, 5两个元素之后，因为它们是比较小的整数，都能使用2个字节表示，所以encoding不变，值还是2。 </p>
+<p>当添加32768的时候，它不再能用2个字节来表示了（2个字节能表达的数据范围是-215~215-1，而32768等于215，超出范围了），因此encoding必须升级到INTSET_ENC_INT32（值为4），即用4个字节表示一个元素。</p>
+<p><img src="Picture\06.png" alt="06"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>sds是一个灵活的字符串数组，并且支持直接存储二进制数据，同时提供长度和剩余空间的字段来保证伸缩性和防止溢出。</p>
+<p>dict是一个字典结构，实现方式就是Java中的hashmap实现，同时持有两个节点数组，但只使用其中一个，扩容时换成另外一个。</p>
+<p>ziplist是一个压缩链表，他放弃内存不连续的连接方式，而是直接分配连续内存进行存储，减少内存碎片。提高利用率，并且也支持存储二进制数据。</p>
+<p>quicklist是ziplist和传统链表的中和形成的链表结果，每个链表节点都是一个ziplist。</p>
+<p>zset是由skiplist和dict实现的。</p>
+<p>inset是一个数字集合，他根据插入元素的数据类型来决定数组元素的长度。并自动进行扩容。</p>
+<ul>
+<li><p>他们实现了哪些结构？</p>
+<p>字符串由sds实现</p>
+<p>list由ziplist和quicklist实现</p>
+<p>sortset由ziplist和zset实现</p>
+<p>hash表由dict实现</p>
+<p>集合由inset实现。</p>
+</li>
+</ul>
+<h2 id="RedisDb"><a href="#RedisDb" class="headerlink" title="RedisDb"></a>RedisDb</h2><p>redis服务器中维护着一个数据库名为redisdb，实际上他是一个dict结构。</p>
+<p>Redis的数据库使用字典作为底层实现，数据库的增、删、查、改都是构建在字典的操作之上的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Redis database representation. There are multiple databases identified</span></span><br><span class="line"><span class="comment"> * by integers from 0 (the default database) up to the max configured</span></span><br><span class="line"><span class="comment"> * database. The database number is the 'id' field in the structure. */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisDb</span> &#123;</span></span><br><span class="line">     <span class="comment">// 数据库键空间，保存着数据库中的所有键值对</span></span><br><span class="line">    dict *dict;                 <span class="comment">/* The keyspace for this DB */</span></span><br><span class="line">     <span class="comment">// 键的过期时间，字典的键为键，字典的值为过期事件 UNIX 时间戳</span></span><br><span class="line">    dict *expires;              <span class="comment">/* Timeout of keys with a timeout set */</span></span><br><span class="line">    <span class="comment">// 正处于阻塞状态的键</span></span><br><span class="line">    dict *blocking_keys;        <span class="comment">/* Keys with clients waiting for data (BLPOP) */</span></span><br><span class="line">    <span class="comment">// 可以解除阻塞的键</span></span><br><span class="line">    dict *ready_keys;           <span class="comment">/* Blocked keys that received a PUSH */</span></span><br><span class="line">    <span class="comment">// 正在被 WATCH 命令监视的键</span></span><br><span class="line">    dict *watched_keys;         <span class="comment">/* WATCHED keys for MULTI/EXEC CAS */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">evictionPoolEntry</span> *<span class="title">eviction_pool</span>;</span>    <span class="comment">/* Eviction pool of keys */</span></span><br><span class="line">    <span class="comment">// 数据库号码</span></span><br><span class="line">    <span class="keyword">int</span> id;                     <span class="comment">/* Database ID */</span></span><br><span class="line">    <span class="comment">// 数据库的键的平均 TTL ，统计信息</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> avg_ttl;          <span class="comment">/* Average TTL, just for stats */</span></span><br><span class="line"> &#125; redisDb;</span><br></pre></td></tr></table></figure>
+<p><img src="Picture\07.jpg" alt="07"></p>
+<h3 id="过期键的删除策略"><a href="#过期键的删除策略" class="headerlink" title="过期键的删除策略"></a>过期键的删除策略</h3><p>定时删除：在设置键的过期时间的同时，创建一个定时器，在定时结束的时候，将该键删除；</p>
+<p>惰性删除：放任键过期不管，在访问该键的时候，判断该键的过期时间是否已经到了，如果过期时间已经到了，就执行删除操作；</p>
+<p>定期删除：每隔一段时间，对数据库中的键进行一次遍历，删除过期的键。</p>
+<h2 id="Redis的事件模型"><a href="#Redis的事件模型" class="headerlink" title="Redis的事件模型"></a>Redis的事件模型</h2><p>redis处理请求的方式基于<strong>reactor线程模型</strong>，即一个线程处理连接，并且注册事件到IO多路复用器，复用器触发事件以后根据不同的处理器去执行不同的操作。总结以下</p>
+<h3 id="客户端到服务端的请求过程"><a href="#客户端到服务端的请求过程" class="headerlink" title="客户端到服务端的请求过程"></a>客户端到服务端的请求过程</h3><p>远程客户端连接到 redis 后，redis服务端会为远程客户端创建一个 redisClient 作为代理。</p>
+<p>redis 会读取嵌套字中的数据，写入 querybuf 中。</p>
+<p>解析 querybuf 中的命令，记录到 argc 和 argv 中。</p>
+<p>根据 argv[0] 查找对应的 recommand。</p>
+<p>执行 recommend 对应的执行函数。</p>
+<p>执行以后将结果存入 buf &amp; bufpos &amp; reply 中。</p>
+<p>返回给调用方。返回数据的时候，会控制写入数据量的大小，如果过大会分成若干次。保证 redis 的相应时间。</p>
+<p>Redis 作为单线程应用，一直贯彻的思想就是，每个步骤的执行都有一个上限（包括执行时间的上限或者文件尺寸的上限）一旦达到上限，就会记录下当前的执行进度，下次再执行。保证了 Redis 能够及时响应不发生阻塞。</p>
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
+  </article>
+    
+  </div>
 </div>
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
-
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2019/01/18/Network/IO模型/Reactor/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    高性能IO之Reactor模式
-                    
-
-                </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2019/01/17/Database/Redis/Mac 下 Redis 使用/" class="ui tiny button">
-                    
-                    Mac 下 Redis 使用
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
-            
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#Redis-设计与实现"><span>Redis 设计与实现</span></a><ol><li><a href="#前言"><span>前言</span></a></li><li><a href="#数据结构"><span>数据结构</span></a><ol><li><a href="#外层数据结构"><span>外层数据结构</span></a><ol><li><a href="#字符串"><span>字符串</span></a></li><li><a href="#哈希表"><span>哈希表</span></a></li><li><a href="#列表"><span>列表</span></a></li><li><a href="#集合"><span>集合</span></a></li><li><a href="#有序集"><span>有序集</span></a></li></ol></li><li><a href="#底层数据结构"><span>底层数据结构</span></a><ol><li><a href="#SDS-动态字符串"><span>SDS 动态字符串</span></a></li><li><a href="#dict-字典"><span>dict 字典</span></a></li><li><a href="#ziplist-压缩链表"><span>ziplist 压缩链表</span></a></li><li><a href="#quicklist"><span>quicklist</span></a></li><li><a href="#zset"><span>zset</span></a></li><li><a href="#skiplist-跳跃表"><span>skiplist 跳跃表</span></a></li><li><a href="#inset"><span>inset</span></a></li></ol></li><li><a href="#总结"><span>总结</span></a></li></ol></li><li><a href="#RedisDb"><span>RedisDb</span></a><ol><li><a href="#过期键的删除策略"><span>过期键的删除策略</span></a></li></ol></li><li><a href="#Redis的事件模型"><span>Redis的事件模型</span></a><ol><li><a href="#客户端到服务端的请求过程"><span>客户端到服务端的请求过程</span></a></li></ol></li></ol></li><li><a href="#结束"><span>结束</span></a></li></ol>
-                </div>
-
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2019 <a href="/">Skuaka</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a href="http://hexo.io/" target="_blank">Hexo</a>.
-    </div>
-</div>
-
-    </div>
+    <footer class="main-footer">
+  <div class="container">
+    © 2018 
+  </div>
+</footer>
+    
 
 
 
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
+<script src="/./runtime.32f029.js"></script><script src="/./vendor.ec1199.js"></script><script src="/./app.5ed5af.js"></script>
 
 
-
-</body>
+  </body>
 </html>
