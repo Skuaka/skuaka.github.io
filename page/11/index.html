@@ -234,10 +234,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Network/Ccie/bgp" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/交换机基础" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/bgp/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/交换机基础/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -253,7 +253,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/bgp/">CCIE bgp</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/交换机基础/">CCIE 交换机基础</a>
     </h1>
   
 
@@ -263,158 +263,55 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="边界网关路由协议"><a href="#边界网关路由协议" class="headerlink" title="边界网关路由协议"></a>边界网关路由协议</h1><h3 id="BGP简介"><a href="#BGP简介" class="headerlink" title="BGP简介"></a>BGP简介</h3><p>工作类型：路径矢量路由选择协议</p>
-<p>基于tcp(三次握手)</p>
-<p>三张表：邻居表（peer表）  bgp转发表  路由表</p>
-<h4 id="BGP版本"><a href="#BGP版本" class="headerlink" title="BGP版本"></a>BGP版本</h4><p>BGPv4：IPv4</p>
-<p>BGPv4+：IPv6</p>
-<p>MP-BGP：协议npls</p>
-<p>M-BGP：多播</p>
-<h4 id="BGP优缺点"><a href="#BGP优缺点" class="headerlink" title="BGP优缺点"></a>BGP优缺点</h4><p><strong>优点</strong></p>
-<p>1EGP路由表只能存储千条信息，bgp可上万条。</p>
-<p>2丰富的路径属性，13条选路原则，提供了更丰富的路由操控策略。</p>
-<p><strong>缺点</strong></p>
-<p>1对路由器性能要求较高。</p>
-<p>2配置程序比较复杂。</p>
-<p>3一般小网络不建议使用bgp</p>
-<h4 id="AS-和-邻居类型"><a href="#AS-和-邻居类型" class="headerlink" title="AS 和 邻居类型"></a>AS 和 邻居类型</h4><p>bgp AS 一台路由器只能属于一个</p>
-<p>公网AS1-65411    65412-65535私有AS</p>
-<p>iBGP：处于同一AS内的BGP路由器所建立的BGP对等体关系</p>
-<p>eBGP：不同AS内的BGP路由器建立的…</p>
-<p>### </p>
-<h3 id="BGP消息"><a href="#BGP消息" class="headerlink" title="BGP消息"></a>BGP消息</h3><p>open：建立成功，会互相发送open信息(类似hello)协商邻居关系的各项参数，等待对方确认。</p>
-<p>keeplive：维持对等体(类似邻居)关系的建立，60s发一次，180s后peer关系结束</p>
-<p>update：不会周期性更新，只会增量更新或触发更新。</p>
-<p>Notification：当BGP检测到错误状态时，就向对等体发出Notification消息，之后BGP连接会立即中断。</p>
-<h3 id="peer关系建立过程"><a href="#peer关系建立过程" class="headerlink" title="peer关系建立过程"></a>peer关系建立过程</h3><p>IDLE（空闲状态）：本地路由向外发送tcp(端口179)请求，等回复</p>
-<p>connect状态：tcp建立</p>
-<p>active：建立不成功，再次请求tcp连接的建立（回到IDLE）。</p>
-<p>open sent：建立成功，发送open消息</p>
-<p>openconfirm：收到对方的信息进行参数对比，参数一致则建立完成。</p>
-<p>established：连接建立。。update。。keepalive。。</p>
-<h3 id="bgp的防环机制"><a href="#bgp的防环机制" class="headerlink" title="bgp的防环机制"></a>bgp的防环机制</h3><h4 id="iBGP-水平分隔原则"><a href="#iBGP-水平分隔原则" class="headerlink" title="iBGP-水平分隔原则"></a>iBGP-水平分隔原则</h4><p>BGP对等体路由器收到iBGP路由，不会发送给其他iBGP对等体路由器。</p>
-<p>但是纯水平拓扑上该原则会导致路由不被传递学习。两个解决方案</p>
-<p>全互联拓扑解决方案：所有路由器间都建立iBGP关系。（垃圾方案）</p>
-<p>路由反射器解决方案：</p>
-<h4 id="eBGP"><a href="#eBGP" class="headerlink" title="eBGP"></a>eBGP</h4><p>基于AS PATH信息的检测。接收到来自于eBGP peer的路由更新，更新所带AS-PATH 信息包含了当前设备AS号，则该路由更新忽略。</p>
-<h4 id="特殊拓扑下路由反射器的防环机制"><a href="#特殊拓扑下路由反射器的防环机制" class="headerlink" title="特殊拓扑下路由反射器的防环机制"></a>特殊拓扑下路由反射器的防环机制</h4><p>originate id：起源id。路由器将设备的RID设置为起源ID。起源ID和当前设备RID一样，则路由更新不学习。</p>
-<p>cluster id：簇id。管理员在路由反射器上设置，路由更新携带的簇ID一致，则路由更新不学习。</p>
-<h3 id="同步与下一跳判断"><a href="#同步与下一跳判断" class="headerlink" title="同步与下一跳判断"></a>同步与下一跳判断</h3><p>路由更新来自于iBGP peer时才考虑同步和下一跳。</p>
-<h4 id="同步机制"><a href="#同步机制" class="headerlink" title="同步机制"></a>同步机制</h4><p>对于当前启用BGP的设备，路由更新对应的网络底层协议也必须能学习到，这才叫同步。同步是为了避免路由黑洞。</p>
-<p>现实中同步被关闭，路由黑洞问题无法避免，但利用MPLS能解决。</p>
-<h5 id="bgp路由黑洞"><a href="#bgp路由黑洞" class="headerlink" title="bgp路由黑洞"></a>bgp路由黑洞</h5><p>路由更新的传递设备也就是数据传输的沿途设备，并没有参与BGP ，学习该路由，所以数据抵达后，只能丢包。</p>
-<p>解决方法：</p>
-<p>1重分发(不建议，会增大路由表)</p>
-<p>2全互联的网络拓扑(两两之间建立ibgp对等体)</p>
-<h4 id="下一跳判断"><a href="#下一跳判断" class="headerlink" title="下一跳判断"></a>下一跳判断</h4><p>来自于iBGP peer的路由更新，如果下一跳不可达，路由更新不学习。</p>
-<p>路由源于AS外，通告者是eBGP peer，下一跳就是eBGP peer地址。</p>
-<p>路由源于AS外，通告者是iBGP peer，下一跳依旧是eBGP peer地址。此时下一跳可能不可达。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Router bgp &lt;as&gt;</span><br><span class="line">Neighbor &lt;peer-address&gt; next-hop-self</span><br><span class="line">//所有发给对等体的路由更新，下一跳强制修改成自己</span><br></pre></td></tr></table></figure>
-<p>路由源于iBGP peer，通告者是iBGP peer，下一跳就是iBGP peer地址。</p>
-<p>补充内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Neighbor &lt;peer-address&gt; next-hop-unchange</span><br><span class="line">//eBGP 下一跳维持不变</span><br></pre></td></tr></table></figure>
-<h3 id="BGP的路由更新属性"><a href="#BGP的路由更新属性" class="headerlink" title="BGP的路由更新属性"></a>BGP的路由更新属性</h3><ol>
-<li><p>公认必选</p>
-<p>NEXT-HOP：下一跳</p>
-<p>AS-PATH：AS路径信息</p>
-<p>Originate code：起源代码</p>
-<p>​    描述了目标网络进入BGP的方式（I E ?）</p>
-<p>​    I ：目标网络源于底层协议通过network进入BGP</p>
-<p>​    E：EGP共享的目标网络信息</p>
-<p>​    ?：外部路由以重分发的方式进入BGP</p>
-</li>
-<li><p>公认任选（自选）</p>
-<p>LP：本地优先</p>
-<p>​    路由更新在IBGP peer间传递时，LP值才出现，且为100</p>
-<p>​    作用：影响iBGP peer 出站路径的选择，LP参数越大越优。</p>
-<p>automatic aggregate：原子聚合</p>
-<p>​    BGP发生了自动聚合或手动聚合时，聚合后网络携带该属性。</p>
-<p>​    原子聚合属性用于提醒更新接受者，路由更新目标网络可能丢失了部分原有属性。</p>
-</li>
-<li><p>任选可传递</p>
-<p>Aggregated：被聚合属性——聚合后的网络携带的属性，表明该网络是聚合来的。</p>
-<p>Community：团体属性  是携带特定策略的标记</p>
-<p>​    公认团体属性：</p>
-<p>​        Internet：所有的BGP路由默认携带该属性，该属性对应的策略是，共享给所有的BGP peer。</p>
-<p>​        no-export：不导出，携带该属性的路由更新不共享给eBGP peer。</p>
-<p>​        no-advertise：不通告，携带该属性的路由更新不共享给任何BGP peer。</p>
-<p>​        local-as：本地as，携带该属性的路由更新不共享给联盟内其他eBGP peer。</p>
-<p>​    自定义团体属性：</p>
-<p>​        AA:NN</p>
-<p>​        AS号：标记值</p>
-</li>
-<li><p>任选不可传递（属性保留，但值为空）</p>
-<p>MED：多出口距离</p>
-<p>​    eBGP间路由共享携带该属性，MED值用于影响eBGP peer入站路径选择。MED值默认为0，越小越优。</p>
-<p>Originate id、cluster id</p>
-</li>
-</ol>
-<h3 id="BGP选路原则"><a href="#BGP选路原则" class="headerlink" title="BGP选路原则"></a>BGP选路原则</h3><p>选路原则决定了BGP按什么标准进行路由更新属性的比较</p>
-<ol>
-<li><p>优选拥有最高权重值的路径 weight</p>
-<p>用于影响当前路由器出站路径选择</p>
-<p>默认32768，越大越优</p>
-<p>不同类型的对等体出现，需要影响路径抉择，权重更优。</p>
-</li>
-<li><p>优选LP大的</p>
-</li>
-<li><p>优选起源于本地的路径</p>
-<p>next-hop=0.0.0.0</p>
-</li>
-<li><p>优选拥有最短AS-PATH 路径信息的</p>
-</li>
-<li><p>比较Origin属性&lt;IGP优先于EGP优先于Incomplete&gt;</p>
-</li>
-<li><p>优选拥有最佳MED值的</p>
-</li>
-<li><p>eBGP peer 的路径优于 iBGP peer的路径</p>
-</li>
-<li><p>优选离下一跳更近的路径</p>
-</li>
-<li><p>针对eBGP peer的路由，通过命令行允许多条路径，成为最佳进入路由表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">maximun-path &lt;n&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>优选最早被学习的路由，只针对 eBGP peer</p>
-</li>
-<li><p>优选拥有最小RID的BGP peer提供的路由</p>
-</li>
-<li><p>优选拥有最短cluster-id 的路径</p>
-</li>
-<li><p>优选拥有最低peer地址的邻居提供的路径</p>
-</li>
-</ol>
-<h3 id="BGP基本配置"><a href="#BGP基本配置" class="headerlink" title="BGP基本配置"></a>BGP基本配置</h3><p>对等体体必须手动指定，并且指定的地址可达<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">bgp router-id &lt;a.b.c.d&gt; //设置bgp rid</span><br><span class="line">address-family ipv4 unicast //进入 bgpv4</span><br><span class="line"></span><br><span class="line">neighbor &lt;ip&gt; remote-as &lt;对端as号&gt;</span><br><span class="line">neighbor &lt;ip&gt; updat-source lo0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">以环回口建立ebgp对等体关系时，必须指定ebgp多跳，两端都要设置。</span><br><span class="line"></span><br><span class="line">nei ip ebgp-multihop 1-255(默认255)</span><br><span class="line"></span><br><span class="line">内部条目通过宣告或重分发</span><br><span class="line"></span><br><span class="line">bgp宣告的条目可以是本地直连网段，也可以是通过igp协议所学到的网段带入所得。</span><br><span class="line"></span><br><span class="line">net ip mask 子网掩码</span><br><span class="line"></span><br><span class="line">宣告的ip必须在本地路由表内存在，否则宣告不出去。</span><br><span class="line"></span><br><span class="line">sh ip bgp查看bgp表</span><br><span class="line"></span><br><span class="line">路由反射器(常在ibgp内启用)</span><br><span class="line"></span><br><span class="line">nei ip route-reflection-client</span><br><span class="line"></span><br><span class="line">做路由反射器的设备叫RR路由器</span><br><span class="line"></span><br><span class="line">next-hop-self下一跳是自己</span><br><span class="line"></span><br><span class="line">特权模式 clear ip bgp *      硬清除</span><br><span class="line"></span><br><span class="line">                 clear ip bgp * soft 软清除</span><br><span class="line"></span><br><span class="line">AS欺骗，用于EBGP之间，不能ibgp之间。</span><br><span class="line"></span><br><span class="line">AS重写。as-override来自于同一as的路由不接收。</span><br><span class="line"></span><br><span class="line">bgp 7.25</span><br><span class="line"></span><br><span class="line">聚合(类似于汇总)</span><br><span class="line"></span><br><span class="line">aggregate-address +网段 +子网掩码 +(summary-only)</span><br><span class="line"></span><br><span class="line">只能聚合学习到的，起源于本地的路由无法聚合。</span><br><span class="line"></span><br><span class="line">用对等体组建立bgp对等体关系</span><br><span class="line"></span><br><span class="line">1. nei 名字 peer-group</span><br><span class="line"></span><br><span class="line">         …一系列共同操作…</span><br><span class="line"></span><br><span class="line">1. nei Rid peer-group 名字</span><br></pre></td></tr></table></figure></p>
-<h3 id="自动汇总-auto-summary"><a href="#自动汇总-auto-summary" class="headerlink" title="自动汇总 auto-summary"></a>自动汇总 auto-summary</h3><p>自动汇总用来设定BGP宣告是精确还是不精确的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10.1.1.0/24</span><br><span class="line">RIP: network 1.0.0.0</span><br><span class="line">EIGRP OSPF ISIS: 10.1.1.0 0.0.0.255</span><br></pre></td></tr></table></figure>
-<p>auto-summary 关闭的情况下，BGP 处于精确宣告状态</p>
-<p>auto-summary 开启的情况下，BGP 处于非精确宣告状态</p>
-<p>被宣告的网络只要拥有本地对应的子网，被宣告网络就可以当做更新发送出去。</p>
-<p>针对外部路由，auto-summary 开启，外部路由自动汇总，否则外部路由就明细进入。</p>
-<h3 id="路由更新属性"><a href="#路由更新属性" class="headerlink" title="路由更新属性"></a>路由更新属性</h3><h4 id="如何修改路由更新属性-三个步骤"><a href="#如何修改路由更新属性-三个步骤" class="headerlink" title="如何修改路由更新属性(三个步骤)"></a>如何修改路由更新属性(三个步骤)</h4><ol>
-<li><p>抓取被修改路由更新属性的目标网络</p>
-<ul>
-<li>利用ACL抓取</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip access-list stand &lt;name&gt;</span><br><span class="line">permit &lt;x.x.x.x&gt; &lt;x.x.x.x&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>前缀列表 prefix-list</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip prefix-list &lt;编号&gt; &lt;permit/deny&gt; &lt;x.x.x.x/8&gt; [le &lt;xx&gt;/ge &lt;xx&gt;]</span><br><span class="line">//  其中/8是通配符</span><br><span class="line">//  le 与 ge 后面是前缀长度</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>利用路由映射调用 acl 或prefix-list 完成属性修改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">route-map [name] [permit/deny] &lt;策略编号：默认10&gt;</span><br><span class="line">//这里的permit有两个作用：</span><br><span class="line">//	1. 在BGP里面，permit的网络被当做更新发送，deny的网络是被过滤的。</span><br><span class="line">//  2. 在非BGP里，permit含义是关注且执行策略，deny是不关注、不执行策略。</span><br><span class="line">//  route-map 创建后，有一个隐藏的 deny all</span><br><span class="line">match ip address &lt;ack-id&gt; //调用ACL</span><br><span class="line">match ip address prefix &lt;id&gt; //调用前缀列表</span><br><span class="line">set &lt;xxxxxx&gt; //设置路由更新属性</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>BGP里引用 route-map</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as&gt;</span><br><span class="line">neighbor &lt;a.b.c.d&gt; route-map &lt;name&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="weight-修改命令"><a href="#weight-修改命令" class="headerlink" title="weight 修改命令"></a>weight 修改命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;xx&gt;</span><br><span class="line">neighbor &lt;peer-address&gt; weight &lt;xxxx&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="通过-LP-影响出站路径"><a href="#通过-LP-影响出站路径" class="headerlink" title="通过 LP 影响出站路径"></a>通过 LP 影响出站路径</h4><h4 id="通过增加-AS-PATH-路径信息影响选路"><a href="#通过增加-AS-PATH-路径信息影响选路" class="headerlink" title="通过增加 AS-PATH 路径信息影响选路"></a>通过增加 AS-PATH 路径信息影响选路</h4><p>只有 eBGP peer 间该属性才能修改，当前路由器只关心 AS-PATH 的长短，不关心是否作用于 eBGP或 iBGP</p>
-<p>！！注意</p>
-<p>AS-PATH 信息的附加 in 和out 是不一样的</p>
-<p>1 i out方向附加666，就变成 1 666i</p>
-<p>1 i in  方 向附加666，就变成 666 1</p>
-<h4 id="通过修改起源代码"><a href="#通过修改起源代码" class="headerlink" title="通过修改起源代码"></a>通过修改起源代码</h4><h4 id="通过修改MED影响选路抉择"><a href="#通过修改MED影响选路抉择" class="headerlink" title="通过修改MED影响选路抉择"></a>通过修改MED影响选路抉择</h4><h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+        <h3 id="交换机基础"><a href="#交换机基础" class="headerlink" title="交换机基础"></a>交换机基础</h3><p>泛洪：除接收端口外，所有端口都向外去发。</p>
+<p>mac地址表=cam表</p>
+<p>广播域：所能传播的最大范围</p>
+<p>冲突域：发生冲突之后所影响的范围</p>
+<p>CSMA/CD：载波帧听多链路访问</p>
+<p>交换机指示灯：</p>
+<p>绿色常亮：接口两端没有问题，但是当前没有数据从中通过</p>
+<p>绿色不停地闪：正在传输数据</p>
+<p>橘红色慢闪：端口没问题,对端线路或者对端的端口有问题</p>
+<p>橘红色快闪：端口和对端连接没有问题，正在协商参数建立</p>
+<p>黄色闪动：物理接口有问题，尝试重启。</p>
+<p>不闪：    物理接口有问题，无法通信</p>
+<p>vlan（虚拟局域网） </p>
+<p>作用：分隔广播域</p>
+<p>所有接口默认属于vlan1（默认vlan，不可删除）。</p>
+<p>vlan ID范围和解释</p>
+<p>\1. 0和4095 仅仅限于系统使用 用户不能查看和使用</p>
+<p>\2. 1 正常 cisco默认的vlan,用户可以使用但是不能删除</p>
+<p>\3. 2–1001 正常 用于以太网的VLAN，用户可以创建。使用。删除。</p>
+<p>\4. 1002–1005 正常 用于FDDI和令牌环的CISCO默认VLAN，用户不能删除</p>
+<p>\5. 1006–1024 保留 仅仅限于系统使用。用户不能查看和使用。</p>
+<p>\6. 1025–4094 扩展 仅仅用于以太网VLAN</p>
+<p>Trunk 干道协议（必须两端都设置）</p>
+<p>isl 思科私有协议，目前思科也不采用。通过再封装工作。</p>
+<p>802.1q tag插入帧头</p>
+<p>switchport trunk encapsulation dot1q</p>
+<p>switchport mode trunk</p>
+<p>access</p>
+<p>int xx</p>
+<p>sw mode acc</p>
+<p>sw acc vlan xx</p>
+<p>本帧vlan（native vlan）（属于802.1q）</p>
+<p>默认为1，一般不建议修改；若要修改，保持本网络中交换机上本帧vlan设置一致。</p>
+<p>sw tr na vl xx</p>
+<p>trunk下vlan流量过滤</p>
+<p>switchport trunk allowed vlan 1-9,11-4094</p>
+<p>vtp（虚拟传输协议）</p>
+<p>用于同步同一网络中交换机上网络的信息（减小庞大的配置量）</p>
+<p>生效的前提：trunk正常工作</p>
+<p>vtp mode sever/client/transparent</p>
+<p>服务器：NVRAM（可寄存性存储器）创建、修改、维护、传递、删除、同步vlan信息</p>
+<p>客户端：RAM(重启后要重新同步） 传递、同步vlan信息</p>
+<p>透明模式：NARAM 和服务器一样除了不同步，并且本地创建、修改、维护、删除的vlan    信息只在本地有效。</p>
+<p>sh int tr确保生效</p>
+<p>vtp domain 域名</p>
+<p>vtp mode xxx（默认为sever）</p>
+<p>sh vtp status</p>
+<p>其中Configuration Revision（配置修订号）（类似书的修订号，修改一次增加一次，不能减小）越大越好，同步大的。加入新的交换机时可用透明模式先测试。</p>
+
       
     </div>
     

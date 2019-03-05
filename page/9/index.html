@@ -1651,10 +1651,10 @@
 
 
   
-    <article id="post-Network/Ccie/BGP 补充知识" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/IPSEC VPN" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/BGP 补充知识/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/IPSEC VPN/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1670,7 +1670,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/BGP 补充知识/">CCIE BGP 补充知识</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/IPSEC VPN/">CCIE IPSEC VPN</a>
     </h1>
   
 
@@ -1680,45 +1680,102 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="BGP-的路由更新过滤"><a href="#BGP-的路由更新过滤" class="headerlink" title="BGP 的路由更新过滤"></a>BGP 的路由更新过滤</h3><p>route-map、prefix-list、filter-list（筛选列表）</p>
-<h4 id="利用-route-map"><a href="#利用-route-map" class="headerlink" title="利用 route-map"></a>利用 route-map</h4><p>可以是 in 方向，也可以是 out 方向。</p>
-<p>route-map 有隐藏的 deny all。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">access-list 10 permit 10.1.1.0 0.0.0.255</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 permit 20 //route-map的permit是放行更新</span><br><span class="line">	//route-map如果不写如何match语句，意思是匹配所有</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor 10.1.1.2 route-map R1 out</span><br></pre></td></tr></table></figure>
-<h4 id="利用-prefix-list"><a href="#利用-prefix-list" class="headerlink" title="利用 prefix-list"></a>利用 prefix-list</h4><p>route-map 不光可以完成过滤，还可以对放行的网络设置策略。</p>
-<p>prefix-list 只能完成过滤。</p>
-<p>prefix-list 也有默认的 deny all。</p>
-<p>prefix-list 的放行所有 <code>ip prefix-list x permit 0.0.0.0/0</code></p>
-<h4 id="利用-正则表达式"><a href="#利用-正则表达式" class="headerlink" title="利用 正则表达式"></a>利用 正则表达式</h4><p>正则表达式匹配击中的是 AS 路径信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_ 代表 空格</span><br><span class="line">^ 代表 正则表达式的开始</span><br><span class="line">$ 代表 正则表达式的结束</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_2_ ：抓取任意起源、任意结尾，但经过 AS2 的路由更新。</span><br><span class="line">^1$ ：抓取AS1内的所有路由。</span><br><span class="line">_1$ ：抓取起源于AS1，经过其他任意AS的所有路由。 </span><br><span class="line">^4_ ：抓取AS4共享给当前设备的路由。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route-map AS permit 10</span><br><span class="line">match ip address 10</span><br><span class="line">set as-pasth prepend 3 5</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip as-path access-list 1 permit _4_</span><br><span class="line">router bgp 2</span><br><span class="line">neighbor 12.12.12.1 filter-list 1 in</span><br></pre></td></tr></table></figure>
-<p>放行所有：<code>ip as-path &lt;id&gt; permit _</code></p>
-<h3 id="BGP-的公认团体属性限制路由更新的发送"><a href="#BGP-的公认团体属性限制路由更新的发送" class="headerlink" title="BGP 的公认团体属性限制路由更新的发送"></a>BGP 的公认团体属性限制路由更新的发送</h3><p>路由更新携带 no-advertise，路由更新被接收后不发送给任何 BGP peer。</p>
-<p>路由更新携带 no-export 或 local-as，路由更新被接收后不发送给任何 eBGP peer。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">route-map COMM permit 10</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;no-advertise/no-export/local-as&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; route-map COMM out</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
-<p>查看BGP转发表中携带特定团体属性的路由更新<code>show ip bgp community &lt;no-export/no-advertise&gt;</code></p>
-<h3 id="BGP-自定义团体属性标记及策略设置"><a href="#BGP-自定义团体属性标记及策略设置" class="headerlink" title="BGP 自定义团体属性标记及策略设置"></a>BGP 自定义团体属性标记及策略设置</h3><p>自定义团体属性格式：</p>
-<p>AA：NN（AA 是 AS 号，NN 是标记值 0~65440）</p>
-<h4 id="自定义团体属性的配置步骤"><a href="#自定义团体属性的配置步骤" class="headerlink" title="自定义团体属性的配置步骤"></a>自定义团体属性的配置步骤</h4><p>步骤1：更新源处打上标记</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ACL 抓取网络</span><br><span class="line">!</span><br><span class="line">route-map &lt;name&gt; permit &lt;10&gt;</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;aa:nn&gt;</span><br><span class="line">!</span><br><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; send-community</span><br></pre></td></tr></table></figure>
-<p>步骤2：在更新接收者匹配团体属性，并且定义不同的策略</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ip community-list &lt;id&gt; permit &lt;aa:nn&gt; //团体属性列表，匹配特定团体属性更新</span><br><span class="line">route-map &lt;name&gt; permit 10</span><br><span class="line">match community &lt;id&gt;</span><br><span class="line">set &lt;策略&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br></pre></td></tr></table></figure>
-<p>所有需要传递团体属性的路由器都需要录入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip bgp-community new-format</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
-<h3 id="BGP-联邦"><a href="#BGP-联邦" class="headerlink" title="BGP 联邦"></a>BGP 联邦</h3><p>把多个 AS 融入到一个联邦中，联邦中不同 AS 的路径信息，不会泄露出去。</p>
-<p>联邦内所有设备必须声明联邦号，联邦内 eBGP 还要声明是联邦内 eBGP peer。</p>
-<p><code>bgp confederation identifier 234</code></p>
-<p><code>bgp confederation peer 4</code></p>
-<h3 id="BGP-知识点"><a href="#BGP-知识点" class="headerlink" title="BGP 知识点"></a>BGP 知识点</h3><p>BGP 同步，BGP 下一跳判断。</p>
-<p>BGP eBGP peer 多跳</p>
-<p>BGP 选路原则、利用 route-map 影响</p>
-<p>BGP 的汇总 summary-only as-set</p>
-<p>BGP 的团体属性</p>
-<p>BGP 的过滤</p>
-<p>BGP 路由反射器</p>
-<p>BGP 联邦</p>
-
+        <h2 id="IPSEC-VPN"><a href="#IPSEC-VPN" class="headerlink" title="IPSEC VPN"></a>IPSEC VPN</h2><p>Ip security vpn，是一个工作在网络层的 VPN 技术。</p>
+<h3 id="数据在公共网络上面临的风险"><a href="#数据在公共网络上面临的风险" class="headerlink" title="数据在公共网络上面临的风险"></a>数据在公共网络上面临的风险</h3><ol>
+<li>不加密，明文传递</li>
+<li>没有完整性保护，数据容易被篡改</li>
+<li>没有对等体认证，容易受到中间人攻击</li>
+<li>抵赖</li>
+</ol>
+<h3 id="IPSEC-VPN-解决的问题"><a href="#IPSEC-VPN-解决的问题" class="headerlink" title="IPSEC VPN 解决的问题"></a>IPSEC VPN 解决的问题</h3><ol>
+<li><p>对等体认证，数据发送之前必须经过认证且通过</p>
+<p>口令认证、数字证书（计算机世界的身份证）、加密随机数</p>
+</li>
+<li><p>数据加密</p>
+<p>des、3des、aes</p>
+</li>
+<li><p>数据完整性保护</p>
+<p>HMAC：哈希消息认证码</p>
+</li>
+<li><p>数字签名，防抵赖</p>
+<p>DSA（RSA 公司开发）</p>
+</li>
+</ol>
+<h3 id="KEY：密匙"><a href="#KEY：密匙" class="headerlink" title="KEY：密匙"></a>KEY：密匙</h3><p>KEY 是一个工具，可以参与算法作为变量出现，也可以参与认证作为口令出现。</p>
+<h4 id="对称密钥、非对称密钥"><a href="#对称密钥、非对称密钥" class="headerlink" title="对称密钥、非对称密钥"></a>对称密钥、非对称密钥</h4><p>（加密算法中的 KEY 的理解）</p>
+<ol>
+<li><p>对等密钥及对称密钥加密算法</p>
+<p>加密解密密钥是同一把</p>
+<p><strong>坏处</strong>：不够安全、Key 的共享存在风险</p>
+<p><strong>好处</strong>：简单高效</p>
+</li>
+<li><p>非对称密钥及非对称密钥算法</p>
+<p>非对称密钥是一对KEY，公钥和密钥。</p>
+<p>公钥最后会公开，密钥不公开。</p>
+<p>公钥加密的数据，只有私钥可以解开。</p>
+<p>私钥加密的数据，只有公钥可以解开。</p>
+<p><strong>坏处</strong>：复杂，数据会变庞大</p>
+<p><strong>好处</strong>：安全可靠</p>
+</li>
+</ol>
+<h4 id="IPSEC-VPN-的加密密钥"><a href="#IPSEC-VPN-的加密密钥" class="headerlink" title="IPSEC VPN 的加密密钥"></a>IPSEC VPN 的加密密钥</h4><p>非对称密钥共享是用对称密钥及算法保护</p>
+<p>数据本身是用非对称密钥及算法保护</p>
+<h4 id="密钥产生过程和共享方法"><a href="#密钥产生过程和共享方法" class="headerlink" title="密钥产生过程和共享方法"></a>密钥产生过程和共享方法</h4><p>DH 算法负责产生密钥和共享密钥</p>
+<h3 id="IPSEC-VPN-的关键组件"><a href="#IPSEC-VPN-的关键组件" class="headerlink" title="IPSEC VPN 的关键组件"></a>IPSEC VPN 的关键组件</h3><p>ISAKMP：互联网安全关联密钥管理协议</p>
+<ul>
+<li><p>ISA：通讯双方建立了安全连接就叫做一个 SA 成功了。</p>
+<p>IPSEC VPN 的 SA 有两个：一个是保护 VPN 的，一个是保护数据的。</p>
+</li>
+<li><p>KMP：KMP 是通过 IKE（互联网密钥交换机制）完成的，IKE 专门负责产生密钥，共享密钥。</p>
+<p>IKE 分两个阶段：阶段1产生和共享VPN自身所需的密钥，阶段2利用阶段1的密钥算出新密钥，用于保护用户数据。</p>
+</li>
+</ul>
+<h3 id="IPSEC-VPN-配置流程"><a href="#IPSEC-VPN-配置流程" class="headerlink" title="IPSEC VPN 配置流程"></a>IPSEC VPN 配置流程</h3><p>IOS 中必须带 K9 字样，才支持加密算法： <code>show version</code></p>
+<p>步骤1：开启 ISAKMP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp enable</span><br></pre></td></tr></table></figure>
+<p>步骤2：配置 IPSEC VPN 策略1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crypto policy &lt;seq&gt;</span><br><span class="line">authentication &lt;pre-share/rsa&gt; //认证方式</span><br><span class="line">hash &lt;md5/sha&gt; //定义完整性保护算法</span><br><span class="line">group &lt;1/2/5&gt; //定义 DH 算法等级</span><br><span class="line">encryption &lt;des/3des/aes&gt; //定义加密算法</span><br><span class="line">lifetime &lt;xxs&gt; //定义生命周期</span><br></pre></td></tr></table></figure>
+<p>步骤3：配置 IPSEC VPN peer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp key 0 &lt;口令&gt; address &lt;peer-address&gt; //对等体地址必须可达</span><br></pre></td></tr></table></figure>
+<p>步骤4：配置感兴趣流，告诉 VPN 保护什么流量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list permit ip &lt;源&gt; &lt;目的&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤5：配置转换集定义数据加密方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto ipsec trans &lt;name&gt; &lt;加密算法&gt; &lt;完整性保护算法&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤6：定义加密映射，将数据加密转换集、对等体、感兴趣流绑定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crypto map &lt;名字&gt; &lt;序列号&gt; ipsec-isakmp</span><br><span class="line">set peer &lt;peer-address&gt; //设置对等体地址</span><br><span class="line">match address &lt;acl-id&gt; //匹配感兴趣流</span><br><span class="line">trans-set &lt;转换集名称&gt; //设置转化集</span><br></pre></td></tr></table></figure>
+<p>步骤7：应用加密映射（只能用在发送流量的接口）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">crypto map &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤8：查看命令</p>
+<p>查看数据是否被加密<code>show crypto engine connections active</code></p>
+<h3 id="ESP-和-AH"><a href="#ESP-和-AH" class="headerlink" title="ESP 和 AH"></a>ESP 和 AH</h3><p>ESP 和 AH 都是 VPN 头部信息的缩写</p>
+<p>帧头、包头、段头、数据、帧尾</p>
+<p>数据经历 VPN 保护后变化成如下：</p>
+<p>帧头、VPN 头、包头、段头、数据、帧尾</p>
+<p>VPN 头就分两种：</p>
+<ol>
+<li><p>ESP：封装安全静荷</p>
+<p>该头负责保护数据的完整性，同时加密数据</p>
+</li>
+<li><p>AH：认证头</p>
+<p>该头只负责保护数据完整性，不加密数据</p>
+</li>
+</ol>
+<h3 id="IPSEC-VPN-的模式"><a href="#IPSEC-VPN-的模式" class="headerlink" title="IPSEC VPN 的模式"></a>IPSEC VPN 的模式</h3><ol>
+<li><p>隧道模式（tunnel）</p>
+<p>VPN 网关通过一个隧道模式的 VPN 连接，保护身后所有的通讯数据。</p>
+</li>
+<li><p>传输模式（transport）</p>
+<p>通讯双方自身建立 VPN 连接，保护通讯数据。</p>
+</li>
+</ol>
+<p><strong>区别</strong>：</p>
+<p>隧道模式的新包头，目的 IP 和源 IP 是 VPN 的对等体地址。</p>
+<p>传输模式的新包头，目的 IP 和源 IP 复制了原有的 IP 地址。</p>
+<h3 id="NAT-对-IPSEC-VPN-的影响"><a href="#NAT-对-IPSEC-VPN-的影响" class="headerlink" title="NAT 对 IPSEC VPN 的影响"></a>NAT 对 IPSEC VPN 的影响</h3><p>VPN 流量几乎永远是先被 inside 接口接收，所以 NAT 会直接修改 IP 包头，导致 VPN 无法识别感兴趣流。</p>
+<p>解决方案</p>
+<p>NAT 配置的时候不要使用标准 ACL，用扩展 ACL，书写方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access-list 100 deny ip 10.5.5.0 0.0.0.255 10.7.7.0 0.0.0.255</span><br><span class="line">access-list 100 permit ip 10.5.5.0 0.0.0.255 any</span><br><span class="line">ip nat inside source list 100 interface e0/2 overload</span><br></pre></td></tr></table></figure>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     
