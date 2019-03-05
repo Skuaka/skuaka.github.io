@@ -1421,10 +1421,10 @@
 
 
   
-    <article id="post-Network/Ccie/路由协议分类" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/路由协议分类/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1440,7 +1440,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
     </h1>
   
 
@@ -1450,32 +1450,33 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="路由协议作用"><a href="#路由协议作用" class="headerlink" title="路由协议作用"></a>路由协议作用</h3><ol>
-<li>网络信息共享</li>
-<li>最佳路径的计算</li>
-<li>路由策略</li>
-</ol>
-<h3 id="路由协议分类"><a href="#路由协议分类" class="headerlink" title="路由协议分类"></a>路由协议分类</h3><ol>
-<li><p>应用场景</p>
-<ul>
-<li>as内  IGPS（RIP、EIGRP、OSPF、IS-IS）EGPS（BGP）</li>
-<li>as间</li>
-</ul>
-</li>
-<li><p>度量值metric计算/路径择优标准</p>
-<ul>
-<li><p>DV距离矢量：RIP</p>
-</li>
-<li><p>高级DV：EIGRP  接口五个参数 k1带宽 k2负载 k3延迟 k4可靠性 k5最大传输单元MTU</p>
-<p>EIGRP的距离/跳数和RIP一样发送时+1，用来限制扩散距离。</p>
-</li>
-<li><p>链路状态 LInk State：OSPF、IS-IS  </p>
-</li>
-<li><p>距离向量：BGP</p>
-</li>
-</ul>
-</li>
-</ol>
+        <p>重分发 </p>
+<p>将不同路由协议转化</p>
+<p>1直连进路由选择协议</p>
+<p>redistribute connect metric 1</p>
+<p>2其他路由选择协议进rip</p>
+<p>router rip</p>
+<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
+<p>3其他路由选择协议进eigrp</p>
+<p>router eigrp 100</p>
+<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
+<p>4其他进ospf</p>
+<p>router os 1</p>
+<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
+<p>默认OE2</p>
+<p>将oe2改成oe1:</p>
+<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
+<p>重分发流量控制</p>
+<p>acl</p>
+<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
+<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
+<p>将acl抓去到的流量给route-map</p>
+<p>route-map +名字 +permit/deny </p>
+<p>优先级10(默认优先级) </p>
+<p>match ip address +acl编号</p>
+<p>route-map也默认deny所有流量</p>
+<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
+<p>re rip router-map ccie metric ……</p>
 
       
     </div>
@@ -1510,10 +1511,10 @@
 
 
   
-    <article id="post-Network/Ccie/ipv6" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/防火墙" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/ipv6/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/防火墙/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1529,7 +1530,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/ipv6/">CCIE ipv6</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/防火墙/">CCIE 防火墙</a>
     </h1>
   
 
@@ -1539,389 +1540,291 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>128位 8段x16</p>
-<h3 id="地址分类"><a href="#地址分类" class="headerlink" title="地址分类"></a>地址分类</h3><ol>
-<li><p>单播地址</p>
-<p>全球可聚合单播地址(公网</p>
-<p>2000:0000……～3fff:ffff……   1/8</p>
-<p>站点本地单播地址(私有</p>
-<p>fec0::/10</p>
-<p>链路本地单播地址(mac</p>
-<p>自动生成，该地址不能被传递，只在该   段链路有效。</p>
-<p>fe80::/10</p>
+        <h1 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h1><h2 id="防火墙的分类"><a href="#防火墙的分类" class="headerlink" title="防火墙的分类"></a>防火墙的分类</h2><p>硬件防火墙：流量的省查及访问的控制：保护的是网络</p>
+<p>软件防火墙：省查木马或病毒：保护的是系统</p>
+<p>应用防火墙：WAF（WEB 应用防火墙）、APP 防火墙</p>
+<h3 id="硬件防火墙"><a href="#硬件防火墙" class="headerlink" title="硬件防火墙"></a>硬件防火墙</h3><p>checkpoint（诺基亚）</p>
+<p>netscreen（詹博、Juniper）</p>
+<p>PIX、ASA（Cisco）SDN（安全自防御网络、软件定义的网络）</p>
+<p>华为、天融信</p>
+<h4 id="硬件防火墙的部署"><a href="#硬件防火墙的部署" class="headerlink" title="硬件防火墙的部署"></a>硬件防火墙的部署</h4><p>网络的边缘部署防火墙，一般放在 PPPOE 拨号设备的身后，关键节点之间。</p>
+<h2 id="防火墙的基础知识"><a href="#防火墙的基础知识" class="headerlink" title="防火墙的基础知识"></a>防火墙的基础知识</h2><h3 id="防火墙工作模式"><a href="#防火墙工作模式" class="headerlink" title="防火墙工作模式"></a>防火墙工作模式</h3><p>路由模式：（默认模式）防火墙读取 IP 包头，进行网络层的保护，支持动态路由协议和静态路由。</p>
+<p>交换模式：</p>
+<h3 id="防火墙的多模式和单模式"><a href="#防火墙的多模式和单模式" class="headerlink" title="防火墙的多模式和单模式"></a>防火墙的多模式和单模式</h3><p>多模式支持虚拟防火墙，即把一台防火墙配置成多台逻辑防火墙。</p>
+<p>单模式是默认模式。</p>
+<h3 id="防火墙接口的类型"><a href="#防火墙接口的类型" class="headerlink" title="防火墙接口的类型"></a>防火墙接口的类型</h3><p>inside：内部接口</p>
+<p>通常连接的是信任网络即内网</p>
+<p>outside：外部接口</p>
+<p>通常连接的是非信任公共网络，比如 ISP 或 其他组织网络</p>
+<h3 id="DMZ：非军事区域"><a href="#DMZ：非军事区域" class="headerlink" title="DMZ：非军事区域"></a>DMZ：非军事区域</h3><p>通常数据中心放在 DMZ 区域</p>
+<h3 id="防火墙接口等级和访问规则"><a href="#防火墙接口等级和访问规则" class="headerlink" title="防火墙接口等级和访问规则"></a>防火墙接口等级和访问规则</h3><p>inside 接口安全等级：100</p>
+<p>outside 接口安全等级：0</p>
+<p>DMZ 接口安全等级：50、0</p>
+<p>高等级接口接收流量穿越防火墙从低等级接口发送出去，必须经过 NAT。</p>
+<p>低等级接口接收流量穿越防火墙从高等级接口发送出去，默认不允许。</p>
+<p>除非是返回流量或被管理员手动放行。</p>
+<p>相同安全级别的接口相互通讯，默认不允许通讯，除非管理员放行。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li>查看接口<code>show interface ip brief</code></li>
+</ol>
+<ol start="2">
+<li></li>
+</ol>
+<ol start="3">
+<li>查看特定配置`show run</li>
+</ol>
+<ol start="4">
+<li><p>查看转换表： <code>show xlate</code></p>
 </li>
-<li><p>组播地址</p>
-<p>ff00::/10</p>
+<li><p>配置接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">nameif &lt;inside/outside/dmz/other&gt; //接口命名，必须做，不然接口不工作</span><br><span class="line">security-level &lt;100/0/other&gt;  //设置防火墙接口安全等级</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br><span class="line">no shutdown</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>任播地址</p>
-<p>地址目前还在用全球可聚合单播地址，类似于组播地址，选择最近的地址发送，只发送一个地方。</p>
-<p>前48位为公网拓扑，统一分配；</p>
-<p>后16位为子网拓扑，可自定义；</p>
-<p>剩下64位为主机位。</p>
+<li><p>注入静态路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route &lt;接口名&gt; &lt;目标网络&gt; &lt;掩码&gt; &lt;下一跳地址&gt;</span><br><span class="line">//route outside 0.0.0.0 0.0.0.0 202.1.1.1</span><br><span class="line">//outside 接口作为缺省路由的出口，下一跳为 202.1.1.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>防火墙上配置 ACL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">access-list &lt;ACL-name&gt; &lt;extended/standard&gt; &lt;permit/deny&gt; &lt;协议名字&gt; any any</span><br><span class="line">access-group &lt;ACL-name&gt; &lt;in/out&gt; interface &lt;intf-name&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>防火墙上配置 NAT</p>
+<ol>
+<li><p>创建对象网络，添加允许转化的内网信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object network &lt;INSIDE&gt;</span><br><span class="line">subnet &lt;10.1.1.0 255.255.255.0&gt;</span><br></pre></td></tr></table></figure>
+<p>防火墙可以创建多个对象网络，一个对象网络对应到一个部门。</p>
+</li>
+<li><p>创建对象组，将对象网络关联并且设置 NAT 转化语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object-group network &lt;G&gt;</span><br><span class="line">network-object object &lt;INSIDE&gt;</span><br><span class="line">network-object object &lt;DMZ&gt;</span><br><span class="line">nat (inside,outside) source dynamic G interface</span><br><span class="line">nat (DMZ,outside) source dynamic G interface</span><br></pre></td></tr></table></figure>
+<p>！！补充知识</p>
+<p>NAT：网络地址转换</p>
+<p>静态 NAT：管理员指定的一对一转化</p>
+<p>动态 NAT：路由器自动的完成一对一转化</p>
+<p>端口 NAT：PAT 多对一的转化，利用端口号区分开</p>
+<p>！！注意</p>
+<p>防火墙默认不允许 PING 包流量从低等级接口穿越防火墙抵达高等级接口。</p>
+</li>
+<li><p>内网服务发布到外网</p>
+<ol>
+<li><p>定义对象网络，把服务器地址放入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object network &lt;TELNET&gt;</span><br><span class="line">host &lt;服务器地址&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完成静态 NAT 的配置发布服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nat (dmz,outside) static &lt;公网地址&gt; service tcp &lt;目标端口号&gt;</span><br><span class="line">//公网地址不是 ASA outside 接口地址，是额外申请的</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用 ACL 放行来自外网主动访问内网服务的流量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list &lt;acl-name&gt; extended permit tcp any host 10.2.2.2 eq 23</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="地址书写规则"><a href="#地址书写规则" class="headerlink" title="地址书写规则"></a>地址书写规则</h3><ol>
-<li>完整书写</li>
-<li>简化方式    1.）连续存在的0可以::代替，但一个地址当中只能用一次。2）段中的0若在左边可不写，但是四个都为0还是要写一个0</li>
-<li>嵌入式  X:X:X:X:X:X:d.d.d.d                                 ::FFFF:192.168.0.1</li>
-</ol>
-<p>使用浏览器连接到IPv6设备的http链接时，必须使用方括号括起（与IPv4的冒号区分开来）</p>
-<p>http://[::]/default.html</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
-<li><p>接口ip的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(config)#ipv6 unicast-routing </span><br><span class="line"></span><br><span class="line">开启ipv6单播路由功能。</span><br><span class="line"></span><br><span class="line">interface xx</span><br><span class="line"></span><br><span class="line">ipv6 address 2001：:1/64 不能写掩码</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>协议的启用</p>
-<p>不能使用宣告，只能在接口下启用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipv6 router [IGP] </span><br><span class="line">int xx</span><br><span class="line">ipv6 rip enable</span><br><span class="line">ipv6 ospf x area x</span><br><span class="line">ipv6 eigrp x </span><br><span class="line">router ospfv3 进程id</span><br><span class="line">int xx</span><br><span class="line">ospfv3 进程 area xx</span><br><span class="line">ipv6 router 目的地网段 /x 出接口</span><br><span class="line">router bgp xx</span><br><span class="line">address-family ipv6 unicast</span><br><span class="line">nei xxxx remot-as xx</span><br><span class="line">net xxxx /xx(只有bgp要宣告)</span><br><span class="line">可使用ipv4地址激活ipv6的对等体关系，反之不行。</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="v6和v4的过渡融合"><a href="#v6和v4的过渡融合" class="headerlink" title="v6和v4的过渡融合"></a>v6和v4的过渡融合</h3><p>隧道技术 tunnel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tunnel source ip</span><br><span class="line">tunnel destination ip</span><br><span class="line">tunnel mode ipv6</span><br><span class="line"></span><br><span class="line">ping ipv6 …</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/逻辑子接口" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/逻辑子接口/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="路由器主接口创建逻辑子接口"><a href="#路由器主接口创建逻辑子接口" class="headerlink" title="路由器主接口创建逻辑子接口"></a>路由器主接口创建逻辑子接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt; //进入主接口</span><br><span class="line">no sh</span><br><span class="line">interface &lt;intf-id.子接口编号&gt; //创建逻辑子接口</span><br><span class="line">encapsulation dot1q &lt;vlan ID&gt; //指定逻辑子接口接收带有特定vlan标记的流量</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/网络知识总结" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/网络知识总结/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/网络知识总结/">CCIE 网络知识总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="网络知识总结"><a href="#网络知识总结" class="headerlink" title="网络知识总结"></a>网络知识总结</h1><p><strong>分类</strong></p>
-<p>交换、路由、路由策略、远程接入、网络安全。</p>
-<p>企业级、园区级、运营商级。</p>
-<h2 id="交换"><a href="#交换" class="headerlink" title="交换"></a>交换</h2><h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><p>企业级</p>
-<ul>
-<li>原理层面：vlan 用于分隔广播域</li>
-<li>部署层面：一个部门一个 vlan</li>
-<li>配置层面：</li>
-<li>排错层面：忘记创建；忘记把接口加入、加入错。</li>
-</ul>
-<h3 id="Trunk-link"><a href="#Trunk-link" class="headerlink" title="Trunk-link"></a>Trunk-link</h3><p>企业级</p>
-<ul>
-<li>原理层面：承载携带不同 vlan 标记的流量；vlan标记的携带方式：DOT1Q、ISL。</li>
-<li>部署层面：基础配置、修改本帧vlan、修改Trunk-link vlan承载列表。</li>
-<li>配置层面：</li>
-<li>排错层面：封装标准不一致；错误的承载列表</li>
-<li>vlan间通讯原则</li>
-</ul>
-<h3 id="RSTP"><a href="#RSTP" class="headerlink" title="RSTP"></a>RSTP</h3><p>企业级</p>
-<ul>
-<li><p>原理层面：</p>
-<p>STP、RSTP 计算出无环的交换路径，并且保证一定的冗余性。</p>
-<p>根桥的竞选，根端口的竞选，指定端口的竞选，</p>
-<p>根桥如何故障恢复，RSTP 和 STP 的区别。</p>
 </li>
-<li><p>部署层面：如何影响根及根端口选举结果；PVST（每vlan生成树）</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：确认根桥、端口是否正确</p>
-</li>
-</ul>
-<h3 id="MSTP"><a href="#MSTP" class="headerlink" title="MSTP"></a>MSTP</h3><p>园区网络、运营商级</p>
-<ul>
-<li><p>原理层面：</p>
-<p>允许多个vlan映射到一个实例中，并且层次化、区块化维护生成树。</p>
-<p>CST（通用生成树）、IST（内部生成树）</p>
-</li>
-<li><p>部署层面：IST的规划、CST的定义</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：MSTP 的 IST 的域名不一致，口令不一致</p>
-</li>
-</ul>
-<h3 id="EC：以太网通道"><a href="#EC：以太网通道" class="headerlink" title="EC：以太网通道"></a>EC：以太网通道</h3><p>企业、园区、运营商级</p>
-<ul>
-<li>原理层面：EC 允许交换机把最多8个物理接口捆绑成一个逻辑接口。</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：端口没有统一绑定到一个逻辑接口，接口的物理参数和逻辑参数不一致。</li>
-</ul>
-<h3 id="第一跳冗余：HSRP、VRRP、GLBP"><a href="#第一跳冗余：HSRP、VRRP、GLBP" class="headerlink" title="第一跳冗余：HSRP、VRRP、GLBP"></a>第一跳冗余：HSRP、VRRP、GLBP</h3><ul>
-<li><p>原理层面：多物理网关冗余备份。HSRP、VRRP、GLBP 工作机制。</p>
-</li>
-<li><p>部署层面：</p>
-<p>HSRP 注意 active 和 standby 分配；</p>
-<p>VRRP 注意 master 和 backup 的分配；</p>
-<p>GLBP 注意权重分配。</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="多层交换机路由"><a href="#多层交换机路由" class="headerlink" title="多层交换机路由"></a>多层交换机路由</h3><ul>
-<li>原理层面：多层交换机 vlan 添加 IP 地址扮演网关，开启路由功能，提供跨 vlan 网段通讯能力。</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><h3 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h3><p>企业、园区、运营商级</p>
-<ul>
-<li><p>原理层面：</p>
-<p>OSPF 邻接关系建立条件和规则；</p>
-<p>OSPF DR 和 BDR 的选举；</p>
-<p>OSPF 的开销计算；</p>
-<p>OSPF LSA 的类型、作用、扩散范围、对应的路由；</p>
-<p>OSPF 的孤岛区域、区域分割、虚链路；</p>
-<p>OSPF 的区域汇总；</p>
-<p>OSPF 的特殊区域；</p>
-<p>OSPF 的区域认证、链路认证；</p>
-</li>
-<li><p>部署层面：不要出现孤岛、区域分割问题；小心特殊区域的优化。</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="ISIS"><a href="#ISIS" class="headerlink" title="ISIS"></a>ISIS</h3><p>运营商级</p>
-<ul>
-<li>原理层面：NET 地址；路由器类型、邻居关系类型、路由更新类型、路由类型；</li>
-<li>部署层面：注意路由器角色的设置、汇总和重分发；区域、链路认证。</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="重分发"><a href="#重分发" class="headerlink" title="重分发"></a>重分发</h3><ul>
-<li>原理层面：ASBR 上不同的协议相互交换路由更新、种子度量值的概念。</li>
-<li>部署层面：切记重分发种子度量值的问题</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="BGP"><a href="#BGP" class="headerlink" title="BGP"></a>BGP</h3><p>园区、运营商级</p>
-<ul>
-<li>原理层面：AS 间或 AS 内路由信息的交换、并且携带复杂的路径策略</li>
-<li>部署层面：更新源设置、eBGP 多跳、next-hop-self、路由反射器</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="MPLS-VPN"><a href="#MPLS-VPN" class="headerlink" title="MPLS VPN"></a>MPLS VPN</h3><p>运营商</p>
-<ul>
-<li><p>原理层面：</p>
-<p>利用 peer 共享企业内部路由，利用双标签协助数据穿越运营商网络实现内网的通讯。</p>
-<p>MPLS 标签的分配、分发、关联、POP、UNTAG、交换、弹出。</p>
-<p>P-NETWORK、P、PE、C-NETWORK、CE、VRF、RD、RT、顶部标签、底部标签、数据传递过程。</p>
-</li>
-<li><p>部署层面：MPLS 正确部署；VRF 的 RD 和 RT 正确，不要出现 no label 和 untag。</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="Multicast"><a href="#Multicast" class="headerlink" title="Multicast"></a>Multicast</h3><ul>
-<li><p>原理层面：</p>
-<p>帮助路由器发现组成员，帮助路由器建立多播传递路径，维护路径。</p>
-<p>IGMPv1/2、PIM DM、SM、SM RP 的获取方式、BSR、AUTO-RP。</p>
-</li>
-<li><p>部署层面：注意设备参与 PIM，注意 RP 的获取</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h2 id="路由策略"><a href="#路由策略" class="headerlink" title="路由策略"></a>路由策略</h2><h3 id="修改-Metric-影响路径选择"><a href="#修改-Metric-影响路径选择" class="headerlink" title="修改 Metric 影响路径选择"></a>修改 Metric 影响路径选择</h3><ul>
-<li>原理层面：OSPF、ISIS 如何通过修改接口开销影响结果</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="路由更新过滤"><a href="#路由更新过滤" class="headerlink" title="路由更新过滤"></a>路由更新过滤</h3><ul>
-<li><p>原理层面：</p>
-<p>路由协议发送路由更新时做过滤、重分发时做过滤。</p>
-<p>distribute-list 分发列表，route-map 路由映射。</p>
-</li>
-<li><p>部署层面：ACL 或 prefix-list 编写正确，route-map 有隐含的 deny all。</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="BGP-路由选择策略"><a href="#BGP-路由选择策略" class="headerlink" title="BGP 路由选择策略"></a>BGP 路由选择策略</h3><ul>
-<li><p>原理层面：</p>
-<p>利用修改 BGP 路由更新属性，实现 BGP 路由选路策略的修改</p>
-<p>weight、ip、med、as-path、originate-code</p>
-</li>
-<li><p>部署层面：理解不同选路机制的原理，route-map 的编写</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="BGP-的路由更新过滤"><a href="#BGP-的路由更新过滤" class="headerlink" title="BGP 的路由更新过滤"></a>BGP 的路由更新过滤</h3><ul>
-<li>原理层面：BGP 利用 route-map 和 prefix-list 完成路由更新过滤</li>
-<li>部署层面：对 route-map 和 prefix-list 的理解，BGP 正则表达式完成路由更新过滤</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="BGP-团体属性"><a href="#BGP-团体属性" class="headerlink" title="BGP 团体属性"></a>BGP 团体属性</h3><ul>
-<li>原理层面：BGP 利用公认团体属性完成路由更新扩散范围的限制，利用自定义团体属性标记完成路由更新着色和策略定制。</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="BGP-的联邦"><a href="#BGP-的联邦" class="headerlink" title="BGP 的联邦"></a>BGP 的联邦</h3><ul>
-<li>原理层面：BGP 通过联邦和公有 AS 号、私有 AS 号组建巨型网络</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h2 id="远程接入"><a href="#远程接入" class="headerlink" title="远程接入"></a>远程接入</h2><h3 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h3><p>动态主机配置协议</p>
-<ul>
-<li>原理层面：DHCP 给主机动态地分配 IP 地址，并且管理维护</li>
-<li>部署层面：地址池的创建、DHCP 中继、地址排除</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h3><p>网络地址转换</p>
-<ul>
-<li>原理层面：通过地址转换，实现内网数据与公网通讯。静态 NAT、动态 NAT、PAT。</li>
-<li>部署层面：inside、outside、注意 ACL。</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="PPPOE"><a href="#PPPOE" class="headerlink" title="PPPOE"></a>PPPOE</h3><p>基于以太网的点到点协议</p>
-<ul>
-<li>原理层面：通过 VPDN 拨号，实现企业、家庭用户的互联网接入</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h2 id="网络安全"><a href="#网络安全" class="headerlink" title="网络安全"></a>网络安全</h2><h3 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h3><ul>
-<li>原理层面：防火墙的通讯机制、故障倒换、虚拟防火墙、NAT、路由。</li>
-<li>部署层面：接口命名、安全等级、NAT、ACL、服务发布。</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h3><ul>
-<li>原理层面：虚拟的个人网络数据加密、完整性保护、对等体认证。</li>
-<li>部署层面：IPSEC VPN、DM VPN 配置</li>
-<li>配置层面：策略必须一致，参数必须相同</li>
-<li>排错层面：</li>
-</ul>
+</ol>
 <h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/BGP 补充知识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/BGP 补充知识/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/BGP 补充知识/">CCIE BGP 补充知识</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="BGP-的路由更新过滤"><a href="#BGP-的路由更新过滤" class="headerlink" title="BGP 的路由更新过滤"></a>BGP 的路由更新过滤</h3><p>route-map、prefix-list、filter-list（筛选列表）</p>
+<h4 id="利用-route-map"><a href="#利用-route-map" class="headerlink" title="利用 route-map"></a>利用 route-map</h4><p>可以是 in 方向，也可以是 out 方向。</p>
+<p>route-map 有隐藏的 deny all。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">access-list 10 permit 10.1.1.0 0.0.0.255</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 permit 20 //route-map的permit是放行更新</span><br><span class="line">	//route-map如果不写如何match语句，意思是匹配所有</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor 10.1.1.2 route-map R1 out</span><br></pre></td></tr></table></figure>
+<h4 id="利用-prefix-list"><a href="#利用-prefix-list" class="headerlink" title="利用 prefix-list"></a>利用 prefix-list</h4><p>route-map 不光可以完成过滤，还可以对放行的网络设置策略。</p>
+<p>prefix-list 只能完成过滤。</p>
+<p>prefix-list 也有默认的 deny all。</p>
+<p>prefix-list 的放行所有 <code>ip prefix-list x permit 0.0.0.0/0</code></p>
+<h4 id="利用-正则表达式"><a href="#利用-正则表达式" class="headerlink" title="利用 正则表达式"></a>利用 正则表达式</h4><p>正则表达式匹配击中的是 AS 路径信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_ 代表 空格</span><br><span class="line">^ 代表 正则表达式的开始</span><br><span class="line">$ 代表 正则表达式的结束</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_2_ ：抓取任意起源、任意结尾，但经过 AS2 的路由更新。</span><br><span class="line">^1$ ：抓取AS1内的所有路由。</span><br><span class="line">_1$ ：抓取起源于AS1，经过其他任意AS的所有路由。 </span><br><span class="line">^4_ ：抓取AS4共享给当前设备的路由。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route-map AS permit 10</span><br><span class="line">match ip address 10</span><br><span class="line">set as-pasth prepend 3 5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip as-path access-list 1 permit _4_</span><br><span class="line">router bgp 2</span><br><span class="line">neighbor 12.12.12.1 filter-list 1 in</span><br></pre></td></tr></table></figure>
+<p>放行所有：<code>ip as-path &lt;id&gt; permit _</code></p>
+<h3 id="BGP-的公认团体属性限制路由更新的发送"><a href="#BGP-的公认团体属性限制路由更新的发送" class="headerlink" title="BGP 的公认团体属性限制路由更新的发送"></a>BGP 的公认团体属性限制路由更新的发送</h3><p>路由更新携带 no-advertise，路由更新被接收后不发送给任何 BGP peer。</p>
+<p>路由更新携带 no-export 或 local-as，路由更新被接收后不发送给任何 eBGP peer。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">route-map COMM permit 10</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;no-advertise/no-export/local-as&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; route-map COMM out</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
+<p>查看BGP转发表中携带特定团体属性的路由更新<code>show ip bgp community &lt;no-export/no-advertise&gt;</code></p>
+<h3 id="BGP-自定义团体属性标记及策略设置"><a href="#BGP-自定义团体属性标记及策略设置" class="headerlink" title="BGP 自定义团体属性标记及策略设置"></a>BGP 自定义团体属性标记及策略设置</h3><p>自定义团体属性格式：</p>
+<p>AA：NN（AA 是 AS 号，NN 是标记值 0~65440）</p>
+<h4 id="自定义团体属性的配置步骤"><a href="#自定义团体属性的配置步骤" class="headerlink" title="自定义团体属性的配置步骤"></a>自定义团体属性的配置步骤</h4><p>步骤1：更新源处打上标记</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ACL 抓取网络</span><br><span class="line">!</span><br><span class="line">route-map &lt;name&gt; permit &lt;10&gt;</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;aa:nn&gt;</span><br><span class="line">!</span><br><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; send-community</span><br></pre></td></tr></table></figure>
+<p>步骤2：在更新接收者匹配团体属性，并且定义不同的策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ip community-list &lt;id&gt; permit &lt;aa:nn&gt; //团体属性列表，匹配特定团体属性更新</span><br><span class="line">route-map &lt;name&gt; permit 10</span><br><span class="line">match community &lt;id&gt;</span><br><span class="line">set &lt;策略&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br></pre></td></tr></table></figure>
+<p>所有需要传递团体属性的路由器都需要录入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip bgp-community new-format</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
+<h3 id="BGP-联邦"><a href="#BGP-联邦" class="headerlink" title="BGP 联邦"></a>BGP 联邦</h3><p>把多个 AS 融入到一个联邦中，联邦中不同 AS 的路径信息，不会泄露出去。</p>
+<p>联邦内所有设备必须声明联邦号，联邦内 eBGP 还要声明是联邦内 eBGP peer。</p>
+<p><code>bgp confederation identifier 234</code></p>
+<p><code>bgp confederation peer 4</code></p>
+<h3 id="BGP-知识点"><a href="#BGP-知识点" class="headerlink" title="BGP 知识点"></a>BGP 知识点</h3><p>BGP 同步，BGP 下一跳判断。</p>
+<p>BGP eBGP peer 多跳</p>
+<p>BGP 选路原则、利用 route-map 影响</p>
+<p>BGP 的汇总 summary-only as-set</p>
+<p>BGP 的团体属性</p>
+<p>BGP 的过滤</p>
+<p>BGP 路由反射器</p>
+<p>BGP 联邦</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/DM-VPN" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/DM-VPN/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/DM-VPN/">CCIE DM-VPN</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="DM-VPN"><a href="#DM-VPN" class="headerlink" title="DM-VPN"></a>DM-VPN</h1><p>动态多点VPN、Cisco私有</p>
+<h3 id="IPSEC-VPN-存在的问题"><a href="#IPSEC-VPN-存在的问题" class="headerlink" title="IPSEC VPN 存在的问题"></a>IPSEC VPN 存在的问题</h3><ol>
+<li>不支持多播</li>
+<li>复杂的拓扑</li>
+</ol>
+<h3 id="DM-VPN-的术语"><a href="#DM-VPN-的术语" class="headerlink" title="DM-VPN 的术语"></a>DM-VPN 的术语</h3><ul>
+<li>M-GRE（多点隧道）一点对多点</li>
+<li>物理 IP 地址（物理接口）/逻辑 IP 地址（tunnel 私有 IP）</li>
+<li>NHRP（下一跳解析协议、总部和分部都启用）<br>NHS（下一跳服务器、总部）</li>
+</ul>
+<h3 id="DM-VPN-的三个阶段"><a href="#DM-VPN-的三个阶段" class="headerlink" title="DM-VPN 的三个阶段"></a>DM-VPN 的三个阶段</h3><p><strong>阶段一</strong></p>
+<ul>
+<li>M-GRE：EIGRP</li>
+<li>分支和分支要通过总部才能相互通讯</li>
+</ul>
+<p><strong>阶段二</strong></p>
+<ul>
+<li>M-GRE：EIGRP</li>
+<li>分支和分支可以直接通讯</li>
+</ul>
+<p><strong>阶段三</strong></p>
+<ul>
+<li>单云双中心（两个 HUB 同时工作互为备份，还是依赖 DM-VPN 阶段2）</li>
+</ul>
+<h3 id="DM-VPN-的基础配置流程"><a href="#DM-VPN-的基础配置流程" class="headerlink" title="DM-VPN 的基础配置流程"></a>DM-VPN 的基础配置流程</h3><p><strong>步骤1</strong>：完成 HUB 上 M-GRE 的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 134</span><br><span class="line">ip address 172.16.1.1 255.255.255.0 //隧道的逻辑接口</span><br><span class="line">tunnel source 12.12.12.1 //隧道源是设备物理接口地址</span><br><span class="line">tunnel key 134 //隧道口令</span><br><span class="line">tunnel mode gre multipoint //指定隧道模式</span><br><span class="line">//多点隧道不需要指定目的地址，模式和单点也不同</span><br></pre></td></tr></table></figure>
+<p><strong>步骤2</strong>：完成 spoke 上的 M-GRE 配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 134</span><br><span class="line">ip address 172.16.1.3 255.255.255.0 //隧道的逻辑接口</span><br><span class="line">tunnel source f0/1 //！FA0/1的接口IP成为隧道源，因为分支机构的IP会变化</span><br><span class="line">tunnel key 134 //隧道口令</span><br><span class="line">tunnel mode gre multipoint //指定隧道模式</span><br></pre></td></tr></table></figure>
+<p><strong>步骤3</strong>：完成 HUB 上隧道 NHRP 的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int tu 134</span><br><span class="line">ip nhrp network-id 134 //设置NHRP的网络ID</span><br><span class="line">ip nhrp authentication 134 //设置NHRP的认证口令</span><br><span class="line">ip nhrp map multicast dynamic //允许多播流在M-GRE传递，为了路由协议更新可以传递</span><br></pre></td></tr></table></figure>
+<p><strong>步骤4</strong>：完成 spoke 上 NHRP 的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int tu 134</span><br><span class="line">ip nhrp network-id 134</span><br><span class="line">ip nhrp authentication 134</span><br><span class="line">ip nhrs nhs 172.16.1.1 //指定NHS服务器地址，该地址是HUB的隧道地址</span><br><span class="line">ip nhrs map 172.16.1.1 12.12.12.1 //完成NHS服务器隧道逻辑地址和HUB物理地址的关联</span><br><span class="line">ip nhrp map multicast 12.12.12.1 //设置spoke向hub发送多播流量</span><br></pre></td></tr></table></figure>
+<p><strong>步骤5</strong>：隧道逻辑 IP 地址参与 EIGRP</p>
+<p><strong>步骤6</strong>：完成 IPSEC 的配置并且套用到隧道上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp enable</span><br><span class="line">crypto isakmp policy 10</span><br><span class="line">authen</span><br><span class="line">encry</span><br><span class="line">hash</span><br><span class="line">group</span><br><span class="line">crypto isakmp key cisco address 0.0.0.0 0.0.0.0</span><br><span class="line">crypto ipsec transform-set XX esp-aes esp-sha-hmac</span><br><span class="line">crypto ipsec profile &lt;name&gt; //IPSEC VPN 的配置文件</span><br><span class="line">set transform-set xx</span><br><span class="line">int tunnel x</span><br><span class="line">tunnel protection ipsec profile &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>杂</strong>：</p>
+<p>查看 HUB 的分支信息：<code>show ip nhrp</code></p>
+<p>关闭 EIGRP 水平分割：<code>no ip split-horizon eigrp 1</code></p>
+<p>开启 NHRP 捷径：<code>ip nhrp shortcat</code></p>
+<h3 id="单云双中心的配置细节"><a href="#单云双中心的配置细节" class="headerlink" title="单云双中心的配置细节"></a>单云双中心的配置细节</h3><p><strong>区别1</strong>：两个 HUB 需要互做 NHRP 的映射。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">----HUB1</span><br><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp map 172.16.1.2 202.1.1.2</span><br><span class="line">ip nhrp map multicast 202.1.1.2</span><br><span class="line">----HUB2</span><br><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp map 172.16.1.1 202.1.1.1</span><br><span class="line">ip nhrp map multicast 202.1.1.1</span><br></pre></td></tr></table></figure>
+<p><strong>区别2</strong>：两个 spoke 需要设定两个 NHS 服务器，并且谁先被设定谁就是主设备。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp nhs 172.16.1.1</span><br><span class="line">ip nhrp map 172.16.1.1 202.1.1.1</span><br><span class="line">ip nhrp map multicast 202.1.1.1</span><br><span class="line">ip nhrp nhs 172.16.1.2</span><br><span class="line">ip nhrp map 172.16.1.2 202.1.1.2</span><br><span class="line">ip nhrp map multicast 202.1.1.2</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
