@@ -234,6 +234,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/Mess/C++ofstream输出为1的情况" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/C_C++/Mess/C++ofstream输出为1的情况/" class="article-date">
+      <time datetime="2018-12-04T14:15:08.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/C_C++/Mess/C++ofstream输出为1的情况/">fstream输出为1的情况</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在学C++文件操作时，我曾尝试直接将一个文件输入流接到文件输出流。</p>
+<p>如<code>fout &lt;&lt; fin;</code> 然而运行后输出的文件内容之有一个’1’。</p>
+<p>我接着又尝试<code>fout &lt;&lt; fin &lt;&lt; fin &lt;&lt; fin;</code>结果输出文件内容是’111’。</p>
+<p>查阅文档发现原因：</p>
+<p>ofstream类的&lt;&lt;运算符没有重载fstream类参数，这种情况下（以及其他没有重载的指针类型），会隐式转化成bool类型，然后只要指针不是空的，就会输出’1’（当然，如果使用了std::boolalpha控制符，则会输出’true’）。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Backend/Dreamweaver服务器配置" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -334,6 +402,10 @@
 <h3 id="终端直接进入桌面"><a href="#终端直接进入桌面" class="headerlink" title="终端直接进入桌面"></a>终端直接进入桌面</h3><p>因为我一般将临时文件放在桌面，这样便于操作，但是终端开启时默认目录是用户家目录，经常需要<code>cd Desktop/</code>比较麻烦，所以设置成开启终端自动执行<code>cd Desktop/</code>：偏好设置-&gt;描述文件-&gt;Shell-&gt;启动命令。</p>
 <h3 id="Sublime"><a href="#Sublime" class="headerlink" title="Sublime"></a>Sublime</h3><p>File - &gt; Reopen with Encoding  可以用不同编码方式打开文件，经常以此查看文件的十六进制编码。</p>
 <p>(需要安装)</p>
+<h3 id="设置PATH环境变量"><a href="#设置PATH环境变量" class="headerlink" title="设置PATH环境变量"></a>设置PATH环境变量</h3><p>/etc/paths （全局建议修改这个文件 ，还有很多方法，略）<br>编辑 paths，将环境变量添加到 paths文件中 ，一行一个路径<br>Hint：输入环境变量时，不用一个一个地输入，只要拖动文件夹到 Terminal 里就可以了。</p>
+<p>比如我的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/bin</span><br><span class="line">/usr/bin</span><br><span class="line">/bin</span><br><span class="line">/usr/sbin</span><br><span class="line">/sbin</span><br><span class="line">/Users/skuaka/Code/bin</span><br></pre></td></tr></table></figure>
+<p>我在最后加了自己的命令目录，这样放在Code/bin下的可执行程序可以直接在终端使用。</p>
 
       
     </div>
@@ -1967,83 +2039,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Wireshark/Wireshark入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/22/Network/Wireshark/Wireshark入门/" class="article-date">
-      <time datetime="2018-11-22T13:45:16.000Z" itemprop="datePublished">2018-11-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/22/Network/Wireshark/Wireshark入门/">Wireshark 入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Wireshark-入门"><a href="#Wireshark-入门" class="headerlink" title="Wireshark 入门"></a>Wireshark 入门</h2><h3 id="网卡混杂模式"><a href="#网卡混杂模式" class="headerlink" title="网卡混杂模式"></a>网卡混杂模式</h3><p>如果不设置混杂模式，你的计算机只能获取数据包发往的目标是你计算机和从你计算机出去的数据包。如果设置了混杂模式，你就可以捕获局域网中所有的数据包。</p>
-<h3 id="过滤表达式"><a href="#过滤表达式" class="headerlink" title="过滤表达式"></a>过滤表达式</h3><p><strong>关系</strong></p>
-<p>is present   如果选择的协议域存在，则显示相关数据包。<br>contains     判断一个协议，字段或者分片包含一个值<br>matches     判断一个协议或者字符串匹配一个给定的Perl表达式。</p>
-<p><strong>Predefined values</strong><br>有些协议域包含了预先定义的值。如果你选择的协议域包含这样的值，你可以在这个列表中选择。</p>
-<p><strong>函数</strong><br>upper(string－field)－把字符串转换成大写<br>lower(string－field)－把字符串转换成小写</p>
-<p>例如：<br>upper(ncp.nds_stream_name) contains “BO56.COM”</p>
-<h3 id="使用着色规则"><a href="#使用着色规则" class="headerlink" title="使用着色规则"></a>使用着色规则</h3><p>你经常会在数据包列表区域中看到不同的颜色。这就是wireshark做的很人性化的一方面。它可以让你指定条件，把符合条件的数据包按指定的颜色显示。这样你查找数据包会更方便些。</p>
-<p>点击“view”菜单，然后选择“Coloring Rules”</p>
-<p>注意：wireshark在应用规则的时候，是按自上而下的顺序去应用规则。因此刚添加的规则会优先应用。可以手动调整。</p>
-<h3 id="使用图表"><a href="#使用图表" class="headerlink" title="使用图表"></a>使用图表</h3><h4 id="IO图"><a href="#IO图" class="headerlink" title="IO图"></a>IO图</h4><p>wireshark的IO图让你可以对网络上的吞吐量绘图。让你了解网络数据传输过程中的峰值和波动情况。通过“Statistics”菜单中的“IO Graphs”选项可以打开这个IO图对话框。</p>
-<h4 id="RTT图"><a href="#RTT图" class="headerlink" title="RTT图"></a>RTT图</h4><p>wireshark还有一个功能就是可以对网络传输中的双向时间进行绘图。双向时间（round-trip time, RTT）,就是一个数据包被确认正常接收所花费的时间。</p>
-<h3 id="跟踪tcp流"><a href="#跟踪tcp流" class="headerlink" title="跟踪tcp流"></a>跟踪tcp流</h3><p>跟踪TCP流这个功能可以将接收到的数据排好顺序使之容易查看，而不需要一小块一小块地看。这在查看HTTP、FTP等纯文本应用层协议时非常有用。</p>
-<p>右键单击记录并选择Follow TCP Stream。这时TCP流就会在一个单独的窗口中显示出来。</p>
-<p>这个窗口中的文字会有两种颜色。红色用于表示从源地址到目标地址的流量。蓝色是从目标地址到源地址的流量。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/">Wireshark</a></li></ul>
     </div>
 
       

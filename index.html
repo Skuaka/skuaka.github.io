@@ -234,6 +234,81 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/C程序内存区域" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/06/C_C++/C程序内存区域/" class="article-date">
+      <time datetime="2019-03-06T12:50:55.000Z" itemprop="datePublished">2019-03-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/06/C_C++/C程序内存区域/">C程序内存区域</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="C程序内存区域"><a href="#C程序内存区域" class="headerlink" title="C程序内存区域"></a>C程序内存区域</h3><p>C语言在内存中一共分为如下几个区域，分别是：</p>
+<ol>
+<li>内存栈区： 存放局部变量名；</li>
+<li>内存堆区： 存放new或者malloc出来的对象；</li>
+<li>常数区： 存放局部变量或者全局变量的值；</li>
+<li>静态区： 用于存放全局变量或者静态变量；</li>
+<li>代码区：二进制代码。</li>
+</ol>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/06/C_C++/C程序内存区域/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Algorithm/LIS-最长上升子序列" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -753,6 +828,11 @@
           
         <h3 id="格式化输入输出的-l-标签"><a href="#格式化输入输出的-l-标签" class="headerlink" title="格式化输入输出的 l 标签"></a>格式化输入输出的 l 标签</h3><p>printf 不需要 lf，因为浮点数都是存储为double。</p>
 <p>其他的 l 都有用。</p>
+<h3 id="Size-t-1"><a href="#Size-t-1" class="headerlink" title="Size_t - 1"></a>Size_t - 1</h3><p>今天遇到个bug</p>
+<p><code>for(int i = 0; i &lt; str.size() - 1; ++i</code></p>
+<p>当str长度为0的时候，0 - 1不是 -1。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s</span><span class="params">(<span class="string">""</span>)</span></span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s.size()<span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
+<p>输出18446744073709551615，即 2^64 - 1。</p>
 
       
     </div>
@@ -839,78 +919,6 @@
       
         <p class="article-more-link">
           <a href="/2019/02/28/OpenGl/窗口视口/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Tcp/TCP半关闭,半连接,半打开" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/" class="article-date">
-      <time datetime="2019-02-28T11:42:11.000Z" itemprop="datePublished">2019-02-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/">TCP 半关闭,半连接,半打开</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h4 id="半关闭"><a href="#半关闭" class="headerlink" title="半关闭"></a>半关闭</h4><p>当TCP链接中A向B发送 FIN 请求关闭，另一端B回应ACK之后，并没有立即发送 FIN 给A,A方处于半连接状态（半开关），此时A可以接收B发送的数据，但是A已经不能再向B发送数据。</p>
-<h4 id="半连接"><a href="#半连接" class="headerlink" title="半连接"></a>半连接</h4><p>发生在TCP三次握手中</p>
-<p>如果A向B发起链接，B也按照正常情况响应了，但是A不进行三次握手，这就是半连接。 </p>
-<p>半连接攻击：半连接，会造成B分配的内存资源就一直这么耗着，直到资源耗尽。（SYN攻击）</p>
-<h4 id="半打开"><a href="#半打开" class="headerlink" title="半打开"></a>半打开</h4><p>如果一方关闭或者异常关闭（断电，断网），而另一方并不知情，这样的链接称之为半打开。处于半打开的连接，如果双方不进行数据通信，是发现不了问题的，只有在通信是才真正的察觉到这个连接已经处于半打开状态，如果双方不传输数据的话，仍处于连接状态的一方就不会检测另外一方已经出现异常。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
