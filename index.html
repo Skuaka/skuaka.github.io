@@ -234,6 +234,479 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/Tips/C++运算符优先级" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/08/C_C++/Tips/C++运算符优先级/" class="article-date">
+      <time datetime="2019-03-08T12:41:09.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/C_C++/Tips/C++运算符优先级/">C运算符优先级</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="初单算移关-位逻条赋逗"><a href="#初单算移关-位逻条赋逗" class="headerlink" title="初单算移关,位逻条赋逗!"></a>初单算移关,位逻条赋逗!</h2><h2 id="C运算符"><a href="#C运算符" class="headerlink" title="C运算符"></a>C运算符</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>运算符</th>
+<th>结合性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初等运算符</td>
+<td>() [] -&gt; .</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>单目运算符</td>
+<td>! ~ ++ – - (类型) * &amp; sizeof</td>
+<td>&lt;-</td>
+</tr>
+<tr>
+<td>算术运算符</td>
+<td>* / %</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>算术运算符</td>
+<td>+ -</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>移位运算符</td>
+<td>&lt;&lt; &gt;&gt;</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>关系运算符</td>
+<td>&gt; &gt;= &lt; &lt;=</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>关系运算符</td>
+<td>== !=</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>按位与</td>
+<td>&amp;</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>按位异或</td>
+<td>^</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>按位或</td>
+<td>\</td>
+<td></td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>逻辑与</td>
+<td>&amp;&amp;</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>逻辑或</td>
+<td>\</td>
+<td>\</td>
+<td></td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>条件运算符</td>
+<td>?:</td>
+<td>&lt;-</td>
+</tr>
+<tr>
+<td>赋值运算符</td>
+<td>= += -= *= /= %= &lt;&lt;= &gt;&gt;= &amp;= ^= \</td>
+<td>=</td>
+<td>&lt;-</td>
+</tr>
+<tr>
+<td>逗号运算符</td>
+<td>,</td>
+<td>-&gt;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="C-运算符"><a href="#C-运算符" class="headerlink" title="C++运算符"></a>C++运算符</h2><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>结合性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>::</td>
+<td>二元作用域 一元作用域</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td><code>() [] . -&gt; ++ -- typeid dynamic_cast&lt;type&gt; static_cast&lt;type&gt; reinterpret_cast&lt;type&gt; const_cast&lt;type&gt;</code></td>
+<td>初等/类型转换 ++–为一元后自增</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td><code>++ -- + - ! ~ (类型) sizeof &amp; * new new[] delete delete[]</code></td>
+<td>++–为一元前自增</td>
+<td>&lt;-</td>
+</tr>
+<tr>
+<td><code>.* -&gt;*</code></td>
+<td>取指向成员的指针</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td><code>* / %</code></td>
+<td>算术运算符</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>+ -</td>
+<td>算术运算符</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>&lt;&lt; &gt;&gt;</td>
+<td>移位运算符</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>&lt; &lt;= &gt; &gt;=</td>
+<td>关系运算符</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>== !=</td>
+<td>关系运算符</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>按位与</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>^</td>
+<td>按位异或</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>按位或</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑与</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>\</td>
+<td>\</td>
+<td></td>
+<td>逻辑或</td>
+<td>-&gt;</td>
+</tr>
+<tr>
+<td>?:</td>
+<td>条件运算符</td>
+<td>&lt;-</td>
+</tr>
+<tr>
+<td>`= += -= *= /= %= &amp;= ^=</td>
+<td>= &lt;&lt;= &gt;&gt;=`</td>
+<td>赋值运算符</td>
+<td>&lt;-</td>
+</tr>
+<tr>
+<td>,</td>
+<td>逗号运算符</td>
+<td>-&gt;</td>
+</tr>
+</tbody>
+</table>
+<p>注:从上到下优先级递减!</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/C++Collection/C++虚函数表" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/08/C_C++/C++Collection/C++虚函数表/" class="article-date">
+      <time datetime="2019-03-08T09:33:14.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/C_C++/C++Collection/C++虚函数表/">C++虚函数表</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="C-虚函数表"><a href="#C-虚函数表" class="headerlink" title="C++虚函数表"></a>C++虚函数表</h2><p>学习自<a href="https://blog.twofei.com/496/，写的太好了。" target="_blank" rel="noopener">https://blog.twofei.com/496/，写的太好了。</a></p>
+<p>个人看完后的简略总结：</p>
+<p>基类有虚函数则会在对象最前面创建一个<code>void ** __vftp;</code>指向该类所有对象共用的虚函数表，这个指针占四字节。</p>
+<p>这个虚函数表其实就是个指针数组，指向各个虚函数，如果子类虚函数重载了父类的虚函数，则相应更新虚函数表里函数指针的指向。</p>
+<p>子类的新虚函数索引是放在按继承顺序来看的第一个有虚函数表的基类的虚函数表里，并且会改变对象布局（有虚函数表指针的基类会跑到对象布局最前面，如果有很多个基类，有虚函数的都跑到没虚函数的前面）。</p>
+<p>如果基类都没有虚函数，子类有，那么<code>__vftp</code>就由子类创建，并且移到对象布局最前面（子类的其他部分还是在基类后方）。</p>
+<p>总之：谁有虚函数表, 谁就往前靠（但是子类的固有部分是跑不到基类前面去的）。</p>
+<p>由于继承完全拥有父类的所有, 包括数据成员与虚函数表, 所以:把一个继承类强制转换为一个基类是完全可行的。</p>
+<p>性能：CPU流水线预测不了，可能会排空，所以性能差。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/08/C_C++/C++Collection/C++虚函数表/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/Tips/结构体offsetof宏" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/08/C_C++/Tips/结构体offsetof宏/" class="article-date">
+      <time datetime="2019-03-08T09:29:50.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/C_C++/Tips/结构体offsetof宏/">结构体offsetof宏</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="结构体offsetof宏"><a href="#结构体offsetof宏" class="headerlink" title="结构体offsetof宏"></a>结构体offsetof宏</h3><p><code>#include &lt;stddef.h&gt;</code></p>
+<p><code>#define offsetof(TYPE, MEMBER) ((size_t) &amp;((TYPE*)0)-&gt;MEMBER)</code></p>
+<p><strong>功能</strong>：</p>
+<p>返回结构体TYPE中MEMBER成员相对于结构体首地址的偏移量，以字节为单位。</p>
+<p>经过我测试，bit 成员不能使用这个宏，毕竟要转化为 size_t 才行。</p>
+<p><strong>解析</strong>：</p>
+<p>首先，(TYPE *)0表示将数字0强制类型转换为TYPE类型(TYPE为结构体类型)的指针。因此这里的0代表内存地址0，即我们认为内存地址0开始的sizeof(TYPE)个字节内存储的是一个TYPE类型的变量。</p>
+<p>然后，((TYPE *)0)-&gt;MEMBER 得到该结构体变量中的MEMBER成员变量，</p>
+<p>而 &amp;(((TYPE*)0)-&gt;MEMBER) 使用取地址符&amp;取得了MEMBER成员变量的地址，(size_t)加在前面表示将MEMBER成员变量的地址强制类型转换为size_t(即unsigned int），并将结果作为宏的返回值。</p>
+<p>可见，offsetof宏返回的是MEMBER成员在内存中的实际地址。又因为整个结构体的起始地址是0，因此MEMBER成员的实际地址在数值上就等于MEMBER成员相对于结构体首地址的偏移量。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* offsetof example */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;      /* printf */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stddef.h&gt;     /* offsetof */</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> &#123;</span></span><br><span class="line">  <span class="keyword">char</span> a;</span><br><span class="line">  <span class="keyword">char</span> b[<span class="number">10</span>];</span><br><span class="line">  <span class="keyword">char</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span> (<span class="string">"offsetof(struct foo,a) is %d\n"</span>,(<span class="keyword">int</span>)offsetof(struct foo,a));</span><br><span class="line">  <span class="built_in">printf</span> (<span class="string">"offsetof(struct foo,b) is %d\n"</span>,(<span class="keyword">int</span>)offsetof(struct foo,b));</span><br><span class="line">  <span class="built_in">printf</span> (<span class="string">"offsetof(struct foo,c) is %d\n"</span>,(<span class="keyword">int</span>)offsetof(struct foo,c));</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Database/Concept/mysql数据库引擎" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/07/Database/Concept/mysql数据库引擎/" class="article-date">
+      <time datetime="2019-03-07T15:53:25.000Z" itemprop="datePublished">2019-03-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/07/Database/Concept/mysql数据库引擎/">mysql数据库引擎</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="数据库引擎介绍"><a href="#数据库引擎介绍" class="headerlink" title="数据库引擎介绍"></a>数据库引擎介绍</h3><p>转载自：<a href="https://www.cnblogs.com/zhangjinghe/p/7599988.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhangjinghe/p/7599988.html</a></p>
+<p>MySQL数据库引擎取决于MySQL在安装的时候是如何被编译的。要添加一个新的引擎，就必须重新编译MYSQL。</p>
+<p>在缺省情况下，MYSQL支持三个引擎：ISAM、MYISAM和HEAP。另外两种类型INNODB和BERKLEY（BDB），也常常可以使用。如果技术高超，还可以使用MySQL+API自己做一个引擎。下面介绍几种数据库引擎：</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/07/Database/Concept/mysql数据库引擎/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Operating System/互斥锁-自旋锁-读写锁" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -663,284 +1136,9 @@
 
 
   
-    <article id="post-C_C++/C++Collection/Lambda表达式" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/04/C_C++/C++Collection/Lambda表达式/" class="article-date">
-      <time datetime="2019-03-04T04:05:11.000Z" itemprop="datePublished">2019-03-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/04/C_C++/C++Collection/Lambda表达式/">C++ Lambda表达式用法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>C++ 11中的Lambda表达式用于定义并创建匿名的函数对象，以简化编程工作。<br>Lambda的语法形式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[函数对象参数] (操作符重载函数参数) mutable或exception声明 -&gt; 返回值类型 &#123;函数体&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到，Lambda主要分为五个部分：[函数对象参数]、(操作符重载函数参数)、mutable或exception声明、-&gt; 返回值类型、{函数体}。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/04/C_C++/C++Collection/Lambda表达式/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-OpenGl/OpenGL编程" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/02/OpenGl/OpenGL编程/" class="article-date">
-      <time datetime="2019-03-02T12:50:39.000Z" itemprop="datePublished">2019-03-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/02/OpenGl/OpenGL编程/">OpenGL编程(待续</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><p>在Mac OS X下，一般是<br>#include &lt;OpenGL/gl.h&gt;<br>#include &lt;OpenGL/glu.h&gt;<br>#include &lt;GLUT/glut.h&gt; </p>
-<p>在编译的时候，需要用到Mac OS X里gcc的-framework参数，例如<br><code>g++ -framework OpenGL -framework GLUT -framework Foundation -o test my.cpp</code></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/OpenGL/">OpenGL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/02/OpenGl/OpenGL编程/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-OpenGl/OpenGL概念" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/02/OpenGl/OpenGL概念/" class="article-date">
-      <time datetime="2019-03-02T12:44:11.000Z" itemprop="datePublished">2019-03-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/02/OpenGl/OpenGL概念/">OpenGL概念(待续</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="OpenCV和OpenGL"><a href="#OpenCV和OpenGL" class="headerlink" title="OpenCV和OpenGL"></a>OpenCV和OpenGL</h3><p>两者的区别就是Computer Vision和Computer Graphics这两个学科之间的区别，前者专注于从采集到的视觉图像中获取信息，是用机器来理解图像；后者是用机器绘制合适的视觉图像给人看</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/OpenGL/">OpenGL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/02/OpenGl/OpenGL概念/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-QT/QT 贪吃蛇" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/02/QT/QT 贪吃蛇/" class="article-date">
-      <time datetime="2019-03-02T08:42:42.000Z" itemprop="datePublished">2019-03-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/02/QT/QT 贪吃蛇/">QT 贪吃蛇</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="贪吃蛇"><a href="#贪吃蛇" class="headerlink" title="贪吃蛇"></a>贪吃蛇</h3><p><img src="http://118.25.53.128/Picture/Snake/snake-score.jpg" alt="snake-score"></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/QT/">QT</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/02/QT/QT 贪吃蛇/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>

