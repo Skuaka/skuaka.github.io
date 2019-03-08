@@ -234,6 +234,80 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Macos/Mac杂项记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/Macos/Mac杂项记录/" class="article-date">
+      <time datetime="2018-12-04T14:12:29.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/Macos/Mac杂项记录/">Mac杂项</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="硬件失灵"><a href="#硬件失灵" class="headerlink" title="硬件失灵"></a>硬件失灵</h3><p>有时候键盘某个按键会失灵、扬声器没声音、touch bar 没反应、App Store 有问题，感觉是bug，重启电脑就行了。</p>
+<h3 id="终端直接进入桌面"><a href="#终端直接进入桌面" class="headerlink" title="终端直接进入桌面"></a>终端直接进入桌面</h3><p>因为我一般将临时文件放在桌面，这样便于操作，但是终端开启时默认目录是用户家目录，经常需要<code>cd Desktop/</code>比较麻烦，所以设置成开启终端自动执行<code>cd Desktop/</code>：偏好设置-&gt;描述文件-&gt;Shell-&gt;启动命令。</p>
+<h3 id="Sublime"><a href="#Sublime" class="headerlink" title="Sublime"></a>Sublime</h3><p>File - &gt; Reopen with Encoding  可以用不同编码方式打开文件，经常以此查看文件的十六进制编码。</p>
+<p>(需要安装)</p>
+<h3 id="设置PATH环境变量"><a href="#设置PATH环境变量" class="headerlink" title="设置PATH环境变量"></a>设置PATH环境变量</h3><p>/etc/paths （全局建议修改这个文件 ，还有很多方法，略）<br>编辑 paths，将环境变量添加到 paths文件中 ，一行一个路径<br>Hint：输入环境变量时，不用一个一个地输入，只要拖动文件夹到 Terminal 里就可以了。</p>
+<p>比如我的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/bin</span><br><span class="line">/usr/bin</span><br><span class="line">/bin</span><br><span class="line">/usr/sbin</span><br><span class="line">/sbin</span><br><span class="line">/Users/skuaka/Code/bin</span><br></pre></td></tr></table></figure>
+<p>我在最后加了自己的命令目录，这样放在Code/bin下的可执行程序可以直接在终端使用。</p>
+<h3 id="系统Mail添加google邮箱"><a href="#系统Mail添加google邮箱" class="headerlink" title="系统Mail添加google邮箱"></a>系统Mail添加google邮箱</h3><p><a href="http://www.lapcatsoftware.com/articles/mail2step.html" target="_blank" rel="noopener">http://www.lapcatsoftware.com/articles/mail2step.html</a></p>
+<p>验证方式只能使用8位备份码。</p>
+<p>具体是在输入密码之后的验证中选择have trouble？然后输入8位备份码（这个需要去设置里开启）</p>
+<h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Macos/">Macos</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Macos/">Macos</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Macos/mac软件推荐" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1751,10 +1825,10 @@
 
 
   
-    <article id="post-C_C++/Tips/C++Tips" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-C_C++/Tips/C++小Tips" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/11/25/C_C++/Tips/C++Tips/" class="article-date">
+      <a href="/2018/11/25/C_C++/Tips/C++小Tips/" class="article-date">
       <time datetime="2018-11-25T08:44:38.000Z" itemprop="datePublished">2018-11-25</time>
 </a>
 
@@ -1770,7 +1844,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/25/C_C++/Tips/C++Tips/">C++ Tips</a>
+      <a class="article-title" href="/2018/11/25/C_C++/Tips/C++小Tips/">C++ Tips</a>
     </h1>
   
 
@@ -1982,79 +2056,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/Tips/C++类与结构区别" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/22/C_C++/Tips/C++类与结构区别/" class="article-date">
-      <time datetime="2018-11-22T06:52:12.000Z" itemprop="datePublished">2018-11-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/22/C_C++/Tips/C++类与结构区别/">C++中结构体和类的区别</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>C语言中结构体不允许定义函数成员，且没有访问控制属性的概念。</p>
-<p>在C++中，结构体是一种特殊形态的类。</p>
-<p>结构体和类的<strong>唯一区别</strong>就是：  结构体和类具有<strong>不同的默认访问控制属性</strong>。</p>
-<p>　　类中，对于未指定访问控制属性的成员，其访问控制属性为私有类型（private）</p>
-<p>　　结构体中，对于未指定任何访问控制属性的成员，其访问控制属性为公有类型（public）</p>
-<p>C++中，不使用结构体丝毫不会影响程序的表达能力。<strong>C++之所以要引入结构体，是为了保持和C程序的兼容性。</strong></p>
-<p>但有时仍会在C++中使用结构体，是因为，<strong>可以使用结构体将不同类型数据组成整体，方便于保存数据。</strong>（若用类来保存，因类中成员默认为私有，还要为每个数据成员特定函数来读取和改写各个属性，比较麻烦。）</p>
-<p>另外，C语言中，空结构体的大小为0，而C++中空结构体（属于空类）的大小为1。</p>
-<p><strong>C++中空类的大小为1的原因</strong>：</p>
-<p>　　空类也可以实例化，类实例化出的每个对象都需要有不同的内存地址，为使每个对象在内存中的地址不同，所以在类中会加入一个隐含的字节。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
     </div>
 
       

@@ -234,6 +234,163 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Script Language/Python/懒得整理的python学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/02/26/Script Language/Python/懒得整理的python学习笔记/" class="article-date">
+      <time datetime="2018-02-25T17:17:05.000Z" itemprop="datePublished">2018-02-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/26/Script Language/Python/懒得整理的python学习笔记/">懒得整理的python学习笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>str.join（list）</p>
+<p>str.split（str）</p>
+<p>str.find（str’）返回第一次出现str’偏移量</p>
+<p>str.rfind（str’）最后一次</p>
+<p>str.count（str’）出现次数</p>
+<p>ord(‘s’)       返回ascii       115</p>
+<p>chr(‘115’)    返回对应的字符      ‘s’</p>
+<p>name.list（）初始化空列表</p>
+<p>list.append（elem）</p>
+<p>list.extend（list’）</p>
+<p>list.insert（offset，elem）</p>
+<p>list.remove（name）</p>
+<p>del list[:1] 即 list[:1]=[]</p>
+<p>list.pop（offset）提取出后删除，默认-1</p>
+<p>list.index（elem）返回offset</p>
+<p>if elem in list</p>
+<p>list.sort（）会改变list</p>
+<p>list.sorted（）返回排序好的，不改变list</p>
+<p>复制list的方法</p>
+<p> b=a.copy（）/  c=list（a）/   d=a[：]</p>
+<p>元组解包 a，b，c = tuple</p>
+<p>利用元组交换变量 a，b = b，a</p>
+<p>dict.update（dict’）</p>
+<p>dict.clear（）清空</p>
+<p>dict.get（key，*可选内容）返回key对应的值 否则返回可选 否则返回None</p>
+<p>dict.keys(）dict.values(）dict.items(）</p>
+<p>在py3中要自己用list（）将返回值变成list</p>
+<p>dict.copy（dict’）</p>
+<p>set（）设置集合</p>
+<p>a&amp;b=a.intersection（b）</p>
+<p>a|b=a.union（b）</p>
+<p>a-b=a.difference（b）</p>
+<p>a^b=a.symmetric_difference(b）出现一次</p>
+<p>a&lt;=b 即 a.issubset（b）   a&lt;b真子集</p>
+<p>a&gt;=b 即 a.issuperset（b） a&gt;b真超集</p>
+<p>output=open(r’C:\spam’,’w’)</p>
+<p>input=open(‘data’) 默认为’r’</p>
+<p>type（）返回参数的类型</p>
+<p>\可以多行输入</p>
+<p>for a,b,c in zip(<em>,</em>,*)</p>
+<p>list(zip(a,b))       返回组合迭代对象</p>
+<p>range（start，stop，*step）自然数</p>
+<p>列表推导式[expression for item in iterable if condition ]</p>
+<p>example.       cells=[(row,cop) for row in rows for cop in cols if…]</p>
+<p>字典推导式</p>
+<p>{key_expression : value_expression for expression in iterable}</p>
+<p>example       letter_counts={letter : word.count(letter) for letter in set(word)}</p>
+<p>集合推导式 略</p>
+<p>def fun（）：</p>
+<p>​      pass </p>
+<p>#什么都不做，返回None</p>
+<p>关键字参数 fun（参数1=？，参数2=？）参数位置可改变</p>
+<p>*（位置参数收集）将一组可变数量的位置参数集合成参数值的元组</p>
+<p>**（关键字参数收集）将参数收集到字典中，参值对应。</p>
+<p>函数开头可以写文档字符串</p>
+<p>help（fun）打印出fun的形参和文档字符串</p>
+<p>print（fun.<strong>doc</strong>）仅打印文档字符串</p>
+<p>（lambda 参数：定义）匿名小函数 🤔</p>
+<p>生成器函数def my_range（first=0，last=10，step=1）：</p>
+<p>​      number = first</p>
+<p>​      while number &lt; last：</p>
+<p>​               <strong>yield</strong> number</p>
+<p>​               number+=step</p>
+<p>ranger = my_range（1，5）</p>
+<p>for x in ranger：</p>
+<p>​        print （x）</p>
+<p>global 声明 在局部命名空间引用全局变量</p>
+<p>locals（） globals（）返回局部/全局命名空间内容的字典</p>
+<p>别名导入模块。from ？ import  ？ as ？</p>
+<p>两个计数器Counter（）可以用集合的方法</p>
+<p>pprint（）友好输出</p>
+<p>input()支持表达式和数字，不支持字符串。raw_input()支持字符串</p>
+<p>print(value, …, sep=’ ‘, end=’\n’, file=sys.stdout, flush=False)</p>
+<p>def  <strong>init</strong>（self，…）</p>
+<p>super().name=</p>
+<p>name=property（get_name,set_name)</p>
+<p>@property</p>
+<p>@name.setter（省略setter则无法从直接从外部设置值）</p>
+<p>以<strong>开头命名的类特性不能直接访问，但可以 （特定类._类名</strong>类特性） 访问。</p>
+<p>@classmethod 类方法 类参数约定为cls</p>
+<p>魔术方法<strong>eq</strong>(self, other) </p>
+<p>​               return  self == other</p>
+<p>类似的 ne !=      lt &lt;     gt  &gt;.   le &lt;=.   ge &gt;=</p>
+<p>add+ sub- mul* floordiv// truediv/ mod% pow**         str(print  repr(交互式str len</p>
+<p>命名元组 from collections import namedtuple</p>
+<p>Duck=namedtuple(‘Duck’,’bill tail’)</p>
+<p>duck=Duck(‘wide orange’,’long’)</p>
+<p>>&gt;&gt;duck.bill</p>
+<p>‘wide orange’</p>
+<p>parts={‘bill’=’wide orange’,’tail’=’long’}</p>
+<p>duck2=Duck(**parts)//用字典创建</p>
+<p>命名元组是不可变的，蛋可以替换其中某些域的值并返回一个新的命名元组</p>
+<p>duck3=duck2._replace(‘bill’=</p>
+<p>%! &lt;20s 左对齐20个字符，空位用!填充</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Unix/Programming/Shell入门" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
