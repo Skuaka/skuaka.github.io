@@ -234,10 +234,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/STP生成树协议" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/STP生成树协议/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -253,7 +253,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/STP生成树协议/">CCIE STP生成树协议</a>
     </h1>
   
 
@@ -263,33 +263,514 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>重分发 </p>
-<p>将不同路由协议转化</p>
-<p>1直连进路由选择协议</p>
-<p>redistribute connect metric 1</p>
-<p>2其他路由选择协议进rip</p>
-<p>router rip</p>
-<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
-<p>3其他路由选择协议进eigrp</p>
-<p>router eigrp 100</p>
-<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
-<p>4其他进ospf</p>
-<p>router os 1</p>
-<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
-<p>默认OE2</p>
-<p>将oe2改成oe1:</p>
-<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
-<p>重分发流量控制</p>
-<p>acl</p>
-<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
-<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
-<p>将acl抓去到的流量给route-map</p>
-<p>route-map +名字 +permit/deny </p>
-<p>优先级10(默认优先级) </p>
-<p>match ip address +acl编号</p>
-<p>route-map也默认deny所有流量</p>
-<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
-<p>re rip router-map ccie metric ……</p>
+        <p>STP生成树协议 7.27</p>
+<p>一个广播域中选举一个生成树。</p>
+<p>广播风暴：绝不停止。</p>
+<p>重复帧。</p>
+<p>mac地址表的不稳定。</p>
+<p>1一个网络中选取一个根桥</p>
+<p>2根桥上所有端口都为<strong>指定端口</strong></p>
+<p>3非根桥上选取一个<strong>根端口</strong></p>
+<p>4每一段选举一个指定端口</p>
+<p>5非指定端口为<strong>阻塞端口</strong></p>
+<hr>
+<p><strong>*粗体为生成树定义的交换机接口角色</strong></p>
+<p>根端口：距离根桥距离最短的端口。开销值一样的话就选最小的发送者id。只在非桥根上选举，并且只选一个。</p>
+<p>指定端口：可以执行数据的转发。一台交换机上可以有多个指定端口。根桥上所有端口都是指定端口。</p>
+<p>阻塞端口：逻辑上的阻塞，不执行数据的转发，但会持续侦听bpdu信息。</p>
+<p>BPDU(桥协议数据单元)只允许根桥产生</p>
+<p>root id</p>
+<p>优先级：(默认32768，越小越优，更改   优先值时必须为4096的倍数)。</p>
+<p>背板mac：标识一台交换机，背板mac小的为优。</p>
+<p>bridge id</p>
+<p>优先级+背板mac：和根id一样</p>
+<p>cost</p>
+<p>开销值</p>
+<p>port id</p>
+<p>优先级(默认128，小优，更改时必须为64的倍数)</p>
+<p>端口mac：发送者的端口mac</p>
+<p>PVST：每vlan生成树，在优先级插入vlan的信息。优先级+vlan编号。</p>
+<p>端口状态</p>
+<p><strong>Blocking</strong>（阻塞状态）：此时，二层端口为非指定端口，也不会参与数据帧的转发。该端口通过接收BPDU来判断根交换机的位置和根ID，以及在STP拓扑收敛结束之后，各交换机端口应该处于什么状态，在默认情况下，端口会在这种状态下停留20秒钟时间。</p>
+<p><strong>Listening</strong>（侦听状态）：生成树此时已经根据交换机所接收到的BPDU而判断出了这个端口应该参与数据帧的转发。于是交换机端口就将不再满足于接收BPDU，而同时也开始发送自己的BPDU，并以此通告邻接的交换机该端口会在活动拓扑中参与转发数据帧的工作。在默认情况下，该端口会在这种状态下停留15秒钟的时间。</p>
+<p><strong>Learning</strong>(学习状态)：这个二层端口准备参与数据帧的转发，并开始填写MAC表。在默认情况下，端口会在这种状态下停留15秒钟时间。</p>
+<p><strong>Forwarding</strong>（转发状态）：这个二层端口已经成为了活动拓扑的一个组成部分，它会转发数据帧，并同时收发BPDU。</p>
+<p><strong>Disabled</strong>（禁用状态）：这个二层端口不会参与生成树，也不会转发。</p>
+<p>根桥每2s发送一次bpdu信息，维护本生成树的运行。</p>
+<p>tcn bpdu 拓扑变更通告，只会从根端口向上发。</p>
+<p>sh spanning-tree </p>
+<p>spanning-trre vlan 1，3，5 priority 优先级</p>
+<p>spanning-trre vlan 1，3，5 root </p>
+<p><pre style="color: rgb(0, 0, 0); font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-tap-highlight-color: rgba(26, 26, 26, 0.301961); -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; word-wrap: break-word; white-space: pre-wrap;">RSTP rapid 快速生成树</pre></p>
+<p>spanning-tree mode rapid-pvst</p>
+<p>协商/同意机制</p>
+<p>替代端口：替代根端口</p>
+<p>备份端口：备份指定端口，一般从阻塞端口选取</p>
+<p>丢弃状态：discarding</p>
+<p>​    向外发送bpdu信息</p>
+<p>学习状态：learning</p>
+<p>​    一边侦听一边学习</p>
+<p>转发状态：forward</p>
+<p>mst multiple 多生成树 </p>
+<p>对RSTP的优化，自动开启RSTP。</p>
+<p>默认处于instance（实例） 0</p>
+<p>特性：</p>
+<p>portfast 快速端口，不参与生成树的选举，直接进入转发状态。</p>
+<p>bpdu guard 一旦收到guard，接口就关闭，必须管理员手动恢复，进入接口sh再no sh。</p>
+<p>端口安全 </p>
+<p>spanning-tree portfast default 将交换机上所有端口设为快速端口</p>
+<p>int xx</p>
+<p>spanning-tree portfast针对单一接口开启</p>
+<p>spanning-tree portfast bpduguard default</p>
+<p>单臂路由 </p>
+<p>子接口：将一个物理接口逻辑上划分成几个子接口使用，每一个划分出的子接口类似于物理接口正常使用。</p>
+<p>pc机</p>
+<p>no ip routing关闭路由功能</p>
+<p>int xx</p>
+<p>ip add 192.168.2.2 255.255.255.0</p>
+<p>ip default-gateway 192.168.2.1</p>
+<p>int e0/0.1</p>
+<p>encapsulation dot1q 10←vlan编号</p>
+<p>企业连接ISP的方式</p>
+<p>单宿：从一个运营商拉一根线</p>
+<p>多宿：从多个运营商拉一根线</p>
+<p>双宿：从同一个运营商拉多根线</p>
+<p>双多宿：从多个运营商同时拉多根线</p>
+<p>三层交换</p>
+<p>每一个端口都可以支持交换和简单的路由功能，开始默认都为交换接口。</p>
+<p>svi端口：</p>
+<p>​    虚拟vlan接口，不受物理接口的限制，只受交换机性能的限制。性能比子接口好很多。前提本地存在此vlan。</p>
+<p>​    int vlan 10 此端口只能识别vlan10</p>
+<p>​    ip add x.x x.x</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/acl控制" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/acl控制/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/acl控制/">CCIE acl控制</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="数字acl"><a href="#数字acl" class="headerlink" title="数字acl"></a>数字acl</h3><p>全局配置</p>
+<p>access-list 1 deny/permit ip或网段 通配符</p>
+<p>不管是何种acl，最后都会存在一条拒绝所有数据的命令</p>
+<p>一般都会在结尾加上放行所有流量的命令</p>
+<p>access-list 1 permit any</p>
+<p>接口配置 ip access-group 1 in/out</p>
+<h3 id="命名acl"><a href="#命名acl" class="headerlink" title="命名acl"></a>命名acl</h3><p>全局ip access-list standard 名字</p>
+<p>deny 11.11.11.0 0.0.0.255</p>
+<p>deny 12.12.12.0 0.0.0.255</p>
+<p>pe any</p>
+<p>接口同理</p>
+<p>命名acl能no掉某条以及接下来的所有控制，保留上层，数字acl只能全部no</p>
+<p>全局 enable password/secret 密码</p>
+<p>​                         明文/密文 密文优先级高</p>
+<p>全局 line vty 0 4 可同时登入5个 0 2 三个</p>
+<p>   password 密码</p>
+<p>telnet ip 输入密码 </p>
+<p>远程登入端口号telnet:23 http:80</p>
+<h3 id="数字扩展acl"><a href="#数字扩展acl" class="headerlink" title="数字扩展acl"></a>数字扩展acl</h3><p>ping命令是icmp协议</p>
+<p>access-list 100 deny icmp 12.12.12.0 0.0.0.255 host 3.3.3.3 ？（ping 是echo）</p>
+<p>access-list 100 permit ip any any</p>
+<p>全局ip access-list extended 名字</p>
+<h3 id="access-list命令"><a href="#access-list命令" class="headerlink" title="access-list命令"></a>access-list命令</h3><p>（1）标准访问列表</p>
+<p>access-list access-list-number { permit | deny } {source [source-wildcard] | any}</p>
+<p>命令解释如下。</p>
+<p>access-list：访问列表命令。</p>
+<p>access-list-number：访问列表号码，值为1~99.</p>
+<p>permit：允许。</p>
+<p>deny：拒绝。</p>
+<p>source：源IP地址。</p>
+<p>source-wildcard：源IP地址的通配符。</p>
+<p>（2）扩展访问列表</p>
+<p><code>access-list access-list-number { permit | deny } { protocol \ protocol-keyword } { source [ source-wildcard ] | any } { destination destination-wildcard } | any }[protocol-specific options][log]</code></p>
+<p>命令解释如下。</p>
+<p>access-list-number：访问列表号码，值为100~199.</p>
+<p>protocol \ protocol-keyword：可使用的协议，包括IP、ICMP、IGRP、EIGRP、OSPF等。</p>
+<p>destination destination-wild：目的IP地址，格式与源IP地址相同。</p>
+<p>protocol-specific options：协议制定的选项。</p>
+<p>log：记录有关数据报进入访问列表的信息。</p>
+<p>rip 跳数</p>
+<p>offset-list acc号 in/out 跳数增加值</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/bgp" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/bgp/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/bgp/">CCIE bgp</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="边界网关路由协议"><a href="#边界网关路由协议" class="headerlink" title="边界网关路由协议"></a>边界网关路由协议</h1><h3 id="BGP简介"><a href="#BGP简介" class="headerlink" title="BGP简介"></a>BGP简介</h3><p>工作类型：路径矢量路由选择协议</p>
+<p>基于tcp(三次握手)</p>
+<p>三张表：邻居表（peer表）  bgp转发表  路由表</p>
+<h4 id="BGP版本"><a href="#BGP版本" class="headerlink" title="BGP版本"></a>BGP版本</h4><p>BGPv4：IPv4</p>
+<p>BGPv4+：IPv6</p>
+<p>MP-BGP：协议npls</p>
+<p>M-BGP：多播</p>
+<h4 id="BGP优缺点"><a href="#BGP优缺点" class="headerlink" title="BGP优缺点"></a>BGP优缺点</h4><p><strong>优点</strong></p>
+<p>1EGP路由表只能存储千条信息，bgp可上万条。</p>
+<p>2丰富的路径属性，13条选路原则，提供了更丰富的路由操控策略。</p>
+<p><strong>缺点</strong></p>
+<p>1对路由器性能要求较高。</p>
+<p>2配置程序比较复杂。</p>
+<p>3一般小网络不建议使用bgp</p>
+<h4 id="AS-和-邻居类型"><a href="#AS-和-邻居类型" class="headerlink" title="AS 和 邻居类型"></a>AS 和 邻居类型</h4><p>bgp AS 一台路由器只能属于一个</p>
+<p>公网AS1-65411    65412-65535私有AS</p>
+<p>iBGP：处于同一AS内的BGP路由器所建立的BGP对等体关系</p>
+<p>eBGP：不同AS内的BGP路由器建立的…</p>
+<p>### </p>
+<h3 id="BGP消息"><a href="#BGP消息" class="headerlink" title="BGP消息"></a>BGP消息</h3><p>open：建立成功，会互相发送open信息(类似hello)协商邻居关系的各项参数，等待对方确认。</p>
+<p>keeplive：维持对等体(类似邻居)关系的建立，60s发一次，180s后peer关系结束</p>
+<p>update：不会周期性更新，只会增量更新或触发更新。</p>
+<p>Notification：当BGP检测到错误状态时，就向对等体发出Notification消息，之后BGP连接会立即中断。</p>
+<h3 id="peer关系建立过程"><a href="#peer关系建立过程" class="headerlink" title="peer关系建立过程"></a>peer关系建立过程</h3><p>IDLE（空闲状态）：本地路由向外发送tcp(端口179)请求，等回复</p>
+<p>connect状态：tcp建立</p>
+<p>active：建立不成功，再次请求tcp连接的建立（回到IDLE）。</p>
+<p>open sent：建立成功，发送open消息</p>
+<p>openconfirm：收到对方的信息进行参数对比，参数一致则建立完成。</p>
+<p>established：连接建立。。update。。keepalive。。</p>
+<h3 id="bgp的防环机制"><a href="#bgp的防环机制" class="headerlink" title="bgp的防环机制"></a>bgp的防环机制</h3><h4 id="iBGP-水平分隔原则"><a href="#iBGP-水平分隔原则" class="headerlink" title="iBGP-水平分隔原则"></a>iBGP-水平分隔原则</h4><p>BGP对等体路由器收到iBGP路由，不会发送给其他iBGP对等体路由器。</p>
+<p>但是纯水平拓扑上该原则会导致路由不被传递学习。两个解决方案</p>
+<p>全互联拓扑解决方案：所有路由器间都建立iBGP关系。（垃圾方案）</p>
+<p>路由反射器解决方案：</p>
+<h4 id="eBGP"><a href="#eBGP" class="headerlink" title="eBGP"></a>eBGP</h4><p>基于AS PATH信息的检测。接收到来自于eBGP peer的路由更新，更新所带AS-PATH 信息包含了当前设备AS号，则该路由更新忽略。</p>
+<h4 id="特殊拓扑下路由反射器的防环机制"><a href="#特殊拓扑下路由反射器的防环机制" class="headerlink" title="特殊拓扑下路由反射器的防环机制"></a>特殊拓扑下路由反射器的防环机制</h4><p>originate id：起源id。路由器将设备的RID设置为起源ID。起源ID和当前设备RID一样，则路由更新不学习。</p>
+<p>cluster id：簇id。管理员在路由反射器上设置，路由更新携带的簇ID一致，则路由更新不学习。</p>
+<h3 id="同步与下一跳判断"><a href="#同步与下一跳判断" class="headerlink" title="同步与下一跳判断"></a>同步与下一跳判断</h3><p>路由更新来自于iBGP peer时才考虑同步和下一跳。</p>
+<h4 id="同步机制"><a href="#同步机制" class="headerlink" title="同步机制"></a>同步机制</h4><p>对于当前启用BGP的设备，路由更新对应的网络底层协议也必须能学习到，这才叫同步。同步是为了避免路由黑洞。</p>
+<p>现实中同步被关闭，路由黑洞问题无法避免，但利用MPLS能解决。</p>
+<h5 id="bgp路由黑洞"><a href="#bgp路由黑洞" class="headerlink" title="bgp路由黑洞"></a>bgp路由黑洞</h5><p>路由更新的传递设备也就是数据传输的沿途设备，并没有参与BGP ，学习该路由，所以数据抵达后，只能丢包。</p>
+<p>解决方法：</p>
+<p>1重分发(不建议，会增大路由表)</p>
+<p>2全互联的网络拓扑(两两之间建立ibgp对等体)</p>
+<h4 id="下一跳判断"><a href="#下一跳判断" class="headerlink" title="下一跳判断"></a>下一跳判断</h4><p>来自于iBGP peer的路由更新，如果下一跳不可达，路由更新不学习。</p>
+<p>路由源于AS外，通告者是eBGP peer，下一跳就是eBGP peer地址。</p>
+<p>路由源于AS外，通告者是iBGP peer，下一跳依旧是eBGP peer地址。此时下一跳可能不可达。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Router bgp &lt;as&gt;</span><br><span class="line">Neighbor &lt;peer-address&gt; next-hop-self</span><br><span class="line">//所有发给对等体的路由更新，下一跳强制修改成自己</span><br></pre></td></tr></table></figure>
+<p>路由源于iBGP peer，通告者是iBGP peer，下一跳就是iBGP peer地址。</p>
+<p>补充内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Neighbor &lt;peer-address&gt; next-hop-unchange</span><br><span class="line">//eBGP 下一跳维持不变</span><br></pre></td></tr></table></figure>
+<h3 id="BGP的路由更新属性"><a href="#BGP的路由更新属性" class="headerlink" title="BGP的路由更新属性"></a>BGP的路由更新属性</h3><ol>
+<li><p>公认必选</p>
+<p>NEXT-HOP：下一跳</p>
+<p>AS-PATH：AS路径信息</p>
+<p>Originate code：起源代码</p>
+<p>​    描述了目标网络进入BGP的方式（I E ?）</p>
+<p>​    I ：目标网络源于底层协议通过network进入BGP</p>
+<p>​    E：EGP共享的目标网络信息</p>
+<p>​    ?：外部路由以重分发的方式进入BGP</p>
+</li>
+<li><p>公认任选（自选）</p>
+<p>LP：本地优先</p>
+<p>​    路由更新在IBGP peer间传递时，LP值才出现，且为100</p>
+<p>​    作用：影响iBGP peer 出站路径的选择，LP参数越大越优。</p>
+<p>automatic aggregate：原子聚合</p>
+<p>​    BGP发生了自动聚合或手动聚合时，聚合后网络携带该属性。</p>
+<p>​    原子聚合属性用于提醒更新接受者，路由更新目标网络可能丢失了部分原有属性。</p>
+</li>
+<li><p>任选可传递</p>
+<p>Aggregated：被聚合属性——聚合后的网络携带的属性，表明该网络是聚合来的。</p>
+<p>Community：团体属性  是携带特定策略的标记</p>
+<p>​    公认团体属性：</p>
+<p>​        Internet：所有的BGP路由默认携带该属性，该属性对应的策略是，共享给所有的BGP peer。</p>
+<p>​        no-export：不导出，携带该属性的路由更新不共享给eBGP peer。</p>
+<p>​        no-advertise：不通告，携带该属性的路由更新不共享给任何BGP peer。</p>
+<p>​        local-as：本地as，携带该属性的路由更新不共享给联盟内其他eBGP peer。</p>
+<p>​    自定义团体属性：</p>
+<p>​        AA:NN</p>
+<p>​        AS号：标记值</p>
+</li>
+<li><p>任选不可传递（属性保留，但值为空）</p>
+<p>MED：多出口距离</p>
+<p>​    eBGP间路由共享携带该属性，MED值用于影响eBGP peer入站路径选择。MED值默认为0，越小越优。</p>
+<p>Originate id、cluster id</p>
+</li>
+</ol>
+<h3 id="BGP选路原则"><a href="#BGP选路原则" class="headerlink" title="BGP选路原则"></a>BGP选路原则</h3><p>选路原则决定了BGP按什么标准进行路由更新属性的比较</p>
+<ol>
+<li><p>优选拥有最高权重值的路径 weight</p>
+<p>用于影响当前路由器出站路径选择</p>
+<p>默认32768，越大越优</p>
+<p>不同类型的对等体出现，需要影响路径抉择，权重更优。</p>
+</li>
+<li><p>优选LP大的</p>
+</li>
+<li><p>优选起源于本地的路径</p>
+<p>next-hop=0.0.0.0</p>
+</li>
+<li><p>优选拥有最短AS-PATH 路径信息的</p>
+</li>
+<li><p>比较Origin属性&lt;IGP优先于EGP优先于Incomplete&gt;</p>
+</li>
+<li><p>优选拥有最佳MED值的</p>
+</li>
+<li><p>eBGP peer 的路径优于 iBGP peer的路径</p>
+</li>
+<li><p>优选离下一跳更近的路径</p>
+</li>
+<li><p>针对eBGP peer的路由，通过命令行允许多条路径，成为最佳进入路由表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">maximun-path &lt;n&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优选最早被学习的路由，只针对 eBGP peer</p>
+</li>
+<li><p>优选拥有最小RID的BGP peer提供的路由</p>
+</li>
+<li><p>优选拥有最短cluster-id 的路径</p>
+</li>
+<li><p>优选拥有最低peer地址的邻居提供的路径</p>
+</li>
+</ol>
+<h3 id="BGP基本配置"><a href="#BGP基本配置" class="headerlink" title="BGP基本配置"></a>BGP基本配置</h3><p>对等体体必须手动指定，并且指定的地址可达<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">bgp router-id &lt;a.b.c.d&gt; //设置bgp rid</span><br><span class="line">address-family ipv4 unicast //进入 bgpv4</span><br><span class="line"></span><br><span class="line">neighbor &lt;ip&gt; remote-as &lt;对端as号&gt;</span><br><span class="line">neighbor &lt;ip&gt; updat-source lo0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">以环回口建立ebgp对等体关系时，必须指定ebgp多跳，两端都要设置。</span><br><span class="line"></span><br><span class="line">nei ip ebgp-multihop 1-255(默认255)</span><br><span class="line"></span><br><span class="line">内部条目通过宣告或重分发</span><br><span class="line"></span><br><span class="line">bgp宣告的条目可以是本地直连网段，也可以是通过igp协议所学到的网段带入所得。</span><br><span class="line"></span><br><span class="line">net ip mask 子网掩码</span><br><span class="line"></span><br><span class="line">宣告的ip必须在本地路由表内存在，否则宣告不出去。</span><br><span class="line"></span><br><span class="line">sh ip bgp查看bgp表</span><br><span class="line"></span><br><span class="line">路由反射器(常在ibgp内启用)</span><br><span class="line"></span><br><span class="line">nei ip route-reflection-client</span><br><span class="line"></span><br><span class="line">做路由反射器的设备叫RR路由器</span><br><span class="line"></span><br><span class="line">next-hop-self下一跳是自己</span><br><span class="line"></span><br><span class="line">特权模式 clear ip bgp *      硬清除</span><br><span class="line"></span><br><span class="line">                 clear ip bgp * soft 软清除</span><br><span class="line"></span><br><span class="line">AS欺骗，用于EBGP之间，不能ibgp之间。</span><br><span class="line"></span><br><span class="line">AS重写。as-override来自于同一as的路由不接收。</span><br><span class="line"></span><br><span class="line">bgp 7.25</span><br><span class="line"></span><br><span class="line">聚合(类似于汇总)</span><br><span class="line"></span><br><span class="line">aggregate-address +网段 +子网掩码 +(summary-only)</span><br><span class="line"></span><br><span class="line">只能聚合学习到的，起源于本地的路由无法聚合。</span><br><span class="line"></span><br><span class="line">用对等体组建立bgp对等体关系</span><br><span class="line"></span><br><span class="line">1. nei 名字 peer-group</span><br><span class="line"></span><br><span class="line">         …一系列共同操作…</span><br><span class="line"></span><br><span class="line">1. nei Rid peer-group 名字</span><br></pre></td></tr></table></figure></p>
+<h3 id="自动汇总-auto-summary"><a href="#自动汇总-auto-summary" class="headerlink" title="自动汇总 auto-summary"></a>自动汇总 auto-summary</h3><p>自动汇总用来设定BGP宣告是精确还是不精确的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10.1.1.0/24</span><br><span class="line">RIP: network 1.0.0.0</span><br><span class="line">EIGRP OSPF ISIS: 10.1.1.0 0.0.0.255</span><br></pre></td></tr></table></figure>
+<p>auto-summary 关闭的情况下，BGP 处于精确宣告状态</p>
+<p>auto-summary 开启的情况下，BGP 处于非精确宣告状态</p>
+<p>被宣告的网络只要拥有本地对应的子网，被宣告网络就可以当做更新发送出去。</p>
+<p>针对外部路由，auto-summary 开启，外部路由自动汇总，否则外部路由就明细进入。</p>
+<h3 id="路由更新属性"><a href="#路由更新属性" class="headerlink" title="路由更新属性"></a>路由更新属性</h3><h4 id="如何修改路由更新属性-三个步骤"><a href="#如何修改路由更新属性-三个步骤" class="headerlink" title="如何修改路由更新属性(三个步骤)"></a>如何修改路由更新属性(三个步骤)</h4><ol>
+<li><p>抓取被修改路由更新属性的目标网络</p>
+<ul>
+<li>利用ACL抓取</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip access-list stand &lt;name&gt;</span><br><span class="line">permit &lt;x.x.x.x&gt; &lt;x.x.x.x&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>前缀列表 prefix-list</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip prefix-list &lt;编号&gt; &lt;permit/deny&gt; &lt;x.x.x.x/8&gt; [le &lt;xx&gt;/ge &lt;xx&gt;]</span><br><span class="line">//  其中/8是通配符</span><br><span class="line">//  le 与 ge 后面是前缀长度</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用路由映射调用 acl 或prefix-list 完成属性修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">route-map [name] [permit/deny] &lt;策略编号：默认10&gt;</span><br><span class="line">//这里的permit有两个作用：</span><br><span class="line">//	1. 在BGP里面，permit的网络被当做更新发送，deny的网络是被过滤的。</span><br><span class="line">//  2. 在非BGP里，permit含义是关注且执行策略，deny是不关注、不执行策略。</span><br><span class="line">//  route-map 创建后，有一个隐藏的 deny all</span><br><span class="line">match ip address &lt;ack-id&gt; //调用ACL</span><br><span class="line">match ip address prefix &lt;id&gt; //调用前缀列表</span><br><span class="line">set &lt;xxxxxx&gt; //设置路由更新属性</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>BGP里引用 route-map</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as&gt;</span><br><span class="line">neighbor &lt;a.b.c.d&gt; route-map &lt;name&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="weight-修改命令"><a href="#weight-修改命令" class="headerlink" title="weight 修改命令"></a>weight 修改命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;xx&gt;</span><br><span class="line">neighbor &lt;peer-address&gt; weight &lt;xxxx&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="通过-LP-影响出站路径"><a href="#通过-LP-影响出站路径" class="headerlink" title="通过 LP 影响出站路径"></a>通过 LP 影响出站路径</h4><h4 id="通过增加-AS-PATH-路径信息影响选路"><a href="#通过增加-AS-PATH-路径信息影响选路" class="headerlink" title="通过增加 AS-PATH 路径信息影响选路"></a>通过增加 AS-PATH 路径信息影响选路</h4><p>只有 eBGP peer 间该属性才能修改，当前路由器只关心 AS-PATH 的长短，不关心是否作用于 eBGP或 iBGP</p>
+<p>！！注意</p>
+<p>AS-PATH 信息的附加 in 和out 是不一样的</p>
+<p>1 i out方向附加666，就变成 1 666i</p>
+<p>1 i in  方 向附加666，就变成 666 1</p>
+<h4 id="通过修改起源代码"><a href="#通过修改起源代码" class="headerlink" title="通过修改起源代码"></a>通过修改起源代码</h4><h4 id="通过修改MED影响选路抉择"><a href="#通过修改MED影响选路抉择" class="headerlink" title="通过修改MED影响选路抉择"></a>通过修改MED影响选路抉择</h4><h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/交换机基础" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/交换机基础/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/交换机基础/">CCIE 交换机基础</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="交换机基础"><a href="#交换机基础" class="headerlink" title="交换机基础"></a>交换机基础</h3><p>泛洪：除接收端口外，所有端口都向外去发。</p>
+<p>mac地址表=cam表</p>
+<p>广播域：所能传播的最大范围</p>
+<p>冲突域：发生冲突之后所影响的范围</p>
+<p>CSMA/CD：载波帧听多链路访问</p>
+<p>交换机指示灯：</p>
+<p>绿色常亮：接口两端没有问题，但是当前没有数据从中通过</p>
+<p>绿色不停地闪：正在传输数据</p>
+<p>橘红色慢闪：端口没问题,对端线路或者对端的端口有问题</p>
+<p>橘红色快闪：端口和对端连接没有问题，正在协商参数建立</p>
+<p>黄色闪动：物理接口有问题，尝试重启。</p>
+<p>不闪：    物理接口有问题，无法通信</p>
+<p>vlan（虚拟局域网） </p>
+<p>作用：分隔广播域</p>
+<p>所有接口默认属于vlan1（默认vlan，不可删除）。</p>
+<p>vlan ID范围和解释</p>
+<p>\1. 0和4095 仅仅限于系统使用 用户不能查看和使用</p>
+<p>\2. 1 正常 cisco默认的vlan,用户可以使用但是不能删除</p>
+<p>\3. 2–1001 正常 用于以太网的VLAN，用户可以创建。使用。删除。</p>
+<p>\4. 1002–1005 正常 用于FDDI和令牌环的CISCO默认VLAN，用户不能删除</p>
+<p>\5. 1006–1024 保留 仅仅限于系统使用。用户不能查看和使用。</p>
+<p>\6. 1025–4094 扩展 仅仅用于以太网VLAN</p>
+<p>Trunk 干道协议（必须两端都设置）</p>
+<p>isl 思科私有协议，目前思科也不采用。通过再封装工作。</p>
+<p>802.1q tag插入帧头</p>
+<p>switchport trunk encapsulation dot1q</p>
+<p>switchport mode trunk</p>
+<p>access</p>
+<p>int xx</p>
+<p>sw mode acc</p>
+<p>sw acc vlan xx</p>
+<p>本帧vlan（native vlan）（属于802.1q）</p>
+<p>默认为1，一般不建议修改；若要修改，保持本网络中交换机上本帧vlan设置一致。</p>
+<p>sw tr na vl xx</p>
+<p>trunk下vlan流量过滤</p>
+<p>switchport trunk allowed vlan 1-9,11-4094</p>
+<p>vtp（虚拟传输协议）</p>
+<p>用于同步同一网络中交换机上网络的信息（减小庞大的配置量）</p>
+<p>生效的前提：trunk正常工作</p>
+<p>vtp mode sever/client/transparent</p>
+<p>服务器：NVRAM（可寄存性存储器）创建、修改、维护、传递、删除、同步vlan信息</p>
+<p>客户端：RAM(重启后要重新同步） 传递、同步vlan信息</p>
+<p>透明模式：NARAM 和服务器一样除了不同步，并且本地创建、修改、维护、删除的vlan    信息只在本地有效。</p>
+<p>sh int tr确保生效</p>
+<p>vtp domain 域名</p>
+<p>vtp mode xxx（默认为sever）</p>
+<p>sh vtp status</p>
+<p>其中Configuration Revision（配置修订号）（类似书的修订号，修改一次增加一次，不能减小）越大越好，同步大的。加入新的交换机时可用透明模式先测试。</p>
 
       
     </div>
@@ -1251,225 +1732,9 @@
 
 
   
-    <article id="post-Backend/base64原理" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/24/Backend/base64原理/" class="article-date">
-      <time datetime="2018-04-23T16:37:54.000Z" itemprop="datePublished">2018-04-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/Backend/base64原理/">Base64原理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h3><p>　　开发者对Base64编码肯定很熟悉，是否对它有很清晰的认识就不一定了。实际上Base64已经简单到不能再简单了，如果对它的理解还是模棱两可实在不应该。大概介绍一下Base64的相关内容，花几分钟时间就可以彻底理解它。文章下边贴了一个Base64的编解码器，方便阅读文章的同时来实验。</p>
-<p>　　<strong>一. Base64编码由来</strong></p>
-<p>　　为什么会有Base64编码呢？因为有些网络传送渠道并不支持所有的字节，例如传统的邮件只支持可见字符的传送，像ASCII码的<strong>控制字符</strong>就不能通过邮件传送。这样用途就受到了很大的限制，比如图片二进制流的每个字节不可能全部是可见字符，所以就传送不了。最好的方法就是在不改变传统协议的情况下，做一种扩展方案来支持二进制文件的传送。把不可打印的字符也能用可打印字符来表示，问题就解决了。Base64编码应运而生，Base64就是一种基于64个可打印字符来表示二进制数据的表示方法。</p>
-<p>　　<strong>二. Base64编码原理</strong></p>
-<p>　　看一下Base64的索引表，字符选用了”A-Z、a-z、0-9、+、/“ 64个可打印字符。数值代表字符的索引，这个是标准Base64协议规定的，不能更改。64个字符用6个bit位就可以全部表示，一个字节有8个bit位，剩下两个bit就浪费掉了，这样就不得不牺牲一部分空间了。这里需要弄明白的就是一个Base64字符是8个bit，但是有效部分只有右边的6个bit，左边两个永远是0。</p>
-<p><img src="https://images0.cnblogs.com/blog/238451/201408/291137095326660.png" alt="img"></p>
-<p>　　那么怎么用6个有效bit来表示传统字符的8个bit呢？8和6的最小公倍数是24，也就是说3个传统字节可以由4个Base64字符来表示，保证有效位数是一样的，这样就多了1/3的字节数来弥补Base64只有6个有效bit的不足。你也可以说用两个Base64字符也能表示一个传统字符，但是采用最小公倍数的方案其实是最减少浪费的。结合下边的图比较容易理解。Man是三个字符，一共24个有效bit，只好用4个Base64字符来凑齐24个有效位。红框表示的是对应的Base64，6个有效位转化成相应的索引值再对应Base64字符表，查出”Man”对应的Base64字符是”TWFU”。说到这里有个原则不知道你发现了没有，要转换成Base64的<strong>最小单位就是三个字节</strong>，对一个字符串来说每次都是三个字节三个字节的转换，对应的是Base64的四个字节。这个搞清楚了其实就差不多了。</p>
-<p><img src="https://images0.cnblogs.com/blog/238451/201408/291153483606946.png" alt="img">         <img src="https://images0.cnblogs.com/blog/238451/201408/291429131888725.png" alt="img"></p>
-<p>　　但是转换到最后你发现不够三个字节了怎么办呢？愿望终于实现了，我们可以用两个Base64来表示一个字符或用三个Base64表示两个字符，像下图的A对应的第二个Base64的二进制位只有两个，把后边的四个补0就是了。所以A对应的Base64字符就是QQ。上边已经说过了，原则是Base64字符的<strong>最小单位是四个字符一组</strong>，那这才两个字符，后边补两个”=”吧。其实不用”=”也不耽误解码，之所以用”=”，可能是考虑到多段编码后的Base64字符串拼起来也不会引起混淆。由此可见Base64字符串只可能最后出现一个或两个”=”，中间是不可能出现”=”的。下图中字符”BC”的编码过程也是一样的。</p>
-<p><img src="https://images0.cnblogs.com/blog/238451/201408/291217167983928.png" alt="img"></p>
-<p>　　<strong>三. 总结</strong>　　</p>
-<p>　　说起Base64编码可能有些奇怪，因为大多数的编码都是由字符转化成二进制的过程，而从二进制转成字符的过程称为解码。而Base64的概念就恰好反了，由二进制转到字符称为编码，由字符到二进制称为解码。</p>
-<p>　　Base64编码主要用在传输、存储、表示二进制等领域，还可以用来加密，但是这种加密比较简单，只是一眼看上去不知道什么内容罢了，当然也可以对Base64的字符序列进行定制来进行加密。</p>
-<p>　　Base64编码是从二进制到字符的过程，像一些中文字符用不同的编码转为二进制时，产生的二进制是不一样的，所以最终产生的Base64字符也不一样。例如”上网”对应utf-8格式的Base64编码是”5LiK572R”，对应GB2312格式的Base64编码是”yc/N+A==”。</p>
-<p>文章参考自 “<a href="http://zh.wikipedia.org/wiki/Base64" target="_blank" rel="noopener">维基百科-Base64</a>“</p>
-<h3 id="url-safe-base64"><a href="#url-safe-base64" class="headerlink" title="url safe base64"></a>url safe base64</h3><p>在上面的base64传统编码中会出现+, /两个会被url直接转义的符号，因此如果希望通过url传输这些编码字符串，我们</p>
-<p>需要先做传统base64编码，随后将+和/分别替换为- _两个字符，在接收端则做相反的动作解码</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Backend/">Backend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/base64/">base64</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Security/无线安全/reaver" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/18/Security/无线安全/reaver/" class="article-date">
-      <time datetime="2018-04-18T08:02:06.000Z" itemprop="datePublished">2018-04-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/18/Security/无线安全/reaver/">reaver</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="扫描使用wps的Wi-Fi"><a href="#扫描使用wps的Wi-Fi" class="headerlink" title="扫描使用wps的Wi-Fi"></a>扫描使用wps的Wi-Fi</h3><p><code>wash -i en0</code></p>
-<h3 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h3><p><code>reaver -i en0 [-b mac] -vv [-c channel]</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Security/">Security</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali/">Kali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wifi/">Wifi</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Security/无线安全/wireshark fatal IO error 2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/15/Security/无线安全/wireshark fatal IO error 2/" class="article-date">
-      <time datetime="2018-04-15T06:23:44.000Z" itemprop="datePublished">2018-04-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/15/Security/无线安全/wireshark fatal IO error 2/">kali vnc wireshark fatal IO error 2</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><em># wireshark</em></p>
-<p>failed to get the current screen resources<br>The X11 connection broke: I/O error (code 1)<br>XIO: fatal IO error 2 (No such file or directory) on X server “localhost:10.0”<br>after 349 requests (349 known processed) with 0 events remaining.</p>
-<p>Try using wireshark-gtk by installing</p>
-<p><em># apt install wireshark-gtk</em></p>
-<p>Now just run </p>
-<p><em># wireshark-gtk</em></p>
-<p>No errors. If you continue to get errors please comment below.</p>
-<p>source : <a href="https://www.linuxsecrets.com/discussions/9991-the-x11-connection-broke-i-o-error-code-1" target="_blank" rel="noopener">https://www.linuxsecrets.com/discussions/9991-the-x11-connection-broke-i-o-error-code-1</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Security/">Security</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali/">Kali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wifi/">Wifi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/">Wireshark</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
     </nav>
   
 </div>
