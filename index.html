@@ -263,7 +263,33 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="c-算法库-更新中"><a href="#c-算法库-更新中" class="headerlink" title="c++算法库(更新中)"></a>c++算法库(更新中)</h1><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>基于排序的算法，基本上都可以增加一个参数，即比较函数。</p>
+        <h1 id="c-算法库-更新中"><a href="#c-算法库-更新中" class="headerlink" title="c++算法库(更新中)"></a>c++算法库(更新中)</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>前提是已经排序。</p>
+<table>
+<thead>
+<tr>
+<th>binary_search</th>
+<th>determines if an element exists in a certain range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lower_bound</td>
+<td>returns an iterator to the first element <strong><em>not less</em></strong> than the given value</td>
+</tr>
+<tr>
+<td>upper_bound</td>
+<td>returns an iterator to the first element <strong><em>greater</em></strong> than a certain value</td>
+</tr>
+<tr>
+<td>equal_range</td>
+<td>returns range of elements matching a specific key</td>
+</tr>
+</tbody>
+</table>
+<p><strong>equal_range:</strong></p>
+<p>试图在已排序的[first,last)中寻找value，它返回一对迭代器i和j，其中i是在不破坏次序的前提下，<strong>value可插入的第一个位置（亦即lower_bound）</strong>，j则是在不破坏次序的前提下，<strong>value可插入的最后一个位置（亦即upper_bound）</strong>，因此，[i,j)内的每个元素都等同于value，而且[i,j)是[first,last)之中符合此一性质的最大子区间。</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>基于排序的算法，基本上都可以增加一个参数，即比较函数。</p>
+<p>需要随机访问迭代器。</p>
 <table>
 <thead>
 <tr>
@@ -290,7 +316,7 @@
 </tr>
 <tr>
 <td>stable_sort</td>
-<td>sorts a range of elements while preserving order between equal elements</td>
+<td>(稳定排序)sorts a range of elements while preserving order between equal elements</td>
 </tr>
 <tr>
 <td>nth_element</td>
@@ -298,6 +324,19 @@
 </tr>
 </tbody>
 </table>
+<p><strong>partial_sort:</strong></p>
+<p>partial_sort(first, middle, last);</p>
+<p>其实就是类似<em>用堆找第K大数</em>的方法，先 <code>make_heap(first, middle)</code>，然后不断比较替换堆顶，最后<code>sort_heap(first, heap);</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找出[first,last)中6个最小的元素，并且排序在[first,middle)，其余部分无序</span></span><br><span class="line">partial_sort(v.begin(), v.begin()+<span class="number">6</span>, v.end());</span><br></pre></td></tr></table></figure>
+<p><strong>nth_element:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nth_element</span><span class="params">( RandomIt first, RandomIt nth, RandomIt last )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>排序后a[n]就是数列中第n+1大的数（下标从0開始计数），a[start,n)中的数肯定不大于a[n,end]中的数。但是a[start,n), a[n,end]内的大小顺序还不一定。<strong>并不返回值。</strong></p>
+<p><strong>partial_sort_copy:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partial_sort_copy( InputIt first, InputIt last, RandomIt d_first, RandomIt d_last );</span><br></pre></td></tr></table></figure>
+<p>将排序后的内容复制到新的地方。输入输出迭代器范围的一大一小会产生不同效果，见如下例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v0&#123;<span class="number">4</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v1.begin(), v1.end());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the smaller vector in ascending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v1) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">if</span>(it == v1.end())</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The return value is the end iterator\n"</span>;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v2.begin(), v2.end(), </span><br><span class="line">                                <span class="built_in">std</span>::greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the larger vector in descending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v2) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> &lt;&lt; <span class="string">"The return value is the iterator to "</span> &lt;&lt; *it &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Writing to the smaller vector in ascending order gives: 1 2 3</span><br><span class="line">The return value is the end iterator</span><br><span class="line">Writing to the larger vector in descending order gives: 5 4 3 2 1 15 16</span><br><span class="line">The return value is the iterator to 15</span><br></pre></td></tr></table></figure>
 <h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>排序算法基本默认都是递增的，而堆排序如果要递增排序的话，则是建立最大堆，这就是我理解的默认是建立最大堆而不是最小堆的原因。</p>
 <table>
 <thead>
@@ -375,50 +414,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Untitled" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/17/Untitled/" class="article-date">
-      <time datetime="2019-03-17T10:55:11.817Z" itemprop="datePublished">2019-03-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
       
       <div class="clearfix"></div>
     </div>
@@ -1480,6 +1475,76 @@
       
         <p class="article-more-link">
           <a href="/2019/03/10/C_C++/C++Collection/C++string/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/C++Collection/C++强制类型转换" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/10/C_C++/C++Collection/C++强制类型转换/" class="article-date">
+      <time datetime="2019-03-10T07:04:04.000Z" itemprop="datePublished">2019-03-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/10/C_C++/C++Collection/C++强制类型转换/">C++强制类型转换</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="C-强制类型转换"><a href="#C-强制类型转换" class="headerlink" title="C++强制类型转换"></a>C++强制类型转换</h2><h3 id="C-强制类型转换-1"><a href="#C-强制类型转换-1" class="headerlink" title="C++强制类型转换"></a>C++强制类型转换</h3><p>在C++语言中新增了四个关键字static_cast、const_cast、reinterpret_cast和dynamic_cast。这四个关键字都是用于强制类型转换的。</p>
+<p>新类型的强制转换可以提供更好的控制强制转换过程，允许控制各种不同种类的强制转换。</p>
+<p>C++中风格是<code>static_cast&lt;type&gt;(content)</code>。C++风格的强制转换其他的好处是，它们能更清晰的表明它们要干什么。程序员只要扫一眼这样的代码，就能立即知道一个强制转换的目的。 </p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/10/C_C++/C++Collection/C++强制类型转换/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

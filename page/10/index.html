@@ -234,272 +234,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Database/Mysql/mysql 命令" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/10/06/Database/Mysql/mysql 命令/" class="article-date">
-      <time datetime="2018-10-06T13:06:00.000Z" itemprop="datePublished">2018-10-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/06/Database/Mysql/mysql 命令/">mysql 命令</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root -p create RUNOOB</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure>
-<h4 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; drop database RUNOOB;</span><br></pre></td></tr></table></figure>
-<p>​      或者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root -p drop RUNOOB</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure>
-<h4 id="选择-切换数据库"><a href="#选择-切换数据库" class="headerlink" title="选择/切换数据库"></a>选择/切换数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure>
-<h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `runoob_tbl`(</span><br><span class="line">   `runoob_id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   `runoob_title` VARCHAR(100) NOT NULL,</span><br><span class="line">   `runoob_author` VARCHAR(40) NOT NULL,</span><br><span class="line">   `submission_date` DATE,</span><br><span class="line">   PRIMARY KEY ( `runoob_id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
-<p>实例解析：</p>
-<ul>
-<li>如果你不想字段为 <strong>NULL</strong> 可以设置字段的属性为 <strong>NOT NULL</strong>， 在操作数据库时如果输入该字段的数据为<strong>NULL</strong> ，就会报错。</li>
-<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
-<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
-<li>ENGINE 设置存储引擎，CHARSET 设置编码</li>
-</ul>
-<h4 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table_name ;</span><br></pre></td></tr></table></figure>
-<h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure>
-<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE [WHERE condition1 [AND/OR condition2].....]</span><br><span class="line">[LIMIT N][ OFFSET M]</span><br></pre></td></tr></table></figure>
-<h4 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name SET field1=new-value1, field2=new-value2</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure>
-<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name [WHERE Clause]</span><br></pre></td></tr></table></figure>
-<h3 id="查询进阶"><a href="#查询进阶" class="headerlink" title="查询进阶"></a>查询进阶</h3><h4 id="like条件"><a href="#like条件" class="headerlink" title="like条件"></a>like条件</h4><p>SQL LIKE 子句中使用百分号 %字符来表示任意字符，类似于UNIX或正则表达式中的星号 *。</p>
-<p>如果没有使用百分号 %, LIKE 子句与等号 = 的效果是一样的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT field1, field2,...fieldN </span><br><span class="line">FROM table_name</span><br><span class="line">WHERE field1 LIKE condition1 [AND [OR]] filed2 = &apos;somevalue&apos;</span><br></pre></td></tr></table></figure>
-<h4 id="合并-UNION"><a href="#合并-UNION" class="headerlink" title="合并 UNION"></a>合并 UNION</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions]</span><br><span class="line">UNION [ALL | DISTINCT]</span><br><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions];</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>DISTINCT:</strong> 可选，删除结果集中重复的数据。默认情况下 UNION 操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。</li>
-<li><strong>ALL:</strong> 可选，返回所有结果集，包含重复数据。</li>
-</ul>
-<h4 id="排序-ORDER-BY"><a href="#排序-ORDER-BY" class="headerlink" title="排序 ORDER BY"></a>排序 ORDER BY</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT field1, field2,...fieldN table_name1, table_name2...</span><br><span class="line">ORDER BY field1, [field2...] [ASC [DESC]]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。 默认情况下，它是按升序排列。</li>
-</ul>
-<h4 id="分组-GROUP-BY"><a href="#分组-GROUP-BY" class="headerlink" title="分组 GROUP BY"></a>分组 GROUP BY</h4><p>GROUP BY 语句根据一个或多个列对结果集进行分组。</p>
-<p>在分组的列上我们可以使用 COUNT, SUM, AVG,等函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name, function(column_name)</span><br><span class="line">FROM table_name</span><br><span class="line">WHERE column_name operator value</span><br><span class="line">GROUP BY column_name;</span><br></pre></td></tr></table></figure>
-<h5 id="WITH-ROLLUP"><a href="#WITH-ROLLUP" class="headerlink" title="WITH ROLLUP"></a>WITH ROLLUP</h5><p>WITH ROLLUP 可以实现在分组统计数据基础上再进行相同的统计（SUM,AVG,COUNT…）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT name, SUM(singin) as singin_count FROM  employee_tbl GROUP BY name WITH ROLLUP;</span><br><span class="line">+--------+--------------+</span><br><span class="line">| name   | singin_count |</span><br><span class="line">+--------+--------------+</span><br><span class="line">| 小丽    |            2 |</span><br><span class="line">| 小明    |            7 |</span><br><span class="line">| 小王    |            7 |</span><br><span class="line">| NULL   |           16 |</span><br><span class="line">+--------+--------------+</span><br></pre></td></tr></table></figure>
-<p>其中记录 NULL 表示所有人的登录次数。</p>
-<p>我们可以使用 coalesce 来设置一个可以取代 NUll 的名称</p>
-<h5 id="coalesce-a-b-c"><a href="#coalesce-a-b-c" class="headerlink" title="coalesce(a,b,c)"></a>coalesce(a,b,c)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select coalesce(a,b,c);</span><br></pre></td></tr></table></figure>
-<p>参数说明：如果a==null,则选择b；如果b==null,则选择c；如果a!=null,则选择a；如果a b c 都为null ，则返回为null（没意义）。</p>
-<p>以下实例中如果名字为空我们使用总数代替：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT coalesce(name, &apos;总数&apos;), SUM(singin) as singin_count FROM  employee_tbl GROUP BY name WITH ROLLUP;</span><br><span class="line">+--------------------------+--------------+</span><br><span class="line">| coalesce(name, &apos;总数&apos;) | singin_count |</span><br><span class="line">+--------------------------+--------------+</span><br><span class="line">| 小丽                   |            2 |</span><br><span class="line">| 小明                   |            7 |</span><br><span class="line">| 小王                   |            7 |</span><br><span class="line">| 总数                   |           16 |</span><br><span class="line">+--------------------------+--------------+</span><br></pre></td></tr></table></figure>
-<h4 id="连接-JOIN"><a href="#连接-JOIN" class="headerlink" title="连接 JOIN"></a>连接 JOIN</h4><ul>
-<li><strong>INNER JOIN（内连接,或等值连接）</strong>：获取两个表中字段匹配关系的记录。可以省略 INNER。</li>
-<li><strong>LEFT JOIN（左连接）：</strong>获取左表所有记录，即使右表没有对应匹配的记录。</li>
-<li><strong>RIGHT JOIN（右连接）：</strong> 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT a.runoob_id, a.runoob_author FROM runoob_tbl a INNER JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;</span><br></pre></td></tr></table></figure>
-<p>等价于where语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a, tcount_tbl b WHERE a.runoob_author = b.runoob_author;</span><br></pre></td></tr></table></figure>
-<h4 id="where和having区别"><a href="#where和having区别" class="headerlink" title="where和having区别"></a>where和having区别</h4><p>having是从筛选出的字段再筛选，而where是从数据表中的字段直接进行的筛选。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="NULL值处理"><a href="#NULL值处理" class="headerlink" title="NULL值处理"></a>NULL值处理</h4><p>关于 NULL 的条件比较运算是比较特殊的。你不能使用 = NULL 或 != NULL 在列中查找 NULL 值 。</p>
-<p>在 MySQL 中，NULL 值与任何其它值的比较（即使是 NULL）永远返回 false，即 NULL = NULL 返回false 。</p>
-<p>为了处理这种情况，MySQL提供了三大运算符:</p>
-<ul>
-<li><strong>IS NULL:</strong> 当列的值是 NULL,此运算符返回 true。</li>
-<li><strong>IS NOT NULL:</strong> 当列的值不为 NULL, 运算符返回 true。</li>
-<li><strong>&lt;=&gt;:</strong> 比较操作符（不同于=运算符），当比较的的两个值为 NULL 时返回 true。</li>
-</ul>
-<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>我们已经了解到MySQL可以通过 <strong>LIKE …%</strong> 来进行模糊匹配。</p>
-<p>MySQL 同样也支持其他正则表达式的匹配，使用 REGEXP 操作符来进行正则表达式匹配。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT name FROM person_tbl WHERE name REGEXP &apos;^st&apos;;</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>模式</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>^</td>
-<td>匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 ‘\n’ 或 ‘\r’ 之后的位置。</td>
-</tr>
-<tr>
-<td>$</td>
-<td>匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 ‘\n’ 或 ‘\r’ 之前的位置。</td>
-</tr>
-<tr>
-<td>.</td>
-<td>匹配除 “\n” 之外的任何单个字符。要匹配包括 <code>&#39;\n&#39;</code> 在内的任何字符，请使用象 <code>&#39;[.\n]&#39;</code> 的模式。</td>
-</tr>
-<tr>
-<td>[…]</td>
-<td>字符集合。匹配所包含的任意一个字符。例如， <code>&#39;[abc]&#39;</code> 可以匹配 “plain” 中的 ‘a’。</td>
-</tr>
-<tr>
-<td>[^…]</td>
-<td>负值字符集合。匹配未包含的任意字符。例如，<code>&#39;[^abc]&#39;</code>可以匹配 “plain” 中的’p’。</td>
-</tr>
-<tr>
-<td>p1\</td>
-<td>p2\</td>
-<td>p3</td>
-<td>匹配 p1 或 p2 或 p3。例如，’z\</td>
-<td>food’ 能匹配 “z” 或 “food”。’(z\</td>
-<td>f)ood’ 则匹配 “zood” 或 “food”。</td>
-</tr>
-<tr>
-<td>*</td>
-<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
-</tr>
-<tr>
-<td>+</td>
-<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
-</tr>
-<tr>
-<td>{n}</td>
-<td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
-</tr>
-<tr>
-<td>{n,m}</td>
-<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h4><ul>
-<li>在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。</li>
-<li>事务处理可以用来维护数据库的完整性，保证成批的 SQL 语句要么全部执行，要么全部不执行。</li>
-</ul>
-<p>一般来说，事务是必须满足4个条件（ACID）：：原子性（<strong>A</strong>tomicity，或称不可分割性）、一致性（<strong>C</strong>onsistency）、隔离性（<strong>I</strong>solation，又称独立性）、持久性（<strong>D</strong>urability）。</p>
-<p>MYSQL 事务处理主要有两种方法：</p>
-<ol>
-<li>用 BEGIN, ROLLBACK, COMMIT来实现<ul>
-<li><strong>BEGIN</strong> 开始一个事务</li>
-<li><strong>ROLLBACK</strong> 事务回滚</li>
-<li><strong>COMMIT</strong> 事务确认</li>
-</ul>
-</li>
-<li>直接用 SET 来改变 MySQL 的自动提交模式: <ul>
-<li><strong>SET AUTOCOMMIT=0</strong> 禁止自动提交</li>
-<li><strong>SET AUTOCOMMIT=1</strong> 开启自动提交</li>
-</ul>
-</li>
-</ol>
-<h4 id="修改表-ALTER"><a href="#修改表-ALTER" class="headerlink" title="修改表 ALTER"></a>修改表 ALTER</h4><p>//查看数据表类型可以使用 SHOW TABLE STATUS 语句。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  SHOW TABLE STATUS LIKE &apos;testalter_tbl&apos;\G</span><br></pre></td></tr></table></figure>
-<h5 id="删除，添加或修改表字段"><a href="#删除，添加或修改表字段" class="headerlink" title="删除，添加或修改表字段"></a>删除，添加或修改表字段</h5><p>如下命令使用了 ALTER 命令及 DROP 子句来删除以上创建表的 i 字段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl  DROP i;</span><br></pre></td></tr></table></figure>
-<p>如果数据表中只剩余一个字段则无法使用DROP来删除字段。</p>
-<p>MySQL 中使用 ADD 子句来向数据表中添加列，如下实例在表 testalter_tbl 中添加 i 字段，并定义数据类型:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl ADD i INT;</span><br></pre></td></tr></table></figure>
-<p>如果需要指定新增字段的位置，可以使用MySQL提供的关键字 FIRST (设定位第一列)， AFTER 字段名（设定位于某个字段之后）。</p>
-<h5 id="修改字段类型及名称"><a href="#修改字段类型及名称" class="headerlink" title="修改字段类型及名称"></a>修改字段类型及名称</h5><p>如果需要修改字段类型及名称, 你可以在ALTER命令中使用 MODIFY 或 CHANGE 子句 。</p>
-<p>例如，把字段 c 的类型从 CHAR(1) 改为 CHAR(10)，可以执行以下命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl MODIFY c CHAR(10);</span><br></pre></td></tr></table></figure>
-<p>使用 CHANGE 子句, 语法有很大的不同。 在 CHANGE 关键字之后，紧跟着的是你要修改的字段名，然后指定新字段名及类型:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl CHANGE i j BIGINT;</span><br></pre></td></tr></table></figure>
-<h5 id="修改字段默认值"><a href="#修改字段默认值" class="headerlink" title="修改字段默认值"></a>修改字段默认值</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl ALTER i SET DEFAULT 1000;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl ALTER i DROP DEFAULT;</span><br></pre></td></tr></table></figure>
-<h5 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl RENAME TO alter_tbl;</span><br></pre></td></tr></table></figure>
-<h5 id="修改存储引擎"><a href="#修改存储引擎" class="headerlink" title="修改存储引擎"></a>修改存储引擎</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName engine=myisam;</span><br></pre></td></tr></table></figure>
-<h5 id="删除外键约束"><a href="#删除外键约束" class="headerlink" title="删除外键约束"></a>删除外键约束</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName drop foreign key keyName;</span><br></pre></td></tr></table></figure>
-<h5 id="修改字段的相对位置"><a href="#修改字段的相对位置" class="headerlink" title="修改字段的相对位置"></a>修改字段的相对位置</h5><p>这里name1为想要修改的字段，type1为该字段原来类型，first和after二选一，这应该显而易见，first放在第一位，after放在name2字段后面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName modify name1 type1 first|after name2;</span><br></pre></td></tr></table></figure>
-<h4 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a>临时表</h4><p>MySQL临时表只在当前连接可见，如果你使用PHP脚本来创建MySQL临时表，那每当PHP脚本执行完成后，该临时表也会自动销毁。</p>
-<p>如果你使用了其他MySQL客户端程序连接MySQL数据库服务器来创建临时表，那么只有在关闭客户端程序时才会销毁临时表，当然你也可以手动销毁。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TEMPORARY TABLE SalesSummary (</span><br><span class="line">    -&gt; product_name VARCHAR(50) NOT NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>删除临时表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DROP TABLE SalesSummary;</span><br></pre></td></tr></table></figure>
-<h4 id="复制表"><a href="#复制表" class="headerlink" title="复制表"></a>复制表</h4><ul>
-<li>使用 <strong>SHOW CREATE TABLE</strong> 命令获取创建数据表(<strong>CREATE TABLE</strong>) 语句，该语句包含了原数据表的结构，索引等。​</li>
-<li>复制以下命令显示的SQL语句，修改数据表名，并执行SQL语句，通过以上命令 将完全的复制数据表结构。</li>
-<li>如果你想复制表的内容，你就可以使用 <strong>INSERT INTO … SELECT</strong> 语句来实现。</li>
-</ul>
-<p><strong>步骤一：</strong></p>
-<p>获取数据表的完整结构。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW CREATE TABLE runoob_tbl \G;</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">       Table: runoob_tbl</span><br><span class="line">Create Table: CREATE TABLE `runoob_tbl` (</span><br><span class="line">  `runoob_id` int(11) NOT NULL auto_increment,</span><br><span class="line">  `runoob_title` varchar(100) NOT NULL default &apos;&apos;,</span><br><span class="line">  `runoob_author` varchar(40) NOT NULL default &apos;&apos;,</span><br><span class="line">  `submission_date` date default NULL,</span><br><span class="line">  PRIMARY KEY  (`runoob_id`),</span><br><span class="line">  UNIQUE KEY `AUTHOR_INDEX` (`runoob_author`)</span><br><span class="line">) ENGINE=InnoDB </span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">ERROR:</span><br><span class="line">No query specified</span><br></pre></td></tr></table></figure>
-<p><strong>步骤二：</strong></p>
-<p>修改SQL语句的数据表名，并执行SQL语句。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE `clone_tbl` (</span><br><span class="line">  -&gt; `runoob_id` int(11) NOT NULL auto_increment,</span><br><span class="line">  -&gt; `runoob_title` varchar(100) NOT NULL default &apos;&apos;,</span><br><span class="line">  -&gt; `runoob_author` varchar(40) NOT NULL default &apos;&apos;,</span><br><span class="line">  -&gt; `submission_date` date default NULL,</span><br><span class="line">  -&gt; PRIMARY KEY  (`runoob_id`),</span><br><span class="line">  -&gt; UNIQUE KEY `AUTHOR_INDEX` (`runoob_author`)</span><br><span class="line">-&gt; ) ENGINE=InnoDB;</span><br><span class="line">Query OK, 0 rows affected (1.80 sec)</span><br></pre></td></tr></table></figure>
-<p><strong>步骤三：</strong></p>
-<p>执行完第二步骤后，你将在数据库中创建新的克隆表 clone_tbl。 如果你想拷贝数据表的数据你可以使用 <strong>INSERT INTO… SELECT</strong> 语句来实现。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; INSERT INTO clone_tbl (runoob_id,</span><br><span class="line">    -&gt;                        runoob_title,</span><br><span class="line">    -&gt;                        runoob_author,</span><br><span class="line">    -&gt;                        submission_date)</span><br><span class="line">    -&gt; SELECT runoob_id,runoob_title,</span><br><span class="line">    -&gt;        runoob_author,submission_date</span><br><span class="line">    -&gt; FROM runoob_tbl;</span><br><span class="line">Query OK, 3 rows affected (0.07 sec)</span><br><span class="line">Records: 3  Duplicates: 0  Warnings: 0</span><br></pre></td></tr></table></figure>
-<h4 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h4><p>MySQL序列是一组整数：1, 2, 3, …，由于一张数据表只能有一个字段自增主键， 如果你想实现其他字段也实现自动增加，就可以使用MySQL序列来实现。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE insect</span><br><span class="line">    -&gt; (</span><br><span class="line">    -&gt; id INT UNSIGNED NOT NULL AUTO_INCREMENT,</span><br><span class="line">    -&gt; PRIMARY KEY (id),</span><br><span class="line">	……</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h5 id="重置序列"><a href="#重置序列" class="headerlink" title="重置序列"></a>重置序列</h5><p>如果你删除了数据表中的多条记录，并希望对剩下数据的AUTO_INCREMENT列进行重新排列，那么你可以通过删除自增的列，然后重新添加来实现。 不过该操作要非常小心，如果在删除的同时又有新记录添加，有可能会出现数据混乱。</p>
-<h5 id="设置序列的开始值"><a href="#设置序列的开始值" class="headerlink" title="设置序列的开始值"></a>设置序列的开始值</h5><p>一般情况下序列的开始值为1，但如果你需要指定一个开始值100，那我们可以通过以下语句来实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE insect</span><br><span class="line">    -&gt; (</span><br><span class="line">    -&gt; id INT UNSIGNED NOT NULL AUTO_INCREMENT,</span><br><span class="line">    -&gt; PRIMARY KEY (id),</span><br><span class="line">    -&gt; name VARCHAR(30) NOT NULL, </span><br><span class="line">    -&gt; date DATE NOT NULL,</span><br><span class="line">    -&gt; origin VARCHAR(30) NOT NULL</span><br><span class="line">)engine=innodb auto_increment=100 charset=utf8;</span><br></pre></td></tr></table></figure>
-<p>或者你也可以在表创建成功后，通过以下语句来实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE t AUTO_INCREMENT = 100;</span><br></pre></td></tr></table></figure>
-<h4 id="处理重复数据"><a href="#处理重复数据" class="headerlink" title="处理重复数据"></a>处理重复数据</h4><h5 id="防止"><a href="#防止" class="headerlink" title="防止"></a>防止</h5><p>可以在MySQL数据表中设置指定的字段为 <strong>PRIMARY KEY（主键）</strong> 或者 <strong>UNIQUE（唯一）</strong> 索引来保证数据的唯一性。</p>
-<p>INSERT IGNORE INTO当插入数据时，在设置了记录的唯一性后，如果插入重复数据，将不返回错误，<strong>跳过</strong>这条数据，只以警告形式返回。 而REPLACE INTO into如果存在primary 或 unique相同的记录，则先删除掉。再插入新记录。</p>
-<p>另一种设置数据的唯一性方法是添加一个UNIQUE索引，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE person_tbl</span><br><span class="line">(</span><br><span class="line">   first_name CHAR(20) NOT NULL,</span><br><span class="line">   last_name CHAR(20) NOT NULL,</span><br><span class="line">   sex CHAR(10)</span><br><span class="line">   UNIQUE (last_name, first_name)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h5 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h5><p>以下我们将统计表中 first_name 和 last_name的重复记录数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT COUNT(*) as repetitions, last_name, first_name</span><br><span class="line">    -&gt; FROM person_tbl</span><br><span class="line">    -&gt; GROUP BY last_name, first_name</span><br><span class="line">    -&gt; HAVING repetitions &gt; 1;</span><br></pre></td></tr></table></figure>
-<p>以上查询语句将返回 person_tbl 表中重复的记录数。 一般情况下，查询重复的值，请执行以下操作：</p>
-<ul>
-<li>确定哪一列包含的值可能会重复。</li>
-<li>在列选择列表使用COUNT(*)列出的那些列。</li>
-<li>在GROUP BY子句中列出的列。</li>
-<li>HAVING子句设置重复数大于1。</li>
-</ul>
-<h5 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h5><p>如果你需要读取不重复的数据可以在 SELECT 语句中使用 DISTINCT 关键字来过滤重复数据。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT DISTINCT last_name, first_name</span><br><span class="line">    -&gt; FROM person_tbl;</span><br></pre></td></tr></table></figure>
-<p>你也可以使用 GROUP BY 来读取数据表中不重复的数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT last_name, first_name</span><br><span class="line">    -&gt; FROM person_tbl</span><br><span class="line">    -&gt; GROUP BY (last_name, first_name);</span><br></pre></td></tr></table></figure>
-<h5 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h5><p>如果你想删除数据表中的重复数据，你可以使用以下的SQL语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE tmp SELECT last_name, first_name, sex FROM person_tbl  GROUP BY (last_name, first_name, sex);</span><br><span class="line">mysql&gt; DROP TABLE person_tbl;</span><br><span class="line">mysql&gt; ALTER TABLE tmp RENAME TO person_tbl;</span><br></pre></td></tr></table></figure>
-<p>当然你也可以在数据表中添加 INDEX（索引） 和 PRIMAY KEY（主键）这种简单的方法来删除表中的重复记录。方法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER IGNORE TABLE person_tbl</span><br><span class="line">    -&gt; ADD PRIMARY KEY (last_name, first_name);</span><br></pre></td></tr></table></figure>
-<h3 id="显示信息"><a href="#显示信息" class="headerlink" title="显示信息"></a>显示信息</h3><p>SHOW DATABASES                                //列出 MySQL Server 数据库。<br>SHOW TABLES [FROM db_name]                    //列出数据库数据表。<br>SHOW TABLE STATUS [FROM db_name]              //列出数据表及表状态信息。<br>SHOW COLUMNS FROM tbl_name [FROM db_name]     //列出资料表字段<br>SHOW FIELDS FROM tbl_name [FROM db_name]，DESCRIBE tbl_name [col_name]。<br>SHOW FULL COLUMNS FROM tbl_name [FROM db_name]//列出字段及详情<br>SHOW FULL FIELDS FROM tbl_name [FROM db_name] //列出字段完整属性<br>SHOW INDEX FROM tbl_name [FROM db_name]       //列出表索引。<br>SHOW STATUS                                  //列出 DB Server 状态。<br>SHOW VARIABLES                               //列出 MySQL 系统环境变量。<br>SHOW PROCESSLIST                             //列出执行命令。<br>SHOW GRANTS FOR user                         //列出某用户权限</p>
-<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>多行模式输入错误，可以输入\c 废弃本次语句。</p>
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Database/Mysql/mysql大小写区分" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1339,6 +1073,76 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Macos/macos apache problem" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/17/Macos/macos apache problem/" class="article-date">
+      <time datetime="2018-08-17T13:35:30.000Z" itemprop="datePublished">2018-08-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/17/Macos/macos apache problem/">macos apache problem</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="problem-when-start-apache-1"><a href="#problem-when-start-apache-1" class="headerlink" title="problem when start apache-1"></a>problem when start apache-1</h3><p>AH00558: httpd: Could not reliably determine the server’s fully qualified domain name, using sujiakaideMBP.lan. Set the ‘ServerName’ directive globally to suppress this message.</p>
+<h4 id="solve"><a href="#solve" class="headerlink" title="solve"></a>solve</h4><p>To find the right location of your <code>httpd.conf</code> Apache configuration file, run:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apachectl -t -D DUMP_INCLUDES</span><br></pre></td></tr></table></figure>
+<p>then double check whether <code>ServerName</code> is uncommented and set to <code>localhost</code>.</p>
+<h3 id="problem-when-start-apache-2"><a href="#problem-when-start-apache-2" class="headerlink" title="problem when start apache-2"></a>problem when start apache-2</h3><p>(48)Address already in use: AH00072: make_sock: could not bind to address [::]:8080</p>
+<p>(48)Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:8080</p>
+<h4 id="solve-1"><a href="#solve-1" class="headerlink" title="solve"></a>solve</h4><p>in httpd.conf, set Listen to another number.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Macos/">Macos</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Macos/">Macos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li></ul>
     </div>
 
       

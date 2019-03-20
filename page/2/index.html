@@ -234,76 +234,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-C_C++/C++Collection/C++强制类型转换" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/10/C_C++/C++Collection/C++强制类型转换/" class="article-date">
-      <time datetime="2019-03-10T07:04:04.000Z" itemprop="datePublished">2019-03-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/10/C_C++/C++Collection/C++强制类型转换/">C++强制类型转换</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="C-强制类型转换"><a href="#C-强制类型转换" class="headerlink" title="C++强制类型转换"></a>C++强制类型转换</h2><h3 id="C-强制类型转换-1"><a href="#C-强制类型转换-1" class="headerlink" title="C++强制类型转换"></a>C++强制类型转换</h3><p>在C++语言中新增了四个关键字static_cast、const_cast、reinterpret_cast和dynamic_cast。这四个关键字都是用于强制类型转换的。</p>
-<p>新类型的强制转换可以提供更好的控制强制转换过程，允许控制各种不同种类的强制转换。</p>
-<p>C++中风格是<code>static_cast&lt;type&gt;(content)</code>。C++风格的强制转换其他的好处是，它们能更清晰的表明它们要干什么。程序员只要扫一眼这样的代码，就能立即知道一个强制转换的目的。 </p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/10/C_C++/C++Collection/C++强制类型转换/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Operating System/浮点数存储法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -929,6 +859,86 @@
       
         <p class="article-more-link">
           <a href="/2019/03/07/Operating System/虚拟内存/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/C++Collection/C++智能指针" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/06/C_C++/C++Collection/C++智能指针/" class="article-date">
+      <time datetime="2019-03-06T15:20:43.000Z" itemprop="datePublished">2019-03-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/06/C_C++/C++Collection/C++智能指针/">C++智能指针</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="为什么需要？"><a href="#为什么需要？" class="headerlink" title="为什么需要？"></a>为什么需要？</h1><p>当程序正常或者异常终止时，普通指针在栈中被删除，但是它指向的内存不会被删除。</p>
+<p>而如果这个指针是对象，则可以让它的析构函数删除指向的内存。</p>
+<p>用法：将new获得（直接或间接）的地址赋给这种对象，当智能指针过期时，它的析构函数将使用delete来释放内存。当然，它们还有其他的功能。</p>
+<p>比如：<code>auto_ptr&lt;string&gt; ps(new string);</code></p>
+<h1 id="智能指针模版类"><a href="#智能指针模版类" class="headerlink" title="智能指针模版类"></a>智能指针模版类</h1><p>c++98 ：auto_ptr（废弃）</p>
+<p>c++11 ：unique_ptr、shared_ptr</p>
+<p>c++17 ：weak_ptr</p>
+<p>boost库还有一些智能指针，本文不介绍。</p>
+<h2 id="将原程序换成智能指针的步骤"><a href="#将原程序换成智能指针的步骤" class="headerlink" title="将原程序换成智能指针的步骤"></a>将原程序换成智能指针的步骤</h2><ol>
+<li><code>#include &lt;memory&gt;</code>，名称空间：std。</li>
+<li>替换指针</li>
+<li>删除delete语句</li>
+</ol>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/06/C_C++/C++Collection/C++智能指针/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
