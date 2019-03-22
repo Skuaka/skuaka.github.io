@@ -234,6 +234,138 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/Mysql/mac 使用 mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/Database/Mysql/mac 使用 mysql/" class="article-date">
+      <time datetime="2018-12-04T14:17:58.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/Database/Mysql/mac 使用 mysql/">mac 使用 mysql</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h2><p>1、安装：<code>sunyichaodeMacBook-Pro:~ sunyichao$ brew install mysql</code><br>2、开启mysql：<code>mysql.server start</code>(Linux下是<code>service mysql start</code>)<br>2、使用mysql的配置脚本：<code>/usr/local/opt/mysql/bin/mysql_secure_installation //mysql 提供的配置向导</code><br>启动这个脚本后，即可根据如下命令提示进行初始化设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$ /usr/local/opt/mysql/bin/mysql_secure_installation   //mysql 提供的配置向导</span><br><span class="line">Securing the MySQL server deployment.</span><br><span class="line">Connecting to MySQL using a blank password.</span><br><span class="line">VALIDATE PASSWORD PLUGIN can be used to test passwordsand improve security. It     checks the strength of password and allows the users to set only those passwords which are secure enough. Would you like to setup VALIDATE PASSWORD plugin?</span><br><span class="line"></span><br><span class="line">Press y|Y for Yes, any other key for No: k //是否采用mysql密码安全检测插件（这里作为演示选择否，密码检查插件要求密码复杂程度高，大小写字母+数字+字符等）</span><br><span class="line">Please set the password for root here. // 首次使用自带配置脚本，设置root密码</span><br><span class="line"></span><br><span class="line">New password:</span><br><span class="line"></span><br><span class="line">Re-enter new password:</span><br><span class="line"></span><br><span class="line">By default, a MySQL installation has an anonymous user, allowing anyone to log into MySQL without having to have a user account created for This is intended only for testing, and to make the installation go a bit smoother. You should remove them before moving into a production environment.    </span><br><span class="line">Remove anonymous users? [Y/n] Y //是否删除匿名用户</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed to connect from &apos;localhost&apos;.This</span><br><span class="line">ensures that someone cannot guess at the root password from the network.</span><br><span class="line"></span><br><span class="line">Disallow root login remotely? [Y/n] Y //是否禁止远程登录</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">By default, MySQL comes with a database named &apos;test&apos; that anyone can</span><br><span class="line">access.This is also intended only for testing, and should be removed</span><br><span class="line">before moving into a production environment.</span><br><span class="line"></span><br><span class="line">Remove test database and access to it? [Y/n] Y //删除测试数据库，并登录</span><br><span class="line"> Dropping test database...</span><br><span class="line"> ... Success!</span><br><span class="line"> Removing privileges on test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will take effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? [Y/n] Y//重新载入权限表</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">All done!  If you&apos;ve completed all of the above steps, your MySQL</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks for using MySQL!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$</span><br></pre></td></tr></table></figure>
+<p>//以上内容来自<a href="https://segmentfault.com/q/1010000000475470里的回答" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000475470里的回答</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/Tips/C++显式实例化的用途" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/C_C++/Tips/C++显式实例化的用途/" class="article-date">
+      <time datetime="2018-12-04T14:15:28.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/C_C++/Tips/C++显式实例化的用途/">C++显式实例化的用途</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>翻译自：<a href="https://stackoverflow.com/questions/2351148/explicit-instantiation-when-is-it-used" target="_blank" rel="noopener">https://stackoverflow.com/questions/2351148/explicit-instantiation-when-is-it-used</a></p>
+<p>学习时思考了这个问题，百度了一圈，对看到的帖子很失望，基本都在不懂装懂。所以谷歌了一下找到答案，翻译成中文：</p>
+<p>显式实例化让你能够先创建模版的某个实例，而不是在使用它的时候再隐式创建。主要的用途就是用来写库文件，因为没有实例化的模版不能放入对象(.obj)文件中。在库文件里使用了显式实例化后，模版的实例化代码就不需要在每个使用到的对象里拷贝一份了（隐式实例化），编译器只需要链接到相应的库函数。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/Tips/C++ofstream输出为1的情况" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1855,180 +1987,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/Tips/C++小Tips" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/25/C_C++/Tips/C++小Tips/" class="article-date">
-      <time datetime="2018-11-25T08:44:38.000Z" itemprop="datePublished">2018-11-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/25/C_C++/Tips/C++小Tips/">C++ Tips</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="重载和转换"><a href="#重载和转换" class="headerlink" title="重载和转换"></a>重载和转换</h3><p><strong>重载和转换</strong>：两种实现系统预定义类型和类类型相加的方法</p>
-<p>第一种：用转化函数将系统预定义类型转化为类类型，然后调用加法重载</p>
-<p>第二种：将加法定义为显式使用系统预定义类型的函数</p>
-<p>应该使用第二种，第一种有额外开销。</p>
-<p><strong>重载和转换</strong>：两种实现char*赋值给string类的方法</p>
-<p>第一种：自动调用构造函数将char*赋值给string，然后赋值。</p>
-<p>第二种：直接定义运算符重载</p>
-<p>应该使用第二种，第一种有额外开销。</p>
-<h3 id="new-char-和-new-char-1"><a href="#new-char-和-new-char-1" class="headerlink" title="new char 和 new char[1]"></a>new char 和 new char[1]</h3><p>有时候要用new char[1] 来匹配析构函数中的 delete[]。</p>
-<p>如果有多个构造函数，则必须用相同的方式使用new，要么都带中括号，要么都不带。因为只有一个析构函数，所有的构造函数都必须和它兼容。</p>
-<p>同时，也可以在某个构造函数中初始化指针为空指针，因为delete和delete[]可以用于空指针。</p>
-<h3 id="定位new运算符和delete的问题"><a href="#定位new运算符和delete的问题" class="headerlink" title="定位new运算符和delete的问题"></a>定位new运算符和delete的问题</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> * buffer = <span class="keyword">char</span>[BUF];</span><br><span class="line">Test * pc1 = <span class="keyword">new</span> (buffer) Test;</span><br><span class="line"><span class="keyword">delete</span> [] buffer;</span><br></pre></td></tr></table></figure>
-<p>将delete用于buffer时，不会为内存块内存储的Test对象调用析构函数。</p>
-<p><strong>解决方法</strong>：显式调用析构函数</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pc1-&gt;~Test();</span><br></pre></td></tr></table></figure>
-<p>ps：对于用定位new运算符创建的对象，应该与创建顺序相反的顺序进行删除。因为晚创建的对象可能依赖于早创建的对象。</p>
-<h3 id="C-中的匿名对象是pure-RValue"><a href="#C-中的匿名对象是pure-RValue" class="headerlink" title="C++中的匿名对象是pure RValue"></a>C++中的匿名对象是pure RValue</h3><h3 id="std-ref-可以返回对象的引用"><a href="#std-ref-可以返回对象的引用" class="headerlink" title="std::ref() 可以返回对象的引用"></a><code>std::ref()</code> 可以返回对象的引用</h3><h3 id="C-成员函数指针"><a href="#C-成员函数指针" class="headerlink" title="C++成员函数指针"></a>C++成员函数指针</h3><p>C++成员函数分为静态成员函数和普通成员函数，其中普通成员函数的实现中隐式包含了this指针作为其第一个参数，所以导致两者函数指针使用的差异，静态成员函数指针与普通的外部函数指针使用基本一致，但普通成员函数指针类型的定义要包含类名的信息：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span>  </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    Test(<span class="keyword">int</span> a, <span class="keyword">int</span> b): a(a), b(b)  </span><br><span class="line">    &#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span> <span class="params">(Test &amp; test)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; test.a &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; test.b &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">output</span> <span class="params">()</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">this</span>-&gt;a &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">this</span>-&gt;b &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">    <span class="keyword">int</span> a;  </span><br><span class="line">    <span class="keyword">int</span> b;  </span><br><span class="line">&#125;;</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="function">Test <span class="title">test</span><span class="params">(<span class="number">1</span>, <span class="number">2</span>)</span></span>;  </span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(Test::* MemFun)</span><span class="params">()</span></span>;<span class="comment">//普通成员函数的函数指针定义  </span></span><br><span class="line">    MemFun output = &amp;Test::output;  </span><br><span class="line">    (test.*output)(); <span class="comment">//等同于：Test * ptest = &amp;test; (ptest-&gt;*output)(); </span></span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(* StaticMemFun)</span><span class="params">(Test&amp;)</span></span>;<span class="comment">//静态成员函数的函数指针定义  </span></span><br><span class="line">    StaticMemFun print = &amp;Test::print;  </span><br><span class="line">    print(test);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意上述代码中，普通成员函数函数指针类型*前要加”类名::”，静态成员函数无此限制。</p>
-<p>注意获取一个成员函数指针的<strong>语法要求很严格</strong>：</p>
-<ol>
-<li><p>不能使用括号：例如&amp;(Test::output)错误；</p>
-</li>
-<li><p>必须有限定符：例如&amp;output不对。即使在类Test的作用域内也不行，必须加上限定符；</p>
-</li>
-<li><p>必须使用取地址符号：例如直接写Test::output不行（虽然普通函数指针可以这样）。所以，必须要这样写：&amp;ClassName::foo。</p>
-</li>
-</ol>
-<hr>
-<p>注意这里成员函数指针已经开始显示它“异类”的天性了。上面代码中注释A和B处两个表达式，产生了一个在C++里面没有类型的“东西”（这是C++语言里面唯一的例外，其它任何东西都是有类型的），这就是.<em>和-&gt;</em>运算符运算产生的东西：</p>
-<p><code>(test.*output)</code> / <code>(ptest-&gt;*output)</code></p>
-<p>这两个运算符求值生成的“东西”我们只知道可以把它拿来当函数调用一样使唤，别的什么也不能干，甚至都不能把它存在某个地方。就因为这个原因，Andrei Alexandrescu 在他那本著名的《Modern c++ design》里面就说，成员函数指针和这两个操作符号是“curiously half-baked concept in c++”。（5.9节）</p>
-<hr>
-<p>C++里面引入了“引用”(reference)的概念，可是却不存在“成员函数的引用”，这也是一个特殊的地方。(当然，我们可以使用“成员函数指针”的引用)。</p>
-<h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Wireshark/Wireshark入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/22/Network/Wireshark/Wireshark入门/" class="article-date">
-      <time datetime="2018-11-22T13:45:16.000Z" itemprop="datePublished">2018-11-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/22/Network/Wireshark/Wireshark入门/">Wireshark 入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Wireshark-入门"><a href="#Wireshark-入门" class="headerlink" title="Wireshark 入门"></a>Wireshark 入门</h2><h3 id="网卡混杂模式"><a href="#网卡混杂模式" class="headerlink" title="网卡混杂模式"></a>网卡混杂模式</h3><p>如果不设置混杂模式，你的计算机只能获取数据包发往的目标是你计算机和从你计算机出去的数据包。如果设置了混杂模式，你就可以捕获局域网中所有的数据包。</p>
-<h3 id="过滤表达式"><a href="#过滤表达式" class="headerlink" title="过滤表达式"></a>过滤表达式</h3><p><strong>关系</strong></p>
-<p>is present   如果选择的协议域存在，则显示相关数据包。<br>contains     判断一个协议，字段或者分片包含一个值<br>matches     判断一个协议或者字符串匹配一个给定的Perl表达式。</p>
-<p><strong>Predefined values</strong><br>有些协议域包含了预先定义的值。如果你选择的协议域包含这样的值，你可以在这个列表中选择。</p>
-<p><strong>函数</strong><br>upper(string－field)－把字符串转换成大写<br>lower(string－field)－把字符串转换成小写</p>
-<p>例如：<br>upper(ncp.nds_stream_name) contains “BO56.COM”</p>
-<h3 id="使用着色规则"><a href="#使用着色规则" class="headerlink" title="使用着色规则"></a>使用着色规则</h3><p>你经常会在数据包列表区域中看到不同的颜色。这就是wireshark做的很人性化的一方面。它可以让你指定条件，把符合条件的数据包按指定的颜色显示。这样你查找数据包会更方便些。</p>
-<p>点击“view”菜单，然后选择“Coloring Rules”</p>
-<p>注意：wireshark在应用规则的时候，是按自上而下的顺序去应用规则。因此刚添加的规则会优先应用。可以手动调整。</p>
-<h3 id="使用图表"><a href="#使用图表" class="headerlink" title="使用图表"></a>使用图表</h3><h4 id="IO图"><a href="#IO图" class="headerlink" title="IO图"></a>IO图</h4><p>wireshark的IO图让你可以对网络上的吞吐量绘图。让你了解网络数据传输过程中的峰值和波动情况。通过“Statistics”菜单中的“IO Graphs”选项可以打开这个IO图对话框。</p>
-<h4 id="RTT图"><a href="#RTT图" class="headerlink" title="RTT图"></a>RTT图</h4><p>wireshark还有一个功能就是可以对网络传输中的双向时间进行绘图。双向时间（round-trip time, RTT）,就是一个数据包被确认正常接收所花费的时间。</p>
-<h3 id="跟踪tcp流"><a href="#跟踪tcp流" class="headerlink" title="跟踪tcp流"></a>跟踪tcp流</h3><p>跟踪TCP流这个功能可以将接收到的数据排好顺序使之容易查看，而不需要一小块一小块地看。这在查看HTTP、FTP等纯文本应用层协议时非常有用。</p>
-<p>右键单击记录并选择Follow TCP Stream。这时TCP流就会在一个单独的窗口中显示出来。</p>
-<p>这个窗口中的文字会有两种颜色。红色用于表示从源地址到目标地址的流量。蓝色是从目标地址到源地址的流量。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/">Wireshark</a></li></ul>
     </div>
 
       
