@@ -234,6 +234,154 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Frontend/HTMLl5+CSS3入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/04/03/Frontend/HTMLl5+CSS3入门/" class="article-date">
+      <time datetime="2018-04-03T04:17:26.000Z" itemprop="datePublished">2018-04-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/03/Frontend/HTMLl5+CSS3入门/">HTML5+CSS3入门</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="html5"><a href="#html5" class="headerlink" title="html5"></a>html5</h3><p>ie9以上版本支持html5</p>
+<p>查询资料 <a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">http://www.w3school.com.cn/</a></p>
+<h4 id="html5格式"><a href="#html5格式" class="headerlink" title="html5格式"></a>html5格式</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>mytitle<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>html5语法更加宽松</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span><span class="tag">&lt;/<span class="name">meta</span>&gt;</span> <span class="comment">&lt;!--html5可以把所有的标签都看成是双标签&gt;</span></span><br><span class="line"><span class="comment">&lt;!--向下兼容--比html5低版本的语法都支持&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="html5新增标签"><a href="#html5新增标签" class="headerlink" title="html5新增标签"></a>html5新增标签</h4><p><code>&lt;header&gt;</code>网页的头部</p>
+<p><code>&lt;nav</code>网页的导航–链接的哪行文本</p>
+<p><code>&lt;section&gt;</code>代表网页的一个块–与div相似</p>
+<p><code>&lt;article&gt;</code>文章内容</p>
+<p><code>&lt;aside&gt;</code>网页文档的侧边栏</p>
+<p><code>&lt;footer&gt;</code>网页的页脚–版权</p>
+<h4 id="html5新增type标签"><a href="#html5新增type标签" class="headerlink" title="html5新增type标签"></a>html5新增type标签</h4><p>placeholder=”内容”  输入框的提示信息</p>
+<p>required=”required”  必填项，不填不能提交</p>
+<p>autofocus=”autofocus”  自动获取焦点，光标自动定位到输入框中</p>
+<h4 id="html5新增表单属性"><a href="#html5新增表单属性" class="headerlink" title="html5新增表单属性"></a>html5新增表单属性</h4><ul>
+<li><p>限定输入类型 </p>
+<p>email</p>
+<p>url</p>
+<p>data</p>
+<p>month</p>
+<p>time</p>
+<p>week</p>
+<p>number</p>
+</li>
+<li><p>search  搜索框</p>
+</li>
+<li><p>color  产生一个颜色选项</p>
+</li>
+<li><p>range  产生一个滑块</p>
+</li>
+</ul>
+<h4 id="html5视频-音频"><a href="#html5视频-音频" class="headerlink" title="html5视频/音频"></a>html5视频/音频</h4><p>视频</p>
+<p>.ogg  .mp4  .webm</p>
+<ol>
+<li><p><code>&lt;video src=&quot;路径&quot; &gt;</code>属性：autoplay=”autoplay”自动播放   controls控件</p>
+</li>
+<li><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">autoplay</span>=<span class="string">"autoplay"</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"xx.mp4"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"xx.ogg"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"xx.webm"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span><span class="comment">&lt;!--支持所有格式&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>音频</p>
+<p>.ogg  .mp3  .wav</p>
+<p><code>&lt;audio&gt;</code>类似video</p>
+<h3 id="css3"><a href="#css3" class="headerlink" title="css3"></a>css3</h3><p>对css2进行扩充、删减、优化</p>
+<h4 id="css3属性选择器"><a href="#css3属性选择器" class="headerlink" title="css3属性选择器"></a>css3属性选择器</h4><p>E–element 元素(选择器)    data–属性</p>
+<ul>
+<li><code>E[data]</code>  选择带有data属性的元素对象</li>
+<li><code>E[data=&quot;one&quot;]</code>  选择带有data属性并且属性值<strong>为one</strong>的元素</li>
+<li><code>E[data^=&quot;one&quot;]</code>  选择带有data属性并且属性值<strong>以o开头</strong>的元素</li>
+<li><code>E[data$=&quot;e&quot;]</code>  选择带有data属性并且属性值<strong>以e结尾</strong>的元素</li>
+<li><code>E[data*=&quot;n&quot;]</code>  选择带有data属性并且属性值<strong>包含n</strong>的元素</li>
+</ul>
+<h4 id="css3伪类"><a href="#css3伪类" class="headerlink" title="css3伪类"></a>css3伪类</h4><ul>
+<li><p><code>E:first-child{}</code>第一个E孩子</p>
+</li>
+<li><p><code>E:last-child{}</code>最后一个E孩子</p>
+</li>
+<li><p><code>E:only-child{}</code>唯一的个E孩子</p>
+</li>
+<li><p><code>E:nth-child(n){}</code>第n个E孩子</p>
+</li>
+<li><p><code>E:nth-child(2n+1){}</code></p>
+<p><code>E:nth-child(odd){}</code>获得奇数E孩子</p>
+</li>
+<li><p><code>E:nth-child(2n){}</code></p>
+<p><code>E:nth-child(even){}</code>获得偶数E孩子</p>
+</li>
+</ul>
+<h4 id="css3伪元素"><a href="#css3伪元素" class="headerlink" title="css3伪元素"></a>css3伪元素</h4><ul>
+<li><code>E:first-letter</code>设置第一个文字</li>
+<li><code>E:first-line</code>设置第一行文字</li>
+<li><code>E::after</code>在盒子里面的后面插入内容 .me::after{content:”内容”}</li>
+<li><code>E::before</code>在盒子里面的前面插入内容</li>
+</ul>
+<p>阿里巴巴矢量图标库  <a href="http://iconfont.cn/" target="_blank" rel="noopener">http://iconfont.cn/</a></p>
+<h4 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h4><p><strong>设置文本的阴影</strong></p>
+<p>text-shadow:水平(必须设置，正右负左)  垂直(必须设置，正下负上)  模糊强调  颜色(如果不设置，默认为黑色)</p>
+<p>可以有多重阴影，之间用逗号相隔</p>
+<p><code>text-shadow:2px 2px 2px blue,-2px -2px -2px #ff3399;</code></p>
+<p><strong>设置盒子的阴影</strong></p>
+<p>box-shadow: 水平(必须设置)  垂直(必须设置)  模糊强度  模糊尺寸  颜色  内外阴影(默认是外阴影，内阴影要加inset，但是如果是外阴影<strong>不加outset</strong>)</p>
+<h4 id="圆角矩形"><a href="#圆角矩形" class="headerlink" title="圆角矩形"></a>圆角矩形</h4><p>boder-radius:左上 右上 右下 左下</p>
+<h4 id="设置半透明颜色"><a href="#设置半透明颜色" class="headerlink" title="设置半透明颜色"></a>设置半透明颜色</h4><p>rgba(255,0,0,0.3)</p>
+<h4 id="背景图片的尺寸"><a href="#背景图片的尺寸" class="headerlink" title="背景图片的尺寸"></a>背景图片的尺寸</h4><p>background-size:宽度 高度 </p>
+<p>background-size:cover 背景图片会覆盖整个盒子(宽<strong>和</strong>高都覆盖)</p>
+<p>background-size:contain  图片覆盖盒子的宽<strong>或</strong>高</p>
+<h3 id="完"><a href="#完" class="headerlink" title="完"></a>完</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Frontend/Html入门" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
