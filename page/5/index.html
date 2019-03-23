@@ -1202,7 +1202,7 @@
 <p><code>int n</code> 指出 n 的类型 为 int，这种参数（指定特殊的类型而不是用作泛型名）成为非类型（non-type）或表达式（expression）参数。</p>
 <ul>
 <li>表达式参数可以是<strong>整型</strong>、<strong>枚举</strong>、<strong>引用</strong>、<strong>指针</strong>。因此double m是不合法的，但是double * m是合法的。</li>
-<li>模版代码不能修改参数的值，也不能使用参数的地址，所以不能在模版中使用诸如n++和&amp;n等表达式，实例化模版时，用作表达式参数的值必须是常量表达式。</li>
+<li>模版代码不能修改参数的值，也不能使用参数的地址，所以不能在模版中使用诸如n++和&amp;n等表达式，<strong>实例化模版时，用作表达式参数的值必须是常量表达式</strong>。</li>
 </ul>
 <h4 id="递归使用模版"><a href="#递归使用模版" class="headerlink" title="递归使用模版"></a>递归使用模版</h4><p><code>ArrayTP&lt; ArrayTP&lt;int,5&gt;, 10&gt;twodee</code> 与<code>int twodee[10][5]</code>等价，<strong>在模版语法中，维的顺序与二维数组相反</strong>。</p>
 <h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><p>类模板可以为<strong>类型参数</strong>提供默认值，这样如果忽略了类型参数值，则将使用默认的类型。（函数模版不能提供默认类型参数）</p>
