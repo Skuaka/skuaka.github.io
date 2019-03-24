@@ -1135,6 +1135,84 @@
 
 
   
+    <article id="post-Algorithm/逆元" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/14/Algorithm/逆元/" class="article-date">
+      <time datetime="2019-03-14T12:31:21.000Z" itemprop="datePublished">2019-03-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/14/Algorithm/逆元/">逆元</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="逆元（inv）"><a href="#逆元（inv）" class="headerlink" title="逆元（inv）"></a>逆元（inv）</h3><h4 id="什么是逆元"><a href="#什么是逆元" class="headerlink" title="什么是逆元"></a>什么是逆元</h4><p>当求解公式：(a/b)%m 时，因b可能会过大，会出现爆精度的情况，所以需变除法为乘法：</p>
+<p>设c是b的逆元，则有<code>b*c≡1(mod m)</code>；</p>
+<p>则<code>(a/b)%m = (a/b)*1%m = (a/b)*b*c%m = a*c(mod m)</code>;</p>
+<p>即a/b的模等于a*c的模；</p>
+<h4 id="求逆元的方法"><a href="#求逆元的方法" class="headerlink" title="求逆元的方法"></a>求逆元的方法</h4><h5 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h5><p>当p为质数时候，<code>a^(p-1)≡1(mod p)</code></p>
+<p>所以 <code>a^(p-2)</code> 是 a 的逆元</p>
+<p>复杂度O(logn)。</p>
+<p>例子 p=1000000007</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1000000009</span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">quickpow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ret = <span class="number">1</span>;</span><br><span class="line">    a %= mod;</span><br><span class="line">    <span class="keyword">while</span>(b) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>)</span><br><span class="line">            ret = (ret * a) % mod;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = (a * a) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">inv</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> quickpow(a, mod - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="阶乘的逆元"><a href="#阶乘的逆元" class="headerlink" title="阶乘的逆元"></a>阶乘的逆元</h4><p>记数字 x 的逆元为f(x)</p>
+<p>因为 <code>n! = (n-1)! * n</code></p>
+<p>所以 <code>f(n!) = f( (n-1)! * n) = f( (n-1)! ) * f(n)</code></p>
+<p>所以 <code>f( (n-1)! ) = f(n!) * n</code>  (逆元的逆元就是他自身)</p>
+<p>这样子我们就可以用后项推出前面的项了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//阶乘</span></span><br><span class="line">fac[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; MAXN; i++)</span><br><span class="line">    fac[i] = (fac[i<span class="number">-1</span>]*i)%MOD;</span><br><span class="line"><span class="comment">//逆元</span></span><br><span class="line">inv[MAXN<span class="number">-1</span>] = quickpow(fac[MAXN<span class="number">-1</span>], MOD<span class="number">-2</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = MAXN<span class="number">-2</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">    inv[i] = (inv[i+<span class="number">1</span>]*(i+<span class="number">1</span>))%MOD;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/C++Collection/C++线程库" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1761,74 +1839,6 @@
       
         <p class="article-more-link">
           <a href="/2019/03/11/C_C++/C++Collection/C++右值引用和移动/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Http/http" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/11/Network/Http/http/" class="article-date">
-      <time datetime="2019-03-11T15:27:43.000Z" itemprop="datePublished">2019-03-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/Network/Http/http/">http协议(待续</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h1 id="http协议-待续"><a href="#http协议-待续" class="headerlink" title="http协议(待续"></a>http协议(待续</h1>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/11/Network/Http/http/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
