@@ -538,7 +538,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在学C++文件操作时，我曾尝试直接将一个文件输入流接到文件输出流。</p>
+        <h3 id="fstream输出为1的情况"><a href="#fstream输出为1的情况" class="headerlink" title="fstream输出为1的情况"></a>fstream输出为1的情况</h3><p>在学C++文件操作时，我曾尝试直接将一个文件输入流接到文件输出流。</p>
 <p>如<code>fout &lt;&lt; fin;</code> 然而运行后输出的文件内容之有一个’1’。</p>
 <p>我接着又尝试<code>fout &lt;&lt; fin &lt;&lt; fin &lt;&lt; fin;</code>结果输出文件内容是’111’。</p>
 <p>查阅文档发现原因：</p>
