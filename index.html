@@ -1284,6 +1284,51 @@
 <li><p>在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
 </li>
 </ol>
+<h3 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h3><p>客户在调用函数connect之前不必非得调用bind函数。如果需要，内核会确定源IP地址，并选择一个临时端口。</p>
+<p>如果是TCP套接字，调用connect将激发三路握手，仅在成功或者出错时返回，返回错误有三种情况：</p>
+<ol>
+<li><p>若<strong>客户没有收到SYN分节的响应</strong>，则返回<code>ETIMEDOUT</code>错误。</p>
+<p>一般的实现无响应等待6s后再发送一个，若仍无响应则等24s发送一个。若等了75s仍未响应，则返回本错误。</p>
+</li>
+<li><p>若<strong>客户的SYN响应是RST</strong>，则表明服务器在指定端口没有进程在等待连接(也许服务器根本没运行)。</p>
+<p>这是一种<em>硬错误</em>，马上返回<code>ECONNREFUSED</code>错误。</p>
+</li>
+<li><p>若客户发出的SYN在某个路由器上引发了”目的地不可达”ICMP错误，则认为是一种<em>软错误</em>，并按照第一种情况继续发送。若等了75s仍未响应，则把保存的消息(ICMP错误)作为<code>EHOSTUNREACH</code>或<code>ENETUNREACH</code>错误返回给进程。</p>
+<p>对于第三种，以下两种情况也是可能的：</p>
+<ul>
+<li>按照本地系统的转发表，根本没有到达远程系统的路径</li>
+<li>connect调用根本不等待就返回</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意：如果connect()失败</strong>，必须close该套接字，不可对它再次调用connect。</p>
+<h4 id="产生RST的三个条件"><a href="#产生RST的三个条件" class="headerlink" title="产生RST的三个条件"></a>产生RST的三个条件</h4><ol>
+<li>目的地为某端口的SYN到达，但是该端口上没有正在监听的服务器。</li>
+<li>TCP想取消某个连接。</li>
+<li>TCP收到一个根本不存在的连接上的分节。</li>
+</ol>
+<h3 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h3><p>bind把一个本地协议地址赋予一个套接字，对于TCP则是IP和端口号的组合。</p>
+<p>对于TCP，可以都指定、也可以只指定一个、也可以都不指定。</p>
+<ul>
+<li>端口号赋0可以让内核选择端口，使用通配地址(INADDR_ANY，也就是0)可以让内核选择地址。</li>
+<li>一般服务器要定端口，不定ip；客户端都不需要定。</li>
+</ul>
+<p>从bind返回的常见错误就是<code>EADDRINUSE</code> 地址已使用。</p>
+<h3 id="listen"><a href="#listen" class="headerlink" title="listen()"></a>listen()</h3><p>listen仅由TCP服务器调用，它做两件事：</p>
+<ol>
+<li>当socket()创建一个套接字时，它被假设为一个主动套接字，listen()把一个未连接的套接字转化为一个被动套接字。</li>
+<li>本函数的第二个参数<em>规定</em>了内核应该为相应套接字排队的最大连接个数。</li>
+</ol>
+<p>内核为任何一个给定的监听套接字维护两个队列：</p>
+<ul>
+<li>未完成连接队列：SYN已收到，正在完成三路握手。SYN_RECD状态。</li>
+<li>已完成连接队列：已经完成三路握手。ESTABLISHED状态。</li>
+</ul>
+<p><img src="Picture/unp05.jpg" alt="unp05"></p>
+<p><img src="Picture/unp06.jpg" alt="unp06"></p>
+<p>如果三路握手完成，该项就从未完成队列移动到已完成队列队尾。当进程调用accept()时，已完成队列的队头将返回给进程；或者该队列为空，那么进程睡眠等待唤醒。</p>
+<p>当一个客户SYN到达时，如果队列是满的，那么TCP就忽略该分节，而不发送RST。因为这么做是暂时的，客户会重发SYN分节。</p>
+<h3 id="accept"><a href="#accept" class="headerlink" title="accept()"></a>accept()</h3><p>如果accept成功，那么其返回值是内核生成的全新的描述符（<em>已连接套接字</em>，区别于<em>监听套接字</em>），代表与所返回客户的TCP连接。</p>
 <h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>
