@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Skuaka">
+
+
+
+<meta name="description" content="libeventIntroduction官方文档：http://libevent.org . 本篇是对官方文档的学习摘录。学习前已有IO复用基础。  各系统分别提出了基于异步/callback的系统调用，例如Linux的epoll，BSD的kqueue，Windows的IOCP。由于在内核层面做了支持，所以可以用O(1)的效率查找到active的fd。基本上，libevent就是对这些高效IO的封">
+<meta name="keywords" content="Network">
+<meta property="og:type" content="article">
+<meta property="og:title" content="libevent">
+<meta property="og:url" content="http://skuaka.cn/2019/03/27/Network/IO/libevent/index.html">
+<meta property="og:site_name" content="Skuaka">
+<meta property="og:description" content="libeventIntroduction官方文档：http://libevent.org . 本篇是对官方文档的学习摘录。学习前已有IO复用基础。  各系统分别提出了基于异步/callback的系统调用，例如Linux的epoll，BSD的kqueue，Windows的IOCP。由于在内核层面做了支持，所以可以用O(1)的效率查找到active的fd。基本上，libevent就是对这些高效IO的封">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-03-31T11:07:53.571Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="libevent">
+<meta name="twitter:description" content="libeventIntroduction官方文档：http://libevent.org . 本篇是对官方文档的学习摘录。学习前已有IO复用基础。  各系统分别提出了基于异步/callback的系统调用，例如Linux的epoll，BSD的kqueue，Windows的IOCP。由于在内核层面做了支持，所以可以用O(1)的效率查找到active的fd。基本上，libevent就是对这些高效IO的封">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Skuaka" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/avatar.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>libevent | Skuaka</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Skuaka</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">For you, a thousand times over.</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">Home</a></li>
+                        
+                            <li><a href="/archives/">Archives</a></li>
+                        
+                            <li><a href="/tags/">Tags</a></li>
+                        
+                            <li><a href="/about/">about</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:skuaka@icloud.com" title="Email"></a>
+                            
+                                <a class="fa bilibili" href="https://space.bilibili.com/5006495" title="bilibili"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CCIE/">CCIE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMake/">CMake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDos/">DDos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTD/">DTD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DoNotStarve/">DoNotStarve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dreamweaver/">Dreamweaver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kali/">Kali</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Macos/">Macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Makefile/">Makefile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mp3/">Mp3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenGL/">OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Perl/">Perl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QT/">QT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberrypi/">Raspberrypi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLserver/">SQLserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Socks5/">Socks5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wifi/">Wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/">base64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc-gdb/">gcc,gdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unp/">unp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vultr/">vultr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Skuaka</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Skuaka</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">For you, a thousand times over.</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">Home</a></li>
+                
+                    <li><a href="/archives/">Archives</a></li>
+                
+                    <li><a href="/tags/">Tags</a></li>
+                
+                    <li><a href="/about/">about</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:skuaka@icloud.com" title="Email"></a>
+                            
+                                <a class="fa bilibili" target="_blank" href="https://space.bilibili.com/5006495" title="bilibili"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-Network/IO/libevent" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/27/Network/IO/libevent/" class="article-date">
+      <time datetime="2019-03-27T14:47:57.000Z" itemprop="datePublished">2019-03-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      libevent
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="libevent"><a href="#libevent" class="headerlink" title="libevent"></a>libevent</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>官方文档：<a href="http://libevent.org/" target="_blank" rel="noopener">http://libevent.org </a>.</p>
+<p>本篇是对官方文档的学习摘录。学习前已有IO复用基础。</p>
+<hr>
+<p>各系统分别提出了基于异步/callback的系统调用，例如Linux的epoll，BSD的kqueue，Windows的IOCP。由于在内核层面做了支持，所以可以用O(1)的效率查找到active的fd。基本上，<strong>libevent就是对这些高效IO的封装，提供统一的API，简化开发。</strong></p>
+<p><em>libevent</em> is meant to replace the event loop found in event driven network servers. An application just needs to call<em>event_dispatch()</em> and then add or remove events dynamically without having to change the event loop.</p>
+<p>Libevent can also be used for multi-threaded applications, either by isolating each event_base so that only a single thread accesses it, or by locked access to a single shared event_base. </p>
+<p>Libevent additionally provides a sophisticated framework for buffered network IO, with support for sockets, filters, rate-limiting, SSL, zero-copy file transmission, and IOCP. Libevent includes support for several useful protocols, including DNS, HTTP, and a minimal RPC framework.</p>
+<h3 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h3><p><strong>Libevent is divided into the following components:</strong></p>
+<p><strong>evutil</strong></p>
+<p>Generic functionality to abstract out the differences between different platforms’ networking implementations.</p>
+<p><strong>event</strong> and <strong>event_base</strong></p>
+<p>This is <em>the heart of Libevent</em>. It provides an abstract API to the various platform-specific, event-based nonblocking IO backends. It can let you know when sockets are ready to read or write, do basic timeout functionality, and detect OS signals.</p>
+<p><strong>bufferevent</strong></p>
+<p>These functions provide a more convenient wrapper around Libevent’s event-based core. They let your application request buffered reads and writes, and rather than informing you when sockets are ready to do, they let you know when IO has actually occurred.</p>
+<p><strong>evbuffer</strong></p>
+<p>This module implements the buffers underlying bufferevents, and provides functions for efficient and/or convenient access.</p>
+<p><strong>evhttp</strong></p>
+<p>A simple HTTP client/server implementation.</p>
+<p><strong>evdns</strong></p>
+<p>A simple DNS client/server implementation.</p>
+<p><strong>evrpc</strong></p>
+<p>A simple RPC implementation.</p>
+<h3 id="Libraries"><a href="#Libraries" class="headerlink" title="Libraries"></a>Libraries</h3><p>When Libevent is built, by default it installs the following libraries:</p>
+<ul>
+<li><p>libevent_core</p>
+<p>All core event and buffer functionality. This library contains all the event_base, evbuffer, bufferevent, and utility functions.</p>
+</li>
+<li><p>libevent_extra</p>
+<p>This library defines protocol-specific functionality that you may or may not want for your application, <em>including HTTP, DNS, and RPC</em>.</p>
+</li>
+<li><p>libevent</p>
+<p>This library <em>exists for historical reasons</em>; it contains the contents of both libevent_core and libevent_extra. <em>You shouldn’t use it; it may go away in a future version of Libevent</em>.</p>
+</li>
+</ul>
+<p>The following libraries are installed only on some platforms:</p>
+<ul>
+<li><p>libevent_pthreads</p>
+<p>This library adds threading and locking implementations based on the pthreads portable threading library. It is separated from libevent_core so that you don’t need to link against pthreads to use Libevent unless you are <em>actually</em> using Libevent in a multithreaded way.</p>
+</li>
+<li><p>libevent_openssl</p>
+<p>This library provides support for encrypted communications using bufferevents and the OpenSSL library. It is separated from libevent_core so that you don’t need to link against OpenSSL to use Libevent unless you are <em>actually</em> using encrypted connections.</p>
+</li>
+</ul>
+<h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><p>All current public Libevent headers are <strong>installed under the <em>event2</em> directory</strong>. </p>
+<p>link lib：<code>-levent</code> .</p>
+<table>
+<thead>
+<tr>
+<th>OLD HEADER</th>
+<th>REPLACED BY CURRENT HEADERS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event.h</td>
+<td>event2/event*.h, event2/buffer*.h event2/bufferevent*.h event2/tag*.h</td>
+</tr>
+<tr>
+<td>evdns.h</td>
+<td>event2/dns*.h</td>
+</tr>
+<tr>
+<td>evhttp.h</td>
+<td>event2/http*.h</td>
+</tr>
+<tr>
+<td>evrpc.h</td>
+<td>event2/rpc*.h</td>
+</tr>
+<tr>
+<td>evutil.h</td>
+<td>event2/util*.h</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Program"><a href="#Program" class="headerlink" title="Program"></a>Program</h2><h3 id="Lib-setup"><a href="#Lib-setup" class="headerlink" title="Lib setup"></a>Lib setup</h3><p>在开始调用libevent之前，可以进行一些设置来影响程序的行为。</p>
+<p>官方文档：<a href="http://www.wangafu.net/~nickm/libevent-book/Ref1_libsetup.html" target="_blank" rel="noopener">http://www.wangafu.net/~nickm/libevent-book/Ref1_libsetup.html</a> .</p>
+<p>其中可以设置的内容有：</p>
+<ul>
+<li>错误和警告日志的行为</li>
+<li>产生致命错误时的行为</li>
+<li>自定义内存管理函数</li>
+<li>使用锁来保证线程安全</li>
+<li>开启锁或者事件的debug选项</li>
+<li>确定libevent库的版本</li>
+<li>释放libevent库运行内部分配的内存(不是用户分配的)</li>
+</ul>
+<h3 id="event-base"><a href="#event-base" class="headerlink" title="event_base"></a>event_base</h3><p>Each event_base structure holds a set of events and can poll to determine which events are active.</p>
+<h4 id="多线程？"><a href="#多线程？" class="headerlink" title="多线程？"></a>多线程？</h4><p>如果为event_base设置了锁，那么在多个线程中访问它是安全的，但是一个事件循环只能在一个线程上运行，如果要多线程，必须为每一个线程都分配一个event_base。(未来版本会实现跨线程循环)</p>
+<hr>
+<h4 id="默认初始化"><a href="#默认初始化" class="headerlink" title="默认初始化"></a>默认初始化</h4><p><code>event_base_new()</code> : allocates and returns a new event base with the default settings. If there is an error, it returns NULL.</p>
+<h4 id="配置初始化"><a href="#配置初始化" class="headerlink" title="配置初始化"></a>配置初始化</h4><p><code>event_config</code> 的创建、使用和释放：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct event_config *<span class="title">event_config_new</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">struct event_base *<span class="title">event_base_new_with_config</span><span class="params">(<span class="keyword">const</span> struct event_config *cfg)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_config_free</span><span class="params">(struct event_config *cfg)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>event_config</code> 的配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_config_avoid_method</span><span class="params">(struct event_config *cfg, <span class="keyword">const</span> <span class="keyword">char</span> *method)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> event_method_feature &#123;</span><br><span class="line">    EV_FEATURE_ET = <span class="number">0x01</span>,		<span class="comment">// supports edge-triggered IO.</span></span><br><span class="line">    EV_FEATURE_O1 = <span class="number">0x02</span>,		<span class="comment">// O(1) operation</span></span><br><span class="line">    EV_FEATURE_FDS = <span class="number">0x04</span>,	<span class="comment">// support arbitrary file descriptor, not just sockets.</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_config_require_features</span><span class="params">(struct event_config *cfg,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  <span class="keyword">enum</span> event_method_feature feature)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> event_base_config_flag &#123;</span><br><span class="line">    EVENT_BASE_FLAG_NOLOCK = <span class="number">0x01</span>,</span><br><span class="line">    EVENT_BASE_FLAG_IGNORE_ENV = <span class="number">0x02</span>,</span><br><span class="line">    EVENT_BASE_FLAG_STARTUP_IOCP = <span class="number">0x04</span>,</span><br><span class="line">    EVENT_BASE_FLAG_NO_CACHE_TIME = <span class="number">0x08</span>,</span><br><span class="line">    EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST = <span class="number">0x10</span>,</span><br><span class="line">    EVENT_BASE_FLAG_PRECISE_TIMER = <span class="number">0x20</span></span><br><span class="line">&#125;;	<span class="comment">// detail: http://www.wangafu.net/~nickm/libevent-book/Ref2_eventbase.html</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_config_set_flag</span><span class="params">(struct event_config *cfg,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">enum</span> event_base_config_flag flag)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// This function prevents priority inversion by limiting how many low-priority event callbacks can be invoked before checking for more high-priority events. If max_interval is non-null, the event loop checks the time after each callback, and re-scans for high-priority events if max_interval has passed. If max_callbacks is nonnegative, the event loop also checks for more events after max_callbacks callbacks have been invoked. These rules apply to any event of min_priority or higher.</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_config_set_max_dispatch_interval</span><span class="params">(struct event_config *cfg,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> struct timeval *max_interval, <span class="keyword">int</span> max_callbacks,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> min_priority)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>The above functions that manipulate an event_config all return 0 on success, -1 on failure.</p>
+<p><strong>If you have made a configuration that Libevent can’t satisfy, event_base_new_with_config() will return NULL.</strong></p>
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><p><strong>Example</strong>: Preferring edge-triggered backends</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_config</span> *<span class="title">cfg</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span>;</span></span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* My program wants to use edge-triggered events if at all possible.  So</span></span><br><span class="line"><span class="comment">   I'll try to get a base twice: Once insisting on edge-triggered IO, and</span></span><br><span class="line"><span class="comment">   once not. */</span></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;<span class="number">2</span>; ++i) &#123;</span><br><span class="line">    cfg = event_config_new();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* I don't like select. */</span></span><br><span class="line">    event_config_avoid_method(cfg, <span class="string">"select"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">        event_config_require_features(cfg, EV_FEATURE_ET);</span><br><span class="line"></span><br><span class="line">    base = event_base_new_with_config(cfg);</span><br><span class="line">    event_config_free(cfg);</span><br><span class="line">    <span class="keyword">if</span> (base)</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Example</strong>: Avoiding priority-inversion</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_config</span> *<span class="title">cfg</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span>;</span></span><br><span class="line"></span><br><span class="line">cfg = event_config_new();</span><br><span class="line"><span class="keyword">if</span> (!cfg)</span><br><span class="line">   <span class="comment">/* Handle error */</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* I'm going to have events running at two priorities.  I expect that</span></span><br><span class="line"><span class="comment">   some of my priority-1 events are going to have pretty slow callbacks,</span></span><br><span class="line"><span class="comment">   so I don't want more than 100 msec to elapse (or 5 callbacks) before</span></span><br><span class="line"><span class="comment">   checking for priority-0 events. */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">msec_100</span> = &#123;</span> <span class="number">0</span>, <span class="number">100</span>*<span class="number">1000</span> &#125;;</span><br><span class="line"><span class="comment">/*The &lt;sys/time.h&gt; header defines the timeval structure that includes at least the following members:</span></span><br><span class="line"><span class="comment">time_t         tv_sec      seconds</span></span><br><span class="line"><span class="comment">suseconds_t    tv_usec     microseconds */</span></span><br><span class="line">event_config_set_max_dispatch_interval(cfg, &amp;msec_100, <span class="number">5</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">base = event_base_new_with_config(cfg);</span><br><span class="line"><span class="keyword">if</span> (!base)</span><br><span class="line">   <span class="comment">/* Handle error */</span>;</span><br><span class="line"></span><br><span class="line">event_base_priority_init(base, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="查看配置"><a href="#查看配置" class="headerlink" title="查看配置"></a>查看配置</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> **methods = event_get_supported_methods();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Starting Libevent %s.  Available methods are:\n"</span>,</span><br><span class="line">    event_get_version());</span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; methods[i] != <span class="literal">NULL</span>; ++i) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"    %s\n"</span>, methods[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span>;</span></span><br><span class="line"><span class="keyword">enum</span> event_method_feature f;</span><br><span class="line"></span><br><span class="line">base = event_base_new();</span><br><span class="line"><span class="keyword">if</span> (!base) &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Couldn't get an event_base!"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Using Libevent with backend method %s."</span>,</span><br><span class="line">        event_base_get_method(base));</span><br><span class="line">    f = event_base_get_features(base);</span><br><span class="line">    <span class="keyword">if</span> ((f &amp; EV_FEATURE_ET))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"  Edge-triggered events are supported."</span>);</span><br><span class="line">    <span class="keyword">if</span> ((f &amp; EV_FEATURE_O1))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"  O(1) event notification is supported."</span>);</span><br><span class="line">    <span class="keyword">if</span> ((f &amp; EV_FEATURE_FDS))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"  All FD types are supported."</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="释放event-base"><a href="#释放event-base" class="headerlink" title="释放event_base"></a>释放event_base</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_base_free</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="设置优先级"><a href="#设置优先级" class="headerlink" title="设置优先级"></a>设置优先级</h4><p>By default, though, an event_base supports only a single priority level.</p>
+<p>You can set the number of priorities on an event_base by calling <code>event_base_priority_init()</code>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_priority_init</span><span class="params">(struct event_base *base, <span class="keyword">int</span> n_priorities)</span></span>;</span><br><span class="line"><span class="comment">// returns 0 on success and -1 on failure</span></span><br><span class="line"><span class="comment">// n_priorities is the number of priorities to support.( &gt;=1 ).</span></span><br></pre></td></tr></table></figure>
+<p>The available priorities for new events will be numbered from 0 (most important) to n_priorities-1 (least important).</p>
+<p>By default, all new events associated with this base will be initialized with priority: <strong>n_priorities / 2</strong>.</p>
+<p>You <strong>must</strong> call this function before any events become active.</p>
+<p>查看当前设置的优先级：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_get_npriorities</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="fork之后重置"><a href="#fork之后重置" class="headerlink" title="fork之后重置"></a>fork之后重置</h4><p>Not all event backends persist cleanly after a call to fork(). Thus, if your program uses fork() or a related system call in order to start a new process, and you want to continue using an event_base after you have forked, you may need to reinitialize it.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_reinit</span><span class="params">(struct event_base *base)</span></span>;</span><br><span class="line"><span class="comment">// returns 0 on success, -1 on failure.</span></span><br></pre></td></tr></table></figure>
+<p>example:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (fork()) &#123;</span><br><span class="line">    <span class="comment">/* In parent */</span></span><br><span class="line">    continue_running_parent(base); <span class="comment">/*...*/</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/* In child */</span></span><br><span class="line">    event_reinit(base);</span><br><span class="line">    continue_running_child(base); <span class="comment">/*...*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="event-loop"><a href="#event-loop" class="headerlink" title="event loop"></a>event loop</h3><h4 id="run"><a href="#run" class="headerlink" title="run"></a>run</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVLOOP_ONCE             0x01</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVLOOP_NONBLOCK         0x02</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVLOOP_NO_EXIT_ON_EMPTY 0x04</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_loop</span><span class="params">(struct event_base *base, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_dispatch</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>The <code>event_base_dispatch()</code> call is the same as <code>event_base_loop()</code>, <em>with no flags set</em>.</p>
+<p>By default, the two functions <strong>run</strong> an event_base <strong>until</strong> :</p>
+<ol>
+<li>there are no more events registered in it</li>
+<li><code>event_base_loopbreak()</code> is called.</li>
+<li><code>event_base_loopexit()</code> is called.</li>
+</ol>
+<p>When it is done, <code>event_base_loop()</code> <strong>returns</strong> <strong>0</strong> if it exited normally, <strong>-1</strong> if it exited because of some unhandled error in the backend, and <strong>1</strong> if it exited because there were no more pending or active events.</p>
+<p><strong>Pseudocode :</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (any events are registered with the loop,</span><br><span class="line">        <span class="keyword">or</span> EVLOOP_NO_EXIT_ON_EMPTY was <span class="built_in">set</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (EVLOOP_NONBLOCK was <span class="built_in">set</span>, <span class="keyword">or</span> any events are already active)</span><br><span class="line">        If any registered events have triggered, mark them active.</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        Wait until at least one event has triggered, <span class="keyword">and</span> mark it active.</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (p = <span class="number">0</span>; p &lt; n_priorities; ++p) &#123;</span><br><span class="line">       <span class="keyword">if</span> (any event with priority of p is active) &#123;</span><br><span class="line">          Run all active events with priority of p.</span><br><span class="line">          <span class="keyword">break</span>; <span class="comment">/* Do not run any events of a less important priority */</span></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (EVLOOP_ONCE was <span class="built_in">set</span> <span class="keyword">or</span> EVLOOP_NONBLOCK was <span class="built_in">set</span>)</span><br><span class="line">       <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_loopexit</span><span class="params">(struct event_base *base,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">const</span> struct timeval *tv)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_loopbreak</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>differences :</strong></p>
+<p>The <code>event_base_loopexit()</code> function tells an event_base to stop looping after a given time has elapsed. If the <em>tv</em> argument is NULL, the event_base stops looping without a delay. If the event_base is currently running callbacks for any active events, it will continue running them, and not exit until <strong>they</strong> have all been run.</p>
+<p>The <code>event_base_loopbreak()</code> function tells the event_base to exit its loop immediately. It <strong>differs from</strong> <code>event_base_loopexit(base, NULL)</code> in that if the event_base is currently running callbacks for any active events, it will exit immediately after finishing the <strong>one</strong> it’s currently processing.</p>
+<p>Note also that event_base_loopexit(base,NULL) and event_base_loopbreak(base) act differently when no event loop is running: loopexit schedules the next instance of the event loop to stop right after the next round of callbacks are run (as if it had been invoked with EVLOOP_ONCE) whereas loopbreak only stops a currently running loop, and has no effect if the event loop isn’t running.</p>
+<h5 id="example"><a href="#example" class="headerlink" title="example"></a>example</h5><p>Example: Shut down immediately</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event2/event.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Here's a callback function that calls loopbreak */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cb</span><span class="params">(<span class="keyword">int</span> sock, <span class="keyword">short</span> what, <span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span> = <span class="title">arg</span>;</span></span><br><span class="line">    event_base_loopbreak(base);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main_loop</span><span class="params">(struct event_base *base, <span class="keyword">evutil_socket_t</span> watchdog_fd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">event</span> *<span class="title">watchdog_event</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Construct a new event to trigger whenever there are any bytes to</span></span><br><span class="line"><span class="comment">       read from a watchdog socket.  When that happens, we'll call the</span></span><br><span class="line"><span class="comment">       cb function, which will make the loop exit immediately without</span></span><br><span class="line"><span class="comment">       running any other active events at all.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    watchdog_event = event_new(base, watchdog_fd, EV_READ, cb, base);</span><br><span class="line"></span><br><span class="line">    event_add(watchdog_event, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    event_base_dispatch(base);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example: Run an event loop for 10 seconds, then exit.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event2/event.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">run_base_with_ticks</span><span class="params">(struct event_base *base)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">ten_sec</span>;</span></span><br><span class="line"></span><br><span class="line">  ten_sec.tv_sec = <span class="number">10</span>;</span><br><span class="line">  ten_sec.tv_usec = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Now we run the event_base for a series of 10-second intervals, printing</span></span><br><span class="line"><span class="comment">     "Tick" after each.  For a much better way to implement a 10-second</span></span><br><span class="line"><span class="comment">     timer, see the section below about persistent timer events. */</span></span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">     <span class="comment">/* This schedules an exit ten seconds from now. */</span></span><br><span class="line">     event_base_loopexit(base, &amp;ten_sec);</span><br><span class="line"></span><br><span class="line">     event_base_dispatch(base);</span><br><span class="line">     <span class="built_in">puts</span>(<span class="string">"Tick"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="检查退出原因"><a href="#检查退出原因" class="headerlink" title="检查退出原因"></a>检查退出原因</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_got_exit</span><span class="params">(struct event_base *base)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_got_break</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>These two functions will return true if the loop was stopped with <code>event_base_loopexit()</code> or <code>event_base_break()</code> respectively, and false otherwise. Their values will be reset the next time you start the event loop.</p>
+<h4 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h4><p>Sometimes you might want to stop Libevent right after the current callback has been run, and tell it to scan again. By analogy to <code>event_base_loopbreak()</code>, you can do this with the function <code>event_base_loopcontinue()</code>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_loopcontinue</span><span class="params">(struct event_base *)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>Calling event_base_loopcontinue() has no effect if we aren’t currently running event callbacks.</p>
+<h4 id="other-api"><a href="#other-api" class="headerlink" title="other api"></a>other api</h4><h5 id="time-cache"><a href="#time-cache" class="headerlink" title="time cache"></a>time cache</h5><p>系统时钟的代替方案：<a href="http://www.wangafu.net/~nickm/libevent-book/Ref3_eventloop.html" target="_blank" rel="noopener">http://www.wangafu.net/~nickm/libevent-book/Ref3_eventloop.html</a></p>
+<h5 id="dump-status"><a href="#dump-status" class="headerlink" title="dump status"></a>dump status</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_base_dump_events</span><span class="params">(struct event_base *base, FILE *f)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>For help debugging your program (or debugging Libevent!) you might sometimes want a complete list of all events added in the event_base and their status. </p>
+<p>Calling <code>event_base_dump_events()</code> writes this list to the stdio file provided.</p>
+<h4 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*event_base_foreach_event_cb)</span><span class="params">(<span class="keyword">const</span> struct event_base *,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> struct event *, <span class="keyword">void</span> *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_foreach_event</span><span class="params">(struct event_base *base,</span></span></span><br><span class="line"><span class="function"><span class="params">                             event_base_foreach_event_cb fn,</span></span></span><br><span class="line"><span class="function"><span class="params">                             <span class="keyword">void</span> *arg)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>Use <code>event_base_foreach_event()</code> to iterate over every currently active or pending event associated with an event_base. The provided callback will be invoked exactly once <strong>per event</strong>, in an <em>unspecified order</em>. </p>
+<p>The callback function must <strong>return 0 to continue iteration</strong>, or some other integer to stop iterating. <strong>Whatever value it returns will then be returned by <code>event_base_foreach_function()</code></strong>.</p>
+<p>Your callback function <strong>must not modify</strong> any of the events that it receives, or add or remove any events to the event base, or otherwise modify any event associated with the event base, or undefined behavior can occur, up to or including crashes and heap-smashing.</p>
+<p>The event_base <strong>lock will be held</strong> for the duration of the call to <code>event_base_foreach_event()</code> — this will block other threads from doing anything useful with the event_base, <em>so make sure that your callback doesn’t take a long time</em>.</p>
+<h3 id="events"><a href="#events" class="headerlink" title="events"></a>events</h3><p>Every event represents a set of conditions, including:</p>
+<ul>
+<li>A file descriptor being ready to read from or write to.</li>
+<li>A file descriptor <em>becoming</em> ready to read from or write to (Edge-triggered IO only).</li>
+<li>A timeout expiring.</li>
+<li>A signal occurring.</li>
+<li>A user-triggered event.</li>
+</ul>
+<p>Events have similar lifecycles. Once you call a Libevent function to set up an event and associate it with an event base, it becomes <strong>initialized</strong>. At this point, you can <em>add</em>, which makes it <strong>pending</strong> in the base. When the event is pending, if the conditions that would trigger an event occur (e.g., its file descriptor changes state or its timeout expires), the event becomes <strong>active</strong>, and its (user-provided) callback function is run. If the event is configured <strong>persistent</strong>, it remains pending. If it is not persistent, it stops being pending when its callback runs. You can make a pending event non-pending by <em>deleting</em> it, and you can <em>add</em> a non-pending event to make it pending again.</p>
+<h4 id="construct"><a href="#construct" class="headerlink" title="construct"></a>construct</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_TIMEOUT      0x01	<span class="comment">// ignored when construct, only return to cb</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_READ         0x02</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_WRITE        0x04</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_SIGNAL       0x08</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_PERSIST      0x10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_ET           0x20</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*event_callback_fn)</span><span class="params">(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">struct event *<span class="title">event_new</span><span class="params">(struct event_base *base, <span class="keyword">evutil_socket_t</span> fd,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">short</span> what, event_callback_fn cb,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_free</span><span class="params">(struct event *event)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>The <em>what</em> argument is a set of the flags listed above. When the event is active, Libevent will invoke the provided <em>cb</em> function, passing it as arguments: the file descriptor <em>fd</em>, a bitfield of <em>all</em> the events that triggered, and the value that was passed in for <em>arg</em> when the function was constructed.</p>
+<p>The <strong>EV_PERSIST</strong> flag  means that event remains pending even when its callback is activated. If you want to make it non-pending from within its callback, you can call <code>event_del()</code> on it. The timeout on a persistent event <strong>resets</strong> whenever the event’s callback runs.</p>
+<p>On an internal error, or invalid arguments, <code>event_new()</code> will <strong>return</strong> NULL.</p>
+<p>All new events are initialized and non-pending. To make an event pending, call <code>event_add()</code>.</p>
+<p>To deallocate an event, call <code>event_free()</code>. It is <strong>safe</strong> to call <code>event_free()</code> on an event that is pending or active: doing so makes the event non-pending and inactive before deallocating it.</p>
+<p><strong>Example</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cb_func</span><span class="params">(<span class="keyword">evutil_socket_t</span> fd, <span class="keyword">short</span> what, <span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *data = arg;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Got an event on socket %d:%s%s%s%s [%s]"</span>,</span><br><span class="line">            (<span class="keyword">int</span>) fd,</span><br><span class="line">            (what&amp;EV_TIMEOUT) ? <span class="string">" timeout"</span> : <span class="string">""</span>,</span><br><span class="line">            (what&amp;EV_READ)    ? <span class="string">" read"</span> : <span class="string">""</span>,</span><br><span class="line">            (what&amp;EV_WRITE)   ? <span class="string">" write"</span> : <span class="string">""</span>,</span><br><span class="line">            (what&amp;EV_SIGNAL)  ? <span class="string">" signal"</span> : <span class="string">""</span>,</span><br><span class="line">            data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main_loop</span><span class="params">(<span class="keyword">evutil_socket_t</span> fd1, <span class="keyword">evutil_socket_t</span> fd2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">event</span> *<span class="title">ev1</span>, *<span class="title">ev2</span>;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">five_seconds</span> = &#123;</span><span class="number">5</span>,<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span> = <span class="title">event_base_new</span>();</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* The caller has already set up fd1, fd2 somehow, and make them</span></span><br><span class="line"><span class="comment">           nonblocking. */</span></span><br><span class="line"></span><br><span class="line">        ev1 = event_new(base, fd1, EV_TIMEOUT|EV_READ|EV_PERSIST, cb_func,</span><br><span class="line">           (<span class="keyword">char</span>*)<span class="string">"Reading event"</span>);</span><br><span class="line">        ev2 = event_new(base, fd2, EV_WRITE|EV_PERSIST, cb_func,</span><br><span class="line">           (<span class="keyword">char</span>*)<span class="string">"Writing event"</span>);</span><br><span class="line"></span><br><span class="line">        event_add(ev1, &amp;five_seconds);</span><br><span class="line">        event_add(ev2, <span class="literal">NULL</span>);</span><br><span class="line">        event_base_dispatch(base);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Timeout-only"><a href="#Timeout-only" class="headerlink" title="Timeout-only"></a>Timeout-only</h5><p>As a convenience, there are a set of <strong>macros</strong> beginning with evtimer_ that you can use in place of the event_* calls to allocate and manipulate pure-timeout events.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_new(base, callback, arg) \</span></span><br><span class="line">    event_new((base), <span class="number">-1</span>, <span class="number">0</span>, (callback), (arg))</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_add(ev, tv) \</span></span><br><span class="line">    event_add((ev),(tv))</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_del(ev) \</span></span><br><span class="line">    event_del(ev)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_pending(ev, tv_out) \</span></span><br><span class="line">    event_pending((ev), EV_TIMEOUT, (tv_out))</span><br></pre></td></tr></table></figure>
+<h5 id="signal-events"><a href="#signal-events" class="headerlink" title="signal events"></a>signal events</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_new(base, signum, cb, arg) \</span></span><br><span class="line">    event_new(base, signum, EV_SIGNAL|EV_PERSIST, cb, arg)</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_add(ev, tv) \</span></span><br><span class="line">    event_add((ev),(tv))</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_del(ev) \</span></span><br><span class="line">    event_del(ev)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_pending(ev, what, tv_out) \</span></span><br><span class="line">    event_pending((ev), (what), (tv_out))</span><br></pre></td></tr></table></figure>
+<p>example:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">evsignal_new(base, SIGHUP, sighup_function, <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="assign"><a href="#assign" class="headerlink" title="assign"></a>assign</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_assign</span><span class="params">(struct event *event, struct event_base *base,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">evutil_socket_t</span> fd, <span class="keyword">short</span> what,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">void</span> (*callback)(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>All the arguments of <code>event_assign()</code> are as for <code>event_new()</code>, except for the <em>event</em> argument, which must point to an uninitialized event. </p>
+<p><strong>Example :</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event2/event.h&gt;</span></span></span><br><span class="line"><span class="comment">/* Watch out!  Including event_struct.h means that your code will not</span></span><br><span class="line"><span class="comment"> * be binary-compatible with future versions of Libevent. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event2/event_struct.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_pair</span> &#123;</span></span><br><span class="line">         <span class="keyword">evutil_socket_t</span> fd;</span><br><span class="line">         <span class="class"><span class="keyword">struct</span> <span class="title">event</span> <span class="title">read_event</span>;</span></span><br><span class="line">         <span class="class"><span class="keyword">struct</span> <span class="title">event</span> <span class="title">write_event</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readcb</span><span class="params">(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">writecb</span><span class="params">(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *)</span></span>;</span><br><span class="line"><span class="function">struct event_pair *<span class="title">event_pair_new</span><span class="params">(struct event_base *base, <span class="keyword">evutil_socket_t</span> fd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">event_pair</span> *<span class="title">p</span> = <span class="title">malloc</span>(<span class="title">sizeof</span>(<span class="title">struct</span> <span class="title">event_pair</span>));</span></span><br><span class="line">        <span class="keyword">if</span> (!p) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        p-&gt;fd = fd;</span><br><span class="line">        event_assign(&amp;p-&gt;read_event, base, fd, EV_READ|EV_PERSIST, readcb, p);</span><br><span class="line">        event_assign(&amp;p-&gt;write_event, base, fd, EV_WRITE|EV_PERSIST, writecb, p);</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You can also use <code>event_assign()</code> to initialize stack-allocated or statically allocated events.</p>
+<p><strong>WARNING</strong>: Never call <code>event_assign()</code> on an event that is already pending in an event base. If the event is already initialized and pending, call <code>event_del()</code> on it <strong>before</strong> you call <code>event_assign()</code> on it again.</p>
+<p>There are convenience <strong>macros</strong> you can use to <code>event_assign()</code> a timeout-only or a signal event:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_assign(event, base, callback, arg) \</span></span><br><span class="line">    event_assign(event, base, <span class="number">-1</span>, <span class="number">0</span>, callback, arg)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_assign(event, base, signum, callback, arg) \</span></span><br><span class="line">    event_assign(event, base, signum, EV_SIGNAL|EV_PERSIST, callback, arg)</span><br></pre></td></tr></table></figure>
+<p>关于<code>event_assign()</code>不同版本的兼容性问题，见<a href="http://www.wangafu.net/~nickm/libevent-book/Ref4_event.html" target="_blank" rel="noopener">官方文档</a> 。</p>
+<h4 id="use"><a href="#use" class="headerlink" title="use"></a>use</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_add</span><span class="params">(struct event *ev, <span class="keyword">const</span> struct timeval *tv)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_del</span><span class="params">(struct event *ev)</span></span>;</span><br><span class="line"><span class="comment">// returns 0 on success, -1 on failure</span></span><br></pre></td></tr></table></figure>
+<p>If you delete an event after it becomes active but before its callback has a chance to execute, the callback will not be executed.</p>
+<p>If you call <code>event_add()</code> on an event that is <em>already</em> pending, it will leave it pending, and reschedule it with the provided timeout. If the event is already pending, and you re-add it with the timeout NULL, <code>event_add()</code> will have no effect.</p>
+<p>You can remove a pending event’s timeout completely without deleting its IO or signal components. If the event had no timeout pending, <code>event_remove_timer()</code> has no effect. If the event had only a timeout but no IO or signal component, <code>event_remove_timer()</code> has the same effect as <code>event_del()</code>. </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_remove_timer</span><span class="params">(struct event *ev)</span></span>;</span><br></pre></td></tr></table></figure>
+<h5 id="priorities"><a href="#priorities" class="headerlink" title="priorities"></a>priorities</h5><p>Before adding an event to the event_base, but after initializing it, you can set its priority.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_priority_set</span><span class="params">(struct event *event, <span class="keyword">int</span> priority)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>When multiple events of multiple priorities become active, the low-priority events are not run. Instead, Libevent runs the high priority events, then checks for events again. Only when no high-priority events are active are the low-priority events run.</p>
+<h5 id="event-status"><a href="#event-status" class="headerlink" title="event status"></a>event status</h5><p>Sometimes you want to tell whether an event has been added, and check what it refers to.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_pending</span><span class="params">(<span class="keyword">const</span> struct event *ev, <span class="keyword">short</span> what, struct timeval *tv_out)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> event_get_signal(ev) <span class="comment">/* ... */</span></span></span><br><span class="line"><span class="keyword">evutil_socket_t</span> event_get_fd(<span class="keyword">const</span> struct event *ev);</span><br><span class="line"><span class="function">struct event_base *<span class="title">event_get_base</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">short</span> <span class="title">event_get_events</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"><span class="function">event_callback_fn <span class="title">event_get_callback</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">event_get_callback_arg</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_get_priority</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_get_assignment</span><span class="params">(<span class="keyword">const</span> struct event *event,</span></span></span><br><span class="line"><span class="function"><span class="params">        struct event_base **base_out,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">evutil_socket_t</span> *fd_out,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">short</span> *events_out,</span></span></span><br><span class="line"><span class="function"><span class="params">        event_callback_fn *callback_out,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">void</span> **arg_out)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>The <code>event_pending()</code> function determines whether the given event is pending or active. If it is, and any of the flags EV_READ, EV_WRITE, EV_SIGNAL, and EV_TIMEOUT are set in the <em>what</em> argument, the function returns all of the flags that the event is currently pending or active on. If <em>tv_out</em> is provided, and EV_TIMEOUT is set in <em>what</em>, and the event is currently pending or active on a timeout, then <em>tv_out</em> is set to hold the time when the event’s timeout will expire.</p>
+<p>The <code>event_get_fd()</code> and <code>event_get_signal()</code> functions return the configured file descriptor or signal number for an event. The <code>event_get_base()</code> function returns its configured event_base. The <code>event_get_events()</code> function returns the event <em>flags</em> (EV_READ, EV_WRITE, etc) of the event. The <code>event_get_callback()</code> and <code>event_get_callback_arg()</code> functions return the callback function and argument pointer. The <code>event_get_priority()</code> function returns the event’s currently assigned priority.</p>
+<p>The <code>event_get_assignment()</code> function copies all of the assigned fields of the event into the provided pointers. If any of the pointers is NULL, it is ignored.</p>
+<p><strong>Example :</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Change the callback and callback_arg of 'ev', which must not be pending. */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">replace_callback</span><span class="params">(struct event *ev, event_callback_fn new_callback,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">void</span> *new_callback_arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span>;</span></span><br><span class="line">    <span class="keyword">evutil_socket_t</span> fd;</span><br><span class="line">    <span class="keyword">short</span> events;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> pending;</span><br><span class="line"></span><br><span class="line">    pending = event_pending(ev, EV_READ|EV_WRITE|EV_SIGNAL|EV_TIMEOUT,</span><br><span class="line">                            <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (pending) &#123;</span><br><span class="line">        <span class="comment">/* We want to catch this here so that we do not re-assign a</span></span><br><span class="line"><span class="comment">         * pending event.  That would be very very bad. */</span></span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,</span><br><span class="line">                <span class="string">"Error! replace_callback called on a pending event!\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    event_get_assignment(ev, &amp;base, &amp;fd, &amp;events,</span><br><span class="line">                         <span class="literal">NULL</span> <span class="comment">/* ignore old callback */</span> ,</span><br><span class="line">                         <span class="literal">NULL</span> <span class="comment">/* ignore old callback argument */</span>);</span><br><span class="line"></span><br><span class="line">    event_assign(ev, base, fd, events, new_callback, new_callback_arg);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>currently running event</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct event *<span class="title">event_base_get_running_event</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
+<h5 id="one-off-events"><a href="#one-off-events" class="headerlink" title="one-off events"></a>one-off events</h5><p>If you don’t need to add an event more than once, or delete it once it has been added, and it doesn’t have to be persistent, you can use <code>event_base_once()</code>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_once</span><span class="params">(struct event_base *, <span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">void</span> (*)(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *), <span class="keyword">void</span> *, <span class="keyword">const</span> struct timeval *)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>This function’s interface is the same as <code>event_new()</code>, except that it does not support EV_SIGNAL or EV_PERSIST. The scheduled event is inserted and run with the default priority. <strong><em>When the callback is finally done, Libevent frees the internal event structure itself</em></strong>.</p>
+<p>Events inserted with <code>event_base_once()</code> cannot be deleted or manually activated: if you want to be able to cancel an event, create it with regular way.</p>
+<h5 id="manually-activate"><a href="#manually-activate" class="headerlink" title="manually activate"></a>manually activate</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_active</span><span class="params">(struct event *ev, <span class="keyword">int</span> what, <span class="keyword">short</span> ncalls)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>This function makes an event <em>ev</em> become active with the flags <em>what</em> (a combination of EV_READ, EV_WRITE, and EV_TIMEOUT). The event does not need to have previously been pending, and activating it does not make it pending.</p>
+<h5 id="others"><a href="#others" class="headerlink" title="others"></a>others</h5><p><strong>optimize timeouts</strong></p>
+<p>默认的存储事件超时的数据结构是堆，复杂度O(lgN)。可以改变存储的方式，比如改成O(1)的双端列队，具体见<a href="http://www.wangafu.net/~nickm/libevent-book/Ref4_event.html" target="_blank" rel="noopener">官方文档</a> 。</p>
+<p><strong>Telling a good event</strong></p>
+<p>辨别一个event结构是否是良好的(也许被清空了)。</p>
+<p>具体见<a href="http://www.wangafu.net/~nickm/libevent-book/Ref4_event.html" target="_blank" rel="noopener">官方文档</a> 。</p>
+<h3 id="bufferevents"><a href="#bufferevents" class="headerlink" title="bufferevents"></a>bufferevents</h3><h1 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h1>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2019/03/27/Network/IO/libevent/">libevent</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Skuaka</a></p>
+        <p><span>Created:</span>2019-03-27, 22:47:57</p>
+        <p><span>Updated:</span>2019-03-31, 19:07:53</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2019/03/27/Network/IO/libevent/" title="libevent">http://skuaka.cn/2019/03/27/Network/IO/libevent/</a>
+            <span class="copy-path" data-clipboard-text="From http://skuaka.cn/2019/03/27/Network/IO/libevent/　　By Skuaka" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/03/25/Operating System/操作系统知识点/">
+                    操作系统知识点
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#libevent"><span class="toc-number">1.</span> <span class="toc-text">libevent</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Components"><span class="toc-number">1.1.1.</span> <span class="toc-text">Components</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Libraries"><span class="toc-number">1.1.2.</span> <span class="toc-text">Libraries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Headers"><span class="toc-number">1.1.3.</span> <span class="toc-text">Headers</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Program"><span class="toc-number">1.2.</span> <span class="toc-text">Program</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lib-setup"><span class="toc-number">1.2.1.</span> <span class="toc-text">Lib setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#event-base"><span class="toc-number">1.2.2.</span> <span class="toc-text">event_base</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#多线程？"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">多线程？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#默认初始化"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">默认初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置初始化"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">配置初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#例子"><span class="toc-number">1.2.2.3.1.</span> <span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看配置"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">查看配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#释放event-base"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">释放event_base</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置优先级"><span class="toc-number">1.2.2.6.</span> <span class="toc-text">设置优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fork之后重置"><span class="toc-number">1.2.2.7.</span> <span class="toc-text">fork之后重置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#event-loop"><span class="toc-number">1.2.3.</span> <span class="toc-text">event loop</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#run"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">run</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#stop"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">stop</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#example"><span class="toc-number">1.2.3.2.1.</span> <span class="toc-text">example</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#检查退出原因"><span class="toc-number">1.2.3.2.2.</span> <span class="toc-text">检查退出原因</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#continue"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">continue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#other-api"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">other api</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#time-cache"><span class="toc-number">1.2.3.4.1.</span> <span class="toc-text">time cache</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dump-status"><span class="toc-number">1.2.3.4.2.</span> <span class="toc-text">dump status</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#foreach"><span class="toc-number">1.2.3.5.</span> <span class="toc-text">foreach</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#events"><span class="toc-number">1.2.4.</span> <span class="toc-text">events</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#construct"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">construct</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Timeout-only"><span class="toc-number">1.2.4.1.1.</span> <span class="toc-text">Timeout-only</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#signal-events"><span class="toc-number">1.2.4.1.2.</span> <span class="toc-text">signal events</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#assign"><span class="toc-number">1.2.4.1.3.</span> <span class="toc-text">assign</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#use"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">use</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#priorities"><span class="toc-number">1.2.4.2.1.</span> <span class="toc-text">priorities</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#event-status"><span class="toc-number">1.2.4.2.2.</span> <span class="toc-text">event status</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#one-off-events"><span class="toc-number">1.2.4.2.3.</span> <span class="toc-text">one-off events</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#manually-activate"><span class="toc-number">1.2.4.2.4.</span> <span class="toc-text">manually activate</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#others"><span class="toc-number">1.2.4.2.5.</span> <span class="toc-text">others</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bufferevents"><span class="toc-number">1.2.5.</span> <span class="toc-text">bufferevents</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#待续"><span class="toc-number">2.</span> <span class="toc-text">待续</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-5 i,
+        .toc-level-5 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide" title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"libevent　| Skuaka　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/03/25/Operating System/操作系统知识点/" title="Next: 操作系统知识点">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/Network/IO/libevent/">libevent</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Operating System/操作系统知识点/">操作系统知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Database/数据库理论知识/">数据库理论知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/24/Operating System/Linux虚拟地址空间/">Linux虚拟地址空间</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/23/C_C++/C++Collection/C++ref/">C++ref</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/Network/Tcp/IP头_TCP头_UDP头/">IP头_TCP头_UDP头</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/C_C++/C++Collection/C++线程池/">C++线程池</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/20/C_C++/C++Collection/C++algorithm/">c++algorithm</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/17/Network/Unp/unp笔记/">《unp》笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/Algorithm/逆元/">逆元</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/C_C++/C++Collection/C++线程库/">C++线程库</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/C_C++/C++Collection/C++chrono时间库/">C++chrono时间库</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/11/C_C++/C++Collection/C++右值引用和移动/">C++右值引用和移动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/11/Network/Http/http/">http协议(待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/11/Algorithm/堆和优先队列/">堆和优先队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/C_C++/C++Collection/C++string/">C++ string类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/C_C++/C++Collection/C++强制类型转换/">C++强制类型转换</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/09/Operating System/浮点数存储法/">浮点数存储法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/09/C_C++/Tips/C_C++pow函数实现/">C_C++ pow函数实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/09/C_C++/C++Collection/C++杂类/">C++杂类(持续更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/08/C_C++/Tips/C++运算符优先级/">C运算符优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/08/C_C++/C++Collection/C++虚函数表/">C++虚函数表</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/08/C_C++/Tips/结构体offsetof宏/">结构体offsetof宏 和 bit位测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/Database/Concept/mysql数据库引擎/">mysql数据库引擎</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/Operating System/互斥锁-自旋锁-读写锁/">互斥锁 自旋锁 读写锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/Operating System/虚拟内存概念/">虚拟内存概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/C_C++/C++Collection/C++智能指针/">C++智能指针</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/Operating System/C程序内存区域/">C程序内存区域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/05/Algorithm/LIS-最长上升子序列/">LIS 最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Algorithm/LCS-最长公共子序列/">LCS (最长公共子序列)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/C_C++/C++Collection/C++Lambda表达式/">C++ Lambda表达式用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/02/OpenGl/OpenGL编程/">OpenGL编程(待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/02/OpenGl/OpenGL概念/">OpenGL概念(待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/02/QT/QT 贪吃蛇/">QT 贪吃蛇</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/QT/PaintEvent/">QT PaintEvent</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/C_C++/Tips/C语言杂记/">C语言杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/OpenGl/窗口视口/">窗口视口</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/">TCP 半关闭,半连接,半打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/Network/Tcp/Tcp_ip协议栈/">Tcp_ip协议栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/Unix/Command/内存cpu/">Linux 内存Cpu 查看</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Unix/Command/tar/">Tar命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Unix/Command/ln/">ln</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Unix/Command/screen/">使用 screen 管理远程会话</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Mess/Game/DoNotStarve/饥荒联机控制台/">饥荒联机控制台</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Mess/Game/DoNotStarve/饥荒Linux服务器/">饥荒Linux服务器搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/28/Unix/Command/输出重定向/">Linux 输出重定向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/C_C++/模板和元编程/C++编译期备忘录/">C++ 编译期 备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/C_C++/模板和元编程/C++typename用法/">C++ typename 用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/C_C++/模板和元编程/C++模板元编程书上习题/">C++模板元编程书上习题（待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/22/C_C++/模板和元编程/C++模板元编程/">C++模板元编程(待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/20/C_C++/C++Collection/C++基础笔记/">C++ 基础笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/20/C_C++/Tips/C++和Java的引用/">C++和Java的引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/18/Network/IO/Reactor/">高性能IO之Reactor模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/18/Database/Redis/Redis设计与实现/">Redis 设计与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/17/Database/Redis/Mac 下 Redis 使用/">Mac 下 Redis 使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/10/Operating System/操作系统期末背诵点/">操作系统期末背诵点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/05/QT/QT入门/">QT 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/04/QT/QString/">QString与char*的相互转换</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/28/Algorithm/排序算法/">排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/24/Network/Tcp/TCP网络拥塞控制/">TCP网络拥塞控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/Unix/Programming/Makefile学习/">Makefile学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/07/C_C++/C++Collection/C++STL/">C++ STL</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/07/Algorithm/查找树/">查找树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/06/Database/SQLserver/远程登入sqlserver/">远程登入 SQL server</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Database/Mysql/mysql c api/">mysql c&c++ api</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Database/Mysql/mac 使用 mysql/">mac 使用 mysql</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/C_C++/Tips/C++显式实例化的用途/">C++显式实例化的用途</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/C_C++/Tips/C++ofstream输出为1的情况/">fstream输出为1的情况</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Backend/Dreamweaver服务器配置/">Dreamweaver 连接到 Linux 云服务器 php</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Macos/Mac杂项记录/">Mac杂项</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Macos/mac软件推荐/">mac软件推荐</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Unix/Raspberrypi/树莓派安装kali/">树莓派安装kali</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/Script Language/Perl/Perl入门/">Perl 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/Unix/Command/vim备忘录/">vim备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/C_C++/Concept_gcc/标准IO的三类缓冲/">标准IO的三类缓冲</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/25/C_C++/Tips/C++杂记/">C++杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Network/Wireshark/Wireshark入门/">Wireshark 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Unix/Command/Linux不常用小命令/">Linux 不常用命令(待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/C_C++/Tips/C++类与结构区别/">C++中结构体和类的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/17/Security/DDos/DDos攻击详解/">DDos 攻击详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/17/Network/Wireshark/qq好友IP定位/">qq好友IP定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/Backend/apache删除后Nginx显示Apache界面/">apache删除后使用Nginx服务仍然显示Apache界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/Unix/Proxy/Socks5/">Linux搭建Socks5 Proxy</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/14/Network/IO/epoll/">epoll</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/13/Unix/Command/sed/">sed 命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/12/Unix/Command/awk/">awk 命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/06/Unix/Command/nmap/">nmap</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/06/Unix/System/使用过的端口/">使用过的端口(待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/06/Macos/mac显示隐藏文件/">macos 显示隐藏文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/06/Mess/win逆向工程(弃)/">win逆向工程（放弃）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/01/Mess/计算机专业名词/">计算机专业名词记录(放弃更新）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/01/C_C++/Concept_gcc/不可重入函数/">不可重入函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/Unix/System/Linux日志文件分析/">Linux 日志文件分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/26/Unix/Programming/解释器文件/">解释器文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/26/Script Language/Python/Python杂记/">Python 杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/18/Database/SQLserver/mssql实验/">mssql实验(放弃更新)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/06/Database/Mysql/mysql 命令/">mysql 命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/06/Database/Mysql/mysql大小写区分/">mysql大小写区分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/Unix/Programming/CMake入门/">CMake入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/Macos/mac平台开发工具/">我用的mac平台开发工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/Mess/vultr问题集/">vultr 问题集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/Unix/System/Linux备忘录/">Linux备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/Network/Unp/unp_code/">《unp》源代码问题笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/20/Database/PostgreSQL/C++ connector for PostgreSQL/">C++ connector for PostgreSQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/">PostgreSQL 命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /">Mac 下 PostgreSQL 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/17/Macos/macos apache problem/">macos apache problem</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/15/Database/Mysql/mysql创建时间和更新时间/">mysql创建时间和更新时间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/15/Database/Mysql/远程连接mysql/">远程连接mysql</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/14/Database/PostgreSQL/Linux 下 PostgreSQL/">Linux 下 PostgreSQL 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/09/Backend/php入门/">php入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/09/Frontend/DTD入门/">DTD入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/09/Mess/File structure/mp3文件格式/">mp3文件格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/MPLS/">CCIE MPLS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/防火墙/">CCIE 防火墙</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/acl控制/">CCIE acl控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/IS-IS协议/">CCIE IS-IS协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/IPSEC VPN/">CCIE IPSEC VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/bgp/">CCIE bgp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/ipv6/">CCIE ipv6</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/NAT 地址转换协议/">CCIE NAT 地址转换协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/STP生成树协议/">CCIE STP生成树协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/交换机基础/">CCIE 交换机基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/跨域的多播/">CCIE 跨域的多播</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/多播/">CCIE 多播（multicast）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/网络知识总结/">CCIE 网络知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/MPLS VPN/">CCIE MPLS VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/DM-VPN/">CCIE DM-VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/BGP 补充知识/">CCIE BGP 补充知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/IS-IS/">CCIE IS-IS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/13/C_C++/Concept_gcc/gcc_gdb备忘录/">gcc_gdb备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/18/Frontend/Javascript入门/">Javascript 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Frontend/XML入门/">XML入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Database/Mysql/mysql用户名及密码/">mysql用户名及密码</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/03/Database/Mysql/centos彻底删除mysql/">centos彻底删除mysql</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/25/Security/无线安全/Dsniff/">Dsniff</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/Backend/base64原理/">Base64原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/18/Security/无线安全/reaver/">reaver</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/15/Security/无线安全/wireshark fatal IO error 2/">kali vnc wireshark fatal IO error 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/15/Security/无线安全/Aircrack-ng/">Aircrack-ng</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/10/C_C++/C++Collection/C++11新特性/">C++11（待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/03/Frontend/HTMLl5+CSS3入门/">HTML5+CSS3入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/03/Frontend/Html入门/">Html入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/03/Frontend/CSS入门/">CSS入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/25/Algorithm/DFS/">DFS BFS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/26/Script Language/Python/懒得整理的python学习笔记/">懒得整理的python学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/13/Unix/Programming/Shell入门/">shell程序设计入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/10/Mess/Markdown/">Markdown标记语言</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2019 Skuaka
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 1;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
