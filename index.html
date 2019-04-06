@@ -234,6 +234,91 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Network/Http/https与ssl" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/06/Network/Http/https与ssl/" class="article-date">
+      <time datetime="2019-04-06T12:39:23.000Z" itemprop="datePublished">2019-04-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/06/Network/Http/https与ssl/">https 与 ssl</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>Hypertext Transfer Protocol Secure，缩写：HTTPS，常称为HTTP over TLS，HTTP over SSL，HTTP Secure。</p>
+<p>HTTP端口：80，HTTPS端口：443。</p>
+<p>在计算机网络上，HTTPS经由超文本传输协议（HTTP）进行通信，但利用SSL/TLS来加密数据包。</p>
+<h3 id="握手"><a href="#握手" class="headerlink" title="握手"></a>握手</h3><p>HTTPS在传输数据之前需要客户端（浏览器）与服务端（网站）之间进行一次握手，在握手过程中将确立双方加密传输数据的密码信息。TLS/SSL协议不仅仅是一套加密传输的协议，更是一件经过艺术家精心设计的艺术品，TLS/SSL中使用了<strong>非对称加密</strong>，<strong>对称加密</strong>，<strong>HASH算法</strong>。握手过程的具体描述如下：</p>
+<ul>
+<li>1）浏览器将自己支持的一套加密规则发送给网站。 </li>
+<li>2）网站从中选出一组加密算法与HASH算法，并将自己的身份信息以证书的形式发回给浏览器。证书里面包含了网站地址，加密公钥，以及证书的颁发机构等信息。  </li>
+<li>3）浏览器获得网站证书之后浏览器要做以下工作：  a) 验证证书的合法性（颁发证书的机构是否合法，证书中包含的网站地址是否与正在访问的地址一致等），如果证书受信任，则浏览器栏里面会显示一个小锁头，否则会给出证书不受信的提示。  b) 如果证书受信任，或者是用户接受了不受信的证书，浏览器会生成一串随机数的密码，并用证书中提供的公钥加密。  c) 使用约定好的HASH算法计算握手消息，并使用生成的随机数对消息进行加密，最后将之前生成的所有信息发送给网站。 </li>
+<li> 4）网站接收浏览器发来的数据之后要做以下的操作：  a) 使用自己的私钥将信息解密取出密码，使用密码解密浏览器发来的握手消息，并验证HASH是否与浏览器发来的一致。  b) 使用密码加密一段握手消息，发送给浏览器。 </li>
+<li> 5）浏览器解密并计算握手消息的HASH，如果与服务端发来的HASH一致，此时握手过程结束，之后所有的通信数据将由之前浏览器生成的随机密码并利用对称加密算法进行加密。 </li>
+</ul>
+<p>这里浏览器与网站互相发送加密的握手消息并验证，目的是为了保证双方都获得了一致的密码，并且可以正常的加密解密数据，为后续真正数据的传输做一次测试。另外，HTTPS一般使用的加密与HASH算法如下：</p>
+<ul>
+<li>非对称加密算法：RSA，DSA/DSS</li>
+<li>对称加密算法：AES，RC4，3DES</li>
+<li>HASH算法：MD5，SHA1，SHA256</li>
+</ul>
+<h4 id="通信时序图"><a href="#通信时序图" class="headerlink" title="通信时序图"></a>通信时序图</h4><p><img src="http://www.runoob.com/wp-content/uploads/2017/05/201208201734403507.png" alt="201208201734403507"></p>
+<h2 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h2><p>secure socket layer (安全套接字层)</p>
+<p>SSL证书和我们日常用的身份证类似，是一个支持HTTPS网站的身份证明，SSL证书里面包含了网站的域名，证书有效期，证书的颁发机构以及用于加密传输密码的公钥等信息，由于公钥加密的密码只能被在申请证书时生成的私钥解密，因此浏览器在生成密码之前需要先核对当前访问的域名与证书上绑定的域名是否一致，同时还要对证书的颁发机构进行验证，如果验证失败浏览器会给出证书错误的提示。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p><strong>来源</strong></p>
+<p>学习自：<a href="http://www.runoob.com/w3cnote/https-ssl-intro.html" target="_blank" rel="noopener">http://www.runoob.com/w3cnote/https-ssl-intro.html</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Macos/clion_git" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -264,7 +349,7 @@
       
           
         <h3 id="Clion-Git使用"><a href="#Clion-Git使用" class="headerlink" title="Clion+Git使用"></a>Clion+Git使用</h3><ol>
-<li><p>先创建本地仓库(命令行或者GitHub Desktop)</p>
+<li><p>先创建本地仓库并且发布(命令行或者GitHub Desktop)</p>
 </li>
 <li><p>Clion只需要在上一步创建的位置上创建新项目，便会自动使用Git进行版本控制。</p>
 </li>
@@ -337,8 +422,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="libevent"><a href="#libevent" class="headerlink" title="libevent"></a>libevent</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>官方文档：<a href="http://libevent.org/" target="_blank" rel="noopener">http://libevent.org </a>.</p>
-<p>本篇是对官方文档的学习摘录。学习前已有IO复用基础。</p>
+              <h1 id="libevent"><a href="#libevent" class="headerlink" title="libevent"></a>libevent</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>官方文档：<a href="http://libevent.org/" target="_blank" rel="noopener">http://libevent.org </a>.</p>
+<p>本篇是对官方文档的学习摘录。有目录方便查找。</p>
 <hr>
 <p>各系统分别提出了基于异步/callback的系统调用，例如Linux的epoll，BSD的kqueue，Windows的IOCP。由于在内核层面做了支持，所以可以用O(1)的效率查找到active的fd。基本上，<strong>libevent就是对这些高效IO的封装，提供统一的API，简化开发。</strong></p>
 <p><em>libevent</em> is meant to replace the event loop found in event driven network servers. An application just needs to call<em>event_dispatch()</em> and then add or remove events dynamically without having to change the event loop.</p>
@@ -381,7 +466,6 @@
 </li>
 </ul>
 <h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><p>All current public Libevent headers are <strong>installed under the <em>event2</em> directory</strong>. </p>
-<p>link lib：<code>-levent</code> .</p>
 <table>
 <thead>
 <tr>
@@ -412,164 +496,13 @@
 </tr>
 </tbody>
 </table>
+<p><strong>编译参数：</strong></p>
+<p>gcc link lib：<code>-levent</code> .</p>
+<p>因为我是在mac下用brew安装的，所以我的<strong>cmake</strong>这么写：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>(/usr/local/Cellar/libevent/<span class="number">2.1</span>.<span class="number">8</span>/<span class="keyword">include</span>)</span><br><span class="line"><span class="keyword">link_directories</span>(/usr/local/Cellar/libevent/<span class="number">2.1</span>.<span class="number">8</span>/lib)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(server main.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(server event)</span><br></pre></td></tr></table></figure>
+<p>目录可以用 <code>brew info libevent</code> 查找。</p>
 <h2 id="Program"><a href="#Program" class="headerlink" title="Program"></a>Program</h2><h3 id="Lib-setup"><a href="#Lib-setup" class="headerlink" title="Lib setup"></a>Lib setup</h3><p>在开始调用libevent之前，可以进行一些设置来影响程序的行为。</p>
-<p>官方文档：<a href="http://www.wangafu.net/~nickm/libevent-book/Ref1_libsetup.html" target="_blank" rel="noopener">http://www.wangafu.net/~nickm/libevent-book/Ref1_libsetup.html</a> .</p>
-<p>其中可以设置的内容有：</p>
-<ul>
-<li>错误和警告日志的行为</li>
-<li>产生致命错误时的行为</li>
-<li>自定义内存管理函数</li>
-<li>使用锁来保证线程安全</li>
-<li>开启锁或者事件的debug选项</li>
-<li>确定libevent库的版本</li>
-<li>释放libevent库运行内部分配的内存(不是用户分配的)</li>
-</ul>
-<h3 id="可移植工具"><a href="#可移植工具" class="headerlink" title="可移植工具"></a>可移植工具</h3><h4 id="可移植类型"><a href="#可移植类型" class="headerlink" title="可移植类型"></a>可移植类型</h4><p><strong>套接字类型</strong>    evutil_socket_t</p>
-<p><strong>整型</strong>        比如 ev_uint64_t、ev_ssize_t</p>
-<h4 id="时间操纵函数"><a href="#时间操纵函数" class="headerlink" title="时间操纵函数"></a>时间操纵函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evutil_timeradd(tvp, uvp, vvp) <span class="comment">/* ... */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evutil_timersub(tvp, uvp, vvp) <span class="comment">/* ... */</span></span></span><br></pre></td></tr></table></figure>
-<p>These macros add or subtract (respectively) their first two arguments, and stores the result in the third.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evutil_timerclear(tvp) <span class="comment">/* ... */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evutil_timerisset(tvp) <span class="comment">/* ... */</span></span></span><br></pre></td></tr></table></figure>
-<p>Clearing a timeval sets its value to zero. Checking whether it is set returns true if it is nonzero and false otherwise.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evutil_timercmp(tvp, uvp, cmp)</span></span><br></pre></td></tr></table></figure>
-<p>The evutil_timercmp macro compares two timevals, and yields true if they are in the relationship specified by the relational operator <em>cmp</em>.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">evutil_gettimeofday</span><span class="params">(struct timeval *tv, struct timezone *tz)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>The evutil_gettimeofday function sets <em>tv</em> to the current time. The tz argument is unused.</p>
-<h4 id="套接字api"><a href="#套接字api" class="headerlink" title="套接字api"></a>套接字api</h4><p>closes a socket. On Unix, it’s an alias for <code>close()</code>; on Windows, it calls <code>closesocket()</code>.</p>
-<hr>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVUTIL_SOCKET_ERROR()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVUTIL_SET_SOCKET_ERROR(errcode)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evutil_socket_geterror(sock)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evutil_socket_error_to_string(errcode)</span></span><br></pre></td></tr></table></figure>
-<p>These macros access and manipulate socket error codes. EVUTIL_SOCKET_ERROR() returns the global error code for the last socket operation from this thread, and evutil_socket_geterror() does so for a particular socket. (Both are errno on Unix-like systems.) EVUTIL_SET_SOCKET_ERROR() changes the current socket error code (like setting errno on Unix), and evutil_socket_error_to_string() returns a string representation of a given socket error code (like strerror() on Unix).</p>
-<p>(We need these functions because Windows doesn’t use errno for errors from socket functions, but instead uses WSAGetLastError().)</p>
-<hr>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">evutil_make_socket_nonblocking</span><span class="params">(<span class="keyword">evutil_socket_t</span> sock)</span></span>;				<span class="comment">// O_NONBLOCK</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">evutil_make_listen_socket_reuseable</span><span class="params">(<span class="keyword">evutil_socket_t</span> sock)</span></span>;	<span class="comment">// SO_REUSEADDR</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">evutil_make_socket_closeonexec</span><span class="params">(<span class="keyword">evutil_socket_t</span> sock)</span></span>;				<span class="comment">// FD_CLOEXEC</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">evutil_socketpair</span><span class="params">(<span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">evutil_socket_t</span> sv[<span class="number">2</span>])</span></span>;</span><br><span class="line"><span class="comment">// This function behaves as the Unix socketpair() call: it makes two sockets that are connected with each other and can be used with ordinary socket IO calls. It stores the two sockets in sv[0] and sv[1], and returns 0 for success and -1 for failure.</span></span><br></pre></td></tr></table></figure>
-<h4 id="随机数生成"><a href="#随机数生成" class="headerlink" title="随机数生成"></a>随机数生成</h4><p>Many applications (including evdns) need a source of hard-to-predict random numbers for their security.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">evutil_secure_rng_get_bytes</span><span class="params">(<span class="keyword">void</span> *buf, <span class="keyword">size_t</span> n)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>This function fills n-byte buffer at <em>buf</em> with <em>n</em> bytes of random data.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">evutil_secure_rng_init</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">evutil_secure_rng_add_bytes</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *dat, <span class="keyword">size_t</span> datlen)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>You do not need to manually initialize the secure random number generator, but if you want to make sure it is successfully initialized, you can do so by calling <code>evutil_secure_rng_init()</code>. It seeds the RNG (if it was not already seeded) and returns 0 on success. If it returns -1, Libevent wasn’t able to find a good source of entropy on your OS, and you can’t use the RNG safely without initializing it yourself.</p>
-<p>If you are running in an environment where your program is likely to drop privileges (for example, by running <code>chroot()</code>), you should call <code>evutil_secure_rng_init()</code> before you do so.</p>
-<h3 id="event-base"><a href="#event-base" class="headerlink" title="event_base"></a>event_base</h3><p>Each event_base structure holds a set of events and can poll to determine which events are active.</p>
-<h4 id="多线程？"><a href="#多线程？" class="headerlink" title="多线程？"></a>多线程？</h4><p>如果为event_base设置了锁，那么在多个线程中访问它是安全的，但是一个事件循环只能在一个线程上运行，如果要多线程，必须为每一个线程都分配一个event_base。(未来版本会实现跨线程循环)</p>
-<hr>
-<h4 id="默认初始化"><a href="#默认初始化" class="headerlink" title="默认初始化"></a>默认初始化</h4><p><code>event_base_new()</code> : allocates and returns a new event base with the default settings. If there is an error, it returns NULL.</p>
-<h4 id="配置初始化"><a href="#配置初始化" class="headerlink" title="配置初始化"></a>配置初始化</h4><p><code>event_config</code> 的创建、使用和释放：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct event_config *<span class="title">event_config_new</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">struct event_base *<span class="title">event_base_new_with_config</span><span class="params">(<span class="keyword">const</span> struct event_config *cfg)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_config_free</span><span class="params">(struct event_config *cfg)</span></span>;</span><br></pre></td></tr></table></figure>
-<p><code>event_config</code> 的配置：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_config_avoid_method</span><span class="params">(struct event_config *cfg, <span class="keyword">const</span> <span class="keyword">char</span> *method)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> event_method_feature &#123;</span><br><span class="line">    EV_FEATURE_ET = <span class="number">0x01</span>,		<span class="comment">// supports edge-triggered IO.</span></span><br><span class="line">    EV_FEATURE_O1 = <span class="number">0x02</span>,		<span class="comment">// O(1) operation</span></span><br><span class="line">    EV_FEATURE_FDS = <span class="number">0x04</span>,	<span class="comment">// support arbitrary file descriptor, not just sockets.</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_config_require_features</span><span class="params">(struct event_config *cfg,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  <span class="keyword">enum</span> event_method_feature feature)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> event_base_config_flag &#123;</span><br><span class="line">    EVENT_BASE_FLAG_NOLOCK = <span class="number">0x01</span>,</span><br><span class="line">    EVENT_BASE_FLAG_IGNORE_ENV = <span class="number">0x02</span>,</span><br><span class="line">    EVENT_BASE_FLAG_STARTUP_IOCP = <span class="number">0x04</span>,</span><br><span class="line">    EVENT_BASE_FLAG_NO_CACHE_TIME = <span class="number">0x08</span>,</span><br><span class="line">    EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST = <span class="number">0x10</span>,</span><br><span class="line">    EVENT_BASE_FLAG_PRECISE_TIMER = <span class="number">0x20</span></span><br><span class="line">&#125;;	<span class="comment">// detail: http://www.wangafu.net/~nickm/libevent-book/Ref2_eventbase.html</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_config_set_flag</span><span class="params">(struct event_config *cfg,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">enum</span> event_base_config_flag flag)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// This function prevents priority inversion by limiting how many low-priority event callbacks can be invoked before checking for more high-priority events. If max_interval is non-null, the event loop checks the time after each callback, and re-scans for high-priority events if max_interval has passed. If max_callbacks is nonnegative, the event loop also checks for more events after max_callbacks callbacks have been invoked. These rules apply to any event of min_priority or higher.</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_config_set_max_dispatch_interval</span><span class="params">(struct event_config *cfg,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> struct timeval *max_interval, <span class="keyword">int</span> max_callbacks,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> min_priority)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>The above functions that manipulate an event_config all return 0 on success, -1 on failure.</p>
-<p><strong>If you have made a configuration that Libevent can’t satisfy, event_base_new_with_config() will return NULL.</strong></p>
-<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><p><strong>Example</strong>: Preferring edge-triggered backends</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_config</span> *<span class="title">cfg</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span>;</span></span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* My program wants to use edge-triggered events if at all possible.  So</span></span><br><span class="line"><span class="comment">   I'll try to get a base twice: Once insisting on edge-triggered IO, and</span></span><br><span class="line"><span class="comment">   once not. */</span></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;<span class="number">2</span>; ++i) &#123;</span><br><span class="line">    cfg = event_config_new();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* I don't like select. */</span></span><br><span class="line">    event_config_avoid_method(cfg, <span class="string">"select"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">        event_config_require_features(cfg, EV_FEATURE_ET);</span><br><span class="line"></span><br><span class="line">    base = event_base_new_with_config(cfg);</span><br><span class="line">    event_config_free(cfg);</span><br><span class="line">    <span class="keyword">if</span> (base)</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>Example</strong>: Avoiding priority-inversion</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_config</span> *<span class="title">cfg</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span>;</span></span><br><span class="line"></span><br><span class="line">cfg = event_config_new();</span><br><span class="line"><span class="keyword">if</span> (!cfg)</span><br><span class="line">   <span class="comment">/* Handle error */</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* I'm going to have events running at two priorities.  I expect that</span></span><br><span class="line"><span class="comment">   some of my priority-1 events are going to have pretty slow callbacks,</span></span><br><span class="line"><span class="comment">   so I don't want more than 100 msec to elapse (or 5 callbacks) before</span></span><br><span class="line"><span class="comment">   checking for priority-0 events. */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">msec_100</span> = &#123;</span> <span class="number">0</span>, <span class="number">100</span>*<span class="number">1000</span> &#125;;</span><br><span class="line"><span class="comment">/*The &lt;sys/time.h&gt; header defines the timeval structure that includes at least the following members:</span></span><br><span class="line"><span class="comment">time_t         tv_sec      seconds</span></span><br><span class="line"><span class="comment">suseconds_t    tv_usec     microseconds */</span></span><br><span class="line">event_config_set_max_dispatch_interval(cfg, &amp;msec_100, <span class="number">5</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">base = event_base_new_with_config(cfg);</span><br><span class="line"><span class="keyword">if</span> (!base)</span><br><span class="line">   <span class="comment">/* Handle error */</span>;</span><br><span class="line"></span><br><span class="line">event_base_priority_init(base, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="查看配置"><a href="#查看配置" class="headerlink" title="查看配置"></a>查看配置</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> **methods = event_get_supported_methods();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Starting Libevent %s.  Available methods are:\n"</span>,</span><br><span class="line">    event_get_version());</span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; methods[i] != <span class="literal">NULL</span>; ++i) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"    %s\n"</span>, methods[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span>;</span></span><br><span class="line"><span class="keyword">enum</span> event_method_feature f;</span><br><span class="line"></span><br><span class="line">base = event_base_new();</span><br><span class="line"><span class="keyword">if</span> (!base) &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Couldn't get an event_base!"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Using Libevent with backend method %s."</span>,</span><br><span class="line">        event_base_get_method(base));</span><br><span class="line">    f = event_base_get_features(base);</span><br><span class="line">    <span class="keyword">if</span> ((f &amp; EV_FEATURE_ET))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"  Edge-triggered events are supported."</span>);</span><br><span class="line">    <span class="keyword">if</span> ((f &amp; EV_FEATURE_O1))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"  O(1) event notification is supported."</span>);</span><br><span class="line">    <span class="keyword">if</span> ((f &amp; EV_FEATURE_FDS))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"  All FD types are supported."</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="释放event-base"><a href="#释放event-base" class="headerlink" title="释放event_base"></a>释放event_base</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_base_free</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
-<h4 id="设置优先级"><a href="#设置优先级" class="headerlink" title="设置优先级"></a>设置优先级</h4><p>By default, though, an event_base supports only a single priority level.</p>
-<p>You can set the number of priorities on an event_base by calling <code>event_base_priority_init()</code>.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_priority_init</span><span class="params">(struct event_base *base, <span class="keyword">int</span> n_priorities)</span></span>;</span><br><span class="line"><span class="comment">// returns 0 on success and -1 on failure</span></span><br><span class="line"><span class="comment">// n_priorities is the number of priorities to support.( &gt;=1 ).</span></span><br></pre></td></tr></table></figure>
-<p>The available priorities for new events will be numbered from 0 (most important) to n_priorities-1 (least important).</p>
-<p>By default, all new events associated with this base will be initialized with priority: <strong>n_priorities / 2</strong>.</p>
-<p>You <strong>must</strong> call this function before any events become active.</p>
-<p>查看当前设置的优先级：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_get_npriorities</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
-<h4 id="fork之后重置"><a href="#fork之后重置" class="headerlink" title="fork之后重置"></a>fork之后重置</h4><p>Not all event backends persist cleanly after a call to fork(). Thus, if your program uses fork() or a related system call in order to start a new process, and you want to continue using an event_base after you have forked, you may need to reinitialize it.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_reinit</span><span class="params">(struct event_base *base)</span></span>;</span><br><span class="line"><span class="comment">// returns 0 on success, -1 on failure.</span></span><br></pre></td></tr></table></figure>
-<p>example:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (fork()) &#123;</span><br><span class="line">    <span class="comment">/* In parent */</span></span><br><span class="line">    continue_running_parent(base); <span class="comment">/*...*/</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/* In child */</span></span><br><span class="line">    event_reinit(base);</span><br><span class="line">    continue_running_child(base); <span class="comment">/*...*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="event-loop"><a href="#event-loop" class="headerlink" title="event loop"></a>event loop</h3><h4 id="run"><a href="#run" class="headerlink" title="run"></a>run</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVLOOP_ONCE             0x01</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVLOOP_NONBLOCK         0x02</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVLOOP_NO_EXIT_ON_EMPTY 0x04</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_loop</span><span class="params">(struct event_base *base, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_dispatch</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>The <code>event_base_dispatch()</code> call is the same as <code>event_base_loop()</code>, <em>with no flags set</em>.</p>
-<p>By default, the two functions <strong>run</strong> an event_base <strong>until</strong> :</p>
-<ol>
-<li>there are no more events registered in it</li>
-<li><code>event_base_loopbreak()</code> is called.</li>
-<li><code>event_base_loopexit()</code> is called.</li>
-</ol>
-<p>When it is done, <code>event_base_loop()</code> <strong>returns</strong> <strong>0</strong> if it exited normally, <strong>-1</strong> if it exited because of some unhandled error in the backend, and <strong>1</strong> if it exited because there were no more pending or active events.</p>
-<p><strong>Pseudocode :</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (any events are registered with the loop,</span><br><span class="line">        <span class="keyword">or</span> EVLOOP_NO_EXIT_ON_EMPTY was <span class="built_in">set</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (EVLOOP_NONBLOCK was <span class="built_in">set</span>, <span class="keyword">or</span> any events are already active)</span><br><span class="line">        If any registered events have triggered, mark them active.</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        Wait until at least one event has triggered, <span class="keyword">and</span> mark it active.</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (p = <span class="number">0</span>; p &lt; n_priorities; ++p) &#123;</span><br><span class="line">       <span class="keyword">if</span> (any event with priority of p is active) &#123;</span><br><span class="line">          Run all active events with priority of p.</span><br><span class="line">          <span class="keyword">break</span>; <span class="comment">/* Do not run any events of a less important priority */</span></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (EVLOOP_ONCE was <span class="built_in">set</span> <span class="keyword">or</span> EVLOOP_NONBLOCK was <span class="built_in">set</span>)</span><br><span class="line">       <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_loopexit</span><span class="params">(struct event_base *base,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">const</span> struct timeval *tv)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_loopbreak</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
-<p><strong>differences :</strong></p>
-<p>The <code>event_base_loopexit()</code> function tells an event_base to stop looping after a given time has elapsed. If the <em>tv</em> argument is NULL, the event_base stops looping without a delay. If the event_base is currently running callbacks for any active events, it will continue running them, and not exit until <strong>they</strong> have all been run.</p>
-<p>The <code>event_base_loopbreak()</code> function tells the event_base to exit its loop immediately. It <strong>differs from</strong> <code>event_base_loopexit(base, NULL)</code> in that if the event_base is currently running callbacks for any active events, it will exit immediately after finishing the <strong>one</strong> it’s currently processing.</p>
-<p>Note also that event_base_loopexit(base,NULL) and event_base_loopbreak(base) act differently when no event loop is running: loopexit schedules the next instance of the event loop to stop right after the next round of callbacks are run (as if it had been invoked with EVLOOP_ONCE) whereas loopbreak only stops a currently running loop, and has no effect if the event loop isn’t running.</p>
-<h5 id="example"><a href="#example" class="headerlink" title="example"></a>example</h5><p>Example: Shut down immediately</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event2/event.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Here's a callback function that calls loopbreak */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cb</span><span class="params">(<span class="keyword">int</span> sock, <span class="keyword">short</span> what, <span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span> = <span class="title">arg</span>;</span></span><br><span class="line">    event_base_loopbreak(base);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main_loop</span><span class="params">(struct event_base *base, <span class="keyword">evutil_socket_t</span> watchdog_fd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">event</span> *<span class="title">watchdog_event</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Construct a new event to trigger whenever there are any bytes to</span></span><br><span class="line"><span class="comment">       read from a watchdog socket.  When that happens, we'll call the</span></span><br><span class="line"><span class="comment">       cb function, which will make the loop exit immediately without</span></span><br><span class="line"><span class="comment">       running any other active events at all.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    watchdog_event = event_new(base, watchdog_fd, EV_READ, cb, base);</span><br><span class="line"></span><br><span class="line">    event_add(watchdog_event, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    event_base_dispatch(base);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Example: Run an event loop for 10 seconds, then exit.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event2/event.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">run_base_with_ticks</span><span class="params">(struct event_base *base)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">ten_sec</span>;</span></span><br><span class="line"></span><br><span class="line">  ten_sec.tv_sec = <span class="number">10</span>;</span><br><span class="line">  ten_sec.tv_usec = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Now we run the event_base for a series of 10-second intervals, printing</span></span><br><span class="line"><span class="comment">     "Tick" after each.  For a much better way to implement a 10-second</span></span><br><span class="line"><span class="comment">     timer, see the section below about persistent timer events. */</span></span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">     <span class="comment">/* This schedules an exit ten seconds from now. */</span></span><br><span class="line">     event_base_loopexit(base, &amp;ten_sec);</span><br><span class="line"></span><br><span class="line">     event_base_dispatch(base);</span><br><span class="line">     <span class="built_in">puts</span>(<span class="string">"Tick"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="检查退出原因"><a href="#检查退出原因" class="headerlink" title="检查退出原因"></a>检查退出原因</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_got_exit</span><span class="params">(struct event_base *base)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_got_break</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>These two functions will return true if the loop was stopped with <code>event_base_loopexit()</code> or <code>event_base_break()</code> respectively, and false otherwise. Their values will be reset the next time you start the event loop.</p>
-<h4 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h4><p>Sometimes you might want to stop Libevent right after the current callback has been run, and tell it to scan again. By analogy to <code>event_base_loopbreak()</code>, you can do this with the function <code>event_base_loopcontinue()</code>.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_loopcontinue</span><span class="params">(struct event_base *)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>Calling event_base_loopcontinue() has no effect if we aren’t currently running event callbacks.</p>
-<h4 id="other-api"><a href="#other-api" class="headerlink" title="other api"></a>other api</h4><h5 id="time-cache"><a href="#time-cache" class="headerlink" title="time cache"></a>time cache</h5><p>系统时钟的代替方案：<a href="http://www.wangafu.net/~nickm/libevent-book/Ref3_eventloop.html" target="_blank" rel="noopener">http://www.wangafu.net/~nickm/libevent-book/Ref3_eventloop.html</a></p>
-<h5 id="dump-status"><a href="#dump-status" class="headerlink" title="dump status"></a>dump status</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_base_dump_events</span><span class="params">(struct event_base *base, FILE *f)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>For help debugging your program (or debugging Libevent!) you might sometimes want a complete list of all events added in the event_base and their status. </p>
-<p>Calling <code>event_base_dump_events()</code> writes this list to the stdio file provided.</p>
-<h4 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*event_base_foreach_event_cb)</span><span class="params">(<span class="keyword">const</span> struct event_base *,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> struct event *, <span class="keyword">void</span> *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_foreach_event</span><span class="params">(struct event_base *base,</span></span></span><br><span class="line"><span class="function"><span class="params">                             event_base_foreach_event_cb fn,</span></span></span><br><span class="line"><span class="function"><span class="params">                             <span class="keyword">void</span> *arg)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>Use <code>event_base_foreach_event()</code> to iterate over every currently active or pending event associated with an event_base. The provided callback will be invoked exactly once <strong>per event</strong>, in an <em>unspecified order</em>. </p>
-<p>The callback function must <strong>return 0 to continue iteration</strong>, or some other integer to stop iterating. <strong>Whatever value it returns will then be returned by <code>event_base_foreach_function()</code></strong>.</p>
-<p>Your callback function <strong>must not modify</strong> any of the events that it receives, or add or remove any events to the event base, or otherwise modify any event associated with the event base, or undefined behavior can occur, up to or including crashes and heap-smashing.</p>
-<p>The event_base <strong>lock will be held</strong> for the duration of the call to <code>event_base_foreach_event()</code> — this will block other threads from doing anything useful with the event_base, <em>so make sure that your callback doesn’t take a long time</em>.</p>
-<h3 id="events"><a href="#events" class="headerlink" title="events"></a>events</h3><p>Every event represents a set of conditions, including:</p>
-<ul>
-<li>A file descriptor being ready to read from or write to.</li>
-<li>A file descriptor <em>becoming</em> ready to read from or write to (Edge-triggered IO only).</li>
-<li>A timeout expiring.</li>
-<li>A signal occurring.</li>
-<li>A user-triggered event.</li>
-</ul>
-<p>Events have similar lifecycles. Once you call a Libevent function to set up an event and associate it with an event base, it becomes <strong>initialized</strong>. At this point, you can <em>add</em>, which makes it <strong>pending</strong> in the base. When the event is pending, if the conditions that would trigger an event occur (e.g., its file descriptor changes state or its timeout expires), the event becomes <strong>active</strong>, and its (user-provided) callback function is run. If the event is configured <strong>persistent</strong>, it remains pending. If it is not persistent, it stops being pending when its callback runs. You can make a pending event non-pending by <em>deleting</em> it, and you can <em>add</em> a non-pending event to make it pending again.</p>
-<h4 id="construct"><a href="#construct" class="headerlink" title="construct"></a>construct</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_TIMEOUT      0x01	<span class="comment">// ignored when construct, only return to cb</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_READ         0x02</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_WRITE        0x04</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_SIGNAL       0x08</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_PERSIST      0x10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EV_ET           0x20</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*event_callback_fn)</span><span class="params">(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">struct event *<span class="title">event_new</span><span class="params">(struct event_base *base, <span class="keyword">evutil_socket_t</span> fd,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">short</span> what, event_callback_fn cb,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_free</span><span class="params">(struct event *event)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>The <em>what</em> argument is a set of the flags listed above. When the event is active, Libevent will invoke the provided <em>cb</em> function, passing it as arguments: the file descriptor <em>fd</em>, a bitfield of <em>all</em> the events that triggered, and the value that was passed in for <em>arg</em> when the function was constructed.</p>
-<p>The <strong>EV_PERSIST</strong> flag  means that event remains pending even when its callback is activated. If you want to make it non-pending from within its callback, you can call <code>event_del()</code> on it. The timeout on a persistent event <strong>resets</strong> whenever the event’s callback runs.</p>
-<p>On an internal error, or invalid arguments, <code>event_new()</code> will <strong>return</strong> NULL.</p>
-<p>All new events are initialized and non-pending. To make an event pending, call <code>event_add()</code>.</p>
-<p>To deallocate an event, call <code>event_free()</code>. It is <strong>safe</strong> to call <code>event_free()</code> on an event that is pending or active: doing so makes the event non-pending and inactive before deallocating it.</p>
-<p><strong>Example</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cb_func</span><span class="params">(<span class="keyword">evutil_socket_t</span> fd, <span class="keyword">short</span> what, <span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *data = arg;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Got an event on socket %d:%s%s%s%s [%s]"</span>,</span><br><span class="line">            (<span class="keyword">int</span>) fd,</span><br><span class="line">            (what&amp;EV_TIMEOUT) ? <span class="string">" timeout"</span> : <span class="string">""</span>,</span><br><span class="line">            (what&amp;EV_READ)    ? <span class="string">" read"</span> : <span class="string">""</span>,</span><br><span class="line">            (what&amp;EV_WRITE)   ? <span class="string">" write"</span> : <span class="string">""</span>,</span><br><span class="line">            (what&amp;EV_SIGNAL)  ? <span class="string">" signal"</span> : <span class="string">""</span>,</span><br><span class="line">            data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main_loop</span><span class="params">(<span class="keyword">evutil_socket_t</span> fd1, <span class="keyword">evutil_socket_t</span> fd2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">event</span> *<span class="title">ev1</span>, *<span class="title">ev2</span>;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">five_seconds</span> = &#123;</span><span class="number">5</span>,<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span> = <span class="title">event_base_new</span>();</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* The caller has already set up fd1, fd2 somehow, and make them</span></span><br><span class="line"><span class="comment">           nonblocking. */</span></span><br><span class="line"></span><br><span class="line">        ev1 = event_new(base, fd1, EV_TIMEOUT|EV_READ|EV_PERSIST, cb_func,</span><br><span class="line">           (<span class="keyword">char</span>*)<span class="string">"Reading event"</span>);</span><br><span class="line">        ev2 = event_new(base, fd2, EV_WRITE|EV_PERSIST, cb_func,</span><br><span class="line">           (<span class="keyword">char</span>*)<span class="string">"Writing event"</span>);</span><br><span class="line"></span><br><span class="line">        event_add(ev1, &amp;five_seconds);</span><br><span class="line">        event_add(ev2, <span class="literal">NULL</span>);</span><br><span class="line">        event_base_dispatch(base);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Timeout-only"><a href="#Timeout-only" class="headerlink" title="Timeout-only"></a>Timeout-only</h5><p>As a convenience, there are a set of <strong>macros</strong> beginning with evtimer_ that you can use in place of the event_* calls to allocate and manipulate pure-timeout events.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_new(base, callback, arg) \</span></span><br><span class="line">    event_new((base), <span class="number">-1</span>, <span class="number">0</span>, (callback), (arg))</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_add(ev, tv) \</span></span><br><span class="line">    event_add((ev),(tv))</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_del(ev) \</span></span><br><span class="line">    event_del(ev)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_pending(ev, tv_out) \</span></span><br><span class="line">    event_pending((ev), EV_TIMEOUT, (tv_out))</span><br></pre></td></tr></table></figure>
-<h5 id="signal-events"><a href="#signal-events" class="headerlink" title="signal events"></a>signal events</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_new(base, signum, cb, arg) \</span></span><br><span class="line">    event_new(base, signum, EV_SIGNAL|EV_PERSIST, cb, arg)</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_add(ev, tv) \</span></span><br><span class="line">    event_add((ev),(tv))</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_del(ev) \</span></span><br><span class="line">    event_del(ev)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_pending(ev, what, tv_out) \</span></span><br><span class="line">    event_pending((ev), (what), (tv_out))</span><br></pre></td></tr></table></figure>
-<p>example:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">evsignal_new(base, SIGHUP, sighup_function, <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
-<h5 id="assign"><a href="#assign" class="headerlink" title="assign"></a>assign</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_assign</span><span class="params">(struct event *event, struct event_base *base,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">evutil_socket_t</span> fd, <span class="keyword">short</span> what,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">void</span> (*callback)(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>All the arguments of <code>event_assign()</code> are as for <code>event_new()</code>, except for the <em>event</em> argument, which must point to an uninitialized event. </p>
-<p><strong>Example :</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event2/event.h&gt;</span></span></span><br><span class="line"><span class="comment">/* Watch out!  Including event_struct.h means that your code will not</span></span><br><span class="line"><span class="comment"> * be binary-compatible with future versions of Libevent. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event2/event_struct.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">event_pair</span> &#123;</span></span><br><span class="line">         <span class="keyword">evutil_socket_t</span> fd;</span><br><span class="line">         <span class="class"><span class="keyword">struct</span> <span class="title">event</span> <span class="title">read_event</span>;</span></span><br><span class="line">         <span class="class"><span class="keyword">struct</span> <span class="title">event</span> <span class="title">write_event</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readcb</span><span class="params">(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">writecb</span><span class="params">(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *)</span></span>;</span><br><span class="line"><span class="function">struct event_pair *<span class="title">event_pair_new</span><span class="params">(struct event_base *base, <span class="keyword">evutil_socket_t</span> fd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">event_pair</span> *<span class="title">p</span> = <span class="title">malloc</span>(<span class="title">sizeof</span>(<span class="title">struct</span> <span class="title">event_pair</span>));</span></span><br><span class="line">        <span class="keyword">if</span> (!p) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        p-&gt;fd = fd;</span><br><span class="line">        event_assign(&amp;p-&gt;read_event, base, fd, EV_READ|EV_PERSIST, readcb, p);</span><br><span class="line">        event_assign(&amp;p-&gt;write_event, base, fd, EV_WRITE|EV_PERSIST, writecb, p);</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>You can also use <code>event_assign()</code> to initialize stack-allocated or statically allocated events.</p>
-<p><strong>WARNING</strong>: Never call <code>event_assign()</code> on an event that is already pending in an event base. If the event is already initialized and pending, call <code>event_del()</code> on it <strong>before</strong> you call <code>event_assign()</code> on it again.</p>
-<p>There are convenience <strong>macros</strong> you can use to <code>event_assign()</code> a timeout-only or a signal event:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evtimer_assign(event, base, callback, arg) \</span></span><br><span class="line">    event_assign(event, base, <span class="number">-1</span>, <span class="number">0</span>, callback, arg)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> evsignal_assign(event, base, signum, callback, arg) \</span></span><br><span class="line">    event_assign(event, base, signum, EV_SIGNAL|EV_PERSIST, callback, arg)</span><br></pre></td></tr></table></figure>
-<p>关于<code>event_assign()</code>不同版本的兼容性问题，见<a href="http://www.wangafu.net/~nickm/libevent-book/Ref4_event.html" target="_blank" rel="noopener">官方文档</a> 。</p>
-<h4 id="use"><a href="#use" class="headerlink" title="use"></a>use</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_add</span><span class="params">(struct event *ev, <span class="keyword">const</span> struct timeval *tv)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_del</span><span class="params">(struct event *ev)</span></span>;</span><br><span class="line"><span class="comment">// returns 0 on success, -1 on failure</span></span><br></pre></td></tr></table></figure>
-<p>If you delete an event after it becomes active but before its callback has a chance to execute, the callback will not be executed.</p>
-<p>If you call <code>event_add()</code> on an event that is <em>already</em> pending, it will leave it pending, and reschedule it with the provided timeout. If the event is already pending, and you re-add it with the timeout NULL, <code>event_add()</code> will have no effect.</p>
-<p>You can remove a pending event’s timeout completely without deleting its IO or signal components. If the event had no timeout pending, <code>event_remove_timer()</code> has no effect. If the event had only a timeout but no IO or signal component, <code>event_remove_timer()</code> has the same effect as <code>event_del()</code>. </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_remove_timer</span><span class="params">(struct event *ev)</span></span>;</span><br></pre></td></tr></table></figure>
-<h5 id="priorities"><a href="#priorities" class="headerlink" title="priorities"></a>priorities</h5><p>Before adding an event to the event_base, but after initializing it, you can set its priority.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_priority_set</span><span class="params">(struct event *event, <span class="keyword">int</span> priority)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>When multiple events of multiple priorities become active, the low-priority events are not run. Instead, Libevent runs the high priority events, then checks for events again. Only when no high-priority events are active are the low-priority events run.</p>
-<h5 id="event-status"><a href="#event-status" class="headerlink" title="event status"></a>event status</h5><p>Sometimes you want to tell whether an event has been added, and check what it refers to.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_pending</span><span class="params">(<span class="keyword">const</span> struct event *ev, <span class="keyword">short</span> what, struct timeval *tv_out)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> event_get_signal(ev) <span class="comment">/* ... */</span></span></span><br><span class="line"><span class="keyword">evutil_socket_t</span> event_get_fd(<span class="keyword">const</span> struct event *ev);</span><br><span class="line"><span class="function">struct event_base *<span class="title">event_get_base</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">short</span> <span class="title">event_get_events</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"><span class="function">event_callback_fn <span class="title">event_get_callback</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">event_get_callback_arg</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_get_priority</span><span class="params">(<span class="keyword">const</span> struct event *ev)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_get_assignment</span><span class="params">(<span class="keyword">const</span> struct event *event,</span></span></span><br><span class="line"><span class="function"><span class="params">        struct event_base **base_out,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">evutil_socket_t</span> *fd_out,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">short</span> *events_out,</span></span></span><br><span class="line"><span class="function"><span class="params">        event_callback_fn *callback_out,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">void</span> **arg_out)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>The <code>event_pending()</code> function determines whether the given event is pending or active. If it is, and any of the flags EV_READ, EV_WRITE, EV_SIGNAL, and EV_TIMEOUT are set in the <em>what</em> argument, the function returns all of the flags that the event is currently pending or active on. If <em>tv_out</em> is provided, and EV_TIMEOUT is set in <em>what</em>, and the event is currently pending or active on a timeout, then <em>tv_out</em> is set to hold the time when the event’s timeout will expire.</p>
-<p>The <code>event_get_fd()</code> and <code>event_get_signal()</code> functions return the configured file descriptor or signal number for an event. The <code>event_get_base()</code> function returns its configured event_base. The <code>event_get_events()</code> function returns the event <em>flags</em> (EV_READ, EV_WRITE, etc) of the event. The <code>event_get_callback()</code> and <code>event_get_callback_arg()</code> functions return the callback function and argument pointer. The <code>event_get_priority()</code> function returns the event’s currently assigned priority.</p>
-<p>The <code>event_get_assignment()</code> function copies all of the assigned fields of the event into the provided pointers. If any of the pointers is NULL, it is ignored.</p>
-<p><strong>Example :</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Change the callback and callback_arg of 'ev', which must not be pending. */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">replace_callback</span><span class="params">(struct event *ev, event_callback_fn new_callback,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">void</span> *new_callback_arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span>;</span></span><br><span class="line">    <span class="keyword">evutil_socket_t</span> fd;</span><br><span class="line">    <span class="keyword">short</span> events;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> pending;</span><br><span class="line"></span><br><span class="line">    pending = event_pending(ev, EV_READ|EV_WRITE|EV_SIGNAL|EV_TIMEOUT,</span><br><span class="line">                            <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (pending) &#123;</span><br><span class="line">        <span class="comment">/* We want to catch this here so that we do not re-assign a</span></span><br><span class="line"><span class="comment">         * pending event.  That would be very very bad. */</span></span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,</span><br><span class="line">                <span class="string">"Error! replace_callback called on a pending event!\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    event_get_assignment(ev, &amp;base, &amp;fd, &amp;events,</span><br><span class="line">                         <span class="literal">NULL</span> <span class="comment">/* ignore old callback */</span> ,</span><br><span class="line">                         <span class="literal">NULL</span> <span class="comment">/* ignore old callback argument */</span>);</span><br><span class="line"></span><br><span class="line">    event_assign(ev, base, fd, events, new_callback, new_callback_arg);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>currently running event</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct event *<span class="title">event_base_get_running_event</span><span class="params">(struct event_base *base)</span></span>;</span><br></pre></td></tr></table></figure>
-<h5 id="one-off-events"><a href="#one-off-events" class="headerlink" title="one-off events"></a>one-off events</h5><p>If you don’t need to add an event more than once, or delete it once it has been added, and it doesn’t have to be persistent, you can use <code>event_base_once()</code>.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">event_base_once</span><span class="params">(struct event_base *, <span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">void</span> (*)(<span class="keyword">evutil_socket_t</span>, <span class="keyword">short</span>, <span class="keyword">void</span> *), <span class="keyword">void</span> *, <span class="keyword">const</span> struct timeval *)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>This function’s interface is the same as <code>event_new()</code>, except that it does not support EV_SIGNAL or EV_PERSIST. The scheduled event is inserted and run with the default priority. <strong><em>When the callback is finally done, Libevent frees the internal event structure itself</em></strong>.</p>
-<p>Events inserted with <code>event_base_once()</code> cannot be deleted or manually activated: if you want to be able to cancel an event, create it with regular way.</p>
-<h5 id="manually-activate"><a href="#manually-activate" class="headerlink" title="manually activate"></a>manually activate</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">event_active</span><span class="params">(struct event *ev, <span class="keyword">int</span> what, <span class="keyword">short</span> ncalls)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>This function makes an event <em>ev</em> become active with the flags <em>what</em> (a combination of EV_READ, EV_WRITE, and EV_TIMEOUT). The event does not need to have previously been pending, and activating it does not make it pending.</p>
-<h5 id="others"><a href="#others" class="headerlink" title="others"></a>others</h5><p><strong>optimize timeouts</strong></p>
-<p>默认的存储事件超时的数据结构是堆，复杂度O(lgN)。可以改变存储的方式，比如改成O(1)的双端列队，具体见<a href="http://www.wangafu.net/~nickm/libevent-book/Ref4_event.html" target="_blank" rel="noopener">官方文档</a> 。</p>
-<p><strong>Telling a good event</strong></p>
-<p>辨别一个event结构是否是良好的(也许被清空了)。</p>
-<p>具体见<a href="http://www.wangafu.net/~nickm/libevent-book/Ref4_event.html" target="_blank" rel="noopener">官方文档</a> 。</p>
-<h3 id="bufferevents"><a href="#bufferevents" class="headerlink" title="bufferevents"></a>bufferevents</h3><h1 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h1>
+          
       
     </div>
     
@@ -586,6 +519,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/2019/03/27/Network/IO/libevent/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -1530,189 +1467,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Unp/unp笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/17/Network/Unp/unp笔记/" class="article-date">
-      <time datetime="2019-03-17T07:01:56.000Z" itemprop="datePublished">2019-03-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/17/Network/Unp/unp笔记/">《unp》笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="《unp》笔记"><a href="#《unp》笔记" class="headerlink" title="《unp》笔记"></a>《unp》笔记</h2><p>以前读的《Unix网络编程》，最近整理一下概念性的知识点。</p>
-<h3 id="OSI模型"><a href="#OSI模型" class="headerlink" title="OSI模型"></a>OSI模型</h3><p><img src="http://118.25.53.128/Picture/Unp/unp01.jpg" alt="unp01"></p>
-<p>TCP和UDP之间留有空隙，表明网络应用是可以直接绕过传输层使用IPv4或IPv6的。这就是所谓的原始套接字。</p>
-<p>本书所讲的套接字编程是从顶上三层进入传输层的接口。</p>
-<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><h4 id="TCP特性"><a href="#TCP特性" class="headerlink" title="TCP特性"></a>TCP特性</h4><ul>
-<li><p>TCP含有用于动态估算客户和服务器之间的<strong>RTT</strong>的算法，以便知道它等待一个确认需要多少时间。</p>
-<ul>
-<li>RTT-(round-trip time) 往返时间。RTT在一个局域网上大约是几毫秒，广域网则可能数秒。</li>
-</ul>
-</li>
-<li><p>TCP通过给其中每个字节关联一个<strong>序列号</strong>对所发送的数据进行排序。</p>
-<p>接收端可以按顺序重排或丢弃重复。</p>
-</li>
-<li><p>TCP提供<strong>流量控制</strong></p>
-<p>TCP总是告知对端在任何时刻它一次能够从对端接收多少字节的数据，这称为<strong>窗口通告</strong>。</p>
-</li>
-<li><p>TCP是<strong>全双工</strong>的。</p>
-</li>
-</ul>
-<h4 id="TCP连接建立"><a href="#TCP连接建立" class="headerlink" title="TCP连接建立"></a>TCP连接建立</h4><p><img src="http://118.25.53.128/Picture/Unp/unp02.jpg" alt="unp02"></p>
-<ol>
-<li><p>服务器必须准备好接受外来的连接。这称为<strong>被动打开</strong>。</p>
-<p>通常需要socket、bind、listen。</p>
-</li>
-<li><p>客户端通过调用connect发起<strong>主动打开</strong>。</p>
-<p>客户端发送一个SYN(同步)分节，它告诉服务器客户将在连接中发送的数据的<strong>初始序列号</strong>。</p>
-<p>通常SYN分节不携带数据，其所在IP数据报只含有一个IP首部、一个TCP首部、可能有的TCP选项。</p>
-</li>
-<li><p>服务器确认(ACK)客户端的SYN，同时自己也发送一个SYN分节。</p>
-</li>
-<li><p>客户端确认(ACK)服务器的SYN。</p>
-</li>
-</ol>
-<hr>
-<p><strong>PS：</strong>ACK中的确认号是发送这个ACK的一端所期待的下一个序列号。</p>
-<p>​    因为SYN分节占据一个字节的序列号空间，所以每一个SYN的ACK中的确认号就是该SYN的初始序列号加1.</p>
-<p>​    类似地，每一个FIN的ACK也这样。</p>
-<h4 id="TCP选项"><a href="#TCP选项" class="headerlink" title="TCP选项"></a>TCP选项</h4><p>每一个SYN可以含有多个TCP选项。</p>
-<ul>
-<li><strong>MSS选项</strong>。通告对端它的最大分节大小(maximum segment size)，也就是在本次连接的每个TCP分节中愿意接受的最大数据量。</li>
-<li><strong>窗口规模选项</strong>。TCP连接任何一端能够通告对端的最大窗口大小是65535(2^16 -1)，因为在TCP首部中相应的字段占16位。但是当今因特网上有时需要更大的窗口以获得更大的吞吐量。这个新选项指定TCP首部中的通告窗口必须扩大的位数(0~14)。因此所提供的最大窗口接近1GB(<code>65535*2^14</code>)</li>
-<li><strong>时间戳选项</strong>。作为网络编程人员无需考虑。</li>
-</ul>
-<h4 id="TCP连接终止"><a href="#TCP连接终止" class="headerlink" title="TCP连接终止"></a>TCP连接终止</h4><p><img src="http://118.25.53.128/Picture/Unp/unp03.jpg" alt="unp03"></p>
-<ol>
-<li><strong>主动关闭</strong>。调用close，于是发送一个FIN分节表示数据发送完毕。</li>
-<li><strong>被动关闭</strong>。客户端的FIN由TCP确认，它的接收也作为一个文件结束符(EOF，end-of-file)传递给接收端应用进程。</li>
-<li>一段时间后，接收到EOF的应用进程将调用close关闭它的套接字，这导致它的TCP也发送一个FIN。</li>
-<li>确认服务器的FIN。</li>
-</ol>
-<hr>
-<p>每个方向都需要一个FIN和一个ACK。<strong>通常</strong>终止一个连接需要4个分节。但是：</p>
-<ul>
-<li>某些情况下步骤1的FIN随数据一起发送；</li>
-<li>步骤2和步骤3发送的分节可能被合并成一个分节。</li>
-</ul>
-<h4 id="TCP连接的分组交换"><a href="#TCP连接的分组交换" class="headerlink" title="TCP连接的分组交换"></a>TCP连接的分组交换</h4><p><img src="http://118.25.53.128/Picture/Unp/unp04.jpg" alt="unp04"></p>
-<ul>
-<li>服务器对客户请求的ACK是伴随其数据应答发送的，这种做法称为捎带，它通常在服务器处理请求并应答的时间少于200ms时发生的，如果服务器耗时更长，那么我们将看到先是确认后是应答。</li>
-</ul>
-<h5 id="TIME-WAIT状态"><a href="#TIME-WAIT状态" class="headerlink" title="TIME_WAIT状态"></a>TIME_WAIT状态</h5><p>该状态持续2MSL时间。</p>
-<p><strong>MSL</strong>是Maximum Segment Lifetime英文的缩写，中文可以译为“报文最大生存时间”，他是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。RFC 793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分钟等。</p>
-<p>区别于<strong>TTL</strong>：tcp报文（segment）是ip数据报（datagram）的数据部分，而ip头中有一个<strong>TTL</strong>域(time to live)，这个生存时间是由源主机设置初始值，存储了一个ip数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减1，当此值为0则数据报将被丢弃，同时发送ICMP报文通知源主机。</p>
-<p><strong>为什么要等待2MSL时间？</strong></p>
-<ol>
-<li><p>可靠地实现TCP全双工连接的终止</p>
-<p>主要目的是怕最后一个ACK包对方没收到，那么对方在超时后(1MSL)将重发FIN包，主动关闭端接收到(1MSL)重发的FIN包后可以再发一个ACK应答包。</p>
-</li>
-<li><p>允许老的重复分节在网络中消逝</p>
-<p>我们假设在关闭一个连接，过一段时间后在相同的IP和端口之间建立另一个连接，后一个连接称为前一个连接的<strong>化身</strong>。通过设置2MSL的TIME_WAIT状态，我们就可以确保每次成功建立一个TCP连接时，来自该连接先前化身的老的重复分组都已在网络中消失了。</p>
-<p>这个规则存在一个例外：如果到达的SYN的序列号大于前一化身的结束序列号，源自Berkeley的实现将给当前处于TIME_WAIT状态的连接启动新的化身。</p>
-</li>
-<li><p>在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
-</li>
-</ol>
-<h3 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h3><p>客户在调用函数connect之前不必非得调用bind函数。如果需要，内核会确定源IP地址，并选择一个临时端口。</p>
-<p>如果是TCP套接字，调用connect将激发三路握手，仅在成功或者出错时返回，返回错误有三种情况：</p>
-<ol>
-<li><p>若<strong>客户没有收到SYN分节的响应</strong>，则返回<code>ETIMEDOUT</code>错误。</p>
-<p>一般的实现无响应等待6s后再发送一个，若仍无响应则等24s发送一个。若等了75s仍未响应，则返回本错误。</p>
-</li>
-<li><p>若<strong>客户的SYN响应是RST</strong>，则表明服务器在指定端口没有进程在等待连接(也许服务器根本没运行)。</p>
-<p>这是一种<em>硬错误</em>，马上返回<code>ECONNREFUSED</code>错误。</p>
-</li>
-<li><p>若客户发出的SYN在某个路由器上引发了”目的地不可达”ICMP错误，则认为是一种<em>软错误</em>，并按照第一种情况继续发送。若等了75s仍未响应，则把保存的消息(ICMP错误)作为<code>EHOSTUNREACH</code>或<code>ENETUNREACH</code>错误返回给进程。</p>
-<p>对于第三种，以下两种情况也是可能的：</p>
-<ul>
-<li>按照本地系统的转发表，根本没有到达远程系统的路径</li>
-<li>connect调用根本不等待就返回</li>
-</ul>
-</li>
-</ol>
-<p><strong>注意：如果connect()失败</strong>，必须close该套接字，不可对它再次调用connect。</p>
-<h4 id="产生RST的三个条件"><a href="#产生RST的三个条件" class="headerlink" title="产生RST的三个条件"></a>产生RST的三个条件</h4><ol>
-<li>目的地为某端口的SYN到达，但是该端口上没有正在监听的服务器。</li>
-<li>TCP想取消某个连接。</li>
-<li>TCP收到一个根本不存在的连接上的分节。</li>
-</ol>
-<h3 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h3><p>bind把一个本地协议地址赋予一个套接字，对于TCP则是IP和端口号的组合。</p>
-<p>对于TCP，可以都指定、也可以只指定一个、也可以都不指定。</p>
-<ul>
-<li>端口号赋0可以让内核选择端口，使用通配地址(INADDR_ANY，也就是0)可以让内核选择地址。</li>
-<li>一般服务器要定端口，不定ip；客户端都不需要定。</li>
-</ul>
-<p>从bind返回的常见错误就是<code>EADDRINUSE</code> 地址已使用。</p>
-<h3 id="listen"><a href="#listen" class="headerlink" title="listen()"></a>listen()</h3><p>listen仅由TCP服务器调用，它做两件事：</p>
-<ol>
-<li>当socket()创建一个套接字时，它被假设为一个主动套接字，listen()把一个未连接的套接字转化为一个被动套接字。</li>
-<li>本函数的第二个参数<em>规定</em>了内核应该为相应套接字排队的最大连接个数。</li>
-</ol>
-<p>内核为任何一个给定的监听套接字维护两个队列：</p>
-<ul>
-<li>未完成连接队列：SYN已收到，正在完成三路握手。SYN_RECD状态。</li>
-<li>已完成连接队列：已经完成三路握手。ESTABLISHED状态。</li>
-</ul>
-<p><img src="Picture/unp05.jpg" alt="unp05"></p>
-<p><img src="Picture/unp06.jpg" alt="unp06"></p>
-<p>如果三路握手完成，该项就从未完成队列移动到已完成队列队尾。当进程调用accept()时，已完成队列的队头将返回给进程；或者该队列为空，那么进程睡眠等待唤醒。</p>
-<p>当一个客户SYN到达时，如果队列是满的，那么TCP就忽略该分节，而不发送RST。因为这么做是暂时的，客户会重发SYN分节。</p>
-<h3 id="accept"><a href="#accept" class="headerlink" title="accept()"></a>accept()</h3><p>如果accept成功，那么其返回值是内核生成的全新的描述符（<em>已连接套接字</em>，区别于<em>监听套接字</em>），代表与所返回客户的TCP连接。</p>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unp/">unp</a></li></ul>
     </div>
 
       
