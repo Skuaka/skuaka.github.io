@@ -234,6 +234,94 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-QT/QString" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/04/QT/QString/" class="article-date">
+      <time datetime="2019-01-04T08:40:30.000Z" itemprop="datePublished">2019-01-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/04/QT/QString/">QString与char*的相互转换</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="QString-转换为-char"><a href="#QString-转换为-char" class="headerlink" title="QString 转换为 char *"></a>QString 转换为 char *</h3><p>将 QString 转 char <em>，需要用到 QByteArray 类，QByteArray 类的说明详见 Qt 帮助文档。<br>因为 char </em> 最后都有一个<code>&#39;\0&#39;</code>作为结束符，而采用 QString::toLatin1() 时会在字符串后面加上<code>&#39;\0&#39;</code>。</p>
+<p>方法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QString  qstr;</span><br><span class="line"><span class="keyword">char</span>*  cstr;</span><br><span class="line">QByteArray ba = qstr.toLatin1(); <span class="comment">// must</span></span><br><span class="line">cstr = ba.data();</span><br></pre></td></tr></table></figure>
+<h4 id="中文乱码"><a href="#中文乱码" class="headerlink" title="中文乱码　"></a>中文乱码　</h4><p>以上方法当 QString 内含有中文时，转换为 char * 就是乱码，采用如下方法解决：</p>
+<p><strong>方法1</strong></p>
+<p>添加GBK编码支持：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QTextCodec&gt;</span></span></span><br><span class="line">QTextCodec::setCodecForTr(QTextCodec::codecForName(<span class="string">"GBK"</span>));</span><br><span class="line">QTextCodec::setCodecForLocale(QTextCodec::codecForName(<span class="string">"GBK"</span>));</span><br></pre></td></tr></table></figure>
+<p>然后将上面的第3行修改为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QByteArray ba = str.toLocal8Bit();  <span class="comment">// toLocal8Bit 支持中文</span></span><br></pre></td></tr></table></figure>
+<p><strong>方法2</strong></p>
+<p>先将 QString 转为标准库中的 string 类型，然后将 string 转为 char *。如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QString  filename;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> str = filename.toStdString();</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* ch = str.c_str();</span><br></pre></td></tr></table></figure>
+<h3 id="char-转换为-QString"><a href="#char-转换为-QString" class="headerlink" title="char * 转换为 QString"></a>char * 转换为 QString</h3><p>使用 QString 的构造函数进行转换：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString(const QLatin1String &amp;str);</span><br></pre></td></tr></table></figure>
+<p>QLatin1String 的构造函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QLatin1String(const char *str);</span><br></pre></td></tr></table></figure>
+<p>因此用下面这个语句就可以将 char * ch 转换为 QString str 了，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = QString(QLatin1String(ch));</span><br></pre></td></tr></table></figure>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><strong>arg()</strong></p>
+<p>QString 的 arg() 函数可以自动替换掉 QString 中出现的占位符。其占位符以 % 开始，后面是占位符的位置，例如 %1，%2 这种。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString(<span class="string">"[%1, %2]"</span>).arg(x, y);</span><br></pre></td></tr></table></figure>
+<p><strong>sprintf()</strong></p>
+<p>可以使用类似 C 风格的格式化函数 sprintf() 来构造 QString。</p>
+<p><strong>QString::number(long n, int base = 10)</strong></p>
+<p>将数字转化为QString</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/QT/">QT</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Algorithm/排序算法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -267,10 +355,10 @@
 <p>注释版</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 平均时间复杂度 O(NlogN)，最差O(N^2)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,t,temp;</span><br><span class="line">    <span class="keyword">if</span>(left &gt; right)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    temp=a[left];	<span class="comment">//存基准数</span></span><br><span class="line">    i=left;</span><br><span class="line">    j=right;</span><br><span class="line">    <span class="keyword">while</span>(i!=j)&#123;</span><br><span class="line">        <span class="comment">//顺序很重要，先从右往左找，因为要最后停在比基准数小的地方(，然后和基准数交换)</span></span><br><span class="line">        <span class="comment">//找到比基准数小的</span></span><br><span class="line">        <span class="keyword">while</span>(a[j]&gt;=temp &amp;&amp; i&lt;j)</span><br><span class="line">            --j;</span><br><span class="line">        <span class="comment">//找到比基准数大的</span></span><br><span class="line">        <span class="keyword">while</span>(a[i]&lt;=temp &amp;&amp; i&lt;j)</span><br><span class="line">            ++i;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//如果没有相遇时，交换位置</span></span><br><span class="line">        <span class="keyword">if</span>(i&lt;j)&#123;</span><br><span class="line">            t=a[i];</span><br><span class="line">            a[i]=a[j];</span><br><span class="line">            a[j]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//下面三行代码交换 最左处的基准数 和 相遇位置(这个数比基准数小)</span></span><br><span class="line">    <span class="comment">//temp=a[left]; 存基准数时已经写了</span></span><br><span class="line">    a[left]=a[i];</span><br><span class="line">    a[i]=temp;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//此时基准数归位，基准数左边的都小于基准数右边的</span></span><br><span class="line">    quicksort(left, i<span class="number">-1</span>);	<span class="comment">//继续处理左边</span></span><br><span class="line">    quicksort(i+<span class="number">1</span>, right);	<span class="comment">//继续处理右边</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">quicksort(<span class="number">0</span>, n);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*运行例子</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> 6 1 2 7 9 3 4 5 10 8</span></span><br><span class="line"><span class="comment"> 3 1 2 5 4(6)9 7 10 8</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> 2 1(3)5 4 6 9 7 10 8</span></span><br><span class="line"><span class="comment"> 1(2)3 5 4 6 9 7 10 8</span></span><br><span class="line"><span class="comment">(1)2 3 5 4 6 9 7 10 8</span></span><br><span class="line"><span class="comment"> 1 2 3 4(5)6 9 7 10 8</span></span><br><span class="line"><span class="comment"> 1 2 3(4)5 6 9 7 10 8</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> 1 2 3 4 5 6 8 7 (9)10</span></span><br><span class="line"><span class="comment"> 1 2 3 4 5 6 7(8) 9 10</span></span><br><span class="line"><span class="comment"> 1 2 3 4 5 6(7)8  9 10</span></span><br><span class="line"><span class="comment"> 1 2 3 4 5 6 7 8  9(10)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>见另一篇讲解堆的</p>
-<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>见另一篇C++algorithm里的 inplace_merge.</p>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>将两个有序数列合并为一个有序数列，参见另一篇C++algorithm里的 inplace_merge.</p>
 <p>归并排序的效率是比较高的，设数列长为N，将数列分开成小数列一共要logN步，每步都是一个合并有序数列的过程，时间复杂度可以记为O(N)，故一共为O(N*logN)。</p>
 <p>因为归并排序每次都是在相邻的数据中进行操作，所以归并排序在O(N*logN)的几种排序方法（快速排序，归并排序，希尔排序，堆排序）也是效率比较高的。但是归并排序需要额外的空间分配。</p>
-<h2 id="O-n-2"><a href="#O-n-2" class="headerlink" title="O(n^2)"></a>O(n^2)</h2><h3 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h3><p>每一趟从待排序的数据元素中选择最小（或最大）的一个元素首元素，直到所有元素排完为止，简单选择排序是不稳定排序。</p>
+<h2 id="O-n-2"><a href="#O-n-2" class="headerlink" title="O(n^2)"></a>O(n^2)</h2><h3 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h3><p>每一趟从待排序的数据元素中选择最小（或最大）的一个元素移动到首元素，直到所有元素排完为止，简单选择排序是不稳定排序。</p>
 <h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// n个数排序，只需进行n-1趟</span></span><br><span class="line"><span class="comment">// 一趟将一个最小的数冒泡到最后</span></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n<span class="number">-1</span>; ++i)&#123;</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;n<span class="number">-1</span>-i; ++j)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[j]&lt;a[j+<span class="number">1</span>])&#123;</span><br><span class="line">            t=a[j];</span><br><span class="line">            a[j]=a[j+<span class="number">1</span>];</span><br><span class="line">            a[j+<span class="number">1</span>]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h3><p>直接插入排序基本思想是每一步将一个待排序的记录，从后向前冒泡，直到找到自己的位置，插入到前面已经排好序的有序序列中去。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">	<span class="keyword">int</span> j = i;</span><br><span class="line">    <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; arr[j] &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">        swap(arr,j,j<span class="number">-1</span>);</span><br><span class="line">        j--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -937,75 +1025,6 @@
         <p>翻译自：<a href="https://stackoverflow.com/questions/2351148/explicit-instantiation-when-is-it-used" target="_blank" rel="noopener">https://stackoverflow.com/questions/2351148/explicit-instantiation-when-is-it-used</a></p>
 <p>学习时思考了这个问题，百度了一圈，对看到的帖子很失望，基本都在不懂装懂。所以谷歌了一下找到答案，翻译成中文：</p>
 <p>显式实例化让你能够先创建模版的某个实例，而不是在使用它的时候再隐式创建。主要的用途就是用来写库文件，因为没有实例化的模版不能放入对象(.obj)文件中。在库文件里使用了显式实例化后，模版的实例化代码就不需要在每个使用到的对象里拷贝一份了（隐式实例化），编译器只需要链接到相应的库函数。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/Tips/C++ofstream输出为1的情况" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/04/C_C++/Tips/C++ofstream输出为1的情况/" class="article-date">
-      <time datetime="2018-12-04T14:15:08.000Z" itemprop="datePublished">2018-12-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/04/C_C++/Tips/C++ofstream输出为1的情况/">fstream输出为1的情况</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="fstream输出为1的情况"><a href="#fstream输出为1的情况" class="headerlink" title="fstream输出为1的情况"></a>fstream输出为1的情况</h3><p>在学C++文件操作时，我曾尝试直接将一个文件输入流接到文件输出流。</p>
-<p>如<code>fout &lt;&lt; fin;</code> 然而运行后输出的文件内容之有一个’1’。</p>
-<p>我接着又尝试<code>fout &lt;&lt; fin &lt;&lt; fin &lt;&lt; fin;</code>结果输出文件内容是’111’。</p>
-<p>查阅文档发现原因：</p>
-<p>ofstream类的&lt;&lt;运算符没有重载fstream类参数，这种情况下（以及其他没有重载的指针类型），会隐式转化成bool类型，然后只要指针不是空的，就会输出’1’（当然，如果使用了std::boolalpha控制符，则会输出’true’）。</p>
-<p>与此类似，有很多类也有bool转化，输出时可能就会输出1。</p>
 
       
     </div>

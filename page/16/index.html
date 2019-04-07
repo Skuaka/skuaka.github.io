@@ -234,6 +234,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Algorithm/DFS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/03/25/Algorithm/DFS/" class="article-date">
+      <time datetime="2018-03-25T05:16:50.000Z" itemprop="datePublished">2018-03-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/25/Algorithm/DFS/">DFS BFS</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="DFS思路"><a href="#DFS思路" class="headerlink" title="DFS思路"></a>DFS思路</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">DFS</span><span class="params">(solution_Set, buildingAnswer, step)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">if</span> <span class="title">Avaliable</span><span class="params">(buildingAnswer)</span> :                        # 如果当前构造的解是可用的解，则添加到最终解之中</span></span><br><span class="line"><span class="function">       solution_Set.<span class="title">add</span><span class="params">(buildingAnswer)</span></span></span><br><span class="line"><span class="function">       return</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    <span class="keyword">for</span> bs in BuildingSpace:                                # 遍历构造空间，是当前构造解可添加处理操作的空间</span></span><br><span class="line"><span class="function">        <span class="keyword">if</span> <span class="title">feasible</span><span class="params">(bs)</span>:                                    # 如果当前遍历的操作对于当前阶段是可行的，则对当前构造解施加操作</span></span><br><span class="line"><span class="function">            <span class="title">Process</span><span class="params">(buildingAnswer, fs)</span></span></span><br><span class="line"><span class="function">            <span class="title">DFS</span><span class="params">(solution_Set, buildingAnswer, step + <span class="number">1</span>)</span>        # 在当前的处理上进入下一种处理，进一步搜索解</span></span><br><span class="line"><span class="function">            <span class="title">Restore</span><span class="params">(buildingAnswer, fs)</span>                        # 从下一个状态搜索中返回，无论下一层是否是什么状态。 恢复本阶段的状态，搜索本阶段另外可施加的状态。</span></span><br></pre></td></tr></table></figure>
+<h3 id="BFS和DFS选择"><a href="#BFS和DFS选择" class="headerlink" title="BFS和DFS选择"></a>BFS和DFS选择</h3><ol>
+<li>BFS是用来搜索最短径路的解是比较合适的，比如求最少步数的解，最少交换次数的解，因为BFS搜索过程中遇到的解一定是离根最近的，所以遇到一个解，一定就是最优解，此时搜索算法可以终止。这个时候不适宜使用DFS，因为DFS搜索到的解不一定是离根最近的，只有全局搜索完毕，才能从所有解中找出离根的最近的解。（当然这个DFS的不足，可以使用迭代加深搜索ID-DFS去弥补）</li>
+<li>空间优劣上，DFS是有优势的，DFS不需要保存搜索过程中的状态，而BFS在搜索过程中需要保存搜索过的状态，而且一般情况需要一个队列来记录。</li>
+<li>DFS适合搜索全部的解，因为要搜索全部的解，那么BFS搜索过程中，遇到离根最近的解，并没有什么用，也必须遍历完整棵搜索树，DFS搜索也会搜索全部，但是相比DFS不用记录过多信息，所以搜素全部解的问题，DFS显然更加合适。</li>
+</ol>
+<p>作者：知乎用户</p>
+<p>链接：<a href="https://www.zhihu.com/question/23780297/answer/167225829" target="_blank" rel="noopener">https://www.zhihu.com/question/23780297/answer/167225829</a></p>
+<p>来源：知乎</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Script Language/Python/懒得整理的python学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">

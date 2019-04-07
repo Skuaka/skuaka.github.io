@@ -234,6 +234,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/Tips/C++ofstream输出为1的情况" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/C_C++/Tips/C++ofstream输出为1的情况/" class="article-date">
+      <time datetime="2018-12-04T14:15:08.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/C_C++/Tips/C++ofstream输出为1的情况/">fstream输出为1的情况</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="fstream输出为1的情况"><a href="#fstream输出为1的情况" class="headerlink" title="fstream输出为1的情况"></a>fstream输出为1的情况</h3><p>在学C++文件操作时，我曾尝试直接将一个文件输入流接到文件输出流。</p>
+<p>如<code>fout &lt;&lt; fin;</code> 然而运行后输出的文件内容之有一个’1’。</p>
+<p>我接着又尝试<code>fout &lt;&lt; fin &lt;&lt; fin &lt;&lt; fin;</code>结果输出文件内容是’111’。</p>
+<p>查阅文档发现原因：</p>
+<p>ofstream类的&lt;&lt;运算符没有重载fstream类参数，这种情况下（以及其他没有重载的指针类型），会隐式转化成bool类型，然后只要指针不是空的，就会输出’1’（当然，如果使用了std::boolalpha控制符，则会输出’true’）。</p>
+<p>与此类似，有很多类也有bool转化，输出时可能就会输出1。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Backend/Dreamweaver服务器配置" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1964,100 +2033,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/">Wireshark</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Unix/Command/Linux不常用小命令" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/22/Unix/Command/Linux不常用小命令/" class="article-date">
-      <time datetime="2018-11-22T13:44:50.000Z" itemprop="datePublished">2018-11-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/22/Unix/Command/Linux不常用小命令/">Linux 不常用命令(待续</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="LINUX-不常用小命令"><a href="#LINUX-不常用小命令" class="headerlink" title="LINUX 不常用小命令"></a>LINUX 不常用小命令</h1><h3 id="A"><a href="#A" class="headerlink" title="A"></a>A</h3><h4 id="awk：文本查找"><a href="#awk：文本查找" class="headerlink" title="awk：文本查找"></a>awk：文本查找</h4><p>另见</p>
-<h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><h3 id="E"><a href="#E" class="headerlink" title="E"></a>E</h3><h3 id="F"><a href="#F" class="headerlink" title="F"></a>F</h3><h3 id="G"><a href="#G" class="headerlink" title="G"></a>G</h3><h4 id="grep：文本查找"><a href="#grep：文本查找" class="headerlink" title="grep：文本查找"></a>grep：文本查找</h4><ul>
-<li>-v 反向查找</li>
-<li>-r 递归查找文件夹内符合的文件</li>
-</ul>
-<h3 id="H"><a href="#H" class="headerlink" title="H"></a>H</h3><h4 id="hexdump"><a href="#hexdump" class="headerlink" title="hexdump"></a>hexdump</h4><p>十六进制查看文件</p>
-<h4 id="history"><a href="#history" class="headerlink" title="history"></a>history</h4><p>查看命令行记录</p>
-<ul>
-<li>-c 清除命令行记录</li>
-</ul>
-<p>直接清除历史记录文件：<code>echo &gt; ~/.bash_history</code></p>
-<h4 id="host"><a href="#host" class="headerlink" title="host"></a>host</h4><p>查看主机名/网站 ip</p>
-<h3 id="I"><a href="#I" class="headerlink" title="I"></a>I</h3><h3 id="J"><a href="#J" class="headerlink" title="J"></a>J</h3><h3 id="K"><a href="#K" class="headerlink" title="K"></a>K</h3><h3 id="L"><a href="#L" class="headerlink" title="L"></a>L</h3><h4 id="last"><a href="#last" class="headerlink" title="last"></a>last</h4><p>查看所有的登入信息</p>
-<ul>
-<li>-n  只看最近 n 条</li>
-<li>-R  不显示 ip/hostname</li>
-<li>username  只看指定用户</li>
-</ul>
-<h4 id="lastlog"><a href="#lastlog" class="headerlink" title="lastlog"></a>lastlog</h4><p>查看所有用户最后一次的登入时间</p>
-<h3 id="M"><a href="#M" class="headerlink" title="M"></a>M</h3><h3 id="N"><a href="#N" class="headerlink" title="N"></a>N</h3><h4 id="nslookup：网站ip"><a href="#nslookup：网站ip" class="headerlink" title="nslookup：网站ip"></a>nslookup：网站ip</h4><p>查看网站ip 也可以用 host 命令</p>
-<h4 id="nmap：内网扫描"><a href="#nmap：内网扫描" class="headerlink" title="nmap：内网扫描"></a>nmap：内网扫描</h4><p>另见</p>
-<h3 id="O"><a href="#O" class="headerlink" title="O"></a>O</h3><h3 id="P"><a href="#P" class="headerlink" title="P"></a>P</h3><h3 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h3><h3 id="R"><a href="#R" class="headerlink" title="R"></a>R</h3><h3 id="S"><a href="#S" class="headerlink" title="S"></a>S</h3><h4 id="sftp"><a href="#sftp" class="headerlink" title="sftp"></a>sftp</h4><p>ls  查看当前目录下文件</p>
-<p>help 查看sftp支持哪些命令</p>
-<p>cd 指定目录</p>
-<p>pwd 查看当前目录</p>
-<p>get xxx.txt 下载xxx文件</p>
-<p>put xxx.txt 上传xxx文件</p>
-<p>quit / bye / exit 退出sftp</p>
-<h3 id="sed：文本处理"><a href="#sed：文本处理" class="headerlink" title="sed：文本处理"></a>sed：文本处理</h3><p>另见</p>
-<h3 id="T"><a href="#T" class="headerlink" title="T"></a>T</h3><h3 id="U"><a href="#U" class="headerlink" title="U"></a>U</h3><h3 id="V"><a href="#V" class="headerlink" title="V"></a>V</h3><h3 id="W"><a href="#W" class="headerlink" title="W"></a>W</h3><h4 id="who"><a href="#who" class="headerlink" title="who"></a>who</h4><p>查看当前登入的用户</p>
-<p><code>who /var/log/wtmp</code> 显示从wtmp文件创建或删改以来的每一次登录</p>
-<h3 id="X"><a href="#X" class="headerlink" title="X"></a>X</h3><h3 id="Y"><a href="#Y" class="headerlink" title="Y"></a>Y</h3><h3 id="Z"><a href="#Z" class="headerlink" title="Z"></a>Z</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
     </div>
 
       

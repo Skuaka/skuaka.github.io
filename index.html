@@ -234,6 +234,249 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/Concept_gcc/C++命名规范" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/07/C_C++/Concept_gcc/C++命名规范/" class="article-date">
+      <time datetime="2019-04-07T08:37:00.000Z" itemprop="datePublished">2019-04-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/07/C_C++/Concept_gcc/C++命名规范/">C++命名规范</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="C-命名规范"><a href="#C-命名规范" class="headerlink" title="C++命名规范"></a>C++命名规范</h2><p>源自：<a href="https://www.cnblogs.com/heyonggang/p/3362873.html" target="_blank" rel="noopener">https://www.cnblogs.com/heyonggang/p/3362873.html</a></p>
+<h3 id="整体原则"><a href="#整体原则" class="headerlink" title="整体原则"></a>整体原则</h3><p>在引入细节之前，先说明一下命名规范的整体原则：</p>
+<table>
+<thead>
+<tr>
+<th>同一性</th>
+<th>在编写一个子模块或派生类的时候，要遵循其基类或整体模块的命名风格，保持命名风格在整个模块中的同一性。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标识符组成</td>
+<td>标识符采用英文单词或其组合，应当直观且可以拼读，可望文知意，用词应当准确。</td>
+</tr>
+<tr>
+<td>最小化长度 &amp;&amp; 最大化信息量原则</td>
+<td>在保持一个标识符意思明确的同时，应当尽量缩短其长度。</td>
+</tr>
+<tr>
+<td>避免过于相似</td>
+<td>不要出现仅靠大小写区分的相似的标识符，例如“i”与“I”，“function”与“Function”等等。</td>
+</tr>
+<tr>
+<td>避免在不同级别的作用域中重名</td>
+<td>程序中不要出现名字完全相同的局部变量和全局变量，尽管两者的作用域不同而不会发生语法错误，但容易使人误解。</td>
+</tr>
+<tr>
+<td>正确命名具有互斥意义的标识符</td>
+<td>用正确的反义词组命名具有互斥意义的标识符，如：”nMinValue”和”nMaxValue”，”GetName()” 和 “SetName()” ….</td>
+</tr>
+<tr>
+<td>避免名字中出现数字编号</td>
+<td>尽量避免名字中出现数字编号，如Value1,Value2等，除非逻辑上的确需要编号。这是为了防止程序员偷懒，不肯为命名动脑筋而导致产生无意义的名字（因为用数字编号最省事）。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="类-结构"><a href="#类-结构" class="headerlink" title="类/结构"></a>类/结构</h3><p>除了异常类等个别情况（不希望用户把该类看作一个普通的、正常的类之情况）外，C++类/结构<br>的命名应该遵循以下准则：</p>
+<table>
+<thead>
+<tr>
+<th>C++类/结构的命名</th>
+<th>类的名称都要以大写字母“C”开头，后跟一个或多个单词。为便于界定，每个单词的首字母要大写。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>推荐的组成形式</td>
+<td>类的命名推荐用”名词”或”形容词＋名词”的形式，例如：”CAnalyzer”, “CFastVector” ….</td>
+</tr>
+<tr>
+<td>传统C结构体的命名</td>
+<td>传统C结构体的名称全部由大写字母组成，单词间使用下划线界定，例如：”SERVICE_STATUS”, “DRIVER_INFO” ….</td>
+</tr>
+</tbody>
+</table>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><table>
+<thead>
+<tr>
+<th>函数的命名</th>
+<th>函数的名称由一个或多个单词组成。为便于界定，每个单词的首字母要大写。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>推荐的组成形式</td>
+<td>函数名应当使用”动词”或者”动词＋名词”（动宾词组）的形式。例如：”GetName()”, “SetValue()”, “Erase()”, “Reserve()” ….</td>
+</tr>
+<tr>
+<td>保护成员函数</td>
+<td>保护成员函数的开头应当加上一个下划线“_”以示区别，例如：”_SetState()” ….</td>
+</tr>
+<tr>
+<td>私有成员函数</td>
+<td>类似地，私有成员函数的开头应当加上两个下划线“<strong>”，例如：”</strong>DestroyImp()” ….</td>
+</tr>
+<tr>
+<td>虚函数</td>
+<td>虚函数习惯以“Do”开头，如：”DoRefresh()”, “_DoEncryption()” ….</td>
+</tr>
+<tr>
+<td>回调和事件处理函数</td>
+<td>回调和事件处理函数习惯以单词“On”开头。例如：”_OnTimer()”, “OnExit()” ….</td>
+</tr>
+</tbody>
+</table>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量名由<strong><em>作用域前缀＋类型前缀＋一个或多个单词</em></strong>组成。为便于界定，每个单词的首字母要大写。</p>
+<p>对于某些用途简单明了的局部变量，也可以使用简化的方式，如：i, j, k, x, y, z ….</p>
+<p><strong>作用域前缀</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>前缀</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>无</em></td>
+<td>局部变量</td>
+</tr>
+<tr>
+<td>m_</td>
+<td>类的成员变量（member）</td>
+</tr>
+<tr>
+<td>sm_</td>
+<td>类的静态成员变量（static member）</td>
+</tr>
+<tr>
+<td>s_</td>
+<td>静态变量（static）</td>
+</tr>
+<tr>
+<td>g_</td>
+<td>外部全局变量（global）</td>
+</tr>
+<tr>
+<td>sg_</td>
+<td>静态全局变量（static global）</td>
+</tr>
+<tr>
+<td>gg_</td>
+<td>进程间共享的共享数据段全局变量（global global）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>类型前缀</strong></p>
+<p>类型前缀可以组合使用，例如”gc”表示字符数组，”ppn”表示指向整型的指针的指针等等。</p>
+<table>
+<thead>
+<tr>
+<th>前缀</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n</td>
+<td>整型和位域变量（number）</td>
+</tr>
+<tr>
+<td>e</td>
+<td>枚举型变量（enumeration）</td>
+</tr>
+<tr>
+<td>c</td>
+<td>字符型变量（char）</td>
+</tr>
+<tr>
+<td>b</td>
+<td>布尔型变量（bool）</td>
+</tr>
+<tr>
+<td>f</td>
+<td>浮点型变量（float）</td>
+</tr>
+<tr>
+<td>p</td>
+<td>指针型变量和迭代子（pointer）</td>
+</tr>
+<tr>
+<td>pfn</td>
+<td>特别针对指向函数的指针变量和函数对象指针（pointer of function）</td>
+</tr>
+<tr>
+<td>g</td>
+<td>数组（grid）</td>
+</tr>
+<tr>
+<td>i</td>
+<td>类的实例（instance）<br>对于经常用到的类，也可以定义一些专门的前缀，<br>如：std::string类的前缀可以定义为”st”，std::vector类的前缀可以定义为”v”。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐的组成形式</strong></p>
+<p>变量的名字应当使用”名词”或者”形容词＋名词”。例如：”nCode”, “m_nState”，”nMaxWidth” ….</p>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量名由类型前缀＋全大写字母组成，单词间通过下划线来界定，如：cDELIMITER, nMAX_BUFFER ….</p>
+<p>类型前缀的定义与变量命名规则中的相同。</p>
+<h3 id="枚举-联合-typedef"><a href="#枚举-联合-typedef" class="headerlink" title="枚举/联合/typedef"></a>枚举/联合/typedef</h3><p>枚举、联合、typedef语句生成的类型名由全大写字母组成，单词间通过下划线来界定，如：FAR_PROC, ERROR_TYPE ….</p>
+<h3 id="宏-枚举"><a href="#宏-枚举" class="headerlink" title="宏/枚举"></a>宏/枚举</h3><p>宏和枚举值由全大写字母组成，单词间通过下划线来界定，如：ERROR_UNKNOWN, OP_STOP ….</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Http/https与ssl" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -266,6 +509,25 @@
         <h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>Hypertext Transfer Protocol Secure，缩写：HTTPS，常称为HTTP over TLS，HTTP over SSL，HTTP Secure。</p>
 <p>HTTP端口：80，HTTPS端口：443。</p>
 <p>在计算机网络上，HTTPS经由超文本传输协议（HTTP）进行通信，但利用SSL/TLS来加密数据包。</p>
+<p><strong>HTTP的特点</strong></p>
+<ul>
+<li><p>无状态：协议对客户端没有状态存储，对事物处理没有“记忆”能力，比如访问一个网站需要反复进行登录操作</p>
+</li>
+<li><p>无连接：HTTP/1.1之前，由于无状态特点，每次请求需要通过TCP三次握手四次挥手，和服务器重新建立连接。比如某个客户机在短时间多次请求同一个资源，服务器并不能区别是否已经响应过用户的请求，所以每次需要重新响应请求，需要耗费不必要的时间和流量。</p>
+</li>
+<li><p>基于请求和响应：基本的特性，由客户端发起请求，服务端响应</p>
+</li>
+<li><p>简单快速、灵活</p>
+</li>
+<li><p>通信使用明文、请求和响应不会对通信方进行确认、无法保护数据的完整性</p>
+</li>
+</ul>
+<p><strong>HTTPS的特点</strong></p>
+<ol>
+<li>内容加密：采用混合加密技术，中间者无法直接查看明文内容</li>
+<li>验证身份：通过证书认证客户端访问的是自己的服务器</li>
+<li>保护数据完整性：防止传输的内容被中间人冒充或者篡改</li>
+</ol>
 <h3 id="握手"><a href="#握手" class="headerlink" title="握手"></a>握手</h3><p>HTTPS在传输数据之前需要客户端（浏览器）与服务端（网站）之间进行一次握手，在握手过程中将确立双方加密传输数据的密码信息。TLS/SSL协议不仅仅是一套加密传输的协议，更是一件经过艺术家精心设计的艺术品，TLS/SSL中使用了<strong>非对称加密</strong>，<strong>对称加密</strong>，<strong>HASH算法</strong>。握手过程的具体描述如下：</p>
 <ul>
 <li>1）浏览器将自己支持的一套加密规则发送给网站。 </li>
@@ -283,8 +545,50 @@
 <h4 id="通信时序图"><a href="#通信时序图" class="headerlink" title="通信时序图"></a>通信时序图</h4><p><img src="http://www.runoob.com/wp-content/uploads/2017/05/201208201734403507.png" alt="201208201734403507"></p>
 <h2 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h2><p>secure socket layer (安全套接字层)</p>
 <p>SSL证书和我们日常用的身份证类似，是一个支持HTTPS网站的身份证明，SSL证书里面包含了网站的域名，证书有效期，证书的颁发机构以及用于加密传输密码的公钥等信息，由于公钥加密的密码只能被在申请证书时生成的私钥解密，因此浏览器在生成密码之前需要先核对当前访问的域名与证书上绑定的域名是否一致，同时还要对证书的颁发机构进行验证，如果验证失败浏览器会给出证书错误的提示。</p>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p><strong>来源</strong></p>
-<p>学习自：<a href="http://www.runoob.com/w3cnote/https-ssl-intro.html" target="_blank" rel="noopener">http://www.runoob.com/w3cnote/https-ssl-intro.html</a></p>
+<h3 id="证书的类型"><a href="#证书的类型" class="headerlink" title="证书的类型"></a>证书的类型</h3><p>实际上，我们使用的证书分很多种类型，SSL证书只是其中的一种。SSL证书负责传输公钥，是一种PKI（Public Key Infrastructure，公钥基础结构）证书。 我们常见的证书根据用途不同大致有以下几种：</p>
+<ul>
+<li> 1、SSL证书，用于加密HTTP协议，也就是HTTPS。</li>
+<li> 2、代码签名证书，用于签名二进制文件，比如Windows内核驱动，Firefox插件，Java代码签名等等。</li>
+<li> 3、客户端证书，用于加密邮件。</li>
+<li> 4、双因素证书，网银专业版使用的USB Key里面用的就是这种类型的证书。</li>
+</ul>
+<p> 这些证书都是由受认证的证书颁发机构——我们称之为<strong>CA（Certificate Authority）</strong>机构来颁发，针对企业与个人的不同，可申请的证书的类型也不同，价格也不同。CA机构颁发的证书都是受信任的证书，对于SSL证书来说，如果访问的网站与证书绑定的网站一致就可以通过浏览器的验证而不会提示错误。</p>
+<h3 id="SSL证书申请与规则"><a href="#SSL证书申请与规则" class="headerlink" title="SSL证书申请与规则"></a>SSL证书申请与规则</h3><p>SSL证书可以向CA机构通过付费的方式申请，也可以自己制作。 CA机构颁发的证书价格非常昂贵，而且有效期一般只有一年到三年不等（年数不同，价格也不同），过期之后还要再次交钱申请，因此一般只有企业才会申请证书。但是随着个人网站的增多，目前也有针对个人的SSL证书服务，价格相对便宜一些，国内的话400多块钱就能申请到一个，国外更是有免费的SSL证书可以申请。 在申请SSL证书时需要向CA机构提供网站域名，营业执照，以及申请人的身份信息等。网站的域名非常重要，申请人必须证明自己对域名有所有权，如果支持Hotmail.com，Gmail.com的SSL证书都可以随便申请，黑客们就不用做假证书欺骗了。</p>
+<p>此外，一个证书一般只绑定一个域名，如果CA机构心情好的话，会免费再绑一个，比如你要申请域名时绑定的域名是 <a href="http://www.runoob.com，那么只有在浏览器地址是" target="_blank" rel="noopener">www.runoob.com，那么只有在浏览器地址是</a> <a href="https://www.runoob.com" target="_blank" rel="noopener">https://www.runoob.com</a> 的时候，这个证书才是受信任的，如果地址是<a href="https://tt.runoob.com或者https://login.runoob.com，那么这个证书由于访问的域名与证书绑定的域名不同，仍然会被浏览器显示为不受信任的。" target="_blank" rel="noopener">https://tt.runoob.com或者https://login.runoob.com，那么这个证书由于访问的域名与证书绑定的域名不同，仍然会被浏览器显示为不受信任的。</a></p>
+<p>CA机构也提供申请通配符域名（例如，*.runoob.com），通配符域名相当于绑定了主域名下的所有域名，因此使用起来非常方便，但是价格也超级昂贵，一个通配符域名一年大概得5000块钱，只有企业才可以申请。 </p>
+<hr>
+<p>以上说的是向CA机构申请证书的情况，如果个人网站只为加密传输也可以自己制作SSL证书，自己制作的证书不会受到浏览器的信任，在访问的时候由于证书验证失败而给出警告。</p>
+<h3 id="SSL证书欺骗"><a href="#SSL证书欺骗" class="headerlink" title="SSL证书欺骗"></a>SSL证书欺骗</h3><p>对HTTPS最常见的攻击手段就是SSL证书欺骗或者叫SSL劫持，是一种典型的中间人攻击。不过SSL劫持并非只是用于攻击目的，在一些特殊情况下利用SSL劫持我们可以更顺畅的访问网络，我会在后文提到。</p>
+<p>以攻击为目的的SSL劫持如果不注意浏览器安全提示的话，很容易就中招。当网络中有中间人发起SSL劫持攻击时，攻击者需要伪造一个SSL证书发给浏览器，这个时候由于伪造的SSL证书不受信任，浏览器会给出提示。</p>
+<p>这里有一个误区，当SSL证书不受信任的时候，并不一定就是有SSL劫持发生，有种例外情况是：一些个人网站买不起合法的SSL证书，因此会自己制作一个SSL证书来加密传输的数据。如果你经常访问某个个人网站，而且你知道这个网站是干什么的，那么这种情况可以不用担心。但是如果你访问的是网银，在线支付，或者是hotmail.com，gmail.com等，这类公司性质的网站一定会申请合法的SSL证书（12306.cn除外），一旦SSL证书不受信任，应该果断的终止访问，这个时候网络中一定会存在异常行为，对于一些小区宽带的用户一定要注意这点。</p>
+<p>所以作为个人用户，你一定要知道你访问的是什么网站，如果你只是一个没有多少计算机只是的普通网民，我相信你不会经常上那些自己制作SSL证书的个人网站（12306.cn除外），因此如果你没有办法判断网络是不是有异常，只要是证书有问题的，干脆就别再访问了。</p>
+<blockquote>
+<p>小提示：对于12306.cn，一定要按照网站说的那样，”为保障您顺畅购票，请下载安装根证书”。</p>
+</blockquote>
+<p>总结一下使用SSL证书要注意的问题：</p>
+<ul>
+<li>1、除非必要，不要随意安装根证书。安装根证书的时候一定要明确证书的来源。</li>
+<li>2、对于网银，在线支付，重要邮箱等网站，一定要确保SSL证书是没有问题的，如果浏览器给出SSL证书错误的警告，一定要拒绝访问。一些小区宽带用户一定要注意这点。</li>
+<li>3、由于现在个人申请SSL证书比较便宜，一定要注意挂着合法SSL证书的钓鱼网站（国外比较常见）。对于钓鱼网站，一定要看清域名，另外别相信什么中奖的消息，同时要安装带有钓鱼防护功能的安全软件。</li>
+</ul>
+<h3 id="证书如何保证安全传输"><a href="#证书如何保证安全传输" class="headerlink" title="证书如何保证安全传输"></a>证书如何保证安全传输</h3><p>数字证书包括了加密后服务器的公钥、权威机构的信息、服务器域名，还有经过CA私钥签名之后的证书内容（经过先通过Hash函数计算得到证书数字摘要，然后用权威机构私钥加密数字摘要得到数字签名)，签名计算方法以及证书对应的域名。当客户端收到这个证书之后，使用本地配置的权威机构的公钥对证书进行解密得到服务端的公钥和证书的数字签名，数字签名经过CA公钥解密得到证书信息摘要，然后根据证书上描述的计算证书的方法计算一下当前证书的信息摘要，与收到的信息摘要作对比，如果一样，表示证书一定是服务器下发的，没有被中间人篡改过。因为中间人虽然有权威机构的公钥，能够解析证书内容并篡改，但是篡改完成之后中间人需要将证书重新加密，但是中间人没有权威机构的私钥，无法加密，强行加密只会导致客户端无法解密，如果中间人强行乱修改证书，就会导致证书内容和证书签名不匹配。</p>
+<p>那第三方攻击者能否让自己的证书显示出来的信息也是服务端呢？（伪装服务端一样的配置）显然这个是不行的，因为当第三方攻击者去CA那边寻求认证的时候CA会要求其提供例如域名的whois信息、域名管理邮箱等证明你是服务端域名的拥有者，而第三方攻击者是无法提供这些信息所以他就是无法骗CA他拥有属于服务端的域名</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="安全性考虑"><a href="#安全性考虑" class="headerlink" title="安全性考虑"></a>安全性考虑</h3><ol>
+<li>HTTPS协议的加密范围也比较有限，在黑客攻击、拒绝服务攻击、服务器劫持等方面几乎起不到什么作用。</li>
+<li>SSL证书的信用链体系并不安全，特别是在某些国家可以控制CA根证书的情况下，中间人攻击一样可行。</li>
+</ol>
+<h3 id="成本考虑"><a href="#成本考虑" class="headerlink" title="成本考虑"></a>成本考虑</h3><p>SSL证书需要购买申请，功能越强大的证书费用越高。</p>
+<p>SSL证书通常需要绑定IP，不能在同一IP上绑定多个域名，IPv4资源不可能支撑这个消耗（SSL有扩展可以部分解决这个问题，但是比较麻烦，而且要求浏览器、操作系统支持，Windows XP就不支持这个扩展，考虑到XP的装机量，这个特性几乎没用）。</p>
+<p>根据ACM CoNEXT数据显示，使用HTTPS协议会使页面的加载时间延长近50%，增加10%到20%的耗电。</p>
+<p>HTTPS连接缓存不如HTTP高效，流量成本高。</p>
+<p>HTTPS连接服务器端资源占用高很多，支持访客多的网站需要投入更大的成本。</p>
+<p>HTTPS协议握手阶段比较费时，对网站的响应速度有影响，影响用户体验。比较好的方式是采用分而治之，类似12306网站的主页使用HTTP协议，有关于用户信息等方面使用HTTPS。</p>
+<h2 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h2><p>SSL只是一个协议，openssl则是SSL的实现版，另外openssl还包含了公钥私钥的生成、摘要生成等各种工具。</p>
+<p><strong>使用场景</strong></p>
+<p>我们知道，有些时候我们浏览网站的时候会有一些广告，这些广告什么的不一定是原网站挂上去的，也有可能是中间的运营商在中间篡改了内容导致的，可以使用https技术（一般是基于openssl）来对数据进行加密，保证数据不被篡改。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p><strong>学习来源</strong></p>
+<p><a href="http://www.runoob.com/w3cnote/https-ssl-intro.html" target="_blank" rel="noopener">http://www.runoob.com/w3cnote/https-ssl-intro.html</a></p>
+<p><a href="https://blog.csdn.net/xiaoming100001/article/details/81109617" target="_blank" rel="noopener">https://blog.csdn.net/xiaoming100001/article/details/81109617</a></p>
 
       
     </div>
@@ -1172,287 +1476,6 @@
 <p>使用示例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ThreadPool.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ThreadPool <span class="title">pool</span><span class="params">(<span class="number">4</span>)</span></span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt; <span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt; &gt; results;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; ++i) &#123;</span><br><span class="line">        results.emplace_back(</span><br><span class="line">            pool.enqueue([i] &#123;</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"hello "</span> &lt;&lt; i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">                <span class="built_in">std</span>::this_thread::sleep_for(<span class="built_in">std</span>::chrono::seconds(<span class="number">1</span>));</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"world "</span> &lt;&lt; i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">return</span> i*i;</span><br><span class="line">            &#125;)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;&amp; result: results)</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; result.get() &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/C++Collection/C++algorithm" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/20/C_C++/C++Collection/C++algorithm/" class="article-date">
-      <time datetime="2019-03-20T07:51:15.000Z" itemprop="datePublished">2019-03-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/20/C_C++/C++Collection/C++algorithm/">c++algorithm</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="c-算法库"><a href="#c-算法库" class="headerlink" title="c++算法库"></a>c++算法库</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p><strong>前提是已经排序。</strong></p>
-<table>
-<thead>
-<tr>
-<th>binary_search</th>
-<th>determines if an element exists in a certain range</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>lower_bound</td>
-<td>returns an iterator to the first element <strong><em>not less</em></strong> than the given value</td>
-</tr>
-<tr>
-<td>upper_bound</td>
-<td>returns an iterator to the first element <strong><em>greater</em></strong> than a certain value</td>
-</tr>
-<tr>
-<td>equal_range</td>
-<td>returns range of elements matching a specific key</td>
-</tr>
-</tbody>
-</table>
-<p><strong>equal_range:</strong></p>
-<p>试图在已排序的[first,last)中寻找value，它返回一对迭代器i和j，其中i是在不破坏次序的前提下，value可插入的第一个位置（亦即lower_bound），j则是在不破坏次序的前提下，value可插入的最后一个位置（亦即upper_bound），因此，[i,j)内的每个元素都等同于value，而且[i,j)是[first,last)之中符合此一性质的最大子区间。</p>
-<h2 id="合并有序集"><a href="#合并有序集" class="headerlink" title="合并有序集"></a>合并有序集</h2><table>
-<thead>
-<tr>
-<th>merge</th>
-<th>merges two sorted ranges</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>inplace_merge</td>
-<td>merges two ordered ranges in-place</td>
-</tr>
-</tbody>
-</table>
-<p><strong>inplace_merge:</strong></p>
-<p>Merges two consecutive sorted ranges <code>[first, middle)</code> and <code>[middle, last)</code> into one sorted range <code>[first, last)</code></p>
-<p>用inplace_merge<strong>实现归并排序</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Iter</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">merge_sort</span>(<span class="title">Iter</span> <span class="title">first</span>, <span class="title">Iter</span> <span class="title">last</span>) &#123;</span></span><br><span class="line">    <span class="keyword">if</span> (last - first &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        Iter middle = first + (last - first) / <span class="number">2</span>;</span><br><span class="line">        merge_sort(first, middle);</span><br><span class="line">        merge_sort(middle, last);</span><br><span class="line">        <span class="built_in">std</span>::inplace_merge(first, middle, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123;<span class="number">8</span>, <span class="number">2</span>, <span class="number">-2</span>, <span class="number">0</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    merge_sort(v.begin(), v.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> n : v) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>基于排序的算法，基本上都可以增加一个参数，即比较函数。</p>
-<p>需要随机访问迭代器。</p>
-<table>
-<thead>
-<tr>
-<th>is_sorted(C++11)</th>
-<th>checks whether a range is sorted into ascending order</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>is_sorted_until(C++11)</td>
-<td>finds the largest sorted subrange</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>sorts a range into ascending order</td>
-</tr>
-<tr>
-<td>partial_sort</td>
-<td>sorts the first N elements of a range</td>
-</tr>
-<tr>
-<td>partial_sort_copy</td>
-<td>copies and partially sorts a range of elements</td>
-</tr>
-<tr>
-<td>stable_sort</td>
-<td>(稳定排序)sorts a range of elements while preserving order between equal elements</td>
-</tr>
-<tr>
-<td>nth_element</td>
-<td>partially sorts the given range making sure that it is partitioned by the given element</td>
-</tr>
-</tbody>
-</table>
-<p><strong>partial_sort:</strong></p>
-<p>partial_sort(first, middle, last);</p>
-<p>其实就是类似<em>用堆找第K大数</em>的方法，先 <code>make_heap(first, middle)</code>，然后不断比较替换堆顶，最后<code>sort_heap(first, heap);</code></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找出[first,last)中6个最小的元素，并且排序在[first,middle)，其余部分无序</span></span><br><span class="line">partial_sort(v.begin(), v.begin()+<span class="number">6</span>, v.end());</span><br></pre></td></tr></table></figure>
-<p><strong>nth_element:</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nth_element</span><span class="params">( RandomIt first, RandomIt nth, RandomIt last )</span></span>;</span><br></pre></td></tr></table></figure>
-<p>排序后a[n]就是数列中第n+1大的数（下标从0開始计数），a[start,n)中的数肯定不大于a[n,end]中的数。但是a[start,n), a[n,end]内的大小顺序还不一定。<strong>并不返回值。</strong></p>
-<p><strong>partial_sort_copy:</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partial_sort_copy( InputIt first, InputIt last, RandomIt d_first, RandomIt d_last );</span><br></pre></td></tr></table></figure>
-<p>将排序后的内容复制到新的地方。输入输出迭代器范围的一大一小会产生不同效果，见如下例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v0&#123;<span class="number">4</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v1.begin(), v1.end());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the smaller vector in ascending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v1) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">if</span>(it == v1.end())</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The return value is the end iterator\n"</span>;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v2.begin(), v2.end(), </span><br><span class="line">                                <span class="built_in">std</span>::greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the larger vector in descending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v2) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> &lt;&lt; <span class="string">"The return value is the iterator to "</span> &lt;&lt; *it &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Writing to the smaller vector in ascending order gives: 1 2 3</span><br><span class="line">The return value is the end iterator</span><br><span class="line">Writing to the larger vector in descending order gives: 5 4 3 2 1 15 16</span><br><span class="line">The return value is the iterator to 15</span><br></pre></td></tr></table></figure>
-<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><table>
-<thead>
-<tr>
-<th>includes</th>
-<th>returns true if one set is a subset of another</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>set_difference</td>
-<td>computes the difference between two sets</td>
-</tr>
-<tr>
-<td>set_intersection</td>
-<td>computes the intersection of two sets</td>
-</tr>
-<tr>
-<td>set_symmetric_difference</td>
-<td>computes the symmetric difference between two sets</td>
-</tr>
-<tr>
-<td>set_union</td>
-<td>computes the union of two sets</td>
-</tr>
-</tbody>
-</table>
-<p><strong>set_开头的函数</strong>的第五个参数是一个输出迭代器，可以用输出容器的插入迭代器。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; s1&#123;<span class="string">"3"</span>,<span class="string">"2"</span>,<span class="string">"1"</span>&#125;;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; s2&#123;<span class="string">"2"</span>&#125;;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; s3;</span><br><span class="line">	</span><br><span class="line">set_difference(s1.begin(), s1.end(), s2.begin(), s2.end(), </span><br><span class="line">               insert_iterator&lt;<span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt;&gt;(s3,s3.begin()));</span><br><span class="line">copy(s3.begin(),s3.end(),ostream_iterator&lt;<span class="built_in">string</span>, <span class="keyword">char</span>&gt;(<span class="built_in">cout</span>,<span class="string">" "</span>));</span><br><span class="line"><span class="comment">//output: 1 3</span></span><br></pre></td></tr></table></figure>
-<p><strong>set_symmetric_difference:</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>  &#125;;</span><br><span class="line">&#123;  <span class="number">2</span>,    <span class="number">5</span>,    <span class="number">7</span>&#125;;</span><br><span class="line"><span class="comment">//set_symmetric_difference</span></span><br><span class="line">&#123;<span class="number">1</span>,  <span class="number">3</span>,<span class="number">4</span>,  <span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>排序算法基本默认都是递增的，而堆排序如果要递增排序的话，则是建立最大堆，这就是我理解的默认是建立最大堆而不是最小堆的原因。</p>
-<table>
-<thead>
-<tr>
-<th>is_heap(C++11)</th>
-<th>checks if the given range is a max heap</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>is_heap_until(C++11)</td>
-<td>finds the largest subrange that is a max heap</td>
-</tr>
-<tr>
-<td>make_heap</td>
-<td>creates a max heap out of a range of elements</td>
-</tr>
-<tr>
-<td>push_heap</td>
-<td>inserts the element at the position <code>last-1</code> into the <em>max heap</em></td>
-</tr>
-<tr>
-<td>pop_heap</td>
-<td>swaps <code>first</code> and  <code>last-1</code> and makes the subrange <code>[first, last-1)</code> into a <em>max heap</em>.</td>
-</tr>
-<tr>
-<td>sort_heap</td>
-<td>turns a max heap into a range of elements sorted in ascending order</td>
-</tr>
-</tbody>
-</table>
-<p>example:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v &#123; <span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span> &#125;;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"initially      : "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"> </span><br><span class="line">	<span class="built_in">std</span>::make_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after make_heap: "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::pop_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after pop_heap : "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">std</span>::push_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after push_heap: "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">std</span>::sort_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after sort_heap: "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">initially      : 3 1 4 1 5 9 </span><br><span class="line">after make_heap: 9 5 4 1 1 3 </span><br><span class="line">after pop_heap : 5 3 4 1 1 9 </span><br><span class="line">after push_heap: 9 3 5 1 1 4 </span><br><span class="line">after sort_heap: 1 1 3 4 5 9</span><br></pre></td></tr></table></figure>
-<h2 id="最值"><a href="#最值" class="headerlink" title="最值"></a>最值</h2><table>
-<thead>
-<tr>
-<th>max</th>
-<th>returns the greater of the given values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>max_element</td>
-<td>returns the largest element in a range</td>
-</tr>
-<tr>
-<td>min</td>
-<td>returns the smaller of the given values</td>
-</tr>
-<tr>
-<td>min_element</td>
-<td>returns the smallest element in a range</td>
-</tr>
-</tbody>
-</table>
-<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><table>
-<thead>
-<tr>
-<th>equal</th>
-<th>determines if two sets of elements are the same</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>lexicographical_compare</td>
-<td>returns true if one range is lexicographically less than another</td>
-</tr>
-</tbody>
-</table>
-<h2 id="排列"><a href="#排列" class="headerlink" title="排列"></a>排列</h2><table>
-<thead>
-<tr>
-<th>is_permutation(C++11)</th>
-<th>determines if a sequence is a permutation of another sequence</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>next_permutation</td>
-<td>generates the next greater lexicographic permutation of a range of elements</td>
-</tr>
-<tr>
-<td>prev_permutation</td>
-<td>generates the next smaller lexicographic permutation of a range of elements</td>
-</tr>
-</tbody>
-</table>
-<p><strong>next_permutation:</strong></p>
-<p>Transforms the range <code>[first, last)</code> into the next permutation from the set of all permutations that are lexicographically ordered with respect to <code>operator&lt;</code> or <code>comp</code>. Returns true if such permutation exists, otherwise transforms the range into the first permutation (as if by <code>std::sort(first, last)</code>) and returns false.</p>
-<p><strong>prev_permutation</strong>类似，都是反过来。</p>
-<p>example:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3,5,4,1,2 is a permutation of 1,2,3,4,5? "</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::boolalpha</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::is_permutation(v1.begin(), v1.end(), v2.begin()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3,5,4,1,1 is a permutation of 1,2,3,4,5? "</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::boolalpha</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::is_permutation(v1.begin(), v1.end(), v3.begin()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>output:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span> is a permutation of <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>? <span class="literal">true</span></span><br><span class="line"><span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">1</span> is a permutation of <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>? <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<h1 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h1>
       
     </div>
     
