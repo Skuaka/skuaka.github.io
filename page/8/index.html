@@ -234,6 +234,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/Tips/C++显式实例化的用途" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/C_C++/Tips/C++显式实例化的用途/" class="article-date">
+      <time datetime="2018-12-04T14:15:28.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/C_C++/Tips/C++显式实例化的用途/">C++显式实例化的用途</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>翻译自：<a href="https://stackoverflow.com/questions/2351148/explicit-instantiation-when-is-it-used" target="_blank" rel="noopener">https://stackoverflow.com/questions/2351148/explicit-instantiation-when-is-it-used</a></p>
+<p>学习时思考了这个问题，百度了一圈，对看到的帖子很失望，基本都在不懂装懂。所以谷歌了一下找到答案，翻译成中文：</p>
+<p>显式实例化让你能够先创建模版的某个实例，而不是在使用它的时候再隐式创建。主要的用途就是用来写库文件，因为没有实例化的模版不能放入对象(.obj)文件中。在库文件里使用了显式实例化后，模版的实例化代码就不需要在每个使用到的对象里拷贝一份了（隐式实例化），编译器只需要链接到相应的库函数。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/Tips/C++ofstream输出为1的情况" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1956,83 +2022,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Wireshark/Wireshark入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/22/Network/Wireshark/Wireshark入门/" class="article-date">
-      <time datetime="2018-11-22T13:45:16.000Z" itemprop="datePublished">2018-11-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/22/Network/Wireshark/Wireshark入门/">Wireshark 入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Wireshark-入门"><a href="#Wireshark-入门" class="headerlink" title="Wireshark 入门"></a>Wireshark 入门</h2><h3 id="网卡混杂模式"><a href="#网卡混杂模式" class="headerlink" title="网卡混杂模式"></a>网卡混杂模式</h3><p>如果不设置混杂模式，你的计算机只能获取数据包发往的目标是你计算机和从你计算机出去的数据包。如果设置了混杂模式，你就可以捕获局域网中所有的数据包。</p>
-<h3 id="过滤表达式"><a href="#过滤表达式" class="headerlink" title="过滤表达式"></a>过滤表达式</h3><p><strong>关系</strong></p>
-<p>is present   如果选择的协议域存在，则显示相关数据包。<br>contains     判断一个协议，字段或者分片包含一个值<br>matches     判断一个协议或者字符串匹配一个给定的Perl表达式。</p>
-<p><strong>Predefined values</strong><br>有些协议域包含了预先定义的值。如果你选择的协议域包含这样的值，你可以在这个列表中选择。</p>
-<p><strong>函数</strong><br>upper(string－field)－把字符串转换成大写<br>lower(string－field)－把字符串转换成小写</p>
-<p>例如：<br>upper(ncp.nds_stream_name) contains “BO56.COM”</p>
-<h3 id="使用着色规则"><a href="#使用着色规则" class="headerlink" title="使用着色规则"></a>使用着色规则</h3><p>你经常会在数据包列表区域中看到不同的颜色。这就是wireshark做的很人性化的一方面。它可以让你指定条件，把符合条件的数据包按指定的颜色显示。这样你查找数据包会更方便些。</p>
-<p>点击“view”菜单，然后选择“Coloring Rules”</p>
-<p>注意：wireshark在应用规则的时候，是按自上而下的顺序去应用规则。因此刚添加的规则会优先应用。可以手动调整。</p>
-<h3 id="使用图表"><a href="#使用图表" class="headerlink" title="使用图表"></a>使用图表</h3><h4 id="IO图"><a href="#IO图" class="headerlink" title="IO图"></a>IO图</h4><p>wireshark的IO图让你可以对网络上的吞吐量绘图。让你了解网络数据传输过程中的峰值和波动情况。通过“Statistics”菜单中的“IO Graphs”选项可以打开这个IO图对话框。</p>
-<h4 id="RTT图"><a href="#RTT图" class="headerlink" title="RTT图"></a>RTT图</h4><p>wireshark还有一个功能就是可以对网络传输中的双向时间进行绘图。双向时间（round-trip time, RTT）,就是一个数据包被确认正常接收所花费的时间。</p>
-<h3 id="跟踪tcp流"><a href="#跟踪tcp流" class="headerlink" title="跟踪tcp流"></a>跟踪tcp流</h3><p>跟踪TCP流这个功能可以将接收到的数据排好顺序使之容易查看，而不需要一小块一小块地看。这在查看HTTP、FTP等纯文本应用层协议时非常有用。</p>
-<p>右键单击记录并选择Follow TCP Stream。这时TCP流就会在一个单独的窗口中显示出来。</p>
-<p>这个窗口中的文字会有两种颜色。红色用于表示从源地址到目标地址的流量。蓝色是从目标地址到源地址的流量。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/">Wireshark</a></li></ul>
     </div>
 
       

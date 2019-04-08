@@ -234,6 +234,86 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/C++Collection/C++智能指针" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/06/C_C++/C++Collection/C++智能指针/" class="article-date">
+      <time datetime="2019-03-06T15:20:43.000Z" itemprop="datePublished">2019-03-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/06/C_C++/C++Collection/C++智能指针/">C++智能指针</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="为什么需要？"><a href="#为什么需要？" class="headerlink" title="为什么需要？"></a>为什么需要？</h1><p>当程序正常或者异常终止时，普通指针在栈中被删除，但是它指向的内存不会被删除。</p>
+<p>而如果这个指针是对象，则可以让它的析构函数删除指向的内存。</p>
+<p>用法：将new获得（直接或间接）的地址赋给这种对象，当智能指针过期时，它的析构函数将使用delete来释放内存。当然，它们还有其他的功能。</p>
+<p>比如：<code>auto_ptr&lt;string&gt; ps(new string);</code></p>
+<h1 id="智能指针模版类"><a href="#智能指针模版类" class="headerlink" title="智能指针模版类"></a>智能指针模版类</h1><p>c++98 ：auto_ptr（废弃）</p>
+<p>c++11 ：unique_ptr、shared_ptr</p>
+<p>c++17 ：weak_ptr</p>
+<p>boost库还有一些智能指针，本文不介绍。</p>
+<h2 id="将原程序换成智能指针的步骤"><a href="#将原程序换成智能指针的步骤" class="headerlink" title="将原程序换成智能指针的步骤"></a>将原程序换成智能指针的步骤</h2><ol>
+<li><code>#include &lt;memory&gt;</code>，名称空间：std。</li>
+<li>替换指针</li>
+<li>删除delete语句</li>
+</ol>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/06/C_C++/C++Collection/C++智能指针/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Operating System/C程序内存区域" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -847,76 +927,6 @@
       
         <p class="article-more-link">
           <a href="/2019/03/01/C_C++/Tips/C语言杂记/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-OpenGl/窗口视口" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/02/28/OpenGl/窗口视口/" class="article-date">
-      <time datetime="2019-02-28T12:02:10.000Z" itemprop="datePublished">2019-02-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/28/OpenGl/窗口视口/">窗口视口</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="窗口视口"><a href="#窗口视口" class="headerlink" title="窗口视口"></a>窗口视口</h3><p>屏幕：即计算机的整个屏幕大小。</p>
-<p>窗口：即屏幕中的某一个窗口，可放大放小和移动关闭。 </p>
-<p>视口：即窗口还可以分为若干个区域，称为视口，窗口中用来绘图的区域。一般设置视口大小等于窗口大小。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/OpenGL/">OpenGL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/02/28/OpenGl/窗口视口/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
