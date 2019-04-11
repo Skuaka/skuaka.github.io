@@ -234,6 +234,264 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Network/Unp/unp_code" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/09/20/Network/Unp/unp_code/" class="article-date">
+      <time datetime="2018-09-20T05:18:20.000Z" itemprop="datePublished">2018-09-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/20/Network/Unp/unp_code/">《unp》源代码问题笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ol>
+<li><p>首先阅读主文件夹的README文件，进行configure和库的安装(make)，接下来所有程序都要用make编译，具体编译规则查看文件夹内的Makefile文件。</p>
+</li>
+<li><p>客户端程序连接时连接拒绝：<code>connect error: Connection refused</code></p>
+<p>这时要看看源代码里的port是否和服务器程序的port相同，经我对比有的程序端口和书上不同。</p>
+</li>
+<li><p>tcpservpoll01编译时提示OPEN_MAX未定义，可见<code>&lt;limits.h&gt;</code>头文件不一定定义了OPEN_MAX。</p>
+<p>于是我就在程序添加了三行代码，即可成功编译。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#ifndef         OPEN_MAX</span><br><span class="line">        #define OPEN_MAX        16</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unp/">unp</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Database/PostgreSQL/C++ connector for PostgreSQL" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/20/Database/PostgreSQL/C++ connector for PostgreSQL/" class="article-date">
+      <time datetime="2018-08-20T06:33:38.000Z" itemprop="datePublished">2018-08-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/20/Database/PostgreSQL/C++ connector for PostgreSQL/">C++ connector for PostgreSQL</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="安装libpqxx"><a href="#安装libpqxx" class="headerlink" title="安装libpqxx"></a>安装libpqxx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://pqxx.org/download/software/libpqxx/libpqxx-4.0.tar.gz</span><br><span class="line">tar xvfz libpqxx-4.0.tar.gz</span><br><span class="line">cd libpqxx-4.0</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pqxx/pqxx&gt;</span><br><span class="line">using namespace pqxx;</span><br></pre></td></tr></table></figure>
+<h3 id="编译命令"><a href="#编译命令" class="headerlink" title="编译命令"></a>编译命令</h3><p><code>g++ main.c -lpqxx -lpq</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Database/PostgreSQL/PostgreSQL 命令" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/" class="article-date">
+      <time datetime="2018-08-17T14:49:50.000Z" itemprop="datePublished">2018-08-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/">PostgreSQL 命令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><p>查看所有命令</p>
+<p><code>\?</code></p>
+<p>显示已创建的数据库</p>
+<p><code>\l</code>  或者</p>
+<p><code>SELECT datname FROM pg_database;</code></p>
+<p>在不连接进 PostgreSQL 数据库的情况下，也可以在终端上查看显示已创建的列表：</p>
+<p><code>psql -l</code></p>
+<p>查看postgresql数据库用户</p>
+<p><code>\du</code></p>
+<p>显示数据库表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、通过命令行查询</span><br><span class="line">\d 数据库 —— 得到所有表的名字</span><br><span class="line">\d 表名 —— 得到表结构</span><br><span class="line"></span><br><span class="line">2、通过SQL语句查询</span><br><span class="line">select * from pg_tables;	//得到当前db中所有表的信息（这里pg_tables是系统视图）</span><br><span class="line">select tablename from pg_tables where schemaname=&apos;public&apos;	//得到所有用户自定义表的名字（这里&quot;tablename&quot;字段是表的名字，&quot;schemaname&quot;是schema的名字。用户自定义的表，如果未经特殊处理，默认都是放在名为public的schema下）</span><br></pre></td></tr></table></figure>
+<h5 id="d命令"><a href="#d命令" class="headerlink" title="\d命令"></a>\d命令</h5><p>该命令将显示每个匹配关系（表，视图，索引，序列）的信息，包括对象所有的列，它们的类型，表空间（如果不是默认的）和任何特殊属性（如NOT NULL或默认值等）。与唯一约束相关的索引，规则，约束，触发器也同样会显示出来。如果关系是一个视图，还会显示视图的定义。</p>
+<ol>
+<li>如果\d命令什么都不带，将列出当前数据库中的所有表。</li>
+<li>\d后面跟一个表名，表示显示这个表的结构定义。</li>
+<li>\d也可以显示索引信息</li>
+<li>\d后面可以跟一通配符”*“或”?”</li>
+<li><p>\d+命令，该命令将显示比\d命令更详细的信息</p>
+</li>
+<li><p>匹配不同对象类型的\d命令</p>
+<p>如果想只显示匹配的表，可以使用\dt命令</p>
+<p>如果想只显示索引，可以使用\di命令</p>
+<p>如果想只显示序号，可以使用\ds命令</p>
+<p>如果想只显示视图，可以使用\dv命令</p>
+<p>如果想只显示函数，可以使用\df命令</p>
+</li>
+<li><p>如果想显示SQL已执行的时间，可以用\timing命令</p>
+</li>
+<li><p>列出所有的schemas可以使用\dn命令</p>
+</li>
+<li><p>显示所有的表空间可以用\db命令</p>
+<p>表空间就是一个目录，放在这个表空间的表，就是把表的数据文件放到这个表空间下。</p>
+</li>
+<li><p>列出数据库所有角色或用户\du或\dg</p>
+</li>
+<li>\dp或\z命令用于显示表的权限分配情况</li>
+</ol>
+<h3 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h3><p>连接数据库</p>
+<p><code>\c dbname</code></p>
+<p>创建一个名为 test 的表</p>
+<p><code>CREATE TABLE test(id int, text VARCHAR(255));</code></p>
+<p>插入一条记录</p>
+<p><code>insert into test(id,text) values ( 1,&#39;heihei&#39;);</code></p>
+<p>查询记录</p>
+<p><code>select * from test where id = 1;</code></p>
+<p>更新记录</p>
+<p><code>update test set text =&#39;update&#39; where id =5;</code></p>
+<p>删除指定的记录</p>
+<p><code>delete from test where id = 1;</code></p>
+<p>删除表</p>
+<p><code>drop table test;</code></p>
+<p>删除数据库</p>
+<p><code>drop database test_db0;</code></p>
+<p>或者利用 dropdb 指令，在终端上删除数据库</p>
+<p><code>dropdb test0</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/PostgreSQL/Mac 下 PostgreSQL " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -969,1054 +1227,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DTD/">DTD</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Mess/File structure/mp3文件格式" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/09/Mess/File structure/mp3文件格式/" class="article-date">
-      <time datetime="2018-08-09T07:05:28.000Z" itemprop="datePublished">2018-08-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/09/Mess/File structure/mp3文件格式/">mp3文件格式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="MP3-文件结构"><a href="#MP3-文件结构" class="headerlink" title="MP3 文件结构"></a>MP3 文件结构</h1><p>MP3文件大体分为三部分:TAG_V2(ID3V2)，Frame, TAG_V1(ID3V1) </p>
-<table>
-<thead>
-<tr>
-<th style="text-align:right">ID3V2</th>
-<th>包含了作者，作曲，专辑等信息，长度不固定，扩展了 ID3V1 的信息量。</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right"><code>Frame   .   .   . Frame</code></td>
-<td>一系列的帧，个数由文件大小和帧长决定  每个 FRAME 的长度可能不固定，也可能固定，由位率 bitrate 决定 每个 FRAME 又分为帧头和数据实体两部分  帧头记录了 mp3 的位率，采样率，版本等信息，每个帧之间相互独立</td>
-</tr>
-<tr>
-<td style="text-align:right">ID3V1</td>
-<td>包含了作者，作曲，专辑等信息，长度为 128BYTE。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="ID3V2"><a href="#ID3V2" class="headerlink" title="ID3V2"></a>ID3V2</h2><p>ID3V2 到现在一共有4 个版本，但流行的播放软件一般只支持第3 版， 既ID3v2.3。</p>
-<p>由于ID3V1 记录在MP3 文件的末尾，ID3V2就只好记录在MP3 文件的首部了(如果有一天发布ID3V3，真不知道该记录在哪里)。也正是由于这个原因，对ID3V2 的操作比ID3V1 要慢。而且ID3V2 结构比ID3V1 的结构要复杂得多，但比前者全面且可以伸缩和扩展。</p>
-<p>下面就介绍一下ID3V2.3：</p>
-<p><strong>每个ID3V2.3 的标签都一个标签头和若干个标签帧或一个扩展标签头组成。</strong>关于曲目的信息如标题、作者等都存放在不同的标签帧中，扩展标签头和标签帧并不是必要的，但每个标签至少要有一个标签帧。标签头和标签帧一起顺序存放在MP3 文件的首部。</p>
-<h3 id="1、标签头"><a href="#1、标签头" class="headerlink" title="1、标签头"></a>1、标签头</h3><p>在文件的首部顺序记录10个字节的ID3V2.3 的头部。数据结构如下：</p>
-<p>char Header[3];  /<em>必须为”ID3”否则认为标签不存在</em>/</p>
-<p>char Ver;        /<em>版本号ID3V2.3 就记录3</em>/</p>
-<p>char Revision;   /<em>副版本号此版本记录为0</em>/</p>
-<p>char Flag;       /<em>存放标志的字节，这个版本只定义了三位，稍后详细解说</em>/</p>
-<p>char Size[4];    /<em>标签大小，包括标签头的10个字节和所有的标签帧的大小</em>/</p>
-<h4 id="1）标志字节"><a href="#1）标志字节" class="headerlink" title="1）标志字节"></a>1）标志字节</h4><p>标志字节一般为0，定义如下： abc00000</p>
-<p>a – 表示是否使用Unsynchronisation(一般不设置)</p>
-<p>b – 表示是否有扩展头部(一般不设置)</p>
-<p>c – 表示是否为测试标签(一般不设置)</p>
-<p><em>第6个字节：存放标志的字节，只定义了三位，这里值为0</em> </p>
-<h4 id="2）标签大小"><a href="#2）标签大小" class="headerlink" title="2）标签大小"></a>2）标签大小</h4><p>一共四个字节，但每个字节只用7位，最高位不使用恒为0。所以格式如下</p>
-<p>0xxxxxxx 0xxxxxxx 0xxxxxxx 0xxxxxxx</p>
-<p>计算大小时要将0 去掉，得到一个28 位的二进制数，就是标签大小，计算公式如下：</p>
-<p>total_size  = (Size[0]&amp;0x7F)<em>0x200000+ (Size[1]&amp;0x7F)</em>0x4000 + (Size[2]&amp;0x7F)*0x80 +(Size[3]&amp;0x7F)</p>
-<p><strong>注意：这里的帧大小，并不包含帧头的10个字节，只表示帧内容的大小.</strong></p>
-<h3 id="2、标签帧"><a href="#2、标签帧" class="headerlink" title="2、标签帧"></a>2、标签帧</h3><p>每个标签帧都有一个10个字节的帧头和至少一个字节的不固定长度的内容组成。它们也是顺序存放在文件中，和标签头和其他的标签帧也没有特殊的字符分隔。得到一个完整的帧的内容只有从帧头中的到内容大小后才能读出，读取时要注意大小，不要将其他帧的内容或帧头读入。 </p>
-<p><strong>帧头的定义如下：</strong></p>
-<p>char ID[4];  /<em>用四个字符标识一个帧，说明其内容，稍后有常用的标识对照表</em>/</p>
-<p>char Size[4]; /<em>帧内容的大小，不包括帧头，不得小于1</em>/</p>
-<p>char Flags[2]; /<em>存放标志，只定义了6 位</em>/</p>
-<h4 id="1）帧标识"><a href="#1）帧标识" class="headerlink" title="1）帧标识"></a>1）帧标识</h4><p>用四个字符标识一个帧，说明一个帧的内容含义，常用的对照如下：</p>
-<p>TIT2=标题表示内容为这首歌的标题，下同</p>
-<p>TPE1=作者</p>
-<p>TALB=专集</p>
-<p>TRCK=音轨格式：N/M 其中N 为专集中的第N 首，M为专集中共M 首，N和M 为ASCII 码表示的数字</p>
-<p>TYER=年代是用ASCII 码表示的数字</p>
-<p>TCON=类型直接用字符串表示</p>
-<p>COMM=备注格式：”eng\0备注内容”，其中eng 表示备注所使用的自然语言</p>
-<h4 id="2）大小"><a href="#2）大小" class="headerlink" title="2）大小"></a>2）大小</h4><p>这个可没有标签头的算法那么麻烦，每个字节的8 位全用，格式如下</p>
-<p>xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx</p>
-<p>算法如下：</p>
-<p>int FSize = Size[0]<em>0x100000000 + Size[1]</em>0x10000+ Size[2]*0x100 + Size[3];</p>
-<p><strong>注意：这里的帧大小，并不包含帧头的10个字节，只表示帧内容的大小</strong></p>
-<h4 id="3）标志"><a href="#3）标志" class="headerlink" title="3）标志"></a>3）标志</h4><p>只定义了6 位，另外的10 位为0，但大部分的情况下16 位都为0 就可以了。格式如下：<strong>abc00000ijk00000</strong> </p>
-<p>a – 标签保护标志，设置时认为此帧作废</p>
-<p>b – 文件保护标志，设置时认为此帧作废</p>
-<p>c – 只读标志，设置时认为此帧不能修改(但我没有找到一个软件理会这个标志)</p>
-<p>i – 压缩标志，设置时一个字节存放两个BCD 码表示数字</p>
-<p>j – 加密标志(没有见过哪个MP3 文件的标签用了加密)</p>
-<p>k – 组标志，设置时说明此帧和其他的某帧是一组</p>
-<h2 id="FRAME"><a href="#FRAME" class="headerlink" title="FRAME"></a>FRAME</h2><p> 每个 FRAME 都有一个帧头 FRAMEHEADER，长度是 4BYTE(32bit),帧头后面可能有两个字节的 CRC 校 </p>
-<p>验，这两个字节的是否存在决定于 FRAMEHEADER 信息的第 16bit，为 0 则帧头后面无校验，为 1 则有校验, 校验值长度为 2 个字节，紧跟在 FRAMEHEADER 后面，接着就是帧的实体数据了，格式如下: </p>
-<table>
-<thead>
-<tr>
-<th>FRAMEHEADER</th>
-<th>CRC(free)</th>
-<th>MAIN_DATA</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>4 BYTE</td>
-<td>0 OR 2 BYTE</td>
-<td>长度由帧头计算得出</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1、帧头"><a href="#1、帧头" class="headerlink" title="1、帧头"></a>1、帧头</h3><p>FRAMEHEADER 格式如下:<br><strong>AAAAAAAA AAABBCCD EEEEFFGH IIJJKLMM</strong> </p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Sign</th>
-<th style="text-align:center">Length<br>(bits)</th>
-<th style="text-align:center">Position<br>(bits)</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">A</td>
-<td style="text-align:center">11</td>
-<td style="text-align:center">(31-21)</td>
-<td>Frame sync (all bits set)</td>
-</tr>
-<tr>
-<td style="text-align:center">B</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(20,19)</td>
-<td>MPEG Audio version<br>00 - MPEG Version 2.5 <br>01 - reserved <br>10 - MPEG Version 2<br>11 - MPEG Version 1</td>
-</tr>
-<tr>
-<td style="text-align:center">C</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(18,17)</td>
-<td>Layer description<br>00 - reserved<br>01 - Layer III<br>10 - Layer II<br>11 - Layer I</td>
-</tr>
-<tr>
-<td style="text-align:center">D</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(16)</td>
-<td>Protection bit<br>0 - Protected by CRC (16bit crc follows header)<br>1 - Not protected</td>
-</tr>
-<tr>
-<td style="text-align:center">E</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">(15,12)</td>
-<td>Bitrate index</td>
-</tr>
-<tr>
-<td style="text-align:center">F</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(11,10)</td>
-<td>Sampling rate frequency index</td>
-</tr>
-<tr>
-<td style="text-align:center">G</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(9)</td>
-<td>Padding bit<br>0 - frame is not padded<br>1 - frame is padded with one extra bit</td>
-</tr>
-<tr>
-<td style="text-align:center">H</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(8)</td>
-<td>Private bit (unknown purpose)</td>
-</tr>
-<tr>
-<td style="text-align:center">I</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(7,6)</td>
-<td>Channel  Mode<br>00 - Stereo<br>01 - Joint stereo (Stereo)<br>10 - Dual channel (Stereo)<br>11 - Single channel (Mono)</td>
-</tr>
-<tr>
-<td style="text-align:center">J</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(5,4)</td>
-<td>Mode extension (Only if Joint stereo)</td>
-</tr>
-<tr>
-<td style="text-align:center">K</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(3)</td>
-<td>Copyright<br>0 - Audio is not copyrighted<br>1 - Audio is copyrighted</td>
-</tr>
-<tr>
-<td style="text-align:center">L</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(2)</td>
-<td>Original<br>0 - Copy of original media<br>1 - Original media</td>
-</tr>
-<tr>
-<td style="text-align:center">M</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(1,0)</td>
-<td>Emphasis<br>00 - none<br>01 - 50/15 ms<br>10 - reserved<br>11 - CCIT J.17</td>
-</tr>
-</tbody>
-</table>
-<h4 id="Bitrate-index"><a href="#Bitrate-index" class="headerlink" title="Bitrate index"></a>Bitrate index</h4><table>
-<thead>
-<tr>
-<th style="text-align:left">bits</th>
-<th>V1,L1</th>
-<th>V1,L2</th>
-<th>V1,L3</th>
-<th>V2,L1</th>
-<th>V2,L2</th>
-<th>V2,L3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">0000</td>
-<td>free</td>
-<td>free</td>
-<td>free</td>
-<td>free</td>
-<td>free</td>
-<td>free</td>
-</tr>
-<tr>
-<td style="text-align:left">0001</td>
-<td>32</td>
-<td>32</td>
-<td>32</td>
-<td>32</td>
-<td>32</td>
-<td>8 (8)</td>
-</tr>
-<tr>
-<td style="text-align:left">0010</td>
-<td>64</td>
-<td>48</td>
-<td>40</td>
-<td>64</td>
-<td>48</td>
-<td>16 (16)</td>
-</tr>
-<tr>
-<td style="text-align:left">0011</td>
-<td>96</td>
-<td>56</td>
-<td>48</td>
-<td>96</td>
-<td>56</td>
-<td>24 (24)</td>
-</tr>
-<tr>
-<td style="text-align:left">0100</td>
-<td>128</td>
-<td>64</td>
-<td>56</td>
-<td>128</td>
-<td>64</td>
-<td>32 (32)</td>
-</tr>
-<tr>
-<td style="text-align:left">0101</td>
-<td>160</td>
-<td>80</td>
-<td>64</td>
-<td>160</td>
-<td>80</td>
-<td>64 (40)</td>
-</tr>
-<tr>
-<td style="text-align:left">0110</td>
-<td>192</td>
-<td>96</td>
-<td>80</td>
-<td>192</td>
-<td>96</td>
-<td>80 (48)</td>
-</tr>
-<tr>
-<td style="text-align:left">0111</td>
-<td>224</td>
-<td>112</td>
-<td>96</td>
-<td>224</td>
-<td>112</td>
-<td>56 (56)</td>
-</tr>
-<tr>
-<td style="text-align:left">1000</td>
-<td>256</td>
-<td>128</td>
-<td>112</td>
-<td>256</td>
-<td>128</td>
-<td>64 (64)</td>
-</tr>
-<tr>
-<td style="text-align:left">1001</td>
-<td>288</td>
-<td>160</td>
-<td>128</td>
-<td>288</td>
-<td>160</td>
-<td>128 (80)</td>
-</tr>
-<tr>
-<td style="text-align:left">1010</td>
-<td>320</td>
-<td>192</td>
-<td>160</td>
-<td>320</td>
-<td>192</td>
-<td>160 (96)</td>
-</tr>
-<tr>
-<td style="text-align:left">1011</td>
-<td>352</td>
-<td>224</td>
-<td>192</td>
-<td>352</td>
-<td>224</td>
-<td>112 (112)</td>
-</tr>
-<tr>
-<td style="text-align:left">1100</td>
-<td>384</td>
-<td>256</td>
-<td>224</td>
-<td>384</td>
-<td>256</td>
-<td>128 (128)</td>
-</tr>
-<tr>
-<td style="text-align:left">1101</td>
-<td>416</td>
-<td>320</td>
-<td>256</td>
-<td>416</td>
-<td>320</td>
-<td>256 (144)</td>
-</tr>
-<tr>
-<td style="text-align:left">1110</td>
-<td>448</td>
-<td>384</td>
-<td>320</td>
-<td>448</td>
-<td>384</td>
-<td>320 (160)</td>
-</tr>
-<tr>
-<td style="text-align:left">1111</td>
-<td>bad</td>
-<td>bad</td>
-<td>bad</td>
-<td>bad</td>
-<td>bad</td>
-<td>bad</td>
-</tr>
-</tbody>
-</table>
-<p>NOTES: All values are in kbps</p>
-<p>V1  -  MPEG  Version  1</p>
-<p>V2 - MPEG Version 2 and Version 2.5</p>
-<p>L1 - Layer I L2 - Layer II L3 - Layer III</p>
-<p>“free” means variable bitrate.</p>
-<p>“bad” means that this is not an allowed value</p>
-<h4 id="Sampling-rate-frequency-index"><a href="#Sampling-rate-frequency-index" class="headerlink" title="Sampling rate frequency index"></a>Sampling rate frequency index</h4><p>(values are in Hz)</p>
-<table>
-<thead>
-<tr>
-<th>bits</th>
-<th>MPEG</th>
-<th>MPEG2</th>
-<th>MPEG2.5</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>00</td>
-<td>44100</td>
-<td>22050</td>
-<td>11025</td>
-</tr>
-<tr>
-<td>01</td>
-<td>48000</td>
-<td>24000</td>
-<td>12000</td>
-</tr>
-<tr>
-<td>10</td>
-<td>32000</td>
-<td>16000</td>
-<td>8000</td>
-</tr>
-<tr>
-<td>11</td>
-<td>reserve</td>
-<td>reserve</td>
-<td>reserve</td>
-</tr>
-</tbody>
-</table>
-<h4 id="Mode-extension"><a href="#Mode-extension" class="headerlink" title="Mode extension"></a>Mode extension</h4><table>
-<thead>
-<tr>
-<th>value</th>
-<th>Intensity stereo</th>
-<th>MS stereo</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>00</td>
-<td>off</td>
-<td>off</td>
-</tr>
-<tr>
-<td>01</td>
-<td>on</td>
-<td>off</td>
-</tr>
-<tr>
-<td>10</td>
-<td>off</td>
-<td>on</td>
-</tr>
-<tr>
-<td>11</td>
-<td>on</td>
-<td>on</td>
-</tr>
-</tbody>
-</table>
-<h4 id="1）计算帧长度"><a href="#1）计算帧长度" class="headerlink" title="1）计算帧长度"></a>1）计算帧长度</h4><p>我们首先区分两个术语：帧大小和帧长度。帧大小即每帧采样数表示一帧中采样的个数，这是恒定值。其值如下表所示</p>
-<table>
-<thead>
-<tr>
-<th>LAYER</th>
-<th>MPEG 1</th>
-<th>MPEG 2(LSF)</th>
-<th>MPEG 2.5(LSF)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Layer 1</td>
-<td>384</td>
-<td>384</td>
-<td>384</td>
-</tr>
-<tr>
-<td>Layer 2</td>
-<td>1152</td>
-<td>1152</td>
-<td>1152</td>
-</tr>
-<tr>
-<td>Layer 3</td>
-<td>1152</td>
-<td>576</td>
-<td>576</td>
-</tr>
-</tbody>
-</table>
-<p> 帧长度是压缩时每一帧的长度，包括帧头。它将填充的空位也计算在内。LayerI的一个空位长4字节，LayerII和LayerIII的空位是1字节。当读取MPEG文件时必须计算该值以便找到相邻的帧。注意：因为有填充和比特率变换，帧长度可能变化。</p>
-<p>从头中读取比特率，采样频率和填充的值后可以进行计算，</p>
-<p>LyaerI使用公式：</p>
-<p><strong>帧长度（字节） = (( 每帧采样数/ 8 * 比特率 ) / 采样频率 ) + 填充 * 4</strong></p>
-<p>LyerII和LyaerIII使用公式：</p>
-<p><strong>帧长度（字节）= (( 每帧采样数/ 8 * 比特率 ) / 采样频率 ) + 填充</strong></p>
-<p>例：LayerIII 比特率 128000，采样频率 44100，填充0  =〉帧大小 417字节。</p>
-<p>(1152 / 8 * 128K)/44.1K = 417 (字节)</p>
-<h4 id="2）每帧的持续时间"><a href="#2）每帧的持续时间" class="headerlink" title="2）每帧的持续时间"></a>2）每帧的持续时间</h4><p>每帧持续时间(毫秒) = 每帧采样数 / 采样频率 * 1000</p>
-<h4 id="3）CRC校验"><a href="#3）CRC校验" class="headerlink" title="3）CRC校验"></a>3）CRC校验</h4><p>如果帧头的校验位为0，则帧头后就有一个16位的CRC值，这个值是big-endian的值，把这个值和该帧通过计算得出的CRC值进行比较就可以得知该帧是否有效。</p>
-<h2 id="ID3v1"><a href="#ID3v1" class="headerlink" title="ID3v1"></a>ID3v1</h2><p>ID3V1标准并不周全，存放的信息少，无法存放歌词，无法录入专辑封面、图片等。ID3V2是一个相当完备的标准，但给编写软件带来困难，虽然赞成此格式的人很多，在软件中绝大多数MP3仍在使用ID3V1标准。ID3v1标签包含艺术家，标题，唱片集，发布年代和流派。另外还有额外的注释空间。位于音频文件的最后固定为128字节。可以读取该文件的最后这128字节获得标签。</p>
-<p>ID3V1结构如下：</p>
-<p>AAABBBBB BBBBBBBB BBBBBBBB BBBBBBBB<br>BCCCCCCC CCCCCCCC CCCCCCCC CCCCCCCD<br>DDDDDDDD DDDDDDDD DDDDDDDD DDDDDEEE<br>EFFFFFFF FFFFFFFF FFFFFFFF FFFFFGHI</p>
-<p>  <strong>表3.1  ID3 V1.0文件尾说明</strong></p>
-<table>
-<thead>
-<tr>
-<th>字节</th>
-<th>长度 (字节)</th>
-<th>说 明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1-3(A)</td>
-<td>3</td>
-<td>存放“TAG”字符，表示ID3 V1.0标准，紧接其后的是歌曲信息。</td>
-</tr>
-<tr>
-<td>4-33(B)</td>
-<td>30</td>
-<td>歌名</td>
-</tr>
-<tr>
-<td>34-63(C)</td>
-<td>30</td>
-<td>作者</td>
-</tr>
-<tr>
-<td>64-93(D)</td>
-<td>30</td>
-<td>专辑名</td>
-</tr>
-<tr>
-<td>94-97(E)</td>
-<td>4</td>
-<td>年份</td>
-</tr>
-<tr>
-<td>98-125(F)</td>
-<td>28</td>
-<td>附注</td>
-</tr>
-<tr>
-<td>126(G)</td>
-<td>1</td>
-<td>保留位</td>
-</tr>
-<tr>
-<td>127(H)</td>
-<td>1</td>
-<td>音轨号</td>
-</tr>
-<tr>
-<td>128(I)</td>
-<td>1</td>
-<td>MP3音乐类别，共147种。</td>
-</tr>
-</tbody>
-</table>
-<p>ID3V1 的各项信息都是顺序存放，没有任何标识将其分开，比如标题信息不足30 个字节，则使用’’\0’’填充，数据结构定义如下：</p>
-<p>typedef struct tagID3V1  {</p>
-<p>charHeader[3];         /<em>标签头必须是”TAG”否则认为没有标签</em>/</p>
-<p>charTitle[30];         /<em>标题</em>/</p>
-<p>charArtist[30];        /<em>作者</em>/</p>
-<p>charAlbum[30];         /<em>专集</em>/</p>
-<p>charYear[4];           /<em>出品年代</em>/</p>
-<p>charComment[28];       /<em>备注</em>/</p>
-<p>charreserve;           /<em>保留</em>/</p>
-<p>chartrack;             /<em>音轨</em>/</p>
-<p>charGenre;             /<em>类型</em>/</p>
-<p>} ID3V1, *pID3V1;</p>
-<h2 id="Unicode与FFFE"><a href="#Unicode与FFFE" class="headerlink" title="Unicode与FFFE"></a>Unicode与FFFE</h2><p>标签帧的内容开头都有 01 ff fe 三个字节。原因是为了判别大端还是小端编码。</p>
-<p>在UCS编码中有一个叫做”ZERO WIDTH NO-BREAK SPACE”的字符，它的编码是FEFF。而FFFE在UCS中是不存在的字符，所以不应该出现在实际传输中。UCS规范建议我们在传输字节流前，先传输字符”ZERO WIDTH NO-BREAK SPACE”。<br>这样如果接收者收到FEFF，就表明这个字节流是Big-Endian的；如果收到FFFE，就表明这个字节流是Little-Endian的。因此字符”ZERO WIDTH NO-BREAK SPACE”又被称作BOM。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mess/">Mess</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mp3/">Mp3</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/IS-IS协议" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/IS-IS协议/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/IS-IS协议/">CCIE IS-IS协议</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="1：IS-IS中间系统到中间系统"><a href="#1：IS-IS中间系统到中间系统" class="headerlink" title="1：IS-IS中间系统到中间系统"></a>1：IS-IS中间系统到中间系统</h3><p>IGPS阵营中的协议</p>
-<p>两大阵营：EGPS和IGPS</p>
-<p>IGPS 内部网关协议集</p>
-<p>IGPS：RIP OSPF EIGRP IS-IS 都是AS内的协议</p>
-<p>EGPS：BGP AS间、AS内</p>
-<p>IS-IS正在取代OSPF</p>
-<p>学习RIP, EIGRP是为了学习OSPF和BGP？</p>
-<p>Link State 链路状态路由协议</p>
-<p>根据协议自身特点分类：【分类记住路由协议】</p>
-<p>距离矢量 RIP 高级距离矢量 EIGRP 不是靠跳数 公式【基于带宽延迟】+Metric值 但是受距离限制 OSPF 链路状态</p>
-<p>*为什么要使用IS-IS取代OSPF？</p>
-<h3 id="2：IS-IS的发展历程"><a href="#2：IS-IS的发展历程" class="headerlink" title="2：IS-IS的发展历程"></a>2：IS-IS的发展历程</h3><p>同时进行的，没有谁早谁晚的说法。</p>
-<p>OSI七层模型 传输层 面向链接TCP 无链接UDP</p>
-<p>OSI中后期产物 计算机网络最早的发展阶段提出的是CLNS和CONS</p>
-<p>CLNS和CONS算是OSI的前身</p>
-<p>N代表网络，S代表服务，C代表链接 O代表Of“有链接的网络服务”类似于TCP L代表Less “无链接的网络服务”</p>
-<p>基于对CONS的研究，延伸出了IP【网络标识】和TCP</p>
-<p>TCP数据传输控制 IP网络标识</p>
-<p>因此开发出了动态的路由协议：RIP EIGRP OSPF BGP</p>
-<p>另一阵营：CLNS坚持使用无链接的网络协议</p>
-<p>开发出了CLNP：CLNS网络标识</p>
-<p>还需要的机制：CLNS【名字重复】IS-IS</p>
-<p>OSPF为IP服务，IS-IS为CLNP网络服务。</p>
-<p>这些都是不同组织在同时发展的，最后CONS阵营的方案得到公司的认可。</p>
-<p>最后，ISO组织提出了OSI七层模型，但是CLNS的理念也得到认可，因此保留下来，叫做UDP</p>
-<p>最后，IS-IS就感觉要消失了</p>
-<p>这是为了统一行业标准。</p>
-<p>OSPF虚链路：①克服孤岛区域：0，1，2区域不互相学路由</p>
-<p>②两边区域0，中间区域1，但是两边区域0不互相学路由。</p>
-<p>IS-IS没有这个问题。</p>
-<p>外企推运营商用IS-IS 思科排第一</p>
-<p>割接：干掉原有协议，换新协议</p>
-<p>两种方法：①升级OSPF，使其拥有IS-IS特性</p>
-<p>②直接用IS-IS取代OSPF</p>
-<p>两种方法都不太科学……</p>
-<p>所以我们现在使用的IS-IS，并不是纯IS-IS</p>
-<p>集成IS-IS、双栈IS-IS</p>
-<p>所以很多技术原来与IP对立，后来被IP吞并……</p>
-<h3 id="3：CLNP标识"><a href="#3：CLNP标识" class="headerlink" title="3：CLNP标识"></a>3：CLNP标识</h3><p>3.1 NET 网络实体标识</p>
-<p>类似于IP+MAC组合</p>
-<p>3.2 NSAP 网络服务接入点</p>
-<p>实现IP+MAC+端口号port_nam</p>
-<p>CLNP觉得没有必要把IP+MAC分开。</p>
-<p>NSAP在这个基础上把端口号加入。</p>
-<p>一步到位。地址就会很长。</p>
-<p>3.3 CLNP标识格式</p>
-<p>AFI A地址 F格式 I授权组织</p>
-<p>数字由官方定好。47，48，49是用在局域网或私网的地址</p>
-<p>所以官方有一张表。</p>
-<p>0000 完整的一段，但有两块信息。前两个00代表域标识，后两个00代表区域标识</p>
-<p>区域被域包含 域就是AS</p>
-<p>巨型网络有不同的域标识</p>
-<p>0001 0002 0003 同一域中的不同区域</p>
-<p>sys-ID——MAC地址</p>
-<p>所以说CLNP地址类似于IP+MAC，保证了全球唯一独立性</p>
-<p>最后又有两个00 相当于端口号</p>
-<p>CLNP全都是16进制 0A代表端口10</p>
-<p>地址格式和MAC地址一样，但不是MAC地址</p>
-<p>sys-id只要不一样就好，建议使用设备MAC地址……</p>
-<p>*如何区分是NET还是NSAP？</p>
-<p>看最后的部分是不是00</p>
-<p>IS-IS启用的时候，必须要有一个NET地址。</p>
-<p>其实是因为IS-IS被同化，留着NET已经没啥用了……</p>
-<p>就用NET当ROUTE ID RID</p>
-<p>类似于奥运会上的中华台北</p>
-<p>3.4 IS-IS术语</p>
-<p>1）ES 终端系统</p>
-<p>所有设备连入CLNP后都叫ES</p>
-<p>TCP/IP CLNS/CLNP匹配</p>
-<p>2）IS:ROUTER</p>
-<p>3）CLNP 无链接网络协议 里面对应NET和NSAP</p>
-<p>4）CLNS 无链接网络服务……类似于UDP</p>
-<p>5）DIS 指定中间系统 类似DR</p>
-<h3 id="6：IS-IS中路由器的类型-router-type"><a href="#6：IS-IS中路由器的类型-router-type" class="headerlink" title="6：IS-IS中路由器的类型 router type"></a>6：IS-IS中路由器的类型 router type</h3><p>6.1）所有启用IS-IS的路由器，默认类型都是L1/L2：类似于ABR：将区域内路由器和骨干路由器连接</p>
-<p>6.2）可改为L1：区域内路由器</p>
-<p>6.2）可改为L2：骨干区域路由器</p>
-<p>OSPF中骨干区域必须从0开始，IS-IS没有限制。</p>
-<h3 id="7：IS-IS-neighbour-TYPE-邻居关系类型"><a href="#7：IS-IS-neighbour-TYPE-邻居关系类型" class="headerlink" title="7：IS-IS neighbour TYPE 邻居关系类型"></a>7：IS-IS neighbour TYPE 邻居关系类型</h3><p>7.1）L1/L2 L1/L2——L1/L2（X）取交集</p>
-<p>7.2）L2</p>
-<p>7.3）L1</p>
-<p>相同区域ID 不同区域ID</p>
-<p>L1——L1/L2 取L1 L1——L1/L2 【L1是区域内路由器】（X）</p>
-<p>【公务员考试找共同点？】</p>
-<p>中国共产党和国民党……</p>
-<p>L1——L1 L1——L1（X）</p>
-<p>【L1设备只和相同区域设备建立邻居关系】</p>
-<p>L1——L2（X） L1——L2（X）</p>
-<p>不然L1/L2就没意义了呀。</p>
-<p>L1设备只能和相同区域内带L1角色的设备形成L1邻居关系。【L1邻居关系——区域内邻居关系】</p>
-<p>L1/L2——L1/L2 L1/L2——L1/L2</p>
-<p>【此时既为L1也为L2】 【L1没有L2有】</p>
-<p>L1是区域内邻居关系，L2首先是区域间邻居关系【区域号不一样】，但也可以是区域内邻居关系。</p>
-<p>L1/L2——L2【L2】 L1/L2——L2【L2】</p>
-<p>L2——L1（X） L2——L1（X）</p>
-<h3 id="8：IS-IS的特性"><a href="#8：IS-IS的特性" class="headerlink" title="8：IS-IS的特性"></a>8：IS-IS的特性</h3><p>8.1）IS-IS中DIS的特点：类似于DR 指定路由器</p>
-<p>！！回顾</p>
-<p>OSPF中DR干嘛的？</p>
-<p>①减少不必要的邻接关系；</p>
-<p>②统筹更新发送过程。</p>
-<p>图</p>
-<p>EIGRP</p>
-<p>OSPF DR BDR</p>
-<p>1）DIS的选举</p>
-<p>先比较优先级（默认是64，最大127）大则优</p>
-<p>再比较sys-id 大则优</p>
-<p>参数不同，机制相似。</p>
-<p>2）没有B DIS，且DIS可以随意被替代。</p>
-<p>3）所有非DIS之间，都可以正常形成邻接关系。</p>
-<p>DIS用来干啥？原因：DIS被做了一半。</p>
-<p>所以可以当它不存在了。没有任何作用。</p>
-<p>这点上不如OSPF。</p>
-<p>8.2）IS-IS中区域的特点</p>
-<p>IS-IS也是层次化的设计，骨干层，常规层。同样也有骨干区域和常规区域</p>
-<p>IS-IS不要求骨干区域编号一定是0</p>
-<p>IS-IS不要求所有常规区域必须和骨干区域连接。</p>
-<p>*IS-IS区域的边界是在路由器，OSPF区域边界是在接口</p>
-<p>IS-IS允许接口和路由器在不同区域。</p>
-<p>OSPF中拥有特殊区域：STUB T-STUB</p>
-<p>NSSA、T-NSSA</p>
-<p>IS-IS 区域内设备只要路由器角色改为L1，它所连接的L1/L2设备就自动给它一条缺省</p>
-<p>并且不会将区域间路由，外部路由放入区域内。</p>
-<h3 id="9：IS-IS路径度量值计算"><a href="#9：IS-IS路径度量值计算" class="headerlink" title="9：IS-IS路径度量值计算"></a>9：IS-IS路径度量值计算</h3><p>计算公式及方法和OSPF一模一样，都叫COST</p>
-<p>默认情况下所有接口都被赋予了10的开销【不是动态计算】</p>
-<p>有计算公式但是不用</p>
-<h3 id="10：IS-IS的消息和消息类型"><a href="#10：IS-IS的消息和消息类型" class="headerlink" title="10：IS-IS的消息和消息类型"></a>10：IS-IS的消息和消息类型</h3><p>鸡肋中的战斗机？</p>
-<p>1）IIH：is-is hello 路由器角色决定它的消息分L1 L2 固定10s一个，三倍老化时间</p>
-<p>2）LSP：link state pdu LSP=LSA OSI命名模式…… 也分L1 L2</p>
-<p>IS-IS的数据库也分L1 L2</p>
-<p>涛哥和吴老师的澳门赌场之旅</p>
-<h3 id="11：IS-IS的配置"><a href="#11：IS-IS的配置" class="headerlink" title="11：IS-IS的配置"></a>11：IS-IS的配置</h3><p>步骤1：启用IS-IS并且设定NET地址</p>
-<p>Router isis</p>
-<p>Net 49.0000.0000.0000.0001.00</p>
-<p>log-adjacency-changes //让控制台以日志形式提醒IS-IS邻接关系的变化</p>
-<p>0000：域0，区域0</p>
-<p>0000.0000.0001：sys-id</p>
-<p>步骤2：接口加入IS-IS</p>
-<p>与OSPF不同，将接口接入某个区域</p>
-<p>interface&lt; intf-id&gt;</p>
-<p>ip route isis</p>
-<h3 id="12：IS-IS的查看"><a href="#12：IS-IS的查看" class="headerlink" title="12：IS-IS的查看"></a>12：IS-IS的查看</h3><p>1）查看路由表中IS-IS的条目</p>
-<p>show ip route isis</p>
-<p>i L1/L2 IS-IS路由也分L1 L2</p>
-<p>i L1 区域内路由</p>
-<p>i L2 区域间路由或外部路由</p>
-<p>IS-IS管理距离全是115</p>
-<p>2）查看邻接关系是否建立、邻接关系的类型</p>
-<p>show clns neighbour L1/L2 所以一般使用这个命令</p>
-<p>show isis neighbour 一行L1，一行L2</p>
-<p>12：IS-IS实验</p>
-<p>log-adjacency-changes</p>
-<p>控制台报了两次，为什么？</p>
-<p>默认角色是L1/L2</p>
-<p>is-type ?</p>
-<p>is-type level-1 //修改路由器类型为L1</p>
-<p>is-type level-1-2</p>
-<p>不允许L2变L1进入区域</p>
-<p>show isis neighbours //更多用来看DIS更方便</p>
-<p>Circuit ID 电路ID DIS</p>
-<p>isis priority 127 //更改DIS</p>
-<h3 id="13：IS-IS-的重分发"><a href="#13：IS-IS-的重分发" class="headerlink" title="13：IS-IS 的重分发"></a>13：IS-IS 的重分发</h3><p>外部网络进入isis，默认是L2路由类型，默认开销是10。</p>
-<p>router isis</p>
-<p>redistribute [rip/eigrp as-id] metric &lt;指定外部路由初始度量值&gt; </p>
-<p>&lt; level-1 /level-2/level-1-2 &gt; //指定外部路由是什么类型进入isis</p>
-<p>redistribute ospf pid metric-type &lt; external ospf 的外部路由/internal ospf的区域内或区域间路由&gt;</p>
-<p>路由器角色为L1，那么重分发一般不允许做在这样的设备上。</p>
-<p>如果L1角色设备需要配置重分发，那么一定要在最后加上level-1。</p>
-<h3 id="14：ISIS-的手动汇总"><a href="#14：ISIS-的手动汇总" class="headerlink" title="14：ISIS 的手动汇总"></a>14：ISIS 的手动汇总</h3><p>建议配置在L1/L2角色设备上。</p>
-<p>汇总后路由类型为L2，开销默认10  。</p>
-<p>L1设备上默认无法对本地 ISIS L1 路由进行汇总。</p>
-<p>本地直连网络以外部路由 L1 形式进入，再针对 L1 路由汇总。</p>
-<p>router isis</p>
-<p>summary-address &lt;汇总后网络&gt; &lt;汇总后网络掩码&gt; level-1/level-2</p>
-<h3 id="15：ISIS-认证-及-ISIS-路由泄露"><a href="#15：ISIS-认证-及-ISIS-路由泄露" class="headerlink" title="15：ISIS 认证 及 ISIS 路由泄露"></a>15：ISIS 认证 及 ISIS 路由泄露</h3><p>15.1）ISIS 认证</p>
-<ol>
-<li><p>链路认证 isis password cisco</p>
-<p>该认证是利用 IIH 完成的，所以认证不同过影响邻接关系。链路认证是最高级别的，如果区域认证通过，链路认证不通过就是不通过。一般一个认证就行了。</p>
-</li>
-</ol>
-<ol start="2">
-<li><p>区域认证 area-password cisco</p>
-<p>利用 LSP 完成的，认证不通过只影响路由的学习，不影响邻接关系。</p>
-</li>
-</ol>
-<ol start="3">
-<li><p>域认证 domain-password cisco</p>
-<p>该认证如果不通过，只影响路由的学习，不影响邻接关系。</p>
-</li>
-</ol>
-<p>15.2）路由泄露</p>
-<p>L1/L2 设备默认不允许 L2 数据库信息进入 L1 数据库，变成更新发送。</p>
-<p>15.3）路由泄露的配置流程</p>
-<p>步骤1：L1/L2 设备上编写 ACL，匹配被泄露的目标路由</p>
-<p>步骤2：L1/L2 设备上编写 ROUTE-MAP 引用 ACL。</p>
-<p>步骤3：L1/L2 设备上做 ISIS 到 ISIS 的重分发，并且指定是利用 route-map 完成 L2 数据库条目到 L1 数据库条目的泄露。</p>
-<p>redistribute isis ip level-2 into level-1 route-map 2T1</p>
-<p>更改开销 isis metric &lt; 开销&gt;</p>
-<h3 id="16：ISIS-的不同区域迁移"><a href="#16：ISIS-的不同区域迁移" class="headerlink" title="16：ISIS 的不同区域迁移"></a>16：ISIS 的不同区域迁移</h3><p>ISIS 允许一个设备属于多个不同的区域。</p>
-<p>router isis</p>
-<p>net</p>
-<p>net</p>
-<p>net</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/MPLS" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/MPLS/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/MPLS/">CCIE MPLS</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="代理arp"><a href="#代理arp" class="headerlink" title="代理arp"></a>代理arp</h3><p>arp</p>
-<p>请求：广播</p>
-<p>回应：单播</p>
-<p>proxy arp（代理arp）</p>
-<p>代为请求和回应</p>
-<h4 id="帧头重写"><a href="#帧头重写" class="headerlink" title="帧头重写"></a>帧头重写</h4><p>重写=switch（从mac表内拿出置换）</p>
-<p>目的mac改为arp请求结果</p>
-<p>源mac改为出口mac</p>
-<h3 id="路由器数据转发机制"><a href="#路由器数据转发机制" class="headerlink" title="路由器数据转发机制"></a>路由器数据转发机制</h3><ol>
-<li><p>process forward进程转发（不缓存）</p>
-</li>
-<li><p>cache forward缓存转发（结果缓存10s）</p>
-<p>上两者都是基于流量触发（第一次会丢包）</p>
-</li>
-<li><p><strong>CEF  Cisco的快速转发技术</strong></p>
-<p>基于拓扑，不需要流量触发</p>
-</li>
-</ol>
-<h4 id="CEF"><a href="#CEF" class="headerlink" title="CEF"></a>CEF</h4><p>FIB 转发信息库（本身就是路由表的副本）</p>
-<p>RIB 路由表（给FIB提供要素）</p>
-<h2 id="MPLS详解"><a href="#MPLS详解" class="headerlink" title="MPLS详解"></a>MPLS详解</h2><p>multiple protocol label switch（多协议标签交换）</p>
-<h3 id="MPLS作用"><a href="#MPLS作用" class="headerlink" title="MPLS作用"></a>MPLS作用</h3><p>MPLS是一种数据交换机制，基于标签库和数据携带的标签。</p>
-<p>进行数据转发，同时支持多种协议。</p>
-<p>MPLS在实际工作中，能实现如下两个基本功能：</p>
-<ol>
-<li>数据包的高速转发</li>
-<li>减少参与BGP的设备数量、减少对等体关系、减少不必要的路由学习</li>
-</ol>
-<h3 id="MPLS术语"><a href="#MPLS术语" class="headerlink" title="MPLS术语"></a>MPLS术语</h3><h4 id="label-标签"><a href="#label-标签" class="headerlink" title="label 标签"></a>label 标签</h4><p>总长 <strong>32bit</strong> 由如下几个部分组成：</p>
-<p><strong>前20bit</strong> 是标签取值范围</p>
-<p><strong>第21bit</strong> 是栈底位，栈底位为1则表明该标签已经是最后一个</p>
-<p><strong>第22~24bit</strong> 是体验位，可以将标签对应的数据分成8个级别，给予不同的传输策略。</p>
-<p><strong>最后8bit</strong> 是TTL，限制携带标签的数据传递范围。</p>
-<h4 id="MPLS-模式"><a href="#MPLS-模式" class="headerlink" title="MPLS 模式"></a>MPLS 模式</h4><p>帧模式：frame mode（主流模式），标签被插在帧头的后面，包头前面。</p>
-<p>信令模式：cell mode 标签被插在信令头后面。</p>
-<h4 id="LSR：标签交换路由器"><a href="#LSR：标签交换路由器" class="headerlink" title="LSR：标签交换路由器"></a>LSR：标签交换路由器</h4><p>启用了MPLS的路由器统称LSR。</p>
-<p>入站 LSR （inbound LSR）：接收到 IP 数据包，压入标签，传递给 MPLS 网络。</p>
-<p>链路中 LSR （link LSR）：接收到携带标签的数据，基于标签进行数据转发。</p>
-<p>出站 LSR （outbound LSR）：负责将标签移除，并且变回 IP 数据报文。</p>
-<h4 id="压入、交换、移除、弹出"><a href="#压入、交换、移除、弹出" class="headerlink" title="压入、交换、移除、弹出"></a>压入、交换、移除、弹出</h4><p>压入：入站LSR将标签压入数据。</p>
-<p>交换：链路中LSR基于标签库，进行标签的置换、数据的传递。</p>
-<p>移除：出站LSR将数据携带的所有标签全部删除。</p>
-<p>弹出：出站LSR将数据携带的栈顶标签弹出，其他标签保留。</p>
-<h4 id="LSP：链路标签路径"><a href="#LSP：链路标签路径" class="headerlink" title="LSP：链路标签路径"></a>LSP：链路标签路径</h4><p>是MPLS设备传递数据所需的路径。（即路由）</p>
-<p>LSP是通过标签的关联产生的。</p>
-<h4 id="标签分配、分发、关联、维护协议"><a href="#标签分配、分发、关联、维护协议" class="headerlink" title="标签分配、分发、关联、维护协议"></a>标签分配、分发、关联、维护协议</h4><p>TDP：标记分发协议、思科私有</p>
-<p>LDP：<strong>标签分发协议</strong>、公有公开</p>
-<h3 id="LDP详解"><a href="#LDP详解" class="headerlink" title="LDP详解"></a>LDP详解</h3><h4 id="LDP作用"><a href="#LDP作用" class="headerlink" title="LDP作用"></a>LDP作用</h4><ol>
-<li>利用 hello 消息建立 LDP 邻接关系。</li>
-<li>基于CEF给本地网络分配本地标签。</li>
-<li>将网络对应的标签分发共享给邻居</li>
-<li>基于底层协议完成本地标签与远程共享标签的关联，最终形成LSP。</li>
-<li>负责监控LSP的有效性，并且维护它。</li>
-</ol>
-<h4 id="LDP邻接关系的建立"><a href="#LDP邻接关系的建立" class="headerlink" title="LDP邻接关系的建立"></a>LDP邻接关系的建立</h4><p>LDP 邻居的发现，通过hello消息，基于UDP，目标端口646。</p>
-<p>LDP 利用TCP，目标端口646完成邻接关系建立。</p>
-<p>LDP可以设定RID，RID扮演更新源，更新源会成为对端TCP的目标接收地址，所以更新源必须可达。</p>
-<h4 id="LDP标签的分配"><a href="#LDP标签的分配" class="headerlink" title="LDP标签的分配"></a>LDP标签的分配</h4><p>除BGP路由，LDP可以给本地直连网络以及非直连网络分配标签。</p>
-<h4 id="LDP标签的共享"><a href="#LDP标签的共享" class="headerlink" title="LDP标签的共享"></a>LDP标签的共享</h4><p>两种形式：下游主动、上游主动。</p>
-<p>实际上标签的分享是给所有的邻居，不遵循所谓的上下游。</p>
-<h4 id="LDP标签的关联"><a href="#LDP标签的关联" class="headerlink" title="LDP标签的关联"></a>LDP标签的关联</h4><p>LDP永远将路由路径下一跳共享的标签与对应网络的本地标签关联。</p>
-<p>boundaddress：绑定地址，参与MPLS设备的IP会成为绑定地址和，会跟着本地标签一起共享给LDP邻居，邻居根据底层协议下一跳地址和绑定地址的判断来确认哪个LDP邻居是下一跳，再绑定。</p>
-<h4 id="LDP的特殊标签"><a href="#LDP的特殊标签" class="headerlink" title="LDP的特殊标签"></a>LDP的特殊标签</h4><ul>
-<li>UNTAGE：未标记</li>
-</ul>
-<p>出现原因：底层是ospf,本地网络无法找到对应的远程标签，LDP给网络分配untage。</p>
-<p>处理方式：目标网络远程标签如果是untage，那么LSR会将所有标签移除，向外传递。</p>
-<ul>
-<li>POP：倒数第二跳标签</li>
-</ul>
-<p>出现原因：当前路由器给本地直连网络分配的本地标签就是POP。</p>
-<p>处理方式：如果出站标签是POP，那么LSR 会将栈顶标签弹出。</p>
-<p>意义：提高数据转发效率，减少一次标签库查找。</p>
-<h4 id="LDP的两张表"><a href="#LDP的两张表" class="headerlink" title="LDP的两张表"></a>LDP的两张表</h4><p>LIB：标签信息库</p>
-<p>目标网络本地标签和学习到的远程标签存储在这里。（未关联）</p>
-<p>LFIB：标签转发信息库</p>
-<p>标签关联后的结果 即 LSP  存储在这里。</p>
-<h4 id="CEF、LDP-数据转发过程"><a href="#CEF、LDP-数据转发过程" class="headerlink" title="CEF、LDP 数据转发过程"></a>CEF、LDP 数据转发过程</h4><p>略</p>
-<h3 id="MPLS的配置流程"><a href="#MPLS的配置流程" class="headerlink" title="MPLS的配置流程"></a>MPLS的配置流程</h3><p>步骤1：开启 CEF（默认开启，一般情况不需要此命令）</p>
-<p><code>ip cef</code></p>
-<p>步骤2：设置标签分配、分发关联协议（默认是LDP）</p>
-<p><code>mpls label protocol &lt;ldp/tdp&gt;</code></p>
-<p>步骤3：设置标签取值范围（通常不设置）</p>
-<p><code>mpls label range &lt;xx-yy&gt;</code></p>
-<p>步骤4：设置 LDP 的 RID  即设置更新源（不设置则和OSPF一样自动选取RID）</p>
-<p><code>mpls ldp router-id loopback x [force]  //RID 必须可达、force 强制改变 RID</code></p>
-<p>步骤5：接口下启用MPLS</p>
-<p><code>mpls ip</code></p>
-<h4 id="LDP的查看校验命令"><a href="#LDP的查看校验命令" class="headerlink" title="LDP的查看校验命令"></a>LDP的查看校验命令</h4><ul>
-<li><p>查看LDP是否发现了邻居</p>
-<p><code>show mpls idp discovery</code></p>
-<p>邻居被发现后，no host route 指没有抵达对方的主机路由，但有网络路由，总体可达。</p>
-<p>邻居被发现后，no route 指没有抵达对方的路由路径，邻接关系最终无法建立。</p>
-</li>
-<li><p>查看LDP邻接关系是否建立</p>
-<p><code>show mpls idp neighbor</code></p>
-</li>
-<li><p>查看 LIB</p>
-<p><code>show mpls ldp binding</code></p>
-</li>
-<li><p>查看LFIB</p>
-<p><code>show mpls forwarding-table</code></p>
-</li>
-</ul>
-<h4 id="通过-IGP的路径改变来影响-LSP"><a href="#通过-IGP的路径改变来影响-LSP" class="headerlink" title="通过 IGP的路径改变来影响 LSP"></a>通过 IGP的路径改变来影响 LSP</h4><p>LSP是会存在负载均衡的。实际上底层协议的路径决定了 LSP路径。</p>
-<h4 id="CEF-FIB-和-ADJ-TABLE-详解"><a href="#CEF-FIB-和-ADJ-TABLE-详解" class="headerlink" title="CEF FIB 和 ADJ-TABLE 详解"></a>CEF FIB 和 ADJ-TABLE 详解</h4><p><code>show ip cef detail | begin 172.16.1.0</code></p>
-<p>查看cef邻接表</p>
-<p><code>show adjacency detail</code></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li><p>arp的作用、代理arp的作用</p>
-</li>
-<li><p>路由器数据转发的三个机制</p>
-</li>
-<li><p>CEF两张表和工作机制</p>
-</li>
-<li><p>RIB FIB ADJ-TABLE 在数据传递时使用方法</p>
-</li>
-<li><p>MPLS 的全称、模式</p>
-</li>
-<li><p>标签长度和每段的含义</p>
-</li>
-<li><p>MPLS 术语</p>
-<p>LSR(in/out/link)    LSP</p>
-<p>标签的动作：压入、交换、移除、弹出</p>
-<p>POP和UNTAGE</p>
-<p>LDP和TDP的作用</p>
-<p>LDP的标签分配、分发、关联</p>
-</li>
-<li><p>MPLS的配置流程</p>
-</li>
-<li><p>查看和理解LDP的邻居发现、邻接建立</p>
-</li>
-<li><p>查看和理解LIB 和LFIB</p>
-</li>
-<li><p>理解</p>
-</li>
-</ol>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
     </div>
 
       

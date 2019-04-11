@@ -234,6 +234,221 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Unix/System/Linux日志文件分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/29/Unix/System/Linux日志文件分析/" class="article-date">
+      <time datetime="2018-10-29T13:53:48.000Z" itemprop="datePublished">2018-10-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/29/Unix/System/Linux日志文件分析/">Linux 日志文件分析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在Linux系统中，有三类主要的日志子系统:</p>
+<p>● 连接时间日志: 由多个程序执行，把记录写入到/var/log/wtmp和/var/run/utmp，login等程序会更新wtmp和utmp文件，使系统管理员能够跟踪谁在何时登录到系统。</p>
+<p>● 进程统计: 由系统内核执行，当一个进程终止时，为每个进程往进程统计文件（pacct或acct）中写一个记录。进程统计的目的是为系统中的基本服务提供命令使用统计。</p>
+<p>● 错误日志: 由syslogd（8）守护程序执行，各种系统守护进程、用户程序和内核通过syslogd（3）守护程序向文件/var/log/messages报告值得注意的事件。另外有许多Unix程序创建日志。像HTTP和FTP这样提供网络服务的服务器也保持详细的日志。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Unix/Programming/解释器文件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/26/Unix/Programming/解释器文件/" class="article-date">
+      <time datetime="2018-10-26T09:37:54.000Z" itemprop="datePublished">2018-10-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/26/Unix/Programming/解释器文件/">解释器文件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="什么是解释器文件"><a href="#什么是解释器文件" class="headerlink" title="什么是解释器文件"></a>什么是解释器文件</h3><p>解释器文件是文本文件，它起始行的格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#! pathname [optional-argument]</span><br></pre></td></tr></table></figure>
+<p>感叹号和pathname之间的空格是可选的。常见的解释器文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">#!/usr/bin/python</span><br><span class="line">#!/usr/bin/perl </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>注意以下区别</p>
+<ul>
+<li>​      <em>解释器文件</em>： 以#!开头的文本文件</li>
+<li>​      <em>解释器</em>：解释器文件第一行pathname所指定的程序</li>
+</ul>
+<h3 id="为什么使用解释器文件"><a href="#为什么使用解释器文件" class="headerlink" title="为什么使用解释器文件"></a>为什么使用解释器文件</h3><p>解释器文件能得到效率方面的好处，但代价是内核的额外开销（因为识别解释器文件的是内核）。以下是使用解释器文件的理由：</p>
+<ul>
+<li>有些程序是使用某种脚本语言编写的脚本，而解释器文件隐藏了这一事实。</li>
+<li>解释器文件使我们可以使用除/bin/sh以外的shell来执行shell脚本。</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>#!这一行的长度有一定的限制，linux为127，其他的系统最少的为63。</li>
+<li>别在选项之后放任何空白，空白也会跟着选项一起传给被引用的程序。</li>
+<li>解释器需要完整路径名。以避免可移植问题。</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Script Language/Python/Python杂记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/26/Script Language/Python/Python杂记/" class="article-date">
+      <time datetime="2018-10-26T05:44:02.000Z" itemprop="datePublished">2018-10-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/26/Script Language/Python/Python杂记/">Python 杂记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="安装matplotlib"><a href="#安装matplotlib" class="headerlink" title="安装matplotlib"></a>安装matplotlib</h4><p><code>pip3 install --index-url https://pypi.douban.com/simple matplotlib</code></p>
+<h4 id="osx-文件编码"><a href="#osx-文件编码" class="headerlink" title="osx 文件编码"></a>osx 文件编码</h4><p>latin1</p>
+<p><code>open(&quot;filename&quot;,encoding=&#39;latin1&#39;)</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/SQLserver/mssql实验" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1078,264 +1293,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Unp/unp_code" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/09/20/Network/Unp/unp_code/" class="article-date">
-      <time datetime="2018-09-20T05:18:20.000Z" itemprop="datePublished">2018-09-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/20/Network/Unp/unp_code/">《unp》源代码问题笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <ol>
-<li><p>首先阅读主文件夹的README文件，进行configure和库的安装(make)，接下来所有程序都要用make编译，具体编译规则查看文件夹内的Makefile文件。</p>
-</li>
-<li><p>客户端程序连接时连接拒绝：<code>connect error: Connection refused</code></p>
-<p>这时要看看源代码里的port是否和服务器程序的port相同，经我对比有的程序端口和书上不同。</p>
-</li>
-<li><p>tcpservpoll01编译时提示OPEN_MAX未定义，可见<code>&lt;limits.h&gt;</code>头文件不一定定义了OPEN_MAX。</p>
-<p>于是我就在程序添加了三行代码，即可成功编译。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#ifndef         OPEN_MAX</span><br><span class="line">        #define OPEN_MAX        16</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unp/">unp</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Database/PostgreSQL/C++ connector for PostgreSQL" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/20/Database/PostgreSQL/C++ connector for PostgreSQL/" class="article-date">
-      <time datetime="2018-08-20T06:33:38.000Z" itemprop="datePublished">2018-08-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/20/Database/PostgreSQL/C++ connector for PostgreSQL/">C++ connector for PostgreSQL</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="安装libpqxx"><a href="#安装libpqxx" class="headerlink" title="安装libpqxx"></a>安装libpqxx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://pqxx.org/download/software/libpqxx/libpqxx-4.0.tar.gz</span><br><span class="line">tar xvfz libpqxx-4.0.tar.gz</span><br><span class="line">cd libpqxx-4.0</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pqxx/pqxx&gt;</span><br><span class="line">using namespace pqxx;</span><br></pre></td></tr></table></figure>
-<h3 id="编译命令"><a href="#编译命令" class="headerlink" title="编译命令"></a>编译命令</h3><p><code>g++ main.c -lpqxx -lpq</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Database/PostgreSQL/PostgreSQL 命令" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/" class="article-date">
-      <time datetime="2018-08-17T14:49:50.000Z" itemprop="datePublished">2018-08-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/">PostgreSQL 命令</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><p>查看所有命令</p>
-<p><code>\?</code></p>
-<p>显示已创建的数据库</p>
-<p><code>\l</code>  或者</p>
-<p><code>SELECT datname FROM pg_database;</code></p>
-<p>在不连接进 PostgreSQL 数据库的情况下，也可以在终端上查看显示已创建的列表：</p>
-<p><code>psql -l</code></p>
-<p>查看postgresql数据库用户</p>
-<p><code>\du</code></p>
-<p>显示数据库表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、通过命令行查询</span><br><span class="line">\d 数据库 —— 得到所有表的名字</span><br><span class="line">\d 表名 —— 得到表结构</span><br><span class="line"></span><br><span class="line">2、通过SQL语句查询</span><br><span class="line">select * from pg_tables;	//得到当前db中所有表的信息（这里pg_tables是系统视图）</span><br><span class="line">select tablename from pg_tables where schemaname=&apos;public&apos;	//得到所有用户自定义表的名字（这里&quot;tablename&quot;字段是表的名字，&quot;schemaname&quot;是schema的名字。用户自定义的表，如果未经特殊处理，默认都是放在名为public的schema下）</span><br></pre></td></tr></table></figure>
-<h5 id="d命令"><a href="#d命令" class="headerlink" title="\d命令"></a>\d命令</h5><p>该命令将显示每个匹配关系（表，视图，索引，序列）的信息，包括对象所有的列，它们的类型，表空间（如果不是默认的）和任何特殊属性（如NOT NULL或默认值等）。与唯一约束相关的索引，规则，约束，触发器也同样会显示出来。如果关系是一个视图，还会显示视图的定义。</p>
-<ol>
-<li>如果\d命令什么都不带，将列出当前数据库中的所有表。</li>
-<li>\d后面跟一个表名，表示显示这个表的结构定义。</li>
-<li>\d也可以显示索引信息</li>
-<li>\d后面可以跟一通配符”*“或”?”</li>
-<li><p>\d+命令，该命令将显示比\d命令更详细的信息</p>
-</li>
-<li><p>匹配不同对象类型的\d命令</p>
-<p>如果想只显示匹配的表，可以使用\dt命令</p>
-<p>如果想只显示索引，可以使用\di命令</p>
-<p>如果想只显示序号，可以使用\ds命令</p>
-<p>如果想只显示视图，可以使用\dv命令</p>
-<p>如果想只显示函数，可以使用\df命令</p>
-</li>
-<li><p>如果想显示SQL已执行的时间，可以用\timing命令</p>
-</li>
-<li><p>列出所有的schemas可以使用\dn命令</p>
-</li>
-<li><p>显示所有的表空间可以用\db命令</p>
-<p>表空间就是一个目录，放在这个表空间的表，就是把表的数据文件放到这个表空间下。</p>
-</li>
-<li><p>列出数据库所有角色或用户\du或\dg</p>
-</li>
-<li>\dp或\z命令用于显示表的权限分配情况</li>
-</ol>
-<h3 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h3><p>连接数据库</p>
-<p><code>\c dbname</code></p>
-<p>创建一个名为 test 的表</p>
-<p><code>CREATE TABLE test(id int, text VARCHAR(255));</code></p>
-<p>插入一条记录</p>
-<p><code>insert into test(id,text) values ( 1,&#39;heihei&#39;);</code></p>
-<p>查询记录</p>
-<p><code>select * from test where id = 1;</code></p>
-<p>更新记录</p>
-<p><code>update test set text =&#39;update&#39; where id =5;</code></p>
-<p>删除指定的记录</p>
-<p><code>delete from test where id = 1;</code></p>
-<p>删除表</p>
-<p><code>drop table test;</code></p>
-<p>删除数据库</p>
-<p><code>drop database test_db0;</code></p>
-<p>或者利用 dropdb 指令，在终端上删除数据库</p>
-<p><code>dropdb test0</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
     </div>
 
       
