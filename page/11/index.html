@@ -234,6 +234,83 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/Concept_gcc/不可重入函数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/01/C_C++/Concept_gcc/不可重入函数/" class="article-date">
+      <time datetime="2018-11-01T08:02:10.000Z" itemprop="datePublished">2018-11-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/01/C_C++/Concept_gcc/不可重入函数/">不可重入函数</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="不可重入函数"><a href="#不可重入函数" class="headerlink" title="不可重入函数"></a>不可重入函数</h2><p><strong>可重入</strong>(<em>Reentrancy</em>)的函数简单来说就是可以被中断的函数，也就是说，可以在这个函数执行的任何时刻中断它。</p>
+<p><strong>不可重入</strong>的函数由于使用了一些系统资源，比如全局变量区、中断向量表等，所以它如果被中断的话，可能会出现问题，这类函数是不能运行在多任务环境下的。</p>
+<p> 满足下列条件的函数多数是<strong>不可重入</strong>的：</p>
+<ul>
+<li><p>函数体内使用了静态的数据结构；</p>
+</li>
+<li><p>函数体内调用了malloc()或者free()函数；</p>
+</li>
+<li><p>函数体内调用了标准I/O函数。</p>
+</li>
+</ul>
+<p>常见的：</p>
+<p>printf 引用全局变量stdout</p>
+<p>malloc，free 引用全局的内存分配表</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Unix/System/Linux日志文件分析" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1069,230 +1146,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vultr/">vultr</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Unix/System/Linux备忘录" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/10/02/Unix/System/Linux备忘录/" class="article-date">
-      <time datetime="2018-10-01T16:20:34.000Z" itemprop="datePublished">2018-10-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/02/Unix/System/Linux备忘录/">Linux备忘录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="系统安装后的配置"><a href="#系统安装后的配置" class="headerlink" title="系统安装后的配置"></a>系统安装后的配置</h3><ul>
-<li><p>关闭防火墙</p>
-<p>chkconfig iptables off</p>
-</li>
-<li><p>关闭selinux</p>
-<p>/etc/selinux/config</p>
-<p>SELINUX=disabled</p>
-</li>
-<li><p>chkconfig NetworkManager off</p>
-<p>systemctl disable NetworkManager.service</p>
-</li>
-<li><p>reboot</p>
-</li>
-</ul>
-<h3 id="自动加载文件系统-etc-fstab"><a href="#自动加载文件系统-etc-fstab" class="headerlink" title="自动加载文件系统/etc/fstab"></a>自动加载文件系统/etc/fstab</h3><ol>
-<li>文件系统对应的设备名。这一列内容可以是分区或设备</li>
-<li>挂载点</li>
-<li>文件系统格式。如 ext3， vfat 等</li>
-<li>文件系统挂载参数。不同的文件系统可能有不同的参数</li>
-<li>备份标志。设定为 1 时，表示备份该文件系统；0 表示不备份</li>
-<li>系统启动时，文件系统的检查顺序。只有根分区才可以设定为 1，其余需要检查的分区应该设定为 2，设定为 0 表示不检查文件系统</li>
-</ol>
-<h3 id="网络配置的相关文件"><a href="#网络配置的相关文件" class="headerlink" title="网络配置的相关文件"></a>网络配置的相关文件</h3><ol>
-<li>IP地址配置文件    /etc/sysconfig/network-scripts/ifcfg-网卡</li>
-<li>主机名映射文件/etc/hosts</li>
-<li>主机名文件/etc/sysconfig/network</li>
-<li>DNS解析文件/etc/reslov.conf</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure>
-<p>修改信息如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">E=eth0 //网卡名称</span><br><span class="line"></span><br><span class="line">HWADDR=00:0c:29:5c:94:74 //物理地址</span><br><span class="line"></span><br><span class="line">TYPE=Ethernet</span><br><span class="line"></span><br><span class="line">UUID=36c43db3-95a9-427c-af8f-ba130189de85</span><br><span class="line"></span><br><span class="line">ONBOOT=yes //将ONBOOT=&quot;no&quot;改为ONBOOT=&quot;yes&quot;</span><br><span class="line"></span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line"></span><br><span class="line">BOOTPROTO=none</span><br><span class="line"></span><br><span class="line">IPADDR=192.168.1.98 //修改IP地址</span><br><span class="line"></span><br><span class="line">NETMASK=255.255.255.0 //修改子网掩码</span><br><span class="line"></span><br><span class="line">GATEWAY=192.168.1.1 //修改网关</span><br><span class="line"></span><br><span class="line">DNS1=8.8.8.8 //修改DNS服务器</span><br><span class="line"></span><br><span class="line">IPV6INIT=no</span><br><span class="line"></span><br><span class="line">USERCTL=no</span><br></pre></td></tr></table></figure>
-<p>（2）重启网络服务：</p>
-<p>要想生效，必须重启Linux或者重启网络服务，我们重启网络服务，执行如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
-<h3 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h3><h4 id="使用rpm从镜像文件下载软件包"><a href="#使用rpm从镜像文件下载软件包" class="headerlink" title="使用rpm从镜像文件下载软件包"></a>使用rpm从镜像文件下载软件包</h4><ol>
-<li>ls  /dev 看到scd0(ISO镜像文件)</li>
-<li>mount  /dev/scd0  /mnt/cdrom 镜像文件挂载</li>
-<li>cd  /mnt/cdrom/Packages/</li>
-<li>ls | grep +包名</li>
-<li>rpm  -ivh  包名</li>
-</ol>
-<h4 id="使用本地yum源下载软件包"><a href="#使用本地yum源下载软件包" class="headerlink" title="使用本地yum源下载软件包"></a>使用本地yum源下载软件包</h4><ol>
-<li><p>挂载光盘镜像（如上）</p>
-</li>
-<li><p>修改/etc/yum.repos.d/目录下的以.repo结尾的配置文件</p>
-<p>baseurl=file:///mnt/cdrom/</p>
-<p>enable=1</p>
-<p>gpgcheck=0</p>
-</li>
-</ol>
-<h3 id="逻辑卷管理"><a href="#逻辑卷管理" class="headerlink" title="逻辑卷管理"></a>逻辑卷管理</h3><h4 id="新建逻辑卷"><a href="#新建逻辑卷" class="headerlink" title="新建逻辑卷"></a>新建逻辑卷</h4><ol>
-<li><p>磁盘分区</p>
-<p>fdisk /dev/sdb  # 8e Linux LVM</p>
-</li>
-<li><p>创建PV</p>
-<p>pvcreate /dev/sdb1  /dev/sdb2</p>
-</li>
-<li><p>创建VG</p>
-<p>vgcreate myVG /dev/sdb1 /dev/sdb2</p>
-</li>
-<li><p>创建LV</p>
-<p>lvcreate -L 400M -n vol01 myVG</p>
-</li>
-<li><p>创建Filesystem</p>
-<p>mkfs.ext3 /dev/myVG/vol01</p>
-</li>
-</ol>
-<h4 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h4><ol>
-<li>首先将正在使用的逻辑卷卸载掉   umount 命令<ol start="2">
-<li>将逻辑卷先删除　　   lvremove 命令</li>
-</ol>
-</li>
-<li>删除卷组　　   vgremove 命令</li>
-<li>最后再删除物理卷　　  pvremove 命令</li>
-</ol>
-<h4 id="扩充逻辑卷"><a href="#扩充逻辑卷" class="headerlink" title="扩充逻辑卷"></a>扩充逻辑卷</h4><ol>
-<li><p>将要添加到VG的硬盘格式化成PV</p>
-<p>pvcreate /dev/sdd</p>
-</li>
-<li><p>将新的PV添加到指定的VG当中</p>
-<p>vgextend xiaoluo /dev/sdd</p>
-</li>
-<li><p>扩充逻辑卷</p>
-<p>lvextend -L +1G /dev/xiaoluo/mylv</p>
-</li>
-<li><p>更新文件系统</p>
-<p>resize2fs /dev/xiaoluo/mylv</p>
-</li>
-</ol>
-<h4 id="缩容逻辑卷"><a href="#缩容逻辑卷" class="headerlink" title="缩容逻辑卷"></a>缩容逻辑卷</h4><p>逻辑卷的缩小操作必须离线执行，要先卸载掉逻辑卷才可以</p>
-<p><strong>第一种</strong></p>
-<ol>
-<li><p>卸载已经挂载的逻辑卷　　通过 umount 命令</p>
-</li>
-<li><p>缩小文件系统(会提示需要运行fsck来检查文件系统)</p>
-<p>resize2fs /dev/xiaoluo/mylv 10G</p>
-</li>
-<li><p>缩小LV</p>
-<p>lvreduce -L -4G /dev/xiaoluo/mylv </p>
-</li>
-<li><p>缩小完逻辑卷以后，再将逻辑卷挂载</p>
-</li>
-</ol>
-<p><strong>第二种</strong></p>
-<ol>
-<li><p>卸载逻辑卷　　通过 umount 命令</p>
-</li>
-<li><p>将一个PV从指定卷组中移除掉</p>
-<p>vgreduce xiaoluo /dev/sdd</p>
-</li>
-<li><p>将PV删除掉</p>
-<p>pvremove /dev/sdd</p>
-</li>
-</ol>
-<h3 id="网卡绑定"><a href="#网卡绑定" class="headerlink" title="网卡绑定"></a>网卡绑定</h3><ol>
-<li><p>关闭NetworkManager服务</p>
-</li>
-<li><p>创建bonding.conf文件在/etc/modprobe.d/目录中alias bond0 bonding</p>
-</li>
-<li><p>创建ifcfg-bond0文件在/etc/sysconfig/network-scripts/目录中</p>
-<p>DEVICE=bond0</p>
-<p>NAME=bond0</p>
-<p>TYPE=Ethernet</p>
-<p>ONBOOT=yes</p>
-<p>BOOTPROTO=static</p>
-<p>IPADDR=192.168.50.111</p>
-<p>NETMASK=255.255.255.0</p>
-<p>GATEWAY=192.168.50.1</p>
-<p>BONDING_OPTS=”mode=1 miimon=100”</p>
-</li>
-<li><p>修改真实网卡的配置   /etc/sysconfig/network-scripts/ifcfg-要加入的两块网卡</p>
-<p>DEVICE=eth0</p>
-<p>NAME=eth0</p>
-<p>ONBOOT=yes</p>
-<p>BOOTPROTO=none</p>
-<p>MASTER=bond0</p>
-<p>SLAVE=yes</p>
-</li>
-<li><p>重启网络服务service network restart</p>
-</li>
-<li>查看状态cat /proc/net/bonding/bond0</li>
-</ol>
-<h3 id="NFS服务配置"><a href="#NFS服务配置" class="headerlink" title="NFS服务配置"></a>NFS服务配置</h3><p>使用NFS服务，至少需要启动以下3个系统守护进程</p>
-<ol>
-<li>rpc.nfsd</li>
-<li>rpc.mountd</li>
-<li>portmap（rhel5）        rpcbind（rhel6）</li>
-</ol>
-<h3 id="Apache服务"><a href="#Apache服务" class="headerlink" title="Apache服务"></a>Apache服务</h3><ul>
-<li><p>启动httpd服务</p>
-<p>service httpd start</p>
-<p>如在地址栏输入<a href="http://192.168.100.101，成功加载页面，就说明httpd正常运行了" target="_blank" rel="noopener">http://192.168.100.101，成功加载页面，就说明httpd正常运行了</a></p>
-</li>
-<li><p>配置文件/etc/httpd/conf/httpd.conf</p>
-<p>端口监听：Listen *:80</p>
-<p>导向固定ip：ServerName *:80</p>
-<p>默认目录：DocumentRoot “/var/www/html/“</p>
-</li>
-</ul>
-<h3 id="阻止重定向操作覆盖已有文件"><a href="#阻止重定向操作覆盖已有文件" class="headerlink" title="阻止重定向操作覆盖已有文件"></a>阻止重定向操作覆盖已有文件</h3><p><code>set -o noclobber</code>阻止重定向操作覆盖已有文件</p>
-<p><code>set +o noclobber</code>取消上面的操作</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
     </div>
 
       

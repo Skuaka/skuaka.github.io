@@ -234,6 +234,79 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Unix/Command/ln" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/02/01/Unix/Command/ln/" class="article-date">
+      <time datetime="2019-02-01T10:19:22.000Z" itemprop="datePublished">2019-02-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/01/Unix/Command/ln/">ln</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>ln -s 源文件 目标文件 </p>
+<p>举例：</p>
+<p>当前目录是<code>/local</code>，而我经常要访问<code>/usr/local/linux/work</code></p>
+<p>那么我就可以使用在 local 下建立一个文件 linkwork，</p>
+<p>然后<code>ln -s /usr/local/linux/work  /local/linkwork</code></p>
+<p>即建立两者之间的链接。</p>
+<p>删除链接 </p>
+<p><code>rm -rf   symbolic_name</code>   注意不是  <code>rm -rf   symbolic_name/</code></p>
+<p>那么上面就是</p>
+<p><code>rm -rf   /local/linkwork</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Unix/Command/screen" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -575,8 +648,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="静态断言-static-assert"><a href="#静态断言-static-assert" class="headerlink" title="静态断言 static_assert"></a>静态断言 static_assert</h3><p>C++提供了调试工具assert宏，它在运行阶段对断言进行检查，如果为true，则显示一条消息，否则abort()。</p>
-<p>C++11 中引入了<strong>static_assert</strong>这个关键字，用来做编译期间的断言，因此叫做静态断言。</p>
+        <h2 id="C-编译期备忘录"><a href="#C-编译期备忘录" class="headerlink" title="C++ 编译期备忘录"></a>C++ 编译期备忘录</h2><h3 id="静态断言-static-assert"><a href="#静态断言-static-assert" class="headerlink" title="静态断言 static_assert"></a>静态断言 static_assert</h3><p>C++提供了调试工具assert宏，它在运行阶段对断言进行检查，如果为true，则显示一条消息，否则abort()。</p>
+<p><strong>C++11</strong> 中引入了<strong>static_assert</strong>这个关键字，用来做编译期间的断言，因此叫做静态断言。</p>
 <p>语法：<code>static_assert(常量表达式，提示字符串)</code>。</p>
 <p>如果第一个参数常量表达式的值为真(true或者非零值)，那么<strong>static_assert</strong>不做任何事情；否则会产生一条编译错误，错误位置就是该<strong>static_assert</strong>语句所在行，错误提示就是第二个参数提示字符串。</p>
 <ul>
@@ -585,9 +658,13 @@
 </ul>
 <p>例子：判断类型是否正确</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">static_assert</span>(is_same&lt;<span class="keyword">int</span> <span class="keyword">const</span>, add_const&lt;<span class="keyword">int</span>&gt;&gt;(), <span class="string">""</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="类型选择-std-conditional"><a href="#类型选择-std-conditional" class="headerlink" title="类型选择 std::conditional"></a>类型选择 std::conditional</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Defined in header &lt;type_traits&gt;</span></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="keyword">bool</span> B, <span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">conditional</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Possible implementation</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">bool</span> B, <span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">conditional</span> &#123;</span> <span class="keyword">typedef</span> T type; &#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">conditional</span>&lt;false, T, F&gt; &#123;</span> <span class="keyword">typedef</span> F type; &#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="类型选择-std-conditional"><a href="#类型选择-std-conditional" class="headerlink" title="类型选择 std::conditional"></a>类型选择 std::conditional</h3><p>c++11</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Defined in header &lt;type_traits&gt;</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">bool</span> B, <span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">conditional</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Possible implementation</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">bool</span> B, <span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">conditional</span> &#123;</span> <span class="keyword">typedef</span> T type; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">conditional</span>&lt;false, T, F&gt; &#123;</span> <span class="keyword">typedef</span> F type; &#125;;</span><br></pre></td></tr></table></figure>
 <p>Provides member typedef <code>type</code>, which is defined as <code>T</code> if <code>B</code> is true at compile time, or as <code>F</code> if <code>B</code> is false.</p>
-
+<p>C++14开始提供类型定义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="keyword">bool</span> B, <span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">using</span> <span class="title">conditional_t</span> = <span class="title">typename</span> <span class="title">conditional</span>&lt;B,T,F&gt;:</span>:type;</span><br></pre></td></tr></table></figure>
+<h3 id="整型数列-std-integer-sequence"><a href="#整型数列-std-integer-sequence" class="headerlink" title="整型数列 std::integer_sequence"></a>整型数列 std::integer_sequence</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T... ts&gt;</span><br><span class="line"><span class="built_in">std</span>::ostream&amp; <span class="keyword">operator</span>&lt;&lt;(<span class="built_in">std</span>::ostream&amp; os,</span><br><span class="line">                         <span class="keyword">const</span> <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;&amp;)</span><br><span class="line">&#123;</span><br><span class="line">    os &lt;&lt; <span class="string">"&#123; "</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> T values[] &#123; ts... &#125;;</span><br><span class="line">    <span class="built_in">std</span>::copy(<span class="built_in">std</span>::begin(values),</span><br><span class="line">              <span class="built_in">std</span>::end(values),</span><br><span class="line">              <span class="built_in">std</span>::ostream_iterator&lt;T&gt;(os, <span class="string">" "</span>));</span><br><span class="line">    <span class="keyword">return</span> os &lt;&lt; <span class="string">"&#125;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>
     
@@ -665,7 +742,13 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 现在假设我们有一个类如下：</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">Y</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    T::iterator *iter;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* 我们可能本意是想定义一个迭代器对象，例如我们如果用vector&lt;int&gt;来实例化这个模板，那么iter</span></span><br><span class="line"><span class="comment">则应该是一个迭代器指针，但是，如果我们用下面这个类来实例化这个模板：*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cType</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> iterator;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* 那么T::iterator *iter 会被编译器解释为两个数相乘。事实上，C++编译器会采用第二种解释方法</span></span><br><span class="line"><span class="comment">，即使iterator的确是一个类型名。</span></span><br><span class="line"><span class="comment">为了避免这种矛盾，当我们适用qualified dependent name的时候，需要用typename来指出这是一个</span></span><br><span class="line"><span class="comment">类型名.即: */</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">Y</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">typename</span> T::iterator *iter;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> T::iterator iterator; <span class="comment">//定义了Y::iterator类型名称</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//typename 指出下面紧跟着的名称是一个类型</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-
+<h3 id="使用-t代替typename"><a href="#使用-t代替typename" class="headerlink" title="使用_t代替typename"></a>使用_t代替typename</h3><p>在模板元编程时定义类型，就可以简化程序，提高可读性。</p>
+<p>比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ... T&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">temp_t</span> = <span class="keyword">typename</span> temp&lt;T...&gt;::type;</span><br></pre></td></tr></table></figure>
+<p>那么本来需要写 <code>using a = typename temp&lt;T...&gt;::type</code></p>
+<p>现在只需要写 <code>using a = temp_t&lt;T...&gt;</code></p>
+<p>这也是C++标准库里的做法。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     
@@ -1386,8 +1469,7 @@
 <h4 id="模版嵌套"><a href="#模版嵌套" class="headerlink" title="模版嵌套"></a>模版嵌套</h4><p>模板可以用作结构、类或模板类的成员（这样可以在类内实例化参数不同的对象）。要完全实现STL，必须有这项特性。</p>
 <p>可以直接在模板内定义模板，也可以像下面这样在外定义：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">beta</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">V</span>&gt;	//<span class="title">declaration</span></span></span><br><span class="line"><span class="class">    <span class="title">class</span> <span class="title">hold</span>;</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// member difinition</span></span><br><span class="line"><span class="keyword">template</span>&lt;Typename T&gt;</span><br><span class="line">	<span class="keyword">template</span>&lt;Typename V&gt;</span><br><span class="line">		<span class="class"><span class="keyword">class</span> <span class="title">beta</span>&lt;T&gt;:</span>:hold</span><br><span class="line">        &#123;</span><br><span class="line">        	...</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//不同于</span></span><br><span class="line"><span class="keyword">template</span>&lt;Typename T, Typename V&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="模板作为模板参数"><a href="#模板作为模板参数" class="headerlink" title="模板作为模板参数"></a>模板作为模板参数</h4><p>也是用于实现STL。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">class</span> <span class="title">Thing</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Crab</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Thing&lt;<span class="keyword">int</span>&gt; s1;</span><br><span class="line">    Thing&lt;<span class="keyword">double</span>&gt; s2;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Crab&lt;Stack&gt; s;	<span class="comment">// Stack&lt;int&gt; s1, Stack&lt;double&gt; s2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="模板作为模板参数"><a href="#模板作为模板参数" class="headerlink" title="模板作为模板参数"></a>模板作为模板参数</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">class</span> <span class="title">Thing</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Crab</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Thing&lt;<span class="keyword">int</span>&gt; s1;</span><br><span class="line">    Thing&lt;<span class="keyword">double</span>&gt; s2;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Crab&lt;Stack&gt; s;	<span class="comment">// Stack&lt;int&gt; s1, Stack&lt;double&gt; s2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="模版类和友元"><a href="#模版类和友元" class="headerlink" title="模版类和友元"></a>模版类和友元</h4><h5 id="非模版友元函数"><a href="#非模版友元函数" class="headerlink" title="非模版友元函数"></a>非模版友元函数</h5><p>方式：在模版中将一个常规函数声明为友元，则<strong>该函数成为模版所有实例化的友元</strong>。</p>
 <p>带某个 模板实例化参数 的友元，成为该实例化的友元。</p>
 <h5 id="约束模版友元函数"><a href="#约束模版友元函数" class="headerlink" title="约束模版友元函数"></a>约束模版友元函数</h5><p>使<strong>类的每一个具体化都获得与友元匹配的具体化</strong>。步骤：</p>
@@ -1606,75 +1688,6 @@
 <h3 id="内核格式化"><a href="#内核格式化" class="headerlink" title="内核格式化"></a>内核格式化</h3><p>sstream族使用相同的接口提供应用程序和 string 对象之间的 I/O。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="built_in">ostringstream</span> outstr;</span><br><span class="line">outstr &lt;&lt; <span class="string">"Hello"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/Mess/C++和Java的引用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/01/20/C_C++/Mess/C++和Java的引用/" class="article-date">
-      <time datetime="2019-01-20T12:51:11.000Z" itemprop="datePublished">2019-01-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/20/C_C++/Mess/C++和Java的引用/">C++和Java的引用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="C-和Java的引用"><a href="#C-和Java的引用" class="headerlink" title="C++和Java的引用"></a>C++和Java的引用</h3><h5 id="c-中引用的概念跟java中的不一样"><a href="#c-中引用的概念跟java中的不一样" class="headerlink" title="c++中引用的概念跟java中的不一样"></a>c++中引用的概念跟java中的不一样</h5><p>c++中的引用必须绑定到一个实际存在的对象，不能绑定到NULL，</p>
-<p>c++中 Object &amp;obj=NULL;这样的句子是绝对违法的。</p>
-<p>Object &amp;obj=*(new Object());这样的句子，或许可以编译通过，但是这是非常危险地，因为后面很容易忘记释放这个对象。</p>
-<p>string &amp;str=string(“123”)+”456”;这样的句子，VC中打开扩展可以编译通过，但是c++规范是不允许的，因为这同样非常危险。str绑定到了临时对象。</p>
-<h5 id="c-中的指针跟java中的引用类似"><a href="#c-中的指针跟java中的引用类似" class="headerlink" title="c++中的指针跟java中的引用类似"></a>c++中的指针跟java中的引用类似</h5><p>Object obj = null; java中的意思是定义Object型引用的变量obj并初始化为null</p>
-<p>Object *obj=NULL;c++中的意思为定Object型指针的变量obj并初始化为NULL  </p>
-
       
     </div>
     

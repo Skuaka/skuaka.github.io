@@ -234,6 +234,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-OpenGl/OpenGL编程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/02/OpenGl/OpenGL编程/" class="article-date">
+      <time datetime="2019-03-02T12:50:39.000Z" itemprop="datePublished">2019-03-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/02/OpenGl/OpenGL编程/">OpenGL编程(待续</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><p>在Mac OS X下，一般是<br>#include &lt;OpenGL/gl.h&gt;<br>#include &lt;OpenGL/glu.h&gt;<br>#include &lt;GLUT/glut.h&gt; </p>
+<p>在编译的时候，需要用到Mac OS X里gcc的-framework参数，例如<br><code>g++ -framework OpenGL -framework GLUT -framework Foundation -o test my.cpp</code></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/OpenGL/">OpenGL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/02/OpenGl/OpenGL编程/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-OpenGl/OpenGL概念" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -847,79 +916,6 @@
         <p class="article-more-link">
           <a href="/2019/02/01/Unix/Command/tar/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Unix/Command/ln" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/02/01/Unix/Command/ln/" class="article-date">
-      <time datetime="2019-02-01T10:19:22.000Z" itemprop="datePublished">2019-02-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/01/Unix/Command/ln/">ln</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>ln -s 源文件 目标文件 </p>
-<p>举例：</p>
-<p>当前目录是<code>/local</code>，而我经常要访问<code>/usr/local/linux/work</code></p>
-<p>那么我就可以使用在 local 下建立一个文件 linkwork，</p>
-<p>然后<code>ln -s /usr/local/linux/work  /local/linkwork</code></p>
-<p>即建立两者之间的链接。</p>
-<p>删除链接 </p>
-<p><code>rm -rf   symbolic_name</code>   注意不是  <code>rm -rf   symbolic_name/</code></p>
-<p>那么上面就是</p>
-<p><code>rm -rf   /local/linkwork</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>
