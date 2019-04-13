@@ -928,49 +928,194 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="c-算法库"><a href="#c-算法库" class="headerlink" title="c++算法库"></a>c++算法库</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p><strong>前提是已经排序。</strong></p>
+        <h1 id="c-算法库"><a href="#c-算法库" class="headerlink" title="c++算法库"></a>c++算法库</h1><h2 id="不修改元素的序列操作"><a href="#不修改元素的序列操作" class="headerlink" title="不修改元素的序列操作"></a>不修改元素的序列操作</h2><p>序列操作的前两个参数都是指向序列首尾的迭代器。</p>
 <table>
 <thead>
 <tr>
-<th>binary_search</th>
-<th>determines if an element exists in a certain range</th>
+<th>all_of(C++11)<br>any_of(C++11)<br>none_of(C++11)</th>
+<th>checks if a predicate is true for all, any or none <br>of the elements in a range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>lower_bound</td>
-<td>returns an iterator to the first element <strong><em>not less</em></strong> than the given value</td>
+<td>for_each</td>
+<td>applies a function to a range of elements</td>
 </tr>
 <tr>
-<td>upper_bound</td>
-<td>returns an iterator to the first element <strong><em>greater</em></strong> than a certain value</td>
+<td>for_each_n(C++17)</td>
+<td>applies a function object <strong><em>to the first n elements</em></strong> of a sequence</td>
 </tr>
 <tr>
-<td>equal_range</td>
-<td>returns range of elements matching a specific key</td>
+<td>count<br>count_if</td>
+<td>returns the number of elements satisfying specific criteria</td>
+</tr>
+<tr>
+<td>mismatch</td>
+<td>finds the first position where two ranges differ</td>
+</tr>
+<tr>
+<td>find<br>find_if<br>find_if_not(C++11)</td>
+<td>finds the first element satisfying specific criteria</td>
+</tr>
+<tr>
+<td>find_end</td>
+<td>finds the last sequence of elements in a certain range</td>
+</tr>
+<tr>
+<td>find_first_of</td>
+<td>searches for any one of a set of elements<br>在第一个范围内找存在于第二个范围内的任何一个数。</td>
+</tr>
+<tr>
+<td>adjacent_find</td>
+<td>finds the first two adjacent items that are equal <br>(or satisfy a given predicate)</td>
+</tr>
+<tr>
+<td>search</td>
+<td>searches for a range of elements<br>find是找一个数，search是找一个序列。</td>
+</tr>
+<tr>
+<td>search_n</td>
+<td>searches a range for a number of consecutive copies of an element</td>
 </tr>
 </tbody>
 </table>
-<p><strong>equal_range:</strong></p>
-<p>试图在已排序的[first,last)中寻找value，它返回一对迭代器i和j，其中i是在不破坏次序的前提下，value可插入的第一个位置（亦即lower_bound），j则是在不破坏次序的前提下，value可插入的最后一个位置（亦即upper_bound），因此，[i,j)内的每个元素都等同于value，而且[i,j)是[first,last)之中符合此一性质的最大子区间。</p>
-<h2 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h2><table>
+<h2 id="会修改元素的序列操作"><a href="#会修改元素的序列操作" class="headerlink" title="会修改元素的序列操作"></a>会修改元素的序列操作</h2><table>
 <thead>
 <tr>
-<th>merge</th>
-<th>merges two sorted ranges</th>
+<th>copy<br>copy_if(C++11)</th>
+<th>copies a range of elements to a new location</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>inplace_merge</td>
-<td>merges two ordered ranges in-place</td>
+<td>copy_n(C++11)</td>
+<td>copies a number of elements to a new location</td>
+</tr>
+<tr>
+<td>copy_backward</td>
+<td>copies a range of elements in backwards order</td>
+</tr>
+<tr>
+<td>move(C++11)</td>
+<td>moves a range of elements to a new location</td>
+</tr>
+<tr>
+<td>move_backward(C++11)</td>
+<td>moves a range of elements to a new location in backwards order</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>copy-assigns the given value to every element in a range</td>
+</tr>
+<tr>
+<td>fill_n</td>
+<td>copy-assigns the given value to N elements in a range</td>
+</tr>
+<tr>
+<td>transform</td>
+<td>applies a function to a range of elements</td>
+</tr>
+<tr>
+<td>generate</td>
+<td>assigns the results of successive function calls to every element in a range</td>
+</tr>
+<tr>
+<td>generate_n</td>
+<td>assigns the results of successive function calls to N elements in a range</td>
+</tr>
+<tr>
+<td>remove<br>remove_if</td>
+<td>removes elements satisfying specific criteria</td>
+</tr>
+<tr>
+<td>remove_copy<br>remove_copy_if</td>
+<td>copies a range of elements omitting those that satisfy specific criteria</td>
+</tr>
+<tr>
+<td>replace<br>replace_if</td>
+<td>replaces all values satisfying specific criteria with another value</td>
+</tr>
+<tr>
+<td>replace_copy<br>replace_copy_if</td>
+<td>copies a range, replacing elements satisfying specific criteria with another value</td>
+</tr>
+<tr>
+<td>swap</td>
+<td>swaps the values of two objects</td>
+</tr>
+<tr>
+<td>swap_ranges</td>
+<td>swaps two ranges of elements</td>
+</tr>
+<tr>
+<td>iter_swap</td>
+<td>swaps the elements pointed to by two iterators</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>reverses the order of elements in a range</td>
+</tr>
+<tr>
+<td>reverse_copy</td>
+<td>creates a copy of a range that is reversed</td>
+</tr>
+<tr>
+<td>rotate</td>
+<td>rotates the order of elements in a range</td>
+</tr>
+<tr>
+<td>rotate_copy</td>
+<td>copies and rotate a range of elements</td>
+</tr>
+<tr>
+<td>shift_left(C++20)<br>shift_right(C++20)</td>
+<td>shifts elements in a range</td>
+</tr>
+<tr>
+<td>random_shuffle<br>(until C++17)<br>shuffle(C++11)</td>
+<td>randomly re-orders elements in a range</td>
+</tr>
+<tr>
+<td>sample(C++17)</td>
+<td>selects n random elements from a sequence</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>removes consecutive duplicate elements in a range</td>
+</tr>
+<tr>
+<td>unique_copy</td>
+<td>creates a copy of some range of elements that contains no consecutive duplicates</td>
 </tr>
 </tbody>
 </table>
-<p><strong>inplace_merge:</strong></p>
-<p>Merges two consecutive sorted ranges <code>[first, middle)</code> and <code>[middle, last)</code> into one sorted range <code>[first, last)</code></p>
-<p>用inplace_merge<strong>实现归并排序</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Iter</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">merge_sort</span>(<span class="title">Iter</span> <span class="title">first</span>, <span class="title">Iter</span> <span class="title">last</span>) &#123;</span></span><br><span class="line">    <span class="keyword">if</span> (last - first &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        Iter middle = first + (last - first) / <span class="number">2</span>;</span><br><span class="line">        merge_sort(first, middle);</span><br><span class="line">        merge_sort(middle, last);</span><br><span class="line">        <span class="built_in">std</span>::inplace_merge(first, middle, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123;<span class="number">8</span>, <span class="number">2</span>, <span class="number">-2</span>, <span class="number">0</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    merge_sort(v.begin(), v.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> n : v) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分割"><a href="#分割" class="headerlink" title="分割"></a>分割</h2><table>
+<thead>
+<tr>
+<th>is_partitioned(C++11)</th>
+<th>determines if the range is partitioned by the given predicate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>partition</td>
+<td>divides a range of elements into two groups,<br><strong>returns</strong> iterator to the first element of the second group.</td>
+</tr>
+<tr>
+<td>partition_copy(C++11)</td>
+<td>copies a range dividing the elements into two groups</td>
+</tr>
+<tr>
+<td>stable_partition</td>
+<td>divides elements into two groups while preserving their relative order</td>
+</tr>
+<tr>
+<td>partition_point(C++11)</td>
+<td>locates the partition point of a partitioned range</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> it = <span class="built_in">std</span>::partition(v.begin(), v.end(), [](<span class="keyword">int</span> i)&#123;<span class="keyword">return</span> i % <span class="number">2</span> == <span class="number">0</span>;&#125;);</span><br><span class="line"><span class="built_in">std</span>::copy(<span class="built_in">std</span>::begin(v), it, <span class="built_in">std</span>::ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">std</span>::<span class="built_in">cout</span>, <span class="string">" "</span>));</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" * "</span>;</span><br><span class="line"><span class="built_in">std</span>::copy(it,<span class="built_in">std</span>::end(v), <span class="built_in">std</span>::ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">std</span>::<span class="built_in">cout</span>, <span class="string">" "</span>));</span><br></pre></td></tr></table></figure>
 <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>基于排序的算法，基本上都可以增加一个参数，即比较函数。</p>
 <p>需要随机访问迭代器。</p>
 <table>
@@ -1020,6 +1165,49 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v0&#123;<span class="number">4</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v1.begin(), v1.end());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the smaller vector in ascending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v1) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">if</span>(it == v1.end())</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The return value is the end iterator\n"</span>;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v2.begin(), v2.end(), </span><br><span class="line">                                <span class="built_in">std</span>::greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the larger vector in descending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v2) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> &lt;&lt; <span class="string">"The return value is the iterator to "</span> &lt;&lt; *it &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>output:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Writing to the smaller vector in ascending order gives: 1 2 3</span><br><span class="line">The return value is the end iterator</span><br><span class="line">Writing to the larger vector in descending order gives: 5 4 3 2 1 15 16</span><br><span class="line">The return value is the iterator to 15</span><br></pre></td></tr></table></figure>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p><strong>前提是已经排序。</strong></p>
+<table>
+<thead>
+<tr>
+<th>binary_search</th>
+<th>determines if an element exists in a certain range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lower_bound</td>
+<td>returns an iterator to the first element <strong><em>not less</em></strong> than the given value</td>
+</tr>
+<tr>
+<td>upper_bound</td>
+<td>returns an iterator to the first element <strong><em>greater</em></strong> than a certain value</td>
+</tr>
+<tr>
+<td>equal_range</td>
+<td>returns range of elements matching a specific key</td>
+</tr>
+</tbody>
+</table>
+<p><strong>equal_range:</strong></p>
+<p>试图在已排序的[first,last)中寻找value，它返回一对迭代器i和j，其中i是在不破坏次序的前提下，value可插入的第一个位置（亦即lower_bound），j则是在不破坏次序的前提下，value可插入的最后一个位置（亦即upper_bound），因此，[i,j)内的每个元素都等同于value，而且[i,j)是[first,last)之中符合此一性质的最大子区间。</p>
+<h2 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h2><table>
+<thead>
+<tr>
+<th>merge</th>
+<th>merges two sorted ranges</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inplace_merge</td>
+<td>merges two ordered ranges in-place</td>
+</tr>
+</tbody>
+</table>
+<p><strong>inplace_merge:</strong></p>
+<p>Merges two consecutive sorted ranges <code>[first, middle)</code> and <code>[middle, last)</code> into one sorted range <code>[first, last)</code></p>
+<p>用inplace_merge<strong>实现归并排序</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Iter</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">merge_sort</span>(<span class="title">Iter</span> <span class="title">first</span>, <span class="title">Iter</span> <span class="title">last</span>) &#123;</span></span><br><span class="line">    <span class="keyword">if</span> (last - first &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        Iter middle = first + (last - first) / <span class="number">2</span>;</span><br><span class="line">        merge_sort(first, middle);</span><br><span class="line">        merge_sort(middle, last);</span><br><span class="line">        <span class="built_in">std</span>::inplace_merge(first, middle, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123;<span class="number">8</span>, <span class="number">2</span>, <span class="number">-2</span>, <span class="number">0</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    merge_sort(v.begin(), v.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> n : v) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><table>
 <thead>
 <tr>
@@ -1146,7 +1334,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3,5,4,1,2 is a permutation of 1,2,3,4,5? "</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::boolalpha</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::is_permutation(v1.begin(), v1.end(), v2.begin()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3,5,4,1,1 is a permutation of 1,2,3,4,5? "</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::boolalpha</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::is_permutation(v1.begin(), v1.end(), v3.begin()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>output:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span> is a permutation of <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>? <span class="literal">true</span></span><br><span class="line"><span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">1</span> is a permutation of <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>? <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<h1 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h1>
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
       
     </div>
     

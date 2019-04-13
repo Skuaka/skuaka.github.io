@@ -604,10 +604,10 @@
 
 
   
-    <article id="post-Database/Mysql/mysql 命令" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Database/Mysql/mysql 基本命令" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/06/Database/Mysql/mysql 命令/" class="article-date">
+      <a href="/2018/10/06/Database/Mysql/mysql 基本命令/" class="article-date">
       <time datetime="2018-10-06T13:06:00.000Z" itemprop="datePublished">2018-10-06</time>
 </a>
 
@@ -623,7 +623,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/06/Database/Mysql/mysql 命令/">mysql 命令</a>
+      <a class="article-title" href="/2018/10/06/Database/Mysql/mysql 基本命令/">mysql 基本命令</a>
     </h1>
   
 
@@ -633,7 +633,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root -p create RUNOOB</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure>
+        <h3 id="Mysql-基础命令"><a href="#Mysql-基础命令" class="headerlink" title="Mysql 基础命令"></a>Mysql 基础命令</h3><h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root -p create RUNOOB</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure>
 <h4 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; drop database RUNOOB;</span><br></pre></td></tr></table></figure>
 <p>​      或者</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root -p drop RUNOOB</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure>
@@ -649,6 +649,9 @@
 <h4 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table_name ;</span><br></pre></td></tr></table></figure>
 <h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure>
 <h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE [WHERE condition1 [AND/OR condition2].....]</span><br><span class="line">[LIMIT N][ OFFSET M]</span><br></pre></td></tr></table></figure>
+<p>LIMIT是MySQL内置函数，其作用是<strong>用于限制查询结果的条数</strong>。</p>
+<p>其语法格式可以如上，也可以如下:</p>
+<p><code>LIMIT [位置偏移量,]行数</code></p>
 <h4 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name SET field1=new-value1, field2=new-value2</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure>
 <h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name [WHERE Clause]</span><br></pre></td></tr></table></figure>
 <h3 id="查询进阶"><a href="#查询进阶" class="headerlink" title="查询进阶"></a>查询进阶</h3><h4 id="like条件"><a href="#like条件" class="headerlink" title="like条件"></a>like条件</h4><p>SQL LIKE 子句中使用百分号 %字符来表示任意字符，类似于UNIX或正则表达式中的星号 *。</p>
@@ -787,6 +790,10 @@
 <h5 id="删除外键约束"><a href="#删除外键约束" class="headerlink" title="删除外键约束"></a>删除外键约束</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName drop foreign key keyName;</span><br></pre></td></tr></table></figure>
 <h5 id="修改字段的相对位置"><a href="#修改字段的相对位置" class="headerlink" title="修改字段的相对位置"></a>修改字段的相对位置</h5><p>这里name1为想要修改的字段，type1为该字段原来类型，first和after二选一，这应该显而易见，first放在第一位，after放在name2字段后面</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tableName modify name1 type1 first|after name2;</span><br></pre></td></tr></table></figure>
+<h5 id="修改编码"><a href="#修改编码" class="headerlink" title="修改编码"></a>修改编码</h5><p>添加中文支持</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name convert to character set utf8;</span><br></pre></td></tr></table></figure>
+<p>创建表的时候就可以添加编码：</p>
+<p><code>character set = utf8</code></p>
 <h4 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a>临时表</h4><p>MySQL临时表只在当前连接可见，如果你使用PHP脚本来创建MySQL临时表，那每当PHP脚本执行完成后，该临时表也会自动销毁。</p>
 <p>如果你使用了其他MySQL客户端程序连接MySQL数据库服务器来创建临时表，那么只有在关闭客户端程序时才会销毁临时表，当然你也可以手动销毁。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TEMPORARY TABLE SalesSummary (</span><br><span class="line">    -&gt; product_name VARCHAR(50) NOT NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
@@ -899,7 +906,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>mysql查询默认是不区分大小写的 如:<br>select <em> from some_table where str=‘abc’;<br>select </em> from some_table where str=’ABC’;<br>得到的结果是一样的，如果我们需要进行区分的话可以按照如下方法来做：<br>第一种方法：<br>要让mysql查询区分大小写，可以：<br><code>select * from some_table where binary str=&#39;abc&#39;</code><br><code>select * from some_table where binary str=&#39;ABC&#39;</code></p>
+        <h3 id="mysql大小写区分"><a href="#mysql大小写区分" class="headerlink" title="mysql大小写区分"></a>mysql大小写区分</h3><p>mysql查询默认是不区分大小写的 如:<br><code>select * from some_table where str=‘abc&#39;;</code><br><code>select * from some_table where str=&#39;ABC&#39;;</code><br>得到的结果是一样的，如果我们需要进行区分的话可以按照如下方法来做：<br>第一种方法：<br>要让mysql查询区分大小写，可以：<br><code>select * from some_table where binary str=&#39;abc&#39;</code><br><code>select * from some_table where binary str=&#39;ABC&#39;</code></p>
 <p>第二种方法：<br>在建表时时候加以标识</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table some_table(</span><br><span class="line">str char(20) binary </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>原理：<br>对于CHAR、VARCHAR和TEXT类型，BINARY属性可以为列分配该列字符集的 校对规则。<br>BINARY属性是指定列字符集的<strong>二元 校对规则</strong>的简写。<br>排序和比较<strong>基于数值字符值</strong>。因此也就自然区分了大小写。</p>
