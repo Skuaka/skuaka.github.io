@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="ln -s 源文件 目标文件  举例： 当前目录是/local，而我经常要访问/usr/local/linux/work 那么我就可以使用在 local 下建立一个文件 linkwork， 然后ln -s /usr/local/linux/work  /local/linkwork 即建立两者之间的链接。 删除链接  rm -rf   symbolic_name   注意不是  rm -rf">
-<meta name="keywords" content="Linux,Shell">
+<meta name="description" content="IDE+Git使用拿Clion举个例子，大部分IDE都差不多。  先创建本地仓库并且发布(命令行或者GitHub Desktop)  Clion只需要在上一步创建的位置上创建新项目，便会自动使用Git进行版本控制。  工具栏只能pull和commit，而push在菜单栏里。  如果不想上传clion自动创建的文件夹，可以添加ignore文件名(命令行或者GitHub Desktop)： 12cma">
+<meta name="keywords" content="clion">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ln">
-<meta property="og:url" content="http://skuaka.cn/2019/02/01/Unix/Command/ln/index.html">
+<meta property="og:title" content="IDE+git使用">
+<meta property="og:url" content="http://skuaka.cn/2019/04/01/Unix/Programming/ide_git/index.html">
 <meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="ln -s 源文件 目标文件  举例： 当前目录是/local，而我经常要访问/usr/local/linux/work 那么我就可以使用在 local 下建立一个文件 linkwork， 然后ln -s /usr/local/linux/work  /local/linkwork 即建立两者之间的链接。 删除链接  rm -rf   symbolic_name   注意不是  rm -rf">
+<meta property="og:description" content="IDE+Git使用拿Clion举个例子，大部分IDE都差不多。  先创建本地仓库并且发布(命令行或者GitHub Desktop)  Clion只需要在上一步创建的位置上创建新项目，便会自动使用Git进行版本控制。  工具栏只能pull和commit，而push在菜单栏里。  如果不想上传clion自动创建的文件夹，可以添加ignore文件名(命令行或者GitHub Desktop)： 12cma">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-07T11:21:15.455Z">
+<meta property="og:updated_time" content="2019-04-17T15:14:59.540Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ln">
-<meta name="twitter:description" content="ln -s 源文件 目标文件  举例： 当前目录是/local，而我经常要访问/usr/local/linux/work 那么我就可以使用在 local 下建立一个文件 linkwork， 然后ln -s /usr/local/linux/work  /local/linkwork 即建立两者之间的链接。 删除链接  rm -rf   symbolic_name   注意不是  rm -rf">
+<meta name="twitter:title" content="IDE+git使用">
+<meta name="twitter:description" content="IDE+Git使用拿Clion举个例子，大部分IDE都差不多。  先创建本地仓库并且发布(命令行或者GitHub Desktop)  Clion只需要在上一步创建的位置上创建新项目，便会自动使用Git进行版本控制。  工具栏只能pull和commit，而push在菜单栏里。  如果不想上传clion自动创建的文件夹，可以添加ignore文件名(命令行或者GitHub Desktop)： 12cma">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>ln | Skuaka</title>
+<title>IDE+git使用 | Skuaka</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -228,11 +228,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
 </nav>
-      <div class="body-wrap"><article id="post-Unix/Command/ln" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Unix/Programming/ide_git" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/02/01/Unix/Command/ln/" class="article-date">
-      <time datetime="2019-02-01T10:19:22.000Z" itemprop="datePublished">2019-02-01</time>
+      <a href="/2019/04/01/Unix/Programming/ide_git/" class="article-date">
+      <time datetime="2019-04-01T07:24:56.000Z" itemprop="datePublished">2019-04-01</time>
 </a>
 
 
@@ -247,7 +247,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ln
+      IDE+git使用
     </h1>
   
 
@@ -255,14 +255,10 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/clion/">clion</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -272,16 +268,22 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>ln -s 源文件 目标文件 </p>
-<p>举例：</p>
-<p>当前目录是<code>/local</code>，而我经常要访问<code>/usr/local/linux/work</code></p>
-<p>那么我就可以使用在 local 下建立一个文件 linkwork，</p>
-<p>然后<code>ln -s /usr/local/linux/work  /local/linkwork</code></p>
-<p>即建立两者之间的链接。</p>
-<p>删除链接 </p>
-<p><code>rm -rf   symbolic_name</code>   注意不是  <code>rm -rf   symbolic_name/</code></p>
-<p>那么上面就是</p>
-<p><code>rm -rf   /local/linkwork</code></p>
+        <h3 id="IDE-Git使用"><a href="#IDE-Git使用" class="headerlink" title="IDE+Git使用"></a>IDE+Git使用</h3><p>拿Clion举个例子，大部分IDE都差不多。</p>
+<ol>
+<li><p>先创建本地仓库并且发布(命令行或者GitHub Desktop)</p>
+</li>
+<li><p>Clion只需要在上一步创建的位置上创建新项目，便会自动使用Git进行版本控制。</p>
+</li>
+<li><p>工具栏只能pull和commit，而push在菜单栏里。</p>
+</li>
+<li><p>如果不想上传clion自动创建的文件夹，可以添加ignore文件名(命令行或者GitHub Desktop)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake-build*</span><br><span class="line">.idea</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>PS：</p>
+<ul>
+<li>可以设置commit的时候检查todo注释</li>
+</ul>
 
       
     </div>
@@ -290,13 +292,13 @@
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2019/02/01/Unix/Command/ln/">ln</a></p>
+        <p><span>Title:</span><a href="/2019/04/01/Unix/Programming/ide_git/">IDE+git使用</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Skuaka</a></p>
-        <p><span>Created:</span>2019-02-01, 18:19:22</p>
-        <p><span>Updated:</span>2019-03-07, 19:21:15</p>
+        <p><span>Created:</span>2019-04-01, 15:24:56</p>
+        <p><span>Updated:</span>2019-04-17, 23:14:59</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2019/02/01/Unix/Command/ln/" title="ln">http://skuaka.cn/2019/02/01/Unix/Command/ln/</a>
-            <span class="copy-path" data-clipboard-text="From http://skuaka.cn/2019/02/01/Unix/Command/ln/　　By Skuaka" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2019/04/01/Unix/Programming/ide_git/" title="IDE+git使用">http://skuaka.cn/2019/04/01/Unix/Programming/ide_git/</a>
+            <span class="copy-path" data-clipboard-text="From http://skuaka.cn/2019/04/01/Unix/Programming/ide_git/　　By Skuaka" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -309,15 +311,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/02/01/Unix/Command/tar/">
-                    Tar命令
+                <a href="/2019/04/06/Network/Http/https与ssl/">
+                    https 与 ssl
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/02/01/Unix/Command/screen/">
-                    使用 screen 管理远程会话
+                <a href="/2019/03/27/Network/IO/libevent/">
+                    libevent
                 </a>
             </div>
         
@@ -329,7 +331,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#IDE-Git使用"><span class="toc-number">1.</span> <span class="toc-text">IDE+Git使用</span></a></li></ol>
         
     </div>
     <style>
@@ -365,7 +367,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"ln　| Skuaka　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"IDE+git使用　| Skuaka　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -385,7 +387,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/02/01/Unix/Command/tar/" title="Pre: Tar命令">
+            <a href="/2019/04/06/Network/Http/https与ssl/" title="Pre: https 与 ssl">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -393,7 +395,7 @@
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/02/01/Unix/Command/screen/" title="Next: 使用 screen 管理远程会话">
+            <a href="/2019/03/27/Network/IO/libevent/" title="Next: libevent">
                 <i class="fa fa-angle-right"></i>
             </a>
         
