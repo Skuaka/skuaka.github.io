@@ -234,6 +234,155 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Operating System/浮点数存储法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/09/Operating System/浮点数存储法/" class="article-date">
+      <time datetime="2019-03-09T08:05:06.000Z" itemprop="datePublished">2019-03-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/09/Operating System/浮点数存储法/">浮点数存储法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="浮点数存储法"><a href="#浮点数存储法" class="headerlink" title="浮点数存储法"></a>浮点数存储法</h2><p>目前所有的C/C++编译器都是采用IEEE所制定的标准浮点格式，即二进制科学表示法。</p>
+<h3 id="二进制科学表示法"><a href="#二进制科学表示法" class="headerlink" title="二进制科学表示法"></a>二进制科学表示法</h3><p>二进制科学表示法中，S=M*2^N 主要由三部分构成：符号位+阶码(N)+尾数(M)。对于float型数据，其二进制有32位，其中符号位1位，阶码8位，尾数23位；对于double型数据，其二进制为64位，符号位1位，阶码11位，尾数52位。</p>
+<p>​                31        30-23       22-0</p>
+<p>float       符号位     阶码        尾数</p>
+<p>​                63        62-52       51-0</p>
+<p>double    符号位     阶码        尾数</p>
+<p><em>符号位</em>：0表示正，1表示负</p>
+<p><em>阶码</em>：这里阶码采用移码表示，对于float型数据其规定<em>偏置量</em>为127,阶码有正有负，对于8位二进制，则其表示范围为-128-127，double型规定为1023，其表示范围为-1024-1023。比如对于float型数据，若阶码的真实值为2，则加上127后为129，其阶码表示形式为10000010</p>
+<p><em>尾数</em>：有效数字位，即部分二进制位(<strong>小数点后面的二进制位</strong>)，<strong>因为规定M的整数部分恒为1，所以这个1就不进行存储了。</strong></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/09/Operating System/浮点数存储法/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/Mess/C_C++pow函数实现" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/09/C_C++/Mess/C_C++pow函数实现/" class="article-date">
+      <time datetime="2019-03-09T07:12:01.000Z" itemprop="datePublished">2019-03-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/09/C_C++/Mess/C_C++pow函数实现/">C_C++ pow函数实现</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>整理翻译自 <a href="https://stackoverflow.com/questions/101439/the-most-efficient-way-to-implement-an-integer-based-power-function-powint-int" target="_blank" rel="noopener">stackoverflow</a></p>
+<h3 id="整数pow-实现方式"><a href="#整数pow-实现方式" class="headerlink" title="整数pow()实现方式"></a>整数pow()实现方式</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ipow</span><span class="params">(<span class="keyword">int</span> base, <span class="keyword">int</span> <span class="built_in">exp</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">exp</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">exp</span> &amp; <span class="number">1</span>)</span><br><span class="line">            result *= base;</span><br><span class="line">        <span class="built_in">exp</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        base *= base;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2的n次方的常数时间方法"><a href="#2的n次方的常数时间方法" class="headerlink" title="2的n次方的常数时间方法"></a>2的n次方的常数时间方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">IeeeFloat</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> base : <span class="number">23</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> exponent : <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> signBit : <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> IeeeFloatUnion</span><br><span class="line">&#123;</span><br><span class="line">    IeeeFloat brokenOut;</span><br><span class="line">    <span class="keyword">float</span> f;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">float</span> <span class="title">twoToThe</span><span class="params">(<span class="keyword">char</span> exponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// notice how the range checking is already done on the exponent var </span></span><br><span class="line">    <span class="keyword">static</span> IeeeFloatUnion u;</span><br><span class="line">    u.f = <span class="number">2.0</span>;</span><br><span class="line">    <span class="comment">// Change the exponent part of the float</span></span><br><span class="line">    u.brokenOut.exponent += (exponent - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> (u.f);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法在指数是负的或者指数太大以至于不能存储在int中时仍能使用。</p>
+<p>这里是使用的float，可以用double来运算更大的指数。</p>
+<p>原理详见另一篇–浮点数存储法。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/09/C_C++/Mess/C_C++pow函数实现/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/C++Collection/C++杂类" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -791,150 +940,6 @@
       
         <p class="article-more-link">
           <a href="/2019/03/06/C_C++/C++Collection/C++智能指针/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Operating System/C程序内存区域" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/06/Operating System/C程序内存区域/" class="article-date">
-      <time datetime="2019-03-06T12:50:55.000Z" itemprop="datePublished">2019-03-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/06/Operating System/C程序内存区域/">C程序内存区域</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="C程序内存区域"><a href="#C程序内存区域" class="headerlink" title="C程序内存区域"></a>C程序内存区域</h3><p>C语言在内存中一共分为如下几个区域，分别是：</p>
-<ol>
-<li>内存栈区： 存放局部变量名；</li>
-<li>内存堆区： 存放new或者malloc出来的对象；</li>
-<li>常数区： 存放局部变量或者全局变量的值；</li>
-<li>静态区： 用于存放全局变量或者静态变量；</li>
-<li>代码区：二进制代码。</li>
-</ol>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/06/Operating System/C程序内存区域/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Algorithm/LIS-最长上升子序列" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/05/Algorithm/LIS-最长上升子序列/" class="article-date">
-      <time datetime="2019-03-05T03:19:02.000Z" itemprop="datePublished">2019-03-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/05/Algorithm/LIS-最长上升子序列/">LIS 最长上升子序列</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="LIS-最长上升子序列"><a href="#LIS-最长上升子序列" class="headerlink" title="LIS 最长上升子序列"></a>LIS 最长上升子序列</h3><p>有了LCS的基础后就容易理解了：</p>
-<p>状态转移方程为：<code>if(a[i] &gt; a[j])  dp[i] = MAX (dp[i], dp[j] + 1);</code></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/05/Algorithm/LIS-最长上升子序列/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

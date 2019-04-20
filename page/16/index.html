@@ -234,6 +234,146 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/Mysql/centos彻底删除mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/05/03/Database/Mysql/centos彻底删除mysql/" class="article-date">
+      <time datetime="2018-05-03T12:14:34.000Z" itemprop="datePublished">2018-05-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/03/Database/Mysql/centos彻底删除mysql/">centos彻底删除mysql</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>1 删除Mysql</p>
+<p>   yum remove  mysql mysql-server mysql-libs mysql-server;</p>
+<p>​    find / -name mysql 将找到的相关东西delete掉；</p>
+<p>​    rpm -qa|grep mysql(查询出来的东东yum remove掉)</p>
+<p>2 安装Mysql</p>
+<p>​     yum install  mysql mysql-server mysql-libs mysql-server;</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Security/无线安全/Dsniff" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/04/25/Security/无线安全/Dsniff/" class="article-date">
+      <time datetime="2018-04-25T15:44:10.000Z" itemprop="datePublished">2018-04-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/25/Security/无线安全/Dsniff/">Dsniff</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="内网扫描"><a href="#内网扫描" class="headerlink" title="内网扫描"></a>内网扫描</h3><p>nmap   百度教程：<a href="https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html</a></p>
+<h3 id="arp欺骗"><a href="#arp欺骗" class="headerlink" title="arp欺骗"></a>arp欺骗</h3><p><code>arpspoof -i eth0 -t [target_ip] [host_ip]</code></p>
+<h3 id="开启路由转发"><a href="#开启路由转发" class="headerlink" title="开启路由转发"></a>开启路由转发</h3><p><code>echo 1 &gt;&gt; /proc/sys/net/ipv4/ip_forward</code></p>
+<h3 id="url嗅探"><a href="#url嗅探" class="headerlink" title="url嗅探"></a>url嗅探</h3><p>urlsnarf</p>
+<h3 id="查看图片"><a href="#查看图片" class="headerlink" title="查看图片"></a>查看图片</h3><p>ettercap</p>
+<h3 id="dns劫持"><a href="#dns劫持" class="headerlink" title="dns劫持"></a>dns劫持</h3><p>前提是双端都做了arp欺骗</p>
+<p><code>dnsspoof -i eth0 [-f file]</code></p>
+<h3 id="一些特殊事项"><a href="#一些特殊事项" class="headerlink" title="一些特殊事项"></a>一些特殊事项</h3><h4 id="mac-os要开启软网卡"><a href="#mac-os要开启软网卡" class="headerlink" title="mac os要开启软网卡"></a>mac os要开启软网卡</h4><p><code>sudo chmod 777 /dev/bpf*</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Security/">Security</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali/">Kali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wifi/">Wifi</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Backend/base64原理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1660,235 +1800,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Algorithm/DFS" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/03/25/Algorithm/DFS/" class="article-date">
-      <time datetime="2018-03-25T05:16:50.000Z" itemprop="datePublished">2018-03-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/25/Algorithm/DFS/">DFS BFS</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="DFS思路"><a href="#DFS思路" class="headerlink" title="DFS思路"></a>DFS思路</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">DFS</span><span class="params">(solution_Set, buildingAnswer, step)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">if</span> <span class="title">Avaliable</span><span class="params">(buildingAnswer)</span> :                        # 如果当前构造的解是可用的解，则添加到最终解之中</span></span><br><span class="line"><span class="function">       solution_Set.<span class="title">add</span><span class="params">(buildingAnswer)</span></span></span><br><span class="line"><span class="function">       return</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    <span class="keyword">for</span> bs in BuildingSpace:                                # 遍历构造空间，是当前构造解可添加处理操作的空间</span></span><br><span class="line"><span class="function">        <span class="keyword">if</span> <span class="title">feasible</span><span class="params">(bs)</span>:                                    # 如果当前遍历的操作对于当前阶段是可行的，则对当前构造解施加操作</span></span><br><span class="line"><span class="function">            <span class="title">Process</span><span class="params">(buildingAnswer, fs)</span></span></span><br><span class="line"><span class="function">            <span class="title">DFS</span><span class="params">(solution_Set, buildingAnswer, step + <span class="number">1</span>)</span>        # 在当前的处理上进入下一种处理，进一步搜索解</span></span><br><span class="line"><span class="function">            <span class="title">Restore</span><span class="params">(buildingAnswer, fs)</span>                        # 从下一个状态搜索中返回，无论下一层是否是什么状态。 恢复本阶段的状态，搜索本阶段另外可施加的状态。</span></span><br></pre></td></tr></table></figure>
-<h3 id="BFS和DFS选择"><a href="#BFS和DFS选择" class="headerlink" title="BFS和DFS选择"></a>BFS和DFS选择</h3><ol>
-<li>BFS是用来搜索最短径路的解是比较合适的，比如求最少步数的解，最少交换次数的解，因为BFS搜索过程中遇到的解一定是离根最近的，所以遇到一个解，一定就是最优解，此时搜索算法可以终止。这个时候不适宜使用DFS，因为DFS搜索到的解不一定是离根最近的，只有全局搜索完毕，才能从所有解中找出离根的最近的解。（当然这个DFS的不足，可以使用迭代加深搜索ID-DFS去弥补）</li>
-<li>空间优劣上，DFS是有优势的，DFS不需要保存搜索过程中的状态，而BFS在搜索过程中需要保存搜索过的状态，而且一般情况需要一个队列来记录。</li>
-<li>DFS适合搜索全部的解，因为要搜索全部的解，那么BFS搜索过程中，遇到离根最近的解，并没有什么用，也必须遍历完整棵搜索树，DFS搜索也会搜索全部，但是相比DFS不用记录过多信息，所以搜素全部解的问题，DFS显然更加合适。</li>
-</ol>
-<p>作者：知乎用户</p>
-<p>链接：<a href="https://www.zhihu.com/question/23780297/answer/167225829" target="_blank" rel="noopener">https://www.zhihu.com/question/23780297/answer/167225829</a></p>
-<p>来源：知乎</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Script Language/Python/懒得整理的python学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/02/26/Script Language/Python/懒得整理的python学习笔记/" class="article-date">
-      <time datetime="2018-02-25T17:17:05.000Z" itemprop="datePublished">2018-02-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/26/Script Language/Python/懒得整理的python学习笔记/">懒得整理的python学习笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>str.join（list）</p>
-<p>str.split（str）</p>
-<p>str.find（str’）返回第一次出现str’偏移量</p>
-<p>str.rfind（str’）最后一次</p>
-<p>str.count（str’）出现次数</p>
-<p>ord(‘s’)       返回ascii       115</p>
-<p>chr(‘115’)    返回对应的字符      ‘s’</p>
-<p>name.list（）初始化空列表</p>
-<p>list.append（elem）</p>
-<p>list.extend（list’）</p>
-<p>list.insert（offset，elem）</p>
-<p>list.remove（name）</p>
-<p>del list[:1] 即 list[:1]=[]</p>
-<p>list.pop（offset）提取出后删除，默认-1</p>
-<p>list.index（elem）返回offset</p>
-<p>if elem in list</p>
-<p>list.sort（）会改变list</p>
-<p>list.sorted（）返回排序好的，不改变list</p>
-<p>复制list的方法</p>
-<p> b=a.copy（）/  c=list（a）/   d=a[：]</p>
-<p>元组解包 a，b，c = tuple</p>
-<p>利用元组交换变量 a，b = b，a</p>
-<p>dict.update（dict’）</p>
-<p>dict.clear（）清空</p>
-<p>dict.get（key，*可选内容）返回key对应的值 否则返回可选 否则返回None</p>
-<p>dict.keys(）dict.values(）dict.items(）</p>
-<p>在py3中要自己用list（）将返回值变成list</p>
-<p>dict.copy（dict’）</p>
-<p>set（）设置集合</p>
-<p>a&amp;b=a.intersection（b）</p>
-<p>a|b=a.union（b）</p>
-<p>a-b=a.difference（b）</p>
-<p>a^b=a.symmetric_difference(b）出现一次</p>
-<p>a&lt;=b 即 a.issubset（b）   a&lt;b真子集</p>
-<p>a&gt;=b 即 a.issuperset（b） a&gt;b真超集</p>
-<p>output=open(r’C:\spam’,’w’)</p>
-<p>input=open(‘data’) 默认为’r’</p>
-<p>type（）返回参数的类型</p>
-<p>\可以多行输入</p>
-<p>for a,b,c in zip(<em>,</em>,*)</p>
-<p>list(zip(a,b))       返回组合迭代对象</p>
-<p>range（start，stop，*step）自然数</p>
-<p>列表推导式[expression for item in iterable if condition ]</p>
-<p>example.       cells=[(row,cop) for row in rows for cop in cols if…]</p>
-<p>字典推导式</p>
-<p>{key_expression : value_expression for expression in iterable}</p>
-<p>example       letter_counts={letter : word.count(letter) for letter in set(word)}</p>
-<p>集合推导式 略</p>
-<p>def fun（）：</p>
-<p>​      pass </p>
-<p>#什么都不做，返回None</p>
-<p>关键字参数 fun（参数1=？，参数2=？）参数位置可改变</p>
-<p>*（位置参数收集）将一组可变数量的位置参数集合成参数值的元组</p>
-<p>**（关键字参数收集）将参数收集到字典中，参值对应。</p>
-<p>函数开头可以写文档字符串</p>
-<p>help（fun）打印出fun的形参和文档字符串</p>
-<p>print（fun.<strong>doc</strong>）仅打印文档字符串</p>
-<p>（lambda 参数：定义）匿名小函数 🤔</p>
-<p>生成器函数def my_range（first=0，last=10，step=1）：</p>
-<p>​      number = first</p>
-<p>​      while number &lt; last：</p>
-<p>​               <strong>yield</strong> number</p>
-<p>​               number+=step</p>
-<p>ranger = my_range（1，5）</p>
-<p>for x in ranger：</p>
-<p>​        print （x）</p>
-<p>global 声明 在局部命名空间引用全局变量</p>
-<p>locals（） globals（）返回局部/全局命名空间内容的字典</p>
-<p>别名导入模块。from ？ import  ？ as ？</p>
-<p>两个计数器Counter（）可以用集合的方法</p>
-<p>pprint（）友好输出</p>
-<p>input()支持表达式和数字，不支持字符串。raw_input()支持字符串</p>
-<p>print(value, …, sep=’ ‘, end=’\n’, file=sys.stdout, flush=False)</p>
-<p>def  <strong>init</strong>（self，…）</p>
-<p>super().name=</p>
-<p>name=property（get_name,set_name)</p>
-<p>@property</p>
-<p>@name.setter（省略setter则无法从直接从外部设置值）</p>
-<p>以<strong>开头命名的类特性不能直接访问，但可以 （特定类._类名</strong>类特性） 访问。</p>
-<p>@classmethod 类方法 类参数约定为cls</p>
-<p>魔术方法<strong>eq</strong>(self, other) </p>
-<p>​               return  self == other</p>
-<p>类似的 ne !=      lt &lt;     gt  &gt;.   le &lt;=.   ge &gt;=</p>
-<p>add+ sub- mul* floordiv// truediv/ mod% pow**         str(print  repr(交互式str len</p>
-<p>命名元组 from collections import namedtuple</p>
-<p>Duck=namedtuple(‘Duck’,’bill tail’)</p>
-<p>duck=Duck(‘wide orange’,’long’)</p>
-<p>>&gt;&gt;duck.bill</p>
-<p>‘wide orange’</p>
-<p>parts={‘bill’=’wide orange’,’tail’=’long’}</p>
-<p>duck2=Duck(**parts)//用字典创建</p>
-<p>命名元组是不可变的，蛋可以替换其中某些域的值并返回一个新的命名元组</p>
-<p>duck3=duck2._replace(‘bill’=</p>
-<p>%! &lt;20s 左对齐20个字符，空位用!填充</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Python/">Python</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
     </div>
 
       
