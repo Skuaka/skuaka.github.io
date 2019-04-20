@@ -264,12 +264,12 @@
       
           
         <h2 id="Qt-issues"><a href="#Qt-issues" class="headerlink" title="Qt issues"></a>Qt issues</h2><h3 id="symbol-not-found-iconv"><a href="#symbol-not-found-iconv" class="headerlink" title="symbol not found: _iconv"></a>symbol not found: _iconv</h3><p><strong>problem:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dyld: Symbol not found: _iconv</span><br><span class="line">  Referenced from: /usr/lib/libcups.2.dylib</span><br><span class="line">  Expected in: /sw/lib//libiconv.2.dylib</span><br><span class="line"> in /usr/lib/libcups.2.dylib</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dyld: Symbol not found: _iconv</span><br><span class="line">  Referenced from: /usr/lib/libcups.2.dylib</span><br><span class="line">  Expected in: /****/lib/libiconv.2.dylib</span><br><span class="line"> in /usr/lib/libcups.2.dylib</span><br></pre></td></tr></table></figure>
 <p><strong>fix:</strong></p>
 <ol>
 <li>Go to Projects -&gt; Run -&gt; “Run Environment” (show Details)</li>
 <li>I would not recommend <strong>Unset</strong>, rather you should <strong>edit</strong> Both: <strong>DYLD_LIBRARY_PATH</strong>and <strong>DYLD_FRAMEWORK_PATH</strong></li>
-<li>Add <em>/System/Library/Frameworks/ImageIO.framework/Resources:</em> to the beginning for both paths (colon delimited string)</li>
+<li>Add <em>/usr/lib:</em> to the beginning for both paths (colon delimited string)</li>
 <li>Build project again - this will fix it for good</li>
 </ol>
 <p><strong>from:</strong></p>
