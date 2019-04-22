@@ -291,7 +291,7 @@
 <p>get xxx.txt 下载xxx文件</p>
 <p>put xxx.txt 上传xxx文件</p>
 <p>quit / bye / exit 退出sftp</p>
-<h3 id="sed：文本处理"><a href="#sed：文本处理" class="headerlink" title="sed：文本处理"></a>sed：文本处理</h3><p>另见</p>
+<h3 id="sed：文本处理"><a href="#sed：文本处理" class="headerlink" title="sed：文本处理"></a>sed：文本处理</h3><p>见另一篇</p>
 <h3 id="T"><a href="#T" class="headerlink" title="T"></a>T</h3><h3 id="U"><a href="#U" class="headerlink" title="U"></a>U</h3><h3 id="V"><a href="#V" class="headerlink" title="V"></a>V</h3><h3 id="W"><a href="#W" class="headerlink" title="W"></a>W</h3><h4 id="who"><a href="#who" class="headerlink" title="who"></a>who</h4><p>查看当前登入的用户</p>
 <p><code>who /var/log/wtmp</code> 显示从wtmp文件创建或删改以来的每一次登录</p>
 <h3 id="X"><a href="#X" class="headerlink" title="X"></a>X</h3><h3 id="Y"><a href="#Y" class="headerlink" title="Y"></a>Y</h3><h3 id="Z"><a href="#Z" class="headerlink" title="Z"></a>Z</h3>
@@ -434,7 +434,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><ol>
+        <h2 id="DDos-攻击详解"><a href="#DDos-攻击详解" class="headerlink" title="DDos 攻击详解"></a>DDos 攻击详解</h2><h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><ol>
 <li>Synflood<br>该攻击以多个随机的源主机地址向目的主机发送SYN包，而在收到目的主机的SYN ACK后并不回应，这样，目的主机就为这些源主机建立了大量的连接队列，而且由于没有收到ACK一直维护着这些队列，造成了资源的大量消耗，最终导致拒绝服务。</li>
 <li>Smurf<br>该攻击向一个子网的广播地址发一个带有特定请求(如ICMP回应请求)的包，并且将源地址伪装成想要攻击的主机地址。子网上所有主机都回应广播包请求而向被攻击主机发包，使该主机受到攻击。</li>
 <li>Land-based<br>攻击者将一个包的源地址和目的地址都设置为目标主机的地址，然后将该包通过IP欺骗的方式发送给被攻击主机，这种包可以造成被攻击主机因试图与自己建立连接而陷入死循环，从而很大程度地降低了系统性能。</li>
@@ -447,7 +447,7 @@
 <li>按攻击流量规模分类<br>(1) 较小流量：<br>小于1000Mbps，且在服务器硬件与应用接受范围之内，并不影响业务的： 利用iptables或者DDoS防护应用实现软件层防护。<br>(2) 大型流量：<br>大于1000Mbps，但在DDoS清洗设备性能范围之内，且小于机房出口，可能影响相同机房的其他业务的：利用iptables或者DDoS防护应用实现软件层防护，或者在机房出口设备直接配置黑洞等防护策略，或者同时切换域名，将对外服务IP修改为高负载Proxy集群外网IP，或者CDN高仿IP，或者公有云DDoS网关IP，由其代理到RealServer;或者直接接入DDoS清洗设备。<br>(3) 超大规模流量：<br>在DDoS清洗设备性能范围之外，但在机房出口性能之内，可能影响相同机房的其他业务，或者大于机房出口，已经影响相同机房的所有业务或大部分业务的：联系运营商检查分组限流配置部署情况并观察业务恢复情况。</li>
 <li>按攻击流量协议分类<br>(1) syn/fin/ack等tcp协议包：<br>设置预警阀值和响应阀值，前者开始报警，后者开始处理，根据流量大小和影响程度调整防护策略和防护手段，逐步升级。<br>(2) UDP/DNS query等UDP协议包：<br>对于大部分游戏业务来说，都是TCP协议的，所以可以根据业务协议制定一份TCP协议白名单，如果遇到大量UDP请求，可以不经产品确认或者延迟跟产品确认，直接在系统层面/HPPS或者清洗设备上丢弃UDP包。<br>(3) http flood/CC等需要跟数据库交互的攻击：<br>这种一般会导致数据库或者webserver负载很高或者连接数过高，在限流或者清洗流量后可能需要重启服务才能释放连接数，因此更倾向在系统资源能够支撑的情况下调大支持的连接数。相对来说，这种攻击防护难度较大，对防护设备性能消耗很大。<br>(4) 其他：<br>icmp包可以直接丢弃，先在机房出口以下各个层面做丢弃或者限流策略。现在这种攻击已经很少见，对业务破坏力有限。</li>
 </ol>
-
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     
@@ -1517,7 +1517,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>复制自百度经验：<a href="https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html</a></p>
+        <h3 id="nmap使用"><a href="#nmap使用" class="headerlink" title="nmap使用"></a>nmap使用</h3><p>复制自百度经验：<a href="https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html</a></p>
 <p>Nmap是一款网络扫描和主机检测的非常有用的工具。Nmap是不局限于仅仅收集信息和枚举，同时可以用来作为一个漏洞探测器或安全扫描器。它可以适用于winodws,linux,mac等操作系统</p>
 <p>Nmap是一款非常强大的实用工具,可用于：检测活在网络上的主机（主机发现）检测主机上开放的端口（端口发现或枚举）检测到相应的端口（服务发现）的软件和版本检测操作系统，硬件地址，以及软件版本检测脆弱性的漏洞（Nmap的脚本）Nmap是一个非常普遍的工具，它有命令行界面和图形用户界面。本人包括以下方面的内容:介绍Nmap扫描中的重要参数操作系统检测Nmap使用教程Nmap使用不同的技术来执行扫描，包括：TCP的connect（）扫描，TCP反向的ident扫描，FTP反弹扫描等。所有这些扫描的类型有自己的优点和缺点，我们接下来将讨论这些问题。 Nmap的使用取决于目标主机,因为有一个简单的（基本）扫描和预先扫描之间的差异。我们需要使用一些先进的技术来绕过防火墙和入侵检测/防御系统，以获得正确的结果。下面是一些基本的命令和它们的用法的例子：扫描单一的一个主机，命令如下：</p>
 <p>代码如下:</p>

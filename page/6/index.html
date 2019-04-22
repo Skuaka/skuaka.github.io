@@ -543,13 +543,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>ln -s 源文件 目标文件 </p>
+        <h3 id="ln创建链接"><a href="#ln创建链接" class="headerlink" title="ln创建链接"></a>ln创建链接</h3><p><code>ln -s 源文件 目标文件</code> </p>
 <p>举例：</p>
 <p>当前目录是<code>/local</code>，而我经常要访问<code>/usr/local/linux/work</code></p>
 <p>那么我就可以使用在 local 下建立一个文件 linkwork，</p>
 <p>然后<code>ln -s /usr/local/linux/work  /local/linkwork</code></p>
 <p>即建立两者之间的链接。</p>
-<p>删除链接 </p>
+<p><strong>删除链接</strong> </p>
 <p><code>rm -rf   symbolic_name</code>   注意不是  <code>rm -rf   symbolic_name/</code></p>
 <p>那么上面就是</p>
 <p><code>rm -rf   /local/linkwork</code></p>

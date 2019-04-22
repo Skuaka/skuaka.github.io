@@ -807,7 +807,7 @@
 <li><p>在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
 </li>
 </ol>
-<h3 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h3><p>客户在调用函数connect之前不必非得调用bind函数。如果需要，内核会确定源IP地址，并选择一个临时端口。</p>
+<h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><h4 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h4><p>客户在调用函数connect之前不必非得调用bind函数。如果需要，内核会确定源IP地址，并选择一个临时端口。</p>
 <p>如果是TCP套接字，调用connect将激发三路握手，仅在成功或者出错时返回，返回错误有三种情况：</p>
 <ol>
 <li><p>若<strong>客户没有收到SYN分节的响应</strong>，则返回<code>ETIMEDOUT</code>错误。</p>
@@ -825,19 +825,19 @@
 </li>
 </ol>
 <p><strong>注意：如果connect()失败</strong>，必须close该套接字，不可对它再次调用connect。</p>
-<h4 id="产生RST的三个条件"><a href="#产生RST的三个条件" class="headerlink" title="产生RST的三个条件"></a>产生RST的三个条件</h4><ol>
+<h5 id="产生RST的三个条件"><a href="#产生RST的三个条件" class="headerlink" title="产生RST的三个条件"></a>产生RST的三个条件</h5><ol>
 <li>目的地为某端口的SYN到达，但是该端口上没有正在监听的服务器。</li>
 <li>TCP想取消某个连接。</li>
 <li>TCP收到一个根本不存在的连接上的分节。</li>
 </ol>
-<h3 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h3><p>bind把一个本地协议地址赋予一个套接字，对于TCP则是IP和端口号的组合。</p>
+<h4 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h4><p>bind把一个本地协议地址赋予一个套接字，对于TCP则是IP和端口号的组合。</p>
 <p>对于TCP，可以都指定、也可以只指定一个、也可以都不指定。</p>
 <ul>
 <li>端口号赋0可以让内核选择端口，使用通配地址(INADDR_ANY，也就是0)可以让内核选择地址。</li>
 <li>一般服务器要定端口，不定ip；客户端都不需要定。</li>
 </ul>
 <p>从bind返回的常见错误就是<code>EADDRINUSE</code> 地址已使用。</p>
-<h3 id="listen"><a href="#listen" class="headerlink" title="listen()"></a>listen()</h3><p>listen仅由TCP服务器调用，它做两件事：</p>
+<h4 id="listen"><a href="#listen" class="headerlink" title="listen()"></a>listen()</h4><p>listen仅由TCP服务器调用，它做两件事：</p>
 <ol>
 <li>当socket()创建一个套接字时，它被假设为一个主动套接字，listen()把一个未连接的套接字转化为一个被动套接字。</li>
 <li>本函数的第二个参数<em>规定</em>了内核应该为相应套接字排队的最大连接个数。</li>
@@ -851,7 +851,62 @@
 <p><img src="Picture/unp06.jpg" alt="unp06"></p>
 <p>如果三路握手完成，该项就从未完成队列移动到已完成队列队尾。当进程调用accept()时，已完成队列的队头将返回给进程；或者该队列为空，那么进程睡眠等待唤醒。</p>
 <p>当一个客户SYN到达时，如果队列是满的，那么TCP就忽略该分节，而不发送RST。因为这么做是暂时的，客户会重发SYN分节。</p>
-<h3 id="accept"><a href="#accept" class="headerlink" title="accept()"></a>accept()</h3><p>如果accept成功，那么其返回值是内核生成的全新的描述符（<em>已连接套接字</em>，区别于<em>监听套接字</em>），代表与所返回客户的TCP连接。</p>
+<h4 id="accept"><a href="#accept" class="headerlink" title="accept()"></a>accept()</h4><p>如果accept成功，那么其返回值是内核生成的全新的描述符（<em>已连接套接字</em>，区别于<em>监听套接字</em>），代表与所返回客户的TCP连接。</p>
+<h3 id="套接字选项"><a href="#套接字选项" class="headerlink" title="套接字选项"></a>套接字选项</h3><h4 id="SO-KEEPALIVE"><a href="#SO-KEEPALIVE" class="headerlink" title="SO_KEEPALIVE"></a>SO_KEEPALIVE</h4><p>设置后，如果两小时内在该套接字的任一方向上都没有数据交换，TCP 就会自动给对端发送一个<strong>保持存活探测分节</strong>(keep-alive probe)。这是一个对端必须响应的 TCP 分节，它会导致以下三种情况之一：</p>
+<ol>
+<li><p>ACK。</p>
+</li>
+<li><p>RST，返回 <code>ECONNRESET</code> 错误。</p>
+</li>
+<li><p>没有任何响应，隔一段时间再发送几次，还没有响应则放弃，返回 <code>ETIMEOUT</code> 错误。</p>
+<p>然而如果套接字收到一个 ICMP 错误作为某个探测分节的响应，则返回相应的错误。</p>
+</li>
+</ol>
+<h4 id="SO-LINGER"><a href="#SO-LINGER" class="headerlink" title="SO_LINGER"></a>SO_LINGER</h4><p>可以改变close的行为。</p>
+<p>本选项要求在用户进程与内核间传递如下结构：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">linger</span>&#123;</span></span><br><span class="line">  <span class="keyword">int</span> l_onoff;	<span class="comment">// 0 = off, nonzero = on</span></span><br><span class="line">  <span class="keyword">int</span> l_linger;	<span class="comment">// linger time, seconds</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>如果 <code>l_onoff</code> 为 0，即关闭本选项，TCP 默认设置生效，close 立即返回。</p>
+</li>
+<li><p>如果 <code>l_onoff</code> 非 0，</p>
+<ul>
+<li><p><code>l_linger</code> 为 0，TCP 将丢弃套接字发送缓冲区的数据，并发送一个 RST 给对端，没有四次挥手。</p>
+</li>
+<li><p><code>l_linger</code> 非 0，如果在套接字发送缓冲区仍有数据，那么进程将睡眠，直到：(a)所有数据都发送完且被确认，(b) <code>l_linger</code> 延滞时间到。</p>
+<p>如果是因为延滞时间到，那么返回 <code>EWOULDBLOCK</code> 错误。</p>
+</li>
+</ul>
+<p>如果套接字设置了<strong><em>非阻塞</em></strong>，那么它将不等待 <code>close</code> 完成，即使延滞时间非 0 也是如此。</p>
+</li>
+</ol>
+<p>总结来说，当关闭客户端时，可以在以下3个不同的时机返回：</p>
+<ol>
+<li><code>close</code> 立即返回。</li>
+<li><code>close</code> 一直拖延直到接收了对于客户端 FIN 的 ACK 才返回。</li>
+<li>后跟一个 read 调用的 写关闭<code>shutdown</code> 一直等到接收了对端的 FIN 才返回。</li>
+</ol>
+<h4 id="TCP-NODELAY"><a href="#TCP-NODELAY" class="headerlink" title="TCP_NODELAY"></a>TCP_NODELAY</h4><p>默认情况下 Nagle 算法是开启的，本选项可以关闭此算法。</p>
+<h5 id="Nagle-算法"><a href="#Nagle-算法" class="headerlink" title="Nagle 算法"></a>Nagle 算法</h5><p><strong><em>目的</em></strong>：减少广域网(WAN)上小分组的数目。</p>
+<p><strong><em>内容</em></strong>：如果某个给定连接上有待确认数据，那么原本应该作为用户写操作响应的在该连接上立即发送相应小分组的行为就不会发生，直到现有数据被确认为止。</p>
+<p>这里”小”分组的定义就是小于 MSS 的任何分组，TCP 总是尽可能地发送最大大小的分组。</p>
+<h5 id="ACK-延滞算法"><a href="#ACK-延滞算法" class="headerlink" title="ACK 延滞算法"></a>ACK 延滞算法</h5><p>Nagle 算法通常与 ACK 延滞算法联合使用。</p>
+<p><strong><em>内容</em></strong>：TCP 在接收到数据后不立即发送 ACK，而是等待一小段时间才发送 ACK。TCP 期待在这一小段时间内自身有数据要发送回对端，被延滞的 ACK 就可以由这些数据捎带，从而省掉一个 TCP 分节。</p>
+<h5 id="不适合的情况"><a href="#不适合的情况" class="headerlink" title="不适合的情况"></a>不适合的情况</h5><ul>
+<li><p>在快速的<strong><em>局域网</em></strong>上，我们通常不会注意到 Nagle 算法对客户进程的影响，然而在<strong><em>广域网</em></strong>上，小分组所需的确认时间可能长达一秒，本来就有的延迟被 Nagle 算法进一步放大。</p>
+</li>
+<li><p>对于服务器不在相反方向产生数据以便携带 ACK 的情况，客户可能察觉到明显的延迟。</p>
+</li>
+<li><p>客户以若干小片数据向服务器发送单个逻辑请求，比如发送一个 4 字节的请求类型后跟 396 字节的请求数据。</p>
+<p>如果客户先执行 4 字节的 write 调用，再执行 396 字节的 write 调用，那么第二个写操作的数据将一直等到服务器的 TCP 确认了第一个写操作的 4 字节数据后才由客户的 TCP 发送出去。</p>
+<p>如果服务器需要接收到 400 字节才进行操作，此时服务器的 TCP 将延滞该 4 字节的 ACK。</p>
+<p>有<strong><em>三种办法修正</em></strong>这类程序：</p>
+<ol>
+<li>使用 writev 而不是调用两次 write，（首选方法）。</li>
+<li>把两次数据复制到单个缓冲区，然后对该缓冲区调用一次 write。</li>
+<li>设置 TCP_NODELAY 套接字选项。但是这最不可取，有损网络。</li>
+</ol>
+</li>
+</ul>
 <h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>

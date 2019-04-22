@@ -2277,18 +2277,13 @@
 <hr>
 <h5 id="消息对话框"><a href="#消息对话框" class="headerlink" title="消息对话框"></a>消息对话框</h5><p>这里简单地介绍一下 QMessageBox ，我们一般会使用其提供的几个 static 函数：</p>
 <ul>
-<li><p>void about(QWidget * parent, const QString &amp; title, const QString &amp; text)：显示关于对话框。这是一个最简单的对话框，其标题是 title，内容是 text，父窗口是 parent。对话框只有一个 OK 按钮。</p>
-</li>
-<li><p>void aboutQt(QWidget * parent, const QString &amp; title = QString())：显示关于 Qt 对话框。该对话框用于显示有关 Qt 的信息。</p>
-</li>
-<li><p>StandardButton critical(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)：显示严重错误对话框。这个对话框将显示一个红色的错误符号。我们可以通过 buttons 参数指明其显示的按钮。默认情况下只有一个 Ok 按钮，我们可以使用 StandardButtons 类型指定多种按钮。</p>
-</li>
-<li><p>StandardButton information(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)：QMessageBox::information() 函数与 QMessageBox::critical() 类似，不同之处在于这个对话框提供一个普通信息图标。</p>
-</li>
-<li><p>StandardButton question(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = StandardButtons( Yes | No ), StandardButton defaultButton = NoButton)：QMessageBox::question() 函数与 QMessageBox::critical() 类似，不同之处在于这个对话框提供一个问号图标，并且其显示的按钮是“是”和“否”两个。</p>
-</li>
-<li><p>StandardButton warning(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)：QMessageBox::warning() 函数与 QMessageBox::critical() 类似，不同之处在于这个对话框提供一个叹号图标。</p>
-</li>
+<li>void about(QWidget * parent, const QString &amp; title, const QString &amp; text)：显示关于对话框。这是一个最简单的对话框，其标题是 title，内容是 text，父窗口是 parent。对话框只有一个 OK 按钮。</li>
+<li>void aboutQt(QWidget * parent, const QString &amp; title = QString())：显示关于 Qt 对话框。该对话框用于显示有关 Qt 的信息。</li>
+<li>StandardButton critical(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)：显示严重错误对话框。这个对话框将显示一个红色的错误符号。我们可以通过 buttons 参数指明其显示的按钮。默认情况下只有一个 Ok 按钮，我们可以使用 StandardButtons 类型指定多种按钮。</li>
+<li>StandardButton information(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)：QMessageBox::information() 函数与 QMessageBox::critical() 类似，不同之处在于这个对话框提供一个普通信息图标。</li>
+<li>StandardButton question(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = StandardButtons( Yes | No ), StandardButton defaultButton = NoButton)。</li>
+<li>QMessageBox::question() 函数与 QMessageBox::critical() 类似，不同之处在于这个对话框提供一个问号图标，并且其显示的按钮是“是”和“否”两个。</li>
+<li>StandardButton warning(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)：QMessageBox::warning() 函数与 QMessageBox::critical() 类似，不同之处在于这个对话框提供一个叹号图标。</li>
 </ul>
 <p><strong>例子：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (QMessageBox::Yes == QMessageBox::question(<span class="keyword">this</span>,</span><br><span class="line">                                              tr(<span class="string">"Question"</span>),</span><br><span class="line">                                              tr(<span class="string">"Are you OK?"</span>),</span><br><span class="line">                                              QMessageBox::Yes | QMessageBox::No,</span><br><span class="line">                                              QMessageBox::Yes)) &#123;</span><br><span class="line">    QMessageBox::information(<span class="keyword">this</span>, tr(<span class="string">"Hmmm..."</span>), tr(<span class="string">"I'm glad to hear that!"</span>));</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    QMessageBox::information(<span class="keyword">this</span>, tr(<span class="string">"Hmmm..."</span>), tr(<span class="string">"I'm sorry!"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

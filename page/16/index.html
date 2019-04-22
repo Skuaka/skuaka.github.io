@@ -332,7 +332,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="内网扫描"><a href="#内网扫描" class="headerlink" title="内网扫描"></a>内网扫描</h3><p>nmap   百度教程：<a href="https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html</a></p>
+        <h2 id="Dsniff使用"><a href="#Dsniff使用" class="headerlink" title="Dsniff使用"></a>Dsniff使用</h2><h3 id="内网扫描"><a href="#内网扫描" class="headerlink" title="内网扫描"></a>内网扫描</h3><p>nmap   百度教程：<a href="https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html</a></p>
 <h3 id="arp欺骗"><a href="#arp欺骗" class="headerlink" title="arp欺骗"></a>arp欺骗</h3><p><code>arpspoof -i eth0 -t [target_ip] [host_ip]</code></p>
 <h3 id="开启路由转发"><a href="#开启路由转发" class="headerlink" title="开启路由转发"></a>开启路由转发</h3><p><code>echo 1 &gt;&gt; /proc/sys/net/ipv4/ip_forward</code></p>
 <h3 id="url嗅探"><a href="#url嗅探" class="headerlink" title="url嗅探"></a>url嗅探</h3><p>urlsnarf</p>
@@ -340,7 +340,7 @@
 <h3 id="dns劫持"><a href="#dns劫持" class="headerlink" title="dns劫持"></a>dns劫持</h3><p>前提是双端都做了arp欺骗</p>
 <p><code>dnsspoof -i eth0 [-f file]</code></p>
 <h3 id="一些特殊事项"><a href="#一些特殊事项" class="headerlink" title="一些特殊事项"></a>一些特殊事项</h3><h4 id="mac-os要开启软网卡"><a href="#mac-os要开启软网卡" class="headerlink" title="mac os要开启软网卡"></a>mac os要开启软网卡</h4><p><code>sudo chmod 777 /dev/bpf*</code></p>
-
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     
@@ -483,7 +483,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="扫描使用wps的Wi-Fi"><a href="#扫描使用wps的Wi-Fi" class="headerlink" title="扫描使用wps的Wi-Fi"></a>扫描使用wps的Wi-Fi</h3><p><code>wash -i en0</code></p>
+        <h2 id="reaver使用"><a href="#reaver使用" class="headerlink" title="reaver使用"></a>reaver使用</h2><h3 id="扫描使用wps的Wi-Fi"><a href="#扫描使用wps的Wi-Fi" class="headerlink" title="扫描使用wps的Wi-Fi"></a>扫描使用wps的Wi-Fi</h3><p><code>wash -i en0</code></p>
 <h3 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h3><p><code>reaver -i en0 [-b mac] -vv [-c channel]</code></p>
 
       
