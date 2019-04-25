@@ -234,74 +234,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-OpenGl/OpenGL概念" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/02/OpenGl/OpenGL概念/" class="article-date">
-      <time datetime="2019-03-02T12:44:11.000Z" itemprop="datePublished">2019-03-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/02/OpenGl/OpenGL概念/">OpenGL概念(待续</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="OpenCV和OpenGL"><a href="#OpenCV和OpenGL" class="headerlink" title="OpenCV和OpenGL"></a>OpenCV和OpenGL</h3><p>两者的区别就是Computer Vision和Computer Graphics这两个学科之间的区别，前者专注于从采集到的视觉图像中获取信息，是用机器来理解图像；后者是用机器绘制合适的视觉图像给人看</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/OpenGL/">OpenGL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/02/OpenGl/OpenGL概念/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-QT/QT 贪吃蛇" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -920,6 +852,80 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
     </div>
 
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Unix/Command/screen" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/02/01/Unix/Command/screen/" class="article-date">
+      <time datetime="2019-02-01T07:32:17.000Z" itemprop="datePublished">2019-02-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/01/Unix/Command/screen/">使用 screen 管理远程会话</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="使用-screen-管理远程会话"><a href="#使用-screen-管理远程会话" class="headerlink" title="使用 screen 管理远程会话"></a>使用 screen 管理远程会话</h1><h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>你是不是经常需要 SSH 或者 telent 远程登录到 Linux 服务器？你是不是经常为一些长时间运行的任务而头疼，比如系统备份、ftp 传输等等。通常情况下我们都是为每一个这样的任务开一个远程终端窗口，因为他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被杀掉，一切半途而废了。</p>
+<h3 id="元凶就是-SIGHUP-信号"><a href="#元凶就是-SIGHUP-信号" class="headerlink" title="元凶就是 SIGHUP 信号"></a>元凶就是 SIGHUP 信号</h3><ul>
+<li>当终端接口检测到网络连接断开，将挂断信号发送给控制进程（会话期首进程）。</li>
+<li>如果会话期首进程终止，则该信号发送到该会话期前台进程组。</li>
+<li>一个进程退出导致一个孤儿进程组中产生时，如果任意一个孤儿进程组进程处于STOP状态，发送SIGHUP和SIGCONT信号到该进程组中所有进程。</li>
+</ul>
+<p>因此当网络断开或终端窗口关闭后，控制进程收到SIGHUP信号退出，会导致该会话期内其他进程退出。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/02/01/Unix/Command/screen/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

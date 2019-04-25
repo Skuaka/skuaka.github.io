@@ -234,120 +234,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Algorithm/Hash" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/11/Algorithm/Hash/" class="article-date">
-      <time datetime="2019-04-11T09:36:44.000Z" itemprop="datePublished">2019-04-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/11/Algorithm/Hash/">Hash</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Hash知识点整理"><a href="#Hash知识点整理" class="headerlink" title="Hash知识点整理"></a>Hash知识点整理</h2><h3 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h3><p>构造哈希函数的<strong>原则</strong>是：</p>
-<ol>
-<li>函数本身便于计算；</li>
-<li>计算出来的地址分布均匀，目的是尽可能减少冲突。</li>
-</ol>
-<p>构造哈希函数常用的五种方法：</p>
-<ol>
-<li><p><strong>数字分析法</strong></p>
-<p>如果事先知道关键字集合，并且每个关键字的位数比哈希表的地址码位数多时，可以从关键字中选出分布较均匀的若干位，构成哈希地址。</p>
-</li>
-<li><p><strong>平方取中法</strong></p>
-<p>当无法确定关键字中哪几位分布较均匀时，可以先求出关键字的平方值，然后按需要取平方值的中间几位作为哈希地址。这是因为：平方后中间几位和关键字中每一位都相关，故不同关键字会以较高的概率产生不同的哈希地址。</p>
-</li>
-<li><p><strong>分段叠加法</strong></p>
-<p>按哈希表地址位数将关键字分成位数相等的几部分（最后一部分可以较短），然后将这几部分相加，舍弃最高进位后的结果就是该关键字的哈希地址。</p>
-<p>具体方法有<strong>折叠法</strong>与<strong>移位法。</strong>移位法是将分割后的每部分低位对齐相加，折叠法是从一端向另一端沿分割界来回折叠（奇数段为正序，偶数段为倒序），然后将各段相加。</p>
-</li>
-<li><p><strong>除留余数法</strong></p>
-<p>假设哈希表长为<em>m</em>，<em>p</em>为小于等于<em>m</em>的最大素数，则哈希函数为</p>
-<p><em>h</em>(<em>k</em>) = <em>k % p</em> 。</p>
-<p>素数是为了防止当数列的间隔比较稳定时产生大量冲突。</p>
-</li>
-<li><p><strong>伪随机数法</strong></p>
-<p>采用一个伪随机函数做哈希函数，即<em>h(key)=random(key)</em>。</p>
-</li>
-</ol>
-<hr>
-<p>在实际应用中，应根据具体情况，灵活采用不同的方法，并用实际数据测试它的性能，以便做出正确判定。通常应考虑以下五个因素 ：</p>
-<ul>
-<li><p>计算哈希函数所需时间 （简单）。</p>
-</li>
-<li><p>关键字的长度。</p>
-</li>
-<li><p>哈希表大小。</p>
-</li>
-<li><p>关键字分布情况。</p>
-</li>
-<li><p>记录查找频率。</p>
-</li>
-</ul>
-<h3 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h3><ol>
-<li><p>开放定址法/再散列法</p>
-<p>这种方法也称<strong>再散列法，</strong>其基本思想是：当关键字<em>key</em>的哈希地址<em>p</em>出现冲突时，以<em>p</em>为基础，产生另一个哈希地址<em>p1</em>，如果<em>p1</em>仍然冲突，再以<em>p1</em>为基础，产生另一个哈希地址<em>p2</em>, … 直到找出一个不冲突的哈希地址<em>pi</em>。</p>
-</li>
-<li><p>拉链法/链地址法/哈希桶</p>
-<p>将所有哈希地址为<em>i</em>的元素构成一个称为<strong>同义词链</strong>的单链表，并将单链表的头指针存在哈希表的第<em>i</em>个单元中，因而查找、插入和删除主要在同义词链中进行。链地址法适用于经常进行插入和删除的情况。</p>
-</li>
-<li><p>溢出法</p>
-<p>将哈希表分为<strong>基本表</strong>和<strong>溢出表</strong>两部分，凡是和基本表发生冲突的元素，一律填入溢出表。</p>
-</li>
-</ol>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-C_C++/C++Collection/C++bitset" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1131,7 +1017,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="git使用笔记"><a href="#git使用笔记" class="headerlink" title="git使用笔记"></a>git使用笔记</h2><h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><h3 id="IDE-Git使用"><a href="#IDE-Git使用" class="headerlink" title="IDE+Git使用"></a>IDE+Git使用</h3><p>拿Clion举个例子，大部分IDE都差不多。</p>
+        <h2 id="git使用笔记"><a href="#git使用笔记" class="headerlink" title="git使用笔记"></a>git使用笔记</h2><h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰的Git教程</a></p>
+<h3 id="IDE-Git使用"><a href="#IDE-Git使用" class="headerlink" title="IDE+Git使用"></a>IDE+Git使用</h3><p>拿Clion举个例子，大部分IDE都差不多。</p>
 <ol>
 <li><p>先创建本地仓库并且发布(命令行或者GitHub Desktop)</p>
 </li>
@@ -1387,6 +1274,103 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Database/Concept/数据库理论知识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/25/Database/Concept/数据库理论知识/" class="article-date">
+      <time datetime="2019-03-25T12:24:14.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/25/Database/Concept/数据库理论知识/">数据库理论知识</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="数据库理论知识"><a href="#数据库理论知识" class="headerlink" title="数据库理论知识"></a>数据库理论知识</h2><h3 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h3><p>聚簇索引也称为聚集索引，聚类索引，簇集索引，聚簇索引确定表中数据的物理顺序。聚簇索引类似于电话簿，后者按姓氏排列数据。由于聚簇索引规定数据在表中的物理存储顺序，因此一个表只能包含一个聚簇索引。但该索引可以包含多个列（组合索引），就像电话簿按姓氏和名字进行组织一样。汉语字典也是聚簇索引的典型应用，在汉语字典里，索引项是字母+声调，字典正文也是按照先字母再声调的顺序排列。</p>
+<h3 id="索引种类"><a href="#索引种类" class="headerlink" title="索引种类"></a>索引种类</h3><p>来自：<a href="https://www.cnblogs.com/sessionbest/articles/8689255.html" target="_blank" rel="noopener">https://www.cnblogs.com/sessionbest/articles/8689255.html</a></p>
+<ol>
+<li>按照索引列值的唯一性，索引可分为唯一索引和非唯一索引；</li>
+<li>按照索引列的个数：单列索引和复合索引；</li>
+<li>按照索引列的物理组织方式。</li>
+</ol>
+<p><strong>物理组织方式</strong>：</p>
+<p>一、<strong>B树索引</strong></p>
+<p>最常用的索引，各叶子节点中包括的数据有索引列的值和数据表中对应行的ROWID，简单的说，在B树索引中，是通过在索引中保存排过续的索引列值与相对应记录的ROWID来实现快速查询的目的。</p>
+<p>可以保证无论用户要搜索哪个分支的叶子结点，都需要经过相同的索引层次，即都需要相同的I/O次数。</p>
+<p>注1：索引是针对字段创建的，相同字段不能创建一个以上的索引；</p>
+<p>注2：默认的索引是不唯一的，但是也可以加上unique，表示该索引的字段上没有重复值(定义unique约束时会自动创建)；</p>
+<p>注3：创建主键时，默认在主键上创建了B树索引，因此不能再在主键上创建索引。</p>
+<p>二、<strong>位图索引</strong></p>
+<p>有些字段中使用B树索引的效率仍然不高，例如性别的字段中，只有“男、女”两个值，则即便使用了B树索引，在进行检索时也将返回接近一半的记录。</p>
+<p>所以当字段的基数很低时，需要使用位图索引。(“低”的标准是取值数量 &lt; 行数*1%)</p>
+<p><img src="http://118.25.53.128/Picture/Database/bitmap_index.jpg" alt="bitmap_index"></p>
+<p>位图索引的逻辑结构如上图所示：索引中不再记录rowid和键值，而是将每个值作为一列，用0和1表示该行是否等于该键值(0表示否;1表示是)。其中位图索引的行顺序与原表的行顺序一致，可以在查询数据的过程中对应计算出行的原始物理位置。</p>
+<p>注：位图索引不可能是唯一索引，也不能进行键值压缩。</p>
+<p>三、<strong>反向键索引</strong></p>
+<p>考虑这个情况：某一字段的值是1-1000顺序排列，建立B树索引后依旧递增，到后来该B数索引不断在后面增加分支，会形成不对称树。</p>
+<p>反向键索引是<strong>一种特殊的B树索引</strong>，在存储构造中与B树索引完全相同，但是针对数值时，反向键索引会先反向每个键值的字节，然后对反向后的新数据进行索引。例如输入2008则转换为8002，这样当数值一次增加时，其反向键在大小中的分布仍然是比较平均的。</p>
+<p>注：键的反转由系统自行完成。对于用户是透明的。</p>
+<p>四、<strong>基于函数的索引</strong></p>
+<p>有的时候，需要进行如下查询：<code>select * from t1 where to_char(date,&#39;yyyy&#39;)&gt;&#39;2007&#39;;</code></p>
+<p>但是即便在date字段上建立了索引，还是不得不进行全表扫描。在这种情况下，可以使用基于函数的索引。</p>
+<p>注：简单来说，基于函数的索引，就是将查询要用到的表达式作为索引项。</p>
+<p>五、<strong>全局索引和局部索引</strong></p>
+<p>这个索引貌似很复杂，其实很简单。总得来说一句话，就是无论怎么分区，都是为了方便管理。</p>
+<p>具体索引和表的关系有三种：</p>
+<p>1、局部分区索引：分区索引和分区表1对1</p>
+<p>2、全局分区索引：分区索引和分区表N对N</p>
+<p>3、全局非分区索引：非分区索引和分区表1对N</p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Database/">Database</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li></ul>
     </div>
 
       
