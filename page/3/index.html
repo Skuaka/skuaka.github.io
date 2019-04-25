@@ -234,6 +234,347 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/Concept/数据库理论知识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/25/Database/Concept/数据库理论知识/" class="article-date">
+      <time datetime="2019-03-25T12:24:14.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/25/Database/Concept/数据库理论知识/">数据库理论知识</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="数据库理论知识"><a href="#数据库理论知识" class="headerlink" title="数据库理论知识"></a>数据库理论知识</h2><h3 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h3><p>聚簇索引也称为聚集索引，聚类索引，簇集索引，聚簇索引确定表中数据的物理顺序。聚簇索引类似于电话簿，后者按姓氏排列数据。由于聚簇索引规定数据在表中的物理存储顺序，因此一个表只能包含一个聚簇索引。但该索引可以包含多个列（组合索引），就像电话簿按姓氏和名字进行组织一样。汉语字典也是聚簇索引的典型应用，在汉语字典里，索引项是字母+声调，字典正文也是按照先字母再声调的顺序排列。</p>
+<h3 id="索引种类"><a href="#索引种类" class="headerlink" title="索引种类"></a>索引种类</h3><p>来自：<a href="https://www.cnblogs.com/sessionbest/articles/8689255.html" target="_blank" rel="noopener">https://www.cnblogs.com/sessionbest/articles/8689255.html</a></p>
+<ol>
+<li>按照索引列值的唯一性，索引可分为唯一索引和非唯一索引；</li>
+<li>按照索引列的个数：单列索引和复合索引；</li>
+<li>按照索引列的物理组织方式。</li>
+</ol>
+<p><strong>物理组织方式</strong>：</p>
+<p>一、<strong>B树索引</strong></p>
+<p>最常用的索引，各叶子节点中包括的数据有索引列的值和数据表中对应行的ROWID，简单的说，在B树索引中，是通过在索引中保存排过续的索引列值与相对应记录的ROWID来实现快速查询的目的。</p>
+<p>可以保证无论用户要搜索哪个分支的叶子结点，都需要经过相同的索引层次，即都需要相同的I/O次数。</p>
+<p>注1：索引是针对字段创建的，相同字段不能创建一个以上的索引；</p>
+<p>注2：默认的索引是不唯一的，但是也可以加上unique，表示该索引的字段上没有重复值(定义unique约束时会自动创建)；</p>
+<p>注3：创建主键时，默认在主键上创建了B树索引，因此不能再在主键上创建索引。</p>
+<p>二、<strong>位图索引</strong></p>
+<p>有些字段中使用B树索引的效率仍然不高，例如性别的字段中，只有“男、女”两个值，则即便使用了B树索引，在进行检索时也将返回接近一半的记录。</p>
+<p>所以当字段的基数很低时，需要使用位图索引。(“低”的标准是取值数量 &lt; 行数*1%)</p>
+<p><img src="http://118.25.53.128/Picture/Database/bitmap_index.jpg" alt="bitmap_index"></p>
+<p>位图索引的逻辑结构如上图所示：索引中不再记录rowid和键值，而是将每个值作为一列，用0和1表示该行是否等于该键值(0表示否;1表示是)。其中位图索引的行顺序与原表的行顺序一致，可以在查询数据的过程中对应计算出行的原始物理位置。</p>
+<p>注：位图索引不可能是唯一索引，也不能进行键值压缩。</p>
+<p>三、<strong>反向键索引</strong></p>
+<p>考虑这个情况：某一字段的值是1-1000顺序排列，建立B树索引后依旧递增，到后来该B数索引不断在后面增加分支，会形成不对称树。</p>
+<p>反向键索引是<strong>一种特殊的B树索引</strong>，在存储构造中与B树索引完全相同，但是针对数值时，反向键索引会先反向每个键值的字节，然后对反向后的新数据进行索引。例如输入2008则转换为8002，这样当数值一次增加时，其反向键在大小中的分布仍然是比较平均的。</p>
+<p>注：键的反转由系统自行完成。对于用户是透明的。</p>
+<p>四、<strong>基于函数的索引</strong></p>
+<p>有的时候，需要进行如下查询：<code>select * from t1 where to_char(date,&#39;yyyy&#39;)&gt;&#39;2007&#39;;</code></p>
+<p>但是即便在date字段上建立了索引，还是不得不进行全表扫描。在这种情况下，可以使用基于函数的索引。</p>
+<p>注：简单来说，基于函数的索引，就是将查询要用到的表达式作为索引项。</p>
+<p>五、<strong>全局索引和局部索引</strong></p>
+<p>这个索引貌似很复杂，其实很简单。总得来说一句话，就是无论怎么分区，都是为了方便管理。</p>
+<p>具体索引和表的关系有三种：</p>
+<p>1、局部分区索引：分区索引和分区表1对1</p>
+<p>2、全局分区索引：分区索引和分区表N对N</p>
+<p>3、全局非分区索引：非分区索引和分区表1对N</p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Database/">Database</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Operating System/Linux虚拟地址空间" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/24/Operating System/Linux虚拟地址空间/" class="article-date">
+      <time datetime="2019-03-24T08:31:27.000Z" itemprop="datePublished">2019-03-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/24/Operating System/Linux虚拟地址空间/">Linux虚拟地址空间</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Linux虚拟地址空间"><a href="#Linux虚拟地址空间" class="headerlink" title="Linux虚拟地址空间"></a>Linux虚拟地址空间</h2><blockquote>
+<p>整理自：<a href="http://www.cnblogs.com/clover-toeic/p/3754433.html" target="_blank" rel="noopener">http://www.cnblogs.com/clover-toeic/p/3754433.html</a></p>
+<p>另一篇已经写了C程序内存结构，这篇是更详细的。</p>
+</blockquote>
+<p><strong>在多任务操作系统中</strong>，每个进程都运行在属于自己的内存沙盘中。这个沙盘就是<strong>虚拟地址空间(Virtual Address Space)</strong>，在32位模式下它是一个4GB的内存地址块。在Linux系统中, 内核进程和用户进程所占的虚拟内存比例是1:3，而Windows系统为2:2(通过设置Large-Address-Aware Executables标志也可为1:3)。这并不意味着内核使用那么多物理内存，仅表示它可支配这部分地址空间，根据需要将其映射到物理内存。</p>
+<p><strong>虚拟地址通过页表(Page Table)映射到物理内存</strong>，页表由操作系统维护并被处理器引用。<strong>每个进程都拥有一套属于它自己的页表，因此对于每个进程而言都好像独享了整个虚拟地址空间。</strong></p>
+<p><strong>内核空间在页表中拥有较高特权级，因此用户态程序试图访问这些页时会导致一个页错误</strong>(page fault)。</p>
+<p><strong>在Linux中，内核空间是持续存在的，并且在所有进程中都映射到同样的物理内存</strong>。内核代码和数据总是可寻址，随时准备处理中断和系统调用。<strong>与此相反，用户模式地址空间的映射随进程切换的发生而不断变化</strong>。</p>
+<hr>
+<p><strong>Linux进程在虚拟内存中的标准内存段布局</strong>如下图所示：</p>
+<p><img src="http://118.25.53.128/Picture/Op/vitural_addr.jpg" alt="vitural_addr"></p>
+<p>其中，用户地址空间中的蓝色条带对应于映射到物理内存的不同内存段，灰白区域表示未映射的部分。这些段只是简单的内存地址范围，与Intel处理器的段没有关系。</p>
+<p>上图中<strong>Random stack offset等随机值意在防止恶意程序</strong>。Linux通过对栈、内存映射段、堆的起始地址加上随机偏移量来打乱布局，以免恶意程序通过计算访问栈、库函数等地址。execve(2)负责为进程代码段和数据段建立映射，真正将代码段和数据段的内容读入内存是由系统的缺页异常处理程序按需完成的。另外，execve(2)还会将BSS段清零。</p>
+<p>在将应用程序加载到内存空间执行时，操作系统负责代码段、数据段和BSS段的加载，并在内存中为这些段分配空间。栈也由操作系统分配和管理；堆由程序员自己管理，即显式地申请和释放空间。</p>
+<p>BSS段、数据段和代码段是可执行程序编译时的分段，运行时还需要栈和堆。</p>
+<hr>
+<h3 id="mm-struct"><a href="#mm-struct" class="headerlink" title="mm_struct"></a>mm_struct</h3><p>内核使用内存描述符来表示进程的地址空间，该描述符表示着进程所有地址空间的信息。内存描述符由 mm_struct 结构体表示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mm_struct</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">vm_area_struct</span> *<span class="title">mmap</span>;</span>           <span class="comment">/* 内存区域链表 */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rb_root</span> <span class="title">mm_rb</span>;</span>                  <span class="comment">/* VMA 形成的红黑树 */</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">mmlist</span>;</span>               <span class="comment">/* 所有 mm_struct 形成的链表 */</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> total_vm;                <span class="comment">/* 全部页面数目 */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> locked_vm;               <span class="comment">/* 上锁的页面数据 */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> pinned_vm;               <span class="comment">/* Refcount permanently increased */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> shared_vm;               <span class="comment">/* 共享页面数目 Shared pages (files) */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> exec_vm;                 <span class="comment">/* 可执行页面数目 VM_EXEC &amp; ~VM_WRITE */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> stack_vm;                <span class="comment">/* 栈区页面数目 VM_GROWSUP/DOWN */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> def_flags;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> start_code, end_code, start_data, end_data;    <span class="comment">/* 代码段、数据段 起始地址和结束地址 */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> start_brk, brk, start_stack;                   <span class="comment">/* 栈区 的起始地址，堆区 起始地址和结束地址 */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> arg_start, arg_end, env_start, env_end;        <span class="comment">/* 命令行参数 和 环境变量的 起始地址和结束地址 */</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">/* Architecture-specific MM context */</span></span><br><span class="line">    <span class="keyword">mm_context_t</span> context;                  <span class="comment">/* 体系结构特殊数据 */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Must use atomic bitops to access the bits */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> flags;                   <span class="comment">/* 状态标志位 */</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">/* Coredumping and NUMA and HugePage 相关结构体 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="http://118.25.53.128/Picture/Op/mm_struct.png" alt="mm_struct"></p>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h3><p>线程是进程的执行单元，每个线程都运行在进程的上下文中，共享该进程虚拟地址空间里的：</p>
+<ul>
+<li><strong>代码段、数据段、堆、共享库、打开的文件</strong>。</li>
+</ul>
+<p>每个线程都有自己的线程上下文，包括：</p>
+<ul>
+<li><strong>线程 ID、栈、栈指针、PC、通用目的寄存器、条件码</strong>。</li>
+</ul>
+<p>各自独立的线程栈的内存模型并不整齐清楚，它们都保存在进程虚拟地址空间的栈区域中，通常被相应的线程独立访问，但<strong>并不对其他线程设防</strong>。</p>
+<p><img src="http://118.25.53.128/Picture/Op/thread_model.png" alt="thread_model"></p>
+<p><strong>线程栈</strong></p>
+<p>从 Linux 内核的角度来说，其实它并没有线程的概念。Linux 把所有线程都当做进程来实现，它将线程和进程不加区分的统一到了 task_struct 中。<strong>线程仅仅被视为一个与其他进程共享某些资源的进程，而是否共享地址空间几乎是进程和 Linux 中所谓线程的唯一区别</strong>。线程创建的时候，加上了 CLONE_VM 标记，这样 线程的内存描述符 将直接指向 父进程的内存描述符。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (clone_flags &amp; CLONE_VM) &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * current 是父进程而 tsk 在 fork() 执行期间是共享子进程</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    atomic_inc(&amp;current-&gt;mm-&gt;mm_users);</span><br><span class="line">    tsk-&gt;mm = current-&gt;mm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然线程的地址空间和进程一样，但是对待其地址空间的 stack 还是有些区别的。对于 Linux 进程或者说主线程，其 stack 是在 fork 的时候生成的，实际上就是复制了父亲的 stack 空间地址，然后写时拷贝 (cow) 以及动态增长。然而对于主线程生成的子线程而言，其 stack 将不再是这样的了，而是事先固定下来的，使用 mmap 系统调用，它不带有 VM_STACK_FLAGS 标记。<strong>线程栈不能动态增长，一旦用尽就没了，这是和生成进程的 fork 不同的地方</strong>。</p>
+<p><strong>线程的栈在哪？</strong></p>
+<p>Stack space for a new thread is created by the parent thread with <code>mmap(MAP_ANONYMOUS|MAP_STACK)</code>. So they’re in the “memory map segment”. It can end up anywhere that a large <code>malloc()</code> could go. (glibc <code>malloc(3)</code> uses <code>mmap(MAP_ANONYMOUS)</code> for large allocations.)</p>
+<hr>
+<h3 id="各个分段的含义"><a href="#各个分段的含义" class="headerlink" title="各个分段的含义"></a>各个分段的含义</h3><ul>
+<li><p><strong>内核空间</strong></p>
+<p>内核总是驻留在内存中，是操作系统的一部分。内核空间为内核保留，不允许应用程序读写该区域的内容或直接调用内核代码定义的函数。</p>
+</li>
+<li><p><strong>栈</strong>(stack)</p>
+<p>栈又称堆栈，由编译器自动分配释放，行为类似数据结构中的栈(先进后出)。堆栈主要有三个用途：</p>
+<ul>
+<li>为函数内部声明的非静态局部变量(C语言中称“自动变量”)提供存储空间。</li>
+<li>记录函数调用过程相关的维护性信息，称为栈帧(Stack Frame)或过程活动记录(Procedure Activation Record)。它包括函数返回地址，不适合装入寄存器的函数参数及一些寄存器值的保存。除递归调用外，堆栈并非必需。因为编译时可获知局部变量，参数和返回地址所需空间，并将其分配于BSS段。</li>
+<li>临时存储区，用于暂存长算术表达式部分计算结果或alloca()函数分配的栈内内存。</li>
+</ul>
+<p>持续地重用栈空间有助于使活跃的栈内存保持在CPU缓存中，从而加速访问。<strong>进程中的每个线程都有属于自己的栈。</strong>向栈中不断压入数据时，若超出其容量就会耗尽栈对应的内存区域，从而触发一个页错误。此时若栈的大小低于堆栈最大值RLIMIT_STACK(通常是8M)，则<strong>栈会动态增长</strong>，程序继续运行。<strong>映射的栈区扩展到所需大小后，不再收缩。</strong></p>
+<p>Linux中<code>ulimit -s</code>命令可查看和设置堆栈最大值，当程序使用的堆栈超过该值时, 发生栈溢出(Stack Overflow)，程序收到一个段错误(Segmentation Fault)。注意，调高堆栈容量可能会增加内存开销和启动时间。</p>
+<p>堆栈既可向下增长(向内存低地址)也可向上增长, 这依赖于具体的实现。本文所述堆栈向下增长。</p>
+<p>堆栈的大小在运行时由内核动态调整。</p>
+</li>
+<li><p><strong>内存映射段(mmap)</strong></p>
+<p>此处，内核<strong>将硬盘文件的内容直接映射到内存</strong>, 任何应用程序都可通过<strong>Linux的mmap()</strong>系统调用或Windows的CreateFileMapping()/MapViewOfFile()请求这种映射。<strong>内存映射是一种方便高效的文件I/O方式， 因而被用于装载动态共享库</strong>。用户也可创建匿名内存映射，该映射没有对应的文件, 可用于存放程序数据。<strong>在 Linux中，若通过malloc()请求一大块内存，C运行库将创建一个匿名内存映射，而不使用堆内存。”大块” 意味着比阈值 MMAP_THRESHOLD还大，缺省为128KB，可通过mallopt()调整。</strong></p>
+<p>（该区域用于映射用到的动态链接库。在Linux 2.4版本中，若可执行文件依赖共享库，则系统会为这些动态库在从0x40000000开始的地址分配相应空间，并在程序装载时将其载入到该空间。在Linux 2.6内核中，共享库的起始地址被往上移动至更靠近栈区的位置。）</p>
+<p>（从进程地址空间的布局可以看到，在有共享库的情况下，留给堆的可用空间还有两处：一处是从.bss段到0x40000000，约不到1GB的空间；另一处是从共享库到栈之间的空间，约不到2GB。这两块空间大小取决于栈、共享库的大小和数量。这样来看，是否应用程序可申请的最大堆空间只有2GB？事实上，这与Linux内核版本有关。在上面给出的进程地址空间经典布局图中，共享库的装载地址为0x40000000，这实际上是Linux kernel 2.6版本之前的情况了，在2.6版本里，共享库的装载地址已经被挪到靠近栈的位置，即位于0xBFxxxxxx附近，因此，此时的堆范围就不会被共享库分割成2个“碎片”，故kernel 2.6的32位Linux系统中，malloc申请的最大内存理论值在2.9GB左右。）</p>
+</li>
+<li><p><strong>堆</strong>(heap)</p>
+<p>堆用于存放进程运行时动态分配的内存段，可动态扩张或缩减。<strong>堆中内容是匿名的，不能按名字直接访问，只能通过指针间接访问</strong>。当进程调用malloc(C)/new(C++)等函数分配内存时，新分配的内存动态添加到堆上(扩张)；当调用free(C)/delete(C++)等函数释放内存时，被释放的内存从堆中剔除(缩减) 。</p>
+<p>分配的堆内存是经过字节对齐的空间，以适合原子操作。堆管理器通过链表管理每个申请的内存，由于堆申请和释放是无序的，最终会产生内存碎片。堆内存一般由应用程序分配释放，回收的内存可供重新使用。若程序员不释放，程序结束时操作系统可能会自动回收。</p>
+<p>堆的末端由break指针标识，当堆管理器需要更多内存时，可通过系统调用brk()和sbrk()来移动break指针以扩张堆，一般由系统自动调用。</p>
+</li>
+<li><p>【扩展阅读】<strong>栈和堆的区别</strong></p>
+<ul>
+<li>①<strong>管理方式</strong>：栈由编译器自动管理；堆由程序员控制，使用方便，但易产生内存泄露。</li>
+<li>②<strong>生长方向</strong>：栈向低地址扩展(即”向下生长”)，是连续的内存区域；堆向高地址扩展(即”向上生长”)，是不连续的内存区域。这是由于系统用链表来存储空闲内存地址，自然不连续，而链表从低地址向高地址遍历。</li>
+<li>③<strong>空间大小</strong>：栈顶地址和栈的最大容量由系统预先规定(通常默认2M或10M)；堆的大小则受限于计算机系统中有效的虚拟内存，32位Linux系统中堆内存可达2.9G空间。</li>
+<li>④<strong>存储内容</strong>：栈在函数调用时，首先压入主调函数中下条指令(函数调用语句的下条可执行语句)的地址，然后是函数实参，然后是被调函数的局部变量。本次调用结束后，局部变量先出栈，然后是参数，最后栈顶指针指向最开始存的指令地址，程序由该点继续运行下条可执行语句。堆通常在头部用一个字节存放其大小，堆用于存储生存期与函数调用无关的数据，具体内容由程序员安排。</li>
+<li>⑤<strong>分配方式</strong>：栈可静态分配或动态分配。静态分配由编译器完成，如局部变量的分配。动态分配由alloca函数在栈上申请空间，用完后自动释放。堆只能动态分配且手工释放。</li>
+<li>⑥<strong>分配效率</strong>：栈由计算机底层提供支持：分配专门的寄存器存放栈地址，压栈出栈由专门的指令执行，因此效率较高。堆由函数库提供，机制复杂，效率比栈低得多。Windows系统中VirtualAlloc可直接在进程地址空间中分配一块内存，快速且灵活。</li>
+<li>⑦<strong>分配后系统响应</strong>：只要栈剩余空间大于所申请空间，系统将为程序提供内存，否则报告异常提示栈溢出。     操作系统为堆维护一个记录空闲内存地址的链表。当系统收到程序的内存分配申请时，会遍历该链表寻找第一个空间大于所申请空间的堆结点，然后将该结点从空闲结点链表中删除，并将该结点空间分配给程序。若无足够大小的空间(可能由于内存碎片太多)，有可能调用系统功能去增加程序数据段的内存空间，以便有机会分到足够大小的内存，然后进行返回。，大多数系统会在该内存空间首地址处记录本次分配的内存大小，供后续的释放函数(如free/delete)正确释放本内存空间。     此外，由于找到的堆结点大小不一定正好等于申请的大小，系统会自动将多余的部分重新放入空闲链表中。</li>
+<li>⑧<strong>碎片问题</strong>：栈不会存在碎片问题，因为栈是先进后出的队列，内存块弹出栈之前，在其上面的后进的栈内容已弹出。而频繁申请释放操作会造成堆内存空间的不连续，从而造成大量碎片，使程序效率降低。     可见，堆容易造成内存碎片；由于没有专门的系统支持，效率很低；由于可能引发用户态和内核态切换，内存申请的代价更为昂贵。所以栈在程序中应用最广泛，函数调用也利用栈来完成，调用过程中的参数、返回地址、栈基指针和局部变量等都采用栈的方式存放。所以，建议尽量使用栈，仅在分配大量或大块内存空间时使用堆。</li>
+</ul>
+</li>
+<li><p><strong>BSS段</strong>(Block Started by Symbol)</p>
+<p>BSS段中通常存放程序中以下符号：</p>
+<ul>
+<li>未初始化的全局变量和静态局部变量</li>
+<li>初始值为0的全局变量和静态局部变量(依赖于编译器实现)</li>
+<li>未定义且初值不为0的符号(该初值即common block的大小)</li>
+</ul>
+<p>C语言中，未显式初始化的静态分配变量被初始化为0(算术类型)或空指针(指针类型)。由于程序加载时，BSS会被操作系统清零，所以未赋初值或初值为0的全局变量都在BSS中。BSS段仅为未初始化的静态分配变量预留位置，在目标文件中并不占据空间，这样可<strong>减少目标文件体积</strong>。但程序运行时需为变量分配内存空间，故目标文件必须记录所有未初始化的静态分配变量大小总和(通过start_bss和end_bss地址写入机器代码)。当加载器(loader)加载程序时，将为BSS段分配的内存初始化为0。在嵌入式软件中，进入main()函数之前BSS段被C运行时系统映射到初始化为全零的内存(效率较高)。</p>
+<p>注意，尽管均放置于BSS段，但初值为0的全局变量是强符号，而未初始化的全局变量是弱符号。若其他地方已定义同名的强符号(初值可能非0)，则弱符号与之链接时不会引起重定义错误，但运行时的初值可能并非期望值(会被强符号覆盖)。因此，定义全局变量时，若只有本文件使用，则尽量使用static关键字修饰；否则需要<strong>为全局变量定义赋初值(哪怕0值)，保证该变量为强符号，以便链接时发现变量名冲突</strong>，而不是被未知值覆盖。</p>
+</li>
+<li><p><strong>数据段</strong>(Data)</p>
+<p>数据段通常用于存放程序中已初始化且初值不为0的全局变量和静态局部变量。数据段属于静态内存分配(静态存储区)，可读可写。</p>
+<p>数据段保存在目标文件中(在嵌入式系统里一般固化在镜像文件中)，其内容由程序初始化。例如，对于全局变量int gVar = 10，必须在目标文件数据段中保存10这个数据，然后在程序加载时复制到相应的内存。</p>
+</li>
+<li><p>【扩展阅读】<strong>数据段与BSS段的区别</strong></p>
+<ul>
+<li><p>BSS段不占用物理文件尺寸，但占用内存空间；数据段占用物理文件，也占用内存空间。</p>
+<p>对于大型数组如int ar0[10000] = {1, 2, 3, …}和int ar1[10000]，ar1放在BSS段，只记录共有10000*4个字节需要初始化为0，而不是像ar0那样记录每个数据1、2、3…，此时BSS为目标文件所节省的磁盘空间相当可观。</p>
+</li>
+<li><p>当程序读取数据段的数据时，系统会出发缺页故障，从而分配相应的物理内存；当程序读取BSS段的数据时，内核会将其转到一个全零页面，不会发生缺页故障，也不会为其分配相应的物理内存。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>代码段</strong>(text)</p>
+<p>代码段也称正文段或文本段，通常用于存放程序执行代码(即CPU执行的机器指令)。一般C语言执行语句都编译成机器代码保存在代码段。通常代码段是可共享的，因此频繁执行的程序只需要在内存中拥有一份拷贝即可。代码段通常属于只读，以防止其他程序意外地修改其指令(对该段的写操作将导致段错误)。某些架构也允许代码段为可写，即允许修改程序。</p>
+<p>代码段指令根据程序设计流程依次执行，对于顺序指令，只会执行一次(每个进程)；若有反复，则需使用跳转指令；若进行递归，则需要借助栈来实现。</p>
+<p>代码段指令中包括操作码和操作对象(或对象地址引用)。若操作对象是立即数(具体数值)，将直接包含在代码中；若是局部数据，将在栈区分配空间，然后引用该数据地址；若位于BSS段和数据段，同样引用该数据地址。</p>
+<p>代码段最容易受优化措施影响。</p>
+</li>
+<li><p><strong>保留区</strong></p>
+<p><strong>位于虚拟地址空间的最低部分</strong>，未赋予物理地址。任何对它的引用都是非法的，<strong>用于捕捉使用空指针和小整型值指针引用内存的异常情况</strong>。</p>
+<p>它并不是一个单一的内存区域，而是对地址空间中受到操作系统保护而禁止用户进程访问的地址区域的总称。大多数操作系统中，极小的地址通常都是不允许访问的，如NULL。<strong>C语言将无效指针赋值为0也是出于这种考虑</strong>，因为0地址上正常情况下不会存放有效的可访问数据。</p>
+</li>
+</ul>
+<hr>
+<h3 id="分段的好处"><a href="#分段的好处" class="headerlink" title="分段的好处"></a>分段的好处</h3><p>进程运行过程中，代码指令根据流程依次执行，只需访问一次(当然跳转和递归可能使代码执行多次)；而数据(数据段和BSS段)通常需要访问多次，因此单独开辟空间以方便访问和节约空间。具体解释如下：</p>
+<p>当程序被装载后，数据和指令分别映射到两个虚存区域。数据区对于进程而言可读写，而指令区对于进程只读。两区的权限可分别设置为可读写和只读。以防止程序指令被有意或无意地改写。</p>
+<p>现代CPU具有极为强大的缓存(Cache)体系，程序必须尽量提高缓存命中率。<strong>指令区和数据区的分离有利于提高程序的局部性</strong>。现代CPU一般数据缓存和指令缓存分离，故程序的指令和数据分开存放有利于<strong>提高CPU缓存命中率。</strong></p>
+<p>当系统中运行多个该程序的副本时，其指令相同，故内存中只须保存一份该程序的指令部分。若系统中运行数百进程，通过共享指令将节省大量空间(尤其对于有动态链接的系统)。其他只读数据如程序里的图标、图片、文本等资源也可共享。而每个副本进程的数据区域不同，它们是进程私有的。</p>
+<p>此外，临时数据及需要再次使用的代码在运行时放入栈区中，生命周期短。全局数据和静态数据可能在整个程序执行过程中都需要访问，因此单独存储管理。堆区由用户自由分配，以便管理。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/C++Collection/C++ref" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/23/C_C++/C++Collection/C++ref/" class="article-date">
+      <time datetime="2019-03-23T10:28:23.000Z" itemprop="datePublished">2019-03-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/23/C_C++/C++Collection/C++ref/">C++ref</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="C-ref"><a href="#C-ref" class="headerlink" title="C++ ref"></a>C++ ref</h2><p>像thread类 和 bind函数的参数只能按值传递（内部decay，移除了引用），如果想传递引用，那么就需要 <code>std::ref</code>，const引用则用<code>cref</code>。</p>
+<p>ref的返回类型为<code>std::reference_wrapper</code>，其实这个模板类保存了传入参数的地址，然后定义了左值引用的类型转化函数，所以把它赋值给一个引用就可以让这个引用获得对象内保存的地址，看起来就和真正的引用一样了。</p>
+<p>官方实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">reference_wrapper</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// types</span></span><br><span class="line">  <span class="keyword">typedef</span> T type;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// construct/copy/destroy</span></span><br><span class="line">  reference_wrapper(T&amp; ref) <span class="keyword">noexcept</span> : _ptr(<span class="built_in">std</span>::addressof(ref)) &#123;&#125;</span><br><span class="line">  reference_wrapper(T&amp;&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">  reference_wrapper(<span class="keyword">const</span> reference_wrapper&amp;) <span class="keyword">noexcept</span> = <span class="keyword">default</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// assignment</span></span><br><span class="line">  reference_wrapper&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> reference_wrapper&amp; x) <span class="keyword">noexcept</span> = <span class="keyword">default</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// access</span></span><br><span class="line">  <span class="keyword">operator</span> T&amp; () <span class="keyword">const</span> <span class="keyword">noexcept</span> &#123; <span class="keyword">return</span> *_ptr; &#125;</span><br><span class="line">  <span class="function">T&amp; <span class="title">get</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">noexcept</span> </span>&#123; <span class="keyword">return</span> *_ptr; &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span>... <span class="title">ArgTypes</span> &gt;</span></span><br><span class="line"><span class="class">  <span class="title">std</span>:</span>:<span class="keyword">invoke_result_t</span>&lt;T&amp;, ArgTypes...&gt;</span><br><span class="line">    <span class="keyword">operator</span>() ( ArgTypes&amp;&amp;... args ) <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">std</span>::invoke(get(), <span class="built_in">std</span>::forward&lt;ArgTypes&gt;(args)...);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  T* _ptr;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// deduction guides</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">reference_wrapper</span>(<span class="title">reference_wrapper</span>&lt;T&gt;) -&gt; <span class="title">reference_wrapper</span>&lt;T&gt;;</span></span><br></pre></td></tr></table></figure>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Tcp/IP头_TCP头_UDP头" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1837,214 +2178,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/C++Collection/C++右值引用和移动" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/11/C_C++/C++Collection/C++右值引用和移动/" class="article-date">
-      <time datetime="2019-03-11T15:46:45.000Z" itemprop="datePublished">2019-03-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/C_C++/C++Collection/C++右值引用和移动/">C++右值引用和移动</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="C-右值引用和移动"><a href="#C-右值引用和移动" class="headerlink" title="C++右值引用和移动"></a>C++右值引用和移动</h2><p>参考：<a href="https://www.jianshu.com/p/31cea1b6ee24" target="_blank" rel="noopener">简书</a> 、<a href="https://www.cnblogs.com/likaiming/p/9045642.html" target="_blank" rel="noopener">cnblogs</a> 、《C++primer Plus》</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/11/C_C++/C++Collection/C++右值引用和移动/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Http/http" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/11/Network/Http/http/" class="article-date">
-      <time datetime="2019-03-11T15:27:43.000Z" itemprop="datePublished">2019-03-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/Network/Http/http/">http</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h2><p>学习自：<a href="http://www.runoob.com/" target="_blank" rel="noopener">http://www.runoob.com/</a></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/11/Network/Http/http/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Algorithm/堆和优先队列" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/11/Algorithm/堆和优先队列/" class="article-date">
-      <time datetime="2019-03-11T12:28:18.000Z" itemprop="datePublished">2019-03-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/Algorithm/堆和优先队列/">堆和优先队列</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="堆和优先队列"><a href="#堆和优先队列" class="headerlink" title="堆和优先队列"></a>堆和优先队列</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><strong>最小堆</strong>：所有父节点都比子节点小的<em>完全二叉树</em>。</p>
-<p>最大堆同理。为了方便，本篇讲解都基于最小堆。</p>
-<hr>
-<p>堆存储在数组内，相比于普通队列，寻找最大(小)值的速度非常快，所以堆也可以作为优先队列。</p>
-<p>优先队列：支持插入元素和寻找最大(小)值元素的数据结构。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/11/Algorithm/堆和优先队列/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

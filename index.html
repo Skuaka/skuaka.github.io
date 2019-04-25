@@ -234,6 +234,246 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Unix/Programming/守护进程的创建" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/25/Unix/Programming/守护进程的创建/" class="article-date">
+      <time datetime="2019-04-25T11:39:20.000Z" itemprop="datePublished">2019-04-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/25/Unix/Programming/守护进程的创建/">守护进程的创建</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>转自：<a href="http://blog.chinaunix.net/uid-25365622-id-3055635.html" target="_blank" rel="noopener">http://blog.chinaunix.net/uid-25365622-id-3055635.html</a></p>
+<h2 id="守护进程的创建"><a href="#守护进程的创建" class="headerlink" title="守护进程的创建"></a>守护进程的创建</h2><p>守护进程（Daemon）是运行在后台的一种特殊进程。它独立于控制终端并且周期性地执行某种任务或等待处理某些发生的事件。</p>
+<ol>
+<li><p>使进程在后台运行</p>
+<p>创建子进程父进程退出</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>((pid = fork())&gt;<span class="number">0</span>)</span><br><span class="line">   <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(pid&lt;<span class="number">0</span>) &#123;</span><br><span class="line">    perror(<span class="string">"fail to fork"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>脱离控制终端，登录会话和进程组（创建新会话）</p>
+<p>进程属于一个进程组，进程组号（GID）就是进程组长的进程号（PID）。登录会话可以包含多个进程组。这些进程组共享一个控制终端。这个控制终端通常是创建进程的登录终端。 控制终端，登录会话和进程组通常是从父进程继承下来的。我们的目的就是要摆脱它们，使之不受它们的影响。方法是在第1点的基础上，调用setsid()使进程成为会话组长。</p>
+<p>说明：当进程是会话组长时setsid()调用失败。但第一点已经保证进程不是会话组长。</p>
+<p>setsid()调用成功后，进程成为新的会话组长和新的进程组长，并与原来的登录会话和进程组脱离。由于会话过程对控制终端的独占性，进程同时与控制终端脱离。</p>
+<p>The <code>setsid()</code> function creates a new session.  The calling process is the session leader of the new session, is the process group leader of a new process group and has no controlling terminal.</p>
+</li>
+<li><p>禁止进程重新打开控制终端 </p>
+<p>现在，进程已经成为无终端的会话组长。但它可以重新申请打开一个控制终端。可以通过使进程不再成为会话组长来禁止进程重新打开控制终端： </p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(pid=fork()) </span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);<span class="comment">//结束第一子进程，第二子进程继续（第二子进程不再是会话组长）</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭所有文件描述符</p>
+<p>进程从创建它的父进程那里继承了打开的文件描述符。如不关闭，将会浪费系统资源，造成进程所在的文件系统无法卸下以及引起无法预料的错误:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;=getdtablesize(); i++)</span><br><span class="line">		close(i);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>改变当前工作目录 </p>
+<p>进程活动时，其工作目录所在的文件系统不能卸下。一般需要将工作目录改变到根目录。对于需要转储核心，写运行日志的进程将工作目录改变到特定目录如/tmp:</p>
+<p><code>chdir(&quot;/tmp&quot;) ;</code></p>
+</li>
+<li><p>重设权限掩码</p>
+<p>进程从创建它的父进程那里继承了文件创建掩码。它可能修改守护进程所创建的文件的存取位。为防止这一点，将文件创建掩码清除：</p>
+<p><code>umask(0);</code></p>
+</li>
+<li><p>处理SIGCHLD信号 </p>
+<p>处理SIGCHLD信号并不是必须的。但对于某些进程，特别是服务器进程往往在请求到来时生成子进程处理请求。如果父进程不等待子进程结束，子进程将成为僵尸进程（zombie）从而占用系统资源。如果父进程等待子进程结束，将增加父进程的负担，影响服务器进程的并发性能。在Linux下可以简单地将 SIGCHLD信号的操作设为SIG_IGN。 </p>
+<p><code>signal(SIGCHLD,SIG_IGN);</code> </p>
+<p>这样，内核在子进程结束时不会产生僵尸进程。这一点与BSD4不同，BSD4下必须显式等待子进程结束才能释放僵尸进程。</p>
+</li>
+</ol>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*name: init_deamon.c</span></span><br><span class="line"><span class="comment"> *function:创建一个守护进程</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/param.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_deamon</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> pid; </span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 处理SIGCHLD信号。处理SIGCHLD信号并不是必须的。但对于某些进程，特别是服务器进程往往在请求到来时生成子进程处理请求。如果父进程不等待子进程结束，子进程将成为僵尸进程（zombie）从而占用系统资源。*/</span></span><br><span class="line">    <span class="keyword">if</span>(signal(SIGCHLD,SIG_IGN) == SIG_ERR)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Cant signal in init_daemon."</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pid=fork()) </span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);<span class="comment">//是父进程，结束父进程 </span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(pid&lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);<span class="comment">//fork失败，退出</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//是第一子进程，后台继续执行</span></span><br><span class="line">    setsid();<span class="comment">//第一子进程成为新的会话组长和进程组长,并与控制终端分离</span></span><br><span class="line">    <span class="keyword">if</span>(pid=fork())</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);<span class="comment">//是第一子进程，结束第一子进程 </span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(pid&lt; <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);<span class="comment">//fork失败，退出</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//是第二子进程，不再是会话组长</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt; getdtablesize();++i)<span class="comment">//关闭打开的文件描述符</span></span><br><span class="line">        close(i); </span><br><span class="line">    chdir(<span class="string">"/tmp"</span>);<span class="comment">//改变工作目录到/tmp</span></span><br><span class="line">    umask(<span class="number">0</span>);<span class="comment">//重设文件创建掩码</span></span><br><span class="line">    <span class="keyword">return</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* name :test.c</span></span><br><span class="line"><span class="comment"> * function :调用init_deamon函数使进程变成守护进程，然后每一秒向/tmp目录下的print_time文件打印当前时间</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt; </span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_deamon</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">//守护进程初始化函数 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    FILE *fp; </span><br><span class="line">    <span class="keyword">time_t</span> t; </span><br><span class="line">    init_deamon();<span class="comment">//初始化为Daemon </span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)<span class="comment">//每隔一分钟向test.log报告运行状态 </span></span><br><span class="line">    &#123; </span><br><span class="line">        sleep(<span class="number">1</span>);<span class="comment">//睡眠一秒钟 </span></span><br><span class="line">        <span class="keyword">if</span>((fp=fopen(<span class="string">"print_time"</span>,<span class="string">"a"</span>)) &gt;=<span class="number">0</span>) </span><br><span class="line">        &#123; </span><br><span class="line">            t=time(<span class="number">0</span>); </span><br><span class="line">            <span class="built_in">fprintf</span>(fp,<span class="string">"The time right now is : %s"</span>,asctime(localtime(&amp;t))); </span><br><span class="line">            fclose(fp); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/Concept_gcc/attribute-packed" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/25/C_C++/Concept_gcc/attribute-packed/" class="article-date">
+      <time datetime="2019-04-25T06:43:11.000Z" itemprop="datePublished">2019-04-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/25/C_C++/Concept_gcc/attribute-packed/">__attribute__</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>学习自：<a href="http://blog.chinaunix.net/uid-25768133-id-3485479.html" target="_blank" rel="noopener">http://blog.chinaunix.net/uid-25768133-id-3485479.html</a></p>
+<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>GNU C的一大特色就是<code>__attribute__</code>机制。<code>__attribute__</code>可以设置函数属性（Function Attribute）、变量属性（Variable Attribute）和类型属性（Type Attribute）。</p>
+<p><strong>语法格式</strong>：</p>
+<p><code>__attribute__ ((attribute-list))</code></p>
+<p>其位置约束：放于声明的尾部“；”之前。</p>
+<h3 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h3><h4 id="attribute-packed"><a href="#attribute-packed" class="headerlink" title="__attribute__((packed))"></a><code>__attribute__((packed))</code></h4><p>作用：让编译器取消结构在编译过程中的优化对齐，按照实际占用字节数进行对齐，即对变量是一字节对齐，对域（field）是位对齐。。</p>
+<p>这是GCC特有的语法，gcc默认是非紧凑模式的。</p>
+<p>在TC下：<code>struct my{ char ch; int a;}</code> sizeof(int)=2;sizeof(my)=3;（紧凑模式）</p>
+<p>在GCC下：<code>struct my{ char ch; int a;}</code> sizeof(int)=4;sizeof(my)=8;（非紧凑模式）</p>
+<p>在GCC下：<code>struct my{ char ch; int a;}__attrubte__ ((packed))</code> sizeof(int)=4;sizeof(my)=5</p>
+<h4 id="attribute-noreturn"><a href="#attribute-noreturn" class="headerlink" title="__attribute__((noreturn))"></a><code>__attribute__((noreturn))</code></h4><p>告诉编译器这个函数不会返回给调用者，以便编译器在优化时去掉不必要的函数返回代码。</p>
+<h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3><p>以后遇到了再添加。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/Mess/C++11notify_one原理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/25/C_C++/Mess/C++11notify_one原理/" class="article-date">
+      <time datetime="2019-04-24T16:20:14.000Z" itemprop="datePublished">2019-04-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/25/C_C++/Mess/C++11notify_one原理/">C++11 notify_one内部实现</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="C-11-notify-one内部实现"><a href="#C-11-notify-one内部实现" class="headerlink" title="C++11 notify_one内部实现"></a>C++11 notify_one内部实现</h3><p>The effects of <code>notify_one()</code>/<code>notify_all()</code> and each of the three atomic parts of  <code>wait()</code>/<code>wait_for()</code>/<code>wait_until()</code>(unlock+wait, wakeup, and lock) take place in a single total order that can be viewed as <a href="../../atomic/memory_order.html#Modification_order">modification order</a> of an atomic variable: the order is specific to this individual condition_variable. This makes it impossible for <code>notify_one()</code> to, for example, be delayed and unblock a thread that started waiting just after the call to <code>notify_one()</code> was made.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Unix/System/SIGINT-SIGTERM-SIGKILL区别" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -856,270 +1096,6 @@
 <h3 id="Wrap-up"><a href="#Wrap-up" class="headerlink" title="Wrap up"></a>Wrap up</h3><p>The readability of this code is vastly improved over the 2011 original, and its shorter too. Using alias templates does not just save typing, but also removes the need for many transformation templates. Performance is also improved over the 2011 original, which used two pass partitioning using a filter.</p>
 <p>The utter uselessness of compile time quicksort, however, is not threatened.</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Algorithm/Hash" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/11/Algorithm/Hash/" class="article-date">
-      <time datetime="2019-04-11T09:36:44.000Z" itemprop="datePublished">2019-04-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/11/Algorithm/Hash/">Hash</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Hash知识点整理"><a href="#Hash知识点整理" class="headerlink" title="Hash知识点整理"></a>Hash知识点整理</h2><h3 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h3><p>构造哈希函数的<strong>原则</strong>是：</p>
-<ol>
-<li>函数本身便于计算；</li>
-<li>计算出来的地址分布均匀，目的是尽可能减少冲突。</li>
-</ol>
-<p>构造哈希函数常用的五种方法：</p>
-<ol>
-<li><p><strong>数字分析法</strong></p>
-<p>如果事先知道关键字集合，并且每个关键字的位数比哈希表的地址码位数多时，可以从关键字中选出分布较均匀的若干位，构成哈希地址。</p>
-</li>
-<li><p><strong>平方取中法</strong></p>
-<p>当无法确定关键字中哪几位分布较均匀时，可以先求出关键字的平方值，然后按需要取平方值的中间几位作为哈希地址。这是因为：平方后中间几位和关键字中每一位都相关，故不同关键字会以较高的概率产生不同的哈希地址。</p>
-</li>
-<li><p><strong>分段叠加法</strong></p>
-<p>按哈希表地址位数将关键字分成位数相等的几部分（最后一部分可以较短），然后将这几部分相加，舍弃最高进位后的结果就是该关键字的哈希地址。</p>
-<p>具体方法有<strong>折叠法</strong>与<strong>移位法。</strong>移位法是将分割后的每部分低位对齐相加，折叠法是从一端向另一端沿分割界来回折叠（奇数段为正序，偶数段为倒序），然后将各段相加。</p>
-</li>
-<li><p><strong>除留余数法</strong></p>
-<p>假设哈希表长为<em>m</em>，<em>p</em>为小于等于<em>m</em>的最大素数，则哈希函数为</p>
-<p><em>h</em>(<em>k</em>) = <em>k % p</em> 。</p>
-<p>素数是为了防止当数列的间隔比较稳定时产生大量冲突。</p>
-</li>
-<li><p><strong>伪随机数法</strong></p>
-<p>采用一个伪随机函数做哈希函数，即<em>h(key)=random(key)</em>。</p>
-</li>
-</ol>
-<hr>
-<p>在实际应用中，应根据具体情况，灵活采用不同的方法，并用实际数据测试它的性能，以便做出正确判定。通常应考虑以下五个因素 ：</p>
-<ul>
-<li><p>计算哈希函数所需时间 （简单）。</p>
-</li>
-<li><p>关键字的长度。</p>
-</li>
-<li><p>哈希表大小。</p>
-</li>
-<li><p>关键字分布情况。</p>
-</li>
-<li><p>记录查找频率。</p>
-</li>
-</ul>
-<h3 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h3><ol>
-<li><p>开放定址法/再散列法</p>
-<p>这种方法也称<strong>再散列法，</strong>其基本思想是：当关键字<em>key</em>的哈希地址<em>p</em>出现冲突时，以<em>p</em>为基础，产生另一个哈希地址<em>p1</em>，如果<em>p1</em>仍然冲突，再以<em>p1</em>为基础，产生另一个哈希地址<em>p2</em>, … 直到找出一个不冲突的哈希地址<em>pi</em>。</p>
-</li>
-<li><p>拉链法/链地址法/哈希桶</p>
-<p>将所有哈希地址为<em>i</em>的元素构成一个称为<strong>同义词链</strong>的单链表，并将单链表的头指针存在哈希表的第<em>i</em>个单元中，因而查找、插入和删除主要在同义词链中进行。链地址法适用于经常进行插入和删除的情况。</p>
-</li>
-<li><p>溢出法</p>
-<p>将哈希表分为<strong>基本表</strong>和<strong>溢出表</strong>两部分，凡是和基本表发生冲突的元素，一律填入溢出表。</p>
-</li>
-</ol>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/C++Collection/C++bitset" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/11/C_C++/C++Collection/C++bitset/" class="article-date">
-      <time datetime="2019-04-10T17:57:21.000Z" itemprop="datePublished">2019-04-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/11/C_C++/C++Collection/C++bitset/">C++bitset</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="C-bitset"><a href="#C-bitset" class="headerlink" title="C++bitset"></a>C++bitset</h2><p><code>bitset</code> represents a fixed-size sequence of <code>N</code> bits. Bitsets can be manipulated by standard logic operators and converted to and from strings and integers.</p>
-<h3 id="construct"><a href="#construct" class="headerlink" title="construct"></a>construct</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// empty constructor</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">bitset</span>&lt;8&gt; b1; <span class="comment">// [0,0,0,0,0,0,0,0]</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// unsigned long long constructor</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">bitset</span>&lt;8&gt; b2(<span class="number">42</span>);          <span class="comment">// [0,0,1,0,1,0,1,0]</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">bitset</span>&lt;8&gt; bs(<span class="number">0xfff0</span>);      <span class="comment">// [1,1,1,1,0,0,0,0]</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// string constructor</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> bit_string = <span class="string">"110010"</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">bitset</span>&lt;8&gt; b3(bit_string);       <span class="comment">// [0,0,1,1,0,0,1,0]</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">bitset</span>&lt;8&gt; b4(bit_string, <span class="number">2</span>);    <span class="comment">// [0,0,0,0,0,0,1,0]</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">bitset</span>&lt;8&gt; b5(bit_string, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// [0,0,0,0,0,0,0,1]</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// string constructor using custom zero/one digits</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> alpha_bit_string = <span class="string">"aBaaBBaB"</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">bitset</span>&lt;8&gt; b6(alpha_bit_string, <span class="number">0</span>, alpha_bit_string.size(), <span class="string">'a'</span>, <span class="string">'B'</span>);</span><br><span class="line"><span class="comment">// [0,1,0,0,1,1,0,1]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// char* constructor using custom digits</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">bitset</span>&lt;8&gt; b7(<span class="string">"XXXXYYYY"</span>, <span class="number">8</span>, <span class="string">'X'</span>, <span class="string">'Y'</span>); <span class="comment">// [0,0,0,0,1,1,1,1]</span></span><br></pre></td></tr></table></figure>
-<h3 id="Element-access"><a href="#Element-access" class="headerlink" title="Element access"></a>Element access</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>[pos];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">test</span><span class="params">(pos)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">all</span><span class="params">()</span></span>;	<span class="comment">//all set, C++11</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">any</span><span class="params">()</span></span>;	<span class="comment">//any set</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">none</span><span class="params">()</span></span>;	<span class="comment">//none set</span></span><br><span class="line"></span><br><span class="line">count();	<span class="comment">//return the number of bits set to true</span></span><br><span class="line">size();		<span class="comment">//return the size of bits that the bitset can hold</span></span><br></pre></td></tr></table></figure>
-<h3 id="Modifiers"><a href="#Modifiers" class="headerlink" title="Modifiers"></a>Modifiers</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// all return *this</span></span><br><span class="line"><span class="built_in">set</span>();						<span class="comment">//set all to true</span></span><br><span class="line"><span class="built_in">set</span>(pos);					<span class="comment">//set pos to true</span></span><br><span class="line"><span class="built_in">set</span>(pos, <span class="literal">false</span>);	<span class="comment">//set pos to false</span></span><br><span class="line"></span><br><span class="line">reset();					<span class="comment">//set all to false</span></span><br><span class="line">reset(pos);				<span class="comment">//set pos to false</span></span><br><span class="line"></span><br><span class="line">flip();						<span class="comment">//flip是翻转的意思</span></span><br><span class="line">flip(pos);</span><br><span class="line"></span><br><span class="line"><span class="comment">//overloaded: &amp;  |  ^  &lt;&lt;  &gt;&gt;  ==  !=</span></span><br></pre></td></tr></table></figure>
-<h3 id="Conversions"><a href="#Conversions" class="headerlink" title="Conversions"></a>Conversions</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">to_string(zero = <span class="string">'0'</span>, one = <span class="string">'1'</span>);	<span class="comment">//转化为01字符串，可以修改0和1的表达字符</span></span><br><span class="line">to_ulong();</span><br><span class="line">to_ullong();		<span class="comment">//C++11</span></span><br></pre></td></tr></table></figure>
-<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/C++模板和元编程/C++可变参数模板" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/11/C_C++/C++模板和元编程/C++可变参数模板/" class="article-date">
-      <time datetime="2019-04-10T17:18:09.000Z" itemprop="datePublished">2019-04-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/11/C_C++/C++模板和元编程/C++可变参数模板/">C++可变参数模板</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="C-可变参数模板"><a href="#C-可变参数模板" class="headerlink" title="C++可变参数模板"></a>C++可变参数模板</h2><p>这个还是看例子最直观。</p>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show_list</span><span class="params">(Args... args)</span></span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>其中Args是一个<strong>模板参数包</strong>，args是一个<strong>函数参数包</strong>。</p>
-<p><strong><em>args包含的值列表与模板参数包Args包含的类型列表匹配。</em></strong></p>
-</li>
-<li><p>默认是按值传递参数，可以为可变参数模板指定展开模式，比如const、&amp;。</p>
-</li>
-<li><p>将省略号放在函数参数包右边即可展开参数包。</p>
-</li>
-<li><p>参数个数为 <code>sizeof…(Args)</code></p>
-</li>
-<li><p>使用时需要递归展开</p>
-</li>
-</ul>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="可变参数函数模板"><a href="#可变参数函数模板" class="headerlink" title="可变参数函数模板"></a>可变参数函数模板</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// definition for 0 parameters</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show_list</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// definition for 1 parameter</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show_list</span><span class="params">(<span class="keyword">const</span> T&amp; value)</span></span>&#123;</span><br><span class="line">  	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; value &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// definition for 2 or more parameters</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show_list</span><span class="params">(<span class="keyword">const</span> T&amp; value, <span class="keyword">const</span> Args&amp;... args)</span></span>&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; value &lt;&lt; <span class="string">','</span>;</span><br><span class="line">		show_list(args...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="可变参数类模板"><a href="#可变参数类模板" class="headerlink" title="可变参数类模板"></a>可变参数类模板</h4><p>模板元编程的例子，组合integer_sequence。</p>
-<p>为可变参数类模板特例化的时候要依据特例化需要的参数来写模板参数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt; //integer_sequence</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T... ts&gt;</span><br><span class="line"><span class="built_in">std</span>::ostream&amp; <span class="keyword">operator</span>&lt;&lt;(<span class="built_in">std</span>::ostream&amp; os,</span><br><span class="line">                         <span class="keyword">const</span> <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;&amp;)</span><br><span class="line">&#123;</span><br><span class="line">    os &lt;&lt; <span class="string">"&#123; "</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> T values[] &#123; ts... &#125;;</span><br><span class="line">    <span class="built_in">std</span>::copy(<span class="built_in">std</span>::begin(values),</span><br><span class="line">              <span class="built_in">std</span>::end(values),</span><br><span class="line">              <span class="built_in">std</span>::ostream_iterator&lt;T&gt;(os, <span class="string">" "</span>));</span><br><span class="line">    <span class="keyword">return</span> os &lt;&lt; <span class="string">"&#125;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">concat</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T... ts&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">concat</span>&lt;std::integer_sequence&lt;T, ts...&gt; &gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">using</span> type = <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T... s1, T... s2, <span class="keyword">typename</span>... Tail&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">concat</span>&lt;</span></span><br><span class="line"><span class="class">        std::integer_sequence&lt;T, s1...&gt;,</span></span><br><span class="line"><span class="class">        std::integer_sequence&lt;T, s2...&gt;,</span></span><br><span class="line"><span class="class">        Tail...&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">using</span> type =<span class="keyword">typename</span> concat&lt;</span><br><span class="line">            <span class="built_in">std</span>::integer_sequence&lt;T, s1..., s2...&gt;,</span><br><span class="line">            Tail...&gt;::type ;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> s1 = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&gt;;</span><br><span class="line">    <span class="keyword">using</span> s2 = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&gt;;</span><br><span class="line">    <span class="keyword">using</span> s3 = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&gt;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; concat&lt;s1, s2, s3&gt;::type&#123;&#125; &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     
