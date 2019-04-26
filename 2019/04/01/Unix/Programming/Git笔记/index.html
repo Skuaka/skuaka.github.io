@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="烧录系统到sd卡 下载Kali Linux 树莓派TFT屏版镜像，并解压。（如不使用触摸屏显示器下载kali For树莓派的regular版本镜像）; 下载Win32DiskImager; 用读卡器把SD连接到Windows主机； 运行Win32DiskImager.exe； 在右侧“设备Device”栏目选择SD卡的盘符； 浏览找到树莓派的进行文件； 点击“Write”按钮，把镜像文件写入SD卡">
-<meta name="keywords" content="Raspberrypi">
+<meta name="description" content="Git使用笔记基础廖雪峰的快速教程 官方教程 常用命令： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465git initgit add 1.txtgit commit -m &quot;bug fix&quot;git rm">
+<meta name="keywords" content="clion">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派安装kali">
-<meta property="og:url" content="http://skuaka.cn/2018/12/04/Unix/Raspberrypi/树莓派安装kali/index.html">
+<meta property="og:title" content="Git使用笔记">
+<meta property="og:url" content="http://skuaka.cn/2019/04/01/Unix/Programming/Git笔记/index.html">
 <meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="烧录系统到sd卡 下载Kali Linux 树莓派TFT屏版镜像，并解压。（如不使用触摸屏显示器下载kali For树莓派的regular版本镜像）; 下载Win32DiskImager; 用读卡器把SD连接到Windows主机； 运行Win32DiskImager.exe； 在右侧“设备Device”栏目选择SD卡的盘符； 浏览找到树莓派的进行文件； 点击“Write”按钮，把镜像文件写入SD卡">
+<meta property="og:description" content="Git使用笔记基础廖雪峰的快速教程 官方教程 常用命令： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465git initgit add 1.txtgit commit -m &quot;bug fix&quot;git rm">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-03T13:04:45.433Z">
+<meta property="og:updated_time" content="2019-04-26T15:40:12.052Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="树莓派安装kali">
-<meta name="twitter:description" content="烧录系统到sd卡 下载Kali Linux 树莓派TFT屏版镜像，并解压。（如不使用触摸屏显示器下载kali For树莓派的regular版本镜像）; 下载Win32DiskImager; 用读卡器把SD连接到Windows主机； 运行Win32DiskImager.exe； 在右侧“设备Device”栏目选择SD卡的盘符； 浏览找到树莓派的进行文件； 点击“Write”按钮，把镜像文件写入SD卡">
+<meta name="twitter:title" content="Git使用笔记">
+<meta name="twitter:description" content="Git使用笔记基础廖雪峰的快速教程 官方教程 常用命令： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465git initgit add 1.txtgit commit -m &quot;bug fix&quot;git rm">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>树莓派安装kali | Skuaka</title>
+<title>Git使用笔记 | Skuaka</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -228,11 +228,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
 </nav>
-      <div class="body-wrap"><article id="post-Unix/Raspberrypi/树莓派安装kali" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Unix/Programming/Git笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/12/04/Unix/Raspberrypi/树莓派安装kali/" class="article-date">
-      <time datetime="2018-12-04T14:08:32.000Z" itemprop="datePublished">2018-12-04</time>
+      <a href="/2019/04/01/Unix/Programming/Git笔记/" class="article-date">
+      <time datetime="2019-04-01T07:24:56.000Z" itemprop="datePublished">2019-04-01</time>
 </a>
 
 
@@ -247,7 +247,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      树莓派安装kali
+      Git使用笔记
     </h1>
   
 
@@ -255,14 +255,10 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Raspberrypi/">Raspberrypi</a>
-    </div>
-
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Raspberrypi/">Raspberrypi</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/clion/">clion</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -272,79 +268,27 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="烧录系统到sd卡"><a href="#烧录系统到sd卡" class="headerlink" title="烧录系统到sd卡"></a>烧录系统到sd卡</h3><ol>
-<li>下载<a href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/" target="_blank" rel="noopener">Kali Linux 树莓派TFT屏版镜像</a>，并解压。（如不使用触摸屏显示器<a href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/" target="_blank" rel="noopener">下载kali For树莓派的regular版本镜像</a>）;</li>
-<li>下载Win32DiskImager;</li>
-<li>用读卡器把SD连接到Windows主机；</li>
-<li>运行Win32DiskImager.exe；</li>
-<li>在右侧“设备Device”栏目选择SD卡的盘符；</li>
-<li>浏览找到树莓派的进行文件；</li>
-<li>点击“Write”按钮，把镜像文件写入SD卡，制作启动盘，操作完成以后把SD卡插入树莓派</li>
+        <h2 id="Git使用笔记"><a href="#Git使用笔记" class="headerlink" title="Git使用笔记"></a>Git使用笔记</h2><h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰的快速教程</a></p>
+<p><a href="https://git-scm.com/docs" target="_blank" rel="noopener">官方教程</a></p>
+<p><strong>常用命令：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line"></span><br><span class="line">git add 1.txt</span><br><span class="line">git commit -m <span class="string">"bug fix"</span></span><br><span class="line">git rm 1.txt</span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line">git diff 1.txt</span><br><span class="line">git diff HEAD -- 1.txt //查看工作区和版本库里面最新版本的区别</span><br><span class="line"></span><br><span class="line">git <span class="built_in">log</span> [--graph] [--pretty=oneline] [--abbrev-commit]</span><br><span class="line">git reset --hard HEAD^</span><br><span class="line">git reset --hard HEAD^^</span><br><span class="line">git reset --hard HEAD~3</span><br><span class="line">git reset --hard bde57</span><br><span class="line">git reflog</span><br><span class="line"></span><br><span class="line">git checkout -- 1.txt</span><br><span class="line">git reset HEAD &lt;file&gt;</span><br><span class="line">// 场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。</span><br><span class="line">// 场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，</span><br><span class="line">//			 第一步用命令git reset HEAD &lt;file&gt;，就回到了场景1，第二步按场景1操作。</span><br><span class="line">// 场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。</span><br><span class="line"></span><br><span class="line">git branch							//查看分支</span><br><span class="line">git branch &lt;name&gt; 			//创建分支</span><br><span class="line">git checkout &lt;name&gt;			//切换分支</span><br><span class="line">git checkout -b &lt;name&gt;	//创建+切换分支</span><br><span class="line">git merge &lt;name&gt;				//合并某分支到当前分支</span><br><span class="line">git branch -d &lt;name&gt;		//删除分支</span><br><span class="line">git branch -D &lt;name&gt;		//强行删除分支</span><br><span class="line"></span><br><span class="line">git merge --no-ff -m <span class="string">"xxx"</span> &lt;branch&gt;	//禁用 Fast forward</span><br><span class="line"></span><br><span class="line">git stash</span><br><span class="line">git stash list</span><br><span class="line">git stash apply [stash@&#123;4&#125;]</span><br><span class="line">git stash drop [stash@&#123;2&#125;]</span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line">git remote [-v]</span><br><span class="line">git push [-u] origin master</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:xxx/xxx.git</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/xxx/xxx.git</span><br><span class="line">git checkout -b dev origin/dev</span><br><span class="line">git branch --<span class="built_in">set</span>-upstream-to=origin/dev dev</span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line">git tag &lt;tagname&gt; [&lt;commit-id&gt;]</span><br><span class="line">git show &lt;tagname&gt; / &lt;commit-id&gt;</span><br><span class="line">git tag -d &lt;tagname&gt;</span><br><span class="line">git push origin &#123;&lt;tagname&gt; / --tags&#125;</span><br><span class="line">git push origin :refs/tags/&lt;tagname&gt;	//先本地删除，然后远程删除</span><br><span class="line"></span><br><span class="line">// 配置Git的时候，加上--global是针对当前用户起作用的，如果不加，那只针对当前的仓库起作用。</span><br><span class="line">git config --global alias.last <span class="string">'log -1'</span></span><br><span class="line">git config --global alias.st status</span><br><span class="line">git config --global alias.ch checkout</span><br><span class="line">git config --global alias.co commit</span><br><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global alias.unstage <span class="string">'reset HEAD'</span></span><br><span class="line">git config --global alias.lg <span class="string">"log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit"</span></span><br><span class="line">// 仓库的Git配置文件在仓库目录下.git/config中。</span><br><span class="line">// 而当前用户的Git配置文件放在用户主目录下的一个隐藏文件.gitconfig中。</span><br></pre></td></tr></table></figure>
+<h3 id="IDE-Git使用"><a href="#IDE-Git使用" class="headerlink" title="IDE+Git使用"></a>IDE+Git使用</h3><p>在mac平台，拿Clion举个例子，大部分IDE都差不多。</p>
+<ol>
+<li><p>先创建本地仓库并且发布(命令行或者GitHub Desktop)</p>
+</li>
+<li><p>Clion只需要在上一步创建的位置上创建新项目，便会自动使用Git进行版本控制。</p>
+</li>
+<li><p>工具栏只能pull和commit，而push在菜单栏里。</p>
+</li>
+<li><p>如果不想上传clion自动创建的文件夹，可以添加ignore文件名(命令行或者GitHub Desktop)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake-build*</span><br><span class="line">.idea</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h3 id="下载raspi-config（树莓派最好的扩展工具）"><a href="#下载raspi-config（树莓派最好的扩展工具）" class="headerlink" title="下载raspi-config（树莓派最好的扩展工具）"></a>下载raspi-config（树莓派最好的扩展工具）</h3><p><a href="http://archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20180406+1.tar.xz" target="_blank" rel="noopener">http://archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20180406+1.tar.xz</a></p>
+<p>PS：</p>
 <ul>
-<li><p>按照里面的选项修改root密码。</p>
-</li>
-<li><p>树莓派默认不会完整的使用整个SD卡空间，所以需要扩展分区 ，在advance里面有扩展选项</p>
-</li>
+<li>可以设置commit的时候检查todo注释</li>
 </ul>
-<h3 id="安装中文字体"><a href="#安装中文字体" class="headerlink" title="安装中文字体"></a>安装中文字体</h3><p>sudo apt-get install ttf-wqy-zenhei</p>
-<p>安装完成后输入sudo dpkg-reconfigure locales，选择en_US.UTF-8、zh_CN.GBK、zh_CN.UTF-8。</p>
-<p>table 键选择ok然后选择zh_CN.UTF-8</p>
-<p>完成后重新启动（然后中文系统连接vncserver不会乱码了）</p>
-<h3 id="vnc远程登入"><a href="#vnc远程登入" class="headerlink" title="vnc远程登入"></a>vnc远程登入</h3><p>apt-get install vnc-server</p>
-<p>选择一个vnc服务器软件并下载</p>
-<p>然后vncserver开启vnc服务</p>
-<p>关闭vnc：vncserver -kill :1</p>
-<p>（冒号后面数字是想关闭的vnc桌面编号，从1开始递增）</p>
-<h3 id="LED亮灯状态"><a href="#LED亮灯状态" class="headerlink" title="LED亮灯状态"></a>LED亮灯状态</h3><table>
-<thead>
-<tr>
-<th>LED</th>
-<th>颜色</th>
-<th>功能</th>
-<th>正常状态</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ACT</td>
-<td>绿色</td>
-<td>card status</td>
-<td>闪烁:SD卡正在活动（类似电脑的硬盘灯）</td>
-</tr>
-<tr>
-<td>PWR</td>
-<td>红色</td>
-<td>power</td>
-<td>不闪烁:正常</td>
-</tr>
-<tr>
-<td>FDX</td>
-<td>橙</td>
-<td>full duplex</td>
-<td>亮:全双工/不亮:半双工</td>
-</tr>
-<tr>
-<td>LNK</td>
-<td>橙</td>
-<td>link</td>
-<td>亮:网络连接成功</td>
-</tr>
-<tr>
-<td>100</td>
-<td>橙</td>
-<td>100 Mbps</td>
-<td>亮:100 Mbps/不亮:10 Mbps</td>
-</tr>
-</tbody>
-</table>
-<h3 id="快捷键打开终端"><a href="#快捷键打开终端" class="headerlink" title="快捷键打开终端"></a>快捷键打开终端</h3><p>首先查看自己终端的名字，打开终端-&gt;help-&gt;about，就可以发现名字，我的是xfce4-terminal。</p>
-<p>然后去左上角找到设置-&gt;键盘-&gt;快捷键-&gt;添加，命令就是上一步看到的名字，快捷键自己按。</p>
-<p>（本人最新kali镜像的终端是 gnome-terminal）</p>
-<h3 id="开启ssh"><a href="#开启ssh" class="headerlink" title="开启ssh"></a>开启ssh</h3><p>1.sudo systemctl enable ssh</p>
-<p>2.sudo systemctl start ssh</p>
-
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>
     
@@ -352,13 +296,13 @@
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2018/12/04/Unix/Raspberrypi/树莓派安装kali/">树莓派安装kali</a></p>
+        <p><span>Title:</span><a href="/2019/04/01/Unix/Programming/Git笔记/">Git使用笔记</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Skuaka</a></p>
-        <p><span>Created:</span>2018-12-04, 22:08:32</p>
-        <p><span>Updated:</span>2019-03-03, 21:04:45</p>
+        <p><span>Created:</span>2019-04-01, 15:24:56</p>
+        <p><span>Updated:</span>2019-04-26, 23:40:12</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2018/12/04/Unix/Raspberrypi/树莓派安装kali/" title="树莓派安装kali">http://skuaka.cn/2018/12/04/Unix/Raspberrypi/树莓派安装kali/</a>
-            <span class="copy-path" data-clipboard-text="From http://skuaka.cn/2018/12/04/Unix/Raspberrypi/树莓派安装kali/　　By Skuaka" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2019/04/01/Unix/Programming/Git笔记/" title="Git使用笔记">http://skuaka.cn/2019/04/01/Unix/Programming/Git笔记/</a>
+            <span class="copy-path" data-clipboard-text="From http://skuaka.cn/2019/04/01/Unix/Programming/Git笔记/　　By Skuaka" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -371,15 +315,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/12/04/Macos/mac软件推荐/">
-                    mac软件推荐
+                <a href="/2019/04/06/Network/Http/https与ssl/">
+                    https 与 ssl
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/11/30/Script Language/Perl/Perl入门/">
-                    Perl 入门
+                <a href="/2019/03/27/Network/IO/libevent/">
+                    libevent
                 </a>
             </div>
         
@@ -391,7 +335,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#烧录系统到sd卡"><span class="toc-number">1.</span> <span class="toc-text">烧录系统到sd卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载raspi-config（树莓派最好的扩展工具）"><span class="toc-number">2.</span> <span class="toc-text">下载raspi-config（树莓派最好的扩展工具）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装中文字体"><span class="toc-number">3.</span> <span class="toc-text">安装中文字体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vnc远程登入"><span class="toc-number">4.</span> <span class="toc-text">vnc远程登入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LED亮灯状态"><span class="toc-number">5.</span> <span class="toc-text">LED亮灯状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快捷键打开终端"><span class="toc-number">6.</span> <span class="toc-text">快捷键打开终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启ssh"><span class="toc-number">7.</span> <span class="toc-text">开启ssh</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git使用笔记"><span class="toc-number">1.</span> <span class="toc-text">Git使用笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础"><span class="toc-number">1.1.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IDE-Git使用"><span class="toc-number">1.2.</span> <span class="toc-text">IDE+Git使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#待续"><span class="toc-number">2.</span> <span class="toc-text">待续</span></a></li></ol>
         
     </div>
     <style>
@@ -427,7 +371,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"树莓派安装kali　| Skuaka　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Git使用笔记　| Skuaka　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -447,7 +391,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/12/04/Macos/mac软件推荐/" title="Pre: mac软件推荐">
+            <a href="/2019/04/06/Network/Http/https与ssl/" title="Pre: https 与 ssl">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -455,7 +399,7 @@
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/11/30/Script Language/Perl/Perl入门/" title="Next: Perl 入门">
+            <a href="/2019/03/27/Network/IO/libevent/" title="Next: libevent">
                 <i class="fa fa-angle-right"></i>
             </a>
         
