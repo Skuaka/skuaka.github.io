@@ -234,6 +234,88 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Operating System/操作系统知识点" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/25/Operating System/操作系统知识点/" class="article-date">
+      <time datetime="2019-03-25T13:03:29.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/25/Operating System/操作系统知识点/">操作系统知识点</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="操作系统知识点"><a href="#操作系统知识点" class="headerlink" title="操作系统知识点"></a>操作系统知识点</h2><h3 id="IPC"><a href="#IPC" class="headerlink" title="IPC"></a>IPC</h3><p>IPC(Inter-Process Communication)进程间通信，提供了各种进程间通信的方法。在Linux C编程中有几种方法</p>
+<ol>
+<li>半双工Unix管道</li>
+<li>FIFOs(命名管道)</li>
+<li>消息队列</li>
+<li>信号量</li>
+<li>共享内存</li>
+<li>Unix域套接字</li>
+</ol>
+<h3 id="多核CPU和进程线程"><a href="#多核CPU和进程线程" class="headerlink" title="多核CPU和进程线程"></a>多核CPU和进程线程</h3><ol>
+<li>单CPU中进程只能是并发，多CPU计算机中进程可以并行。</li>
+<li>单CPU单核中线程只能并发，单CPU多核中线程可以并行。</li>
+</ol>
+<h3 id="用户态和内核态的切换"><a href="#用户态和内核态的切换" class="headerlink" title="用户态和内核态的切换"></a>用户态和内核态的切换</h3><p>　　因为操作系统的资源是有限的，如果访问资源的操作过多，必然会消耗过多的资源，而且如果不对这些操作加以区分，很可能造成资源访问的冲突。所以，为了减少有限资源的访问和使用冲突，Unix/Linux的设计哲学之一就是：对不同的操作赋予不同的执行等级，就是所谓特权的概念。简单说就是有多大能力做多大的事，与系统相关的一些特别关键的操作必须由最高特权的程序来完成。Intel的X86架构的CPU提供了0到3四个特权级，数字越小，特权越高，Linux操作系统中主要采用了0和3两个特权级，分别对应的就是内核态和用户态。运行于用户态的进程可以执行的操作和访问的资源都会受到极大的限制，而运行在内核态的进程则可以执行任何操作并且在资源的使用上没有限制。很多程序开始时运行于用户态，但在执行的过程中，一些操作需要在内核权限下才能执行，这就涉及到一个从用户态切换到内核态的过程。比如C函数库中的内存分配函数malloc()，它具体是使用sbrk()系统调用来分配内存，当malloc调用sbrk()的时候就涉及一次从用户态到内核态的切换，类似的函数还有printf()，调用的是wirte()系统调用来输出字符串，等等。</p>
+<p>一般存在以下三种情况会发生从用户态到内核态的切换：</p>
+<p>1）<strong>系统调用</strong>：原因如上分析。</p>
+<p>2）<strong>异常事件</strong>： 当CPU正在执行运行在用户态的程序时，突然发生某些预先不可知的异常事件，这个时候就会触发从当前用户态执行的进程转向内核态执行相关的异常事件，典型的如缺页异常。</p>
+<p>3）<strong>外围设备的中断</strong>：<strong><em>当外围设备完成用户的请求操作后，会向CPU发出中断信号</em></strong>，此时，CPU就会暂停执行下一条即将要执行的指令，转而去执行中断信号对应的处理程序，如果先前执行的指令是在用户态下，则自然就发生从用户态到内核态的转换。</p>
+<p>　　注意：系统调用的本质其实也是中断，相对于外围设备的硬中断，这种中断称为软中断，这是操作系统为用户特别开放的一种中断，如Linux int 80h中断。所以，从触发方式和效果上来看，这三种切换方式是完全一样的，都相当于是执行了一个中断响应的过程。但是从触发的对象来看，系统调用是进程主动请求切换的，而异常和硬中断则是被动的。</p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/Concept/数据库理论知识" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -2044,124 +2126,6 @@
 <p><strong>例子：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> RandomIt&gt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">parallel_sum</span><span class="params">(RandomIt beg, RandomIt end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> len = end - beg;</span><br><span class="line">    <span class="keyword">if</span> (len &lt; <span class="number">1000</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">std</span>::accumulate(beg, end, <span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">    RandomIt mid = beg + len/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">auto</span> handle = <span class="built_in">std</span>::async(<span class="built_in">std</span>::launch::async,</span><br><span class="line">                             parallel_sum&lt;RandomIt&gt;, mid, end);</span><br><span class="line">    <span class="keyword">int</span> sum = parallel_sum(beg, mid);</span><br><span class="line">    <span class="keyword">return</span> sum + handle.get();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(<span class="number">10000</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The sum is "</span> &lt;&lt; parallel_sum(v.begin(), v.end()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="fin"><a href="#fin" class="headerlink" title="fin"></a>fin</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/C++Collection/C++chrono时间库" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/13/C_C++/C++Collection/C++chrono时间库/" class="article-date">
-      <time datetime="2019-03-13T11:20:05.000Z" itemprop="datePublished">2019-03-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/13/C_C++/C++Collection/C++chrono时间库/">C++chrono时间库</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="时间库chrono（简述）"><a href="#时间库chrono（简述）" class="headerlink" title="时间库chrono（简述）"></a>时间库chrono（简述）</h3><p><code>#include&lt;chrono&gt;</code></p>
-<p><code>using namespace std::chrono</code></p>
-<h4 id="duration"><a href="#duration" class="headerlink" title="duration"></a>duration</h4><p><code>std::chrono::duration</code> 表示一段时间。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Rep</span>, <span class="title">class</span> <span class="title">Period</span> = <span class="title">ratio</span>&lt;1&gt; &gt; <span class="title">class</span> <span class="title">duration</span>;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Rep表示一种数值类型，用来表示Period的数量，比如int float double</p>
-<p>常用的duration&lt;Rep,Period&gt;已经定义好了，在std::chrono::duration下：</p>
-<p>ratio&lt;3600, 1&gt;                hours</p>
-<p>ratio&lt;60, 1&gt;                    minutes</p>
-<p>ratio&lt;1, 1&gt;                      seconds</p>
-<p>ratio&lt;1, 1000&gt;               microseconds</p>
-<p>ratio&lt;1, 1000000&gt;         microseconds</p>
-<p>ratio&lt;1, 1000000000&gt;    nanosecons</p>
-<ul>
-<li><p>在<code>std::chrono::chrono_literals</code>名称空间下，还定义了<strong>用户字面常量</strong>，只举两个：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">operator</span><span class="string">""</span>h</span><br><span class="line"><span class="keyword">operator</span><span class="string">""</span>s</span><br></pre></td></tr></table></figure>
-<p>所以可以直接使用 “1s” 来表示一秒的时间。</p>
-</li>
-</ul>
-</li>
-<li><p>Period是ratio类型，用来表示【用秒表示的时间单位】比如second milisecond</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">intmax_t</span> N, <span class="keyword">intmax_t</span> D = <span class="number">1</span>&gt; class ratio;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>N代表分子，D代表分母，所以ratio表示一个分数值。</p>
-<p>注意，我们自己可以定义Period，比如ratio&lt;1, -2&gt;表示单位时间是-0.5秒。</p>
-</li>
-</ul>
-</li>
-<li><p>由于各种duration表示不同，chrono库提供了duration_cast类型转换函数。</p>
-<p>默认可以转化为更小单位的时间，但是转化为大单位（缩窄）就需调用要这个类型转换函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ToDuration</span>, <span class="title">class</span> <span class="title">Rep</span>, <span class="title">class</span> <span class="title">Period</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">constexpr</span> <span class="title">ToDuration</span> <span class="title">duration_cast</span> (<span class="title">const</span> <span class="title">duration</span>&lt;Rep,Period&gt;&amp; <span class="title">dtn</span>);</span></span><br></pre></td></tr></table></figure>
-<p>比如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">int</span>&gt; seconds_type;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">int</span>,<span class="built_in">std</span>::milli&gt; milliseconds_type;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">int</span>,<span class="built_in">std</span>::ratio&lt;<span class="number">60</span>*<span class="number">60</span>&gt;&gt; hours_type;</span><br><span class="line"></span><br><span class="line"><span class="function">seconds_type <span class="title">s_onehour</span> <span class="params">(<span class="number">60</span>*<span class="number">60</span>)</span></span>;				<span class="comment">// 3600s</span></span><br><span class="line"><span class="comment">//hours_type h_onehour (s_onehour);			// NOT VALID (type truncates), use:</span></span><br><span class="line"><span class="function">hours_type <span class="title">h_onehour</span> <span class="params">(<span class="built_in">std</span>::chrono::duration_cast&lt;hours_type&gt;(s_onehour))</span></span>;</span><br><span class="line"><span class="function">milliseconds_type <span class="title">ms_onehour</span> <span class="params">(s_onehour)</span></span>;	<span class="comment">// 3600000ms (ok, no type truncation)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>duration还有一个成员函数count() 返回Rep类型的Period数量，通常就是用这个函数来显示时间的：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">milliseconds <span class="title">foo</span> <span class="params">(<span class="number">1000</span>)</span></span>; <span class="comment">// 1 second</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; foo.count() &lt;&lt; <span class="string">" milliseconds.\n"</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="time-point"><a href="#time-point" class="headerlink" title="time_point"></a>time_point</h4><p><code>std::chrono::time_point</code> 表示一个具体时间。一个time point必须有一个clock计时。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Clock</span>, <span class="title">class</span> <span class="title">Duration</span> = <span class="title">typename</span> <span class="title">Clock</span>:</span>:duration&gt;  <span class="class"><span class="keyword">class</span> <span class="title">time_point</span>;</span></span><br></pre></td></tr></table></figure>
-<p>由于各种time_point表示方式不同，chrono也提供了相应的转换函数 time_point_cast。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ToDuration</span>, <span class="title">class</span> <span class="title">Clock</span>, <span class="title">class</span> <span class="title">Duration</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">time_point</span>&lt;Clock,ToDuration&gt; <span class="title">time_point_cast</span> (<span class="title">const</span> <span class="title">time_point</span>&lt;Clock,Duration&gt;&amp; <span class="title">tp</span>);</span></span><br></pre></td></tr></table></figure>
-<h4 id="clock"><a href="#clock" class="headerlink" title="clock"></a>clock</h4><p>每一个clock类中都有确定的time_point, duration, Rep, Period类型。</p>
-<ul>
-<li><p><code>std::chrono::system_clock</code> 它表示当前的系统时钟，系统中运行的所有进程使用now()得到的时间是一致的。</p>
-<p>方法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">now(); 			<span class="comment">//当前时间time_point</span></span><br><span class="line"><span class="keyword">to_time_t</span>(); 	<span class="comment">//time_point转换成time_t秒</span></span><br><span class="line"><span class="keyword">from_time_t</span>();	<span class="comment">//从time_t转换成time_point</span></span><br></pre></td></tr></table></figure>
-<p>比如线程库里的一个<strong>例子</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::chrono_literals;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello waiter\n"</span> &lt;&lt; <span class="built_in">std</span>::flush;</span><br><span class="line">    <span class="keyword">auto</span> start = <span class="built_in">std</span>::chrono::high_resolution_clock::now();</span><br><span class="line">    <span class="built_in">std</span>::this_thread::sleep_for(<span class="number">2</span>s);</span><br><span class="line">    <span class="keyword">auto</span> end = <span class="built_in">std</span>::chrono::high_resolution_clock::now();</span><br><span class="line">    <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">double</span>, <span class="built_in">std</span>::milli&gt; elapsed = end-start;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Waited "</span> &lt;&lt; elapsed.count() &lt;&lt; <span class="string">" ms\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>std::chrono::steady_clock</code> 为了表示稳定的时间间隔，后一次调用now()得到的时间总是比前一次的值大（这句话的意思其实是，如果中途修改了系统时间，也不影响now()的结果），每次tick都保证过了稳定的时间间隔。</p>
-</li>
-<li><p><code>std::chrono::high_resolution_clock</code> 顾名思义，这是系统可用的最高精度的时钟。实际上只不过是system_clock或者steady_clock的typedef。</p>
-</li>
-</ul>
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
       
     </div>
     

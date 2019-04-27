@@ -234,6 +234,88 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/Concept_gcc/gcc_gdb备忘录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/06/13/C_C++/Concept_gcc/gcc_gdb备忘录/" class="article-date">
+      <time datetime="2018-06-13T06:48:51.000Z" itemprop="datePublished">2018-06-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/13/C_C++/Concept_gcc/gcc_gdb备忘录/">gcc_gdb备忘录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="gcc常用标签"><a href="#gcc常用标签" class="headerlink" title="gcc常用标签"></a>gcc常用标签</h3><p>对于C/C++编写的程序，从源代码到可执行文件，一般经过下面四个步骤：</p>
+<ol>
+<li><p>预处理，产生.ii文件</p>
+<p><code>gcc -E hello.c &gt; hello.i</code>  只进行预处理，会默认输出到标准输出。</p>
+</li>
+<li><p>编译，产生汇编文件(.s文件)</p>
+<p><code>gcc -O1 -S hello.c</code>   -S 产生<strong>汇编</strong>代码(<strong>注意是大写！！</strong>) hello.s ；-O1是程序优化等级，O2优化比O1高，查看汇编代码时使用低优化等级有助于阅读学习，高版本gcc可以使用-Og</p>
+</li>
+<li><p>汇编，产生目标文件(.o或.obj文件)</p>
+<p><code>gcc -O1 -c hello.c</code> 汇编，阻止编译器创建一个完整的程序，产生<strong>二进制目标代码文件</strong>hello.o。</p>
+</li>
+<li><p>链接,产生可执行文件(.out或.exe文件)</p>
+<p><code>gcc -o hello hello.c</code> </p>
+</li>
+</ol>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcc-gdb/">gcc,gdb</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2018/06/13/C_C++/Concept_gcc/gcc_gdb备忘录/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Frontend/Javascript入门" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1493,173 +1575,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali/">Kali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wifi/">Wifi</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/C++Collection/C++11新特性" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/10/C_C++/C++Collection/C++11新特性/" class="article-date">
-      <time datetime="2018-04-10T04:16:16.000Z" itemprop="datePublished">2018-04-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/10/C_C++/C++Collection/C++11新特性/">C++11（待续</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="新类型"><a href="#新类型" class="headerlink" title="新类型"></a>新类型</h2><p>long long / unsigned long long</p>
-<p>char16_t / char32_t</p>
-<p>原始字符串</p>
-<h3 id="作用域内枚举"><a href="#作用域内枚举" class="headerlink" title="作用域内枚举"></a>作用域内枚举</h3><p>传统enum关键字存在的问题</p>
-<ul>
-<li>全局作用域</li>
-<li>能隐式转换为其他类型(如整型)</li>
-<li>无法指定底层使用的数据类型</li>
-</ul>
-<p>enum class（enum struct）</p>
-<ul>
-<li><p>具有class封装性的特性，作用域是确定的。需要加类名限定符来访问。</p>
-</li>
-<li><p>可以指定底层数据类型</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> <span class="comment">/** 每个枚举都是unsigned char类型的 */</span></span><br><span class="line">&#123; my_enum3 = <span class="number">0</span>, &#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不能隐式转换</p>
-</li>
-</ul>
-<h2 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h2><p>c++11扩大了初始化列表的适用范围，使其可以用于所有内置类型和用户定义的类。</p>
-<p>提供了模版类initializer_list，STL提供了将其作为参数的构造函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;initializer_list&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sum</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">double</span>&gt; il)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">double</span>&gt; il = &#123;<span class="number">1.1</span>, <span class="number">2.2</span>, <span class="number">3.3</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; sum(dl) &lt;&lt; sum(&#123;<span class="number">1.1</span>, <span class="number">2.2</span> ,<span class="number">3.3</span>&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sum</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">double</span>&gt; il)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> p = il.begin(); p != il.end(); ++p)</span><br><span class="line">        total += *p;</span><br><span class="line">    <span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>PS：</strong></p>
-<ul>
-<li>可按值传递也可按引用传递 initializer_list，没有什么大的性能差别。</li>
-<li>它的迭代器类型为 const，所以不能修改值。</li>
-<li>初始化列表能防止缩窄。</li>
-</ul>
-<hr>
-<p>我无意中发现了c++11<strong><em>基于范围的for循环也能用这个语法</em></strong>，即braced-init-list。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i: &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;)</span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;i;	<span class="comment">//输出：123</span></span><br></pre></td></tr></table></figure>
-<p>如下的实验发现，<em>它会将 braced-init-list 里的元素作为参数，依次构造为声明的类型</em>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">myString</span> :</span> <span class="keyword">public</span> <span class="built_in">std</span>::<span class="built_in">string</span></span><br><span class="line">&#123;</span><br><span class="line">	myString(<span class="keyword">const</span> <span class="keyword">char</span> * str) : <span class="built_in">std</span>::<span class="built_in">string</span>(str)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"constructed"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(myString i:&#123;<span class="string">"1"</span>,<span class="string">"2"</span>&#125;)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">constructed</span><br><span class="line">1</span><br><span class="line">constructed</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
-<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><h3 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h3><p>由存储类型说明符变为自动类型推断。</p>
-<h3 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h3><p>将变量的类型声明为表达式指定的类型。<code>decltype(x) y</code>将y声明为x的类型。</p>
-<h3 id="返回后置类型"><a href="#返回后置类型" class="headerlink" title="返回后置类型"></a>返回后置类型</h3><p>常规函数使用这个没有意义，但对于模版函数来说很有用，如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</span><br><span class="line">auto eff(T t, U u) -&gt; decltype(T*U)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为在编译器遇到eff的参数列表前，T和U还不在作用域内，所以必须在参数列表后使用decltype。</p>
-<h3 id="常量表达式constexpr"><a href="#常量表达式constexpr" class="headerlink" title="常量表达式constexpr"></a>常量表达式constexpr</h3><p>constexpr是C++11中新增的关键字，其语义是“常量表达式”，也就是在编译期可求值的表达式。最基础的常量表达式就是字面值或全局变量/函数的地址或sizeof等关键字返回的结果，而其它常量表达式都是由基础表达式通过各种确定的运算得到的。constexpr值可用于enum、switch、数组长度等场合。</p>
-<p>constexpr所修饰的变量一定是编译期可求值的，所修饰的函数在其所有参数都是constexpr时，一定会返回constexpr。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">Inc</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;<span class="keyword">return</span> i + <span class="number">1</span>;&#125; </span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> a = Inc(<span class="number">1</span>); <span class="comment">// ok</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> b = Inc(<span class="built_in">cin</span>.get()); <span class="comment">// !error</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> c = a * <span class="number">2</span> + <span class="number">1</span>;<span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
-<p>constexpr还能用于修饰类的构造函数，即保证如果提供给该构造函数的参数都是constexpr，那么产生的对象中的所有成员都会是constexpr，该对象也就是constexpr对象了，可用于各种只能使用constexpr的场合。注意，<strong>constexpr构造函数必须有一个空的函数体，即所有成员变量的初始化都放到初始化列表中。</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    constexpr A(int xx,int yy): </span><br><span class="line">    	x(xx), y(yy) &#123;&#125;</span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> A <span class="title">a</span><span class="params">(<span class="number">1</span>, <span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">enum</span> &#123;SIZE_X = a.x, SIZE_Y = a.y&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>好处</strong>：</p>
-<ol>
-<li>是一种很强的约束，更好地保证程序的正确语义不被破坏。</li>
-<li>编译器可以在编译期对constexpr的代码进行非常大的优化，比如将用到的constexpr表达式都直接替换成最终结果等。</li>
-<li>相比宏来说，没有额外的开销，但更安全可靠。</li>
-</ol>
-<h3 id="模版别名：using"><a href="#模版别名：using" class="headerlink" title="模版别名：using="></a>模版别名：using=</h3><p>可以部分具体化模版，但typedef就不行。</p>
-<h3 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a>nullptr</h3><p>为向后兼容，nullptr==0 为true。</p>
-<h2 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h2><h3 id="原始字面量"><a href="#原始字面量" class="headerlink" title="原始字面量"></a>原始字面量</h3><p><code>R&quot;xxx(raw string)xxx&quot;</code></p>
-<p>xxx可以为任意字符串，左右相同。</p>
-<h3 id="用户定义字面量"><a href="#用户定义字面量" class="headerlink" title="用户定义字面量"></a>用户定义字面量</h3><p>字面量运算符(literal operator)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> <span class="keyword">operator</span><span class="string">""</span> km(<span class="keyword">long</span> <span class="keyword">double</span> x) &#123; <span class="keyword">return</span> x * <span class="number">1000</span>; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="number">1.0</span>km &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;<span class="comment">//output 1000</span></span><br></pre></td></tr></table></figure>
-<p>根据 C++ 11 标准，<strong>只有下面这些签名是合法的</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> <span class="keyword">const</span>*</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span>*, <span class="built_in">std</span>::<span class="keyword">size_t</span></span><br><span class="line"><span class="keyword">wchar_t</span> <span class="keyword">const</span>*, <span class="built_in">std</span>::<span class="keyword">size_t</span></span><br><span class="line"><span class="keyword">char16_t</span> <span class="keyword">const</span>*, <span class="built_in">std</span>::<span class="keyword">size_t</span></span><br><span class="line"><span class="keyword">char32_t</span> <span class="keyword">const</span>*, <span class="built_in">std</span>::<span class="keyword">size_t</span></span><br></pre></td></tr></table></figure>
-<p>最后四个对于字符串相当有用，因为第二个参数会自动推断为字符串的长度。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="keyword">size_t</span> <span class="keyword">operator</span><span class="string">""</span> _len(<span class="keyword">char</span> <span class="keyword">const</span>*, <span class="built_in">std</span>::<span class="keyword">size_t</span> len)&#123;</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ABCDEFGH"</span>_len &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;<span class="comment">//output 8</span></span><br></pre></td></tr></table></figure>
-<p>上面列出的第一个签名不要同字符串相混淆，应该被称为原始字面量 <em>raw literal</em> 操作符。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> <span class="keyword">const</span>* <span class="keyword">operator</span><span class="string">""</span> _r(<span class="keyword">char</span> <span class="keyword">const</span>* s)&#123;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="number">12</span>_r &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;<span class="comment">//output 12</span></span><br></pre></td></tr></table></figure>
-<h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><p>摒弃了auto_ptr，新增了三种：unique_ptr , shared_ptr , weak_ptr 。</p>
-<h2 id="异常规范"><a href="#异常规范" class="headerlink" title="异常规范"></a>异常规范</h2><p>摒弃了异常规范，添加了关键字noexcept来指出函数不回引发异常。</p>
-<h2 id="静态断言"><a href="#静态断言" class="headerlink" title="静态断言"></a>静态断言</h2><p>C++提供了调试工具assert宏，它在运行阶段对断言进行检查，如果为true，则显示一条消息，否则abort()。</p>
-<p>C++11新增了关键字static_assert，可用于在编译阶段对断言进行测试，(便于编译期调试)。</p>
-<h2 id="对类的修改"><a href="#对类的修改" class="headerlink" title="对类的修改"></a>对类的修改</h2><h3 id="移动构造和移动赋值"><a href="#移动构造和移动赋值" class="headerlink" title="移动构造和移动赋值"></a>移动构造和移动赋值</h3><h3 id="default和delete"><a href="#default和delete" class="headerlink" title="default和delete"></a>default和delete</h3><h3 id="委托构造函数"><a href="#委托构造函数" class="headerlink" title="委托构造函数"></a>委托构造函数</h3><p>c++11允许在一个构造函数的定义中使用另一个构造函数，类似成员初始化列表的语法。</p>
-<h3 id="final-override"><a href="#final-override" class="headerlink" title="final/override"></a>final/override</h3><ul>
-<li><p>final 修饰的虚函数不能被子类重写。</p>
-<p><code>virtual void printf() final;</code></p>
-</li>
-<li><p>final 修饰的类不能被继承。</p>
-<p><code>class Base final{...}</code></p>
-</li>
-<li><p>override 修饰后如果父类无对应的虚函数则报错。用来检查的。</p>
-</li>
-</ul>
-<h3 id="explicit可用于转换函数"><a href="#explicit可用于转换函数" class="headerlink" title="explicit可用于转换函数"></a>explicit可用于转换函数</h3><p>本来是禁止单参数构造函数导致的自动转换，c++11扩展了这种用法，使其可<strong>对转换函数</strong>做类似的处理。</p>
-<p><code>explicit operator double() const;</code></p>
-<h3 id="类内成员初始化"><a href="#类内成员初始化" class="headerlink" title="类内成员初始化"></a>类内成员初始化</h3><p>可以使用等号或大括号版本的初始化，但不能使用圆括号版本的初始化。</p>
-<p>如果构造函数在成员初始化列表中提供了相应的值，这些默认值将被覆盖。</p>
-<h2 id="模版和STL的修改"><a href="#模版和STL的修改" class="headerlink" title="模版和STL的修改"></a>模版和STL的修改</h2><h3 id="基于范围的for循环"><a href="#基于范围的for循环" class="headerlink" title="基于范围的for循环"></a>基于范围的for循环</h3><p><code>for(auto x : ss)</code></p>
-<h3 id="新的STL容器"><a href="#新的STL容器" class="headerlink" title="新的STL容器"></a>新的STL容器</h3><p>单向链表 forward_list</p>
-<p>无序集合 unordered_map、unordered_multimap、unordered_set、unordered_multiset。</p>
-<p>array模版</p>
-<h3 id="新的STL方法"><a href="#新的STL方法" class="headerlink" title="新的STL方法"></a>新的STL方法</h3><p>cbegin()和cend()、crbegin()和crend()。是对应于原来的const版本。</p>
-<h3 id="valarray-升级"><a href="#valarray-升级" class="headerlink" title="valarray 升级"></a>valarray 升级</h3><p>为它提供了begin() 和 end()</p>
-<h3 id="摒弃-export"><a href="#摒弃-export" class="headerlink" title="摒弃 export"></a>摒弃 export</h3><p>摈弃了C++98的关键字export，但仍保留了以供以后使用。</p>
-<h3 id="连续尖括号-gt-gt"><a href="#连续尖括号-gt-gt" class="headerlink" title="连续尖括号&gt;&gt;"></a>连续尖括号&gt;&gt;</h3><p>以前嵌套模版的&gt;&gt;可能会引起歧义，需要分开来，现在不需要了。</p>
-<h3 id="右值引用和移动语义"><a href="#右值引用和移动语义" class="headerlink" title="右值引用和移动语义"></a>右值引用和移动语义</h3><p>见另一篇</p>
-<h3 id="Lamda表达式"><a href="#Lamda表达式" class="headerlink" title="Lamda表达式"></a>Lamda表达式</h3><p>见另一篇</p>
-<h3 id="包装器"><a href="#包装器" class="headerlink" title="包装器"></a>包装器</h3><p>比如 <code>std::function</code>、 <code>std::packaged_task</code></p>
-<h3 id="可变参数模版"><a href="#可变参数模版" class="headerlink" title="可变参数模版"></a>可变参数模版</h3><p>见另一篇</p>
-<h3 id="新增的库"><a href="#新增的库" class="headerlink" title="新增的库"></a>新增的库</h3><ul>
-<li><p>线程库：见另一篇 <code>automic</code>、<code>thread</code>、<code>mutex</code>、<code>condition_variable</code>、<code>future</code>。</p>
-</li>
-<li><p>时间库：见另一篇 <code>chrono</code> 。</p>
-</li>
-<li><p><code>tuple</code>库，tuple是广义的pair对象，可以存储任意多个类型不同的值。</p>
-</li>
-<li><code>ratio</code>库，编译阶段有理数算术库</li>
-<li><code>regex</code>正则表达式库，指定了一种模式，可用于与文本字符串的内容匹配。</li>
-</ul>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
     </div>
 
       
