@@ -316,69 +316,6 @@
 
 
   
-    <article id="post-Unix/Command/xargs" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/27/Unix/Command/xargs/" class="article-date">
-      <time datetime="2019-04-27T02:14:34.000Z" itemprop="datePublished">2019-04-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/27/Unix/Command/xargs/">xargs</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Unix/Programming/守护进程的创建" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1068,6 +1005,129 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/C++模板和元编程/C++编译期快速排序" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/11/C_C++/C++模板和元编程/C++编译期快速排序/" class="article-date">
+      <time datetime="2019-04-11T14:53:26.000Z" itemprop="datePublished">2019-04-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/11/C_C++/C++模板和元编程/C++编译期快速排序/">C++编译期快速排序</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>来自：<a href="https://playfulprogramming.blogspot.com/2015/01/compile-time-quicksort-in-idiomatic.html" target="_blank" rel="noopener">https://playfulprogramming.blogspot.com/2015/01/compile-time-quicksort-in-idiomatic.html</a></p>
+<p>文章太好，阅读完受益匪浅，完整拷贝防遗失。</p>
+<h2 id="Compile-time-quicksort-in-idiomatic-modern-C"><a href="#Compile-time-quicksort-in-idiomatic-modern-C" class="headerlink" title="Compile time quicksort in idiomatic modern C++"></a>Compile time quicksort in idiomatic modern C++</h2><p>A contender for the most useless program ever written just got a much needed overhaul. In 2011 I <a href="http://playfulprogramming.blogspot.se/2011/09/compile-time-quick-sort-using-c.html" target="_blank" rel="noopener">wrote</a> about compile time quick sort as a challenge to myself, and as an exercise in the then newfangled variadic templates. Now, having worked with C++11 for a few years, and lately also C++14, I see that the code I wrote then is unnecessarily clumsy and highly unidiomatic.</p>
+<p>In C++14 the data representation is easy. <a href="http://en.cppreference.com/w/cpp/utility/integer_sequence" target="_blank" rel="noopener">std::integer_sequence</a> fits perfectly. It really is the same as I used in 2011, but this time it’s provided by the standard library.</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>In order to show sequences, an output streaming operator is handy:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T ... ts&gt;</span><br><span class="line"><span class="built_in">std</span>::ostream&amp; <span class="keyword">operator</span>&lt;&lt;(<span class="built_in">std</span>::ostream&amp; os,</span><br><span class="line">                         <span class="keyword">const</span> <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;&amp;)</span><br><span class="line">&#123;</span><br><span class="line">  os &lt;&lt; <span class="string">"&#123; "</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> T values[] &#123; ts... &#125;;</span><br><span class="line">  <span class="built_in">std</span>::copy(<span class="built_in">std</span>::begin(values),</span><br><span class="line">            <span class="built_in">std</span>::end(values),</span><br><span class="line">            <span class="built_in">std</span>::ostream_iterator&lt;T&gt;(os, <span class="string">" "</span>));</span><br><span class="line">  <span class="keyword">return</span> os &lt;&lt; <span class="string">"&#125;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Note that the value of the integer sequence is not used. All information is in the type.  That’s why filling the values in a static array makes sense - the output stream operator function will be instantiated for each different sequence being output by a program.</p>
+<h3 id="Concatenating-sequences"><a href="#Concatenating-sequences" class="headerlink" title="Concatenating sequences"></a>Concatenating sequences</h3><p>An important problem to solve is that of concatenating sequences. It will be needed in quick sort itself, since it concatenates the sorted sub sequences.</p>
+<p>First an introduction of the concat template, accompanied by an alias for making life easier.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ... T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">concat</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ... T&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">concat_t</span> = <span class="keyword">typename</span> concat&lt;T...&gt;::type;</span><br></pre></td></tr></table></figure>
+<p>The alias concat_t&lt;T…&gt; is a convenience. Instead of having to write using a = typename concat&lt;T…&gt;::type, you just write using a = concat_t&lt;T…&gt;.</p>
+<p>In ways I dislike the naming convention (I’d like it reversed,) but it follows that of the C++14 standard library, and that is not unimportant. Regardless, I argue that the latter is not just less typing, but is easier to read too.</p>
+<p>Now for the partial specializations.</p>
+<p>As so often in template meta programming, the solution is recursive. First concatenating a single integer sequence is the trivial base case.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T ... ts&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">concat</span>&lt;std::integer_sequence&lt;T, ts...&gt; &gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> type = <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>In ways this is even unnecessarily complicated. You can say that concatenating one type (any type) is that type itself. That would work, but I choose to make partial specializations for std::integer_sequence&lt;&gt; only, since it makes it slightly easier to catch stupid programming mistakes. It also future proofs concat, should I ever feel a need to concatenate other types.</p>
+<p>The general case, concatenating two integer sequences, and some unknown tail is the same as concatenating the combination of the two integer sequences with the tail.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T... s1, T... s2, <span class="keyword">typename</span> ... Tail&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">concat</span>&lt;std::integer_sequence&lt;T, s1...&gt;,</span></span><br><span class="line"><span class="class">              std::integer_sequence&lt;T, s2...&gt;,</span></span><br><span class="line"><span class="class">              Tail...&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> type = <span class="keyword">concat_t</span>&lt;<span class="built_in">std</span>::integer_sequence&lt;T, s1..., s2...&gt;, Tail...&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Note how the convenience alias concat_t is useful even in the implementation of concat itself.</p>
+<p>Let’s see if this works, using a simple program:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">using</span> s1 = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&gt;;</span><br><span class="line">  <span class="keyword">using</span> s2 = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&gt;;</span><br><span class="line">  <span class="keyword">using</span> s3 = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&gt;;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">concat_t</span>&lt;s1, s2, s3&gt;&#123;&#125; &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Note that even though the output stream operator for std::integer_sequence&lt;&gt; doesn’t use the value itself, a value is none the less needed, so an instance is created.</p>
+<p>The output of running the program is:</p>
+<p><code>{ 1 2 3 4 5 6 7 8 9 }</code></p>
+<p>so that is good.</p>
+<h3 id="Partitioning"><a href="#Partitioning" class="headerlink" title="Partitioning"></a>Partitioning</h3><p>Quick sort works by partitioning the sequence into a sequence of the values less than a selected pivot element, and the rest, and then recursively sort those partitions. So partitioning a sequence into two sequences based on a predicate is important.</p>
+<p>Here too, the solution is a recursive. The base case of partitioning an empty sequence is trivial:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> V, V&gt; <span class="class"><span class="keyword">class</span> <span class="title">pred</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">partition</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> V, V&gt; <span class="class"><span class="keyword">class</span> <span class="title">pred</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">partition</span>&lt;pred, std::integer_sequence&lt;T&gt;&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> incl_type = <span class="built_in">std</span>::integer_sequence&lt;T&gt;;</span><br><span class="line">  <span class="keyword">using</span> excl_type = <span class="built_in">std</span>::integer_sequence&lt;T&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>After all, the number of elements selected by the predicate from the empty sequence are none, and likewise for those rejected by it.</p>
+<p>The general case is not much more difficult:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> V, V&gt; <span class="class"><span class="keyword">class</span> <span class="title">pred</span>, <span class="title">typename</span> <span class="title">T</span>, <span class="title">T</span> <span class="title">t</span>, <span class="title">T</span> ... <span class="title">ts</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">partition</span>&lt;pred, std::integer_sequence&lt;T, t, ts...&gt;&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> incl = <span class="built_in">std</span>::integer_sequence&lt;T, t&gt;;</span><br><span class="line">  <span class="keyword">using</span> excl = <span class="built_in">std</span>::integer_sequence&lt;T&gt;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">using</span> tail = partition&lt;pred, <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt; &gt;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">bool</span> outcome = pred&lt;T, t&gt;::value;</span><br><span class="line">  <span class="keyword">using</span> incl_type = <span class="keyword">concat_t</span>&lt;<span class="built_in">std</span>::<span class="keyword">conditional_t</span>&lt;outcome, incl, excl&gt;,</span><br><span class="line">                             <span class="keyword">typename</span> tail::incl_type&gt;;</span><br><span class="line">  <span class="keyword">using</span> excl_type = <span class="keyword">concat_t</span>&lt;<span class="built_in">std</span>::<span class="keyword">conditional_t</span>&lt;outcome, excl, incl&gt;,</span><br><span class="line">                             <span class="keyword">typename</span> tail::excl_type&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>As always in C++ template meta programming, using alias names for things is a must to keep the code anywhere near readable.</p>
+<p>Above tail is the result of the partitioning of the rest of the values. <a href="http://en.cppreference.com/w/cpp/types/conditional" target="_blank" rel="noopener">std::conditional_t</a> results in either TrueType or FalseType depending on the boolean value of the selector.</p>
+<p>If we assume that the outcome of the predicate on t (the first element in the sequence) is true, then incl_type becomes the concatenation of std::integer_sequence&lt;T, t&gt; and incl_type from tail, otherwise it becomes the concatenation of the empty sequence and incl_type from tail.</p>
+<p>Since this implementation builds both the included sequence and the excluded sequence in parallel, the convention of a convenience alias partition_t&lt;&gt; is of little use. It would be possible to make a filter template instead, that just provides a sequence of selected elements, but then filtering would have to be done twice, the second time with the inverted predicate, and even though we’re in compile time computation, we care about performance and avoid two-pass implementations if we can, right?</p>
+<p>Let’s see how this partitioning works, with another simple program:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T v&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">is_odd</span> :</span> <span class="built_in">std</span>::integral_constant&lt;<span class="keyword">bool</span>, v &amp; <span class="number">1</span>&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">using</span> seq = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&gt;;</span><br><span class="line">  <span class="keyword">using</span> elems = partition&lt;is_odd, seq&gt;;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; elems::incl_type&#123;&#125; &lt;&lt; <span class="string">' '</span> &lt;&lt; elems::excl_type&#123;&#125; &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Lines 1-2 defines the simple predicate that tells if an integral value is odd. Line 7 partitions the provided sequence into those selected by the predicate and those rejected by it.</p>
+<p>The result of running the program is:</p>
+<p><code>{ 1 3 5 } { 2 4 6 }</code></p>
+<p>so again, it looks OK.</p>
+<h3 id="Quick-sort"><a href="#Quick-sort" class="headerlink" title="Quick sort"></a>Quick sort</h3><p>Given the availability of concat and partition, quicksort becomes rather simple to implement. First the typical introduction of the template:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, U, U&gt; <span class="class"><span class="keyword">class</span> <span class="title">compare</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">quicksort</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, U, U&gt; <span class="class"><span class="keyword">class</span> <span class="title">compare</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">using</span> <span class="title">quicksort_t</span> = <span class="title">typename</span> <span class="title">quicksort</span>&lt;compare, T&gt;:</span>:type;</span><br></pre></td></tr></table></figure>
+<p>Since quicksort only has one result, the convenience alias quicksort_t becomes handy. compare is a binary predicate accepting two values of a given type.</p>
+<p>As so often, the base case is trivial.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, U, U&gt; <span class="class"><span class="keyword">class</span> <span class="title">compare</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">quicksort</span>&lt;compare, std::integer_sequence&lt;T&gt;&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> type = <span class="built_in">std</span>::integer_sequence&lt;T&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>After all, the result of sorting an empty sequence is always an empty sequence.</p>
+<p>The general case, a partial specialization of quicksort with a binary predicate compare and an std::integer_sequence&lt;&gt; of at least one element, is surprisingly simple too:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, U, U&gt; <span class="class"><span class="keyword">class</span> <span class="title">compare</span>,</span></span><br><span class="line"><span class="class">          <span class="title">typename</span> <span class="title">T</span>, <span class="title">T</span> <span class="title">t</span>, <span class="title">T</span> ... <span class="title">ts</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">quicksort</span>&lt;compare, std::integer_sequence&lt;T, t, ts...&gt;&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> V, V v&gt;</span><br><span class="line">  <span class="keyword">using</span> pred = compare&lt;V, v, t&gt;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">using</span> partitions = partition&lt;pred, <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;&gt;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">using</span> incl_seq = <span class="keyword">typename</span> partitions::incl_type;</span><br><span class="line">  <span class="keyword">using</span> excl_seq = <span class="keyword">typename</span> partitions::excl_type;</span><br><span class="line">  <span class="keyword">using</span> type = <span class="keyword">concat_t</span>&lt;<span class="keyword">quicksort_t</span>&lt;compare, incl_seq&gt;,</span><br><span class="line">                        <span class="built_in">std</span>::integer_sequence&lt;T, t&gt;,</span><br><span class="line">                        <span class="keyword">quicksort_t</span>&lt;compare, excl_seq&gt; &gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Lines 5-6 is an interesting template alias. It makes a unary predicate from the binary predicate compare and the first element of the sequence, t. So, the first element becomes the pivot element to partition the rest of the elements around, and partition requires a unary predicate as its selection criteria. As an example, if compare is “less than”, and the first element t is 8, then predbecomes “is less than 8”.</p>
+<p>Line 8 is where this partitioning is done.</p>
+<p>Lines 10-11 are just short hand conveniences to make lines 12-14 readable.</p>
+<p>Lines 12-14 are just as from the text book, the result of quick sort is the concatenation of quick sort on the partition of elements included by the predicate, the pivot element, and the result of quick sort on the partition of elements excluded by the predicate.</p>
+<p>Another simple program shows the result:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T lh, T rh&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">less</span> :</span> <span class="built_in">std</span>::integral_constant&lt;<span class="keyword">bool</span>, (lh &lt; rh)&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">using</span> seq = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">32</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">99</span>, <span class="number">101</span>, <span class="number">5</span>&gt;;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">quicksort_t</span>&lt;less, seq&gt;&#123;&#125; &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The output from running this program is unsurprisingly:</p>
+<p><code>{ 1 3 4 5 7 8 32 99 101 }</code></p>
+<h3 id="A-word-on-performance"><a href="#A-word-on-performance" class="headerlink" title="A word on performance"></a>A word on performance</h3><p>Everyone who has studied algorithms knows that it’s poor practice to partition the elements around the first element for quick sort, since it gives sorting an already sorted sequence O(n²) complexity. For any deterministic element selection, there is a vulnerable family of sequences, so to protect against this, the selection of the pivot element for partitioning should be random. Just two days ago, a solution to this was shown by <a href="http://mattbierner.com/" target="_blank" rel="noopener">Matt Bierner</a> in his blog post <a href="http://blog.mattbierner.com/stupid-template-tricks-compile-time-pseudo-random-number-generator/" target="_blank" rel="noopener">“Compile Time Pseudo-Random Number Generator”</a>.  I leave it as an exercise for someone else to improve on the quick sort implementation.</p>
+<h3 id="Wrap-up"><a href="#Wrap-up" class="headerlink" title="Wrap up"></a>Wrap up</h3><p>The readability of this code is vastly improved over the 2011 original, and its shorter too. Using alias templates does not just save typing, but also removes the need for many transformation templates. Performance is also improved over the 2011 original, which used two pass partitioning using a filter.</p>
+<p>The utter uselessness of compile time quicksort, however, is not threatened.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li></ul>
     </div>
 
       

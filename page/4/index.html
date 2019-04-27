@@ -234,124 +234,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-C_C++/C++Collection/C++chrono时间库" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/13/C_C++/C++Collection/C++chrono时间库/" class="article-date">
-      <time datetime="2019-03-13T11:20:05.000Z" itemprop="datePublished">2019-03-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/13/C_C++/C++Collection/C++chrono时间库/">C++chrono时间库</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="时间库chrono（简述）"><a href="#时间库chrono（简述）" class="headerlink" title="时间库chrono（简述）"></a>时间库chrono（简述）</h3><p><code>#include&lt;chrono&gt;</code></p>
-<p><code>using namespace std::chrono</code></p>
-<h4 id="duration"><a href="#duration" class="headerlink" title="duration"></a>duration</h4><p><code>std::chrono::duration</code> 表示一段时间。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Rep</span>, <span class="title">class</span> <span class="title">Period</span> = <span class="title">ratio</span>&lt;1&gt; &gt; <span class="title">class</span> <span class="title">duration</span>;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Rep表示一种数值类型，用来表示Period的数量，比如int float double</p>
-<p>常用的duration&lt;Rep,Period&gt;已经定义好了，在std::chrono::duration下：</p>
-<p>ratio&lt;3600, 1&gt;                hours</p>
-<p>ratio&lt;60, 1&gt;                    minutes</p>
-<p>ratio&lt;1, 1&gt;                      seconds</p>
-<p>ratio&lt;1, 1000&gt;               microseconds</p>
-<p>ratio&lt;1, 1000000&gt;         microseconds</p>
-<p>ratio&lt;1, 1000000000&gt;    nanosecons</p>
-<ul>
-<li><p>在<code>std::chrono::chrono_literals</code>名称空间下，还定义了<strong>用户字面常量</strong>，只举两个：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">operator</span><span class="string">""</span>h</span><br><span class="line"><span class="keyword">operator</span><span class="string">""</span>s</span><br></pre></td></tr></table></figure>
-<p>所以可以直接使用 “1s” 来表示一秒的时间。</p>
-</li>
-</ul>
-</li>
-<li><p>Period是ratio类型，用来表示【用秒表示的时间单位】比如second milisecond</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">intmax_t</span> N, <span class="keyword">intmax_t</span> D = <span class="number">1</span>&gt; class ratio;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>N代表分子，D代表分母，所以ratio表示一个分数值。</p>
-<p>注意，我们自己可以定义Period，比如ratio&lt;1, -2&gt;表示单位时间是-0.5秒。</p>
-</li>
-</ul>
-</li>
-<li><p>由于各种duration表示不同，chrono库提供了duration_cast类型转换函数。</p>
-<p>默认可以转化为更小单位的时间，但是转化为大单位（缩窄）就需调用要这个类型转换函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ToDuration</span>, <span class="title">class</span> <span class="title">Rep</span>, <span class="title">class</span> <span class="title">Period</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">constexpr</span> <span class="title">ToDuration</span> <span class="title">duration_cast</span> (<span class="title">const</span> <span class="title">duration</span>&lt;Rep,Period&gt;&amp; <span class="title">dtn</span>);</span></span><br></pre></td></tr></table></figure>
-<p>比如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">int</span>&gt; seconds_type;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">int</span>,<span class="built_in">std</span>::milli&gt; milliseconds_type;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">int</span>,<span class="built_in">std</span>::ratio&lt;<span class="number">60</span>*<span class="number">60</span>&gt;&gt; hours_type;</span><br><span class="line"></span><br><span class="line"><span class="function">seconds_type <span class="title">s_onehour</span> <span class="params">(<span class="number">60</span>*<span class="number">60</span>)</span></span>;				<span class="comment">// 3600s</span></span><br><span class="line"><span class="comment">//hours_type h_onehour (s_onehour);			// NOT VALID (type truncates), use:</span></span><br><span class="line"><span class="function">hours_type <span class="title">h_onehour</span> <span class="params">(<span class="built_in">std</span>::chrono::duration_cast&lt;hours_type&gt;(s_onehour))</span></span>;</span><br><span class="line"><span class="function">milliseconds_type <span class="title">ms_onehour</span> <span class="params">(s_onehour)</span></span>;	<span class="comment">// 3600000ms (ok, no type truncation)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>duration还有一个成员函数count() 返回Rep类型的Period数量，通常就是用这个函数来显示时间的：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">milliseconds <span class="title">foo</span> <span class="params">(<span class="number">1000</span>)</span></span>; <span class="comment">// 1 second</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; foo.count() &lt;&lt; <span class="string">" milliseconds.\n"</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="time-point"><a href="#time-point" class="headerlink" title="time_point"></a>time_point</h4><p><code>std::chrono::time_point</code> 表示一个具体时间。一个time point必须有一个clock计时。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Clock</span>, <span class="title">class</span> <span class="title">Duration</span> = <span class="title">typename</span> <span class="title">Clock</span>:</span>:duration&gt;  <span class="class"><span class="keyword">class</span> <span class="title">time_point</span>;</span></span><br></pre></td></tr></table></figure>
-<p>由于各种time_point表示方式不同，chrono也提供了相应的转换函数 time_point_cast。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ToDuration</span>, <span class="title">class</span> <span class="title">Clock</span>, <span class="title">class</span> <span class="title">Duration</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">time_point</span>&lt;Clock,ToDuration&gt; <span class="title">time_point_cast</span> (<span class="title">const</span> <span class="title">time_point</span>&lt;Clock,Duration&gt;&amp; <span class="title">tp</span>);</span></span><br></pre></td></tr></table></figure>
-<h4 id="clock"><a href="#clock" class="headerlink" title="clock"></a>clock</h4><p>每一个clock类中都有确定的time_point, duration, Rep, Period类型。</p>
-<ul>
-<li><p><code>std::chrono::system_clock</code> 它表示当前的系统时钟，系统中运行的所有进程使用now()得到的时间是一致的。</p>
-<p>方法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">now(); 			<span class="comment">//当前时间time_point</span></span><br><span class="line"><span class="keyword">to_time_t</span>(); 	<span class="comment">//time_point转换成time_t秒</span></span><br><span class="line"><span class="keyword">from_time_t</span>();	<span class="comment">//从time_t转换成time_point</span></span><br></pre></td></tr></table></figure>
-<p>比如线程库里的一个<strong>例子</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::chrono_literals;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello waiter\n"</span> &lt;&lt; <span class="built_in">std</span>::flush;</span><br><span class="line">    <span class="keyword">auto</span> start = <span class="built_in">std</span>::chrono::high_resolution_clock::now();</span><br><span class="line">    <span class="built_in">std</span>::this_thread::sleep_for(<span class="number">2</span>s);</span><br><span class="line">    <span class="keyword">auto</span> end = <span class="built_in">std</span>::chrono::high_resolution_clock::now();</span><br><span class="line">    <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">double</span>, <span class="built_in">std</span>::milli&gt; elapsed = end-start;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Waited "</span> &lt;&lt; elapsed.count() &lt;&lt; <span class="string">" ms\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>std::chrono::steady_clock</code> 为了表示稳定的时间间隔，后一次调用now()得到的时间总是比前一次的值大（这句话的意思其实是，如果中途修改了系统时间，也不影响now()的结果），每次tick都保证过了稳定的时间间隔。</p>
-</li>
-<li><p><code>std::chrono::high_resolution_clock</code> 顾名思义，这是系统可用的最高精度的时钟。实际上只不过是system_clock或者steady_clock的typedef。</p>
-</li>
-</ul>
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-C_C++/C++Collection/C++右值引用和移动" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -965,6 +847,89 @@
       
         <p class="article-more-link">
           <a href="/2019/03/08/C_C++/Mess/C++运算符优先级/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-C_C++/C++Collection/C++虚函数表" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/08/C_C++/C++Collection/C++虚函数表/" class="article-date">
+      <time datetime="2019-03-08T09:33:14.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/C_C++/C++Collection/C++虚函数表/">C++虚函数表</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="C-虚函数表"><a href="#C-虚函数表" class="headerlink" title="C++虚函数表"></a>C++虚函数表</h2><p>学习自<a href="https://blog.twofei.com/496/" target="_blank" rel="noopener">https://blog.twofei.com/496/</a> ，写的太好了。</p>
+<p><strong>个人看完后的简略总结：</strong></p>
+<p>基类有虚函数则会在对象最前面创建一个<code>void ** __vftp;</code>指向该类所有对象共用的虚函数表，这个指针占四字节。</p>
+<p>这个虚函数表其实就是个指针数组，指向各个虚函数，如果子类虚函数重载了父类的虚函数，则相应更新虚函数表里函数指针的指向。</p>
+<p>子类的新虚函数索引是放在按继承顺序来看的第一个有虚函数表的基类的虚函数表里，并且会改变对象布局（有虚函数表指针的基类会跑到对象布局最前面，如果有很多个基类，有虚函数的都跑到没虚函数的前面）。</p>
+<p>如果基类都没有虚函数，子类有，那么<code>__vftp</code>就由子类创建，并且移到对象布局最前面（子类的其他部分还是在基类后方）。</p>
+<p><strong>总之</strong>：<em>谁有虚函数表, 谁就往前靠</em>（但是子类的固有部分是跑不到基类前面去的）。</p>
+<hr>
+<p><strong>可以强制转换</strong></p>
+<p>由于继承完全拥有父类的所有, 包括数据成员与虚函数表, 所以:把一个继承类强制转换为一个基类是完全可行的。</p>
+<p><strong>虚函数性能</strong></p>
+<p>CPU流水线预测不了，可能会排空，所以性能差。</p>
+<p><strong>带虚函数与否的空类大小</strong></p>
+<p>不带虚函数：<em>sizeof</em>为<em>1</em>（详情见另一篇 struct 与 class 区别）</p>
+<p>带虚函数：<em>sizeof</em>为<em>4</em>（<em>32</em>位）</p>
+<h5 id="虚函数不能内联"><a href="#虚函数不能内联" class="headerlink" title="虚函数不能内联"></a>虚函数不能内联</h5><p>虚函数需要函数指针，内联就无法产生函数。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/08/C_C++/C++Collection/C++虚函数表/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
