@@ -234,6 +234,142 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/Mysql/mysql c api" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/Database/Mysql/mysql c api/" class="article-date">
+      <time datetime="2018-12-04T14:18:57.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/Database/Mysql/mysql c api/">mysql c&amp;c++ api</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="mac-os环境"><a href="#mac-os环境" class="headerlink" title="mac os环境"></a>mac os环境</h2><h3 id="Download-Connector-C"><a href="#Download-Connector-C" class="headerlink" title="Download Connector/C++"></a>Download Connector/C++</h3><p><a href="https://dev.mysql.com/downloads/connector/cpp/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/connector/cpp/</a></p>
+<h3 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;mysql/mysql.h&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Compiler-Arguments"><a href="#Compiler-Arguments" class="headerlink" title="Compiler Arguments"></a>Compiler Arguments</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">g++ main.cpp  `mysql_config --libs`</span><br><span class="line"><span class="comment">/*在unix环境中反引号 `` 和 $() 都是命令替换。</span></span><br><span class="line"><span class="comment">在本机(Mac)上直接输入 mysql_config --libs 产生的结果是: </span></span><br><span class="line"><span class="comment">-L/usr/local/Cellar/mysql/5.7.21/lib -lmysqlclient -lssl -lcrypto</span></span><br><span class="line"><span class="comment">所以等于是参数直接替换为后者，两者是相同效果。</span></span><br><span class="line"><span class="comment">同理 mysql_config --cflags</span></span><br><span class="line"><span class="comment">-I/usr/local/Cellar/mysql/5.7.21/include</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>注：18.9.30更新macOS Mojave 后，编译选项报错，所以我只用了 -lmysqlclient ，把 -lssl -lcrypto 删了，然后未发生错误。</p>
+<p>Clion 只需要添加两句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set(CMAKE_C_FLAGS &quot;$&#123;CMAKE_C_FLAGS&#125; -I/usr/local/Cellar/mysql/5.7.21/include&quot;)</span><br><span class="line"></span><br><span class="line">add_executable(Project01 main.c)</span><br><span class="line"></span><br><span class="line">target_link_libraries(Project01 -L/usr/local/Cellar/mysql/5.7.21/lib -lmysqlclient)</span><br></pre></td></tr></table></figure>
+<h3 id="Use-in-Program"><a href="#Use-in-Program" class="headerlink" title="Use in Program"></a>Use in Program</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">//连接数据库，成功返回0</span><br><span class="line">int connectMysql(MYSQL * mysql)&#123;</span><br><span class="line">    int     ret = 0;</span><br><span class="line">    MYSQL   *con = NULL;</span><br><span class="line"></span><br><span class="line">    con = mysql_init(mysql);</span><br><span class="line">    if (con == NULL) &#123;</span><br><span class="line">        ret = mysql_errno(mysql);</span><br><span class="line">        printf(&quot;func mysql_init() err :%d\n&quot;, ret);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //连接mysql服务器</span><br><span class="line">    //MYSQL *mysql_real_connect(MYSQL *mysql, const char *host, const char *user, const char *passwd,</span><br><span class="line">    //const char *db, unsigned int port, const char *unix_socket, unsigned long client_flag) ;</span><br><span class="line">    con = mysql_real_connect(mysql, MYSQLHOST, MYSQLUSR, MYSQLPAS, MYSQLDB, 0, NULL, 0 );</span><br><span class="line">    if (con == NULL) &#123;</span><br><span class="line">        ret = mysql_errno(mysql);</span><br><span class="line">        printf(&quot;func mysql_real_connect() err :%d\n&quot;, ret);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">#ifdef NOTDEFMYSQL</span><br><span class="line">    else &#123;</span><br><span class="line">        printf(&quot;func mysql_real_connect() ok\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">#endif</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*插入名字和密码，成功则返回0*/</span><br><span class="line">int insertNamePass(MYSQL* mysql, const char* name, const char* pass)&#123;</span><br><span class="line">    char query[51 + MAXNAME + MAXPASS] = &quot;insert into users(username,password) values(\&quot;&quot;;</span><br><span class="line">    strncat(query, name, MAXNAME);</span><br><span class="line">    strcat(query, &quot;\&quot;,\&quot;&quot;);</span><br><span class="line">    strncat(query, pass, MAXPASS);</span><br><span class="line">    strcat(query, &quot;\&quot;)&quot;);</span><br><span class="line"></span><br><span class="line">    return mysql_real_query(mysql, query, (unsigned int)strlen(query));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*如果名字存在则返回0*/</span><br><span class="line">int hasName(MYSQL* mysql, const char * name)&#123;</span><br><span class="line">    char query[38 + MAXNAME] = &quot;SELECT 1 FROM users WHERE username=\&quot;&quot;;</span><br><span class="line">    strncat(query, name, MAXNAME);</span><br><span class="line">    strcat(query, &quot;\&quot;&quot;);</span><br><span class="line"></span><br><span class="line">    if (mysql_real_query(mysql, query, (unsigned int)strlen(query) ) )</span><br><span class="line">    &#123;</span><br><span class="line">        puts(&quot;MySQL query is error!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        MYSQL_RES *result = mysql_store_result(mysql);</span><br><span class="line">        if( mysql_num_rows(result) )&#123;</span><br><span class="line">            mysql_free_result(result);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//检测用户的密码是否匹配，匹配则返回0</span><br><span class="line">int passRight(MYSQL* mysql, const char * name, const char * pass)&#123;</span><br><span class="line">    char query[45 + MAXNAME] = &quot;select password from users where username=\&quot;&quot;;</span><br><span class="line">    strncat(query, name, MAXNAME);</span><br><span class="line">    strcat(query, &quot;\&quot;&quot;);</span><br><span class="line"></span><br><span class="line">    if (mysql_real_query(mysql, query, (unsigned int)strlen(query) ) )</span><br><span class="line">    &#123;</span><br><span class="line">        puts(&quot;MySQL query is error!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        MYSQL_RES *result = mysql_store_result(mysql);</span><br><span class="line">        MYSQL_ROW row = mysql_fetch_row(result);</span><br><span class="line">        if( !strncmp(row[0], pass, MAXPASS))&#123;</span><br><span class="line">            mysql_free_result(result);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        mysql_free_result(result);</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//返回用户分数,2 Bytes</span><br><span class="line">short getGrade(MYSQL* mysql, const char * name)&#123;</span><br><span class="line">    char query[42 + MAXNAME] = &quot;select grade from users where username=\&quot;&quot;;</span><br><span class="line">    strncat(query, name, MAXNAME);</span><br><span class="line">    strcat(query, &quot;\&quot;&quot;);</span><br><span class="line"></span><br><span class="line">    if (mysql_real_query(mysql, query, (unsigned int)strlen(query) ) )</span><br><span class="line">    &#123;</span><br><span class="line">        puts(&quot;MySQL query is error!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        MYSQL_RES *result = mysql_store_result(mysql);</span><br><span class="line">        MYSQL_ROW row = mysql_fetch_row(result);</span><br><span class="line">        short grade = (short)strtol(row[0], NULL, 10);</span><br><span class="line">        mysql_free_result(result);</span><br><span class="line">        return grade;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Database/Mysql/mysql安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/Database/Mysql/mysql安装与配置/" class="article-date">
+      <time datetime="2018-12-04T14:17:58.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/Database/Mysql/mysql安装与配置/">mysql安装与配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h2><p>1、安装：<code>sunyichaodeMacBook-Pro:~ sunyichao$ brew install mysql</code><br>2、开启mysql：<code>mysql.server start</code>(Linux下是<code>service mysql start</code>)<br>2、使用mysql的配置脚本：<code>/usr/local/opt/mysql/bin/mysql_secure_installation //mysql 提供的配置向导</code><br>启动这个脚本后，即可根据如下命令提示进行初始化设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$ /usr/local/opt/mysql/bin/mysql_secure_installation   //mysql 提供的配置向导</span><br><span class="line">Securing the MySQL server deployment.</span><br><span class="line">Connecting to MySQL using a blank password.</span><br><span class="line">VALIDATE PASSWORD PLUGIN can be used to test passwordsand improve security. It     checks the strength of password and allows the users to set only those passwords which are secure enough. Would you like to setup VALIDATE PASSWORD plugin?</span><br><span class="line"></span><br><span class="line">Press y|Y for Yes, any other key for No: k //是否采用mysql密码安全检测插件（这里作为演示选择否，密码检查插件要求密码复杂程度高，大小写字母+数字+字符等）</span><br><span class="line">Please set the password for root here. // 首次使用自带配置脚本，设置root密码</span><br><span class="line"></span><br><span class="line">New password:</span><br><span class="line"></span><br><span class="line">Re-enter new password:</span><br><span class="line"></span><br><span class="line">By default, a MySQL installation has an anonymous user, allowing anyone to log into MySQL without having to have a user account created for This is intended only for testing, and to make the installation go a bit smoother. You should remove them before moving into a production environment.    </span><br><span class="line">Remove anonymous users? [Y/n] Y //是否删除匿名用户</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed to connect from &apos;localhost&apos;.This</span><br><span class="line">ensures that someone cannot guess at the root password from the network.</span><br><span class="line"></span><br><span class="line">Disallow root login remotely? [Y/n] Y //是否禁止远程登录</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">By default, MySQL comes with a database named &apos;test&apos; that anyone can</span><br><span class="line">access.This is also intended only for testing, and should be removed</span><br><span class="line">before moving into a production environment.</span><br><span class="line"></span><br><span class="line">Remove test database and access to it? [Y/n] Y //删除测试数据库，并登录</span><br><span class="line"> Dropping test database...</span><br><span class="line"> ... Success!</span><br><span class="line"> Removing privileges on test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will take effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? [Y/n] Y//重新载入权限表</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">All done!  If you&apos;ve completed all of the above steps, your MySQL</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks for using MySQL!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$</span><br></pre></td></tr></table></figure>
+<p>//以上内容来自<a href="https://segmentfault.com/q/1010000000475470里的回答" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000475470里的回答</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/Mess/C++显式实例化的用途" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1831,210 +1967,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/Concept_gcc/标准IO的三类缓冲" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/26/C_C++/Concept_gcc/标准IO的三类缓冲/" class="article-date">
-      <time datetime="2018-11-26T14:12:50.000Z" itemprop="datePublished">2018-11-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/26/C_C++/Concept_gcc/标准IO的三类缓冲/">标准IO的三类缓冲</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <table>
-<thead>
-<tr>
-<th style="text-align:center">缓冲类型</th>
-<th style="text-align:center">发生I/O的条件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">完全缓冲</td>
-<td style="text-align:center">缓冲区满，进程调用fflush，进程调用exit终止自身。</td>
-</tr>
-<tr>
-<td style="text-align:center">行缓冲</td>
-<td style="text-align:center">碰到换行符，进程调用fflush，进程调用exit终止自身。</td>
-</tr>
-<tr>
-<td style="text-align:center">不缓冲</td>
-<td style="text-align:center">每次调用标准I/O输出函数都发生I/O</td>
-</tr>
-</tbody>
-</table>
-<p>标准I/O函数库的大多数Unix实现使用如下规则：</p>
-<ul>
-<li>标准错误输出总是不缓冲</li>
-<li>标准输入和标准输出完全缓冲，除非它们指代终端设备（这种情况下它们行缓冲）</li>
-<li>所有其他I/O流都是完全缓冲，除非它们指代终端设备（这种情况下它们行缓冲）</li>
-</ul>
-<p>可以通过调用 setvbuf 改变缓冲类型。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/Mess/C++杂记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/25/C_C++/Mess/C++杂记/" class="article-date">
-      <time datetime="2018-11-25T08:44:38.000Z" itemprop="datePublished">2018-11-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/25/C_C++/Mess/C++杂记/">C++杂记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="重载和转换"><a href="#重载和转换" class="headerlink" title="重载和转换"></a>重载和转换</h3><p><strong>重载和转换</strong>：两种实现系统预定义类型和类类型相加的方法</p>
-<p>第一种：用转化函数将系统预定义类型转化为类类型，然后调用加法重载</p>
-<p>第二种：将加法定义为显式使用系统预定义类型的函数</p>
-<p>应该使用第二种，第一种有额外开销。</p>
-<p><strong>重载和转换</strong>：两种实现char*赋值给string类的方法</p>
-<p>第一种：自动调用构造函数将char*赋值给string，然后赋值。</p>
-<p>第二种：直接定义运算符重载</p>
-<p>应该使用第二种，第一种有额外开销。</p>
-<h3 id="new-char-和-new-char-1"><a href="#new-char-和-new-char-1" class="headerlink" title="new char 和 new char[1]"></a>new char 和 new char[1]</h3><p>有时候要用new char[1] 来匹配析构函数中的 delete[]。</p>
-<p>如果有多个构造函数，则必须用相同的方式使用new，要么都带中括号，要么都不带。因为只有一个析构函数，所有的构造函数都必须和它兼容。</p>
-<p>同时，也可以在某个构造函数中初始化指针为空指针，因为delete和delete[]可以用于空指针。</p>
-<h3 id="定位new运算符和delete的问题"><a href="#定位new运算符和delete的问题" class="headerlink" title="定位new运算符和delete的问题"></a>定位new运算符和delete的问题</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> * buffer = <span class="keyword">char</span>[BUF];</span><br><span class="line">Test * pc1 = <span class="keyword">new</span> (buffer) Test;</span><br><span class="line"><span class="keyword">delete</span> [] buffer;</span><br></pre></td></tr></table></figure>
-<p>将delete用于buffer时，不会为内存块内存储的Test对象调用析构函数。</p>
-<p><strong>解决方法</strong>：显式调用析构函数</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pc1-&gt;~Test();</span><br></pre></td></tr></table></figure>
-<p>ps：对于用定位new运算符创建的对象，应该与创建顺序相反的顺序进行删除。因为晚创建的对象可能依赖于早创建的对象。</p>
-<h3 id="C-成员函数指针"><a href="#C-成员函数指针" class="headerlink" title="C++成员函数指针"></a>C++成员函数指针</h3><p>C++成员函数分为静态成员函数和普通成员函数，其中普通成员函数的实现中隐式包含了this指针作为其第一个参数，所以导致两者函数指针使用的差异，静态成员函数指针与普通的外部函数指针使用基本一致，但普通成员函数指针类型的定义要包含类名的信息：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span>  </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    Test(<span class="keyword">int</span> a, <span class="keyword">int</span> b): a(a), b(b)  </span><br><span class="line">    &#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span> <span class="params">(Test &amp; test)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; test.a &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; test.b &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">output</span> <span class="params">()</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">this</span>-&gt;a &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">this</span>-&gt;b &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">    <span class="keyword">int</span> a;  </span><br><span class="line">    <span class="keyword">int</span> b;  </span><br><span class="line">&#125;;</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="function">Test <span class="title">test</span><span class="params">(<span class="number">1</span>, <span class="number">2</span>)</span></span>;  </span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(Test::* MemFun)</span><span class="params">()</span></span>;<span class="comment">//普通成员函数的函数指针定义  </span></span><br><span class="line">    MemFun output = &amp;Test::output;  </span><br><span class="line">    (test.*output)(); <span class="comment">//等同于：Test * ptest = &amp;test; (ptest-&gt;*output)(); </span></span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(* StaticMemFun)</span><span class="params">(Test&amp;)</span></span>;<span class="comment">//静态成员函数的函数指针定义  </span></span><br><span class="line">    StaticMemFun print = &amp;Test::print;  </span><br><span class="line">    print(test);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意上述代码中，普通成员函数函数指针类型*前要加”类名::”，静态成员函数无此限制。</p>
-<p>注意获取一个成员函数指针的<strong>语法要求很严格</strong>：</p>
-<ol>
-<li><p>不能使用括号：例如&amp;(Test::output)错误；</p>
-</li>
-<li><p>必须有限定符：例如&amp;output不对。即使在类Test的作用域内也不行，必须加上限定符；</p>
-</li>
-<li><p>必须使用取地址符号：例如直接写Test::output不行（虽然普通函数指针可以这样）。所以，必须要这样写：&amp;ClassName::foo。</p>
-</li>
-</ol>
-<hr>
-<p>注意这里成员函数指针已经开始显示它“异类”的天性了。上面代码中注释A和B处两个表达式，产生了一个在C++里面没有类型的“东西”（这是C++语言里面唯一的例外，其它任何东西都是有类型的），这就是.<em>和-&gt;</em>运算符运算产生的东西：</p>
-<p><code>(test.*output)</code> / <code>(ptest-&gt;*output)</code></p>
-<p>这两个运算符求值生成的“东西”我们只知道可以把它拿来当函数调用一样使唤，别的什么也不能干，甚至都不能把它存在某个地方。就因为这个原因，Andrei Alexandrescu 在他那本著名的《Modern c++ design》里面就说，成员函数指针和这两个操作符号是“curiously half-baked concept in c++”。（5.9节）</p>
-<hr>
-<p>C++里面引入了“引用”(reference)的概念，可是却不存在“成员函数的引用”，这也是一个特殊的地方。(当然，我们可以使用“成员函数指针”的引用)。</p>
-<h3 id="模板声明和定义不能分开？"><a href="#模板声明和定义不能分开？" class="headerlink" title="模板声明和定义不能分开？"></a>模板声明和定义不能分开？</h3><p>假如在头文件 <code>t.h</code> 里声明了模板（模板函数或者模板类）。定义放在了 <code>t.cpp</code> ，那么当 <code>main.c</code> 用到模板的实例的情况下，因为预处理的时候只能看到头文件，所以编译器先是隐式实例化头文件的声明，然后发现没有定义，则等待链接时进行链接。但是预处理的时候 <code>t.cpp</code> 里既没有显示实例化，也没有代码使用了它，所以是不会实例化的，等到链接阶段就是个空文件。</p>
-<p>解决办法可以在 <code>t.cpp</code> 里显式实例化。</p>
-<h3 id="const常量和宏"><a href="#const常量和宏" class="headerlink" title="const常量和宏"></a>const常量和宏</h3><p><strong>(1) 编译器处理方式不同</strong></p>
-<p>　　define宏是在预处理阶段展开。</p>
-<p>　　const常量是编译运行阶段使用。</p>
-<p><strong>(2) 类型和安全检查不同</strong></p>
-<p>　　define宏没有类型，不做任何类型检查，仅仅是展开。</p>
-<p>　　const常量有具体的类型，在编译阶段会执行类型检查。</p>
-<p><strong>(3) 存储方式不同</strong></p>
-<p>　　define宏仅仅是展开，有多少地方使用，就展开多少次，不会分配内存。</p>
-<p>　　const常量会在内存中分配(可以是堆中也可以是栈中)。</p>
-<p><strong>(4)const  可以节省空间，避免不必要的内存分配</strong></p>
-<p>const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是象#define一样给出的是立即数，所以，const定义的常量在程序<em>运行过程中</em>只有一份拷贝，而 #define定义的常量在内存中有若干个拷贝。 </p>
-<p><strong>(5) 提高了效率</strong></p>
-<p>编译器通常不为普通const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读内存的操作，使得它的效率也很高。</p>
-<h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
     </div>
 
       

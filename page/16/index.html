@@ -234,6 +234,644 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Frontend/Javascript入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/05/18/Frontend/Javascript入门/" class="article-date">
+      <time datetime="2018-05-18T08:13:12.000Z" itemprop="datePublished">2018-05-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/18/Frontend/Javascript入门/">Javascript 入门</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="JavaScript-使用"><a href="#JavaScript-使用" class="headerlink" title="JavaScript 使用"></a>JavaScript 使用</h2><p>HTML 中的脚本必须位于 <code>&lt;script&gt;</code> 与 <code>&lt;/script&gt;</code> 标签之间。</p>
+<ul>
+<li><p>脚本可被放置在 HTML 页面的 <code>&lt;body&gt;</code> 和 <code>&lt;head&gt;</code> 部分中。</p>
+</li>
+<li><p>也可以把脚本保存到外部文件中。外部文件通常包含被多个网页使用的代码。</p>
+<p>外部 JavaScript 文件的文件扩展名是 .js。</p>
+<p><code>&lt;script src=&quot;myScript.js&quot;&gt;&lt;/script&gt;</code></p>
+</li>
+</ul>
+<h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2><ol>
+<li><p>var 变量名=值;</p>
+</li>
+<li><p>var 变量名;</p>
+<p>变量名=值;</p>
+</li>
+<li><p>您可以在一条语句中声明很多变量。该语句以 var 开头，并使用逗号分隔变量即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var name=&quot;Gates&quot;, age=56, job=&quot;CEO&quot;;</span><br></pre></td></tr></table></figure>
+<p>声明也可横跨多行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var name=&quot;Gates&quot;,</span><br><span class="line">age=56,</span><br><span class="line">job=&quot;CEO&quot;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注：如果值被引号围起来，就会被当成文本来处理。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li><p>数字类型：number</p>
+</li>
+<li><p>字符类型：string</p>
+</li>
+<li><p>空类型：null</p>
+</li>
+<li><p>未定义类型：undefined</p>
+</li>
+<li><p>布尔类型：boolean(bool)  值：true false</p>
+</li>
+<li><p>复合数据类型：array(数组) object(对象)  等</p>
+</li>
+</ul>
+<h2 id="声明变量类型"><a href="#声明变量类型" class="headerlink" title="声明变量类型"></a>声明变量类型</h2><p>当您声明新变量时，可以使用关键词 “new” 来声明其类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var carname=new String;</span><br><span class="line">var x=      new Number;</span><br><span class="line">var y=      new Boolean;</span><br><span class="line">var cars=   new Array;</span><br><span class="line">var person= new Object;</span><br></pre></td></tr></table></figure>
+<p>JavaScript 变量均为对象。当您声明一个变量时，就创建了一个新的对象。</p>
+<h2 id="与其他语言的相似之处"><a href="#与其他语言的相似之处" class="headerlink" title="与其他语言的相似之处"></a>与其他语言的相似之处</h2><p><strong>条件语句循环语句</strong>和c语言一样。</p>
+<p>“<strong>变量命名规则</strong>”，“<strong>算数、比较、逻辑、位运算符</strong>”，“<strong>注释语句</strong>” 和c语言完全一样</p>
+<p>除了以下不同</p>
+<p>​    ===全等于 (数据类型和数值都相等)</p>
+<p>​    23+”24”=”2324”  只要有一个为字符串，加号就是字符串运算符</p>
+<p><strong>传值</strong>有两种：赋值传值；引用传值。（规则和java一样）</p>
+<p><strong>对象的属性和方法</strong>使用和 java 一样。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ol>
+<li><p>区分大小写</p>
+</li>
+<li><p>所有的符号都是英文输入状态下的</p>
+</li>
+<li><p>语句以分号结尾</p>
+</li>
+<li><p>JavaScript 会忽略多余的空格。您可以向脚本添加空格，来提高其可读性。</p>
+</li>
+<li><p>您可以在文本字符串中使用反斜杠对代码行进行换行。下面的例子会正确地显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.write(&quot;Hello \</span><br><span class="line">World!&quot;);</span><br></pre></td></tr></table></figure>
+<p>不过，您不能像这样折行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.write \</span><br><span class="line">(&quot;Hello World!&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params">var1,var2</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">这里是要执行的代码。</span><br><span class="line">可以<span class="keyword">return</span>值，可以不加值。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onclick=<span class="string">"myFunction('Bill Gates','CEO')"</span>&gt;点击这里&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">function myFunction(name,job)</span></span><br><span class="line"><span class="regexp">&#123;</span></span><br><span class="line"><span class="regexp">alert("Welcome " + name + ", the " + job);</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+<p>变量<strong>作用域</strong>分局部和全局，和c语言一样。除了下面这点：</p>
+<p><strong>向未声明的 JavaScript 变量来分配值</strong></p>
+<p>如果把值赋给尚未声明的变量，该变量将被自动作为全局变量声明。</p>
+<p>这条语句：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">"Volvo"</span>;</span><br></pre></td></tr></table></figure>
+<p>将声明一个全局变量 name，即使它在函数内执行。</p>
+<h3 id="自带函数"><a href="#自带函数" class="headerlink" title="自带函数"></a>自带函数</h3><ul>
+<li><p>使用typeof()查看数据类型</p>
+</li>
+<li><p>alert()：弹出一个窗口(会停止程序的运行，点击确定后再接着运行)</p>
+</li>
+<li><p>如需从 JavaScript 访问某个 HTML 元素，可以使用 document.getElementById(<em>id</em>) 方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML=<span class="string">"我的第一段 JavaScript"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 document.write() 仅仅向文档输出写内容。</p>
+<p>如果在文档已完成加载后执行 document.write，整个 HTML 页面将被覆盖：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.write(<span class="string">"&lt;p&gt;我的第一段 JavaScript&lt;/p&gt;"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="运算符和语句"><a href="#运算符和语句" class="headerlink" title="运算符和语句"></a>运算符和语句</h2><p>运算符和语句大致和c语言一样，除了以下：</p>
+<ul>
+<li><p>将字符串和数字相加，数字为转化为字符型（php不是这样）</p>
+</li>
+<li><p>===全等运算符，需要值和类型都一样</p>
+</li>
+<li><p>有一个for(x in array)循环</p>
+</li>
+<li><p>JavaScript 标签</p>
+<p>通过标签引用，break 语句可用于跳出任何 JavaScript 代码块：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cars=[<span class="string">"BMW"</span>,<span class="string">"Volvo"</span>,<span class="string">"Saab"</span>,<span class="string">"Ford"</span>];</span><br><span class="line">list:</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">0</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">1</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">2</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">break</span> list;</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">3</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">4</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">5</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="错误捕捉"><a href="#错误捕捉" class="headerlink" title="错误捕捉"></a>错误捕捉</h2><p>和java一样</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">  &#123;</span><br><span class="line">  <span class="keyword">var</span> x=<span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).value;</span><br><span class="line">  <span class="keyword">if</span>(x==<span class="string">""</span>)    <span class="keyword">throw</span> <span class="string">"empty"</span>;</span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">isNaN</span>(x)) <span class="keyword">throw</span> <span class="string">"not a number"</span>;</span><br><span class="line">  <span class="keyword">if</span>(x&gt;<span class="number">10</span>)     <span class="keyword">throw</span> <span class="string">"too high"</span>;</span><br><span class="line">  <span class="keyword">if</span>(x&lt;<span class="number">5</span>)      <span class="keyword">throw</span> <span class="string">"too low"</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">catch</span>(err)</span><br><span class="line">  &#123;</span><br><span class="line">  <span class="keyword">var</span> y=<span class="built_in">document</span>.getElementById(<span class="string">"mess"</span>);</span><br><span class="line">  y.innerHTML=<span class="string">"Error: "</span> + err + <span class="string">"."</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;h1&gt;My First JavaScript&lt;/</span>h1&gt;</span><br><span class="line">&lt;p&gt;Please input a number between <span class="number">5</span> and <span class="number">10</span>:<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&lt;input id=<span class="string">"demo"</span> type=<span class="string">"text"</span>&gt;</span><br><span class="line">&lt;button type=<span class="string">"button"</span> onclick=<span class="string">"myFunction()"</span>&gt;Test Input&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;p id="mess"&gt;&lt;/</span>p&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a>表单验证</h2><p><strong>JavaScript 可用来在数据被送往服务器前对 HTML 表单中的这些输入数据进行验证。</strong></p>
+<p>被 JavaScript 验证的这些典型的表单数据有：</p>
+<ul>
+<li>用户是否已填写表单中的必填项目？</li>
+<li>用户输入的邮件地址是否合法？</li>
+<li>用户是否已输入合法的日期？</li>
+<li>用户是否在数据域 (numeric field) 中输入了文本？</li>
+</ul>
+<h3 id="必填（或必选）项目"><a href="#必填（或必选）项目" class="headerlink" title="必填（或必选）项目"></a>必填（或必选）项目</h3><p>下面的函数用来检查用户是否已填写表单中的必填（或必选）项目。假如必填或必选项为空，那么警告框会弹出，并且函数的返回值为 false，否则函数的返回值则为 true（意味着数据没有问题）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validate_required</span>(<span class="params">field,alerttxt</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">with</span> (field)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> (value==<span class="literal">null</span>||value==<span class="string">""</span>)</span><br><span class="line">  &#123;alert(alerttxt);<span class="keyword">return</span> <span class="literal">false</span>&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是连同 HTML 表单的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validate_required</span>(<span class="params">field,alerttxt</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">with</span> (field)</span><br><span class="line">  &#123;</span><br><span class="line">  <span class="keyword">if</span> (value==<span class="literal">null</span>||value==<span class="string">""</span>)</span><br><span class="line">    &#123;alert(alerttxt);<span class="keyword">return</span> <span class="literal">false</span>&#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validate_form</span>(<span class="params">thisform</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">with</span> (thisform)</span><br><span class="line">  &#123;</span><br><span class="line">  <span class="keyword">if</span> (validate_required(email,<span class="string">"Email must be filled out!"</span>)==<span class="literal">false</span>)</span><br><span class="line">    &#123;email.focus();<span class="keyword">return</span> <span class="literal">false</span>&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=<span class="string">"submitpage.htm"</span> onsubmit=<span class="string">"return validate_form(this)"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">Email: <span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">size</span>=<span class="string">"30"</span>&gt;</span></span></span><br><span class="line">&lt;input type="submit" value="Submit"&gt; </span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="E-mail-验证"><a href="#E-mail-验证" class="headerlink" title="E-mail 验证"></a>E-mail 验证</h2><p>下面的函数检查输入的数据是否符合电子邮件地址的基本语法。</p>
+<p>意思就是说，输入的数据必须包含 @ 符号和点号(.)。同时，@ 不可以是邮件地址的首字符，并且 @ 之后需有至少一个点号：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validate_email</span>(<span class="params">field,alerttxt</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">with</span> (field)</span><br><span class="line">&#123;</span><br><span class="line">apos=value.indexOf(<span class="string">"@"</span>)</span><br><span class="line">dotpos=value.lastIndexOf(<span class="string">"."</span>)</span><br><span class="line"><span class="keyword">if</span> (apos&lt;<span class="number">1</span>||dotpos-apos&lt;<span class="number">2</span>) </span><br><span class="line">  &#123;alert(alerttxt);<span class="keyword">return</span> <span class="literal">false</span>&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是连同 HTML 表单的完整代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validate_email</span>(<span class="params">field,alerttxt</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">with</span> (field)</span><br><span class="line">&#123;</span><br><span class="line">apos=value.indexOf(<span class="string">"@"</span>)</span><br><span class="line">dotpos=value.lastIndexOf(<span class="string">"."</span>)</span><br><span class="line"><span class="keyword">if</span> (apos&lt;<span class="number">1</span>||dotpos-apos&lt;<span class="number">2</span>) </span><br><span class="line">  &#123;alert(alerttxt);<span class="keyword">return</span> <span class="literal">false</span>&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validate_form</span>(<span class="params">thisform</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">with</span> (thisform)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> (validate_email(email,<span class="string">"Not a valid e-mail address!"</span>)==<span class="literal">false</span>)</span><br><span class="line">  &#123;email.focus();<span class="keyword">return</span> <span class="literal">false</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=<span class="string">"submitpage.htm"</span>onsubmit=<span class="string">"return validate_form(this);"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">Email: <span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">size</span>=<span class="string">"30"</span>&gt;</span></span></span><br><span class="line">&lt;input type="submit" value="Submit"&gt; </span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="HTML-DOM"><a href="#HTML-DOM" class="headerlink" title="HTML DOM"></a>HTML DOM</h1><h2 id="HTML-DOM-（文档对象模型）"><a href="#HTML-DOM-（文档对象模型）" class="headerlink" title="HTML DOM （文档对象模型）"></a>HTML DOM （文档对象模型）</h2><p>当网页被加载时，浏览器会创建页面的文档对象模型（Document Object Model）。</p>
+<p>HTML DOM 模型被构造为对象的树。</p>
+<h2 id="查找-HTML-元素"><a href="#查找-HTML-元素" class="headerlink" title="查找 HTML 元素"></a>查找 HTML 元素</h2><p>通常，通过 JavaScript，您需要操作 HTML 元素。</p>
+<p>为了做到这件事情，您必须首先找到该元素。有三种方法来做这件事：</p>
+<ul>
+<li>通过 id 找到 HTML 元素</li>
+<li>通过标签名找到 HTML 元素</li>
+<li>通过类名找到 HTML 元素</li>
+</ul>
+<h3 id="通过-id-查找-HTML-元素"><a href="#通过-id-查找-HTML-元素" class="headerlink" title="通过 id 查找 HTML 元素"></a>通过 id 查找 HTML 元素</h3><p>本例查找 id=”intro” 元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x=<span class="built_in">document</span>.getElementById(<span class="string">"intro"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="通过标签名查找-HTML-元素"><a href="#通过标签名查找-HTML-元素" class="headerlink" title="通过标签名查找 HTML 元素"></a>通过标签名查找 HTML 元素</h3><p>本例查找 id=”main” 的元素，然后查找 “main” 中的所有 <code>&lt;p&gt;</code> 元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var x=document.getElementById(&quot;main&quot;);</span><br><span class="line">var y=x.getElementsByTagName(&quot;p&quot;);</span><br></pre></td></tr></table></figure>
+<h4 id="DOM-导航"><a href="#DOM-导航" class="headerlink" title="DOM 导航"></a>DOM 导航</h4><p>getElementsByTagName() 方法返回<em>节点列表</em>。节点列表是一个节点数组。</p>
+<p>下面的代码选取文档中的所有 <code>&lt;p&gt;</code> 节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var x=document.getElementsByTagName(&quot;p&quot;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>可以通过下标号访问这些节点。如需访问第二个 <code>&lt;p&gt;</code>，您可以这么写：</p>
+<p><code>y=x[1];</code></p>
+</li>
+<li><p>length 属性定义节点列表中节点的数量。</p>
+</li>
+<li><p>三个节点属性：parentNode、firstChild 以及 lastChild </p>
+</li>
+<li><p>document.documentElement - 全部文档</p>
+</li>
+<li><p>document.body - 文档的主体</p>
+</li>
+<li><p>childNodes 和 nodeValue</p>
+<p>除了 innerHTML 属性，还可以使用 childNodes 和 nodeValue 属性来获取元素的内容。</p>
+</li>
+</ul>
+<h2 id="DOM-HTML"><a href="#DOM-HTML" class="headerlink" title="DOM HTML"></a>DOM HTML</h2><h3 id="改变-HTML-输出流"><a href="#改变-HTML-输出流" class="headerlink" title="改变 HTML 输出流"></a>改变 HTML 输出流</h3><p>JavaScript 能够创建动态的 HTML 内容：</p>
+<p>在 JavaScript 中，document.write() 可用于直接向 HTML 输出流写内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">document.write(Date());</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="改变-HTML-内容"><a href="#改变-HTML-内容" class="headerlink" title="改变 HTML 内容"></a>改变 HTML 内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(id).innerHTML=new HTML</span><br></pre></td></tr></table></figure>
+<p>本例改变了 <code>&lt;p&gt;</code> 元素的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;p id=&quot;p1&quot;&gt;Hello World!&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">document.getElementById(&quot;p1&quot;).innerHTML=&quot;New text!&quot;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="改变-HTML-属性"><a href="#改变-HTML-属性" class="headerlink" title="改变 HTML 属性"></a>改变 HTML 属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(id).attribute=new value</span><br></pre></td></tr></table></figure>
+<p>本例改变了 <code>&lt;img&gt;</code> 元素的 src 属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;img id=&quot;image&quot; src=&quot;smiley.gif&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">document.getElementById(&quot;image&quot;).src=&quot;landscape.jpg&quot;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="改变-HTML-样式"><a href="#改变-HTML-样式" class="headerlink" title="改变 HTML 样式"></a>改变 HTML 样式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(id).style.property=new style</span><br></pre></td></tr></table></figure>
+<p>下面的例子会改变 <code>&lt;p&gt;</code> 元素的样式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;p id=&quot;p2&quot;&gt;Hello World!&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">document.getElementById(&quot;p2&quot;).style.color=&quot;blue&quot;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="DOM-事件"><a href="#DOM-事件" class="headerlink" title="DOM 事件"></a>DOM 事件</h2><p>我们可以在事件发生时执行 JavaScript，比如当用户在 HTML 元素上点击时。</p>
+<p>如需在用户点击某个元素时执行代码，请向一个 HTML 事件属性添加 JavaScript 代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onclick=JavaScript</span><br></pre></td></tr></table></figure>
+<h3 id="HTML-事件属性"><a href="#HTML-事件属性" class="headerlink" title="HTML 事件属性"></a>HTML 事件属性</h3><p>如需向 HTML 元素分配 事件，可以使用事件属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onclick=&quot;displayDate()&quot;&gt;点击这里&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="使用-HTML-DOM-来分配事件"><a href="#使用-HTML-DOM-来分配事件" class="headerlink" title="使用 HTML DOM 来分配事件"></a>使用 HTML DOM 来分配事件</h3><p>HTML DOM 允许您通过使用 JavaScript 来向 HTML 元素分配事件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">document.getElementById(&quot;myBtn&quot;).onclick=function()&#123;displayDate()&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="onload-和-onunload-事件"><a href="#onload-和-onunload-事件" class="headerlink" title="onload 和 onunload 事件"></a>onload 和 onunload 事件</h3><p>onload 和 onunload 事件会在用户进入或离开页面时被触发。</p>
+<p>onload 事件可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。</p>
+<p>onload 和 onunload 事件可用于处理 cookie。</p>
+<h3 id="onchange-事件"><a href="#onchange-事件" class="headerlink" title="onchange 事件"></a>onchange 事件</h3><p>onchange 事件常结合对输入字段的验证来使用。</p>
+<p>下面是一个如何使用 onchange 的例子。当用户改变输入字段的内容时，会调用 upperCase() 函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; id=&quot;fname&quot; onchange=&quot;upperCase()&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="onmouseover-和-onmouseout-事件"><a href="#onmouseover-和-onmouseout-事件" class="headerlink" title="onmouseover 和 onmouseout 事件"></a>onmouseover 和 onmouseout 事件</h3><p>在用户的鼠标移至 HTML 元素上方或移出元素时触发函数。</p>
+<h3 id="onmousedown、onmouseup-以及-onclick-事件"><a href="#onmousedown、onmouseup-以及-onclick-事件" class="headerlink" title="onmousedown、onmouseup 以及 onclick 事件"></a>onmousedown、onmouseup 以及 onclick 事件</h3><p>onmousedown, onmouseup 以及 onclick 构成了鼠标点击事件的所有部分。首先当点击鼠标按钮时，会触发 onmousedown 事件，当释放鼠标按钮时，会触发 onmouseup 事件，最后，当完成鼠标点击时，会触发 onclick 事件。 </p>
+<h3 id="onfocus-事件"><a href="#onfocus-事件" class="headerlink" title="onfocus 事件"></a>onfocus 事件</h3><p>当输入字段获得焦点时触发事件。</p>
+<h2 id="DOM-节点"><a href="#DOM-节点" class="headerlink" title="DOM 节点"></a>DOM 节点</h2><h3 id="创建新的-HTML-元素"><a href="#创建新的-HTML-元素" class="headerlink" title="创建新的 HTML 元素"></a>创建新的 HTML 元素</h3><p>如需向 HTML DOM 添加新元素，您必须首先创建该元素（元素节点），然后向一个已存在的元素追加该元素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">&lt;p id=<span class="string">"p1"</span>&gt;这是一个段落&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;p id="p2"&gt;这是另一个段落&lt;/</span>p&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">var para=document.createElement("p");</span></span><br><span class="line"><span class="regexp">var node=document.createTextNode("这是新段落。");</span></span><br><span class="line"><span class="regexp">para.appendChild(node);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">var element=document.getElementById("div1");</span></span><br><span class="line"><span class="regexp">element.appendChild(para);</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="删除已有的-HTML-元素"><a href="#删除已有的-HTML-元素" class="headerlink" title="删除已有的 HTML 元素"></a>删除已有的 HTML 元素</h3><p>如需删除 HTML 元素，您必须首先获得该元素的父元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">&lt;p id=<span class="string">"p1"</span>&gt;这是一个段落。&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;p id="p2"&gt;这是另一个段落。&lt;/</span>p&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">var parent=document.getElementById("div1");</span></span><br><span class="line"><span class="regexp">var child=document.getElementById("p1");</span></span><br><span class="line"><span class="regexp">parent.removeChild(child);</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>提示</strong>：如果能够在不引用父元素的情况下删除某个元素，就太好了。</p>
+<p>不过很遗憾。DOM 需要清楚您需要删除的元素，以及它的父元素。</p>
+<p>这是常用的解决方案：找到您希望删除的子元素，然后使用其 parentNode 属性来找到父元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> child=<span class="built_in">document</span>.getElementById(<span class="string">"p1"</span>);</span><br><span class="line">child.parentNode.removeChild(child);</span><br></pre></td></tr></table></figure>
+<h1 id="JavaScript-对象"><a href="#JavaScript-对象" class="headerlink" title="JavaScript 对象"></a>JavaScript 对象</h1><h2 id="创建-JavaScript-对象"><a href="#创建-JavaScript-对象" class="headerlink" title="创建 JavaScript 对象"></a>创建 JavaScript 对象</h2><h3 id="创建直接的实例"><a href="#创建直接的实例" class="headerlink" title="创建直接的实例"></a>创建直接的实例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">person=new Object();</span><br><span class="line">person.firstname=&quot;Bill&quot;;</span><br><span class="line">person.lastname=&quot;Gates&quot;;</span><br><span class="line">person.age=56;</span><br><span class="line">person.eyecolor=&quot;blue&quot;;</span><br></pre></td></tr></table></figure>
+<p>替代语法（使用对象 literals）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person=&#123;firstname:&quot;John&quot;,lastname:&quot;Doe&quot;,age:50,eyecolor:&quot;blue&quot;&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="使用对象构造器"><a href="#使用对象构造器" class="headerlink" title="使用对象构造器"></a>使用对象构造器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function person(firstname,lastname,age,eyecolor)</span><br><span class="line">&#123;</span><br><span class="line">this.firstname=firstname;</span><br><span class="line">this.lastname=lastname;</span><br><span class="line">this.age=age;</span><br><span class="line">this.eyecolor=eyecolor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一旦您有了对象构造器，就可以创建新的对象实例，就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var myFather=new person(&quot;Bill&quot;,&quot;Gates&quot;,56,&quot;blue&quot;);</span><br><span class="line">var myMother=new person(&quot;Steve&quot;,&quot;Jobs&quot;,48,&quot;green&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="把方法添加到-JavaScript-对象"><a href="#把方法添加到-JavaScript-对象" class="headerlink" title="把方法添加到 JavaScript 对象"></a>把方法添加到 JavaScript 对象</h3><p>方法只不过是附加在对象上的函数。</p>
+<p>在构造器函数内部定义“对象的方法”：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function person(firstname,lastname,age,eyecolor)</span><br><span class="line">&#123;</span><br><span class="line">this.firstname=firstname;</span><br><span class="line">this.lastname=lastname;</span><br><span class="line">this.age=age;</span><br><span class="line">this.eyecolor=eyecolor;</span><br><span class="line"></span><br><span class="line">this.changeName=changeName;</span><br><span class="line">function changeName(name)</span><br><span class="line">&#123;</span><br><span class="line">this.lastname=name;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="JavaScript-for…in-循环"><a href="#JavaScript-for…in-循环" class="headerlink" title="JavaScript for…in 循环"></a>JavaScript for…in 循环</h3><p>JavaScript for…in 语句循环遍历对象的<strong>属性</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (对象中的变量)</span><br><span class="line">  &#123;</span><br><span class="line">  要执行的代码</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>注释：for…in 循环中的代码块将针对每个属性执行一次。</p>
+<h3 id="JavaScript-不使用类"><a href="#JavaScript-不使用类" class="headerlink" title="JavaScript 不使用类"></a>JavaScript 不使用类</h3><p>JavaScript 是面向对象的语言，但 JavaScript 不使用类。</p>
+<p>在 JavaScript 中，不会创建类，也不会通过类来创建对象（就像在其他面向对象的语言中那样）。</p>
+<p>JavaScript 基于 prototype，而不是基于类的。</p>
+<h2 id="原生对象"><a href="#原生对象" class="headerlink" title="原生对象"></a>原生对象</h2><h3 id="JavaScript数字"><a href="#JavaScript数字" class="headerlink" title="JavaScript数字"></a>JavaScript数字</h3><ol>
+<li><p>所有 JavaScript 数字均为 64 位</p>
+</li>
+<li><p>精度：</p>
+<p>整数（不使用小数点或指数计数法）最多为 15 位。</p>
+<p>小数的最大位数是 17，但是浮点运算并不总是 100% 准确：</p>
+</li>
+<li><p>八进制和十六进制：</p>
+<p>如果前缀为 0，则 JavaScript 会把数值常量解释为八进制数，</p>
+<p>如果前缀为 0 和 “x”，则解释为十六进制数。</p>
+</li>
+</ol>
+<p>属性：</p>
+<ul>
+<li>MAX VALUE</li>
+<li>MIN VALUE</li>
+<li>NEGATIVE INFINITIVE</li>
+<li>POSITIVE INFINITIVE</li>
+<li>NaN</li>
+<li>prototype</li>
+<li>constructor</li>
+</ul>
+<p>方法：</p>
+<ul>
+<li>toExponential()</li>
+<li>toFixed()</li>
+<li>toPrecision()</li>
+<li>toString()</li>
+<li>valueOf()</li>
+</ul>
+<h3 id="字符串-String-对象"><a href="#字符串-String-对象" class="headerlink" title="字符串(String)对象"></a>字符串(String)对象</h3><h3 id="日期-Date-对象"><a href="#日期-Date-对象" class="headerlink" title="日期(Date)对象"></a>日期(Date)对象</h3><h3 id="数组-Array-对象"><a href="#数组-Array-对象" class="headerlink" title="数组(Array)对象"></a>数组(Array)对象</h3><p>有两种向数组赋值的方法（你可以添加任意多的值，就像你可以定义你需要的任意多的变量一样）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var mycars=new Array()</span><br><span class="line">mycars[0]=&quot;Saab&quot;</span><br><span class="line">mycars[1]=&quot;Volvo&quot;</span><br><span class="line">mycars[2]=&quot;BMW&quot;</span><br></pre></td></tr></table></figure>
+<p>也可以使用一个整数自变量来控制数组的容量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var mycars=new Array(3)</span><br><span class="line">mycars[0]=&quot;Saab&quot;</span><br><span class="line">mycars[1]=&quot;Volvo&quot;</span><br><span class="line">mycars[2]=&quot;BMW&quot;</span><br></pre></td></tr></table></figure>
+<p>使用初始化列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var mycars=new Array(&quot;Saab&quot;,&quot;Volvo&quot;,&quot;BMW&quot;)</span><br></pre></td></tr></table></figure>
+<p>注意：如果你需要在数组内指定数值或者逻辑值，那么变量类型应该是数值变量或者布尔变量，而不是字符变量。</p>
+<h3 id="逻辑-Boolean-对象"><a href="#逻辑-Boolean-对象" class="headerlink" title="逻辑(Boolean)对象"></a>逻辑(Boolean)对象</h3><p>使用关键词 new 来定义 Boolean 对象。下面的代码定义了一个名为 myBoolean 的逻辑对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var myBoolean=new Boolean()</span><br></pre></td></tr></table></figure>
+<p>如果逻辑对象无初始值或者其值为 0、-0、null、””、false、undefined 或者 NaN，那么对象的值为 false。否则，其值为 true（即使当自变量为字符串 “false” 时）！</p>
+<h3 id="算数-Math-对象"><a href="#算数-Math-对象" class="headerlink" title="算数(Math)对象"></a>算数(Math)对象</h3><p>Math（算数）对象的作用是：执行普通的算数任务。</p>
+<h3 id="正则表达式-RegExp-对象"><a href="#正则表达式-RegExp-对象" class="headerlink" title="正则表达式(RegExp)对象"></a>正则表达式(RegExp)对象</h3><p>RegExp 是正则表达式的缩写。</p>
+<p>当您检索某个文本时，可以使用一种模式来描述要检索的内容。RegExp 就是这种模式。</p>
+<p>简单的模式可以是一个单独的字符。</p>
+<p>更复杂的模式包括了更多的字符，并可用于解析、格式检查、替换等等。</p>
+<p>您可以规定字符串中的检索位置，以及要检索的字符类型，等等。</p>
+<p>RegExp 对象有 3 个方法：test()、exec() 以及 compile()。</p>
+<h1 id="浏览器对象模型-BOM"><a href="#浏览器对象模型-BOM" class="headerlink" title="浏览器对象模型 (BOM)"></a>浏览器对象模型 (BOM)</h1><h2 id="Window-对象"><a href="#Window-对象" class="headerlink" title="Window 对象"></a>Window 对象</h2><p>所有浏览器都支持 <em>window</em> 对象。它表示浏览器窗口。</p>
+<p>所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员。</p>
+<p>全局变量是 window 对象的属性。</p>
+<p>全局函数是 window 对象的方法。</p>
+<p>甚至 HTML DOM 的 document 也是 window 对象的属性之一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.document.getElementById(&quot;header&quot;);</span><br></pre></td></tr></table></figure>
+<p>与此相同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(&quot;header&quot;);</span><br></pre></td></tr></table></figure>
+<h2 id="Window-尺寸"><a href="#Window-尺寸" class="headerlink" title="Window 尺寸"></a>Window 尺寸</h2><p>有三种方法能够确定浏览器窗口的尺寸（浏览器的视口，不包括工具栏和滚动条）。</p>
+<p>对于Internet Explorer、Chrome、Firefox、Opera 以及 Safari：</p>
+<ul>
+<li>window.innerHeight - 浏览器窗口的内部高度</li>
+<li>window.innerWidth - 浏览器窗口的内部宽度</li>
+</ul>
+<p>对于 Internet Explorer 8、7、6、5：</p>
+<ul>
+<li>document.documentElement.clientHeight</li>
+<li>document.documentElement.clientWidth</li>
+</ul>
+<p>或者</p>
+<ul>
+<li>document.body.clientHeight</li>
+<li>document.body.clientWidth</li>
+</ul>
+<p>实用的 JavaScript 方案（涵盖所有浏览器）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var w=window.innerWidth</span><br><span class="line">|| document.documentElement.clientWidth</span><br><span class="line">|| document.body.clientWidth;</span><br><span class="line"></span><br><span class="line">var h=window.innerHeight</span><br><span class="line">|| document.documentElement.clientHeight</span><br><span class="line">|| document.body.clientHeight;</span><br></pre></td></tr></table></figure>
+<h2 id="Window-方法"><a href="#Window-方法" class="headerlink" title="Window 方法"></a>Window 方法</h2><p>一些其他方法：</p>
+<ul>
+<li>window.open() - 打开新窗口</li>
+<li>window.close() - 关闭当前窗口</li>
+<li>window.moveTo() - 移动当前窗口</li>
+<li>window.resizeTo() - 调整当前窗口的尺寸</li>
+</ul>
+<h2 id="Window-Screen"><a href="#Window-Screen" class="headerlink" title="Window Screen"></a>Window Screen</h2><p><strong>window.screen 对象包含有关用户屏幕的信息。</strong></p>
+<p><em>window.screen</em> 对象在编写时可以不使用 window 这个前缀。</p>
+<p>一些属性：</p>
+<ul>
+<li>screen.availWidth - 可用的屏幕宽度</li>
+<li>screen.availHeight - 可用的屏幕高度</li>
+</ul>
+<h2 id="Window-Location"><a href="#Window-Location" class="headerlink" title="Window Location"></a>Window Location</h2><p>window.location 对象用于获得当前页面的地址 (URL)，或把浏览器重定向到新的页面。</p>
+<ul>
+<li>location.hostname 返回 web 主机的域名</li>
+<li>location.pathname 返回当前页面的路径和文件名</li>
+<li>location.port 返回 web 主机的端口 （80 或 443）</li>
+<li>location.protocol 返回所使用的 web 协议（http:// 或 https://）</li>
+<li>location.href 返回当前页面的 URL</li>
+<li>location.pathname 返回 URL 的路径名</li>
+<li>location.assign() 方法加载新的文档（页面）</li>
+</ul>
+<h2 id="Window-History"><a href="#Window-History" class="headerlink" title="Window History"></a>Window History</h2><p>window.history 对象包含浏览器的历史。</p>
+<p>一些方法：</p>
+<ul>
+<li>history.back() - 与在浏览器点击后退按钮相同</li>
+<li>history.forward() - 与在浏览器中点击按钮向前相同</li>
+</ul>
+<h2 id="Window-Navigator"><a href="#Window-Navigator" class="headerlink" title="Window Navigator"></a>Window Navigator</h2><p>window.navigator 对象包含有关访问者浏览器的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;example&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">txt = &quot;&lt;p&gt;Browser CodeName: &quot; + navigator.appCodeName + &quot;&lt;/p&gt;&quot;;</span><br><span class="line">txt+= &quot;&lt;p&gt;Browser Name: &quot; + navigator.appName + &quot;&lt;/p&gt;&quot;;</span><br><span class="line">txt+= &quot;&lt;p&gt;Browser Version: &quot; + navigator.appVersion + &quot;&lt;/p&gt;&quot;;</span><br><span class="line">txt+= &quot;&lt;p&gt;Cookies Enabled: &quot; + navigator.cookieEnabled + &quot;&lt;/p&gt;&quot;;</span><br><span class="line">txt+= &quot;&lt;p&gt;Platform: &quot; + navigator.platform + &quot;&lt;/p&gt;&quot;;</span><br><span class="line">txt+= &quot;&lt;p&gt;User-agent header: &quot; + navigator.userAgent + &quot;&lt;/p&gt;&quot;;</span><br><span class="line">txt+= &quot;&lt;p&gt;User-agent language: &quot; + navigator.systemLanguage + &quot;&lt;/p&gt;&quot;;</span><br><span class="line"></span><br><span class="line">document.getElementById(&quot;example&quot;).innerHTML=txt;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>警告：来自 navigator 对象的信息具有误导性，不应该被用于检测浏览器版本，这是因为：</p>
+<ul>
+<li>navigator 数据可被浏览器使用者更改</li>
+<li>浏览器无法报告晚于浏览器发布的新操作系统</li>
+</ul>
+<p><strong><em>浏览器检测</em></strong></p>
+<p>由于 navigator 可误导浏览器检测，使用对象检测可用来嗅探不同的浏览器。</p>
+<p>由于不同的浏览器支持不同的对象，您可以使用对象来检测浏览器。例如，由于只有 Opera 支持属性 “window.opera”，您可以据此识别出 Opera。</p>
+<p>例子：if (window.opera) {…some action…}</p>
+<h2 id="JavaScript-消息框"><a href="#JavaScript-消息框" class="headerlink" title="JavaScript 消息框"></a>JavaScript 消息框</h2><h3 id="警告框"><a href="#警告框" class="headerlink" title="警告框"></a>警告框</h3><p>警告框经常用于确保用户可以得到某些信息。</p>
+<p>当警告框出现后，用户需要点击确定按钮才能继续进行操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(&quot;文本&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="确认框"><a href="#确认框" class="headerlink" title="确认框"></a>确认框</h3><p>确认框用于使用户可以验证或者接受某些信息。</p>
+<p>当确认框出现后，用户需要点击确定或者取消按钮才能继续进行操作。</p>
+<p>如果用户点击确认，那么返回值为 true。如果用户点击取消，那么返回值为 false。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">confirm(&quot;文本&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="提示框"><a href="#提示框" class="headerlink" title="提示框"></a>提示框</h3><p>提示框经常用于提示用户在进入页面前输入某个值。</p>
+<p>当提示框出现后，用户需要输入某个值，然后点击确认或取消按钮才能继续操纵。</p>
+<p>如果用户点击确认，那么返回值为输入的值。如果用户点击取消，那么返回值为 null。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prompt(&quot;文本&quot;,&quot;默认值&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="JavaScript-计时"><a href="#JavaScript-计时" class="headerlink" title="JavaScript 计时"></a>JavaScript 计时</h2><p><strong>通过使用 JavaScript，我们有能力做到在一个设定的时间间隔之后来执行代码，而不是在函数被调用后立即执行。我们称之为计时事件。</strong></p>
+<ul>
+<li><p>setTimeout()</p>
+<p>未来的某时执行代码</p>
+<p> <code>var t=setTimeout(&quot;javascript语句&quot;,毫秒)</code></p>
+</li>
+<li><p>clearTimeout()</p>
+<p>用来取消setTimeout()</p>
+</li>
+</ul>
+<h2 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h2><p>cookie 是存储于访问者的计算机中的变量。每当同一台计算机通过浏览器请求某个页面时，就会发送这个 cookie。你可以使用 JavaScript 来创建和取回 cookie 的值。</p>
+<p><strong>创建和存储 cookie</strong></p>
+<p>在这个例子中我们要创建一个存储访问者名字的 cookie。当访问者首次访问网站时，他们会被要求填写姓名。名字会存储于 cookie 中。当访问者再次访问网站时，他们就会收到欢迎词。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">c_name</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">document</span>.cookie.length&gt;<span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">  c_start=<span class="built_in">document</span>.cookie.indexOf(c_name + <span class="string">"="</span>)</span><br><span class="line">  <span class="keyword">if</span> (c_start!=<span class="number">-1</span>)</span><br><span class="line">    &#123; </span><br><span class="line">    c_start=c_start + c_name.length+<span class="number">1</span> </span><br><span class="line">    c_end=<span class="built_in">document</span>.cookie.indexOf(<span class="string">";"</span>,c_start)</span><br><span class="line">    <span class="keyword">if</span> (c_end==<span class="number">-1</span>) c_end=<span class="built_in">document</span>.cookie.length</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">unescape</span>(<span class="built_in">document</span>.cookie.substring(c_start,c_end))</span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">c_name,value,expiredays</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">var</span> exdate=<span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">exdate.setDate(exdate.getDate()+expiredays)</span><br><span class="line"><span class="built_in">document</span>.cookie=c_name+ <span class="string">"="</span> +<span class="built_in">escape</span>(value)+</span><br><span class="line">((expiredays==<span class="literal">null</span>) ? <span class="string">""</span> : <span class="string">";expires="</span>+exdate.toGMTString())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkCookie</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">username=getCookie(<span class="string">'username'</span>)</span><br><span class="line"><span class="keyword">if</span> (username!=<span class="literal">null</span> &amp;&amp; username!=<span class="string">""</span>)</span><br><span class="line">  &#123;alert(<span class="string">'Welcome again '</span>+username+<span class="string">'!'</span>)&#125;</span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">  &#123;</span><br><span class="line">  username=prompt(<span class="string">'Please enter your name:'</span>,<span class="string">""</span>)</span><br><span class="line">  <span class="keyword">if</span> (username!=<span class="literal">null</span> &amp;&amp; username!=<span class="string">""</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    setCookie(<span class="string">'username'</span>,username,<span class="number">365</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body onLoad=<span class="string">"checkCookie()"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="JS-库"><a href="#JS-库" class="headerlink" title="JS 库"></a>JS 库</h1><h2 id="CDN-内容分发网络"><a href="#CDN-内容分发网络" class="headerlink" title="CDN - 内容分发网络"></a>CDN - 内容分发网络</h2><p>您总是希望网页可以尽可能地快。您希望页面的容量尽可能地小，同时您希望浏览器尽可能多地进行缓存。</p>
+<p>如果许多不同的网站使用相同的 JavaScript 框架，那么把框架库存放在一个通用的位置供每个网页分享就变得很有意义了。</p>
+<p>CDN (Content Delivery Network) 解决了这个问题。CDN 是包含可分享代码库的服务器网络。</p>
+<p>Google 为一系列 JavaScript 库提供了免费的 CDN，包括：</p>
+<ul>
+<li>jQuery</li>
+<li>Prototype</li>
+<li>MooTools</li>
+<li>Dojo</li>
+<li>Yahoo! YUI</li>
+</ul>
+<p>如需在您的网页中使用 JavaScript 框架库，只需在 <code>&lt;script&gt;</code> 标签中引用该库即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js&quot;&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js&quot;&gt;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h2><p>主要的 jQuery 函数是 $() 函数（jQuery 函数）。如果您向该函数传递 DOM 对象，它会返回 jQuery 对象，带有向其添加的 jQuery 功能。</p>
+<p>jQuery 允许您通过 CSS 选择器来选取元素。</p>
+<p>在 JavaScript 中，您可以分配一个函数以处理窗口加载事件：</p>
+<p>JavaScript 方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function myFunction()</span><br><span class="line">&#123;</span><br><span class="line">var obj=document.getElementById(&quot;h01&quot;);</span><br><span class="line">obj.innerHTML=&quot;Hello jQuery&quot;;</span><br><span class="line">&#125;</span><br><span class="line">onload=myFunction;</span><br></pre></td></tr></table></figure>
+<p>jQuery 方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function myFunction()</span><br><span class="line">&#123;</span><br><span class="line">$(&quot;#h01&quot;).html(&quot;Hello jQuery&quot;);</span><br><span class="line">&#125;</span><br><span class="line">$(document).ready(myFunction);</span><br></pre></td></tr></table></figure>
+<p>上面代码的最后一行，HTML DOM 文档对象被传递到 jQuery ：$(document)。</p>
+<p>当您向 jQuery 传递 DOM 对象时，jQuery 会返回以 HTML DOM 对象包装的 jQuery 对象。</p>
+<p>jQuery 函数会返回新的 jQuery 对象，其中的 ready() 是一个方法。</p>
+<p>由于在 JavaScript 中函数就是变量，因此可以把 myFunction 作为变量传递给 jQuery 的 ready 方法。</p>
+<p>提示：jQuery 返回 jQuery 对象，与已传递的 DOM 对象不同。jQuery 对象拥有的属性和方法，与 DOM 对象的不同。您不能在 jQuery 对象上使用 HTML DOM 的属性和方法。</p>
+<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><h2 id="JavaScript-对象表示法"><a href="#JavaScript-对象表示法" class="headerlink" title="JavaScript 对象表示法"></a>JavaScript 对象表示法</h2><p>JSON 是存储和交换文本信息的语法。类似 XML。</p>
+<p>JSON 比 XML 更小、更快，更易解析。</p>
+<p>JSON 使用 JavaScript 语法来描述数据对象，但是 JSON 仍然独立于语言和平台。JSON 解析器和 JSON 库支持许多不同的编程语言。</p>
+<p><strong>JSON - 转换为 JavaScript 对象</strong></p>
+<p>JSON 文本格式在语法上与创建 JavaScript 对象的代码相同。</p>
+<p>由于这种相似性，无需解析器，JavaScript 程序能够使用内建的 <a href="http://www.w3school.com.cn/jsref/jsref_eval.asp" target="_blank" rel="noopener">eval() 函数</a>，用 JSON 数据来生成原生的 JavaScript 对象。</p>
+<h2 id="为什么使用-JSON？"><a href="#为什么使用-JSON？" class="headerlink" title="为什么使用 JSON？"></a>为什么使用 JSON？</h2><p>对于 AJAX 应用程序来说，JSON 比 XML 更快更易使用：</p>
+<ol>
+<li>使用 XML</li>
+</ol>
+<ul>
+<li>读取 XML 文档</li>
+<li>使用 XML DOM 来循环遍历文档</li>
+<li>读取值并存储在变量中</li>
+</ul>
+<ol start="2">
+<li>使用 JSON</li>
+</ol>
+<ul>
+<li>读取 JSON 字符串</li>
+<li>用 eval() 处理 JSON 字符串</li>
+</ul>
+<h2 id="JSON-语法规则"><a href="#JSON-语法规则" class="headerlink" title="JSON 语法规则"></a>JSON 语法规则</h2><p>JSON 语法是 JavaScript 对象表示法语法的子集。</p>
+<ul>
+<li>数据在名称/值对中</li>
+<li>数据由逗号分隔</li>
+<li>花括号保存对象</li>
+<li>方括号保存数组</li>
+</ul>
+<p>JSON 值可以是：</p>
+<ul>
+<li>数字（整数或浮点数）</li>
+<li>字符串（在双引号中）</li>
+<li>逻辑值（true 或 false）</li>
+<li>数组（在方括号中）</li>
+<li>对象（在花括号中）</li>
+<li>null</li>
+</ul>
+<h2 id="JSON-解析器"><a href="#JSON-解析器" class="headerlink" title="JSON 解析器"></a>JSON 解析器</h2><p>提示：eval() 函数可编译并执行任何 JavaScript 代码。这隐藏了一个潜在的安全问题。</p>
+<p>使用 JSON 解析器将 JSON 转换为 JavaScript 对象是更安全的做法。JSON 解析器只能识别 JSON 文本，而不会编译脚本。</p>
+<p>在浏览器中，这提供了原生的 JSON 支持，而且 JSON 解析器的速度更快。</p>
+<p>较新的浏览器和最新的 ECMAScript (JavaScript) 标准中均包含了原生的对 JSON 的支持。</p>
+<h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><p>AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）</p>
+<ol>
+<li><p>创建 XMLHttpRequest 对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xmlhttp;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</span><br><span class="line">  &#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></span><br><span class="line">  xmlhttp=<span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  &#123;<span class="comment">// code for IE6, IE5</span></span><br><span class="line">  xmlhttp=<span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向服务器发送请求</p>
+<p>| 方法                               | 描述                                                         |<br>| ———————————- | ———————————————————— |<br>| open(<em>method</em>,<em>url</em>,<em>async</em>)       | 规定请求的类型、URL 以及是否异步处理请求。<em>method</em>：请求的类型；GET 或 POST<em>url</em>：文件在服务器上的位置<em>async</em>：true（异步）或 false（同步） |<br>| send(<em>string</em>)                     | 将请求发送到服务器。<em>string</em>：仅用于 POST 请求               |<br>| setRequestHeader(<em>header</em>,<em>value</em>) | 向请求添加 HTTP 头。<em>header</em>: 规定头的名称<em>value</em>: 规定头的值 |</p>
+</li>
+<li><p>服务器响应</p>
+<p>| 属性         | 描述                       |<br>| ———— | ————————– |<br>| responseText | 获得字符串形式的响应数据。 |<br>| responseXML  | 获得 XML 形式的响应数据。  |</p>
+</li>
+<li><p>onreadystatechange 事件</p>
+<p>当请求被发送到服务器时，我们需要执行一些基于响应的任务。</p>
+<p>每当 readyState 改变时，就会触发 onreadystatechange 事件。</p>
+<p>readyState 属性存有 XMLHttpRequest 的状态信息。</p>
+<p>下面是 XMLHttpRequest 对象的三个重要的属性：</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onreadystatechange</td>
+<td>存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。</td>
+</tr>
+<tr>
+<td>readyState</td>
+<td>存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。0: 请求未初始化1: 服务器连接已建立2: 请求已接收3: 请求处理中4: 请求已完成，且响应已就绪</td>
+</tr>
+<tr>
+<td>status</td>
+<td>200: “OK”404: 未找到页面</td>
+</tr>
+</tbody>
+</table>
+<p>当 readyState 等于 4 且状态为 200 时，表示响应已就绪：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xmlhttp.readyState==<span class="number">4</span> &amp;&amp; xmlhttp.status==<span class="number">200</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>).innerHTML=xmlhttp.responseText;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Frontend/XML入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/05/12/Frontend/XML入门/" class="article-date">
+      <time datetime="2018-05-12T03:10:58.000Z" itemprop="datePublished">2018-05-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/12/Frontend/XML入门/">XML入门</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>//默认已经学过html</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="XML-文档必须有根元素"><a href="#XML-文档必须有根元素" class="headerlink" title="XML 文档必须有根元素"></a>XML 文档必须有根元素</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;root&gt;</span><br><span class="line">  &lt;child&gt;</span><br><span class="line">    &lt;subchild&gt;.....&lt;/subchild&gt;</span><br><span class="line">  &lt;/child&gt;</span><br><span class="line">&lt;/root&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="XML-声明"><a href="#XML-声明" class="headerlink" title="XML 声明"></a>XML 声明</h4><p>XML 声明文件的可选部分，如果存在需要放在文档的第一行，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="元素必须有一个关闭标签"><a href="#元素必须有一个关闭标签" class="headerlink" title="元素必须有一个关闭标签"></a>元素必须有一个关闭标签</h4><p>在 HTML 中，某些元素不必有一个关闭标签；在 XML 中，省略关闭标签是非法的。</p>
+<p><strong>注：</strong>XML 声明没有关闭标签。这不是错误。声明不是 XML 文档本身的一部分，它没有关闭标签。</p>
+<h4 id="标签对大小写敏感"><a href="#标签对大小写敏感" class="headerlink" title="标签对大小写敏感"></a>标签对大小写敏感</h4><h4 id="属性值必须加引号"><a href="#属性值必须加引号" class="headerlink" title="属性值必须加引号"></a>属性值必须加引号</h4><h4 id="实体引用"><a href="#实体引用" class="headerlink" title="实体引用"></a>实体引用</h4><p>在 XML 中，一些字符拥有特殊的意义。</p>
+<p>如果您把字符 “&lt;” 放在 XML 元素中，会发生错误，这是因为解析器会把它当作新元素的开始。</p>
+<p>这样会产生 XML 错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;message&gt;if salary &lt; 1000 then&lt;/message&gt;</span><br></pre></td></tr></table></figure>
+<p>为了避免这个错误，请用<strong>实体引用</strong>来代替 “&lt;” 字符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;message&gt;if salary &amp;lt; 1000 then&lt;/message&gt;</span><br></pre></td></tr></table></figure>
+<p>在 XML 中，有 5 个预定义的实体引用：</p>
+<table>
+<thead>
+<tr>
+<th>&lt;</th>
+<th>&lt;</th>
+<th>less than</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>greater than</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>&amp;</td>
+<td>ampersand</td>
+</tr>
+<tr>
+<td>&apos;</td>
+<td>‘</td>
+<td>apostrophe</td>
+</tr>
+<tr>
+<td>&quot;</td>
+<td>“</td>
+<td>quotation mark</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注：</strong>在 XML 中，只有字符 “&lt;” 和 “&amp;” 确实是非法的。大于号是合法的，但是用实体引用来代替它是一个好习惯。</p>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>在 XML 中编写注释的语法与 HTML 的语法很相似。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- This is a comment --&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="在-XML-中，空格会被保留"><a href="#在-XML-中，空格会被保留" class="headerlink" title="在 XML 中，空格会被保留"></a>在 XML 中，空格会被保留</h4><p>HTML 会把多个连续的空格字符裁减（合并）为一个； XML 中，文档中的空格不会被删减。</p>
+<h4 id="XML-以-LF-存储换行"><a href="#XML-以-LF-存储换行" class="headerlink" title="XML 以 LF 存储换行"></a>XML 以 LF 存储换行</h4><p>在 Windows 应用程序中，换行通常以一对字符来存储：回车符（CR）和换行符（LF）。</p>
+<p>在 Unix 和 Mac OSX 中，使用 LF 来存储新行。</p>
+<p>在旧的 Mac 系统中，使用 CR 来存储新行。</p>
+<p>XML 以 LF 存储换行。</p>
+<h3 id="应避免使用属性"><a href="#应避免使用属性" class="headerlink" title="应避免使用属性"></a>应避免使用属性</h3><p>因使用属性而引起的一些问题：</p>
+<ul>
+<li>属性不能包含多个值（元素可以）</li>
+<li>属性不能包含树结构（元素可以）</li>
+<li>属性不容易扩展（为未来的变化）</li>
+</ul>
+<p>属性难以阅读和维护。请尽量使用元素来描述数据。而仅仅使用属性来提供与数据无关的信息。</p>
+<h4 id="针对元数据的-XML-属性"><a href="#针对元数据的-XML-属性" class="headerlink" title="针对元数据的 XML 属性"></a>针对元数据的 XML 属性</h4><p>有时候会向元素分配 ID 引用。这些 ID 索引可用于标识 XML 元素，它起作用的方式与 HTML 中 id 属性是一样的。这个实例向我们演示了这种情况：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">messages</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span> <span class="attr">id</span>=<span class="string">"501"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">to</span>&gt;</span>Tove<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">from</span>&gt;</span>Jani<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">heading</span>&gt;</span>Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>Don't forget me this weekend!<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span> <span class="attr">id</span>=<span class="string">"502"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">to</span>&gt;</span>Jani<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">from</span>&gt;</span>Tove<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">heading</span>&gt;</span>Re: Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>I will not<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">messages</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的 id 属性仅仅是一个标识符，用于标识不同的便签。它并不是便签数据的组成部分。</p>
+<p>在此我们极力向您传递的理念是：元数据（有关数据的数据）应当存储为属性，而数据本身应当存储为元素。</p>
+<h3 id="XML-如何显示？"><a href="#XML-如何显示？" class="headerlink" title="XML 如何显示？"></a>XML 如何显示？</h3><p>XML 文档不会携带有关如何显示数据的信息。</p>
+<p>由于 XML 标签由 XML 文档的作者“发明”，浏览器无法确定像 <code>&lt;table&gt;</code> 这样一个标签究竟描述一个 HTML 表格还是一个餐桌。</p>
+<p>在没有任何有关如何显示数据的信息的情况下，大多数的浏览器都会仅仅把 XML 文档显示为源代码。</p>
+<p>在下面的章节，我们会了解几个有关这个显示问题的解决方案，其中会使用 CSS、XSL、JavaScript 以及 XML 数据岛。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XML/">XML</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/Mysql/mysql用户名及密码" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1022,561 +1660,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Frontend/HTMLl5+CSS3入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/03/Frontend/HTMLl5+CSS3入门/" class="article-date">
-      <time datetime="2018-04-03T04:17:26.000Z" itemprop="datePublished">2018-04-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/03/Frontend/HTMLl5+CSS3入门/">HTML5+CSS3入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="html5"><a href="#html5" class="headerlink" title="html5"></a>html5</h3><p>ie9以上版本支持html5</p>
-<p>查询资料 <a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">http://www.w3school.com.cn/</a></p>
-<h4 id="html5格式"><a href="#html5格式" class="headerlink" title="html5格式"></a>html5格式</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>mytitle<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>html5语法更加宽松</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span><span class="tag">&lt;/<span class="name">meta</span>&gt;</span> <span class="comment">&lt;!--html5可以把所有的标签都看成是双标签&gt;</span></span><br><span class="line"><span class="comment">&lt;!--向下兼容--比html5低版本的语法都支持&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="html5新增标签"><a href="#html5新增标签" class="headerlink" title="html5新增标签"></a>html5新增标签</h4><p><code>&lt;header&gt;</code>网页的头部</p>
-<p><code>&lt;nav</code>网页的导航–链接的哪行文本</p>
-<p><code>&lt;section&gt;</code>代表网页的一个块–与div相似</p>
-<p><code>&lt;article&gt;</code>文章内容</p>
-<p><code>&lt;aside&gt;</code>网页文档的侧边栏</p>
-<p><code>&lt;footer&gt;</code>网页的页脚–版权</p>
-<h4 id="html5新增type标签"><a href="#html5新增type标签" class="headerlink" title="html5新增type标签"></a>html5新增type标签</h4><p>placeholder=”内容”  输入框的提示信息</p>
-<p>required=”required”  必填项，不填不能提交</p>
-<p>autofocus=”autofocus”  自动获取焦点，光标自动定位到输入框中</p>
-<h4 id="html5新增表单属性"><a href="#html5新增表单属性" class="headerlink" title="html5新增表单属性"></a>html5新增表单属性</h4><ul>
-<li><p>限定输入类型 </p>
-<p>email</p>
-<p>url</p>
-<p>data</p>
-<p>month</p>
-<p>time</p>
-<p>week</p>
-<p>number</p>
-</li>
-<li><p>search  搜索框</p>
-</li>
-<li><p>color  产生一个颜色选项</p>
-</li>
-<li><p>range  产生一个滑块</p>
-</li>
-</ul>
-<h4 id="html5视频-音频"><a href="#html5视频-音频" class="headerlink" title="html5视频/音频"></a>html5视频/音频</h4><p>视频</p>
-<p>.ogg  .mp4  .webm</p>
-<ol>
-<li><p><code>&lt;video src=&quot;路径&quot; &gt;</code>属性：autoplay=”autoplay”自动播放   controls控件</p>
-</li>
-<li><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">autoplay</span>=<span class="string">"autoplay"</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"xx.mp4"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"xx.ogg"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"xx.webm"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span><span class="comment">&lt;!--支持所有格式&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>音频</p>
-<p>.ogg  .mp3  .wav</p>
-<p><code>&lt;audio&gt;</code>类似video</p>
-<h3 id="css3"><a href="#css3" class="headerlink" title="css3"></a>css3</h3><p>对css2进行扩充、删减、优化</p>
-<h4 id="css3属性选择器"><a href="#css3属性选择器" class="headerlink" title="css3属性选择器"></a>css3属性选择器</h4><p>E–element 元素(选择器)    data–属性</p>
-<ul>
-<li><code>E[data]</code>  选择带有data属性的元素对象</li>
-<li><code>E[data=&quot;one&quot;]</code>  选择带有data属性并且属性值<strong>为one</strong>的元素</li>
-<li><code>E[data^=&quot;one&quot;]</code>  选择带有data属性并且属性值<strong>以o开头</strong>的元素</li>
-<li><code>E[data$=&quot;e&quot;]</code>  选择带有data属性并且属性值<strong>以e结尾</strong>的元素</li>
-<li><code>E[data*=&quot;n&quot;]</code>  选择带有data属性并且属性值<strong>包含n</strong>的元素</li>
-</ul>
-<h4 id="css3伪类"><a href="#css3伪类" class="headerlink" title="css3伪类"></a>css3伪类</h4><ul>
-<li><p><code>E:first-child{}</code>第一个E孩子</p>
-</li>
-<li><p><code>E:last-child{}</code>最后一个E孩子</p>
-</li>
-<li><p><code>E:only-child{}</code>唯一的个E孩子</p>
-</li>
-<li><p><code>E:nth-child(n){}</code>第n个E孩子</p>
-</li>
-<li><p><code>E:nth-child(2n+1){}</code></p>
-<p><code>E:nth-child(odd){}</code>获得奇数E孩子</p>
-</li>
-<li><p><code>E:nth-child(2n){}</code></p>
-<p><code>E:nth-child(even){}</code>获得偶数E孩子</p>
-</li>
-</ul>
-<h4 id="css3伪元素"><a href="#css3伪元素" class="headerlink" title="css3伪元素"></a>css3伪元素</h4><ul>
-<li><code>E:first-letter</code>设置第一个文字</li>
-<li><code>E:first-line</code>设置第一行文字</li>
-<li><code>E::after</code>在盒子里面的后面插入内容 .me::after{content:”内容”}</li>
-<li><code>E::before</code>在盒子里面的前面插入内容</li>
-</ul>
-<p>阿里巴巴矢量图标库  <a href="http://iconfont.cn/" target="_blank" rel="noopener">http://iconfont.cn/</a></p>
-<h4 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h4><p><strong>设置文本的阴影</strong></p>
-<p>text-shadow:水平(必须设置，正右负左)  垂直(必须设置，正下负上)  模糊强调  颜色(如果不设置，默认为黑色)</p>
-<p>可以有多重阴影，之间用逗号相隔</p>
-<p><code>text-shadow:2px 2px 2px blue,-2px -2px -2px #ff3399;</code></p>
-<p><strong>设置盒子的阴影</strong></p>
-<p>box-shadow: 水平(必须设置)  垂直(必须设置)  模糊强度  模糊尺寸  颜色  内外阴影(默认是外阴影，内阴影要加inset，但是如果是外阴影<strong>不加outset</strong>)</p>
-<h4 id="圆角矩形"><a href="#圆角矩形" class="headerlink" title="圆角矩形"></a>圆角矩形</h4><p>boder-radius:左上 右上 右下 左下</p>
-<h4 id="设置半透明颜色"><a href="#设置半透明颜色" class="headerlink" title="设置半透明颜色"></a>设置半透明颜色</h4><p>rgba(255,0,0,0.3)</p>
-<h4 id="背景图片的尺寸"><a href="#背景图片的尺寸" class="headerlink" title="背景图片的尺寸"></a>背景图片的尺寸</h4><p>background-size:宽度 高度 </p>
-<p>background-size:cover 背景图片会覆盖整个盒子(宽<strong>和</strong>高都覆盖)</p>
-<p>background-size:contain  图片覆盖盒子的宽<strong>或</strong>高</p>
-<h3 id="完"><a href="#完" class="headerlink" title="完"></a>完</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Frontend/Html入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/03/Frontend/Html入门/" class="article-date">
-      <time datetime="2018-04-03T04:17:16.000Z" itemprop="datePublished">2018-04-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/03/Frontend/Html入门/">Html入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>html(hyper markup language)超文本标记语言，是一种标准—–w3c</p>
-<p>超文本：在文本内容的基础上，添加更加丰富的信息（图片，动画，声音等）</p>
-<h3 id="html基本骨架结构"><a href="#html基本骨架结构" class="headerlink" title="html基本骨架结构"></a>html基本骨架结构</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>mytitle<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="html结构说明"><a href="#html结构说明" class="headerlink" title="html结构说明"></a>html结构说明</h3><ul>
-<li><p><code>&lt;html&gt;</code>含义：告诉浏览器网页的代码用什么格式来解析</p>
-</li>
-<li><p><code>&lt;head&gt;</code>含义：告诉浏览器网页的文字用什么字符集，字符集不正确则会出现乱码</p>
-<p>gb2312  简体中文  —-  <strong>汉字操作系统默认使用的字符集</strong></p>
-<p>gbk  国际码       utf-8  多国语言</p>
-</li>
-<li><p><code>&lt;title&gt;</code>含义：便于搜索引擎查找</p>
-</li>
-<li><p><code>&lt;body&gt;</code>含义：网站的内容只有放入该标签才能在窗口中显示</p>
-</li>
-</ul>
-<h3 id="html书写规范"><a href="#html书写规范" class="headerlink" title="html书写规范"></a>html书写规范</h3><ul>
-<li>不区分大小写，但是w3c使用的是小写</li>
-<li>单标签一定要闭合<code>&lt;br /&gt;</code></li>
-<li>属性值用双引号</li>
-</ul>
-<h3 id="html文本标签"><a href="#html文本标签" class="headerlink" title="html文本标签"></a>html文本标签</h3><ul>
-<li><code>&lt;font color=&quot;red&quot; size=&quot;5&quot; face=&quot;楷书&quot;&gt;content&lt;/font&gt;</code>size以<strong>号</strong>为单位</li>
-<li><ol>
-<li><code>&lt;b&gt;&lt;/b&gt;</code>加粗</li>
-<li><code>&lt;strong&gt;&lt;/strong&gt;</code>加粗 加强语气</li>
-<li><code>&lt;i&gt;&lt;/i&gt;</code>倾斜</li>
-<li><code>&lt;em&gt;&lt;/em&gt;</code>倾斜 加强语气</li>
-<li><code>&lt;u&gt;&lt;/u&gt;</code>下划线</li>
-<li><code>&lt;ins&gt;&lt;/ins&gt;</code>下划线 强调内容</li>
-<li><code>&lt;sup&gt;&lt;/sup&gt;</code>上标</li>
-<li><code>&lt;sub&gt;&lt;/sub&gt;</code>下标</li>
-</ol>
-</li>
-<li>段落标签<code>&lt;p&gt;&lt;/p&gt;</code>属性：Align 取值 left center right</li>
-<li>标题标签<code>&lt;h1&gt;&lt;/h1&gt;...&lt;h6&gt;&lt;/h6&gt;</code>属性：Align</li>
-<li>pre 预定义标签<code>&lt;pre&gt;content&lt;/pre&gt;</code>保留标签之间内容的空格和换行</li>
-<li>div 本身没有意义，自己独占一行，结合css    <strong>块标签</strong></li>
-<li>span 本身没有意义，结合css   <strong>行内标签</strong></li>
-</ul>
-<h3 id="html图片标签"><a href="#html图片标签" class="headerlink" title="html图片标签"></a>html图片标签</h3><p>语法：<code>&lt;img 属性=&quot;属性值&quot;/&gt;</code></p>
-<p>属性：</p>
-<ul>
-<li><p>路径 src=”图片地址“       图片要放到同一个站点（文件夹）下</p>
-</li>
-<li><p>宽度 width=“1”  以像素px为单位，不用写单位</p>
-</li>
-<li><p>高度 weight=“1”</p>
-</li>
-<li><p>边框 border=“1”</p>
-</li>
-<li><p>解释说明 alt=“对图片的描述内容”</p>
-</li>
-<li><p>图片和内容左右之间的距离 hspace=“1”  （css实现更佳）</p>
-</li>
-<li><p>图片和内容上下之间的距离 vspace=“1”  （css实现更佳）</p>
-<p>注意：只设置高度或宽度，图片等比例缩放</p>
-</li>
-</ul>
-<h3 id="html列表"><a href="#html列表" class="headerlink" title="html列表"></a>html列表</h3><ol>
-<li><p>无序列表</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>one<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>two<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>three<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>属性：type  设置列表前面符号的样式  取值  circle(实心圆)  disc(空心圆 默认)  square(方形)</p>
-</li>
-<li><p>有序列表</p>
-<p><code>&lt;ol&gt;</code>类似</p>
-</li>
-</ol>
-<h3 id="html表格"><a href="#html表格" class="headerlink" title="html表格"></a>html表格</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span>/*----第一行----*/</span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span>/*----第二行----*/</span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>图片内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>table属性：</p>
-<ol>
-<li><p>边框 border=“2” 默认是0</p>
-</li>
-<li><p>宽度 width=“2”</p>
-</li>
-<li><p>高度 height=“2”（w3c不建议使用高度）</p>
-</li>
-<li><p>居中方式 align=“center”</p>
-</li>
-<li><p>表格中内容和单元格之间的距离 cellpadding=“2” 默认是2px</p>
-</li>
-<li><p>表格中单元格和单元格之间的距离 cellspacing=“2” 默认是2px</p>
-</li>
-<li><p>背景颜色 bgcolor=“red”</p>
-</li>
-<li><p>背景图片 backgroun=“图片地址” (不能含有中文)</p>
-<p>注意：背景图片的优先级高于背景颜色</p>
-</li>
-<li><p>合并边框线 rules=“all”（css实现更佳）</p>
-</li>
-<li><p>边框颜色 bordercolor=“red”（css实现更佳）</p>
-</li>
-</ol>
-</li>
-<li><p>tr 行属性</p>
-<ol>
-<li>高度 height=“300”</li>
-<li>背景颜色 bgcolor=“blue”</li>
-<li>背景图片 background=“图片地址”</li>
-<li>水平对齐方式 align=“left//center//right”</li>
-<li>垂直对齐方式 valign=“top//middle//bottom”</li>
-</ol>
-</li>
-<li><p>td 单元格属性</p>
-<ol>
-<li><p>背景颜色 bgcolor</p>
-</li>
-<li><p>背景图片 background=“图片地址”</p>
-</li>
-<li><p>宽度 width=“300”</p>
-</li>
-<li><p>高度 height=“40”</p>
-</li>
-<li><p>水平对齐方式 align=“left//center//right”</p>
-</li>
-<li><p>垂直对齐方式 valign=“top//middle//bottom”</p>
-</li>
-<li><p><strong>合并单元格</strong></p>
-<p>横向合并 colspan=“2” 横向合并两个</p>
-<p>纵向合并 rowspan=“3”</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="html链接"><a href="#html链接" class="headerlink" title="html链接"></a>html链接</h3><p><strong>语法</strong>：<code>&lt;a 属性=“属性值”&gt;content&lt;/a&gt;</code></p>
-<p><strong>属性</strong>：</p>
-<ul>
-<li>链接的地址 href=“地址 url”   相对地址或绝对地址</li>
-<li>设置打开目标文件的窗口 target=“方式”<ol>
-<li>在新的窗口中打开目标文件 _blank</li>
-<li>默认的打开方式，在原窗口打开目标文件 _self</li>
-</ol>
-</li>
-<li>name 定义锚点的名称</li>
-</ul>
-<p><strong>特殊链接</strong>：</p>
-<ul>
-<li><p>下载链接</p>
-<p>不需要下载的文件  .html   .jpg   .gif</p>
-<p>必须要下载的文件  .zip  .exe</p>
-</li>
-<li><p>邮件连接</p>
-<p><code>&lt;a href=&quot;mailto:邮件地址&quot;&gt;content&lt;/a&gt;</code></p>
-</li>
-<li><p>空链接</p>
-<p>链接到当前页面  <code>&lt;a href=&quot;#&quot;&gt;content&lt;/a&gt;</code></p>
-</li>
-<li><p>javascript 链接</p>
-<p><code>&lt;a href=&quot;javascript:window.close()&quot;&gt;关闭页面&lt;/a&gt;</code></p>
-<p>Firefox设置问题：1在地址栏输入about config  2在搜索中输入close_windows  3双击配置改为true</p>
-</li>
-</ul>
-<p><strong>锚点</strong>：用name属性定义锚点名称</p>
-<p>定义锚点<code>&lt;a name=&quot;anchor&quot;&gt;&lt;/a&gt;</code>标签之间不加内容</p>
-<p>跳转锚点<code>&lt;a href=&quot;#anchor&quot;content&lt;/a&gt;</code></p>
-<h3 id="html特殊字符"><a href="#html特殊字符" class="headerlink" title="html特殊字符"></a>html特殊字符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;nbsp; 一个空格 占一个字符 一个汉字占两个字符</span><br><span class="line">&amp;copy; 版权</span><br><span class="line">&amp;lit; &lt;</span><br><span class="line">&amp;git; &gt;</span><br><span class="line">&amp;yen; ¥</span><br></pre></td></tr></table></figure>
-<h3 id="html颜色代码"><a href="#html颜色代码" class="headerlink" title="html颜色代码"></a>html颜色代码</h3><table>
-<thead>
-<tr>
-<th>英文名字</th>
-<th>red</th>
-<th>green</th>
-<th>blue</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>十六进制</td>
-<td><code>#ff0000</code></td>
-<td><code>#00ff00</code></td>
-<td><code>#0000ff</code></td>
-</tr>
-<tr>
-<td>十进制rgb</td>
-<td>rgb(255,0,0)</td>
-<td>rgb(0,255,0)</td>
-<td>rgb(0,0,255)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Meta标签"><a href="#Meta标签" class="headerlink" title="Meta标签"></a>Meta标签</h3><p>描述网页文档属性</p>
-<pre><code>http-equiv    和    name
-</code></pre><p>http-equiv  模拟http文件头信息，当内容从服务器端发送客户端，告诉浏览器如何正确显示信息</p>
-<ul>
-<li><p>字符集</p>
-<p><code>&lt;meta http-equiv=&quot;content-type&quot;content=&quot;text/html;charset=&quot;UTF-8&quot;/&gt;</code>多国语言</p>
-<p><strong>字符集介绍</strong></p>
-<ul>
-<li><p>ASCII    2^8=256</p>
-</li>
-<li><p>ANSI    各个国家对ASCII编码进行扩展，用于显示本国的语言  2^16=65536</p>
-<p>中文操作系统 gb2312 收录了6763个汉字</p>
-<p>繁体操作系统 big5</p>
-</li>
-<li><p>GBK     对gb2312扩充，收录冷门字       越2.1万汉字</p>
-</li>
-<li><p>Unicode  计划将世上所有字符统一编码，用4Byte(32bit)表示一个字符，造成极大空间浪费</p>
-</li>
-<li><p>UTF-8   多国语言编码，它会选择合适编码来翻译不同的字符</p>
-</li>
-</ul>
-</li>
-<li><p>网页自动刷新</p>
-<p><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;4&quot;/&gt;</code>间隔4秒网页自动刷新</p>
-<p><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;8;http://www.baidu.com&quot;/&gt;</code>等待8秒自动跳转到百度</p>
-</li>
-<li><p>Name可以设置网页关键字，描述信息等</p>
-<p><code>&lt;meta name=&quot;description&quot; content=&quot;网站的描述信息&quot;/&gt;便于搜索引擎需要</code></p>
-<p><code>&lt;meta name=&quot;author&quot; content=&quot;作者&quot;/&gt;</code>网站的作者</p>
-</li>
-</ul>
-<h3 id="html表单"><a href="#html表单" class="headerlink" title="html表单"></a>html表单</h3><p>可以获取客户端的信息（数据）。</p>
-<p>对表单中的数据进行验证，如果不符合制定的要求，提示验证没有通过；如果符合相应的要求，把数据提交到服务器端，数据放入数据库中。</p>
-<p>表单分为前台的制作页面，php对数据的处理。</p>
-<p><strong>表单的结构</strong></p>
-<p>语法</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> 属性=<span class="string">“属性值”</span>&gt;</span></span><br><span class="line">  	控件</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>表单的属性</strong></p>
-<ol>
-<li><p>Name=”username”  表单的识别名称</p>
-</li>
-<li><p>Action=”xx.php”  对数据进行处理</p>
-<p>Action=””  对表单中的数据处理的程序就在当前文档</p>
-</li>
-<li><p>Method=”get/post”  把表单中的数据提交到服务器端的方法，传递数据的方法</p>
-<ol>
-<li><p>Get 方法 默认的一种传递数据的方法，通过地址来传递表单中的数据。</p>
-<ul>
-<li>不能传递敏感的数据，密码</li>
-<li>不能传递大量的数据，每次只能传递1024字节。</li>
-<li>不能上传附件</li>
-</ul>
-</li>
-<li><p>Post 方法，不是通过地址栏传递数据，数据传给文件处理程序</p>
-<ul>
-<li>相对安全</li>
-<li>可以传递海量数据</li>
-<li>可以传递附件</li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-<p><strong>表单控件</strong></p>
-<h4 id="单行文本框"><a href="#单行文本框" class="headerlink" title="单行文本框"></a>单行文本框</h4><p>(单标签，行内标签)</p>
-<p>语法：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p>属性：</p>
-<ul>
-<li>Name=“username”  单行文本框的识别名称，是把输入框中的数据，提交到文件的处理程序，可以自己定义名称，命名规则。</li>
-<li>Size=“数值” 输入框的宽度，以字符为单位</li>
-<li>Maxlength=”数值“  最多允许输入的字符数，如果超出范围，输入不进去</li>
-<li>value=“内容”  设置输入框的初始值，输入框中的默认数据信息</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">size</span>=<span class="string">"50"</span> <span class="attr">maxlength</span>=<span class="string">"8"</span> <span class="attr">value</span>=<span class="string">"请输入账号/用户名"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="密码框"><a href="#密码框" class="headerlink" title="密码框"></a>密码框</h4><p>语法：type=”password”</p>
-<p>属性：</p>
-<ul>
-<li>Name</li>
-<li>Size </li>
-<li>Maxlength</li>
-<li>value  初始值</li>
-<li>Readonly=“Readonly” 只读属性，只能选中，不能修改（不常用）</li>
-<li>Disable=“Disable” 禁止属性，不能选中，不能修改（以Firefox为准）</li>
-</ul>
-<h4 id="单选按钮"><a href="#单选按钮" class="headerlink" title="单选按钮"></a>单选按钮</h4><p>语法：type=”radio”</p>
-<p>属性：</p>
-<ul>
-<li>Name 组名，单选按钮<strong>组</strong>的识别名称，一个组能选定一个单选按钮。</li>
-<li>Value 初始值，必须写，代表每一项的值。</li>
-</ul>
-<h4 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h4><p>（多选按钮）</p>
-<p>语法：type=“checkbox”</p>
-<p>属性：</p>
-<ul>
-<li>Name  组名</li>
-<li>Value  初始值，设置每一项的值</li>
-<li>checked=“checked”  默认被选中</li>
-</ul>
-<h4 id="多行文本框"><a href="#多行文本框" class="headerlink" title="多行文本框"></a>多行文本框</h4><p>（双标签）</p>
-<p>语法：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">rows</span>=<span class="string">"10"</span> <span class="attr">cols</span>=<span class="string">"80"</span> <span class="attr">name</span>=<span class="string">"content"</span>&gt;</span>默认显示内容<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>属性：</p>
-<ul>
-<li>Name</li>
-<li>Value 不要出现value，如果想显示默认的信息，直接在双标签之间输入。</li>
-<li>Rows  显示的行数</li>
-<li>Cols  一行显示多少字符</li>
-</ul>
-<h4 id="下拉列表"><a href="#下拉列表" class="headerlink" title="下拉列表"></a>下拉列表</h4><p>（双标签）</p>
-<p>语法：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">option</span>&gt;</span>---请选择---<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">option</span>&gt;</span>选择1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">option</span>&gt;</span>选择2<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>属性：</p>
-<ul>
-<li>Name</li>
-<li>Value  每一项的初始值，不写的话默认为选择的字符串内容</li>
-</ul>
-<h4 id="隐藏域"><a href="#隐藏域" class="headerlink" title="隐藏域"></a>隐藏域</h4><p>隐藏起来，不是给客户看，是给程序用的（以后常用）</p>
-<p>语法：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"id1"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="文件域"><a href="#文件域" class="headerlink" title="文件域"></a>文件域</h4><p>语法：type=“file”</p>
-<p>属性：</p>
-<ul>
-<li>Name</li>
-<li>Value  不写value，通过单击按钮来选择文件，选择的文件就是value值，value是只读属性，不能手动输入。</li>
-</ul>
-<h4 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h4><ol>
-<li><p>提交按钮</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intput</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"按钮上显示的文字"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>图片按钮（属于提交按钮的一种）</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intput</span> <span class="attr">type</span>=<span class="string">"image"</span> <span class="attr">src</span>=<span class="string">"图片的地址"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重置按钮—-恢复到默认的状态</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intput</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">value</span>=<span class="string">"按钮上显示的文字"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>普通按钮—-本身没有任何功能，结合程序构成功能</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intput</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"按钮上显示的文字"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">onclick</span>=<span class="string">"javascript:window.alert('你已经投过票了')"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="Xhtml"><a href="#Xhtml" class="headerlink" title="Xhtml"></a>Xhtml</h3><p>可扩展的超文本标记语言—–取代 html，pc机 —–面向当今的移动端设备</p>
-<p>Xhtml语法比html严格：</p>
-<ul>
-<li><p>输入的标签和属性必须是小写</p>
-</li>
-<li><p>单标签后必须加/ 例如<code>&lt;br /&gt;</code></p>
-</li>
-<li><p>属性必须用双引号</p>
-</li>
-<li><p>必须有 dtd （document type definition）文档类型定义<br>dtd 是一种验证机制，检验输入的xhtml 是否符合规范<br>dtd 分类：</p>
-<ul>
-<li><p>过渡型  xhtml1-transitional   允许使用表现标签和属性<code>&lt;b&gt; &lt;i&gt; &lt;font color=&quot;red&quot;&gt;</code>等</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;&quot;http://...//xhtml1-transitional.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>严格型  xhtml1-strict（不常用）不允许使用表现标签和属性，必须使用css样式来设置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;&quot;http://...//xhtml1-strict.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>框架型  xhtml1-frameset（不常用）给框架用</p>
-</li>
-<li><p>可以通过该网站测试 dtd 声明   <a href="http://www.w3.org" target="_blank" rel="noopener">http://www.w3.org</a></p>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
     </div>
 
       

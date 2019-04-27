@@ -234,6 +234,205 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/PostgreSQL/PostgreSQL 命令" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/" class="article-date">
+      <time datetime="2018-08-17T14:49:50.000Z" itemprop="datePublished">2018-08-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/">PostgreSQL 命令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><p>查看所有命令</p>
+<p><code>\?</code></p>
+<p>显示已创建的数据库</p>
+<p><code>\l</code>  或者</p>
+<p><code>SELECT datname FROM pg_database;</code></p>
+<p>在不连接进 PostgreSQL 数据库的情况下，也可以在终端上查看显示已创建的列表：</p>
+<p><code>psql -l</code></p>
+<p>查看postgresql数据库用户</p>
+<p><code>\du</code></p>
+<p>显示数据库表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、通过命令行查询</span><br><span class="line">\d 数据库 —— 得到所有表的名字</span><br><span class="line">\d 表名 —— 得到表结构</span><br><span class="line"></span><br><span class="line">2、通过SQL语句查询</span><br><span class="line">select * from pg_tables;	//得到当前db中所有表的信息（这里pg_tables是系统视图）</span><br><span class="line">select tablename from pg_tables where schemaname=&apos;public&apos;	//得到所有用户自定义表的名字（这里&quot;tablename&quot;字段是表的名字，&quot;schemaname&quot;是schema的名字。用户自定义的表，如果未经特殊处理，默认都是放在名为public的schema下）</span><br></pre></td></tr></table></figure>
+<h5 id="d命令"><a href="#d命令" class="headerlink" title="\d命令"></a>\d命令</h5><p>该命令将显示每个匹配关系（表，视图，索引，序列）的信息，包括对象所有的列，它们的类型，表空间（如果不是默认的）和任何特殊属性（如NOT NULL或默认值等）。与唯一约束相关的索引，规则，约束，触发器也同样会显示出来。如果关系是一个视图，还会显示视图的定义。</p>
+<ol>
+<li>如果\d命令什么都不带，将列出当前数据库中的所有表。</li>
+<li>\d后面跟一个表名，表示显示这个表的结构定义。</li>
+<li>\d也可以显示索引信息</li>
+<li>\d后面可以跟一通配符”*“或”?”</li>
+<li><p>\d+命令，该命令将显示比\d命令更详细的信息</p>
+</li>
+<li><p>匹配不同对象类型的\d命令</p>
+<p>如果想只显示匹配的表，可以使用\dt命令</p>
+<p>如果想只显示索引，可以使用\di命令</p>
+<p>如果想只显示序号，可以使用\ds命令</p>
+<p>如果想只显示视图，可以使用\dv命令</p>
+<p>如果想只显示函数，可以使用\df命令</p>
+</li>
+<li><p>如果想显示SQL已执行的时间，可以用\timing命令</p>
+</li>
+<li><p>列出所有的schemas可以使用\dn命令</p>
+</li>
+<li><p>显示所有的表空间可以用\db命令</p>
+<p>表空间就是一个目录，放在这个表空间的表，就是把表的数据文件放到这个表空间下。</p>
+</li>
+<li><p>列出数据库所有角色或用户\du或\dg</p>
+</li>
+<li>\dp或\z命令用于显示表的权限分配情况</li>
+</ol>
+<h3 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h3><p>连接数据库</p>
+<p><code>\c dbname</code></p>
+<p>创建一个名为 test 的表</p>
+<p><code>CREATE TABLE test(id int, text VARCHAR(255));</code></p>
+<p>插入一条记录</p>
+<p><code>insert into test(id,text) values ( 1,&#39;heihei&#39;);</code></p>
+<p>查询记录</p>
+<p><code>select * from test where id = 1;</code></p>
+<p>更新记录</p>
+<p><code>update test set text =&#39;update&#39; where id =5;</code></p>
+<p>删除指定的记录</p>
+<p><code>delete from test where id = 1;</code></p>
+<p>删除表</p>
+<p><code>drop table test;</code></p>
+<p>删除数据库</p>
+<p><code>drop database test_db0;</code></p>
+<p>或者利用 dropdb 指令，在终端上删除数据库</p>
+<p><code>dropdb test0</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Database/PostgreSQL/Mac 下 PostgreSQL " class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /" class="article-date">
+      <time datetime="2018-08-17T14:20:14.000Z" itemprop="datePublished">2018-08-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /">Mac 下 PostgreSQL 配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在 mac 下，可以利用 <a href="http://dhq.me/mac-apt-get-homebrew" target="_blank" rel="noopener">homebrew</a> 直接安装 PostgreSQL：</p>
+<p><code>brew install postgresql</code></p>
+<p>初始数据库：</p>
+<p><code>initdb /usr/local/var/postgres -E utf8</code></p>
+<p>上面指定 “/usr/local/var/postgres” 为 PostgreSQL 的配置数据存放目录，并且设置数据库数据编码是 utf8，更多配置信息可以 “initdb –help” 查看。</p>
+<p>启动 PostgreSQL：</p>
+<p><code>pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start</code></p>
+<p>关闭 PostgreSQL：</p>
+<p><code>pg_ctl -D /usr/local/var/postgres stop -s -m fast</code></p>
+<p><strong>创建一个 PostgreSQL 用户</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">createuser username -P</span><br><span class="line"></span><br><span class="line"><span class="comment">#Enter password for new role:`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Enter it again:</span></span><br></pre></td></tr></table></figure>
+<p>上面的 username 是用户名，回车输入 2 次用户密码后即用户创建完成。更多用户创建信息可以 “createuser –help” 查看。</p>
+<p><strong>创建数据库</strong></p>
+<p><code>createdb dbname -O username -E UTF8 -e</code></p>
+<p>上面创建了一个名为 dbname 的数据库，并指定 username 为改数据库的拥有者（owner），数据库的编码（encoding）是 UTF8，参数 “-e” 是指把数据库执行操作的命令显示出来。</p>
+<p>更多数据库创建信息可以 “createdb –help” 查看。</p>
+<p><strong>连接数据库</strong></p>
+<p><code>psql -U username -d dbname -h 127.0.0.1</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Macos/macos apache problem" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1490,10 +1689,10 @@
 
 
   
-    <article id="post-Network/Ccie/bgp" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/多播" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/bgp/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/多播/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1509,7 +1708,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/bgp/">CCIE bgp</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/多播/">CCIE 多播（multicast）</a>
     </h1>
   
 
@@ -1519,311 +1718,223 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="边界网关路由协议"><a href="#边界网关路由协议" class="headerlink" title="边界网关路由协议"></a>边界网关路由协议</h1><h3 id="BGP简介"><a href="#BGP简介" class="headerlink" title="BGP简介"></a>BGP简介</h3><p>工作类型：路径矢量路由选择协议</p>
-<p>基于tcp(三次握手)</p>
-<p>三张表：邻居表（peer表）  bgp转发表  路由表</p>
-<h4 id="BGP版本"><a href="#BGP版本" class="headerlink" title="BGP版本"></a>BGP版本</h4><p>BGPv4：IPv4</p>
-<p>BGPv4+：IPv6</p>
-<p>MP-BGP：协议npls</p>
-<p>M-BGP：多播</p>
-<h4 id="BGP优缺点"><a href="#BGP优缺点" class="headerlink" title="BGP优缺点"></a>BGP优缺点</h4><p><strong>优点</strong></p>
-<p>1EGP路由表只能存储千条信息，bgp可上万条。</p>
-<p>2丰富的路径属性，13条选路原则，提供了更丰富的路由操控策略。</p>
-<p><strong>缺点</strong></p>
-<p>1对路由器性能要求较高。</p>
-<p>2配置程序比较复杂。</p>
-<p>3一般小网络不建议使用bgp</p>
-<h4 id="AS-和-邻居类型"><a href="#AS-和-邻居类型" class="headerlink" title="AS 和 邻居类型"></a>AS 和 邻居类型</h4><p>bgp AS 一台路由器只能属于一个</p>
-<p>公网AS1-65411    65412-65535私有AS</p>
-<p>iBGP：处于同一AS内的BGP路由器所建立的BGP对等体关系</p>
-<p>eBGP：不同AS内的BGP路由器建立的…</p>
-<p>### </p>
-<h3 id="BGP消息"><a href="#BGP消息" class="headerlink" title="BGP消息"></a>BGP消息</h3><p>open：建立成功，会互相发送open信息(类似hello)协商邻居关系的各项参数，等待对方确认。</p>
-<p>keeplive：维持对等体(类似邻居)关系的建立，60s发一次，180s后peer关系结束</p>
-<p>update：不会周期性更新，只会增量更新或触发更新。</p>
-<p>Notification：当BGP检测到错误状态时，就向对等体发出Notification消息，之后BGP连接会立即中断。</p>
-<h3 id="peer关系建立过程"><a href="#peer关系建立过程" class="headerlink" title="peer关系建立过程"></a>peer关系建立过程</h3><p>IDLE（空闲状态）：本地路由向外发送tcp(端口179)请求，等回复</p>
-<p>connect状态：tcp建立</p>
-<p>active：建立不成功，再次请求tcp连接的建立（回到IDLE）。</p>
-<p>open sent：建立成功，发送open消息</p>
-<p>openconfirm：收到对方的信息进行参数对比，参数一致则建立完成。</p>
-<p>established：连接建立。。update。。keepalive。。</p>
-<h3 id="bgp的防环机制"><a href="#bgp的防环机制" class="headerlink" title="bgp的防环机制"></a>bgp的防环机制</h3><h4 id="iBGP-水平分隔原则"><a href="#iBGP-水平分隔原则" class="headerlink" title="iBGP-水平分隔原则"></a>iBGP-水平分隔原则</h4><p>BGP对等体路由器收到iBGP路由，不会发送给其他iBGP对等体路由器。</p>
-<p>但是纯水平拓扑上该原则会导致路由不被传递学习。两个解决方案</p>
-<p>全互联拓扑解决方案：所有路由器间都建立iBGP关系。（垃圾方案）</p>
-<p>路由反射器解决方案：</p>
-<h4 id="eBGP"><a href="#eBGP" class="headerlink" title="eBGP"></a>eBGP</h4><p>基于AS PATH信息的检测。接收到来自于eBGP peer的路由更新，更新所带AS-PATH 信息包含了当前设备AS号，则该路由更新忽略。</p>
-<h4 id="特殊拓扑下路由反射器的防环机制"><a href="#特殊拓扑下路由反射器的防环机制" class="headerlink" title="特殊拓扑下路由反射器的防环机制"></a>特殊拓扑下路由反射器的防环机制</h4><p>originate id：起源id。路由器将设备的RID设置为起源ID。起源ID和当前设备RID一样，则路由更新不学习。</p>
-<p>cluster id：簇id。管理员在路由反射器上设置，路由更新携带的簇ID一致，则路由更新不学习。</p>
-<h3 id="同步与下一跳判断"><a href="#同步与下一跳判断" class="headerlink" title="同步与下一跳判断"></a>同步与下一跳判断</h3><p>路由更新来自于iBGP peer时才考虑同步和下一跳。</p>
-<h4 id="同步机制"><a href="#同步机制" class="headerlink" title="同步机制"></a>同步机制</h4><p>对于当前启用BGP的设备，路由更新对应的网络底层协议也必须能学习到，这才叫同步。同步是为了避免路由黑洞。</p>
-<p>现实中同步被关闭，路由黑洞问题无法避免，但利用MPLS能解决。</p>
-<h5 id="bgp路由黑洞"><a href="#bgp路由黑洞" class="headerlink" title="bgp路由黑洞"></a>bgp路由黑洞</h5><p>路由更新的传递设备也就是数据传输的沿途设备，并没有参与BGP ，学习该路由，所以数据抵达后，只能丢包。</p>
-<p>解决方法：</p>
-<p>1重分发(不建议，会增大路由表)</p>
-<p>2全互联的网络拓扑(两两之间建立ibgp对等体)</p>
-<h4 id="下一跳判断"><a href="#下一跳判断" class="headerlink" title="下一跳判断"></a>下一跳判断</h4><p>来自于iBGP peer的路由更新，如果下一跳不可达，路由更新不学习。</p>
-<p>路由源于AS外，通告者是eBGP peer，下一跳就是eBGP peer地址。</p>
-<p>路由源于AS外，通告者是iBGP peer，下一跳依旧是eBGP peer地址。此时下一跳可能不可达。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Router bgp &lt;as&gt;</span><br><span class="line">Neighbor &lt;peer-address&gt; next-hop-self</span><br><span class="line">//所有发给对等体的路由更新，下一跳强制修改成自己</span><br></pre></td></tr></table></figure>
-<p>路由源于iBGP peer，通告者是iBGP peer，下一跳就是iBGP peer地址。</p>
-<p>补充内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Neighbor &lt;peer-address&gt; next-hop-unchange</span><br><span class="line">//eBGP 下一跳维持不变</span><br></pre></td></tr></table></figure>
-<h3 id="BGP的路由更新属性"><a href="#BGP的路由更新属性" class="headerlink" title="BGP的路由更新属性"></a>BGP的路由更新属性</h3><ol>
-<li><p>公认必选</p>
-<p>NEXT-HOP：下一跳</p>
-<p>AS-PATH：AS路径信息</p>
-<p>Originate code：起源代码</p>
-<p>​    描述了目标网络进入BGP的方式（I E ?）</p>
-<p>​    I ：目标网络源于底层协议通过network进入BGP</p>
-<p>​    E：EGP共享的目标网络信息</p>
-<p>​    ?：外部路由以重分发的方式进入BGP</p>
+        <h1 id="多播（multicast）"><a href="#多播（multicast）" class="headerlink" title="多播（multicast）"></a>多播（multicast）</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="数据的传递方式"><a href="#数据的传递方式" class="headerlink" title="数据的传递方式"></a>数据的传递方式</h3><ul>
+<li><p>单播（unicast）</p>
+<p>一对一通讯，数据接收者已知。</p>
 </li>
-<li><p>公认任选（自选）</p>
-<p>LP：本地优先</p>
-<p>​    路由更新在IBGP peer间传递时，LP值才出现，且为100</p>
-<p>​    作用：影响iBGP peer 出站路径的选择，LP参数越大越优。</p>
-<p>automatic aggregate：原子聚合</p>
-<p>​    BGP发生了自动聚合或手动聚合时，聚合后网络携带该属性。</p>
-<p>​    原子聚合属性用于提醒更新接受者，路由更新目标网络可能丢失了部分原有属性。</p>
+<li><p>广播（boradcast）</p>
+<p>一对所有通讯，数据接收者未知。</p>
 </li>
-<li><p>任选可传递</p>
-<p>Aggregated：被聚合属性——聚合后的网络携带的属性，表明该网络是聚合来的。</p>
-<p>Community：团体属性  是携带特定策略的标记</p>
-<p>​    公认团体属性：</p>
-<p>​        Internet：所有的BGP路由默认携带该属性，该属性对应的策略是，共享给所有的BGP peer。</p>
-<p>​        no-export：不导出，携带该属性的路由更新不共享给eBGP peer。</p>
-<p>​        no-advertise：不通告，携带该属性的路由更新不共享给任何BGP peer。</p>
-<p>​        local-as：本地as，携带该属性的路由更新不共享给联盟内其他eBGP peer。</p>
-<p>​    自定义团体属性：</p>
-<p>​        AA:NN</p>
-<p>​        AS号：标记值</p>
+<li><p>多播（mulicast）</p>
+<p>一对多通讯，数据接收者未知。</p>
 </li>
-<li><p>任选不可传递（属性保留，但值为空）</p>
-<p>MED：多出口距离</p>
-<p>​    eBGP间路由共享携带该属性，MED值用于影响eBGP peer入站路径选择。MED值默认为0，越小越优。</p>
-<p>Originate id、cluster id</p>
-</li>
-</ol>
-<h3 id="BGP选路原则"><a href="#BGP选路原则" class="headerlink" title="BGP选路原则"></a>BGP选路原则</h3><p>选路原则决定了BGP按什么标准进行路由更新属性的比较</p>
-<ol>
-<li><p>优选拥有最高权重值的路径 weight</p>
-<p>用于影响当前路由器出站路径选择</p>
-<p>默认32768，越大越优</p>
-<p>不同类型的对等体出现，需要影响路径抉择，权重更优。</p>
-</li>
-<li><p>优选LP大的</p>
-</li>
-<li><p>优选起源于本地的路径</p>
-<p>next-hop=0.0.0.0</p>
-</li>
-<li><p>优选拥有最短AS-PATH 路径信息的</p>
-</li>
-<li><p>比较Origin属性&lt;IGP优先于EGP优先于Incomplete&gt;</p>
-</li>
-<li><p>优选拥有最佳MED值的</p>
-</li>
-<li><p>eBGP peer 的路径优于 iBGP peer的路径</p>
-</li>
-<li><p>优选离下一跳更近的路径</p>
-</li>
-<li><p>针对eBGP peer的路由，通过命令行允许多条路径，成为最佳进入路由表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">maximun-path &lt;n&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>优选最早被学习的路由，只针对 eBGP peer</p>
-</li>
-<li><p>优选拥有最小RID的BGP peer提供的路由</p>
-</li>
-<li><p>优选拥有最短cluster-id 的路径</p>
-</li>
-<li><p>优选拥有最低peer地址的邻居提供的路径</p>
-</li>
-</ol>
-<h3 id="BGP基本配置"><a href="#BGP基本配置" class="headerlink" title="BGP基本配置"></a>BGP基本配置</h3><p>对等体体必须手动指定，并且指定的地址可达<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">bgp router-id &lt;a.b.c.d&gt; //设置bgp rid</span><br><span class="line">address-family ipv4 unicast //进入 bgpv4</span><br><span class="line"></span><br><span class="line">neighbor &lt;ip&gt; remote-as &lt;对端as号&gt;</span><br><span class="line">neighbor &lt;ip&gt; updat-source lo0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">以环回口建立ebgp对等体关系时，必须指定ebgp多跳，两端都要设置。</span><br><span class="line"></span><br><span class="line">nei ip ebgp-multihop 1-255(默认255)</span><br><span class="line"></span><br><span class="line">内部条目通过宣告或重分发</span><br><span class="line"></span><br><span class="line">bgp宣告的条目可以是本地直连网段，也可以是通过igp协议所学到的网段带入所得。</span><br><span class="line"></span><br><span class="line">net ip mask 子网掩码</span><br><span class="line"></span><br><span class="line">宣告的ip必须在本地路由表内存在，否则宣告不出去。</span><br><span class="line"></span><br><span class="line">sh ip bgp查看bgp表</span><br><span class="line"></span><br><span class="line">路由反射器(常在ibgp内启用)</span><br><span class="line"></span><br><span class="line">nei ip route-reflection-client</span><br><span class="line"></span><br><span class="line">做路由反射器的设备叫RR路由器</span><br><span class="line"></span><br><span class="line">next-hop-self下一跳是自己</span><br><span class="line"></span><br><span class="line">特权模式 clear ip bgp *      硬清除</span><br><span class="line"></span><br><span class="line">                 clear ip bgp * soft 软清除</span><br><span class="line"></span><br><span class="line">AS欺骗，用于EBGP之间，不能ibgp之间。</span><br><span class="line"></span><br><span class="line">AS重写。as-override来自于同一as的路由不接收。</span><br><span class="line"></span><br><span class="line">bgp 7.25</span><br><span class="line"></span><br><span class="line">聚合(类似于汇总)</span><br><span class="line"></span><br><span class="line">aggregate-address +网段 +子网掩码 +(summary-only)</span><br><span class="line"></span><br><span class="line">只能聚合学习到的，起源于本地的路由无法聚合。</span><br><span class="line"></span><br><span class="line">用对等体组建立bgp对等体关系</span><br><span class="line"></span><br><span class="line">1. nei 名字 peer-group</span><br><span class="line"></span><br><span class="line">         …一系列共同操作…</span><br><span class="line"></span><br><span class="line">1. nei Rid peer-group 名字</span><br></pre></td></tr></table></figure></p>
-<h3 id="自动汇总-auto-summary"><a href="#自动汇总-auto-summary" class="headerlink" title="自动汇总 auto-summary"></a>自动汇总 auto-summary</h3><p>自动汇总用来设定BGP宣告是精确还是不精确的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10.1.1.0/24</span><br><span class="line">RIP: network 1.0.0.0</span><br><span class="line">EIGRP OSPF ISIS: 10.1.1.0 0.0.0.255</span><br></pre></td></tr></table></figure>
-<p>auto-summary 关闭的情况下，BGP 处于精确宣告状态</p>
-<p>auto-summary 开启的情况下，BGP 处于非精确宣告状态</p>
-<p>被宣告的网络只要拥有本地对应的子网，被宣告网络就可以当做更新发送出去。</p>
-<p>针对外部路由，auto-summary 开启，外部路由自动汇总，否则外部路由就明细进入。</p>
-<h3 id="路由更新属性"><a href="#路由更新属性" class="headerlink" title="路由更新属性"></a>路由更新属性</h3><h4 id="如何修改路由更新属性-三个步骤"><a href="#如何修改路由更新属性-三个步骤" class="headerlink" title="如何修改路由更新属性(三个步骤)"></a>如何修改路由更新属性(三个步骤)</h4><ol>
-<li><p>抓取被修改路由更新属性的目标网络</p>
-<ul>
-<li>利用ACL抓取</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip access-list stand &lt;name&gt;</span><br><span class="line">permit &lt;x.x.x.x&gt; &lt;x.x.x.x&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>前缀列表 prefix-list</li>
+<h3 id="路由器和交换机对不同类型数据的处理方式"><a href="#路由器和交换机对不同类型数据的处理方式" class="headerlink" title="路由器和交换机对不同类型数据的处理方式"></a>路由器和交换机对不同类型数据的处理方式</h3><h4 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h4><p>单播包：路由或丢弃</p>
+<p>广播包：丢弃或本地存在感兴趣的进程进行处理</p>
+<p>多播包：丢弃或本地存在感兴趣的进程进行处理</p>
+<h4 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h4><p>单播帧：目的MAC地址交换机是否已知，如果已知则交换，如果未知则泛洪</p>
+<p>广播帧：泛洪</p>
+<p>多播帧：泛洪</p>
+<h2 id="IGMP-互联网组管理协议"><a href="#IGMP-互联网组管理协议" class="headerlink" title="IGMP 互联网组管理协议"></a>IGMP 互联网组管理协议</h2><p>路由器及终端运行，帮助路由器发现直连子网中的多播接收者。</p>
+<p>组（group）：所有对同一多播流感兴趣的成员组成了多播组。</p>
+<p>组成员（group member）：组中的多播流接收者。</p>
+<p>版本：IGMPv1、IGMPv2、IGMPv3</p>
+<h3 id="IGMPv1"><a href="#IGMPv1" class="headerlink" title="IGMPv1"></a>IGMPv1</h3><ul>
+<li><p>报告消息（report）：始发于终端，用于通告子网中的路由器存在特定组组成员。</p>
+<p>发送终端的IP 和MAC以及组信息。</p>
+</li>
+<li><p>查询消息（request）：始发于路由器，用于查询直连子网中是否存在组成员。</p>
+<p>通常是路由器接收到多播流后触发。</p>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip prefix-list &lt;编号&gt; &lt;permit/deny&gt; &lt;x.x.x.x/8&gt; [le &lt;xx&gt;/ge &lt;xx&gt;]</span><br><span class="line">//  其中/8是通配符</span><br><span class="line">//  le 与 ge 后面是前缀长度</span><br></pre></td></tr></table></figure>
+<p>一旦发现组成员，路由器就创造一个180s 的老化计时器，该计时器通过 report 消息进行维护。</p>
+<h4 id="IGMPv1的缺陷"><a href="#IGMPv1的缺陷" class="headerlink" title="IGMPv1的缺陷"></a>IGMPv1的缺陷</h4><ol>
+<li><p>响应时间慢</p>
+<p>组中没有成员时，路由器需要 180s 才能发现</p>
 </li>
-<li><p>利用路由映射调用 acl 或prefix-list 完成属性修改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">route-map [name] [permit/deny] &lt;策略编号：默认10&gt;</span><br><span class="line">//这里的permit有两个作用：</span><br><span class="line">//	1. 在BGP里面，permit的网络被当做更新发送，deny的网络是被过滤的。</span><br><span class="line">//  2. 在非BGP里，permit含义是关注且执行策略，deny是不关注、不执行策略。</span><br><span class="line">//  route-map 创建后，有一个隐藏的 deny all</span><br><span class="line">match ip address &lt;ack-id&gt; //调用ACL</span><br><span class="line">match ip address prefix &lt;id&gt; //调用前缀列表</span><br><span class="line">set &lt;xxxxxx&gt; //设置路由更新属性</span><br></pre></td></tr></table></figure>
+<li><p>存在多查询者</p>
 </li>
-<li><p>BGP里引用 route-map</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;as&gt;</span><br><span class="line">neighbor &lt;a.b.c.d&gt; route-map &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<li><p>存在多转发者</p>
 </li>
 </ol>
-<h4 id="weight-修改命令"><a href="#weight-修改命令" class="headerlink" title="weight 修改命令"></a>weight 修改命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router bgp &lt;xx&gt;</span><br><span class="line">neighbor &lt;peer-address&gt; weight &lt;xxxx&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="通过-LP-影响出站路径"><a href="#通过-LP-影响出站路径" class="headerlink" title="通过 LP 影响出站路径"></a>通过 LP 影响出站路径</h4><h4 id="通过增加-AS-PATH-路径信息影响选路"><a href="#通过增加-AS-PATH-路径信息影响选路" class="headerlink" title="通过增加 AS-PATH 路径信息影响选路"></a>通过增加 AS-PATH 路径信息影响选路</h4><p>只有 eBGP peer 间该属性才能修改，当前路由器只关心 AS-PATH 的长短，不关心是否作用于 eBGP或 iBGP</p>
+<h3 id="IGMPv2"><a href="#IGMPv2" class="headerlink" title="IGMPv2"></a>IGMPv2</h3><ul>
+<li>报告消息（report）：和 v1 相同</li>
+<li><p>查询消息（request）：和 v1 相同</p>
+</li>
+<li><p>离开消息（leave）：始发于终端，终端PC 不再是组成员时发送，用于通告路由器有组成员离开。</p>
+<p>收到离开消息时，立刻发送SQ，如下。</p>
+</li>
+<li><p>特定查询消息（SQ）：始发于路由器，发送出去后设定的老化时间为 3s 。如果 3s 内收到 report ，说明发送离开消息的组成员并不是组中最后一个人；如果收不到任何消息，那么说明组成员不存在。</p>
+</li>
+</ul>
+<p>IGMPv2 查询者竞选机制：多个查询者通过比较查询消息源 ip 来确认谁最终负责查询，源 ip 越小越优。</p>
+<p>多转发者缺陷 IGMPv2 无法克服。</p>
+<h2 id="多播地址"><a href="#多播地址" class="headerlink" title="多播地址"></a>多播地址</h2><p>多播 IP 和多播 MAC 都不是用来定位接收者所在的网络和物理位置。</p>
+<p>它们用于标识服务和应用。</p>
+<p>RIPv2  224.0.0.9</p>
+<p>IPv4  D类  224.x.x.x  239.x.x.x</p>
+<h3 id="多播-mac"><a href="#多播-mac" class="headerlink" title="多播 mac"></a>多播 mac</h3><p>设备根据多播的 IP 自动计算而来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">224.0.0.1  //例子ip</span><br><span class="line"></span><br><span class="line">11110000.00000000.00000000.00000001 //转化成2进制</span><br><span class="line"></span><br><span class="line">x0000000.00000000.00000001 //取后23bit，再在第一位添个0</span><br><span class="line"></span><br><span class="line">0   0    0   0    0   1  //转化为十六进制</span><br><span class="line"></span><br><span class="line">01005E+000001  //mac地址</span><br></pre></td></tr></table></figure>
+<p>多播的MAC地址可能会重复，多播的 IP 后 23bit 一致则会重复。</p>
+<h2 id="多播路由器协议"><a href="#多播路由器协议" class="headerlink" title="多播路由器协议"></a>多播路由器协议</h2><p>是运行在路由器之间，负责建立多播路由路径，用于传递多播数据。</p>
+<h3 id="多播路由协议分类"><a href="#多播路由协议分类" class="headerlink" title="多播路由协议分类"></a>多播路由协议分类</h3><ul>
+<li>距离矢量：DVMRP  距离矢量多播路由协议（淘汰了）</li>
+<li>链路状态：MOSPF  多播的OSPF（非主流）</li>
+<li>距离向量：CBT  基于核心的树（非主流）</li>
+<li>独立于其他：PIM  协议独立多播（Cisco、主流）</li>
+</ul>
+<h3 id="PIM-的两个版本"><a href="#PIM-的两个版本" class="headerlink" title="PIM 的两个版本"></a>PIM 的两个版本</h3><p>PIMv1：用的是 IGMPv1，但是现在也用 IGMPv2</p>
+<p>PIMv2：用的是 IGMPv2</p>
+<h3 id="PIM-的三种模式"><a href="#PIM-的三种模式" class="headerlink" title="PIM 的三种模式"></a>PIM 的三种模式</h3><ul>
+<li><p>密集模式（dense mode）</p>
+<p>设备间带宽资源紧张，子网成员大部分是组成员的时候，建议使用密集模式。</p>
+<p>密集模式默认采用 IGMPv1。</p>
+</li>
+<li><p>稀疏模式（sparse mode）</p>
+<p>设备间带宽资源依旧紧张，子网成员只有少数是组成员，建议使用稀疏模式。</p>
+<p>稀疏模式采用 IGMPv2。</p>
+</li>
+<li><p>混合模式（sparse-dense mode）</p>
+<p>该模式下路由器先启用稀疏模式，稀疏模式失效后再用密集模式。</p>
+</li>
+</ul>
+<h3 id="PIM-的密集模式详解"><a href="#PIM-的密集模式详解" class="headerlink" title="PIM 的密集模式详解"></a>PIM 的密集模式详解</h3><h4 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h4><ul>
+<li>加入消息（join）：下游路由器通过加入消息将直连网络加入多播转发路径。</li>
+<li>修剪消息（prune）：下游路由器通过修剪消息，将原本隶属于多播路径的直连网络从多播路径中删除。</li>
+<li>接枝消息（graft）：下游路由器通过该消息请求将原本被拆除的多播路径再恢复过来。</li>
+<li>接枝确认消息（graft-ack）：上游路由器通过该消息告诉下游，直连路径恢复成多播转发路径。</li>
+<li>assert消息（assert）：连接子网的路由器通过该消息，竞选出最终的转发者。</li>
+</ul>
+<h4 id="密集模式工作过程"><a href="#密集模式工作过程" class="headerlink" title="密集模式工作过程"></a>密集模式工作过程</h4><p>扩散、剪枝。</p>
+<h4 id="PIM-的特殊机制"><a href="#PIM-的特殊机制" class="headerlink" title="PIM 的特殊机制"></a>PIM 的特殊机制</h4><ul>
+<li><p>PIM 密集模式的 DR</p>
+<p>接口优先级+接口ip地址，构成竞选参数，越大越优。</p>
+<p>PIM密集模式早期使用IGMPv1，IGMPv1会出现多查询者问题，于是就利用DR的竞选，来帮助IGMPv1确认谁负责查询。</p>
+<p>PIM密集模式现在使用的是IGMPv2，DR就没用了。</p>
+</li>
+<li><p>PIM 消息中的 assert 作用</p>
+<p>通过竞选选出一个人负责转发数据。</p>
+<p>assert 消息，携带了三个竞选参数：</p>
+<ul>
+<li>当前路由器启用的底层协议管理距离，越小越优。</li>
+<li>当前路由器抵达多播源底层路由协议的开销，越小越优。</li>
+<li>当前路由器连接子网的接口 ip，越大越优。</li>
+</ul>
+</li>
+</ul>
+<h3 id="PIM-密集模式的配置流程"><a href="#PIM-密集模式的配置流程" class="headerlink" title="PIM 密集模式的配置流程"></a>PIM 密集模式的配置流程</h3><ul>
+<li><p>步骤1：确认参与多播的设备及接口</p>
+<p>所有需要接收多播流的接口和发送多播流的接口及连接组成员的接口，都要参与多播路由协议的启用。</p>
+</li>
+<li><p>步骤2：路由器接口模拟成多播组成员</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if)#ip igmp join-group &lt;多播组地址&gt;</span><br></pre></td></tr></table></figure>
+<p>  注意：该命令可以反复录入，一个接口扮演多个组成员</p>
+</li>
+<li><p>步骤3：路由器开启多播路由功能，接口启用多播密集模式</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip multicast-routing</span><br><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">ip pim dense-mode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>步骤4：校验查看</p>
+<p>  校验路由器是否发现了组成员：<code>show ip igmp group</code></p>
+<p>  校验路由器是否形成了PIM 邻居关系：<code>show ip pim neighbor</code></p>
+<p>  校验路由器多播路由表：<code>show ip mroute</code></p>
+</li>
+</ul>
+<h3 id="多播路由表"><a href="#多播路由表" class="headerlink" title="多播路由表"></a>多播路由表</h3><h4 id="父条目与子条目"><a href="#父条目与子条目" class="headerlink" title="父条目与子条目"></a>父条目与子条目</h4><ul>
+<li><p>父条目</p>
+<p>父条目起提醒注释的作用，告知当前路由器和管理员，路由器可能需要为某个多播组传递流量。</p>
+<p>路由器收到 report 消息便会产生父条目，路由器收到多播流也会产生父条目。</p>
+</li>
+<li><p>子条目</p>
+<p>子条目是实际负责多播流量传递工作。</p>
+<p>子条目是路由器根据计算得来。</p>
+</li>
+</ul>
+<h4 id="多播路由条目的样式"><a href="#多播路由条目的样式" class="headerlink" title="多播路由条目的样式"></a>多播路由条目的样式</h4><p>（多播源，组地址）    存活计时器/老化计时器</p>
+<p>Incoming-interface（上游接口）：接口名字    状态/模式</p>
+<p>Outgoing-interface（上游接口）：接口名字    状态/模式</p>
+<hr>
+<p>父条目多播源部分几乎都是<code>*</code>号，代表源未知。</p>
+<p>子条目多播源部分一定是某个 IPv4 单播地址。</p>
+<h3 id="多播防环机制"><a href="#多播防环机制" class="headerlink" title="多播防环机制"></a>多播防环机制</h3><p>RPF：反向路径转发：启用多播的接口默认开启，用于避免环路的出现。</p>
+<p>所有接收多播流的接口，必须通过 RPF 检测，才可以成为有效的上游接口。</p>
+<p>当前接口必须是抵达多播源下一跳地址的本地出口，才通过检测。</p>
+<p>用来查看rpf检测是否通过：<code>show ip rpf &lt;intf-id&gt;</code></p>
+<h3 id="多播树"><a href="#多播树" class="headerlink" title="多播树"></a>多播树</h3><p>多播树其实就是多播转发数据的路径。</p>
+<h4 id="密集模式的树"><a href="#密集模式的树" class="headerlink" title="密集模式的树"></a>密集模式的树</h4><p>最短路径树，也称源树。</p>
+<p>当前路由器以多播源为根，计算抵达多播源的最短路径，每个路径对应到多播路由表中的一个条目。</p>
+<h5 id="源树缺陷"><a href="#源树缺陷" class="headerlink" title="源树缺陷"></a>源树缺陷</h5><ul>
+<li>容易产生大量的多播子条目。</li>
+<li>树构建的早期多播流被扩散到了不必要的设备上</li>
+</ul>
+<h3 id="PIM-的稀疏模式详解"><a href="#PIM-的稀疏模式详解" class="headerlink" title="PIM 的稀疏模式详解"></a>PIM 的稀疏模式详解</h3><h4 id="消息-1"><a href="#消息-1" class="headerlink" title="消息"></a>消息</h4><p>join、prune、graft、graft-ack、assert（和密集模式相同）</p>
+<p>注册消息（register）</p>
+<p>注册停止消息（register-stop）</p>
+<h4 id="稀疏模式中的集合点：RP"><a href="#稀疏模式中的集合点：RP" class="headerlink" title="稀疏模式中的集合点：RP"></a>稀疏模式中的集合点：RP</h4><p>RP 是管理员指定的，是多股多播流的交汇处。</p>
+<h4 id="稀疏模式的工作原理"><a href="#稀疏模式的工作原理" class="headerlink" title="稀疏模式的工作原理"></a>稀疏模式的工作原理</h4><p>上游注册，下游加入，RP 整合。</p>
 <p>！！注意</p>
-<p>AS-PATH 信息的附加 in 和out 是不一样的</p>
-<p>1 i out方向附加666，就变成 1 666i</p>
-<p>1 i in  方 向附加666，就变成 666 1</p>
-<h4 id="通过修改起源代码"><a href="#通过修改起源代码" class="headerlink" title="通过修改起源代码"></a>通过修改起源代码</h4><h4 id="通过修改MED影响选路抉择"><a href="#通过修改MED影响选路抉择" class="headerlink" title="通过修改MED影响选路抉择"></a>通过修改MED影响选路抉择</h4><h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/路由协议分类" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/路由协议分类/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="路由协议作用"><a href="#路由协议作用" class="headerlink" title="路由协议作用"></a>路由协议作用</h3><ol>
-<li>网络信息共享</li>
-<li>最佳路径的计算</li>
-<li>路由策略</li>
-</ol>
-<h3 id="路由协议分类"><a href="#路由协议分类" class="headerlink" title="路由协议分类"></a>路由协议分类</h3><ol>
-<li><p>应用场景</p>
-<ul>
-<li>as内  IGPS（RIP、EIGRP、OSPF、IS-IS）EGPS（BGP）</li>
-<li>as间</li>
-</ul>
+<p>RP 以下的设备，以 RP 为根，计算最短路径。</p>
+<p>RP 自身以源为根，计算最短路径。</p>
+<p>稀疏模式是一个双树结构，RP 和源之间维护的是源树，下游设备与 RP 之间维护的是共享树。</p>
+<h4 id="共享树切换成源树"><a href="#共享树切换成源树" class="headerlink" title="共享树切换成源树"></a>共享树切换成源树</h4><p>稀疏模式下，每台支持多播路由协议的路由器在接收超过4个字节的多播流后，就会尝试建立源树。</p>
+<h4 id="RP-的获取方式"><a href="#RP-的获取方式" class="headerlink" title="RP 的获取方式"></a>RP 的获取方式</h4><ul>
+<li><p>手动指定：<code>ip pim rp-address &lt;RP地址&gt;</code></p>
 </li>
-<li><p>度量值metric计算/路径择优标准</p>
-<ul>
-<li><p>DV距离矢量：RIP</p>
+<li><p>RP 的竞选</p>
+<ol>
+<li><p>代理 rp（auto-rp）</p>
+<p>C-RP：RP候选者</p>
+<p>RP-Agent：RP代理、C-RP 信息收集，裁决，分享结果</p>
+<p>RP：RP</p>
 </li>
-<li><p>高级DV：EIGRP  接口五个参数 k1带宽 k2负载 k3延迟 k4可靠性 k5最大传输单元MTU</p>
-<p>EIGRP的距离/跳数和RIP一样发送时+1，用来限制扩散距离。</p>
-</li>
-<li><p>链路状态 LInk State：OSPF、IS-IS  </p>
-</li>
-<li><p>距离向量：BGP</p>
-</li>
-</ul>
+<li><p>BSR：boot strap router：自举路由器</p>
+<p>C-BSR：BSR 候选人</p>
+<p>BSR：信息收集，信息分享</p>
+<p>C-RP、RP</p>
+<p>BSR 的竞选过程：BSR 标识越大越优。</p>
+<p>RP</p>
+<p>C-RP 有三个竞选参数：优先级（小优）、hash 长度（长优）、C-RP 标识（大优）</p>
 </li>
 </ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/逻辑子接口" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/逻辑子接口/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="路由器主接口创建逻辑子接口"><a href="#路由器主接口创建逻辑子接口" class="headerlink" title="路由器主接口创建逻辑子接口"></a>路由器主接口创建逻辑子接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt; //进入主接口</span><br><span class="line">no sh</span><br><span class="line">interface &lt;intf-id.子接口编号&gt; //创建逻辑子接口</span><br><span class="line">encapsulation dot1q &lt;vlan ID&gt; //指定逻辑子接口接收带有特定vlan标记的流量</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br></pre></td></tr></table></figure>
-
+</li>
+</ul>
+<h3 id="PIM-的混合模式"><a href="#PIM-的混合模式" class="headerlink" title="PIM 的混合模式"></a>PIM 的混合模式</h3><p>让设备启用混合模式：<code>if)#ip pim sparse-dense-mode</code></p>
+<p>混合模式倒退回密集模式：一定是 RP 彻底无法正常工作</p>
+<p><code>Router(config)#no ip pim dm-fallback  //不允许混合模式倒退回密集模式</code></p>
+<h3 id="auto-rp-的问题和解决方案"><a href="#auto-rp-的问题和解决方案" class="headerlink" title="auto-rp 的问题和解决方案"></a>auto-rp 的问题和解决方案</h3><h4 id="224-0-1-39-与-224-0-1-40"><a href="#224-0-1-39-与-224-0-1-40" class="headerlink" title="224.0.1.39 与 224.0.1.40"></a>224.0.1.39 与 224.0.1.40</h4><p>C-RP 将竞选信息发向 224.0.1.39</p>
+<p>RP-Agent 将结果发向 224.0.1.40</p>
+<p>所有设备为了正确的获取多播 RP 信息，默认会接收发向这两个地址的多播流。</p>
+<h4 id="auto-rp-结果通告信息的跳数"><a href="#auto-rp-结果通告信息的跳数" class="headerlink" title="auto-rp 结果通告信息的跳数"></a>auto-rp 结果通告信息的跳数</h4><p>通告结果是一跳，如果拓扑是水平的多台设备组成，那么就会出现有设备无法得知 RP 信息。</p>
+<h3 id="PIM-稀疏模式-DR-的作用——没记全！！！"><a href="#PIM-稀疏模式-DR-的作用——没记全！！！" class="headerlink" title="PIM 稀疏模式 DR 的作用——没记全！！！"></a>PIM 稀疏模式 DR 的作用——没记全！！！</h3><p>路由器连接子网的部分，DR 负责发送 join 信息给 RP，路由器连接多播源</p>
+<h3 id="网关冗余对多播传递的影响"><a href="#网关冗余对多播传递的影响" class="headerlink" title="网关冗余对多播传递的影响"></a>网关冗余对多播传递的影响</h3><p>HSRP 热备份路由协议，起在路由器接口下。</p>
+<p>子网通常被要求单播数据流和多播数据流分行。</p>
+<p>把当前设备设置成RP-Agent：<code>ip pim send-rp-discovery lo0 sc 255</code></p>
+<h3 id="配置-RP-侦听"><a href="#配置-RP-侦听" class="headerlink" title="配置 RP 侦听"></a>配置 RP 侦听</h3><p>RP-Agent 公布 rp 结果的消息只有一跳，所以只能传给直连设备，该跳数可以修改。</p>
+<p>路由器默认不传递 RP-Agent RP 结果，还必须配置 RP 侦听，帮助路由器透传。</p>
+<p><code>ip pim autorp listener</code></p>
+<h2 id="多播总结"><a href="#多播总结" class="headerlink" title="多播总结"></a>多播总结</h2><ol>
+<li>数据传递方式</li>
+<li>路由器、交换机处理不同数据的方式</li>
+<li>IGMP的作用、版本</li>
+<li>多播路由协议</li>
+<li>PIM<ol>
+<li>PIM 版本、模式</li>
+<li>PIM 密集模式特点、工作方式</li>
+<li>PIM 的 assert 和 DR 的作用</li>
+<li>PIM DM 模式的树</li>
+<li>PIM DM 的配置流程和校验</li>
+<li>PIM SM 特点、工作方式</li>
+<li>PIM SM 中 RP 的作用</li>
+<li>PIM SM 双树</li>
+<li>PIM SM 树的切换</li>
+<li>PIM SM 的 RP 获取方式</li>
+<li>auto rp 的工作方式特点缺陷</li>
+<li>BSR 的工作方式特点</li>
+<li>PIM SM 中 DR 作用</li>
+<li>auto-rp 侦听</li>
+</ol>
+</li>
+</ol>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     
