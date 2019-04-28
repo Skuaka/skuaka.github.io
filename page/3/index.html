@@ -1506,6 +1506,8 @@
 </ol>
 </li>
 </ul>
+<h3 id="Socket-Errno"><a href="#Socket-Errno" class="headerlink" title="Socket Errno"></a>Socket Errno</h3><p><a href="https://blog.csdn.net/huangwei858/article/details/47723613" target="_blank" rel="noopener">https://blog.csdn.net/huangwei858/article/details/47723613</a></p>
+<p><a href="https://blog.csdn.net/u010629326/article/details/76021420" target="_blank" rel="noopener">https://blog.csdn.net/u010629326/article/details/76021420</a></p>
 <h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>
@@ -1709,7 +1711,7 @@
 <p>对具体实现（<strong>译注</strong>：具体实现指的是操作系统的调度器）提出一个提醒以重新规划线程的执行，即让其他线程先运行。</p>
 <p>该方法的具体行为取决于实现，尤其是正在使用的操作系统调度器的机制以及系统的状态。比如，一个先进先出的实时调度器（Linux中的SCHED_FIFO）将会使当前线程暂停，并将其置于同优先级线程队列的末尾（如果同优先级线程队列里没有其他线程，yield就没有效果了。）</p>
 <p><strong>sleep_for()：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::this_thread::sleep_for(<span class="number">2</span>s);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line">    <span class="keyword">using</span> <span class="built_in">std</span>::this_thread::sleep_for;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::chrono_literals;</span><br><span class="line">sleep_for(<span class="number">2</span>s);</span><br></pre></td></tr></table></figure>
 <h3 id="thread-local"><a href="#thread-local" class="headerlink" title="thread_local"></a>thread_local</h3><ul>
 <li>The storage for the object is allocated when the thread begins and deallocated when the thread ends. </li>
 <li>Each thread has its own instance of the object. </li>

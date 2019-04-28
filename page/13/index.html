@@ -1689,10 +1689,10 @@
 
 
   
-    <article id="post-Network/Ccie/acl控制" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/ipv6" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/acl控制/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/ipv6/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1708,7 +1708,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/acl控制/">CCIE acl控制</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/ipv6/">CCIE ipv6</a>
     </h1>
   
 
@@ -1718,47 +1718,44 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="数字acl"><a href="#数字acl" class="headerlink" title="数字acl"></a>数字acl</h3><p>全局配置</p>
-<p>access-list 1 deny/permit ip或网段 通配符</p>
-<p>不管是何种acl，最后都会存在一条拒绝所有数据的命令</p>
-<p>一般都会在结尾加上放行所有流量的命令</p>
-<p>access-list 1 permit any</p>
-<p>接口配置 ip access-group 1 in/out</p>
-<h3 id="命名acl"><a href="#命名acl" class="headerlink" title="命名acl"></a>命名acl</h3><p>全局ip access-list standard 名字</p>
-<p>deny 11.11.11.0 0.0.0.255</p>
-<p>deny 12.12.12.0 0.0.0.255</p>
-<p>pe any</p>
-<p>接口同理</p>
-<p>命名acl能no掉某条以及接下来的所有控制，保留上层，数字acl只能全部no</p>
-<p>全局 enable password/secret 密码</p>
-<p>​                         明文/密文 密文优先级高</p>
-<p>全局 line vty 0 4 可同时登入5个 0 2 三个</p>
-<p>   password 密码</p>
-<p>telnet ip 输入密码 </p>
-<p>远程登入端口号telnet:23 http:80</p>
-<h3 id="数字扩展acl"><a href="#数字扩展acl" class="headerlink" title="数字扩展acl"></a>数字扩展acl</h3><p>ping命令是icmp协议</p>
-<p>access-list 100 deny icmp 12.12.12.0 0.0.0.255 host 3.3.3.3 ？（ping 是echo）</p>
-<p>access-list 100 permit ip any any</p>
-<p>全局ip access-list extended 名字</p>
-<h3 id="access-list命令"><a href="#access-list命令" class="headerlink" title="access-list命令"></a>access-list命令</h3><p>（1）标准访问列表</p>
-<p>access-list access-list-number { permit | deny } {source [source-wildcard] | any}</p>
-<p>命令解释如下。</p>
-<p>access-list：访问列表命令。</p>
-<p>access-list-number：访问列表号码，值为1~99.</p>
-<p>permit：允许。</p>
-<p>deny：拒绝。</p>
-<p>source：源IP地址。</p>
-<p>source-wildcard：源IP地址的通配符。</p>
-<p>（2）扩展访问列表</p>
-<p><code>access-list access-list-number { permit | deny } { protocol \ protocol-keyword } { source [ source-wildcard ] | any } { destination destination-wildcard } | any }[protocol-specific options][log]</code></p>
-<p>命令解释如下。</p>
-<p>access-list-number：访问列表号码，值为100~199.</p>
-<p>protocol \ protocol-keyword：可使用的协议，包括IP、ICMP、IGRP、EIGRP、OSPF等。</p>
-<p>destination destination-wild：目的IP地址，格式与源IP地址相同。</p>
-<p>protocol-specific options：协议制定的选项。</p>
-<p>log：记录有关数据报进入访问列表的信息。</p>
-<p>rip 跳数</p>
-<p>offset-list acc号 in/out 跳数增加值</p>
+        <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>128位 8段x16</p>
+<h3 id="地址分类"><a href="#地址分类" class="headerlink" title="地址分类"></a>地址分类</h3><ol>
+<li><p>单播地址</p>
+<p>全球可聚合单播地址(公网</p>
+<p>2000:0000……～3fff:ffff……   1/8</p>
+<p>站点本地单播地址(私有</p>
+<p>fec0::/10</p>
+<p>链路本地单播地址(mac</p>
+<p>自动生成，该地址不能被传递，只在该   段链路有效。</p>
+<p>fe80::/10</p>
+</li>
+<li><p>组播地址</p>
+<p>ff00::/10</p>
+</li>
+<li><p>任播地址</p>
+<p>地址目前还在用全球可聚合单播地址，类似于组播地址，选择最近的地址发送，只发送一个地方。</p>
+<p>前48位为公网拓扑，统一分配；</p>
+<p>后16位为子网拓扑，可自定义；</p>
+<p>剩下64位为主机位。</p>
+</li>
+</ol>
+<h3 id="地址书写规则"><a href="#地址书写规则" class="headerlink" title="地址书写规则"></a>地址书写规则</h3><ol>
+<li>完整书写</li>
+<li>简化方式    1.）连续存在的0可以::代替，但一个地址当中只能用一次。2）段中的0若在左边可不写，但是四个都为0还是要写一个0</li>
+<li>嵌入式  X:X:X:X:X:X:d.d.d.d                                 ::FFFF:192.168.0.1</li>
+</ol>
+<p>使用浏览器连接到IPv6设备的http链接时，必须使用方括号括起（与IPv4的冒号区分开来）</p>
+<p>http://[::]/default.html</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
+<li><p>接口ip的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(config)#ipv6 unicast-routing </span><br><span class="line"></span><br><span class="line">开启ipv6单播路由功能。</span><br><span class="line"></span><br><span class="line">interface xx</span><br><span class="line"></span><br><span class="line">ipv6 address 2001：:1/64 不能写掩码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>协议的启用</p>
+<p>不能使用宣告，只能在接口下启用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipv6 router [IGP] </span><br><span class="line">int xx</span><br><span class="line">ipv6 rip enable</span><br><span class="line">ipv6 ospf x area x</span><br><span class="line">ipv6 eigrp x </span><br><span class="line">router ospfv3 进程id</span><br><span class="line">int xx</span><br><span class="line">ospfv3 进程 area xx</span><br><span class="line">ipv6 router 目的地网段 /x 出接口</span><br><span class="line">router bgp xx</span><br><span class="line">address-family ipv6 unicast</span><br><span class="line">nei xxxx remot-as xx</span><br><span class="line">net xxxx /xx(只有bgp要宣告)</span><br><span class="line">可使用ipv4地址激活ipv6的对等体关系，反之不行。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="v6和v4的过渡融合"><a href="#v6和v4的过渡融合" class="headerlink" title="v6和v4的过渡融合"></a>v6和v4的过渡融合</h3><p>隧道技术 tunnel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tunnel source ip</span><br><span class="line">tunnel destination ip</span><br><span class="line">tunnel mode ipv6</span><br><span class="line"></span><br><span class="line">ping ipv6 …</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
