@@ -1689,10 +1689,10 @@
 
 
   
-    <article id="post-Network/Ccie/ipv6" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/STP生成树协议" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/ipv6/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/STP生成树协议/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1708,7 +1708,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/ipv6/">CCIE ipv6</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/STP生成树协议/">CCIE STP生成树协议</a>
     </h1>
   
 
@@ -1718,44 +1718,85 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>128位 8段x16</p>
-<h3 id="地址分类"><a href="#地址分类" class="headerlink" title="地址分类"></a>地址分类</h3><ol>
-<li><p>单播地址</p>
-<p>全球可聚合单播地址(公网</p>
-<p>2000:0000……～3fff:ffff……   1/8</p>
-<p>站点本地单播地址(私有</p>
-<p>fec0::/10</p>
-<p>链路本地单播地址(mac</p>
-<p>自动生成，该地址不能被传递，只在该   段链路有效。</p>
-<p>fe80::/10</p>
-</li>
-<li><p>组播地址</p>
-<p>ff00::/10</p>
-</li>
-<li><p>任播地址</p>
-<p>地址目前还在用全球可聚合单播地址，类似于组播地址，选择最近的地址发送，只发送一个地方。</p>
-<p>前48位为公网拓扑，统一分配；</p>
-<p>后16位为子网拓扑，可自定义；</p>
-<p>剩下64位为主机位。</p>
-</li>
-</ol>
-<h3 id="地址书写规则"><a href="#地址书写规则" class="headerlink" title="地址书写规则"></a>地址书写规则</h3><ol>
-<li>完整书写</li>
-<li>简化方式    1.）连续存在的0可以::代替，但一个地址当中只能用一次。2）段中的0若在左边可不写，但是四个都为0还是要写一个0</li>
-<li>嵌入式  X:X:X:X:X:X:d.d.d.d                                 ::FFFF:192.168.0.1</li>
-</ol>
-<p>使用浏览器连接到IPv6设备的http链接时，必须使用方括号括起（与IPv4的冒号区分开来）</p>
-<p>http://[::]/default.html</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
-<li><p>接口ip的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(config)#ipv6 unicast-routing </span><br><span class="line"></span><br><span class="line">开启ipv6单播路由功能。</span><br><span class="line"></span><br><span class="line">interface xx</span><br><span class="line"></span><br><span class="line">ipv6 address 2001：:1/64 不能写掩码</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>协议的启用</p>
-<p>不能使用宣告，只能在接口下启用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipv6 router [IGP] </span><br><span class="line">int xx</span><br><span class="line">ipv6 rip enable</span><br><span class="line">ipv6 ospf x area x</span><br><span class="line">ipv6 eigrp x </span><br><span class="line">router ospfv3 进程id</span><br><span class="line">int xx</span><br><span class="line">ospfv3 进程 area xx</span><br><span class="line">ipv6 router 目的地网段 /x 出接口</span><br><span class="line">router bgp xx</span><br><span class="line">address-family ipv6 unicast</span><br><span class="line">nei xxxx remot-as xx</span><br><span class="line">net xxxx /xx(只有bgp要宣告)</span><br><span class="line">可使用ipv4地址激活ipv6的对等体关系，反之不行。</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="v6和v4的过渡融合"><a href="#v6和v4的过渡融合" class="headerlink" title="v6和v4的过渡融合"></a>v6和v4的过渡融合</h3><p>隧道技术 tunnel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tunnel source ip</span><br><span class="line">tunnel destination ip</span><br><span class="line">tunnel mode ipv6</span><br><span class="line"></span><br><span class="line">ping ipv6 …</span><br></pre></td></tr></table></figure></p>
+        <p>STP生成树协议 7.27</p>
+<p>一个广播域中选举一个生成树。</p>
+<p>广播风暴：绝不停止。</p>
+<p>重复帧。</p>
+<p>mac地址表的不稳定。</p>
+<p>1一个网络中选取一个根桥</p>
+<p>2根桥上所有端口都为<strong>指定端口</strong></p>
+<p>3非根桥上选取一个<strong>根端口</strong></p>
+<p>4每一段选举一个指定端口</p>
+<p>5非指定端口为<strong>阻塞端口</strong></p>
+<hr>
+<p><strong>*粗体为生成树定义的交换机接口角色</strong></p>
+<p>根端口：距离根桥距离最短的端口。开销值一样的话就选最小的发送者id。只在非桥根上选举，并且只选一个。</p>
+<p>指定端口：可以执行数据的转发。一台交换机上可以有多个指定端口。根桥上所有端口都是指定端口。</p>
+<p>阻塞端口：逻辑上的阻塞，不执行数据的转发，但会持续侦听bpdu信息。</p>
+<p>BPDU(桥协议数据单元)只允许根桥产生</p>
+<p>root id</p>
+<p>优先级：(默认32768，越小越优，更改   优先值时必须为4096的倍数)。</p>
+<p>背板mac：标识一台交换机，背板mac小的为优。</p>
+<p>bridge id</p>
+<p>优先级+背板mac：和根id一样</p>
+<p>cost</p>
+<p>开销值</p>
+<p>port id</p>
+<p>优先级(默认128，小优，更改时必须为64的倍数)</p>
+<p>端口mac：发送者的端口mac</p>
+<p>PVST：每vlan生成树，在优先级插入vlan的信息。优先级+vlan编号。</p>
+<p>端口状态</p>
+<p><strong>Blocking</strong>（阻塞状态）：此时，二层端口为非指定端口，也不会参与数据帧的转发。该端口通过接收BPDU来判断根交换机的位置和根ID，以及在STP拓扑收敛结束之后，各交换机端口应该处于什么状态，在默认情况下，端口会在这种状态下停留20秒钟时间。</p>
+<p><strong>Listening</strong>（侦听状态）：生成树此时已经根据交换机所接收到的BPDU而判断出了这个端口应该参与数据帧的转发。于是交换机端口就将不再满足于接收BPDU，而同时也开始发送自己的BPDU，并以此通告邻接的交换机该端口会在活动拓扑中参与转发数据帧的工作。在默认情况下，该端口会在这种状态下停留15秒钟的时间。</p>
+<p><strong>Learning</strong>(学习状态)：这个二层端口准备参与数据帧的转发，并开始填写MAC表。在默认情况下，端口会在这种状态下停留15秒钟时间。</p>
+<p><strong>Forwarding</strong>（转发状态）：这个二层端口已经成为了活动拓扑的一个组成部分，它会转发数据帧，并同时收发BPDU。</p>
+<p><strong>Disabled</strong>（禁用状态）：这个二层端口不会参与生成树，也不会转发。</p>
+<p>根桥每2s发送一次bpdu信息，维护本生成树的运行。</p>
+<p>tcn bpdu 拓扑变更通告，只会从根端口向上发。</p>
+<p>sh spanning-tree </p>
+<p>spanning-trre vlan 1，3，5 priority 优先级</p>
+<p>spanning-trre vlan 1，3，5 root </p>
+<p><pre style="color: rgb(0, 0, 0); font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-tap-highlight-color: rgba(26, 26, 26, 0.301961); -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; word-wrap: break-word; white-space: pre-wrap;">RSTP rapid 快速生成树</pre></p>
+<p>spanning-tree mode rapid-pvst</p>
+<p>协商/同意机制</p>
+<p>替代端口：替代根端口</p>
+<p>备份端口：备份指定端口，一般从阻塞端口选取</p>
+<p>丢弃状态：discarding</p>
+<p>​    向外发送bpdu信息</p>
+<p>学习状态：learning</p>
+<p>​    一边侦听一边学习</p>
+<p>转发状态：forward</p>
+<p>mst multiple 多生成树 </p>
+<p>对RSTP的优化，自动开启RSTP。</p>
+<p>默认处于instance（实例） 0</p>
+<p>特性：</p>
+<p>portfast 快速端口，不参与生成树的选举，直接进入转发状态。</p>
+<p>bpdu guard 一旦收到guard，接口就关闭，必须管理员手动恢复，进入接口sh再no sh。</p>
+<p>端口安全 </p>
+<p>spanning-tree portfast default 将交换机上所有端口设为快速端口</p>
+<p>int xx</p>
+<p>spanning-tree portfast针对单一接口开启</p>
+<p>spanning-tree portfast bpduguard default</p>
+<p>单臂路由 </p>
+<p>子接口：将一个物理接口逻辑上划分成几个子接口使用，每一个划分出的子接口类似于物理接口正常使用。</p>
+<p>pc机</p>
+<p>no ip routing关闭路由功能</p>
+<p>int xx</p>
+<p>ip add 192.168.2.2 255.255.255.0</p>
+<p>ip default-gateway 192.168.2.1</p>
+<p>int e0/0.1</p>
+<p>encapsulation dot1q 10←vlan编号</p>
+<p>企业连接ISP的方式</p>
+<p>单宿：从一个运营商拉一根线</p>
+<p>多宿：从多个运营商拉一根线</p>
+<p>双宿：从同一个运营商拉多根线</p>
+<p>双多宿：从多个运营商同时拉多根线</p>
+<p>三层交换</p>
+<p>每一个端口都可以支持交换和简单的路由功能，开始默认都为交换接口。</p>
+<p>svi端口：</p>
+<p>​    虚拟vlan接口，不受物理接口的限制，只受交换机性能的限制。性能比子接口好很多。前提本地存在此vlan。</p>
+<p>​    int vlan 10 此端口只能识别vlan10</p>
+<p>​    ip add x.x x.x</p>
 
       
     </div>

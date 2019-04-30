@@ -981,9 +981,9 @@
 <li><p>正确方法一：使用枚举</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span>&#123;</span></span><br><span class="line">	<span class="keyword">enum</span> &#123;Months = <span class="number">12</span>&#125;;</span><br><span class="line">	<span class="keyword">double</span> costs[Months];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>用这种方式声明枚举并不会创建类数据成员，即所有对象中都不包含枚举。</p>
+<li><p>用这种方式声明枚举<strong><em>并不会创建类数据成员</em></strong>，即所有对象中都不包含枚举。</p>
 </li>
-<li><p>Months只是一个符号名称，在作用域为整个类的代码中遇到它时，编译器将用12替换它。</p>
+<li><p>Months只是一个符号名称，在作用域为整个类的代码中遇到它时，<strong><em>编译器将用12替换它</em></strong>。</p>
 </li>
 <li><p>不必提供枚举名称。</p>
 </li>
