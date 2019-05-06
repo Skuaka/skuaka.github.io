@@ -616,6 +616,11 @@
 <p>因此，你想要做OS X的系统盘，按照现在电脑都是intel芯片的情况，需要选择guid分区形式，选择主引导区的话在安装的时候是不能被识别的，也就是说不能启动Mac。</p>
 <h3 id="创建txt"><a href="#创建txt" class="headerlink" title="创建txt"></a>创建txt</h3><p>因为mac右键没有创建文本文件，所以每次都要进入终端创建一个文件，比较麻烦。</p>
 <p>可以在桌面创建一个空文本，每次要用文本文件时，直接<code>command+d</code>拷贝一下这个空文本就行了。</p>
+<h3 id="取消开机启动"><a href="#取消开机启动" class="headerlink" title="取消开机启动"></a>取消开机启动</h3><p>有很多”流氓”软件不能取消开机启动，比如adobe，即使关掉了还会有后台进程。</p>
+<p>去下面文件夹里转移掉相应的plist文件，或者在文件里把登入时启动的true改为false。</p>
+<p><code>~/Library/LaunchAgents/</code> – （当前用户的守护进程）</p>
+<p><code>/Library/LaunchAgents/</code> – （管理员设置的用户进程）</p>
+<p>世界清静了。</p>
 <h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3>
       
     </div>
