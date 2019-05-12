@@ -234,6 +234,79 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/SQLserver/远程登入sqlserver" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/06/Database/SQLserver/远程登入sqlserver/" class="article-date">
+      <time datetime="2018-12-06T06:18:58.000Z" itemprop="datePublished">2018-12-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/06/Database/SQLserver/远程登入sqlserver/">远程登入 SQL server</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html</a></p>
+<ol>
+<li><p>登录sqlserver manager 后，右键选择“属性”。左侧选择“安全性”，选中右侧的“SQL Server 和 Windows 身份验证模式”以启用混合登录模式</p>
+</li>
+<li><p>选择“连接”，勾选“允许远程连接此服务器”，然后点“确定”</p>
+</li>
+<li>展开“安全性”，“登录名”选择一个服务器登入名，右键选择“属性”，左侧选择“常规”，右侧选择“SQL Server 身份验证”，并设置密码</li>
+<li>打开sql server配置管理器，在左则选择sql server网络配置节点下的sqlexpress的协议，在右侧的TCP/IP默认是“否”，右键启用或者双击打开设置面板将其修改为“是”。</li>
+<li>重启服务器</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/SQLserver/">SQLserver</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQLserver/">SQLserver</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/Mysql/mysql c api" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -470,7 +543,7 @@
 <p>我接着又尝试<code>fout &lt;&lt; fin &lt;&lt; fin &lt;&lt; fin;</code>结果输出文件内容是’111’。</p>
 <p>查阅文档发现原因：</p>
 <p>ofstream类的&lt;&lt;运算符没有重载fstream类参数，这种情况下（以及其他没有重载的指针类型），会隐式转化成bool类型，然后只要指针不是空的，就会输出’1’（当然，如果使用了std::boolalpha控制符，则会输出’true’）。</p>
-<p>与此类似，有很多类也有bool转化，输出时可能就会输出1。</p>
+<p><strong><em>与此类似，有很多类也有bool转化，输出时可能就会输出1。</em></strong></p>
 
       
     </div>
@@ -1868,110 +1941,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Perl/">Perl</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Unix/Command/vim备忘录" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/29/Unix/Command/vim备忘录/" class="article-date">
-      <time datetime="2018-11-29T13:43:25.000Z" itemprop="datePublished">2018-11-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/29/Unix/Command/vim备忘录/">vim备忘录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><p>Ctrl+u: 向上翻半屏<br>Ctrl+d: 向下翻半屏<br>Ctrl+f: 向上翻一屏<br>Ctrl+b: 向下翻一屏 </p>
-<p>hjkl上左右下移动光标</p>
-<p>i：在当前光标前插入，光标后文本向后移<br>I：在光标所在行首插入（第一个非空白字符前）<br>a：从当前光标后插入，光标后文本后移<br>A：从光标所在行末插入</p>
-<p>nG: 光标移至第n行首<br>n$: 光标移至第n行尾 </p>
-<p>0: 光标移至当前行首<br>$: 光标移至当前行尾</p>
-<p>n+: 光标下移n行<br>n-: 光标上移n行 </p>
-<p>r: 修改光标所在字符<br>R: 替换任意字符，直到按 [ESC] </p>
-<p>o: 在光标所在行下面新增一行（并进入输入模式）<br>O: 在光标所在行上方新增一行（并进入输入模式） </p>
-<p>x: 删除光标所在字符，等同于[Delete]功能键<br>X: 删除光标前字符，相当与[Backspace] </p>
-<p>dd: 删除光标所在的行<br>do: 删至行首<br>d$: 删至行尾 </p>
-<p>yy：复制当前行正行内容到剪切板<br>nyy：复制从光标处开始的n行内容<br>p：粘贴剪切板中的内容到当前光标位置之后<br>P：粘贴剪切板中的内容到当前光标位置之前</p>
-<p>按/键——输入指定的字符串，从当前光标处向下查找。<br>按?键——输入指定的字符串，从当前光标处向上查找。<br>查找完按n、N键在不同的查找结果中进行选择。</p>
-<p>“:e 新的文件”编辑新文件。<br>“:r 其他文件”读入其他文件的内容，将其复制到当前光标的所在位置。<br>“:r !命令”将命令的输出粘贴至文本文件光标所在位置。<br>“set number”命令可显示行号，执行”set nonu”取消显示行号。</p>
-<p>vim编辑器的参数<br>-o file1  file2;将同时打开两个文件，上下显示，使用ctrl+w切换文件。<br>-O file1  file2；将同时打开两个文件，左右显示，使用ctrl+ww切换文件。</p>
-<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><ol>
-<li><p>配置文件的位置</p>
-<p>在目录 /etc/ 下面，有个名为vimrc的文件，这是系统中公共的vim配置文件，对所有用户都有效。而在每个用户的主目录下，都可以自己建立私有的配置文件，命名为：“.vimrc”。例如，/root目录下，通常已经存在一个.vimrc文件。</p>
-<p>在mac下要先拷贝一份配置文件cp  /usr/share/vim/vimrc  ~/.vimrc</p>
-</li>
-</ol>
-<ol start="2">
-<li>设置语法高亮显示</li>
-</ol>
-<p>　　1) 打开vimrc，添加以下语句来使得语法高亮显示：<br>　　syntax on</p>
-<p>　　2) 如果此时语法还是没有高亮显示，那么在/etc目录下的profile文件中添加以下语句：<br>　　export TERM=xterm-color</p>
-<ol start="3">
-<li>设置Windows风格的C/C++自动缩进（添加以下set语句到vimrc中）</li>
-</ol>
-<p>　　1）设置（软）制表符宽度为4：<br>　　set tabstop=4<br>　　set softtabstop=4</p>
-<p>　　2）设置缩进的空格数为4<br>　　set shiftwidth=4</p>
-<p>　　3）设置自动缩进：即每行的缩进值与上一行相等；使用 noautoindent 取消设置：<br>　　set autoindent</p>
-<p>　　4）设置使用 C/C++ 语言的自动缩进方式：<br>　　set cindent（有点问题，未解决）</p>
-<p>　　5）设置C/C++语言的具体缩进方式（以我的windows风格为例）：<br>　　set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,&gt;1s,=1s,:1s</p>
-<ol start="4">
-<li>如果想在左侧显示文本的行号，可以用以下语句：</li>
-</ol>
-<p>　　set nu</p>
-<h4 id="文件冲突"><a href="#文件冲突" class="headerlink" title="文件冲突"></a>文件冲突</h4><p>按照提示删除文件目录下的<code>.[filename].swp</code> 文件</p>
-<h4 id="查看文件信息"><a href="#查看文件信息" class="headerlink" title="查看文件信息"></a>查看文件信息</h4><p><code>:set</code></p>
-<p>粘贴时候取消自动缩进</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set paste</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
     </div>
 
       

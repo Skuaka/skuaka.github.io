@@ -234,6 +234,89 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/C++Collection/C++虚函数表" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/08/C_C++/C++Collection/C++虚函数表/" class="article-date">
+      <time datetime="2019-03-08T09:33:14.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/C_C++/C++Collection/C++虚函数表/">C++虚函数表</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="C-虚函数表"><a href="#C-虚函数表" class="headerlink" title="C++虚函数表"></a>C++虚函数表</h2><p>学习自<a href="https://blog.twofei.com/496/" target="_blank" rel="noopener">https://blog.twofei.com/496/</a> ，写的太好了。</p>
+<p><strong>个人看完后的简略总结：</strong></p>
+<p>基类有虚函数则会在对象最前面创建一个<code>void ** __vftp;</code>指向该类所有对象共用的虚函数表，这个指针占四字节。</p>
+<p>这个虚函数表其实就是个指针数组，指向各个虚函数，如果子类虚函数重载了父类的虚函数，则相应更新虚函数表里函数指针的指向。</p>
+<p>子类的新虚函数索引是放在按继承顺序来看的第一个有虚函数表的基类的虚函数表里，并且会改变对象布局（有虚函数表指针的基类会跑到对象布局最前面，如果有很多个基类，有虚函数的都跑到没虚函数的前面）。</p>
+<p>如果基类都没有虚函数，子类有，那么<code>__vftp</code>就由子类创建，并且移到对象布局最前面（子类的其他部分还是在基类后方）。</p>
+<p><strong>总之</strong>：<em>谁有虚函数表, 谁就往前靠</em>（但是子类的固有部分是跑不到基类前面去的）。</p>
+<hr>
+<p><strong>可以强制转换</strong></p>
+<p>由于继承完全拥有父类的所有, 包括数据成员与虚函数表, 所以:把一个继承类强制转换为一个基类是完全可行的。</p>
+<p><strong>虚函数性能</strong></p>
+<p>CPU流水线预测不了，可能会排空，所以性能差。</p>
+<p><strong>带虚函数与否的空类大小</strong></p>
+<p>不带虚函数：<em>sizeof</em>为<em>1</em>（详情见另一篇 struct 与 class 区别）</p>
+<p>带虚函数：<em>sizeof</em>为<em>4</em>（<em>32</em>位）</p>
+<h5 id="虚函数不能内联"><a href="#虚函数不能内联" class="headerlink" title="虚函数不能内联"></a>虚函数不能内联</h5><p>虚函数需要函数指针，内联就无法产生函数。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/03/08/C_C++/C++Collection/C++虚函数表/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/Mess/结构体offsetof宏" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -854,74 +937,6 @@
       
         <p class="article-more-link">
           <a href="/2019/03/04/C_C++/C++Collection/C++Lambda表达式/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-QT/QT 贪吃蛇" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/02/QT/QT 贪吃蛇/" class="article-date">
-      <time datetime="2019-03-02T08:42:42.000Z" itemprop="datePublished">2019-03-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/02/QT/QT 贪吃蛇/">QT 贪吃蛇</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="贪吃蛇"><a href="#贪吃蛇" class="headerlink" title="贪吃蛇"></a>贪吃蛇</h3><p><img src="http://118.25.53.128/Picture/Snake/snake-score.jpg" alt="snake-score"></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/QT/">QT</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/02/QT/QT 贪吃蛇/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
