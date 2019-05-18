@@ -234,6 +234,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Algorithm/C++栈实现队列" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/14/Algorithm/C++栈实现队列/" class="article-date">
+      <time datetime="2019-04-13T16:32:05.000Z" itemprop="datePublished">2019-04-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/14/Algorithm/C++栈实现队列/">C++栈实现队列</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="C-栈实现队列"><a href="#C-栈实现队列" class="headerlink" title="C++栈实现队列"></a>C++栈实现队列</h3><p>内部管理两个栈，栈1只插入数据，栈2只弹出数据。(除非当只有一个元素且在栈1的时候是由栈1直接弹出。)</p>
+<p>每次栈2为空时，top操作和pop操作都会致使元素从栈1弹出并存到栈2（缓存）。然后元素从栈2弹出的顺序就和插入栈1的顺序相同，实现了先进先出。</p>
+<p>注意：模仿STL库提供的接口，由用户检查插入弹出的合法性。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">myQueue</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="function"><span class="keyword">const</span> T&amp; <span class="title">front</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(stack2.empty()) &#123;</span><br><span class="line">         <span class="keyword">while</span> (!stack1.empty()) &#123;</span><br><span class="line">            stack2.push(stack1.top());</span><br><span class="line">            stack1.pop();</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> stack2.top();</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">      stack1.push(t);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(stack2.empty()) &#123;</span><br><span class="line">         <span class="keyword">while</span>(stack1.size() &gt; <span class="number">1</span>)</span><br><span class="line">         &#123;</span><br><span class="line">            stack2.push(stack1.top());</span><br><span class="line">            stack1.pop();</span><br><span class="line">         &#125;</span><br><span class="line">         stack1.pop();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">         stack2.pop();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> stack1.empty() &amp;&amp; stack2.empty();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">size_t</span> size()&#123;</span><br><span class="line">      <span class="keyword">return</span> stack1.size() + stack2.size();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;T&gt; stack1;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;T&gt; stack2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="C-队列实现栈"><a href="#C-队列实现栈" class="headerlink" title="C++队列实现栈"></a>C++队列实现栈</h3><p>内部两个列队，每次弹出操作都将元素转移到另一个列队中，剩下的最后一个弹出。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">myStack</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(queue2.empty())</span><br><span class="line">			queue1.push(t);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			queue2.push(t);</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(queue2.empty()) &#123;</span><br><span class="line">			<span class="keyword">while</span>(queue1.size() &gt; <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				queue2.push(queue1.front());</span><br><span class="line">				queue1.pop();</span><br><span class="line">			&#125;</span><br><span class="line">			queue1.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">while</span>(queue2.size() &gt; <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				queue1.push(queue2.front());</span><br><span class="line">				queue2.pop();</span><br><span class="line">			&#125;</span><br><span class="line">			queue2.pop();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">const</span> T&amp; <span class="title">top</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(queue2.empty()) &#123;</span><br><span class="line">			<span class="keyword">return</span> queue1.back();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> queue2.back();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> queue1.empty() &amp;&amp; queue2.empty();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">size_t</span> size() <span class="keyword">const</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> queue1.size() + queue2.size();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">queue</span>&lt;T&gt; queue1;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">queue</span>&lt;T&gt; queue2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/C++模板和元编程/C++编译期快速排序" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1292,153 +1361,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/IO/libevent基础" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/27/Network/IO/libevent基础/" class="article-date">
-      <time datetime="2019-03-27T14:47:57.000Z" itemprop="datePublished">2019-03-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/27/Network/IO/libevent基础/">libevent基础</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h1 id="libevent"><a href="#libevent" class="headerlink" title="libevent"></a>libevent</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>官方文档：<a href="http://libevent.org/" target="_blank" rel="noopener">http://libevent.org </a>.</p>
-<p>本篇是对官方文档的学习摘录。有目录方便查找。</p>
-<hr>
-<p>各系统分别提出了基于异步/callback的系统调用，例如Linux的epoll，BSD的kqueue，Windows的IOCP。由于在内核层面做了支持，所以可以用O(1)的效率查找到active的fd。基本上，<strong>libevent就是对这些高效IO的封装，提供统一的API，简化开发。</strong></p>
-<p><em>libevent</em> is meant to replace the event loop found in event driven network servers. An application just needs to call<em>event_dispatch()</em> and then add or remove events dynamically without having to change the event loop.</p>
-<p>Libevent can also be used for multi-threaded applications, either by isolating each event_base so that only a single thread accesses it, or by locked access to a single shared event_base. </p>
-<p>Libevent additionally provides a sophisticated framework for buffered network IO, with support for sockets, filters, rate-limiting, SSL, zero-copy file transmission, and IOCP. Libevent includes support for several useful protocols, including DNS, HTTP, and a minimal RPC framework.</p>
-<h3 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h3><p><strong>Libevent is divided into the following components:</strong></p>
-<p><strong>evutil</strong></p>
-<p>Generic functionality to abstract out the differences between different platforms’ networking implementations.</p>
-<p><strong>event</strong> and <strong>event_base</strong></p>
-<p>This is <em>the heart of Libevent</em>. It provides an abstract API to the various platform-specific, event-based nonblocking IO backends. It can let you know when sockets are ready to read or write, do basic timeout functionality, and detect OS signals.</p>
-<p><strong>bufferevent</strong></p>
-<p>These functions provide a more convenient wrapper around Libevent’s event-based core. They let your application request buffered reads and writes, and rather than informing you when sockets are ready to do, they let you know when IO has actually occurred.</p>
-<p><strong>evbuffer</strong></p>
-<p>This module implements the buffers underlying bufferevents, and provides functions for efficient and/or convenient access.</p>
-<p><strong>evhttp</strong></p>
-<p>A simple HTTP client/server implementation.</p>
-<p><strong>evdns</strong></p>
-<p>A simple DNS client/server implementation.</p>
-<p><strong>evrpc</strong></p>
-<p>A simple RPC implementation.</p>
-<h3 id="Libraries"><a href="#Libraries" class="headerlink" title="Libraries"></a>Libraries</h3><p>When Libevent is built, by default it installs the following libraries:</p>
-<ul>
-<li><p>libevent_core</p>
-<p>All core event and buffer functionality. This library contains all the event_base, evbuffer, bufferevent, and utility functions.</p>
-</li>
-<li><p>libevent_extra</p>
-<p>This library defines protocol-specific functionality that you may or may not want for your application, <em>including HTTP, DNS, and RPC</em>.</p>
-</li>
-<li><p>libevent</p>
-<p>This library <em>exists for historical reasons</em>; it contains the contents of both libevent_core and libevent_extra. <em>You shouldn’t use it; it may go away in a future version of Libevent</em>.</p>
-</li>
-</ul>
-<p>The following libraries are installed only on some platforms:</p>
-<ul>
-<li><p>libevent_pthreads</p>
-<p>This library adds threading and locking implementations based on the pthreads portable threading library. It is separated from libevent_core so that you don’t need to link against pthreads to use Libevent unless you are <em>actually</em> using Libevent in a multithreaded way.</p>
-</li>
-<li><p>libevent_openssl</p>
-<p>This library provides support for encrypted communications using bufferevents and the OpenSSL library. It is separated from libevent_core so that you don’t need to link against OpenSSL to use Libevent unless you are <em>actually</em> using encrypted connections.</p>
-</li>
-</ul>
-<h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><p>All current public Libevent headers are <strong>installed under the <em>event2</em> directory</strong>. </p>
-<table>
-<thead>
-<tr>
-<th>OLD HEADER</th>
-<th>REPLACED BY CURRENT HEADERS</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>event.h</td>
-<td>event2/event*.h, event2/buffer*.h event2/bufferevent*.h event2/tag*.h</td>
-</tr>
-<tr>
-<td>evdns.h</td>
-<td>event2/dns*.h</td>
-</tr>
-<tr>
-<td>evhttp.h</td>
-<td>event2/http*.h</td>
-</tr>
-<tr>
-<td>evrpc.h</td>
-<td>event2/rpc*.h</td>
-</tr>
-<tr>
-<td>evutil.h</td>
-<td>event2/util*.h</td>
-</tr>
-</tbody>
-</table>
-<p><strong>编译参数：</strong></p>
-<p>gcc link lib：<code>-levent</code> .</p>
-<p>因为我是在mac下用brew安装的，所以我的<strong>cmake</strong>这么写：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>(/usr/local/Cellar/libevent/<span class="number">2.1</span>.<span class="number">8</span>/<span class="keyword">include</span>)</span><br><span class="line"><span class="keyword">link_directories</span>(/usr/local/Cellar/libevent/<span class="number">2.1</span>.<span class="number">8</span>/lib)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(server main.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(server event)</span><br></pre></td></tr></table></figure>
-<p>目录可以用 <code>brew info libevent</code> 查找。</p>
-<h2 id="Program"><a href="#Program" class="headerlink" title="Program"></a>Program</h2><h3 id="Lib-setup"><a href="#Lib-setup" class="headerlink" title="Lib setup"></a>Lib setup</h3><p>在开始调用libevent之前，可以进行一些设置来影响程序的行为。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/27/Network/IO/libevent基础/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
