@@ -263,10 +263,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="如何grep一个-？"><a href="#如何grep一个-？" class="headerlink" title="如何grep一个 - ？"></a>如何grep一个 <code>-</code> ？</h3><p>起因，想知道如何grep一个划线。</p>
+        <h3 id="如何grep一个-？"><a href="#如何grep一个-？" class="headerlink" title="如何grep一个 - ？"></a>如何grep一个 <code>-</code> ？</h3><p>起因，想知道如何grep一个中划线。</p>
 <p>假如要查找一条命令的某个选项 <code>-a</code> ，即使用引号将 <code>-a</code> 括起来，也会报错。</p>
 <p>因为 <code>-</code> (dash键) 是shell选项的前缀。只要它出现shell就会认为接下来跟着的是选项。</p>
-<p>两种解决方法：</p>
+<p><strong>两种解决方法</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cmd --<span class="built_in">help</span> | grep -e <span class="string">'-a'</span></span><br><span class="line">$ cmd --<span class="built_in">help</span> | grep -- -a</span><br></pre></td></tr></table></figure>
 <p>第一个是grep的正则表达式，第二个是shell语法 <code>--</code>。</p>
 <h3 id="double-dash-作用"><a href="#double-dash-作用" class="headerlink" title="double-dash (--) 作用"></a>double-dash (<code>--</code>) 作用</h3><p>来自：<a href="https://unix.stackexchange.com/questions/11376/what-does-double-dash-mean-also-known-as-bare-double-dash" target="_blank" rel="noopener">https://unix.stackexchange.com/questions/11376/what-does-double-dash-mean-also-known-as-bare-double-dash</a></p>
