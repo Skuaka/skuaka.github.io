@@ -234,10 +234,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Network/Ccie/ipv6" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/NAT 地址转换协议" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/ipv6/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/NAT 地址转换协议/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -253,7 +253,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/ipv6/">CCIE ipv6</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/NAT 地址转换协议/">CCIE NAT 地址转换协议</a>
     </h1>
   
 
@@ -263,44 +263,42 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>128位 8段x16</p>
-<h3 id="地址分类"><a href="#地址分类" class="headerlink" title="地址分类"></a>地址分类</h3><ol>
-<li><p>单播地址</p>
-<p>全球可聚合单播地址(公网</p>
-<p>2000:0000……～3fff:ffff……   1/8</p>
-<p>站点本地单播地址(私有</p>
-<p>fec0::/10</p>
-<p>链路本地单播地址(mac</p>
-<p>自动生成，该地址不能被传递，只在该   段链路有效。</p>
-<p>fe80::/10</p>
-</li>
-<li><p>组播地址</p>
-<p>ff00::/10</p>
-</li>
-<li><p>任播地址</p>
-<p>地址目前还在用全球可聚合单播地址，类似于组播地址，选择最近的地址发送，只发送一个地方。</p>
-<p>前48位为公网拓扑，统一分配；</p>
-<p>后16位为子网拓扑，可自定义；</p>
-<p>剩下64位为主机位。</p>
-</li>
-</ol>
-<h3 id="地址书写规则"><a href="#地址书写规则" class="headerlink" title="地址书写规则"></a>地址书写规则</h3><ol>
-<li>完整书写</li>
-<li>简化方式    1.）连续存在的0可以::代替，但一个地址当中只能用一次。2）段中的0若在左边可不写，但是四个都为0还是要写一个0</li>
-<li>嵌入式  X:X:X:X:X:X:d.d.d.d                                 ::FFFF:192.168.0.1</li>
-</ol>
-<p>使用浏览器连接到IPv6设备的http链接时，必须使用方括号括起（与IPv4的冒号区分开来）</p>
-<p>http://[::]/default.html</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
-<li><p>接口ip的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(config)#ipv6 unicast-routing </span><br><span class="line"></span><br><span class="line">开启ipv6单播路由功能。</span><br><span class="line"></span><br><span class="line">interface xx</span><br><span class="line"></span><br><span class="line">ipv6 address 2001：:1/64 不能写掩码</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>协议的启用</p>
-<p>不能使用宣告，只能在接口下启用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipv6 router [IGP] </span><br><span class="line">int xx</span><br><span class="line">ipv6 rip enable</span><br><span class="line">ipv6 ospf x area x</span><br><span class="line">ipv6 eigrp x </span><br><span class="line">router ospfv3 进程id</span><br><span class="line">int xx</span><br><span class="line">ospfv3 进程 area xx</span><br><span class="line">ipv6 router 目的地网段 /x 出接口</span><br><span class="line">router bgp xx</span><br><span class="line">address-family ipv6 unicast</span><br><span class="line">nei xxxx remot-as xx</span><br><span class="line">net xxxx /xx(只有bgp要宣告)</span><br><span class="line">可使用ipv4地址激活ipv6的对等体关系，反之不行。</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="v6和v4的过渡融合"><a href="#v6和v4的过渡融合" class="headerlink" title="v6和v4的过渡融合"></a>v6和v4的过渡融合</h3><p>隧道技术 tunnel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tunnel source ip</span><br><span class="line">tunnel destination ip</span><br><span class="line">tunnel mode ipv6</span><br><span class="line"></span><br><span class="line">ping ipv6 …</span><br></pre></td></tr></table></figure></p>
+        <h2 id="NAT-地址转换协议"><a href="#NAT-地址转换协议" class="headerlink" title="NAT 地址转换协议"></a>NAT 地址转换协议</h2><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p><strong>优点</strong><br>在地址重叠时提供解决方案</p>
+<p>在网络发生变化时避免重新编织</p>
+<p>最大作用为可将私网地址转换为公网地址，提升了ip地址空间的使用率，这也是ipv4至今还未耗尽的原因</p>
+<p><strong>缺点</strong></p>
+<p>增加交换延迟</p>
+<p>无法进行端到端ip跟踪</p>
+<p>有些应用程序无法正常运行</p>
+<h3 id="网络地址转换类型"><a href="#网络地址转换类型" class="headerlink" title="网络地址转换类型"></a>网络地址转换类型</h3><p><strong>静态NAT</strong>：在本地地址和全局地址直接进行一对一的映射。必须为网络中的每台主机提供一个公有ip地址。</p>
+<p><strong>动态NAT</strong>：将未注册的ip地址映射到注册ip地址池中的一个地址。必须有足够多的公有ip地址，让连接到因特网的主机都能够同时发送和接收分组。</p>
+<p><strong>NAT重载</strong>：<em>最常用的NAT类型</em></p>
+<p>也被称为端口地址转换(PAT) </p>
+<p>利用源端口将多个非注册ip地址映射到一个注册ip地址(多对一)</p>
+<p>使用传输层端口号来标识主机，因此理论上最多可让大约65 000台主机共用一个公有ip地址</p>
+<p><strong>本地地址</strong>：进行NAT转换前的地址</p>
+<p>内部本地地址：转换前的内部源地址，主机的私网地址</p>
+<p>外部本地地址：转换后的目标地址，与ISP相连的路由器接口的地址，通常为共有地址</p>
+<p><strong>全局地址</strong>：进行NAT转换后的地址，通常为因特网共有地址</p>
+<p>内部全局地址：转换后的源地址</p>
+<p>外部全局地址：转换前的外部目标地址</p>
+<h3 id="配置方式"><a href="#配置方式" class="headerlink" title="配置方式"></a>配置方式</h3><p>接口角色：<br>inside：连接在内部广播域<br>outside：连接公网</p>
+<p>转换接口角色<br>int xx<br>ip nat inside/outside</p>
+<h4 id="静态NAT"><a href="#静态NAT" class="headerlink" title="静态NAT"></a>静态NAT</h4><p>ip nat inside source static 内部ip 外部ip</p>
+<h4 id="动态NAT"><a href="#动态NAT" class="headerlink" title="动态NAT"></a>动态NAT</h4><p>ip nat pool todd 170.168.2.3 170.168.2.254 netmask 255.255.255.0</p>
+<p>创建一个地址池todd，用于将全局地址分配给主机</p>
+<p>ip nat inside source list 1 pool todd</p>
+<p>将与access-list 1匹配的ip地址转换为ip地址池todd中的一个可用地址</p>
+<h4 id="PAT-NAT重载"><a href="#PAT-NAT重载" class="headerlink" title="PAT(NAT重载)"></a>PAT(NAT重载)</h4><p>与动态NAT相比，PAT地址池只包含一个ip地址，且配置命令末尾包含关键字overload</p>
+<p>ip nat pool globalnet 170.168.2.1170.168.2.1 netmask 255.255.255.0 </p>
+<p>ip nat inside source list 1 pool overload</p>
+<p>(重复使用，如果地址池有其他地址，也可以使用它，适合大型网络，必须重载多个公有ip地址)</p>
+<h3 id="验证与修改"><a href="#验证与修改" class="headerlink" title="验证与修改"></a>验证与修改</h3><p>show ip nat translation</p>
+<p>debug ip nat</p>
+<p>show ip nat statistics</p>
+<p>命令claer ip nat translations 清除转换条目，可以使用全局地址、本地地址、tcp(udp)端口、*（星号，清除所有转换条目）</p>
+<p>只要NAT表中有包含地址池中地址的转换条目，思科ios就不允许修改或删除相应的地址池</p>
+<p>转换条目超时时间：默认为24小时，可以使用命令ip nat translation timeout修改。如果定时器到期，相应的转换条目将从NAT表中删除，动态分配给它的地址将归还给地址池。</p>
 
       
     </div>
