@@ -234,6 +234,76 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Backend/apache删除后Nginx显示Apache界面" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/15/Backend/apache删除后Nginx显示Apache界面/" class="article-date">
+      <time datetime="2018-11-15T14:09:42.000Z" itemprop="datePublished">2018-11-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/15/Backend/apache删除后Nginx显示Apache界面/">apache删除后使用Nginx服务仍然显示Apache界面</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Even after you <a href="https://askubuntu.com/questions/176964/permanently-removing-apache2" target="_blank" rel="noopener">remove apache2 completely</a>, you will still have its “default site” files sitting in <code>/var/www/</code>. By default, Nginx will attempt to serve these or its own version of these files for sites it cannot otherwise match. You can see this all in <code>/etc/nginx/sites-available/default</code>.</p>
+<p>What you’re seeing is by design, it was just unexpected.</p>
+<p>To fix it, you can edit or remove the default site… Or alter the files in <code>/var/www/</code> to better suit your needs. If you want rid of the default, you can delete <code>/etc/nginx/sites-available/default</code>. It’s just a symlink so if you want to restore it, you can with:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /etc/nginx/sites-&#123;available,enabled&#125;/default</span><br></pre></td></tr></table></figure>
+<p>And remember to reload after making configuration changes:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx configtest  # make sure the config is good before reloading!</span><br><span class="line">sudo service nginx reload</span><br></pre></td></tr></table></figure>
+<p><a href="https://askubuntu.com/questions/642238/why-do-i-still-see-an-apache-site-on-nginx" target="_blank" rel="noopener">https://askubuntu.com/questions/642238/why-do-i-still-see-an-apache-site-on-nginx</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Backend/">Backend</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Unix/Proxy/Socks5" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1599,83 +1669,6 @@
 
 
       
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/Concept_gcc/不可重入函数" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/01/C_C++/Concept_gcc/不可重入函数/" class="article-date">
-      <time datetime="2018-11-01T08:02:10.000Z" itemprop="datePublished">2018-11-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/01/C_C++/Concept_gcc/不可重入函数/">不可重入函数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="不可重入函数"><a href="#不可重入函数" class="headerlink" title="不可重入函数"></a>不可重入函数</h2><p><strong>可重入</strong>(<em>Reentrancy</em>)的函数简单来说就是可以被中断的函数，也就是说，可以在这个函数执行的任何时刻中断它。</p>
-<p><strong>不可重入</strong>的函数由于使用了一些系统资源，比如全局变量区、中断向量表等，所以它如果被中断的话，可能会出现问题，这类函数是不能运行在多任务环境下的。</p>
-<p> 满足下列条件的函数多数是<strong>不可重入</strong>的：</p>
-<ul>
-<li><p>函数体内使用了静态的数据结构；</p>
-</li>
-<li><p>函数体内调用了malloc()或者free()函数；</p>
-</li>
-<li><p>函数体内调用了标准I/O函数。</p>
-</li>
-</ul>
-<p>常见的：</p>
-<p>printf 引用全局变量stdout</p>
-<p>malloc，free 引用全局的内存分配表</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>

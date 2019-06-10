@@ -234,6 +234,230 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Unix/System/Linux备忘录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/02/Unix/System/Linux备忘录/" class="article-date">
+      <time datetime="2018-10-01T16:20:34.000Z" itemprop="datePublished">2018-10-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/02/Unix/System/Linux备忘录/">Linux备忘录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="系统安装后的配置"><a href="#系统安装后的配置" class="headerlink" title="系统安装后的配置"></a>系统安装后的配置</h3><ul>
+<li><p>关闭防火墙</p>
+<p>chkconfig iptables off</p>
+</li>
+<li><p>关闭selinux</p>
+<p>/etc/selinux/config</p>
+<p>SELINUX=disabled</p>
+</li>
+<li><p>chkconfig NetworkManager off</p>
+<p>systemctl disable NetworkManager.service</p>
+</li>
+<li><p>reboot</p>
+</li>
+</ul>
+<h3 id="自动加载文件系统-etc-fstab"><a href="#自动加载文件系统-etc-fstab" class="headerlink" title="自动加载文件系统/etc/fstab"></a>自动加载文件系统/etc/fstab</h3><ol>
+<li>文件系统对应的设备名。这一列内容可以是分区或设备</li>
+<li>挂载点</li>
+<li>文件系统格式。如 ext3， vfat 等</li>
+<li>文件系统挂载参数。不同的文件系统可能有不同的参数</li>
+<li>备份标志。设定为 1 时，表示备份该文件系统；0 表示不备份</li>
+<li>系统启动时，文件系统的检查顺序。只有根分区才可以设定为 1，其余需要检查的分区应该设定为 2，设定为 0 表示不检查文件系统</li>
+</ol>
+<h3 id="网络配置的相关文件"><a href="#网络配置的相关文件" class="headerlink" title="网络配置的相关文件"></a>网络配置的相关文件</h3><ol>
+<li>IP地址配置文件    /etc/sysconfig/network-scripts/ifcfg-网卡</li>
+<li>主机名映射文件/etc/hosts</li>
+<li>主机名文件/etc/sysconfig/network</li>
+<li>DNS解析文件/etc/reslov.conf</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure>
+<p>修改信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">E=eth0 //网卡名称</span><br><span class="line"></span><br><span class="line">HWADDR=00:0c:29:5c:94:74 //物理地址</span><br><span class="line"></span><br><span class="line">TYPE=Ethernet</span><br><span class="line"></span><br><span class="line">UUID=36c43db3-95a9-427c-af8f-ba130189de85</span><br><span class="line"></span><br><span class="line">ONBOOT=yes //将ONBOOT=&quot;no&quot;改为ONBOOT=&quot;yes&quot;</span><br><span class="line"></span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line"></span><br><span class="line">BOOTPROTO=none</span><br><span class="line"></span><br><span class="line">IPADDR=192.168.1.98 //修改IP地址</span><br><span class="line"></span><br><span class="line">NETMASK=255.255.255.0 //修改子网掩码</span><br><span class="line"></span><br><span class="line">GATEWAY=192.168.1.1 //修改网关</span><br><span class="line"></span><br><span class="line">DNS1=8.8.8.8 //修改DNS服务器</span><br><span class="line"></span><br><span class="line">IPV6INIT=no</span><br><span class="line"></span><br><span class="line">USERCTL=no</span><br></pre></td></tr></table></figure>
+<p>（2）重启网络服务：</p>
+<p>要想生效，必须重启Linux或者重启网络服务，我们重启网络服务，执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
+<h3 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h3><h4 id="使用rpm从镜像文件下载软件包"><a href="#使用rpm从镜像文件下载软件包" class="headerlink" title="使用rpm从镜像文件下载软件包"></a>使用rpm从镜像文件下载软件包</h4><ol>
+<li>ls  /dev 看到scd0(ISO镜像文件)</li>
+<li>mount  /dev/scd0  /mnt/cdrom 镜像文件挂载</li>
+<li>cd  /mnt/cdrom/Packages/</li>
+<li>ls | grep +包名</li>
+<li>rpm  -ivh  包名</li>
+</ol>
+<h4 id="使用本地yum源下载软件包"><a href="#使用本地yum源下载软件包" class="headerlink" title="使用本地yum源下载软件包"></a>使用本地yum源下载软件包</h4><ol>
+<li><p>挂载光盘镜像（如上）</p>
+</li>
+<li><p>修改/etc/yum.repos.d/目录下的以.repo结尾的配置文件</p>
+<p>baseurl=file:///mnt/cdrom/</p>
+<p>enable=1</p>
+<p>gpgcheck=0</p>
+</li>
+</ol>
+<h3 id="逻辑卷管理"><a href="#逻辑卷管理" class="headerlink" title="逻辑卷管理"></a>逻辑卷管理</h3><h4 id="新建逻辑卷"><a href="#新建逻辑卷" class="headerlink" title="新建逻辑卷"></a>新建逻辑卷</h4><ol>
+<li><p>磁盘分区</p>
+<p>fdisk /dev/sdb  # 8e Linux LVM</p>
+</li>
+<li><p>创建PV</p>
+<p>pvcreate /dev/sdb1  /dev/sdb2</p>
+</li>
+<li><p>创建VG</p>
+<p>vgcreate myVG /dev/sdb1 /dev/sdb2</p>
+</li>
+<li><p>创建LV</p>
+<p>lvcreate -L 400M -n vol01 myVG</p>
+</li>
+<li><p>创建Filesystem</p>
+<p>mkfs.ext3 /dev/myVG/vol01</p>
+</li>
+</ol>
+<h4 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h4><ol>
+<li>首先将正在使用的逻辑卷卸载掉   umount 命令<ol start="2">
+<li>将逻辑卷先删除　　   lvremove 命令</li>
+</ol>
+</li>
+<li>删除卷组　　   vgremove 命令</li>
+<li>最后再删除物理卷　　  pvremove 命令</li>
+</ol>
+<h4 id="扩充逻辑卷"><a href="#扩充逻辑卷" class="headerlink" title="扩充逻辑卷"></a>扩充逻辑卷</h4><ol>
+<li><p>将要添加到VG的硬盘格式化成PV</p>
+<p>pvcreate /dev/sdd</p>
+</li>
+<li><p>将新的PV添加到指定的VG当中</p>
+<p>vgextend xiaoluo /dev/sdd</p>
+</li>
+<li><p>扩充逻辑卷</p>
+<p>lvextend -L +1G /dev/xiaoluo/mylv</p>
+</li>
+<li><p>更新文件系统</p>
+<p>resize2fs /dev/xiaoluo/mylv</p>
+</li>
+</ol>
+<h4 id="缩容逻辑卷"><a href="#缩容逻辑卷" class="headerlink" title="缩容逻辑卷"></a>缩容逻辑卷</h4><p>逻辑卷的缩小操作必须离线执行，要先卸载掉逻辑卷才可以</p>
+<p><strong>第一种</strong></p>
+<ol>
+<li><p>卸载已经挂载的逻辑卷　　通过 umount 命令</p>
+</li>
+<li><p>缩小文件系统(会提示需要运行fsck来检查文件系统)</p>
+<p>resize2fs /dev/xiaoluo/mylv 10G</p>
+</li>
+<li><p>缩小LV</p>
+<p>lvreduce -L -4G /dev/xiaoluo/mylv </p>
+</li>
+<li><p>缩小完逻辑卷以后，再将逻辑卷挂载</p>
+</li>
+</ol>
+<p><strong>第二种</strong></p>
+<ol>
+<li><p>卸载逻辑卷　　通过 umount 命令</p>
+</li>
+<li><p>将一个PV从指定卷组中移除掉</p>
+<p>vgreduce xiaoluo /dev/sdd</p>
+</li>
+<li><p>将PV删除掉</p>
+<p>pvremove /dev/sdd</p>
+</li>
+</ol>
+<h3 id="网卡绑定"><a href="#网卡绑定" class="headerlink" title="网卡绑定"></a>网卡绑定</h3><ol>
+<li><p>关闭NetworkManager服务</p>
+</li>
+<li><p>创建bonding.conf文件在/etc/modprobe.d/目录中alias bond0 bonding</p>
+</li>
+<li><p>创建ifcfg-bond0文件在/etc/sysconfig/network-scripts/目录中</p>
+<p>DEVICE=bond0</p>
+<p>NAME=bond0</p>
+<p>TYPE=Ethernet</p>
+<p>ONBOOT=yes</p>
+<p>BOOTPROTO=static</p>
+<p>IPADDR=192.168.50.111</p>
+<p>NETMASK=255.255.255.0</p>
+<p>GATEWAY=192.168.50.1</p>
+<p>BONDING_OPTS=”mode=1 miimon=100”</p>
+</li>
+<li><p>修改真实网卡的配置   /etc/sysconfig/network-scripts/ifcfg-要加入的两块网卡</p>
+<p>DEVICE=eth0</p>
+<p>NAME=eth0</p>
+<p>ONBOOT=yes</p>
+<p>BOOTPROTO=none</p>
+<p>MASTER=bond0</p>
+<p>SLAVE=yes</p>
+</li>
+<li><p>重启网络服务service network restart</p>
+</li>
+<li>查看状态cat /proc/net/bonding/bond0</li>
+</ol>
+<h3 id="NFS服务配置"><a href="#NFS服务配置" class="headerlink" title="NFS服务配置"></a>NFS服务配置</h3><p>使用NFS服务，至少需要启动以下3个系统守护进程</p>
+<ol>
+<li>rpc.nfsd</li>
+<li>rpc.mountd</li>
+<li>portmap（rhel5）        rpcbind（rhel6）</li>
+</ol>
+<h3 id="Apache服务"><a href="#Apache服务" class="headerlink" title="Apache服务"></a>Apache服务</h3><ul>
+<li><p>启动httpd服务</p>
+<p>service httpd start</p>
+<p>如在地址栏输入<a href="http://192.168.100.101，成功加载页面，就说明httpd正常运行了" target="_blank" rel="noopener">http://192.168.100.101，成功加载页面，就说明httpd正常运行了</a></p>
+</li>
+<li><p>配置文件/etc/httpd/conf/httpd.conf</p>
+<p>端口监听：Listen *:80</p>
+<p>导向固定ip：ServerName *:80</p>
+<p>默认目录：DocumentRoot “/var/www/html/“</p>
+</li>
+</ul>
+<h3 id="阻止重定向操作覆盖已有文件"><a href="#阻止重定向操作覆盖已有文件" class="headerlink" title="阻止重定向操作覆盖已有文件"></a>阻止重定向操作覆盖已有文件</h3><p><code>set -o noclobber</code>阻止重定向操作覆盖已有文件</p>
+<p><code>set +o noclobber</code>取消上面的操作</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Unp/unp_code" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -974,258 +1198,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Frontend/DTD入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/09/Frontend/DTD入门/" class="article-date">
-      <time datetime="2018-08-09T07:06:44.000Z" itemprop="datePublished">2018-08-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/09/Frontend/DTD入门/">DTD入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="DTD-简介"><a href="#DTD-简介" class="headerlink" title="DTD 简介"></a>DTD 简介</h3><p>文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。</p>
-<p>DTD 可被成行地声明于 XML 文档中，也可作为一个外部引用。</p>
-<hr>
-<h4 id="内部的-DOCTYPE-声明"><a href="#内部的-DOCTYPE-声明" class="headerlink" title="内部的 DOCTYPE 声明"></a>内部的 DOCTYPE 声明</h4><p>假如 DTD 被包含在您的 XML 源文件中，它应当通过下面的语法包装在一个 DOCTYPE 声明中：</p>
-<p>&lt;!DOCTYPE root-element [element-declarations]&gt;</p>
-<p>带有 DTD 的 XML 文档实例（请在 IE5 以及更高的版本打开，并选择查看源代码）：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE note [</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT note (to,from,heading,body)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT to (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT from (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT heading (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT body (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">to</span>&gt;</span>Tove<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">from</span>&gt;</span>Jani<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">heading</span>&gt;</span>Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>Don't forget me this weekend<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>以上 DTD 解释如下：</p>
-<ul>
-<li><strong>!DOCTYPE note</strong> (第二行)定义此文档是 <strong>note</strong> 类型的文档。</li>
-<li><strong>!ELEMENT note</strong> (第三行)定义 <strong>note</strong> 元素有四个元素：”to、from、heading,、body”</li>
-<li><strong>!ELEMENT to</strong> (第四行)定义 <strong>to</strong> 元素为 “#PCDATA” 类型</li>
-<li><strong>!ELEMENT from</strong> (第五行)定义 <strong>from</strong> 元素为 “#PCDATA” 类型</li>
-<li><strong>!ELEMENT heading</strong> (第六行)定义 <strong>heading</strong> 元素为 “#PCDATA” 类型</li>
-<li><strong>!ELEMENT body</strong> (第七行)定义 <strong>body</strong> 元素为 “#PCDATA” 类型</li>
-</ul>
-<hr>
-<h4 id="外部文档声明"><a href="#外部文档声明" class="headerlink" title="外部文档声明"></a>外部文档声明</h4><p>假如 DTD 位于 XML 源文件的外部，那么它应通过下面的语法被封装在一个 DOCTYPE 定义中：</p>
-<p>&lt;!DOCTYPE root-element SYSTEM “filename”&gt;</p>
-<p>这个 XML 文档和上面的 XML 文档相同，但是拥有一个外部的 DTD:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE note SYSTEM "note.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">to</span>&gt;</span>Tove<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">from</span>&gt;</span>Jani<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">heading</span>&gt;</span>Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>Don't forget me this weekend!<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>这是包含 DTD 的 “note.dtd” 文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT note (to,from,heading,body)&gt;</span><br><span class="line">&lt;!ELEMENT to (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT from (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT heading (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT body (#PCDATA)&gt;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h4 id="为什么使用-DTD？"><a href="#为什么使用-DTD？" class="headerlink" title="为什么使用 DTD？"></a>为什么使用 DTD？</h4><p>通过 DTD，您的每一个 XML 文件均可携带一个有关其自身格式的描述。</p>
-<p>通过 DTD，独立的团体可一致地使用某个标准的 DTD 来交换数据。</p>
-<p>而您的应用程序也可使用某个标准的 DTD 来验证从外部接收到的数据。</p>
-<p>您还可以使用 DTD 来验证您自身的数据。</p>
-<h3 id="DTD-元素"><a href="#DTD-元素" class="headerlink" title="DTD - 元素"></a>DTD - 元素</h3><hr>
-<h4 id="PCDATA"><a href="#PCDATA" class="headerlink" title="PCDATA"></a>PCDATA</h4><p>PCDATA 的意思是被解析的字符数据（parsed character data）。</p>
-<p>可把字符数据想象为 XML 元素的开始标签与结束标签之间的文本。</p>
-<p><strong>PCDATA 是会被解析器解析的文本。这些文本将被解析器检查实体以及标记。</strong></p>
-<p>文本中的标签会被当作标记来处理，而实体会被展开。</p>
-<p>不过，被解析的字符数据不应当包含任何 &amp;、&lt; 或者 &gt; 字符；需要使用 &amp;、&lt; 以及 &gt; 实体来分别替换它们。</p>
-<hr>
-<h4 id="CDATA"><a href="#CDATA" class="headerlink" title="CDATA"></a>CDATA</h4><p>CDATA 的意思是字符数据（character data）。</p>
-<p><strong>CDATA 是不会被解析器解析的文本。</strong>在这些文本中的标签不会被当作标记来对待，其中的实体也不会被展开。</p>
-<hr>
-<h4 id="声明一个元素"><a href="#声明一个元素" class="headerlink" title="声明一个元素"></a>声明一个元素</h4><p>在 DTD 中，XML 元素通过元素声明来进行声明。元素声明使用下面的语法：</p>
-<p>&lt;!ELEMENT element-name category&gt;<br>或<br>&lt;!ELEMENT element-name (element-content)&gt;</p>
-<hr>
-<h4 id="空元素"><a href="#空元素" class="headerlink" title="空元素"></a>空元素</h4><p>空元素通过类别关键词EMPTY进行声明：</p>
-<p>&lt;!ELEMENT element-name EMPTY&gt;<br>实例:<br>&lt;!ELEMENT br EMPTY&gt;<br>XML example:<br><br></p>
-<hr>
-<h4 id="只有-PCDATA-的元素"><a href="#只有-PCDATA-的元素" class="headerlink" title="只有 PCDATA 的元素"></a>只有 PCDATA 的元素</h4><p>只有 PCDATA 的元素通过圆括号中的 #PCDATA 进行声明：</p>
-<p>&lt;!ELEMENT element-name (#PCDATA)&gt;<br>实例:<br>&lt;!ELEMENT from (#PCDATA)&gt;</p>
-<hr>
-<h4 id="带有任何内容的元素"><a href="#带有任何内容的元素" class="headerlink" title="带有任何内容的元素"></a>带有任何内容的元素</h4><p>通过类别关键词 ANY 声明的元素，可包含任何可解析数据的组合：</p>
-<p>&lt;!ELEMENT element-name ANY&gt;<br>实例:<br>&lt;!ELEMENT note ANY&gt;</p>
-<hr>
-<h4 id="带有子元素（序列）的元素"><a href="#带有子元素（序列）的元素" class="headerlink" title="带有子元素（序列）的元素"></a>带有子元素（序列）的元素</h4><p>带有一个或多个子元素的元素通过圆括号中的子元素名进行声明：</p>
-<p>&lt;!ELEMENT element-name (child1)&gt;<br>或<br>&lt;!ELEMENT element-name (child1,child2,…)&gt;<br>实例:<br>&lt;!ELEMENT note (to,from,heading,body)&gt;</p>
-<p>当子元素按照由逗号分隔开的序列进行声明时，这些子元素必须按照相同的顺序出现在文档中。在一个完整的声明中，子元素也必须被声明，同时子元素也可拥有子元素。”note” 元素的完整声明是：</p>
-<p>&lt;!ELEMENT note (to,from,heading,body)&gt;<br>&lt;!ELEMENT to (#PCDATA)&gt;<br>&lt;!ELEMENT from (#PCDATA)&gt;<br>&lt;!ELEMENT heading (#PCDATA)&gt;<br>&lt;!ELEMENT body (#PCDATA)&gt;</p>
-<hr>
-<h4 id="声明只出现一次的元素"><a href="#声明只出现一次的元素" class="headerlink" title="声明只出现一次的元素"></a>声明只出现一次的元素</h4><p>&lt;!ELEMENT element-name (child-name)&gt;<br>实例:<br>&lt;!ELEMENT note (message)&gt;</p>
-<p>上面的例子声明了：message 子元素必须出现一次，并且必须只在 “note” 元素中出现一次。</p>
-<hr>
-<h4 id="声明最少出现一次的元素"><a href="#声明最少出现一次的元素" class="headerlink" title="声明最少出现一次的元素"></a>声明最少出现一次的元素</h4><p>&lt;!ELEMENT element-name (child-name+)&gt;<br>实例:<br>&lt;!ELEMENT note (message+)&gt;</p>
-<p>上面的例子中的加号（+）声明了：message 子元素必须在 “note” 元素内出现至少一次。</p>
-<hr>
-<h4 id="声明出现零次或多次的元素"><a href="#声明出现零次或多次的元素" class="headerlink" title="声明出现零次或多次的元素"></a>声明出现零次或多次的元素</h4><p>&lt;!ELEMENT element-name (child-name<em>)&gt;<br>实例:<br>&lt;!ELEMENT note (message</em>)&gt;</p>
-<p>上面的例子中的星号（*）声明了：子元素 message 可在 “note” 元素内出现零次或多次。</p>
-<hr>
-<h4 id="声明出现零次或一次的元素"><a href="#声明出现零次或一次的元素" class="headerlink" title="声明出现零次或一次的元素"></a>声明出现零次或一次的元素</h4><p>&lt;!ELEMENT element-name (child-name?)&gt;<br>实例:<br>&lt;!ELEMENT note (message?)&gt;</p>
-<p>上面的例子中的问号(?)声明了：子元素 message 可在 “note” 元素内出现零次或一次。</p>
-<hr>
-<h4 id="声明”非…-既…”类型的内容"><a href="#声明”非…-既…”类型的内容" class="headerlink" title="声明”非…/既…”类型的内容"></a>声明”非…/既…”类型的内容</h4><p>实例:<br>&lt;!ELEMENT note (to,from,header,(message|body))&gt;</p>
-<p>上面的例子声明了：”note” 元素必须包含 “to” 元素、”from” 元素、”header” 元素，以及非 “message” 元素既 “body” 元素。</p>
-<hr>
-<h4 id="声明混合型的内容"><a href="#声明混合型的内容" class="headerlink" title="声明混合型的内容"></a>声明混合型的内容</h4><p>实例:<br>&lt;!ELEMENT note (#PCDATA|to|from|header|message)*&gt;</p>
-<p>上面的例子声明了：”note” 元素可包含出现零次或多次的 PCDATA、”to”、”from”、”header” 或者 “message”。</p>
-<h3 id="DTD-属性"><a href="#DTD-属性" class="headerlink" title="DTD - 属性"></a>DTD - 属性</h3><hr>
-<p>在 DTD 中，属性通过 ATTLIST 声明来进行声明。</p>
-<hr>
-<h4 id="声明属性"><a href="#声明属性" class="headerlink" title="声明属性"></a>声明属性</h4><p>属性声明使用下列语法：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">!ATTLIST</span> <span class="attr">element-name</span> <span class="attr">attribute-name</span> <span class="attr">attribute-type</span> <span class="attr">attribute-value</span>&gt;</span></span><br><span class="line">DTD 实例:</span><br><span class="line"><span class="tag">&lt;<span class="name">!ATTLIST</span> <span class="attr">payment</span> <span class="attr">type</span> <span class="attr">CDATA</span> "<span class="attr">check</span>"&gt;</span></span><br><span class="line">XML 实例:</span><br><span class="line"><span class="tag">&lt;<span class="name">payment</span> <span class="attr">type</span>=<span class="string">"check"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>以下是 <strong>属性类型</strong>的选项：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CDATA</td>
-<td>值为字符数据 (character data)</td>
-</tr>
-<tr>
-<td>(<em>en1</em>\</td>
-<td><em>en2</em>\</td>
-<td>..)</td>
-<td>此值是枚举列表中的一个值</td>
-</tr>
-<tr>
-<td>ID</td>
-<td>值为唯一的 id</td>
-</tr>
-<tr>
-<td>IDREF</td>
-<td>值为另外一个元素的 id</td>
-</tr>
-<tr>
-<td>IDREFS</td>
-<td>值为其他 id 的列表</td>
-</tr>
-<tr>
-<td>NMTOKEN</td>
-<td>值为合法的 XML 名称</td>
-</tr>
-<tr>
-<td>NMTOKENS</td>
-<td>值为合法的 XML 名称的列表</td>
-</tr>
-<tr>
-<td>ENTITY</td>
-<td>值是一个实体</td>
-</tr>
-<tr>
-<td>ENTITIES</td>
-<td>值是一个实体列表</td>
-</tr>
-<tr>
-<td>NOTATION</td>
-<td>此值是符号的名称</td>
-</tr>
-<tr>
-<td>xml:</td>
-<td>值是一个预定义的 XML 值</td>
-</tr>
-</tbody>
-</table>
-<p>默认<strong>属性值</strong>可使用下列值 :</p>
-<table>
-<thead>
-<tr>
-<th>值</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>值</td>
-<td>属性的默认值</td>
-</tr>
-<tr>
-<td>#REQUIRED</td>
-<td>属性值是必需的</td>
-</tr>
-<tr>
-<td>#IMPLIED</td>
-<td>属性不是必需的</td>
-</tr>
-<tr>
-<td>#FIXED value</td>
-<td>属性值是固定的</td>
-</tr>
-</tbody>
-</table>
-<h5 id="列举属性值"><a href="#列举属性值" class="headerlink" title="列举属性值"></a>列举属性值</h5><p>语法</p>
-<p>&lt;!ATTLIST element-name attribute-name (en1|en2|..) default-value&gt;</p>
-<p>实例</p>
-<p>DTD:<br>&lt;!ATTLIST payment type (check|cash) “cash”&gt;<br>XML 例子:</p>
-<p><payment type="check"><br>或</payment></p>
-<payment type="cash">
-
-<p>如果您希望属性值为一系列固定的合法值之一，请使用列举属性值。</p>
-<h3 id="DTD-实体"><a href="#DTD-实体" class="headerlink" title="DTD - 实体"></a>DTD - 实体</h3><hr>
-<p>实体是用于定义引用普通文本或特殊字符的快捷方式的变量。</p>
-<ul>
-<li>实体引用是对实体的引用。</li>
-<li>实体可在内部或外部进行声明。</li>
-</ul>
-<hr>
-<h4 id="内部实体声明"><a href="#内部实体声明" class="headerlink" title="内部实体声明"></a>内部实体声明</h4><p>语法</p>
-<p>&lt;!ENTITY entity-name “entity-value”&gt;</p>
-<p>实例</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DTD 实例:</span><br><span class="line"><span class="tag">&lt;<span class="name">!ENTITY</span> <span class="attr">writer</span> "<span class="attr">Donald</span> <span class="attr">Duck.</span>"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">!ENTITY</span> <span class="attr">copyright</span> "<span class="attr">Copyright</span> <span class="attr">runoob.com</span>"&gt;</span></span><br><span class="line">XML 实例：</span><br><span class="line"><span class="tag">&lt;<span class="name">author</span>&gt;</span>&amp;writer;&amp;copyright;<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 一个实体由三部分构成: 一个和号 (&amp;), 一个实体名称, 以及一个分号 (;)。</p>
-<hr>
-<h4 id="外部实体声明"><a href="#外部实体声明" class="headerlink" title="外部实体声明"></a>外部实体声明</h4><p>语法</p>
-<p>&lt;!ENTITY entity-name SYSTEM “URI/URL”&gt;</p>
-<p>实例<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DTD 实例:</span><br><span class="line"><span class="tag">&lt;<span class="name">!ENTITY</span> <span class="attr">writer</span> <span class="attr">SYSTEM</span> "<span class="attr">http:</span>//<span class="attr">www.runoob.com</span>/<span class="attr">entities.dtd</span>"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">!ENTITY</span> <span class="attr">copyright</span> <span class="attr">SYSTEM</span> "<span class="attr">http:</span>//<span class="attr">www.runoob.com</span>/<span class="attr">entities.dtd</span>"&gt;</span></span><br><span class="line">XML example:</span><br><span class="line"><span class="tag">&lt;<span class="name">author</span>&gt;</span>&amp;writer;&amp;copyright;<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="DTD-来自网络的实例"><a href="#DTD-来自网络的实例" class="headerlink" title="DTD - 来自网络的实例"></a>DTD - 来自网络的实例</h3><hr>
-<h4 id="电视节目表-DTD"><a href="#电视节目表-DTD" class="headerlink" title="电视节目表 DTD"></a>电视节目表 DTD</h4><p>由 David Moisan 创造。拷贝自： <a href="http://www.davidmoisan.org/" target="_blank" rel="noopener">http://www.davidmoisan.org/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE TVSCHEDULE [</span><br><span class="line">&lt;!ELEMENT TVSCHEDULE (CHANNEL+)&gt;</span><br><span class="line">&lt;!ELEMENT CHANNEL (BANNER,DAY+)&gt;</span><br><span class="line">&lt;!ELEMENT BANNER (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT DAY (DATE,(HOLIDAY|PROGRAMSLOT+)+)&gt;</span><br><span class="line">&lt;!ELEMENT HOLIDAY (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT DATE (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT PROGRAMSLOT (TIME,TITLE,DESCRIPTION?)&gt;</span><br><span class="line">&lt;!ELEMENT TIME (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT TITLE (#PCDATA)&gt; </span><br><span class="line">&lt;!ELEMENT DESCRIPTION (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST TVSCHEDULE NAME CDATA #REQUIRED&gt;</span><br><span class="line">&lt;!ATTLIST CHANNEL CHAN CDATA #REQUIRED&gt;</span><br><span class="line">&lt;!ATTLIST PROGRAMSLOT VTR CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ATTLIST TITLE RATING CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ATTLIST TITLE LANGUAGE CDATA #IMPLIED&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h4 id="报纸文章-DTD"><a href="#报纸文章-DTD" class="headerlink" title="报纸文章 DTD"></a>报纸文章 DTD</h4><p>拷贝自：<a href="http://www.vervet.com/" target="_blank" rel="noopener">http://www.vervet.com/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE NEWSPAPER [</span><br><span class="line">&lt;!ELEMENT NEWSPAPER (ARTICLE+)&gt;</span><br><span class="line">&lt;!ELEMENT ARTICLE (HEADLINE,BYLINE,LEAD,BODY,NOTES)&gt;</span><br><span class="line">&lt;!ELEMENT HEADLINE (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT BYLINE (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT LEAD (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT BODY (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT NOTES (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST ARTICLE AUTHOR CDATA #REQUIRED&gt;</span><br><span class="line">&lt;!ATTLIST ARTICLE EDITOR CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ATTLIST ARTICLE DATE CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ATTLIST ARTICLE EDITION CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ENTITY NEWSPAPER &quot;Vervet Logic Times&quot;&gt;</span><br><span class="line">&lt;!ENTITY PUBLISHER &quot;Vervet Logic Press&quot;&gt;</span><br><span class="line">&lt;!ENTITY COPYRIGHT &quot;Copyright 1998 Vervet Logic Press&quot;&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h4 id="产品目录-DTD"><a href="#产品目录-DTD" class="headerlink" title="产品目录 DTD"></a>产品目录 DTD</h4><p>拷贝自： <a href="http://www.vervet.com/" target="_blank" rel="noopener">http://www.vervet.com/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE CATALOG [</span><br><span class="line">&lt;!ENTITY AUTHOR &quot;John Doe&quot;&gt;</span><br><span class="line">&lt;!ENTITY COMPANY &quot;JD Power Tools, Inc.&quot;&gt;</span><br><span class="line">&lt;!ENTITY EMAIL &quot;jd@jd-tools.com&quot;&gt;</span><br><span class="line">&lt;!ELEMENT CATALOG (PRODUCT+)&gt;</span><br><span class="line">&lt;!ELEMENT PRODUCT</span><br><span class="line">(SPECIFICATIONS+,OPTIONS?,PRICE+,NOTES?)&gt;</span><br><span class="line">&lt;!ATTLIST PRODUCT</span><br><span class="line">NAME CDATA #IMPLIED</span><br><span class="line">CATEGORY (HandTool|Table|Shop-Professional) &quot;HandTool&quot;</span><br><span class="line">PARTNUM CDATA #IMPLIED</span><br><span class="line">PLANT (Pittsburgh|Milwaukee|Chicago) &quot;Chicago&quot;</span><br><span class="line">INVENTORY (InStock|Backordered|Discontinued) &quot;InStock&quot;&gt;</span><br><span class="line">&lt;!ELEMENT SPECIFICATIONS (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST SPECIFICATIONS</span><br><span class="line">WEIGHT CDATA #IMPLIED</span><br><span class="line">POWER CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ELEMENT OPTIONS (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST OPTIONS</span><br><span class="line">FINISH (Metal|Polished|Matte) &quot;Matte&quot;</span><br><span class="line">ADAPTER (Included|Optional|NotApplicable) &quot;Included&quot;</span><br><span class="line">CASE (HardShell|Soft|NotApplicable) &quot;HardShell&quot;&gt;</span><br><span class="line">&lt;!ELEMENT PRICE (#PCDATA)&gt;</span><br><span class="line">&lt;!ATTLIST PRICE</span><br><span class="line">MSRP CDATA #IMPLIED</span><br><span class="line">WHOLESALE CDATA #IMPLIED</span><br><span class="line">STREET CDATA #IMPLIED</span><br><span class="line">SHIPPING CDATA #IMPLIED&gt;</span><br><span class="line">&lt;!ELEMENT NOTES (#PCDATA)&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure></p>
-</payment>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DTD/">DTD</a></li></ul>
     </div>
 
       

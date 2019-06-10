@@ -234,6 +234,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/Mess/C++和Java的引用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/20/C_C++/Mess/C++和Java的引用/" class="article-date">
+      <time datetime="2019-01-20T12:51:11.000Z" itemprop="datePublished">2019-01-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/20/C_C++/Mess/C++和Java的引用/">C++和Java的引用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="C-和Java的引用"><a href="#C-和Java的引用" class="headerlink" title="C++和Java的引用"></a>C++和Java的引用</h3><h5 id="c-中引用的概念跟java中的不一样"><a href="#c-中引用的概念跟java中的不一样" class="headerlink" title="c++中引用的概念跟java中的不一样"></a>c++中引用的概念跟java中的不一样</h5><p>c++中的引用必须绑定到一个实际存在的对象，不能绑定到NULL，</p>
+<p>c++中 Object &amp;obj=NULL;这样的句子是绝对违法的。</p>
+<p>Object &amp;obj=*(new Object());这样的句子，或许可以编译通过，但是这是非常危险地，因为后面很容易忘记释放这个对象。</p>
+<p>string &amp;str=string(“123”)+”456”;这样的句子，VC中打开扩展可以编译通过，但是c++规范是不允许的，因为这同样非常危险。str绑定到了临时对象。</p>
+<h5 id="c-中的指针跟java中的引用类似"><a href="#c-中的指针跟java中的引用类似" class="headerlink" title="c++中的指针跟java中的引用类似"></a>c++中的指针跟java中的引用类似</h5><p>Object obj = null; java中的意思是定义Object型引用的变量obj并初始化为null</p>
+<p>Object *obj=NULL;c++中的意思为定Object型指针的变量obj并初始化为NULL  </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/IO/Reactor" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -2018,74 +2087,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Makefile/">Makefile</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/C++Collection/C++STL" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/07/C_C++/C++Collection/C++STL/" class="article-date">
-      <time datetime="2018-12-07T12:51:15.000Z" itemprop="datePublished">2018-12-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/07/C_C++/C++Collection/C++STL/">C++ STL</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h1 id="标准模板库"><a href="#标准模板库" class="headerlink" title="标准模板库"></a>标准模板库</h1><p>STL 提供了一组表示容器、迭代器、函数对象、算法的模板。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2018/12/07/C_C++/C++Collection/C++STL/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
