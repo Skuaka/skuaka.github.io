@@ -234,10 +234,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/BGP 补充知识" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/BGP 补充知识/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -253,7 +253,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/BGP 补充知识/">CCIE BGP 补充知识</a>
     </h1>
   
 
@@ -263,33 +263,44 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>重分发 </p>
-<p>将不同路由协议转化</p>
-<p>1直连进路由选择协议</p>
-<p>redistribute connect metric 1</p>
-<p>2其他路由选择协议进rip</p>
-<p>router rip</p>
-<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
-<p>3其他路由选择协议进eigrp</p>
-<p>router eigrp 100</p>
-<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
-<p>4其他进ospf</p>
-<p>router os 1</p>
-<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
-<p>默认OE2</p>
-<p>将oe2改成oe1:</p>
-<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
-<p>重分发流量控制</p>
-<p>acl</p>
-<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
-<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
-<p>将acl抓去到的流量给route-map</p>
-<p>route-map +名字 +permit/deny </p>
-<p>优先级10(默认优先级) </p>
-<p>match ip address +acl编号</p>
-<p>route-map也默认deny所有流量</p>
-<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
-<p>re rip router-map ccie metric ……</p>
+        <h3 id="BGP-的路由更新过滤"><a href="#BGP-的路由更新过滤" class="headerlink" title="BGP 的路由更新过滤"></a>BGP 的路由更新过滤</h3><p>route-map、prefix-list、filter-list（筛选列表）</p>
+<h4 id="利用-route-map"><a href="#利用-route-map" class="headerlink" title="利用 route-map"></a>利用 route-map</h4><p>可以是 in 方向，也可以是 out 方向。</p>
+<p>route-map 有隐藏的 deny all。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">access-list 10 permit 10.1.1.0 0.0.0.255</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 deny 10</span><br><span class="line">match ip add 10</span><br><span class="line">route-map R1 permit 20 //route-map的permit是放行更新</span><br><span class="line">	//route-map如果不写如何match语句，意思是匹配所有</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor 10.1.1.2 route-map R1 out</span><br></pre></td></tr></table></figure>
+<h4 id="利用-prefix-list"><a href="#利用-prefix-list" class="headerlink" title="利用 prefix-list"></a>利用 prefix-list</h4><p>route-map 不光可以完成过滤，还可以对放行的网络设置策略。</p>
+<p>prefix-list 只能完成过滤。</p>
+<p>prefix-list 也有默认的 deny all。</p>
+<p>prefix-list 的放行所有 <code>ip prefix-list x permit 0.0.0.0/0</code></p>
+<h4 id="利用-正则表达式"><a href="#利用-正则表达式" class="headerlink" title="利用 正则表达式"></a>利用 正则表达式</h4><p>正则表达式匹配击中的是 AS 路径信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_ 代表 空格</span><br><span class="line">^ 代表 正则表达式的开始</span><br><span class="line">$ 代表 正则表达式的结束</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_2_ ：抓取任意起源、任意结尾，但经过 AS2 的路由更新。</span><br><span class="line">^1$ ：抓取AS1内的所有路由。</span><br><span class="line">_1$ ：抓取起源于AS1，经过其他任意AS的所有路由。 </span><br><span class="line">^4_ ：抓取AS4共享给当前设备的路由。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route-map AS permit 10</span><br><span class="line">match ip address 10</span><br><span class="line">set as-pasth prepend 3 5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip as-path access-list 1 permit _4_</span><br><span class="line">router bgp 2</span><br><span class="line">neighbor 12.12.12.1 filter-list 1 in</span><br></pre></td></tr></table></figure>
+<p>放行所有：<code>ip as-path &lt;id&gt; permit _</code></p>
+<h3 id="BGP-的公认团体属性限制路由更新的发送"><a href="#BGP-的公认团体属性限制路由更新的发送" class="headerlink" title="BGP 的公认团体属性限制路由更新的发送"></a>BGP 的公认团体属性限制路由更新的发送</h3><p>路由更新携带 no-advertise，路由更新被接收后不发送给任何 BGP peer。</p>
+<p>路由更新携带 no-export 或 local-as，路由更新被接收后不发送给任何 eBGP peer。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">route-map COMM permit 10</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;no-advertise/no-export/local-as&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; route-map COMM out</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
+<p>查看BGP转发表中携带特定团体属性的路由更新<code>show ip bgp community &lt;no-export/no-advertise&gt;</code></p>
+<h3 id="BGP-自定义团体属性标记及策略设置"><a href="#BGP-自定义团体属性标记及策略设置" class="headerlink" title="BGP 自定义团体属性标记及策略设置"></a>BGP 自定义团体属性标记及策略设置</h3><p>自定义团体属性格式：</p>
+<p>AA：NN（AA 是 AS 号，NN 是标记值 0~65440）</p>
+<h4 id="自定义团体属性的配置步骤"><a href="#自定义团体属性的配置步骤" class="headerlink" title="自定义团体属性的配置步骤"></a>自定义团体属性的配置步骤</h4><p>步骤1：更新源处打上标记</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ACL 抓取网络</span><br><span class="line">!</span><br><span class="line">route-map &lt;name&gt; permit &lt;10&gt;</span><br><span class="line">match ip add &lt;acl-id&gt;</span><br><span class="line">set community &lt;aa:nn&gt;</span><br><span class="line">!</span><br><span class="line">router bgp &lt;as-id&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br><span class="line">neighbor &lt;peer-id&gt; send-community</span><br></pre></td></tr></table></figure>
+<p>步骤2：在更新接收者匹配团体属性，并且定义不同的策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ip community-list &lt;id&gt; permit &lt;aa:nn&gt; //团体属性列表，匹配特定团体属性更新</span><br><span class="line">route-map &lt;name&gt; permit 10</span><br><span class="line">match community &lt;id&gt;</span><br><span class="line">set &lt;策略&gt;</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-id&gt; route-map &lt;name&gt; &lt;in/out&gt;</span><br></pre></td></tr></table></figure>
+<p>所有需要传递团体属性的路由器都需要录入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip bgp-community new-format</span><br><span class="line">router bgp 1</span><br><span class="line">neighbor &lt;peer-add&gt; send-community</span><br></pre></td></tr></table></figure>
+<h3 id="BGP-联邦"><a href="#BGP-联邦" class="headerlink" title="BGP 联邦"></a>BGP 联邦</h3><p>把多个 AS 融入到一个联邦中，联邦中不同 AS 的路径信息，不会泄露出去。</p>
+<p>联邦内所有设备必须声明联邦号，联邦内 eBGP 还要声明是联邦内 eBGP peer。</p>
+<p><code>bgp confederation identifier 234</code></p>
+<p><code>bgp confederation peer 4</code></p>
+<h3 id="BGP-知识点"><a href="#BGP-知识点" class="headerlink" title="BGP 知识点"></a>BGP 知识点</h3><p>BGP 同步，BGP 下一跳判断。</p>
+<p>BGP eBGP peer 多跳</p>
+<p>BGP 选路原则、利用 route-map 影响</p>
+<p>BGP 的汇总 summary-only as-set</p>
+<p>BGP 的团体属性</p>
+<p>BGP 的过滤</p>
+<p>BGP 路由反射器</p>
+<p>BGP 联邦</p>
 
       
     </div>
@@ -324,10 +335,10 @@
 
 
   
-    <article id="post-Network/Ccie/ipv6" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/IS-IS协议" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/ipv6/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/IS-IS协议/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -343,7 +354,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/ipv6/">CCIE ipv6</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/IS-IS协议/">CCIE IS-IS协议</a>
     </h1>
   
 
@@ -353,45 +364,408 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>128位 8段x16</p>
-<h3 id="地址分类"><a href="#地址分类" class="headerlink" title="地址分类"></a>地址分类</h3><ol>
-<li><p>单播地址</p>
-<p>全球可聚合单播地址(公网</p>
-<p>2000:0000……～3fff:ffff……   1/8</p>
-<p>站点本地单播地址(私有</p>
-<p>fec0::/10</p>
-<p>链路本地单播地址(mac</p>
-<p>自动生成，该地址不能被传递，只在该   段链路有效。</p>
-<p>fe80::/10</p>
-</li>
-<li><p>组播地址</p>
-<p>ff00::/10</p>
-</li>
-<li><p>任播地址</p>
-<p>地址目前还在用全球可聚合单播地址，类似于组播地址，选择最近的地址发送，只发送一个地方。</p>
-<p>前48位为公网拓扑，统一分配；</p>
-<p>后16位为子网拓扑，可自定义；</p>
-<p>剩下64位为主机位。</p>
+        <h3 id="1：IS-IS中间系统到中间系统"><a href="#1：IS-IS中间系统到中间系统" class="headerlink" title="1：IS-IS中间系统到中间系统"></a>1：IS-IS中间系统到中间系统</h3><p>IGPS阵营中的协议</p>
+<p>两大阵营：EGPS和IGPS</p>
+<p>IGPS 内部网关协议集</p>
+<p>IGPS：RIP OSPF EIGRP IS-IS 都是AS内的协议</p>
+<p>EGPS：BGP AS间、AS内</p>
+<p>IS-IS正在取代OSPF</p>
+<p>学习RIP, EIGRP是为了学习OSPF和BGP？</p>
+<p>Link State 链路状态路由协议</p>
+<p>根据协议自身特点分类：【分类记住路由协议】</p>
+<p>距离矢量 RIP 高级距离矢量 EIGRP 不是靠跳数 公式【基于带宽延迟】+Metric值 但是受距离限制 OSPF 链路状态</p>
+<p>*为什么要使用IS-IS取代OSPF？</p>
+<h3 id="2：IS-IS的发展历程"><a href="#2：IS-IS的发展历程" class="headerlink" title="2：IS-IS的发展历程"></a>2：IS-IS的发展历程</h3><p>同时进行的，没有谁早谁晚的说法。</p>
+<p>OSI七层模型 传输层 面向链接TCP 无链接UDP</p>
+<p>OSI中后期产物 计算机网络最早的发展阶段提出的是CLNS和CONS</p>
+<p>CLNS和CONS算是OSI的前身</p>
+<p>N代表网络，S代表服务，C代表链接 O代表Of“有链接的网络服务”类似于TCP L代表Less “无链接的网络服务”</p>
+<p>基于对CONS的研究，延伸出了IP【网络标识】和TCP</p>
+<p>TCP数据传输控制 IP网络标识</p>
+<p>因此开发出了动态的路由协议：RIP EIGRP OSPF BGP</p>
+<p>另一阵营：CLNS坚持使用无链接的网络协议</p>
+<p>开发出了CLNP：CLNS网络标识</p>
+<p>还需要的机制：CLNS【名字重复】IS-IS</p>
+<p>OSPF为IP服务，IS-IS为CLNP网络服务。</p>
+<p>这些都是不同组织在同时发展的，最后CONS阵营的方案得到公司的认可。</p>
+<p>最后，ISO组织提出了OSI七层模型，但是CLNS的理念也得到认可，因此保留下来，叫做UDP</p>
+<p>最后，IS-IS就感觉要消失了</p>
+<p>这是为了统一行业标准。</p>
+<p>OSPF虚链路：①克服孤岛区域：0，1，2区域不互相学路由</p>
+<p>②两边区域0，中间区域1，但是两边区域0不互相学路由。</p>
+<p>IS-IS没有这个问题。</p>
+<p>外企推运营商用IS-IS 思科排第一</p>
+<p>割接：干掉原有协议，换新协议</p>
+<p>两种方法：①升级OSPF，使其拥有IS-IS特性</p>
+<p>②直接用IS-IS取代OSPF</p>
+<p>两种方法都不太科学……</p>
+<p>所以我们现在使用的IS-IS，并不是纯IS-IS</p>
+<p>集成IS-IS、双栈IS-IS</p>
+<p>所以很多技术原来与IP对立，后来被IP吞并……</p>
+<h3 id="3：CLNP标识"><a href="#3：CLNP标识" class="headerlink" title="3：CLNP标识"></a>3：CLNP标识</h3><p>3.1 NET 网络实体标识</p>
+<p>类似于IP+MAC组合</p>
+<p>3.2 NSAP 网络服务接入点</p>
+<p>实现IP+MAC+端口号port_nam</p>
+<p>CLNP觉得没有必要把IP+MAC分开。</p>
+<p>NSAP在这个基础上把端口号加入。</p>
+<p>一步到位。地址就会很长。</p>
+<p>3.3 CLNP标识格式</p>
+<p>AFI A地址 F格式 I授权组织</p>
+<p>数字由官方定好。47，48，49是用在局域网或私网的地址</p>
+<p>所以官方有一张表。</p>
+<p>0000 完整的一段，但有两块信息。前两个00代表域标识，后两个00代表区域标识</p>
+<p>区域被域包含 域就是AS</p>
+<p>巨型网络有不同的域标识</p>
+<p>0001 0002 0003 同一域中的不同区域</p>
+<p>sys-ID——MAC地址</p>
+<p>所以说CLNP地址类似于IP+MAC，保证了全球唯一独立性</p>
+<p>最后又有两个00 相当于端口号</p>
+<p>CLNP全都是16进制 0A代表端口10</p>
+<p>地址格式和MAC地址一样，但不是MAC地址</p>
+<p>sys-id只要不一样就好，建议使用设备MAC地址……</p>
+<p>*如何区分是NET还是NSAP？</p>
+<p>看最后的部分是不是00</p>
+<p>IS-IS启用的时候，必须要有一个NET地址。</p>
+<p>其实是因为IS-IS被同化，留着NET已经没啥用了……</p>
+<p>就用NET当ROUTE ID RID</p>
+<p>类似于奥运会上的中华台北</p>
+<p>3.4 IS-IS术语</p>
+<p>1）ES 终端系统</p>
+<p>所有设备连入CLNP后都叫ES</p>
+<p>TCP/IP CLNS/CLNP匹配</p>
+<p>2）IS:ROUTER</p>
+<p>3）CLNP 无链接网络协议 里面对应NET和NSAP</p>
+<p>4）CLNS 无链接网络服务……类似于UDP</p>
+<p>5）DIS 指定中间系统 类似DR</p>
+<h3 id="6：IS-IS中路由器的类型-router-type"><a href="#6：IS-IS中路由器的类型-router-type" class="headerlink" title="6：IS-IS中路由器的类型 router type"></a>6：IS-IS中路由器的类型 router type</h3><p>6.1）所有启用IS-IS的路由器，默认类型都是L1/L2：类似于ABR：将区域内路由器和骨干路由器连接</p>
+<p>6.2）可改为L1：区域内路由器</p>
+<p>6.2）可改为L2：骨干区域路由器</p>
+<p>OSPF中骨干区域必须从0开始，IS-IS没有限制。</p>
+<h3 id="7：IS-IS-neighbour-TYPE-邻居关系类型"><a href="#7：IS-IS-neighbour-TYPE-邻居关系类型" class="headerlink" title="7：IS-IS neighbour TYPE 邻居关系类型"></a>7：IS-IS neighbour TYPE 邻居关系类型</h3><p>7.1）L1/L2 L1/L2——L1/L2（X）取交集</p>
+<p>7.2）L2</p>
+<p>7.3）L1</p>
+<p>相同区域ID 不同区域ID</p>
+<p>L1——L1/L2 取L1 L1——L1/L2 【L1是区域内路由器】（X）</p>
+<p>【公务员考试找共同点？】</p>
+<p>中国共产党和国民党……</p>
+<p>L1——L1 L1——L1（X）</p>
+<p>【L1设备只和相同区域设备建立邻居关系】</p>
+<p>L1——L2（X） L1——L2（X）</p>
+<p>不然L1/L2就没意义了呀。</p>
+<p>L1设备只能和相同区域内带L1角色的设备形成L1邻居关系。【L1邻居关系——区域内邻居关系】</p>
+<p>L1/L2——L1/L2 L1/L2——L1/L2</p>
+<p>【此时既为L1也为L2】 【L1没有L2有】</p>
+<p>L1是区域内邻居关系，L2首先是区域间邻居关系【区域号不一样】，但也可以是区域内邻居关系。</p>
+<p>L1/L2——L2【L2】 L1/L2——L2【L2】</p>
+<p>L2——L1（X） L2——L1（X）</p>
+<h3 id="8：IS-IS的特性"><a href="#8：IS-IS的特性" class="headerlink" title="8：IS-IS的特性"></a>8：IS-IS的特性</h3><p>8.1）IS-IS中DIS的特点：类似于DR 指定路由器</p>
+<p>！！回顾</p>
+<p>OSPF中DR干嘛的？</p>
+<p>①减少不必要的邻接关系；</p>
+<p>②统筹更新发送过程。</p>
+<p>图</p>
+<p>EIGRP</p>
+<p>OSPF DR BDR</p>
+<p>1）DIS的选举</p>
+<p>先比较优先级（默认是64，最大127）大则优</p>
+<p>再比较sys-id 大则优</p>
+<p>参数不同，机制相似。</p>
+<p>2）没有B DIS，且DIS可以随意被替代。</p>
+<p>3）所有非DIS之间，都可以正常形成邻接关系。</p>
+<p>DIS用来干啥？原因：DIS被做了一半。</p>
+<p>所以可以当它不存在了。没有任何作用。</p>
+<p>这点上不如OSPF。</p>
+<p>8.2）IS-IS中区域的特点</p>
+<p>IS-IS也是层次化的设计，骨干层，常规层。同样也有骨干区域和常规区域</p>
+<p>IS-IS不要求骨干区域编号一定是0</p>
+<p>IS-IS不要求所有常规区域必须和骨干区域连接。</p>
+<p>*IS-IS区域的边界是在路由器，OSPF区域边界是在接口</p>
+<p>IS-IS允许接口和路由器在不同区域。</p>
+<p>OSPF中拥有特殊区域：STUB T-STUB</p>
+<p>NSSA、T-NSSA</p>
+<p>IS-IS 区域内设备只要路由器角色改为L1，它所连接的L1/L2设备就自动给它一条缺省</p>
+<p>并且不会将区域间路由，外部路由放入区域内。</p>
+<h3 id="9：IS-IS路径度量值计算"><a href="#9：IS-IS路径度量值计算" class="headerlink" title="9：IS-IS路径度量值计算"></a>9：IS-IS路径度量值计算</h3><p>计算公式及方法和OSPF一模一样，都叫COST</p>
+<p>默认情况下所有接口都被赋予了10的开销【不是动态计算】</p>
+<p>有计算公式但是不用</p>
+<h3 id="10：IS-IS的消息和消息类型"><a href="#10：IS-IS的消息和消息类型" class="headerlink" title="10：IS-IS的消息和消息类型"></a>10：IS-IS的消息和消息类型</h3><p>鸡肋中的战斗机？</p>
+<p>1）IIH：is-is hello 路由器角色决定它的消息分L1 L2 固定10s一个，三倍老化时间</p>
+<p>2）LSP：link state pdu LSP=LSA OSI命名模式…… 也分L1 L2</p>
+<p>IS-IS的数据库也分L1 L2</p>
+<p>涛哥和吴老师的澳门赌场之旅</p>
+<h3 id="11：IS-IS的配置"><a href="#11：IS-IS的配置" class="headerlink" title="11：IS-IS的配置"></a>11：IS-IS的配置</h3><p>步骤1：启用IS-IS并且设定NET地址</p>
+<p>Router isis</p>
+<p>Net 49.0000.0000.0000.0001.00</p>
+<p>log-adjacency-changes //让控制台以日志形式提醒IS-IS邻接关系的变化</p>
+<p>0000：域0，区域0</p>
+<p>0000.0000.0001：sys-id</p>
+<p>步骤2：接口加入IS-IS</p>
+<p>与OSPF不同，将接口接入某个区域</p>
+<p>interface&lt; intf-id&gt;</p>
+<p>ip route isis</p>
+<h3 id="12：IS-IS的查看"><a href="#12：IS-IS的查看" class="headerlink" title="12：IS-IS的查看"></a>12：IS-IS的查看</h3><p>1）查看路由表中IS-IS的条目</p>
+<p>show ip route isis</p>
+<p>i L1/L2 IS-IS路由也分L1 L2</p>
+<p>i L1 区域内路由</p>
+<p>i L2 区域间路由或外部路由</p>
+<p>IS-IS管理距离全是115</p>
+<p>2）查看邻接关系是否建立、邻接关系的类型</p>
+<p>show clns neighbour L1/L2 所以一般使用这个命令</p>
+<p>show isis neighbour 一行L1，一行L2</p>
+<p>12：IS-IS实验</p>
+<p>log-adjacency-changes</p>
+<p>控制台报了两次，为什么？</p>
+<p>默认角色是L1/L2</p>
+<p>is-type ?</p>
+<p>is-type level-1 //修改路由器类型为L1</p>
+<p>is-type level-1-2</p>
+<p>不允许L2变L1进入区域</p>
+<p>show isis neighbours //更多用来看DIS更方便</p>
+<p>Circuit ID 电路ID DIS</p>
+<p>isis priority 127 //更改DIS</p>
+<h3 id="13：IS-IS-的重分发"><a href="#13：IS-IS-的重分发" class="headerlink" title="13：IS-IS 的重分发"></a>13：IS-IS 的重分发</h3><p>外部网络进入isis，默认是L2路由类型，默认开销是10。</p>
+<p>router isis</p>
+<p>redistribute [rip/eigrp as-id] metric &lt;指定外部路由初始度量值&gt; </p>
+<p>&lt; level-1 /level-2/level-1-2 &gt; //指定外部路由是什么类型进入isis</p>
+<p>redistribute ospf pid metric-type &lt; external ospf 的外部路由/internal ospf的区域内或区域间路由&gt;</p>
+<p>路由器角色为L1，那么重分发一般不允许做在这样的设备上。</p>
+<p>如果L1角色设备需要配置重分发，那么一定要在最后加上level-1。</p>
+<h3 id="14：ISIS-的手动汇总"><a href="#14：ISIS-的手动汇总" class="headerlink" title="14：ISIS 的手动汇总"></a>14：ISIS 的手动汇总</h3><p>建议配置在L1/L2角色设备上。</p>
+<p>汇总后路由类型为L2，开销默认10  。</p>
+<p>L1设备上默认无法对本地 ISIS L1 路由进行汇总。</p>
+<p>本地直连网络以外部路由 L1 形式进入，再针对 L1 路由汇总。</p>
+<p>router isis</p>
+<p>summary-address &lt;汇总后网络&gt; &lt;汇总后网络掩码&gt; level-1/level-2</p>
+<h3 id="15：ISIS-认证-及-ISIS-路由泄露"><a href="#15：ISIS-认证-及-ISIS-路由泄露" class="headerlink" title="15：ISIS 认证 及 ISIS 路由泄露"></a>15：ISIS 认证 及 ISIS 路由泄露</h3><p>15.1）ISIS 认证</p>
+<ol>
+<li><p>链路认证 isis password cisco</p>
+<p>该认证是利用 IIH 完成的，所以认证不同过影响邻接关系。链路认证是最高级别的，如果区域认证通过，链路认证不通过就是不通过。一般一个认证就行了。</p>
 </li>
 </ol>
-<h3 id="地址书写规则"><a href="#地址书写规则" class="headerlink" title="地址书写规则"></a>地址书写规则</h3><ol>
-<li>完整书写</li>
-<li>简化方式    1.）连续存在的0可以::代替，但一个地址当中只能用一次。2）段中的0若在左边可不写，但是四个都为0还是要写一个0</li>
-<li>嵌入式  X:X:X:X:X:X:d.d.d.d                                 ::FFFF:192.168.0.1</li>
-</ol>
-<p>使用浏览器连接到IPv6设备的http链接时，必须使用方括号括起（与IPv4的冒号区分开来）</p>
-<p>http://[::]/default.html</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
-<li><p>接口ip的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(config)#ipv6 unicast-routing </span><br><span class="line"></span><br><span class="line">开启ipv6单播路由功能。</span><br><span class="line"></span><br><span class="line">interface xx</span><br><span class="line"></span><br><span class="line">ipv6 address 2001：:1/64 不能写掩码</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>协议的启用</p>
-<p>不能使用宣告，只能在接口下启用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipv6 router [IGP] </span><br><span class="line">int xx</span><br><span class="line">ipv6 rip enable</span><br><span class="line">ipv6 ospf x area x</span><br><span class="line">ipv6 eigrp x </span><br><span class="line">router ospfv3 进程id</span><br><span class="line">int xx</span><br><span class="line">ospfv3 进程 area xx</span><br><span class="line">ipv6 router 目的地网段 /x 出接口</span><br><span class="line">router bgp xx</span><br><span class="line">address-family ipv6 unicast</span><br><span class="line">nei xxxx remot-as xx</span><br><span class="line">net xxxx /xx(只有bgp要宣告)</span><br><span class="line">可使用ipv4地址激活ipv6的对等体关系，反之不行。</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>区域认证 area-password cisco</p>
+<p>利用 LSP 完成的，认证不通过只影响路由的学习，不影响邻接关系。</p>
 </li>
 </ol>
-<h3 id="v6和v4的过渡融合"><a href="#v6和v4的过渡融合" class="headerlink" title="v6和v4的过渡融合"></a>v6和v4的过渡融合</h3><p>隧道技术 tunnel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tunnel source ip</span><br><span class="line">tunnel destination ip</span><br><span class="line">tunnel mode ipv6</span><br><span class="line"></span><br><span class="line">ping ipv6 …</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li><p>域认证 domain-password cisco</p>
+<p>该认证如果不通过，只影响路由的学习，不影响邻接关系。</p>
+</li>
+</ol>
+<p>15.2）路由泄露</p>
+<p>L1/L2 设备默认不允许 L2 数据库信息进入 L1 数据库，变成更新发送。</p>
+<p>15.3）路由泄露的配置流程</p>
+<p>步骤1：L1/L2 设备上编写 ACL，匹配被泄露的目标路由</p>
+<p>步骤2：L1/L2 设备上编写 ROUTE-MAP 引用 ACL。</p>
+<p>步骤3：L1/L2 设备上做 ISIS 到 ISIS 的重分发，并且指定是利用 route-map 完成 L2 数据库条目到 L1 数据库条目的泄露。</p>
+<p>redistribute isis ip level-2 into level-1 route-map 2T1</p>
+<p>更改开销 isis metric &lt; 开销&gt;</p>
+<h3 id="16：ISIS-的不同区域迁移"><a href="#16：ISIS-的不同区域迁移" class="headerlink" title="16：ISIS 的不同区域迁移"></a>16：ISIS 的不同区域迁移</h3><p>ISIS 允许一个设备属于多个不同的区域。</p>
+<p>router isis</p>
+<p>net</p>
+<p>net</p>
+<p>net</p>
 
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/MPLS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/MPLS/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/MPLS/">CCIE MPLS</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="代理arp"><a href="#代理arp" class="headerlink" title="代理arp"></a>代理arp</h3><p>arp</p>
+<p>请求：广播</p>
+<p>回应：单播</p>
+<p>proxy arp（代理arp）</p>
+<p>代为请求和回应</p>
+<h4 id="帧头重写"><a href="#帧头重写" class="headerlink" title="帧头重写"></a>帧头重写</h4><p>重写=switch（从mac表内拿出置换）</p>
+<p>目的mac改为arp请求结果</p>
+<p>源mac改为出口mac</p>
+<h3 id="路由器数据转发机制"><a href="#路由器数据转发机制" class="headerlink" title="路由器数据转发机制"></a>路由器数据转发机制</h3><ol>
+<li><p>process forward进程转发（不缓存）</p>
+</li>
+<li><p>cache forward缓存转发（结果缓存10s）</p>
+<p>上两者都是基于流量触发（第一次会丢包）</p>
+</li>
+<li><p><strong>CEF  Cisco的快速转发技术</strong></p>
+<p>基于拓扑，不需要流量触发</p>
+</li>
+</ol>
+<h4 id="CEF"><a href="#CEF" class="headerlink" title="CEF"></a>CEF</h4><p>FIB 转发信息库（本身就是路由表的副本）</p>
+<p>RIB 路由表（给FIB提供要素）</p>
+<h2 id="MPLS详解"><a href="#MPLS详解" class="headerlink" title="MPLS详解"></a>MPLS详解</h2><p>multiple protocol label switch（多协议标签交换）</p>
+<h3 id="MPLS作用"><a href="#MPLS作用" class="headerlink" title="MPLS作用"></a>MPLS作用</h3><p>MPLS是一种数据交换机制，基于标签库和数据携带的标签。</p>
+<p>进行数据转发，同时支持多种协议。</p>
+<p>MPLS在实际工作中，能实现如下两个基本功能：</p>
+<ol>
+<li>数据包的高速转发</li>
+<li>减少参与BGP的设备数量、减少对等体关系、减少不必要的路由学习</li>
+</ol>
+<h3 id="MPLS术语"><a href="#MPLS术语" class="headerlink" title="MPLS术语"></a>MPLS术语</h3><h4 id="label-标签"><a href="#label-标签" class="headerlink" title="label 标签"></a>label 标签</h4><p>总长 <strong>32bit</strong> 由如下几个部分组成：</p>
+<p><strong>前20bit</strong> 是标签取值范围</p>
+<p><strong>第21bit</strong> 是栈底位，栈底位为1则表明该标签已经是最后一个</p>
+<p><strong>第22~24bit</strong> 是体验位，可以将标签对应的数据分成8个级别，给予不同的传输策略。</p>
+<p><strong>最后8bit</strong> 是TTL，限制携带标签的数据传递范围。</p>
+<h4 id="MPLS-模式"><a href="#MPLS-模式" class="headerlink" title="MPLS 模式"></a>MPLS 模式</h4><p>帧模式：frame mode（主流模式），标签被插在帧头的后面，包头前面。</p>
+<p>信令模式：cell mode 标签被插在信令头后面。</p>
+<h4 id="LSR：标签交换路由器"><a href="#LSR：标签交换路由器" class="headerlink" title="LSR：标签交换路由器"></a>LSR：标签交换路由器</h4><p>启用了MPLS的路由器统称LSR。</p>
+<p>入站 LSR （inbound LSR）：接收到 IP 数据包，压入标签，传递给 MPLS 网络。</p>
+<p>链路中 LSR （link LSR）：接收到携带标签的数据，基于标签进行数据转发。</p>
+<p>出站 LSR （outbound LSR）：负责将标签移除，并且变回 IP 数据报文。</p>
+<h4 id="压入、交换、移除、弹出"><a href="#压入、交换、移除、弹出" class="headerlink" title="压入、交换、移除、弹出"></a>压入、交换、移除、弹出</h4><p>压入：入站LSR将标签压入数据。</p>
+<p>交换：链路中LSR基于标签库，进行标签的置换、数据的传递。</p>
+<p>移除：出站LSR将数据携带的所有标签全部删除。</p>
+<p>弹出：出站LSR将数据携带的栈顶标签弹出，其他标签保留。</p>
+<h4 id="LSP：链路标签路径"><a href="#LSP：链路标签路径" class="headerlink" title="LSP：链路标签路径"></a>LSP：链路标签路径</h4><p>是MPLS设备传递数据所需的路径。（即路由）</p>
+<p>LSP是通过标签的关联产生的。</p>
+<h4 id="标签分配、分发、关联、维护协议"><a href="#标签分配、分发、关联、维护协议" class="headerlink" title="标签分配、分发、关联、维护协议"></a>标签分配、分发、关联、维护协议</h4><p>TDP：标记分发协议、思科私有</p>
+<p>LDP：<strong>标签分发协议</strong>、公有公开</p>
+<h3 id="LDP详解"><a href="#LDP详解" class="headerlink" title="LDP详解"></a>LDP详解</h3><h4 id="LDP作用"><a href="#LDP作用" class="headerlink" title="LDP作用"></a>LDP作用</h4><ol>
+<li>利用 hello 消息建立 LDP 邻接关系。</li>
+<li>基于CEF给本地网络分配本地标签。</li>
+<li>将网络对应的标签分发共享给邻居</li>
+<li>基于底层协议完成本地标签与远程共享标签的关联，最终形成LSP。</li>
+<li>负责监控LSP的有效性，并且维护它。</li>
+</ol>
+<h4 id="LDP邻接关系的建立"><a href="#LDP邻接关系的建立" class="headerlink" title="LDP邻接关系的建立"></a>LDP邻接关系的建立</h4><p>LDP 邻居的发现，通过hello消息，基于UDP，目标端口646。</p>
+<p>LDP 利用TCP，目标端口646完成邻接关系建立。</p>
+<p>LDP可以设定RID，RID扮演更新源，更新源会成为对端TCP的目标接收地址，所以更新源必须可达。</p>
+<h4 id="LDP标签的分配"><a href="#LDP标签的分配" class="headerlink" title="LDP标签的分配"></a>LDP标签的分配</h4><p>除BGP路由，LDP可以给本地直连网络以及非直连网络分配标签。</p>
+<h4 id="LDP标签的共享"><a href="#LDP标签的共享" class="headerlink" title="LDP标签的共享"></a>LDP标签的共享</h4><p>两种形式：下游主动、上游主动。</p>
+<p>实际上标签的分享是给所有的邻居，不遵循所谓的上下游。</p>
+<h4 id="LDP标签的关联"><a href="#LDP标签的关联" class="headerlink" title="LDP标签的关联"></a>LDP标签的关联</h4><p>LDP永远将路由路径下一跳共享的标签与对应网络的本地标签关联。</p>
+<p>boundaddress：绑定地址，参与MPLS设备的IP会成为绑定地址和，会跟着本地标签一起共享给LDP邻居，邻居根据底层协议下一跳地址和绑定地址的判断来确认哪个LDP邻居是下一跳，再绑定。</p>
+<h4 id="LDP的特殊标签"><a href="#LDP的特殊标签" class="headerlink" title="LDP的特殊标签"></a>LDP的特殊标签</h4><ul>
+<li>UNTAGE：未标记</li>
+</ul>
+<p>出现原因：底层是ospf,本地网络无法找到对应的远程标签，LDP给网络分配untage。</p>
+<p>处理方式：目标网络远程标签如果是untage，那么LSR会将所有标签移除，向外传递。</p>
+<ul>
+<li>POP：倒数第二跳标签</li>
+</ul>
+<p>出现原因：当前路由器给本地直连网络分配的本地标签就是POP。</p>
+<p>处理方式：如果出站标签是POP，那么LSR 会将栈顶标签弹出。</p>
+<p>意义：提高数据转发效率，减少一次标签库查找。</p>
+<h4 id="LDP的两张表"><a href="#LDP的两张表" class="headerlink" title="LDP的两张表"></a>LDP的两张表</h4><p>LIB：标签信息库</p>
+<p>目标网络本地标签和学习到的远程标签存储在这里。（未关联）</p>
+<p>LFIB：标签转发信息库</p>
+<p>标签关联后的结果 即 LSP  存储在这里。</p>
+<h4 id="CEF、LDP-数据转发过程"><a href="#CEF、LDP-数据转发过程" class="headerlink" title="CEF、LDP 数据转发过程"></a>CEF、LDP 数据转发过程</h4><p>略</p>
+<h3 id="MPLS的配置流程"><a href="#MPLS的配置流程" class="headerlink" title="MPLS的配置流程"></a>MPLS的配置流程</h3><p>步骤1：开启 CEF（默认开启，一般情况不需要此命令）</p>
+<p><code>ip cef</code></p>
+<p>步骤2：设置标签分配、分发关联协议（默认是LDP）</p>
+<p><code>mpls label protocol &lt;ldp/tdp&gt;</code></p>
+<p>步骤3：设置标签取值范围（通常不设置）</p>
+<p><code>mpls label range &lt;xx-yy&gt;</code></p>
+<p>步骤4：设置 LDP 的 RID  即设置更新源（不设置则和OSPF一样自动选取RID）</p>
+<p><code>mpls ldp router-id loopback x [force]  //RID 必须可达、force 强制改变 RID</code></p>
+<p>步骤5：接口下启用MPLS</p>
+<p><code>mpls ip</code></p>
+<h4 id="LDP的查看校验命令"><a href="#LDP的查看校验命令" class="headerlink" title="LDP的查看校验命令"></a>LDP的查看校验命令</h4><ul>
+<li><p>查看LDP是否发现了邻居</p>
+<p><code>show mpls idp discovery</code></p>
+<p>邻居被发现后，no host route 指没有抵达对方的主机路由，但有网络路由，总体可达。</p>
+<p>邻居被发现后，no route 指没有抵达对方的路由路径，邻接关系最终无法建立。</p>
+</li>
+<li><p>查看LDP邻接关系是否建立</p>
+<p><code>show mpls idp neighbor</code></p>
+</li>
+<li><p>查看 LIB</p>
+<p><code>show mpls ldp binding</code></p>
+</li>
+<li><p>查看LFIB</p>
+<p><code>show mpls forwarding-table</code></p>
+</li>
+</ul>
+<h4 id="通过-IGP的路径改变来影响-LSP"><a href="#通过-IGP的路径改变来影响-LSP" class="headerlink" title="通过 IGP的路径改变来影响 LSP"></a>通过 IGP的路径改变来影响 LSP</h4><p>LSP是会存在负载均衡的。实际上底层协议的路径决定了 LSP路径。</p>
+<h4 id="CEF-FIB-和-ADJ-TABLE-详解"><a href="#CEF-FIB-和-ADJ-TABLE-详解" class="headerlink" title="CEF FIB 和 ADJ-TABLE 详解"></a>CEF FIB 和 ADJ-TABLE 详解</h4><p><code>show ip cef detail | begin 172.16.1.0</code></p>
+<p>查看cef邻接表</p>
+<p><code>show adjacency detail</code></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>arp的作用、代理arp的作用</p>
+</li>
+<li><p>路由器数据转发的三个机制</p>
+</li>
+<li><p>CEF两张表和工作机制</p>
+</li>
+<li><p>RIB FIB ADJ-TABLE 在数据传递时使用方法</p>
+</li>
+<li><p>MPLS 的全称、模式</p>
+</li>
+<li><p>标签长度和每段的含义</p>
+</li>
+<li><p>MPLS 术语</p>
+<p>LSR(in/out/link)    LSP</p>
+<p>标签的动作：压入、交换、移除、弹出</p>
+<p>POP和UNTAGE</p>
+<p>LDP和TDP的作用</p>
+<p>LDP的标签分配、分发、关联</p>
+</li>
+<li><p>MPLS的配置流程</p>
+</li>
+<li><p>查看和理解LDP的邻居发现、邻接建立</p>
+</li>
+<li><p>查看和理解LIB 和LFIB</p>
+</li>
+<li><p>理解</p>
+</li>
+</ol>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     
@@ -1432,74 +1806,9 @@
 
 
   
-    <article id="post-Security/无线安全/reaver" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/18/Security/无线安全/reaver/" class="article-date">
-      <time datetime="2018-04-18T08:02:06.000Z" itemprop="datePublished">2018-04-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/18/Security/无线安全/reaver/">reaver</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="reaver使用"><a href="#reaver使用" class="headerlink" title="reaver使用"></a>reaver使用</h2><h3 id="扫描使用wps的Wi-Fi"><a href="#扫描使用wps的Wi-Fi" class="headerlink" title="扫描使用wps的Wi-Fi"></a>扫描使用wps的Wi-Fi</h3><p><code>wash -i en0</code></p>
-<h3 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h3><p><code>reaver -i en0 [-b mac] -vv [-c channel]</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Security/">Security</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali/">Kali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wifi/">Wifi</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/15/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/17/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/15/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/17/">Next &raquo;</a>
     </nav>
   
 </div>

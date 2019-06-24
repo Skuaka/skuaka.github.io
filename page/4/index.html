@@ -234,6 +234,475 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/C++Collection/C++algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/20/C_C++/C++Collection/C++algorithm/" class="article-date">
+      <time datetime="2019-03-20T07:51:15.000Z" itemprop="datePublished">2019-03-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/20/C_C++/C++Collection/C++algorithm/">c++algorithm</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="c-算法库"><a href="#c-算法库" class="headerlink" title="c++算法库"></a>c++算法库</h1><h2 id="不修改元素的序列操作"><a href="#不修改元素的序列操作" class="headerlink" title="不修改元素的序列操作"></a>不修改元素的序列操作</h2><p>序列操作的前两个参数都是指向序列首尾的迭代器。</p>
+<table>
+<thead>
+<tr>
+<th>all_of(C++11)<br>any_of(C++11)<br>none_of(C++11)</th>
+<th>checks if a predicate is true for all, any or none <br>of the elements in a range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>for_each</td>
+<td>applies a function to a range of elements</td>
+</tr>
+<tr>
+<td>for_each_n(C++17)</td>
+<td>applies a function object <strong><em>to the first n elements</em></strong> of a sequence</td>
+</tr>
+<tr>
+<td>count<br>count_if</td>
+<td>returns the number of elements satisfying specific criteria</td>
+</tr>
+<tr>
+<td>mismatch</td>
+<td>finds the first position where two ranges differ</td>
+</tr>
+<tr>
+<td>find<br>find_if<br>find_if_not(C++11)</td>
+<td>finds the first element satisfying specific criteria</td>
+</tr>
+<tr>
+<td>find_end</td>
+<td>finds the last sequence of elements in a certain range</td>
+</tr>
+<tr>
+<td>find_first_of</td>
+<td>searches for any one of a set of elements<br>在第一个范围内找存在于第二个范围内的任何一个数。</td>
+</tr>
+<tr>
+<td>adjacent_find</td>
+<td>finds the first two adjacent items that are equal <br>(or satisfy a given predicate)</td>
+</tr>
+<tr>
+<td>search</td>
+<td>searches for a range of elements<br>find是找一个数，search是找一个序列。</td>
+</tr>
+<tr>
+<td>search_n</td>
+<td>searches a range for a number of consecutive copies of an element</td>
+</tr>
+</tbody>
+</table>
+<h2 id="会修改元素的序列操作"><a href="#会修改元素的序列操作" class="headerlink" title="会修改元素的序列操作"></a>会修改元素的序列操作</h2><table>
+<thead>
+<tr>
+<th>copy<br>copy_if(C++11)</th>
+<th>copies a range of elements to a new location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>copy_n(C++11)</td>
+<td>copies a number of elements to a new location</td>
+</tr>
+<tr>
+<td>copy_backward</td>
+<td>copies a range of elements in backwards order</td>
+</tr>
+<tr>
+<td>move(C++11)</td>
+<td>moves a range of elements to a new location</td>
+</tr>
+<tr>
+<td>move_backward(C++11)</td>
+<td>moves a range of elements to a new location in backwards order</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>copy-assigns the given value to every element in a range</td>
+</tr>
+<tr>
+<td>fill_n</td>
+<td>copy-assigns the given value to N elements in a range</td>
+</tr>
+<tr>
+<td>transform</td>
+<td>applies a function to a range of elements</td>
+</tr>
+<tr>
+<td>generate</td>
+<td>assigns the results of successive function calls to every element in a range</td>
+</tr>
+<tr>
+<td>generate_n</td>
+<td>assigns the results of successive function calls to N elements in a range</td>
+</tr>
+<tr>
+<td>remove<br>remove_if</td>
+<td>removes elements satisfying specific criteria</td>
+</tr>
+<tr>
+<td>remove_copy<br>remove_copy_if</td>
+<td>copies a range of elements omitting those that satisfy specific criteria</td>
+</tr>
+<tr>
+<td>replace<br>replace_if</td>
+<td>replaces all values satisfying specific criteria with another value</td>
+</tr>
+<tr>
+<td>replace_copy<br>replace_copy_if</td>
+<td>copies a range, replacing elements satisfying specific criteria with another value</td>
+</tr>
+<tr>
+<td>swap</td>
+<td>swaps the values of two objects</td>
+</tr>
+<tr>
+<td>swap_ranges</td>
+<td>swaps two ranges of elements</td>
+</tr>
+<tr>
+<td>iter_swap</td>
+<td>swaps the elements pointed to by two iterators</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>reverses the order of elements in a range</td>
+</tr>
+<tr>
+<td>reverse_copy</td>
+<td>creates a copy of a range that is reversed</td>
+</tr>
+<tr>
+<td>rotate</td>
+<td>rotates the order of elements in a range</td>
+</tr>
+<tr>
+<td>rotate_copy</td>
+<td>copies and rotate a range of elements</td>
+</tr>
+<tr>
+<td>shift_left(C++20)<br>shift_right(C++20)</td>
+<td>shifts elements in a range</td>
+</tr>
+<tr>
+<td>random_shuffle<br>(until C++17)<br>shuffle(C++11)</td>
+<td>randomly re-orders elements in a range</td>
+</tr>
+<tr>
+<td>sample(C++17)</td>
+<td>selects n random elements from a sequence</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>removes consecutive duplicate elements in a range</td>
+</tr>
+<tr>
+<td>unique_copy</td>
+<td>creates a copy of some range of elements that contains no consecutive duplicates</td>
+</tr>
+</tbody>
+</table>
+<h2 id="分割"><a href="#分割" class="headerlink" title="分割"></a>分割</h2><table>
+<thead>
+<tr>
+<th>is_partitioned(C++11)</th>
+<th>determines if the range is partitioned by the given predicate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>partition</td>
+<td>divides a range of elements into two groups,<br><strong>returns</strong> iterator to the first element of the second group.</td>
+</tr>
+<tr>
+<td>partition_copy(C++11)</td>
+<td>copies a range dividing the elements into two groups</td>
+</tr>
+<tr>
+<td>stable_partition</td>
+<td>divides elements into two groups while preserving their relative order</td>
+</tr>
+<tr>
+<td>partition_point(C++11)</td>
+<td>locates the partition point of a partitioned range</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> it = <span class="built_in">std</span>::partition(v.begin(), v.end(), [](<span class="keyword">int</span> i)&#123;<span class="keyword">return</span> i % <span class="number">2</span> == <span class="number">0</span>;&#125;);</span><br><span class="line"><span class="built_in">std</span>::copy(<span class="built_in">std</span>::begin(v), it, <span class="built_in">std</span>::ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">std</span>::<span class="built_in">cout</span>, <span class="string">" "</span>));</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" * "</span>;</span><br><span class="line"><span class="built_in">std</span>::copy(it,<span class="built_in">std</span>::end(v), <span class="built_in">std</span>::ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">std</span>::<span class="built_in">cout</span>, <span class="string">" "</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>基于排序的算法，基本上都可以增加一个参数，即比较函数。</p>
+<p>需要随机访问迭代器。</p>
+<table>
+<thead>
+<tr>
+<th>is_sorted(C++11)</th>
+<th>checks whether a range is sorted into ascending order</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is_sorted_until(C++11)</td>
+<td>finds the largest sorted subrange</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>sorts a range into ascending order</td>
+</tr>
+<tr>
+<td>partial_sort</td>
+<td>sorts the first N elements of a range</td>
+</tr>
+<tr>
+<td>partial_sort_copy</td>
+<td>copies and partially sorts a range of elements</td>
+</tr>
+<tr>
+<td>stable_sort</td>
+<td>(稳定排序)sorts a range of elements while preserving order between equal elements</td>
+</tr>
+<tr>
+<td>nth_element</td>
+<td>partially sorts the given range making sure that it is partitioned by the given element</td>
+</tr>
+</tbody>
+</table>
+<p><strong>partial_sort:</strong></p>
+<p>partial_sort(first, middle, last);</p>
+<p>其实就是类似<em>用堆找第K大数</em>的方法，先 <code>make_heap(first, middle)</code>，然后不断比较替换堆顶，最后<code>sort_heap(first, heap);</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找出[first,last)中6个最小的元素，并且排序在[first,middle)，其余部分无序</span></span><br><span class="line">partial_sort(v.begin(), v.begin()+<span class="number">6</span>, v.end());</span><br></pre></td></tr></table></figure>
+<p><strong>nth_element:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nth_element</span><span class="params">( RandomIt first, RandomIt nth, RandomIt last )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>排序后a[n]就是数列中第n+1大的数（下标从0開始计数），a[start,n)中的数肯定不大于a[n,end]中的数。但是a[start,n), a[n,end]内的大小顺序还不一定。<strong>并不返回值。</strong></p>
+<p><strong>partial_sort_copy:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partial_sort_copy( InputIt first, InputIt last, RandomIt d_first, RandomIt d_last );</span><br></pre></td></tr></table></figure>
+<p>将排序后的内容复制到新的地方。输入输出迭代器范围的一大一小会产生不同效果，见如下例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v0&#123;<span class="number">4</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v1.begin(), v1.end());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the smaller vector in ascending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v1) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">if</span>(it == v1.end())</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The return value is the end iterator\n"</span>;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v2.begin(), v2.end(), </span><br><span class="line">                                <span class="built_in">std</span>::greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the larger vector in descending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v2) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> &lt;&lt; <span class="string">"The return value is the iterator to "</span> &lt;&lt; *it &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Writing to the smaller vector in ascending order gives: 1 2 3</span><br><span class="line">The return value is the end iterator</span><br><span class="line">Writing to the larger vector in descending order gives: 5 4 3 2 1 15 16</span><br><span class="line">The return value is the iterator to 15</span><br></pre></td></tr></table></figure>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p><strong>前提是已经排序。</strong></p>
+<table>
+<thead>
+<tr>
+<th>binary_search</th>
+<th>determines if an element exists in a certain range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lower_bound</td>
+<td>returns an iterator to the first element <strong><em>not less</em></strong> than the given value</td>
+</tr>
+<tr>
+<td>upper_bound</td>
+<td>returns an iterator to the first element <strong><em>greater</em></strong> than a certain value</td>
+</tr>
+<tr>
+<td>equal_range</td>
+<td>returns range of elements matching a specific key</td>
+</tr>
+</tbody>
+</table>
+<p><strong>equal_range:</strong></p>
+<p>试图在已排序的[first,last)中寻找value，它返回一对迭代器i和j，其中i是在不破坏次序的前提下，value可插入的第一个位置（亦即lower_bound），j则是在不破坏次序的前提下，value可插入的最后一个位置（亦即upper_bound），因此，[i,j)内的每个元素都等同于value，而且[i,j)是[first,last)之中符合此一性质的最大子区间。</p>
+<h2 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h2><table>
+<thead>
+<tr>
+<th>merge</th>
+<th>merges two sorted ranges</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inplace_merge</td>
+<td>merges two ordered ranges in-place</td>
+</tr>
+</tbody>
+</table>
+<p><strong>inplace_merge:</strong></p>
+<p>Merges two consecutive sorted ranges <code>[first, middle)</code> and <code>[middle, last)</code> into one sorted range <code>[first, last)</code></p>
+<p>用inplace_merge<strong>实现归并排序</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Iter</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">merge_sort</span>(<span class="title">Iter</span> <span class="title">first</span>, <span class="title">Iter</span> <span class="title">last</span>) &#123;</span></span><br><span class="line">    <span class="keyword">if</span> (last - first &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        Iter middle = first + (last - first) / <span class="number">2</span>;</span><br><span class="line">        merge_sort(first, middle);</span><br><span class="line">        merge_sort(middle, last);</span><br><span class="line">        <span class="built_in">std</span>::inplace_merge(first, middle, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123;<span class="number">8</span>, <span class="number">2</span>, <span class="number">-2</span>, <span class="number">0</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    merge_sort(v.begin(), v.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> n : v) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><table>
+<thead>
+<tr>
+<th>includes</th>
+<th>returns true if one set is a subset of another</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set_difference</td>
+<td>computes the difference between two sets</td>
+</tr>
+<tr>
+<td>set_intersection</td>
+<td>computes the intersection of two sets</td>
+</tr>
+<tr>
+<td>set_symmetric_difference</td>
+<td>computes the symmetric difference between two sets</td>
+</tr>
+<tr>
+<td>set_union</td>
+<td>computes the union of two sets</td>
+</tr>
+</tbody>
+</table>
+<p><strong>set_开头的函数</strong>的第五个参数是一个输出迭代器，可以用输出容器的插入迭代器。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; s1&#123;<span class="string">"3"</span>,<span class="string">"2"</span>,<span class="string">"1"</span>&#125;;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; s2&#123;<span class="string">"2"</span>&#125;;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; s3;</span><br><span class="line">	</span><br><span class="line">set_difference(s1.begin(), s1.end(), s2.begin(), s2.end(), </span><br><span class="line">               insert_iterator&lt;<span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt;&gt;(s3,s3.begin()));</span><br><span class="line">copy(s3.begin(),s3.end(),ostream_iterator&lt;<span class="built_in">string</span>, <span class="keyword">char</span>&gt;(<span class="built_in">cout</span>,<span class="string">" "</span>));</span><br><span class="line"><span class="comment">//output: 1 3</span></span><br></pre></td></tr></table></figure>
+<p><strong>set_symmetric_difference:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>  &#125;;</span><br><span class="line">&#123;  <span class="number">2</span>,    <span class="number">5</span>,    <span class="number">7</span>&#125;;</span><br><span class="line"><span class="comment">//set_symmetric_difference</span></span><br><span class="line">&#123;<span class="number">1</span>,  <span class="number">3</span>,<span class="number">4</span>,  <span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>排序算法基本默认都是递增的，而堆排序如果要递增排序的话，则是建立最大堆，这就是我理解的默认是建立最大堆而不是最小堆的原因。</p>
+<table>
+<thead>
+<tr>
+<th>is_heap(C++11)</th>
+<th>checks if the given range is a max heap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is_heap_until(C++11)</td>
+<td>finds the largest subrange that is a max heap</td>
+</tr>
+<tr>
+<td>make_heap</td>
+<td>creates a max heap out of a range of elements</td>
+</tr>
+<tr>
+<td>push_heap</td>
+<td>inserts the element at the position <code>last-1</code> into the <em>max heap</em></td>
+</tr>
+<tr>
+<td>pop_heap</td>
+<td>swaps <code>first</code> and  <code>last-1</code> and makes the subrange <code>[first, last-1)</code> into a <em>max heap</em>.</td>
+</tr>
+<tr>
+<td>sort_heap</td>
+<td>turns a max heap into a range of elements sorted in ascending order</td>
+</tr>
+</tbody>
+</table>
+<p>example:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v &#123; <span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span> &#125;;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"initially      : "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"> </span><br><span class="line">	<span class="built_in">std</span>::make_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after make_heap: "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::pop_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after pop_heap : "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">std</span>::push_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after push_heap: "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">std</span>::sort_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after sort_heap: "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">initially      : 3 1 4 1 5 9 </span><br><span class="line">after make_heap: 9 5 4 1 1 3 </span><br><span class="line">after pop_heap : 5 3 4 1 1 9 </span><br><span class="line">after push_heap: 9 3 5 1 1 4 </span><br><span class="line">after sort_heap: 1 1 3 4 5 9</span><br></pre></td></tr></table></figure>
+<h2 id="最值"><a href="#最值" class="headerlink" title="最值"></a>最值</h2><table>
+<thead>
+<tr>
+<th>max</th>
+<th>returns the greater of the given values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_element</td>
+<td>returns the largest element in a range</td>
+</tr>
+<tr>
+<td>min</td>
+<td>returns the smaller of the given values</td>
+</tr>
+<tr>
+<td>min_element</td>
+<td>returns the smallest element in a range</td>
+</tr>
+</tbody>
+</table>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><table>
+<thead>
+<tr>
+<th>equal</th>
+<th>determines if two sets of elements are the same</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lexicographical_compare</td>
+<td>returns true if one range is lexicographically less than another</td>
+</tr>
+</tbody>
+</table>
+<h2 id="排列"><a href="#排列" class="headerlink" title="排列"></a>排列</h2><table>
+<thead>
+<tr>
+<th>is_permutation(C++11)</th>
+<th>determines if a sequence is a permutation of another sequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>next_permutation</td>
+<td>generates the next greater lexicographic permutation of a range of elements</td>
+</tr>
+<tr>
+<td>prev_permutation</td>
+<td>generates the next smaller lexicographic permutation of a range of elements</td>
+</tr>
+</tbody>
+</table>
+<p><strong>next_permutation:</strong></p>
+<p>Transforms the range <code>[first, last)</code> into the next permutation from the set of all permutations that are lexicographically ordered with respect to <code>operator&lt;</code> or <code>comp</code>. Returns true if such permutation exists, otherwise transforms the range into the first permutation (as if by <code>std::sort(first, last)</code>) and returns false.</p>
+<p><strong>prev_permutation</strong>类似，都是反过来。</p>
+<p>example:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3,5,4,1,2 is a permutation of 1,2,3,4,5? "</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::boolalpha</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::is_permutation(v1.begin(), v1.end(), v2.begin()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3,5,4,1,1 is a permutation of 1,2,3,4,5? "</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::boolalpha</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::is_permutation(v1.begin(), v1.end(), v3.begin()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span> is a permutation of <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>? <span class="literal">true</span></span><br><span class="line"><span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">1</span> is a permutation of <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>? <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Unp/unp笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1475,85 +1944,9 @@
 
 
   
-    <article id="post-Operating System/浮点数存储法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/09/Operating System/浮点数存储法/" class="article-date">
-      <time datetime="2019-03-09T08:05:06.000Z" itemprop="datePublished">2019-03-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/09/Operating System/浮点数存储法/">浮点数存储法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="浮点数存储法"><a href="#浮点数存储法" class="headerlink" title="浮点数存储法"></a>浮点数存储法</h2><p>目前所有的C/C++编译器都是采用IEEE所制定的标准浮点格式，即二进制科学表示法。</p>
-<h3 id="二进制科学表示法"><a href="#二进制科学表示法" class="headerlink" title="二进制科学表示法"></a>二进制科学表示法</h3><p>二进制科学表示法中，S=M*2^N 主要由三部分构成：符号位+阶码(N)+尾数(M)。对于float型数据，其二进制有32位，其中符号位1位，阶码8位，尾数23位；对于double型数据，其二进制为64位，符号位1位，阶码11位，尾数52位。</p>
-<p>​                31        30-23       22-0</p>
-<p>float       符号位     阶码        尾数</p>
-<p>​                63        62-52       51-0</p>
-<p>double    符号位     阶码        尾数</p>
-<p><em>符号位</em>：0表示正，1表示负</p>
-<p><em>阶码</em>：这里阶码采用移码表示，对于float型数据其规定<em>偏置量</em>为127,阶码有正有负，对于8位二进制，则其表示范围为-128-127，double型规定为1023，其表示范围为-1024-1023。比如对于float型数据，若阶码的真实值为2，则加上127后为129，其阶码表示形式为10000010</p>
-<p><em>尾数</em>：有效数字位，即部分二进制位(<strong>小数点后面的二进制位</strong>)，<strong>因为规定M的整数部分恒为1，所以这个1就不进行存储了。</strong></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/09/Operating System/浮点数存储法/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 </div>

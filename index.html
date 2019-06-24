@@ -234,6 +234,128 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Python/virtualenv" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/06/24/Python/virtualenv/" class="article-date">
+      <time datetime="2019-06-24T09:09:51.000Z" itemprop="datePublished">2019-06-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/24/Python/virtualenv/">virtualenv</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="virtualenv使用"><a href="#virtualenv使用" class="headerlink" title="virtualenv使用"></a>virtualenv使用</h3><ol>
+<li><p>通过 pip 安装 virtualenv</p>
+<p><code>pip install virtualenv</code></p>
+</li>
+<li><p>创建虚拟环境 my_venv</p>
+<p><code>virtualenv my_venv</code></p>
+<ul>
+<li>virtualenv 会创建一个目录 <code>my_venv/</code>，目录结构：<ul>
+<li><code>lib/</code>，包含虚拟环境中后续安装的软件包</li>
+<li><code>include/</code>，包含支持Python的类库</li>
+<li><code>bin/</code>，可执行文件</li>
+<li><code>python</code>，可执行python的命令文件</li>
+<li><code>pip</code>，辅助安装其他软件包的命令文件</li>
+<li><code>setuptools</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>指定参数</p>
+<ul>
+<li><p>指定要使用的 Python 版本：</p>
+<p><code>virtualenv -p /usr/bin/python2.7 my_venv</code></p>
+<p>或者在 <code>~/.bashrc</code> 文件中设置环境变量</p>
+<p><code>VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7</code></p>
+</li>
+<li><p>不继承全局软件包：</p>
+<p><code>virtualenv --no-site-packages my_venv</code></p>
+</li>
+<li><p>继承全局软件包：</p>
+<p><code>virtualenv --system-site-packages my_venv</code></p>
+<blockquote>
+<p>从virtualenv 1.7开始，默认不包含全局软件包；</p>
+<p>全局软件包默认位于 <code>/usr/lib/python&lt;version&gt;/site-packages</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>激活运行环境：</p>
+<p><code>source my_venv/bin/activate</code></p>
+<blockquote>
+<p>这条命令修改了当前用户的环境变量 <code>$PATH</code>，将我们新建的虚拟环境目录 <code>ENV/bin/</code> 作为第一个元素添加到了 $PATH 中。因为在Linux系统中输入命令时，命令可执行文件的搜索路径是根据 $PATH 中配置的路径的先后顺序来的，所以接下来你执行的所有命令都将是 <code>ENV/bin/</code> 中的命令（如果此目录中存在这个命令的话），新安装的模块都只会安装到该目录（ENV）中去。</p>
+</blockquote>
+<p>PS：有时候缺失这个脚本文件，重新创建一下虚拟环境。</p>
+</li>
+<li><p>在激活的虚拟环境中，通过pip安装其他必要的软件包。</p>
+</li>
+<li><p>注销虚拟环境：</p>
+<p><code>deactivate</code></p>
+</li>
+<li><p>删除虚拟环境：</p>
+<p><code>rm -rf my_venv</code></p>
+</li>
+<li><p>备份虚拟环境配置文件：</p>
+<p><code>pip freeze &gt; requirements.txt</code></p>
+</li>
+<li><p>将备份文件还原到虚拟环境中：</p>
+<p><code>pip install -r requirements.txt</code></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/Mysql/数据库dual表" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1163,87 +1285,9 @@
 
 
   
-    <article id="post-QT/Qt issues" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/20/QT/Qt issues/" class="article-date">
-      <time datetime="2019-04-20T09:16:08.000Z" itemprop="datePublished">2019-04-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/20/QT/Qt issues/">Qt issues</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Qt-issues"><a href="#Qt-issues" class="headerlink" title="Qt issues"></a>Qt issues</h2><h3 id="symbol-not-found-iconv"><a href="#symbol-not-found-iconv" class="headerlink" title="symbol not found: _iconv"></a>symbol not found: _iconv</h3><p><strong>problem:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dyld: Symbol not found: _iconv</span><br><span class="line">  Referenced from: /usr/lib/libcups.2.dylib</span><br><span class="line">  Expected in: /****/lib/libiconv.2.dylib</span><br><span class="line"> in /usr/lib/libcups.2.dylib</span><br></pre></td></tr></table></figure>
-<p><strong>fix:</strong></p>
-<ol>
-<li>Go to Projects -&gt; Run -&gt; “Run Environment” (show Details)</li>
-<li>I would not recommend <strong>Unset</strong>, rather you should <strong>edit</strong> Both: <strong>DYLD_LIBRARY_PATH</strong>and <strong>DYLD_FRAMEWORK_PATH</strong></li>
-<li>Add <em>/usr/lib:</em> to the beginning for both paths (colon delimited string)</li>
-<li>Build project again - this will fix it for good</li>
-</ol>
-<p><strong>from:</strong></p>
-<p><a href="https://stackoverflow.com/questions/38131011/qt-application-throws-dyld-symbol-not-found-cg-jpeg-resync-to-restart" target="_blank" rel="noopener">https://stackoverflow.com/questions/38131011/qt-application-throws-dyld-symbol-not-found-cg-jpeg-resync-to-restart</a></p>
-<h3 id="QLineEdit响应回车时避免Button同时响应"><a href="#QLineEdit响应回车时避免Button同时响应" class="headerlink" title="QLineEdit响应回车时避免Button同时响应"></a>QLineEdit响应回车时避免Button同时响应</h3><p>在Dialog中的按钮默认有autoDefault属性，外观都会变，而且lineEdit响应回车信号的时候，按钮会同时响应点击事件。</p>
-<p>解决办法：</p>
-<p>在designer中，找到QPushButton的autoDefault属性，将对勾去掉即可。</p>
-<p>或者代码修改: pButton-&gt;setAutoDefault(false);</p>
-<h2 id="to-be-continued"><a href="#to-be-continued" class="headerlink" title="to be continued"></a>to be continued</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/QT/">QT</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
