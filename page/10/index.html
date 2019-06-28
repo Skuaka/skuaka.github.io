@@ -1851,10 +1851,10 @@
 
 
   
-    <article id="post-Unix/Command/Linux不常用小命令" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Unix/Command/Linux 小命令" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/11/22/Unix/Command/Linux不常用小命令/" class="article-date">
+      <a href="/2018/11/22/Unix/Command/Linux 小命令/" class="article-date">
       <time datetime="2018-11-22T13:44:50.000Z" itemprop="datePublished">2018-11-22</time>
 </a>
 
@@ -1870,7 +1870,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/22/Unix/Command/Linux不常用小命令/">Linux 小命令记录</a>
+      <a class="article-title" href="/2018/11/22/Unix/Command/Linux 小命令/">Linux 小命令记录</a>
     </h1>
   
 
@@ -1881,7 +1881,9 @@
       
           
         <h1 id="LINUX-小命令记录"><a href="#LINUX-小命令记录" class="headerlink" title="LINUX 小命令记录"></a>LINUX 小命令记录</h1><h3 id="A"><a href="#A" class="headerlink" title="A"></a>A</h3><h4 id="awk：文本查找"><a href="#awk：文本查找" class="headerlink" title="awk：文本查找"></a>awk：文本查找</h4><p>另见</p>
-<h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><h3 id="E"><a href="#E" class="headerlink" title="E"></a>E</h3><h3 id="F"><a href="#F" class="headerlink" title="F"></a>F</h3><h3 id="G"><a href="#G" class="headerlink" title="G"></a>G</h3><h4 id="grep：文本查找"><a href="#grep：文本查找" class="headerlink" title="grep：文本查找"></a>grep：文本查找</h4><ul>
+<h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h3 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h3><p>定时执行任务</p>
+<h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><h3 id="du"><a href="#du" class="headerlink" title="du"></a>du</h3><p>查看文件夹占用空间</p>
+<h3 id="E"><a href="#E" class="headerlink" title="E"></a>E</h3><h3 id="F"><a href="#F" class="headerlink" title="F"></a>F</h3><h3 id="G"><a href="#G" class="headerlink" title="G"></a>G</h3><h4 id="grep：文本查找"><a href="#grep：文本查找" class="headerlink" title="grep：文本查找"></a>grep：文本查找</h4><ul>
 <li>-v 反向查找</li>
 <li>-r 递归查找文件夹内符合的文件</li>
 </ul>
@@ -1893,6 +1895,7 @@
 <p>直接清除历史记录文件：<code>echo &gt; ~/.bash_history</code></p>
 <h4 id="host"><a href="#host" class="headerlink" title="host"></a>host</h4><p>查看主机名/网站 ip</p>
 <h3 id="I"><a href="#I" class="headerlink" title="I"></a>I</h3><h4 id="iftop"><a href="#iftop" class="headerlink" title="iftop"></a>iftop</h4><p>和top类似，不过显示的是网络数据收发。</p>
+<h3 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h3><p>和 <code>find</code> 功能类似，但速度快，因为有定时更新的系统路径数据库。</p>
 <h3 id="J"><a href="#J" class="headerlink" title="J"></a>J</h3><h3 id="K"><a href="#K" class="headerlink" title="K"></a>K</h3><h3 id="L"><a href="#L" class="headerlink" title="L"></a>L</h3><h4 id="last"><a href="#last" class="headerlink" title="last"></a>last</h4><p>查看所有的登入信息</p>
 <ul>
 <li>-n  只看最近 n 条</li>
@@ -1916,7 +1919,11 @@
 <h4 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h4><p>见另一篇</p>
 <h4 id="strace"><a href="#strace" class="headerlink" title="strace"></a>strace</h4><p><code>strace -p PID</code></p>
 <p>查看该进程调用的所有系统调用</p>
-<h3 id="T"><a href="#T" class="headerlink" title="T"></a>T</h3><h3 id="U"><a href="#U" class="headerlink" title="U"></a>U</h3><h3 id="V"><a href="#V" class="headerlink" title="V"></a>V</h3><h3 id="W"><a href="#W" class="headerlink" title="W"></a>W</h3><h4 id="w"><a href="#w" class="headerlink" title="w"></a>w</h4><p>查看当前登入的用户</p>
+<h3 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h3><p><code>shutdown [minutes]</code></p>
+<p>在minutes分钟后关机</p>
+<h3 id="T"><a href="#T" class="headerlink" title="T"></a>T</h3><h3 id="U"><a href="#U" class="headerlink" title="U"></a>U</h3><h3 id="uname"><a href="#uname" class="headerlink" title="uname"></a>uname</h3><p><code>uname -a</code></p>
+<p>查看操作系统信息</p>
+<h3 id="V"><a href="#V" class="headerlink" title="V"></a>V</h3><h3 id="W"><a href="#W" class="headerlink" title="W"></a>W</h3><h4 id="w"><a href="#w" class="headerlink" title="w"></a>w</h4><p>查看当前登入的用户</p>
 <h4 id="who"><a href="#who" class="headerlink" title="who"></a>who</h4><p>查看当前登入的用户</p>
 <p><code>who /var/log/wtmp</code> 显示从wtmp文件创建或删改以来的每一次登录</p>
 <h3 id="X"><a href="#X" class="headerlink" title="X"></a>X</h3><h4 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h4><p>xargs是给命令传递参数的一个过滤器，也是组合多个命令的一个工具。</p>
