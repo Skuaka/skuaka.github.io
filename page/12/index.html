@@ -568,6 +568,14 @@
       
           
         <h4 id="安装matplotlib"><a href="#安装matplotlib" class="headerlink" title="安装matplotlib"></a>安装matplotlib</h4><p><code>pip3 install --index-url https://pypi.douban.com/simple matplotlib</code></p>
+<h4 id="Macos安装pip"><a href="#Macos安装pip" class="headerlink" title="Macos安装pip"></a>Macos安装pip</h4><p><code>sudo easy_install pip</code></p>
+<h4 id="查看pip包安装位置"><a href="#查看pip包安装位置" class="headerlink" title="查看pip包安装位置"></a>查看pip包安装位置</h4><p><code>pip3 show [package-name]</code></p>
+<h4 id="Sublime-Build-with-Python3"><a href="#Sublime-Build-with-Python3" class="headerlink" title="Sublime Build with Python3"></a>Sublime Build with Python3</h4><p>Tools -&gt; Build System -&gt; New Build System</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;env&quot;: &#123;&quot;PYTHONIOENCODING&quot;: &quot;utf8&quot;&#125;,</span><br><span class="line">    &quot;cmd&quot;: [&quot;/usr/bin/python3&quot;, &quot;-u&quot;, &quot;$file&quot;],</span><br><span class="line">    &quot;file_regex&quot;: &quot;^[ ]*File \&quot;(...*?)\&quot;, line ([0-9]*)&quot;,</span><br><span class="line">    &quot;selector&quot;: &quot;source.python&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Change your python3 path in <em>“cmd”</em> ( see with <code>$ which python3</code>)</p>
+<p>Save as <code>python3.sublime-build</code></p>
+<h4 id="Sublime-translate-tabs-to-spaces"><a href="#Sublime-translate-tabs-to-spaces" class="headerlink" title="Sublime translate tabs to spaces"></a>Sublime translate tabs to spaces</h4><p>Preferences -&gt; Settings-User<br>add the two lines below:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;tab_size&quot;: 4,</span><br><span class="line">&quot;translate_tabs_to_spaces&quot;: true</span><br></pre></td></tr></table></figure>
 <h4 id="osx-文件编码"><a href="#osx-文件编码" class="headerlink" title="osx 文件编码"></a>osx 文件编码</h4><p>latin1</p>
 <p><code>open(&quot;filename&quot;,encoding=&#39;latin1&#39;)</code></p>
 
