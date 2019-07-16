@@ -234,565 +234,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Network/Ccie/多播" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/多播/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/多播/">CCIE 多播（multicast）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="多播（multicast）"><a href="#多播（multicast）" class="headerlink" title="多播（multicast）"></a>多播（multicast）</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="数据的传递方式"><a href="#数据的传递方式" class="headerlink" title="数据的传递方式"></a>数据的传递方式</h3><ul>
-<li><p>单播（unicast）</p>
-<p>一对一通讯，数据接收者已知。</p>
-</li>
-<li><p>广播（boradcast）</p>
-<p>一对所有通讯，数据接收者未知。</p>
-</li>
-<li><p>多播（mulicast）</p>
-<p>一对多通讯，数据接收者未知。</p>
-</li>
-</ul>
-<h3 id="路由器和交换机对不同类型数据的处理方式"><a href="#路由器和交换机对不同类型数据的处理方式" class="headerlink" title="路由器和交换机对不同类型数据的处理方式"></a>路由器和交换机对不同类型数据的处理方式</h3><h4 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h4><p>单播包：路由或丢弃</p>
-<p>广播包：丢弃或本地存在感兴趣的进程进行处理</p>
-<p>多播包：丢弃或本地存在感兴趣的进程进行处理</p>
-<h4 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h4><p>单播帧：目的MAC地址交换机是否已知，如果已知则交换，如果未知则泛洪</p>
-<p>广播帧：泛洪</p>
-<p>多播帧：泛洪</p>
-<h2 id="IGMP-互联网组管理协议"><a href="#IGMP-互联网组管理协议" class="headerlink" title="IGMP 互联网组管理协议"></a>IGMP 互联网组管理协议</h2><p>路由器及终端运行，帮助路由器发现直连子网中的多播接收者。</p>
-<p>组（group）：所有对同一多播流感兴趣的成员组成了多播组。</p>
-<p>组成员（group member）：组中的多播流接收者。</p>
-<p>版本：IGMPv1、IGMPv2、IGMPv3</p>
-<h3 id="IGMPv1"><a href="#IGMPv1" class="headerlink" title="IGMPv1"></a>IGMPv1</h3><ul>
-<li><p>报告消息（report）：始发于终端，用于通告子网中的路由器存在特定组组成员。</p>
-<p>发送终端的IP 和MAC以及组信息。</p>
-</li>
-<li><p>查询消息（request）：始发于路由器，用于查询直连子网中是否存在组成员。</p>
-<p>通常是路由器接收到多播流后触发。</p>
-</li>
-</ul>
-<p>一旦发现组成员，路由器就创造一个180s 的老化计时器，该计时器通过 report 消息进行维护。</p>
-<h4 id="IGMPv1的缺陷"><a href="#IGMPv1的缺陷" class="headerlink" title="IGMPv1的缺陷"></a>IGMPv1的缺陷</h4><ol>
-<li><p>响应时间慢</p>
-<p>组中没有成员时，路由器需要 180s 才能发现</p>
-</li>
-<li><p>存在多查询者</p>
-</li>
-<li><p>存在多转发者</p>
-</li>
-</ol>
-<h3 id="IGMPv2"><a href="#IGMPv2" class="headerlink" title="IGMPv2"></a>IGMPv2</h3><ul>
-<li>报告消息（report）：和 v1 相同</li>
-<li><p>查询消息（request）：和 v1 相同</p>
-</li>
-<li><p>离开消息（leave）：始发于终端，终端PC 不再是组成员时发送，用于通告路由器有组成员离开。</p>
-<p>收到离开消息时，立刻发送SQ，如下。</p>
-</li>
-<li><p>特定查询消息（SQ）：始发于路由器，发送出去后设定的老化时间为 3s 。如果 3s 内收到 report ，说明发送离开消息的组成员并不是组中最后一个人；如果收不到任何消息，那么说明组成员不存在。</p>
-</li>
-</ul>
-<p>IGMPv2 查询者竞选机制：多个查询者通过比较查询消息源 ip 来确认谁最终负责查询，源 ip 越小越优。</p>
-<p>多转发者缺陷 IGMPv2 无法克服。</p>
-<h2 id="多播地址"><a href="#多播地址" class="headerlink" title="多播地址"></a>多播地址</h2><p>多播 IP 和多播 MAC 都不是用来定位接收者所在的网络和物理位置。</p>
-<p>它们用于标识服务和应用。</p>
-<p>RIPv2  224.0.0.9</p>
-<p>IPv4  D类  224.x.x.x  239.x.x.x</p>
-<h3 id="多播-mac"><a href="#多播-mac" class="headerlink" title="多播 mac"></a>多播 mac</h3><p>设备根据多播的 IP 自动计算而来。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">224.0.0.1  //例子ip</span><br><span class="line"></span><br><span class="line">11110000.00000000.00000000.00000001 //转化成2进制</span><br><span class="line"></span><br><span class="line">x0000000.00000000.00000001 //取后23bit，再在第一位添个0</span><br><span class="line"></span><br><span class="line">0   0    0   0    0   1  //转化为十六进制</span><br><span class="line"></span><br><span class="line">01005E+000001  //mac地址</span><br></pre></td></tr></table></figure>
-<p>多播的MAC地址可能会重复，多播的 IP 后 23bit 一致则会重复。</p>
-<h2 id="多播路由器协议"><a href="#多播路由器协议" class="headerlink" title="多播路由器协议"></a>多播路由器协议</h2><p>是运行在路由器之间，负责建立多播路由路径，用于传递多播数据。</p>
-<h3 id="多播路由协议分类"><a href="#多播路由协议分类" class="headerlink" title="多播路由协议分类"></a>多播路由协议分类</h3><ul>
-<li>距离矢量：DVMRP  距离矢量多播路由协议（淘汰了）</li>
-<li>链路状态：MOSPF  多播的OSPF（非主流）</li>
-<li>距离向量：CBT  基于核心的树（非主流）</li>
-<li>独立于其他：PIM  协议独立多播（Cisco、主流）</li>
-</ul>
-<h3 id="PIM-的两个版本"><a href="#PIM-的两个版本" class="headerlink" title="PIM 的两个版本"></a>PIM 的两个版本</h3><p>PIMv1：用的是 IGMPv1，但是现在也用 IGMPv2</p>
-<p>PIMv2：用的是 IGMPv2</p>
-<h3 id="PIM-的三种模式"><a href="#PIM-的三种模式" class="headerlink" title="PIM 的三种模式"></a>PIM 的三种模式</h3><ul>
-<li><p>密集模式（dense mode）</p>
-<p>设备间带宽资源紧张，子网成员大部分是组成员的时候，建议使用密集模式。</p>
-<p>密集模式默认采用 IGMPv1。</p>
-</li>
-<li><p>稀疏模式（sparse mode）</p>
-<p>设备间带宽资源依旧紧张，子网成员只有少数是组成员，建议使用稀疏模式。</p>
-<p>稀疏模式采用 IGMPv2。</p>
-</li>
-<li><p>混合模式（sparse-dense mode）</p>
-<p>该模式下路由器先启用稀疏模式，稀疏模式失效后再用密集模式。</p>
-</li>
-</ul>
-<h3 id="PIM-的密集模式详解"><a href="#PIM-的密集模式详解" class="headerlink" title="PIM 的密集模式详解"></a>PIM 的密集模式详解</h3><h4 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h4><ul>
-<li>加入消息（join）：下游路由器通过加入消息将直连网络加入多播转发路径。</li>
-<li>修剪消息（prune）：下游路由器通过修剪消息，将原本隶属于多播路径的直连网络从多播路径中删除。</li>
-<li>接枝消息（graft）：下游路由器通过该消息请求将原本被拆除的多播路径再恢复过来。</li>
-<li>接枝确认消息（graft-ack）：上游路由器通过该消息告诉下游，直连路径恢复成多播转发路径。</li>
-<li>assert消息（assert）：连接子网的路由器通过该消息，竞选出最终的转发者。</li>
-</ul>
-<h4 id="密集模式工作过程"><a href="#密集模式工作过程" class="headerlink" title="密集模式工作过程"></a>密集模式工作过程</h4><p>扩散、剪枝。</p>
-<h4 id="PIM-的特殊机制"><a href="#PIM-的特殊机制" class="headerlink" title="PIM 的特殊机制"></a>PIM 的特殊机制</h4><ul>
-<li><p>PIM 密集模式的 DR</p>
-<p>接口优先级+接口ip地址，构成竞选参数，越大越优。</p>
-<p>PIM密集模式早期使用IGMPv1，IGMPv1会出现多查询者问题，于是就利用DR的竞选，来帮助IGMPv1确认谁负责查询。</p>
-<p>PIM密集模式现在使用的是IGMPv2，DR就没用了。</p>
-</li>
-<li><p>PIM 消息中的 assert 作用</p>
-<p>通过竞选选出一个人负责转发数据。</p>
-<p>assert 消息，携带了三个竞选参数：</p>
-<ul>
-<li>当前路由器启用的底层协议管理距离，越小越优。</li>
-<li>当前路由器抵达多播源底层路由协议的开销，越小越优。</li>
-<li>当前路由器连接子网的接口 ip，越大越优。</li>
-</ul>
-</li>
-</ul>
-<h3 id="PIM-密集模式的配置流程"><a href="#PIM-密集模式的配置流程" class="headerlink" title="PIM 密集模式的配置流程"></a>PIM 密集模式的配置流程</h3><ul>
-<li><p>步骤1：确认参与多播的设备及接口</p>
-<p>所有需要接收多播流的接口和发送多播流的接口及连接组成员的接口，都要参与多播路由协议的启用。</p>
-</li>
-<li><p>步骤2：路由器接口模拟成多播组成员</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if)#ip igmp join-group &lt;多播组地址&gt;</span><br></pre></td></tr></table></figure>
-<p>  注意：该命令可以反复录入，一个接口扮演多个组成员</p>
-</li>
-<li><p>步骤3：路由器开启多播路由功能，接口启用多播密集模式</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip multicast-routing</span><br><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">ip pim dense-mode</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>步骤4：校验查看</p>
-<p>  校验路由器是否发现了组成员：<code>show ip igmp group</code></p>
-<p>  校验路由器是否形成了PIM 邻居关系：<code>show ip pim neighbor</code></p>
-<p>  校验路由器多播路由表：<code>show ip mroute</code></p>
-</li>
-</ul>
-<h3 id="多播路由表"><a href="#多播路由表" class="headerlink" title="多播路由表"></a>多播路由表</h3><h4 id="父条目与子条目"><a href="#父条目与子条目" class="headerlink" title="父条目与子条目"></a>父条目与子条目</h4><ul>
-<li><p>父条目</p>
-<p>父条目起提醒注释的作用，告知当前路由器和管理员，路由器可能需要为某个多播组传递流量。</p>
-<p>路由器收到 report 消息便会产生父条目，路由器收到多播流也会产生父条目。</p>
-</li>
-<li><p>子条目</p>
-<p>子条目是实际负责多播流量传递工作。</p>
-<p>子条目是路由器根据计算得来。</p>
-</li>
-</ul>
-<h4 id="多播路由条目的样式"><a href="#多播路由条目的样式" class="headerlink" title="多播路由条目的样式"></a>多播路由条目的样式</h4><p>（多播源，组地址）    存活计时器/老化计时器</p>
-<p>Incoming-interface（上游接口）：接口名字    状态/模式</p>
-<p>Outgoing-interface（上游接口）：接口名字    状态/模式</p>
-<hr>
-<p>父条目多播源部分几乎都是<code>*</code>号，代表源未知。</p>
-<p>子条目多播源部分一定是某个 IPv4 单播地址。</p>
-<h3 id="多播防环机制"><a href="#多播防环机制" class="headerlink" title="多播防环机制"></a>多播防环机制</h3><p>RPF：反向路径转发：启用多播的接口默认开启，用于避免环路的出现。</p>
-<p>所有接收多播流的接口，必须通过 RPF 检测，才可以成为有效的上游接口。</p>
-<p>当前接口必须是抵达多播源下一跳地址的本地出口，才通过检测。</p>
-<p>用来查看rpf检测是否通过：<code>show ip rpf &lt;intf-id&gt;</code></p>
-<h3 id="多播树"><a href="#多播树" class="headerlink" title="多播树"></a>多播树</h3><p>多播树其实就是多播转发数据的路径。</p>
-<h4 id="密集模式的树"><a href="#密集模式的树" class="headerlink" title="密集模式的树"></a>密集模式的树</h4><p>最短路径树，也称源树。</p>
-<p>当前路由器以多播源为根，计算抵达多播源的最短路径，每个路径对应到多播路由表中的一个条目。</p>
-<h5 id="源树缺陷"><a href="#源树缺陷" class="headerlink" title="源树缺陷"></a>源树缺陷</h5><ul>
-<li>容易产生大量的多播子条目。</li>
-<li>树构建的早期多播流被扩散到了不必要的设备上</li>
-</ul>
-<h3 id="PIM-的稀疏模式详解"><a href="#PIM-的稀疏模式详解" class="headerlink" title="PIM 的稀疏模式详解"></a>PIM 的稀疏模式详解</h3><h4 id="消息-1"><a href="#消息-1" class="headerlink" title="消息"></a>消息</h4><p>join、prune、graft、graft-ack、assert（和密集模式相同）</p>
-<p>注册消息（register）</p>
-<p>注册停止消息（register-stop）</p>
-<h4 id="稀疏模式中的集合点：RP"><a href="#稀疏模式中的集合点：RP" class="headerlink" title="稀疏模式中的集合点：RP"></a>稀疏模式中的集合点：RP</h4><p>RP 是管理员指定的，是多股多播流的交汇处。</p>
-<h4 id="稀疏模式的工作原理"><a href="#稀疏模式的工作原理" class="headerlink" title="稀疏模式的工作原理"></a>稀疏模式的工作原理</h4><p>上游注册，下游加入，RP 整合。</p>
-<p>！！注意</p>
-<p>RP 以下的设备，以 RP 为根，计算最短路径。</p>
-<p>RP 自身以源为根，计算最短路径。</p>
-<p>稀疏模式是一个双树结构，RP 和源之间维护的是源树，下游设备与 RP 之间维护的是共享树。</p>
-<h4 id="共享树切换成源树"><a href="#共享树切换成源树" class="headerlink" title="共享树切换成源树"></a>共享树切换成源树</h4><p>稀疏模式下，每台支持多播路由协议的路由器在接收超过4个字节的多播流后，就会尝试建立源树。</p>
-<h4 id="RP-的获取方式"><a href="#RP-的获取方式" class="headerlink" title="RP 的获取方式"></a>RP 的获取方式</h4><ul>
-<li><p>手动指定：<code>ip pim rp-address &lt;RP地址&gt;</code></p>
-</li>
-<li><p>RP 的竞选</p>
-<ol>
-<li><p>代理 rp（auto-rp）</p>
-<p>C-RP：RP候选者</p>
-<p>RP-Agent：RP代理、C-RP 信息收集，裁决，分享结果</p>
-<p>RP：RP</p>
-</li>
-<li><p>BSR：boot strap router：自举路由器</p>
-<p>C-BSR：BSR 候选人</p>
-<p>BSR：信息收集，信息分享</p>
-<p>C-RP、RP</p>
-<p>BSR 的竞选过程：BSR 标识越大越优。</p>
-<p>RP</p>
-<p>C-RP 有三个竞选参数：优先级（小优）、hash 长度（长优）、C-RP 标识（大优）</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="PIM-的混合模式"><a href="#PIM-的混合模式" class="headerlink" title="PIM 的混合模式"></a>PIM 的混合模式</h3><p>让设备启用混合模式：<code>if)#ip pim sparse-dense-mode</code></p>
-<p>混合模式倒退回密集模式：一定是 RP 彻底无法正常工作</p>
-<p><code>Router(config)#no ip pim dm-fallback  //不允许混合模式倒退回密集模式</code></p>
-<h3 id="auto-rp-的问题和解决方案"><a href="#auto-rp-的问题和解决方案" class="headerlink" title="auto-rp 的问题和解决方案"></a>auto-rp 的问题和解决方案</h3><h4 id="224-0-1-39-与-224-0-1-40"><a href="#224-0-1-39-与-224-0-1-40" class="headerlink" title="224.0.1.39 与 224.0.1.40"></a>224.0.1.39 与 224.0.1.40</h4><p>C-RP 将竞选信息发向 224.0.1.39</p>
-<p>RP-Agent 将结果发向 224.0.1.40</p>
-<p>所有设备为了正确的获取多播 RP 信息，默认会接收发向这两个地址的多播流。</p>
-<h4 id="auto-rp-结果通告信息的跳数"><a href="#auto-rp-结果通告信息的跳数" class="headerlink" title="auto-rp 结果通告信息的跳数"></a>auto-rp 结果通告信息的跳数</h4><p>通告结果是一跳，如果拓扑是水平的多台设备组成，那么就会出现有设备无法得知 RP 信息。</p>
-<h3 id="PIM-稀疏模式-DR-的作用——没记全！！！"><a href="#PIM-稀疏模式-DR-的作用——没记全！！！" class="headerlink" title="PIM 稀疏模式 DR 的作用——没记全！！！"></a>PIM 稀疏模式 DR 的作用——没记全！！！</h3><p>路由器连接子网的部分，DR 负责发送 join 信息给 RP，路由器连接多播源</p>
-<h3 id="网关冗余对多播传递的影响"><a href="#网关冗余对多播传递的影响" class="headerlink" title="网关冗余对多播传递的影响"></a>网关冗余对多播传递的影响</h3><p>HSRP 热备份路由协议，起在路由器接口下。</p>
-<p>子网通常被要求单播数据流和多播数据流分行。</p>
-<p>把当前设备设置成RP-Agent：<code>ip pim send-rp-discovery lo0 sc 255</code></p>
-<h3 id="配置-RP-侦听"><a href="#配置-RP-侦听" class="headerlink" title="配置 RP 侦听"></a>配置 RP 侦听</h3><p>RP-Agent 公布 rp 结果的消息只有一跳，所以只能传给直连设备，该跳数可以修改。</p>
-<p>路由器默认不传递 RP-Agent RP 结果，还必须配置 RP 侦听，帮助路由器透传。</p>
-<p><code>ip pim autorp listener</code></p>
-<h2 id="多播总结"><a href="#多播总结" class="headerlink" title="多播总结"></a>多播总结</h2><ol>
-<li>数据传递方式</li>
-<li>路由器、交换机处理不同数据的方式</li>
-<li>IGMP的作用、版本</li>
-<li>多播路由协议</li>
-<li>PIM<ol>
-<li>PIM 版本、模式</li>
-<li>PIM 密集模式特点、工作方式</li>
-<li>PIM 的 assert 和 DR 的作用</li>
-<li>PIM DM 模式的树</li>
-<li>PIM DM 的配置流程和校验</li>
-<li>PIM SM 特点、工作方式</li>
-<li>PIM SM 中 RP 的作用</li>
-<li>PIM SM 双树</li>
-<li>PIM SM 树的切换</li>
-<li>PIM SM 的 RP 获取方式</li>
-<li>auto rp 的工作方式特点缺陷</li>
-<li>BSR 的工作方式特点</li>
-<li>PIM SM 中 DR 作用</li>
-<li>auto-rp 侦听</li>
-</ol>
-</li>
-</ol>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/网络知识总结" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/网络知识总结/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/网络知识总结/">CCIE 网络知识总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="网络知识总结"><a href="#网络知识总结" class="headerlink" title="网络知识总结"></a>网络知识总结</h1><p><strong>分类</strong></p>
-<p>交换、路由、路由策略、远程接入、网络安全。</p>
-<p>企业级、园区级、运营商级。</p>
-<h2 id="交换"><a href="#交换" class="headerlink" title="交换"></a>交换</h2><h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><p>企业级</p>
-<ul>
-<li>原理层面：vlan 用于分隔广播域</li>
-<li>部署层面：一个部门一个 vlan</li>
-<li>配置层面：</li>
-<li>排错层面：忘记创建；忘记把接口加入、加入错。</li>
-</ul>
-<h3 id="Trunk-link"><a href="#Trunk-link" class="headerlink" title="Trunk-link"></a>Trunk-link</h3><p>企业级</p>
-<ul>
-<li>原理层面：承载携带不同 vlan 标记的流量；vlan标记的携带方式：DOT1Q、ISL。</li>
-<li>部署层面：基础配置、修改本帧vlan、修改Trunk-link vlan承载列表。</li>
-<li>配置层面：</li>
-<li>排错层面：封装标准不一致；错误的承载列表</li>
-<li>vlan间通讯原则</li>
-</ul>
-<h3 id="RSTP"><a href="#RSTP" class="headerlink" title="RSTP"></a>RSTP</h3><p>企业级</p>
-<ul>
-<li><p>原理层面：</p>
-<p>STP、RSTP 计算出无环的交换路径，并且保证一定的冗余性。</p>
-<p>根桥的竞选，根端口的竞选，指定端口的竞选，</p>
-<p>根桥如何故障恢复，RSTP 和 STP 的区别。</p>
-</li>
-<li><p>部署层面：如何影响根及根端口选举结果；PVST（每vlan生成树）</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：确认根桥、端口是否正确</p>
-</li>
-</ul>
-<h3 id="MSTP"><a href="#MSTP" class="headerlink" title="MSTP"></a>MSTP</h3><p>园区网络、运营商级</p>
-<ul>
-<li><p>原理层面：</p>
-<p>允许多个vlan映射到一个实例中，并且层次化、区块化维护生成树。</p>
-<p>CST（通用生成树）、IST（内部生成树）</p>
-</li>
-<li><p>部署层面：IST的规划、CST的定义</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：MSTP 的 IST 的域名不一致，口令不一致</p>
-</li>
-</ul>
-<h3 id="EC：以太网通道"><a href="#EC：以太网通道" class="headerlink" title="EC：以太网通道"></a>EC：以太网通道</h3><p>企业、园区、运营商级</p>
-<ul>
-<li>原理层面：EC 允许交换机把最多8个物理接口捆绑成一个逻辑接口。</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：端口没有统一绑定到一个逻辑接口，接口的物理参数和逻辑参数不一致。</li>
-</ul>
-<h3 id="第一跳冗余：HSRP、VRRP、GLBP"><a href="#第一跳冗余：HSRP、VRRP、GLBP" class="headerlink" title="第一跳冗余：HSRP、VRRP、GLBP"></a>第一跳冗余：HSRP、VRRP、GLBP</h3><ul>
-<li><p>原理层面：多物理网关冗余备份。HSRP、VRRP、GLBP 工作机制。</p>
-</li>
-<li><p>部署层面：</p>
-<p>HSRP 注意 active 和 standby 分配；</p>
-<p>VRRP 注意 master 和 backup 的分配；</p>
-<p>GLBP 注意权重分配。</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="多层交换机路由"><a href="#多层交换机路由" class="headerlink" title="多层交换机路由"></a>多层交换机路由</h3><ul>
-<li>原理层面：多层交换机 vlan 添加 IP 地址扮演网关，开启路由功能，提供跨 vlan 网段通讯能力。</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><h3 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h3><p>企业、园区、运营商级</p>
-<ul>
-<li><p>原理层面：</p>
-<p>OSPF 邻接关系建立条件和规则；</p>
-<p>OSPF DR 和 BDR 的选举；</p>
-<p>OSPF 的开销计算；</p>
-<p>OSPF LSA 的类型、作用、扩散范围、对应的路由；</p>
-<p>OSPF 的孤岛区域、区域分割、虚链路；</p>
-<p>OSPF 的区域汇总；</p>
-<p>OSPF 的特殊区域；</p>
-<p>OSPF 的区域认证、链路认证；</p>
-</li>
-<li><p>部署层面：不要出现孤岛、区域分割问题；小心特殊区域的优化。</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="ISIS"><a href="#ISIS" class="headerlink" title="ISIS"></a>ISIS</h3><p>运营商级</p>
-<ul>
-<li>原理层面：NET 地址；路由器类型、邻居关系类型、路由更新类型、路由类型；</li>
-<li>部署层面：注意路由器角色的设置、汇总和重分发；区域、链路认证。</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="重分发"><a href="#重分发" class="headerlink" title="重分发"></a>重分发</h3><ul>
-<li>原理层面：ASBR 上不同的协议相互交换路由更新、种子度量值的概念。</li>
-<li>部署层面：切记重分发种子度量值的问题</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="BGP"><a href="#BGP" class="headerlink" title="BGP"></a>BGP</h3><p>园区、运营商级</p>
-<ul>
-<li>原理层面：AS 间或 AS 内路由信息的交换、并且携带复杂的路径策略</li>
-<li>部署层面：更新源设置、eBGP 多跳、next-hop-self、路由反射器</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="MPLS-VPN"><a href="#MPLS-VPN" class="headerlink" title="MPLS VPN"></a>MPLS VPN</h3><p>运营商</p>
-<ul>
-<li><p>原理层面：</p>
-<p>利用 peer 共享企业内部路由，利用双标签协助数据穿越运营商网络实现内网的通讯。</p>
-<p>MPLS 标签的分配、分发、关联、POP、UNTAG、交换、弹出。</p>
-<p>P-NETWORK、P、PE、C-NETWORK、CE、VRF、RD、RT、顶部标签、底部标签、数据传递过程。</p>
-</li>
-<li><p>部署层面：MPLS 正确部署；VRF 的 RD 和 RT 正确，不要出现 no label 和 untag。</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="Multicast"><a href="#Multicast" class="headerlink" title="Multicast"></a>Multicast</h3><ul>
-<li><p>原理层面：</p>
-<p>帮助路由器发现组成员，帮助路由器建立多播传递路径，维护路径。</p>
-<p>IGMPv1/2、PIM DM、SM、SM RP 的获取方式、BSR、AUTO-RP。</p>
-</li>
-<li><p>部署层面：注意设备参与 PIM，注意 RP 的获取</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h2 id="路由策略"><a href="#路由策略" class="headerlink" title="路由策略"></a>路由策略</h2><h3 id="修改-Metric-影响路径选择"><a href="#修改-Metric-影响路径选择" class="headerlink" title="修改 Metric 影响路径选择"></a>修改 Metric 影响路径选择</h3><ul>
-<li>原理层面：OSPF、ISIS 如何通过修改接口开销影响结果</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="路由更新过滤"><a href="#路由更新过滤" class="headerlink" title="路由更新过滤"></a>路由更新过滤</h3><ul>
-<li><p>原理层面：</p>
-<p>路由协议发送路由更新时做过滤、重分发时做过滤。</p>
-<p>distribute-list 分发列表，route-map 路由映射。</p>
-</li>
-<li><p>部署层面：ACL 或 prefix-list 编写正确，route-map 有隐含的 deny all。</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="BGP-路由选择策略"><a href="#BGP-路由选择策略" class="headerlink" title="BGP 路由选择策略"></a>BGP 路由选择策略</h3><ul>
-<li><p>原理层面：</p>
-<p>利用修改 BGP 路由更新属性，实现 BGP 路由选路策略的修改</p>
-<p>weight、ip、med、as-path、originate-code</p>
-</li>
-<li><p>部署层面：理解不同选路机制的原理，route-map 的编写</p>
-</li>
-<li><p>配置层面：</p>
-</li>
-<li><p>排错层面：</p>
-</li>
-</ul>
-<h3 id="BGP-的路由更新过滤"><a href="#BGP-的路由更新过滤" class="headerlink" title="BGP 的路由更新过滤"></a>BGP 的路由更新过滤</h3><ul>
-<li>原理层面：BGP 利用 route-map 和 prefix-list 完成路由更新过滤</li>
-<li>部署层面：对 route-map 和 prefix-list 的理解，BGP 正则表达式完成路由更新过滤</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="BGP-团体属性"><a href="#BGP-团体属性" class="headerlink" title="BGP 团体属性"></a>BGP 团体属性</h3><ul>
-<li>原理层面：BGP 利用公认团体属性完成路由更新扩散范围的限制，利用自定义团体属性标记完成路由更新着色和策略定制。</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="BGP-的联邦"><a href="#BGP-的联邦" class="headerlink" title="BGP 的联邦"></a>BGP 的联邦</h3><ul>
-<li>原理层面：BGP 通过联邦和公有 AS 号、私有 AS 号组建巨型网络</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h2 id="远程接入"><a href="#远程接入" class="headerlink" title="远程接入"></a>远程接入</h2><h3 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h3><p>动态主机配置协议</p>
-<ul>
-<li>原理层面：DHCP 给主机动态地分配 IP 地址，并且管理维护</li>
-<li>部署层面：地址池的创建、DHCP 中继、地址排除</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h3><p>网络地址转换</p>
-<ul>
-<li>原理层面：通过地址转换，实现内网数据与公网通讯。静态 NAT、动态 NAT、PAT。</li>
-<li>部署层面：inside、outside、注意 ACL。</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="PPPOE"><a href="#PPPOE" class="headerlink" title="PPPOE"></a>PPPOE</h3><p>基于以太网的点到点协议</p>
-<ul>
-<li>原理层面：通过 VPDN 拨号，实现企业、家庭用户的互联网接入</li>
-<li>部署层面：</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h2 id="网络安全"><a href="#网络安全" class="headerlink" title="网络安全"></a>网络安全</h2><h3 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h3><ul>
-<li>原理层面：防火墙的通讯机制、故障倒换、虚拟防火墙、NAT、路由。</li>
-<li>部署层面：接口命名、安全等级、NAT、ACL、服务发布。</li>
-<li>配置层面：</li>
-<li>排错层面：</li>
-</ul>
-<h3 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h3><ul>
-<li>原理层面：虚拟的个人网络数据加密、完整性保护、对等体认证。</li>
-<li>部署层面：IPSEC VPN、DM VPN 配置</li>
-<li>配置层面：策略必须一致，参数必须相同</li>
-<li>排错层面：</li>
-</ul>
-<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Network/Ccie/防火墙" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -900,6 +341,160 @@
 </li>
 </ol>
 <h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/逻辑子接口" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/逻辑子接口/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="路由器主接口创建逻辑子接口"><a href="#路由器主接口创建逻辑子接口" class="headerlink" title="路由器主接口创建逻辑子接口"></a>路由器主接口创建逻辑子接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt; //进入主接口</span><br><span class="line">no sh</span><br><span class="line">interface &lt;intf-id.子接口编号&gt; //创建逻辑子接口</span><br><span class="line">encapsulation dot1q &lt;vlan ID&gt; //指定逻辑子接口接收带有特定vlan标记的流量</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>重分发 </p>
+<p>将不同路由协议转化</p>
+<p>1直连进路由选择协议</p>
+<p>redistribute connect metric 1</p>
+<p>2其他路由选择协议进rip</p>
+<p>router rip</p>
+<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
+<p>3其他路由选择协议进eigrp</p>
+<p>router eigrp 100</p>
+<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
+<p>4其他进ospf</p>
+<p>router os 1</p>
+<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
+<p>默认OE2</p>
+<p>将oe2改成oe1:</p>
+<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
+<p>重分发流量控制</p>
+<p>acl</p>
+<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
+<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
+<p>将acl抓去到的流量给route-map</p>
+<p>route-map +名字 +permit/deny </p>
+<p>优先级10(默认优先级) </p>
+<p>match ip address +acl编号</p>
+<p>route-map也默认deny所有流量</p>
+<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
+<p>re rip router-map ccie metric ……</p>
+
       
     </div>
     
