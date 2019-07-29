@@ -234,6 +234,298 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/C++模板和元编程/C++模板元编程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/22/C_C++/C++模板和元编程/C++模板元编程/" class="article-date">
+      <time datetime="2019-01-21T17:08:28.000Z" itemprop="datePublished">2019-01-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/22/C_C++/C++模板和元编程/C++模板元编程/">C++模板元编程(待续</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="今天刚开始学"><a href="#今天刚开始学" class="headerlink" title="今天刚开始学"></a>今天刚开始学</h2><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>(为什么要用struct？因为struct默认访问权限是public，如果用class还要多写一行public)</p>
+<h4 id="阶乘计算"><a href="#阶乘计算" class="headerlink" title="阶乘计算"></a>阶乘计算</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">unsigned</span> n&gt; <span class="comment">// general case: the value of</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Factorial</span> &#123;</span> <span class="comment">// Factorial&lt;n&gt; is n times the value</span></span><br><span class="line"><span class="comment">// of Factorial&lt;n-1&gt;</span></span><br><span class="line">    <span class="keyword">enum</span> &#123; value = n * Factorial&lt;n<span class="number">-1</span>&gt;::value &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;&gt; <span class="comment">// special case: the value of</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Factorial</span>&lt;0&gt; &#123;</span> <span class="comment">// Factorial&lt;0&gt; is 1</span></span><br><span class="line">    <span class="keyword">enum</span> &#123; value = <span class="number">1</span> &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="二进制计算"><a href="#二进制计算" class="headerlink" title="二进制计算"></a>二进制计算</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">int</span> N&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Binary</span>&#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> value = Binary&lt;N/<span class="number">10</span>&gt;::value * <span class="number">2</span> + N % <span class="number">10</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Binary</span>&lt;0&gt;&#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> value = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="交换迭代器指向的内容"><a href="#交换迭代器指向的内容" class="headerlink" title="交换迭代器指向的内容"></a>交换迭代器指向的内容</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/type_traits/is_reference.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/type_traits/is_same.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iterator&gt; // 针对iterator_traits</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt; // 针对swap</span></span></span><br><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">bool</span> use_swap&gt; <span class="class"><span class="keyword">struct</span> <span class="title">iter_swap_impl</span>;</span></span><br><span class="line">    <span class="comment">// 快速版本</span></span><br><span class="line">    <span class="keyword">template</span> &lt;&gt;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">iter_swap_impl</span>&lt;true&gt;&#123;</span></span><br><span class="line">    	<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator1</span>, <span class="title">class</span> <span class="title">ForwardIterator2</span>&gt;</span></span><br><span class="line"><span class="class">    	<span class="title">static</span> <span class="title">void</span> <span class="title">do_it</span>(<span class="title">ForwardIterator1</span> <span class="title">i1</span>, <span class="title">ForwardIterator2</span> <span class="title">i2</span>)&#123;</span></span><br><span class="line">			<span class="built_in">std</span>::swap(*i1, *i2);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 总是可行的版本</span></span><br><span class="line">    <span class="keyword">template</span> &lt;&gt;</span><br><span class="line">   	<span class="class"><span class="keyword">struct</span> <span class="title">iter_swap_impl</span>&lt;false&gt;&#123;</span></span><br><span class="line">       	<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator1</span>, <span class="title">class</span> <span class="title">ForwardIterator2</span>&gt;</span></span><br><span class="line"><span class="class">       	<span class="title">static</span> <span class="title">void</span> <span class="title">do_it</span>(<span class="title">ForwardIterator1</span> <span class="title">i1</span>, <span class="title">ForwardIterator2</span> <span class="title">i2</span>)&#123;</span></span><br><span class="line">       		<span class="keyword">typename</span> iterator_traits&lt;ForwardIterator1&gt;::value_type</span><br><span class="line">            tmp = *i1;</span><br><span class="line">           	*i1 = *i2;</span><br><span class="line">          	*i2 = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator1</span>, <span class="title">class</span> <span class="title">ForwardIterator2</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">iter_swap</span>(<span class="title">ForwardIterator1</span> <span class="title">i1</span>, <span class="title">ForwardIterator2</span> <span class="title">i2</span>)&#123;</span></span><br><span class="line">    	<span class="keyword">typedef</span> iterator_traits&lt;ForwardsIterator1&gt; traits1;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits1::value_type v1;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits1::reference r1;</span><br><span class="line">    	</span><br><span class="line">    	<span class="keyword">typedef</span> iterator_traits&lt;ForwardsIterator1&gt; traits2;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits2::value_type v2;</span><br><span class="line">    	<span class="keyword">typedef</span> <span class="keyword">typename</span> traits2::reference r2; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">bool</span> <span class="keyword">const</span> use_swap = boost::is_same&lt;v1,v2&gt;::value</span><br><span class="line">        						&amp;&amp; boost::isreference&lt;r1&gt;::value</span><br><span class="line">        						&amp;&amp; boost::isreference&lt;r2&gt;::value;</span><br><span class="line">		</span><br><span class="line">        iter_swap_impl&lt;use_swap&gt;::do_it(i1,i2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="blob"><a href="#blob" class="headerlink" title="blob"></a>blob</h3><p>在面向对象的编程中将一个带有大量成员的类称作”blob”。类的成员彼此耦合，因为它们必须被声明在一起。为了避免耦合并提高模块化的程度，应该避免使用这种模式。代替方案是采用独立的元函数来定义单独的traits。</p>
+<h3 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h3><p>可被C++编译器系统操纵的”值”可以被认为是元数据。在模板元编程中，两种最常见的元数据是<strong>类型</strong>和<strong>整数常量</strong>(包括bool)。</p>
+<p>C++的编译器部分通常被称为”纯函数式语言”，因为元数据是不可变的并且元函数不可以有任何副作用。</p>
+<h3 id="静态-动态多态"><a href="#静态-动态多态" class="headerlink" title="静态/动态多态"></a>静态/动态多态</h3><p>动态多态</p>
+<ul>
+<li>允许我们通过单个基指针或引用处理多个派生类型的对象</li>
+<li>实际类型决定于运行期</li>
+<li>是面向对象的关键特性</li>
+</ul>
+<p>静态多态</p>
+<ul>
+<li>允许不同类型的对象以同样的方式被操纵，只要它们支持某种共通的语法。</li>
+<li>实际类型决定于编译期</li>
+<li>是泛型编程的本质要素</li>
+</ul>
+<h3 id="Boost-库的多态"><a href="#Boost-库的多态" class="headerlink" title="Boost 库的多态"></a>Boost 库的多态</h3><p>为了在元函数之间实现多态，Boost 程序库使用的约定如下：</p>
+<p><code>metafunction-name&lt;type-arguments...&gt;::type</code></p>
+<p>从现在开始，当我们使用术语元函数时，就是指可以采用这种语法进行调用的模板。</p>
+<h4 id="整型常量外覆器"><a href="#整型常量外覆器" class="headerlink" title="整型常量外覆器"></a>整型常量外覆器</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">five</span> // 数值5的整型常量外覆器</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> <span class="keyword">const</span> value = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">int</span> value_type;</span><br><span class="line">    <span class="comment">// ... more</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// to get a int value</span></span><br><span class="line">metafunction-name&lt;type arguments...&gt;::type::value</span><br></pre></td></tr></table></figure>
+<h2 id="Boost元函数库"><a href="#Boost元函数库" class="headerlink" title="Boost元函数库"></a>Boost元函数库</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
+<li>所有元函数都位于<strong>命名空间</strong>boost中</li>
+<li><strong>头文件</strong>格式：<code>#include &lt;boost/type_traits/metafunction-name.hpp&gt;</code></li>
+<li>所有<strong>数值元函数</strong>(包括bool, char 类型)都在其自身内直接提供了<code>::value</code></li>
+<li>有少数type_traits 为了发挥完整的功能需要一些非标准编译器支持（否则功能降级，但肯定安全、能编译成功）。</li>
+<li>类型归类元函数通常会忽视cv修饰符。</li>
+</ul>
+<h3 id="主类型归类"><a href="#主类型归类" class="headerlink" title="主类型归类"></a>主类型归类</h3><p>Primary Type Categorization</p>
+<p>对于给定的类型T，这些元函数中有且仅有一个会产生结果true。</p>
+<table>
+<thead>
+<tr>
+<th>主类型Trait</th>
+<th>::type::value 和 ::value 为 ture 的情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>is_array&lt;T&gt;</code></td>
+<td>T 是数组类型</td>
+</tr>
+<tr>
+<td><code>is_class&lt;T&gt;</code></td>
+<td>T 是类类型，如果缺乏编译器支持，T 是联合体时也是 true</td>
+</tr>
+<tr>
+<td><code>is_enum&lt;T&gt;</code></td>
+<td>T 是枚举类型</td>
+</tr>
+<tr>
+<td><code>is_float&lt;T&gt;</code></td>
+<td>T 是浮点类型</td>
+</tr>
+<tr>
+<td><code>is_function&lt;T&gt;</code></td>
+<td>T 是函数类型，<code>R(*)(args...)</code>/<code>R(&amp;)(args...)</code></td>
+</tr>
+<tr>
+<td><code>is_integral&lt;T&gt;</code></td>
+<td>T 是整型</td>
+</tr>
+<tr>
+<td><code>is_member_pointer&lt;T&gt;</code></td>
+<td>T 是指向函数成员或数据成员的指针，注意<code>is_pointer</code>识别不了这些类型。</td>
+</tr>
+<tr>
+<td><code>is_pointer&lt;T&gt;</code></td>
+<td>T 是指针类型（但不指向成员）</td>
+</tr>
+<tr>
+<td><code>is_reference&lt;T&gt;</code></td>
+<td>T 是引用</td>
+</tr>
+<tr>
+<td><code>is_union&lt;T&gt;</code></td>
+<td>T 是联合体，若缺乏编译器支持则总是false</td>
+</tr>
+<tr>
+<td><code>is_void&lt;T&gt;</code></td>
+<td>T 具有cv void形式</td>
+</tr>
+</tbody>
+</table>
+<p><strong>指向成员的指针</strong></p>
+<p>指向成员函数的指针：<code>R(C::*)(args...)cv</code></p>
+<p>指向数据成员的指针：<code>D C::*</code></p>
+<p>实际上它们根本不是指针，而是一种偏移量。所以和指针类型不同。</p>
+<h3 id="次类型归类"><a href="#次类型归类" class="headerlink" title="次类型归类"></a>次类型归类</h3><p>Secondary Type Categorization</p>
+<p>表示对主类型归类的分组或区分。</p>
+<table>
+<thead>
+<tr>
+<th>次类型Trait</th>
+<th>::type::value 和 ::value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>is_arithmetic&lt;T&gt;</code></td>
+<td>`is_integral<t>::value</t></td>
+<td></td>
+<td>is_float<t>::value`</t></td>
+</tr>
+<tr>
+<td><code>is_compound&lt;T&gt;</code></td>
+<td><code>!is_fundamental&lt;T&gt;::value</code></td>
+</tr>
+<tr>
+<td><code>is_fundamental&lt;T&gt;</code></td>
+<td>`is_arithmetic<t>::value</t></td>
+<td></td>
+<td>is_void<t>::value`</t></td>
+</tr>
+<tr>
+<td><code>is_member_function_pointer&lt;T&gt;</code></td>
+<td>T是指向成员函数的指针？</td>
+</tr>
+<tr>
+<td><code>is_object&lt;T&gt;</code></td>
+<td>`!(is_function<t>::value</t></td>
+<td></td>
+<td>is_reference<t>::value</t></td>
+<td></td>
+<td>is_void<t>::value)`</t></td>
+</tr>
+<tr>
+<td><code>is_scalar&lt;T&gt;</code></td>
+<td>`is_arithmetic<t>::value</t></td>
+<td></td>
+<td>is_enum<t>::value</t></td>
+<td></td>
+<td>is_pointer<t>::value</t></td>
+<td></td>
+<td>is_member_pointer<t>::value`</t></td>
+</tr>
+</tbody>
+</table>
+<h3 id="类型属性"><a href="#类型属性" class="headerlink" title="类型属性"></a>类型属性</h3><p>对于那些不是和标准类型归类直接相关的traits，type traits程序库使用“属性”作为包罗万象的术语来指定它们。</p>
+<p>这个分组中，最简单的是<code>is_const&lt;T&gt;</code>和<code>is_volatile&lt;T&gt;</code>。</p>
+<p>其余属性，略。</p>
+<h3 id="类型之间的关系"><a href="#类型之间的关系" class="headerlink" title="类型之间的关系"></a>类型之间的关系</h3><table>
+<thead>
+<tr>
+<th>元函数</th>
+<th>::value 为 true的条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>is_same&lt;T,U&gt;</code></td>
+<td>T 和 U 类型一致</td>
+</tr>
+<tr>
+<td><code>is_convertible&lt;T,U&gt;</code></td>
+<td>T 类型可以被隐式转换为 U 类型</td>
+</tr>
+<tr>
+<td><code>is_base_and_derived&lt;B,D&gt;</code></td>
+<td>B 是 D 的一个基类</td>
+</tr>
+</tbody>
+</table>
+<h3 id="类型转化"><a href="#类型转化" class="headerlink" title="类型转化"></a>类型转化</h3><p>不同于之前的，这组元函数产生类型结果而不是布尔值。</p>
+<table>
+<thead>
+<tr>
+<th>转化</th>
+<th>::type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>remove_const&lt;T&gt;</code></td>
+<td>T不带任何顶层const。<code>const int</code>变成int，但<code>const int*</code>不变</td>
+</tr>
+<tr>
+<td><code>remove_volatile&lt;T&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>remove_cv&lt;T&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>remove_reference&lt;T&gt;</code></td>
+<td>T不带任何顶层引用。<code>int&amp;</code>变成int，但<code>int*</code>不变</td>
+</tr>
+<tr>
+<td><code>remove_bounds&lt;T&gt;</code></td>
+<td>T不带任何顶层数组中括号。<code>int[2][3]</code>变成<code>int[3]</code></td>
+</tr>
+<tr>
+<td><code>remove_pointer&lt;T&gt;</code></td>
+<td>T不带任何顶层指针。<code>int*</code>变成int，但<code>int&amp;</code>不变</td>
+</tr>
+<tr>
+<td><code>add_reference&lt;T&gt;</code></td>
+<td>如果T是引用类型，结果为T，否则为<code>T&amp;</code></td>
+</tr>
+<tr>
+<td><code>add_pointer&lt;T&gt;</code></td>
+<td><code>remove_reference&lt;T&gt;::type*</code>。如<code>int</code>和<code>int&amp;</code>都变成<code>int*</code></td>
+</tr>
+<tr>
+<td><code>add_const&lt;T&gt;</code></td>
+<td>T const</td>
+</tr>
+<tr>
+<td><code>add_volatile&lt;T&gt;</code></td>
+<td>T volatile</td>
+</tr>
+<tr>
+<td><code>add_cv&lt;T&gt;</code></td>
+<td>T const volatile</td>
+</tr>
+</tbody>
+</table>
+<h2 id="元函数的定义"><a href="#元函数的定义" class="headerlink" title="元函数的定义"></a>元函数的定义</h2><p><strong>无参元函数</strong></p>
+<p>编写无参元函数最容易的方式是借助一个简单的struct：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">always_int</span>&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">int</span> type;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>元函数的定义</strong></p>
+<p>一个元函数可以是</p>
+<ul>
+<li>一个类模板，它的所有参数都是类型</li>
+<li>一个类，带有一个名为”type”的可公开访问的嵌套结果类型</li>
+</ul>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/C++Collection/C++基础笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -2447,75 +2739,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Tcp/TCP网络拥塞控制" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/24/Network/Tcp/TCP网络拥塞控制/" class="article-date">
-      <time datetime="2018-12-24T06:55:50.000Z" itemprop="datePublished">2018-12-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/24/Network/Tcp/TCP网络拥塞控制/">TCP网络拥塞控制</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="网络拥塞控制的四种算法"><a href="#网络拥塞控制的四种算法" class="headerlink" title="网络拥塞控制的四种算法"></a>网络拥塞控制的四种算法</h3><p>cnwd - 拥塞窗口的大小（以字节为单位，这里以数据段的个数为单位方便计算），发送方让自己的发送窗口等于拥塞窗口。<br>RTT- 一个传输轮次经历的时间。</p>
-<h4 id="慢开始"><a href="#慢开始" class="headerlink" title="慢开始"></a>慢开始</h4><p>最初的TCP在连接建立成功后会向网络中发送大量的数据包，这样很容易导致网络中路由器缓存空间耗尽，从而发生拥塞。因此新建立的连接不能够一开始就大量发送数据包，而只能根据网络情况逐步增加每次发送的数据量，以避免上述现象的发生。具体来说，当新建连接时，cwnd初始化为1个报文段(MSS)大小，发送端开始按照拥塞窗口大小发送数据，每当有一个报文段被确认，cwnd就增加1倍。这样cwnd的值就随着网络往返时间RTT呈指数级增长.<br>这里设置了一个慢开始门限ssthresh。<br>cwnd &lt; ssthresh时,进行慢开始算法。<br>cwnd&gt;ssthresh时,进行拥塞避免算。<br>cwnd = ssthresh时,两者皆可。</p>
-<h4 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h4><p>每个轮次结束都让cwnd增加一个，而不是一倍，增加的更加缓慢。<br>不论是慢开始还是拥塞避免只要网络出现拥塞（没有按时到达）时，就把ssthresh的值置为出现拥塞时的拥塞窗口的一半，以及cwnd置为1，进行慢开始。 </p>
-<h4 id="快重传和快恢复算法"><a href="#快重传和快恢复算法" class="headerlink" title="快重传和快恢复算法"></a>快重传和快恢复算法</h4><p>快重传算法要求接收方每收到一个失序的报文段后就立即进行重复确认。 </p>
-<p>当接收方接收到了M4,却没有接收到M3，这时报文段已经失序，不能确认M4,根据快重传算法规定，返回一个M2重复确认提醒接收方M3没有接收到， 在接收到M5,M6后继续返回两个重复确认。快重传算法规定发送方一连接收到三个重复确认就立即重传对方尚未收到的报文段M3。<br>（还有一种快重传把cwnd增加到ssthresh+3MSS）.<br>快恢复算法与快重传算法配合使用。<br>一连收到三个重复确认信号后就把ssthresh减半，然后cwnd设置为ssthresh减半后的数值，执行拥塞避免算法。 </p>
-<p>在采用快恢复算法时，慢开始算法只有在建立TCP连接时和网络超时才使用。 </p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
     </div>
 
       
