@@ -418,15 +418,22 @@
       
           
         <h3 id="系统安装后的配置"><a href="#系统安装后的配置" class="headerlink" title="系统安装后的配置"></a>系统安装后的配置</h3><ul>
-<li><p>关闭防火墙</p>
-<p>chkconfig iptables off</p>
-</li>
 <li><p>关闭selinux</p>
 <p>/etc/selinux/config</p>
 <p>SELINUX=disabled</p>
 </li>
+<li><p>关闭防火墙</p>
+<ul>
+<li><p>chkconfig iptables off</p>
+</li>
 <li><p>chkconfig NetworkManager off</p>
 <p>systemctl disable NetworkManager.service</p>
+</li>
+<li><p>firewall-cmd –state</p>
+<p>systemctl stop firewalld.service</p>
+<p>systemctl disable firewalld.service</p>
+</li>
+</ul>
 </li>
 <li><p>reboot</p>
 </li>

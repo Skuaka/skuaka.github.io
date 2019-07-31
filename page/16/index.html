@@ -234,6 +234,95 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Network/Ccie/路由协议分类" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/路由协议分类/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="路由协议作用"><a href="#路由协议作用" class="headerlink" title="路由协议作用"></a>路由协议作用</h3><ol>
+<li>网络信息共享</li>
+<li>最佳路径的计算</li>
+<li>路由策略</li>
+</ol>
+<h3 id="路由协议分类"><a href="#路由协议分类" class="headerlink" title="路由协议分类"></a>路由协议分类</h3><ol>
+<li><p>应用场景</p>
+<ul>
+<li>as内  IGPS（RIP、EIGRP、OSPF、IS-IS）EGPS（BGP）</li>
+<li>as间</li>
+</ul>
+</li>
+<li><p>度量值metric计算/路径择优标准</p>
+<ul>
+<li><p>DV距离矢量：RIP</p>
+</li>
+<li><p>高级DV：EIGRP  接口五个参数 k1带宽 k2负载 k3延迟 k4可靠性 k5最大传输单元MTU</p>
+<p>EIGRP的距离/跳数和RIP一样发送时+1，用来限制扩散距离。</p>
+</li>
+<li><p>链路状态 LInk State：OSPF、IS-IS  </p>
+</li>
+<li><p>距离向量：BGP</p>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Ccie/逻辑子接口" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -298,10 +387,10 @@
 
 
   
-    <article id="post-Network/Ccie/路由协议分类" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/路由协议分类/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -317,7 +406,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
     </h1>
   
 
@@ -327,32 +416,33 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="路由协议作用"><a href="#路由协议作用" class="headerlink" title="路由协议作用"></a>路由协议作用</h3><ol>
-<li>网络信息共享</li>
-<li>最佳路径的计算</li>
-<li>路由策略</li>
-</ol>
-<h3 id="路由协议分类"><a href="#路由协议分类" class="headerlink" title="路由协议分类"></a>路由协议分类</h3><ol>
-<li><p>应用场景</p>
-<ul>
-<li>as内  IGPS（RIP、EIGRP、OSPF、IS-IS）EGPS（BGP）</li>
-<li>as间</li>
-</ul>
-</li>
-<li><p>度量值metric计算/路径择优标准</p>
-<ul>
-<li><p>DV距离矢量：RIP</p>
-</li>
-<li><p>高级DV：EIGRP  接口五个参数 k1带宽 k2负载 k3延迟 k4可靠性 k5最大传输单元MTU</p>
-<p>EIGRP的距离/跳数和RIP一样发送时+1，用来限制扩散距离。</p>
-</li>
-<li><p>链路状态 LInk State：OSPF、IS-IS  </p>
-</li>
-<li><p>距离向量：BGP</p>
-</li>
-</ul>
-</li>
-</ol>
+        <p>重分发 </p>
+<p>将不同路由协议转化</p>
+<p>1直连进路由选择协议</p>
+<p>redistribute connect metric 1</p>
+<p>2其他路由选择协议进rip</p>
+<p>router rip</p>
+<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
+<p>3其他路由选择协议进eigrp</p>
+<p>router eigrp 100</p>
+<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
+<p>4其他进ospf</p>
+<p>router os 1</p>
+<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
+<p>默认OE2</p>
+<p>将oe2改成oe1:</p>
+<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
+<p>重分发流量控制</p>
+<p>acl</p>
+<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
+<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
+<p>将acl抓去到的流量给route-map</p>
+<p>route-map +名字 +permit/deny </p>
+<p>优先级10(默认优先级) </p>
+<p>match ip address +acl编号</p>
+<p>route-map也默认deny所有流量</p>
+<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
+<p>re rip router-map ccie metric ……</p>
 
       
     </div>
@@ -494,96 +584,6 @@
 </li>
 </ol>
 <h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>重分发 </p>
-<p>将不同路由协议转化</p>
-<p>1直连进路由选择协议</p>
-<p>redistribute connect metric 1</p>
-<p>2其他路由选择协议进rip</p>
-<p>router rip</p>
-<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
-<p>3其他路由选择协议进eigrp</p>
-<p>router eigrp 100</p>
-<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
-<p>4其他进ospf</p>
-<p>router os 1</p>
-<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
-<p>默认OE2</p>
-<p>将oe2改成oe1:</p>
-<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
-<p>重分发流量控制</p>
-<p>acl</p>
-<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
-<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
-<p>将acl抓去到的流量给route-map</p>
-<p>route-map +名字 +permit/deny </p>
-<p>优先级10(默认优先级) </p>
-<p>match ip address +acl编号</p>
-<p>route-map也默认deny所有流量</p>
-<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
-<p>re rip router-map ccie metric ……</p>
-
       
     </div>
     
