@@ -1615,192 +1615,6 @@
 
 
   
-    <article id="post-Network/Ccie/IS-IS" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/IS-IS/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/IS-IS/">CCIE IS-IS</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="IS-IS（中间系统到中间系统）"><a href="#IS-IS（中间系统到中间系统）" class="headerlink" title="IS-IS（中间系统到中间系统）"></a>IS-IS（中间系统到中间系统）</h1><h3 id="数据传递方式"><a href="#数据传递方式" class="headerlink" title="数据传递方式"></a>数据传递方式</h3><ul>
-<li><p>面向连接 tcp/ip</p>
-</li>
-<li><p>非面向连接 clns/clnp 非连接的网络服务(负责控制数据传递过程)/非连接的网络协议(网络地址标识)</p>
-<p>最后，ip获得广泛使用，但是CLNS的理念也得到认可，因此保留下来，叫做UDP。</p>
-</li>
-</ul>
-<h3 id="IS-IS术语"><a href="#IS-IS术语" class="headerlink" title="IS-IS术语"></a>IS-IS术语</h3><ul>
-<li><p>IS：中间系统 即 路由器router</p>
-</li>
-<li><p>ES：终端系统 （但是现在已经没有使用clnp标识的设备了）</p>
-</li>
-<li><p>clnp：标识</p>
-<p>NET：网络实体标识（网络+主机）128bit</p>
-<p>clnp：clnp地址  NSAP网络服务应用标识</p>
-</li>
-</ul>
-<h3 id="clnp地址解释"><a href="#clnp地址解释" class="headerlink" title="clnp地址解释"></a>clnp地址解释</h3><p>49.0001.0000.0000.0001.00</p>
-<p>49.0002.0000.0000.0002.00</p>
-<p>49.0101.0000.0000.0001.00</p>
-<p>49：AFI地址格式标识 A地址 F格式 I授权标识  数字由官方的表定好。47，48，49用于私网。</p>
-<p>0101 01/01 域/区域 （区域包含在域内）这里为两个十六进制数</p>
-<p>0000.0000.0001 mac地址</p>
-<p>00 服务号（作用类似于端口号）</p>
-<h3 id="IS-IS-域、区域-骨干区域，常规区域"><a href="#IS-IS-域、区域-骨干区域，常规区域" class="headerlink" title="IS-IS 域、区域{骨干区域，常规区域}"></a>IS-IS 域、区域{骨干区域，常规区域}</h3><p>域：AS</p>
-<p>区域：0，1，2 ……</p>
-<h3 id="路由器角色类型"><a href="#路由器角色类型" class="headerlink" title="路由器角色类型"></a>路由器角色类型</h3><ul>
-<li>OSPF{角色：DR BDR DR-other，类型：ABR ASBR}</li>
-<li>IS-IS {角色：Dis(不完整)，类型：L1  L2  L1/L2}</li>
-</ul>
-<p>伪节点</p>
-<ul>
-<li>OSPF：DR{减少邻接关系，提高更新效率}</li>
-<li>IS-IS：Dis</li>
-</ul>
-<p>IS-IS类型</p>
-<ul>
-<li>L2 骨干区域</li>
-<li>L1 常规区域</li>
-<li>L1/L2(默认类型) 连接两个区域</li>
-</ul>
-<h3 id="OSPF-LSA-特殊区域"><a href="#OSPF-LSA-特殊区域" class="headerlink" title="OSPF LSA 特殊区域"></a>OSPF LSA 特殊区域</h3><p>LSA：Link-State Advertisement 链路状态广播</p>
-<p>DBD：数据库描述报文</p>
-<p>LSR：链路状态查询</p>
-<p>LSU：链路状态更新</p>
-<h4 id="OSPF七种LSA类型"><a href="#OSPF七种LSA类型" class="headerlink" title="OSPF七种LSA类型"></a>OSPF七种LSA类型</h4><ul>
-<li><p>LSA1（Router LSA）</p>
-<p>起源：区域内每台设备都能产生LSA1</p>
-<p>内容：节点信息{RID network cost}</p>
-<p>扩散：不允许穿越ABR，也就是区域内扩散。</p>
-<p>路由：区域内路由</p>
-</li>
-<li><p>LSA2（Network LSA）</p>
-<p>起源：只有DR可以产生</p>
-<p>内容：拓扑信息{节点的直连情况，谁是DR}</p>
-<p>扩散：区域内</p>
-</li>
-<li><p>LSA3（Network summary LSA）</p>
-<p>起源：ABR</p>
-<p>内容：区域网络信息</p>
-<p>扩散：整个OSPF AS</p>
-<p>路由：区域间路由</p>
-</li>
-<li><p>LSA4（ASBR summary LSA）</p>
-<p>起源：ASBR所在域的ABR</p>
-<p>内容：ASBR的RID</p>
-<p>扩散：整个OSPF</p>
-<p>路由：外部{OE1，OE2}</p>
-</li>
-<li><p>LSA5（Autonomous system external LSA）</p>
-<p>起源：ASBR</p>
-<p>内容：外部路由</p>
-<p>扩散：整个OSPF</p>
-<p>路由：外部{OE1，OE2}</p>
-</li>
-</ul>
-<p>OSPF LSA 特区</p>
-<p>LSA6 MOSPF专用（废除）</p>
-<p>LSA7 NSSA</p>
-<p>LSA8 LSA9 ：OSPFv3</p>
-<p>LSA10 口袋路由</p>
-<p>LSA11 标记</p>
-<h3 id="IS-IS路由类型"><a href="#IS-IS路由类型" class="headerlink" title="IS-IS路由类型"></a>IS-IS路由类型</h3><p>L2路由 区域间、外部</p>
-<p>L1路由 区域内、内部</p>
-<p>OSPF不允许同一接口网络属于同一区域</p>
-<p>允许一台设备加入不同区域</p>
-<h3 id="睡着了"><a href="#睡着了" class="headerlink" title="睡着了"></a>睡着了</h3><p>log-adjacency-changes</p>
-<p>EIGRP</p>
-<p>show ip ei neighbor</p>
-<p>neighbor 对端接口ip</p>
-<p>BGP</p>
-<p>peer-address对端RID</p>
-<p>IS-IS</p>
-<p>NET sys-id对方</p>
-<h3 id="ISIS的汇总及重分发"><a href="#ISIS的汇总及重分发" class="headerlink" title="ISIS的汇总及重分发"></a>ISIS的汇总及重分发</h3><p>汇总和重分发最好做在拥有L2角色的设备上。</p>
-<p>汇总后的路由和重分发的路由都是L2设备。</p>
-<h4 id="L1设备上完成重分发和汇总的解决方法"><a href="#L1设备上完成重分发和汇总的解决方法" class="headerlink" title="L1设备上完成重分发和汇总的解决方法"></a>L1设备上完成重分发和汇总的解决方法</h4><ul>
-<li><p>L1设备上重分发</p>
-<p>重分发时指定外部路由类型改为L1</p>
-</li>
-<li><p>L1设备上做汇总</p>
-<p>被汇总的网络必须以外部路由形式进入ISIS，再汇总才生效</p>
-<p>！！注意</p>
-<p>ISIS的外部路由类型是L2，那么接受者不累加接口开销</p>
-<p>ISIS的外部路由类型是L1，那么接受者会累加接口开销</p>
-</li>
-</ul>
-<h3 id="ISIS的认证"><a href="#ISIS的认证" class="headerlink" title="ISIS的认证"></a>ISIS的认证</h3><p>区域认证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">area-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
-<p>链路认证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;id&gt;</span><br><span class="line">isis password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
-<p>域(AS)认证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">domain-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
-<p>~~注意</p>
-<p>区域认证、域认证 不通过只影响路由学习；</p>
-<p>链路认证不通过影响邻居关系建立。</p>
-<p>IIH：HELLO：链路认证是包含在hello 中的；</p>
-<p>LSP：更新：区域认证、域认证是包含在更新中的。</p>
-<h3 id="ISIS的路由泄露"><a href="#ISIS的路由泄露" class="headerlink" title="ISIS的路由泄露"></a>ISIS的路由泄露</h3><p>ISIS路由泄露 指 将指定的L2数据库目标网络信息转化成L1的，发送给L1设备。</p>
-<h5 id="路由泄露的配置流程"><a href="#路由泄露的配置流程" class="headerlink" title="路由泄露的配置流程"></a>路由泄露的配置流程</h5><p>步骤1：L1/L2 设备上编写 ACL，匹配被泄露的目标路由</p>
-<p>步骤2：L1/L2 设备上编写 ROUTE-MAP 引用 ACL。</p>
-<p>步骤3：L1/L2 设备上做 ISIS 到 ISIS 的重分发，并且指定是利用 route-map 完成 L2 数据库条目到 L1 数据库条目的泄露。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redistribute isis ip level-2 into level-1 route-map 2T1</span><br><span class="line">isis metric &lt;开销&gt; //更改开销</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Network/Ccie/MPLS VPN" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -2142,6 +1956,206 @@
 <p><strong>区别2</strong>：两个 spoke 需要设定两个 NHS 服务器，并且谁先被设定谁就是主设备。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp nhs 172.16.1.1</span><br><span class="line">ip nhrp map 172.16.1.1 202.1.1.1</span><br><span class="line">ip nhrp map multicast 202.1.1.1</span><br><span class="line">ip nhrp nhs 172.16.1.2</span><br><span class="line">ip nhrp map 172.16.1.2 202.1.1.2</span><br><span class="line">ip nhrp map multicast 202.1.1.2</span><br></pre></td></tr></table></figure>
 
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/MPLS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/MPLS/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/MPLS/">CCIE MPLS</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="代理arp"><a href="#代理arp" class="headerlink" title="代理arp"></a>代理arp</h3><p>arp</p>
+<p>请求：广播</p>
+<p>回应：单播</p>
+<p>proxy arp（代理arp）</p>
+<p>代为请求和回应</p>
+<h4 id="帧头重写"><a href="#帧头重写" class="headerlink" title="帧头重写"></a>帧头重写</h4><p>重写=switch（从mac表内拿出置换）</p>
+<p>目的mac改为arp请求结果</p>
+<p>源mac改为出口mac</p>
+<h3 id="路由器数据转发机制"><a href="#路由器数据转发机制" class="headerlink" title="路由器数据转发机制"></a>路由器数据转发机制</h3><ol>
+<li><p>process forward进程转发（不缓存）</p>
+</li>
+<li><p>cache forward缓存转发（结果缓存10s）</p>
+<p>上两者都是基于流量触发（第一次会丢包）</p>
+</li>
+<li><p><strong>CEF  Cisco的快速转发技术</strong></p>
+<p>基于拓扑，不需要流量触发</p>
+</li>
+</ol>
+<h4 id="CEF"><a href="#CEF" class="headerlink" title="CEF"></a>CEF</h4><p>FIB 转发信息库（本身就是路由表的副本）</p>
+<p>RIB 路由表（给FIB提供要素）</p>
+<h2 id="MPLS详解"><a href="#MPLS详解" class="headerlink" title="MPLS详解"></a>MPLS详解</h2><p>multiple protocol label switch（多协议标签交换）</p>
+<h3 id="MPLS作用"><a href="#MPLS作用" class="headerlink" title="MPLS作用"></a>MPLS作用</h3><p>MPLS是一种数据交换机制，基于标签库和数据携带的标签。</p>
+<p>进行数据转发，同时支持多种协议。</p>
+<p>MPLS在实际工作中，能实现如下两个基本功能：</p>
+<ol>
+<li>数据包的高速转发</li>
+<li>减少参与BGP的设备数量、减少对等体关系、减少不必要的路由学习</li>
+</ol>
+<h3 id="MPLS术语"><a href="#MPLS术语" class="headerlink" title="MPLS术语"></a>MPLS术语</h3><h4 id="label-标签"><a href="#label-标签" class="headerlink" title="label 标签"></a>label 标签</h4><p>总长 <strong>32bit</strong> 由如下几个部分组成：</p>
+<p><strong>前20bit</strong> 是标签取值范围</p>
+<p><strong>第21bit</strong> 是栈底位，栈底位为1则表明该标签已经是最后一个</p>
+<p><strong>第22~24bit</strong> 是体验位，可以将标签对应的数据分成8个级别，给予不同的传输策略。</p>
+<p><strong>最后8bit</strong> 是TTL，限制携带标签的数据传递范围。</p>
+<h4 id="MPLS-模式"><a href="#MPLS-模式" class="headerlink" title="MPLS 模式"></a>MPLS 模式</h4><p>帧模式：frame mode（主流模式），标签被插在帧头的后面，包头前面。</p>
+<p>信令模式：cell mode 标签被插在信令头后面。</p>
+<h4 id="LSR：标签交换路由器"><a href="#LSR：标签交换路由器" class="headerlink" title="LSR：标签交换路由器"></a>LSR：标签交换路由器</h4><p>启用了MPLS的路由器统称LSR。</p>
+<p>入站 LSR （inbound LSR）：接收到 IP 数据包，压入标签，传递给 MPLS 网络。</p>
+<p>链路中 LSR （link LSR）：接收到携带标签的数据，基于标签进行数据转发。</p>
+<p>出站 LSR （outbound LSR）：负责将标签移除，并且变回 IP 数据报文。</p>
+<h4 id="压入、交换、移除、弹出"><a href="#压入、交换、移除、弹出" class="headerlink" title="压入、交换、移除、弹出"></a>压入、交换、移除、弹出</h4><p>压入：入站LSR将标签压入数据。</p>
+<p>交换：链路中LSR基于标签库，进行标签的置换、数据的传递。</p>
+<p>移除：出站LSR将数据携带的所有标签全部删除。</p>
+<p>弹出：出站LSR将数据携带的栈顶标签弹出，其他标签保留。</p>
+<h4 id="LSP：链路标签路径"><a href="#LSP：链路标签路径" class="headerlink" title="LSP：链路标签路径"></a>LSP：链路标签路径</h4><p>是MPLS设备传递数据所需的路径。（即路由）</p>
+<p>LSP是通过标签的关联产生的。</p>
+<h4 id="标签分配、分发、关联、维护协议"><a href="#标签分配、分发、关联、维护协议" class="headerlink" title="标签分配、分发、关联、维护协议"></a>标签分配、分发、关联、维护协议</h4><p>TDP：标记分发协议、思科私有</p>
+<p>LDP：<strong>标签分发协议</strong>、公有公开</p>
+<h3 id="LDP详解"><a href="#LDP详解" class="headerlink" title="LDP详解"></a>LDP详解</h3><h4 id="LDP作用"><a href="#LDP作用" class="headerlink" title="LDP作用"></a>LDP作用</h4><ol>
+<li>利用 hello 消息建立 LDP 邻接关系。</li>
+<li>基于CEF给本地网络分配本地标签。</li>
+<li>将网络对应的标签分发共享给邻居</li>
+<li>基于底层协议完成本地标签与远程共享标签的关联，最终形成LSP。</li>
+<li>负责监控LSP的有效性，并且维护它。</li>
+</ol>
+<h4 id="LDP邻接关系的建立"><a href="#LDP邻接关系的建立" class="headerlink" title="LDP邻接关系的建立"></a>LDP邻接关系的建立</h4><p>LDP 邻居的发现，通过hello消息，基于UDP，目标端口646。</p>
+<p>LDP 利用TCP，目标端口646完成邻接关系建立。</p>
+<p>LDP可以设定RID，RID扮演更新源，更新源会成为对端TCP的目标接收地址，所以更新源必须可达。</p>
+<h4 id="LDP标签的分配"><a href="#LDP标签的分配" class="headerlink" title="LDP标签的分配"></a>LDP标签的分配</h4><p>除BGP路由，LDP可以给本地直连网络以及非直连网络分配标签。</p>
+<h4 id="LDP标签的共享"><a href="#LDP标签的共享" class="headerlink" title="LDP标签的共享"></a>LDP标签的共享</h4><p>两种形式：下游主动、上游主动。</p>
+<p>实际上标签的分享是给所有的邻居，不遵循所谓的上下游。</p>
+<h4 id="LDP标签的关联"><a href="#LDP标签的关联" class="headerlink" title="LDP标签的关联"></a>LDP标签的关联</h4><p>LDP永远将路由路径下一跳共享的标签与对应网络的本地标签关联。</p>
+<p>boundaddress：绑定地址，参与MPLS设备的IP会成为绑定地址和，会跟着本地标签一起共享给LDP邻居，邻居根据底层协议下一跳地址和绑定地址的判断来确认哪个LDP邻居是下一跳，再绑定。</p>
+<h4 id="LDP的特殊标签"><a href="#LDP的特殊标签" class="headerlink" title="LDP的特殊标签"></a>LDP的特殊标签</h4><ul>
+<li>UNTAGE：未标记</li>
+</ul>
+<p>出现原因：底层是ospf,本地网络无法找到对应的远程标签，LDP给网络分配untage。</p>
+<p>处理方式：目标网络远程标签如果是untage，那么LSR会将所有标签移除，向外传递。</p>
+<ul>
+<li>POP：倒数第二跳标签</li>
+</ul>
+<p>出现原因：当前路由器给本地直连网络分配的本地标签就是POP。</p>
+<p>处理方式：如果出站标签是POP，那么LSR 会将栈顶标签弹出。</p>
+<p>意义：提高数据转发效率，减少一次标签库查找。</p>
+<h4 id="LDP的两张表"><a href="#LDP的两张表" class="headerlink" title="LDP的两张表"></a>LDP的两张表</h4><p>LIB：标签信息库</p>
+<p>目标网络本地标签和学习到的远程标签存储在这里。（未关联）</p>
+<p>LFIB：标签转发信息库</p>
+<p>标签关联后的结果 即 LSP  存储在这里。</p>
+<h4 id="CEF、LDP-数据转发过程"><a href="#CEF、LDP-数据转发过程" class="headerlink" title="CEF、LDP 数据转发过程"></a>CEF、LDP 数据转发过程</h4><p>略</p>
+<h3 id="MPLS的配置流程"><a href="#MPLS的配置流程" class="headerlink" title="MPLS的配置流程"></a>MPLS的配置流程</h3><p>步骤1：开启 CEF（默认开启，一般情况不需要此命令）</p>
+<p><code>ip cef</code></p>
+<p>步骤2：设置标签分配、分发关联协议（默认是LDP）</p>
+<p><code>mpls label protocol &lt;ldp/tdp&gt;</code></p>
+<p>步骤3：设置标签取值范围（通常不设置）</p>
+<p><code>mpls label range &lt;xx-yy&gt;</code></p>
+<p>步骤4：设置 LDP 的 RID  即设置更新源（不设置则和OSPF一样自动选取RID）</p>
+<p><code>mpls ldp router-id loopback x [force]  //RID 必须可达、force 强制改变 RID</code></p>
+<p>步骤5：接口下启用MPLS</p>
+<p><code>mpls ip</code></p>
+<h4 id="LDP的查看校验命令"><a href="#LDP的查看校验命令" class="headerlink" title="LDP的查看校验命令"></a>LDP的查看校验命令</h4><ul>
+<li><p>查看LDP是否发现了邻居</p>
+<p><code>show mpls idp discovery</code></p>
+<p>邻居被发现后，no host route 指没有抵达对方的主机路由，但有网络路由，总体可达。</p>
+<p>邻居被发现后，no route 指没有抵达对方的路由路径，邻接关系最终无法建立。</p>
+</li>
+<li><p>查看LDP邻接关系是否建立</p>
+<p><code>show mpls idp neighbor</code></p>
+</li>
+<li><p>查看 LIB</p>
+<p><code>show mpls ldp binding</code></p>
+</li>
+<li><p>查看LFIB</p>
+<p><code>show mpls forwarding-table</code></p>
+</li>
+</ul>
+<h4 id="通过-IGP的路径改变来影响-LSP"><a href="#通过-IGP的路径改变来影响-LSP" class="headerlink" title="通过 IGP的路径改变来影响 LSP"></a>通过 IGP的路径改变来影响 LSP</h4><p>LSP是会存在负载均衡的。实际上底层协议的路径决定了 LSP路径。</p>
+<h4 id="CEF-FIB-和-ADJ-TABLE-详解"><a href="#CEF-FIB-和-ADJ-TABLE-详解" class="headerlink" title="CEF FIB 和 ADJ-TABLE 详解"></a>CEF FIB 和 ADJ-TABLE 详解</h4><p><code>show ip cef detail | begin 172.16.1.0</code></p>
+<p>查看cef邻接表</p>
+<p><code>show adjacency detail</code></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>arp的作用、代理arp的作用</p>
+</li>
+<li><p>路由器数据转发的三个机制</p>
+</li>
+<li><p>CEF两张表和工作机制</p>
+</li>
+<li><p>RIB FIB ADJ-TABLE 在数据传递时使用方法</p>
+</li>
+<li><p>MPLS 的全称、模式</p>
+</li>
+<li><p>标签长度和每段的含义</p>
+</li>
+<li><p>MPLS 术语</p>
+<p>LSR(in/out/link)    LSP</p>
+<p>标签的动作：压入、交换、移除、弹出</p>
+<p>POP和UNTAGE</p>
+<p>LDP和TDP的作用</p>
+<p>LDP的标签分配、分发、关联</p>
+</li>
+<li><p>MPLS的配置流程</p>
+</li>
+<li><p>查看和理解LDP的邻居发现、邻接建立</p>
+</li>
+<li><p>查看和理解LIB 和LFIB</p>
+</li>
+<li><p>理解</p>
+</li>
+</ol>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     
