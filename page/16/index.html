@@ -234,6 +234,95 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Network/Ccie/路由协议分类" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/路由协议分类/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="路由协议作用"><a href="#路由协议作用" class="headerlink" title="路由协议作用"></a>路由协议作用</h3><ol>
+<li>网络信息共享</li>
+<li>最佳路径的计算</li>
+<li>路由策略</li>
+</ol>
+<h3 id="路由协议分类"><a href="#路由协议分类" class="headerlink" title="路由协议分类"></a>路由协议分类</h3><ol>
+<li><p>应用场景</p>
+<ul>
+<li>as内  IGPS（RIP、EIGRP、OSPF、IS-IS）EGPS（BGP）</li>
+<li>as间</li>
+</ul>
+</li>
+<li><p>度量值metric计算/路径择优标准</p>
+<ul>
+<li><p>DV距离矢量：RIP</p>
+</li>
+<li><p>高级DV：EIGRP  接口五个参数 k1带宽 k2负载 k3延迟 k4可靠性 k5最大传输单元MTU</p>
+<p>EIGRP的距离/跳数和RIP一样发送时+1，用来限制扩散距离。</p>
+</li>
+<li><p>链路状态 LInk State：OSPF、IS-IS  </p>
+</li>
+<li><p>距离向量：BGP</p>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Ccie/跨域的多播" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -357,70 +446,6 @@
 
 
   
-    <article id="post-Network/Ccie/逻辑子接口" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/逻辑子接口/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="路由器主接口创建逻辑子接口"><a href="#路由器主接口创建逻辑子接口" class="headerlink" title="路由器主接口创建逻辑子接口"></a>路由器主接口创建逻辑子接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt; //进入主接口</span><br><span class="line">no sh</span><br><span class="line">interface &lt;intf-id.子接口编号&gt; //创建逻辑子接口</span><br><span class="line">encapsulation dot1q &lt;vlan ID&gt; //指定逻辑子接口接收带有特定vlan标记的流量</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -511,10 +536,10 @@
 
 
   
-    <article id="post-Network/Ccie/路由协议分类" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/逻辑子接口" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/路由协议分类/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/逻辑子接口/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -530,7 +555,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a>
     </h1>
   
 
@@ -540,32 +565,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="路由协议作用"><a href="#路由协议作用" class="headerlink" title="路由协议作用"></a>路由协议作用</h3><ol>
-<li>网络信息共享</li>
-<li>最佳路径的计算</li>
-<li>路由策略</li>
-</ol>
-<h3 id="路由协议分类"><a href="#路由协议分类" class="headerlink" title="路由协议分类"></a>路由协议分类</h3><ol>
-<li><p>应用场景</p>
-<ul>
-<li>as内  IGPS（RIP、EIGRP、OSPF、IS-IS）EGPS（BGP）</li>
-<li>as间</li>
-</ul>
-</li>
-<li><p>度量值metric计算/路径择优标准</p>
-<ul>
-<li><p>DV距离矢量：RIP</p>
-</li>
-<li><p>高级DV：EIGRP  接口五个参数 k1带宽 k2负载 k3延迟 k4可靠性 k5最大传输单元MTU</p>
-<p>EIGRP的距离/跳数和RIP一样发送时+1，用来限制扩散距离。</p>
-</li>
-<li><p>链路状态 LInk State：OSPF、IS-IS  </p>
-</li>
-<li><p>距离向量：BGP</p>
-</li>
-</ul>
-</li>
-</ol>
+        <h3 id="路由器主接口创建逻辑子接口"><a href="#路由器主接口创建逻辑子接口" class="headerlink" title="路由器主接口创建逻辑子接口"></a>路由器主接口创建逻辑子接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt; //进入主接口</span><br><span class="line">no sh</span><br><span class="line">interface &lt;intf-id.子接口编号&gt; //创建逻辑子接口</span><br><span class="line">encapsulation dot1q &lt;vlan ID&gt; //指定逻辑子接口接收带有特定vlan标记的流量</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
