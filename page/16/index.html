@@ -421,10 +421,10 @@
 
 
   
-    <article id="post-Network/Ccie/防火墙" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/防火墙/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -440,7 +440,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/防火墙/">CCIE 防火墙</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
     </h1>
   
 
@@ -450,84 +450,34 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h1><h2 id="防火墙的分类"><a href="#防火墙的分类" class="headerlink" title="防火墙的分类"></a>防火墙的分类</h2><p>硬件防火墙：流量的省查及访问的控制：保护的是网络</p>
-<p>软件防火墙：省查木马或病毒：保护的是系统</p>
-<p>应用防火墙：WAF（WEB 应用防火墙）、APP 防火墙</p>
-<h3 id="硬件防火墙"><a href="#硬件防火墙" class="headerlink" title="硬件防火墙"></a>硬件防火墙</h3><p>checkpoint（诺基亚）</p>
-<p>netscreen（詹博、Juniper）</p>
-<p>PIX、ASA（Cisco）SDN（安全自防御网络、软件定义的网络）</p>
-<p>华为、天融信</p>
-<h4 id="硬件防火墙的部署"><a href="#硬件防火墙的部署" class="headerlink" title="硬件防火墙的部署"></a>硬件防火墙的部署</h4><p>网络的边缘部署防火墙，一般放在 PPPOE 拨号设备的身后，关键节点之间。</p>
-<h2 id="防火墙的基础知识"><a href="#防火墙的基础知识" class="headerlink" title="防火墙的基础知识"></a>防火墙的基础知识</h2><h3 id="防火墙工作模式"><a href="#防火墙工作模式" class="headerlink" title="防火墙工作模式"></a>防火墙工作模式</h3><p>路由模式：（默认模式）防火墙读取 IP 包头，进行网络层的保护，支持动态路由协议和静态路由。</p>
-<p>交换模式：</p>
-<h3 id="防火墙的多模式和单模式"><a href="#防火墙的多模式和单模式" class="headerlink" title="防火墙的多模式和单模式"></a>防火墙的多模式和单模式</h3><p>多模式支持虚拟防火墙，即把一台防火墙配置成多台逻辑防火墙。</p>
-<p>单模式是默认模式。</p>
-<h3 id="防火墙接口的类型"><a href="#防火墙接口的类型" class="headerlink" title="防火墙接口的类型"></a>防火墙接口的类型</h3><p>inside：内部接口</p>
-<p>通常连接的是信任网络即内网</p>
-<p>outside：外部接口</p>
-<p>通常连接的是非信任公共网络，比如 ISP 或 其他组织网络</p>
-<h3 id="DMZ：非军事区域"><a href="#DMZ：非军事区域" class="headerlink" title="DMZ：非军事区域"></a>DMZ：非军事区域</h3><p>通常数据中心放在 DMZ 区域</p>
-<h3 id="防火墙接口等级和访问规则"><a href="#防火墙接口等级和访问规则" class="headerlink" title="防火墙接口等级和访问规则"></a>防火墙接口等级和访问规则</h3><p>inside 接口安全等级：100</p>
-<p>outside 接口安全等级：0</p>
-<p>DMZ 接口安全等级：50、0</p>
-<p>高等级接口接收流量穿越防火墙从低等级接口发送出去，必须经过 NAT。</p>
-<p>低等级接口接收流量穿越防火墙从高等级接口发送出去，默认不允许。</p>
-<p>除非是返回流量或被管理员手动放行。</p>
-<p>相同安全级别的接口相互通讯，默认不允许通讯，除非管理员放行。</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
-<li>查看接口<code>show interface ip brief</code></li>
-</ol>
-<ol start="2">
-<li></li>
-</ol>
-<ol start="3">
-<li>查看特定配置`show run</li>
-</ol>
-<ol start="4">
-<li><p>查看转换表： <code>show xlate</code></p>
-</li>
-<li><p>配置接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">nameif &lt;inside/outside/dmz/other&gt; //接口命名，必须做，不然接口不工作</span><br><span class="line">security-level &lt;100/0/other&gt;  //设置防火墙接口安全等级</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br><span class="line">no shutdown</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>注入静态路由</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route &lt;接口名&gt; &lt;目标网络&gt; &lt;掩码&gt; &lt;下一跳地址&gt;</span><br><span class="line">//route outside 0.0.0.0 0.0.0.0 202.1.1.1</span><br><span class="line">//outside 接口作为缺省路由的出口，下一跳为 202.1.1.1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>防火墙上配置 ACL</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">access-list &lt;ACL-name&gt; &lt;extended/standard&gt; &lt;permit/deny&gt; &lt;协议名字&gt; any any</span><br><span class="line">access-group &lt;ACL-name&gt; &lt;in/out&gt; interface &lt;intf-name&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>防火墙上配置 NAT</p>
-<ol>
-<li><p>创建对象网络，添加允许转化的内网信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object network &lt;INSIDE&gt;</span><br><span class="line">subnet &lt;10.1.1.0 255.255.255.0&gt;</span><br></pre></td></tr></table></figure>
-<p>防火墙可以创建多个对象网络，一个对象网络对应到一个部门。</p>
-</li>
-<li><p>创建对象组，将对象网络关联并且设置 NAT 转化语句。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object-group network &lt;G&gt;</span><br><span class="line">network-object object &lt;INSIDE&gt;</span><br><span class="line">network-object object &lt;DMZ&gt;</span><br><span class="line">nat (inside,outside) source dynamic G interface</span><br><span class="line">nat (DMZ,outside) source dynamic G interface</span><br></pre></td></tr></table></figure>
-<p>！！补充知识</p>
-<p>NAT：网络地址转换</p>
-<p>静态 NAT：管理员指定的一对一转化</p>
-<p>动态 NAT：路由器自动的完成一对一转化</p>
-<p>端口 NAT：PAT 多对一的转化，利用端口号区分开</p>
-<p>！！注意</p>
-<p>防火墙默认不允许 PING 包流量从低等级接口穿越防火墙抵达高等级接口。</p>
-</li>
-<li><p>内网服务发布到外网</p>
-<ol>
-<li><p>定义对象网络，把服务器地址放入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object network &lt;TELNET&gt;</span><br><span class="line">host &lt;服务器地址&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>完成静态 NAT 的配置发布服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nat (dmz,outside) static &lt;公网地址&gt; service tcp &lt;目标端口号&gt;</span><br><span class="line">//公网地址不是 ASA outside 接口地址，是额外申请的</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>利用 ACL 放行来自外网主动访问内网服务的流量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list &lt;acl-name&gt; extended permit tcp any host 10.2.2.2 eq 23</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
+        <p>重分发 </p>
+<p>将不同路由协议转化</p>
+<p>1直连进路由选择协议</p>
+<p>redistribute connect metric 1</p>
+<p>2其他路由选择协议进rip</p>
+<p>router rip</p>
+<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
+<p>3其他路由选择协议进eigrp</p>
+<p>router eigrp 100</p>
+<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
+<p>4其他进ospf</p>
+<p>router os 1</p>
+<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
+<p>默认OE2</p>
+<p>将oe2改成oe1:</p>
+<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
+<p>重分发流量控制</p>
+<p>acl</p>
+<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
+<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
+<p>将acl抓去到的流量给route-map</p>
+<p>route-map +名字 +permit/deny </p>
+<p>优先级10(默认优先级) </p>
+<p>match ip address +acl编号</p>
+<p>route-map也默认deny所有流量</p>
+<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
+<p>re rip router-map ccie metric ……</p>
+
       
     </div>
     
@@ -650,10 +600,10 @@
 
 
   
-    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/防火墙" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/防火墙/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -669,7 +619,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/防火墙/">CCIE 防火墙</a>
     </h1>
   
 
@@ -679,34 +629,84 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>重分发 </p>
-<p>将不同路由协议转化</p>
-<p>1直连进路由选择协议</p>
-<p>redistribute connect metric 1</p>
-<p>2其他路由选择协议进rip</p>
-<p>router rip</p>
-<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
-<p>3其他路由选择协议进eigrp</p>
-<p>router eigrp 100</p>
-<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
-<p>4其他进ospf</p>
-<p>router os 1</p>
-<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
-<p>默认OE2</p>
-<p>将oe2改成oe1:</p>
-<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
-<p>重分发流量控制</p>
-<p>acl</p>
-<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
-<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
-<p>将acl抓去到的流量给route-map</p>
-<p>route-map +名字 +permit/deny </p>
-<p>优先级10(默认优先级) </p>
-<p>match ip address +acl编号</p>
-<p>route-map也默认deny所有流量</p>
-<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
-<p>re rip router-map ccie metric ……</p>
-
+        <h1 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h1><h2 id="防火墙的分类"><a href="#防火墙的分类" class="headerlink" title="防火墙的分类"></a>防火墙的分类</h2><p>硬件防火墙：流量的省查及访问的控制：保护的是网络</p>
+<p>软件防火墙：省查木马或病毒：保护的是系统</p>
+<p>应用防火墙：WAF（WEB 应用防火墙）、APP 防火墙</p>
+<h3 id="硬件防火墙"><a href="#硬件防火墙" class="headerlink" title="硬件防火墙"></a>硬件防火墙</h3><p>checkpoint（诺基亚）</p>
+<p>netscreen（詹博、Juniper）</p>
+<p>PIX、ASA（Cisco）SDN（安全自防御网络、软件定义的网络）</p>
+<p>华为、天融信</p>
+<h4 id="硬件防火墙的部署"><a href="#硬件防火墙的部署" class="headerlink" title="硬件防火墙的部署"></a>硬件防火墙的部署</h4><p>网络的边缘部署防火墙，一般放在 PPPOE 拨号设备的身后，关键节点之间。</p>
+<h2 id="防火墙的基础知识"><a href="#防火墙的基础知识" class="headerlink" title="防火墙的基础知识"></a>防火墙的基础知识</h2><h3 id="防火墙工作模式"><a href="#防火墙工作模式" class="headerlink" title="防火墙工作模式"></a>防火墙工作模式</h3><p>路由模式：（默认模式）防火墙读取 IP 包头，进行网络层的保护，支持动态路由协议和静态路由。</p>
+<p>交换模式：</p>
+<h3 id="防火墙的多模式和单模式"><a href="#防火墙的多模式和单模式" class="headerlink" title="防火墙的多模式和单模式"></a>防火墙的多模式和单模式</h3><p>多模式支持虚拟防火墙，即把一台防火墙配置成多台逻辑防火墙。</p>
+<p>单模式是默认模式。</p>
+<h3 id="防火墙接口的类型"><a href="#防火墙接口的类型" class="headerlink" title="防火墙接口的类型"></a>防火墙接口的类型</h3><p>inside：内部接口</p>
+<p>通常连接的是信任网络即内网</p>
+<p>outside：外部接口</p>
+<p>通常连接的是非信任公共网络，比如 ISP 或 其他组织网络</p>
+<h3 id="DMZ：非军事区域"><a href="#DMZ：非军事区域" class="headerlink" title="DMZ：非军事区域"></a>DMZ：非军事区域</h3><p>通常数据中心放在 DMZ 区域</p>
+<h3 id="防火墙接口等级和访问规则"><a href="#防火墙接口等级和访问规则" class="headerlink" title="防火墙接口等级和访问规则"></a>防火墙接口等级和访问规则</h3><p>inside 接口安全等级：100</p>
+<p>outside 接口安全等级：0</p>
+<p>DMZ 接口安全等级：50、0</p>
+<p>高等级接口接收流量穿越防火墙从低等级接口发送出去，必须经过 NAT。</p>
+<p>低等级接口接收流量穿越防火墙从高等级接口发送出去，默认不允许。</p>
+<p>除非是返回流量或被管理员手动放行。</p>
+<p>相同安全级别的接口相互通讯，默认不允许通讯，除非管理员放行。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li>查看接口<code>show interface ip brief</code></li>
+</ol>
+<ol start="2">
+<li></li>
+</ol>
+<ol start="3">
+<li>查看特定配置`show run</li>
+</ol>
+<ol start="4">
+<li><p>查看转换表： <code>show xlate</code></p>
+</li>
+<li><p>配置接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">nameif &lt;inside/outside/dmz/other&gt; //接口命名，必须做，不然接口不工作</span><br><span class="line">security-level &lt;100/0/other&gt;  //设置防火墙接口安全等级</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br><span class="line">no shutdown</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注入静态路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route &lt;接口名&gt; &lt;目标网络&gt; &lt;掩码&gt; &lt;下一跳地址&gt;</span><br><span class="line">//route outside 0.0.0.0 0.0.0.0 202.1.1.1</span><br><span class="line">//outside 接口作为缺省路由的出口，下一跳为 202.1.1.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>防火墙上配置 ACL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">access-list &lt;ACL-name&gt; &lt;extended/standard&gt; &lt;permit/deny&gt; &lt;协议名字&gt; any any</span><br><span class="line">access-group &lt;ACL-name&gt; &lt;in/out&gt; interface &lt;intf-name&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>防火墙上配置 NAT</p>
+<ol>
+<li><p>创建对象网络，添加允许转化的内网信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object network &lt;INSIDE&gt;</span><br><span class="line">subnet &lt;10.1.1.0 255.255.255.0&gt;</span><br></pre></td></tr></table></figure>
+<p>防火墙可以创建多个对象网络，一个对象网络对应到一个部门。</p>
+</li>
+<li><p>创建对象组，将对象网络关联并且设置 NAT 转化语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object-group network &lt;G&gt;</span><br><span class="line">network-object object &lt;INSIDE&gt;</span><br><span class="line">network-object object &lt;DMZ&gt;</span><br><span class="line">nat (inside,outside) source dynamic G interface</span><br><span class="line">nat (DMZ,outside) source dynamic G interface</span><br></pre></td></tr></table></figure>
+<p>！！补充知识</p>
+<p>NAT：网络地址转换</p>
+<p>静态 NAT：管理员指定的一对一转化</p>
+<p>动态 NAT：路由器自动的完成一对一转化</p>
+<p>端口 NAT：PAT 多对一的转化，利用端口号区分开</p>
+<p>！！注意</p>
+<p>防火墙默认不允许 PING 包流量从低等级接口穿越防火墙抵达高等级接口。</p>
+</li>
+<li><p>内网服务发布到外网</p>
+<ol>
+<li><p>定义对象网络，把服务器地址放入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object network &lt;TELNET&gt;</span><br><span class="line">host &lt;服务器地址&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完成静态 NAT 的配置发布服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nat (dmz,outside) static &lt;公网地址&gt; service tcp &lt;目标端口号&gt;</span><br><span class="line">//公网地址不是 ASA outside 接口地址，是额外申请的</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用 ACL 放行来自外网主动访问内网服务的流量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list &lt;acl-name&gt; extended permit tcp any host 10.2.2.2 eq 23</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
       
     </div>
     
