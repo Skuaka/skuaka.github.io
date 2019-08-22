@@ -1699,7 +1699,7 @@
 <li><p>std::async() 的 fn 和 args 参数用来指定异步任务及其参数。另外，std::async() 返回一个 std::future 对象，通过该对象可以获取异步任务的值或异常（如果异步任务抛出了异常）。</p>
 </li>
 <li><p>第二类函数指定了启动策略。</p>
-<p>| Constant                | Explanation                                                  |<br>| ———————– | ———————————————————— |<br>| <code>std::launch::async</code>    | a new thread is launched to execute the task asynchronously  |<br>| <code>std::launch::deferred</code> | the task is executed on the calling thread the first time its result is requested (lazy evaluation) |</p>
+<p>| Constant                | Explanation                                                  |<br>| ———————– | ———————————————————— |<br>| <code>std::launch::async</code>    | a new thread is launched to execute the task asynchronously  |<br>| <code>std::launch::deferred</code> | the task is executed on the calling thread the first time<br> its result is requested (lazy evaluation) |</p>
 </li>
 </ul>
 <p><strong>例子：</strong></p>
