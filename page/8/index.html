@@ -234,6 +234,85 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/C++模板和元编程/C++编译期备忘录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/26/C_C++/C++模板和元编程/C++编译期备忘录/" class="article-date">
+      <time datetime="2019-01-26T08:53:47.000Z" itemprop="datePublished">2019-01-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/26/C_C++/C++模板和元编程/C++编译期备忘录/">C++ 编译期备忘录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="C-编译期备忘录"><a href="#C-编译期备忘录" class="headerlink" title="C++ 编译期备忘录"></a>C++ 编译期备忘录</h2><h3 id="静态断言-static-assert"><a href="#静态断言-static-assert" class="headerlink" title="静态断言 static_assert"></a>静态断言 static_assert</h3><p>C++提供了调试工具assert宏，它在运行阶段对断言进行检查，如果为true，则显示一条消息，否则abort()。</p>
+<p><strong>C++11</strong> 中引入了<strong>static_assert</strong>这个关键字，用来做编译期间的断言，因此叫做静态断言。</p>
+<p>语法：<code>static_assert(常量表达式，提示字符串)</code>。</p>
+<p>如果第一个参数常量表达式的值为真(true或者非零值)，那么<strong>static_assert</strong>不做任何事情；否则会产生一条编译错误，错误位置就是该<strong>static_assert</strong>语句所在行，错误提示就是第二个参数提示字符串。</p>
+<ul>
+<li>如果该常量表达式依赖于某些模板参数，则延迟到模板实例化时再进行演算，这就让<strong>检查模板参数</strong>成为了可能。</li>
+<li><strong>static_assert</strong>不会造成任何运行期性能损失。</li>
+</ul>
+<p>例子：判断类型是否正确</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">static_assert</span>(is_same&lt;<span class="keyword">int</span> <span class="keyword">const</span>, add_const&lt;<span class="keyword">int</span>&gt;&gt;(), <span class="string">""</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="类型选择-std-conditional"><a href="#类型选择-std-conditional" class="headerlink" title="类型选择 std::conditional"></a>类型选择 std::conditional</h3><p>c++11</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Defined in header &lt;type_traits&gt;</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">bool</span> B, <span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">conditional</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Possible implementation</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">bool</span> B, <span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">conditional</span> &#123;</span> <span class="keyword">typedef</span> T type; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">conditional</span>&lt;false, T, F&gt; &#123;</span> <span class="keyword">typedef</span> F type; &#125;;</span><br></pre></td></tr></table></figure>
+<p>Provides member typedef <code>type</code>, which is defined as <code>T</code> if <code>B</code> is true at compile time, or as <code>F</code> if <code>B</code> is false.</p>
+<p>C++14开始提供类型定义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="keyword">bool</span> B, <span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">F</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">using</span> <span class="title">conditional_t</span> = <span class="title">typename</span> <span class="title">conditional</span>&lt;B,T,F&gt;:</span>:type;</span><br></pre></td></tr></table></figure>
+<h3 id="整型数列-std-integer-sequence"><a href="#整型数列-std-integer-sequence" class="headerlink" title="整型数列 std::integer_sequence"></a>整型数列 std::integer_sequence</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T... ts&gt;</span><br><span class="line"><span class="built_in">std</span>::ostream&amp; <span class="keyword">operator</span>&lt;&lt;(<span class="built_in">std</span>::ostream&amp; os,</span><br><span class="line">                         <span class="keyword">const</span> <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;&amp;)</span><br><span class="line">&#123;</span><br><span class="line">    os &lt;&lt; <span class="string">"&#123; "</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> T values[] &#123; ts... &#125;;</span><br><span class="line">    <span class="built_in">std</span>::copy(<span class="built_in">std</span>::begin(values),</span><br><span class="line">              <span class="built_in">std</span>::end(values),</span><br><span class="line">              <span class="built_in">std</span>::ostream_iterator&lt;T&gt;(os, <span class="string">" "</span>));</span><br><span class="line">    <span class="keyword">return</span> os &lt;&lt; <span class="string">"&#125;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/C++模板和元编程/C++typename用法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1948,754 +2027,6 @@
       
 
       
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-QT/QT入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/01/05/QT/QT入门/" class="article-date">
-      <time datetime="2019-01-05T05:11:18.000Z" itemprop="datePublished">2019-01-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/05/QT/QT入门/">QT 入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="Qt5-入门"><a href="#Qt5-入门" class="headerlink" title="Qt5 入门"></a>Qt5 入门</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="QT与OpenGL"><a href="#QT与OpenGL" class="headerlink" title="QT与OpenGL"></a>QT与OpenGL</h3><p>Qt 5.2.0 for Windows 32-bit (MinGW 4.8, OpenGL, 689 MB)<br>Qt 5.2.0 for Windows 32-bit (VS 2010, 570 MB) 、<br>Qt 5.2.0 for Windows 32-bit (VS 2010, OpenGL, 569 MB)、<br>Qt 5.2.0 for Windows 32-bit (VS 2012, 579 MB)</p>
-<p>这四个首先是编译器的区别：第一个是MinGW；第二、三个是VS2010；第四个是VS2012。<strong>标记有OpenGL的含义是使用OpenGL后端；否则的话使用ANGLE后端。</strong>ANGLE是Google发起的一个开源项目，旨在将OpenGL ES 2.0 API映射到DirectX 9 API。如果你的应用程序使用了不包含在OpenGL ES中的OpenGL API；或者<strong>需要运行在Windows XP平台，那么需要选择OpenGL版本（意思是说OpenGL版本是全版本，自带所有API）</strong></p>
-<h3 id="元对象"><a href="#元对象" class="headerlink" title="元对象"></a>元对象</h3><p>元对象（meta object）意思是<strong>描述另一个对象结构的对象</strong>，比如获得一个对象有多少成员函数，有哪些属性。在Qt中，我们将要用到的是QMetaObject这个类。</p>
-<p>元对象系统基于以下3点：</p>
-<ul>
-<li>以QObject作为基类</li>
-<li>类声明的私有区域中，Q_Object宏指令使我们能够使用元对象的特性，比如动态属性、信号、槽等</li>
-<li>元对象编译器（<strong>Meta-Object Compiler</strong>  moc）为QObject子类生成具有元对象特性的代码</li>
-</ul>
-<p>我们可以通过QObject类的一个成员函数获得该类的元对象：</p>
-<p><code>QMetaObject *QObject::metaObject() const</code>通过这个元对象，进而可以获取一个QObject对象的更多信息：</p>
-<p><code>QMetaObject::className()</code> 返回运行时类的名称（不需要C++中的运行时类型识别机制RTTI）</p>
-<p><code>QMetaObject::methodCount()</code> 返回类中方法的个数</p>
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="Hello-world"><a href="#Hello-world" class="headerlink" title="Hello world"></a>Hello world</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QLabel&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">QLabel <span class="title">label</span><span class="params">(<span class="string">"Hello, world"</span>)</span></span>;</span><br><span class="line">    label.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意！！！</strong> </p>
-<p>不能使用new创建Qlabel，<code>QLabel *label = new QLabel(&quot;Hello, world&quot;);</code></p>
-<p>label 是建立在堆上的，app 是建立在栈上的。这意味着，label 会在 app 之后析构。也就是说，label 的生命周期长于 app 的生命周期。<strong>这是 Qt 编程的大忌</strong>。</p>
-<h3 id="信号与槽"><a href="#信号与槽" class="headerlink" title="信号与槽"></a>信号与槽</h3><p>例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// !!! Qt 5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPushButton&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">QPushButton <span class="title">button</span><span class="params">(<span class="string">"Quit"</span>)</span></span>;</span><br><span class="line">    QObject::connect(&amp;button, &amp;QPushButton::clicked, &amp;QApplication::quit);</span><br><span class="line">    button.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h4><p>在 <strong>Qt 5 中</strong>，QObject::connect() 有五个重载</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">QMetaObject::<span class="function">Connection <span class="title">connect</span><span class="params">(<span class="keyword">const</span> QObject *, <span class="keyword">const</span> <span class="keyword">char</span> *,</span></span></span><br><span class="line"><span class="function"><span class="params">                                <span class="keyword">const</span> QObject *, <span class="keyword">const</span> <span class="keyword">char</span> *,</span></span></span><br><span class="line"><span class="function"><span class="params">                                Qt::ConnectionType)</span></span>;</span><br><span class="line"></span><br><span class="line">QMetaObject::<span class="function">Connection <span class="title">connect</span><span class="params">(<span class="keyword">const</span> QObject *, <span class="keyword">const</span> QMetaMethod &amp;,</span></span></span><br><span class="line"><span class="function"><span class="params">                                <span class="keyword">const</span> QObject *, <span class="keyword">const</span> QMetaMethod &amp;,</span></span></span><br><span class="line"><span class="function"><span class="params">                                Qt::ConnectionType)</span></span>;</span><br><span class="line"></span><br><span class="line">QMetaObject::<span class="function">Connection <span class="title">connect</span><span class="params">(<span class="keyword">const</span> QObject *, <span class="keyword">const</span> <span class="keyword">char</span> *,</span></span></span><br><span class="line"><span class="function"><span class="params">                                <span class="keyword">const</span> <span class="keyword">char</span> *,</span></span></span><br><span class="line"><span class="function"><span class="params">                                Qt::ConnectionType)</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">QMetaObject::<span class="function">Connection <span class="title">connect</span><span class="params">(<span class="keyword">const</span> QObject *, PointerToMemberFunction,</span></span></span><br><span class="line"><span class="function"><span class="params">                                <span class="keyword">const</span> QObject *, PointerToMemberFunction,</span></span></span><br><span class="line"><span class="function"><span class="params">                                Qt::ConnectionType)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line">QMetaObject::Connection connect(const QObject *, PointerToMemberFunction,</span><br><span class="line">                                Functor);</span><br></pre></td></tr></table></figure>
-<p>最常用的一般形式如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connect(sender, signal,</span><br><span class="line">        receiver, slot);</span><br></pre></td></tr></table></figure>
-<p>connect() 一般会使用前面四个参数，第一个是发出信号的对象，第二个是发送对象发出的信号，第三个是接收信号的对象，第四个是接收对象在接收到信号之后所需要调用的函数。</p>
-<p>可以套用这个形式去分析上面给出的五个重载。</p>
-<ul>
-<li>第一个函数将 signal 和 slot 作为字符串处理。</li>
-<li>第二个函数的 signal 和 slot 都是 const QMetaMethod &amp;。我们可以将每个函数看做是 QMetaMethod 的子类。因此，这种写法可以使用 QMetaMethod 进行类型比对。</li>
-<li>第三个函数缺少了 receiver。这个函数其实是将 this 指针作为 receiver。</li>
-<li>第四个函数 signal 和 slot 类型则是 PointerToMemberFunction，这是指向成员函数的指针。</li>
-<li>第五个，前面两个参数没有什么不同，最后一个参数是 Functor 类型。这个类型可以接受 static 函数、全局函数以及 Lambda 表达式。</li>
-</ul>
-<hr>
-<p><strong>注意事项</strong>：</p>
-<ul>
-<li><p>使用函数指针能够获得<strong>编译期的类型检查</strong>。信号槽要求信号和槽的参数一致，所谓一致，是参数类型一致。如果不一致，允许的情况是，槽函数的参数可以比信号的少，即便如此，槽函数存在的那些参数的顺序也必须和信号的前面几个一致起来。</p>
-</li>
-<li><p><strong>如果信号有重载</strong>，可以使用一个函数指针来指明到底是哪一个信号。</p>
-  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (Newspaper:: *newPaperNameDate)(<span class="keyword">const</span> QString &amp;, <span class="keyword">const</span> QDate &amp;) = &amp;Newspaper::newPaper;</span><br><span class="line">QObject::connect(&amp;newspaper, newPaperNameDate,</span><br><span class="line">                 &amp;reader,    &amp;Reader::receiveNewspaper);</span><br></pre></td></tr></table></figure>
-<p>  也可以使用匿名指针：</p>
-  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QObject::connect(&amp;newspaper,</span><br><span class="line">                 <span class="keyword">static_cast</span>&lt;<span class="keyword">void</span> (Newspaper:: *)(<span class="keyword">const</span> QString &amp;, <span class="keyword">const</span> QDate &amp;)&gt;(&amp;Newspaper::newPaper),</span><br><span class="line">                 <span class="comment">//(void (Newspaper:: *)(const QString &amp;, const QDate &amp;))&amp;Newspaper::newPaper,</span></span><br><span class="line">                 &amp;reader,</span><br><span class="line">                 &amp;Reader::receiveNewspaper);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>可以使用 C 风格的强制类型转换。但此时，如果你改变了信号的类型，那么你就会有一个潜在的运行时错误。</p>
-<p>而<code>static_cast&lt;&gt;</code>则是 C++ 推荐的风格，当参数类型改变时，编译器会检测到这个错误。</p>
-</li>
-</ul>
-</li>
-<li><p>这里我们只是强调了函数参数的问题。如果前面的对象都错了呢？此时，编译器会直接失败，因为 connect() 函数会去寻找 <code>sender-&gt;*signal</code>，如果这两个参数不满足，则会直接报错。</p>
-</li>
-<li><p>有一种情况，槽函数的参数可以比信号的多，那就是<strong>槽函数的参数带有默认值</strong>。</p>
-  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Newspaper</span></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">newPaper</span><span class="params">(<span class="keyword">const</span> QString &amp;name)</span></span>;</span><br><span class="line"><span class="comment">// Reader</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">receiveNewspaper</span><span class="params">(<span class="keyword">const</span> QString &amp;name, <span class="keyword">const</span> QDate &amp;date = QDate::currentDate())</span></span>;</span><br></pre></td></tr></table></figure>
-<p>  不过我们不能在函数指针中使用函数参数的默认值。这是 <strong>C++ 语言的限制</strong>：参数默认值只能使用在直接地函数调用中。当使用函数指针取其地址的时候，默认参数是不可见的！</p>
-<p>  当然，此时你可以选择 Qt 4 的连接语法。如果你还是想使用 Qt 5 的新语法，目前的办法只有一个：<strong>Lambda 表达式</strong>。目前能够支持 Qt 5 的编译器都是支持 Lambda 表达式的。于是，使用connect的第五个重载，我们的代码就变成了：</p>
-  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QObject::connect(&amp;newspaper,</span><br><span class="line">                 <span class="keyword">static_cast</span>&lt;<span class="keyword">void</span> (Newspaper:: *)(<span class="keyword">const</span> QString &amp;)&gt;(&amp;Newspaper::newPaper),</span><br><span class="line">                 [=](<span class="keyword">const</span> QString &amp;name) &#123; <span class="comment">/* Your code here. */</span> &#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="自定义信号槽-基本框架"><a href="#自定义信号槽-基本框架" class="headerlink" title="自定义信号槽(基本框架)"></a>自定义信号槽(基本框架)</h4><p>读者接收报纸信息的例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//!!! Qt5</span></span><br><span class="line"><span class="comment">////////// newspaper.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Newspaper</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Newspaper(<span class="keyword">const</span> QString &amp; name) :</span><br><span class="line">        m_name(name)</span><br><span class="line">    &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">send</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function">emit <span class="title">newPaper</span><span class="params">(m_name)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">newPaper</span><span class="params">(<span class="keyword">const</span> QString &amp;name)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QString m_name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////// reader.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Reader</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Reader() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">receiveNewspaper</span><span class="params">(<span class="keyword">const</span> QString &amp; name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        qDebug() &lt;&lt; <span class="string">"Receives Newspaper: "</span> &lt;&lt; name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////// main.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QCoreApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"newspaper.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"reader.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QCoreApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Newspaper <span class="title">newspaper</span><span class="params">(<span class="string">"Newspaper A"</span>)</span></span>;</span><br><span class="line">    Reader reader;</span><br><span class="line">    QObject::connect(&amp;newspaper, &amp;Newspaper::newPaper,</span><br><span class="line">                     &amp;reader,    &amp;Reader::receiveNewspaper);</span><br><span class="line">    newspaper.send();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>分析</strong></p>
-<ul>
-<li>为了使用信号槽，必须继承 QObject。</li>
-<li><p>凡是 QObject 类（不管是直接子类还是间接子类），都应该在第一行代码写上 Q_OBJECT。</p>
-<ul>
-<li>不管是不是使用信号槽，<strong>都应该添加这个宏</strong>。这个宏的展开将为我们的类提供信号槽机制、国际化机制以及 Qt 提供的不基于 C++ RTTI 的反射能力。除了信号槽，其它很多操作都会依赖于这个宏。</li>
-<li>这个宏将由 moc 做特殊处理，不仅仅是宏展开这么简单。moc 会读取标记了 Q_OBJECT 的<strong>头文件</strong>，生成以 moc_ 为前缀的文件，比如 newspaper.h 将生成 moc_newspaper.cpp。可以到构建目录查看这个文件，看看到底增加了什么内容。</li>
-<li>注意，由于 moc 只处理头文件中的标记了 Q_OBJECT 的类声明，不会处理 cpp 文件中的类似声明。因此，如果我们的 Newspaper 和 Reader 类位于 main.cpp 中，是无法得到 moc 的处理的。解决方法是，我们手动调用 moc 工具处理 main.cpp，并且将 main.cpp 中的 include “newspaper.h” 改为 include “moc_newspaper.h” 就可以了。不过，这是相当繁琐的步骤。</li>
-</ul>
-</li>
-<li>signals 块所列出的，就是该类的信号。信号就是函数名，返回值是 void，参数是该类需要让外界知道的数据。（moc 会自动帮我们实现信号函数所需要的函数体）</li>
-<li><p>emit 是 Qt 对 C++ 的扩展，是一个关键字（宏）。emit 用来发出信号。</p>
-</li>
-<li><p>槽函数是普通的成员函数，作为成员函数，会受到 public、private、protected 的影响；</p>
-</li>
-</ul>
-<h3 id="Qt模块"><a href="#Qt模块" class="headerlink" title="Qt模块"></a>Qt模块</h3><p>Qt 5 模块分为 Essentials Modules 和 Add-on Modules 两部分。前者是基础模块，在所有平台上都可用；后者是扩展模块，建立在基础模块的基础之上，在能够运行 Qt 的平台之上可以酌情引入。</p>
-<p><strong>Qt 基础模块</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- Qt Core，提供核心的非 GUI 功能，所有模块都需要这个模块。这个模块的类包括了动画框架、定时器、各个容器类、时间日期类、事件、IO、JSON、插件机制、智能指针、图形（矩形、路径等）、线程、XML 等。所有这些类都可以通过 &lt;QtCore&gt; 头文件引入。</span><br><span class="line"></span><br><span class="line">- Qt Gui，提供 GUI 程序的基本功能，包括与窗口系统的集成、事件处理、OpenGL 和 OpenGL ES 集成、<span class="number">2</span>D 图像、字体、拖放等。这些类一般由 Qt 用户界面类内部使用，当然也可以用于访问底层的 OpenGL ES 图像 API。Qt Gui 模块提供的是所有图形用户界面程序都需要的通用功能。</span><br><span class="line"></span><br><span class="line">- Qt Multimedia，提供视频、音频、收音机以及摄像头等功能。这些类可以通过 &lt;QtMultimedia&gt; 引入，而且需要在 pro 文件中添加 QT += multimedia。</span><br><span class="line"></span><br><span class="line">- Qt Network，提供跨平台的网络功能。这些类可以通过 &lt;QtNetwork&gt; 引入，而且需要在 pro 文件中添加 QT += network。</span><br><span class="line"></span><br><span class="line">- Qt Qml，提供供 QML（一种脚本语言，也提供 JavaScript 的交互机制） 使用的 C++ API。这些类可以通过 &lt;QtQml&gt; 引入，而且需要在 pro 文件中添加 QT += qml。</span><br><span class="line"></span><br><span class="line">- Qt Quick，允许在 Qt/C++ 程序中嵌入 Qt Quick（一种基于 Qt 的高度动画的用户界面，适合于移动平台开发）。这些类可以通过 &lt;QtQuick&gt; 引入，而且需要在 pro 文件中添加 QT += quick。</span><br><span class="line"></span><br><span class="line">- Qt SQL，允许使用 SQL 访问数据库。这些类可以通过 &lt;QtSql&gt; 引入，而且需要在 pro 文件中添加 QT += sql。</span><br><span class="line"></span><br><span class="line">- Qt Test，提供 Qt 程序的单元测试功能。这些类可以通过 &lt;QtTest&gt; 引入，而且需要在 pro 文件中添加 QT += testlib。</span><br><span class="line"></span><br><span class="line">- Qt Webkit，基于 WebKit2 的实现以及一套全新的 QML API（顺便说一下，Qt <span class="number">4.8</span> 附带的是 QtWebkit <span class="number">2.2</span>）。</span><br></pre></td></tr></table></figure>
-<p><strong>Qt 扩展模块</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Qt 3D，提供声明式语法，在 Qt 程序中可以简单地嵌入 3D 图像。Qt 3D 为 Qt Quick 添加了 3D 内容渲染。Qt 3D 提供了 QML 和 C++ 两套 API，用于开发 3D 程序。</span><br><span class="line">Qt Bluetooth，提供用于访问蓝牙无线设备的 C++ 和 QML API。</span><br><span class="line">Qt Contacts，用于访问地址簿或者联系人数据库的 C++ 和 QML API。</span><br><span class="line">Qt Concurrent，封装了底层线程技术的类库，方便开发多线程程序。</span><br><span class="line">Qt D-Bus，这是一个仅供 Unix 平台使用的类库，用于利用 D-Bus 协议进行进程间交互。</span><br><span class="line">Qt Graphical Effects，提供一系列用于实现图像特效的类，比如模糊、锐化等。</span><br><span class="line">Qt Image Formats，支持图片格式的一系列插件，包括 TIFF、MNG、TGA 和 WBMP。</span><br><span class="line">Qt JS Backend，该模块没有公开的 API，是 V8 JavaScript 引擎的一个移植。这个模块仅供 QtQml 模块内部使用。</span><br><span class="line">Qt Location，提供定位机制、地图和导航技术、位置搜索等功能的 QML 和 C++ API。</span><br><span class="line">Qt OpenGL，方便在 Qt 应用程序中使用 OpenGL。该模块仅仅为了程序从 Qt 4 移植到 Qt 5 的方便才保留下来，如果你需要在新的 Qt 5 程序中使用 OpenGL 相关技术，需要使用的是 QtGui 模块中的 QOpenGL。</span><br><span class="line">Qt Organizer，使用 QML 和 C++ API 访问组织事件（organizer event）。organizer API 是 Personal Information Management API 的一部分，用于访问 Calendar 信息。通过 Organizer API 可以实现：从日历数据库访问日历时间、导入 iCalendar 事件或者将自己的事件导出到 iCalendar。</span><br><span class="line">Qt Print Support，提供对打印功能的支持。</span><br><span class="line">Qt Publish and Subscribe，为应用程序提供对项目值的读取、导航、订阅等的功能。</span><br><span class="line">Qt Quick 1，从 Qt 4 移植过来的 QtDeclarative 模块，用于提供与 Qt 4 的兼容。如果你需要开发新的程序，需要使用 QtQuick 模块。</span><br><span class="line">Qt Script，提供脚本化机制。这也是为提供与 Qt 4 的兼容性，如果要使用脚本化支持，请使用 QtQml 模块的 QJS* 类。</span><br><span class="line">Qt Script Tools，为使用了 Qt Script 模块的应用程序提供的额外的组件。</span><br><span class="line">Qt Sensors，提供访问各类传感器的 QML 和 C++ 接口。</span><br><span class="line">Qt Service Framework，提供客户端发现其他设备的服务。Qt Service Framework 为在不同平台上发现、实现和访问服务定义了一套统一的机制。</span><br><span class="line">Qt SVG，提供渲染和创建 SVG 文件的功能。</span><br><span class="line">Qt System Info，提供一套 API，用于发现系统相关的信息，比如电池使用量、锁屏、硬件特性等。</span><br><span class="line">Qt Tools，提供了 Qt 开发的方便工具，包括 Qt CLucene、Qt Designer、Qt Help 以及 Qt UI Tools 。</span><br><span class="line">Qt Versit，提供了对 Versit API 的支持。Versit API 是 Personal Information Management API 的一部分，用于 QContacts 和 vCard 以及 QOrganizerItems 和 iCalendar 之间的相互转换。</span><br><span class="line">Qt Wayland，仅用于 Linux 平台，用于替代 QWS，包括 Qt Compositor API（server）和 Wayland 平台插件（clients）。</span><br><span class="line">Qt WebKit，从 Qt 4 移植来的基于 WebKit1 和 QWidget 的 API。</span><br><span class="line">Qt Widgets，使用 C++ 扩展的 Qt Gui 模块，提供了一些界面组件，比如按钮、单选框等。</span><br><span class="line">Qt XML，SAX 和 DOM 的 C++ 实现。该模块已经废除，请使用 QXmlStreamReader/Writer。</span><br><span class="line">Qt XML Patterns，提供对 XPath、XQuery、XSLT 和 XML Schema 验证的支持。</span><br></pre></td></tr></table></figure>
-<h3 id="QMainWindow"><a href="#QMainWindow" class="headerlink" title="QMainWindow"></a>QMainWindow</h3><p>QMainWindow 是 Qt 框架带来的一个预定义好的主窗口类。经典的主窗口，通常是由一个标题栏，一个菜单栏，若干工具栏和一个任务栏。在这些子组件之间则是我们的工作区。QMainWindow 正是这样的一种布局。</p>
-<p>通常我们的程序主窗口会继承自 QMainWindow，以便获得 QMainWindow 提供的各种便利的函数。这也是 Qt Creator 生成的代码所做的。</p>
-<h3 id="Pro文件"><a href="#Pro文件" class="headerlink" title="Pro文件"></a>Pro文件</h3><p>TARGET 是生成的程序的名字。</p>
-<p>TEMPLATE 是生成 makefile 所使用的模板，比如 app 就是编译成一个可执行程序，而 lib 则是编译成一个链接库（默认是动态链接库）。</p>
-<h3 id="QAction"><a href="#QAction" class="headerlink" title="QAction"></a>QAction</h3><p>Qt 使用 QAction 类作为动作。这个类就是代表了窗口的一个“动作”。</p>
-<p>无论是出现在菜单栏还是工具栏，用户选择之后，所执行的动作应该都是一样的。因此，Qt 并没有专门的菜单项类，只是使用一个 QAction 类，抽象出公共的动作。当我们把 QAction 对象添加到菜单，就显示成一个菜单项，添加到工具栏，就显示成一个工具按钮。用户可以通过点击菜单项、点击工具栏按钮、点击快捷键来激活这个动作。</p>
-<p>QAction 包含了图标、菜单文字、快捷键、状态栏文字、浮动帮助等信息。</p>
-<p>例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// !!! Qt 5</span></span><br><span class="line"><span class="comment">// ========== mainwindow.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MAINWINDOW_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAINWINDOW_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMainWindow&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> :</span> <span class="keyword">public</span> QMainWindow</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MainWindow(QWidget *parent = <span class="number">0</span>);</span><br><span class="line">    ~MainWindow();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">open</span><span class="params">()</span></span>;</span><br><span class="line">    QAction *openAction;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// MAINWINDOW_H</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== mainwindow.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QAction&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMenuBar&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMessageBox&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QStatusBar&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QToolBar&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mainwindow.h"</span></span></span><br><span class="line"></span><br><span class="line">MainWindow::MainWindow(QWidget *parent) :</span><br><span class="line">    QMainWindow(parent)</span><br><span class="line">&#123;</span><br><span class="line">    setWindowTitle(tr(<span class="string">"Main Window"</span>));</span><br><span class="line"></span><br><span class="line">    openAction = <span class="keyword">new</span> QAction(QIcon(<span class="string">":/images/doc-open"</span>), tr(<span class="string">"&amp;Open..."</span>), <span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">//openAction = new QAction("open", this);</span></span><br><span class="line">    openAction-&gt;setShortcuts(QKeySequence::Open);</span><br><span class="line">    openAction-&gt;setStatusTip(tr(<span class="string">"Open an existing file"</span>));</span><br><span class="line">    connect(openAction, &amp;QAction::triggered, <span class="keyword">this</span>, &amp;MainWindow::open);</span><br><span class="line"></span><br><span class="line">    QMenu *file = menuBar()-&gt;addMenu(tr(<span class="string">"&amp;File"</span>));</span><br><span class="line">    file-&gt;addAction(openAction);</span><br><span class="line"></span><br><span class="line">    QToolBar *toolBar = addToolBar(tr(<span class="string">"&amp;File"</span>));</span><br><span class="line">    toolBar-&gt;addAction(openAction);</span><br><span class="line"></span><br><span class="line">    statusBar() ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MainWindow::~MainWindow()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::open()</span><br><span class="line">&#123;</span><br><span class="line">    QMessageBox::information(<span class="keyword">this</span>, tr(<span class="string">"Information"</span>), tr(<span class="string">"Open"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>程序解释：</p>
-<ul>
-<li><p>QIcon，传入值是一个字符串，这个字符串对应于 Qt 资源文件中的一段路径。</p>
-</li>
-<li><p>QAction 第二个参数中，文本值前面有一个 &amp;，意味着这将成为一个快捷键。</p>
-</li>
-<li><p>setShortcut() 函数用于说明这个 QAction 的快捷键。</p>
-<p>Qt 的 QKeySequence 为我们定义了很多内置的快捷键，根据平台不同而不同。</p>
-</li>
-<li><p>setStatusTip() 实现了当用户鼠标滑过这个 action 时，会在主窗口下方的状态栏显示相应的提示。</p>
-</li>
-<li><p>connect() 函数，将这个 QAction 的 triggered() 信号与 MainWindow 类的 open() 函数连接起来。</p>
-</li>
-<li><p>下面的 menuBar()、toolBar() 和 statusBar() 三个是 QMainWindow 的函数，用于创建并返回菜单栏、工具栏和状态栏。我们把 QAction 对象添加到这个菜单和工具栏。</p>
-</li>
-</ul>
-<h3 id="tr"><a href="#tr" class="headerlink" title="tr()"></a>tr()</h3><p>函数 tr()全名是QObject::tr(),被它处理的字符串可以使用工具提取出来翻译成其他语言, 也就是做国际化使用。</p>
-<p>只要记住,Qt 的最佳实践:如果你想让你的程序国际化的话,那么,所有用户可见的字符串都要使用 QObject::tr()!</p>
-<p>例子：<code>tr(&quot;Cannot open file:\n%1&quot;).arg(path)</code></p>
-<h3 id="资源文件"><a href="#资源文件" class="headerlink" title="资源文件"></a>资源文件</h3><ul>
-<li><p>Qt 资源系统是一个<strong>跨平台</strong>的资源机制，用于将程序运行时所需要的资源以二进制的形式存储于可执行文件内部。如果你的程序需要加载特定的资源（图标、文本翻译等），那么，将其放置在资源文件中，就再也不需要担心这些文件的丢失。也就是说，如果你将资源以资源文件形式存储，它是会编译到可执行文件内部。</p>
-</li>
-<li><p>当我们编译工程之后，我们可以在构建目录中找到 qrc_res.cpp 文件，这就是 Qt 将我们的资源编译成了 C++ 代码。</p>
-</li>
-<li><p>通过使用冒号开头的路径来找到这个文件。比如，我们的前缀是 <code>/images</code>，文件是 <code>document-open.png</code>，那么就可以使用 <code>:/images/document-open.png</code> 找到这个文件。</p>
-</li>
-</ul>
-<p><strong>别名</strong></p>
-<p>如果我们要更改文件名，比如将 docuemnt-open.png 改成 docopen.png，那么，所有使用了这个名字的路径都需要修改。所以，更好的办法是，我们给这个文件取一个“别名”(Alias)，以后就以这个别名来引用这个文件。</p>
-<p><strong>语言</strong>（待实践）</p>
-<p>可以看到资源编辑窗口最下方有一个“语言”。这个可以对资源进行国际化。</p>
-<p>比如我们新建一个前缀，将语言设置为 fr，再添加一个文件 document-open-fr.png。我们可以使用 <code>:/images/fr/doc-open</code> 引用到 document-open-fr.png 这个文件。这个“语言”的作用是，如果 Qt 发现，本机的本地化信息是 fr 的话（<code>QLocale::system().name()</code> 返回 fr_FR），则使用 <code>:/images/fr/doc-open</code> 这个图片；如果不是，则默认使用 :/images/doc-open 这个。</p>
-<h3 id="对象模型"><a href="#对象模型" class="headerlink" title="对象模型"></a>对象模型</h3><p>​    标准 C++ 对象模型在运行时效率方面卓有成效，但是在某些特定问题域下的静态特性就显得捉襟见肘。GUI 界面需要同时具有运行时的效率以及更高级别的灵活性。为了解决这一问题，Qt “扩展”了标准 C++。所谓“扩展”，实际是在使用标准 C++ 编译器编译 Qt 源程序之前，Qt 先使用一个叫做 moc（Meta Object Compiler，元对象编译器）的工具，先对 Qt 源代码进行一次预处理（<em>注意，这个预处理与标准 C++ 的预处理有所不同。Qt 的 moc 预处理发生在标准 C++ 预处理器工作之前，并且 Qt 的 moc 预处理不是递归的。</em>），生成标准 C++ 源代码，然后再使用标准 C++ 编译器进行编译。</p>
-<p><strong>特性</strong></p>
-<p>Qt 使用 moc，为标准 C++ 增加了一些特性：</p>
-<ul>
-<li>信号槽机制，用于解决对象之间的通讯，这个我们已经了解过了，可以认为是 Qt 最明显的特性之一；</li>
-<li>可查询，并且可设计的对象属性；</li>
-<li>强大的事件机制以及事件过滤器；</li>
-<li>基于上下文的字符串翻译机制（国际化），也就是 tr() 函数，我们简单地介绍过；</li>
-<li>复杂的定时器实现，用于在事件驱动的 GUI 中嵌入能够精确控制的任务集成；</li>
-<li>层次化的可查询的对象树，提供一种自然的方式管理对象关系。</li>
-<li>智能指针（QPointer），在对象析构之后自动设为 0，防止野指针；</li>
-<li>能够跨越库边界的动态转换机制。</li>
-</ul>
-<p>通过继承 QObject 类，我们可以很方便地获得这些特性。moc 其实实现的是一个叫做元对象系统（meta-object system）的机制。</p>
-<p>虽然利用模板可以达到类似的效果，但是 Qt 没有选择使用模板。按照 Qt 官方的说法，模板虽然是内置语言特性，但是其语法实在是复杂，并且由于 GUI 是动态的，利用静态的模板机制有时候很难处理。而自己使用 moc 生成代码更为灵活，虽然效率有些降低（一个信号槽的调用大约相当于四个模板函数调用），不过在现代计算机上，这点性能损耗实在是可以忽略。</p>
-<p><strong>对象树</strong></p>
-<p>QObjects 是以对象树的形式组织起来的。当你创建一个 QObject 对象时，会看到 QObject 的构造函数接收一个 QObject 指针作为参数，这个参数就是 parent，也就是父对象指针。</p>
-<p>这相当于，在创建 QObject 对象时，可以提供一个其父对象，我们创建的这个 QObject 对象会自动添加到其父对象的 children() 列表。当父对象析构的时候，这个列表中的所有对象也会被析构。（<strong>注意，这里的父对象并不是继承意义上的父类！</strong>）这种机制在 GUI 程序设计中相当有用。例如，一个按钮有一个 QShortcut（快捷键）对象作为其子对象。当我们删除按钮的时候，这个快捷键理应被删除。</p>
-<p>QWidget 是能够在屏幕上显示的一切组件的父类。QWidget 继承自 QObject。</p>
-<p>当一个 QObject 对象在堆上创建的时候，Qt 会同时为其创建一个对象树。不过，对象树中对象的顺序是没有定义的，销毁这些对象的顺序也是未定义的。Qt 保证的是，任何对象树中的 QObject 对象 delete 的时候，如果这个对象有 parent，则自动将其从 parent 的 children() 列表中删除；如果有孩子，则自动 delete 每一个孩子。Qt 保证没有 QObject 会被 delete 两次，这是由析构顺序决定的。</p>
-<p><strong>补充</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    QWidget window;</span><br><span class="line">    <span class="function">QPushButton <span class="title">quit</span><span class="params">(<span class="string">"Quit"</span>, &amp;window)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>作为父组件的 window 和作为子组件的 quit 都是 QObject 的子类（事实上，它们都是 QWidget 的子类，而 QWidget 是 QObject 的子类）。这段代码是正确的，局部对象的析构顺序应该按照其创建顺序的相反过程。</p>
-<p>但是，如果我们使用下面的代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="function">QPushButton <span class="title">quit</span><span class="params">(<span class="string">"Quit"</span>)</span></span>;</span><br><span class="line">    QWidget window;</span><br><span class="line"></span><br><span class="line">    quit.setParent(&amp;window);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>析构顺序就有了问题。在上面的代码中，作为父对象的 window 会首先被析构，因为它是最后一个创建的对象。在析构过程中，它会调用子对象列表中每一个对象的析构函数，也就是说， quit 此时就被析构了。然后，代码继续执行，在 window 析构之后，quit 也会被析构，因为 quit 也是一个局部变量，在超出作用域的时候当然也需要析构。但是，这时候已经是第二次调用 quit 的析构函数了，C++ 不允许调用两次析构函数，因此，程序崩溃了。</p>
-<p>所以，我们最好从开始就养成良好习惯，在 Qt 中，<strong>尽量在构造的时候就指定 parent 对象</strong>，并且大胆在堆上创建。</p>
-<h3 id="布局管理器"><a href="#布局管理器" class="headerlink" title="布局管理器"></a>布局管理器</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.setWindowTitle(<span class="string">"Enter your age"</span>);</span><br><span class="line"></span><br><span class="line">    QSpinBox *spinBox = <span class="keyword">new</span> QSpinBox(&amp;window);</span><br><span class="line">    QSlider *slider = <span class="keyword">new</span> QSlider(Qt::Horizontal, &amp;window);</span><br><span class="line">    spinBox-&gt;setRange(<span class="number">0</span>, <span class="number">130</span>);</span><br><span class="line">    slider-&gt;setRange(<span class="number">0</span>, <span class="number">130</span>);</span><br><span class="line"></span><br><span class="line">    QObject::connect(slider, &amp;QSlider::valueChanged, spinBox, &amp;QSpinBox::setValue);</span><br><span class="line">    <span class="keyword">void</span> (QSpinBox:: *spinBoxSignal)(<span class="keyword">int</span>) = &amp;QSpinBox::valueChanged;	<span class="comment">// 1</span></span><br><span class="line">    QObject::connect(spinBox, spinBoxSignal, slider, &amp;QSlider::setValue);</span><br><span class="line">    spinBox-&gt;setValue(<span class="number">35</span>);</span><br><span class="line"></span><br><span class="line">    QHBoxLayout *layout = <span class="keyword">new</span> QHBoxLayout;</span><br><span class="line">    layout-&gt;addWidget(spinBox);</span><br><span class="line">    layout-&gt;addWidget(slider);</span><br><span class="line">    window.setLayout(layout);</span><br><span class="line"></span><br><span class="line">    window.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>解释</strong></p>
-<ol>
-<li><p>将 slider 的 valueChanged() 信号同 spinBox 的 setValue() 函数相连时，如果直接写<code>&amp;QSpinBox::valueChanged</code>，编译器会报错，原因是编译器认为 QSpinBox::valueChanged 是一个 overloaded 的函数。看一下 QSpinBox 的文档发现，QSpinBox 的确有两个信号：</p>
-<ul>
-<li>void valueChanged(int)</li>
-<li>void valueChanged(const QString &amp;)</li>
-</ul>
-<p>那么我们就显式指定一个函数。方法就是，我们创建一个函数指针，这个函数指针参数指定为 int。</p>
-</li>
-<li><p>仔细观察这两个 connect() 的作用，它们实际完成了一个双向的数据绑定。当然，对于 Qt 自己的信号函数，我们可以比较放心地使用。但是，如果是我们自己的信号，应当注意避免发生无限循环！</p>
-</li>
-<li><p>我们创建了一个 QHBoxLayout 对象。显然，这就是一个布局管理器。然后将这两个组件都添加到这个布局管理器，并且把该布局管理器设置为窗口的布局管理器。布局管理器很聪明地做出了正确的行为：保持 QSpinBox 宽度不变，自动拉伸 QSlider 的宽度。</p>
-</li>
-</ol>
-<p>Qt 提供了几种布局管理器供我们选择：</p>
-<ul>
-<li>QHBoxLayout：按照水平方向从左到右布局；</li>
-<li>QVBoxLayout：按照竖直方向从上到下布局；</li>
-<li>QGridLayout：在一个网格中进行布局，类似于 HTML 的 table；</li>
-<li>QFormLayout：按照表格布局，每一行前面是一段文本，文本后面跟随一个组件（通常是输入框），类似 HTML 的 form；</li>
-<li>QStackedLayout：层叠的布局，允许我们将几个组件按照 Z 轴方向堆叠，可以形成向导那种一页一页的效果。</li>
-</ul>
-<h3 id="菜单栏、工具栏、状态栏"><a href="#菜单栏、工具栏、状态栏" class="headerlink" title="菜单栏、工具栏、状态栏"></a>菜单栏、工具栏、状态栏</h3><ul>
-<li><p>Qt 将用户与界面进行交互的元素抽象为一种“动作”，使用 QAction 类表示。QAction 可以添加到菜单上、工具栏上。</p>
-</li>
-<li><p>我们假设窗口还是建立在 QMainWindow 类之上，这会让我们的开发简单许多。</p>
-<p>当然，在实际开发过程中，QMainWindow 通常只作为“主窗口”，对话框窗口则更多地使用 QDialog 类。我们会在后面看到，QDialog 类会缺少一些 QMainWindow 类提供方便的函数，比如 menuBar() 以及 toolBar()。</p>
-</li>
-</ul>
-<p><strong>菜单栏</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QMenu *file = menuBar()-&gt;addMenu(tr(<span class="string">"&amp;File"</span>));</span><br><span class="line">file-&gt;addAction(openAction);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>menuBar() 是 QMainWindow 提供的函数，因此你是不会在 QWidget 或者 QDialog 中找到它的。这个函数会返回窗口的菜单栏，如果没有菜单栏则会新创建一个。</p>
-</li>
-<li><p>使用其 addMenu() 函数为其添加菜单。</p>
-</li>
-<li><p>至于 &amp; 符号，已经解释过，这可以为菜单创建一个快捷键。</p>
-</li>
-<li>当我们创建出来了菜单对象时，就可以把 QAction 添加到这个菜单上面，也就是 addAction() 函数的作用。</li>
-</ul>
-<p><strong>工具栏</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QToolBar *toolBar = addToolBar(tr(<span class="string">"&amp;File"</span>));</span><br><span class="line">toolBar-&gt;addAction(openAction);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>为什么前面一个是 menuBar() 而现在的是 addToolBar() 呢？因为一个窗口只有一个菜单栏，但是却可能有多个工具栏。</li>
-<li><p>工具栏可以设置成固定的、浮动的等等，具体设置可以参考 Qt 文档。</p>
-<p><strong>状态栏</strong></p>
-</li>
-</ul>
-<p>前面我们说过，使用 QAction::setStatusTip() 可以设置该动作在状态栏上的提示文本。但我们现在把鼠标放在按钮上，是看不到这个提示文本的。原因很简单，我们没有添加一个状态栏。QMainWindow 有一个 statusBar() 函数，只需要添加下句：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">statusBar();</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>同前面的 menuBar() 的实现类似，这个函数会返回一个 QStatusBar 对象，如果没有则先创建再返回。</p>
-</li>
-<li><p>QStatusBar 继承了 QWidget，因此，我们可以将其它任意 QWidget 子类添加到状态栏，从而实现类似 Photoshop 窗口底部那种有比例显示、有网格开关的复杂状态栏。请参考 Qt 文档。</p>
-</li>
-</ul>
-<h3 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h3><ul>
-<li><p>Qt 中使用 QDialog 类实现对话框。像主窗口一样，我们通常会设计一个类继承 QDialog。</p>
-</li>
-<li><p>QDialog 对于其 parent 指针都有额外的解释：</p>
-<p>如果 parent 为 NULL，则该对话框会作为一个顶层窗口，否则则作为其父组件的子对话框（此时，其默认出现的位置是 parent 的中心）。</p>
-<p>顶层窗口与非顶层窗口的区别在于，顶层窗口在任务栏会有自己的位置，而非顶层窗口则会共享其父组件的位置。</p>
-</li>
-</ul>
-<p>下面修改了前面QAction示例的 open函数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MainWindow::open()</span><br><span class="line">&#123;</span><br><span class="line">    QDialog dialog;			<span class="comment">//顶层窗口</span></span><br><span class="line">    <span class="comment">//QDialog dialog(this);	//非顶层窗口</span></span><br><span class="line">    dialog.setWindowTitle(tr(<span class="string">"Hello, dialog!"</span>));</span><br><span class="line">    dialog.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="模态和非模态"><a href="#模态和非模态" class="headerlink" title="模态和非模态"></a>模态和非模态</h4><p>对话框分为模态对话框和非模态对话框：</p>
-<ul>
-<li>模态对话框，就是会阻塞同一应用程序中其它窗口的输入。比如“打开文件”功能。</li>
-<li>非模态对话框，不会阻塞同一应用程序中其它窗口的输入。例如查找对话框。</li>
-</ul>
-<p>Qt 有两种级别的模态对话框：</p>
-<ul>
-<li>应用程序级别的模态(默认)，当该种模态的对话框出现时，用户必须首先对对话框进行交互，直到关闭对话框，然后才能访问程序中其他的窗口。</li>
-<li>窗口级别的模态，该模态仅仅阻塞与对话框关联的窗口，但是依然允许用户与程序中其它窗口交互。窗口级别的模态尤其适用于多窗口模式。</li>
-</ul>
-<p>实现方法：</p>
-<ul>
-<li><p>使用 QDialog::exec() 实现应用程序级别的模态对话框，</p>
-</li>
-<li><p>使用 QDialog::open() 实现窗口级别的模态对话框，</p>
-</li>
-<li><p>使用 QDialog::show() 实现非模态对话框。</p>
-</li>
-</ul>
-<h5 id="非模态对话框的使用"><a href="#非模态对话框的使用" class="headerlink" title="非模态对话框的使用"></a>非模态对话框的使用</h5><p>我们试着将 exec() 修改为 show()，看看非模态对话框，但是对话框竟然一闪而过！</p>
-<p>因为，show() 函数不会阻塞当前线程，对话框会显示出来，然后函数立即返回，代码继续执行。</p>
-<p>注意，dialog 是建立在栈上的，show() 函数返回，MainWindow::open() 函数结束，dialog 超出作用域被析构，因此对话框消失了。</p>
-<ol>
-<li><p>我们将 dialog 改成堆上建立：</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MainWindow::open()</span><br><span class="line">&#123;</span><br><span class="line">    QDialog *dialog = <span class="keyword">new</span> QDialog;</span><br><span class="line">    dialog-&gt;setWindowTitle(tr(<span class="string">"Hello, dialog!"</span>));</span><br><span class="line">    dialog-&gt;show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 但是dialog 这时存在内存泄露！dialog 使用 new 在堆上分配空间，却一直没有 delete。解决方案也很简单：将 MainWindow 的指针赋给 dialog 即可。还记得我们前面说过的 Qt 的对象系统吗？</p>
-<p> 不过，这样做有两个问题：</p>
-<p> 如果我们的对话框不是在一个界面类中出现呢？由于 QWidget 的 parent 必须是 QWidget 指针，那就限制了我们不能将一个普通的 C++ 类指针传给 Qt 对话框。</p>
-<p> 另外，如果对内存占用有严格限制的话，当我们将主窗口作为 parent 时，主窗口不关闭，对话框就不会被销毁，所以会一直占用内存。</p>
-</li>
-<li><p>更好地，我们可以设置 dialog 的 WindowAttribute：</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MainWindow::open()</span><br><span class="line">&#123;</span><br><span class="line">    QDialog *dialog = <span class="keyword">new</span> QDialog;</span><br><span class="line">    dialog-&gt;setAttribute(Qt::WA_DeleteOnClose);</span><br><span class="line">    dialog-&gt;setWindowTitle(tr(<span class="string">"Hello, dialog!"</span>));</span><br><span class="line">    dialog-&gt;show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> setAttribute() 函数设置对话框关闭时，自动销毁对话框。</p>
-</li>
-<li><p>另外，QObject 还有一个 deleteLater() 函数，该函数会在当前事件循环结束时销毁该对话框（具体到这里，需要使用 exec() 开始一个新的事件循环）。关于事件循环，我们会在后面的文章中详细说明。</p>
-</li>
-</ol>
-<h4 id="对话框数据传递"><a href="#对话框数据传递" class="headerlink" title="对话框数据传递"></a>对话框数据传递</h4><p>对话框用于完成一个简单的任务。对话框与主窗口之间的数据交互相当重要。</p>
-<p>本节将讲解如何在对话框和主窗口之间进行数据交互。对话框分为模态和非模态两种，分别进行阐述。</p>
-<p><strong>模态对话框</strong></p>
-<p>模态对话框使用了 exec() 函数将其显示出来。exec() 函数的真正含义是开启一个新的事件循环，既然是无限循环，在开启了事件循环的地方，代码就会被阻塞，后面的语句也就不会被执行到。因此，我们可以在 exec() 函数之后直接从对话框的对象获取到数据值。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MainWindow::open()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QDialog <span class="title">dialog</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    dialog.setWindowTitle(tr(<span class="string">"Hello, dialog!"</span>));</span><br><span class="line">    dialog.exec();</span><br><span class="line">    qDebug() &lt;&lt; dialog.result();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>qDebug() 类似于 std::cout，将后面的信息输出到标准输出，一般就是控制台。需要头文件。</li>
-<li>注意，如果我们设置 dialog 的属性为 WA_DeleteOnClose，那么当对话框关闭时，对象被销毁，我们就不能使用这种办法获取数据了。</li>
-</ul>
-<p>实际上，QDialog::exec() 是有返回值的，其返回值是 QDialog::Accepted 或者 QDialog::Rejected。可以以此判断对话框的返回值，也就是用户是点击了“确定”还是“取消”。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QDialog <span class="title">dialog</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line"><span class="keyword">if</span> (dialog.exec() == QDialog::Accepted) &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// do something else</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>非模态对话框</strong></p>
-<p>因为 show() 函数不会阻塞主线程，用户还没有来得及输入，就要执行后面的代码。那么我们就应该换一种思路获取数据，那就是使用信号槽机制。</p>
-<p>由于非模态对话框在关闭时可以调用 QDialog::accept() 或者 QDialog::reject() 或者更通用的 QDialog::done() 函数，所以我们可以在这里发出信号。另外，如果找不到合适的信号发出点，我们可以重写 QDialog::closeEvent() 函数，在这里发出信号。在需要接收数据的窗口（这里是主窗口）连接到这个信号即可。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//!!! Qt 5</span></span><br><span class="line"><span class="comment">// in dialog:</span></span><br><span class="line"><span class="keyword">void</span> UserAgeDialog::accept()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">emit <span class="title">userAgeChanged</span><span class="params">(newAge)</span></span>; <span class="comment">// newAge is an int</span></span><br><span class="line">    QDialog::accept();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// in main window:</span></span><br><span class="line"><span class="keyword">void</span> MainWindow::showUserAgeDialog()</span><br><span class="line">&#123;</span><br><span class="line">    UserAgeDialog *dialog = <span class="keyword">new</span> UserAgeDialog(<span class="keyword">this</span>);</span><br><span class="line">    connect(dialog, &amp;UserAgeDialog::userAgeChanged, <span class="keyword">this</span>, &amp;MainWindow::setUserAge);</span><br><span class="line">    dialog-&gt;show();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::setUserAge(<span class="keyword">int</span> age)</span><br><span class="line">&#123;</span><br><span class="line">    userAge = age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不要担心如果对话框关闭，是不是还能获取到数据。因为 Qt 信号槽的机制保证，在槽函数在调用的时候，我们始终可以使用 sender() 函数获取到 signal 的发出者。</p>
-<p>顺便说一句，sender() 函数的存在使我们可以利用这个函数，来实现一个只能打开一个的非模态对话框（方法就是在对话框打开时在一个对话框映射表中记录下标记，在对话框关闭时利用 sender() 函数判断是不是该对话框，然后从映射表中将其删除）。</p>
-<h4 id="标准对话框"><a href="#标准对话框" class="headerlink" title="标准对话框"></a>标准对话框</h4><p>所谓标准对话框，是 Qt 内置的一系列对话框，用于简化开发。</p>
-<hr>
-<p>Qt 的内置对话框大致分为以下几类：</p>
-<ul>
-<li>QColorDialog：选择颜色；</li>
-<li>QFileDialog：选择文件或者目录；</li>
-<li>QFontDialog：选择字体；</li>
-<li>QInputDialog：允许用户输入一个值，并将其值返回；</li>
-<li>QMessageBox：模态对话框，用于显示信息、询问问题等；</li>
-<li>QProgressDialog：显示操作过程。</li>
-</ul>
-<p>在前面有了对话框的基础之上，应该可以结合文档很轻松地学习 Qt 的标准对话框。</p>
-<hr>
-<h5 id="消息对话框"><a href="#消息对话框" class="headerlink" title="消息对话框"></a>消息对话框</h5><p>这里简单地介绍一下 QMessageBox ，我们一般会使用其提供的几个 static 函数：</p>
-<ul>
-<li>void about(QWidget * parent, const QString &amp; title, const QString &amp; text)：显示关于对话框。这是一个最简单的对话框，其标题是 title，内容是 text，父窗口是 parent。对话框只有一个 OK 按钮。</li>
-<li>void aboutQt(QWidget * parent, const QString &amp; title = QString())：显示关于 Qt 对话框。该对话框用于显示有关 Qt 的信息。</li>
-<li>StandardButton critical(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)：显示严重错误对话框。这个对话框将显示一个红色的错误符号。我们可以通过 buttons 参数指明其显示的按钮。默认情况下只有一个 Ok 按钮，我们可以使用 StandardButtons 类型指定多种按钮。</li>
-<li>StandardButton information(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)：QMessageBox::information() 函数与 QMessageBox::critical() 类似，不同之处在于这个对话框提供一个普通信息图标。</li>
-<li>StandardButton question(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = StandardButtons( Yes | No ), StandardButton defaultButton = NoButton)。</li>
-<li>QMessageBox::question() 函数与 QMessageBox::critical() 类似，不同之处在于这个对话框提供一个问号图标，并且其显示的按钮是“是”和“否”两个。</li>
-<li>StandardButton warning(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)：QMessageBox::warning() 函数与 QMessageBox::critical() 类似，不同之处在于这个对话框提供一个叹号图标。</li>
-</ul>
-<p><strong>例子：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (QMessageBox::Yes == QMessageBox::question(<span class="keyword">this</span>,</span><br><span class="line">                                              tr(<span class="string">"Question"</span>),</span><br><span class="line">                                              tr(<span class="string">"Are you OK?"</span>),</span><br><span class="line">                                              QMessageBox::Yes | QMessageBox::No,</span><br><span class="line">                                              QMessageBox::Yes)) &#123;</span><br><span class="line">    QMessageBox::information(<span class="keyword">this</span>, tr(<span class="string">"Hmmm..."</span>), tr(<span class="string">"I'm glad to hear that!"</span>));</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    QMessageBox::information(<span class="keyword">this</span>, tr(<span class="string">"Hmmm..."</span>), tr(<span class="string">"I'm sorry!"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>这个对话框的父窗口是 this。QMessageBox 是 QDialog 的子类，这意味着它的初始显示位置将会是在 parent 窗口的中央。</p>
-</li>
-<li><p>我们使用或运算符（|）指定对话框应该出现的按钮。这里我们希望是一个 Yes 和一个 No。</p>
-</li>
-<li>最后一个参数指定默认选择的按钮。</li>
-</ul>
-<hr>
-<p>QMessageBox 类的 static 函数优点是方便使用，缺点也很明显：非常不灵活。我们只能使用简单的几种形式。</p>
-<p>为了能够定制 QMessageBox 细节，我们必须使用 QMessageBox 的属性设置 API。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">QMessageBox msgBox;</span><br><span class="line">msgBox.setText(tr(<span class="string">"The document has been modified."</span>));</span><br><span class="line">msgBox.setInformativeText(tr(<span class="string">"Do you want to save your changes?"</span>));</span><br><span class="line">msgBox.setDetailedText(tr(<span class="string">"Differences here..."</span>));</span><br><span class="line">msgBox.setStandardButtons(QMessageBox::Save</span><br><span class="line">                          | QMessageBox::Discard</span><br><span class="line">                          | QMessageBox::Cancel);</span><br><span class="line">msgBox.setDefaultButton(QMessageBox::Save);</span><br><span class="line"><span class="keyword">int</span> ret = msgBox.exec();</span><br><span class="line"><span class="keyword">switch</span> (ret) &#123;</span><br><span class="line"><span class="keyword">case</span> QMessageBox::Save:</span><br><span class="line">    qDebug() &lt;&lt; <span class="string">"Save document!"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> QMessageBox::Discard:</span><br><span class="line">    qDebug() &lt;&lt; <span class="string">"Discard changes!"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> QMessageBox::Cancel:</span><br><span class="line">    qDebug() &lt;&lt; <span class="string">"Close document!"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>设置其标题为“The document has been modified.”，informationText 则是会在对话框中显示的文字。</li>
-<li>下面我们使用了一个 detailedText，也就是详细信息，当我们点击了详细信息按钮时，对话框可以自动显示更多信息。</li>
-<li><p>我们自己定义的对话框的按钮有三个：保存、丢弃和取消。然后我们使用了 exec() 使其成为一个模态对话框，根据其返回值进行相应的操作。</p>
-</li>
-<li><p>我们并没有指定按钮的顺序，Qt 已经帮我们按照不同平台的使用习惯对其进行了调整。这一点在 Mac OS 上也会有相应的体现。</p>
-<p>对于一个普通的 QDialog 而言，Qt 使用的是 QDialogButtonBox 这个类来实现不同平台的对话框按钮顺序的显示的。</p>
-</li>
-</ul>
-<hr>
-<h5 id="文件对话框"><a href="#文件对话框" class="headerlink" title="文件对话框"></a>文件对话框</h5><p>在本节中，我们将尝试编写一个简单的文本文件编辑器，我们将使用 QFileDialog 来打开一个文本文件，并将修改过的文件保存到硬盘。</p>
-<p>（此程序仅用于演示，很多必须的操作并没有进行。比如，我们没有检查这个文件的实际类型是不是一个文本文件。并且直接读取文件所有内容，如果文件过大，程序会立刻死掉。）</p>
-<ol>
-<li><p>首先，我们需要创建一个带有文本编辑功能的窗口：</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">openAction = <span class="keyword">new</span> QAction(<span class="string">"open"</span>, <span class="keyword">this</span>);</span><br><span class="line">openAction-&gt;setShortcuts(QKeySequence::Open);</span><br><span class="line">openAction-&gt;setStatusTip(tr(<span class="string">"Open an existing file"</span>));</span><br><span class="line"></span><br><span class="line">saveAction = <span class="keyword">new</span> QAction(QIcon(<span class="string">"file-save"</span>), <span class="keyword">this</span>);</span><br><span class="line">saveAction-&gt;setShortcuts(QKeySequence::Save);</span><br><span class="line">saveAction-&gt;setStatusTip(tr(<span class="string">"Save a new file"</span>));</span><br><span class="line"></span><br><span class="line">QMenu *file = menuBar()-&gt;addMenu(tr(<span class="string">"&amp;File"</span>));</span><br><span class="line">file-&gt;addAction(openAction);</span><br><span class="line">file-&gt;addAction(saveAction);</span><br><span class="line"></span><br><span class="line">QToolBar *toolBar = addToolBar(tr(<span class="string">"&amp;File"</span>));</span><br><span class="line">toolBar-&gt;addAction(openAction);</span><br><span class="line">toolBar-&gt;addAction(saveAction);</span><br><span class="line"></span><br><span class="line">textEdit = <span class="keyword">new</span> QTextEdit(<span class="keyword">this</span>);</span><br><span class="line">setCentralWidget(textEdit);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>我们在菜单和工具栏添加了两个动作：打开和保存。</li>
-<li>接下来是一个 <strong>QTextEdit</strong> 类，这个类用于显示富文本文件。也就是说，它不仅仅用于显示文本，还可以显示图片、表格等等。不过，我们现在只用它显示纯文本文件。</li>
-<li>QMainWindow 有一个 setCentralWidget() 函数，可以将一个组件作为窗口的中心组件，放在窗口中央显示区。</li>
-</ul>
-</li>
-<li><p>我们使用 connect() 函数，为这两个 QAction 对象添加响应的动作：</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connect(openAction, &amp;QAction::triggered, <span class="keyword">this</span>, &amp;MainWindow::openFile);</span><br><span class="line">connect(saveAction, &amp;QAction::triggered, <span class="keyword">this</span>, &amp;MainWindow::saveFile);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下面是最主要的 openFile() 和 saveFile() 这两个函数的代码：</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MainWindow::openFile()</span><br><span class="line">&#123;</span><br><span class="line">    QString path = QFileDialog::getOpenFileName(<span class="keyword">this</span>,</span><br><span class="line">                                                tr(<span class="string">"Open File"</span>),</span><br><span class="line">                                                <span class="string">"."</span>,</span><br><span class="line">                                                tr(<span class="string">"Text Files(*.txt)"</span>));</span><br><span class="line">    <span class="keyword">if</span>(!path.isEmpty()) &#123;</span><br><span class="line">        <span class="function">QFile <span class="title">file</span><span class="params">(path)</span></span>;</span><br><span class="line">        <span class="keyword">if</span> (!file.open(QIODevice::ReadOnly | QIODevice::Text)) &#123;</span><br><span class="line">            QMessageBox::warning(<span class="keyword">this</span>, tr(<span class="string">"Read File"</span>),</span><br><span class="line">                                 tr(<span class="string">"Cannot open file:\n%1"</span>).arg(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">QTextStream <span class="title">in</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line">        textEdit-&gt;setText(in.readAll());</span><br><span class="line">        file.close();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        QMessageBox::warning(<span class="keyword">this</span>, tr(<span class="string">"Path"</span>),</span><br><span class="line">                             tr(<span class="string">"You did not select any file."</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::saveFile()</span><br><span class="line">&#123;</span><br><span class="line">    QString path = QFileDialog::getSaveFileName(<span class="keyword">this</span>,</span><br><span class="line">                                                tr(<span class="string">"Open File"</span>),</span><br><span class="line">                                                <span class="string">"."</span>,</span><br><span class="line">                                                tr(<span class="string">"Text Files(*.txt)"</span>));</span><br><span class="line">    <span class="keyword">if</span>(!path.isEmpty()) &#123;</span><br><span class="line">        <span class="function">QFile <span class="title">file</span><span class="params">(path)</span></span>;</span><br><span class="line">        <span class="keyword">if</span> (!file.open(QIODevice::WriteOnly | QIODevice::Text)) &#123;</span><br><span class="line">            QMessageBox::warning(<span class="keyword">this</span>, tr(<span class="string">"Write File"</span>),</span><br><span class="line">                                       tr(<span class="string">"Cannot open file:\n%1"</span>).arg(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">QTextStream <span class="title">out</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line">        out &lt;&lt; textEdit-&gt;toPlainText();</span><br><span class="line">        file.close();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        QMessageBox::warning(<span class="keyword">this</span>, tr(<span class="string">"Path"</span>),</span><br><span class="line">                             tr(<span class="string">"You did not select any file."</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>在 openFile() 函数中，我们使用 <code>QFileDialog::getOpenFileName()</code> 来获取需要打开的文件的路径。这个函数具有一个长长的签名：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QString <span class="title">getOpenFileName</span><span class="params">(QWidget * parent = <span class="number">0</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">const</span> QString &amp; caption = QString(),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">const</span> QString &amp; dir = QString(),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">const</span> QString &amp; filter = QString(),</span></span></span><br><span class="line"><span class="function"><span class="params">                        QString * selectedFilter = <span class="number">0</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                        Options options = <span class="number">0</span>)</span></span></span><br></pre></td></tr></table></figure>
-<p>不过注意，它的所有参数都是可选的</p>
-<ul>
-<li><p>parent：父窗口；</p>
-</li>
-<li><p>caption：对话框标题；</p>
-</li>
-<li><p>dir：对话框打开时的默认目录，“.” 代表程序运行目录，“/” 代表 Windows 当前盘符的根目录、Linux 平台的根目录，这个参数也可以是平台相关的，比如“C:\”等；</p>
-</li>
-<li><p>filter：过滤器。用于过滤特定的后缀名。如果我们使用<code>“Image Files(*.jpg *.png)”</code>，则只能显示后缀名是 jpg 或者 png 的文件。如果需要多个过滤器，使用“;;”分割，比如<code>“JPEG Files(*.jpg);;PNG Files(*.png)”</code>；</p>
-</li>
-<li><p>selectedFilter：默认选择的过滤器；</p>
-</li>
-<li><p>options：对话框的一些参数设定，比如只显示文件夹等等，它的取值是 enum QFileDialog::Option，每个选项可以使用 | 运算组合起来。</p>
-</li>
-</ul>
-</li>
-<li><p>QFileDialog::getOpenFileName() 返回值是选择的文件路径。我们将其赋值给 path。通过判断 path 是否为空，可以确定用户是否选择了某一文件。</p>
-</li>
-<li><p>我们创建一个 QFile 对象，将用户选择的文件路径传递给这个对象。</p>
-</li>
-<li><p>然后打开这个文件，使用的是 QFile::open()，其参数是指定的打开方式，这里我们使用只读方式和文本方式打开这个文件。打开成功则返回 true。</p>
-</li>
-<li><p>使用 QTextStream::readAll() 读取文件所有内容，然后将其赋值给 QTextEdit 显示出来。最后不要忘记关闭文件。</p>
-<p>saveFile() 函数也是类似的，只不过最后一步，我们使用 &lt;&lt; 重定向，将 QTextEdit 的内容输出到一个文件中。</p>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>事件（event）是由系统或者 Qt 本身在不同的时刻发出的。当用户按下鼠标、敲下键盘，或者是窗口需要重新绘制的时候，都会发出一个相应的事件。一些事件在对用户操作做出响应时发出，如键盘事件等；另一些事件则是由系统自动发出，如计时器事件。</p>
-<p>Qt 中的事件和信号槽并不是相互替代的。</p>
-<ul>
-<li><p>信号由具体的对象发出，然后会马上交给由 connect() 函数连接的槽进行处理；而对于事件，Qt 使用一个事件队列对所有发出的事件进行维护，当新的事件产生时，会被追加到事件队列的尾部。前一个事件完成后，取出后面的事件进行处理。但是，必要的时候，Qt 的事件也可以不进入事件队列，而是直接处理。</p>
-<p>即<strong>信号槽是同步的，事件可以是同步的或者异步的。</strong></p>
-</li>
-<li><p><strong>事件处理函数的返回值是有意义的</strong>，我们要根据这个返回值来确定是否还要继续事件的处理，比如在QT中，事件处理函数如果返回true，则这个事件处理已完成，QApplication会接着处理下一个事件，而如果返回false，那么事件分派函数会继续向上寻找下一个可以处理该事件的注册方法。信号处理函数的返回值对信号分派器来说是无意义的。</p>
-</li>
-<li><p>信号一旦发出，对应的槽函数一定会被执行。但是，<strong>事件则可以使用“事件过滤器”进行过滤</strong>，对于有些事件进行额外的处理，另外的事件则不关心。</p>
-</li>
-<li><p>总的来说，如果我们使用组件，我们关心的是信号槽；如果我们自定义组件，我们关心的是事件。因为我们可以通过事件来改变组件的默认操作。</p>
-</li>
-</ul>
-<p>在执行 exec() 函数之后，程序将进入事件循环来监听应用程序的事件。当事件发生时，Qt 将创建一个事件对象。Qt 中所有事件类都继承于 QEvent。在事件对象创建完毕后，Qt 将这个事件对象传递给 QObject 的 event() 函数。event() 函数并不直接处理事件，而是按照事件对象的类型分派给特定的事件处理函数（event handler）。</p>
-<p>在所有组件的父类 QWidget 中，定义了很多事件处理的回调函数，如 keyPressEvent()、keyReleaseEvent()、mouseDoubleClickEvent()、mouseMoveEvent ()、mousePressEvent()、mouseReleaseEvent() 等。这些函数都是 protected virtual 的，也就是说，我们可以在子类中重新实现这些函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventLabel</span> :</span> <span class="keyword">public</span> QLabel</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mouseMoveEvent</span><span class="params">(QMouseEvent *event)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mousePressEvent</span><span class="params">(QMouseEvent *event)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mouseReleaseEvent</span><span class="params">(QMouseEvent *event)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> EventLabel::mouseMoveEvent(QMouseEvent *event)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;setText(QString(<span class="string">"&lt;center&gt;&lt;h1&gt;Move: (%1, %2)&lt;/h1&gt;&lt;/center&gt;"</span>)</span><br><span class="line">                  .arg(QString::number(event-&gt;x()), QString::number(event-&gt;y())));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> EventLabel::mousePressEvent(QMouseEvent *event)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;setText(QString(<span class="string">"&lt;center&gt;&lt;h1&gt;Press: (%1, %2)&lt;/h1&gt;&lt;/center&gt;"</span>)</span><br><span class="line">                  .arg(QString::number(event-&gt;x()), QString::number(event-&gt;y())));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> EventLabel::mouseReleaseEvent(QMouseEvent *event)</span><br><span class="line">&#123;</span><br><span class="line">    QString msg;</span><br><span class="line">    msg.<span class="built_in">sprintf</span>(<span class="string">"&lt;center&gt;&lt;h1&gt;Release: (%d, %d)&lt;/h1&gt;&lt;/center&gt;"</span>,</span><br><span class="line">                event-&gt;x(), event-&gt;y());</span><br><span class="line">    <span class="keyword">this</span>-&gt;setText(msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    EventLabel *label = <span class="keyword">new</span> EventLabel;</span><br><span class="line">    label-&gt;setWindowTitle(<span class="string">"MouseEvent Demo"</span>);</span><br><span class="line">    label-&gt;resize(<span class="number">300</span>, <span class="number">200</span>);</span><br><span class="line">    label-&gt;show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>EventLabel 继承了 QLabel，覆盖了 mousePressEvent()、mouseMoveEvent() 和 MouseReleaseEvent() 三个函数。我们并没有添加什么功能，只是在鼠标按下（press）、鼠标移动（move）和鼠标释放（release）的时候，把当前鼠标的坐标值显示在这个 Label 上面。由于 QLabel 是支持 HTML 代码的，因此我们直接使用了 HTML 代码来格式化文字。</p>
-</li>
-<li><p>运行上面的代码，当我们点击了一下鼠标之后，label 上将显示鼠标当前坐标值。</p>
-<p>为什么要点击鼠标之后才能在 mouseMoveEvent() 函数中显示鼠标坐标值？这是因为 QWidget 中有一个 mouseTracking 属性，该属性用于设置是否追踪鼠标。只有鼠标被追踪时，mouseMoveEvent() 才会发出。默认的 mouseTracking 是 false，组件在至少一次鼠标点击之后，才能够被追踪。如果 mouseTracking 为 true，则 mouseMoveEvent() 直接可以被发出：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">label-&gt;setMouseTracking(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<h4 id="接收与忽略"><a href="#接收与忽略" class="headerlink" title="接收与忽略"></a>接收与忽略</h4><p>通过调用父类的同名函数，我们可以把 Qt 的事件传递看成链状：如果子类没有处理这个事件，就会继续向其父类传递。Qt 的事件对象有两个函数：accept() 和 ignore()。在事件处理函数中，可以使用 isAccepted() 来查询这个事件是不是已经被接收了。如果一个事件处理函数调用了一个事件对象的 accept() 函数，这个事件就不会被继续传播给其父组件；如果它调用了事件的 ignore() 函数，Qt 会从其父组件中寻找另外的接受者。</p>
-<p>事实上，我们很少会使用 accept() 和 ignore() 函数，而是像上面的示例一样，如果希望忽略事件（所谓忽略，是指自己不想要这个事件），只要调用父类的响应函数即可。（Qt 中的事件都是 protected 的，因此，重写的函数必定存在着其父类中的响应函数。）</p>
-<p>为了避免自己去调用 accept() 和 ignore() 函数，而是尽量调用父类实现，Qt 做了特殊的设计：事件对象默认是 accept 的，而作为所有组件的父类 QWidget 的默认实现则是调用 ignore()。这么一来，如果你自己实现事件处理函数，不调用 QWidget 的默认实现，你就等于是接受了事件；如果你要忽略事件，只需调用 QWidget 的默认实现。</p>
-<hr>
-<p>在一个情形下，我们必须使用 accept() 和 ignore() 函数，那就是<strong>窗口关闭的事件</strong>。对于 QCloseEvent 事件，调用 accept() 意味着 Qt 会停止事件的传播（窗口关闭了），调用 ignore() 则意味着事件继续传播。</p>
-<p>在上面的文件对话框例子中添加如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mainwindow.cpp</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">connect(textEdit, &amp;QTextEdit::textChanged, [=]() &#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;setWindowModified(<span class="literal">true</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::closeEvent(QCloseEvent *event)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (isWindowModified()) &#123;</span><br><span class="line">        <span class="keyword">bool</span> <span class="built_in">exit</span> = QMessageBox::question(<span class="keyword">this</span>,</span><br><span class="line">                                      tr(<span class="string">"Quit"</span>),</span><br><span class="line">                                      tr(<span class="string">"Are you sure to quit this application?"</span>),</span><br><span class="line">                                      QMessageBox::Yes | QMessageBox::No,</span><br><span class="line">                                      QMessageBox::No) == QMessageBox::Yes;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">exit</span>) &#123;</span><br><span class="line">            event-&gt;accept();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            event-&gt;ignore();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        event-&gt;accept();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="重写event"><a href="#重写event" class="headerlink" title="重写event()"></a>重写event()</h4><p>event() 函数主要用于事件的分发。所以，如果你希望在事件分发之前做一些操作，就可以重写这个 event() 函数了。例如，我们希望在一个 QWidget 组件中监听 tab 键的按下，那么就可以继承 QWidget，并重写它的 event() 函数，来达到这个目的：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> CustomWidget::event(QEvent *e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (e-&gt;type() == QEvent::KeyPress) &#123;</span><br><span class="line">        QKeyEvent *keyEvent = <span class="keyword">static_cast</span>&lt;QKeyEvent *&gt;(e);</span><br><span class="line">        <span class="keyword">if</span> (keyEvent-&gt;key() == Qt::Key_Tab) &#123;</span><br><span class="line">            qDebug() &lt;&lt; <span class="string">"You press tab."</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> QWidget::event(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>CustomWidget 是一个普通的 QWidget 子类。我们重写了它的 event() 函数，这个函数有一个 QEvent 对象作为参数，也就是需要转发的事件对象。</p>
-</li>
-<li><p>函数返回值是 bool 类型。如果传入的事件已被识别并且处理，则需要返回 true，否则返回 false。如果返回值是 true，并且，该事件对象设置了 accept()，那么 Qt 会认为这个事件已经处理完毕，不会再将这个事件发送给其它对象，而是会继续处理事件队列中的下一事件。</p>
-</li>
-<li><p>注意，在 event() 函数中，调用事件对象的 accept() 和 ignore() 函数是没有作用的，不会影响到事件的传播。</p>
-</li>
-<li><p>QEvent::type() 函数返回值是 QEvent::Type 类型的枚举。我们处理过自己感兴趣的事件之后，可以直接返回 true，表示我们已经对此事件进行了处理；对于其它我们不关心的事件，则需要调用父类的 event() 函数继续转发。</p>
-</li>
-</ul>
-<p><strong>由此可见</strong>，event() 是一个集中处理不同类型的事件的地方。如果你不想重写一大堆事件处理器，就可以重写这个 event() 函数，通过 QEvent::type() 判断不同的事件。鉴于重写 event() 函数需要十分小心注意父类的同名函数的调用，一不留神就可能出现问题，所以一般还是建议只重写事件处理器（当然，也必须记得是不是应该调用父类的同名处理器）。这其实暗示了 event() 函数的另外一个作用：屏蔽掉某些不需要的事件处理器。正如我们前面的 CustomTextEdit 例子看到的那样，我们创建了一个只能响应 tab 键的组件。这种作用是重写事件处理器所不能实现的。</p>
-<h4 id="事件过滤器"><a href="#事件过滤器" class="headerlink" title="事件过滤器"></a>事件过滤器</h4><p>有时候，对象需要查看、甚至要拦截发送到另外对象的事件。例如，对话框可能想要拦截按键事件，不让别的组件接收到；或者要修改回车键的默认处理。QObject 有一个 eventFilter() 函数，用于建立事件过滤器：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">virtual</span> <span class="keyword">bool</span> QObject::eventFilter ( QObject * watched, QEvent * event );</span><br></pre></td></tr></table></figure>
-<p>它会检查接收到的事件。如果这个事件是我们感兴趣的类型，就进行我们自己的处理；如果不是，就继续转发。</p>
-<ul>
-<li><p>这个函数返回一个 bool 类型，如果你想将参数 event 过滤出来，不想让它继续转发，就返回 true，否则返回 false。</p>
-</li>
-<li><p>事件过滤器的调用时间是目标对象（也就是参数里面的 watched 对象）接收到事件对象之前。也就是说，如果你在事件过滤器中停止了某个事件，那么，watched 对象以及以后所有的事件过滤器根本不会知道这个事件。</p>
-</li>
-</ul>
-<hr>
-<p>eventFilter() 函数相当于创建了过滤器。安装过滤器需要调用 QObject::installEventFilter() 函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> QObject::installEventFilter ( QObject * filterObj )</span><br></pre></td></tr></table></figure>
-<p>这个函数接受一个 QObject * 类型的参数。记得刚刚我们说的，eventFilter() 函数是 QObject 的一个成员函数，因此，任意 QObject 都可以作为事件过滤器。过滤器可以通过 QObject::removeEventFilter() 函数移除。</p>
-<p>另一个例子见事件层次。</p>
-<p>我们可以向一个对象上面安装多个事件处理器，只要调用多次 installEventFilter() 函数。如果一个对象存在多个事件过滤器，那么，最后一个安装的会第一个执行，也就是后进先执行的顺序。</p>
-<p><strong>例子：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> :</span> <span class="keyword">public</span> QMainWindow</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     MainWindow();</span><br><span class="line"> <span class="keyword">protected</span>:</span><br><span class="line">     <span class="function"><span class="keyword">bool</span> <span class="title">eventFilter</span><span class="params">(QObject *obj, QEvent *event)</span></span>;</span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">     QTextEdit *textEdit;</span><br><span class="line"> &#125;;</span><br><span class="line"> </span><br><span class="line"> MainWindow::MainWindow()</span><br><span class="line"> &#123;</span><br><span class="line">     textEdit = <span class="keyword">new</span> QTextEdit;</span><br><span class="line">     setCentralWidget(textEdit);</span><br><span class="line"> </span><br><span class="line">     textEdit-&gt;installEventFilter(<span class="keyword">this</span>);</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">bool</span> MainWindow::eventFilter(QObject *obj, QEvent *event)</span><br><span class="line"> &#123;</span><br><span class="line">     <span class="keyword">if</span> (obj == textEdit) &#123;</span><br><span class="line">         <span class="keyword">if</span> (event-&gt;type() == QEvent::KeyPress) &#123;</span><br><span class="line">             QKeyEvent *keyEvent = <span class="keyword">static_cast</span>&lt;QKeyEvent *&gt;(event);</span><br><span class="line">             qDebug() &lt;&lt; <span class="string">"Ate key press"</span> &lt;&lt; keyEvent-&gt;key();</span><br><span class="line">             <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="comment">// pass the event on to the parent class</span></span><br><span class="line">         <span class="keyword">return</span> QMainWindow::eventFilter(obj, event);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>重写event()的Tab 键例子可以改写为事件过滤器版本：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> FilterObject::eventFilter(QObject *object, QEvent *event)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (object == target &amp;&amp; event-&gt;type() == QEvent::KeyPress) &#123;</span><br><span class="line">        QKeyEvent *keyEvent = <span class="keyword">static_cast</span>&lt;QKeyEvent *&gt;(event);</span><br><span class="line">        <span class="keyword">if</span> (keyEvent-&gt;key() == Qt::Key_Tab) &#123;</span><br><span class="line">            qDebug() &lt;&lt; <span class="string">"You press tab."</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>PS：</strong></p>
-<p>尽管事件过滤器很强大，但这种行为会严重降低整个应用程序的事件分发效率。因此，除非是不得不使用的情况，否则的话我们不应该这么做。</p>
-<p><strong>注意，如果你在事件过滤器中 delete 了某个接收组件，务必将函数返回值设为 true。否则，Qt 还是会将事件分发给这个接收组件，从而导致程序崩溃。</strong></p>
-<p>事件过滤器和被安装过滤器的组件<strong>必须在同一线程</strong>，否则，过滤器将不起作用。另外，如果在安装过滤器之后，这两个组件到了不同的线程，那么，只有等到二者重新回到同一线程的时候过滤器才会有效。</p>
-<h4 id="事件层次"><a href="#事件层次" class="headerlink" title="事件层次"></a>事件层次</h4><p>Qt 中有很多种事件：鼠标事件、键盘事件、大小改变的事件、位置移动的事件等等。如何处理这些事件，实际有两种选择：</p>
-<ol>
-<li>所有事件对应一个事件处理函数，在这个事件处理函数中用一个很大的分支语句进行选择。</li>
-<li>每一种事件对应一个事件处理函数。Qt 就是使用的这种机制。event() 对所有事件处理函数进行分发。</li>
-</ol>
-<p>但event() 函数会有两个问题：</p>
-<ul>
-<li><p>event() 函数是一个 protected 的函数，这意味着我们要想重写 event()，必须继承一个已有的类。试想，我的程序根本不想要鼠标事件，程序中所有组件都不允许处理鼠标事件，是不是我得继承所有组件，一一重写其 event() 函数？protected 函数带来的另外一个问题是，如果我基于第三方库进行开发，而对方没有提供源代码，只有一个链接库，其它都是封装好的。我怎么去继承这种库中的组件呢？</p>
-</li>
-<li><p>event() 函数的确有一定的控制，不过有时候我的需求更严格一些：我希望那些组件根本看不到这种事件。event() 函数虽然可以拦截，但其实也是接收到了 QMouseEvent 对象。我连让它收都收不到。这样做的好处是，模拟一种系统根本没有那个事件的效果，所以其它组件根本不会收到这个事件，也就无需修改自己的事件处理函数。这种需求怎么办呢？</p>
-</li>
-</ul>
-<p>这两个问题是 event() 函数无法处理的。于是，Qt 提供了另外一种解决方案：事件过滤器。事件过滤器给我们一种能力，让我们能够完全移除某种事件。事件过滤器可以安装到任意 QObject 类型上面，并且可以安装多个。</p>
-<p><strong>如果要实现全局的事件过滤器，则可以安装到 QApplication 或者 QCoreApplication 上面。</strong></p>
-<p>事件过滤器可以解决刚刚我们提出的 event() 函数的两点不足：首先，事件过滤器不是 protected 的，因此我们可以向任何 QObject 子类安装事件过滤器；其次，事件过滤器在目标对象接收到事件之前进行处理，如果我们将事件过滤掉，目标对象根本不会见到这个事件。</p>
-<hr>
-<p>事实上，还有一种方法，我们没有介绍。Qt 事件的调用最终都会追溯到 QCoreApplication::notify() 函数，因此，最大的控制权实际上是重写 QCoreApplication::notify()。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">virtual</span> <span class="keyword">bool</span> QCoreApplication::notify ( QObject * receiver, QEvent * event );</span><br></pre></td></tr></table></figure>
-<p>该函数会将 event 发送给 receiver，也就是调用 receiver-&gt;event(event)，其返回值就是来自 receiver 的事件处理器。注意，这个函数为任意线程的任意对象的任意事件调用，因此，它不存在事件过滤器的线程的问题。不过我们并不推荐这么做，因为 notify() 函数只有一个，而事件过滤器要灵活得多。</p>
-<hr>
-<p>现在我们可以总结一下 Qt 的事件处理，实际上是有五个层次：</p>
-<ul>
-<li>重写 paintEvent()、mousePressEvent() 等事件处理函数。这是最普通、最简单的形式，同时功能也最简单。</li>
-<li>重写 event() 函数。event() 函数是所有对象的事件入口，QObject 和 QWidget 中的实现，默认是把事件传递给特定的事件处理函数。</li>
-<li>在特定对象上面安装事件过滤器。该过滤器仅过滤该对象接收到的事件。</li>
-<li>在 QCoreApplication::instance() 上面安装事件过滤器。该过滤器将过滤所有对象的所有事件，因此和 notify() 函数一样强大，但是它更灵活，因为可以安装多个过滤器。全局的事件过滤器可以看到 disabled 组件上面发出的鼠标事件。全局过滤器有一个问题：只能用在主线程。</li>
-<li>重写 QCoreApplication::notify() 函数。这是最强大的，和全局事件过滤器一样提供完全控制，并且不受线程的限制。但是全局范围内只能有一个被使用（因为 QCoreApplication 是单例的）。</li>
-</ul>
-<p>关于调用顺序的<strong>例子</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Label</span> :</span> <span class="keyword">public</span> QWidget</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Label()</span><br><span class="line">    &#123;</span><br><span class="line">        installEventFilter(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">eventFilter</span><span class="params">(QObject *watched, QEvent *event)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (watched == <span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (event-&gt;type() == QEvent::MouseButtonPress) &#123;</span><br><span class="line">                qDebug() &lt;&lt; <span class="string">"eventFilter"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mousePressEvent</span><span class="params">(QMouseEvent *)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        qDebug() &lt;&lt; <span class="string">"mousePressEvent"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">event</span><span class="params">(QEvent *e)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (e-&gt;type() == QEvent::MouseButtonPress) &#123;</span><br><span class="line">            qDebug() &lt;&lt; <span class="string">"event"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> QWidget::event(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventFilter</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    EventFilter(QObject *watched, QObject *parent = <span class="number">0</span>) :</span><br><span class="line">        QObject(parent),</span><br><span class="line">        m_watched(watched)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">eventFilter</span><span class="params">(QObject *watched, QEvent *event)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (watched == m_watched) &#123;</span><br><span class="line">            <span class="keyword">if</span> (event-&gt;type() == QEvent::MouseButtonPress) &#123;</span><br><span class="line">                qDebug() &lt;&lt; <span class="string">"QApplication::eventFilter"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QObject *m_watched;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    Label label;</span><br><span class="line">    app.installEventFilter(<span class="keyword">new</span> EventFilter(&amp;label, &amp;label));</span><br><span class="line">    label.show();</span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们可以看到，鼠标点击之后的输出结果是：</p>
-<p>QApplication::eventFilter eventFilter event mousePressEvent</p>
-<p>因此可以知道，全局事件过滤器被第一个调用，之后是该对象上面的事件过滤器，其次是 event() 函数，最后是特定的事件处理函数。</p>
-<h4 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h4><p>(待实践)</p>
-<p>Qt 自定义事件很简单，需要继承的类是 QEvent。</p>
-<p><strong>继承 QEvent 类，最重要的是提供一个 QEvent::Type 类型的参数，作为自定义事件的类型值。</strong>回忆一下，这个 type 是我们在处理事件时用于识别事件类型的代号。比如在 event() 函数中，我们使用 QEvent::type() 获得这个事件类型，然后与我们定义的实际类型对比。</p>
-<p><strong>QEvent::Type 是 QEvent 定义的一个枚举。因此，我们可以传递一个 int 值。</strong>但是需要注意的是，我们的自定义事件类型不能和已经存在的 type 值重复，否则会有不可预料的错误发生。因为系统会将你新增加的事件当做系统事件进行派发和调用。</p>
-<p>在 Qt 中，系统保留 0 – 999 的值，也就是说，你的事件 type 要大于 999。</p>
-<p>这种数值当然非常难记，所以 <strong>Qt 定义了两个边界值：QEvent::User 和 QEvent::MaxUser</strong>。我们的自定义事件的 type 应该在这两个值的范围之间。其中，QEvent::User 的值是 1000，QEvent::MaxUser 的值是 65535。</p>
-<p>但是，这样并不能保证自定义事件相互之间不会被覆盖。为了解决这个问题，Qt 提供了一个函数：registerEventType()，用于<strong>自定义事件的注册</strong>。该函数签名如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> QEvent::registerEventType( <span class="keyword">int</span> hint = <span class="number">-1</span> );</span><br></pre></td></tr></table></figure>
-<p>这个函数是 static 的，因此可以使用 QEvent 类直接调用。函数接受一个 int 值，其默认值是 -1；函数返回值是向系统注册的新的 Type 类型的值。如果 hint 不会发生任何覆盖，则会直接返回这个值；否则，系统会自动分配一个合法值并返回。因此，使用这个函数即可完成 type 值的指定。这个函数是线程安全的，不必另外添加同步。</p>
-<hr>
-<p>可以在 QEvent 子类中添加自己的事件所需要的数据，然后进行事件的发送。Qt 中提供了<strong>两种事件发送方式</strong>：</p>
-<ol>
-<li><p>直接将 event 事件发送给 receiver 接受者，使用的是 QCoreApplication::notify() 函数。函数返回值就是事件处理函数的返回值。在事件被发送的时候，event 对象并不会被销毁。通常我们会在栈上创建 event 对象，例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">bool</span> QCoreApplication::sendEvent(QObject *receiver,</span><br><span class="line">                                        QEvent *event);</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QMouseEvent <span class="title">event</span><span class="params">(QEvent::MouseButtonPress, pos, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">QApplication::sendEvent(mainWindow, &amp;event);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将 event 事件及其接受者 receiver 一同追加到事件队列中，函数立即返回。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> QCoreApplication::postEvent(QObject *receiver,</span><br><span class="line">                                        QEvent *event);</span><br></pre></td></tr></table></figure>
-<p>因为 post 事件队列会持有事件对象，并且在其 post 的时候将其 delete 掉，因此，<strong>我们必须在堆上创建 event 对象</strong>。当对象被发送之后，再试图访问 event 对象就会出现问题。</p>
-<p>当控制权返回到主线程循环是，保存在事件队列中的所有事件都通过 notify() 函数发送出去。</p>
-<p>事件会根据 post 的顺序进行处理。如果你想要改变事件的处理顺序，可以考虑为其指定一个优先级。默认的优先级是 Qt::NormalEventPriority。</p>
-<p>这个函数是线程安全的。</p>
-</li>
-<li><p>Qt 还提供了一个函数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> QCoreApplication::sendPostedEvents(QObject *receiver,</span><br><span class="line">                                               <span class="keyword">int</span> event_type);</span><br></pre></td></tr></table></figure>
-<p>这个函数的作用是，将事件队列中的接受者为 receiver，事件类似为 event_type 的所有事件立即发送给 receiver 进行处理。需要注意的是，来自窗口系统的事件并不由这个函数进行处理，而是 processEvent()。详细信息请参考 Qt API 手册。</p>
-</li>
-</ol>
-<hr>
-<p>现在，我们已经能够自定义事件对象，已经能够将事件发送出去，还剩下最后一步：<strong>处理自定义事件</strong>。同前面我们讲解的那些处理方法没有什么区别。我们可以重写 QObject::customEvent() 函数，该函数接收一个 QEvent 对象作为参数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> QObject::customEvent(QEvent *event);</span><br></pre></td></tr></table></figure>
-<p>我们可以通过转换 event 对象类型来判断不同的事件：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CustomWidget::customEvent(QEvent *event) &#123;</span><br><span class="line">    CustomEvent *customEvent = <span class="keyword">static_cast</span>&lt;CustomEvent *&gt;(event);</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然，我们也可以在 event() 函数中直接处理：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> CustomWidget::event(QEvent *event) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event-&gt;type() == MyCustomEventType) &#123;</span><br><span class="line">        CustomEvent *myEvent = <span class="keyword">static_cast</span>&lt;CustomEvent *&gt;(event);</span><br><span class="line">        <span class="comment">// processing...</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> QWidget::event(event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="绘制系统"><a href="#绘制系统" class="headerlink" title="绘制系统"></a>绘制系统</h3><p>Qt 的绘图系统允许使用相同的 API 在屏幕和其它打印设备上进行绘制。整个绘图系统基于 QPainter，QPainterDevice 和 QPaintEngine 三个类。</p>
-<ul>
-<li><p>QPainter 用来执行绘制的操作；</p>
-</li>
-<li><p>QPaintDevice 是一个二维空间的抽象，这个二维空间允许 QPainter 在其上面进行绘制，也就是 QPainter 工作的空间；</p>
-</li>
-<li><p>QPaintEngine 提供了画笔（QPainter）在不同的设备上进行绘制的统一的接口。QPaintEngine 类应用于 QPainter 和 QPaintDevice 之间，通常对开发人员是透明的。除非你需要自定义一个设备，否则你是不需要关心 QPaintEngine 这个类的。</p>
-</li>
-</ul>
-<p><strong>Qt 的绘图系统实际上是，使用 QPainter 在 QPainterDevice 上进行绘制，它们之间使用 QPaintEngine 进行通讯（也就是翻译 QPainter 的指令）。</strong></p>
-<p>通过一个实例来介绍 QPainter 的使用：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//paintedwidget.h</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PaintedWidget</span> :</span> <span class="keyword">public</span> QWidget</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    PaintedWidget(QWidget *parent = <span class="number">0</span>);</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">paintEvent</span><span class="params">(QPaintEvent *)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//paintedwidget.cpp</span></span><br><span class="line">PaintedWidget::PaintedWidget(QWidget *parent) :</span><br><span class="line">    QWidget(parent)</span><br><span class="line">&#123;</span><br><span class="line">    resize(<span class="number">800</span>, <span class="number">600</span>);</span><br><span class="line">    setWindowTitle(tr(<span class="string">"Paint Demo"</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> PaintedWidget::paintEvent(QPaintEvent *)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    painter.drawLine(<span class="number">80</span>, <span class="number">100</span>, <span class="number">650</span>, <span class="number">500</span>);</span><br><span class="line">    painter.setPen(Qt::red);</span><br><span class="line">    painter.drawRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">400</span>);</span><br><span class="line">    painter.setPen(QPen(Qt::green, <span class="number">5</span>));</span><br><span class="line">    painter.setBrush(Qt::blue);</span><br><span class="line">    painter.drawEllipse(<span class="number">50</span>, <span class="number">150</span>, <span class="number">400</span>, <span class="number">200</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//main.cpp</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    PaintedWidget pa;</span><br><span class="line">    pa.show();</span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>注意我们重写了 QWidget 的 paintEvent() 函数。这或许是我们在理解了 Qt 事件系统之后首次实际应用。</p>
-</li>
-<li><p>首先，我们在栈上创建了一个 QPainter 对象，也就是说，每次运行 paintEvent() 函数的时候，都会重建这个 QPainter 对象。注意：由于我们每次重建 QPainter，因此第一次运行时所设置的画笔颜色、状态等，第二次再进入这个函数时就会全部丢失。有时候我们希望保存画笔状态，就必须自己保存数据，或者将 QPainter 作为类的成员变量。</p>
-</li>
-<li><p>QPainter 接收一个 QPaintDevice 指针作为参数。QPaintDevice 有很多子类，比如 QWidget、QPixmap、QPicture、QImage、QPrinter 等。现在我们希望画在这个组件，因此传入的是 this 指针。</p>
-</li>
-<li><p>QPainter 有很多以 draw 开头的函数，用于各种图形的绘制，比如这里的 drawLine()，drawRect() 以及 drawEllipse() 等。</p>
-<p>​    当绘制轮廓线时，使用 QPainter 的 pen() 属性。比如，我们调用了 painter.setPen(Qt::red) 将 pen 设置为红色，则下面绘制的矩形具有红色的轮廓线。接下来，我们将 pen 修改为绿色，5 像素宽(painter.setPen(QPen(Qt::green, 5))），又设置了画刷为蓝色。这时候再调用 draw 函数，则是具有绿色 5 像素宽轮廓线、蓝色填充的椭圆。</p>
-</li>
-<li><p>可以看到直线是第一个绘制，位于最下一层；矩形是第二个绘制，在中间一层；椭圆是最后绘制，在最上层。</p>
-</li>
-</ul>
-<p>如果了解 OpenGL，肯定听说过这么一句话：OpenGL 是一个状态机。所谓状态机，就是说，OpenGL 保存的只是各种状态。比如，将画笔颜色设置成红色，那么，除非你重新设置另外的颜色，它的颜色会一直是红色。QPainter 也是这样，它的状态不会自己恢复，除非你使用了各种设置函数。</p>
-<p>正因为 QPainter 是一个状态机，才会引出我们前面曾经介绍过的一个细节问题：由于 paintEvent() 是需要重复进入的，因此，需要注意第二次进入时，QPainter 的状态是不是和第一次一致，否则的话可能会造成闪烁的现象。这个闪烁并不是由于双缓冲的问题，而是由于绘制状态的快速切换。</p>
-<h4 id="画刷和画笔"><a href="#画刷和画笔" class="headerlink" title="画刷和画笔"></a>画刷和画笔</h4><p>QPen 和 QBrush</p>
-<p><strong>QBrush</strong> 定义了 QPainter 的填充模式，具有样式、颜色、渐变以及纹理等属性。</p>
-<ul>
-<li><p>画刷的 style() 定义了填充的<strong>样式</strong>，使用 Qt::BrushStyle 枚举，默认值是 Qt::NoBrush，也就是不进行任何填充。</p>
-<p><img src="http://118.25.53.128/Picture/Qt/brush-fill-pattern.png" alt="brush-fill-pattern"></p>
-</li>
-<li><p>画刷的 color() 定义了填充模式的<strong>颜色</strong>。这个颜色可以是 Qt 预定义的颜色常量，也就是 Qt::GlobalColor，也可以是任意 QColor 对象。</p>
-</li>
-<li><p>画刷的 gradient() 定义了<strong>渐变</strong>填充。这个属性只有在<em>样式</em>是 Qt::LinearGradientPattern、Qt::RadialGradientPattern 或者 Qt::ConicalGradientPattern 之一时才有效。渐变可以由 QGradient 对象表示。Qt 提供了三种渐变：QLinearGradient、QConicalGradient 和 QRadialGradient，它们都是 QGradient 的子类。我们可以使用如下代码片段来定义一个渐变的画刷：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QRadialGradient <span class="title">gradient</span><span class="params">(<span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>)</span></span>;</span><br><span class="line">gradient.setColorAt(<span class="number">0</span>, QColor::fromRgbF(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>));</span><br><span class="line">gradient.setColorAt(<span class="number">1</span>, QColor::fromRgbF(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line"><span class="function">QBrush <span class="title">brush</span><span class="params">(gradient)</span></span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当画刷样式是 Qt::TexturePattern 时，texture() 定义了用于填充的<strong>纹理</strong>。注意，即使你没有设置样式为 Qt::TexturePattern，当你调用 setTexture() 函数时，QBrush 会自动将 style() 设置为 Qt::TexturePattern。</p>
-</li>
-</ul>
-<hr>
-<p><strong>QPen</strong> 定义了用于 QPainter 应该怎样画线或者轮廓线。具有样式、宽度、画刷、笔帽样式和连接样式等属性。</p>
-<ul>
-<li><p><strong>画笔样式</strong> style() 定义了线的样式。</p>
-<p><img src="http://118.25.53.128/Picture/Qt/pen-style.png" alt="pen-style"></p>
-</li>
-<li><p><strong>画笔宽度</strong> width() 或 widthF() 定义了画笔的宽。注意，不存在宽度为 0 的线。假设你设置 width 为 0，QPainter 依然会绘制出一条线，而这个线的宽度为 1 像素。</p>
-</li>
-<li><p><strong>画刷</strong> brush() 用于填充画笔所绘制的线条。</p>
-</li>
-<li><p><strong>笔帽样式</strong> capStyle() 定义了使用 QPainter 绘制的线的末端。</p>
-<p><img src="http://118.25.53.128/Picture/Qt/cap-style-2.png" alt="cap-style-2"></p>
-</li>
-<li><p><strong>连接样式</strong> joinStyle() 定义了两条线如何连接起来。</p>
-<p><img src="http://118.25.53.128/Picture/Qt/join-style-2.png" alt="join-style-2"></p>
-</li>
-</ul>
-<p>默认的画笔属性是纯黑色，0 像素，方形笔帽（Qt::SquareCap），斜面型连接（Qt::BevelJoin）。</p>
-<p>这么多参数既可以在构造时指定，也可以使用 set 函数指定，完全取决于你的习惯：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line"><span class="function">QPen <span class="title">pen</span><span class="params">(Qt::green, <span class="number">3</span>, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin)</span></span>;</span><br><span class="line">painter.setPen(pen);</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">QPen pen;  <span class="comment">// creates a default pen</span></span><br><span class="line"></span><br><span class="line">pen.setStyle(Qt::DashDotLine);</span><br><span class="line">pen.setWidth(<span class="number">3</span>);</span><br><span class="line">pen.setBrush(Qt::green);</span><br><span class="line">pen.setCapStyle(Qt::RoundCap);</span><br><span class="line">pen.setJoinStyle(Qt::RoundJoin);</span><br><span class="line"></span><br><span class="line">painter.setPen(pen);</span><br></pre></td></tr></table></figure>
-<p>可以使用 setDashPattern() 函数自定义样式。setDashPattern() 函数需要一个包含偶数个元素的列表，其中，奇数位置的元素代表线段长度；偶数位置的元素代表间隔长度。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">QPen pen;</span><br><span class="line">QVector&lt;qreal&gt; dashes;</span><br><span class="line">qreal space = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">dashes &lt;&lt; <span class="number">1</span> &lt;&lt; space &lt;&lt; <span class="number">3</span> &lt;&lt; space &lt;&lt; <span class="number">9</span> &lt;&lt; space</span><br><span class="line">        &lt;&lt; <span class="number">27</span> &lt;&lt; space &lt;&lt; <span class="number">9</span> &lt;&lt; space;</span><br><span class="line"> </span><br><span class="line">pen.setDashPattern(dashes);</span><br><span class="line">painter.setPen(pen);</span><br></pre></td></tr></table></figure>
-<p>效果如图所示：<img src="http://118.25.53.128/Picture/Qt/dash_pattern.jpg" alt="dash_pattern"></p>
-<p>注意，我们前面说了，QPainter 也是一个状态机，这里我们所说的这些属性都是处于这个状态机之中的，因此，我们应该记得是否要将其保存下来或者是重新构建。</p>
-<h4 id="反走样"><a href="#反走样" class="headerlink" title="反走样"></a>反走样</h4><p>我们在光栅图形显示器上绘制非水平、非垂直的直线或多边形边界时，或多或少会呈现锯齿状外观。这是因为直线和多边形的边界是连续的，而光栅则是由离散的点组成。在光栅显示设备上表现直线、多边形等，必须在离散位置采样。由于采样不充分重建后造成的信息失真，就叫走样；用于减少或消除这种效果的技术，就称为反走样。</p>
-<p>反走样是图形学中的重要概念，用以防止通常所说的“锯齿”现象的出现。很多系统的绘图 API 里面都内置了有关反走样的算法，不过由于性能问题，默认一般是关闭的，Qt 也不例外。下面我们来看看代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> PaintedWidget::paintEvent(QPaintEvent *)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    painter.setPen(QPen(Qt::black, <span class="number">5</span>, Qt::DashDotLine, Qt::RoundCap));</span><br><span class="line">    painter.setBrush(Qt::yellow);</span><br><span class="line">    painter.drawEllipse(<span class="number">50</span>, <span class="number">150</span>, <span class="number">200</span>, <span class="number">150</span>);</span><br><span class="line"></span><br><span class="line">    painter.setRenderHint(QPainter::Antialiasing, <span class="literal">true</span>);</span><br><span class="line">    painter.setPen(QPen(Qt::black, <span class="number">5</span>, Qt::DashDotLine, Qt::RoundCap));</span><br><span class="line">    painter.setBrush(Qt::yellow);</span><br><span class="line">    painter.drawEllipse(<span class="number">300</span>, <span class="number">150</span>, <span class="number">200</span>, <span class="number">150</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://118.25.53.128/Picture/Qt/qt-antialiasing.png" alt="qt-antialiasing"></p>
-<p>第二个椭圆的绘制与第一个十分相似，唯一的区别是多了一句：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">painter.setRenderHint(QPainter::Antialiasing, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-<p>我们通过这条语句，将 Antialiasing 属性（也就是反走样）设置为 true。经过这句设置，我们就打开了<code>QPainter</code>的反走样功能。还记得我们曾经说过，<code>QPainter</code>是一个状态机，因此，只要这里我们打开了它，之后所有的代码都会是反走样绘制的了。</p>
-<hr>
-<p>由于反走样需要比较复杂的算法，在一些对图像质量要求不是很高的应用中，是不需要进行反走样的。为了提高效率，一般的图形绘制系统，如 Java2D、OpenGL 之类都是默认不进行反走样的。</p>
-<p>虽然反走样比不反走样的图像质量高很多，但是，没有反走样的图形绘制还是有很大用处的。首先，就像前面说的一样，在一些对图像质量要求不高的环境下，或者说性能受限的环境下，比如嵌入式和手机环境，一般是不进行反走样的。另外，在一些必须精确操作像素的应用中，也是不能进行反走样的。这是由于反走样技术本身的限制的。请看下面的图片：</p>
-<p><img src="http://118.25.53.128/Picture/Qt/ps-points.png" alt="ps-points"></p>
-<p>这是使用 Photoshop 的铅笔和画笔工具绘制的 1 像素的点，放大 3200% 的视图。在一定程度上，我们可以认为，Photoshop 的铅笔工具是不进行反走样，而画笔是要进行反走样的。在放大的情况下就会知道，有反走样的情况下是不能进行精确到 1 像素的操作的。因为反走样很难让你控制到 1 个像素。这不是 Photoshop 画笔工具的缺陷，而是反走样算法的问题。反走样之所以看起来比较模糊，就是因为它需要以一种近似色来替换原始的像素色，这样一来就会显得模糊而圆滑。</p>
-<h4 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h4><p>渐变是绘图中很常见的一种功能，可以把几种颜色混合在一起，让它们能够自然地过渡，而不是一下子变成另一种颜色。渐变的算法比较复杂，写得不好的话效率会很低，好在很多绘图系统都内置了渐变的功能，Qt 也不例外。渐变一般是用在填充里面的，所以，设置渐变是在QBrush里面。</p>
-<p>Qt 提供了三种渐变：线性渐变（QLinearGradient）、辐射渐变（QRadialGradient）和角度渐变（QConicalGradient）。我们可以在 Qt API 手册中看到这几种渐变的区别：</p>
-<p><img src="http://118.25.53.128/Picture/Qt/QLinearGradient.png" alt="QLinearGradient"></p>
-<p><img src="http://118.25.53.128/Picture/Qt/QRadialGradient.png" alt="QRadialGradient"></p>
-<p><img src="http://118.25.53.128/Picture/Qt/QConicalGradient.png" alt="QConicalGradient"></p>
-<hr>
-<p>下面我们通过一个示例看看如何使用渐变进行填充：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> PaintedWidget::paintEvent(QPaintEvent *)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    painter.setRenderHint(QPainter::Antialiasing, <span class="literal">true</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="function">QLinearGradient <span class="title">linearGradient</span><span class="params">(<span class="number">60</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">200</span>)</span></span>;</span><br><span class="line">    linearGradient.setColorAt(<span class="number">0.2</span>, Qt::white);</span><br><span class="line">    linearGradient.setColorAt(<span class="number">0.6</span>, Qt::green);</span><br><span class="line">    linearGradient.setColorAt(<span class="number">1.0</span>, Qt::black);</span><br><span class="line">    </span><br><span class="line">    painter.setBrush(QBrush(linearGradient));</span><br><span class="line">    painter.drawEllipse(<span class="number">50</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">150</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://118.25.53.128/Picture/Qt/gradient-demo.png" alt="gradient-demo"></p>
-<p>首先我们打开了反走样，然后创建一个QLinearGradient对象实例。QLinearGradient也就是线性渐变，其构造函数有四个参数，分别是 x1，y1，x2，y2，即渐变的起始点和终止点。在这里，我们从 (60, 50) 点开始渐变，到 (200, 200) 点止。渐变的颜色是在 setColorAt() 函数中指定的。下面是这个函数的签名：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> QGradient::setColorAt ( qreal position, <span class="keyword">const</span> QColor &amp; color )</span><br></pre></td></tr></table></figure>
-<p>这个函数的作用是，把 position 位置的颜色设置成 color。其中，position 是一个 [0, 1] 闭区间的数字，是相对于我们建立渐变对象时做的那个起始点和终止点区间的一个比例。</p>
-<hr>
-<p>下面绘制一个<strong>色轮</strong>（color wheel）：</p>
-<p><img src="http://118.25.53.128/Picture/Qt/color-wheel.png" alt="color-wheel"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> ColorWheel::paintEvent(QPaintEvent *)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    painter.setRenderHint(QPainter::Antialiasing);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> r = <span class="number">150</span>;</span><br><span class="line">    <span class="function">QConicalGradient <span class="title">conicalGradient</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    conicalGradient.setColorAt(<span class="number">0.0</span>, Qt::red);</span><br><span class="line">    conicalGradient.setColorAt(<span class="number">60.0</span>/<span class="number">360.0</span>, Qt::yellow);</span><br><span class="line">    conicalGradient.setColorAt(<span class="number">120.0</span>/<span class="number">360.0</span>, Qt::green);</span><br><span class="line">    conicalGradient.setColorAt(<span class="number">180.0</span>/<span class="number">360.0</span>, Qt::cyan);</span><br><span class="line">    conicalGradient.setColorAt(<span class="number">240.0</span>/<span class="number">360.0</span>, Qt::blue);</span><br><span class="line">    conicalGradient.setColorAt(<span class="number">300.0</span>/<span class="number">360.0</span>, Qt::magenta);</span><br><span class="line">    conicalGradient.setColorAt(<span class="number">1.0</span>, Qt::red);</span><br><span class="line"></span><br><span class="line">    painter.translate(r, r);</span><br><span class="line"></span><br><span class="line">    <span class="function">QBrush <span class="title">brush</span><span class="params">(conicalGradient)</span></span>;</span><br><span class="line">    painter.setPen(Qt::NoPen);</span><br><span class="line">    painter.setBrush(brush);</span><br><span class="line">    painter.drawEllipse(QPoint(<span class="number">0</span>, <span class="number">0</span>), r, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>首先我们打开了反走样，然后创建一个QConicalGradient对象实例。QConicalGradient也就是角度渐变，其构造函数有三个参数，前两个参数 cx 和 cy 组成角度渐变的中心点，第三个参数是渐变的起始角度。</p>
-</li>
-<li><p>类似线性渐变，角度渐变的<code>setColorAt()</code>函数同样接受两个参数，第一个是角度比例，第二个是颜色。</p>
-<p><em>至于颜色的分布，这是由颜色空间定义的，有兴趣的朋友可以查阅有关颜色模型的理论。</em></p>
-</li>
-<li><p><code>QPainter::translate(x, y)</code> 将坐标系的原点设置到 (x, y) 点。原本坐标系原点位于左上角，我们使用translate(r, r)，将坐标原点设置为 (r, r)。这么一来，左上角的点的坐标就应该是 (-r, -r)。</p>
-</li>
-<li><p>最后，我们使用<code>drawEllipse()</code>函数绘制圆盘。由于我们已经把坐标原点设置为 (r, r)，因此，在绘制时，圆心应该是新的坐标 (0, 0)，而不是原来的 (r, r)。</p>
-</li>
-</ul>
-<p>如果去掉 translate() 函数的调用，不仅需要修改最后的绘制语句，还要修改 QConicalGradient 定义时传入的中心点的坐标。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="function">QConicalGradient <span class="title">conicalGradient</span><span class="params">(r, r, <span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">painter.drawEllipse(QPoint(r, r), r, r);</span><br></pre></td></tr></table></figure>
-<h4 id="坐标系统"><a href="#坐标系统" class="headerlink" title="坐标系统"></a>坐标系统</h4><p>由于QPaintDeice 是进行绘制的对象，因此，所谓坐标系统，也就是QPaintDevice 上面的坐标。默认坐标系统位于设备的左上角，也就是坐标原点 (0, 0)。x 轴方向向右；y 轴方向向下。在基于像素的设备上（比如显示器），坐标的默认单位是像素，在打印机上则是点（1/72 英寸）。</p>
-<p>将QPainter 的逻辑坐标与QPaintDevice 的物理坐标进行映射的工作，是由QPainter 的变换矩阵（transformation matrix）、视口（viewport）和窗口（window）完成的。如果你不理解这些术语，可以简单了解下有关图形学的内容。实际上，对图形的操作，底层的数学都是进行的矩阵变换、相乘等运算。</p>
-<p>在 Qt 的坐标系统中，每个像素占据 1×1 的空间。你可以把它想象成一张方格纸，每个小格都是1个像素。<strong>方格的焦点定义了坐标，也就是说，像素 (x, y) 的中心位置其实是在 (x + 0.5, y + 0.5) 的位置上。</strong>这个坐标系统实际上是一个“<strong>半像素坐标系</strong>”。我们可以通过下面的示意图来理解这种坐标系：</p>
-<p><img src="http://118.25.53.128/Picture/Qt/coordinate-system-demo.png" alt="coordinate-system-demo"></p>
-<p><strong>注意，这是坐标的逻辑表示，实际绘制则与此不同。</strong>因为在实际设备上，像素是最小单位，我们不能像上面一样，在两个像素之间进行绘制。所以在实际绘制时，Qt 的定义是，绘制点所在像素是逻辑定义点的右下方的像素：</p>
-<p><img src="http://118.25.53.128/Picture/Qt/coordinate-system-demo.png" alt="coordinate-system-demo"></p>
-<p><strong>当绘制大于1个像素时</strong>，情况比较复杂：如果绘制<strong>像素是偶数</strong>，则会将逻辑坐标值夹在相等的两部分像素之间；如果是<strong>奇数</strong>，则会在右下方多出一个像素。具体请看下面的图示：</p>
-<p><img src="http://118.25.53.128/Picture/Qt/mutilpx-painting.png" alt="mutilpx-painting"></p>
-<p>Qt 的这种处理，带来的一个问题是，我们可能获取不到真实的坐标值。由于历史原因，QRect::right() 和QRect::bottom() 的返回值并不是矩形右下角点的真实坐标值：QRect::right() 返回的是 left() + width() – 1；QRect::bottom() 则返回 top() + height() – 1，上图的绿色点指出了这两个函数的返回点的坐标。</p>
-<p>为避免这个问题，我们建议是使用 QRectF。QRectF 使用浮点值，而不是整数值，来描述坐标。这个类的两个函数 QRectF::right() 和 QRectF::bottom() 是正确的。如果你不得不使用 QRect，那么可以利用 x() + width() 和 y() + height() 来替代 right() 和 bottom() 函数。</p>
-<p>对于反走样，实际绘制会包裹住逻辑坐标值：</p>
-<p><img src="http://118.25.53.128/Picture/Qt/anti-aliasing-painting.png" alt="anti-aliasing-painting"></p>
-<hr>
-<p>Qt 同样提供了坐标变换。每一种变换都对应着一个矩阵乘法。</p>
-<p>前面说过，QPainter 是一个状态机。那么，有时我想保存下当前的状态：当我临时绘制某些图像时，就可能想这么做。当然，我们有最原始的办法：将可能改变的状态，比如画笔颜色、粗细等，在临时绘制结束之后再全部恢复。对此，QPainter 提供了内置的函数：save() 和 restore()。save() 就是保存下当前状态；restore() 则恢复上一次保存的结果。这两个函数<strong>必须</strong>成对出现：QPainter 使用<strong>栈</strong>来保存数据，每一次 save()，将当前状态压入栈顶，restore() 则弹出栈顶进行恢复。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> PaintDemo::paintEvent(QPaintEvent *)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    painter.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">100</span>, Qt::red);</span><br><span class="line">    </span><br><span class="line">    painter.save();</span><br><span class="line">    painter.translate(<span class="number">100</span>, <span class="number">0</span>); <span class="comment">// 向右平移 100px</span></span><br><span class="line">    painter.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">100</span>, Qt::yellow);</span><br><span class="line">    painter.restore();</span><br><span class="line">    </span><br><span class="line">    painter.save();</span><br><span class="line">    painter.translate(<span class="number">300</span>, <span class="number">0</span>); <span class="comment">// 向右平移 300px</span></span><br><span class="line">    painter.rotate(<span class="number">30</span>); <span class="comment">// 顺时针旋转 30 度</span></span><br><span class="line">    painter.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">100</span>, Qt::green);</span><br><span class="line">    painter.restore();</span><br><span class="line">    </span><br><span class="line">    painter.save();</span><br><span class="line">    painter.translate(<span class="number">400</span>, <span class="number">0</span>); <span class="comment">// 向右平移 400px</span></span><br><span class="line">    painter.scale(<span class="number">2</span>, <span class="number">3</span>); <span class="comment">// 横坐标单位放大 2 倍，纵坐标放大 3 倍</span></span><br><span class="line">    painter.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">100</span>, Qt::blue);</span><br><span class="line">    painter.restore();</span><br><span class="line">    </span><br><span class="line">    painter.save();</span><br><span class="line">    painter.translate(<span class="number">600</span>, <span class="number">0</span>); <span class="comment">// 向右平移 600px</span></span><br><span class="line">    painter.shear(<span class="number">0</span>, <span class="number">1</span>); <span class="comment">// 横向不变，纵向扭曲 1 倍</span></span><br><span class="line">    painter.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">100</span>, Qt::cyan);</span><br><span class="line">    painter.restore();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://118.25.53.128/Picture/Qt/coordinate-transformations-demo.png" alt="coordinate-transformations-demo"></p>
-<p>注意：所有这些操作都是针对坐标系的，因此在绘制时，我们提供的矩形的坐标参数都是不变的。</p>
-<hr>
-<p>Qt 的坐标分为<strong>逻辑坐标</strong>和<strong>物理坐标</strong>。在我们绘制时，提供给QPainter 的都是逻辑坐标。之前我们看到的坐标变换，也是针对逻辑坐标的。所谓物理坐标，就是绘制底层QPaintDevice 的坐标。要想在设备上绘制，必须提供设备认识的物理坐标。Qt 使用 viewport-window 机制将我们提供的逻辑坐标转换成绘制设备使用的物理坐标，方法是，在逻辑坐标和物理坐标之间提供一层“窗口”坐标。视口是由任意矩形指定的物理坐标；窗口则是该矩形的逻辑坐标表示。默认情况下，物理坐标和逻辑坐标是一致的，都等于设备矩形。</p>
-<p>视口坐标（也就是物理坐标）和窗口坐标是一个简单的线性变换。</p>
-<p>比如一个 400×400 的<strong>窗口</strong>，我们添加如下代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> PaintDemo::paintEvent(QPaintEvent *)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    painter.setWindow(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">    painter.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>, Qt::red);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们将窗口矩形设置为左上角坐标为 (0, 0)，长和宽都是 200px。我们可以理解成，逻辑坐标被“重新分配”。这段代码的运行结果是将整个窗口进行了填充。</p>
-<p>试比较下面两行代码的区别（还是 400×400 的窗口）：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">painter.translate(<span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">painter.setWindow(<span class="number">-160</span>, <span class="number">-320</span>, <span class="number">320</span>, <span class="number">640</span>);</span><br></pre></td></tr></table></figure>
-<p>第一行代码，我们将坐标原点设置到 (200, 200) 处，横坐标范围是 [-200, 200]，纵坐标范围是 [-200, 200]。第二行代码，坐标原点也是在窗口正中心，但是，我们将物理宽 400px 映射成窗口宽 320px，物理高 400px 映射成窗口高 640px，此时，横坐标范围是 [-160, 160]，纵坐标范围是 [-320, 320]。</p>
-<p>这种变换是简单的线性变换。假设原来有个点坐标是 (64， 60)，那么新的窗口坐标下对应的坐标应该是 ((-160 + 64 <em> 320 / 400), (-320 + 60 </em> 640 / 400)) = (-108.8, -224)。</p>
-<hr>
-<p>下面我们再来理解下<strong>视口</strong>的含义。还是以一段代码为例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> PaintDemo::paintEvent(QPaintEvent *)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    painter.setViewport(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">    painter.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>, Qt::red);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这段代码和前面一样，只是把setWindow() 换成了setViewport()。</p>
-<p>前面我们说过，window 代表窗口坐标，viewport 代表物理坐标。也就是说，我们将物理坐标区域定义为左上角位于 (0, 0)，长高都是 200px 的矩形。然后还是绘制和上面一样的矩形。</p>
-<p>只有 1/16 的窗口被填充。这是由于，我们修改了物理坐标，但是没有修改相应的窗口坐标。默认的逻辑坐标范围是左上角坐标为 (0, 0)，长宽都是 400px 的矩形。当我们将物理坐标修改为左上角位于 (0, 0)，长高都是 200px 的矩形时，窗口坐标范围不变，也就是说，我们将物理宽 200px 映射成窗口宽 400px，物理高 200px 映射成窗口高 400px，所以，原始点 (200, 200) 的坐标变成了 ((0 + 200 <em> 200 / 400), (0 + 200 </em> 200 / 400)) = (100, 100)。</p>
-<p>现在我们可以用一张图示总结一下逻辑坐标、窗口坐标和物理坐标之间的关系：</p>
-<p><img src="http://118.25.53.128/Picture/Qt/coordinate-system-instruction.png" alt="coordinate-system-instruction"></p>
-<p>我们传给QPainter 的是逻辑坐标（也称为世界坐标），逻辑坐标可以通过变换矩阵转换成窗口坐标，窗口坐标通过 window-viewport 转换成物理坐标（也就是设备坐标）。</p>
-<h4 id="绘制设备"><a href="#绘制设备" class="headerlink" title="绘制设备"></a>绘制设备</h4><p>绘图设备是继承QPainterDevice的类。QPaintDevice就是能够进行绘制的类，也就是说，QPainter可以在任何QPaintDevice的子类上进行绘制。现在，Qt 提供了若干这样的类：</p>
-<p><img src="http://118.25.53.128/Picture/Qt/paint-device-qt5.png" alt="paint-device-qt5"></p>
-<p>上面的是 Qt4/Qt5 的相关类图，只是在 Qt5 中，QGLPixelBuffer已经被废弃。本章我们关注的是QPixmap、QBitmap、QImage和QPicture这几个类。另外的部分，QWidget就是所有组件的父类，我们已经在前面的章节中使用过。QGLWidget和QGLFramebufferObject，顾名思义，就是关于 OpenGL 的相关类。在 Qt 中，我们可以方便地结合 OpenGL 进行绘制。由于这部分需要牵扯到 OpenGL 的相关内容，现在也不再深入。在我们选择的几个类中，大多与图像密切相关。</p>
-<p>QPixmap专门为图像在屏幕上的显示做了优化；QBitmap是QPixmap的一个子类，它的色深限定为1，你可以使用QPixmap的isQBitmap()函数来确定这个QPixmap是不是一个QBitmap。QImage专门为图像的像素级访问做了优化。QPicture则可以记录和重现QPainter的各条命令。下面我们将分两部分介绍这四种绘图设备。</p>
-<hr>
-<p><code>QPixmap</code>继承了QPaintDevice，因此，你可以使用QPainter直接在上面绘制图形。</p>
-<p>QPixmap也可以接受一个字符串作为一个文件的路径来显示这个文件，比如你想在程序之中打开 png、jpeg 之类的文件，就可以使用QPixmap。</p>
-<p>使用QPainter::drawPixmap()函数可以把这个文件绘制到一个QLabel、QPushButton或者其他的设备上面。</p>
-<p>正如前面所说的那样，QPixmap是针对屏幕进行特殊优化的，因此，它与实际的底层显示设备息息相关。注意，这里说的显示设备并不是硬件，而是操作系统提供的原生的绘图引擎。所以，在不同的操作系统平台下，QPixmap的显示可能会有所差别。</p>
-<p>QPixmap提供了静态的grabWidget()和grabWindow()函数，用于将自身图像绘制到目标上。同时，在使用QPixmap时，你可以直接使用<strong>传值</strong>的形式，不需要传指针，因为QPixmap提供了“隐式数据共享”。关于这一点，我们会在以后的章节中详细描述。简单来说，就是一般对于大型数据（图像无疑就是这种“大型数据”），为性能起见，通常会采用传指针的方式，但是由于QPixmap内置了隐式数据共享，所以只要传递QPixmap。</p>
-<p><code>QBitmap</code>继承自QPixmap，因此具有QPixmap的所有特性。不同之处在于，QBitmap的色深始终为 1，即黑和白。所以说，QBitmap实际上是只有黑白两色的图像数据。由于QBitmap色深小，因此只占用很少的存储空间，所以适合做光标文件和笔刷。（色深这个概念来自计算机图形学，是指用于表现颜色的二进制的位数。我们知道，计算机里面的数据都是使用二进制表示的。为了表示一种颜色，我们也会使用二进制。比如我们要表示 8 种颜色，需要用 3 个二进制位，这时我们就说色深是 3。因此，所谓色深为 1，也就是使用 1 个二进制位表示颜色。1 个位只有两种状态：0 和 1，因此它所表示的颜色就有两种，黑和白。）</p>
-<p>下面我们来看同一个图像文件在QPixmap 和QBitmap 下的不同表现：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> PaintedWidget::paintEvent(QPaintEvent *)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    <span class="function">QPixmap <span class="title">pixmap</span><span class="params">(<span class="string">"qt-logo.png"</span>)</span></span>;</span><br><span class="line">    <span class="function">QBitmap <span class="title">bitmap</span><span class="params">(<span class="string">"qt-logo.png"</span>)</span></span>;</span><br><span class="line">    painter.drawPixmap(<span class="number">10</span>, <span class="number">10</span>, <span class="number">250</span>, <span class="number">125</span>, pixmap);</span><br><span class="line">    painter.drawPixmap(<span class="number">270</span>, <span class="number">10</span>, <span class="number">250</span>, <span class="number">125</span>, bitmap);</span><br><span class="line">    <span class="function">QPixmap <span class="title">whitePixmap</span><span class="params">(<span class="string">"qt-logo-white.png"</span>)</span></span>;</span><br><span class="line">    <span class="function">QBitmap <span class="title">whiteBitmap</span><span class="params">(<span class="string">"qt-logo-white.png"</span>)</span></span>;</span><br><span class="line">    painter.drawPixmap(<span class="number">10</span>, <span class="number">140</span>, <span class="number">250</span>, <span class="number">125</span>, whitePixmap);</span><br><span class="line">    painter.drawPixmap(<span class="number">270</span>, <span class="number">140</span>, <span class="number">250</span>, <span class="number">125</span>, whiteBitmap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://118.25.53.128/Picture/Qt/qpixmap-qbitmap-demo.png" alt="qpixmap-qbitmap-demo"></p>
-<p>这里我们给出了两张 png 图片。qt-logo.png 具有透明背景，qt-logo-white.png 具有白色背景。我们分别使用QPixmap和QBitmap来加载它们。注意看它们的区别：白色的背景在QBitmap中消失了，而透明色在QBitmap中转换成了黑色；其他颜色则是使用点的疏密程度来体现的。</p>
-<hr>
-<p><code>QPixmap</code>使用底层平台的绘制系统进行绘制，无法提供像素级别的操作，而<code>QImage</code>则是使用独立于硬件的绘制系统，因此提供了<strong>像素级别的操作</strong>，并且能够在不同系统之上提供一个一致的显示形式。</p>
-<p><img src="http://118.25.53.128/Picture/Qt/qimage-32bit.png" alt="qimage-32bit"></p>
-<p>QImage与QPixmap相比，最大的优势在于能够进行像素级别的操作。我们通过上面的示意图可以看到，我们声明一个 3 x 3 像素的QImage对象，然后利用setPixel()函数进行颜色的设置。你可以把QImage想象成一个 RGB 颜色的二维数组，记录了每一像素的颜色。</p>
-<hr>
-<p>最后一种<code>QPicture</code>是平台无关的，因此它可以使用在多种设备之上，比如 svg、pdf、ps、打印机或者屏幕。QPicture使用系统分辨率，并且可以调整QPainter来消除不同设备之间的显示差异。</p>
-<p><strong>如果我们要记录</strong>下QPainter的命令，首先要使用QPainter::begin()函数，将QPicture实例作为参数传递进去，以便告诉系统开始记录，记录完毕后使用QPainter::end()命令终止。代码示例如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QPicture picture;</span><br><span class="line">QPainter painter;</span><br><span class="line">painter.begin(&amp;picture);             <span class="comment">// 在 picture 进行绘制</span></span><br><span class="line">painter.drawEllipse(<span class="number">10</span>, <span class="number">20</span>, <span class="number">80</span>, <span class="number">70</span>); <span class="comment">// 绘制一个椭圆</span></span><br><span class="line">painter.end();                       <span class="comment">// 绘制完成</span></span><br><span class="line">picture.save(<span class="string">"drawing.pic"</span>);         <span class="comment">// 保存 picture</span></span><br></pre></td></tr></table></figure>
-<p>如果我们要重现命令，首先要使用 QPicture::load() 函数进行装载：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QPicture picture;</span><br><span class="line">picture.load(<span class="string">"drawing.pic"</span>);           <span class="comment">// 加载 picture</span></span><br><span class="line">QPainter painter;</span><br><span class="line">painter.begin(&amp;myImage);               <span class="comment">// 在 myImage 上开始绘制</span></span><br><span class="line">painter.drawPicture(<span class="number">0</span>, <span class="number">0</span>, picture);    <span class="comment">// 在 (0, 0) 点开始绘制 picture</span></span><br><span class="line">painter.end();                         <span class="comment">// 绘制完成</span></span><br></pre></td></tr></table></figure>
-<p>我们也可以直接使用<code>QPicture::play()</code>进行绘制。这个函数接受一个<code>QPainter</code>对象，也就是进行绘制的画笔。</p>
-<h4 id="Graphics-View-Framework"><a href="#Graphics-View-Framework" class="headerlink" title="Graphics View Framework"></a>Graphics View Framework</h4><p>Graphics View 提供了一种接口，用于管理大量自定义的 2D 图形元素，并与之进行交互；还提供了用于将这些元素进行可视化显示的观察组件，并支持缩放和旋转。我们通常所说的 Linux 的 KDE 桌面环境，就是建立在 Graphics View 基础之上的（尽管新版本的 KDE 有向 QML 迁移的趋势）。</p>
-<p>Graphics View 框架包含了一套完整的事件体系，可以用于与场景中的元素进行双精度的交互。这些元素同样支持键盘事件、鼠标事件等。Graphics View 使用了 BSP 树（Binary Space Partitioning tree，这是一种被广泛应用于图形学方面的数据结构）来提供非常快速的元素发现，也正因为如此，才能够实现一种上百万数量级元素的实时显示机制。</p>
-<p>Graphics View 是一个基于元素（item）的 MV 架构的框架。它可以分成三个部分：<strong>元素 item</strong>、<strong>场景 scene</strong> 、<strong>视图 view</strong>：</p>
-<ul>
-<li><code>QGraphicsScene</code>：能够管理元素的非 GUI 容器；</li>
-<li><code>QGraphicsItem</code>：能够被添加到场景的元素；</li>
-<li><code>QGraphicsView</code>：能够观察场景的可视化组件视图。</li>
-</ul>
-<p>基于元素的意思是，它的每一个组件都是一个独立的元素。这是与我们之前讲到过的<code>QPainter</code>状态机机制不同。使用<code>QPainter</code>绘图，大多是采用一种面向过程的描述方式：首先使用<code>drawLine()</code>画一条直线，然后使用<code>drawPolygon()</code>画一个多边形。</p>
-<p>对于 Graphics View，首先创建一个场景（scene），然后创建一个直线对象和一个多边形对象，再使用场景的<code>add()</code>函数，将直线和多边形添加到场景中，最后通过视图进行观察，就可以看到了。乍看起来，后者似乎更加复杂，但是，如果你的图像中包含了成千上万的直线、多边形之类，管理这些对象要比管理<code>QPainter</code>的绘制语句容易得多。并且，<strong>这些图形对象也更加符合面向对象的设计要求</strong>：一个很复杂的图形可以很方便的复用。</p>
-<p>MV 架构的意思是，Graphics View 提供一个 model 和一个 view（正如 MVC 架构，只不过 MV 架构少了 C 这么一个组件）。所谓模型（model）就是我们添加的种种对象；所谓视图（view）就是我们观察这些对象的视口。<strong>同一个模型可以由很多视图从不同的角度进行观察</strong>，这是很常见的需求。使用 QPainter 很难实现这一点，这需要很复杂的计算，而 Graphics View 可以很容易的实现。</p>
-<p>Graphics View 提供了<code>QGraphicsScene</code>作为场景，即是允许我们添加图形的空间，相当于整个世界；<code>QGraphicsView</code>作为视口，也就是我们的观察窗口，相当于照相机的取景框，这个取景框可以覆盖整个场景，也可以是场景的一部分；<code>QGraphicsItem</code>作为图形元件，以便添加到场景中去，Qt 内置了很多图形，比如直线、多边形等，它们都是继承自<code>QGraphicsItem</code>。</p>
-<p>下面我们通过一段代码看看 Graphics View 的使用。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    QGraphicsScene scene;</span><br><span class="line">    scene.addLine(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function">QGraphicsView <span class="title">view</span><span class="params">(&amp;scene)</span></span>;</span><br><span class="line">    view.setWindowTitle(<span class="string">"Graphics View"</span>);</span><br><span class="line">    view.resize(<span class="number">500</span>, <span class="number">500</span>);</span><br><span class="line">    view.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这段代码很简单：首先创建一个场景，也就是QGraphicsScene 对象。然后我们使用addLine() 函数向场景中添加了一个直线，起始点和终点坐标分别是 (0, 0) 和 (150, 150)。通过这两步，我们已经有了场景和元素。之后，我们创建一个GraphicsView 对象，绑定到一个场景上。注意，QGraphicsScene 不是QWidget 的子类，因此该构造函数并不是调用的QGraphicsView(QWidget *parent) 。</p>
-<p>我们看到，这个直线自动在视图居中显示。这并不需要我们进行任何额外的代码。如果不想这么做，我们可以给 scene 设置一下 sceneRect() 属性：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">QGraphicsScene scene;</span><br><span class="line">scene.setSceneRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line">scene.addLine(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line"></span><br><span class="line"><span class="function">QGraphicsView <span class="title">view</span><span class="params">(&amp;scene)</span></span>;</span><br><span class="line">view.setWindowTitle(<span class="string">"Graphics View"</span>);</span><br><span class="line"><span class="comment">// view.resize(500, 500);</span></span><br><span class="line">view.show();</span><br></pre></td></tr></table></figure>
-<p>不仅如此，我们还去掉了<code>view.resize()</code>一行。<strong>QGraphicsScene 的sceneRect 属性供QGraphicsView 确定视图默认的滚动条区域</strong>，并且协助QGraphicsScene 管理元素索引。之所以去掉<code>view.resize()</code>一行，是因为我们让系统去决定视图的最小尺寸（如果不是过大，就是设置的300）。</p>
-<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/QT/">QT</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>
