@@ -234,6 +234,90 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C_C++/C++模板和元编程/C++typename用法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/25/C_C++/C++模板和元编程/C++typename用法/" class="article-date">
+      <time datetime="2019-01-25T12:35:28.000Z" itemprop="datePublished">2019-01-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/25/C_C++/C++模板和元编程/C++typename用法/">C++ typename 用法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="typename"><a href="#typename" class="headerlink" title="typename"></a>typename</h2><ol>
+<li><p>在C++中typename一般用来声明模板的模板参数(template parameter):<br><code>template&lt;typename T&gt; class X;</code>   //T是一个模板参数</p>
+</li>
+<li><p>但是还有一个关键的用法。首先是两个概念：</p>
+<ol>
+<li><p>qualified name 限定名<br>例如:std::cout, std::endl;这样含有作用域符号(::)的就是限定名，<br>当我们用using声明将cout,endl引入到当前作用域之后就可以直接使用<br>这两个名称，这个时候cout，endl就不是限定名了。</p>
+</li>
+<li><p>dependent name 依赖名<br>dependent name是依赖于模板参数的类型,例如:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">X</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ivec;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line">    </span><br><span class="line">    T type;</span><br><span class="line"> 	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;T&gt; tvec;</span><br><span class="line">   	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;T&gt;::iterator titer;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* 前3个成员变量是不依赖于模板参数,所以是non-dependent name;</span></span><br><span class="line"><span class="comment">   后3个是dependent name,直到实例化该模板的时候才会知道到底是什么类型。*/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>下面来讨论typename的第二种用法:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 现在假设我们有一个类如下：</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">Y</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    T::iterator *iter;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* 我们可能本意是想定义一个迭代器对象，例如我们如果用vector&lt;int&gt;来实例化这个模板，那么iter</span></span><br><span class="line"><span class="comment">则应该是一个迭代器指针，但是，如果我们用下面这个类来实例化这个模板：*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cType</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> iterator;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* 那么T::iterator *iter 会被编译器解释为两个数相乘。事实上，C++编译器会采用第二种解释方法</span></span><br><span class="line"><span class="comment">，即使iterator的确是一个类型名。</span></span><br><span class="line"><span class="comment">为了避免这种矛盾，当我们适用qualified dependent name的时候，需要用typename来指出这是一个</span></span><br><span class="line"><span class="comment">类型名.即: */</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">Y</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">typename</span> T::iterator *iter;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> T::iterator iterator; <span class="comment">//定义了Y::iterator类型名称</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//typename 指出下面紧跟着的名称是一个类型</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="使用-t代替typename"><a href="#使用-t代替typename" class="headerlink" title="使用_t代替typename"></a>使用_t代替typename</h3><p>在模板元编程时定义类型，就可以简化程序，提高可读性。</p>
+<p>比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ... T&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">temp_t</span> = <span class="keyword">typename</span> temp&lt;T...&gt;::type;</span><br></pre></td></tr></table></figure>
+<p>那么本来需要写 <code>using a = typename temp&lt;T...&gt;::type</code></p>
+<p>现在只需要写 <code>using a = temp_t&lt;T...&gt;</code></p>
+<p>这也是C++标准库里的做法。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C_C++/C++模板和元编程/C++模板元编程书上习题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -2596,94 +2680,6 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">QGraphicsScene scene;</span><br><span class="line">scene.setSceneRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line">scene.addLine(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line"></span><br><span class="line"><span class="function">QGraphicsView <span class="title">view</span><span class="params">(&amp;scene)</span></span>;</span><br><span class="line">view.setWindowTitle(<span class="string">"Graphics View"</span>);</span><br><span class="line"><span class="comment">// view.resize(500, 500);</span></span><br><span class="line">view.show();</span><br></pre></td></tr></table></figure>
 <p>不仅如此，我们还去掉了<code>view.resize()</code>一行。<strong>QGraphicsScene 的sceneRect 属性供QGraphicsView 确定视图默认的滚动条区域</strong>，并且协助QGraphicsScene 管理元素索引。之所以去掉<code>view.resize()</code>一行，是因为我们让系统去决定视图的最小尺寸（如果不是过大，就是设置的300）。</p>
 <h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/QT/">QT</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-QT/QString" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/01/04/QT/QString/" class="article-date">
-      <time datetime="2019-01-04T08:40:30.000Z" itemprop="datePublished">2019-01-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/04/QT/QString/">QString与char*的相互转换</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="QString-转换为-char"><a href="#QString-转换为-char" class="headerlink" title="QString 转换为 char *"></a>QString 转换为 char *</h3><p>将 QString 转 char <em>，需要用到 QByteArray 类，QByteArray 类的说明详见 Qt 帮助文档。<br>因为 char </em> 最后都有一个<code>&#39;\0&#39;</code>作为结束符，而采用 QString::toLatin1() 时会在字符串后面加上<code>&#39;\0&#39;</code>。</p>
-<p>方法如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QString  qstr;</span><br><span class="line"><span class="keyword">char</span>*  cstr;</span><br><span class="line">QByteArray ba = qstr.toLatin1(); <span class="comment">// must</span></span><br><span class="line">cstr = ba.data();</span><br></pre></td></tr></table></figure>
-<h4 id="中文乱码"><a href="#中文乱码" class="headerlink" title="中文乱码　"></a>中文乱码　</h4><p>以上方法当 QString 内含有中文时，转换为 char * 就是乱码，采用如下方法解决：</p>
-<p><strong>方法1</strong></p>
-<p>添加GBK编码支持：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QTextCodec&gt;</span></span></span><br><span class="line">QTextCodec::setCodecForTr(QTextCodec::codecForName(<span class="string">"GBK"</span>));</span><br><span class="line">QTextCodec::setCodecForLocale(QTextCodec::codecForName(<span class="string">"GBK"</span>));</span><br></pre></td></tr></table></figure>
-<p>然后将上面的第3行修改为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QByteArray ba = str.toLocal8Bit();  <span class="comment">// toLocal8Bit 支持中文</span></span><br></pre></td></tr></table></figure>
-<p><strong>方法2</strong></p>
-<p>先将 QString 转为标准库中的 string 类型，然后将 string 转为 char *。如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QString  filename;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> str = filename.toStdString();</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* ch = str.c_str();</span><br></pre></td></tr></table></figure>
-<h3 id="char-转换为-QString"><a href="#char-转换为-QString" class="headerlink" title="char * 转换为 QString"></a>char * 转换为 QString</h3><p>使用 QString 的构造函数进行转换：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString(const QLatin1String &amp;str);</span><br></pre></td></tr></table></figure>
-<p>QLatin1String 的构造函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QLatin1String(const char *str);</span><br></pre></td></tr></table></figure>
-<p>因此用下面这个语句就可以将 char * ch 转换为 QString str 了，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = QString(QLatin1String(ch));</span><br></pre></td></tr></table></figure>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><strong>arg()</strong></p>
-<p>QString 的 arg() 函数可以自动替换掉 QString 中出现的占位符。其占位符以 % 开始，后面是占位符的位置，例如 %1，%2 这种。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString(<span class="string">"[%1, %2]"</span>).arg(x, y);</span><br></pre></td></tr></table></figure>
-<p><strong>sprintf()</strong></p>
-<p>可以使用类似 C 风格的格式化函数 sprintf() 来构造 QString。</p>
-<p><strong>QString::number(long n, int base = 10)</strong></p>
-<p>将数字转化为QString</p>
-
       
     </div>
     

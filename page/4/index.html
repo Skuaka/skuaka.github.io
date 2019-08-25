@@ -234,6 +234,80 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Network/Tcp/ICMP" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/22/Network/Tcp/ICMP/" class="article-date">
+      <time datetime="2019-03-22T14:49:12.000Z" itemprop="datePublished">2019-03-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/22/Network/Tcp/ICMP/">ICMP</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h3><p><strong>互联网控制消息协议</strong>（英语：<strong>I</strong>nternet <strong>C</strong>ontrol <strong>M</strong>essage <strong>P</strong>rotocol，缩写：<strong>ICMP</strong>）是互联网协议族的核心协议之一。它用于网际协议（IP）中发送控制消息，提供可能发生在通信环境中的各种问题反馈。通过这些信息，使管理者可以对所发生的问题作出诊断，然后采取适当的措施解决。</p>
+<p>ICMP依靠IP來完成它的任务，它是IP的主要部分。它与传输协议（如TCP和UDP）显著不同：它一般不用于在两点间传输数据。它通常不由网络程序直接使用，除了ping和traceroute这两个特別的例子。</p>
+<h3 id="报头"><a href="#报头" class="headerlink" title="报头"></a>报头</h3><p>ICMP报头从IP报头的第160位开始（IP首部20字节）（除非使用了IP报头的可选部分）。</p>
+<p><img src="Picture/ICMP_header.jpg" alt="ICMP_header"></p>
+<ul>
+<li><strong>Type</strong> - ICMP的類型,标识生成的错误报文；</li>
+<li><strong>Code</strong> - 進一步劃分ICMP的類型,该字段用来查找产生错误的原因.；例如，ICMP的目標不可達類型可以把這個位設為1至15等來表示不同的意思。</li>
+<li><strong>Checksum</strong> - 校验码部分,這個字段包含有從ICMP報頭和數據部分計算得來的，用於檢查錯誤的數據，其中此校验码字段的值視為0。</li>
+<li><strong>ID</strong> - 這個字段包含了ID值，在Echo Reply類型的消息中要返回這個字段。</li>
+<li><strong>Sequence</strong> - 這個字段包含一個序號，同樣要在Echo Reply類型的消息中要返回這個字段。</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Tcp/IP头_TCP头_UDP头" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1991,78 +2065,6 @@
       
         <p class="article-more-link">
           <a href="/2019/03/11/Network/Http/http/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Algorithm/堆和优先队列" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/11/Algorithm/堆和优先队列/" class="article-date">
-      <time datetime="2019-03-11T12:28:18.000Z" itemprop="datePublished">2019-03-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/Algorithm/堆和优先队列/">堆和优先队列</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="堆和优先队列"><a href="#堆和优先队列" class="headerlink" title="堆和优先队列"></a>堆和优先队列</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><strong>最小堆</strong>：所有父节点都比子节点小的<em>完全二叉树</em>。</p>
-<p>最大堆同理。为了方便，本篇讲解都基于最小堆。</p>
-<hr>
-<p>堆存储在数组内，相比于普通队列，寻找最大(小)值的速度非常快，所以堆也可以作为优先队列。</p>
-<p>优先队列：支持插入元素和寻找最大(小)值元素的数据结构。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/11/Algorithm/堆和优先队列/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

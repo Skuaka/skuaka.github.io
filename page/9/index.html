@@ -234,6 +234,94 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-QT/QString" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/04/QT/QString/" class="article-date">
+      <time datetime="2019-01-04T08:40:30.000Z" itemprop="datePublished">2019-01-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/04/QT/QString/">QString与char*的相互转换</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="QString-转换为-char"><a href="#QString-转换为-char" class="headerlink" title="QString 转换为 char *"></a>QString 转换为 char *</h3><p>将 QString 转 char <em>，需要用到 QByteArray 类，QByteArray 类的说明详见 Qt 帮助文档。<br>因为 char </em> 最后都有一个<code>&#39;\0&#39;</code>作为结束符，而采用 QString::toLatin1() 时会在字符串后面加上<code>&#39;\0&#39;</code>。</p>
+<p>方法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QString  qstr;</span><br><span class="line"><span class="keyword">char</span>*  cstr;</span><br><span class="line">QByteArray ba = qstr.toLatin1(); <span class="comment">// must</span></span><br><span class="line">cstr = ba.data();</span><br></pre></td></tr></table></figure>
+<h4 id="中文乱码"><a href="#中文乱码" class="headerlink" title="中文乱码　"></a>中文乱码　</h4><p>以上方法当 QString 内含有中文时，转换为 char * 就是乱码，采用如下方法解决：</p>
+<p><strong>方法1</strong></p>
+<p>添加GBK编码支持：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QTextCodec&gt;</span></span></span><br><span class="line">QTextCodec::setCodecForTr(QTextCodec::codecForName(<span class="string">"GBK"</span>));</span><br><span class="line">QTextCodec::setCodecForLocale(QTextCodec::codecForName(<span class="string">"GBK"</span>));</span><br></pre></td></tr></table></figure>
+<p>然后将上面的第3行修改为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QByteArray ba = str.toLocal8Bit();  <span class="comment">// toLocal8Bit 支持中文</span></span><br></pre></td></tr></table></figure>
+<p><strong>方法2</strong></p>
+<p>先将 QString 转为标准库中的 string 类型，然后将 string 转为 char *。如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QString  filename;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> str = filename.toStdString();</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* ch = str.c_str();</span><br></pre></td></tr></table></figure>
+<h3 id="char-转换为-QString"><a href="#char-转换为-QString" class="headerlink" title="char * 转换为 QString"></a>char * 转换为 QString</h3><p>使用 QString 的构造函数进行转换：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString(const QLatin1String &amp;str);</span><br></pre></td></tr></table></figure>
+<p>QLatin1String 的构造函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QLatin1String(const char *str);</span><br></pre></td></tr></table></figure>
+<p>因此用下面这个语句就可以将 char * ch 转换为 QString str 了，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = QString(QLatin1String(ch));</span><br></pre></td></tr></table></figure>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><strong>arg()</strong></p>
+<p>QString 的 arg() 函数可以自动替换掉 QString 中出现的占位符。其占位符以 % 开始，后面是占位符的位置，例如 %1，%2 这种。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString(<span class="string">"[%1, %2]"</span>).arg(x, y);</span><br></pre></td></tr></table></figure>
+<p><strong>sprintf()</strong></p>
+<p>可以使用类似 C 风格的格式化函数 sprintf() 来构造 QString。</p>
+<p><strong>QString::number(long n, int base = 10)</strong></p>
+<p>将数字转化为QString</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/QT/">QT</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Algorithm/排序算法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -630,10 +718,10 @@
 
 
   
-    <article id="post-Algorithm/查找树" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Algorithm/Data Structure/查找树" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/12/07/Algorithm/查找树/" class="article-date">
+      <a href="/2018/12/07/Algorithm/Data Structure/查找树/" class="article-date">
       <time datetime="2018-12-07T05:57:22.000Z" itemprop="datePublished">2018-12-07</time>
 </a>
 
@@ -649,7 +737,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/07/Algorithm/查找树/">查找树</a>
+      <a class="article-title" href="/2018/12/07/Algorithm/Data Structure/查找树/">查找树</a>
     </h1>
   
 
@@ -679,7 +767,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2018/12/07/Algorithm/查找树/#more">more >></a>
+          <a href="/2018/12/07/Algorithm/Data Structure/查找树/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -939,75 +1027,6 @@
         <p>翻译自：<a href="https://stackoverflow.com/questions/2351148/explicit-instantiation-when-is-it-used" target="_blank" rel="noopener">https://stackoverflow.com/questions/2351148/explicit-instantiation-when-is-it-used</a></p>
 <p>初学时思考了这个问题，百度了一圈，对看到的帖子很失望，基本都在不懂装懂。所以谷歌了一下找到答案，翻译成中文：</p>
 <p>显式实例化让你能够先创建模版的某个实例，而不是在使用它的时候再隐式创建。主要的用途就是用来写库文件，因为没有实例化的模版不能放入对象(.obj)文件中。在库文件里使用了显式实例化后，模版的实例化代码就不需要在每个使用到的对象里拷贝一份了（隐式实例化），编译器只需要链接到相应的库函数。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C_C++/Mess/C++ofstream输出为1的情况" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/04/C_C++/Mess/C++ofstream输出为1的情况/" class="article-date">
-      <time datetime="2018-12-04T14:15:08.000Z" itemprop="datePublished">2018-12-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/04/C_C++/Mess/C++ofstream输出为1的情况/">fstream输出为1的情况</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="fstream输出为1的情况"><a href="#fstream输出为1的情况" class="headerlink" title="fstream输出为1的情况"></a>fstream输出为1的情况</h3><p>在学C++文件操作时，我曾尝试直接将一个文件输入流接到文件输出流。</p>
-<p>如<code>fout &lt;&lt; fin;</code> 然而运行后输出的文件内容之有一个’1’。</p>
-<p>我接着又尝试<code>fout &lt;&lt; fin &lt;&lt; fin &lt;&lt; fin;</code>结果输出文件内容是’111’。</p>
-<p>查阅文档发现原因：</p>
-<p>ofstream类的&lt;&lt;运算符没有重载fstream类参数，这种情况下（以及其他没有重载的指针类型），会隐式转化成bool类型，然后只要指针不是空的，就会输出’1’（当然，如果使用了std::boolalpha控制符，则会输出’true’）。</p>
-<p><strong><em>与此类似，有很多类也有bool转化，输出时可能就会输出1。</em></strong></p>
 
       
     </div>
