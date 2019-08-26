@@ -263,7 +263,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="node-js笔记"><a href="#node-js笔记" class="headerlink" title="node-js笔记"></a>node-js笔记</h2><h3 id="nodemon"><a href="#nodemon" class="headerlink" title="nodemon"></a>nodemon</h3><p>nodemon用来监视node.js应用程序中的任何更改并自动重启服务,非常适合用在开发环境中。</p>
+        <h2 id="node-js笔记"><a href="#node-js笔记" class="headerlink" title="node-js笔记"></a>node-js笔记</h2><h3 id="npm-script"><a href="#npm-script" class="headerlink" title="npm script"></a>npm script</h3><p>npm 允许在<code>package.json</code>文件里面，使用<code>scripts</code>字段定义脚本命令。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"node build.js"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>run</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm run build</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ node build.js</span><br></pre></td></tr></table></figure>
+<h3 id="nodemon"><a href="#nodemon" class="headerlink" title="nodemon"></a>nodemon</h3><p>nodemon用来监视node.js应用程序中的任何更改并自动重启服务,非常适合用在开发环境中。</p>
 <ul>
 <li>在运行脚本时将其替换命令行上的node。</li>
 <li>如果有任何文件更改，nodemon将自动重新启动node应用程序。</li>

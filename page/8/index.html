@@ -1737,10 +1737,10 @@
 
 
   
-    <article id="post-Database/Redis/Mac 下 Redis 使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Database/Redis/Mac-Redis-Usage" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/01/17/Database/Redis/Mac 下 Redis 使用/" class="article-date">
+      <a href="/2019/01/17/Database/Redis/Mac-Redis-Usage/" class="article-date">
       <time datetime="2019-01-17T11:56:20.000Z" itemprop="datePublished">2019-01-17</time>
 </a>
 
@@ -1756,7 +1756,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/17/Database/Redis/Mac 下 Redis 使用/">Mac 下 Redis 使用</a>
+      <a class="article-title" href="/2019/01/17/Database/Redis/Mac-Redis-Usage/">Mac-Redis-Usage</a>
     </h1>
   
 
@@ -1766,11 +1766,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h2><h3 id="安装Redis"><a href="#安装Redis" class="headerlink" title="安装Redis"></a>安装Redis</h3><p><code>brew install redis</code></p>
+        <h1 id="Mac-Redis-Usage"><a href="#Mac-Redis-Usage" class="headerlink" title="Mac-Redis-Usage"></a>Mac-Redis-Usage</h1><h2 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h2><h3 id="安装Redis"><a href="#安装Redis" class="headerlink" title="安装Redis"></a>安装Redis</h3><p><code>brew install redis</code></p>
 <h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><p><code>redis-server</code> 开启默认配置的服务器，可加参数。</p>
+<h3 id="关闭服务器"><a href="#关闭服务器" class="headerlink" title="关闭服务器"></a>关闭服务器</h3><p><code>redis-cli shutdown</code></p>
 <h3 id="开启客户端"><a href="#开启客户端" class="headerlink" title="开启客户端"></a>开启客户端</h3><p><code>redis-cli</code>   默认为连接本地服务器，可加参数。</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><code>redis 127.0.0.1:6379&gt; CONFIG GET CONFIG_SETTING_NAME</code>    查看配置项</p>
-<p><code>redis 127.0.0.1:6379&gt; CONFIG SET CONFIG_SETTING_NAME NEW_CONFIG_VALUE</code>  设置配置项</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><code>redis 127.0.0.1:6379&gt; CONFIG GET [SETTING_NAME]</code>    查看配置项</p>
+<p><code>redis 127.0.0.1:6379&gt; CONFIG SET [SETTING_NAME] [NEW_CONFIG_VALUE]</code>  设置配置项</p>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>mac下是： <code>/usr/local/etc/redis.conf</code></p>
+<p>修改dump的目录修改”dbfilename”.(Todo)</p>
 <h2 id="Redis命令"><a href="#Redis命令" class="headerlink" title="Redis命令"></a>Redis命令</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。</p>
 <h4 id="键-key"><a href="#键-key" class="headerlink" title="键(key)"></a>键(key)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SET runoobkey redis</span><br><span class="line">OK</span><br><span class="line">redis 127.0.0.1:6379&gt; DEL runoobkey</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
 <h4 id="字符串-String"><a href="#字符串-String" class="headerlink" title="字符串(String)"></a>字符串(String)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SET runoobkey redis</span><br><span class="line">OK</span><br><span class="line">redis 127.0.0.1:6379&gt; GET runoobkey</span><br><span class="line">&quot;redis&quot;</span><br></pre></td></tr></table></figure>
@@ -1792,7 +1795,6 @@
 <p>但是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; PFADD runoobkey &quot;redis&quot;</span><br><span class="line"></span><br><span class="line">1) (integer) 1</span><br><span class="line"></span><br><span class="line">redis 127.0.0.1:6379&gt; PFADD runoobkey &quot;mongodb&quot;</span><br><span class="line"></span><br><span class="line">1) (integer) 1</span><br><span class="line"></span><br><span class="line">redis 127.0.0.1:6379&gt; PFADD runoobkey &quot;mysql&quot;</span><br><span class="line"></span><br><span class="line">1) (integer) 1</span><br><span class="line"></span><br><span class="line">redis 127.0.0.1:6379&gt; PFCOUNT runoobkey</span><br><span class="line"></span><br><span class="line">(integer) 3</span><br></pre></td></tr></table></figure>
 <p>//我发现medis（mac上的redis可视化）把 Redis HyperLogLog 类型识别为 string ，于是测试了 get ，发现是可行的，但是输出是乱码。</p>
-<p>### </p>
 <h3 id="测试服务器连通性"><a href="#测试服务器连通性" class="headerlink" title="测试服务器连通性"></a>测试服务器连通性</h3><p><code>127.0.0.1:6379&gt; ping</code>    连通则显示pong</p>
 <h3 id="Redis-数据备份与恢复"><a href="#Redis-数据备份与恢复" class="headerlink" title="Redis 数据备份与恢复"></a>Redis 数据备份与恢复</h3><h4 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SAVE </span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
 <p>该命令将在 redis 安装目录中创建dump.rdb文件。</p>
