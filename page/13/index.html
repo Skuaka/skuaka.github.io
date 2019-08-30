@@ -354,6 +354,11 @@
 <li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
 <li>ENGINE 设置存储引擎，CHARSET 设置编码</li>
 </ul>
+<h5 id="外键约束类型"><a href="#外键约束类型" class="headerlink" title="外键约束类型"></a>外键约束类型</h5><p>CASCADE<br>在父表上update/delete记录时，同步update/delete掉子表的匹配记录 </p>
+<p>SET NULL<br>在父表上update/delete记录时，将子表上匹配记录的列设为null (要注意子表的外键列不能为not null)  </p>
+<p>NO ACTION<br>如果子表中有匹配的记录,则不允许对父表对应候选键进行update/delete操作  </p>
+<p>RESTRICT<br>同no action, 都是立即检查外键约束</p>
+<p>SET NULL<br>父表有变更时,子表将外键列设置成一个默认的值 但Innodb不能识别</p>
 <h4 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table_name ;</span><br></pre></td></tr></table></figure>
 <h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure>
 <h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE [WHERE condition1 [AND/OR condition2].....]</span><br><span class="line">[LIMIT N][ OFFSET M]</span><br></pre></td></tr></table></figure>

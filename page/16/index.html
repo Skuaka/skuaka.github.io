@@ -793,6 +793,129 @@
 
 
   
+    <article id="post-Network/Ccie/跨域的多播" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/跨域的多播/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/跨域的多播/">CCIE 跨域的多播</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="跨域的多播"><a href="#跨域的多播" class="headerlink" title="跨域的多播"></a>跨域的多播</h1><p>源和组成员在不同的AS，需要传递多播数据流。</p>
+<h3 id="跨域多播的问题和挑战"><a href="#跨域多播的问题和挑战" class="headerlink" title="跨域多播的问题和挑战"></a>跨域多播的问题和挑战</h3><p>组成员无法发现源、源无法发现组成员、多播树无法建立。</p>
+<h3 id="MSDP-多播源发现协议"><a href="#MSDP-多播源发现协议" class="headerlink" title="MSDP 多播源发现协议"></a>MSDP 多播源发现协议</h3><p>MSDP 是配置在不同 AS RP 上的，它会建立基于 TCP 的对等体关系，利用自身的 SA（源关联）消息共享”源地址信息、多播组地址信息、RP 信息”给对端 RP。</p>
+<h3 id="MSDP-配置流程"><a href="#MSDP-配置流程" class="headerlink" title="MSDP 配置流程"></a>MSDP 配置流程</h3><p>步骤1：RP上配置新的 loopback 接口，并且宣告进 BGP。</p>
+<p>步骤2：RP上完成 MSDP 的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip msdp peer 8.8.8.8</span><br><span class="line">ip msdp peer 8.8.8.8 connect-source lo44</span><br><span class="line">ip msdp origin lo88</span><br><span class="line"></span><br><span class="line">show ip msdp summary</span><br></pre></td></tr></table></figure>
+<h3 id="排错手段"><a href="#排错手段" class="headerlink" title="排错手段"></a>排错手段</h3><p>ip 路由疑难解析</p>
+<h4 id="多播排错"><a href="#多播排错" class="headerlink" title="多播排错"></a>多播排错</h4><p>ping 多播组地址 不同</p>
+<ol>
+<li><p>确认发现组成员</p>
+<p><code>show ip igmp group</code></p>
+<p>查看组地址、本地接口、报告者 是否出现</p>
+<p><strong>错点</strong></p>
+<ul>
+<li>没有模拟成组成员，缺乏接口下：<code>ip igmp join-group &lt;a.b.c.d&gt;</code></li>
+<li>路由器接口没有加入PIM，缺乏接口下:<code>ip pim &lt;x&gt;</code></li>
+<li>连通性问题</li>
+</ul>
+</li>
+<li><p>确认稀疏模式获取 RP 信息</p>
+<p><code>show ip pim rp mapping</code> 查看 RP 映射，查看 RP 的结果</p>
+<p><code>show ip pim rp</code> 查看多播组和 RP 的关联</p>
+<p><strong>错点</strong></p>
+<ul>
+<li>没有通过静态 RP 指明 RP 地址</li>
+<li>BSR 的 C-BSR 或 C-RP 配置问题</li>
+<li>auto-rp 的配置问题</li>
+<li>缺乏auto-rp 侦听的配置</li>
+<li>设备间缺乏必要的PIM 邻居：<code>show ip pim neighbor</code><ul>
+<li>设备缺乏多播路由功能和接口忘记加入PIM</li>
+<li>接口忘记激活、错误的安全策略挡住了PIM消息</li>
+</ul>
+</li>
+<li>设备无法正常抵达 RP 地址，所以不显示获取的 RP 消息<ul>
+<li>路由层面问题、忘记宣告、忘记重分发、错误的过滤</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>RPF 检测未通过</p>
+<ul>
+<li>缺乏必要的更新源路由</li>
+<li>忘记宣告、忘记重分发、错误的路由更新过滤</li>
+</ul>
+</li>
+<li><p>是否是跨域多播、缺乏必要的配置和连通性</p>
+<ul>
+<li><p>缺乏必要的 MSDP 配置和 MSDP 对等体关系</p>
+<p><code>show run | sec ip msdp</code></p>
+<p><code>show ip msdp summary</code></p>
+<p>MSDP peer 地址不可达</p>
+<p>MSDP 链接源和起源 ID 设置错误</p>
+</li>
+<li><p>RPF 检测不通过</p>
+</li>
+</ul>
+</li>
+<li><p>错误的安全策略</p>
+</li>
+</ol>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Ccie/路由协议分类" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1176,129 +1299,6 @@
 
 
   
-    <article id="post-Network/Ccie/跨域的多播" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/跨域的多播/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/跨域的多播/">CCIE 跨域的多播</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="跨域的多播"><a href="#跨域的多播" class="headerlink" title="跨域的多播"></a>跨域的多播</h1><p>源和组成员在不同的AS，需要传递多播数据流。</p>
-<h3 id="跨域多播的问题和挑战"><a href="#跨域多播的问题和挑战" class="headerlink" title="跨域多播的问题和挑战"></a>跨域多播的问题和挑战</h3><p>组成员无法发现源、源无法发现组成员、多播树无法建立。</p>
-<h3 id="MSDP-多播源发现协议"><a href="#MSDP-多播源发现协议" class="headerlink" title="MSDP 多播源发现协议"></a>MSDP 多播源发现协议</h3><p>MSDP 是配置在不同 AS RP 上的，它会建立基于 TCP 的对等体关系，利用自身的 SA（源关联）消息共享”源地址信息、多播组地址信息、RP 信息”给对端 RP。</p>
-<h3 id="MSDP-配置流程"><a href="#MSDP-配置流程" class="headerlink" title="MSDP 配置流程"></a>MSDP 配置流程</h3><p>步骤1：RP上配置新的 loopback 接口，并且宣告进 BGP。</p>
-<p>步骤2：RP上完成 MSDP 的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip msdp peer 8.8.8.8</span><br><span class="line">ip msdp peer 8.8.8.8 connect-source lo44</span><br><span class="line">ip msdp origin lo88</span><br><span class="line"></span><br><span class="line">show ip msdp summary</span><br></pre></td></tr></table></figure>
-<h3 id="排错手段"><a href="#排错手段" class="headerlink" title="排错手段"></a>排错手段</h3><p>ip 路由疑难解析</p>
-<h4 id="多播排错"><a href="#多播排错" class="headerlink" title="多播排错"></a>多播排错</h4><p>ping 多播组地址 不同</p>
-<ol>
-<li><p>确认发现组成员</p>
-<p><code>show ip igmp group</code></p>
-<p>查看组地址、本地接口、报告者 是否出现</p>
-<p><strong>错点</strong></p>
-<ul>
-<li>没有模拟成组成员，缺乏接口下：<code>ip igmp join-group &lt;a.b.c.d&gt;</code></li>
-<li>路由器接口没有加入PIM，缺乏接口下:<code>ip pim &lt;x&gt;</code></li>
-<li>连通性问题</li>
-</ul>
-</li>
-<li><p>确认稀疏模式获取 RP 信息</p>
-<p><code>show ip pim rp mapping</code> 查看 RP 映射，查看 RP 的结果</p>
-<p><code>show ip pim rp</code> 查看多播组和 RP 的关联</p>
-<p><strong>错点</strong></p>
-<ul>
-<li>没有通过静态 RP 指明 RP 地址</li>
-<li>BSR 的 C-BSR 或 C-RP 配置问题</li>
-<li>auto-rp 的配置问题</li>
-<li>缺乏auto-rp 侦听的配置</li>
-<li>设备间缺乏必要的PIM 邻居：<code>show ip pim neighbor</code><ul>
-<li>设备缺乏多播路由功能和接口忘记加入PIM</li>
-<li>接口忘记激活、错误的安全策略挡住了PIM消息</li>
-</ul>
-</li>
-<li>设备无法正常抵达 RP 地址，所以不显示获取的 RP 消息<ul>
-<li>路由层面问题、忘记宣告、忘记重分发、错误的过滤</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>RPF 检测未通过</p>
-<ul>
-<li>缺乏必要的更新源路由</li>
-<li>忘记宣告、忘记重分发、错误的路由更新过滤</li>
-</ul>
-</li>
-<li><p>是否是跨域多播、缺乏必要的配置和连通性</p>
-<ul>
-<li><p>缺乏必要的 MSDP 配置和 MSDP 对等体关系</p>
-<p><code>show run | sec ip msdp</code></p>
-<p><code>show ip msdp summary</code></p>
-<p>MSDP peer 地址不可达</p>
-<p>MSDP 链接源和起源 ID 设置错误</p>
-</li>
-<li><p>RPF 检测不通过</p>
-</li>
-</ul>
-</li>
-<li><p>错误的安全策略</p>
-</li>
-</ol>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-C-C++/Concept-gcc/gcc_gdb备忘录" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1410,7 +1410,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="JavaScript-使用"><a href="#JavaScript-使用" class="headerlink" title="JavaScript 使用"></a>JavaScript 使用</h2><p>HTML 中的脚本必须位于 <code>&lt;script&gt;</code> 与 <code>&lt;/script&gt;</code> 标签之间。</p>
+        <h1 id="基础（不全）"><a href="#基础（不全）" class="headerlink" title="基础（不全）"></a>基础（不全）</h1><h2 id="JavaScript-使用"><a href="#JavaScript-使用" class="headerlink" title="JavaScript 使用"></a>JavaScript 使用</h2><p>HTML 中的脚本必须位于 <code>&lt;script&gt;</code> 与 <code>&lt;/script&gt;</code> 标签之间。</p>
 <ul>
 <li><p>脚本可被放置在 HTML 页面的 <code>&lt;body&gt;</code> 和 <code>&lt;head&gt;</code> 部分中。</p>
 </li>
@@ -1503,7 +1503,7 @@
 </li>
 <li><p>JavaScript 标签</p>
 <p>通过标签引用，break 语句可用于跳出任何 JavaScript 代码块：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cars=[<span class="string">"BMW"</span>,<span class="string">"Volvo"</span>,<span class="string">"Saab"</span>,<span class="string">"Ford"</span>];</span><br><span class="line">list:</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">0</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">1</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">2</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">break</span> list;</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">3</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">4</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="built_in">document</span>.write(cars[<span class="number">5</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cars=[<span class="string">"BMW"</span>,<span class="string">"Volvo"</span>,<span class="string">"Saab"</span>,<span class="string">"Ford"</span>];</span><br><span class="line">list:</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">document</span>.write(cars[<span class="number">0</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">  <span class="built_in">document</span>.write(cars[<span class="number">1</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">  <span class="built_in">document</span>.write(cars[<span class="number">2</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">  <span class="keyword">break</span> list;</span><br><span class="line">  <span class="built_in">document</span>.write(cars[<span class="number">3</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">  <span class="built_in">document</span>.write(cars[<span class="number">4</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">  <span class="built_in">document</span>.write(cars[<span class="number">5</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="错误捕捉"><a href="#错误捕捉" class="headerlink" title="错误捕捉"></a>错误捕捉</h2><p>和java一样</p>
