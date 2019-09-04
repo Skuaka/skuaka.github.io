@@ -234,6 +234,80 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Python/Python杂记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/26/Python/Python杂记/" class="article-date">
+      <time datetime="2018-10-26T05:44:02.000Z" itemprop="datePublished">2018-10-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/26/Python/Python杂记/">Python 杂记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="安装matplotlib"><a href="#安装matplotlib" class="headerlink" title="安装matplotlib"></a>安装matplotlib</h4><p><code>pip3 install --index-url https://pypi.douban.com/simple matplotlib</code></p>
+<h4 id="Macos安装pip"><a href="#Macos安装pip" class="headerlink" title="Macos安装pip"></a>Macos安装pip</h4><p><code>sudo easy_install pip</code></p>
+<h4 id="查看pip包安装位置"><a href="#查看pip包安装位置" class="headerlink" title="查看pip包安装位置"></a>查看pip包安装位置</h4><p><code>pip3 show [package-name]</code></p>
+<h4 id="Sublime-Build-with-Python3"><a href="#Sublime-Build-with-Python3" class="headerlink" title="Sublime Build with Python3"></a>Sublime Build with Python3</h4><p>Tools -&gt; Build System -&gt; New Build System</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;env&quot;: &#123;&quot;PYTHONIOENCODING&quot;: &quot;utf8&quot;&#125;,</span><br><span class="line">    &quot;cmd&quot;: [&quot;/usr/bin/python3&quot;, &quot;-u&quot;, &quot;$file&quot;],</span><br><span class="line">    &quot;file_regex&quot;: &quot;^[ ]*File \&quot;(...*?)\&quot;, line ([0-9]*)&quot;,</span><br><span class="line">    &quot;selector&quot;: &quot;source.python&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Change your python3 path in <em>“cmd”</em> ( see with <code>$ which python3</code>)</p>
+<p>Save as <code>python3.sublime-build</code></p>
+<h4 id="Sublime-translate-tabs-to-spaces"><a href="#Sublime-translate-tabs-to-spaces" class="headerlink" title="Sublime translate tabs to spaces"></a>Sublime translate tabs to spaces</h4><p>Preferences -&gt; Settings-User<br>add the two lines below:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;tab_size&quot;: 4,</span><br><span class="line">&quot;translate_tabs_to_spaces&quot;: true</span><br></pre></td></tr></table></figure>
+<h4 id="osx-文件编码"><a href="#osx-文件编码" class="headerlink" title="osx 文件编码"></a>osx 文件编码</h4><p>latin1</p>
+<p><code>open(&quot;filename&quot;,encoding=&#39;latin1&#39;)</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/SQLserver/mssql实验" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -733,10 +807,10 @@
 
 
   
-    <article id="post-Macos/mac平台开发工具" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-MacOS/mac平台开发工具" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/04/Macos/mac平台开发工具/" class="article-date">
+      <a href="/2018/10/04/MacOS/mac平台开发工具/" class="article-date">
       <time datetime="2018-10-03T16:08:30.000Z" itemprop="datePublished">2018-10-04</time>
 </a>
 
@@ -752,7 +826,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/04/Macos/mac平台开发工具/">我用的mac平台开发工具</a>
+      <a class="article-title" href="/2018/10/04/MacOS/mac平台开发工具/">我用的mac平台开发工具</a>
     </h1>
   
 
@@ -1239,124 +1313,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Database/PostgreSQL/PostgreSQL 命令" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/" class="article-date">
-      <time datetime="2018-08-17T14:49:50.000Z" itemprop="datePublished">2018-08-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/">PostgreSQL 命令</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><p>查看所有命令</p>
-<p><code>\?</code></p>
-<p>显示已创建的数据库</p>
-<p><code>\l</code>  或者</p>
-<p><code>SELECT datname FROM pg_database;</code></p>
-<p>在不连接进 PostgreSQL 数据库的情况下，也可以在终端上查看显示已创建的列表：</p>
-<p><code>psql -l</code></p>
-<p>查看postgresql数据库用户</p>
-<p><code>\du</code></p>
-<p>显示数据库表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、通过命令行查询</span><br><span class="line">\d 数据库 —— 得到所有表的名字</span><br><span class="line">\d 表名 —— 得到表结构</span><br><span class="line"></span><br><span class="line">2、通过SQL语句查询</span><br><span class="line">select * from pg_tables;	//得到当前db中所有表的信息（这里pg_tables是系统视图）</span><br><span class="line">select tablename from pg_tables where schemaname=&apos;public&apos;	//得到所有用户自定义表的名字（这里&quot;tablename&quot;字段是表的名字，&quot;schemaname&quot;是schema的名字。用户自定义的表，如果未经特殊处理，默认都是放在名为public的schema下）</span><br></pre></td></tr></table></figure>
-<h5 id="d命令"><a href="#d命令" class="headerlink" title="\d命令"></a>\d命令</h5><p>该命令将显示每个匹配关系（表，视图，索引，序列）的信息，包括对象所有的列，它们的类型，表空间（如果不是默认的）和任何特殊属性（如NOT NULL或默认值等）。与唯一约束相关的索引，规则，约束，触发器也同样会显示出来。如果关系是一个视图，还会显示视图的定义。</p>
-<ol>
-<li>如果\d命令什么都不带，将列出当前数据库中的所有表。</li>
-<li>\d后面跟一个表名，表示显示这个表的结构定义。</li>
-<li>\d也可以显示索引信息</li>
-<li>\d后面可以跟一通配符”*“或”?”</li>
-<li><p>\d+命令，该命令将显示比\d命令更详细的信息</p>
-</li>
-<li><p>匹配不同对象类型的\d命令</p>
-<p>如果想只显示匹配的表，可以使用\dt命令</p>
-<p>如果想只显示索引，可以使用\di命令</p>
-<p>如果想只显示序号，可以使用\ds命令</p>
-<p>如果想只显示视图，可以使用\dv命令</p>
-<p>如果想只显示函数，可以使用\df命令</p>
-</li>
-<li><p>如果想显示SQL已执行的时间，可以用\timing命令</p>
-</li>
-<li><p>列出所有的schemas可以使用\dn命令</p>
-</li>
-<li><p>显示所有的表空间可以用\db命令</p>
-<p>表空间就是一个目录，放在这个表空间的表，就是把表的数据文件放到这个表空间下。</p>
-</li>
-<li><p>列出数据库所有角色或用户\du或\dg</p>
-</li>
-<li>\dp或\z命令用于显示表的权限分配情况</li>
-</ol>
-<h3 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h3><p>连接数据库</p>
-<p><code>\c dbname</code></p>
-<p>创建一个名为 test 的表</p>
-<p><code>CREATE TABLE test(id int, text VARCHAR(255));</code></p>
-<p>插入一条记录</p>
-<p><code>insert into test(id,text) values ( 1,&#39;heihei&#39;);</code></p>
-<p>查询记录</p>
-<p><code>select * from test where id = 1;</code></p>
-<p>更新记录</p>
-<p><code>update test set text =&#39;update&#39; where id =5;</code></p>
-<p>删除指定的记录</p>
-<p><code>delete from test where id = 1;</code></p>
-<p>删除表</p>
-<p><code>drop table test;</code></p>
-<p>删除数据库</p>
-<p><code>drop database test_db0;</code></p>
-<p>或者利用 dropdb 指令，在终端上删除数据库</p>
-<p><code>dropdb test0</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
     </div>
 
       

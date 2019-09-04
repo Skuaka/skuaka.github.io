@@ -234,237 +234,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Network/Ccie/STP生成树协议" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/STP生成树协议/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/STP生成树协议/">CCIE STP生成树协议</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>STP生成树协议 7.27</p>
-<p>一个广播域中选举一个生成树。</p>
-<p>广播风暴：绝不停止。</p>
-<p>重复帧。</p>
-<p>mac地址表的不稳定。</p>
-<p>1一个网络中选取一个根桥</p>
-<p>2根桥上所有端口都为<strong>指定端口</strong></p>
-<p>3非根桥上选取一个<strong>根端口</strong></p>
-<p>4每一段选举一个指定端口</p>
-<p>5非指定端口为<strong>阻塞端口</strong></p>
-<hr>
-<p><strong>*粗体为生成树定义的交换机接口角色</strong></p>
-<p>根端口：距离根桥距离最短的端口。开销值一样的话就选最小的发送者id。只在非桥根上选举，并且只选一个。</p>
-<p>指定端口：可以执行数据的转发。一台交换机上可以有多个指定端口。根桥上所有端口都是指定端口。</p>
-<p>阻塞端口：逻辑上的阻塞，不执行数据的转发，但会持续侦听bpdu信息。</p>
-<p>BPDU(桥协议数据单元)只允许根桥产生</p>
-<p>root id</p>
-<p>优先级：(默认32768，越小越优，更改   优先值时必须为4096的倍数)。</p>
-<p>背板mac：标识一台交换机，背板mac小的为优。</p>
-<p>bridge id</p>
-<p>优先级+背板mac：和根id一样</p>
-<p>cost</p>
-<p>开销值</p>
-<p>port id</p>
-<p>优先级(默认128，小优，更改时必须为64的倍数)</p>
-<p>端口mac：发送者的端口mac</p>
-<p>PVST：每vlan生成树，在优先级插入vlan的信息。优先级+vlan编号。</p>
-<p>端口状态</p>
-<p><strong>Blocking</strong>（阻塞状态）：此时，二层端口为非指定端口，也不会参与数据帧的转发。该端口通过接收BPDU来判断根交换机的位置和根ID，以及在STP拓扑收敛结束之后，各交换机端口应该处于什么状态，在默认情况下，端口会在这种状态下停留20秒钟时间。</p>
-<p><strong>Listening</strong>（侦听状态）：生成树此时已经根据交换机所接收到的BPDU而判断出了这个端口应该参与数据帧的转发。于是交换机端口就将不再满足于接收BPDU，而同时也开始发送自己的BPDU，并以此通告邻接的交换机该端口会在活动拓扑中参与转发数据帧的工作。在默认情况下，该端口会在这种状态下停留15秒钟的时间。</p>
-<p><strong>Learning</strong>(学习状态)：这个二层端口准备参与数据帧的转发，并开始填写MAC表。在默认情况下，端口会在这种状态下停留15秒钟时间。</p>
-<p><strong>Forwarding</strong>（转发状态）：这个二层端口已经成为了活动拓扑的一个组成部分，它会转发数据帧，并同时收发BPDU。</p>
-<p><strong>Disabled</strong>（禁用状态）：这个二层端口不会参与生成树，也不会转发。</p>
-<p>根桥每2s发送一次bpdu信息，维护本生成树的运行。</p>
-<p>tcn bpdu 拓扑变更通告，只会从根端口向上发。</p>
-<p>sh spanning-tree </p>
-<p>spanning-trre vlan 1，3，5 priority 优先级</p>
-<p>spanning-trre vlan 1，3，5 root </p>
-<p><pre style="color: rgb(0, 0, 0); font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-tap-highlight-color: rgba(26, 26, 26, 0.301961); -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; word-wrap: break-word; white-space: pre-wrap;">RSTP rapid 快速生成树</pre></p>
-<p>spanning-tree mode rapid-pvst</p>
-<p>协商/同意机制</p>
-<p>替代端口：替代根端口</p>
-<p>备份端口：备份指定端口，一般从阻塞端口选取</p>
-<p>丢弃状态：discarding</p>
-<p>​    向外发送bpdu信息</p>
-<p>学习状态：learning</p>
-<p>​    一边侦听一边学习</p>
-<p>转发状态：forward</p>
-<p>mst multiple 多生成树 </p>
-<p>对RSTP的优化，自动开启RSTP。</p>
-<p>默认处于instance（实例） 0</p>
-<p>特性：</p>
-<p>portfast 快速端口，不参与生成树的选举，直接进入转发状态。</p>
-<p>bpdu guard 一旦收到guard，接口就关闭，必须管理员手动恢复，进入接口sh再no sh。</p>
-<p>端口安全 </p>
-<p>spanning-tree portfast default 将交换机上所有端口设为快速端口</p>
-<p>int xx</p>
-<p>spanning-tree portfast针对单一接口开启</p>
-<p>spanning-tree portfast bpduguard default</p>
-<p>单臂路由 </p>
-<p>子接口：将一个物理接口逻辑上划分成几个子接口使用，每一个划分出的子接口类似于物理接口正常使用。</p>
-<p>pc机</p>
-<p>no ip routing关闭路由功能</p>
-<p>int xx</p>
-<p>ip add 192.168.2.2 255.255.255.0</p>
-<p>ip default-gateway 192.168.2.1</p>
-<p>int e0/0.1</p>
-<p>encapsulation dot1q 10←vlan编号</p>
-<p>企业连接ISP的方式</p>
-<p>单宿：从一个运营商拉一根线</p>
-<p>多宿：从多个运营商拉一根线</p>
-<p>双宿：从同一个运营商拉多根线</p>
-<p>双多宿：从多个运营商同时拉多根线</p>
-<p>三层交换</p>
-<p>每一个端口都可以支持交换和简单的路由功能，开始默认都为交换接口。</p>
-<p>svi端口：</p>
-<p>​    虚拟vlan接口，不受物理接口的限制，只受交换机性能的限制。性能比子接口好很多。前提本地存在此vlan。</p>
-<p>​    int vlan 10 此端口只能识别vlan10</p>
-<p>​    ip add x.x x.x</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/路由协议分类" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/路由协议分类/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="路由协议作用"><a href="#路由协议作用" class="headerlink" title="路由协议作用"></a>路由协议作用</h3><ol>
-<li>网络信息共享</li>
-<li>最佳路径的计算</li>
-<li>路由策略</li>
-</ol>
-<h3 id="路由协议分类"><a href="#路由协议分类" class="headerlink" title="路由协议分类"></a>路由协议分类</h3><ol>
-<li><p>应用场景</p>
-<ul>
-<li>as内  IGPS（RIP、EIGRP、OSPF、IS-IS）EGPS（BGP）</li>
-<li>as间</li>
-</ul>
-</li>
-<li><p>度量值metric计算/路径择优标准</p>
-<ul>
-<li><p>DV距离矢量：RIP</p>
-</li>
-<li><p>高级DV：EIGRP  接口五个参数 k1带宽 k2负载 k3延迟 k4可靠性 k5最大传输单元MTU</p>
-<p>EIGRP的距离/跳数和RIP一样发送时+1，用来限制扩散距离。</p>
-</li>
-<li><p>链路状态 LInk State：OSPF、IS-IS  </p>
-</li>
-<li><p>距离向量：BGP</p>
-</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Network/Ccie/网络知识总结" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -745,6 +514,164 @@
 
 
   
+    <article id="post-Network/Ccie/IPSEC VPN" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/IPSEC VPN/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/IPSEC VPN/">CCIE IPSEC VPN</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="IPSEC-VPN"><a href="#IPSEC-VPN" class="headerlink" title="IPSEC VPN"></a>IPSEC VPN</h2><p>Ip security vpn，是一个工作在网络层的 VPN 技术。</p>
+<h3 id="数据在公共网络上面临的风险"><a href="#数据在公共网络上面临的风险" class="headerlink" title="数据在公共网络上面临的风险"></a>数据在公共网络上面临的风险</h3><ol>
+<li>不加密，明文传递</li>
+<li>没有完整性保护，数据容易被篡改</li>
+<li>没有对等体认证，容易受到中间人攻击</li>
+<li>抵赖</li>
+</ol>
+<h3 id="IPSEC-VPN-解决的问题"><a href="#IPSEC-VPN-解决的问题" class="headerlink" title="IPSEC VPN 解决的问题"></a>IPSEC VPN 解决的问题</h3><ol>
+<li><p>对等体认证，数据发送之前必须经过认证且通过</p>
+<p>口令认证、数字证书（计算机世界的身份证）、加密随机数</p>
+</li>
+<li><p>数据加密</p>
+<p>des、3des、aes</p>
+</li>
+<li><p>数据完整性保护</p>
+<p>HMAC：哈希消息认证码</p>
+</li>
+<li><p>数字签名，防抵赖</p>
+<p>DSA（RSA 公司开发）</p>
+</li>
+</ol>
+<h3 id="KEY：密匙"><a href="#KEY：密匙" class="headerlink" title="KEY：密匙"></a>KEY：密匙</h3><p>KEY 是一个工具，可以参与算法作为变量出现，也可以参与认证作为口令出现。</p>
+<h4 id="对称密钥、非对称密钥"><a href="#对称密钥、非对称密钥" class="headerlink" title="对称密钥、非对称密钥"></a>对称密钥、非对称密钥</h4><p>（加密算法中的 KEY 的理解）</p>
+<ol>
+<li><p>对等密钥及对称密钥加密算法</p>
+<p>加密解密密钥是同一把</p>
+<p><strong>坏处</strong>：不够安全、Key 的共享存在风险</p>
+<p><strong>好处</strong>：简单高效</p>
+</li>
+<li><p>非对称密钥及非对称密钥算法</p>
+<p>非对称密钥是一对KEY，公钥和密钥。</p>
+<p>公钥最后会公开，密钥不公开。</p>
+<p>公钥加密的数据，只有私钥可以解开。</p>
+<p>私钥加密的数据，只有公钥可以解开。</p>
+<p><strong>坏处</strong>：复杂，数据会变庞大</p>
+<p><strong>好处</strong>：安全可靠</p>
+</li>
+</ol>
+<h4 id="IPSEC-VPN-的加密密钥"><a href="#IPSEC-VPN-的加密密钥" class="headerlink" title="IPSEC VPN 的加密密钥"></a>IPSEC VPN 的加密密钥</h4><p>非对称密钥共享是用对称密钥及算法保护</p>
+<p>数据本身是用非对称密钥及算法保护</p>
+<h4 id="密钥产生过程和共享方法"><a href="#密钥产生过程和共享方法" class="headerlink" title="密钥产生过程和共享方法"></a>密钥产生过程和共享方法</h4><p>DH 算法负责产生密钥和共享密钥</p>
+<h3 id="IPSEC-VPN-的关键组件"><a href="#IPSEC-VPN-的关键组件" class="headerlink" title="IPSEC VPN 的关键组件"></a>IPSEC VPN 的关键组件</h3><p>ISAKMP：互联网安全关联密钥管理协议</p>
+<ul>
+<li><p>ISA：通讯双方建立了安全连接就叫做一个 SA 成功了。</p>
+<p>IPSEC VPN 的 SA 有两个：一个是保护 VPN 的，一个是保护数据的。</p>
+</li>
+<li><p>KMP：KMP 是通过 IKE（互联网密钥交换机制）完成的，IKE 专门负责产生密钥，共享密钥。</p>
+<p>IKE 分两个阶段：阶段1产生和共享VPN自身所需的密钥，阶段2利用阶段1的密钥算出新密钥，用于保护用户数据。</p>
+</li>
+</ul>
+<h3 id="IPSEC-VPN-配置流程"><a href="#IPSEC-VPN-配置流程" class="headerlink" title="IPSEC VPN 配置流程"></a>IPSEC VPN 配置流程</h3><p>IOS 中必须带 K9 字样，才支持加密算法： <code>show version</code></p>
+<p>步骤1：开启 ISAKMP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp enable</span><br></pre></td></tr></table></figure>
+<p>步骤2：配置 IPSEC VPN 策略1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crypto policy &lt;seq&gt;</span><br><span class="line">authentication &lt;pre-share/rsa&gt; //认证方式</span><br><span class="line">hash &lt;md5/sha&gt; //定义完整性保护算法</span><br><span class="line">group &lt;1/2/5&gt; //定义 DH 算法等级</span><br><span class="line">encryption &lt;des/3des/aes&gt; //定义加密算法</span><br><span class="line">lifetime &lt;xxs&gt; //定义生命周期</span><br></pre></td></tr></table></figure>
+<p>步骤3：配置 IPSEC VPN peer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp key 0 &lt;口令&gt; address &lt;peer-address&gt; //对等体地址必须可达</span><br></pre></td></tr></table></figure>
+<p>步骤4：配置感兴趣流，告诉 VPN 保护什么流量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list permit ip &lt;源&gt; &lt;目的&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤5：配置转换集定义数据加密方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto ipsec trans &lt;name&gt; &lt;加密算法&gt; &lt;完整性保护算法&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤6：定义加密映射，将数据加密转换集、对等体、感兴趣流绑定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crypto map &lt;名字&gt; &lt;序列号&gt; ipsec-isakmp</span><br><span class="line">set peer &lt;peer-address&gt; //设置对等体地址</span><br><span class="line">match address &lt;acl-id&gt; //匹配感兴趣流</span><br><span class="line">trans-set &lt;转换集名称&gt; //设置转化集</span><br></pre></td></tr></table></figure>
+<p>步骤7：应用加密映射（只能用在发送流量的接口）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">crypto map &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p>步骤8：查看命令</p>
+<p>查看数据是否被加密<code>show crypto engine connections active</code></p>
+<h3 id="ESP-和-AH"><a href="#ESP-和-AH" class="headerlink" title="ESP 和 AH"></a>ESP 和 AH</h3><p>ESP 和 AH 都是 VPN 头部信息的缩写</p>
+<p>帧头、包头、段头、数据、帧尾</p>
+<p>数据经历 VPN 保护后变化成如下：</p>
+<p>帧头、VPN 头、包头、段头、数据、帧尾</p>
+<p>VPN 头就分两种：</p>
+<ol>
+<li><p>ESP：封装安全静荷</p>
+<p>该头负责保护数据的完整性，同时加密数据</p>
+</li>
+<li><p>AH：认证头</p>
+<p>该头只负责保护数据完整性，不加密数据</p>
+</li>
+</ol>
+<h3 id="IPSEC-VPN-的模式"><a href="#IPSEC-VPN-的模式" class="headerlink" title="IPSEC VPN 的模式"></a>IPSEC VPN 的模式</h3><ol>
+<li><p>隧道模式（tunnel）</p>
+<p>VPN 网关通过一个隧道模式的 VPN 连接，保护身后所有的通讯数据。</p>
+</li>
+<li><p>传输模式（transport）</p>
+<p>通讯双方自身建立 VPN 连接，保护通讯数据。</p>
+</li>
+</ol>
+<p><strong>区别</strong>：</p>
+<p>隧道模式的新包头，目的 IP 和源 IP 是 VPN 的对等体地址。</p>
+<p>传输模式的新包头，目的 IP 和源 IP 复制了原有的 IP 地址。</p>
+<h3 id="NAT-对-IPSEC-VPN-的影响"><a href="#NAT-对-IPSEC-VPN-的影响" class="headerlink" title="NAT 对 IPSEC VPN 的影响"></a>NAT 对 IPSEC VPN 的影响</h3><p>VPN 流量几乎永远是先被 inside 接口接收，所以 NAT 会直接修改 IP 包头，导致 VPN 无法识别感兴趣流。</p>
+<p>解决方案</p>
+<p>NAT 配置的时候不要使用标准 ACL，用扩展 ACL，书写方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access-list 100 deny ip 10.5.5.0 0.0.0.255 10.7.7.0 0.0.0.255</span><br><span class="line">access-list 100 permit ip 10.5.5.0 0.0.0.255 any</span><br><span class="line">ip nat inside source list 100 interface e0/2 overload</span><br></pre></td></tr></table></figure>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Ccie/跨域的多播" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -868,70 +795,6 @@
 
 
   
-    <article id="post-Network/Ccie/逻辑子接口" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/逻辑子接口/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="路由器主接口创建逻辑子接口"><a href="#路由器主接口创建逻辑子接口" class="headerlink" title="路由器主接口创建逻辑子接口"></a>路由器主接口创建逻辑子接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt; //进入主接口</span><br><span class="line">no sh</span><br><span class="line">interface &lt;intf-id.子接口编号&gt; //创建逻辑子接口</span><br><span class="line">encapsulation dot1q &lt;vlan ID&gt; //指定逻辑子接口接收带有特定vlan标记的流量</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -988,6 +851,381 @@
 <p>route-map也默认deny所有流量</p>
 <p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
 <p>re rip router-map ccie metric ……</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/MPLS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/MPLS/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/MPLS/">CCIE MPLS</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="代理arp"><a href="#代理arp" class="headerlink" title="代理arp"></a>代理arp</h3><p>arp</p>
+<p>请求：广播</p>
+<p>回应：单播</p>
+<p>proxy arp（代理arp）</p>
+<p>代为请求和回应</p>
+<h4 id="帧头重写"><a href="#帧头重写" class="headerlink" title="帧头重写"></a>帧头重写</h4><p>重写=switch（从mac表内拿出置换）</p>
+<p>目的mac改为arp请求结果</p>
+<p>源mac改为出口mac</p>
+<h3 id="路由器数据转发机制"><a href="#路由器数据转发机制" class="headerlink" title="路由器数据转发机制"></a>路由器数据转发机制</h3><ol>
+<li><p>process forward进程转发（不缓存）</p>
+</li>
+<li><p>cache forward缓存转发（结果缓存10s）</p>
+<p>上两者都是基于流量触发（第一次会丢包）</p>
+</li>
+<li><p><strong>CEF  Cisco的快速转发技术</strong></p>
+<p>基于拓扑，不需要流量触发</p>
+</li>
+</ol>
+<h4 id="CEF"><a href="#CEF" class="headerlink" title="CEF"></a>CEF</h4><p>FIB 转发信息库（本身就是路由表的副本）</p>
+<p>RIB 路由表（给FIB提供要素）</p>
+<h2 id="MPLS详解"><a href="#MPLS详解" class="headerlink" title="MPLS详解"></a>MPLS详解</h2><p>multiple protocol label switch（多协议标签交换）</p>
+<h3 id="MPLS作用"><a href="#MPLS作用" class="headerlink" title="MPLS作用"></a>MPLS作用</h3><p>MPLS是一种数据交换机制，基于标签库和数据携带的标签。</p>
+<p>进行数据转发，同时支持多种协议。</p>
+<p>MPLS在实际工作中，能实现如下两个基本功能：</p>
+<ol>
+<li>数据包的高速转发</li>
+<li>减少参与BGP的设备数量、减少对等体关系、减少不必要的路由学习</li>
+</ol>
+<h3 id="MPLS术语"><a href="#MPLS术语" class="headerlink" title="MPLS术语"></a>MPLS术语</h3><h4 id="label-标签"><a href="#label-标签" class="headerlink" title="label 标签"></a>label 标签</h4><p>总长 <strong>32bit</strong> 由如下几个部分组成：</p>
+<p><strong>前20bit</strong> 是标签取值范围</p>
+<p><strong>第21bit</strong> 是栈底位，栈底位为1则表明该标签已经是最后一个</p>
+<p><strong>第22~24bit</strong> 是体验位，可以将标签对应的数据分成8个级别，给予不同的传输策略。</p>
+<p><strong>最后8bit</strong> 是TTL，限制携带标签的数据传递范围。</p>
+<h4 id="MPLS-模式"><a href="#MPLS-模式" class="headerlink" title="MPLS 模式"></a>MPLS 模式</h4><p>帧模式：frame mode（主流模式），标签被插在帧头的后面，包头前面。</p>
+<p>信令模式：cell mode 标签被插在信令头后面。</p>
+<h4 id="LSR：标签交换路由器"><a href="#LSR：标签交换路由器" class="headerlink" title="LSR：标签交换路由器"></a>LSR：标签交换路由器</h4><p>启用了MPLS的路由器统称LSR。</p>
+<p>入站 LSR （inbound LSR）：接收到 IP 数据包，压入标签，传递给 MPLS 网络。</p>
+<p>链路中 LSR （link LSR）：接收到携带标签的数据，基于标签进行数据转发。</p>
+<p>出站 LSR （outbound LSR）：负责将标签移除，并且变回 IP 数据报文。</p>
+<h4 id="压入、交换、移除、弹出"><a href="#压入、交换、移除、弹出" class="headerlink" title="压入、交换、移除、弹出"></a>压入、交换、移除、弹出</h4><p>压入：入站LSR将标签压入数据。</p>
+<p>交换：链路中LSR基于标签库，进行标签的置换、数据的传递。</p>
+<p>移除：出站LSR将数据携带的所有标签全部删除。</p>
+<p>弹出：出站LSR将数据携带的栈顶标签弹出，其他标签保留。</p>
+<h4 id="LSP：链路标签路径"><a href="#LSP：链路标签路径" class="headerlink" title="LSP：链路标签路径"></a>LSP：链路标签路径</h4><p>是MPLS设备传递数据所需的路径。（即路由）</p>
+<p>LSP是通过标签的关联产生的。</p>
+<h4 id="标签分配、分发、关联、维护协议"><a href="#标签分配、分发、关联、维护协议" class="headerlink" title="标签分配、分发、关联、维护协议"></a>标签分配、分发、关联、维护协议</h4><p>TDP：标记分发协议、思科私有</p>
+<p>LDP：<strong>标签分发协议</strong>、公有公开</p>
+<h3 id="LDP详解"><a href="#LDP详解" class="headerlink" title="LDP详解"></a>LDP详解</h3><h4 id="LDP作用"><a href="#LDP作用" class="headerlink" title="LDP作用"></a>LDP作用</h4><ol>
+<li>利用 hello 消息建立 LDP 邻接关系。</li>
+<li>基于CEF给本地网络分配本地标签。</li>
+<li>将网络对应的标签分发共享给邻居</li>
+<li>基于底层协议完成本地标签与远程共享标签的关联，最终形成LSP。</li>
+<li>负责监控LSP的有效性，并且维护它。</li>
+</ol>
+<h4 id="LDP邻接关系的建立"><a href="#LDP邻接关系的建立" class="headerlink" title="LDP邻接关系的建立"></a>LDP邻接关系的建立</h4><p>LDP 邻居的发现，通过hello消息，基于UDP，目标端口646。</p>
+<p>LDP 利用TCP，目标端口646完成邻接关系建立。</p>
+<p>LDP可以设定RID，RID扮演更新源，更新源会成为对端TCP的目标接收地址，所以更新源必须可达。</p>
+<h4 id="LDP标签的分配"><a href="#LDP标签的分配" class="headerlink" title="LDP标签的分配"></a>LDP标签的分配</h4><p>除BGP路由，LDP可以给本地直连网络以及非直连网络分配标签。</p>
+<h4 id="LDP标签的共享"><a href="#LDP标签的共享" class="headerlink" title="LDP标签的共享"></a>LDP标签的共享</h4><p>两种形式：下游主动、上游主动。</p>
+<p>实际上标签的分享是给所有的邻居，不遵循所谓的上下游。</p>
+<h4 id="LDP标签的关联"><a href="#LDP标签的关联" class="headerlink" title="LDP标签的关联"></a>LDP标签的关联</h4><p>LDP永远将路由路径下一跳共享的标签与对应网络的本地标签关联。</p>
+<p>boundaddress：绑定地址，参与MPLS设备的IP会成为绑定地址和，会跟着本地标签一起共享给LDP邻居，邻居根据底层协议下一跳地址和绑定地址的判断来确认哪个LDP邻居是下一跳，再绑定。</p>
+<h4 id="LDP的特殊标签"><a href="#LDP的特殊标签" class="headerlink" title="LDP的特殊标签"></a>LDP的特殊标签</h4><ul>
+<li>UNTAGE：未标记</li>
+</ul>
+<p>出现原因：底层是ospf,本地网络无法找到对应的远程标签，LDP给网络分配untage。</p>
+<p>处理方式：目标网络远程标签如果是untage，那么LSR会将所有标签移除，向外传递。</p>
+<ul>
+<li>POP：倒数第二跳标签</li>
+</ul>
+<p>出现原因：当前路由器给本地直连网络分配的本地标签就是POP。</p>
+<p>处理方式：如果出站标签是POP，那么LSR 会将栈顶标签弹出。</p>
+<p>意义：提高数据转发效率，减少一次标签库查找。</p>
+<h4 id="LDP的两张表"><a href="#LDP的两张表" class="headerlink" title="LDP的两张表"></a>LDP的两张表</h4><p>LIB：标签信息库</p>
+<p>目标网络本地标签和学习到的远程标签存储在这里。（未关联）</p>
+<p>LFIB：标签转发信息库</p>
+<p>标签关联后的结果 即 LSP  存储在这里。</p>
+<h4 id="CEF、LDP-数据转发过程"><a href="#CEF、LDP-数据转发过程" class="headerlink" title="CEF、LDP 数据转发过程"></a>CEF、LDP 数据转发过程</h4><p>略</p>
+<h3 id="MPLS的配置流程"><a href="#MPLS的配置流程" class="headerlink" title="MPLS的配置流程"></a>MPLS的配置流程</h3><p>步骤1：开启 CEF（默认开启，一般情况不需要此命令）</p>
+<p><code>ip cef</code></p>
+<p>步骤2：设置标签分配、分发关联协议（默认是LDP）</p>
+<p><code>mpls label protocol &lt;ldp/tdp&gt;</code></p>
+<p>步骤3：设置标签取值范围（通常不设置）</p>
+<p><code>mpls label range &lt;xx-yy&gt;</code></p>
+<p>步骤4：设置 LDP 的 RID  即设置更新源（不设置则和OSPF一样自动选取RID）</p>
+<p><code>mpls ldp router-id loopback x [force]  //RID 必须可达、force 强制改变 RID</code></p>
+<p>步骤5：接口下启用MPLS</p>
+<p><code>mpls ip</code></p>
+<h4 id="LDP的查看校验命令"><a href="#LDP的查看校验命令" class="headerlink" title="LDP的查看校验命令"></a>LDP的查看校验命令</h4><ul>
+<li><p>查看LDP是否发现了邻居</p>
+<p><code>show mpls idp discovery</code></p>
+<p>邻居被发现后，no host route 指没有抵达对方的主机路由，但有网络路由，总体可达。</p>
+<p>邻居被发现后，no route 指没有抵达对方的路由路径，邻接关系最终无法建立。</p>
+</li>
+<li><p>查看LDP邻接关系是否建立</p>
+<p><code>show mpls idp neighbor</code></p>
+</li>
+<li><p>查看 LIB</p>
+<p><code>show mpls ldp binding</code></p>
+</li>
+<li><p>查看LFIB</p>
+<p><code>show mpls forwarding-table</code></p>
+</li>
+</ul>
+<h4 id="通过-IGP的路径改变来影响-LSP"><a href="#通过-IGP的路径改变来影响-LSP" class="headerlink" title="通过 IGP的路径改变来影响 LSP"></a>通过 IGP的路径改变来影响 LSP</h4><p>LSP是会存在负载均衡的。实际上底层协议的路径决定了 LSP路径。</p>
+<h4 id="CEF-FIB-和-ADJ-TABLE-详解"><a href="#CEF-FIB-和-ADJ-TABLE-详解" class="headerlink" title="CEF FIB 和 ADJ-TABLE 详解"></a>CEF FIB 和 ADJ-TABLE 详解</h4><p><code>show ip cef detail | begin 172.16.1.0</code></p>
+<p>查看cef邻接表</p>
+<p><code>show adjacency detail</code></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>arp的作用、代理arp的作用</p>
+</li>
+<li><p>路由器数据转发的三个机制</p>
+</li>
+<li><p>CEF两张表和工作机制</p>
+</li>
+<li><p>RIB FIB ADJ-TABLE 在数据传递时使用方法</p>
+</li>
+<li><p>MPLS 的全称、模式</p>
+</li>
+<li><p>标签长度和每段的含义</p>
+</li>
+<li><p>MPLS 术语</p>
+<p>LSR(in/out/link)    LSP</p>
+<p>标签的动作：压入、交换、移除、弹出</p>
+<p>POP和UNTAGE</p>
+<p>LDP和TDP的作用</p>
+<p>LDP的标签分配、分发、关联</p>
+</li>
+<li><p>MPLS的配置流程</p>
+</li>
+<li><p>查看和理解LDP的邻居发现、邻接建立</p>
+</li>
+<li><p>查看和理解LIB 和LFIB</p>
+</li>
+<li><p>理解</p>
+</li>
+</ol>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/交换机基础" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/交换机基础/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/交换机基础/">CCIE 交换机基础</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="交换机基础"><a href="#交换机基础" class="headerlink" title="交换机基础"></a>交换机基础</h3><p>泛洪：除接收端口外，所有端口都向外去发。</p>
+<p>mac地址表=cam表</p>
+<p>广播域：所能传播的最大范围</p>
+<p>冲突域：发生冲突之后所影响的范围</p>
+<p>CSMA/CD：载波帧听多链路访问</p>
+<p>交换机指示灯：</p>
+<p>绿色常亮：接口两端没有问题，但是当前没有数据从中通过</p>
+<p>绿色不停地闪：正在传输数据</p>
+<p>橘红色慢闪：端口没问题,对端线路或者对端的端口有问题</p>
+<p>橘红色快闪：端口和对端连接没有问题，正在协商参数建立</p>
+<p>黄色闪动：物理接口有问题，尝试重启。</p>
+<p>不闪：    物理接口有问题，无法通信</p>
+<p>vlan（虚拟局域网） </p>
+<p>作用：分隔广播域</p>
+<p>所有接口默认属于vlan1（默认vlan，不可删除）。</p>
+<p>vlan ID范围和解释</p>
+<p>\1. 0和4095 仅仅限于系统使用 用户不能查看和使用</p>
+<p>\2. 1 正常 cisco默认的vlan,用户可以使用但是不能删除</p>
+<p>\3. 2–1001 正常 用于以太网的VLAN，用户可以创建。使用。删除。</p>
+<p>\4. 1002–1005 正常 用于FDDI和令牌环的CISCO默认VLAN，用户不能删除</p>
+<p>\5. 1006–1024 保留 仅仅限于系统使用。用户不能查看和使用。</p>
+<p>\6. 1025–4094 扩展 仅仅用于以太网VLAN</p>
+<p>Trunk 干道协议（必须两端都设置）</p>
+<p>isl 思科私有协议，目前思科也不采用。通过再封装工作。</p>
+<p>802.1q tag插入帧头</p>
+<p>switchport trunk encapsulation dot1q</p>
+<p>switchport mode trunk</p>
+<p>access</p>
+<p>int xx</p>
+<p>sw mode acc</p>
+<p>sw acc vlan xx</p>
+<p>本帧vlan（native vlan）（属于802.1q）</p>
+<p>默认为1，一般不建议修改；若要修改，保持本网络中交换机上本帧vlan设置一致。</p>
+<p>sw tr na vl xx</p>
+<p>trunk下vlan流量过滤</p>
+<p>switchport trunk allowed vlan 1-9,11-4094</p>
+<p>vtp（虚拟传输协议）</p>
+<p>用于同步同一网络中交换机上网络的信息（减小庞大的配置量）</p>
+<p>生效的前提：trunk正常工作</p>
+<p>vtp mode sever/client/transparent</p>
+<p>服务器：NVRAM（可寄存性存储器）创建、修改、维护、传递、删除、同步vlan信息</p>
+<p>客户端：RAM(重启后要重新同步） 传递、同步vlan信息</p>
+<p>透明模式：NARAM 和服务器一样除了不同步，并且本地创建、修改、维护、删除的vlan    信息只在本地有效。</p>
+<p>sh int tr确保生效</p>
+<p>vtp domain 域名</p>
+<p>vtp mode xxx（默认为sever）</p>
+<p>sh vtp status</p>
+<p>其中Configuration Revision（配置修订号）（类似书的修订号，修改一次增加一次，不能减小）越大越好，同步大的。加入新的交换机时可用透明模式先测试。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/逻辑子接口" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/逻辑子接口/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="路由器主接口创建逻辑子接口"><a href="#路由器主接口创建逻辑子接口" class="headerlink" title="路由器主接口创建逻辑子接口"></a>路由器主接口创建逻辑子接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt; //进入主接口</span><br><span class="line">no sh</span><br><span class="line">interface &lt;intf-id.子接口编号&gt; //创建逻辑子接口</span><br><span class="line">encapsulation dot1q &lt;vlan ID&gt; //指定逻辑子接口接收带有特定vlan标记的流量</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1734,135 +1972,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Frontend/XML入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/05/12/Frontend/XML入门/" class="article-date">
-      <time datetime="2018-05-12T03:10:58.000Z" itemprop="datePublished">2018-05-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/12/Frontend/XML入门/">XML入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>//默认已经学过html</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="XML-文档必须有根元素"><a href="#XML-文档必须有根元素" class="headerlink" title="XML 文档必须有根元素"></a>XML 文档必须有根元素</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;root&gt;</span><br><span class="line">  &lt;child&gt;</span><br><span class="line">    &lt;subchild&gt;.....&lt;/subchild&gt;</span><br><span class="line">  &lt;/child&gt;</span><br><span class="line">&lt;/root&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="XML-声明"><a href="#XML-声明" class="headerlink" title="XML 声明"></a>XML 声明</h4><p>XML 声明文件的可选部分，如果存在需要放在文档的第一行，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="元素必须有一个关闭标签"><a href="#元素必须有一个关闭标签" class="headerlink" title="元素必须有一个关闭标签"></a>元素必须有一个关闭标签</h4><p>在 HTML 中，某些元素不必有一个关闭标签；在 XML 中，省略关闭标签是非法的。</p>
-<p><strong>注：</strong>XML 声明没有关闭标签。这不是错误。声明不是 XML 文档本身的一部分，它没有关闭标签。</p>
-<h4 id="标签对大小写敏感"><a href="#标签对大小写敏感" class="headerlink" title="标签对大小写敏感"></a>标签对大小写敏感</h4><h4 id="属性值必须加引号"><a href="#属性值必须加引号" class="headerlink" title="属性值必须加引号"></a>属性值必须加引号</h4><h4 id="实体引用"><a href="#实体引用" class="headerlink" title="实体引用"></a>实体引用</h4><p>在 XML 中，一些字符拥有特殊的意义。</p>
-<p>如果您把字符 “&lt;” 放在 XML 元素中，会发生错误，这是因为解析器会把它当作新元素的开始。</p>
-<p>这样会产生 XML 错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;message&gt;if salary &lt; 1000 then&lt;/message&gt;</span><br></pre></td></tr></table></figure>
-<p>为了避免这个错误，请用<strong>实体引用</strong>来代替 “&lt;” 字符：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;message&gt;if salary &amp;lt; 1000 then&lt;/message&gt;</span><br></pre></td></tr></table></figure>
-<p>在 XML 中，有 5 个预定义的实体引用：</p>
-<table>
-<thead>
-<tr>
-<th>&lt;</th>
-<th>&lt;</th>
-<th>less than</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>&gt;</td>
-<td>&gt;</td>
-<td>greater than</td>
-</tr>
-<tr>
-<td>&amp;</td>
-<td>&amp;</td>
-<td>ampersand</td>
-</tr>
-<tr>
-<td>&apos;</td>
-<td>‘</td>
-<td>apostrophe</td>
-</tr>
-<tr>
-<td>&quot;</td>
-<td>“</td>
-<td>quotation mark</td>
-</tr>
-</tbody>
-</table>
-<p><strong>注：</strong>在 XML 中，只有字符 “&lt;” 和 “&amp;” 确实是非法的。大于号是合法的，但是用实体引用来代替它是一个好习惯。</p>
-<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>在 XML 中编写注释的语法与 HTML 的语法很相似。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- This is a comment --&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="在-XML-中，空格会被保留"><a href="#在-XML-中，空格会被保留" class="headerlink" title="在 XML 中，空格会被保留"></a>在 XML 中，空格会被保留</h4><p>HTML 会把多个连续的空格字符裁减（合并）为一个； XML 中，文档中的空格不会被删减。</p>
-<h4 id="XML-以-LF-存储换行"><a href="#XML-以-LF-存储换行" class="headerlink" title="XML 以 LF 存储换行"></a>XML 以 LF 存储换行</h4><p>在 Windows 应用程序中，换行通常以一对字符来存储：回车符（CR）和换行符（LF）。</p>
-<p>在 Unix 和 Mac OSX 中，使用 LF 来存储新行。</p>
-<p>在旧的 Mac 系统中，使用 CR 来存储新行。</p>
-<p>XML 以 LF 存储换行。</p>
-<h3 id="应避免使用属性"><a href="#应避免使用属性" class="headerlink" title="应避免使用属性"></a>应避免使用属性</h3><p>因使用属性而引起的一些问题：</p>
-<ul>
-<li>属性不能包含多个值（元素可以）</li>
-<li>属性不能包含树结构（元素可以）</li>
-<li>属性不容易扩展（为未来的变化）</li>
-</ul>
-<p>属性难以阅读和维护。请尽量使用元素来描述数据。而仅仅使用属性来提供与数据无关的信息。</p>
-<h4 id="针对元数据的-XML-属性"><a href="#针对元数据的-XML-属性" class="headerlink" title="针对元数据的 XML 属性"></a>针对元数据的 XML 属性</h4><p>有时候会向元素分配 ID 引用。这些 ID 索引可用于标识 XML 元素，它起作用的方式与 HTML 中 id 属性是一样的。这个实例向我们演示了这种情况：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">messages</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span> <span class="attr">id</span>=<span class="string">"501"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">to</span>&gt;</span>Tove<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">from</span>&gt;</span>Jani<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">heading</span>&gt;</span>Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>Don't forget me this weekend!<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span> <span class="attr">id</span>=<span class="string">"502"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">to</span>&gt;</span>Jani<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">from</span>&gt;</span>Tove<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">heading</span>&gt;</span>Re: Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>I will not<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">messages</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>上面的 id 属性仅仅是一个标识符，用于标识不同的便签。它并不是便签数据的组成部分。</p>
-<p>在此我们极力向您传递的理念是：元数据（有关数据的数据）应当存储为属性，而数据本身应当存储为元素。</p>
-<h3 id="XML-如何显示？"><a href="#XML-如何显示？" class="headerlink" title="XML 如何显示？"></a>XML 如何显示？</h3><p>XML 文档不会携带有关如何显示数据的信息。</p>
-<p>由于 XML 标签由 XML 文档的作者“发明”，浏览器无法确定像 <code>&lt;table&gt;</code> 这样一个标签究竟描述一个 HTML 表格还是一个餐桌。</p>
-<p>在没有任何有关如何显示数据的信息的情况下，大多数的浏览器都会仅仅把 XML 文档显示为源代码。</p>
-<p>在下面的章节，我们会了解几个有关这个显示问题的解决方案，其中会使用 CSS、XSL、JavaScript 以及 XML 数据岛。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XML/">XML</a></li></ul>
     </div>
 
       

@@ -234,6 +234,111 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/Redis/Mac-Redis-Usage" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/17/Database/Redis/Mac-Redis-Usage/" class="article-date">
+      <time datetime="2019-01-17T11:56:20.000Z" itemprop="datePublished">2019-01-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/17/Database/Redis/Mac-Redis-Usage/">Mac-Redis-Usage</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Mac-Redis-Usage"><a href="#Mac-Redis-Usage" class="headerlink" title="Mac-Redis-Usage"></a>Mac-Redis-Usage</h1><h2 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h2><h3 id="安装Redis"><a href="#安装Redis" class="headerlink" title="安装Redis"></a>安装Redis</h3><p><code>brew install redis</code></p>
+<h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><p><code>redis-server</code> 开启默认配置的服务器，可加参数。</p>
+<h3 id="关闭服务器"><a href="#关闭服务器" class="headerlink" title="关闭服务器"></a>关闭服务器</h3><p><code>redis-cli shutdown</code></p>
+<h3 id="开启客户端"><a href="#开启客户端" class="headerlink" title="开启客户端"></a>开启客户端</h3><p><code>redis-cli</code>   默认为连接本地服务器，可加参数。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><code>redis 127.0.0.1:6379&gt; CONFIG GET [SETTING_NAME]</code>    查看配置项</p>
+<p><code>redis 127.0.0.1:6379&gt; CONFIG SET [SETTING_NAME] [NEW_CONFIG_VALUE]</code>  设置配置项</p>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>mac下是： <code>/usr/local/etc/redis.conf</code></p>
+<p>修改dump的目录修改”dbfilename”.(Todo)</p>
+<h2 id="Redis命令"><a href="#Redis命令" class="headerlink" title="Redis命令"></a>Redis命令</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。</p>
+<h4 id="键-key"><a href="#键-key" class="headerlink" title="键(key)"></a>键(key)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SET runoobkey redis</span><br><span class="line">OK</span><br><span class="line">redis 127.0.0.1:6379&gt; DEL runoobkey</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<h4 id="字符串-String"><a href="#字符串-String" class="headerlink" title="字符串(String)"></a>字符串(String)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SET runoobkey redis</span><br><span class="line">OK</span><br><span class="line">redis 127.0.0.1:6379&gt; GET runoobkey</span><br><span class="line">&quot;redis&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="哈希-Hash"><a href="#哈希-Hash" class="headerlink" title="哈希(Hash)"></a>哈希(Hash)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt;  HMSET runoobkey name &quot;redis tutorial&quot; description &quot;redis basic commands for caching&quot; likes 20 visitors 23000</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt;  HGETALL runoobkey</span><br><span class="line">1) &quot;name&quot;</span><br><span class="line">2) &quot;redis tutorial&quot;</span><br><span class="line">3) &quot;description&quot;</span><br><span class="line">4) &quot;redis basic commands for caching&quot;</span><br><span class="line">5) &quot;likes&quot;</span><br><span class="line">6) &quot;20&quot;</span><br><span class="line">7) &quot;visitors&quot;</span><br><span class="line">8) &quot;23000&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="列表-List"><a href="#列表-List" class="headerlink" title="列表(List)"></a>列表(List)</h4><p>LPUSH从头部插入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; LPUSH runoobkey redis</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; LPUSH runoobkey mongodb</span><br><span class="line">(integer) 2</span><br><span class="line">redis 127.0.0.1:6379&gt; LPUSH runoobkey mysql</span><br><span class="line">(integer) 3</span><br><span class="line">redis 127.0.0.1:6379&gt; LRANGE runoobkey 0 10</span><br><span class="line"></span><br><span class="line">1) &quot;mysql&quot;</span><br><span class="line">2) &quot;mongodb&quot;</span><br><span class="line">3) &quot;redis&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="集合-Set"><a href="#集合-Set" class="headerlink" title="集合(Set)"></a>集合(Set)</h4><p>Redis 的 Set 是 String 类型的无序集合。集合成员是唯一的，这就意味着集合中不能出现重复的数据。</p>
+<p>Redis 中集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。</p>
+<p>集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SADD runoobkey redis</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; SADD runoobkey mongodb</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; SADD runoobkey mysql</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; SADD runoobkey mysql</span><br><span class="line">(integer) 0</span><br><span class="line">redis 127.0.0.1:6379&gt; SMEMBERS runoobkey</span><br><span class="line"></span><br><span class="line">1) &quot;mysql&quot;</span><br><span class="line">2) &quot;mongodb&quot;</span><br><span class="line">3) &quot;redis&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="有序集合-sorted-set"><a href="#有序集合-sorted-set" class="headerlink" title="有序集合(sorted set)"></a>有序集合(sorted set)</h4><p>Redis 有序集合和集合一样也是string类型元素的集合,且不允许重复的成员。</p>
+<p>不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。</p>
+<p>有序集合的成员是唯一的,但分数(score)却可以重复。</p>
+<p>集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。 集合中最大的成员数为 2^32 - 1 (4294967295, 每个集合可存储40多亿个成员)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; ZADD runoobkey 1 redis</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; ZADD runoobkey 2 mongodb</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; ZADD runoobkey 3 mysql</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; ZADD runoobkey 3 mysql</span><br><span class="line">(integer) 0</span><br><span class="line">redis 127.0.0.1:6379&gt; ZADD runoobkey 4 mysql</span><br><span class="line">(integer) 0</span><br><span class="line">redis 127.0.0.1:6379&gt; ZRANGE runoobkey 0 10 WITHSCORES</span><br><span class="line"></span><br><span class="line">1) &quot;redis&quot;</span><br><span class="line">2) &quot;1&quot;</span><br><span class="line">3) &quot;mongodb&quot;</span><br><span class="line">4) &quot;2&quot;</span><br><span class="line">5) &quot;mysql&quot;</span><br><span class="line">6) &quot;4&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="Redis-HyperLogLog"><a href="#Redis-HyperLogLog" class="headerlink" title="Redis HyperLogLog"></a>Redis HyperLogLog</h4><p>Redis 在 2.8.9 版本添加了 HyperLogLog 结构。</p>
+<p>Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。</p>
+<p>在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基 数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。</p>
+<p>但是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; PFADD runoobkey &quot;redis&quot;</span><br><span class="line"></span><br><span class="line">1) (integer) 1</span><br><span class="line"></span><br><span class="line">redis 127.0.0.1:6379&gt; PFADD runoobkey &quot;mongodb&quot;</span><br><span class="line"></span><br><span class="line">1) (integer) 1</span><br><span class="line"></span><br><span class="line">redis 127.0.0.1:6379&gt; PFADD runoobkey &quot;mysql&quot;</span><br><span class="line"></span><br><span class="line">1) (integer) 1</span><br><span class="line"></span><br><span class="line">redis 127.0.0.1:6379&gt; PFCOUNT runoobkey</span><br><span class="line"></span><br><span class="line">(integer) 3</span><br></pre></td></tr></table></figure>
+<p>//我发现medis（mac上的redis可视化）把 Redis HyperLogLog 类型识别为 string ，于是测试了 get ，发现是可行的，但是输出是乱码。</p>
+<h3 id="测试服务器连通性"><a href="#测试服务器连通性" class="headerlink" title="测试服务器连通性"></a>测试服务器连通性</h3><p><code>127.0.0.1:6379&gt; ping</code>    连通则显示pong</p>
+<h3 id="Redis-数据备份与恢复"><a href="#Redis-数据备份与恢复" class="headerlink" title="Redis 数据备份与恢复"></a>Redis 数据备份与恢复</h3><h4 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SAVE </span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+<p>该命令将在 redis 安装目录中创建dump.rdb文件。</p>
+<p>创建 redis 备份文件也可以使用命令 <strong>BGSAVE</strong>，该命令在后台执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; BGSAVE</span><br><span class="line">Background saving started</span><br></pre></td></tr></table></figure>
+<h4 id="恢复数据"><a href="#恢复数据" class="headerlink" title="恢复数据"></a>恢复数据</h4><p>如果需要恢复数据，只需将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可。获取 redis 目录可以使用 </p>
+<p>CONFIG命令，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; CONFIG GET dir</span><br><span class="line">1) &quot;dir&quot;</span><br><span class="line">2) &quot;/usr/local/redis/bin&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; CONFIG get requirepass</span><br><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;&quot;</span><br></pre></td></tr></table></figure>
+<p>默认情况下 requirepass 参数是空的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; CONFIG set requirepass &quot;runoob&quot;</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; CONFIG get requirepass</span><br><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;runoob&quot;</span><br></pre></td></tr></table></figure>
+<p>设置密码后，客户端连接 redis 服务就需要密码验证，否则无法执行命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; AUTH password</span><br></pre></td></tr></table></figure>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Redis/">Redis</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Operating-System/操作系统期末背诵点" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1863,76 +1968,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQLserver/">SQLserver</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Database/Mysql/mysql-c-api" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/04/Database/Mysql/mysql-c-api/" class="article-date">
-      <time datetime="2018-12-04T14:18:57.000Z" itemprop="datePublished">2018-12-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/04/Database/Mysql/mysql-c-api/">mysql-c-api</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="mac-os环境-mysql-c-api"><a href="#mac-os环境-mysql-c-api" class="headerlink" title="mac os环境 mysql-c-api"></a>mac os环境 mysql-c-api</h2><h3 id="Download-Connector-C"><a href="#Download-Connector-C" class="headerlink" title="Download Connector/C++"></a>Download Connector/C++</h3><p><a href="https://dev.mysql.com/downloads/connector/cpp/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/connector/cpp/</a></p>
-<h3 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;mysql/mysql.h&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="Compiler-Arguments"><a href="#Compiler-Arguments" class="headerlink" title="Compiler Arguments"></a>Compiler Arguments</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">g++ main.cpp  `mysql_config --libs`</span><br><span class="line"><span class="comment">/*在unix环境中反引号 `` 和 $() 都是命令替换。</span></span><br><span class="line"><span class="comment">在本机(Mac)上直接输入 mysql_config --libs 产生的结果是: </span></span><br><span class="line"><span class="comment">-L/usr/local/Cellar/mysql/5.7.21/lib -lmysqlclient -lssl -lcrypto</span></span><br><span class="line"><span class="comment">所以等于是参数直接替换为后者，两者是相同效果。</span></span><br><span class="line"><span class="comment">同理 mysql_config --cflags</span></span><br><span class="line"><span class="comment">-I/usr/local/Cellar/mysql/5.7.21/include</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p>注：18.9.30更新macOS Mojave 后，编译选项报错，所以我只用了 -lmysqlclient ，把 -lssl -lcrypto 删了，然后未发生错误。</p>
-<p>Clion 只需要添加两句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set(CMAKE_C_FLAGS &quot;$&#123;CMAKE_C_FLAGS&#125; -I/usr/local/Cellar/mysql/5.7.21/include&quot;)</span><br><span class="line"></span><br><span class="line">add_executable(Project01 main.c)</span><br><span class="line"></span><br><span class="line">target_link_libraries(Project01 -L/usr/local/Cellar/mysql/5.7.21/lib -lmysqlclient)</span><br></pre></td></tr></table></figure>
-<h3 id="Use-in-Program"><a href="#Use-in-Program" class="headerlink" title="Use in Program"></a>Use in Program</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">//连接数据库，成功返回0</span><br><span class="line">int connectMysql(MYSQL * mysql)&#123;</span><br><span class="line">    int     ret = 0;</span><br><span class="line">    MYSQL   *con = NULL;</span><br><span class="line"></span><br><span class="line">    con = mysql_init(mysql);</span><br><span class="line">    if (con == NULL) &#123;</span><br><span class="line">        ret = mysql_errno(mysql);</span><br><span class="line">        printf(&quot;func mysql_init() err :%d\n&quot;, ret);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //连接mysql服务器</span><br><span class="line">    //MYSQL *mysql_real_connect(MYSQL *mysql, const char *host, const char *user, const char *passwd,</span><br><span class="line">    //const char *db, unsigned int port, const char *unix_socket, unsigned long client_flag) ;</span><br><span class="line">    con = mysql_real_connect(mysql, MYSQLHOST, MYSQLUSR, MYSQLPAS, MYSQLDB, 0, NULL, 0 );</span><br><span class="line">    if (con == NULL) &#123;</span><br><span class="line">        ret = mysql_errno(mysql);</span><br><span class="line">        printf(&quot;func mysql_real_connect() err :%d\n&quot;, ret);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">#ifdef NOTDEFMYSQL</span><br><span class="line">    else &#123;</span><br><span class="line">        printf(&quot;func mysql_real_connect() ok\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">#endif</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*插入名字和密码，成功则返回0*/</span><br><span class="line">int insertNamePass(MYSQL* mysql, const char* name, const char* pass)&#123;</span><br><span class="line">    char query[51 + MAXNAME + MAXPASS] = &quot;insert into users(username,password) values(\&quot;&quot;;</span><br><span class="line">    strncat(query, name, MAXNAME);</span><br><span class="line">    strcat(query, &quot;\&quot;,\&quot;&quot;);</span><br><span class="line">    strncat(query, pass, MAXPASS);</span><br><span class="line">    strcat(query, &quot;\&quot;)&quot;);</span><br><span class="line"></span><br><span class="line">    return mysql_real_query(mysql, query, (unsigned int)strlen(query));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*如果名字存在则返回0*/</span><br><span class="line">int hasName(MYSQL* mysql, const char * name)&#123;</span><br><span class="line">    char query[38 + MAXNAME] = &quot;SELECT 1 FROM users WHERE username=\&quot;&quot;;</span><br><span class="line">    strncat(query, name, MAXNAME);</span><br><span class="line">    strcat(query, &quot;\&quot;&quot;);</span><br><span class="line"></span><br><span class="line">    if (mysql_real_query(mysql, query, (unsigned int)strlen(query) ) )</span><br><span class="line">    &#123;</span><br><span class="line">        puts(&quot;MySQL query is error!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        MYSQL_RES *result = mysql_store_result(mysql);</span><br><span class="line">        if( mysql_num_rows(result) )&#123;</span><br><span class="line">            mysql_free_result(result);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//检测用户的密码是否匹配，匹配则返回0</span><br><span class="line">int passRight(MYSQL* mysql, const char * name, const char * pass)&#123;</span><br><span class="line">    char query[45 + MAXNAME] = &quot;select password from users where username=\&quot;&quot;;</span><br><span class="line">    strncat(query, name, MAXNAME);</span><br><span class="line">    strcat(query, &quot;\&quot;&quot;);</span><br><span class="line"></span><br><span class="line">    if (mysql_real_query(mysql, query, (unsigned int)strlen(query) ) )</span><br><span class="line">    &#123;</span><br><span class="line">        puts(&quot;MySQL query is error!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        MYSQL_RES *result = mysql_store_result(mysql);</span><br><span class="line">        MYSQL_ROW row = mysql_fetch_row(result);</span><br><span class="line">        if( !strncmp(row[0], pass, MAXPASS))&#123;</span><br><span class="line">            mysql_free_result(result);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        mysql_free_result(result);</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//返回用户分数,2 Bytes</span><br><span class="line">short getGrade(MYSQL* mysql, const char * name)&#123;</span><br><span class="line">    char query[42 + MAXNAME] = &quot;select grade from users where username=\&quot;&quot;;</span><br><span class="line">    strncat(query, name, MAXNAME);</span><br><span class="line">    strcat(query, &quot;\&quot;&quot;);</span><br><span class="line"></span><br><span class="line">    if (mysql_real_query(mysql, query, (unsigned int)strlen(query) ) )</span><br><span class="line">    &#123;</span><br><span class="line">        puts(&quot;MySQL query is error!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        MYSQL_RES *result = mysql_store_result(mysql);</span><br><span class="line">        MYSQL_ROW row = mysql_fetch_row(result);</span><br><span class="line">        short grade = (short)strtol(row[0], NULL, 10);</span><br><span class="line">        mysql_free_result(result);</span><br><span class="line">        return grade;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
     </div>
 
       
