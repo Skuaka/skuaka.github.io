@@ -15,18 +15,20 @@
 
 
 
-<meta name="description" content="查看shadowsocks连接了多少用户 netstat -ta | grep [port-id]">
-<meta name="keywords" content="vultr">
+<meta name="description" content="TCP协议如何保证可靠传输1、应用数据被分割成TCP认为最适合发送的数据块。  2、超时重传：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。  3、TCP给发送的每个包进行编号，接收方对数据包进行排序，把有序数据传送给应用层。  4、TCP的接收端会丢弃重复的数据。  5、校验和：TCP将保持它首部和数据的检验和。这是一个端到端的">
+<meta name="keywords" content="Tcp&#x2F;ip">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vultr 问题集">
-<meta property="og:url" content="http://skuaka.cn/2018/10/02/Mess/vultr问题集/index.html">
+<meta property="og:title" content="Tcp_ip协议栈">
+<meta property="og:url" content="http://skuaka.cn/2019/02/27/Network/Tcp/Tcp如何保证可靠/index.html">
 <meta property="og:site_name" content="Skuaka">
-<meta property="og:description" content="查看shadowsocks连接了多少用户 netstat -ta | grep [port-id]">
+<meta property="og:description" content="TCP协议如何保证可靠传输1、应用数据被分割成TCP认为最适合发送的数据块。  2、超时重传：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。  3、TCP给发送的每个包进行编号，接收方对数据包进行排序，把有序数据传送给应用层。  4、TCP的接收端会丢弃重复的数据。  5、校验和：TCP将保持它首部和数据的检验和。这是一个端到端的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-03T12:59:54.720Z">
+<meta property="og:image" content="http://118.25.53.128/Picture/Tcp/tcp_ip.png">
+<meta property="og:updated_time" content="2019-09-09T09:03:23.741Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vultr 问题集">
-<meta name="twitter:description" content="查看shadowsocks连接了多少用户 netstat -ta | grep [port-id]">
+<meta name="twitter:title" content="Tcp_ip协议栈">
+<meta name="twitter:description" content="TCP协议如何保证可靠传输1、应用数据被分割成TCP认为最适合发送的数据块。  2、超时重传：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。  3、TCP给发送的每个包进行编号，接收方对数据包进行排序，把有序数据传送给应用层。  4、TCP的接收端会丢弃重复的数据。  5、校验和：TCP将保持它首部和数据的检验和。这是一个端到端的">
+<meta name="twitter:image" content="http://118.25.53.128/Picture/Tcp/tcp_ip.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>vultr 问题集 | Skuaka</title>
+<title>Tcp_ip协议栈 | Skuaka</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -228,11 +230,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
 </nav>
-      <div class="body-wrap"><article id="post-Mess/vultr问题集" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Network/Tcp/Tcp如何保证可靠" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/02/Mess/vultr问题集/" class="article-date">
-      <time datetime="2018-10-02T04:35:42.000Z" itemprop="datePublished">2018-10-02</time>
+      <a href="/2019/02/27/Network/Tcp/Tcp如何保证可靠/" class="article-date">
+      <time datetime="2019-02-27T13:06:38.000Z" itemprop="datePublished">2019-02-27</time>
 </a>
 
 
@@ -247,7 +249,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      vultr 问题集
+      Tcp_ip协议栈
     </h1>
   
 
@@ -256,13 +258,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mess/">Mess</a>
+    <a class="article-category-link" href="/categories/Network/">Network</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vultr/">vultr</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -272,9 +274,15 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>查看shadowsocks连接了多少用户</p>
-<p><code>netstat -ta | grep [port-id]</code></p>
-
+        <h3 id="TCP协议如何保证可靠传输"><a href="#TCP协议如何保证可靠传输" class="headerlink" title="TCP协议如何保证可靠传输"></a>TCP协议如何保证可靠传输</h3><p>1、应用<strong>数据被分割</strong>成TCP认为最适合发送的数据块。 </p>
+<p>2、<strong>超时重传</strong>：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。 </p>
+<p>3、TCP给发送的<strong>每个包进行编号</strong>，接收方对数据包进行排序，把有序数据传送给应用层。 </p>
+<p>4、TCP的接收端会<strong>丢弃重复</strong>的数据。 </p>
+<p>5、<strong>校验和</strong>：TCP将保持它首部和数据的检验和。这是一个端到端的检验和，目的是检测数据在传输过程中的任何变化。如果收到段的检验和有差错，TCP将丢弃这个报文段和不确认收到此报文段。 </p>
+<p>6、<strong>流量控制</strong>：TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接收端缓冲区能接纳的我数据。当接收方来不及处理发送方的数据，能提示发送方降低发送的速率，防止包丢失。TCP使用的流量控制协议是可变大小的<em>滑动窗口协议</em>。 </p>
+<p>7、<strong>拥塞控制</strong>：当网络拥塞时，减少数据的发送。</p>
+<h3 id="Tcp-ip协议栈"><a href="#Tcp-ip协议栈" class="headerlink" title="Tcp_ip协议栈"></a>Tcp_ip协议栈</h3><p><img src="http://118.25.53.128/Picture/Tcp/tcp_ip.png" alt="tcp_ip"></p>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
       
     </div>
     
@@ -282,13 +290,13 @@
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2018/10/02/Mess/vultr问题集/">vultr 问题集</a></p>
+        <p><span>Title:</span><a href="/2019/02/27/Network/Tcp/Tcp如何保证可靠/">Tcp_ip协议栈</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Skuaka</a></p>
-        <p><span>Created:</span>2018-10-02, 12:35:42</p>
-        <p><span>Updated:</span>2019-03-03, 20:59:54</p>
+        <p><span>Created:</span>2019-02-27, 21:06:38</p>
+        <p><span>Updated:</span>2019-09-09, 17:03:23</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2018/10/02/Mess/vultr问题集/" title="vultr 问题集">http://skuaka.cn/2018/10/02/Mess/vultr问题集/</a>
-            <span class="copy-path" data-clipboard-text="From http://skuaka.cn/2018/10/02/Mess/vultr问题集/　　By Skuaka" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2019/02/27/Network/Tcp/Tcp如何保证可靠/" title="Tcp_ip协议栈">http://skuaka.cn/2019/02/27/Network/Tcp/Tcp如何保证可靠/</a>
+            <span class="copy-path" data-clipboard-text="From http://skuaka.cn/2019/02/27/Network/Tcp/Tcp如何保证可靠/　　By Skuaka" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -301,15 +309,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/10/04/MacOS/mac平台开发工具/">
-                    我用的mac平台开发工具
+                <a href="/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/">
+                    TCP 半关闭,半连接,半打开
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/10/02/Unix/System/Linux备忘录/">
-                    Linux备忘录
+                <a href="/2019/02/05/Unix/Command/系统资源check/">
+                    System resource usage check
                 </a>
             </div>
         
@@ -321,7 +329,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP协议如何保证可靠传输"><span class="toc-number">1.</span> <span class="toc-text">TCP协议如何保证可靠传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tcp-ip协议栈"><span class="toc-number">2.</span> <span class="toc-text">Tcp_ip协议栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束"><span class="toc-number">3.</span> <span class="toc-text">结束</span></a></li></ol>
         
     </div>
     <style>
@@ -357,7 +365,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"vultr 问题集　| Skuaka　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Tcp_ip协议栈　| Skuaka　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -377,7 +385,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/10/04/MacOS/mac平台开发工具/" title="Pre: 我用的mac平台开发工具">
+            <a href="/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/" title="Pre: TCP 半关闭,半连接,半打开">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -385,7 +393,7 @@
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/10/02/Unix/System/Linux备忘录/" title="Next: Linux备忘录">
+            <a href="/2019/02/05/Unix/Command/系统资源check/" title="Next: System resource usage check">
                 <i class="fa fa-angle-right"></i>
             </a>
         
