@@ -335,6 +335,112 @@
 
 
   
+    <article id="post-Network/Ccie/DM-VPN" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/DM-VPN/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/DM-VPN/">CCIE DM-VPN</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="DM-VPN"><a href="#DM-VPN" class="headerlink" title="DM-VPN"></a>DM-VPN</h1><p>动态多点VPN、Cisco私有</p>
+<h3 id="IPSEC-VPN-存在的问题"><a href="#IPSEC-VPN-存在的问题" class="headerlink" title="IPSEC VPN 存在的问题"></a>IPSEC VPN 存在的问题</h3><ol>
+<li>不支持多播</li>
+<li>复杂的拓扑</li>
+</ol>
+<h3 id="DM-VPN-的术语"><a href="#DM-VPN-的术语" class="headerlink" title="DM-VPN 的术语"></a>DM-VPN 的术语</h3><ul>
+<li>M-GRE（多点隧道）一点对多点</li>
+<li>物理 IP 地址（物理接口）/逻辑 IP 地址（tunnel 私有 IP）</li>
+<li>NHRP（下一跳解析协议、总部和分部都启用）<br>NHS（下一跳服务器、总部）</li>
+</ul>
+<h3 id="DM-VPN-的三个阶段"><a href="#DM-VPN-的三个阶段" class="headerlink" title="DM-VPN 的三个阶段"></a>DM-VPN 的三个阶段</h3><p><strong>阶段一</strong></p>
+<ul>
+<li>M-GRE：EIGRP</li>
+<li>分支和分支要通过总部才能相互通讯</li>
+</ul>
+<p><strong>阶段二</strong></p>
+<ul>
+<li>M-GRE：EIGRP</li>
+<li>分支和分支可以直接通讯</li>
+</ul>
+<p><strong>阶段三</strong></p>
+<ul>
+<li>单云双中心（两个 HUB 同时工作互为备份，还是依赖 DM-VPN 阶段2）</li>
+</ul>
+<h3 id="DM-VPN-的基础配置流程"><a href="#DM-VPN-的基础配置流程" class="headerlink" title="DM-VPN 的基础配置流程"></a>DM-VPN 的基础配置流程</h3><p><strong>步骤1</strong>：完成 HUB 上 M-GRE 的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 134</span><br><span class="line">ip address 172.16.1.1 255.255.255.0 //隧道的逻辑接口</span><br><span class="line">tunnel source 12.12.12.1 //隧道源是设备物理接口地址</span><br><span class="line">tunnel key 134 //隧道口令</span><br><span class="line">tunnel mode gre multipoint //指定隧道模式</span><br><span class="line">//多点隧道不需要指定目的地址，模式和单点也不同</span><br></pre></td></tr></table></figure>
+<p><strong>步骤2</strong>：完成 spoke 上的 M-GRE 配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 134</span><br><span class="line">ip address 172.16.1.3 255.255.255.0 //隧道的逻辑接口</span><br><span class="line">tunnel source f0/1 //！FA0/1的接口IP成为隧道源，因为分支机构的IP会变化</span><br><span class="line">tunnel key 134 //隧道口令</span><br><span class="line">tunnel mode gre multipoint //指定隧道模式</span><br></pre></td></tr></table></figure>
+<p><strong>步骤3</strong>：完成 HUB 上隧道 NHRP 的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int tu 134</span><br><span class="line">ip nhrp network-id 134 //设置NHRP的网络ID</span><br><span class="line">ip nhrp authentication 134 //设置NHRP的认证口令</span><br><span class="line">ip nhrp map multicast dynamic //允许多播流在M-GRE传递，为了路由协议更新可以传递</span><br></pre></td></tr></table></figure>
+<p><strong>步骤4</strong>：完成 spoke 上 NHRP 的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int tu 134</span><br><span class="line">ip nhrp network-id 134</span><br><span class="line">ip nhrp authentication 134</span><br><span class="line">ip nhrs nhs 172.16.1.1 //指定NHS服务器地址，该地址是HUB的隧道地址</span><br><span class="line">ip nhrs map 172.16.1.1 12.12.12.1 //完成NHS服务器隧道逻辑地址和HUB物理地址的关联</span><br><span class="line">ip nhrp map multicast 12.12.12.1 //设置spoke向hub发送多播流量</span><br></pre></td></tr></table></figure>
+<p><strong>步骤5</strong>：隧道逻辑 IP 地址参与 EIGRP</p>
+<p><strong>步骤6</strong>：完成 IPSEC 的配置并且套用到隧道上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp enable</span><br><span class="line">crypto isakmp policy 10</span><br><span class="line">authen</span><br><span class="line">encry</span><br><span class="line">hash</span><br><span class="line">group</span><br><span class="line">crypto isakmp key cisco address 0.0.0.0 0.0.0.0</span><br><span class="line">crypto ipsec transform-set XX esp-aes esp-sha-hmac</span><br><span class="line">crypto ipsec profile &lt;name&gt; //IPSEC VPN 的配置文件</span><br><span class="line">set transform-set xx</span><br><span class="line">int tunnel x</span><br><span class="line">tunnel protection ipsec profile &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>杂</strong>：</p>
+<p>查看 HUB 的分支信息：<code>show ip nhrp</code></p>
+<p>关闭 EIGRP 水平分割：<code>no ip split-horizon eigrp 1</code></p>
+<p>开启 NHRP 捷径：<code>ip nhrp shortcat</code></p>
+<h3 id="单云双中心的配置细节"><a href="#单云双中心的配置细节" class="headerlink" title="单云双中心的配置细节"></a>单云双中心的配置细节</h3><p><strong>区别1</strong>：两个 HUB 需要互做 NHRP 的映射。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">----HUB1</span><br><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp map 172.16.1.2 202.1.1.2</span><br><span class="line">ip nhrp map multicast 202.1.1.2</span><br><span class="line">----HUB2</span><br><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp map 172.16.1.1 202.1.1.1</span><br><span class="line">ip nhrp map multicast 202.1.1.1</span><br></pre></td></tr></table></figure>
+<p><strong>区别2</strong>：两个 spoke 需要设定两个 NHS 服务器，并且谁先被设定谁就是主设备。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp nhs 172.16.1.1</span><br><span class="line">ip nhrp map 172.16.1.1 202.1.1.1</span><br><span class="line">ip nhrp map multicast 202.1.1.1</span><br><span class="line">ip nhrp nhs 172.16.1.2</span><br><span class="line">ip nhrp map 172.16.1.2 202.1.1.2</span><br><span class="line">ip nhrp map multicast 202.1.1.2</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Ccie/IPSEC VPN" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -460,112 +566,6 @@
 <p>NAT 配置的时候不要使用标准 ACL，用扩展 ACL，书写方法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access-list 100 deny ip 10.5.5.0 0.0.0.255 10.7.7.0 0.0.0.255</span><br><span class="line">access-list 100 permit ip 10.5.5.0 0.0.0.255 any</span><br><span class="line">ip nat inside source list 100 interface e0/2 overload</span><br></pre></td></tr></table></figure>
 <h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/DM-VPN" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/DM-VPN/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/DM-VPN/">CCIE DM-VPN</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="DM-VPN"><a href="#DM-VPN" class="headerlink" title="DM-VPN"></a>DM-VPN</h1><p>动态多点VPN、Cisco私有</p>
-<h3 id="IPSEC-VPN-存在的问题"><a href="#IPSEC-VPN-存在的问题" class="headerlink" title="IPSEC VPN 存在的问题"></a>IPSEC VPN 存在的问题</h3><ol>
-<li>不支持多播</li>
-<li>复杂的拓扑</li>
-</ol>
-<h3 id="DM-VPN-的术语"><a href="#DM-VPN-的术语" class="headerlink" title="DM-VPN 的术语"></a>DM-VPN 的术语</h3><ul>
-<li>M-GRE（多点隧道）一点对多点</li>
-<li>物理 IP 地址（物理接口）/逻辑 IP 地址（tunnel 私有 IP）</li>
-<li>NHRP（下一跳解析协议、总部和分部都启用）<br>NHS（下一跳服务器、总部）</li>
-</ul>
-<h3 id="DM-VPN-的三个阶段"><a href="#DM-VPN-的三个阶段" class="headerlink" title="DM-VPN 的三个阶段"></a>DM-VPN 的三个阶段</h3><p><strong>阶段一</strong></p>
-<ul>
-<li>M-GRE：EIGRP</li>
-<li>分支和分支要通过总部才能相互通讯</li>
-</ul>
-<p><strong>阶段二</strong></p>
-<ul>
-<li>M-GRE：EIGRP</li>
-<li>分支和分支可以直接通讯</li>
-</ul>
-<p><strong>阶段三</strong></p>
-<ul>
-<li>单云双中心（两个 HUB 同时工作互为备份，还是依赖 DM-VPN 阶段2）</li>
-</ul>
-<h3 id="DM-VPN-的基础配置流程"><a href="#DM-VPN-的基础配置流程" class="headerlink" title="DM-VPN 的基础配置流程"></a>DM-VPN 的基础配置流程</h3><p><strong>步骤1</strong>：完成 HUB 上 M-GRE 的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 134</span><br><span class="line">ip address 172.16.1.1 255.255.255.0 //隧道的逻辑接口</span><br><span class="line">tunnel source 12.12.12.1 //隧道源是设备物理接口地址</span><br><span class="line">tunnel key 134 //隧道口令</span><br><span class="line">tunnel mode gre multipoint //指定隧道模式</span><br><span class="line">//多点隧道不需要指定目的地址，模式和单点也不同</span><br></pre></td></tr></table></figure>
-<p><strong>步骤2</strong>：完成 spoke 上的 M-GRE 配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 134</span><br><span class="line">ip address 172.16.1.3 255.255.255.0 //隧道的逻辑接口</span><br><span class="line">tunnel source f0/1 //！FA0/1的接口IP成为隧道源，因为分支机构的IP会变化</span><br><span class="line">tunnel key 134 //隧道口令</span><br><span class="line">tunnel mode gre multipoint //指定隧道模式</span><br></pre></td></tr></table></figure>
-<p><strong>步骤3</strong>：完成 HUB 上隧道 NHRP 的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int tu 134</span><br><span class="line">ip nhrp network-id 134 //设置NHRP的网络ID</span><br><span class="line">ip nhrp authentication 134 //设置NHRP的认证口令</span><br><span class="line">ip nhrp map multicast dynamic //允许多播流在M-GRE传递，为了路由协议更新可以传递</span><br></pre></td></tr></table></figure>
-<p><strong>步骤4</strong>：完成 spoke 上 NHRP 的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int tu 134</span><br><span class="line">ip nhrp network-id 134</span><br><span class="line">ip nhrp authentication 134</span><br><span class="line">ip nhrs nhs 172.16.1.1 //指定NHS服务器地址，该地址是HUB的隧道地址</span><br><span class="line">ip nhrs map 172.16.1.1 12.12.12.1 //完成NHS服务器隧道逻辑地址和HUB物理地址的关联</span><br><span class="line">ip nhrp map multicast 12.12.12.1 //设置spoke向hub发送多播流量</span><br></pre></td></tr></table></figure>
-<p><strong>步骤5</strong>：隧道逻辑 IP 地址参与 EIGRP</p>
-<p><strong>步骤6</strong>：完成 IPSEC 的配置并且套用到隧道上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp enable</span><br><span class="line">crypto isakmp policy 10</span><br><span class="line">authen</span><br><span class="line">encry</span><br><span class="line">hash</span><br><span class="line">group</span><br><span class="line">crypto isakmp key cisco address 0.0.0.0 0.0.0.0</span><br><span class="line">crypto ipsec transform-set XX esp-aes esp-sha-hmac</span><br><span class="line">crypto ipsec profile &lt;name&gt; //IPSEC VPN 的配置文件</span><br><span class="line">set transform-set xx</span><br><span class="line">int tunnel x</span><br><span class="line">tunnel protection ipsec profile &lt;name&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>杂</strong>：</p>
-<p>查看 HUB 的分支信息：<code>show ip nhrp</code></p>
-<p>关闭 EIGRP 水平分割：<code>no ip split-horizon eigrp 1</code></p>
-<p>开启 NHRP 捷径：<code>ip nhrp shortcat</code></p>
-<h3 id="单云双中心的配置细节"><a href="#单云双中心的配置细节" class="headerlink" title="单云双中心的配置细节"></a>单云双中心的配置细节</h3><p><strong>区别1</strong>：两个 HUB 需要互做 NHRP 的映射。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">----HUB1</span><br><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp map 172.16.1.2 202.1.1.2</span><br><span class="line">ip nhrp map multicast 202.1.1.2</span><br><span class="line">----HUB2</span><br><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp map 172.16.1.1 202.1.1.1</span><br><span class="line">ip nhrp map multicast 202.1.1.1</span><br></pre></td></tr></table></figure>
-<p><strong>区别2</strong>：两个 spoke 需要设定两个 NHS 服务器，并且谁先被设定谁就是主设备。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp nhs 172.16.1.1</span><br><span class="line">ip nhrp map 172.16.1.1 202.1.1.1</span><br><span class="line">ip nhrp map multicast 202.1.1.1</span><br><span class="line">ip nhrp nhs 172.16.1.2</span><br><span class="line">ip nhrp map 172.16.1.2 202.1.1.2</span><br><span class="line">ip nhrp map multicast 202.1.1.2</span><br></pre></td></tr></table></figure>
-
       
     </div>
     
@@ -829,6 +829,192 @@
 <p>net</p>
 <p>net</p>
 <p>net</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/IS-IS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/IS-IS/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/IS-IS/">CCIE IS-IS</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="IS-IS（中间系统到中间系统）"><a href="#IS-IS（中间系统到中间系统）" class="headerlink" title="IS-IS（中间系统到中间系统）"></a>IS-IS（中间系统到中间系统）</h1><h3 id="数据传递方式"><a href="#数据传递方式" class="headerlink" title="数据传递方式"></a>数据传递方式</h3><ul>
+<li><p>面向连接 tcp/ip</p>
+</li>
+<li><p>非面向连接 clns/clnp 非连接的网络服务(负责控制数据传递过程)/非连接的网络协议(网络地址标识)</p>
+<p>最后，ip获得广泛使用，但是CLNS的理念也得到认可，因此保留下来，叫做UDP。</p>
+</li>
+</ul>
+<h3 id="IS-IS术语"><a href="#IS-IS术语" class="headerlink" title="IS-IS术语"></a>IS-IS术语</h3><ul>
+<li><p>IS：中间系统 即 路由器router</p>
+</li>
+<li><p>ES：终端系统 （但是现在已经没有使用clnp标识的设备了）</p>
+</li>
+<li><p>clnp：标识</p>
+<p>NET：网络实体标识（网络+主机）128bit</p>
+<p>clnp：clnp地址  NSAP网络服务应用标识</p>
+</li>
+</ul>
+<h3 id="clnp地址解释"><a href="#clnp地址解释" class="headerlink" title="clnp地址解释"></a>clnp地址解释</h3><p>49.0001.0000.0000.0001.00</p>
+<p>49.0002.0000.0000.0002.00</p>
+<p>49.0101.0000.0000.0001.00</p>
+<p>49：AFI地址格式标识 A地址 F格式 I授权标识  数字由官方的表定好。47，48，49用于私网。</p>
+<p>0101 01/01 域/区域 （区域包含在域内）这里为两个十六进制数</p>
+<p>0000.0000.0001 mac地址</p>
+<p>00 服务号（作用类似于端口号）</p>
+<h3 id="IS-IS-域、区域-骨干区域，常规区域"><a href="#IS-IS-域、区域-骨干区域，常规区域" class="headerlink" title="IS-IS 域、区域{骨干区域，常规区域}"></a>IS-IS 域、区域{骨干区域，常规区域}</h3><p>域：AS</p>
+<p>区域：0，1，2 ……</p>
+<h3 id="路由器角色类型"><a href="#路由器角色类型" class="headerlink" title="路由器角色类型"></a>路由器角色类型</h3><ul>
+<li>OSPF{角色：DR BDR DR-other，类型：ABR ASBR}</li>
+<li>IS-IS {角色：Dis(不完整)，类型：L1  L2  L1/L2}</li>
+</ul>
+<p>伪节点</p>
+<ul>
+<li>OSPF：DR{减少邻接关系，提高更新效率}</li>
+<li>IS-IS：Dis</li>
+</ul>
+<p>IS-IS类型</p>
+<ul>
+<li>L2 骨干区域</li>
+<li>L1 常规区域</li>
+<li>L1/L2(默认类型) 连接两个区域</li>
+</ul>
+<h3 id="OSPF-LSA-特殊区域"><a href="#OSPF-LSA-特殊区域" class="headerlink" title="OSPF LSA 特殊区域"></a>OSPF LSA 特殊区域</h3><p>LSA：Link-State Advertisement 链路状态广播</p>
+<p>DBD：数据库描述报文</p>
+<p>LSR：链路状态查询</p>
+<p>LSU：链路状态更新</p>
+<h4 id="OSPF七种LSA类型"><a href="#OSPF七种LSA类型" class="headerlink" title="OSPF七种LSA类型"></a>OSPF七种LSA类型</h4><ul>
+<li><p>LSA1（Router LSA）</p>
+<p>起源：区域内每台设备都能产生LSA1</p>
+<p>内容：节点信息{RID network cost}</p>
+<p>扩散：不允许穿越ABR，也就是区域内扩散。</p>
+<p>路由：区域内路由</p>
+</li>
+<li><p>LSA2（Network LSA）</p>
+<p>起源：只有DR可以产生</p>
+<p>内容：拓扑信息{节点的直连情况，谁是DR}</p>
+<p>扩散：区域内</p>
+</li>
+<li><p>LSA3（Network summary LSA）</p>
+<p>起源：ABR</p>
+<p>内容：区域网络信息</p>
+<p>扩散：整个OSPF AS</p>
+<p>路由：区域间路由</p>
+</li>
+<li><p>LSA4（ASBR summary LSA）</p>
+<p>起源：ASBR所在域的ABR</p>
+<p>内容：ASBR的RID</p>
+<p>扩散：整个OSPF</p>
+<p>路由：外部{OE1，OE2}</p>
+</li>
+<li><p>LSA5（Autonomous system external LSA）</p>
+<p>起源：ASBR</p>
+<p>内容：外部路由</p>
+<p>扩散：整个OSPF</p>
+<p>路由：外部{OE1，OE2}</p>
+</li>
+</ul>
+<p>OSPF LSA 特区</p>
+<p>LSA6 MOSPF专用（废除）</p>
+<p>LSA7 NSSA</p>
+<p>LSA8 LSA9 ：OSPFv3</p>
+<p>LSA10 口袋路由</p>
+<p>LSA11 标记</p>
+<h3 id="IS-IS路由类型"><a href="#IS-IS路由类型" class="headerlink" title="IS-IS路由类型"></a>IS-IS路由类型</h3><p>L2路由 区域间、外部</p>
+<p>L1路由 区域内、内部</p>
+<p>OSPF不允许同一接口网络属于同一区域</p>
+<p>允许一台设备加入不同区域</p>
+<h3 id="睡着了"><a href="#睡着了" class="headerlink" title="睡着了"></a>睡着了</h3><p>log-adjacency-changes</p>
+<p>EIGRP</p>
+<p>show ip ei neighbor</p>
+<p>neighbor 对端接口ip</p>
+<p>BGP</p>
+<p>peer-address对端RID</p>
+<p>IS-IS</p>
+<p>NET sys-id对方</p>
+<h3 id="ISIS的汇总及重分发"><a href="#ISIS的汇总及重分发" class="headerlink" title="ISIS的汇总及重分发"></a>ISIS的汇总及重分发</h3><p>汇总和重分发最好做在拥有L2角色的设备上。</p>
+<p>汇总后的路由和重分发的路由都是L2设备。</p>
+<h4 id="L1设备上完成重分发和汇总的解决方法"><a href="#L1设备上完成重分发和汇总的解决方法" class="headerlink" title="L1设备上完成重分发和汇总的解决方法"></a>L1设备上完成重分发和汇总的解决方法</h4><ul>
+<li><p>L1设备上重分发</p>
+<p>重分发时指定外部路由类型改为L1</p>
+</li>
+<li><p>L1设备上做汇总</p>
+<p>被汇总的网络必须以外部路由形式进入ISIS，再汇总才生效</p>
+<p>！！注意</p>
+<p>ISIS的外部路由类型是L2，那么接受者不累加接口开销</p>
+<p>ISIS的外部路由类型是L1，那么接受者会累加接口开销</p>
+</li>
+</ul>
+<h3 id="ISIS的认证"><a href="#ISIS的认证" class="headerlink" title="ISIS的认证"></a>ISIS的认证</h3><p>区域认证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">area-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
+<p>链路认证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;id&gt;</span><br><span class="line">isis password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
+<p>域(AS)认证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">domain-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
+<p>~~注意</p>
+<p>区域认证、域认证 不通过只影响路由学习；</p>
+<p>链路认证不通过影响邻居关系建立。</p>
+<p>IIH：HELLO：链路认证是包含在hello 中的；</p>
+<p>LSP：更新：区域认证、域认证是包含在更新中的。</p>
+<h3 id="ISIS的路由泄露"><a href="#ISIS的路由泄露" class="headerlink" title="ISIS的路由泄露"></a>ISIS的路由泄露</h3><p>ISIS路由泄露 指 将指定的L2数据库目标网络信息转化成L1的，发送给L1设备。</p>
+<h5 id="路由泄露的配置流程"><a href="#路由泄露的配置流程" class="headerlink" title="路由泄露的配置流程"></a>路由泄露的配置流程</h5><p>步骤1：L1/L2 设备上编写 ACL，匹配被泄露的目标路由</p>
+<p>步骤2：L1/L2 设备上编写 ROUTE-MAP 引用 ACL。</p>
+<p>步骤3：L1/L2 设备上做 ISIS 到 ISIS 的重分发，并且指定是利用 route-map 完成 L2 数据库条目到 L1 数据库条目的泄露。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redistribute isis ip level-2 into level-1 route-map 2T1</span><br><span class="line">isis metric &lt;开销&gt; //更改开销</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1131,192 +1317,6 @@
 
 
   
-    <article id="post-Network/Ccie/IS-IS" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/IS-IS/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/IS-IS/">CCIE IS-IS</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="IS-IS（中间系统到中间系统）"><a href="#IS-IS（中间系统到中间系统）" class="headerlink" title="IS-IS（中间系统到中间系统）"></a>IS-IS（中间系统到中间系统）</h1><h3 id="数据传递方式"><a href="#数据传递方式" class="headerlink" title="数据传递方式"></a>数据传递方式</h3><ul>
-<li><p>面向连接 tcp/ip</p>
-</li>
-<li><p>非面向连接 clns/clnp 非连接的网络服务(负责控制数据传递过程)/非连接的网络协议(网络地址标识)</p>
-<p>最后，ip获得广泛使用，但是CLNS的理念也得到认可，因此保留下来，叫做UDP。</p>
-</li>
-</ul>
-<h3 id="IS-IS术语"><a href="#IS-IS术语" class="headerlink" title="IS-IS术语"></a>IS-IS术语</h3><ul>
-<li><p>IS：中间系统 即 路由器router</p>
-</li>
-<li><p>ES：终端系统 （但是现在已经没有使用clnp标识的设备了）</p>
-</li>
-<li><p>clnp：标识</p>
-<p>NET：网络实体标识（网络+主机）128bit</p>
-<p>clnp：clnp地址  NSAP网络服务应用标识</p>
-</li>
-</ul>
-<h3 id="clnp地址解释"><a href="#clnp地址解释" class="headerlink" title="clnp地址解释"></a>clnp地址解释</h3><p>49.0001.0000.0000.0001.00</p>
-<p>49.0002.0000.0000.0002.00</p>
-<p>49.0101.0000.0000.0001.00</p>
-<p>49：AFI地址格式标识 A地址 F格式 I授权标识  数字由官方的表定好。47，48，49用于私网。</p>
-<p>0101 01/01 域/区域 （区域包含在域内）这里为两个十六进制数</p>
-<p>0000.0000.0001 mac地址</p>
-<p>00 服务号（作用类似于端口号）</p>
-<h3 id="IS-IS-域、区域-骨干区域，常规区域"><a href="#IS-IS-域、区域-骨干区域，常规区域" class="headerlink" title="IS-IS 域、区域{骨干区域，常规区域}"></a>IS-IS 域、区域{骨干区域，常规区域}</h3><p>域：AS</p>
-<p>区域：0，1，2 ……</p>
-<h3 id="路由器角色类型"><a href="#路由器角色类型" class="headerlink" title="路由器角色类型"></a>路由器角色类型</h3><ul>
-<li>OSPF{角色：DR BDR DR-other，类型：ABR ASBR}</li>
-<li>IS-IS {角色：Dis(不完整)，类型：L1  L2  L1/L2}</li>
-</ul>
-<p>伪节点</p>
-<ul>
-<li>OSPF：DR{减少邻接关系，提高更新效率}</li>
-<li>IS-IS：Dis</li>
-</ul>
-<p>IS-IS类型</p>
-<ul>
-<li>L2 骨干区域</li>
-<li>L1 常规区域</li>
-<li>L1/L2(默认类型) 连接两个区域</li>
-</ul>
-<h3 id="OSPF-LSA-特殊区域"><a href="#OSPF-LSA-特殊区域" class="headerlink" title="OSPF LSA 特殊区域"></a>OSPF LSA 特殊区域</h3><p>LSA：Link-State Advertisement 链路状态广播</p>
-<p>DBD：数据库描述报文</p>
-<p>LSR：链路状态查询</p>
-<p>LSU：链路状态更新</p>
-<h4 id="OSPF七种LSA类型"><a href="#OSPF七种LSA类型" class="headerlink" title="OSPF七种LSA类型"></a>OSPF七种LSA类型</h4><ul>
-<li><p>LSA1（Router LSA）</p>
-<p>起源：区域内每台设备都能产生LSA1</p>
-<p>内容：节点信息{RID network cost}</p>
-<p>扩散：不允许穿越ABR，也就是区域内扩散。</p>
-<p>路由：区域内路由</p>
-</li>
-<li><p>LSA2（Network LSA）</p>
-<p>起源：只有DR可以产生</p>
-<p>内容：拓扑信息{节点的直连情况，谁是DR}</p>
-<p>扩散：区域内</p>
-</li>
-<li><p>LSA3（Network summary LSA）</p>
-<p>起源：ABR</p>
-<p>内容：区域网络信息</p>
-<p>扩散：整个OSPF AS</p>
-<p>路由：区域间路由</p>
-</li>
-<li><p>LSA4（ASBR summary LSA）</p>
-<p>起源：ASBR所在域的ABR</p>
-<p>内容：ASBR的RID</p>
-<p>扩散：整个OSPF</p>
-<p>路由：外部{OE1，OE2}</p>
-</li>
-<li><p>LSA5（Autonomous system external LSA）</p>
-<p>起源：ASBR</p>
-<p>内容：外部路由</p>
-<p>扩散：整个OSPF</p>
-<p>路由：外部{OE1，OE2}</p>
-</li>
-</ul>
-<p>OSPF LSA 特区</p>
-<p>LSA6 MOSPF专用（废除）</p>
-<p>LSA7 NSSA</p>
-<p>LSA8 LSA9 ：OSPFv3</p>
-<p>LSA10 口袋路由</p>
-<p>LSA11 标记</p>
-<h3 id="IS-IS路由类型"><a href="#IS-IS路由类型" class="headerlink" title="IS-IS路由类型"></a>IS-IS路由类型</h3><p>L2路由 区域间、外部</p>
-<p>L1路由 区域内、内部</p>
-<p>OSPF不允许同一接口网络属于同一区域</p>
-<p>允许一台设备加入不同区域</p>
-<h3 id="睡着了"><a href="#睡着了" class="headerlink" title="睡着了"></a>睡着了</h3><p>log-adjacency-changes</p>
-<p>EIGRP</p>
-<p>show ip ei neighbor</p>
-<p>neighbor 对端接口ip</p>
-<p>BGP</p>
-<p>peer-address对端RID</p>
-<p>IS-IS</p>
-<p>NET sys-id对方</p>
-<h3 id="ISIS的汇总及重分发"><a href="#ISIS的汇总及重分发" class="headerlink" title="ISIS的汇总及重分发"></a>ISIS的汇总及重分发</h3><p>汇总和重分发最好做在拥有L2角色的设备上。</p>
-<p>汇总后的路由和重分发的路由都是L2设备。</p>
-<h4 id="L1设备上完成重分发和汇总的解决方法"><a href="#L1设备上完成重分发和汇总的解决方法" class="headerlink" title="L1设备上完成重分发和汇总的解决方法"></a>L1设备上完成重分发和汇总的解决方法</h4><ul>
-<li><p>L1设备上重分发</p>
-<p>重分发时指定外部路由类型改为L1</p>
-</li>
-<li><p>L1设备上做汇总</p>
-<p>被汇总的网络必须以外部路由形式进入ISIS，再汇总才生效</p>
-<p>！！注意</p>
-<p>ISIS的外部路由类型是L2，那么接受者不累加接口开销</p>
-<p>ISIS的外部路由类型是L1，那么接受者会累加接口开销</p>
-</li>
-</ul>
-<h3 id="ISIS的认证"><a href="#ISIS的认证" class="headerlink" title="ISIS的认证"></a>ISIS的认证</h3><p>区域认证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">area-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
-<p>链路认证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;id&gt;</span><br><span class="line">isis password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
-<p>域(AS)认证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router isis</span><br><span class="line">domain-password &lt;xx&gt;</span><br></pre></td></tr></table></figure>
-<p>~~注意</p>
-<p>区域认证、域认证 不通过只影响路由学习；</p>
-<p>链路认证不通过影响邻居关系建立。</p>
-<p>IIH：HELLO：链路认证是包含在hello 中的；</p>
-<p>LSP：更新：区域认证、域认证是包含在更新中的。</p>
-<h3 id="ISIS的路由泄露"><a href="#ISIS的路由泄露" class="headerlink" title="ISIS的路由泄露"></a>ISIS的路由泄露</h3><p>ISIS路由泄露 指 将指定的L2数据库目标网络信息转化成L1的，发送给L1设备。</p>
-<h5 id="路由泄露的配置流程"><a href="#路由泄露的配置流程" class="headerlink" title="路由泄露的配置流程"></a>路由泄露的配置流程</h5><p>步骤1：L1/L2 设备上编写 ACL，匹配被泄露的目标路由</p>
-<p>步骤2：L1/L2 设备上编写 ROUTE-MAP 引用 ACL。</p>
-<p>步骤3：L1/L2 设备上做 ISIS 到 ISIS 的重分发，并且指定是利用 route-map 完成 L2 数据库条目到 L1 数据库条目的泄露。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redistribute isis ip level-2 into level-1 route-map 2T1</span><br><span class="line">isis metric &lt;开销&gt; //更改开销</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Network/Ccie/MPLS" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1484,6 +1484,110 @@
 </li>
 </ol>
 <h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Ccie/acl控制" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/01/Network/Ccie/acl控制/" class="article-date">
+      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/Network/Ccie/acl控制/">CCIE acl控制</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="数字acl"><a href="#数字acl" class="headerlink" title="数字acl"></a>数字acl</h3><p>全局配置</p>
+<p>access-list 1 deny/permit ip或网段 通配符</p>
+<p>不管是何种acl，最后都会存在一条拒绝所有数据的命令</p>
+<p>一般都会在结尾加上放行所有流量的命令</p>
+<p>access-list 1 permit any</p>
+<p>接口配置 ip access-group 1 in/out</p>
+<h3 id="命名acl"><a href="#命名acl" class="headerlink" title="命名acl"></a>命名acl</h3><p>全局ip access-list standard 名字</p>
+<p>deny 11.11.11.0 0.0.0.255</p>
+<p>deny 12.12.12.0 0.0.0.255</p>
+<p>pe any</p>
+<p>接口同理</p>
+<p>命名acl能no掉某条以及接下来的所有控制，保留上层，数字acl只能全部no</p>
+<p>全局 enable password/secret 密码</p>
+<p>​                         明文/密文 密文优先级高</p>
+<p>全局 line vty 0 4 可同时登入5个 0 2 三个</p>
+<p>   password 密码</p>
+<p>telnet ip 输入密码 </p>
+<p>远程登入端口号telnet:23 http:80</p>
+<h3 id="数字扩展acl"><a href="#数字扩展acl" class="headerlink" title="数字扩展acl"></a>数字扩展acl</h3><p>ping命令是icmp协议</p>
+<p>access-list 100 deny icmp 12.12.12.0 0.0.0.255 host 3.3.3.3 ？（ping 是echo）</p>
+<p>access-list 100 permit ip any any</p>
+<p>全局ip access-list extended 名字</p>
+<h3 id="access-list命令"><a href="#access-list命令" class="headerlink" title="access-list命令"></a>access-list命令</h3><p>（1）标准访问列表</p>
+<p>access-list access-list-number { permit | deny } {source [source-wildcard] | any}</p>
+<p>命令解释如下。</p>
+<p>access-list：访问列表命令。</p>
+<p>access-list-number：访问列表号码，值为1~99.</p>
+<p>permit：允许。</p>
+<p>deny：拒绝。</p>
+<p>source：源IP地址。</p>
+<p>source-wildcard：源IP地址的通配符。</p>
+<p>（2）扩展访问列表</p>
+<p><code>access-list access-list-number { permit | deny } { protocol \ protocol-keyword } { source [ source-wildcard ] | any } { destination destination-wildcard } | any }[protocol-specific options][log]</code></p>
+<p>命令解释如下。</p>
+<p>access-list-number：访问列表号码，值为100~199.</p>
+<p>protocol \ protocol-keyword：可使用的协议，包括IP、ICMP、IGRP、EIGRP、OSPF等。</p>
+<p>destination destination-wild：目的IP地址，格式与源IP地址相同。</p>
+<p>protocol-specific options：协议制定的选项。</p>
+<p>log：记录有关数据报进入访问列表的信息。</p>
+<p>rip 跳数</p>
+<p>offset-list acc号 in/out 跳数增加值</p>
+
       
     </div>
     
@@ -1724,110 +1828,6 @@
 <p>​    虚拟vlan接口，不受物理接口的限制，只受交换机性能的限制。性能比子接口好很多。前提本地存在此vlan。</p>
 <p>​    int vlan 10 此端口只能识别vlan10</p>
 <p>​    ip add x.x x.x</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/acl控制" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/acl控制/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/acl控制/">CCIE acl控制</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="数字acl"><a href="#数字acl" class="headerlink" title="数字acl"></a>数字acl</h3><p>全局配置</p>
-<p>access-list 1 deny/permit ip或网段 通配符</p>
-<p>不管是何种acl，最后都会存在一条拒绝所有数据的命令</p>
-<p>一般都会在结尾加上放行所有流量的命令</p>
-<p>access-list 1 permit any</p>
-<p>接口配置 ip access-group 1 in/out</p>
-<h3 id="命名acl"><a href="#命名acl" class="headerlink" title="命名acl"></a>命名acl</h3><p>全局ip access-list standard 名字</p>
-<p>deny 11.11.11.0 0.0.0.255</p>
-<p>deny 12.12.12.0 0.0.0.255</p>
-<p>pe any</p>
-<p>接口同理</p>
-<p>命名acl能no掉某条以及接下来的所有控制，保留上层，数字acl只能全部no</p>
-<p>全局 enable password/secret 密码</p>
-<p>​                         明文/密文 密文优先级高</p>
-<p>全局 line vty 0 4 可同时登入5个 0 2 三个</p>
-<p>   password 密码</p>
-<p>telnet ip 输入密码 </p>
-<p>远程登入端口号telnet:23 http:80</p>
-<h3 id="数字扩展acl"><a href="#数字扩展acl" class="headerlink" title="数字扩展acl"></a>数字扩展acl</h3><p>ping命令是icmp协议</p>
-<p>access-list 100 deny icmp 12.12.12.0 0.0.0.255 host 3.3.3.3 ？（ping 是echo）</p>
-<p>access-list 100 permit ip any any</p>
-<p>全局ip access-list extended 名字</p>
-<h3 id="access-list命令"><a href="#access-list命令" class="headerlink" title="access-list命令"></a>access-list命令</h3><p>（1）标准访问列表</p>
-<p>access-list access-list-number { permit | deny } {source [source-wildcard] | any}</p>
-<p>命令解释如下。</p>
-<p>access-list：访问列表命令。</p>
-<p>access-list-number：访问列表号码，值为1~99.</p>
-<p>permit：允许。</p>
-<p>deny：拒绝。</p>
-<p>source：源IP地址。</p>
-<p>source-wildcard：源IP地址的通配符。</p>
-<p>（2）扩展访问列表</p>
-<p><code>access-list access-list-number { permit | deny } { protocol \ protocol-keyword } { source [ source-wildcard ] | any } { destination destination-wildcard } | any }[protocol-specific options][log]</code></p>
-<p>命令解释如下。</p>
-<p>access-list-number：访问列表号码，值为100~199.</p>
-<p>protocol \ protocol-keyword：可使用的协议，包括IP、ICMP、IGRP、EIGRP、OSPF等。</p>
-<p>destination destination-wild：目的IP地址，格式与源IP地址相同。</p>
-<p>protocol-specific options：协议制定的选项。</p>
-<p>log：记录有关数据报进入访问列表的信息。</p>
-<p>rip 跳数</p>
-<p>offset-list acc号 in/out 跳数增加值</p>
 
       
     </div>
