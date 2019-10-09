@@ -264,7 +264,7 @@
       
           
         <h2 id="Shell控制语句笔记"><a href="#Shell控制语句笔记" class="headerlink" title="Shell控制语句笔记"></a>Shell控制语句笔记</h2><p><strong><em>本笔记提取出一些重要的内容方便以后查阅，常用的放前面</em></strong></p>
-<h3 id="比较语句"><a href="#比较语句" class="headerlink" title="比较语句"></a>比较语句</h3><h4 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运算符两边必须要有空格</span></span><br><span class="line">string1 = string2		<span class="comment">#相等</span></span><br><span class="line">string1 != string2		<span class="comment">#不相等</span></span><br><span class="line">-n string				<span class="comment">#字符串不为空</span></span><br><span class="line">-z string				<span class="comment">#字符串为空</span></span><br></pre></td></tr></table></figure>
+<h3 id="比较语句"><a href="#比较语句" class="headerlink" title="比较语句"></a>比较语句</h3><h4 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运算符两边必须要有空格</span></span><br><span class="line">string1 = string2			<span class="comment">#相等</span></span><br><span class="line">string1 != string2		<span class="comment">#不相等</span></span><br><span class="line">-n string				<span class="comment">#字符串不为空</span></span><br><span class="line">-z string				<span class="comment">#字符串为空</span></span><br></pre></td></tr></table></figure>
 <h4 id="算数比较"><a href="#算数比较" class="headerlink" title="算数比较"></a>算数比较</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">exp1 -eq exp2		<span class="comment">#相等</span></span><br><span class="line">exp1 -ne exp2		<span class="comment">#不相等</span></span><br><span class="line">exp1 -gt exp2		<span class="comment">#大于</span></span><br><span class="line">exp1 -ge exp2		<span class="comment">#大于等于</span></span><br><span class="line">exp1 -lt exp2		<span class="comment">#小于</span></span><br><span class="line">exp1 -le exp2		<span class="comment">#小于等于</span></span><br></pre></td></tr></table></figure>
 <h4 id="文件条件测试"><a href="#文件条件测试" class="headerlink" title="文件条件测试"></a>文件条件测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-d file		<span class="comment">#是目录</span></span><br><span class="line">-e file		<span class="comment">#和-f相似，历史上-e不可移植，所以常用的是-f选项</span></span><br><span class="line">-f file		<span class="comment">#是普通文件</span></span><br><span class="line">-g file		<span class="comment">#gid被设置</span></span><br><span class="line">-r file		<span class="comment">#可读</span></span><br><span class="line">-s file		<span class="comment">#大小不为0</span></span><br><span class="line">-u file		<span class="comment">#uid被设置</span></span><br><span class="line">-w file		<span class="comment">#可写</span></span><br><span class="line">-x file		<span class="comment">#可执行</span></span><br></pre></td></tr></table></figure>
 <p>注：gid和uid只对可执行的二进制文件有用，对shell脚本不起作用。</p>
@@ -490,11 +490,27 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="run"><a href="#run" class="headerlink" title="run"></a>run</h4><h5 id="rm"><a href="#rm" class="headerlink" title="--rm"></a><code>--rm</code></h5><p>在Docker容器退出时，默认容器内部的文件系统仍然被保留，以方便调试并保留用户数据。</p>
+        <h2 id="docker笔记"><a href="#docker笔记" class="headerlink" title="docker笔记"></a>docker笔记</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><h4 id="run"><a href="#run" class="headerlink" title="run"></a>run</h4><h5 id="it"><a href="#it" class="headerlink" title="-it"></a>-it</h5><p>这是两个参数，一个是 <code>-i</code>：交互式操作，一个是 <code>-t</code> 终端。</p>
+<h5 id="–rm"><a href="#–rm" class="headerlink" title="–rm"></a>–rm</h5><p>在Docker容器退出时，默认容器内部的文件系统仍然被保留，以方便调试并保留用户数据。</p>
 <p>但是，对于foreground容器，由于其只是在开发调试过程中短期运行，其用户数据并无保留的必要，因而可以在容器启动时设置<code>--rm</code>选项，这样在容器退出时就能够自动清理容器内部的文件系统。</p>
 <p>注意，<code>--rm</code>选项也会清理容器的匿名data volumes，所以等价于在容器退出后，执行<code>docker rm -v</code>。</p>
+<h5 id="p"><a href="#p" class="headerlink" title="-p"></a>-p</h5><p><code>-p 80:4000</code> : 将容器的 4000 端口映射到主机的 80 端口</p>
+<p><code>-p 127.0.0.1:80:4000</code> : 通过访问 127.0.0.1:80 来访问容器的 4000 端口</p>
+<p><code>-p 80:4000/udp</code> : 默认是绑定 tcp 端口，绑定udp需要加上 /udp</p>
+<p><code>-P</code> : 大写的P，将容器内部端口<strong>随机</strong>映射到主机的高端口</p>
+<h5 id="v"><a href="#v" class="headerlink" title="-v"></a>-v</h5><p><code>-v my-vol:/root</code> : 将 my-vol 挂载到容器的 /root 目录</p>
+<h5 id="d"><a href="#d" class="headerlink" title="-d"></a>-d</h5><p>让容器在后台运行。</p>
+<h4 id="image"><a href="#image" class="headerlink" title="image"></a>image</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker images / docker image ls</span><br><span class="line">docker search centos</span><br><span class="line">docker pull centos</span><br></pre></td></tr></table></figure>
 <h4 id="volume"><a href="#volume" class="headerlink" title="volume"></a>volume</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker volume create my-vol</span><br><span class="line">docker volume ls</span><br><span class="line">docker volume inspect my-vol</span><br><span class="line">docker volume rm my-vol</span><br></pre></td></tr></table></figure>
-
+<h4 id="container"><a href="#container" class="headerlink" title="container"></a>container</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker container [ ls / start / stop / restart ]</span><br><span class="line">docker ps</span><br><span class="line">docker attach 243c32reqwq</span><br><span class="line">docker [ start / stop / restart / rm ] 243c32reqwq</span><br><span class="line"></span><br><span class="line">docker port bf08b7f2cd89 # 查看端口</span><br><span class="line">docker logs -f bf08b7f2cd89 # -f: 让 docker logs 像使用 tail -f 一样来输出容器内部的标准输出。</span><br><span class="line">docker top bf08b7f2cd89 # 查看容器内部运行的进程</span><br><span class="line">docker inspect bf08b7f2cd89</span><br></pre></td></tr></table></figure>
+<h4 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit afcaf46e8305 test/my_centos:1.0</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>-m</strong> : 提交的描述信息</li>
+<li><strong>-a</strong> : 指定镜像作者</li>
+<li><strong>afcaf46e8305</strong> : 容器ID</li>
+<li><strong>test/my_centos:1.0</strong> : 指定要创建的目标镜像名，如果没有tag默认是latest</li>
+</ul>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>
     
@@ -554,12 +570,15 @@
       
           
         <p>GitHub项目地址：<a href="https://github.com/stoplightio/prism" target="_blank" rel="noopener">https://github.com/stoplightio/prism</a></p>
+<p>Doc: <a href="https://stoplight.io/p/docs/gh/stoplightio/prism/docs/getting-started/installation.md" target="_blank" rel="noopener">https://stoplight.io/p/docs/gh/stoplightio/prism/docs/getting-started/installation.md</a></p>
 <p><strong>安装</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @stoplight/prism-cli</span><br></pre></td></tr></table></figure>
 <p><strong>启动命令</strong></p>
-<p><code>prism mock -h 0.0.0.0 -p 4010 example.yaml</code></p>
-<p>docker镜像</p>
-<p><a href="https://stoplight.io/p/docs/gh/stoplightio/prism/docs/getting-started/installation.md" target="_blank" rel="noopener">https://stoplight.io/p/docs/gh/stoplightio/prism/docs/getting-started/installation.md</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prism mock -h 0.0.0.0 -p 4010 example.yaml</span><br></pre></td></tr></table></figure>
+<p><strong>docker镜像</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stoplight/prism:3</span><br></pre></td></tr></table></figure>
+<p><strong>PS</strong></p>
+<p>这里有一个坑，nodejs版本10才可以正常使用这个工具。有的机器默认安装的6和最新的12都是会报错的。</p>
 
       
     </div>
