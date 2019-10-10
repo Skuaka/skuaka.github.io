@@ -234,160 +234,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Unix/Programming/Shell控制语句笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/10/04/Unix/Programming/Shell控制语句笔记/" class="article-date">
-      <time datetime="2019-10-04T09:31:13.000Z" itemprop="datePublished">2019-10-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/04/Unix/Programming/Shell控制语句笔记/">Shell控制语句笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Shell控制语句笔记"><a href="#Shell控制语句笔记" class="headerlink" title="Shell控制语句笔记"></a>Shell控制语句笔记</h2><p><strong><em>本笔记提取出一些重要的内容方便以后查阅，常用的放前面</em></strong></p>
-<h3 id="比较语句"><a href="#比较语句" class="headerlink" title="比较语句"></a>比较语句</h3><h4 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运算符两边必须要有空格</span></span><br><span class="line">string1 = string2			<span class="comment">#相等</span></span><br><span class="line">string1 != string2		<span class="comment">#不相等</span></span><br><span class="line">-n string				<span class="comment">#字符串不为空</span></span><br><span class="line">-z string				<span class="comment">#字符串为空</span></span><br></pre></td></tr></table></figure>
-<h4 id="算数比较"><a href="#算数比较" class="headerlink" title="算数比较"></a>算数比较</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">exp1 -eq exp2		<span class="comment">#相等</span></span><br><span class="line">exp1 -ne exp2		<span class="comment">#不相等</span></span><br><span class="line">exp1 -gt exp2		<span class="comment">#大于</span></span><br><span class="line">exp1 -ge exp2		<span class="comment">#大于等于</span></span><br><span class="line">exp1 -lt exp2		<span class="comment">#小于</span></span><br><span class="line">exp1 -le exp2		<span class="comment">#小于等于</span></span><br></pre></td></tr></table></figure>
-<h4 id="文件条件测试"><a href="#文件条件测试" class="headerlink" title="文件条件测试"></a>文件条件测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-d file		<span class="comment">#是目录</span></span><br><span class="line">-e file		<span class="comment">#和-f相似，历史上-e不可移植，所以常用的是-f选项</span></span><br><span class="line">-f file		<span class="comment">#是普通文件</span></span><br><span class="line">-g file		<span class="comment">#gid被设置</span></span><br><span class="line">-r file		<span class="comment">#可读</span></span><br><span class="line">-s file		<span class="comment">#大小不为0</span></span><br><span class="line">-u file		<span class="comment">#uid被设置</span></span><br><span class="line">-w file		<span class="comment">#可写</span></span><br><span class="line">-x file		<span class="comment">#可执行</span></span><br></pre></td></tr></table></figure>
-<p>注：gid和uid只对可执行的二进制文件有用，对shell脚本不起作用。</p>
-<h4 id="逻辑测试"><a href="#逻辑测试" class="headerlink" title="逻辑测试"></a>逻辑测试</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!</span><br><span class="line">-a &amp;&amp;</span><br><span class="line">-o ||</span><br></pre></td></tr></table></figure>
-<h3 id="条件控制"><a href="#条件控制" class="headerlink" title="条件控制"></a>条件控制</h3><h4 id="if-test"><a href="#if-test" class="headerlink" title="if/test"></a>if/test</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> condition		<span class="comment"># 可以用[]替换test</span></span><br><span class="line"><span class="comment">#if [ condition ]   # [ 的左右要有空格</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	statement1</span><br><span class="line"><span class="keyword">elif</span></span><br><span class="line">	statement2</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	statement3</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-<h3 id="循环控制"><a href="#循环控制" class="headerlink" title="循环控制"></a>循环控制</h3><h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for x in one two three four</span><br><span class="line">do</span><br><span class="line">        echo number $x</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h5 id="文件for循环"><a href="#文件for循环" class="headerlink" title="文件for循环"></a>文件for循环</h5><p><code>for x in /var/log/*</code></p>
-<h5 id="位置参数for循环"><a href="#位置参数for循环" class="headerlink" title="位置参数for循环"></a>位置参数for循环</h5><p><code>for x in &quot;$@&quot;</code></p>
-<h5 id="集合for循环"><a href="#集合for循环" class="headerlink" title="集合for循环"></a>集合for循环</h5><p><code>for x in {a..z}</code></p>
-<h5 id="循环指定次数"><a href="#循环指定次数" class="headerlink" title="循环指定次数"></a>循环指定次数</h5><p><code>for i in {1..5}</code></p>
-<p><code>for i in $(seq 1 5)</code></p>
-<p><code>for (( i=1; i&lt;=5; ++i ))</code></p>
-<h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while [ condition ] ; do</span><br><span class="line">	:</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Unix/Programming/Shell变量笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/10/04/Unix/Programming/Shell变量笔记/" class="article-date">
-      <time datetime="2019-10-04T04:21:53.000Z" itemprop="datePublished">2019-10-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/04/Unix/Programming/Shell变量笔记/">Shell变量笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Shell变量笔记"><a href="#Shell变量笔记" class="headerlink" title="Shell变量笔记"></a>Shell变量笔记</h2><p><strong><em>本笔记提取出一些重要的内容方便以后查阅，难记的放前面</em></strong></p>
-<h3 id="参数拓展"><a href="#参数拓展" class="headerlink" title="参数拓展"></a>参数拓展</h3><p><code>${}</code>把参数值替换进字符串。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_process <span class="variable">$&#123;i&#125;</span>_tmp</span><br></pre></td></tr></table></figure>
-<p>参数拓展有很多种模式匹配方法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;param:-defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值，param不会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:+defult&#125;</span>	<span class="comment">#如果param存在且不会空，就把它设置为defult</span></span><br><span class="line"><span class="variable">$&#123;param:=defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值,并且param也会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:?defult&#125;</span>	<span class="comment">#如果param为空，输出param:defult并异常终止脚本</span></span><br><span class="line"><span class="variable">$&#123;#param&#125;</span>					<span class="comment">#输出param的长度</span></span><br><span class="line"><span class="variable">$&#123;param#word&#125;</span>			<span class="comment">#从param的头部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param##word&#125;</span>		<span class="comment">#从param的头部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param%word&#125;</span>			<span class="comment">#从param的尾部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param%%word&#125;</span>		<span class="comment">#从param的尾部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param/aa/bb&#125;</span>		<span class="comment">#将第一个aa替换为bb</span></span><br><span class="line"><span class="variable">$&#123;param//aa/bb&#125;</span>		<span class="comment">#将所有的aa替换为bb</span></span><br></pre></td></tr></table></figure>
-<h3 id="字符串切片"><a href="#字符串切片" class="headerlink" title="字符串切片"></a>字符串切片</h3><p><code>${param:start_pos:length}</code></p>
-<p><strong><em>索引从0开始计数，-1指向最后一个字符位置</em></strong></p>
-<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$HOME</span>	<span class="comment">#当前用户的家目录</span></span><br><span class="line"><span class="variable">$PATH</span>	<span class="comment">#以冒号分隔的用来搜索命令的目录列表</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$PS1</span>	<span class="comment">#命令提示符，通常为$</span></span><br><span class="line"><span class="variable">$PS2</span>	<span class="comment">#二级提示符，通常为&gt;</span></span><br><span class="line"><span class="variable">$IFS</span>	<span class="comment">#输入域分隔符，读取输入时用来分隔单词的一组字符，它们通常是空格、制表符和换行符</span></span><br><span class="line"></span><br><span class="line">$$		<span class="comment">#shell脚本的进程号</span></span><br><span class="line">$?		<span class="comment">#前一个命令的退出码</span></span><br></pre></td></tr></table></figure>
-<h3 id="参数变量"><a href="#参数变量" class="headerlink" title="参数变量"></a>参数变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$#</span>				<span class="comment">#传递给脚本的参数个数</span></span><br><span class="line"><span class="variable">$0</span>				<span class="comment">#shell脚本的名字</span></span><br><span class="line"><span class="variable">$1</span>,<span class="variable">$2</span>,...	<span class="comment">#脚本程序的参数</span></span><br><span class="line"></span><br><span class="line">$*				<span class="comment">#在一个变量中列出所有参数，用IFS中的第一个字符分隔</span></span><br><span class="line"><span class="variable">$@</span>				<span class="comment">#$*的变体，不使用IFS变量，所以即使IFS为空，参数也不会挤在一起</span></span><br></pre></td></tr></table></figure>
-<h3 id="算数拓展"><a href="#算数拓展" class="headerlink" title="算数拓展"></a>算数拓展</h3><p>expr 执行慢，因为它需要调用一个新的shell来处理expr命令。所以推荐使用<code>$((...))</code>算术拓展。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=$(($x +1))</span><br><span class="line">x=$(expr $x + 1)</span><br><span class="line">x=`expr $x + 1`</span><br></pre></td></tr></table></figure>
-<h3 id="捕获输出"><a href="#捕获输出" class="headerlink" title="捕获输出"></a>捕获输出</h3><p><code>$(command)</code>的结果就是其中命令的输出。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> The current users are $(who)</span><br></pre></td></tr></table></figure>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Unix/System/ppk-to-pem" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -461,6 +307,160 @@
 
 
   
+    <article id="post-Unix/Programming/Shell控制语句笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/02/Unix/Programming/Shell控制语句笔记/" class="article-date">
+      <time datetime="2019-10-02T09:31:13.000Z" itemprop="datePublished">2019-10-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/02/Unix/Programming/Shell控制语句笔记/">Shell控制语句笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Shell控制语句笔记"><a href="#Shell控制语句笔记" class="headerlink" title="Shell控制语句笔记"></a>Shell控制语句笔记</h2><p><strong><em>本笔记提取出一些重要的内容方便以后查阅，常用的放前面</em></strong></p>
+<h3 id="比较语句"><a href="#比较语句" class="headerlink" title="比较语句"></a>比较语句</h3><h4 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运算符两边必须要有空格</span></span><br><span class="line">string1 = string2			<span class="comment">#相等</span></span><br><span class="line">string1 != string2		<span class="comment">#不相等</span></span><br><span class="line">-n string				<span class="comment">#字符串不为空</span></span><br><span class="line">-z string				<span class="comment">#字符串为空</span></span><br></pre></td></tr></table></figure>
+<h4 id="算数比较"><a href="#算数比较" class="headerlink" title="算数比较"></a>算数比较</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">exp1 -eq exp2		<span class="comment">#相等</span></span><br><span class="line">exp1 -ne exp2		<span class="comment">#不相等</span></span><br><span class="line">exp1 -gt exp2		<span class="comment">#大于</span></span><br><span class="line">exp1 -ge exp2		<span class="comment">#大于等于</span></span><br><span class="line">exp1 -lt exp2		<span class="comment">#小于</span></span><br><span class="line">exp1 -le exp2		<span class="comment">#小于等于</span></span><br></pre></td></tr></table></figure>
+<h4 id="文件条件测试"><a href="#文件条件测试" class="headerlink" title="文件条件测试"></a>文件条件测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-d file		<span class="comment">#是目录</span></span><br><span class="line">-e file		<span class="comment">#和-f相似，历史上-e不可移植，所以常用的是-f选项</span></span><br><span class="line">-f file		<span class="comment">#是普通文件</span></span><br><span class="line">-g file		<span class="comment">#gid被设置</span></span><br><span class="line">-r file		<span class="comment">#可读</span></span><br><span class="line">-s file		<span class="comment">#大小不为0</span></span><br><span class="line">-u file		<span class="comment">#uid被设置</span></span><br><span class="line">-w file		<span class="comment">#可写</span></span><br><span class="line">-x file		<span class="comment">#可执行</span></span><br></pre></td></tr></table></figure>
+<p>注：gid和uid只对可执行的二进制文件有用，对shell脚本不起作用。</p>
+<h4 id="逻辑测试"><a href="#逻辑测试" class="headerlink" title="逻辑测试"></a>逻辑测试</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!</span><br><span class="line">-a &amp;&amp;</span><br><span class="line">-o ||</span><br></pre></td></tr></table></figure>
+<h3 id="条件控制"><a href="#条件控制" class="headerlink" title="条件控制"></a>条件控制</h3><h4 id="if-test"><a href="#if-test" class="headerlink" title="if/test"></a>if/test</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> condition		<span class="comment"># 可以用[]替换test</span></span><br><span class="line"><span class="comment">#if [ condition ]   # [ 的左右要有空格</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	statement1</span><br><span class="line"><span class="keyword">elif</span></span><br><span class="line">	statement2</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	statement3</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h3 id="循环控制"><a href="#循环控制" class="headerlink" title="循环控制"></a>循环控制</h3><h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for x in one two three four</span><br><span class="line">do</span><br><span class="line">        echo number $x</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h5 id="文件for循环"><a href="#文件for循环" class="headerlink" title="文件for循环"></a>文件for循环</h5><p><code>for x in /var/log/*</code></p>
+<h5 id="位置参数for循环"><a href="#位置参数for循环" class="headerlink" title="位置参数for循环"></a>位置参数for循环</h5><p><code>for x in &quot;$@&quot;</code></p>
+<h5 id="集合for循环"><a href="#集合for循环" class="headerlink" title="集合for循环"></a>集合for循环</h5><p><code>for x in {a..z}</code></p>
+<h5 id="循环指定次数"><a href="#循环指定次数" class="headerlink" title="循环指定次数"></a>循环指定次数</h5><p><code>for i in {1..5}</code></p>
+<p><code>for i in $(seq 1 5)</code></p>
+<p><code>for (( i=1; i&lt;=5; ++i ))</code></p>
+<h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while [ condition ] ; do</span><br><span class="line">	:</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Unix/Programming/Shell变量笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/02/Unix/Programming/Shell变量笔记/" class="article-date">
+      <time datetime="2019-10-02T04:21:53.000Z" itemprop="datePublished">2019-10-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/02/Unix/Programming/Shell变量笔记/">Shell变量笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Shell变量笔记"><a href="#Shell变量笔记" class="headerlink" title="Shell变量笔记"></a>Shell变量笔记</h2><p><strong><em>本笔记提取出一些重要的内容方便以后查阅，难记的放前面</em></strong></p>
+<h3 id="参数拓展"><a href="#参数拓展" class="headerlink" title="参数拓展"></a>参数拓展</h3><p><code>${}</code>把参数值替换进字符串。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_process <span class="variable">$&#123;i&#125;</span>_tmp</span><br></pre></td></tr></table></figure>
+<p>参数拓展有很多种模式匹配方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;param:-defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值，param不会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:+defult&#125;</span>	<span class="comment">#如果param存在且不会空，就把它设置为defult</span></span><br><span class="line"><span class="variable">$&#123;param:=defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值,并且param也会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:?defult&#125;</span>	<span class="comment">#如果param为空，输出param:defult并异常终止脚本</span></span><br><span class="line"><span class="variable">$&#123;#param&#125;</span>					<span class="comment">#输出param的长度</span></span><br><span class="line"><span class="variable">$&#123;param#word&#125;</span>			<span class="comment">#从param的头部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param##word&#125;</span>		<span class="comment">#从param的头部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param%word&#125;</span>			<span class="comment">#从param的尾部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param%%word&#125;</span>		<span class="comment">#从param的尾部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param/aa/bb&#125;</span>		<span class="comment">#将第一个aa替换为bb</span></span><br><span class="line"><span class="variable">$&#123;param//aa/bb&#125;</span>		<span class="comment">#将所有的aa替换为bb</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串切片"><a href="#字符串切片" class="headerlink" title="字符串切片"></a>字符串切片</h3><p><code>${param:start_pos:length}</code></p>
+<p><strong><em>索引从0开始计数，-1指向最后一个字符位置</em></strong></p>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$HOME</span>	<span class="comment">#当前用户的家目录</span></span><br><span class="line"><span class="variable">$PATH</span>	<span class="comment">#以冒号分隔的用来搜索命令的目录列表</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$PS1</span>	<span class="comment">#命令提示符，通常为$</span></span><br><span class="line"><span class="variable">$PS2</span>	<span class="comment">#二级提示符，通常为&gt;</span></span><br><span class="line"><span class="variable">$IFS</span>	<span class="comment">#输入域分隔符，读取输入时用来分隔单词的一组字符，它们通常是空格、制表符和换行符</span></span><br><span class="line"></span><br><span class="line">$$		<span class="comment">#shell脚本的进程号</span></span><br><span class="line">$?		<span class="comment">#前一个命令的退出码</span></span><br></pre></td></tr></table></figure>
+<h3 id="参数变量"><a href="#参数变量" class="headerlink" title="参数变量"></a>参数变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$#</span>				<span class="comment">#传递给脚本的参数个数</span></span><br><span class="line"><span class="variable">$0</span>				<span class="comment">#shell脚本的名字</span></span><br><span class="line"><span class="variable">$1</span>,<span class="variable">$2</span>,...	<span class="comment">#脚本程序的参数</span></span><br><span class="line"></span><br><span class="line">$*				<span class="comment">#在一个变量中列出所有参数，用IFS中的第一个字符分隔</span></span><br><span class="line"><span class="variable">$@</span>				<span class="comment">#$*的变体，不使用IFS变量，所以即使IFS为空，参数也不会挤在一起</span></span><br></pre></td></tr></table></figure>
+<h3 id="算数拓展"><a href="#算数拓展" class="headerlink" title="算数拓展"></a>算数拓展</h3><p>expr 执行慢，因为它需要调用一个新的shell来处理expr命令。所以推荐使用<code>$((...))</code>算术拓展。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=$(($x +1))</span><br><span class="line">x=$(expr $x + 1)</span><br><span class="line">x=`expr $x + 1`</span><br></pre></td></tr></table></figure>
+<h3 id="捕获输出"><a href="#捕获输出" class="headerlink" title="捕获输出"></a>捕获输出</h3><p><code>$(command)</code>的结果就是其中命令的输出。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> The current users are $(who)</span><br></pre></td></tr></table></figure>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Unix/Programming/docker笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -490,26 +490,42 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="docker笔记"><a href="#docker笔记" class="headerlink" title="docker笔记"></a>docker笔记</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><h4 id="run"><a href="#run" class="headerlink" title="run"></a>run</h4><h5 id="it"><a href="#it" class="headerlink" title="-it"></a>-it</h5><p>这是两个参数，一个是 <code>-i</code>：交互式操作，一个是 <code>-t</code> 终端。</p>
-<h5 id="–rm"><a href="#–rm" class="headerlink" title="–rm"></a>–rm</h5><p>在Docker容器退出时，默认容器内部的文件系统仍然被保留，以方便调试并保留用户数据。</p>
+        <h2 id="docker笔记"><a href="#docker笔记" class="headerlink" title="docker笔记"></a>docker笔记</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><p>命令大全：<a href="https://www.runoob.com/docker/docker-command-manual.html" target="_blank" rel="noopener">https://www.runoob.com/docker/docker-command-manual.html</a></p>
+<h4 id="run"><a href="#run" class="headerlink" title="run"></a>run</h4><ul>
+<li><p><strong>-it</strong></p>
+<p>这是两个参数，一个是 <code>-i</code>：交互式操作，一个是 <code>-t</code> 终端。</p>
+</li>
+<li><p><strong>–rm</strong></p>
+<p>在Docker容器退出时，默认容器内部的文件系统仍然被保留，以方便调试并保留用户数据。</p>
 <p>但是，对于foreground容器，由于其只是在开发调试过程中短期运行，其用户数据并无保留的必要，因而可以在容器启动时设置<code>--rm</code>选项，这样在容器退出时就能够自动清理容器内部的文件系统。</p>
 <p>注意，<code>--rm</code>选项也会清理容器的匿名data volumes，所以等价于在容器退出后，执行<code>docker rm -v</code>。</p>
-<h5 id="p"><a href="#p" class="headerlink" title="-p"></a>-p</h5><p><code>-p 80:4000</code> : 将容器的 4000 端口映射到主机的 80 端口</p>
+</li>
+<li><p><strong>-p</strong></p>
+<p><code>-p 80:4000</code> : 将容器的 4000 端口映射到主机的 80 端口</p>
 <p><code>-p 127.0.0.1:80:4000</code> : 通过访问 127.0.0.1:80 来访问容器的 4000 端口</p>
 <p><code>-p 80:4000/udp</code> : 默认是绑定 tcp 端口，绑定udp需要加上 /udp</p>
-<p><code>-P</code> : 大写的P，将容器内部端口<strong>随机</strong>映射到主机的高端口</p>
-<h5 id="v"><a href="#v" class="headerlink" title="-v"></a>-v</h5><p><code>-v my-vol:/root</code> : 将 my-vol 挂载到容器的 /root 目录</p>
-<h5 id="d"><a href="#d" class="headerlink" title="-d"></a>-d</h5><p>让容器在后台运行。</p>
-<h4 id="image"><a href="#image" class="headerlink" title="image"></a>image</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker images / docker image ls</span><br><span class="line">docker search centos</span><br><span class="line">docker pull centos</span><br></pre></td></tr></table></figure>
+<p><code>-P</code> : <strong>大写</strong>的P，将容器内部端口<strong>随机</strong>映射到主机的高端口</p>
+</li>
+<li><p><strong>-v</strong></p>
+<p><code>-v my-vol:/root</code> : 将 my-vol 挂载到容器的 /root 目录</p>
+</li>
+<li><p><strong>-d</strong></p>
+<p>让容器在后台运行。</p>
+</li>
+</ul>
+<h4 id="image"><a href="#image" class="headerlink" title="image"></a>image</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker images / docker image ls</span><br><span class="line">docker search centos</span><br><span class="line">docker pull centos # -a 拉取所有 tagged 镜像</span><br><span class="line">docker rmi t/test:v1 # -f 强制删除</span><br></pre></td></tr></table></figure>
 <h4 id="volume"><a href="#volume" class="headerlink" title="volume"></a>volume</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker volume create my-vol</span><br><span class="line">docker volume ls</span><br><span class="line">docker volume inspect my-vol</span><br><span class="line">docker volume rm my-vol</span><br></pre></td></tr></table></figure>
-<h4 id="container"><a href="#container" class="headerlink" title="container"></a>container</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker container [ ls / start / stop / restart ]</span><br><span class="line">docker ps</span><br><span class="line">docker attach 243c32reqwq</span><br><span class="line">docker [ start / stop / restart / rm ] 243c32reqwq</span><br><span class="line"></span><br><span class="line">docker port bf08b7f2cd89 # 查看端口</span><br><span class="line">docker logs -f bf08b7f2cd89 # -f: 让 docker logs 像使用 tail -f 一样来输出容器内部的标准输出。</span><br><span class="line">docker top bf08b7f2cd89 # 查看容器内部运行的进程</span><br><span class="line">docker inspect bf08b7f2cd89</span><br></pre></td></tr></table></figure>
+<h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker cp /opt 96f7f14e99ab:/     # 主机 /opt 目录拷贝到容器的 / 目录下</span><br><span class="line">docker cp /opt 96f7f14e99ab:/opt2 # 主机 /opt 目录拷贝到容器的 / 目录下，目录重命名为 opt2</span><br><span class="line">docker cp 96f7f14e99ab:/opt /     # 容器 /opt 目录拷贝到主机的 / 目录下</span><br><span class="line"><span class="meta">#</span><span class="bash"> -L :保持源目标中的链接</span></span><br></pre></td></tr></table></figure>
+<h4 id="container"><a href="#container" class="headerlink" title="container"></a>container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">docker container [ ls / start / stop / restart ]</span><br><span class="line">docker ps</span><br><span class="line">docker attach 243c32reqwq</span><br><span class="line">docker kill [ -s &lt;signal&gt; ] 243c32reqwq</span><br><span class="line">docker [ start / stop / restart / rm ] 243c32reqwq</span><br><span class="line">docker [ pause / unpause ] 243c32reqwq # 暂停/恢复容器中所有的进程。</span><br><span class="line"></span><br><span class="line">docker create --name container-name nginx:latest # 类似run，创建容器但不启动</span><br><span class="line"></span><br><span class="line">docker inspect bf08b7f2cd89</span><br><span class="line">docker port bf08b7f2cd89 # 查看端口</span><br><span class="line">docker logs bf08b7f2cd89 # 查看日志 -f: 像使用 tail -f 一样来跟踪输出。</span><br><span class="line">docker top bf08b7f2cd89 # 查看容器内部运行的进程</span><br></pre></td></tr></table></figure>
 <h4 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit afcaf46e8305 test/my_centos:1.0</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>-m</strong> : 提交的描述信息</li>
 <li><strong>-a</strong> : 指定镜像作者</li>
-<li><strong>afcaf46e8305</strong> : 容器ID</li>
-<li><strong>test/my_centos:1.0</strong> : 指定要创建的目标镜像名，如果没有tag默认是latest</li>
+<li><strong>-c</strong> : 使用Dockerfile指令来创建镜像；</li>
+<li><strong>-p</strong> : 在commit时，将容器暂停。</li>
 </ul>
+<h4 id="info"><a href="#info" class="headerlink" title="info"></a>info</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br><span class="line">docker system df -v # 占用的所有磁盘空间</span><br></pre></td></tr></table></figure>
+<h4 id="login"><a href="#login" class="headerlink" title="login"></a>login</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker login -u &lt;name&gt; -p &lt;pass&gt;</span><br><span class="line">docker logout</span><br></pre></td></tr></table></figure>
 <h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>
@@ -643,7 +659,6 @@
 <h4 id="build图标"><a href="#build图标" class="headerlink" title="build图标"></a>build图标</h4><p>点击travis相关仓库的右上角的build图标，复制Markdown格式然后粘贴在README.md中即可。</p>
 <h4 id="Permission-denied"><a href="#Permission-denied" class="headerlink" title="Permission denied"></a>Permission denied</h4><p>可执行文件没有加执行权限。</p>
 <p>加上后再push就行了。</p>
-<h4 id="检查内存泄漏"><a href="#检查内存泄漏" class="headerlink" title="检查内存泄漏"></a>检查内存泄漏</h4><p>见上文yml格式</p>
 <h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>
