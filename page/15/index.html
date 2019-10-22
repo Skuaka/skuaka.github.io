@@ -234,6 +234,87 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/PostgreSQL/Mac 下 PostgreSQL " class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /" class="article-date">
+      <time datetime="2018-08-17T14:20:14.000Z" itemprop="datePublished">2018-08-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /">Mac 下 PostgreSQL 配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在 mac 下，可以利用 <a href="http://dhq.me/mac-apt-get-homebrew" target="_blank" rel="noopener">homebrew</a> 直接安装 PostgreSQL：</p>
+<p><code>brew install postgresql</code></p>
+<p>初始数据库：</p>
+<p><code>initdb /usr/local/var/postgres -E utf8</code></p>
+<p>上面指定 “/usr/local/var/postgres” 为 PostgreSQL 的配置数据存放目录，并且设置数据库数据编码是 utf8，更多配置信息可以 “initdb –help” 查看。</p>
+<p>启动 PostgreSQL：</p>
+<p><code>pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start</code></p>
+<p>关闭 PostgreSQL：</p>
+<p><code>pg_ctl -D /usr/local/var/postgres stop -s -m fast</code></p>
+<p><strong>创建一个 PostgreSQL 用户</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">createuser username -P</span><br><span class="line"></span><br><span class="line"><span class="comment">#Enter password for new role:`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Enter it again:</span></span><br></pre></td></tr></table></figure>
+<p>上面的 username 是用户名，回车输入 2 次用户密码后即用户创建完成。更多用户创建信息可以 “createuser –help” 查看。</p>
+<p><strong>创建数据库</strong></p>
+<p><code>createdb dbname -O username -E UTF8 -e</code></p>
+<p>上面创建了一个名为 dbname 的数据库，并指定 username 为改数据库的拥有者（owner），数据库的编码（encoding）是 UTF8，参数 “-e” 是指把数据库执行操作的命令显示出来。</p>
+<p>更多数据库创建信息可以 “createdb –help” 查看。</p>
+<p><strong>连接数据库</strong></p>
+<p><code>psql -U username -d dbname -h 127.0.0.1</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-MacOS/Mess/macos apache problem" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1678,10 +1759,10 @@
 
 
   
-    <article id="post-Network/Ccie/IPSEC VPN" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/IPSEC VPN/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1697,7 +1778,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/IPSEC VPN/">CCIE IPSEC VPN</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
     </h1>
   
 
@@ -1707,225 +1788,34 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="IPSEC-VPN"><a href="#IPSEC-VPN" class="headerlink" title="IPSEC VPN"></a>IPSEC VPN</h2><p>Ip security vpn，是一个工作在网络层的 VPN 技术。</p>
-<h3 id="数据在公共网络上面临的风险"><a href="#数据在公共网络上面临的风险" class="headerlink" title="数据在公共网络上面临的风险"></a>数据在公共网络上面临的风险</h3><ol>
-<li>不加密，明文传递</li>
-<li>没有完整性保护，数据容易被篡改</li>
-<li>没有对等体认证，容易受到中间人攻击</li>
-<li>抵赖</li>
-</ol>
-<h3 id="IPSEC-VPN-解决的问题"><a href="#IPSEC-VPN-解决的问题" class="headerlink" title="IPSEC VPN 解决的问题"></a>IPSEC VPN 解决的问题</h3><ol>
-<li><p>对等体认证，数据发送之前必须经过认证且通过</p>
-<p>口令认证、数字证书（计算机世界的身份证）、加密随机数</p>
-</li>
-<li><p>数据加密</p>
-<p>des、3des、aes</p>
-</li>
-<li><p>数据完整性保护</p>
-<p>HMAC：哈希消息认证码</p>
-</li>
-<li><p>数字签名，防抵赖</p>
-<p>DSA（RSA 公司开发）</p>
-</li>
-</ol>
-<h3 id="KEY：密匙"><a href="#KEY：密匙" class="headerlink" title="KEY：密匙"></a>KEY：密匙</h3><p>KEY 是一个工具，可以参与算法作为变量出现，也可以参与认证作为口令出现。</p>
-<h4 id="对称密钥、非对称密钥"><a href="#对称密钥、非对称密钥" class="headerlink" title="对称密钥、非对称密钥"></a>对称密钥、非对称密钥</h4><p>（加密算法中的 KEY 的理解）</p>
-<ol>
-<li><p>对等密钥及对称密钥加密算法</p>
-<p>加密解密密钥是同一把</p>
-<p><strong>坏处</strong>：不够安全、Key 的共享存在风险</p>
-<p><strong>好处</strong>：简单高效</p>
-</li>
-<li><p>非对称密钥及非对称密钥算法</p>
-<p>非对称密钥是一对KEY，公钥和密钥。</p>
-<p>公钥最后会公开，密钥不公开。</p>
-<p>公钥加密的数据，只有私钥可以解开。</p>
-<p>私钥加密的数据，只有公钥可以解开。</p>
-<p><strong>坏处</strong>：复杂，数据会变庞大</p>
-<p><strong>好处</strong>：安全可靠</p>
-</li>
-</ol>
-<h4 id="IPSEC-VPN-的加密密钥"><a href="#IPSEC-VPN-的加密密钥" class="headerlink" title="IPSEC VPN 的加密密钥"></a>IPSEC VPN 的加密密钥</h4><p>非对称密钥共享是用对称密钥及算法保护</p>
-<p>数据本身是用非对称密钥及算法保护</p>
-<h4 id="密钥产生过程和共享方法"><a href="#密钥产生过程和共享方法" class="headerlink" title="密钥产生过程和共享方法"></a>密钥产生过程和共享方法</h4><p>DH 算法负责产生密钥和共享密钥</p>
-<h3 id="IPSEC-VPN-的关键组件"><a href="#IPSEC-VPN-的关键组件" class="headerlink" title="IPSEC VPN 的关键组件"></a>IPSEC VPN 的关键组件</h3><p>ISAKMP：互联网安全关联密钥管理协议</p>
-<ul>
-<li><p>ISA：通讯双方建立了安全连接就叫做一个 SA 成功了。</p>
-<p>IPSEC VPN 的 SA 有两个：一个是保护 VPN 的，一个是保护数据的。</p>
-</li>
-<li><p>KMP：KMP 是通过 IKE（互联网密钥交换机制）完成的，IKE 专门负责产生密钥，共享密钥。</p>
-<p>IKE 分两个阶段：阶段1产生和共享VPN自身所需的密钥，阶段2利用阶段1的密钥算出新密钥，用于保护用户数据。</p>
-</li>
-</ul>
-<h3 id="IPSEC-VPN-配置流程"><a href="#IPSEC-VPN-配置流程" class="headerlink" title="IPSEC VPN 配置流程"></a>IPSEC VPN 配置流程</h3><p>IOS 中必须带 K9 字样，才支持加密算法： <code>show version</code></p>
-<p>步骤1：开启 ISAKMP</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp enable</span><br></pre></td></tr></table></figure>
-<p>步骤2：配置 IPSEC VPN 策略1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crypto policy &lt;seq&gt;</span><br><span class="line">authentication &lt;pre-share/rsa&gt; //认证方式</span><br><span class="line">hash &lt;md5/sha&gt; //定义完整性保护算法</span><br><span class="line">group &lt;1/2/5&gt; //定义 DH 算法等级</span><br><span class="line">encryption &lt;des/3des/aes&gt; //定义加密算法</span><br><span class="line">lifetime &lt;xxs&gt; //定义生命周期</span><br></pre></td></tr></table></figure>
-<p>步骤3：配置 IPSEC VPN peer</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp key 0 &lt;口令&gt; address &lt;peer-address&gt; //对等体地址必须可达</span><br></pre></td></tr></table></figure>
-<p>步骤4：配置感兴趣流，告诉 VPN 保护什么流量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access-list permit ip &lt;源&gt; &lt;目的&gt;</span><br></pre></td></tr></table></figure>
-<p>步骤5：配置转换集定义数据加密方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto ipsec trans &lt;name&gt; &lt;加密算法&gt; &lt;完整性保护算法&gt;</span><br></pre></td></tr></table></figure>
-<p>步骤6：定义加密映射，将数据加密转换集、对等体、感兴趣流绑定</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crypto map &lt;名字&gt; &lt;序列号&gt; ipsec-isakmp</span><br><span class="line">set peer &lt;peer-address&gt; //设置对等体地址</span><br><span class="line">match address &lt;acl-id&gt; //匹配感兴趣流</span><br><span class="line">trans-set &lt;转换集名称&gt; //设置转化集</span><br></pre></td></tr></table></figure>
-<p>步骤7：应用加密映射（只能用在发送流量的接口）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt;</span><br><span class="line">crypto map &lt;name&gt;</span><br></pre></td></tr></table></figure>
-<p>步骤8：查看命令</p>
-<p>查看数据是否被加密<code>show crypto engine connections active</code></p>
-<h3 id="ESP-和-AH"><a href="#ESP-和-AH" class="headerlink" title="ESP 和 AH"></a>ESP 和 AH</h3><p>ESP 和 AH 都是 VPN 头部信息的缩写</p>
-<p>帧头、包头、段头、数据、帧尾</p>
-<p>数据经历 VPN 保护后变化成如下：</p>
-<p>帧头、VPN 头、包头、段头、数据、帧尾</p>
-<p>VPN 头就分两种：</p>
-<ol>
-<li><p>ESP：封装安全静荷</p>
-<p>该头负责保护数据的完整性，同时加密数据</p>
-</li>
-<li><p>AH：认证头</p>
-<p>该头只负责保护数据完整性，不加密数据</p>
-</li>
-</ol>
-<h3 id="IPSEC-VPN-的模式"><a href="#IPSEC-VPN-的模式" class="headerlink" title="IPSEC VPN 的模式"></a>IPSEC VPN 的模式</h3><ol>
-<li><p>隧道模式（tunnel）</p>
-<p>VPN 网关通过一个隧道模式的 VPN 连接，保护身后所有的通讯数据。</p>
-</li>
-<li><p>传输模式（transport）</p>
-<p>通讯双方自身建立 VPN 连接，保护通讯数据。</p>
-</li>
-</ol>
-<p><strong>区别</strong>：</p>
-<p>隧道模式的新包头，目的 IP 和源 IP 是 VPN 的对等体地址。</p>
-<p>传输模式的新包头，目的 IP 和源 IP 复制了原有的 IP 地址。</p>
-<h3 id="NAT-对-IPSEC-VPN-的影响"><a href="#NAT-对-IPSEC-VPN-的影响" class="headerlink" title="NAT 对 IPSEC VPN 的影响"></a>NAT 对 IPSEC VPN 的影响</h3><p>VPN 流量几乎永远是先被 inside 接口接收，所以 NAT 会直接修改 IP 包头，导致 VPN 无法识别感兴趣流。</p>
-<p>解决方案</p>
-<p>NAT 配置的时候不要使用标准 ACL，用扩展 ACL，书写方法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access-list 100 deny ip 10.5.5.0 0.0.0.255 10.7.7.0 0.0.0.255</span><br><span class="line">access-list 100 permit ip 10.5.5.0 0.0.0.255 any</span><br><span class="line">ip nat inside source list 100 interface e0/2 overload</span><br></pre></td></tr></table></figure>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CCIE/">CCIE</a>
-    </div>
+        <p>重分发 </p>
+<p>将不同路由协议转化</p>
+<p>1直连进路由选择协议</p>
+<p>redistribute connect metric 1</p>
+<p>2其他路由选择协议进rip</p>
+<p>router rip</p>
+<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
+<p>3其他路由选择协议进eigrp</p>
+<p>router eigrp 100</p>
+<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
+<p>4其他进ospf</p>
+<p>router os 1</p>
+<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
+<p>默认OE2</p>
+<p>将oe2改成oe1:</p>
+<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
+<p>重分发流量控制</p>
+<p>acl</p>
+<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
+<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
+<p>将acl抓去到的流量给route-map</p>
+<p>route-map +名字 +permit/deny </p>
+<p>优先级10(默认优先级) </p>
+<p>match ip address +acl编号</p>
+<p>route-map也默认deny所有流量</p>
+<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
+<p>re rip router-map ccie metric ……</p>
 
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCIE/">CCIE</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Ccie/跨域的多播" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/跨域的多播/" class="article-date">
-      <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/跨域的多播/">CCIE 跨域的多播</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="跨域的多播"><a href="#跨域的多播" class="headerlink" title="跨域的多播"></a>跨域的多播</h1><p>源和组成员在不同的AS，需要传递多播数据流。</p>
-<h3 id="跨域多播的问题和挑战"><a href="#跨域多播的问题和挑战" class="headerlink" title="跨域多播的问题和挑战"></a>跨域多播的问题和挑战</h3><p>组成员无法发现源、源无法发现组成员、多播树无法建立。</p>
-<h3 id="MSDP-多播源发现协议"><a href="#MSDP-多播源发现协议" class="headerlink" title="MSDP 多播源发现协议"></a>MSDP 多播源发现协议</h3><p>MSDP 是配置在不同 AS RP 上的，它会建立基于 TCP 的对等体关系，利用自身的 SA（源关联）消息共享”源地址信息、多播组地址信息、RP 信息”给对端 RP。</p>
-<h3 id="MSDP-配置流程"><a href="#MSDP-配置流程" class="headerlink" title="MSDP 配置流程"></a>MSDP 配置流程</h3><p>步骤1：RP上配置新的 loopback 接口，并且宣告进 BGP。</p>
-<p>步骤2：RP上完成 MSDP 的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip msdp peer 8.8.8.8</span><br><span class="line">ip msdp peer 8.8.8.8 connect-source lo44</span><br><span class="line">ip msdp origin lo88</span><br><span class="line"></span><br><span class="line">show ip msdp summary</span><br></pre></td></tr></table></figure>
-<h3 id="排错手段"><a href="#排错手段" class="headerlink" title="排错手段"></a>排错手段</h3><p>ip 路由疑难解析</p>
-<h4 id="多播排错"><a href="#多播排错" class="headerlink" title="多播排错"></a>多播排错</h4><p>ping 多播组地址 不同</p>
-<ol>
-<li><p>确认发现组成员</p>
-<p><code>show ip igmp group</code></p>
-<p>查看组地址、本地接口、报告者 是否出现</p>
-<p><strong>错点</strong></p>
-<ul>
-<li>没有模拟成组成员，缺乏接口下：<code>ip igmp join-group &lt;a.b.c.d&gt;</code></li>
-<li>路由器接口没有加入PIM，缺乏接口下:<code>ip pim &lt;x&gt;</code></li>
-<li>连通性问题</li>
-</ul>
-</li>
-<li><p>确认稀疏模式获取 RP 信息</p>
-<p><code>show ip pim rp mapping</code> 查看 RP 映射，查看 RP 的结果</p>
-<p><code>show ip pim rp</code> 查看多播组和 RP 的关联</p>
-<p><strong>错点</strong></p>
-<ul>
-<li>没有通过静态 RP 指明 RP 地址</li>
-<li>BSR 的 C-BSR 或 C-RP 配置问题</li>
-<li>auto-rp 的配置问题</li>
-<li>缺乏auto-rp 侦听的配置</li>
-<li>设备间缺乏必要的PIM 邻居：<code>show ip pim neighbor</code><ul>
-<li>设备缺乏多播路由功能和接口忘记加入PIM</li>
-<li>接口忘记激活、错误的安全策略挡住了PIM消息</li>
-</ul>
-</li>
-<li>设备无法正常抵达 RP 地址，所以不显示获取的 RP 消息<ul>
-<li>路由层面问题、忘记宣告、忘记重分发、错误的过滤</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>RPF 检测未通过</p>
-<ul>
-<li>缺乏必要的更新源路由</li>
-<li>忘记宣告、忘记重分发、错误的路由更新过滤</li>
-</ul>
-</li>
-<li><p>是否是跨域多播、缺乏必要的配置和连通性</p>
-<ul>
-<li><p>缺乏必要的 MSDP 配置和 MSDP 对等体关系</p>
-<p><code>show run | sec ip msdp</code></p>
-<p><code>show ip msdp summary</code></p>
-<p>MSDP peer 地址不可达</p>
-<p>MSDP 链接源和起源 ID 设置错误</p>
-</li>
-<li><p>RPF 检测不通过</p>
-</li>
-</ul>
-</li>
-<li><p>错误的安全策略</p>
-</li>
-</ol>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     

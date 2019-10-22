@@ -234,6 +234,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Network/Vultr/vultr" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/14/Network/Vultr/vultr/" class="article-date">
+      <time datetime="2019-09-14T07:00:16.000Z" itemprop="datePublished">2019-09-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/14/Network/Vultr/vultr/">vultr</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="vultr"><a href="#vultr" class="headerlink" title="vultr"></a>vultr</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br><span class="line"></span><br><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh</span><br><span class="line">chmod +x bbr.sh</span><br><span class="line">./bbr.sh</span><br><span class="line"></span><br><span class="line">lsmod | grep bbr</span><br></pre></td></tr></table></figure>
+<hr>
+<p>之前看到的文章“被删除”，赶紧history自己的机子并记录下来。</p>
+<h3 id="PS"><a href="#PS" class="headerlink" title="PS:"></a>PS:</h3><p>查看shadowsocks连接了多少用户</p>
+<p><code>netstat -ta | grep [port-id]</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vultr/">Vultr</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-MacOS/macOS-command-line-tools" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1055,121 +1123,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Security/linux服务器入侵检测" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/05/12/Security/linux服务器入侵检测/" class="article-date">
-      <time datetime="2019-05-12T15:19:13.000Z" itemprop="datePublished">2019-05-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/12/Security/linux服务器入侵检测/">linux服务器入侵检测</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>source: <a href="https://bash-prompt.net/guides/server-hacked/" target="_blank" rel="noopener">https://bash-prompt.net/guides/server-hacked/</a></p>
-<p>一篇翻译：<a href="https://linux.cn/article-9116-1.html" target="_blank" rel="noopener">https://linux.cn/article-9116-1.html</a></p>
-<h1 id="How-To-Tell-If-Your-Linux-Server-Has-Been-Compromised"><a href="#How-To-Tell-If-Your-Linux-Server-Has-Been-Compromised" class="headerlink" title="How To Tell If Your Linux Server Has Been Compromised"></a>How To Tell If Your Linux Server Has Been Compromised</h1><p>A server being compromised or hacked for the purpose of this guide is an unauthorized person or bot logging into the server in order to use it for their own, usually negative ends.</p>
-<p>Disclaimer: If your server has been compromised by a state organization like the NSA or a serious criminal group then you will not notice any problems and the following techniques will not register their presence.</p>
-<p>However, the majority of compromised servers are carried out by bots i.e. automated attack programs, in-experienced attackers e.g. “script kiddies”, or dumb criminals.</p>
-<p>These sorts of attackers will abuse the server for all it’s worth whilst they have access to it and take few precautions to hide what they are doing.</p>
-<h2 id="Symptoms-of-a-compromised-server"><a href="#Symptoms-of-a-compromised-server" class="headerlink" title="Symptoms of a compromised server"></a>Symptoms of a compromised server</h2><p>When a server has been compromised by an in-experienced or automated attacker they will usually do something with it that consumes 100% of a resource. This resource will usually be either the CPU for something like crypt-currency mining or email spamming, or bandwidth for launching a DOS attack.</p>
-<p>This means that the first indication that something is amiss is that the server is “going slow”. This could manifest in the website serving pages much slower than usual, or email taking many minutes to deliver or send.</p>
-<p>So what should you look for?</p>
-<h2 id="Check-1-Who’s-currently-logged-in"><a href="#Check-1-Who’s-currently-logged-in" class="headerlink" title="Check 1 - Who’s currently logged in?"></a>Check 1 - Who’s currently logged in?</h2><p>The first thing you should look for is who is currently logged into the server. It is not uncommon to find the attacker actually logged into the server and working on it.</p>
-<p>The shell command to do this is <code>w</code>. Running <code>w</code> gives the following output:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 08:32:55 up 98 days,  5:43,  2 users,  load average: 0.05, 0.03, 0.00</span><br><span class="line">USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">root     pts/0    113.174.161.1    08:26    0.00s  0.03s  0.02s ssh root@coopeaa12</span><br><span class="line">root     pts/1    78.31.109.1      08:26    0.00s  0.01s  0.00s w</span><br></pre></td></tr></table></figure>
-<p>One of those IP’s is a UK IP and the second is Vietnamese. That’s probably not a good thing.</p>
-<p>Stop and take a breath, don’t panic and simply kill their SSH connection. Unless you can stop then re-entering the server they will do so quickly and quite likely kick you off and stop you getting back in.</p>
-<p>Please see the <strong>What should I do if I’ve been compromised</strong> section at the end of this guide no how to proceed if you do find evidence of compromise.</p>
-<p>The <code>whois</code> command can be run on IP addresses and will tell you what all the information about the organization that the IP is registered to, including the country.</p>
-<h2 id="Check-2-Who-has-logged-in"><a href="#Check-2-Who-has-logged-in" class="headerlink" title="Check 2 - Who has logged in?"></a>Check 2 - Who has logged in?</h2><p>Linux servers keep a record of which users logged in, from what IP, when and for how long. This information is accessed with the <code>last</code> command.</p>
-<p>The output looks like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root     pts/1        78.31.109.1      Thu Nov 30 08:26   still logged in</span><br><span class="line">root     pts/0        113.174.161.1    Thu Nov 30 08:26   still logged in</span><br><span class="line">root     pts/1        78.31.109.1      Thu Nov 30 08:24 - 08:26  (00:01)</span><br><span class="line">root     pts/0        113.174.161.1    Wed Nov 29 12:34 - 12:52  (00:18)</span><br><span class="line">root     pts/0        14.176.196.1     Mon Nov 27 13:32 - 13:53  (00:21)</span><br></pre></td></tr></table></figure>
-<p>There is a mix of my UK IP’s and some Vietnamese ones, with the top two still logged in. If you see any IP’s that are not authorized then refer to the final section.</p>
-<p>The login history is contained in a text file at <code>~/.bash_history</code> and is therefore easily removable. Often, attackers will simply delete this file to try to cover their tracks. Consequently, if you run <code>last</code> and only see your current login, this is a <strong>Bad Sign</strong>.</p>
-<p>If there is no login history be very, very suspicious and continue looking for indications of compromise.</p>
-<h2 id="Check-3-Review-the-command-history"><a href="#Check-3-Review-the-command-history" class="headerlink" title="Check 3 - Review the command history"></a>Check 3 - Review the command history</h2><p>This level of attacker will frequently take no precautions to leave no command history so running the <code>history</code> command will show you everything they have done. Be on the lookout for <code>wget</code> or <code>curl</code> commands to download out-of-repo software such as spam bots or crypto miners.</p>
-<p>The command history is contained in the <code>~/.bash_history</code> file so some attackers will delete this file to cover what they have done. Just as with the login history, if you run <code>history</code> and don’t see anything then the history file has been deleted. Again this is a <strong>Bad Sign</strong> and you should review the server very carefully.</p>
-<h2 id="Check-4-What’s-using-all-the-CPU"><a href="#Check-4-What’s-using-all-the-CPU" class="headerlink" title="Check 4 - What’s using all the CPU?"></a>Check 4 - What’s using all the CPU?</h2><p>The sorts of attackers that you will encounter usually don’t take too many precautions to hide what they are doing. So they will run processes that consume all the CPU. This generally makes it pretty easy to spot them. Simply run <code>top</code> and look at the highest process.</p>
-<p>This will also show people exploiting your server without having logged in. This could be, for example, someone using an unprotected form-mail script to relay spam.</p>
-<p>If you don’t recognize the top process then either Google its name or investigate what it’s doing with <code>losf</code> or <code>strace</code>.</p>
-<p>To use these tools first copy its PID from <code>top</code> and run:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace -p PID</span><br></pre></td></tr></table></figure>
-<p>This will display all the system calls the process is making. It’s a lot of information but looking through it will give you a good idea what’s going on.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof  -p PID</span><br></pre></td></tr></table></figure>
-<p>This program will <strong>l</strong>i<strong>s</strong>t the <strong>o</strong>pen <strong>f</strong>iles that the process has. Again, this will give you a good idea what it’s doing by showing you what files it is accessing.</p>
-<h2 id="Check-5-Review-the-all-the-system-processes"><a href="#Check-5-Review-the-all-the-system-processes" class="headerlink" title="Check 5 - Review the all the system processes"></a>Check 5 - Review the all the system processes</h2><p>If an unauthorized process is not consuming enough CPU to get listed noticeably on <code>top</code> it will still get displayed in a full process listing with <code>ps</code>. My proffered command is <code>ps auxf</code> for providing the most information clearly.</p>
-<p>You should be looking for any processes that you don’t recognize. The more times you run <code>ps</code> on your servers (which is a good habit to get into) the more obvious an alien process will stand out.</p>
-<h2 id="Check-6-Review-network-usage-by-process"><a href="#Check-6-Review-network-usage-by-process" class="headerlink" title="Check 6 - Review network usage by process"></a>Check 6 - Review network usage by process</h2><p>The command <code>iftop</code> functions like <code>top</code> to show a ranked list of processes that are sending and receiving network data along with their source and destination. A process like a DOS attack or spam bot will immediately show itself at the top of the list.</p>
-<h2 id="Check-7-What-processes-are-listening-for-network-connections"><a href="#Check-7-What-processes-are-listening-for-network-connections" class="headerlink" title="Check 7 - What processes are listening for network connections?"></a>Check 7 - What processes are listening for network connections?</h2><p>Often an attacker will install a program that doesn’t do anything except listen on the network port for instructions. This does not consume CPU or bandwidth whilst it is waiting so can get overlooked in the <code>top</code> type commands.</p>
-<p>The commands <code>lsof</code> and <code>netstat</code> will both list all networked processes. I use them with the following options:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsof -i</span><br><span class="line">netstat -plunt</span><br></pre></td></tr></table></figure>
-<p>You should look for any process that is listed as in the <code>LISTEN</code> or <code>ESTABLISHED</code> status as these processes are either waiting for a connection (LISTEN) or have a connection open (ESTABLISHED). If you don’t recognize these processes use <code>strace</code> or <code>lsof</code> to try to see what they are doing.</p>
-<h2 id="What-should-I-do-if-I’ve-been-compromised"><a href="#What-should-I-do-if-I’ve-been-compromised" class="headerlink" title="What should I do if I’ve been compromised?"></a>What should I do if I’ve been compromised?</h2><p>The first thing to do is not to panic, especially if the attacker is currently logged in. You need to be able to take back control of the machine before the attacker is aware that you know about them. If they realize you know about them they may well lock you out of your server and start destroying any assets out of spite.</p>
-<p>If you are not very technical then simply shut down the server. Either from the server itself with <code>shutdown -h now</code> or <code>systemctl poweroff</code>. Or log into your hosting provider’s control panel and shut down the server. Once it’s powered off you can work on the needed firewall rules and consult with your provider in your own time.</p>
-<p>If you’re feeling a bit more confident and your hosting provider has an upstream firewall then create and enable the following two rules in this order:</p>
-<ol>
-<li>Allow SSH traffic from only your IP address.</li>
-<li>Block <strong>everything</strong> else, not just SSH but every protocol on every port.</li>
-</ol>
-<p>This will immediately kill their SSH session and give only you access to the server.</p>
-<p>If you don’t have access to an upstream firewall then you will have to create and enable these firewall rules on the server itself and then, when they are in place kill the attacker’s ssh session with the <code>kill</code> command.</p>
-<p>A final method, where available, is to log into the server via an out-of-band connection such as the serial console and stop networking with <code>systemctl stop network.service</code>. This will completely stop any network access so you can now enable the firewall rules in your own time.</p>
-<p>Once you have regained control of the server <strong>do not trust it</strong>.</p>
-<p>Do not attempt to fix things up and continue using the server. You can never be sure what the attacker did and so you can never sure the server is secure.</p>
-<p>The <strong>only sensible</strong> course of action is to copy off all the data that you need and start again from a fresh install.</p>
-<h1 id="Fin"><a href="#Fin" class="headerlink" title="Fin"></a>Fin</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Security/">Security</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Security/">Security</a></li></ul>
     </div>
 
       
