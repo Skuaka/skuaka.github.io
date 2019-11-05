@@ -850,80 +850,6 @@
 
 
   
-    <article id="post-Network/Tcp/ICMP" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/22/Network/Tcp/ICMP/" class="article-date">
-      <time datetime="2019-03-22T14:49:12.000Z" itemprop="datePublished">2019-03-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/22/Network/Tcp/ICMP/">ICMP</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h3><p><strong>互联网控制消息协议</strong>（英语：<strong>I</strong>nternet <strong>C</strong>ontrol <strong>M</strong>essage <strong>P</strong>rotocol，缩写：<strong>ICMP</strong>）是互联网协议族的核心协议之一。它用于网际协议（IP）中发送控制消息，提供可能发生在通信环境中的各种问题反馈。通过这些信息，使管理者可以对所发生的问题作出诊断，然后采取适当的措施解决。</p>
-<p>ICMP依靠IP來完成它的任务，它是IP的主要部分。它与传输协议（如TCP和UDP）显著不同：它一般不用于在两点间传输数据。它通常不由网络程序直接使用，除了ping和traceroute这两个特別的例子。</p>
-<h3 id="报头"><a href="#报头" class="headerlink" title="报头"></a>报头</h3><p>ICMP报头从IP报头的第160位开始（IP首部20字节）（除非使用了IP报头的可选部分）。</p>
-<p><img src="Picture/ICMP_header.jpg" alt="ICMP_header"></p>
-<ul>
-<li><strong>Type</strong> - ICMP的類型,标识生成的错误报文；</li>
-<li><strong>Code</strong> - 進一步劃分ICMP的類型,该字段用来查找产生错误的原因.；例如，ICMP的目標不可達類型可以把這個位設為1至15等來表示不同的意思。</li>
-<li><strong>Checksum</strong> - 校验码部分,這個字段包含有從ICMP報頭和數據部分計算得來的，用於檢查錯誤的數據，其中此校验码字段的值視為0。</li>
-<li><strong>ID</strong> - 這個字段包含了ID值，在Echo Reply類型的消息中要返回這個字段。</li>
-<li><strong>Sequence</strong> - 這個字段包含一個序號，同樣要在Echo Reply類型的消息中要返回這個字段。</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Network/Tcp/IP头_TCP头_UDP头" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1013,6 +939,80 @@
 <h3 id="udp头部定义"><a href="#udp头部定义" class="headerlink" title="udp头部定义"></a>udp头部定义</h3><p><img src="http://118.25.53.128/Picture/Tcp/o_udp_header.jpg" alt="o_udp头部"></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*UDP头定义，共8个字节*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">UDP_HEADER</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usSourPort;					<span class="comment">// 源端口号16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usDestPort;					<span class="comment">// 目的端口号16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usLength;						<span class="comment">// 数据包长度16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usCheckSum;					<span class="comment">// 校验和16bit</span></span><br><span class="line">&#125;__attribute__((packed))UDP_HEADER, *PUDP_HEADER;</span><br></pre></td></tr></table></figure>
 <h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Tcp/ICMP" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/22/Network/Tcp/ICMP/" class="article-date">
+      <time datetime="2019-03-22T14:49:12.000Z" itemprop="datePublished">2019-03-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/22/Network/Tcp/ICMP/">ICMP</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h3><p><strong>互联网控制消息协议</strong>（英语：<strong>I</strong>nternet <strong>C</strong>ontrol <strong>M</strong>essage <strong>P</strong>rotocol，缩写：<strong>ICMP</strong>）是互联网协议族的核心协议之一。它用于网际协议（IP）中发送控制消息，提供可能发生在通信环境中的各种问题反馈。通过这些信息，使管理者可以对所发生的问题作出诊断，然后采取适当的措施解决。</p>
+<p>ICMP依靠IP來完成它的任务，它是IP的主要部分。它与传输协议（如TCP和UDP）显著不同：它一般不用于在两点间传输数据。它通常不由网络程序直接使用，除了ping和traceroute这两个特別的例子。</p>
+<h3 id="报头"><a href="#报头" class="headerlink" title="报头"></a>报头</h3><p>ICMP报头从IP报头的第160位开始（IP首部20字节）（除非使用了IP报头的可选部分）。</p>
+<p><img src="Picture/ICMP_header.jpg" alt="ICMP_header"></p>
+<ul>
+<li><strong>Type</strong> - ICMP的類型,标识生成的错误报文；</li>
+<li><strong>Code</strong> - 進一步劃分ICMP的類型,该字段用来查找产生错误的原因.；例如，ICMP的目標不可達類型可以把這個位設為1至15等來表示不同的意思。</li>
+<li><strong>Checksum</strong> - 校验码部分,這個字段包含有從ICMP報頭和數據部分計算得來的，用於檢查錯誤的數據，其中此校验码字段的值視為0。</li>
+<li><strong>ID</strong> - 這個字段包含了ID值，在Echo Reply類型的消息中要返回這個字段。</li>
+<li><strong>Sequence</strong> - 這個字段包含一個序號，同樣要在Echo Reply類型的消息中要返回這個字段。</li>
+</ul>
+
       
     </div>
     
