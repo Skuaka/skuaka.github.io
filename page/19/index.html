@@ -234,6 +234,413 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Frontend/Html入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/04/03/Frontend/Html入门/" class="article-date">
+      <time datetime="2018-04-03T04:17:16.000Z" itemprop="datePublished">2018-04-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/03/Frontend/Html入门/">Html入门</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>html(hyper markup language)超文本标记语言，是一种标准—–w3c</p>
+<p>超文本：在文本内容的基础上，添加更加丰富的信息（图片，动画，声音等）</p>
+<h3 id="html基本骨架结构"><a href="#html基本骨架结构" class="headerlink" title="html基本骨架结构"></a>html基本骨架结构</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>mytitle<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="html结构说明"><a href="#html结构说明" class="headerlink" title="html结构说明"></a>html结构说明</h3><ul>
+<li><p><code>&lt;html&gt;</code>含义：告诉浏览器网页的代码用什么格式来解析</p>
+</li>
+<li><p><code>&lt;head&gt;</code>含义：告诉浏览器网页的文字用什么字符集，字符集不正确则会出现乱码</p>
+<p>gb2312  简体中文  —-  <strong>汉字操作系统默认使用的字符集</strong></p>
+<p>gbk  国际码       utf-8  多国语言</p>
+</li>
+<li><p><code>&lt;title&gt;</code>含义：便于搜索引擎查找</p>
+</li>
+<li><p><code>&lt;body&gt;</code>含义：网站的内容只有放入该标签才能在窗口中显示</p>
+</li>
+</ul>
+<h3 id="html书写规范"><a href="#html书写规范" class="headerlink" title="html书写规范"></a>html书写规范</h3><ul>
+<li>不区分大小写，但是w3c使用的是小写</li>
+<li>单标签一定要闭合<code>&lt;br /&gt;</code></li>
+<li>属性值用双引号</li>
+</ul>
+<h3 id="html文本标签"><a href="#html文本标签" class="headerlink" title="html文本标签"></a>html文本标签</h3><ul>
+<li><code>&lt;font color=&quot;red&quot; size=&quot;5&quot; face=&quot;楷书&quot;&gt;content&lt;/font&gt;</code>size以<strong>号</strong>为单位</li>
+<li><ol>
+<li><code>&lt;b&gt;&lt;/b&gt;</code>加粗</li>
+<li><code>&lt;strong&gt;&lt;/strong&gt;</code>加粗 加强语气</li>
+<li><code>&lt;i&gt;&lt;/i&gt;</code>倾斜</li>
+<li><code>&lt;em&gt;&lt;/em&gt;</code>倾斜 加强语气</li>
+<li><code>&lt;u&gt;&lt;/u&gt;</code>下划线</li>
+<li><code>&lt;ins&gt;&lt;/ins&gt;</code>下划线 强调内容</li>
+<li><code>&lt;sup&gt;&lt;/sup&gt;</code>上标</li>
+<li><code>&lt;sub&gt;&lt;/sub&gt;</code>下标</li>
+</ol>
+</li>
+<li>段落标签<code>&lt;p&gt;&lt;/p&gt;</code>属性：Align 取值 left center right</li>
+<li>标题标签<code>&lt;h1&gt;&lt;/h1&gt;...&lt;h6&gt;&lt;/h6&gt;</code>属性：Align</li>
+<li>pre 预定义标签<code>&lt;pre&gt;content&lt;/pre&gt;</code>保留标签之间内容的空格和换行</li>
+<li>div 本身没有意义，自己独占一行，结合css    <strong>块标签</strong></li>
+<li>span 本身没有意义，结合css   <strong>行内标签</strong></li>
+</ul>
+<h3 id="html图片标签"><a href="#html图片标签" class="headerlink" title="html图片标签"></a>html图片标签</h3><p>语法：<code>&lt;img 属性=&quot;属性值&quot;/&gt;</code></p>
+<p>属性：</p>
+<ul>
+<li><p>路径 src=”图片地址“       图片要放到同一个站点（文件夹）下</p>
+</li>
+<li><p>宽度 width=“1”  以像素px为单位，不用写单位</p>
+</li>
+<li><p>高度 weight=“1”</p>
+</li>
+<li><p>边框 border=“1”</p>
+</li>
+<li><p>解释说明 alt=“对图片的描述内容”</p>
+</li>
+<li><p>图片和内容左右之间的距离 hspace=“1”  （css实现更佳）</p>
+</li>
+<li><p>图片和内容上下之间的距离 vspace=“1”  （css实现更佳）</p>
+<p>注意：只设置高度或宽度，图片等比例缩放</p>
+</li>
+</ul>
+<h3 id="html列表"><a href="#html列表" class="headerlink" title="html列表"></a>html列表</h3><ol>
+<li><p>无序列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>one<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>two<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>three<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>属性：type  设置列表前面符号的样式  取值  circle(实心圆)  disc(空心圆 默认)  square(方形)</p>
+</li>
+<li><p>有序列表</p>
+<p><code>&lt;ol&gt;</code>类似</p>
+</li>
+</ol>
+<h3 id="html表格"><a href="#html表格" class="headerlink" title="html表格"></a>html表格</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span>/*----第一行----*/</span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span>/*----第二行----*/</span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>图片内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">td</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>table属性：</p>
+<ol>
+<li><p>边框 border=“2” 默认是0</p>
+</li>
+<li><p>宽度 width=“2”</p>
+</li>
+<li><p>高度 height=“2”（w3c不建议使用高度）</p>
+</li>
+<li><p>居中方式 align=“center”</p>
+</li>
+<li><p>表格中内容和单元格之间的距离 cellpadding=“2” 默认是2px</p>
+</li>
+<li><p>表格中单元格和单元格之间的距离 cellspacing=“2” 默认是2px</p>
+</li>
+<li><p>背景颜色 bgcolor=“red”</p>
+</li>
+<li><p>背景图片 backgroun=“图片地址” (不能含有中文)</p>
+<p>注意：背景图片的优先级高于背景颜色</p>
+</li>
+<li><p>合并边框线 rules=“all”（css实现更佳）</p>
+</li>
+<li><p>边框颜色 bordercolor=“red”（css实现更佳）</p>
+</li>
+</ol>
+</li>
+<li><p>tr 行属性</p>
+<ol>
+<li>高度 height=“300”</li>
+<li>背景颜色 bgcolor=“blue”</li>
+<li>背景图片 background=“图片地址”</li>
+<li>水平对齐方式 align=“left//center//right”</li>
+<li>垂直对齐方式 valign=“top//middle//bottom”</li>
+</ol>
+</li>
+<li><p>td 单元格属性</p>
+<ol>
+<li><p>背景颜色 bgcolor</p>
+</li>
+<li><p>背景图片 background=“图片地址”</p>
+</li>
+<li><p>宽度 width=“300”</p>
+</li>
+<li><p>高度 height=“40”</p>
+</li>
+<li><p>水平对齐方式 align=“left//center//right”</p>
+</li>
+<li><p>垂直对齐方式 valign=“top//middle//bottom”</p>
+</li>
+<li><p><strong>合并单元格</strong></p>
+<p>横向合并 colspan=“2” 横向合并两个</p>
+<p>纵向合并 rowspan=“3”</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="html链接"><a href="#html链接" class="headerlink" title="html链接"></a>html链接</h3><p><strong>语法</strong>：<code>&lt;a 属性=“属性值”&gt;content&lt;/a&gt;</code></p>
+<p><strong>属性</strong>：</p>
+<ul>
+<li>链接的地址 href=“地址 url”   相对地址或绝对地址</li>
+<li>设置打开目标文件的窗口 target=“方式”<ol>
+<li>在新的窗口中打开目标文件 _blank</li>
+<li>默认的打开方式，在原窗口打开目标文件 _self</li>
+</ol>
+</li>
+<li>name 定义锚点的名称</li>
+</ul>
+<p><strong>特殊链接</strong>：</p>
+<ul>
+<li><p>下载链接</p>
+<p>不需要下载的文件  .html   .jpg   .gif</p>
+<p>必须要下载的文件  .zip  .exe</p>
+</li>
+<li><p>邮件连接</p>
+<p><code>&lt;a href=&quot;mailto:邮件地址&quot;&gt;content&lt;/a&gt;</code></p>
+</li>
+<li><p>空链接</p>
+<p>链接到当前页面  <code>&lt;a href=&quot;#&quot;&gt;content&lt;/a&gt;</code></p>
+</li>
+<li><p>javascript 链接</p>
+<p><code>&lt;a href=&quot;javascript:window.close()&quot;&gt;关闭页面&lt;/a&gt;</code></p>
+<p>Firefox设置问题：1在地址栏输入about config  2在搜索中输入close_windows  3双击配置改为true</p>
+</li>
+</ul>
+<p><strong>锚点</strong>：用name属性定义锚点名称</p>
+<p>定义锚点<code>&lt;a name=&quot;anchor&quot;&gt;&lt;/a&gt;</code>标签之间不加内容</p>
+<p>跳转锚点<code>&lt;a href=&quot;#anchor&quot;content&lt;/a&gt;</code></p>
+<h3 id="html特殊字符"><a href="#html特殊字符" class="headerlink" title="html特殊字符"></a>html特殊字符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;nbsp; 一个空格 占一个字符 一个汉字占两个字符</span><br><span class="line">&amp;copy; 版权</span><br><span class="line">&amp;lit; &lt;</span><br><span class="line">&amp;git; &gt;</span><br><span class="line">&amp;yen; ¥</span><br></pre></td></tr></table></figure>
+<h3 id="html颜色代码"><a href="#html颜色代码" class="headerlink" title="html颜色代码"></a>html颜色代码</h3><table>
+<thead>
+<tr>
+<th>英文名字</th>
+<th>red</th>
+<th>green</th>
+<th>blue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>十六进制</td>
+<td><code>#ff0000</code></td>
+<td><code>#00ff00</code></td>
+<td><code>#0000ff</code></td>
+</tr>
+<tr>
+<td>十进制rgb</td>
+<td>rgb(255,0,0)</td>
+<td>rgb(0,255,0)</td>
+<td>rgb(0,0,255)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Meta标签"><a href="#Meta标签" class="headerlink" title="Meta标签"></a>Meta标签</h3><p>描述网页文档属性</p>
+<pre><code>http-equiv    和    name
+</code></pre><p>http-equiv  模拟http文件头信息，当内容从服务器端发送客户端，告诉浏览器如何正确显示信息</p>
+<ul>
+<li><p>字符集</p>
+<p><code>&lt;meta http-equiv=&quot;content-type&quot;content=&quot;text/html;charset=&quot;UTF-8&quot;/&gt;</code>多国语言</p>
+<p><strong>字符集介绍</strong></p>
+<ul>
+<li><p>ASCII    2^8=256</p>
+</li>
+<li><p>ANSI    各个国家对ASCII编码进行扩展，用于显示本国的语言  2^16=65536</p>
+<p>中文操作系统 gb2312 收录了6763个汉字</p>
+<p>繁体操作系统 big5</p>
+</li>
+<li><p>GBK     对gb2312扩充，收录冷门字       越2.1万汉字</p>
+</li>
+<li><p>Unicode  计划将世上所有字符统一编码，用4Byte(32bit)表示一个字符，造成极大空间浪费</p>
+</li>
+<li><p>UTF-8   多国语言编码，它会选择合适编码来翻译不同的字符</p>
+</li>
+</ul>
+</li>
+<li><p>网页自动刷新</p>
+<p><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;4&quot;/&gt;</code>间隔4秒网页自动刷新</p>
+<p><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;8;http://www.baidu.com&quot;/&gt;</code>等待8秒自动跳转到百度</p>
+</li>
+<li><p>Name可以设置网页关键字，描述信息等</p>
+<p><code>&lt;meta name=&quot;description&quot; content=&quot;网站的描述信息&quot;/&gt;便于搜索引擎需要</code></p>
+<p><code>&lt;meta name=&quot;author&quot; content=&quot;作者&quot;/&gt;</code>网站的作者</p>
+</li>
+</ul>
+<h3 id="html表单"><a href="#html表单" class="headerlink" title="html表单"></a>html表单</h3><p>可以获取客户端的信息（数据）。</p>
+<p>对表单中的数据进行验证，如果不符合制定的要求，提示验证没有通过；如果符合相应的要求，把数据提交到服务器端，数据放入数据库中。</p>
+<p>表单分为前台的制作页面，php对数据的处理。</p>
+<p><strong>表单的结构</strong></p>
+<p>语法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> 属性=<span class="string">“属性值”</span>&gt;</span></span><br><span class="line">  	控件</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>表单的属性</strong></p>
+<ol>
+<li><p>Name=”username”  表单的识别名称</p>
+</li>
+<li><p>Action=”xx.php”  对数据进行处理</p>
+<p>Action=””  对表单中的数据处理的程序就在当前文档</p>
+</li>
+<li><p>Method=”get/post”  把表单中的数据提交到服务器端的方法，传递数据的方法</p>
+<ol>
+<li><p>Get 方法 默认的一种传递数据的方法，通过地址来传递表单中的数据。</p>
+<ul>
+<li>不能传递敏感的数据，密码</li>
+<li>不能传递大量的数据，每次只能传递1024字节。</li>
+<li>不能上传附件</li>
+</ul>
+</li>
+<li><p>Post 方法，不是通过地址栏传递数据，数据传给文件处理程序</p>
+<ul>
+<li>相对安全</li>
+<li>可以传递海量数据</li>
+<li>可以传递附件</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>表单控件</strong></p>
+<h4 id="单行文本框"><a href="#单行文本框" class="headerlink" title="单行文本框"></a>单行文本框</h4><p>(单标签，行内标签)</p>
+<p>语法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>属性：</p>
+<ul>
+<li>Name=“username”  单行文本框的识别名称，是把输入框中的数据，提交到文件的处理程序，可以自己定义名称，命名规则。</li>
+<li>Size=“数值” 输入框的宽度，以字符为单位</li>
+<li>Maxlength=”数值“  最多允许输入的字符数，如果超出范围，输入不进去</li>
+<li>value=“内容”  设置输入框的初始值，输入框中的默认数据信息</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">size</span>=<span class="string">"50"</span> <span class="attr">maxlength</span>=<span class="string">"8"</span> <span class="attr">value</span>=<span class="string">"请输入账号/用户名"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="密码框"><a href="#密码框" class="headerlink" title="密码框"></a>密码框</h4><p>语法：type=”password”</p>
+<p>属性：</p>
+<ul>
+<li>Name</li>
+<li>Size </li>
+<li>Maxlength</li>
+<li>value  初始值</li>
+<li>Readonly=“Readonly” 只读属性，只能选中，不能修改（不常用）</li>
+<li>Disable=“Disable” 禁止属性，不能选中，不能修改（以Firefox为准）</li>
+</ul>
+<h4 id="单选按钮"><a href="#单选按钮" class="headerlink" title="单选按钮"></a>单选按钮</h4><p>语法：type=”radio”</p>
+<p>属性：</p>
+<ul>
+<li>Name 组名，单选按钮<strong>组</strong>的识别名称，一个组能选定一个单选按钮。</li>
+<li>Value 初始值，必须写，代表每一项的值。</li>
+</ul>
+<h4 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h4><p>（多选按钮）</p>
+<p>语法：type=“checkbox”</p>
+<p>属性：</p>
+<ul>
+<li>Name  组名</li>
+<li>Value  初始值，设置每一项的值</li>
+<li>checked=“checked”  默认被选中</li>
+</ul>
+<h4 id="多行文本框"><a href="#多行文本框" class="headerlink" title="多行文本框"></a>多行文本框</h4><p>（双标签）</p>
+<p>语法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">rows</span>=<span class="string">"10"</span> <span class="attr">cols</span>=<span class="string">"80"</span> <span class="attr">name</span>=<span class="string">"content"</span>&gt;</span>默认显示内容<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>属性：</p>
+<ul>
+<li>Name</li>
+<li>Value 不要出现value，如果想显示默认的信息，直接在双标签之间输入。</li>
+<li>Rows  显示的行数</li>
+<li>Cols  一行显示多少字符</li>
+</ul>
+<h4 id="下拉列表"><a href="#下拉列表" class="headerlink" title="下拉列表"></a>下拉列表</h4><p>（双标签）</p>
+<p>语法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">option</span>&gt;</span>---请选择---<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">option</span>&gt;</span>选择1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">option</span>&gt;</span>选择2<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>属性：</p>
+<ul>
+<li>Name</li>
+<li>Value  每一项的初始值，不写的话默认为选择的字符串内容</li>
+</ul>
+<h4 id="隐藏域"><a href="#隐藏域" class="headerlink" title="隐藏域"></a>隐藏域</h4><p>隐藏起来，不是给客户看，是给程序用的（以后常用）</p>
+<p>语法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"id1"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="文件域"><a href="#文件域" class="headerlink" title="文件域"></a>文件域</h4><p>语法：type=“file”</p>
+<p>属性：</p>
+<ul>
+<li>Name</li>
+<li>Value  不写value，通过单击按钮来选择文件，选择的文件就是value值，value是只读属性，不能手动输入。</li>
+</ul>
+<h4 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h4><ol>
+<li><p>提交按钮</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intput</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"按钮上显示的文字"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片按钮（属于提交按钮的一种）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intput</span> <span class="attr">type</span>=<span class="string">"image"</span> <span class="attr">src</span>=<span class="string">"图片的地址"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重置按钮—-恢复到默认的状态</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intput</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">value</span>=<span class="string">"按钮上显示的文字"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>普通按钮—-本身没有任何功能，结合程序构成功能</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intput</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"按钮上显示的文字"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">onclick</span>=<span class="string">"javascript:window.alert('你已经投过票了')"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Xhtml"><a href="#Xhtml" class="headerlink" title="Xhtml"></a>Xhtml</h3><p>可扩展的超文本标记语言—–取代 html，pc机 —–面向当今的移动端设备</p>
+<p>Xhtml语法比html严格：</p>
+<ul>
+<li><p>输入的标签和属性必须是小写</p>
+</li>
+<li><p>单标签后必须加/ 例如<code>&lt;br /&gt;</code></p>
+</li>
+<li><p>属性必须用双引号</p>
+</li>
+<li><p>必须有 dtd （document type definition）文档类型定义<br>dtd 是一种验证机制，检验输入的xhtml 是否符合规范<br>dtd 分类：</p>
+<ul>
+<li><p>过渡型  xhtml1-transitional   允许使用表现标签和属性<code>&lt;b&gt; &lt;i&gt; &lt;font color=&quot;red&quot;&gt;</code>等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;&quot;http://...//xhtml1-transitional.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>严格型  xhtml1-strict（不常用）不允许使用表现标签和属性，必须使用css样式来设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;&quot;http://...//xhtml1-strict.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>框架型  xhtml1-frameset（不常用）给框架用</p>
+</li>
+<li><p>可以通过该网站测试 dtd 声明   <a href="http://www.w3.org" target="_blank" rel="noopener">http://www.w3.org</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Frontend/CSS入门" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -625,101 +1032,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>str.join（list）</p>
-<p>str.split（str）</p>
-<p>str.find（str’）返回第一次出现str’偏移量</p>
-<p>str.rfind（str’）最后一次</p>
-<p>str.count（str’）出现次数</p>
-<p>ord(‘s’)       返回ascii       115</p>
-<p>chr(‘115’)    返回对应的字符      ‘s’</p>
-<p>name.list（）初始化空列表</p>
-<p>list.append（elem）</p>
-<p>list.extend（list’）</p>
-<p>list.insert（offset，elem）</p>
-<p>list.remove（name）</p>
-<p>del list[:1] 即 list[:1]=[]</p>
-<p>list.pop（offset）提取出后删除，默认-1</p>
-<p>list.index（elem）返回offset</p>
-<p>if elem in list</p>
-<p>list.sort（）会改变list</p>
-<p>list.sorted（）返回排序好的，不改变list</p>
-<p>复制list的方法</p>
-<p> b=a.copy（）/  c=list（a）/   d=a[：]</p>
-<p>元组解包 a，b，c = tuple</p>
-<p>利用元组交换变量 a，b = b，a</p>
-<p>dict.update（dict’）</p>
-<p>dict.clear（）清空</p>
-<p>dict.get（key，*可选内容）返回key对应的值 否则返回可选 否则返回None</p>
-<p>dict.keys(）dict.values(）dict.items(）</p>
-<p>在py3中要自己用list（）将返回值变成list</p>
-<p>dict.copy（dict’）</p>
-<p>set（）设置集合</p>
-<p>a&amp;b=a.intersection（b）</p>
-<p>a|b=a.union（b）</p>
-<p>a-b=a.difference（b）</p>
-<p>a^b=a.symmetric_difference(b）出现一次</p>
-<p>a&lt;=b 即 a.issubset（b）   a&lt;b真子集</p>
-<p>a&gt;=b 即 a.issuperset（b） a&gt;b真超集</p>
-<p>output=open(r’C:\spam’,’w’)</p>
-<p>input=open(‘data’) 默认为’r’</p>
-<p>type（）返回参数的类型</p>
-<p>\可以多行输入</p>
-<p>for a,b,c in zip(<em>,</em>,*)</p>
-<p>list(zip(a,b))       返回组合迭代对象</p>
-<p>range（start，stop，*step）自然数</p>
-<p>列表推导式[expression for item in iterable if condition ]</p>
-<p>example.       cells=[(row,cop) for row in rows for cop in cols if…]</p>
-<p>字典推导式</p>
-<p>{key_expression : value_expression for expression in iterable}</p>
-<p>example       letter_counts={letter : word.count(letter) for letter in set(word)}</p>
-<p>集合推导式 略</p>
-<p>def fun（）：</p>
-<p>​      pass </p>
-<p>#什么都不做，返回None</p>
-<p>关键字参数 fun（参数1=？，参数2=？）参数位置可改变</p>
-<p>*（位置参数收集）将一组可变数量的位置参数集合成参数值的元组</p>
-<p>**（关键字参数收集）将参数收集到字典中，参值对应。</p>
-<p>函数开头可以写文档字符串</p>
-<p>help（fun）打印出fun的形参和文档字符串</p>
-<p>print（fun.<strong>doc</strong>）仅打印文档字符串</p>
-<p>（lambda 参数：定义）匿名小函数 🤔</p>
-<p>生成器函数def my_range（first=0，last=10，step=1）：</p>
-<p>​      number = first</p>
-<p>​      while number &lt; last：</p>
-<p>​               <strong>yield</strong> number</p>
-<p>​               number+=step</p>
-<p>ranger = my_range（1，5）</p>
-<p>for x in ranger：</p>
-<p>​        print （x）</p>
-<p>global 声明 在局部命名空间引用全局变量</p>
-<p>locals（） globals（）返回局部/全局命名空间内容的字典</p>
-<p>别名导入模块。from ？ import  ？ as ？</p>
-<p>两个计数器Counter（）可以用集合的方法</p>
-<p>pprint（）友好输出</p>
-<p>input()支持表达式和数字，不支持字符串。raw_input()支持字符串</p>
-<p>print(value, …, sep=’ ‘, end=’\n’, file=sys.stdout, flush=False)</p>
-<p>def  <strong>init</strong>（self，…）</p>
-<p>super().name=</p>
-<p>name=property（get_name,set_name)</p>
-<p>@property</p>
-<p>@name.setter（省略setter则无法从直接从外部设置值）</p>
-<p>以<strong>开头命名的类特性不能直接访问，但可以 （特定类._类名</strong>类特性） 访问。</p>
-<p>@classmethod 类方法 类参数约定为cls</p>
-<p>魔术方法<strong>eq</strong>(self, other) </p>
-<p>​               return  self == other</p>
-<p>类似的 ne !=      lt &lt;     gt  &gt;.   le &lt;=.   ge &gt;=</p>
-<p>add+ sub- mul* floordiv// truediv/ mod% pow**         str(print  repr(交互式str len</p>
-<p>命名元组 from collections import namedtuple</p>
-<p>Duck=namedtuple(‘Duck’,’bill tail’)</p>
-<p>duck=Duck(‘wide orange’,’long’)</p>
-<p>>&gt;&gt;duck.bill</p>
-<p>‘wide orange’</p>
-<p>parts={‘bill’=’wide orange’,’tail’=’long’}</p>
-<p>duck2=Duck(**parts)//用字典创建</p>
-<p>命名元组是不可变的，蛋可以替换其中某些域的值并返回一个新的命名元组</p>
-<p>duck3=duck2._replace(‘bill’=</p>
-<p>%! &lt;20s 左对齐20个字符，空位用!填充</p>
-
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br></pre></td><td class="code"><pre><span class="line">str.join（list）</span><br><span class="line"></span><br><span class="line">str.split（str）</span><br><span class="line"></span><br><span class="line">str.find（st<span class="string">r'）返回第一次出现str'</span>偏移量</span><br><span class="line"></span><br><span class="line">str.rfind（st<span class="string">r'）最后一次</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">str.count（str'</span>）出现次数</span><br><span class="line"></span><br><span class="line">ord(<span class="string">'s'</span>)       返回ascii       <span class="number">115</span></span><br><span class="line"></span><br><span class="line">chr(<span class="string">'115'</span>)    返回对应的字符      <span class="string">'s'</span></span><br><span class="line"></span><br><span class="line">name.list（）初始化空列表</span><br><span class="line"></span><br><span class="line">list.append（elem）</span><br><span class="line"></span><br><span class="line">list.extend（list<span class="string">'）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">list.insert（offset，elem）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">list.remove（name）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">del list[:1] 即 list[:1]=[]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">list.pop（offset）提取出后删除，默认-1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">list.index（elem）返回offset</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if elem in list</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">list.sort（）会改变list</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">list.sorted（）返回排序好的，不改变list</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">复制list的方法</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> b=a.copy（）/  c=list（a）/   d=a[：]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">元组解包 a，b，c = tuple</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">利用元组交换变量 a，b = b，a</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">dict.update（dict'</span>）</span><br><span class="line"></span><br><span class="line">dict.clear（）清空</span><br><span class="line"></span><br><span class="line">dict.get（key，*可选内容）返回key对应的值 否则返回可选 否则返回<span class="literal">None</span></span><br><span class="line"></span><br><span class="line">dict.keys(）dict.values(）dict.items(）</span><br><span class="line"></span><br><span class="line">在py3中要自己用list（）将返回值变成list</span><br><span class="line"></span><br><span class="line">dict.copy（dict<span class="string">'）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">set（）设置集合</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">a&amp;b=a.intersection（b）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">a|b=a.union（b）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">a-b=a.difference（b）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">a^b=a.symmetric_difference(b）出现一次</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">a&lt;=b 即 a.issubset（b）   a&lt;b真子集</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">a&gt;=b 即 a.issuperset（b） a&gt;b真超集</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">output=open(r'</span>C:\spam<span class="string">','</span>w<span class="string">')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">input=open('</span>data<span class="string">') 默认为'</span><span class="string">r'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">type（）返回参数的类型</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">\可以多行输入</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">for a,b,c in zip(*,*,*)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">list(zip(a,b))       返回组合迭代对象</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">range（start，stop，*step）自然数</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">列表推导式[expression for item in iterable if condition ]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">example.       cells=[(row,cop) for row in rows for cop in cols if…]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">字典推导式</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#123;key_expression : value_expression for expression in iterable&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">example       letter_counts=&#123;letter : word.count(letter) for letter in set(word)&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">集合推导式 略</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">def fun（）：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​      pass </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">\#什么都不做，返回None</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">关键字参数 fun（参数1=？，参数2=？）参数位置可改变</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">*（位置参数收集）将一组可变数量的位置参数集合成参数值的元组</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">**（关键字参数收集）将参数收集到字典中，参值对应。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">函数开头可以写文档字符串</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">help（fun）打印出fun的形参和文档字符串</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">print（fun.__doc__）仅打印文档字符串</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">（lambda 参数：定义）匿名小函数 🤔</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">生成器函数def my_range（first=0，last=10，step=1）：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​      number = first</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​      while number &lt; last：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​               **yield** number</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​               number+=step</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">ranger = my_range（1，5）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">for x in ranger：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​        print （x）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">global 声明 在局部命名空间引用全局变量</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">locals（） globals（）返回局部/全局命名空间内容的字典</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">别名导入模块。from ？ import  ？ as ？</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">两个计数器Counter（）可以用集合的方法</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">pprint（）友好输出</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">input()支持表达式和数字，不支持字符串。raw_input()支持字符串</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">print(value, ..., sep='</span> <span class="string">', end='</span>\n<span class="string">', file=sys.stdout, flush=False)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">def  __init__（self，…）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">super().name=</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">name=property（get_name,set_name)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@property</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@name.setter（省略setter则无法从直接从外部设置值）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">以__开头命名的类特性不能直接访问，但可以 （特定类._类名__类特性） 访问。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@classmethod 类方法 类参数约定为cls</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">魔术方法__eq__(self, other) </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">               return  self == other</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">类似的 ne !=      lt &lt;     gt  &gt;.   le &lt;=.   ge &gt;=</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">add+ sub- mul* floordiv// truediv/ mod% pow**         str(print  repr(交互式str len</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">命名元组 from collections import namedtuple</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Duck=namedtuple('</span>Duck<span class="string">','</span>bill tail<span class="string">')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">duck=Duck('</span>wide orange<span class="string">','</span>long<span class="string">')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">\&gt;&gt;&gt;duck.bill</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'</span>wide orange<span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">parts=&#123;'</span>bill<span class="string">'='</span>wide orange<span class="string">','</span>tail<span class="string">'='</span>long<span class="string">'&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">duck2=Duck(**parts)//用字典创建</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">命名元组是不可变的，蛋可以替换其中某些域的值并返回一个新的命名元组</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">duck3=duck2._replace('</span>bill<span class="string">'=</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">%! &lt;20s 左对齐20个字符，空位用!填充</span></span><br></pre></td></tr></table></figure>
       
     </div>
     

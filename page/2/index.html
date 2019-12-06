@@ -234,6 +234,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Develop/travis" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/22/Develop/travis/" class="article-date">
+      <time datetime="2019-09-21T17:45:17.000Z" itemprop="datePublished">2019-09-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/22/Develop/travis/">travis笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="travis"><a href="#travis" class="headerlink" title="travis"></a>travis</h2><h3 id="travis-yml格式"><a href="#travis-yml格式" class="headerlink" title=".travis.yml格式"></a><code>.travis.yml</code>格式</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">c</span></span><br><span class="line"><span class="attr">compiler:</span> <span class="string">gcc</span></span><br><span class="line"></span><br><span class="line"><span class="attr">before_install:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">sudo</span> <span class="string">apt-get</span> <span class="string">install</span> <span class="string">valgrind</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span> </span><br><span class="line"><span class="bullet">  -</span> <span class="string">make</span> <span class="string">all</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">gcc</span> <span class="bullet">--std=c11</span> <span class="bullet">-Wall</span> <span class="bullet">-o</span> <span class="string">testcase1</span> <span class="string">testcase1.c</span> <span class="string">object.c</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">./testcase1</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">./testcase2.sh</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">gcc</span> <span class="bullet">--std=c11</span> <span class="bullet">-Wall</span> <span class="bullet">-g</span> <span class="bullet">-o</span> <span class="string">tc1-valgrind</span> <span class="string">testcase1.c</span> <span class="string">object.c</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">valgrind</span> <span class="bullet">--error-exitcode=5</span> <span class="bullet">--leak-check=yes</span> <span class="string">./tc1-valgrind</span></span><br></pre></td></tr></table></figure>
+<h4 id="如何触发测试"><a href="#如何触发测试" class="headerlink" title="如何触发测试"></a>如何触发测试</h4><p>在仓库添加正确的<code>.travis.yml</code>，然后每次push自动触发测试。</p>
+<h4 id="build图标"><a href="#build图标" class="headerlink" title="build图标"></a>build图标</h4><p>点击travis相关仓库的右上角的build图标，复制Markdown格式然后粘贴在README.md中即可。</p>
+<h4 id="Permission-denied"><a href="#Permission-denied" class="headerlink" title="Permission denied"></a>Permission denied</h4><p>可执行文件没有加执行权限。</p>
+<p>加上后再push就行了。</p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/travis/">travis</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux/System/ssh证书改变后无法登入" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1025,93 +1093,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Database/Mysql/mysql-dual表" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/06/10/Database/Mysql/mysql-dual表/" class="article-date">
-      <time datetime="2019-06-10T14:59:53.000Z" itemprop="datePublished">2019-06-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/10/Database/Mysql/mysql-dual表/">mysql-dual表</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="DUAL表"><a href="#DUAL表" class="headerlink" title="DUAL表"></a>DUAL表</h2><p>Oracle和MySQL中都有一张名称为dual的虚拟表，它们的作用和区别呢？</p>
-<p>From: <a href="https://javawangbaofeng.iteye.com/blog/2242694" target="_blank" rel="noopener">https://javawangbaofeng.iteye.com/blog/2242694</a></p>
-<h3 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h3><p>在MySQL中，对dual表的解释：</p>
-<p>DUAL is purely for the convenience of people who require that all SELECT statements should have FROM and possibly other clauses.</p>
-<p>纯粹是为了满足select … from…这一习惯问题，mysql会忽略对该表的引用。</p>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ul>
-<li><p><code>select * from dual;</code></p>
-<p>mysql会出错: 1096 - No tables used,</p>
-<p>oracle 会返回列：“DUMMY”，其值为“X”, 行为和只有一行记录的普通表是一样的！</p>
-</li>
-<li><p><code>select express [from dual];</code></p>
-<p>mysql总是作为返回该表达式值的普通select语句执行，返回一行记录的结果集，from dual 对mysql来说就是摆设。</p>
-<ul>
-<li><code>select 1 + 1;</code>  </li>
-<li><code>select 1 + 1 from dual;</code>  </li>
-</ul>
-<p>这两句sql语句执行的结果是一样的。</p>
-<p>oracle里该句必须有from dual；否则报错！</p>
-</li>
-<li><p><code>select express from dual where 0=2;</code></p>
-<p>mysq 和 oracle的行为一致：会先计算where的条件，再行计算express；这里的where条件会决定expres是否会返回。</p>
-<p>此时无论是Oracle还是MySQL都不可以省略from dual.</p>
-</li>
-</ul>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
     </div>
 
       

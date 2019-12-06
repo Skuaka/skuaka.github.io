@@ -234,6 +234,93 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/Mysql/mysql-dual表" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/06/10/Database/Mysql/mysql-dual表/" class="article-date">
+      <time datetime="2019-06-10T14:59:53.000Z" itemprop="datePublished">2019-06-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/10/Database/Mysql/mysql-dual表/">mysql-dual表</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="DUAL表"><a href="#DUAL表" class="headerlink" title="DUAL表"></a>DUAL表</h2><p>Oracle和MySQL中都有一张名称为dual的虚拟表，它们的作用和区别呢？</p>
+<p>From: <a href="https://javawangbaofeng.iteye.com/blog/2242694" target="_blank" rel="noopener">https://javawangbaofeng.iteye.com/blog/2242694</a></p>
+<h3 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h3><p>在MySQL中，对dual表的解释：</p>
+<p>DUAL is purely for the convenience of people who require that all SELECT statements should have FROM and possibly other clauses.</p>
+<p>纯粹是为了满足select … from…这一习惯问题，mysql会忽略对该表的引用。</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ul>
+<li><p><code>select * from dual;</code></p>
+<p>mysql会出错: 1096 - No tables used,</p>
+<p>oracle 会返回列：“DUMMY”，其值为“X”, 行为和只有一行记录的普通表是一样的！</p>
+</li>
+<li><p><code>select express [from dual];</code></p>
+<p>mysql总是作为返回该表达式值的普通select语句执行，返回一行记录的结果集，from dual 对mysql来说就是摆设。</p>
+<ul>
+<li><code>select 1 + 1;</code>  </li>
+<li><code>select 1 + 1 from dual;</code>  </li>
+</ul>
+<p>这两句sql语句执行的结果是一样的。</p>
+<p>oracle里该句必须有from dual；否则报错！</p>
+</li>
+<li><p><code>select express from dual where 0=2;</code></p>
+<p>mysq 和 oracle的行为一致：会先计算where的条件，再行计算express；这里的where条件会决定expres是否会返回。</p>
+<p>此时无论是Oracle还是MySQL都不可以省略from dual.</p>
+</li>
+</ul>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/Mysql/mysql-EXPLAIN" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1126,72 +1213,6 @@
 <p>经本人测试，只需要删除shadow build 文件夹中原有的内容。</p>
 <h3 id="取消创建文件时自动小写"><a href="#取消创建文件时自动小写" class="headerlink" title="取消创建文件时自动小写"></a>取消创建文件时自动小写</h3><p>preference -&gt; C++ -&gt; File Naming -&gt; Lower case file names</p>
 <h2 id="to-be-continued"><a href="#to-be-continued" class="headerlink" title="to be continued"></a>to be continued</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/QT/">QT</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-QT/qt隐藏标题栏并鼠标拖动" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/19/QT/qt隐藏标题栏并鼠标拖动/" class="article-date">
-      <time datetime="2019-04-19T07:56:38.000Z" itemprop="datePublished">2019-04-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/19/QT/qt隐藏标题栏并鼠标拖动/">qt隐藏标题栏并鼠标拖动</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="qt隐藏标题栏并鼠标拖动"><a href="#qt隐藏标题栏并鼠标拖动" class="headerlink" title="qt隐藏标题栏并鼠标拖动"></a>qt隐藏标题栏并鼠标拖动</h3><p>设置主题</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>-&gt;setWindowFlags(Qt::FramelessWindowHint);</span><br></pre></td></tr></table></figure>
-<p>重写鼠标拖动事件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> LoginWindow::mousePressEvent(QMouseEvent *e)</span><br><span class="line">&#123;</span><br><span class="line">    last = e-&gt;globalPos();</span><br><span class="line">    pressed = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> LoginWindow::mouseMoveEvent(QMouseEvent *e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(!pressed)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> dx = e-&gt;globalX() - last.x();</span><br><span class="line">    <span class="keyword">int</span> dy = e-&gt;globalY() - last.y();</span><br><span class="line">    last = e-&gt;globalPos();</span><br><span class="line">    move(x()+dx, y()+dy);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> LoginWindow::mouseReleaseEvent(QMouseEvent *e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(!pressed)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> dx = e-&gt;globalX() - last.x();</span><br><span class="line">    <span class="keyword">int</span> dy = e-&gt;globalY() - last.y();</span><br><span class="line">    move(x()+dx, y()+dy);</span><br><span class="line">    pressed = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
