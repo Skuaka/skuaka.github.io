@@ -1613,10 +1613,10 @@
 
 
   
-    <article id="post-Network/Ccie/交换机基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/路由协议分类" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/交换机基础/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/路由协议分类/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1632,7 +1632,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/交换机基础/">CCIE 交换机基础</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a>
     </h1>
   
 
@@ -1642,54 +1642,32 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="交换机基础"><a href="#交换机基础" class="headerlink" title="交换机基础"></a>交换机基础</h3><p>泛洪：除接收端口外，所有端口都向外去发。</p>
-<p>mac地址表=cam表</p>
-<p>广播域：所能传播的最大范围</p>
-<p>冲突域：发生冲突之后所影响的范围</p>
-<p>CSMA/CD：载波帧听多链路访问</p>
-<p>交换机指示灯：</p>
-<p>绿色常亮：接口两端没有问题，但是当前没有数据从中通过</p>
-<p>绿色不停地闪：正在传输数据</p>
-<p>橘红色慢闪：端口没问题,对端线路或者对端的端口有问题</p>
-<p>橘红色快闪：端口和对端连接没有问题，正在协商参数建立</p>
-<p>黄色闪动：物理接口有问题，尝试重启。</p>
-<p>不闪：    物理接口有问题，无法通信</p>
-<p>vlan（虚拟局域网） </p>
-<p>作用：分隔广播域</p>
-<p>所有接口默认属于vlan1（默认vlan，不可删除）。</p>
-<p>vlan ID范围和解释</p>
-<p>\1. 0和4095 仅仅限于系统使用 用户不能查看和使用</p>
-<p>\2. 1 正常 cisco默认的vlan,用户可以使用但是不能删除</p>
-<p>\3. 2–1001 正常 用于以太网的VLAN，用户可以创建。使用。删除。</p>
-<p>\4. 1002–1005 正常 用于FDDI和令牌环的CISCO默认VLAN，用户不能删除</p>
-<p>\5. 1006–1024 保留 仅仅限于系统使用。用户不能查看和使用。</p>
-<p>\6. 1025–4094 扩展 仅仅用于以太网VLAN</p>
-<p>Trunk 干道协议（必须两端都设置）</p>
-<p>isl 思科私有协议，目前思科也不采用。通过再封装工作。</p>
-<p>802.1q tag插入帧头</p>
-<p>switchport trunk encapsulation dot1q</p>
-<p>switchport mode trunk</p>
-<p>access</p>
-<p>int xx</p>
-<p>sw mode acc</p>
-<p>sw acc vlan xx</p>
-<p>本帧vlan（native vlan）（属于802.1q）</p>
-<p>默认为1，一般不建议修改；若要修改，保持本网络中交换机上本帧vlan设置一致。</p>
-<p>sw tr na vl xx</p>
-<p>trunk下vlan流量过滤</p>
-<p>switchport trunk allowed vlan 1-9,11-4094</p>
-<p>vtp（虚拟传输协议）</p>
-<p>用于同步同一网络中交换机上网络的信息（减小庞大的配置量）</p>
-<p>生效的前提：trunk正常工作</p>
-<p>vtp mode sever/client/transparent</p>
-<p>服务器：NVRAM（可寄存性存储器）创建、修改、维护、传递、删除、同步vlan信息</p>
-<p>客户端：RAM(重启后要重新同步） 传递、同步vlan信息</p>
-<p>透明模式：NARAM 和服务器一样除了不同步，并且本地创建、修改、维护、删除的vlan    信息只在本地有效。</p>
-<p>sh int tr确保生效</p>
-<p>vtp domain 域名</p>
-<p>vtp mode xxx（默认为sever）</p>
-<p>sh vtp status</p>
-<p>其中Configuration Revision（配置修订号）（类似书的修订号，修改一次增加一次，不能减小）越大越好，同步大的。加入新的交换机时可用透明模式先测试。</p>
+        <h3 id="路由协议作用"><a href="#路由协议作用" class="headerlink" title="路由协议作用"></a>路由协议作用</h3><ol>
+<li>网络信息共享</li>
+<li>最佳路径的计算</li>
+<li>路由策略</li>
+</ol>
+<h3 id="路由协议分类"><a href="#路由协议分类" class="headerlink" title="路由协议分类"></a>路由协议分类</h3><ol>
+<li><p>应用场景</p>
+<ul>
+<li>as内  IGPS（RIP、EIGRP、OSPF、IS-IS）EGPS（BGP）</li>
+<li>as间</li>
+</ul>
+</li>
+<li><p>度量值metric计算/路径择优标准</p>
+<ul>
+<li><p>DV距离矢量：RIP</p>
+</li>
+<li><p>高级DV：EIGRP  接口五个参数 k1带宽 k2负载 k3延迟 k4可靠性 k5最大传输单元MTU</p>
+<p>EIGRP的距离/跳数和RIP一样发送时+1，用来限制扩散距离。</p>
+</li>
+<li><p>链路状态 LInk State：OSPF、IS-IS  </p>
+</li>
+<li><p>距离向量：BGP</p>
+</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -1724,10 +1702,10 @@
 
 
   
-    <article id="post-Network/Ccie/DM-VPN" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/逻辑子接口" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/DM-VPN/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/逻辑子接口/" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1743,7 +1721,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/DM-VPN/">CCIE DM-VPN</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a>
     </h1>
   
 
@@ -1753,49 +1731,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="DM-VPN"><a href="#DM-VPN" class="headerlink" title="DM-VPN"></a>DM-VPN</h1><p>动态多点VPN、Cisco私有</p>
-<h3 id="IPSEC-VPN-存在的问题"><a href="#IPSEC-VPN-存在的问题" class="headerlink" title="IPSEC VPN 存在的问题"></a>IPSEC VPN 存在的问题</h3><ol>
-<li>不支持多播</li>
-<li>复杂的拓扑</li>
-</ol>
-<h3 id="DM-VPN-的术语"><a href="#DM-VPN-的术语" class="headerlink" title="DM-VPN 的术语"></a>DM-VPN 的术语</h3><ul>
-<li>M-GRE（多点隧道）一点对多点</li>
-<li>物理 IP 地址（物理接口）/逻辑 IP 地址（tunnel 私有 IP）</li>
-<li>NHRP（下一跳解析协议、总部和分部都启用）<br>NHS（下一跳服务器、总部）</li>
-</ul>
-<h3 id="DM-VPN-的三个阶段"><a href="#DM-VPN-的三个阶段" class="headerlink" title="DM-VPN 的三个阶段"></a>DM-VPN 的三个阶段</h3><p><strong>阶段一</strong></p>
-<ul>
-<li>M-GRE：EIGRP</li>
-<li>分支和分支要通过总部才能相互通讯</li>
-</ul>
-<p><strong>阶段二</strong></p>
-<ul>
-<li>M-GRE：EIGRP</li>
-<li>分支和分支可以直接通讯</li>
-</ul>
-<p><strong>阶段三</strong></p>
-<ul>
-<li>单云双中心（两个 HUB 同时工作互为备份，还是依赖 DM-VPN 阶段2）</li>
-</ul>
-<h3 id="DM-VPN-的基础配置流程"><a href="#DM-VPN-的基础配置流程" class="headerlink" title="DM-VPN 的基础配置流程"></a>DM-VPN 的基础配置流程</h3><p><strong>步骤1</strong>：完成 HUB 上 M-GRE 的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 134</span><br><span class="line">ip address 172.16.1.1 255.255.255.0 //隧道的逻辑接口</span><br><span class="line">tunnel source 12.12.12.1 //隧道源是设备物理接口地址</span><br><span class="line">tunnel key 134 //隧道口令</span><br><span class="line">tunnel mode gre multipoint //指定隧道模式</span><br><span class="line">//多点隧道不需要指定目的地址，模式和单点也不同</span><br></pre></td></tr></table></figure>
-<p><strong>步骤2</strong>：完成 spoke 上的 M-GRE 配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 134</span><br><span class="line">ip address 172.16.1.3 255.255.255.0 //隧道的逻辑接口</span><br><span class="line">tunnel source f0/1 //！FA0/1的接口IP成为隧道源，因为分支机构的IP会变化</span><br><span class="line">tunnel key 134 //隧道口令</span><br><span class="line">tunnel mode gre multipoint //指定隧道模式</span><br></pre></td></tr></table></figure>
-<p><strong>步骤3</strong>：完成 HUB 上隧道 NHRP 的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int tu 134</span><br><span class="line">ip nhrp network-id 134 //设置NHRP的网络ID</span><br><span class="line">ip nhrp authentication 134 //设置NHRP的认证口令</span><br><span class="line">ip nhrp map multicast dynamic //允许多播流在M-GRE传递，为了路由协议更新可以传递</span><br></pre></td></tr></table></figure>
-<p><strong>步骤4</strong>：完成 spoke 上 NHRP 的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int tu 134</span><br><span class="line">ip nhrp network-id 134</span><br><span class="line">ip nhrp authentication 134</span><br><span class="line">ip nhrs nhs 172.16.1.1 //指定NHS服务器地址，该地址是HUB的隧道地址</span><br><span class="line">ip nhrs map 172.16.1.1 12.12.12.1 //完成NHS服务器隧道逻辑地址和HUB物理地址的关联</span><br><span class="line">ip nhrp map multicast 12.12.12.1 //设置spoke向hub发送多播流量</span><br></pre></td></tr></table></figure>
-<p><strong>步骤5</strong>：隧道逻辑 IP 地址参与 EIGRP</p>
-<p><strong>步骤6</strong>：完成 IPSEC 的配置并且套用到隧道上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">crypto isakmp enable</span><br><span class="line">crypto isakmp policy 10</span><br><span class="line">authen</span><br><span class="line">encry</span><br><span class="line">hash</span><br><span class="line">group</span><br><span class="line">crypto isakmp key cisco address 0.0.0.0 0.0.0.0</span><br><span class="line">crypto ipsec transform-set XX esp-aes esp-sha-hmac</span><br><span class="line">crypto ipsec profile &lt;name&gt; //IPSEC VPN 的配置文件</span><br><span class="line">set transform-set xx</span><br><span class="line">int tunnel x</span><br><span class="line">tunnel protection ipsec profile &lt;name&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>杂</strong>：</p>
-<p>查看 HUB 的分支信息：<code>show ip nhrp</code></p>
-<p>关闭 EIGRP 水平分割：<code>no ip split-horizon eigrp 1</code></p>
-<p>开启 NHRP 捷径：<code>ip nhrp shortcat</code></p>
-<h3 id="单云双中心的配置细节"><a href="#单云双中心的配置细节" class="headerlink" title="单云双中心的配置细节"></a>单云双中心的配置细节</h3><p><strong>区别1</strong>：两个 HUB 需要互做 NHRP 的映射。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">----HUB1</span><br><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp map 172.16.1.2 202.1.1.2</span><br><span class="line">ip nhrp map multicast 202.1.1.2</span><br><span class="line">----HUB2</span><br><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp map 172.16.1.1 202.1.1.1</span><br><span class="line">ip nhrp map multicast 202.1.1.1</span><br></pre></td></tr></table></figure>
-<p><strong>区别2</strong>：两个 spoke 需要设定两个 NHS 服务器，并且谁先被设定谁就是主设备。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 1</span><br><span class="line">ip nhrp nhs 172.16.1.1</span><br><span class="line">ip nhrp map 172.16.1.1 202.1.1.1</span><br><span class="line">ip nhrp map multicast 202.1.1.1</span><br><span class="line">ip nhrp nhs 172.16.1.2</span><br><span class="line">ip nhrp map 172.16.1.2 202.1.1.2</span><br><span class="line">ip nhrp map multicast 202.1.1.2</span><br></pre></td></tr></table></figure>
+        <h3 id="路由器主接口创建逻辑子接口"><a href="#路由器主接口创建逻辑子接口" class="headerlink" title="路由器主接口创建逻辑子接口"></a>路由器主接口创建逻辑子接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface &lt;intf-id&gt; //进入主接口</span><br><span class="line">no sh</span><br><span class="line">interface &lt;intf-id.子接口编号&gt; //创建逻辑子接口</span><br><span class="line">encapsulation dot1q &lt;vlan ID&gt; //指定逻辑子接口接收带有特定vlan标记的流量</span><br><span class="line">ip address &lt;a.b.c.d&gt; &lt;mask&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
