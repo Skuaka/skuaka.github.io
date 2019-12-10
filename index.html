@@ -263,7 +263,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>error:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># yum install sth</span><br><span class="line">File &quot;/usr/bin/yum&quot;, line 30</span><br><span class="line">  except KeyboardInterrupt, e:</span><br></pre></td></tr></table></figure></p>
+        <h3 id="yum-error"><a href="#yum-error" class="headerlink" title="yum error"></a>yum error</h3><p>error:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># yum install sth</span><br><span class="line">File &quot;/usr/bin/yum&quot;, line 30</span><br><span class="line">  except KeyboardInterrupt, e:</span><br></pre></td></tr></table></figure>
 <p>solve:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/bin/yum</span><br><span class="line">#!/usr/bin/python -&gt; #!/usr/bin/python2.7</span><br></pre></td></tr></table></figure>
       
@@ -643,6 +644,7 @@
 <h4 id="RequestsLibrary"><a href="#RequestsLibrary" class="headerlink" title="RequestsLibrary"></a>RequestsLibrary</h4><p><a href="https://github.com/bulkan/robotframework-requests" target="_blank" rel="noopener">https://github.com/bulkan/robotframework-requests</a></p>
 <p><a href="http://bulkan.github.io/robotframework-requests/doc/RequestsLibrary.html" target="_blank" rel="noopener">http://bulkan.github.io/robotframework-requests/doc/RequestsLibrary.html</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -U requests</span><br><span class="line">pip install -U robotframework-requests</span><br></pre></td></tr></table></figure>
+<h3 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">robot + </span><br><span class="line">-i &lt;tag&gt;		# include tag</span><br><span class="line">-e &lt;tag&gt;		# exclude tag</span><br><span class="line">-d &lt;dir&gt;		# output dir</span><br><span class="line">-v para=value	# set env</span><br><span class="line">&lt;filename&gt;		# run selected file</span><br><span class="line">&lt;dir&gt;			# run selected suite(dir)</span><br></pre></td></tr></table></figure>
 <h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><h4 id="Logical-Operators"><a href="#Logical-Operators" class="headerlink" title="Logical Operators"></a>Logical Operators</h4><p>xxx and xxx</p>
 <p>xxx or xxx</p>
 <p>左右只留一个空格</p>
