@@ -1683,10 +1683,10 @@
 
 
   
-    <article id="post-Network/Ccie/ipv6" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Network/Ccie/重分发 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/01/Network/Ccie/ipv6/" class="article-date">
+      <a href="/2018/08/01/Network/Ccie/重分发 /" class="article-date">
       <time datetime="2018-07-31T16:00:00.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
 
@@ -1702,7 +1702,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/Network/Ccie/ipv6/">CCIE ipv6</a>
+      <a class="article-title" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a>
     </h1>
   
 
@@ -1712,44 +1712,33 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>128位 8段x16</p>
-<h3 id="地址分类"><a href="#地址分类" class="headerlink" title="地址分类"></a>地址分类</h3><ol>
-<li><p>单播地址</p>
-<p>全球可聚合单播地址(公网</p>
-<p>2000:0000……～3fff:ffff……   1/8</p>
-<p>站点本地单播地址(私有</p>
-<p>fec0::/10</p>
-<p>链路本地单播地址(mac</p>
-<p>自动生成，该地址不能被传递，只在该   段链路有效。</p>
-<p>fe80::/10</p>
-</li>
-<li><p>组播地址</p>
-<p>ff00::/10</p>
-</li>
-<li><p>任播地址</p>
-<p>地址目前还在用全球可聚合单播地址，类似于组播地址，选择最近的地址发送，只发送一个地方。</p>
-<p>前48位为公网拓扑，统一分配；</p>
-<p>后16位为子网拓扑，可自定义；</p>
-<p>剩下64位为主机位。</p>
-</li>
-</ol>
-<h3 id="地址书写规则"><a href="#地址书写规则" class="headerlink" title="地址书写规则"></a>地址书写规则</h3><ol>
-<li>完整书写</li>
-<li>简化方式    1.）连续存在的0可以::代替，但一个地址当中只能用一次。2）段中的0若在左边可不写，但是四个都为0还是要写一个0</li>
-<li>嵌入式  X:X:X:X:X:X:d.d.d.d                                 ::FFFF:192.168.0.1</li>
-</ol>
-<p>使用浏览器连接到IPv6设备的http链接时，必须使用方括号括起（与IPv4的冒号区分开来）</p>
-<p>http://[::]/default.html</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
-<li><p>接口ip的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(config)#ipv6 unicast-routing </span><br><span class="line"></span><br><span class="line">开启ipv6单播路由功能。</span><br><span class="line"></span><br><span class="line">interface xx</span><br><span class="line"></span><br><span class="line">ipv6 address 2001：:1/64 不能写掩码</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>协议的启用</p>
-<p>不能使用宣告，只能在接口下启用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipv6 router [IGP] </span><br><span class="line">int xx</span><br><span class="line">ipv6 rip enable</span><br><span class="line">ipv6 ospf x area x</span><br><span class="line">ipv6 eigrp x </span><br><span class="line">router ospfv3 进程id</span><br><span class="line">int xx</span><br><span class="line">ospfv3 进程 area xx</span><br><span class="line">ipv6 router 目的地网段 /x 出接口</span><br><span class="line">router bgp xx</span><br><span class="line">address-family ipv6 unicast</span><br><span class="line">nei xxxx remot-as xx</span><br><span class="line">net xxxx /xx(只有bgp要宣告)</span><br><span class="line">可使用ipv4地址激活ipv6的对等体关系，反之不行。</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="v6和v4的过渡融合"><a href="#v6和v4的过渡融合" class="headerlink" title="v6和v4的过渡融合"></a>v6和v4的过渡融合</h3><p>隧道技术 tunnel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tunnel source ip</span><br><span class="line">tunnel destination ip</span><br><span class="line">tunnel mode ipv6</span><br><span class="line"></span><br><span class="line">ping ipv6 …</span><br></pre></td></tr></table></figure></p>
+        <p>重分发 </p>
+<p>将不同路由协议转化</p>
+<p>1直连进路由选择协议</p>
+<p>redistribute connect metric 1</p>
+<p>2其他路由选择协议进rip</p>
+<p>router rip</p>
+<p>router下 redistribute eigrp 100 metric 1值(默认0)</p>
+<p>3其他路由选择协议进eigrp</p>
+<p>router eigrp 100</p>
+<p>redistribute rip metric 10000带宽 100延迟 255可靠性 1负载 1500MTU值（默认为以上数字，一般不改）</p>
+<p>4其他进ospf</p>
+<p>router os 1</p>
+<p>redistribute eigrp 100进程号 subnets（子集，不加则为主类网络）</p>
+<p>默认OE2</p>
+<p>将oe2改成oe1:</p>
+<p>re ei 100 subnets metric-type 1 (+metric 值）</p>
+<p>重分发流量控制</p>
+<p>acl</p>
+<p>奇acc 1 permit 172.16.1.0 0.0.254.255</p>
+<p>偶acc 1 permit 172.16.0.0 0.0.254.255</p>
+<p>将acl抓去到的流量给route-map</p>
+<p>route-map +名字 +permit/deny </p>
+<p>优先级10(默认优先级) </p>
+<p>match ip address +acl编号</p>
+<p>route-map也默认deny所有流量</p>
+<p>如需放行所有流量 route-map 名字 permit +下一个优先级20(一般为10的叠加)</p>
+<p>re rip router-map ccie metric ……</p>
 
       
     </div>
