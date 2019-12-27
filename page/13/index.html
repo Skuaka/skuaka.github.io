@@ -234,6 +234,83 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C-C++/Mess/C++类与结构区别" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/22/C-C++/Mess/C++类与结构区别/" class="article-date">
+      <time datetime="2018-11-22T06:52:12.000Z" itemprop="datePublished">2018-11-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/22/C-C++/Mess/C++类与结构区别/">C++中结构体和类的区别</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="C-中结构体和类的区别"><a href="#C-中结构体和类的区别" class="headerlink" title="C++中结构体和类的区别"></a>C++中结构体和类的区别</h4><p>C语言中结构体不允许定义函数成员，且没有访问控制属性的概念。</p>
+<p>在C++中，结构体是一种特殊形态的类。</p>
+<p>结构体和类的<strong>唯一区别</strong>就是：  结构体和类具有<strong>不同的默认访问控制属性</strong>。</p>
+<ul>
+<li><p>类中，对于未指定访问控制属性的成员，其访问控制属性为私有类型（private）</p>
+</li>
+<li><p>结构体中，对于未指定任何访问控制属性的成员，其访问控制属性为公有类型（public）</p>
+</li>
+</ul>
+<p>C++中，不使用结构体丝毫不会影响程序的表达能力。<strong>C++之所以要引入结构体，是为了保持和C程序的兼容性。</strong></p>
+<p>但有时仍会在C++中使用结构体，是因为，<strong>可以使用结构体将不同类型数据组成整体，方便于保存数据。</strong>（若用类来保存，因类中成员默认为私有，还要为每个数据成员特定函数来读取和改写各个属性，比较麻烦。）</p>
+<h4 id="C-空类-结构体-的大小为1"><a href="#C-空类-结构体-的大小为1" class="headerlink" title="C++空类(结构体)的大小为1"></a>C++空类(结构体)的大小为1</h4><p>另外，C语言中，空结构体的大小为0，而C++中空结构体（属于空类）的大小为1。</p>
+<p>　　空类也可以实例化，类实例化出的每个对象都需要有不同的内存地址，为使每个对象在内存中的地址不同，所以在类中会加入一个隐含的字节。</p>
+<h4 id="成员函数不存储在对象内存中"><a href="#成员函数不存储在对象内存中" class="headerlink" title="成员函数不存储在对象内存中"></a>成员函数不存储在对象内存中</h4><p>　　成员函数可以被看作是类作用域的全局函数,不在对象分配的空间里,只有虚函数才会在类对象里有一个指针,存放虚函数的地址等相关信息。<br>　　成员函数的地址，编译期就已确定，并静态绑定或动态的绑定在对应的对象上。<br>　　对象调用成员函数时，编译器可以确定这些函数的地址，并通过传入this指针和其他参数，完成函数的调用，所以类中就没有必要存储成员函数的信息。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Security/DDos/DDos攻击详解" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1573,85 +1650,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/macOS/">macOS</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Mess/win逆向工程(弃)" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/06/Mess/win逆向工程(弃)/" class="article-date">
-      <time datetime="2018-11-06T14:34:31.000Z" itemprop="datePublished">2018-11-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/06/Mess/win逆向工程(弃)/">win逆向工程（放弃）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h3 id="PE文件"><a href="#PE文件" class="headerlink" title="PE文件"></a>PE文件</h3><p>全称Portable Execute- 可移植的执行体，是windows平台组织程序代码的一种文件格式。<br>常见的exe、dll、sys、ocx、com都属于PE文件。</p>
-<h3 id="文件偏移地址"><a href="#文件偏移地址" class="headerlink" title="文件偏移地址"></a>文件偏移地址</h3><p>PE文件存储在磁盘上，各数据段的地址称为文件偏移地址或物理地址(raw offset )。文件偏移地址从PE文件的第一个字节开始计数，起始值为0。</p>
-<h3 id="入口点-Entry-point"><a href="#入口点-Entry-point" class="headerlink" title="入口点(Entry point )"></a>入口点(Entry point )</h3><p>程序执行的第一行代码</p>
-<h3 id="基地址-Image-base"><a href="#基地址-Image-base" class="headerlink" title="基地址(Image base)"></a>基地址(Image base)</h3><p>文件执行时将被映射到指定内存地址的初始地址，由PE文件本身决定。<br>默认，EXE: 0x00400000, DLL :0X1000000。用链接程序的/BASE选项改变该值</p>
-<h3 id="虚拟地址-Virtual-Address-VA"><a href="#虚拟地址-Virtual-Address-VA" class="headerlink" title="虚拟地址(Virtual Address,VA)"></a>虚拟地址(Virtual Address,VA)</h3><p>保护模式下，程序访问存储器所使用的逻辑地址称为虚拟地址(VA),内存偏移地址(memory offset)</p>
-<h3 id="相对虚拟地址-Relative-Virtual-Address-RVA"><a href="#相对虚拟地址-Relative-Virtual-Address-RVA" class="headerlink" title="相对虚拟地址(Relative Virtual Address,RVA)"></a>相对虚拟地址(Relative Virtual Address,RVA)</h3><p>指内存中相对于PE文件装入地址( 基地址) 的偏移量。RVA=VA - imagebase</p>
-<h2 id="常用汇编"><a href="#常用汇编" class="headerlink" title="常用汇编"></a>常用汇编</h2><p><code>jmp label</code> 跳转到label标号指定的地址（标号要在程序其他位置标出）</p>
-<p><code>jcc label</code> 条件满足，发生转移，IP &lt;— IP + 8位 位移量；条件不满足则顺序执行。</p>
-<ul>
-<li>label是短转移标号，要跳转的地址必须距离当前IP地址 -128～+127个单元的范围之内。</li>
-</ul>
-<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><h3 id="代码静态分析"><a href="#代码静态分析" class="headerlink" title="代码静态分析"></a>代码静态分析</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>代码静态分析是在不执行计算机程序的条件下，对源代码进行分析，找出代码缺陷。</p>
-<h4 id="执行方式"><a href="#执行方式" class="headerlink" title="执行方式"></a>执行方式</h4><p>一般配合静态程序分析工具进行。</p>
-<h4 id="采用技术"><a href="#采用技术" class="headerlink" title="采用技术"></a>采用技术</h4><p>数据流分析、机器学习、语义精简…</p>
-<h4 id="可检测类型"><a href="#可检测类型" class="headerlink" title="可检测类型"></a>可检测类型</h4><p>死锁，空指针，资源泄露，缓冲区溢出，安全漏洞，竞态条件…</p>
-<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><p>程序翻译/编译(编译器) ，程序优化重构，软件缺陷检测等。</p>
-<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p>程序动态分析:需要实际执行程序。<br>程序理解: 静态分析这一术语一般用来形容自动化工具的分析，而人工分析则往往叫做程序理解。</p>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>能够检测所有的代码级别的可执行路径组合，快速，准确。<br>直接面向源码,分析多种问题。<br>在研发阶段开始找到并修复多种问题，节省大量时间/人力成本。</p>
-<p><strong>注意</strong>: 静态分析不是万能的，测试是持续的过程,非一劳永逸。</p>
-<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>​    静态分析的对象是Windows内核模块、第三方驱动程序等不开源的二进制代码。<br>首先需要通过反汇编工具对模块进行处理，生成相应的汇编代码，然后在此基础上分析、检查程序的语法、结构、过程、    接口等,恢复和重建程序的数据类型、结构和框架，验证程序功能逻辑是否正确。<br>​    在静态分析过程中，关键的地方是要做到准确提取信息。不论是源程序或二进制程序，利用静态分析技术都可以从中提取出控制流、表达式、接口和数据流等相关的信息。<br>​    由于程序本身可以看作是抽象的、复杂的数据结构集合，因此程序的静态分析技术主要是根据从程序中提取的相关信息，从不同角度对程序的数据结构进行重建,根据模型推导数据之间的逻辑转换关系。</p>
-<h2 id="放弃学习"><a href="#放弃学习" class="headerlink" title="放弃学习"></a>放弃学习</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mess/">Mess</a>
-    </div>
-
-
-      
       
       <div class="clearfix"></div>
     </div>

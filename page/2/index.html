@@ -234,6 +234,82 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Linux/Programming/Shell变量笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/02/Linux/Programming/Shell变量笔记/" class="article-date">
+      <time datetime="2019-10-02T04:21:53.000Z" itemprop="datePublished">2019-10-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/02/Linux/Programming/Shell变量笔记/">Shell变量笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Shell变量笔记"><a href="#Shell变量笔记" class="headerlink" title="Shell变量笔记"></a>Shell变量笔记</h2><p><strong><em>本笔记提取出一些重要的内容方便以后查阅，难记的放前面</em></strong></p>
+<h3 id="参数拓展"><a href="#参数拓展" class="headerlink" title="参数拓展"></a>参数拓展</h3><p><code>${}</code>把参数值替换进字符串。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_process <span class="variable">$&#123;i&#125;</span>_tmp</span><br></pre></td></tr></table></figure>
+<p>参数拓展有很多种模式匹配方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;param:-defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值，param不会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:+defult&#125;</span>	<span class="comment">#如果param存在且不会空，就把它设置为defult</span></span><br><span class="line"><span class="variable">$&#123;param:=defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值,并且param也会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:?defult&#125;</span>	<span class="comment">#如果param为空，输出param:defult并异常终止脚本</span></span><br><span class="line"><span class="variable">$&#123;#param&#125;</span>					<span class="comment">#输出param的长度</span></span><br><span class="line"><span class="variable">$&#123;param#word&#125;</span>			<span class="comment">#从param的头部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param##word&#125;</span>		<span class="comment">#从param的头部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param%word&#125;</span>			<span class="comment">#从param的尾部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param%%word&#125;</span>		<span class="comment">#从param的尾部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param/aa/bb&#125;</span>		<span class="comment">#将第一个aa替换为bb</span></span><br><span class="line"><span class="variable">$&#123;param//aa/bb&#125;</span>		<span class="comment">#将所有的aa替换为bb</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串切片"><a href="#字符串切片" class="headerlink" title="字符串切片"></a>字符串切片</h3><p><code>${param:start_pos:length}</code></p>
+<p><strong><em>索引从0开始计数，-1指向最后一个字符位置</em></strong></p>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$HOME</span>	<span class="comment">#当前用户的家目录</span></span><br><span class="line"><span class="variable">$PATH</span>	<span class="comment">#以冒号分隔的用来搜索命令的目录列表</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$PS1</span>	<span class="comment">#命令提示符，通常为$</span></span><br><span class="line"><span class="variable">$PS2</span>	<span class="comment">#二级提示符，通常为&gt;</span></span><br><span class="line"><span class="variable">$IFS</span>	<span class="comment">#输入域分隔符，读取输入时用来分隔单词的一组字符，它们通常是空格、制表符和换行符</span></span><br><span class="line"></span><br><span class="line">$$		<span class="comment">#shell脚本的进程号</span></span><br><span class="line">$?		<span class="comment">#前一个命令的退出码</span></span><br></pre></td></tr></table></figure>
+<h3 id="参数变量"><a href="#参数变量" class="headerlink" title="参数变量"></a>参数变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$#</span>				<span class="comment">#传递给脚本的参数个数</span></span><br><span class="line"><span class="variable">$0</span>				<span class="comment">#shell脚本的名字</span></span><br><span class="line"><span class="variable">$1</span>,<span class="variable">$2</span>,...		<span class="comment">#脚本程序的参数</span></span><br><span class="line"></span><br><span class="line">$*				<span class="comment">#在一个变量中列出所有参数，用IFS中的第一个字符分隔</span></span><br><span class="line"><span class="variable">$@</span>				<span class="comment">#$*的变体，不使用IFS变量，所以即使IFS为空，参数也不会挤在一起</span></span><br></pre></td></tr></table></figure>
+<h3 id="算数拓展"><a href="#算数拓展" class="headerlink" title="算数拓展"></a>算数拓展</h3><p>expr 执行慢，因为它需要调用一个新的shell来处理expr命令。所以推荐使用<code>$((...))</code>算术拓展。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=$(($x +1))</span><br><span class="line">x=$(expr $x + 1)</span><br><span class="line">x=`expr $x + 1`</span><br></pre></td></tr></table></figure>
+<h3 id="捕获输出"><a href="#捕获输出" class="headerlink" title="捕获输出"></a>捕获输出</h3><p><code>$(command)</code>的结果就是其中命令的输出。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> The current users are $(who)</span><br></pre></td></tr></table></figure>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Develop/docker笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -289,7 +365,7 @@
 </ul>
 <h4 id="image"><a href="#image" class="headerlink" title="image"></a>image</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker images / docker image ls</span><br><span class="line">docker search centos</span><br><span class="line">docker pull centos # -a 拉取所有 tagged 镜像</span><br><span class="line">docker rmi t/test:v1 # -f 强制删除</span><br></pre></td></tr></table></figure>
 <h4 id="volume"><a href="#volume" class="headerlink" title="volume"></a>volume</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker volume create my-vol</span><br><span class="line">docker volume ls</span><br><span class="line">docker volume inspect my-vol</span><br><span class="line">docker volume rm my-vol</span><br></pre></td></tr></table></figure>
-<h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker cp /opt 96f7f14e99ab:/     # 主机 /opt 目录拷贝到容器的 / 目录下</span><br><span class="line">docker cp /opt 96f7f14e99ab:/opt2 # 主机 /opt 目录拷贝到容器的 / 目录下，目录重命名为 opt2</span><br><span class="line">docker cp 96f7f14e99ab:/opt /     # 容器 /opt 目录拷贝到主机的 / 目录下</span><br><span class="line"><span class="meta">#</span><span class="bash"> -L :保持源目标中的链接</span></span><br></pre></td></tr></table></figure>
+<h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker cp /opt 96f7f14e99ab:/     # 主机 /opt 目录拷贝到容器的 / 目录下</span><br><span class="line">docker cp /opt 96f7f14e99ab:/opt2 # 主机 /opt 目录拷贝到容器的 / 目录下，目录重命名为 opt2</span><br><span class="line">docker cp 96f7f14e99ab:/opt /     # 容器 /opt 目录拷贝到主机的 / 目录下</span><br><span class="line"><span class="meta">#</span> -L :保持源目标中的链接</span><br></pre></td></tr></table></figure>
 <h4 id="container"><a href="#container" class="headerlink" title="container"></a>container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">docker container [ ls / start / stop / restart ]</span><br><span class="line">docker ps</span><br><span class="line">docker attach 243c32reqwq</span><br><span class="line">docker kill [ -s &lt;signal&gt; ] 243c32reqwq</span><br><span class="line">docker [ start / stop / restart / rm ] 243c32reqwq</span><br><span class="line">docker [ pause / unpause ] 243c32reqwq # 暂停/恢复容器中所有的进程。</span><br><span class="line"></span><br><span class="line">docker create --name container-name nginx:latest # 类似run，创建容器但不启动</span><br><span class="line"></span><br><span class="line">docker inspect bf08b7f2cd89</span><br><span class="line">docker port bf08b7f2cd89 # 查看端口</span><br><span class="line">docker logs bf08b7f2cd89 # 查看日志 -f: 像使用 tail -f 一样来跟踪输出。</span><br><span class="line">docker top bf08b7f2cd89 # 查看容器内部运行的进程</span><br></pre></td></tr></table></figure>
 <h4 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit afcaf46e8305 test/my_centos:1.0</span><br></pre></td></tr></table></figure>
 <ul>
@@ -968,95 +1044,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Op-System/">Op-System</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Algorithm/链表算法题笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/24/Algorithm/链表算法题笔记/" class="article-date">
-      <time datetime="2019-08-24T10:04:44.000Z" itemprop="datePublished">2019-08-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/24/Algorithm/链表算法题笔记/">链表算法题笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="链表算法题笔记"><a href="#链表算法题笔记" class="headerlink" title="链表算法题笔记"></a>链表算法题笔记</h2><h3 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表"></a>环形链表</h3><h4 id="判断链表是否有环"><a href="#判断链表是否有环" class="headerlink" title="判断链表是否有环"></a>判断链表是否有环</h4><ul>
-<li>使用一个slow指针，一个fast指针。</li>
-<li><p>slow指针一次往后遍历以1个节点，fast指针一次往后遍历2个节点，一直做这样的操作。</p>
-</li>
-<li><p>如果fast指针在遍历过程中，遍历到了NULL节点说明链表没有环。</p>
-</li>
-<li><p>否则当slow指针和falst指针相同，则说明环有节点。</p>
-</li>
-</ul>
-<p>时间复杂度O(n)，空间复杂度O(1)。</p>
-<h4 id="找出环形入口"><a href="#找出环形入口" class="headerlink" title="找出环形入口"></a>找出环形入口</h4><p>接着上面所述，我们假定链表头到环入口的距离是<code>len</code>，环入口到slow和fast交汇点的距离为<code>x</code>，环的长度为<code>R</code>。slow和fast第一次交汇时，设slow走的长度为：<code>d = len + x</code>，而fast走的长度为：<code>2d = len + nR + x, (n &gt;= 1)</code>，从而我们可以得知：<code>2len + 2x = len + nR + x</code>，即:<code>len = nR - x, (n &gt;= 1)</code>，于是我们可以得到这样的算法。</p>
-<ul>
-<li><p>使用一个cur指针指向链表头节点，一个inter指针指向第一次的交汇点。</p>
-</li>
-<li><p>cur指针和inter指针一起往后遍历。</p>
-</li>
-<li><p>cur指针和inter指针相等时，cur和inter指针指向的就是环的入口节点。</p>
-</li>
-</ul>
-<p>inter指针在遍历过程中可能多次(n &gt;= 1)经过环入口节点，但当cur指针第一次达到入口节点时，inter指针此时必然也指向入口节点。</p>
-<p>时间复杂度O(n)，空间复杂度O(1)。</p>
-<h3 id="相交链表"><a href="#相交链表" class="headerlink" title="相交链表"></a>相交链表</h3><p>判断两个单链表是否相交，如果相交，给出相交的第一个点（两个链表都不存在环）。</p>
-<p><strong>思路1</strong>：暴力，O(m*n)。对两个链表分别进行遍历，找到相同的节点即可。</p>
-<p><strong>☆思路2</strong>：将其中一个链表首尾相连，检测另外一个链表是否存在环，如果存在，则两个链表相交，并且另一个链表的环入口即为相交的第一个点。时间复杂度为O(m+n)，空间复杂度为O(1)。</p>
-<p><strong>思路3</strong>：使用哈希表，即python中的字典。先遍历一个链表，并将链表内容放入字典。再遍历另外一个链表，看遍历到的位置是否存在于字典中，存在则返回当前结点。若遍历结束仍不存在则返回空。检索复杂度为O(m+n)，空间复杂度O(m+n)。</p>
-<p><strong>☆思路4</strong>：分别计算两个链表的长度。先读较长的链表，读到两个链表等长的时候再同时读两个链表，并判断两个链表遍历到的当前节点是否相同。时间复杂度为O(m+n)，空间复杂度为O(1)。</p>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
     </div>
 
       

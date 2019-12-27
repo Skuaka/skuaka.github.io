@@ -234,6 +234,85 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Mess/win逆向工程(弃)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/06/Mess/win逆向工程(弃)/" class="article-date">
+      <time datetime="2018-11-06T14:34:31.000Z" itemprop="datePublished">2018-11-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/06/Mess/win逆向工程(弃)/">win逆向工程（放弃）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h3 id="PE文件"><a href="#PE文件" class="headerlink" title="PE文件"></a>PE文件</h3><p>全称Portable Execute- 可移植的执行体，是windows平台组织程序代码的一种文件格式。<br>常见的exe、dll、sys、ocx、com都属于PE文件。</p>
+<h3 id="文件偏移地址"><a href="#文件偏移地址" class="headerlink" title="文件偏移地址"></a>文件偏移地址</h3><p>PE文件存储在磁盘上，各数据段的地址称为文件偏移地址或物理地址(raw offset )。文件偏移地址从PE文件的第一个字节开始计数，起始值为0。</p>
+<h3 id="入口点-Entry-point"><a href="#入口点-Entry-point" class="headerlink" title="入口点(Entry point )"></a>入口点(Entry point )</h3><p>程序执行的第一行代码</p>
+<h3 id="基地址-Image-base"><a href="#基地址-Image-base" class="headerlink" title="基地址(Image base)"></a>基地址(Image base)</h3><p>文件执行时将被映射到指定内存地址的初始地址，由PE文件本身决定。<br>默认，EXE: 0x00400000, DLL :0X1000000。用链接程序的/BASE选项改变该值</p>
+<h3 id="虚拟地址-Virtual-Address-VA"><a href="#虚拟地址-Virtual-Address-VA" class="headerlink" title="虚拟地址(Virtual Address,VA)"></a>虚拟地址(Virtual Address,VA)</h3><p>保护模式下，程序访问存储器所使用的逻辑地址称为虚拟地址(VA),内存偏移地址(memory offset)</p>
+<h3 id="相对虚拟地址-Relative-Virtual-Address-RVA"><a href="#相对虚拟地址-Relative-Virtual-Address-RVA" class="headerlink" title="相对虚拟地址(Relative Virtual Address,RVA)"></a>相对虚拟地址(Relative Virtual Address,RVA)</h3><p>指内存中相对于PE文件装入地址( 基地址) 的偏移量。RVA=VA - imagebase</p>
+<h2 id="常用汇编"><a href="#常用汇编" class="headerlink" title="常用汇编"></a>常用汇编</h2><p><code>jmp label</code> 跳转到label标号指定的地址（标号要在程序其他位置标出）</p>
+<p><code>jcc label</code> 条件满足，发生转移，IP &lt;— IP + 8位 位移量；条件不满足则顺序执行。</p>
+<ul>
+<li>label是短转移标号，要跳转的地址必须距离当前IP地址 -128～+127个单元的范围之内。</li>
+</ul>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><h3 id="代码静态分析"><a href="#代码静态分析" class="headerlink" title="代码静态分析"></a>代码静态分析</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>代码静态分析是在不执行计算机程序的条件下，对源代码进行分析，找出代码缺陷。</p>
+<h4 id="执行方式"><a href="#执行方式" class="headerlink" title="执行方式"></a>执行方式</h4><p>一般配合静态程序分析工具进行。</p>
+<h4 id="采用技术"><a href="#采用技术" class="headerlink" title="采用技术"></a>采用技术</h4><p>数据流分析、机器学习、语义精简…</p>
+<h4 id="可检测类型"><a href="#可检测类型" class="headerlink" title="可检测类型"></a>可检测类型</h4><p>死锁，空指针，资源泄露，缓冲区溢出，安全漏洞，竞态条件…</p>
+<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><p>程序翻译/编译(编译器) ，程序优化重构，软件缺陷检测等。</p>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p>程序动态分析:需要实际执行程序。<br>程序理解: 静态分析这一术语一般用来形容自动化工具的分析，而人工分析则往往叫做程序理解。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>能够检测所有的代码级别的可执行路径组合，快速，准确。<br>直接面向源码,分析多种问题。<br>在研发阶段开始找到并修复多种问题，节省大量时间/人力成本。</p>
+<p><strong>注意</strong>: 静态分析不是万能的，测试是持续的过程,非一劳永逸。</p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>​    静态分析的对象是Windows内核模块、第三方驱动程序等不开源的二进制代码。<br>首先需要通过反汇编工具对模块进行处理，生成相应的汇编代码，然后在此基础上分析、检查程序的语法、结构、过程、    接口等,恢复和重建程序的数据类型、结构和框架，验证程序功能逻辑是否正确。<br>​    在静态分析过程中，关键的地方是要做到准确提取信息。不论是源程序或二进制程序，利用静态分析技术都可以从中提取出控制流、表达式、接口和数据流等相关的信息。<br>​    由于程序本身可以看作是抽象的、复杂的数据结构集合，因此程序的静态分析技术主要是根据从程序中提取的相关信息，从不同角度对程序的数据结构进行重建,根据模型推导数据之间的逻辑转换关系。</p>
+<h2 id="放弃学习"><a href="#放弃学习" class="headerlink" title="放弃学习"></a>放弃学习</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Mess/">Mess</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Mess/计算机专业名词" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1092,237 +1171,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMake/">CMake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux/System/Linux备忘录" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/10/02/Linux/System/Linux备忘录/" class="article-date">
-      <time datetime="2018-10-01T16:20:34.000Z" itemprop="datePublished">2018-10-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/02/Linux/System/Linux备忘录/">Linux备忘录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="系统安装后的配置"><a href="#系统安装后的配置" class="headerlink" title="系统安装后的配置"></a>系统安装后的配置</h3><ul>
-<li><p>关闭selinux</p>
-<p>/etc/selinux/config</p>
-<p>SELINUX=disabled</p>
-</li>
-<li><p>关闭防火墙</p>
-<ul>
-<li><p>chkconfig iptables off</p>
-</li>
-<li><p>chkconfig NetworkManager off</p>
-<p>systemctl disable NetworkManager.service</p>
-</li>
-<li><p>firewall-cmd –state</p>
-<p>systemctl stop firewalld.service</p>
-<p>systemctl disable firewalld.service</p>
-</li>
-</ul>
-</li>
-<li><p>reboot</p>
-</li>
-</ul>
-<h3 id="自动加载文件系统-etc-fstab"><a href="#自动加载文件系统-etc-fstab" class="headerlink" title="自动加载文件系统/etc/fstab"></a>自动加载文件系统/etc/fstab</h3><ol>
-<li>文件系统对应的设备名。这一列内容可以是分区或设备</li>
-<li>挂载点</li>
-<li>文件系统格式。如 ext3， vfat 等</li>
-<li>文件系统挂载参数。不同的文件系统可能有不同的参数</li>
-<li>备份标志。设定为 1 时，表示备份该文件系统；0 表示不备份</li>
-<li>系统启动时，文件系统的检查顺序。只有根分区才可以设定为 1，其余需要检查的分区应该设定为 2，设定为 0 表示不检查文件系统</li>
-</ol>
-<h3 id="网络配置的相关文件"><a href="#网络配置的相关文件" class="headerlink" title="网络配置的相关文件"></a>网络配置的相关文件</h3><ol>
-<li>IP地址配置文件    /etc/sysconfig/network-scripts/ifcfg-网卡</li>
-<li>主机名映射文件/etc/hosts</li>
-<li>主机名文件/etc/sysconfig/network</li>
-<li>DNS解析文件/etc/reslov.conf</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure>
-<p>修改信息如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">E=eth0 //网卡名称</span><br><span class="line"></span><br><span class="line">HWADDR=00:0c:29:5c:94:74 //物理地址</span><br><span class="line"></span><br><span class="line">TYPE=Ethernet</span><br><span class="line"></span><br><span class="line">UUID=36c43db3-95a9-427c-af8f-ba130189de85</span><br><span class="line"></span><br><span class="line">ONBOOT=yes //将ONBOOT=&quot;no&quot;改为ONBOOT=&quot;yes&quot;</span><br><span class="line"></span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line"></span><br><span class="line">BOOTPROTO=none</span><br><span class="line"></span><br><span class="line">IPADDR=192.168.1.98 //修改IP地址</span><br><span class="line"></span><br><span class="line">NETMASK=255.255.255.0 //修改子网掩码</span><br><span class="line"></span><br><span class="line">GATEWAY=192.168.1.1 //修改网关</span><br><span class="line"></span><br><span class="line">DNS1=8.8.8.8 //修改DNS服务器</span><br><span class="line"></span><br><span class="line">IPV6INIT=no</span><br><span class="line"></span><br><span class="line">USERCTL=no</span><br></pre></td></tr></table></figure>
-<p>（2）重启网络服务：</p>
-<p>要想生效，必须重启Linux或者重启网络服务，我们重启网络服务，执行如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
-<h3 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h3><h4 id="使用rpm从镜像文件下载软件包"><a href="#使用rpm从镜像文件下载软件包" class="headerlink" title="使用rpm从镜像文件下载软件包"></a>使用rpm从镜像文件下载软件包</h4><ol>
-<li>ls  /dev 看到scd0(ISO镜像文件)</li>
-<li>mount  /dev/scd0  /mnt/cdrom 镜像文件挂载</li>
-<li>cd  /mnt/cdrom/Packages/</li>
-<li>ls | grep +包名</li>
-<li>rpm  -ivh  包名</li>
-</ol>
-<h4 id="使用本地yum源下载软件包"><a href="#使用本地yum源下载软件包" class="headerlink" title="使用本地yum源下载软件包"></a>使用本地yum源下载软件包</h4><ol>
-<li><p>挂载光盘镜像（如上）</p>
-</li>
-<li><p>修改/etc/yum.repos.d/目录下的以.repo结尾的配置文件</p>
-<p>baseurl=file:///mnt/cdrom/</p>
-<p>enable=1</p>
-<p>gpgcheck=0</p>
-</li>
-</ol>
-<h3 id="逻辑卷管理"><a href="#逻辑卷管理" class="headerlink" title="逻辑卷管理"></a>逻辑卷管理</h3><h4 id="新建逻辑卷"><a href="#新建逻辑卷" class="headerlink" title="新建逻辑卷"></a>新建逻辑卷</h4><ol>
-<li><p>磁盘分区</p>
-<p>fdisk /dev/sdb  # 8e Linux LVM</p>
-</li>
-<li><p>创建PV</p>
-<p>pvcreate /dev/sdb1  /dev/sdb2</p>
-</li>
-<li><p>创建VG</p>
-<p>vgcreate myVG /dev/sdb1 /dev/sdb2</p>
-</li>
-<li><p>创建LV</p>
-<p>lvcreate -L 400M -n vol01 myVG</p>
-</li>
-<li><p>创建Filesystem</p>
-<p>mkfs.ext3 /dev/myVG/vol01</p>
-</li>
-</ol>
-<h4 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h4><ol>
-<li>首先将正在使用的逻辑卷卸载掉   umount 命令<ol start="2">
-<li>将逻辑卷先删除　　   lvremove 命令</li>
-</ol>
-</li>
-<li>删除卷组　　   vgremove 命令</li>
-<li>最后再删除物理卷　　  pvremove 命令</li>
-</ol>
-<h4 id="扩充逻辑卷"><a href="#扩充逻辑卷" class="headerlink" title="扩充逻辑卷"></a>扩充逻辑卷</h4><ol>
-<li><p>将要添加到VG的硬盘格式化成PV</p>
-<p>pvcreate /dev/sdd</p>
-</li>
-<li><p>将新的PV添加到指定的VG当中</p>
-<p>vgextend xiaoluo /dev/sdd</p>
-</li>
-<li><p>扩充逻辑卷</p>
-<p>lvextend -L +1G /dev/xiaoluo/mylv</p>
-</li>
-<li><p>更新文件系统</p>
-<p>resize2fs /dev/xiaoluo/mylv</p>
-</li>
-</ol>
-<h4 id="缩容逻辑卷"><a href="#缩容逻辑卷" class="headerlink" title="缩容逻辑卷"></a>缩容逻辑卷</h4><p>逻辑卷的缩小操作必须离线执行，要先卸载掉逻辑卷才可以</p>
-<p><strong>第一种</strong></p>
-<ol>
-<li><p>卸载已经挂载的逻辑卷　　通过 umount 命令</p>
-</li>
-<li><p>缩小文件系统(会提示需要运行fsck来检查文件系统)</p>
-<p>resize2fs /dev/xiaoluo/mylv 10G</p>
-</li>
-<li><p>缩小LV</p>
-<p>lvreduce -L -4G /dev/xiaoluo/mylv </p>
-</li>
-<li><p>缩小完逻辑卷以后，再将逻辑卷挂载</p>
-</li>
-</ol>
-<p><strong>第二种</strong></p>
-<ol>
-<li><p>卸载逻辑卷　　通过 umount 命令</p>
-</li>
-<li><p>将一个PV从指定卷组中移除掉</p>
-<p>vgreduce xiaoluo /dev/sdd</p>
-</li>
-<li><p>将PV删除掉</p>
-<p>pvremove /dev/sdd</p>
-</li>
-</ol>
-<h3 id="网卡绑定"><a href="#网卡绑定" class="headerlink" title="网卡绑定"></a>网卡绑定</h3><ol>
-<li><p>关闭NetworkManager服务</p>
-</li>
-<li><p>创建bonding.conf文件在/etc/modprobe.d/目录中alias bond0 bonding</p>
-</li>
-<li><p>创建ifcfg-bond0文件在/etc/sysconfig/network-scripts/目录中</p>
-<p>DEVICE=bond0</p>
-<p>NAME=bond0</p>
-<p>TYPE=Ethernet</p>
-<p>ONBOOT=yes</p>
-<p>BOOTPROTO=static</p>
-<p>IPADDR=192.168.50.111</p>
-<p>NETMASK=255.255.255.0</p>
-<p>GATEWAY=192.168.50.1</p>
-<p>BONDING_OPTS=”mode=1 miimon=100”</p>
-</li>
-<li><p>修改真实网卡的配置   /etc/sysconfig/network-scripts/ifcfg-要加入的两块网卡</p>
-<p>DEVICE=eth0</p>
-<p>NAME=eth0</p>
-<p>ONBOOT=yes</p>
-<p>BOOTPROTO=none</p>
-<p>MASTER=bond0</p>
-<p>SLAVE=yes</p>
-</li>
-<li><p>重启网络服务service network restart</p>
-</li>
-<li>查看状态cat /proc/net/bonding/bond0</li>
-</ol>
-<h3 id="NFS服务配置"><a href="#NFS服务配置" class="headerlink" title="NFS服务配置"></a>NFS服务配置</h3><p>使用NFS服务，至少需要启动以下3个系统守护进程</p>
-<ol>
-<li>rpc.nfsd</li>
-<li>rpc.mountd</li>
-<li>portmap（rhel5）        rpcbind（rhel6）</li>
-</ol>
-<h3 id="Apache服务"><a href="#Apache服务" class="headerlink" title="Apache服务"></a>Apache服务</h3><ul>
-<li><p>启动httpd服务</p>
-<p>service httpd start</p>
-<p>如在地址栏输入<a href="http://192.168.100.101，成功加载页面，就说明httpd正常运行了" target="_blank" rel="noopener">http://192.168.100.101，成功加载页面，就说明httpd正常运行了</a></p>
-</li>
-<li><p>配置文件/etc/httpd/conf/httpd.conf</p>
-<p>端口监听：Listen *:80</p>
-<p>导向固定ip：ServerName *:80</p>
-<p>默认目录：DocumentRoot “/var/www/html/“</p>
-</li>
-</ul>
-<h3 id="阻止重定向操作覆盖已有文件"><a href="#阻止重定向操作覆盖已有文件" class="headerlink" title="阻止重定向操作覆盖已有文件"></a>阻止重定向操作覆盖已有文件</h3><p><code>set -o noclobber</code>阻止重定向操作覆盖已有文件</p>
-<p><code>set +o noclobber</code>取消上面的操作</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
     </div>
 
       

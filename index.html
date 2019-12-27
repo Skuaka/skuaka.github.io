@@ -234,6 +234,117 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Untitled" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/12/25/Untitled/" class="article-date">
+      <time datetime="2019-12-25T08:17:59.265Z" itemprop="datePublished">2019-12-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Dear all,</p>
+<p>  SP_248 build information is as follows.</p>
+<p>=============================================================================</p>
+<p>Submitter : null</p>
+<p>Build Label : dev_1.0.248</p>
+<p>Automation by Module:</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Test Suite</th>
+<th>Total</th>
+<th>Pass</th>
+<th>Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SP Test Suite</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p> SP Test Suite—————————————PASS RATE–93.33%–<strong><em>!!FAIL!!</em></strong></p>
+<p> SP new feature————————————–PASS RATE–72.73%–<strong><em>!!FAIL!!</em></strong></p>
+<p> Test Idp——————————————–PASS RATE–100.00%</p>
+<p> Test Internal—————————————PASS RATE–100.00%</p>
+<p> Test Open——————————————-PASS RATE–100.00%</p>
+<p> Test Search—————————————–PASS RATE–100.00%</p>
+<p> Test Token Generation——————————-PASS RATE–100.00%</p>
+<p> Test Workbench————————————–PASS RATE–100.00%</p>
+<hr>
+<p>Automation Test Report(Allure):</p>
+<p>  <a href="https://awsself.jenkinsci.trendmicro.com/job/VOSG/job/VOSG_SP_Email_Test_Pipeline/248/allure/" target="_blank" rel="noopener">https://awsself.jenkinsci.trendmicro.com/job/VOSG/job/VOSG_SP_Email_Test_Pipeline/248/allure/</a></p>
+<p>ChangeList: null</p>
+<p>=============================================================================</p>
+<p>=============================================================================</p>
+<p>Build Information:</p>
+<p>Check TimeIndex at:</p>
+<p><a href="https://awsself.jenkinsci.trendmicro.com/job/VOSG/job/VOSG_SP_Email_Test_Pipeline/" target="_blank" rel="noopener">https://awsself.jenkinsci.trendmicro.com/job/VOSG/job/VOSG_SP_Email_Test_Pipeline/</a></p>
+<p>Check Build Log at:</p>
+<p><a href="https://awsself.jenkinsci.trendmicro.com/job/VOSG/job/VOSG_SP_Email_Test_Pipeline/248/console" target="_blank" rel="noopener">https://awsself.jenkinsci.trendmicro.com/job/VOSG/job/VOSG_SP_Email_Test_Pipeline/248/console</a> to view the results.</p>
+<p>=============================================================================</p>
+<p>Automation Test Summarys:</p>
+<p>​    Total Cases : 45</p>
+<p>​    Pass Cases : 42</p>
+<p>​    Fail Cases : 3</p>
+<p>​    Fail List:</p>
+<p>RBAC_uid_in_token_hasrole—–FAIL</p>
+<p>RBAC_uid_in_token_hasrole—–FAIL</p>
+<p>RBAC_uid_in_header_hasrole—–FAIL</p>
+<p>RBAC_uid_in_header_hasrole—–FAIL</p>
+<p>RBAC_backends_get_permissions—–FAIL</p>
+<p>RBAC_backends_get_permissions—–FAIL</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Develop/hexo-note" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -775,7 +886,7 @@
 <h4 id="RequestsLibrary"><a href="#RequestsLibrary" class="headerlink" title="RequestsLibrary"></a>RequestsLibrary</h4><p><a href="https://github.com/bulkan/robotframework-requests" target="_blank" rel="noopener">https://github.com/bulkan/robotframework-requests</a></p>
 <p><a href="http://bulkan.github.io/robotframework-requests/doc/RequestsLibrary.html" target="_blank" rel="noopener">http://bulkan.github.io/robotframework-requests/doc/RequestsLibrary.html</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -U requests</span><br><span class="line">pip install -U robotframework-requests</span><br></pre></td></tr></table></figure>
-<h3 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">robot + </span><br><span class="line">-i &lt;tag&gt;		# include tag</span><br><span class="line">-e &lt;tag&gt;		# exclude tag</span><br><span class="line">-d &lt;dir&gt;		# output dir</span><br><span class="line">-v para=value	# set env</span><br><span class="line">&lt;filename&gt;		# run selected file</span><br><span class="line">&lt;dir&gt;			# run selected suite(dir)</span><br></pre></td></tr></table></figure>
+<h3 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">robot + </span><br><span class="line">-i &lt;tag&gt;		# include tag</span><br><span class="line">-e &lt;tag&gt;		# exclude tag</span><br><span class="line">-d &lt;dir&gt;		# output dir</span><br><span class="line">-v para:value	# set env</span><br><span class="line">&lt;filename&gt;		# run selected file</span><br><span class="line">&lt;dir&gt;			# run selected suite(dir)</span><br></pre></td></tr></table></figure>
 <h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><h4 id="Logical-Operators"><a href="#Logical-Operators" class="headerlink" title="Logical Operators"></a>Logical Operators</h4><p>xxx and xxx</p>
 <p>xxx or xxx</p>
 <p>左右只留一个空格</p>
@@ -946,82 +1057,6 @@
 <p><code>for i in $(seq 1 5)</code></p>
 <p><code>for (( i=1; i&lt;=5; ++i ))</code></p>
 <h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while [ condition ] ; do</span><br><span class="line">	:</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux/Programming/Shell变量笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/10/02/Linux/Programming/Shell变量笔记/" class="article-date">
-      <time datetime="2019-10-02T04:21:53.000Z" itemprop="datePublished">2019-10-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/02/Linux/Programming/Shell变量笔记/">Shell变量笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Shell变量笔记"><a href="#Shell变量笔记" class="headerlink" title="Shell变量笔记"></a>Shell变量笔记</h2><p><strong><em>本笔记提取出一些重要的内容方便以后查阅，难记的放前面</em></strong></p>
-<h3 id="参数拓展"><a href="#参数拓展" class="headerlink" title="参数拓展"></a>参数拓展</h3><p><code>${}</code>把参数值替换进字符串。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_process <span class="variable">$&#123;i&#125;</span>_tmp</span><br></pre></td></tr></table></figure>
-<p>参数拓展有很多种模式匹配方法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;param:-defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值，param不会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:+defult&#125;</span>	<span class="comment">#如果param存在且不会空，就把它设置为defult</span></span><br><span class="line"><span class="variable">$&#123;param:=defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值,并且param也会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:?defult&#125;</span>	<span class="comment">#如果param为空，输出param:defult并异常终止脚本</span></span><br><span class="line"><span class="variable">$&#123;#param&#125;</span>					<span class="comment">#输出param的长度</span></span><br><span class="line"><span class="variable">$&#123;param#word&#125;</span>			<span class="comment">#从param的头部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param##word&#125;</span>		<span class="comment">#从param的头部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param%word&#125;</span>			<span class="comment">#从param的尾部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param%%word&#125;</span>		<span class="comment">#从param的尾部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param/aa/bb&#125;</span>		<span class="comment">#将第一个aa替换为bb</span></span><br><span class="line"><span class="variable">$&#123;param//aa/bb&#125;</span>		<span class="comment">#将所有的aa替换为bb</span></span><br></pre></td></tr></table></figure>
-<h3 id="字符串切片"><a href="#字符串切片" class="headerlink" title="字符串切片"></a>字符串切片</h3><p><code>${param:start_pos:length}</code></p>
-<p><strong><em>索引从0开始计数，-1指向最后一个字符位置</em></strong></p>
-<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$HOME</span>	<span class="comment">#当前用户的家目录</span></span><br><span class="line"><span class="variable">$PATH</span>	<span class="comment">#以冒号分隔的用来搜索命令的目录列表</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$PS1</span>	<span class="comment">#命令提示符，通常为$</span></span><br><span class="line"><span class="variable">$PS2</span>	<span class="comment">#二级提示符，通常为&gt;</span></span><br><span class="line"><span class="variable">$IFS</span>	<span class="comment">#输入域分隔符，读取输入时用来分隔单词的一组字符，它们通常是空格、制表符和换行符</span></span><br><span class="line"></span><br><span class="line">$$		<span class="comment">#shell脚本的进程号</span></span><br><span class="line">$?		<span class="comment">#前一个命令的退出码</span></span><br></pre></td></tr></table></figure>
-<h3 id="参数变量"><a href="#参数变量" class="headerlink" title="参数变量"></a>参数变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$#</span>				<span class="comment">#传递给脚本的参数个数</span></span><br><span class="line"><span class="variable">$0</span>				<span class="comment">#shell脚本的名字</span></span><br><span class="line"><span class="variable">$1</span>,<span class="variable">$2</span>,...		<span class="comment">#脚本程序的参数</span></span><br><span class="line"></span><br><span class="line">$*				<span class="comment">#在一个变量中列出所有参数，用IFS中的第一个字符分隔</span></span><br><span class="line"><span class="variable">$@</span>				<span class="comment">#$*的变体，不使用IFS变量，所以即使IFS为空，参数也不会挤在一起</span></span><br></pre></td></tr></table></figure>
-<h3 id="算数拓展"><a href="#算数拓展" class="headerlink" title="算数拓展"></a>算数拓展</h3><p>expr 执行慢，因为它需要调用一个新的shell来处理expr命令。所以推荐使用<code>$((...))</code>算术拓展。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=$(($x +1))</span><br><span class="line">x=$(expr $x + 1)</span><br><span class="line">x=`expr $x + 1`</span><br></pre></td></tr></table></figure>
-<h3 id="捕获输出"><a href="#捕获输出" class="headerlink" title="捕获输出"></a>捕获输出</h3><p><code>$(command)</code>的结果就是其中命令的输出。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> The current users are $(who)</span><br></pre></td></tr></table></figure>
 <h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>

@@ -234,6 +234,104 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C-C++/Mess/C++多线程排序" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/09/C-C++/Mess/C++多线程排序/" class="article-date">
+      <time datetime="2019-04-09T07:58:43.000Z" itemprop="datePublished">2019-04-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/09/C-C++/Mess/C++多线程排序/">C++多线程多路归并排序函数</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="C-多线程多路归并排序函数"><a href="#C-多线程多路归并排序函数" class="headerlink" title="C++多线程多路归并排序函数"></a>C++多线程多路归并排序函数</h2><h3 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h3><h4 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h4><ul>
+<li>各个线程对分配给它的数据分块进行快速排序(<code>std::sort</code>)。</li>
+<li>主线程排序完分配给自己的数据分块后，需要等待(<code>std::future</code>,<code>std::promise</code>)各个线程完成。</li>
+<li>主线程多路归并排序(需要自己实现，标准库只有二路归并)。</li>
+</ul>
+<h4 id="实现注意"><a href="#实现注意" class="headerlink" title="实现注意"></a>实现注意</h4><ul>
+<li>本实现大量使用C++11特性。</li>
+<li>c语言的qsort内部用到了静态变量，所以不是线程安全的。可以通过在主线程使用一次qsort解决。具体自行搜索或看<a href="https://blog.csdn.net/itegel84/article/details/5871491" target="_blank" rel="noopener">这篇</a>。而这里使用std::sort则没有这个问题。</li>
+</ul>
+<h4 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h4><ul>
+<li>只支持数值类型，读者可自行扩展。</li>
+<li>需要支持随机存储</li>
+</ul>
+<h4 id="数据分块大小"><a href="#数据分块大小" class="headerlink" title="数据分块大小"></a>数据分块大小</h4><p>设数据长度(data_len)为 D，新线程数量(thread_num)为 T，一个分块大小(chunk_size)为 C，最后一个分块的大小(last_chunk_size)为 LC。</p>
+<p>直观地，如果工作线程数量可以整除数据长度，那么商就是块大小。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LC = C = D/(T+1)</span><br></pre></td></tr></table></figure>
+<p>如果不能整除的时候：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C = D/(T+1)+1</span><br><span class="line">LC ∈ (C-(T+1), C)</span><br></pre></td></tr></table></figure>
+<p>因为 T 非常小，所以最后一块的大小差别不大，<strong>本实现就由主线程来处理最后一块</strong>。</p>
+<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><ul>
+<li>指向数据首地址的指针</li>
+<li>数据长度</li>
+<li>指定需要创建的新线程数量</li>
+</ul>
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// multi_threaded_sort.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MULTI_THREADED_SORT_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MULTI_THREADED_SORT_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;type_traits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> IntegerType&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">multi_threaded_sort</span><span class="params">(IntegerType* in_data, <span class="keyword">size_t</span> data_len, <span class="keyword">size_t</span> thread_num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// compile time type check</span></span><br><span class="line">    <span class="keyword">static_assert</span>(<span class="built_in">std</span>::is_integral&lt;IntegerType&gt;::value,</span><br><span class="line">                  <span class="string">"Data type must be integer"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// under such conditions, multi-thread makes no sense</span></span><br><span class="line">    <span class="comment">// call std::sort directly</span></span><br><span class="line">    <span class="keyword">if</span>(data_len &lt;= <span class="number">1</span> || thread_num == <span class="number">0</span></span><br><span class="line">       || data_len &lt; (thread_num+<span class="number">1</span>)*(thread_num+<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::sort(in_data, in_data+data_len);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* one thread sort one chunk</span></span><br><span class="line"><span class="comment">     * main thread sort the last chunk */</span></span><br><span class="line">    <span class="keyword">size_t</span> chunk_size = data_len/(thread_num+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(data_len%(thread_num+<span class="number">1</span>) != <span class="number">0</span>)</span><br><span class="line">        ++chunk_size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// for threads synchronize</span></span><br><span class="line">    <span class="keyword">auto</span> sort_promise = <span class="keyword">new</span> <span class="built_in">std</span>::promise&lt;<span class="keyword">void</span>&gt;[thread_num];</span><br><span class="line">    <span class="keyword">auto</span> sort_future = <span class="keyword">new</span> <span class="built_in">std</span>::future&lt;<span class="keyword">void</span>&gt;[thread_num];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;thread_num; ++i)</span><br><span class="line">        sort_future[i] = sort_promise[i].get_future();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// create threads</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;thread_num; ++i)&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="function">thread <span class="title">th</span><span class="params">([=]&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="built_in">std</span>::sort(in_data + i*chunk_size, in_data + (i+<span class="number">1</span>)*chunk_size);</span></span></span><br><span class="line"><span class="function"><span class="params">            sort_promise[i].set_value();</span></span></span><br><span class="line"><span class="function"><span class="params">        &#125;)</span></span>;</span><br><span class="line">        th.detach();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// sort the last chunk</span></span><br><span class="line">    <span class="built_in">std</span>::sort(in_data + chunk_size*thread_num, in_data + data_len);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// before wait and block, do things not based on data</span></span><br><span class="line">    <span class="keyword">auto</span> out_data = <span class="keyword">new</span> IntegerType[data_len];</span><br><span class="line">    <span class="keyword">auto</span> index = <span class="keyword">new</span> <span class="keyword">size_t</span>[thread_num + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;thread_num + <span class="number">1</span>; ++i)</span><br><span class="line">        index[i] = i * chunk_size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// wait for all threads</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;thread_num; ++i)</span><br><span class="line">        sort_future[i].wait();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] sort_future;</span><br><span class="line">    <span class="keyword">delete</span>[] sort_promise;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// do merge sort</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; data_len; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        IntegerType min_index;</span><br><span class="line">        IntegerType min_num = <span class="built_in">std</span>::numeric_limits&lt;IntegerType&gt;::max();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// traverse every chunk and find the minimum</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">size_t</span> j=<span class="number">0</span>; j&lt;thread_num; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>((index[j] &lt; (j+<span class="number">1</span>)*chunk_size)</span><br><span class="line">               &amp;&amp; (in_data[index[j]] &lt; min_num))</span><br><span class="line">            &#123;</span><br><span class="line">                min_index = j;</span><br><span class="line">                min_num = in_data[index[j]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(index[thread_num] &lt; data_len</span><br><span class="line">           &amp;&amp; (in_data[index[thread_num]] &lt; min_num))</span><br><span class="line">        &#123;</span><br><span class="line">            min_index = thread_num;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        out_data[i] = in_data[index[min_index]];</span><br><span class="line">        index[min_index]++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::copy(out_data, out_data + data_len, in_data);</span><br><span class="line">    <span class="keyword">delete</span>[] out_data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//MULTI_THREADED_SORT_H</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"multi_threaded_sort.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"this example check the correctness:"</span>;</span><br><span class="line">        <span class="keyword">short</span> data[] = &#123;<span class="number">2</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">93</span>, <span class="number">43</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">-3</span>, <span class="number">43</span>&#125;;</span><br><span class="line">        <span class="keyword">size_t</span> N = <span class="keyword">sizeof</span>(data) / <span class="keyword">sizeof</span>(<span class="keyword">short</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\ninput "</span> &lt;&lt; N &lt;&lt; <span class="string">" data: "</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) <span class="built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">        multi_threaded_sort(data, N, <span class="number">2</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n\tsort with 2 threads: "</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) <span class="built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line"></span><br><span class="line">        random_shuffle(data, data + N);<span class="comment">// before c++17</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\nafter shuffle: "</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) <span class="built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">        multi_threaded_sort(data, N, <span class="number">3</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n\tsort with 3 threads: "</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) <span class="built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// -----------------------------------------------------</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">size_t</span> N = <span class="number">654321</span>;   <span class="comment">// numbers to generate</span></span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">size_t</span> T = <span class="number">6</span>;         <span class="comment">// threads to test</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n\nthis example check the efficiency:\n"</span></span><br><span class="line">             &lt;&lt; <span class="string">"randomly generate "</span> &lt;&lt; N</span><br><span class="line">             &lt;&lt; <span class="string">" natural number and sort them...\n"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">short</span> random_data[T][N];</span><br><span class="line">        random_device rd;</span><br><span class="line">        default_random_engine rng&#123;rd()&#125;;</span><br><span class="line">        <span class="built_in">std</span>::uniform_int_distribution&lt;<span class="keyword">short</span>&gt; dis;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">            random_data[<span class="number">0</span>][i] = dis(rng);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">1</span>; i &lt; T; ++i)</span><br><span class="line">            copy(random_data[<span class="number">0</span>], random_data[<span class="number">0</span>] + N, random_data[i]);</span><br><span class="line"></span><br><span class="line">        chrono::time_point&lt;chrono::high_resolution_clock&gt; <span class="keyword">start_t</span>[T], <span class="keyword">end_t</span>[T];</span><br><span class="line">        chrono::duration&lt;<span class="keyword">double</span>, <span class="built_in">std</span>::milli&gt; elapsed[T];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; T; ++i) &#123;</span><br><span class="line">            <span class="keyword">start_t</span>[i] = chrono::high_resolution_clock::now();</span><br><span class="line">            <span class="keyword">if</span> (i)</span><br><span class="line">                multi_threaded_sort(random_data[<span class="number">1</span>], N, i + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                sort(random_data[<span class="number">0</span>], random_data[<span class="number">0</span>] + N);</span><br><span class="line">            <span class="keyword">end_t</span>[i] = chrono::high_resolution_clock::now();</span><br><span class="line">            elapsed[i] = <span class="keyword">end_t</span>[i] - <span class="keyword">start_t</span>[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Use std::sort() cost: "</span> &lt;&lt; elapsed[<span class="number">0</span>].count() &lt;&lt; <span class="string">" ms\n"</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">1</span>; i &lt; T; ++i)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Add "</span> &lt;&lt; i &lt;&lt; <span class="string">" threads   cost: "</span> &lt;&lt; elapsed[i].count() &lt;&lt; <span class="string">" ms\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">this example check the correctness:</span><br><span class="line">input 10 data: 2 5 5 3 93 43 3 0 -3 43 </span><br><span class="line">	sort with 2 threads: -3 0 2 3 3 5 5 43 43 93 </span><br><span class="line">after shuffle: 5 -3 3 5 43 43 3 0 2 93 </span><br><span class="line">	sort with 3 threads: -3 0 2 3 3 5 5 43 43 93 </span><br><span class="line"></span><br><span class="line">this example check the efficiency:</span><br><span class="line">randomly generate 654321 natural number and sort them...</span><br><span class="line">Use std::sort() cost: 36.1254 ms</span><br><span class="line">Add 1 threads   cost: 25.5484 ms</span><br><span class="line">Add 2 threads   cost: 9.9246 ms</span><br><span class="line">Add 3 threads   cost: 10.2634 ms</span><br><span class="line">Add 4 threads   cost: 11.2967 ms</span><br><span class="line">Add 5 threads   cost: 14.7214 ms</span><br></pre></td></tr></table></figure>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ul>
+<li><p>因为线程本身创建和销毁需要时间，所以在数据量较少的情况下使用多线程肯定是不值得的，反而会变慢。</p>
+</li>
+<li><p>因为CPU核数是有限的，所以可以并发执行线程数肯定不会很高，所以创建过多线程也是没有用的，线程数达到某个数量(一般很小)后排序速度随线程数量增加而缓慢下降。</p>
+</li>
+</ul>
+<p>对于上面两点，读者可以修改测试代码的 N 和 T 自己进行测试。</p>
+<p>笔者水平有限，如有错误，还望指出。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C-C++/Mess/new和malloc区别" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1424,128 +1522,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Tcp/IP头_TCP头_UDP头" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/22/Network/Tcp/IP头_TCP头_UDP头/" class="article-date">
-      <time datetime="2019-03-22T14:49:12.000Z" itemprop="datePublished">2019-03-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/22/Network/Tcp/IP头_TCP头_UDP头/">IP头_TCP头_UDP头</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>源自：<a href="https://www.cnblogs.com/shenpengyan/p/5912567.html" target="_blank" rel="noopener">https://www.cnblogs.com/shenpengyan/p/5912567.html</a></p>
-<h3 id="报文封装整体结构"><a href="#报文封装整体结构" class="headerlink" title="报文封装整体结构"></a>报文封装整体结构</h3><p><img src="http://118.25.53.128/Picture/Tcp/o_封装结构.jpg" alt="o_封装结构"></p>
-<h3 id="mac帧头定义"><a href="#mac帧头定义" class="headerlink" title="mac帧头定义"></a>mac帧头定义</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*数据帧定义，头14个字节，尾4个字节*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">MAC_FRAME_HEADER</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">char</span> m_cDstMacAddress[<span class="number">6</span>];    <span class="comment">//目的mac地址</span></span><br><span class="line">   <span class="keyword">char</span> m_cSrcMacAddress[<span class="number">6</span>];    <span class="comment">//源mac地址</span></span><br><span class="line">	 <span class="keyword">short</span> m_cType;       　　　　　<span class="comment">//上一层协议类型，如0x0800代表上一层是IP协议，0x0806为arp</span></span><br><span class="line">&#125;__attribute__((packed))MAC_FRAME_HEADER,*PMAC_FRAME_HEADER;</span><br></pre></td></tr></table></figure>
-<h3 id="ip头部定义"><a href="#ip头部定义" class="headerlink" title="ip头部定义"></a>ip头部定义</h3><p><img src="http://118.25.53.128/Picture/Tcp/o_ip_header.jpg" alt="o_ip头部2"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*IP头定义，共20个字节*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IP_HEADER</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="keyword">char</span> m_cVersionAndHeaderLen;					<span class="comment">//版本信息(前4位)，头长度(后4位)</span></span><br><span class="line"> <span class="keyword">char</span> m_cTypeOfService;								<span class="comment">// 服务类型8位</span></span><br><span class="line"> <span class="keyword">short</span> m_sTotalLenOfPacket;						<span class="comment">//数据包长度</span></span><br><span class="line"> <span class="keyword">short</span> m_sPacketID;										<span class="comment">//数据包标识</span></span><br><span class="line"> <span class="keyword">short</span> m_sSliceinfo;									<span class="comment">//分片使用</span></span><br><span class="line"> <span class="keyword">char</span> m_cTTL;													<span class="comment">//存活时间</span></span><br><span class="line"> <span class="keyword">char</span> m_cTypeOfProtocol;							<span class="comment">//协议类型</span></span><br><span class="line"> <span class="keyword">short</span> m_sCheckSum;      　　　　　　 	<span class="comment">//校验和</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">int</span> m_uiSourIp;							<span class="comment">//源ip</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">int</span> m_uiDestIp;							<span class="comment">//目的ip</span></span><br><span class="line">&#125; __attribute__((packed))IP_HEADER, *PIP_HEADER ;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>版本（Version）字段：占4比特。用来表明IP协议实现的版本号，当前一般为IPv4，即0100。</li>
-<li>报头长度（Internet Header Length，IHL）字段：占4比特。是头部占32比特的数字，包括可选项。普通IP数据报（没有任何选项），该字段的值是5，即160比特=20字节。此字段最大值为60字节。</li>
-<li>服务类型（Type of Service ，TOS）字段：占8比特。其中前3比特为优先权子字段（Precedence，现已被忽略）。第8比特保留未用。<strong><em>第4至第7比特分别代表延迟、吞吐量、可靠性和花费</em></strong>。当它们取值为1时分别代表要求最小时延、最大吞吐量、最高可靠性和最小费用。这4比特的服务类型中只能置其中1比特为1。可以全为0，若全为0则表示一般服务。服务类型字段声明了数据报被网络系统传输时可以被怎样处理。例如：TELNET协议可能要求有最小的延迟，FTP协议（数据）可能要求有最大吞吐量，SNMP协议可能要求有最高可靠性，NNTP（Network News Transfer Protocol，网络新闻传输协议）可能要求最小费用，而ICMP协议可能无特殊要求（4比特全为0）。实际上，大部分主机会忽略这个字段，但一些动态路由协议如OSPF（Open Shortest Path First Protocol）、IS-IS（Intermediate System to Intermediate System Protocol）可以根据这些字段的值进行路由决策。</li>
-<li>总长度字段：占16比特。指明整个数据报的长度（以字节为单位）。最大长度为65535字节。</li>
-<li><strong>标志字段：占16比特。用来唯一地标识主机发送的每一份数据报。通常每发一份报文，它的值会加1。</strong></li>
-<li>标志位字段：占3比特。标志一份数据报<strong>是否要求分段</strong>。</li>
-<li>段偏移字段：占13比特。如果一份数据报要求分段的话，此字段指明该段偏移距原始数据报开始的位置。</li>
-<li>生存期（TTL：Time to Live）字段：占8比特。用来设置数据报最多可以经过的路由器数。由发送数据的源主机设置，通常为32、64、128等。每经过一个路由器，其值减1，直到0时该数据报被丢弃。</li>
-<li>协议字段：占8比特。指明IP层所封装的上层协议类型，如ICMP（1）、IGMP（2） 、TCP（6）、UDP（17）等。</li>
-<li>头部校验和字段：占16比特。内容是根据IP头部计算得到的校验和码。计算方法是：对头部中每个16比特进行二进制反码求和。（和ICMP、IGMP、TCP、UDP不同，IP不对头部后的数据进行校验）。</li>
-<li>源IP地址、目标IP地址字段：各占32比特。用来标明发送IP数据报文的源主机地址和接收IP报文的目标主机地址。</li>
-<li>可选项字段：占32比特。用来定义一些任选项：如记录路径、时间戳等。这些选项很少被使用，同时并不是所有主机和路由器都支持这些选项。可选项字段的长度必须是32比特的整数倍，如果不足，必须填充0以达到此长度要求。</li>
-</ul>
-<h3 id="tcp头部定义"><a href="#tcp头部定义" class="headerlink" title="tcp头部定义"></a>tcp头部定义</h3><p><img src="http://118.25.53.128/Picture/Tcp/o_tcp_header.jpg" alt="o_tcp头部2"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*TCP头定义，共20个字节*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">TCP_HEADER</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="keyword">short</span> m_sSourPort;										<span class="comment">// 源端口号16bit</span></span><br><span class="line"> <span class="keyword">short</span> m_sDestPort;										<span class="comment">// 目的端口号16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">int</span> m_uiSequNum;						<span class="comment">// 序列号32bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">int</span> m_uiAcknowledgeNum;			<span class="comment">// 确认号32bit</span></span><br><span class="line"> <span class="keyword">short</span> m_sHeaderLenAndFlag;						<span class="comment">// 前4位：TCP头长度；中6位：保留；后6位：标志位</span></span><br><span class="line"> <span class="keyword">short</span> m_sWindowSize;									<span class="comment">// 窗口大小16bit</span></span><br><span class="line"> <span class="keyword">short</span> m_sCheckSum;										<span class="comment">// 检验和16bit</span></span><br><span class="line"> <span class="keyword">short</span> m_surgentPointer;							<span class="comment">// 紧急数据偏移量16bit</span></span><br><span class="line">&#125;__attribute__((packed))TCP_HEADER, *PTCP_HEADER;</span><br><span class="line"><span class="comment">/*TCP头中的选项定义</span></span><br><span class="line"><span class="comment">kind(8bit)+Length(8bit，整个选项的长度，包含前两部分)+内容(如果有的话)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">KIND = </span></span><br><span class="line"><span class="comment">  1表示 无操作NOP，无后面的部分</span></span><br><span class="line"><span class="comment">  2表示 maximum segment 后面的LENGTH就是maximum segment选项的长度（以byte为单位，1+1+内容部分长度）</span></span><br><span class="line"><span class="comment">  3表示 windows scale 后面的LENGTH就是 windows scale选项的长度（以byte为单位，1+1+内容部分长度）</span></span><br><span class="line"><span class="comment">  4表示 SACK permitted，LENGTH为2，没有内容部分</span></span><br><span class="line"><span class="comment">  5表示 这是一个SACK包，LENGTH为2，没有内容部分</span></span><br><span class="line"><span class="comment">  8表示 时间戳，LENGTH为10，含8个字节的时间戳</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>源、目标端口号字段：占16比特。TCP协议通过使用”端口”来标识源端和目标端的应用进程。端口号可以使用0到65535之间的任何数字。在收到服务请求时，操作系统动态地为客户端的应用程序分配端口号。在服务器端，每种服务在”众所周知的端口”（Well-Know Port）为用户提供服务。</p>
-</li>
-<li><p>顺序号字段：占32比特。用来标识从TCP源端向TCP目标端发送的数据字节流，当前所携带的数据的第一个字节的顺序号。</p>
-<p>（如：本次连接共要发送1000个字节，已发出了100个字节，现在发送下一个报文，假设每个报文携带的数据为100字节，则这个报文的头结构中的序号是100【注：从0开始编号】）</p>
-</li>
-<li><p><strong>确认号字段：占32比特。只有ACK标志为1时，确认号字段才有效。它包含源端期望收到目标端的下一个数据字节的序号。</strong></p>
-<p>（如上例中那个报文已被正确接收，则接收端会发送一个ACK=1且确认序号=200的应答报文给发送方。）</p>
-</li>
-<li><p>头部长度字段：占4比特。给出头部占32比特的数目。没有任何选项字段的TCP头部长度为20字节；最多可以有60字节的TCP头部。</p>
-</li>
-<li><p>标志位字段（U、A、P、R、S、F）：占6比特。各比特的含义如下：</p>
-<ul>
-<li><p>URG：紧急指针（urgent pointer）有效。</p>
-</li>
-<li><p>ACK：确认序号有效。</p>
-</li>
-<li><p>PSH：接收方应该尽快将这个报文段交给应用层。</p>
-</li>
-<li><p>RST：重建连接。</p>
-</li>
-<li><p>SYN：发起一个连接。</p>
-</li>
-<li><p>FIN：释放一个连接。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>窗口大小字段：占16比特。此字段用来进行流量控制。单位为字节数，这个值是本机期望一次接收的字节数。</strong></p>
-</li>
-<li><p>TCP校验和字段：占16比特。对整个TCP报文段，即TCP头部和TCP数据进行校验和计算，并由目标端进行验证。</p>
-</li>
-<li><p><strong>紧急指针字段：占16比特。它是一个偏移量，和顺序号字段中的值相加表示紧急数据最后一个字节的序号。</strong></p>
-</li>
-<li><p>选项字段：占32比特。可能包括”窗口扩大因子”、”时间戳”等选项。</p>
-</li>
-</ul>
-<h3 id="udp头部定义"><a href="#udp头部定义" class="headerlink" title="udp头部定义"></a>udp头部定义</h3><p><img src="http://118.25.53.128/Picture/Tcp/o_udp_header.jpg" alt="o_udp头部"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*UDP头定义，共8个字节*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">UDP_HEADER</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usSourPort;					<span class="comment">// 源端口号16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usDestPort;					<span class="comment">// 目的端口号16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usLength;						<span class="comment">// 数据包长度16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usCheckSum;					<span class="comment">// 校验和16bit</span></span><br><span class="line">&#125;__attribute__((packed))UDP_HEADER, *PUDP_HEADER;</span><br></pre></td></tr></table></figure>
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
     </div>
 
       

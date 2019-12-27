@@ -234,6 +234,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C-C++/Mess/C++ofstream输出为1的情况" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/C-C++/Mess/C++ofstream输出为1的情况/" class="article-date">
+      <time datetime="2018-12-04T14:15:08.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/C-C++/Mess/C++ofstream输出为1的情况/">fstream输出为1的情况</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="fstream输出为1的情况"><a href="#fstream输出为1的情况" class="headerlink" title="fstream输出为1的情况"></a>fstream输出为1的情况</h3><p>在学C++文件操作时，我曾尝试直接将一个文件输入流接到文件输出流。</p>
+<p>如<code>fout &lt;&lt; fin;</code> 然而运行后输出的文件内容之有一个’1’。</p>
+<p>我接着又尝试<code>fout &lt;&lt; fin &lt;&lt; fin &lt;&lt; fin;</code>结果输出文件内容是’111’。</p>
+<p>查阅文档发现原因：</p>
+<p>ofstream类的&lt;&lt;运算符没有重载fstream类参数，这种情况下（以及其他没有重载的指针类型），会隐式转化成bool类型，然后只要指针不是空的，就会输出’1’（当然，如果使用了std::boolalpha控制符，则会输出’true’）。</p>
+<p><strong><em>与此类似，有很多类也有bool转化，输出时可能就会输出1。</em></strong></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Backend/Mess/Dreamweaver服务器配置" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -2048,83 +2117,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C-C++/Mess/C++类与结构区别" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/22/C-C++/Mess/C++类与结构区别/" class="article-date">
-      <time datetime="2018-11-22T06:52:12.000Z" itemprop="datePublished">2018-11-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/22/C-C++/Mess/C++类与结构区别/">C++中结构体和类的区别</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="C-中结构体和类的区别"><a href="#C-中结构体和类的区别" class="headerlink" title="C++中结构体和类的区别"></a>C++中结构体和类的区别</h4><p>C语言中结构体不允许定义函数成员，且没有访问控制属性的概念。</p>
-<p>在C++中，结构体是一种特殊形态的类。</p>
-<p>结构体和类的<strong>唯一区别</strong>就是：  结构体和类具有<strong>不同的默认访问控制属性</strong>。</p>
-<ul>
-<li><p>类中，对于未指定访问控制属性的成员，其访问控制属性为私有类型（private）</p>
-</li>
-<li><p>结构体中，对于未指定任何访问控制属性的成员，其访问控制属性为公有类型（public）</p>
-</li>
-</ul>
-<p>C++中，不使用结构体丝毫不会影响程序的表达能力。<strong>C++之所以要引入结构体，是为了保持和C程序的兼容性。</strong></p>
-<p>但有时仍会在C++中使用结构体，是因为，<strong>可以使用结构体将不同类型数据组成整体，方便于保存数据。</strong>（若用类来保存，因类中成员默认为私有，还要为每个数据成员特定函数来读取和改写各个属性，比较麻烦。）</p>
-<h4 id="C-空类-结构体-的大小为1"><a href="#C-空类-结构体-的大小为1" class="headerlink" title="C++空类(结构体)的大小为1"></a>C++空类(结构体)的大小为1</h4><p>另外，C语言中，空结构体的大小为0，而C++中空结构体（属于空类）的大小为1。</p>
-<p>　　空类也可以实例化，类实例化出的每个对象都需要有不同的内存地址，为使每个对象在内存中的地址不同，所以在类中会加入一个隐含的字节。</p>
-<h4 id="成员函数不存储在对象内存中"><a href="#成员函数不存储在对象内存中" class="headerlink" title="成员函数不存储在对象内存中"></a>成员函数不存储在对象内存中</h4><p>　　成员函数可以被看作是类作用域的全局函数,不在对象分配的空间里,只有虚函数才会在类对象里有一个指针,存放虚函数的地址等相关信息。<br>　　成员函数的地址，编译期就已确定，并静态绑定或动态的绑定在对应的对象上。<br>　　对象调用成员函数时，编译器可以确定这些函数的地址，并通过传入this指针和其他参数，完成函数的调用，所以类中就没有必要存储成员函数的信息。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
     </div>
 
       

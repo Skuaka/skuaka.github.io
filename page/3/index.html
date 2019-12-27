@@ -234,6 +234,95 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Algorithm/链表算法题笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/24/Algorithm/链表算法题笔记/" class="article-date">
+      <time datetime="2019-08-24T10:04:44.000Z" itemprop="datePublished">2019-08-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/24/Algorithm/链表算法题笔记/">链表算法题笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="链表算法题笔记"><a href="#链表算法题笔记" class="headerlink" title="链表算法题笔记"></a>链表算法题笔记</h2><h3 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表"></a>环形链表</h3><h4 id="判断链表是否有环"><a href="#判断链表是否有环" class="headerlink" title="判断链表是否有环"></a>判断链表是否有环</h4><ul>
+<li>使用一个slow指针，一个fast指针。</li>
+<li><p>slow指针一次往后遍历以1个节点，fast指针一次往后遍历2个节点，一直做这样的操作。</p>
+</li>
+<li><p>如果fast指针在遍历过程中，遍历到了NULL节点说明链表没有环。</p>
+</li>
+<li><p>否则当slow指针和falst指针相同，则说明环有节点。</p>
+</li>
+</ul>
+<p>时间复杂度O(n)，空间复杂度O(1)。</p>
+<h4 id="找出环形入口"><a href="#找出环形入口" class="headerlink" title="找出环形入口"></a>找出环形入口</h4><p>接着上面所述，我们假定链表头到环入口的距离是<code>len</code>，环入口到slow和fast交汇点的距离为<code>x</code>，环的长度为<code>R</code>。slow和fast第一次交汇时，设slow走的长度为：<code>d = len + x</code>，而fast走的长度为：<code>2d = len + nR + x, (n &gt;= 1)</code>，从而我们可以得知：<code>2len + 2x = len + nR + x</code>，即:<code>len = nR - x, (n &gt;= 1)</code>，于是我们可以得到这样的算法。</p>
+<ul>
+<li><p>使用一个cur指针指向链表头节点，一个inter指针指向第一次的交汇点。</p>
+</li>
+<li><p>cur指针和inter指针一起往后遍历。</p>
+</li>
+<li><p>cur指针和inter指针相等时，cur和inter指针指向的就是环的入口节点。</p>
+</li>
+</ul>
+<p>inter指针在遍历过程中可能多次(n &gt;= 1)经过环入口节点，但当cur指针第一次达到入口节点时，inter指针此时必然也指向入口节点。</p>
+<p>时间复杂度O(n)，空间复杂度O(1)。</p>
+<h3 id="相交链表"><a href="#相交链表" class="headerlink" title="相交链表"></a>相交链表</h3><p>判断两个单链表是否相交，如果相交，给出相交的第一个点（两个链表都不存在环）。</p>
+<p><strong>思路1</strong>：暴力，O(m*n)。对两个链表分别进行遍历，找到相同的节点即可。</p>
+<p><strong>☆思路2</strong>：将其中一个链表首尾相连，检测另外一个链表是否存在环，如果存在，则两个链表相交，并且另一个链表的环入口即为相交的第一个点。时间复杂度为O(m+n)，空间复杂度为O(1)。</p>
+<p><strong>思路3</strong>：使用哈希表，即python中的字典。先遍历一个链表，并将链表内容放入字典。再遍历另外一个链表，看遍历到的位置是否存在于字典中，存在则返回当前结点。若遍历结束仍不存在则返回空。检索复杂度为O(m+n)，空间复杂度O(m+n)。</p>
+<p><strong>☆思路4</strong>：分别计算两个链表的长度。先读较长的链表，读到两个链表等长的时候再同时读两个链表，并判断两个链表遍历到的当前节点是否相同。时间复杂度为O(m+n)，空间复杂度为O(1)。</p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/Concept/事务加锁协议" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1107,88 +1196,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux/System/SIGINT-SIGTERM-SIGKILL区别" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/24/Linux/System/SIGINT-SIGTERM-SIGKILL区别/" class="article-date">
-      <time datetime="2019-04-24T12:31:15.000Z" itemprop="datePublished">2019-04-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/24/Linux/System/SIGINT-SIGTERM-SIGKILL区别/">SIGINT SIGTERM SIGKILL区别</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="SIGINT-SIGTERM-SIGKILL区别"><a href="#SIGINT-SIGTERM-SIGKILL区别" class="headerlink" title="SIGINT SIGTERM SIGKILL区别"></a>SIGINT SIGTERM SIGKILL区别</h3><p>参考：<a href="https://www.cnblogs.com/alexyuyu/articles/3853583.html" target="_blank" rel="noopener">https://www.cnblogs.com/alexyuyu/articles/3853583.html</a></p>
-<p>三者都是结束/终止进程运行。</p>
-<ol>
-<li><p>SIGINT SIGTERM区别</p>
-<p>前者与字符ctrl+c关联，后者没有任何控制字符关联。</p>
-<p>SIGINT 会被当前进程树接收到，也就是说，不仅当前进程会收到信号，它的子进程也会收到。</p>
-<p>SIGTERM 只有当前进程收到信号，子进程不会收到。如果当前进程被kill了，那么它的子进程的父进程将会是 init 进程。</p>
-</li>
-<li><p>SIGTERM SIGKILL的区别</p>
-<p>前者可以被阻塞、处理和忽略，但是后者不可以。</p>
-<p>KILL 命令的默认参数发送的信号就是 SIGTERM。</p>
-<p><code>kill -9 进程号</code> 发送的则是不能被捕获的 SIGKILL。</p>
-</li>
-</ol>
-<p>自己试验：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;                                                                                                                                                    </span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;                                                                         </span><br><span class="line">    fork();                                                                          </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;&#125;                                                                       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_12_centos T]# ./a.out &amp;                                                       </span><br><span class="line">[1] 12831                                                                                </span><br><span class="line">[root@VM_0_12_centos T]# ps                                                              </span><br><span class="line">  PID TTY          TIME CMD                                                              </span><br><span class="line">12538 pts/1    00:00:00 bash                                                             </span><br><span class="line">12831 pts/1    00:00:01 a.out                                                            </span><br><span class="line">12832 pts/1    00:00:01 a.out                                                            </span><br><span class="line">12838 pts/1    00:00:00 ps                                                               </span><br><span class="line">[root@VM_0_12_centos T]# fg                                                              </span><br><span class="line">./a.out                                                                                  </span><br><span class="line">^C                                                                                                                                                </span><br><span class="line">[root@VM_0_12_centos T]# ps                                                              </span><br><span class="line">  PID TTY          TIME CMD                                                              </span><br><span class="line">12538 pts/1    00:00:00 bash                                                             </span><br><span class="line">12881 pts/1    00:00:00 ps</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_12_centos T]# ./a.out &amp;                                                       </span><br><span class="line">[1] 13027                                                                                </span><br><span class="line">[root@VM_0_12_centos T]# ps</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line">12538 pts/1    00:00:00 bash</span><br><span class="line">13027 pts/1    00:00:00 a.out</span><br><span class="line">13028 pts/1    00:00:00 a.out</span><br><span class="line">13029 pts/1    00:00:00 ps       </span><br><span class="line">[root@VM_0_12_centos T]# kill -l</span><br><span class="line"> 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP</span><br><span class="line"> 6) SIGABRT      7) SIGBUS       8) SIGFPE       9) SIGKILL     10) SIGUSR1</span><br><span class="line">11) SIGSEGV     12) SIGUSR2     13) SIGPIPE     14) SIGALRM     15) SIGTERM</span><br><span class="line">16) SIGSTKFLT   17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP</span><br><span class="line">21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU     25) SIGXFSZ</span><br><span class="line">26) SIGVTALRM   27) SIGPROF     28) SIGWINCH    29) SIGIO       30) SIGPWR</span><br><span class="line">31) SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3</span><br><span class="line">38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8</span><br><span class="line">43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13</span><br><span class="line">48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12</span><br><span class="line">53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7</span><br><span class="line">58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2</span><br><span class="line">63) SIGRTMAX-1  64) SIGRTMAX    </span><br><span class="line">[root@VM_0_12_centos T]# kill -4 13027</span><br><span class="line">[root@VM_0_12_centos T]# ps</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line">12538 pts/1    00:00:00 bash</span><br><span class="line">13028 pts/1    00:00:24 a.out</span><br><span class="line">13107 pts/1    00:00:00 ps</span><br><span class="line">[1]+  Illegal instruction     ./a.out</span><br><span class="line">[root@VM_0_12_centos T]# fg                                                              </span><br><span class="line">-bash: fg: current: no such job</span><br></pre></td></tr></table></figure>
-<p>可见原来的命令进程被kill后，fork出来的进程变成了非法指令。只能再kill掉。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
     </div>
 
       
