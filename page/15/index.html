@@ -234,6 +234,82 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Develop/CMake入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/05/Develop/CMake入门/" class="article-date">
+      <time datetime="2018-10-05T04:17:19.000Z" itemprop="datePublished">2018-10-05</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/05/Develop/CMake入门/">CMake入门</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="CMake入门"><a href="#CMake入门" class="headerlink" title="CMake入门"></a>CMake入门</h2><h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CMake 最低版本号要求</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span> (VERSION <span class="number">2.8</span>)</span><br><span class="line"><span class="comment"># 项目信息</span></span><br><span class="line"><span class="keyword">project</span> (Demo1)</span><br><span class="line"><span class="comment"># 指定生成目标</span></span><br><span class="line"><span class="keyword">add_executable</span>(Demo main.c fuc.c)</span><br></pre></td></tr></table></figure>
+<h3 id="同一目录，多个源文件"><a href="#同一目录，多个源文件" class="headerlink" title="同一目录，多个源文件"></a>同一目录，多个源文件</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CMake 最低版本号要求</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span> (VERSION <span class="number">2.8</span>)</span><br><span class="line"><span class="comment"># 项目信息</span></span><br><span class="line"><span class="keyword">project</span> (Demo2)</span><br><span class="line"><span class="comment"># 查找当前目录下的所有源文件</span></span><br><span class="line"><span class="comment"># 并将名称保存到 DIR_SRCS 变量</span></span><br><span class="line"><span class="keyword">aux_source_directory</span>(. DIR_SRCS)</span><br><span class="line"><span class="comment"># 指定生成目标</span></span><br><span class="line"><span class="keyword">add_executable</span>(Demo <span class="variable">$&#123;DIR_SRCS&#125;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="多个目录，多个源文件"><a href="#多个目录，多个源文件" class="headerlink" title="多个目录，多个源文件"></a>多个目录，多个源文件</h3><p>根目录中的 CMakeLists.txt ：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CMake 最低版本号要求</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span> (VERSION <span class="number">2.8</span>)</span><br><span class="line"><span class="comment"># 项目信息</span></span><br><span class="line"><span class="keyword">project</span> (Demo3)</span><br><span class="line"><span class="comment"># 查找当前目录下的所有源文件</span></span><br><span class="line"><span class="comment"># 并将名称保存到 DIR_SRCS 变量</span></span><br><span class="line"><span class="keyword">aux_source_directory</span>(. DIR_SRCS)</span><br><span class="line"><span class="comment"># 添加 math 子目录</span></span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="keyword">math</span>)</span><br><span class="line"><span class="comment"># 指定生成目标 </span></span><br><span class="line"><span class="keyword">add_executable</span>(Demo main.cc)</span><br><span class="line"><span class="comment"># 添加链接库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(Demo MathFunctions)</span><br></pre></td></tr></table></figure>
+<p>子目录math中的 CMakeLists.txt：注意库目录还是在根cmake文件里设置。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找当前目录下的所有源文件</span></span><br><span class="line"><span class="comment"># 并将名称保存到 DIR_LIB_SRCS 变量</span></span><br><span class="line"><span class="keyword">aux_source_directory</span>(. DIR_LIB_SRCS)</span><br><span class="line"><span class="comment"># 生成链接库</span></span><br><span class="line"><span class="keyword">add_library</span> (MathFunctions <span class="variable">$&#123;DIR_LIB_SRCS&#125;</span>)</span><br></pre></td></tr></table></figure>
+<p>如果子目录还有子目录</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">aux_source_directory</span>(. DIR_LIB_SRCS)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(Rsa)</span><br><span class="line"><span class="comment"># 生成链接库</span></span><br><span class="line"><span class="keyword">add_library</span> (WorkerLink <span class="variable">$&#123;DIR_WORKER_SRCS&#125;</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(WorkerLink RsaLink)</span><br></pre></td></tr></table></figure>
+<h3 id="添加编译参数"><a href="#添加编译参数" class="headerlink" title="添加编译参数"></a>添加编译参数</h3><p>c：<code>set(CMAKE_C_FLAGS &quot;${CMAKE_C_FLAGS} -std=c++11&quot;)</code></p>
+<p>c++：<code>set(CMAKE_CXX_FLAGS &quot;${CMAKE_CXX_FLAGS} -std=c++11&quot;)</code></p>
+<h3 id="添加头文件目录"><a href="#添加头文件目录" class="headerlink" title="添加头文件目录"></a>添加头文件目录</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>([AFTER|BEFORE] [SYSTEM] dir1 [dir2 ...])</span><br></pre></td></tr></table></figure>
+<h3 id="添加需要链接的库文件目录"><a href="#添加需要链接的库文件目录" class="headerlink" title="添加需要链接的库文件目录"></a>添加需要链接的库文件目录</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">link_directories</span>(directory1 directory2 ...)</span><br></pre></td></tr></table></figure>
+<p>它相当于g++命令的-L选项的作用，也相当于环境变量中增加LD_LIBRARY_PATH的路径的作用。</p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMake/">CMake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux/System/Linux备忘录" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1311,590 +1387,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DTD/">DTD</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Mess/File structure/mp3文件格式" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/09/Mess/File structure/mp3文件格式/" class="article-date">
-      <time datetime="2018-08-09T07:05:28.000Z" itemprop="datePublished">2018-08-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/09/Mess/File structure/mp3文件格式/">mp3文件格式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="MP3-文件结构"><a href="#MP3-文件结构" class="headerlink" title="MP3 文件结构"></a>MP3 文件结构</h1><p>MP3文件大体分为三部分:TAG_V2(ID3V2)，Frame, TAG_V1(ID3V1) </p>
-<table>
-<thead>
-<tr>
-<th style="text-align:right">ID3V2</th>
-<th>包含了作者，作曲，专辑等信息，长度不固定，扩展了 ID3V1 的信息量。</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right"><code>Frame   .   .   . Frame</code></td>
-<td>一系列的帧，个数由文件大小和帧长决定  每个 FRAME 的长度可能不固定，也可能固定，由位率 bitrate 决定 每个 FRAME 又分为帧头和数据实体两部分  帧头记录了 mp3 的位率，采样率，版本等信息，每个帧之间相互独立</td>
-</tr>
-<tr>
-<td style="text-align:right">ID3V1</td>
-<td>包含了作者，作曲，专辑等信息，长度为 128BYTE。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="ID3V2"><a href="#ID3V2" class="headerlink" title="ID3V2"></a>ID3V2</h2><p>ID3V2 到现在一共有4 个版本，但流行的播放软件一般只支持第3 版， 既ID3v2.3。</p>
-<p>由于ID3V1 记录在MP3 文件的末尾，ID3V2就只好记录在MP3 文件的首部了(如果有一天发布ID3V3，真不知道该记录在哪里)。也正是由于这个原因，对ID3V2 的操作比ID3V1 要慢。而且ID3V2 结构比ID3V1 的结构要复杂得多，但比前者全面且可以伸缩和扩展。</p>
-<p>下面就介绍一下ID3V2.3：</p>
-<p><strong>每个ID3V2.3 的标签都一个标签头和若干个标签帧或一个扩展标签头组成。</strong>关于曲目的信息如标题、作者等都存放在不同的标签帧中，扩展标签头和标签帧并不是必要的，但每个标签至少要有一个标签帧。标签头和标签帧一起顺序存放在MP3 文件的首部。</p>
-<h3 id="1、标签头"><a href="#1、标签头" class="headerlink" title="1、标签头"></a>1、标签头</h3><p>在文件的首部顺序记录10个字节的ID3V2.3 的头部。数据结构如下：</p>
-<p>char Header[3];  /<em>必须为”ID3”否则认为标签不存在</em>/</p>
-<p>char Ver;        /<em>版本号ID3V2.3 就记录3</em>/</p>
-<p>char Revision;   /<em>副版本号此版本记录为0</em>/</p>
-<p>char Flag;       /<em>存放标志的字节，这个版本只定义了三位，稍后详细解说</em>/</p>
-<p>char Size[4];    /<em>标签大小，包括标签头的10个字节和所有的标签帧的大小</em>/</p>
-<h4 id="1）标志字节"><a href="#1）标志字节" class="headerlink" title="1）标志字节"></a>1）标志字节</h4><p>标志字节一般为0，定义如下： abc00000</p>
-<p>a – 表示是否使用Unsynchronisation(一般不设置)</p>
-<p>b – 表示是否有扩展头部(一般不设置)</p>
-<p>c – 表示是否为测试标签(一般不设置)</p>
-<p><em>第6个字节：存放标志的字节，只定义了三位，这里值为0</em> </p>
-<h4 id="2）标签大小"><a href="#2）标签大小" class="headerlink" title="2）标签大小"></a>2）标签大小</h4><p>一共四个字节，但每个字节只用7位，最高位不使用恒为0。所以格式如下</p>
-<p>0xxxxxxx 0xxxxxxx 0xxxxxxx 0xxxxxxx</p>
-<p>计算大小时要将0 去掉，得到一个28 位的二进制数，就是标签大小，计算公式如下：</p>
-<p>total_size  = (Size[0]&amp;0x7F)<em>0x200000+ (Size[1]&amp;0x7F)</em>0x4000 + (Size[2]&amp;0x7F)*0x80 +(Size[3]&amp;0x7F)</p>
-<p><strong>注意：这里的帧大小，并不包含帧头的10个字节，只表示帧内容的大小.</strong></p>
-<h3 id="2、标签帧"><a href="#2、标签帧" class="headerlink" title="2、标签帧"></a>2、标签帧</h3><p>每个标签帧都有一个10个字节的帧头和至少一个字节的不固定长度的内容组成。它们也是顺序存放在文件中，和标签头和其他的标签帧也没有特殊的字符分隔。得到一个完整的帧的内容只有从帧头中的到内容大小后才能读出，读取时要注意大小，不要将其他帧的内容或帧头读入。 </p>
-<p><strong>帧头的定义如下：</strong></p>
-<p>char ID[4];  /<em>用四个字符标识一个帧，说明其内容，稍后有常用的标识对照表</em>/</p>
-<p>char Size[4]; /<em>帧内容的大小，不包括帧头，不得小于1</em>/</p>
-<p>char Flags[2]; /<em>存放标志，只定义了6 位</em>/</p>
-<h4 id="1）帧标识"><a href="#1）帧标识" class="headerlink" title="1）帧标识"></a>1）帧标识</h4><p>用四个字符标识一个帧，说明一个帧的内容含义，常用的对照如下：</p>
-<p>TIT2=标题表示内容为这首歌的标题，下同</p>
-<p>TPE1=作者</p>
-<p>TALB=专集</p>
-<p>TRCK=音轨格式：N/M 其中N 为专集中的第N 首，M为专集中共M 首，N和M 为ASCII 码表示的数字</p>
-<p>TYER=年代是用ASCII 码表示的数字</p>
-<p>TCON=类型直接用字符串表示</p>
-<p>COMM=备注格式：”eng\0备注内容”，其中eng 表示备注所使用的自然语言</p>
-<h4 id="2）大小"><a href="#2）大小" class="headerlink" title="2）大小"></a>2）大小</h4><p>这个可没有标签头的算法那么麻烦，每个字节的8 位全用，格式如下</p>
-<p>xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx</p>
-<p>算法如下：</p>
-<p>int FSize = Size[0]<em>0x100000000 + Size[1]</em>0x10000+ Size[2]*0x100 + Size[3];</p>
-<p><strong>注意：这里的帧大小，并不包含帧头的10个字节，只表示帧内容的大小</strong></p>
-<h4 id="3）标志"><a href="#3）标志" class="headerlink" title="3）标志"></a>3）标志</h4><p>只定义了6 位，另外的10 位为0，但大部分的情况下16 位都为0 就可以了。格式如下：<strong>abc00000ijk00000</strong> </p>
-<p>a – 标签保护标志，设置时认为此帧作废</p>
-<p>b – 文件保护标志，设置时认为此帧作废</p>
-<p>c – 只读标志，设置时认为此帧不能修改(但我没有找到一个软件理会这个标志)</p>
-<p>i – 压缩标志，设置时一个字节存放两个BCD 码表示数字</p>
-<p>j – 加密标志(没有见过哪个MP3 文件的标签用了加密)</p>
-<p>k – 组标志，设置时说明此帧和其他的某帧是一组</p>
-<h2 id="FRAME"><a href="#FRAME" class="headerlink" title="FRAME"></a>FRAME</h2><p> 每个 FRAME 都有一个帧头 FRAMEHEADER，长度是 4BYTE(32bit),帧头后面可能有两个字节的 CRC 校 </p>
-<p>验，这两个字节的是否存在决定于 FRAMEHEADER 信息的第 16bit，为 0 则帧头后面无校验，为 1 则有校验, 校验值长度为 2 个字节，紧跟在 FRAMEHEADER 后面，接着就是帧的实体数据了，格式如下: </p>
-<table>
-<thead>
-<tr>
-<th>FRAMEHEADER</th>
-<th>CRC(free)</th>
-<th>MAIN_DATA</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>4 BYTE</td>
-<td>0 OR 2 BYTE</td>
-<td>长度由帧头计算得出</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1、帧头"><a href="#1、帧头" class="headerlink" title="1、帧头"></a>1、帧头</h3><p>FRAMEHEADER 格式如下:<br><strong>AAAAAAAA AAABBCCD EEEEFFGH IIJJKLMM</strong> </p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Sign</th>
-<th style="text-align:center">Length<br>(bits)</th>
-<th style="text-align:center">Position<br>(bits)</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">A</td>
-<td style="text-align:center">11</td>
-<td style="text-align:center">(31-21)</td>
-<td>Frame sync (all bits set)</td>
-</tr>
-<tr>
-<td style="text-align:center">B</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(20,19)</td>
-<td>MPEG Audio version<br>00 - MPEG Version 2.5 <br>01 - reserved <br>10 - MPEG Version 2<br>11 - MPEG Version 1</td>
-</tr>
-<tr>
-<td style="text-align:center">C</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(18,17)</td>
-<td>Layer description<br>00 - reserved<br>01 - Layer III<br>10 - Layer II<br>11 - Layer I</td>
-</tr>
-<tr>
-<td style="text-align:center">D</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(16)</td>
-<td>Protection bit<br>0 - Protected by CRC (16bit crc follows header)<br>1 - Not protected</td>
-</tr>
-<tr>
-<td style="text-align:center">E</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">(15,12)</td>
-<td>Bitrate index</td>
-</tr>
-<tr>
-<td style="text-align:center">F</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(11,10)</td>
-<td>Sampling rate frequency index</td>
-</tr>
-<tr>
-<td style="text-align:center">G</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(9)</td>
-<td>Padding bit<br>0 - frame is not padded<br>1 - frame is padded with one extra bit</td>
-</tr>
-<tr>
-<td style="text-align:center">H</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(8)</td>
-<td>Private bit (unknown purpose)</td>
-</tr>
-<tr>
-<td style="text-align:center">I</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(7,6)</td>
-<td>Channel  Mode<br>00 - Stereo<br>01 - Joint stereo (Stereo)<br>10 - Dual channel (Stereo)<br>11 - Single channel (Mono)</td>
-</tr>
-<tr>
-<td style="text-align:center">J</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(5,4)</td>
-<td>Mode extension (Only if Joint stereo)</td>
-</tr>
-<tr>
-<td style="text-align:center">K</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(3)</td>
-<td>Copyright<br>0 - Audio is not copyrighted<br>1 - Audio is copyrighted</td>
-</tr>
-<tr>
-<td style="text-align:center">L</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(2)</td>
-<td>Original<br>0 - Copy of original media<br>1 - Original media</td>
-</tr>
-<tr>
-<td style="text-align:center">M</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(1,0)</td>
-<td>Emphasis<br>00 - none<br>01 - 50/15 ms<br>10 - reserved<br>11 - CCIT J.17</td>
-</tr>
-</tbody>
-</table>
-<h4 id="Bitrate-index"><a href="#Bitrate-index" class="headerlink" title="Bitrate index"></a>Bitrate index</h4><table>
-<thead>
-<tr>
-<th style="text-align:left">bits</th>
-<th>V1,L1</th>
-<th>V1,L2</th>
-<th>V1,L3</th>
-<th>V2,L1</th>
-<th>V2,L2</th>
-<th>V2,L3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">0000</td>
-<td>free</td>
-<td>free</td>
-<td>free</td>
-<td>free</td>
-<td>free</td>
-<td>free</td>
-</tr>
-<tr>
-<td style="text-align:left">0001</td>
-<td>32</td>
-<td>32</td>
-<td>32</td>
-<td>32</td>
-<td>32</td>
-<td>8 (8)</td>
-</tr>
-<tr>
-<td style="text-align:left">0010</td>
-<td>64</td>
-<td>48</td>
-<td>40</td>
-<td>64</td>
-<td>48</td>
-<td>16 (16)</td>
-</tr>
-<tr>
-<td style="text-align:left">0011</td>
-<td>96</td>
-<td>56</td>
-<td>48</td>
-<td>96</td>
-<td>56</td>
-<td>24 (24)</td>
-</tr>
-<tr>
-<td style="text-align:left">0100</td>
-<td>128</td>
-<td>64</td>
-<td>56</td>
-<td>128</td>
-<td>64</td>
-<td>32 (32)</td>
-</tr>
-<tr>
-<td style="text-align:left">0101</td>
-<td>160</td>
-<td>80</td>
-<td>64</td>
-<td>160</td>
-<td>80</td>
-<td>64 (40)</td>
-</tr>
-<tr>
-<td style="text-align:left">0110</td>
-<td>192</td>
-<td>96</td>
-<td>80</td>
-<td>192</td>
-<td>96</td>
-<td>80 (48)</td>
-</tr>
-<tr>
-<td style="text-align:left">0111</td>
-<td>224</td>
-<td>112</td>
-<td>96</td>
-<td>224</td>
-<td>112</td>
-<td>56 (56)</td>
-</tr>
-<tr>
-<td style="text-align:left">1000</td>
-<td>256</td>
-<td>128</td>
-<td>112</td>
-<td>256</td>
-<td>128</td>
-<td>64 (64)</td>
-</tr>
-<tr>
-<td style="text-align:left">1001</td>
-<td>288</td>
-<td>160</td>
-<td>128</td>
-<td>288</td>
-<td>160</td>
-<td>128 (80)</td>
-</tr>
-<tr>
-<td style="text-align:left">1010</td>
-<td>320</td>
-<td>192</td>
-<td>160</td>
-<td>320</td>
-<td>192</td>
-<td>160 (96)</td>
-</tr>
-<tr>
-<td style="text-align:left">1011</td>
-<td>352</td>
-<td>224</td>
-<td>192</td>
-<td>352</td>
-<td>224</td>
-<td>112 (112)</td>
-</tr>
-<tr>
-<td style="text-align:left">1100</td>
-<td>384</td>
-<td>256</td>
-<td>224</td>
-<td>384</td>
-<td>256</td>
-<td>128 (128)</td>
-</tr>
-<tr>
-<td style="text-align:left">1101</td>
-<td>416</td>
-<td>320</td>
-<td>256</td>
-<td>416</td>
-<td>320</td>
-<td>256 (144)</td>
-</tr>
-<tr>
-<td style="text-align:left">1110</td>
-<td>448</td>
-<td>384</td>
-<td>320</td>
-<td>448</td>
-<td>384</td>
-<td>320 (160)</td>
-</tr>
-<tr>
-<td style="text-align:left">1111</td>
-<td>bad</td>
-<td>bad</td>
-<td>bad</td>
-<td>bad</td>
-<td>bad</td>
-<td>bad</td>
-</tr>
-</tbody>
-</table>
-<p>NOTES: All values are in kbps</p>
-<p>V1  -  MPEG  Version  1</p>
-<p>V2 - MPEG Version 2 and Version 2.5</p>
-<p>L1 - Layer I L2 - Layer II L3 - Layer III</p>
-<p>“free” means variable bitrate.</p>
-<p>“bad” means that this is not an allowed value</p>
-<h4 id="Sampling-rate-frequency-index"><a href="#Sampling-rate-frequency-index" class="headerlink" title="Sampling rate frequency index"></a>Sampling rate frequency index</h4><p>(values are in Hz)</p>
-<table>
-<thead>
-<tr>
-<th>bits</th>
-<th>MPEG</th>
-<th>MPEG2</th>
-<th>MPEG2.5</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>00</td>
-<td>44100</td>
-<td>22050</td>
-<td>11025</td>
-</tr>
-<tr>
-<td>01</td>
-<td>48000</td>
-<td>24000</td>
-<td>12000</td>
-</tr>
-<tr>
-<td>10</td>
-<td>32000</td>
-<td>16000</td>
-<td>8000</td>
-</tr>
-<tr>
-<td>11</td>
-<td>reserve</td>
-<td>reserve</td>
-<td>reserve</td>
-</tr>
-</tbody>
-</table>
-<h4 id="Mode-extension"><a href="#Mode-extension" class="headerlink" title="Mode extension"></a>Mode extension</h4><table>
-<thead>
-<tr>
-<th>value</th>
-<th>Intensity stereo</th>
-<th>MS stereo</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>00</td>
-<td>off</td>
-<td>off</td>
-</tr>
-<tr>
-<td>01</td>
-<td>on</td>
-<td>off</td>
-</tr>
-<tr>
-<td>10</td>
-<td>off</td>
-<td>on</td>
-</tr>
-<tr>
-<td>11</td>
-<td>on</td>
-<td>on</td>
-</tr>
-</tbody>
-</table>
-<h4 id="1）计算帧长度"><a href="#1）计算帧长度" class="headerlink" title="1）计算帧长度"></a>1）计算帧长度</h4><p>我们首先区分两个术语：帧大小和帧长度。帧大小即每帧采样数表示一帧中采样的个数，这是恒定值。其值如下表所示</p>
-<table>
-<thead>
-<tr>
-<th>LAYER</th>
-<th>MPEG 1</th>
-<th>MPEG 2(LSF)</th>
-<th>MPEG 2.5(LSF)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Layer 1</td>
-<td>384</td>
-<td>384</td>
-<td>384</td>
-</tr>
-<tr>
-<td>Layer 2</td>
-<td>1152</td>
-<td>1152</td>
-<td>1152</td>
-</tr>
-<tr>
-<td>Layer 3</td>
-<td>1152</td>
-<td>576</td>
-<td>576</td>
-</tr>
-</tbody>
-</table>
-<p> 帧长度是压缩时每一帧的长度，包括帧头。它将填充的空位也计算在内。LayerI的一个空位长4字节，LayerII和LayerIII的空位是1字节。当读取MPEG文件时必须计算该值以便找到相邻的帧。注意：因为有填充和比特率变换，帧长度可能变化。</p>
-<p>从头中读取比特率，采样频率和填充的值后可以进行计算，</p>
-<p>LyaerI使用公式：</p>
-<p><strong>帧长度（字节） = (( 每帧采样数/ 8 * 比特率 ) / 采样频率 ) + 填充 * 4</strong></p>
-<p>LyerII和LyaerIII使用公式：</p>
-<p><strong>帧长度（字节）= (( 每帧采样数/ 8 * 比特率 ) / 采样频率 ) + 填充</strong></p>
-<p>例：LayerIII 比特率 128000，采样频率 44100，填充0  =〉帧大小 417字节。</p>
-<p>(1152 / 8 * 128K)/44.1K = 417 (字节)</p>
-<h4 id="2）每帧的持续时间"><a href="#2）每帧的持续时间" class="headerlink" title="2）每帧的持续时间"></a>2）每帧的持续时间</h4><p>每帧持续时间(毫秒) = 每帧采样数 / 采样频率 * 1000</p>
-<h4 id="3）CRC校验"><a href="#3）CRC校验" class="headerlink" title="3）CRC校验"></a>3）CRC校验</h4><p>如果帧头的校验位为0，则帧头后就有一个16位的CRC值，这个值是big-endian的值，把这个值和该帧通过计算得出的CRC值进行比较就可以得知该帧是否有效。</p>
-<h2 id="ID3v1"><a href="#ID3v1" class="headerlink" title="ID3v1"></a>ID3v1</h2><p>ID3V1标准并不周全，存放的信息少，无法存放歌词，无法录入专辑封面、图片等。ID3V2是一个相当完备的标准，但给编写软件带来困难，虽然赞成此格式的人很多，在软件中绝大多数MP3仍在使用ID3V1标准。ID3v1标签包含艺术家，标题，唱片集，发布年代和流派。另外还有额外的注释空间。位于音频文件的最后固定为128字节。可以读取该文件的最后这128字节获得标签。</p>
-<p>ID3V1结构如下：</p>
-<p>AAABBBBB BBBBBBBB BBBBBBBB BBBBBBBB<br>BCCCCCCC CCCCCCCC CCCCCCCC CCCCCCCD<br>DDDDDDDD DDDDDDDD DDDDDDDD DDDDDEEE<br>EFFFFFFF FFFFFFFF FFFFFFFF FFFFFGHI</p>
-<p>  <strong>表3.1  ID3 V1.0文件尾说明</strong></p>
-<table>
-<thead>
-<tr>
-<th>字节</th>
-<th>长度 (字节)</th>
-<th>说 明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1-3(A)</td>
-<td>3</td>
-<td>存放“TAG”字符，表示ID3 V1.0标准，紧接其后的是歌曲信息。</td>
-</tr>
-<tr>
-<td>4-33(B)</td>
-<td>30</td>
-<td>歌名</td>
-</tr>
-<tr>
-<td>34-63(C)</td>
-<td>30</td>
-<td>作者</td>
-</tr>
-<tr>
-<td>64-93(D)</td>
-<td>30</td>
-<td>专辑名</td>
-</tr>
-<tr>
-<td>94-97(E)</td>
-<td>4</td>
-<td>年份</td>
-</tr>
-<tr>
-<td>98-125(F)</td>
-<td>28</td>
-<td>附注</td>
-</tr>
-<tr>
-<td>126(G)</td>
-<td>1</td>
-<td>保留位</td>
-</tr>
-<tr>
-<td>127(H)</td>
-<td>1</td>
-<td>音轨号</td>
-</tr>
-<tr>
-<td>128(I)</td>
-<td>1</td>
-<td>MP3音乐类别，共147种。</td>
-</tr>
-</tbody>
-</table>
-<p>ID3V1 的各项信息都是顺序存放，没有任何标识将其分开，比如标题信息不足30 个字节，则使用’’\0’’填充，数据结构定义如下：</p>
-<p>typedef struct tagID3V1  {</p>
-<p>charHeader[3];         /<em>标签头必须是”TAG”否则认为没有标签</em>/</p>
-<p>charTitle[30];         /<em>标题</em>/</p>
-<p>charArtist[30];        /<em>作者</em>/</p>
-<p>charAlbum[30];         /<em>专集</em>/</p>
-<p>charYear[4];           /<em>出品年代</em>/</p>
-<p>charComment[28];       /<em>备注</em>/</p>
-<p>charreserve;           /<em>保留</em>/</p>
-<p>chartrack;             /<em>音轨</em>/</p>
-<p>charGenre;             /<em>类型</em>/</p>
-<p>} ID3V1, *pID3V1;</p>
-<h2 id="Unicode与FFFE"><a href="#Unicode与FFFE" class="headerlink" title="Unicode与FFFE"></a>Unicode与FFFE</h2><p>标签帧的内容开头都有 01 ff fe 三个字节。原因是为了判别大端还是小端编码。</p>
-<p>在UCS编码中有一个叫做”ZERO WIDTH NO-BREAK SPACE”的字符，它的编码是FEFF。而FFFE在UCS中是不存在的字符，所以不应该出现在实际传输中。UCS规范建议我们在传输字节流前，先传输字符”ZERO WIDTH NO-BREAK SPACE”。<br>这样如果接收者收到FEFF，就表明这个字节流是Big-Endian的；如果收到FFFE，就表明这个字节流是Little-Endian的。因此字符”ZERO WIDTH NO-BREAK SPACE”又被称作BOM。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mess/">Mess</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mp3/">Mp3</a></li></ul>
     </div>
 
       

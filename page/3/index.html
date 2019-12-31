@@ -234,6 +234,79 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Linux/System/Linux操作系统笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/25/Linux/System/Linux操作系统笔记/" class="article-date">
+      <time datetime="2019-08-25T08:23:05.000Z" itemprop="datePublished">2019-08-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/25/Linux/System/Linux操作系统笔记/">Linux操作系统笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Linux操作系统笔记"><a href="#Linux操作系统笔记" class="headerlink" title="Linux操作系统笔记"></a>Linux操作系统笔记</h2><h3 id="Linux开机启动流程"><a href="#Linux开机启动流程" class="headerlink" title="Linux开机启动流程"></a>Linux开机启动流程</h3><ul>
+<li>BIOS上电自检（POST）</li>
+<li>引导装载程序 (GRUB2)</li>
+<li>内核初始化</li>
+<li>启动 systemd，其是所有进程之父。(以前是 init 进程)</li>
+</ul>
+<h3 id="登入-非登入-交互shell"><a href="#登入-非登入-交互shell" class="headerlink" title="登入/非登入/交互shell"></a>登入/非登入/交互shell</h3><p>An <strong>interactive login shell</strong> is started <strong>after a successful login</strong>, using <code>/bin/login</code>, by reading the <code>/etc/passwd</code> file. This shell invocation normally reads <code>/etc/profile</code> and its private equivalent <code>~/.bash_profile</code> upon startup. </p>
+<p>An <strong>interactive non-login shell</strong> is normally started at the command-line using a <strong><em>1) shell program</em></strong> (e.g., <code>[prompt]$/bin/bash</code>) or by the <strong><em>2) <code>/bin/su</code> command</em></strong>. An interactive non-login shell is also started with a <strong><em>3) terminal program</em></strong> such as <strong><em>xterm</em></strong> or <strong><em>konsole</em></strong> from within a graphical environment. This type of shell invocation normally <strong>copies the parent environment</strong> and then <strong>reads the user’s <code>~/.bashrc</code> file</strong> for additional startup configuration instructions. </p>
+<p>A <strong>non-interactive shell</strong> is usually present <strong>when a shell script is running</strong>. <em>It is non-interactive because it is processing a script and not waiting for user input between commands</em>. For these shell invocations, only the environment inherited from the parent shell is used. </p>
+<p>The file <code>~/.bash_logout</code> is  read and executed when a user exits from an interactive login shell.</p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Op-System/">Op-System</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Algorithm/链表算法题笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1121,81 +1194,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C-C++/Concept-gcc/attribute-packed" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/25/C-C++/Concept-gcc/attribute-packed/" class="article-date">
-      <time datetime="2019-04-25T06:43:11.000Z" itemprop="datePublished">2019-04-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/25/C-C++/Concept-gcc/attribute-packed/">__attribute__</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>学习自：<a href="http://blog.chinaunix.net/uid-25768133-id-3485479.html" target="_blank" rel="noopener">http://blog.chinaunix.net/uid-25768133-id-3485479.html</a></p>
-<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>GNU C的一大特色就是<code>__attribute__</code>机制。<code>__attribute__</code>可以设置函数属性（Function Attribute）、变量属性（Variable Attribute）和类型属性（Type Attribute）。</p>
-<p><strong>语法格式</strong>：</p>
-<p><code>__attribute__ ((attribute-list))</code></p>
-<p>其位置约束：放于声明的尾部“；”之前。</p>
-<h3 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h3><h4 id="attribute-packed"><a href="#attribute-packed" class="headerlink" title="__attribute__((packed))"></a><code>__attribute__((packed))</code></h4><p>作用：让编译器取消结构在编译过程中的优化对齐，按照实际占用字节数进行对齐，即对变量是一字节对齐，对域（field）是位对齐。。</p>
-<p>这是GCC特有的语法，gcc默认是非紧凑模式的。</p>
-<p>在TC下：<code>struct my{ char ch; int a;}</code> sizeof(int)=2;sizeof(my)=3;（紧凑模式）</p>
-<p>在GCC下：<code>struct my{ char ch; int a;}</code> sizeof(int)=4;sizeof(my)=8;（非紧凑模式）</p>
-<p>在GCC下：<code>struct my{ char ch; int a;}__attrubte__ ((packed))</code> sizeof(int)=4;sizeof(my)=5</p>
-<h4 id="attribute-noreturn"><a href="#attribute-noreturn" class="headerlink" title="__attribute__((noreturn))"></a><code>__attribute__((noreturn))</code></h4><p>告诉编译器这个函数不会返回给调用者，以便编译器在优化时去掉不必要的函数返回代码。</p>
-<h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3><p>以后遇到了再添加。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
     </div>
 
       
