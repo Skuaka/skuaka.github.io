@@ -234,6 +234,80 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/Mysql/mac下安装与配置mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/Database/Mysql/mac下安装与配置mysql/" class="article-date">
+      <time datetime="2018-12-04T14:17:58.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/Database/Mysql/mac下安装与配置mysql/">mac下安装与配置mysql</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h2><ol>
+<li><p>安装：<code>sunyichaodeMacBook-Pro:~ sunyichao$ brew install mysql</code></p>
+</li>
+<li><p>开启mysql：<code>mysql.server start</code>(Linux下是<code>service mysql start</code>)</p>
+</li>
+<li><p>使用mysql的配置脚本：<code>/usr/local/opt/mysql/bin/mysql_secure_installation //mysql 提供的配置向导</code></p>
+</li>
+</ol>
+<p>启动这个脚本后，即可根据如下命令提示进行初始化设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$ /usr/local/opt/mysql/bin/mysql_secure_installation   //mysql 提供的配置向导</span><br><span class="line">Securing the MySQL server deployment.</span><br><span class="line">Connecting to MySQL using a blank password.</span><br><span class="line">VALIDATE PASSWORD PLUGIN can be used to test passwordsand improve security. It     checks the strength of password and allows the users to set only those passwords which are secure enough. Would you like to setup VALIDATE PASSWORD plugin?</span><br><span class="line"></span><br><span class="line">Press y|Y for Yes, any other key for No: k //是否采用mysql密码安全检测插件（这里作为演示选择否，密码检查插件要求密码复杂程度高，大小写字母+数字+字符等）</span><br><span class="line">Please set the password for root here. // 首次使用自带配置脚本，设置root密码</span><br><span class="line"></span><br><span class="line">New password:</span><br><span class="line"></span><br><span class="line">Re-enter new password:</span><br><span class="line"></span><br><span class="line">By default, a MySQL installation has an anonymous user, allowing anyone to log into MySQL without having to have a user account created for This is intended only for testing, and to make the installation go a bit smoother. You should remove them before moving into a production environment.    </span><br><span class="line">Remove anonymous users? [Y/n] Y //是否删除匿名用户</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed to connect from &apos;localhost&apos;.This</span><br><span class="line">ensures that someone cannot guess at the root password from the network.</span><br><span class="line"></span><br><span class="line">Disallow root login remotely? [Y/n] Y //是否禁止远程登录</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">By default, MySQL comes with a database named &apos;test&apos; that anyone can</span><br><span class="line">access.This is also intended only for testing, and should be removed</span><br><span class="line">before moving into a production environment.</span><br><span class="line"></span><br><span class="line">Remove test database and access to it? [Y/n] Y //删除测试数据库，并登录</span><br><span class="line"> Dropping test database...</span><br><span class="line"> ... Success!</span><br><span class="line"> Removing privileges on test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will take effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? [Y/n] Y//重新载入权限表</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">All done!  If you&apos;ve completed all of the above steps, your MySQL</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks for using MySQL!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line">sunyichaodeMacBook-Pro:~ sunyichao$</span><br></pre></td></tr></table></figure>
+<p>//以上内容来自<a href="https://segmentfault.com/q/1010000000475470里的回答" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000475470里的回答</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C-C++/Mess/C++显式实例化的用途" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -2009,83 +2083,6 @@
 
 
   
-    <article id="post-Network/Wireshark/Wireshark入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/22/Network/Wireshark/Wireshark入门/" class="article-date">
-      <time datetime="2018-11-22T13:45:16.000Z" itemprop="datePublished">2018-11-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/22/Network/Wireshark/Wireshark入门/">Wireshark 入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Wireshark-入门"><a href="#Wireshark-入门" class="headerlink" title="Wireshark 入门"></a>Wireshark 入门</h2><h3 id="网卡混杂模式"><a href="#网卡混杂模式" class="headerlink" title="网卡混杂模式"></a>网卡混杂模式</h3><p>如果不设置混杂模式，你的计算机只能获取数据包发往的目标是你计算机和从你计算机出去的数据包。如果设置了混杂模式，你就可以捕获局域网中所有的数据包。</p>
-<h3 id="过滤表达式"><a href="#过滤表达式" class="headerlink" title="过滤表达式"></a>过滤表达式</h3><p><strong>关系</strong></p>
-<p>is present   如果选择的协议域存在，则显示相关数据包。<br>contains     判断一个协议，字段或者分片包含一个值<br>matches     判断一个协议或者字符串匹配一个给定的Perl表达式。</p>
-<p><strong>Predefined values</strong><br>有些协议域包含了预先定义的值。如果你选择的协议域包含这样的值，你可以在这个列表中选择。</p>
-<p><strong>函数</strong><br>upper(string－field)－把字符串转换成大写<br>lower(string－field)－把字符串转换成小写</p>
-<p>例如：<br>upper(ncp.nds_stream_name) contains “BO56.COM”</p>
-<h3 id="使用着色规则"><a href="#使用着色规则" class="headerlink" title="使用着色规则"></a>使用着色规则</h3><p>你经常会在数据包列表区域中看到不同的颜色。这就是wireshark做的很人性化的一方面。它可以让你指定条件，把符合条件的数据包按指定的颜色显示。这样你查找数据包会更方便些。</p>
-<p>点击“view”菜单，然后选择“Coloring Rules”</p>
-<p>注意：wireshark在应用规则的时候，是按自上而下的顺序去应用规则。因此刚添加的规则会优先应用。可以手动调整。</p>
-<h3 id="使用图表"><a href="#使用图表" class="headerlink" title="使用图表"></a>使用图表</h3><h4 id="IO图"><a href="#IO图" class="headerlink" title="IO图"></a>IO图</h4><p>wireshark的IO图让你可以对网络上的吞吐量绘图。让你了解网络数据传输过程中的峰值和波动情况。通过“Statistics”菜单中的“IO Graphs”选项可以打开这个IO图对话框。</p>
-<h4 id="RTT图"><a href="#RTT图" class="headerlink" title="RTT图"></a>RTT图</h4><p>wireshark还有一个功能就是可以对网络传输中的双向时间进行绘图。双向时间（round-trip time, RTT）,就是一个数据包被确认正常接收所花费的时间。</p>
-<h3 id="跟踪tcp流"><a href="#跟踪tcp流" class="headerlink" title="跟踪tcp流"></a>跟踪tcp流</h3><p>跟踪TCP流这个功能可以将接收到的数据排好顺序使之容易查看，而不需要一小块一小块地看。这在查看HTTP、FTP等纯文本应用层协议时非常有用。</p>
-<p>右键单击记录并选择Follow TCP Stream。这时TCP流就会在一个单独的窗口中显示出来。</p>
-<p>这个窗口中的文字会有两种颜色。红色用于表示从源地址到目标地址的流量。蓝色是从目标地址到源地址的流量。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/">Wireshark</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
@@ -2097,7 +2094,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2017-2019 Skuaka
+                2017-2020 Skuaka
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

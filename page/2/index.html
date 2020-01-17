@@ -234,6 +234,79 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Linux/System/ppk-to-pem" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/03/Linux/System/ppk-to-pem/" class="article-date">
+      <time datetime="2019-10-03T09:13:06.000Z" itemprop="datePublished">2019-10-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/03/Linux/System/ppk-to-pem/">ppk_to_pem</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="ppk-to-pem"><a href="#ppk-to-pem" class="headerlink" title="ppk_to_pem"></a>ppk_to_pem</h3><p>From: <a href="https://stackoverflow.com/questions/3475069/use-ppk-file-in-mac-terminal-to-connect-to-remote-connection-over-ssh" target="_blank" rel="noopener">https://stackoverflow.com/questions/3475069/use-ppk-file-in-mac-terminal-to-connect-to-remote-connection-over-ssh</a></p>
+<p>You can <code>ssh</code> directly from the Terminal on Mac, but you need to use a <code>.PEM</code> key rather than the <code>putty</code> <code>.PPK</code> key. You can use PuttyGen on Windows to convert from <code>.PEM</code> to <code>.PPK</code>.</p>
+<p>You can also convert the key using <code>putty</code> for Mac via <code>port</code> or <code>brew</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install putty</span><br></pre></td></tr></table></figure>
+<p>This will also install <code>puttygen</code>. To get <code>puttygen</code> to output a <code>.PEM</code> file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">puttygen privatekey.ppk -O private-openssh -o privatekey.pem</span><br></pre></td></tr></table></figure>
+<p>Once you have the key, open a terminal window and:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i privatekey.pem user@my.server.com</span><br></pre></td></tr></table></figure>
+<p>The private key must have tight security settings otherwise SSH complains. Make sure only the user can read the key.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod go-rw privatekey.pem</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux/Programming/Shell控制语句笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -988,86 +1061,6 @@
 
 
   
-    <article id="post-Backend/Node-js/node-js笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/26/Backend/Node-js/node-js笔记/" class="article-date">
-      <time datetime="2019-08-26T07:51:09.000Z" itemprop="datePublished">2019-08-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/26/Backend/Node-js/node-js笔记/">node-js笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="node-js笔记"><a href="#node-js笔记" class="headerlink" title="node-js笔记"></a>node-js笔记</h1><h2 id="Base"><a href="#Base" class="headerlink" title="Base"></a>Base</h2><h3 id="what"><a href="#what" class="headerlink" title="what"></a>what</h3><p>Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎。</p>
-<h3 id="npm-script"><a href="#npm-script" class="headerlink" title="npm script"></a>npm script</h3><p>npm 允许在<code>package.json</code>文件里面，使用<code>scripts</code>字段定义脚本命令。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"node build.js"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>run</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm run build</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ node build.js</span><br></pre></td></tr></table></figure>
-<h3 id="nodemon"><a href="#nodemon" class="headerlink" title="nodemon"></a>nodemon</h3><p>nodemon用来监视node.js应用程序中的任何更改并自动重启服务,非常适合用在开发环境中。</p>
-<ul>
-<li>在运行脚本时将其替换命令行上的node。</li>
-<li>如果有任何文件更改，nodemon将自动重新启动node应用程序。</li>
-</ul>
-<h2 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h2><h3 id="sequelize"><a href="#sequelize" class="headerlink" title="sequelize"></a>sequelize</h3><h4 id="总文档"><a href="#总文档" class="headerlink" title="总文档"></a>总文档</h4><p><a href="https://sequelize.org/master/manual/getting-started.html" target="_blank" rel="noopener">https://sequelize.org/master/manual/getting-started.html</a></p>
-<p><a href="https://itbilu.com/nodejs/npm/VkYIaRPz-.html#induction" target="_blank" rel="noopener">https://itbilu.com/nodejs/npm/VkYIaRPz-.html#induction</a></p>
-<h4 id="model初始化参数"><a href="#model初始化参数" class="headerlink" title="model初始化参数"></a>model初始化参数</h4><p><a href="https://sequelize.org/master/class/lib/model.js~Model.html#static-method-init" target="_blank" rel="noopener">https://sequelize.org/master/class/lib/model.js~Model.html#static-method-init</a></p>
-<h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><h3 id="glob"><a href="#glob" class="headerlink" title="glob"></a>glob</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> glob = <span class="built_in">require</span>(<span class="string">"glob"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// options is optional</span></span><br><span class="line">glob(<span class="string">"**/*.js"</span>, options, <span class="function"><span class="keyword">function</span> (<span class="params">er, files</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// files is an array of filenames.</span></span><br><span class="line">  <span class="comment">// If the `nonull` option is set, and nothing</span></span><br><span class="line">  <span class="comment">// was found, then files is ["**/*.js"]</span></span><br><span class="line">  <span class="comment">// er is an error object or null.</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>**</code> If a “globstar” is alone in a path portion, then it matches zero or more directories and subdirectories searching for matches. It does not crawl symlinked directories.</li>
-</ul>
-<h3 id="测试框架"><a href="#测试框架" class="headerlink" title="测试框架"></a>测试框架</h3><h4 id="mocha"><a href="#mocha" class="headerlink" title="mocha"></a>mocha</h4><h4 id="chai"><a href="#chai" class="headerlink" title="chai"></a>chai</h4><h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/node/">node</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1079,7 +1072,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2017-2019 Skuaka
+                2017-2020 Skuaka
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

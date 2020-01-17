@@ -234,6 +234,139 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Linux/System/使用过的端口" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/06/Linux/System/使用过的端口/" class="article-date">
+      <time datetime="2018-11-06T14:40:52.000Z" itemprop="datePublished">2018-11-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/06/Linux/System/使用过的端口/">使用过的端口(待续</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>记录一下，方便自己查阅</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">port</th>
+<th style="text-align:center">application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">21</td>
+<td style="text-align:center">FTP</td>
+</tr>
+<tr>
+<td style="text-align:center">22</td>
+<td style="text-align:center">SSH</td>
+</tr>
+<tr>
+<td style="text-align:center">53</td>
+<td style="text-align:center">DNS</td>
+</tr>
+<tr>
+<td style="text-align:center">80</td>
+<td style="text-align:center">Http</td>
+</tr>
+<tr>
+<td style="text-align:center">389</td>
+<td style="text-align:center">LDAP</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">3306</td>
+<td style="text-align:center">Mysql</td>
+</tr>
+<tr>
+<td style="text-align:center">5000</td>
+<td style="text-align:center">Flask default port</td>
+</tr>
+<tr>
+<td style="text-align:center">5432</td>
+<td style="text-align:center">PostgreSQL</td>
+</tr>
+<tr>
+<td style="text-align:center">5800</td>
+<td style="text-align:center">Web VNC</td>
+</tr>
+<tr>
+<td style="text-align:center">5900+</td>
+<td style="text-align:center">client VNC</td>
+</tr>
+<tr>
+<td style="text-align:center">6379</td>
+<td style="text-align:center">Redis</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-MacOS/mac显示隐藏文件" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1122,73 +1255,6 @@
 
 
   
-    <article id="post-Database/Mysql/mysql-大小写区分" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/10/06/Database/Mysql/mysql-大小写区分/" class="article-date">
-      <time datetime="2018-10-06T12:44:52.000Z" itemprop="datePublished">2018-10-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/06/Database/Mysql/mysql-大小写区分/">mysql-大小写区分</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="mysql-大小写区分"><a href="#mysql-大小写区分" class="headerlink" title="mysql-大小写区分"></a>mysql-大小写区分</h3><p>mysql查询默认是不区分大小写的 如:<br><code>select * from some_table where str=‘abc&#39;;</code><br><code>select * from some_table where str=&#39;ABC&#39;;</code><br>得到的结果是一样的，如果我们需要进行区分的话可以按照如下方法来做：<br>第一种方法：<br>要让mysql查询区分大小写，可以：<br><code>select * from some_table where binary str=&#39;abc&#39;</code><br><code>select * from some_table where binary str=&#39;ABC&#39;</code></p>
-<p>第二种方法：<br>在建表时时候加以标识</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table some_table(</span><br><span class="line">str char(20) binary </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>原理：<br>对于CHAR、VARCHAR和TEXT类型，BINARY属性可以为列分配该列字符集的 校对规则。<br>BINARY属性是指定列字符集的<strong>二元 校对规则</strong>的简写。<br>排序和比较<strong>基于数值字符值</strong>。因此也就自然区分了大小写。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/13/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/15/">Next &raquo;</a>
@@ -1200,7 +1266,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2017-2019 Skuaka
+                2017-2020 Skuaka
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

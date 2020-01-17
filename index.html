@@ -234,6 +234,65 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-MacOS/mac维修记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/01/17/MacOS/mac维修记录/" class="article-date">
+      <time datetime="2020-01-17T11:52:33.000Z" itemprop="datePublished">2020-01-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/17/MacOS/mac维修记录/">mac维修记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>apple维修</p>
+<p>先网上预约，进门找人签到（必须）</p>
+<p>第一年保修不需要带发票。</p>
+<p>更换后部件的消费者权益重复保修，需要带发票（虽然最后没有让我出示，还是没用到发票）。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Develop/CMake依赖图" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -963,79 +1022,6 @@
 
 
   
-    <article id="post-Linux/System/ppk-to-pem" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/10/03/Linux/System/ppk-to-pem/" class="article-date">
-      <time datetime="2019-10-03T09:13:06.000Z" itemprop="datePublished">2019-10-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/03/Linux/System/ppk-to-pem/">ppk_to_pem</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="ppk-to-pem"><a href="#ppk-to-pem" class="headerlink" title="ppk_to_pem"></a>ppk_to_pem</h3><p>From: <a href="https://stackoverflow.com/questions/3475069/use-ppk-file-in-mac-terminal-to-connect-to-remote-connection-over-ssh" target="_blank" rel="noopener">https://stackoverflow.com/questions/3475069/use-ppk-file-in-mac-terminal-to-connect-to-remote-connection-over-ssh</a></p>
-<p>You can <code>ssh</code> directly from the Terminal on Mac, but you need to use a <code>.PEM</code> key rather than the <code>putty</code> <code>.PPK</code> key. You can use PuttyGen on Windows to convert from <code>.PEM</code> to <code>.PPK</code>.</p>
-<p>You can also convert the key using <code>putty</code> for Mac via <code>port</code> or <code>brew</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install putty</span><br></pre></td></tr></table></figure>
-<p>This will also install <code>puttygen</code>. To get <code>puttygen</code> to output a <code>.PEM</code> file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">puttygen privatekey.ppk -O private-openssh -o privatekey.pem</span><br></pre></td></tr></table></figure>
-<p>Once you have the key, open a terminal window and:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i privatekey.pem user@my.server.com</span><br></pre></td></tr></table></figure>
-<p>The private key must have tight security settings otherwise SSH complains. Make sure only the user can read the key.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod go-rw privatekey.pem</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1047,7 +1033,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2017-2019 Skuaka
+                2017-2020 Skuaka
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
