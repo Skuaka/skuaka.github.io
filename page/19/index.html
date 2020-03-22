@@ -567,7 +567,8 @@
 <li><p>可以指定底层数据类型</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> <span class="comment">/** 每个枚举都是unsigned char类型的 */</span></span><br><span class="line">&#123; my_enum3 = <span class="number">0</span>, &#125;;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>不能隐式转换</p>
+<li><p><strong>不能隐式</strong>转换</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> <span class="keyword">int</span> &#123;u&#125;</span><br><span class="line"><span class="keyword">int</span> x = <span class="keyword">static_cast</span>&lt;<span class="built_in">std</span>::underlying_type&lt;A&gt;::type&gt;(a::u);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h2><p>c++11扩大了初始化列表的适用范围，使其可以用于所有内置类型和用户定义的类。</p>
