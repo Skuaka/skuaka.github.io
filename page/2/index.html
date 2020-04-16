@@ -234,6 +234,95 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Develop/Robot-framework-note" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/12/Develop/Robot-framework-note/" class="article-date">
+      <time datetime="2019-10-12T06:11:09.000Z" itemprop="datePublished">2019-10-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/12/Develop/Robot-framework-note/">Robot framework note</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Robot-framework"><a href="#Robot-framework" class="headerlink" title="Robot framework"></a>Robot framework</h2><h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install robotframework</span><br></pre></td></tr></table></figure>
+<h3 id="Library"><a href="#Library" class="headerlink" title="Library"></a>Library</h3><h4 id="JSONLibrary"><a href="#JSONLibrary" class="headerlink" title="JSONLibrary"></a>JSONLibrary</h4><p><a href="https://github.com/robotframework-thailand/robotframework-jsonlibrary" target="_blank" rel="noopener">https://github.com/robotframework-thailand/robotframework-jsonlibrary</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U robotframework-jsonlibrary</span><br></pre></td></tr></table></figure>
+<h4 id="RequestsLibrary"><a href="#RequestsLibrary" class="headerlink" title="RequestsLibrary"></a>RequestsLibrary</h4><p><a href="https://github.com/bulkan/robotframework-requests" target="_blank" rel="noopener">https://github.com/bulkan/robotframework-requests</a></p>
+<p><a href="http://bulkan.github.io/robotframework-requests/doc/RequestsLibrary.html" target="_blank" rel="noopener">http://bulkan.github.io/robotframework-requests/doc/RequestsLibrary.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -U requests</span><br><span class="line">pip install -U robotframework-requests</span><br></pre></td></tr></table></figure>
+<h3 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">robot + </span><br><span class="line">-i &lt;tag&gt;		# include tag</span><br><span class="line">-e &lt;tag&gt;		# exclude tag</span><br><span class="line">-d &lt;dir&gt;		# output dir</span><br><span class="line">-v para:value	# set env</span><br><span class="line">&lt;filename&gt;		# run selected file</span><br><span class="line">&lt;dir&gt;			# run selected suite(dir)</span><br></pre></td></tr></table></figure>
+<h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><h4 id="Logical-Operators"><a href="#Logical-Operators" class="headerlink" title="Logical Operators"></a>Logical Operators</h4><p>xxx and xxx</p>
+<p>xxx or xxx</p>
+<p>左右只留一个空格</p>
+<h4 id="Get-length"><a href="#Get-length" class="headerlink" title="Get length"></a>Get length</h4><p>取得字典和链表的大小</p>
+<h4 id="Log-to-console"><a href="#Log-to-console" class="headerlink" title="Log to console"></a>Log to console</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Log to console		message</span><br></pre></td></tr></table></figure>
+<h4 id="timeout"><a href="#timeout" class="headerlink" title="timeout"></a>timeout</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">*** Settings ***</span><br><span class="line">Test Timeout     2 minutes</span><br><span class="line"></span><br><span class="line">*** Test Cases ***</span><br><span class="line">Example</span><br><span class="line">    [Timeout]    1 minute</span><br></pre></td></tr></table></figure>
+<h4 id="Run-Keywords"><a href="#Run-Keywords" class="headerlink" title="Run Keywords"></a>Run Keywords</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Test Case1</span><br><span class="line">  [Teardown]  Run Keywords  Teardown 1  Teardown 2</span><br><span class="line">Test Case2</span><br><span class="line">  [Teardown]  Run Keywords  Teardown 1  arg1  arg2</span><br><span class="line">  ...         AND           Teardown 2  arg1</span><br></pre></td></tr></table></figure>
+<h4 id="if"><a href="#if" class="headerlink" title="if"></a>if</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;api&#125;      Set Variable If     $&#123;USE_API_IN&#125;==$&#123;true&#125;      $&#123;api_in&#125;   $&#123;api_out&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="string-concat"><a href="#string-concat" class="headerlink" title="string concat"></a>string concat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$&#123;str1&#125; =   Catenate    Hello   world   </span><br><span class="line">$&#123;str2&#125; =   Catenate    SEPARATOR=---   Hello   world</span><br><span class="line">$&#123;str3&#125; =   Catenate    SEPARATOR=  Hello   world</span><br><span class="line">=&gt;</span><br><span class="line">$&#123;str1&#125; = &apos;Hello world&apos;</span><br><span class="line">$&#123;str2&#125; = &apos;Hello---world&apos;</span><br><span class="line">$&#123;str3&#125; = &apos;Helloworld&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="configure-pycharm-robotframework"><a href="#configure-pycharm-robotframework" class="headerlink" title="configure pycharm robotframework"></a>configure pycharm robotframework</h3><p>env: MacOS 10.15</p>
+<ol>
+<li><p>install <strong>intelliBot</strong> plugin</p>
+</li>
+<li><p>goto <strong>Editor -&gt; File Types</strong> and configure file type</p>
+</li>
+<li><p>goto <strong>Tools -&gt; External Tools</strong> and add the following two configurations:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Name : Robot Run TestSuite</span><br><span class="line">Program: /usr/local/bin/robot</span><br><span class="line">Arguments: -d Results $FileName$</span><br><span class="line">Working directory : $FileDir$</span><br><span class="line"></span><br><span class="line">Name : Robot Run SelectedTestCase</span><br><span class="line">Program: /usr/local/bin/robot</span><br><span class="line">Arguments: -d Results -t &quot;$SelectedText$&quot; $FileName$</span><br><span class="line">Working directory : $FileDir$</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="To-be-continued"><a href="#To-be-continued" class="headerlink" title="To be continued"></a>To be continued</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/robotframework/">robotframework</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux/System/ppk-to-pem" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -982,88 +1071,9 @@
 
 
   
-    <article id="post-MacOS/macOS-command-line-tools" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/04/MacOS/macOS-command-line-tools/" class="article-date">
-      <time datetime="2019-09-04T07:48:11.000Z" itemprop="datePublished">2019-09-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/04/MacOS/macOS-command-line-tools/">macOS command line tools</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="My-mac-command-line-tools"><a href="#My-mac-command-line-tools" class="headerlink" title="My mac command line tools"></a>My mac command line tools</h3><p>All are installed by brew</p>
-<h4 id="ql-plugins"><a href="#ql-plugins" class="headerlink" title="ql plugins"></a>ql plugins</h4><ul>
-<li><strong>qlimagesize:</strong> Preview the size of images in megabytes, along with their resolution in pixels.</li>
-<li><strong>qlcolorcode:</strong> Preview source code files and display their syntax highlighting.</li>
-<li><strong>qlmarkdown:</strong> Preview Markdown-compatible files.</li>
-</ul>
-<p>brew install qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo qlImageSize</p>
-<h4 id="speedtest-cli"><a href="#speedtest-cli" class="headerlink" title="speedtest-cli*"></a>speedtest-cli*</h4><p>test download and upload speed</p>
-<h4 id="links"><a href="#links" class="headerlink" title="links"></a>links</h4><p>command line web browser</p>
-<h4 id="midnight-commander"><a href="#midnight-commander" class="headerlink" title="midnight-commander"></a>midnight-commander</h4><p>create an interactive file manager directly in the Terminal window</p>
-<h4 id="tldr"><a href="#tldr" class="headerlink" title="tldr*"></a>tldr*</h4><p>Simplified and user-friendly man pages.</p>
-<p>If all you want to do is get a quick list of the available options for <strong>ls</strong> or the syntax for <strong>find</strong>, <strong>tldr</strong> is a priceless resource.</p>
-<h4 id="archey"><a href="#archey" class="headerlink" title="archey"></a>archey</h4><p>display your system information in Terminal next to a text-based retro-style Apple icon.</p>
-<h4 id="ffmpeg"><a href="#ffmpeg" class="headerlink" title="ffmpeg"></a>ffmpeg</h4><p>a very fast video and audio converter that can also grab from a live audio/video source.</p>
-<h4 id="aria2"><a href="#aria2" class="headerlink" title="aria2*"></a>aria2*</h4><p>a lightweight multi-protocol &amp; multi-source command-line download utility</p>
-<p>It supports <strong>HTTP/HTTPS</strong>, <strong>FTP</strong>, <strong>SFTP</strong>, <strong>BitTorrent</strong> and <strong>Metalink</strong>.</p>
-<h3 id="TobeContinue"><a href="#TobeContinue" class="headerlink" title="TobeContinue"></a>TobeContinue</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/macOS/">macOS</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/macOS/">macOS</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>

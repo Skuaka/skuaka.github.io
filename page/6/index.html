@@ -234,6 +234,146 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/Concept/数据库理论知识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/25/Database/Concept/数据库理论知识/" class="article-date">
+      <time datetime="2019-03-25T12:24:14.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/25/Database/Concept/数据库理论知识/">数据库理论知识</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="数据库理论知识"><a href="#数据库理论知识" class="headerlink" title="数据库理论知识"></a>数据库理论知识</h2><p>以下来自：<a href="https://juejin.im/post/5b55b842f265da0f9e589e79#heading-1" target="_blank" rel="noopener">https://juejin.im/post/5b55b842f265da0f9e589e79#heading-1</a></p>
+<h3 id="聚集和非聚集索引"><a href="#聚集和非聚集索引" class="headerlink" title="聚集和非聚集索引"></a>聚集和非聚集索引</h3><p>简单概括：</p>
+<ul>
+<li>聚集索引就是以<strong>主键</strong>创建的索引</li>
+<li>非聚集索引就是以<strong>非主键</strong>创建的索引</li>
+</ul>
+<p>区别：</p>
+<ul>
+<li>聚集索引在叶子节点存储的是<strong>表中的数据</strong></li>
+<li>非聚集索引在叶子节点存储的是<strong>主键和索引列</strong></li>
+<li>使用非聚集索引查询出数据时，<strong>拿到叶子上的主键再去查到想要查找的数据</strong>。(拿到主键再查找这个过程叫做<strong>回表</strong>)</li>
+</ul>
+<p><strong>非聚集索引也叫做二级索引</strong>，不用纠结那么多名词，将其等价就行了~</p>
+<p>非聚集索引在建立的时候也<strong>未必是单列</strong>的，可以多个列来创建索引。</p>
+<ul>
+<li>此时就涉及到了哪个列会走索引，哪个列不走索引的问题了(最左匹配原则–&gt;后面有说)</li>
+<li><strong>创建多个单列(非聚集)索引的时候，会生成多个索引树</strong>(所以过多创建索引会占用磁盘空间)</li>
+</ul>
+<h4 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h4><p>在创建多列索引中也涉及到了一种特殊的索引–&gt;<strong>覆盖索引</strong></p>
+<ul>
+<li>我们前面知道了，如果不是聚集索引，叶子节点存储的是主键+列值</li>
+<li>最终还是要“回表”，也就是要通过主键<strong>再</strong>查找一次。这样就会比较慢</li>
+<li>覆盖索引就是把要<strong>查询出的列和索引对应</strong>，不做回表操作！</li>
+</ul>
+<h3 id="最左匹配原则"><a href="#最左匹配原则" class="headerlink" title="最左匹配原则"></a>最左匹配原则</h3><p><strong>最左匹配原则</strong>：</p>
+<ul>
+<li>索引可以简单如一个列<code>(a)</code>，也可以复杂如多个列<code>(a, b, c, d)</code>，即<strong>联合索引</strong>。</li>
+<li>如果是联合索引，那么key也由多个列组成，同时，索引只能用于查找key是否<strong>存在（相等）</strong>，遇到范围查询<code>(&gt;、&lt;、between、like</code>左匹配)等就<strong>不能进一步匹配</strong>了，后续退化为线性查找。</li>
+<li>因此，<strong>列的排列顺序决定了可命中索引的列数</strong>。</li>
+</ul>
+<p>例子：</p>
+<ul>
+<li>如有索引<code>(a, b, c, d)</code>，查询条件<code>a = 1 and b = 2 and c &gt; 3 and d = 4</code>，则会在每个节点依次命中a、b、c，无法命中d。(很简单：索引命中只能是<strong>相等</strong>的情况，不能是范围匹配)</li>
+</ul>
+<h3 id="自动优化顺序"><a href="#自动优化顺序" class="headerlink" title="=自动优化顺序"></a>=自动优化顺序</h3><p><strong>不需要考虑=、in等条件查询的顺序</strong>，mysql会自动优化这些条件的顺序，以匹配尽可能多的索引列。</p>
+<p>例子：</p>
+<p>如有索引<code>(a, b, c, d)</code>，查询条件<code>c &gt; 3 and b = 2 and a = 1 and d &lt; 4</code>与<code>a = 1 and c &gt; 3 and b = 2 and d &lt; 4</code>等顺序都是可以的，MySQL会自动优化为<code>a = 1 and b = 2 and c &gt; 3 and d &lt; 4</code>，依次命中a、b、c。</p>
+<h3 id="索引种类"><a href="#索引种类" class="headerlink" title="索引种类"></a>索引种类</h3><p>这部分来自：<a href="https://www.cnblogs.com/sessionbest/articles/8689255.html" target="_blank" rel="noopener">https://www.cnblogs.com/sessionbest/articles/8689255.html</a></p>
+<ol>
+<li>按照索引列值的唯一性，索引可分为唯一索引和非唯一索引；</li>
+<li>按照索引列的个数：单列索引和复合索引；</li>
+<li>按照索引列的物理组织方式。</li>
+</ol>
+<p><strong>物理组织方式</strong>：</p>
+<p>一、<strong>B树索引</strong></p>
+<p>最常用的索引，各叶子节点中包括的数据有索引列的值和数据表中对应行的ROWID，简单的说，在B树索引中，是通过在索引中保存排过续的索引列值与相对应记录的ROWID来实现快速查询的目的。</p>
+<p>可以保证无论用户要搜索哪个分支的叶子结点，都需要经过相同的索引层次，即都需要相同的I/O次数。</p>
+<p>注1：索引是针对字段创建的，相同字段不能创建一个以上的索引；</p>
+<p>注2：默认的索引是不唯一的，但是也可以加上unique，表示该索引的字段上没有重复值(定义unique约束时会自动创建)；</p>
+<p>注3：创建主键时，默认在主键上创建了B树索引，因此不能再在主键上创建索引。</p>
+<p>二、<strong>位图索引</strong></p>
+<p>有些字段中使用B树索引的效率仍然不高，例如性别的字段中，只有“男、女”两个值，则即便使用了B树索引，在进行检索时也将返回接近一半的记录。</p>
+<p>所以当字段的基数很低时，需要使用位图索引。(“低”的标准是取值数量 &lt; 行数*1%)</p>
+<p><img src="http://118.25.53.128/Picture/Database/bitmap_index.jpg" alt="bitmap_index"></p>
+<p>位图索引的逻辑结构如上图所示：索引中不再记录rowid和键值，而是将每个值作为一列，用0和1表示该行是否等于该键值(0表示否;1表示是)。其中位图索引的行顺序与原表的行顺序一致，可以在查询数据的过程中对应计算出行的原始物理位置。</p>
+<p>注：位图索引不可能是唯一索引，也不能进行键值压缩。</p>
+<p>三、<strong>反向键索引</strong></p>
+<p>考虑这个情况：某一字段的值是1-1000顺序排列，建立B树索引后依旧递增，到后来该B数索引不断在后面增加分支，会形成不对称树。</p>
+<p>反向键索引是<strong>一种特殊的B树索引</strong>，在存储构造中与B树索引完全相同，但是针对数值时，反向键索引会先反向每个键值的字节，然后对反向后的新数据进行索引。例如输入2008则转换为8002，这样当数值一次增加时，其反向键在大小中的分布仍然是比较平均的。</p>
+<p>注：键的反转由系统自行完成。对于用户是透明的。</p>
+<p>四、<strong>基于函数的索引</strong></p>
+<p>有的时候，需要进行如下查询：<code>select * from t1 where to_char(date,&#39;yyyy&#39;)&gt;&#39;2007&#39;;</code></p>
+<p>但是即便在date字段上建立了索引，还是不得不进行全表扫描。在这种情况下，可以使用基于函数的索引。</p>
+<p>注：简单来说，基于函数的索引，就是将查询要用到的表达式作为索引项。</p>
+<p>五、<strong>全局索引和局部索引</strong></p>
+<p>这个索引貌似很复杂，其实很简单。总得来说一句话，就是无论怎么分区，都是为了方便管理。</p>
+<p>具体索引和表的关系有三种：</p>
+<p>1、局部分区索引：分区索引和分区表1对1</p>
+<p>2、全局分区索引：分区索引和分区表N对N</p>
+<p>3、全局非分区索引：非分区索引和分区表1对N</p>
+<h3 id="热备份、冷备份"><a href="#热备份、冷备份" class="headerlink" title="热备份、冷备份"></a>热备份、冷备份</h3><p>来自：<a href="https://www.cnblogs.com/a12436109/p/3606135.html" target="_blank" rel="noopener">https://www.cnblogs.com/a12436109/p/3606135.html</a></p>
+<p>线路<strong><em>倒换</em></strong>是指把互为备用的两条线路之一条传送的信号转移到另一条的过程或技术。</p>
+<p>热备份是实时备份，发生倒换也不影响业务；冷备份则是周期性备份（如：定时每天凌晨开始备份），发生倒换时，备机的数据不是最新的。</p>
+<p>简单解释下。<br>热备份就是2个完全一样的系统，包括硬盘，内存里的内容都一模一样，所不同的是主用与其他设备即时通信，它将根据移动用户的数据变化而变化，对于备份的设备则是实时与主用设备保持一致，一句话就是：主用随现网变，备用随主用变。而且是任何部分都要变。这就牵涉到一个问题，就是修改主用设备的数据时候必须同时修改备用，如果只修改一个就会出数据不一致的告警，甚至引起主备一直切换，直至他们重新同步。</p>
+<p>冷备份也是2个完全一样的系统，但是备用处于休息状态，硬盘也是存系统文件，配置文件等，对于用户数据，现网运行情况只是做定时更新，内存根本就是停滞状态，只有在主用倒掉的时候，备用才会启用，用户数据也会恢复倒上次更新的情况（当然如果与主用的硬盘通信状态没断的时候还是会再与其同步最后一次），内存里会重新加载需要用的数据。、</p>
+<p>打个比方就例如你需要看通过电视看场球赛，为了安全起见，你准备了2个一样的电视，热备份就是两个同时开开，同时放一个节目，只要你看的那个电视（主用）坏掉了，你扭头就能看另一个电视，而冷备份就是你就开了一台电视，如果主用电视坏了你还要开备用电视，或者还要选台选节目。</p>
+<p>所以热备份不会影响业务，而冷备份会使业务暂时中断，只是时间不会太长。</p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Database/">Database</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Operating-System/Linux虚拟地址空间" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -478,6 +618,80 @@
 
 
   
+    <article id="post-Network/Tcp/ICMP" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/22/Network/Tcp/ICMP/" class="article-date">
+      <time datetime="2019-03-22T14:49:12.000Z" itemprop="datePublished">2019-03-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/22/Network/Tcp/ICMP/">ICMP</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h3><p><strong>互联网控制消息协议</strong>（英语：<strong>I</strong>nternet <strong>C</strong>ontrol <strong>M</strong>essage <strong>P</strong>rotocol，缩写：<strong>ICMP</strong>）是互联网协议族的核心协议之一。它用于网际协议（IP）中发送控制消息，提供可能发生在通信环境中的各种问题反馈。通过这些信息，使管理者可以对所发生的问题作出诊断，然后采取适当的措施解决。</p>
+<p>ICMP依靠IP來完成它的任务，它是IP的主要部分。它与传输协议（如TCP和UDP）显著不同：它一般不用于在两点间传输数据。它通常不由网络程序直接使用，除了ping和traceroute这两个特別的例子。</p>
+<h3 id="报头"><a href="#报头" class="headerlink" title="报头"></a>报头</h3><p>ICMP报头从IP报头的第160位开始（IP首部20字节）（除非使用了IP报头的可选部分）。</p>
+<p><img src="Picture/ICMP_header.jpg" alt="ICMP_header"></p>
+<ul>
+<li><strong>Type</strong> - ICMP的類型,标识生成的错误报文；</li>
+<li><strong>Code</strong> - 進一步劃分ICMP的類型,该字段用来查找产生错误的原因.；例如，ICMP的目標不可達類型可以把這個位設為1至15等來表示不同的意思。</li>
+<li><strong>Checksum</strong> - 校验码部分,這個字段包含有從ICMP報頭和數據部分計算得來的，用於檢查錯誤的數據，其中此校验码字段的值視為0。</li>
+<li><strong>ID</strong> - 這個字段包含了ID值，在Echo Reply類型的消息中要返回這個字段。</li>
+<li><strong>Sequence</strong> - 這個字段包含一個序號，同樣要在Echo Reply類型的消息中要返回這個字段。</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/Tcp/IP头_TCP头_UDP头" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -567,80 +781,6 @@
 <h3 id="udp头部定义"><a href="#udp头部定义" class="headerlink" title="udp头部定义"></a>udp头部定义</h3><p><img src="http://118.25.53.128/Picture/Tcp/o_udp_header.jpg" alt="o_udp头部"></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*UDP头定义，共8个字节*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">UDP_HEADER</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usSourPort;					<span class="comment">// 源端口号16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usDestPort;					<span class="comment">// 目的端口号16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usLength;						<span class="comment">// 数据包长度16bit</span></span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">short</span> m_usCheckSum;					<span class="comment">// 校验和16bit</span></span><br><span class="line">&#125;__attribute__((packed))UDP_HEADER, *PUDP_HEADER;</span><br></pre></td></tr></table></figure>
 <h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Tcp/ICMP" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/22/Network/Tcp/ICMP/" class="article-date">
-      <time datetime="2019-03-22T14:49:12.000Z" itemprop="datePublished">2019-03-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/22/Network/Tcp/ICMP/">ICMP</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h3><p><strong>互联网控制消息协议</strong>（英语：<strong>I</strong>nternet <strong>C</strong>ontrol <strong>M</strong>essage <strong>P</strong>rotocol，缩写：<strong>ICMP</strong>）是互联网协议族的核心协议之一。它用于网际协议（IP）中发送控制消息，提供可能发生在通信环境中的各种问题反馈。通过这些信息，使管理者可以对所发生的问题作出诊断，然后采取适当的措施解决。</p>
-<p>ICMP依靠IP來完成它的任务，它是IP的主要部分。它与传输协议（如TCP和UDP）显著不同：它一般不用于在两点间传输数据。它通常不由网络程序直接使用，除了ping和traceroute这两个特別的例子。</p>
-<h3 id="报头"><a href="#报头" class="headerlink" title="报头"></a>报头</h3><p>ICMP报头从IP报头的第160位开始（IP首部20字节）（除非使用了IP报头的可选部分）。</p>
-<p><img src="Picture/ICMP_header.jpg" alt="ICMP_header"></p>
-<ul>
-<li><strong>Type</strong> - ICMP的類型,标识生成的错误报文；</li>
-<li><strong>Code</strong> - 進一步劃分ICMP的類型,该字段用来查找产生错误的原因.；例如，ICMP的目標不可達類型可以把這個位設為1至15等來表示不同的意思。</li>
-<li><strong>Checksum</strong> - 校验码部分,這個字段包含有從ICMP報頭和數據部分計算得來的，用於檢查錯誤的數據，其中此校验码字段的值視為0。</li>
-<li><strong>ID</strong> - 這個字段包含了ID值，在Echo Reply類型的消息中要返回這個字段。</li>
-<li><strong>Sequence</strong> - 這個字段包含一個序號，同樣要在Echo Reply類型的消息中要返回這個字段。</li>
-</ul>
-
       
     </div>
     
@@ -2073,126 +2213,9 @@
 
 
   
-    <article id="post-C-C++/C++Collection/C++chrono时间库" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/13/C-C++/C++Collection/C++chrono时间库/" class="article-date">
-      <time datetime="2019-03-13T11:20:05.000Z" itemprop="datePublished">2019-03-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/13/C-C++/C++Collection/C++chrono时间库/">C++chrono时间库</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="时间库chrono（简述）"><a href="#时间库chrono（简述）" class="headerlink" title="时间库chrono（简述）"></a>时间库chrono（简述）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::chrono;</span><br></pre></td></tr></table></figure>
-<h4 id="duration"><a href="#duration" class="headerlink" title="duration"></a>duration</h4><p><code>std::chrono::duration</code> 表示一段时间。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Rep</span>, <span class="title">class</span> <span class="title">Period</span> = <span class="title">ratio</span>&lt;1&gt; &gt; <span class="title">class</span> <span class="title">duration</span>;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Rep表示一种数值类型，用来表示Period的数量，比如int float double</p>
-<p>常用的duration&lt;Rep,Period&gt;已经定义好了，在std::chrono::duration下：</p>
-<p>ratio&lt;3600, 1&gt;                hours</p>
-<p>ratio&lt;60, 1&gt;                    minutes</p>
-<p>ratio&lt;1, 1&gt;                      seconds</p>
-<p>ratio&lt;1, 1000&gt;               microseconds</p>
-<p>ratio&lt;1, 1000000&gt;         microseconds</p>
-<p>ratio&lt;1, 1000000000&gt;    nanosecons</p>
-<ul>
-<li><p>在<code>std::chrono::chrono_literals</code>名称空间下，还定义了<strong>用户字面常量</strong>，只举两个：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">operator</span><span class="string">""</span>h</span><br><span class="line"><span class="keyword">operator</span><span class="string">""</span>s</span><br></pre></td></tr></table></figure>
-<p>所以可以直接使用 “1s” 来表示一秒的时间。</p>
-</li>
-</ul>
-</li>
-<li><p>Period是ratio类型，用来表示【用秒表示的时间单位】比如second milisecond</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">intmax_t</span> N, <span class="keyword">intmax_t</span> D = <span class="number">1</span>&gt; class ratio;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>N代表分子，D代表分母，所以ratio表示一个分数值。</p>
-<p>注意，我们自己可以定义Period，比如ratio&lt;1, -2&gt;表示单位时间是-0.5秒。</p>
-</li>
-</ul>
-</li>
-<li><p>由于各种duration表示不同，chrono库提供了duration_cast类型转换函数。</p>
-<p>默认可以转化为更小单位的时间，但是转化为大单位（缩窄）就需调用要这个类型转换函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ToDuration</span>, <span class="title">class</span> <span class="title">Rep</span>, <span class="title">class</span> <span class="title">Period</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">constexpr</span> <span class="title">ToDuration</span> <span class="title">duration_cast</span> (<span class="title">const</span> <span class="title">duration</span>&lt;Rep,Period&gt;&amp; <span class="title">dtn</span>);</span></span><br></pre></td></tr></table></figure>
-<p>比如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">int</span>&gt; seconds_type;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">int</span>,<span class="built_in">std</span>::milli&gt; milliseconds_type;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">int</span>,<span class="built_in">std</span>::ratio&lt;<span class="number">60</span>*<span class="number">60</span>&gt;&gt; hours_type;</span><br><span class="line"></span><br><span class="line"><span class="function">seconds_type <span class="title">s_onehour</span> <span class="params">(<span class="number">60</span>*<span class="number">60</span>)</span></span>;				<span class="comment">// 3600s</span></span><br><span class="line"><span class="comment">//hours_type h_onehour (s_onehour);			// NOT VALID (type truncates), use:</span></span><br><span class="line"><span class="function">hours_type <span class="title">h_onehour</span> <span class="params">(<span class="built_in">std</span>::chrono::duration_cast&lt;hours_type&gt;(s_onehour))</span></span>;</span><br><span class="line"><span class="function">milliseconds_type <span class="title">ms_onehour</span> <span class="params">(s_onehour)</span></span>;	<span class="comment">// 3600000ms (ok, no type truncation)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>duration还有一个成员函数count() 返回Rep类型的Period数量，通常就是用这个函数来显示时间的：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">milliseconds <span class="title">foo</span> <span class="params">(<span class="number">1000</span>)</span></span>; <span class="comment">// 1 second</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; foo.count() &lt;&lt; <span class="string">" milliseconds.\n"</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="time-point"><a href="#time-point" class="headerlink" title="time_point"></a>time_point</h4><p><code>std::chrono::&lt;clock&gt;::time_point</code> 表示一个具体时间。一个time point必须有一个clock计时。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Clock</span>, <span class="title">class</span> <span class="title">Duration</span> = <span class="title">typename</span> <span class="title">Clock</span>:</span>:duration&gt;  <span class="class"><span class="keyword">class</span> <span class="title">time_point</span>;</span></span><br></pre></td></tr></table></figure>
-<p>由于各种time_point表示方式不同，chrono也提供了相应的转换函数 time_point_cast。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ToDuration</span>, <span class="title">class</span> <span class="title">Clock</span>, <span class="title">class</span> <span class="title">Duration</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">time_point</span>&lt;Clock,ToDuration&gt; <span class="title">time_point_cast</span> (<span class="title">const</span> <span class="title">time_point</span>&lt;Clock,Duration&gt;&amp; <span class="title">tp</span>);</span></span><br></pre></td></tr></table></figure>
-<h4 id="clock"><a href="#clock" class="headerlink" title="clock"></a>clock</h4><p>每一个clock类中都有确定的time_point, duration, Rep, Period类型。</p>
-<ul>
-<li><p><code>std::chrono::system_clock</code> 它表示当前的系统时钟，系统中运行的所有进程使用now()得到的时间是一致的。</p>
-<p>方法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">now(); 			<span class="comment">//当前时间time_point</span></span><br><span class="line"><span class="keyword">to_time_t</span>(); 	<span class="comment">//time_point转换成time_t秒</span></span><br><span class="line"><span class="keyword">from_time_t</span>();	<span class="comment">//从time_t转换成time_point</span></span><br></pre></td></tr></table></figure>
-<p>比如线程库里的一个<strong>例子</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::chrono_literals;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello waiter\n"</span> &lt;&lt; <span class="built_in">std</span>::flush;</span><br><span class="line">    <span class="keyword">auto</span> start = <span class="built_in">std</span>::chrono::high_resolution_clock::now();</span><br><span class="line">    <span class="built_in">std</span>::this_thread::sleep_for(<span class="number">2</span>s);</span><br><span class="line">    <span class="keyword">auto</span> end = <span class="built_in">std</span>::chrono::high_resolution_clock::now();</span><br><span class="line">    <span class="built_in">std</span>::chrono::duration&lt;<span class="keyword">double</span>, <span class="built_in">std</span>::milli&gt; elapsed = end-start;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Waited "</span> &lt;&lt; elapsed.count() &lt;&lt; <span class="string">" ms\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>std::chrono::steady_clock</code> 为了表示稳定的时间间隔，后一次调用now()得到的时间总是比前一次的值大（这句话的意思其实是，如果中途修改了系统时间，也不影响now()的结果），每次tick都保证过了稳定的时间间隔。</p>
-</li>
-<li><p><code>std::chrono::high_resolution_clock</code> 顾名思义，这是系统可用的最高精度的时钟。实际上只不过是system_clock或者steady_clock的typedef。</p>
-</li>
-</ul>
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
     </nav>
   
 </div>

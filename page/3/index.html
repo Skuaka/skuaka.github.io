@@ -234,6 +234,85 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-MacOS/macOS-command-line-tools" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/04/MacOS/macOS-command-line-tools/" class="article-date">
+      <time datetime="2019-09-04T07:48:11.000Z" itemprop="datePublished">2019-09-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/04/MacOS/macOS-command-line-tools/">macOS command line tools</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="My-mac-command-line-tools"><a href="#My-mac-command-line-tools" class="headerlink" title="My mac command line tools"></a>My mac command line tools</h3><p>All are installed by brew</p>
+<h4 id="ql-plugins"><a href="#ql-plugins" class="headerlink" title="ql plugins"></a>ql plugins</h4><ul>
+<li><strong>qlimagesize:</strong> Preview the size of images in megabytes, along with their resolution in pixels.</li>
+<li><strong>qlcolorcode:</strong> Preview source code files and display their syntax highlighting.</li>
+<li><strong>qlmarkdown:</strong> Preview Markdown-compatible files.</li>
+</ul>
+<p>brew install qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo qlImageSize</p>
+<h4 id="speedtest-cli"><a href="#speedtest-cli" class="headerlink" title="speedtest-cli*"></a>speedtest-cli*</h4><p>test download and upload speed</p>
+<h4 id="links"><a href="#links" class="headerlink" title="links"></a>links</h4><p>command line web browser</p>
+<h4 id="midnight-commander"><a href="#midnight-commander" class="headerlink" title="midnight-commander"></a>midnight-commander</h4><p>create an interactive file manager directly in the Terminal window</p>
+<h4 id="tldr"><a href="#tldr" class="headerlink" title="tldr*"></a>tldr*</h4><p>Simplified and user-friendly man pages.</p>
+<p>If all you want to do is get a quick list of the available options for <strong>ls</strong> or the syntax for <strong>find</strong>, <strong>tldr</strong> is a priceless resource.</p>
+<h4 id="archey"><a href="#archey" class="headerlink" title="archey"></a>archey</h4><p>display your system information in Terminal next to a text-based retro-style Apple icon.</p>
+<h4 id="ffmpeg"><a href="#ffmpeg" class="headerlink" title="ffmpeg"></a>ffmpeg</h4><p>a very fast video and audio converter that can also grab from a live audio/video source.</p>
+<h4 id="aria2"><a href="#aria2" class="headerlink" title="aria2*"></a>aria2*</h4><p>a lightweight multi-protocol &amp; multi-source command-line download utility</p>
+<p>It supports <strong>HTTP/HTTPS</strong>, <strong>FTP</strong>, <strong>SFTP</strong>, <strong>BitTorrent</strong> and <strong>Metalink</strong>.</p>
+<h3 id="TobeContinue"><a href="#TobeContinue" class="headerlink" title="TobeContinue"></a>TobeContinue</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/macOS/">macOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/macOS/">macOS</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Backend/Node-js/node-js笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1110,91 +1189,9 @@
 
 
   
-    <article id="post-Network/IO/libevent进阶" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/27/Network/IO/libevent进阶/" class="article-date">
-      <time datetime="2019-04-27T14:12:13.000Z" itemprop="datePublished">2019-04-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/27/Network/IO/libevent进阶/">libevent进阶</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="libevent进阶"><a href="#libevent进阶" class="headerlink" title="libevent进阶"></a>libevent进阶</h2><p>之前一篇学了libevent基础，之后陆陆续续用到了一些进阶知识，遂另起此篇记录。</p>
-<h3 id="libevent多线程"><a href="#libevent多线程" class="headerlink" title="libevent多线程"></a>libevent多线程</h3><p>libevent 默认不开启多线程支持，所以在其他线程对 event 进行操作时无法唤醒事件。</p>
-<p>这里总结一下 libevent 在多线程下最简单的使用需要添加的内容。</p>
-<hr>
-<ul>
-<li><p>头文件 + <code>&lt;event2/thread.h&gt;</code></p>
-</li>
-<li><p>event_base 创建前 + <code>evthread_use_pthreads();</code></p>
-</li>
-<li><p>// event_base 创建后 + <code>evthread_make_base_notifiable(ev_base);</code></p>
-<p>Make sure it’s safe to tell an event base to wake up from another thread or a signal handler.</p>
-<p>如果不添加这句程序也能正常运行，我暂时认为这是一种确保，即如果返回-1表明失败，否则无用。</p>
-</li>
-<li><p>event 创建时 + <code>BEV_OPT_THREADSAFE</code></p>
-</li>
-<li><p>链接库 + <code>-levent_pthreads</code></p>
-</li>
-</ul>
-<hr>
-<h3 id="libevent-SSL"><a href="#libevent-SSL" class="headerlink" title="libevent+SSL"></a>libevent+SSL</h3><h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO/">IO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>

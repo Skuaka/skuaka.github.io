@@ -234,6 +234,79 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C-C++/Concept-gcc/centos-gcc版本过低" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/04/16/C-C++/Concept-gcc/centos-gcc版本过低/" class="article-date">
+      <time datetime="2020-04-16T09:42:15.000Z" itemprop="datePublished">2020-04-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/16/C-C++/Concept-gcc/centos-gcc版本过低/">centos gcc版本过低</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Centos-gcc版本过低"><a href="#Centos-gcc版本过低" class="headerlink" title="Centos gcc版本过低"></a>Centos gcc版本过低</h2><p>起因：将代码移植到centos7时，发现编译器只能支持到c++11，所以需要升级才能编译c++14/17代码。</p>
+<h3 id="升级gcc"><a href="#升级gcc" class="headerlink" title="升级gcc"></a>升级gcc</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在这个网站找到想要的版本</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://mirror.koddos.net/gcc/releases/</span></span><br><span class="line">mkdir gcc</span><br><span class="line">cd gcc</span><br><span class="line">wget -c http://mirror.koddos.net/gcc/releases/gcc-4.8.5/gcc-4.8.5.tar.bz2</span><br><span class="line">tar jxf gcc-4.8.5.tar.bz2</span><br><span class="line">cd gcc-4.8.5</span><br><span class="line"></span><br><span class="line">./contrib/download_prerequisites</span><br><span class="line">./configure --prefix=/opt/gcc --enable-checking=release --enable-languages=c,c++ --disable-multilib # 机器是64位的，就不使用32位的包了，--disable-multilib</span><br><span class="line">make -j4 #如果有多核CPU尽量都用上，要编译很久，建议放到screen里跑</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line">echo 'export PATH=/opt/gcc/bin:$PATH' &gt;&gt; /etc/profile</span><br><span class="line">source /etc/profile</span><br><span class="line"></span><br><span class="line">gcc -v</span><br><span class="line">cd /opt/gcc/bin &amp;&amp; ln -s gcc cc</span><br></pre></td></tr></table></figure>
+<h3 id="CMake-指定gcc编译版本"><a href="#CMake-指定gcc编译版本" class="headerlink" title="CMake 指定gcc编译版本"></a>CMake 指定gcc编译版本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">export</span> CC (and CXX) before calling cmake:</span></span><br><span class="line">export CC=/opt/gcc/bin/gcc</span><br><span class="line">export CXX=/opt/gcc/bin/g++</span><br><span class="line">ccmake &lt;project&gt;</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h3 id="升级CMake"><a href="#升级CMake" class="headerlink" title="升级CMake"></a>升级CMake</h3><ul>
+<li><p>需要先安装/升级 gcc</p>
+</li>
+<li><p><em>支持c++17标准的版本：</em></p>
+<p>  <em>For CLang and GNU the support was merged into the main source code branch begin of 2017 and is part of CMake version 3.8 and above:</em></p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在这个网站找到想要的版本</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> https://cmake.org/files</span></span><br><span class="line">mkdir cmake</span><br><span class="line">cd cmake</span><br><span class="line">wget https://cmake.org/files/v3.3/cmake-3.3.2.tar.gz </span><br><span class="line">tar xzvf cmake-3.3.2.tar.gz </span><br><span class="line">cd cmake-3.3.2 </span><br><span class="line"></span><br><span class="line">./bootstrap </span><br><span class="line">gmake </span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line">cmake --version</span><br></pre></td></tr></table></figure>
+<h4 id="issues"><a href="#issues" class="headerlink" title="issues"></a>issues</h4><p><code>./bootstrap</code>时出现问题：<code>/lib64/libstdc++.so.6: version</code>GLIBCXX_3.4.26’ not found (required by /root/CMAKE/cmake-3.17.1/Bootstrap.cmk/cmake)`</p>
+<p><code>strings /lib64/libstdc++.so.6 | grep GLIBCXX_</code> 可以看见版本太低，因为是旧的gcc库。找到上文安装的新版gcc的位置。将 <code>/usr/lib64/libstdc++.so.6</code> 软连接到新的库就行了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># cp /opt/gcc/lib64/libstdc++.so.6 /usr/lib64/</span><br><span class="line">cp: overwrite &apos;/usr/lib64/libstdc++.so.6&apos;? y</span><br></pre></td></tr></table></figure>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcc-gdb/">gcc,gdb</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-MacOS/mac维修记录" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -933,98 +1006,9 @@
 
 
   
-    <article id="post-Develop/Robot-framework-note" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/10/12/Develop/Robot-framework-note/" class="article-date">
-      <time datetime="2019-10-12T06:11:09.000Z" itemprop="datePublished">2019-10-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/12/Develop/Robot-framework-note/">Robot framework note</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Robot-framework"><a href="#Robot-framework" class="headerlink" title="Robot framework"></a>Robot framework</h2><h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install robotframework</span><br></pre></td></tr></table></figure>
-<h3 id="Library"><a href="#Library" class="headerlink" title="Library"></a>Library</h3><h4 id="JSONLibrary"><a href="#JSONLibrary" class="headerlink" title="JSONLibrary"></a>JSONLibrary</h4><p><a href="https://github.com/robotframework-thailand/robotframework-jsonlibrary" target="_blank" rel="noopener">https://github.com/robotframework-thailand/robotframework-jsonlibrary</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U robotframework-jsonlibrary</span><br></pre></td></tr></table></figure>
-<h4 id="RequestsLibrary"><a href="#RequestsLibrary" class="headerlink" title="RequestsLibrary"></a>RequestsLibrary</h4><p><a href="https://github.com/bulkan/robotframework-requests" target="_blank" rel="noopener">https://github.com/bulkan/robotframework-requests</a></p>
-<p><a href="http://bulkan.github.io/robotframework-requests/doc/RequestsLibrary.html" target="_blank" rel="noopener">http://bulkan.github.io/robotframework-requests/doc/RequestsLibrary.html</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -U requests</span><br><span class="line">pip install -U robotframework-requests</span><br></pre></td></tr></table></figure>
-<h3 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">robot + </span><br><span class="line">-i &lt;tag&gt;		# include tag</span><br><span class="line">-e &lt;tag&gt;		# exclude tag</span><br><span class="line">-d &lt;dir&gt;		# output dir</span><br><span class="line">-v para:value	# set env</span><br><span class="line">&lt;filename&gt;		# run selected file</span><br><span class="line">&lt;dir&gt;			# run selected suite(dir)</span><br></pre></td></tr></table></figure>
-<h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><h4 id="Logical-Operators"><a href="#Logical-Operators" class="headerlink" title="Logical Operators"></a>Logical Operators</h4><p>xxx and xxx</p>
-<p>xxx or xxx</p>
-<p>左右只留一个空格</p>
-<h4 id="Get-length"><a href="#Get-length" class="headerlink" title="Get length"></a>Get length</h4><p>取得字典和链表的大小</p>
-<h4 id="Log-to-console"><a href="#Log-to-console" class="headerlink" title="Log to console"></a>Log to console</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Log to console		message</span><br></pre></td></tr></table></figure>
-<h4 id="timeout"><a href="#timeout" class="headerlink" title="timeout"></a>timeout</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">*** Settings ***</span><br><span class="line">Test Timeout     2 minutes</span><br><span class="line"></span><br><span class="line">*** Test Cases ***</span><br><span class="line">Example</span><br><span class="line">    [Timeout]    1 minute</span><br></pre></td></tr></table></figure>
-<h4 id="Run-Keywords"><a href="#Run-Keywords" class="headerlink" title="Run Keywords"></a>Run Keywords</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Test Case1</span><br><span class="line">  [Teardown]  Run Keywords  Teardown 1  Teardown 2</span><br><span class="line">Test Case2</span><br><span class="line">  [Teardown]  Run Keywords  Teardown 1  arg1  arg2</span><br><span class="line">  ...         AND           Teardown 2  arg1</span><br></pre></td></tr></table></figure>
-<h4 id="if"><a href="#if" class="headerlink" title="if"></a>if</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;api&#125;      Set Variable If     $&#123;USE_API_IN&#125;==$&#123;true&#125;      $&#123;api_in&#125;   $&#123;api_out&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="string-concat"><a href="#string-concat" class="headerlink" title="string concat"></a>string concat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$&#123;str1&#125; =   Catenate    Hello   world   </span><br><span class="line">$&#123;str2&#125; =   Catenate    SEPARATOR=---   Hello   world</span><br><span class="line">$&#123;str3&#125; =   Catenate    SEPARATOR=  Hello   world</span><br><span class="line">=&gt;</span><br><span class="line">$&#123;str1&#125; = &apos;Hello world&apos;</span><br><span class="line">$&#123;str2&#125; = &apos;Hello---world&apos;</span><br><span class="line">$&#123;str3&#125; = &apos;Helloworld&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="configure-pycharm-robotframework"><a href="#configure-pycharm-robotframework" class="headerlink" title="configure pycharm robotframework"></a>configure pycharm robotframework</h3><p>env: MacOS 10.15</p>
-<ol>
-<li><p>install <strong>intelliBot</strong> plugin</p>
-</li>
-<li><p>goto <strong>Editor -&gt; File Types</strong> and configure file type</p>
-</li>
-<li><p>goto <strong>Tools -&gt; External Tools</strong> and add the following two configurations:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Name : Robot Run TestSuite</span><br><span class="line">Program: /usr/local/bin/robot</span><br><span class="line">Arguments: -d Results $FileName$</span><br><span class="line">Working directory : $FileDir$</span><br><span class="line"></span><br><span class="line">Name : Robot Run SelectedTestCase</span><br><span class="line">Program: /usr/local/bin/robot</span><br><span class="line">Arguments: -d Results -t &quot;$SelectedText$&quot; $FileName$</span><br><span class="line">Working directory : $FileDir$</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="To-be-continued"><a href="#To-be-continued" class="headerlink" title="To be continued"></a>To be continued</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Develop/">Develop</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/robotframework/">robotframework</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
