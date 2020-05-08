@@ -234,6 +234,482 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C-C++/C++Collection/C++线程库" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/14/C-C++/C++Collection/C++线程库/" class="article-date">
+      <time datetime="2019-03-14T07:35:04.000Z" itemprop="datePublished">2019-03-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/14/C-C++/C++Collection/C++线程库/">C++线程库</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="C-11线程库"><a href="#C-11线程库" class="headerlink" title="C++11线程库"></a>C++11线程库</h1><p>线程相关库整体上分为几大块：线程类，锁类（以及锁的管理类），条件变量类，future类</p>
+<p>锁有互斥锁、定时锁、递归锁、读写锁。</p>
+<p>本篇学习自官方文档，所以中英穿插。</p>
+<h2 id="Threads"><a href="#Threads" class="headerlink" title="Threads"></a>Threads</h2><h3 id="thread类-C-11"><a href="#thread类-C-11" class="headerlink" title="thread类(C++11)"></a>thread类(C++11)</h3><p>Defined in header <code>&lt;thread&gt;</code></p>
+<p>No two <code>std::thread</code> objects may represent the same thread of execution; <code>std::thread</code> is not <em>CopyConstructible</em> or <em>CopyAssignable</em>, although it is <em>MoveConstructible</em> and <em>MoveAssignable</em>.</p>
+<h4 id="thread-id类"><a href="#thread-id类" class="headerlink" title="thread::id类"></a>thread::id类</h4><p>The class <code>thread::id</code> is a lightweight, trivially copyable class that serves as a unique identifier of <code>std::thread</code> objects.</p>
+<p>只定义了 比较运算符 和 输出用的&lt;&lt;运算符。线程用<code>get_id()</code>可获取。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="function">thread <span class="title">t1</span><span class="params">(foo)</span></span>;</span><br><span class="line"><span class="built_in">std</span>::thread::id t1_id = t1.get_id();</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"t1's id: "</span> &lt;&lt; t1_id &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">t1.join();</span><br></pre></td></tr></table></figure>
+<h4 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Creates new thread object which does not represent a thread.</span></span><br><span class="line">thread() <span class="keyword">noexcept</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Move constructor</span></span><br><span class="line">thread( thread&amp;&amp; other ) <span class="keyword">noexcept</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//constructor 3</span></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">Function</span>, <span class="title">class</span>... <span class="title">Args</span> &gt; </span></span><br><span class="line"><span class="class"><span class="title">explicit</span> <span class="title">thread</span>( <span class="title">Function</span>&amp;&amp; <span class="title">f</span>, <span class="title">Args</span>&amp;&amp;... <span class="title">args</span> );</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//The copy constructor is deleted; threads are not copyable. </span></span><br><span class="line">thread(<span class="keyword">const</span> thread&amp;) = <span class="keyword">delete</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>//constructor 3</strong></p>
+<p>Creates new <code>std::thread</code> object and associates it with a thread of execution. The new thread of execution starts executing </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::invoke(decay_copy(<span class="built_in">std</span>::forward&lt;Function&gt;(f)), </span><br><span class="line">            decay_copy(<span class="built_in">std</span>::forward&lt;Args&gt;(args))...);</span><br></pre></td></tr></table></figure>
+<p>where <code>decay_copy</code> is defined as </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">std</span>:</span>:<span class="keyword">decay_t</span>&lt;T&gt; decay_copy(T&amp;&amp; v) &#123; <span class="keyword">return</span> <span class="built_in">std</span>::forward&lt;T&gt;(v); &#125;</span><br></pre></td></tr></table></figure>
+<p>注意，假如是按值传递对象参数，那么传递给thread的参数时第一次拷贝，decay_copy时候再拷贝一次，接下来如果线程函数的参数是引用，则不再拷贝，如果线程函数的参数是值，那么再拷贝一次。</p>
+<p>所以一共会进行2次或3次的拷贝。</p>
+<p>如果想传递引用，只能用<code>std::ref</code>。</p>
+<p><strong>example</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span> &amp;n)</span></span>&#123;&#125;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">std</span>::thread t1; <span class="comment">// t1 is not a thread</span></span><br><span class="line"><span class="built_in">std</span>::<span class="function">thread <span class="title">t2</span><span class="params">(f1, n + <span class="number">1</span>)</span></span>; <span class="comment">// pass by value</span></span><br><span class="line"><span class="built_in">std</span>::<span class="function">thread <span class="title">t3</span><span class="params">(f2, <span class="built_in">std</span>::ref(n))</span></span>; <span class="comment">// pass by reference</span></span><br></pre></td></tr></table></figure>
+<h4 id="Observers"><a href="#Observers" class="headerlink" title="Observers"></a>Observers</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">joinable</span><span class="params">()</span></span>;</span><br><span class="line"><span class="built_in">std</span>::thread::<span class="function">id <span class="title">get_id</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Returns the implementation defined underlying thread handle.</span></span><br><span class="line"><span class="function">native_handle_type <span class="title">native_handle</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//Returns the number of concurrent threads supported by the implementation. The value should be considered only a hint.</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">hardware_concurrency</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>PS:</strong></p>
+<p><strong>线程ID</strong>: 唯一标识线程</p>
+<p><strong>线程句柄</strong>: 基本上，所有操作线程的windowsAPI均使用线程句柄。每多一个句柄，线程对象就多一个引用计数，当引用计数为0时，线程对象将被系统回收。<em>一个线程对象可以有很多个句柄指向它</em>。</p>
+<h4 id="Operations"><a href="#Operations" class="headerlink" title="Operations"></a>Operations</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Blocks the current thread until the thread identified by *this finishes its execution.</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">join</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Separates the thread of execution from the thread object, allowing execution to continue independently. Any allocated resources will be freed once the thread exits.</span></span><br><span class="line"><span class="comment">//join()函数在那个thread对象上不能再被调用，因为它已经不再和一个执行的线程相关联。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">detach</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//swaps two thread objects</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">( thread&amp; other )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>去销毁一个仍然可以“joinable”的C++线程对象会被认为是一种错误。为了销毁一个C++线程对象，要么join()函数被调用（并结束），要么detach()函数被调用。<strong>如果一个C++线程对象当销毁时仍然可以被join，异常会被抛出。</strong></p>
+<p><strong>在<code>std::thread</code>的析构函数中，<code>std::terminate</code>会被调用如果线程没有join或者detach。!!!</strong></p>
+<hr>
+<p>当一个程序终止时（比如main返回），剩下的在后台的detached线程执行不会再等待；相反它们的执行会被挂起并且它们的本地线程对象会被销毁。</p>
+<p>关键地，这意味着这些线程的栈不是完好无损的，因此一些析构函数不会被执行。所以：</p>
+<ul>
+<li><p>请使用 join</p>
+</li>
+<li><p>除非你需要更灵活并且想要独立地提供一种同步机制来等待线程完成，在这种情况下你应该使用detach</p>
+</li>
+</ul>
+<h3 id="this-thread"><a href="#this-thread" class="headerlink" title="this_thread::"></a>this_thread::</h3><p>Defined in namespace <code>std::this_thread</code></p>
+<table>
+<thead>
+<tr>
+<th>yield()</th>
+<th>suggests that the implementation reschedule execution of threads</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get_id()</td>
+<td>returns the thread id of the current thread</td>
+</tr>
+<tr>
+<td>sleep_for()</td>
+<td>stops the execution of the current thread for a specified time duration</td>
+</tr>
+<tr>
+<td>sleep_until()</td>
+<td>stops the execution of the current thread until a specified time point</td>
+</tr>
+</tbody>
+</table>
+<p><strong>yield()：</strong></p>
+<p>对具体实现（<strong>译注</strong>：具体实现指的是操作系统的调度器）提出一个提醒以重新规划线程的执行，即让其他线程先运行。</p>
+<p>该方法的具体行为取决于实现，尤其是正在使用的操作系统调度器的机制以及系统的状态。比如，一个先进先出的实时调度器（Linux中的SCHED_FIFO）将会使当前线程暂停，并将其置于同优先级线程队列的末尾（如果同优先级线程队列里没有其他线程，yield就没有效果了。）</p>
+<p><strong>sleep_for()：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line">    <span class="keyword">using</span> <span class="built_in">std</span>::this_thread::sleep_for;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::chrono_literals;</span><br><span class="line">sleep_for(<span class="number">2</span>s);</span><br></pre></td></tr></table></figure>
+<h3 id="thread-local"><a href="#thread-local" class="headerlink" title="thread_local"></a>thread_local</h3><ul>
+<li>The storage for the object is allocated when the thread begins and deallocated when the thread ends. </li>
+<li>Each thread has its own instance of the object. </li>
+<li><code>thread_local</code> can appear together with <code>static</code> or <code>extern</code> to adjust linkage.</li>
+</ul>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><p><strong>多线程下的volatile</strong>   </p>
+<p>当两个线程都要用到某一个变量且该变量的值会被改变时，应该用volatile声明，该关键字的作用是防止优化编译器把变量从内存装入CPU寄存器中。</p>
+<p>如果变量被装入寄存器，那么两个线程有可能一个使用内存中的变量，一个使用寄存器中的变量，这会造成程序的错误执行。</p>
+<p>volatile的意思是<strong>让编译器每次操作该变量时一定要从内存中真正取出，而不是使用已经存在寄存器中的值</strong>。</p>
+<h2 id="Mutual-exclusion"><a href="#Mutual-exclusion" class="headerlink" title="Mutual exclusion"></a>Mutual exclusion</h2><p>有互斥锁、定时锁、递归锁、读写锁。</p>
+<h3 id="lt-mutex-gt"><a href="#lt-mutex-gt" class="headerlink" title="&lt;mutex&gt;"></a><code>&lt;mutex&gt;</code></h3><p>Defined in header <code>&lt;mutex&gt;</code></p>
+<p>Mutual exclusion algorithms prevent multiple threads from simultaneously accessing shared resources. This prevents data races and provides support for synchronization between threads.</p>
+<h4 id="mutex"><a href="#mutex" class="headerlink" title="mutex"></a>mutex</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mutex m;	<span class="comment">//construct</span></span><br><span class="line">m.lock();	<span class="comment">//locks the mutex, blocks if the mutex is not available</span></span><br><span class="line">m.unlock();	<span class="comment">//unlock</span></span><br><span class="line">m.try_lock();	<span class="comment">//tries to lock the mutex, returns true if the lock was acquired successfully, otherwise false.</span></span><br></pre></td></tr></table></figure>
+<p><strong>Notes</strong></p>
+<ul>
+<li><p>mutex is not copy-assignable </p>
+</li>
+<li><p>If <code>lock()</code> is called by a thread that already owns the <code>mutex</code>, the behavior is undefined.</p>
+</li>
+<li><p><code>std::mutex</code> is usually not accessed directly: std::unique_lock, std::lock_guard, or std::scoped_lock (since C++17) manage locking in a more exception-safe manner.</p>
+</li>
+</ul>
+<h4 id="timed-mutex"><a href="#timed-mutex" class="headerlink" title="timed_mutex"></a>timed_mutex</h4><p>多了两个方法：<code>try_lock_for</code> 和 <code>try_lock_until</code>，介绍一下前者，后者类似。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">Rep</span>, <span class="title">class</span> <span class="title">Period</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">bool</span> <span class="title">try_lock_for</span>( <span class="title">const</span> <span class="title">std</span>:</span>:chrono::duration&lt;Rep,Period&gt;&amp; timeout_duration );</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Tries to lock the mutex. Blocks until specified <code>timeout_duration</code> has elapsed or the lock is acquired, whichever comes first. On successful lock acquisition returns true, otherwise returns false. </p>
+</li>
+<li><p>If <code>timeout_duration</code> is less or equal <code>timeout_duration.zero()</code>, the function behaves like try_lock().</p>
+</li>
+</ul>
+<h4 id="recursive-mutex"><a href="#recursive-mutex" class="headerlink" title="recursive_mutex"></a>recursive_mutex</h4><p>比起 mutex，没有新增成员方法。</p>
+<p><strong>递归锁</strong>：同一个线程可以多次获得该资源锁，别的线程必须等该线程释放所有次数的锁才可以获得。</p>
+<p><strong>递归锁的作用</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">recursive_mutex mutex;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;  </span><br><span class="line">    mutex.lock();  </span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">    mutex.unlock();  </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bar</span><span class="params">()</span></span>&#123;</span><br><span class="line">    mutex.lock();</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">    foo();</span><br><span class="line">    mutex.unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>foo函数和bar函数都获取了同一个锁，而bar函数又会调用foo函数。如果MutexLock锁是个非递归锁，则这个程序会立即死锁。因此在为一段程序加锁时要格外小心，否则很容易因为这种调用关系而造成死锁。 </p>
+<p><strong>但不建议使用</strong></p>
+<p>递归锁用起来固然简单，但往往会隐藏某些代码问题。因此在能使用非递归锁的情况下，应该尽量使用非递归锁，因为死锁相对来说，更容易通过调试发现。程序设计如果有问题，应该暴露的越早越好。</p>
+<h4 id="recursive-timed-mutex"><a href="#recursive-timed-mutex" class="headerlink" title="recursive_timed_mutex"></a>recursive_timed_mutex</h4><p>顾名思义，无需解释。</p>
+<h3 id="lt-shared-mutex-gt"><a href="#lt-shared-mutex-gt" class="headerlink" title="&lt;shared_mutex&gt;"></a><code>&lt;shared_mutex&gt;</code></h3><p>即读写锁</p>
+<h4 id="shared-mutex"><a href="#shared-mutex" class="headerlink" title="shared_mutex"></a>shared_mutex</h4><p>In contrast to other mutex types which facilitate exclusive access, a shared_mutex has two levels of access:</p>
+<ul>
+<li><p><em>shared</em> - several threads can share ownership of the same mutex.</p>
+</li>
+<li><p><em>exclusive</em> - only one thread can own the mutex.</p>
+</li>
+</ul>
+<p>Shared mutexes are usually used in situations when multiple readers can access the same resource at the same time without causing data races, but only one writer can do so.</p>
+<p>分为写锁定和读锁定：</p>
+<ul>
+<li><p>Exclusive locking</p>
+<p><code>lock()</code>、<code>try_lock()</code>、<code>unlock()</code></p>
+</li>
+<li><p>Shared locking</p>
+<p><code>lock_shared()</code>、<code>try_lock_shared()</code>、<code>unlock_shared()</code></p>
+</li>
+</ul>
+<h4 id="shared-timed-mutex"><a href="#shared-timed-mutex" class="headerlink" title="shared_timed_mutex"></a>shared_timed_mutex</h4><p>类似的，加了四个方法：</p>
+<p><code>try_lock_for()</code>、<code>try_lock_until()</code></p>
+<p><code>try_lock_shared_for()</code>、<code>try_lock_shared_until()</code></p>
+<h3 id="management"><a href="#management" class="headerlink" title="management"></a>management</h3><p>Defined in header <code>&lt;mutex&gt;</code></p>
+<p>这些管理对象只有构造函数和析构函数。</p>
+<p>构造时传入mutex对象，并且试图调用静态方法<code>lock()</code>（有重载），当管理对象离开它的作用域时会被析构，析构时会调用静态方法<code>unlock()</code>。</p>
+<h4 id="lock-guard"><a href="#lock-guard" class="headerlink" title="lock_guard"></a>lock_guard</h4><p>最基本的。构造函数只能接受一个mutex。</p>
+<h4 id="scoped-lock-C-17"><a href="#scoped-lock-C-17" class="headerlink" title="scoped_lock(C++17)"></a>scoped_lock(C++17)</h4><p>deadlock-avoiding RAII wrapper for multiple mutexes.</p>
+<p>据stackoverflow上所说，<code>boost::mutex::scoped_lock</code> is a typedef for <code>boost::unique_lock&lt;boost::mutex&gt;</code>。</p>
+<p>其实就是实现RAII语义的包装类，没什么特点。</p>
+<p><em>和 lock_guard 比，它的构造函数使用了可变参数模板，可以接受多个mutex。</em></p>
+<h4 id="unique-lock"><a href="#unique-lock" class="headerlink" title="unique_lock"></a>unique_lock</h4><h4 id="shared-lock"><a href="#shared-lock" class="headerlink" title="shared_lock"></a>shared_lock</h4><p>这两个一起讲，因为它们的<em>方法名</em>都一样，比起上面两个管理器：</p>
+<ul>
+<li><p>多了<code>swap()</code> 和 <code>release()</code>，（参考智能指针）所以<em>可以移动所有权</em>。（注意，移动的时候mutex仍然是锁住的）。</p>
+</li>
+<li><p>拥有 <code>timed_mutex</code> 所拥有的所有方法名。</p>
+</li>
+<li><p>多了两个observer：</p>
+<p><code>mutex()</code> 返回指向关联的 mutex 的指针。</p>
+<p><code>owns_lock()</code> 返回bool值，表明是否拥有锁住的 mutex。</p>
+<p>该类同时还有个bool的类型转化函数，就是调用的 <code>owns_lock()</code>。</p>
+</li>
+</ul>
+<hr>
+<p>它们俩的<strong>区别</strong>，简单的说就是读写锁的读写操作：</p>
+<p>shared_lock是read lock。被锁后仍允许其他线程执行同样被shared_lock的代码。这是一般做读操作时的需要。</p>
+<p>unique_lock是write lock。被锁后不允许其他线程执行被shared_lock或unique_lock的代码。在写操作时，一般用这个，可以同时限制unique_lock的写和share_lock的读。</p>
+<hr>
+<h4 id="tag-type"><a href="#tag-type" class="headerlink" title="tag type"></a>tag type</h4><p><code>unique_lock</code> 和 <code>shared_lock</code> 的构造函数可以有第二个参数，即标签类型，代表不同的含义：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Type</strong></th>
+<th><strong>Effect(s)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>defer_lock_t</td>
+<td>do not acquire ownership of the mutex</td>
+</tr>
+<tr>
+<td>try_to_lock_t</td>
+<td>try to acquire ownership of the mutex without blocking</td>
+</tr>
+<tr>
+<td>adopt_lock_t</td>
+<td>assume the calling thread already has ownership of the mutex</td>
+</tr>
+</tbody>
+</table>
+<h3 id="call-once"><a href="#call-once" class="headerlink" title="call_once()"></a>call_once()</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">Callable</span>, <span class="title">class</span>... <span class="title">Args</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">call_once</span>( <span class="title">std</span>:</span>:once_flag&amp; flag, Callable&amp;&amp; f, Args&amp;&amp;... args );</span><br></pre></td></tr></table></figure>
+<p>Executes the <em>Callable</em> object <code>f</code> exactly once, even if called concurrently, from several threads.</p>
+<p><code>std::once_flag</code> is neither copyable nor movable.</p>
+<p> call_once保证函数 <code>f</code>只被执行一次，如果有多个线程同时执行函数<code>f</code>调用，则只有一个活动线程(active call)会执行函数，其他的线程在这个线程执行返回之前会处于”passive execution”(被动执行状态)——不会直接返回，直到活动线程对fn调用结束才返回。对于所有调用函数fn的并发线程，数据可见性都是同步的(一致的)。</p>
+<p>如果活动线程在执行 <code>f</code> 时抛出异常，则会从处于”passive execution”状态的线程中挑一个线程成为活动线程继续执行 <code>f</code>，依此类推。一旦活动线程返回，所有”passive execution”状态的线程也返回,不会成为活动线程。(实际上once_flag相当于一个锁，使用它的线程都会在上面等待，只有一个线程允许执行。如果该线程抛出异常，那么从等待中的线程中选择一个，重复上面的流程)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::once_flag flag1;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">simple_do_once</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::call_once(flag1, []()&#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Simple example: called once\n"</span>; &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">st1</span><span class="params">(simple_do_once)</span></span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">st2</span><span class="params">(simple_do_once)</span></span>;</span><br><span class="line">    st1.join();</span><br><span class="line">    st2.join();</span><br><span class="line">&#125;<span class="comment">//只输出一次</span></span><br></pre></td></tr></table></figure>
+<h2 id="condition-variable"><a href="#condition-variable" class="headerlink" title="condition_variable"></a>condition_variable</h2><p>Defined in header <code>&lt;condition_variable&gt;</code></p>
+<p>只有两个条件变量：</p>
+<ul>
+<li><code>condition_variable</code> 只能用于 <code>std::unique_lock</code></li>
+<li><code>condition_variable_any</code>：可以用于任意的锁</li>
+</ul>
+<p>只有两种方法：</p>
+<ol>
+<li><p>提醒别的线程我好了</p>
+<p><code>notify_one()</code> 和  <code>notify_all()</code></p>
+</li>
+<li><p>解开作为参数的锁并且一直阻塞直到别的线程发送提醒（或到达指定的时间），然后重新获得锁。</p>
+<p><code>wait()</code> 、 <code>wait_for()</code> 、 <code>wait_until()</code></p>
+<p>详细讲一下 <code>wait()</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">( <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt;&amp; lock )</span></span>;					<span class="comment">//1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">Predicate</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">wait</span>( <span class="title">std</span>:</span>:unique_lock&lt;<span class="built_in">std</span>::mutex&gt;&amp; lock, Predicate pred );	<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>Atomically <strong>unlocks lock</strong>, <strong>blocks the current executing thread</strong>, and <strong>adds it to the list of threads waiting on <code>*this</code></strong>. The thread will <strong>be unblocked when <code>notify_all()</code> or <code>notify_one()</code> is executed</strong>. It may also be unblocked spuriously. <strong>When unblocked, regardless of the reason, lock is reacquired and wait exits</strong>.</p>
+</li>
+<li><p>Equivalent to<code>while (!pred()) { wait(lock);}</code> </p>
+<p>所以如果 <code>pred()</code> 一开始就不为0，那根本就不用等待.</p>
+<p>This overload may <strong>be used to ignore spurious awakenings</strong> while waiting for a specific condition to become true.</p>
+<p><strong>Note that</strong> <code>lock</code> must be acquired before entering this method, and it is reacquired after </p>
+<p><code>wait(lock)</code> exits, which means that <code>lock</code> can be used to guard access to <code>pred()</code>.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>Notes：</strong></p>
+<p>Calling this function if lock.mutex() is not locked by the current thread is undefined behavior.</p>
+<p>Calling this function if lock.mutex() is not the same mutex as the one used by all other threads that are currently waiting on the same condition variable is undefined behavior.</p>
+<p>直接看例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;condition_variable&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">std</span>::mutex m;</span><br><span class="line"><span class="built_in">std</span>::condition_variable cv;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> data;</span><br><span class="line"><span class="keyword">bool</span> ready = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">bool</span> processed = <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">worker_thread</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Wait until main() sends data</span></span><br><span class="line">    <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lk(m);</span><br><span class="line">    cv.wait(lk, []&#123;<span class="keyword">return</span> ready;&#125;);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// after the wait, we own the lock.</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Worker thread is processing data\n"</span>;</span><br><span class="line">    data += <span class="string">" after processing"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Send data back to main()</span></span><br><span class="line">    processed = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Worker thread signals data processing completed\n"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Manual unlocking is done before notifying, to avoid waking up</span></span><br><span class="line">    <span class="comment">// the waiting thread only to block again (see notify_one for details)</span></span><br><span class="line">    lk.unlock();</span><br><span class="line">    cv.notify_one();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">worker</span><span class="params">(worker_thread)</span></span>;</span><br><span class="line"> </span><br><span class="line">    data = <span class="string">"Example data"</span>;</span><br><span class="line">    <span class="comment">// send data to the worker thread</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::lock_guard&lt;<span class="built_in">std</span>::mutex&gt; lk(m);</span><br><span class="line">        ready = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"main() signals data ready for processing\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cv.notify_one();</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// wait for the worker</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lk(m);</span><br><span class="line">        cv.wait(lk, []&#123;<span class="keyword">return</span> processed;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Back in main(), data = "</span> &lt;&lt; data &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"> </span><br><span class="line">    worker.join();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main() signals data ready for processing</span><br><span class="line">Worker thread is processing data</span><br><span class="line">Worker thread signals data processing completed</span><br><span class="line">Back in main(), data = Example data after processing</span><br></pre></td></tr></table></figure>
+<h3 id="cv-status"><a href="#cv-status" class="headerlink" title="cv_status"></a>cv_status</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">cv_status</span> &#123;</span></span><br><span class="line">    no_timeout,</span><br><span class="line">    timeout   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>std::cv_status</code> is used by the <code>wait_for</code> and <code>wait_until</code> methods.</p>
+<table>
+<thead>
+<tr>
+<th><code>no_timeout</code></th>
+<th>the condition variable was awakened with <code>notify_all</code>, <code>notify_one</code>, or spuriously</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>timeout</code></td>
+<td>the condition variable was awakened by timeout expiration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="notify-all-at-thread-exit"><a href="#notify-all-at-thread-exit" class="headerlink" title="notify_all_at_thread_exit"></a>notify_all_at_thread_exit</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">notify_all_at_thread_exit</span><span class="params">( <span class="built_in">std</span>::condition_variable&amp; cond,</span></span></span><br><span class="line"><span class="function"><span class="params">                                <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lk )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>It provides a mechanism to notify other threads that a given thread has completely finished, including destroying all <code>thread_local</code> objects. <strong>It operates as follows:</strong></p>
+<ol>
+<li>destroy thread_locals;</li>
+<li>unlock mutex;</li>
+<li>notify cv.</li>
+</ol>
+<ul>
+<li><p>Ownership of the previously acquired lock <code>lk</code> is transferred to internal storage.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::notify_all_at_thread_exit(cv, <span class="built_in">std</span>::move(lk));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The execution environment is modified such that when the current thread exits, the condition variable <code>cond</code> is notified as if by:</p>
+<ul>
+<li>lk.unlock();</li>
+<li>cond.notify_all();</li>
+</ul>
+</li>
+</ul>
+<p>An equivalent effect may be achieved with the facilities provided by std::promise or std::packaged_task.</p>
+<h2 id="Futures"><a href="#Futures" class="headerlink" title="Futures"></a>Futures</h2><p>Defined in header <code>&lt;future&gt;</code></p>
+<hr>
+<p>这个库提供异步任务（比如函数被分发到不同的线程）的返回值获取和异常捕获。</p>
+<p>The standard library provides facilities to obtain values that are returned and to catch exceptions that are thrown by asynchronous tasks (i.e. functions launched in separate threads). These values are communicated in a <em>shared state</em>, in which the asynchronous task may write its return value or store an exception, and which may be examined, waited for, and otherwise manipulated by other threads that hold instances of <code>std::future</code> or <code>std::shared_future</code> that reference that shared state.</p>
+<hr>
+<h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><p><img src="http://118.25.53.128/Picture/C_C++/promise01.png" alt="promise01"></p>
+<p><strong>来个直观的例子</strong>：</p>
+<p>This example shows how <code>promise&lt;int&gt;</code> can be used as signals between threads.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">accumulate</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator first,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator last,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="built_in">std</span>::promise&lt;<span class="keyword">int</span>&gt; accumulate_promise)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="built_in">std</span>::accumulate(first, last, <span class="number">0</span>);</span><br><span class="line">    accumulate_promise.set_value(sum);  <span class="comment">// Notify future</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_work</span><span class="params">(<span class="built_in">std</span>::promise&lt;<span class="keyword">void</span>&gt; barrier)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::this_thread::sleep_for(<span class="built_in">std</span>::chrono::seconds(<span class="number">1</span>));</span><br><span class="line">    barrier.set_value();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Demonstrate using promise&lt;int&gt; to transmit a result between threads.</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; numbers = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> &#125;;</span><br><span class="line">    <span class="built_in">std</span>::promise&lt;<span class="keyword">int</span>&gt; accumulate_promise;</span><br><span class="line">    <span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt; accumulate_future = accumulate_promise.get_future();</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">work_thread</span><span class="params">(accumulate, numbers.begin(), numbers.end(),</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="built_in">std</span>::move(accumulate_promise))</span></span>;</span><br><span class="line">    accumulate_future.wait();  <span class="comment">// wait for result</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"result="</span> &lt;&lt; accumulate_future.get() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    work_thread.join();  <span class="comment">// wait for thread completion</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Demonstrate using promise&lt;void&gt; to signal state between threads.</span></span><br><span class="line">    <span class="built_in">std</span>::promise&lt;<span class="keyword">void</span>&gt; barrier;</span><br><span class="line">    <span class="built_in">std</span>::future&lt;<span class="keyword">void</span>&gt; barrier_future = barrier.get_future();</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">new_work_thread</span><span class="params">(do_work, <span class="built_in">std</span>::move(barrier))</span></span>;</span><br><span class="line">    barrier_future.wait();</span><br><span class="line">    new_work_thread.join();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="future"><a href="#future" class="headerlink" title="future"></a>future</h3><p>std::future 可以用来获取异步任务的结果，因此可以把它当成一种简单的线程间同步的手段。std::future 通常由某个 Provider 创建，你可以把 Provider 想象成一个异步任务的提供者，Provider 在某个线程中设置共享状态的值，与该共享状态相关联的 std::future 对象调用 get（通常在另外一个线程中） 获取该值，如果共享状态的标志不为 ready，则调用 std::future::get 会阻塞当前的调用者，直到 Provider 设置了共享状态的值（此时共享状态的标志变为 ready），std::future::get 返回异步任务的值或异常（如果发生了异常）。</p>
+<p>一个有效(valid)的 std::future 对象通常由以下三种 Provider 创建，并和某个共享状态相关联。Provider 可以是函数或者类，其实我们前面都已经提到了，他们分别是：</p>
+<ul>
+<li>std::async 函数。</li>
+<li>std::promise::get_future，get_future 为 promise 类的成员函数。</li>
+<li>std::packaged_task::get_future，此时 get_future为 packaged_task 的成员函数。</li>
+</ul>
+<p>一个 std::future 对象只有在有效(valid)的情况下才有用(useful)，由 std::future 默认构造函数创建的 future 对象不是有效的（除非当前非有效的 future 对象被 move 赋值另一个有效的 future 对象）。</p>
+<p>在一个有效的 future 对象上调用 get 会阻塞当前的调用者，直到 Provider 设置了共享状态的值或异常（此时共享状态的标志变为 ready），std::future::get 将返回异步任务的值或异常（如果发生了异常）。</p>
+<hr>
+<p><strong>Member Function</strong></p>
+<ul>
+<li><p><code>share()</code></p>
+<p>返回一个 std::shared_future 对象（本文后续内容将介绍 std::shared_future ），调用该函数之后，该 std::future 对象本身已经不和任何共享状态相关联，因此该 std::future 的状态不再是 valid 的了。</p>
+</li>
+<li><p><code>get()</code>  get 返回 Provider 所设置的共享状态的值或者异常。如果共享状态的标志不为 ready，则调用该函数会阻塞当前的调用者，而此后一旦共享状态的标志变为 ready，get 返回。</p>
+</li>
+<li><p><code>valid()</code>  检查当前的 std::future 对象是否有效，即是否与某个共享状态相关联。</p>
+</li>
+<li><p><code>wait()</code>  等待与当前std::future 对象相关联的共享状态的标志变为 ready.</p>
+</li>
+<li><p><code>wait_for()</code>  时间点过后如果没ready，则直接阻塞当前线程。</p>
+</li>
+<li><p><code>wait_until()</code></p>
+</li>
+</ul>
+<h4 id="shared-future"><a href="#shared-future" class="headerlink" title="shared_future"></a>shared_future</h4><p>std::shared_future 与 std::future 类似，但是 std::shared_future 可以拷贝、多个 std::shared_future 可以共享某个共享状态的最终结果(即共享状态的某个值或者异常)。shared_future 可以通过某个 std::future 对象隐式转换（构造函数），或者通过 std::future::share() 显示转换，无论哪种转换，被转换的那个 std::future 对象都会变为 not-valid.</p>
+<p>成员函数和 std::future 基本相同。</p>
+<h4 id="future-error"><a href="#future-error" class="headerlink" title="future_error"></a>future_error</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">future_error</span> :</span> <span class="keyword">public</span> logic_error;</span><br></pre></td></tr></table></figure>
+<h4 id="future-errc"><a href="#future-errc" class="headerlink" title="future_errc"></a>future_errc</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">future_errc</span> &#123;</span></span><br><span class="line">    broken_promise             = <span class="comment">/* implementation-defined */</span>,</span><br><span class="line">    future_already_retrieved   = <span class="comment">/* implementation-defined */</span>,</span><br><span class="line">    promise_already_satisfied  = <span class="comment">/* implementation-defined */</span>,</span><br><span class="line">    no_state                   = <span class="comment">/* implementation-defined */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="future-status"><a href="#future-status" class="headerlink" title="future_status"></a>future_status</h4><p>Specifies state of a future as returned by <code>wait_for</code> and <code>wait_until</code> functions of std::future and std::shared_future.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">future_status</span> &#123;</span></span><br><span class="line">    ready,</span><br><span class="line">    timeout,</span><br><span class="line">    deferred</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deferred</code></td>
+<td>the shared state contains a deferred function, so the result will be computed only when explicitly requested</td>
+</tr>
+<tr>
+<td><code>ready</code></td>
+<td>the shared state is ready</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>the shared state did not become ready before specified timeout duration has passed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">R</span> &gt; <span class="title">class</span> <span class="title">promise</span>;</span></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">R</span> &gt; <span class="title">class</span> <span class="title">promise</span>&lt;R&amp;&gt;;</span></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;          <span class="class"><span class="keyword">class</span> <span class="title">promise</span>&lt;void&gt;;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>base template</li>
+<li>non-void specialization, used to communicate objects between threads</li>
+<li>void specialization, used to communicate stateless events</li>
+</ol>
+<hr>
+<p><strong>Member functions</strong></p>
+<table>
+<thead>
+<tr>
+<th>functions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>operator=</td>
+<td>只有移动赋值，没有拷贝赋值。First, abandons the shared state (as in ~promise()), then assigns the shared state of <code>other</code> as if by executing <code>std::promise(std::move(other)).swap(*this)</code>.</td>
+</tr>
+<tr>
+<td>swap</td>
+<td>swaps two promise objects</td>
+</tr>
+<tr>
+<td>get_future</td>
+<td>returns a <code>future</code> associated with the promised result</td>
+</tr>
+<tr>
+<td>set_value</td>
+<td>sets the result to specific value</td>
+</tr>
+<tr>
+<td>set_value_at_thread_exit</td>
+<td>sets only at thread exit</td>
+</tr>
+<tr>
+<td>set_exception( p )</td>
+<td>p is exception pointer to store. The behavior is undefined if <code>p</code> is null.</td>
+</tr>
+<tr>
+<td>set_exception_at_thread_exit</td>
+<td>sets only at thread exit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>set_exception的例子</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::promise&lt;<span class="keyword">int</span>&gt; p;</span><br><span class="line">    <span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt; f = p.get_future();</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">t</span><span class="params">([&amp;p]&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">try</span> &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="comment">// code that may throw</span></span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">throw</span> <span class="built_in">std</span>::runtime_error(<span class="string">"Example"</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">        &#125; <span class="keyword">catch</span>(...) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">try</span> &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="comment">// store anything thrown in the promise</span></span></span></span><br><span class="line"><span class="function"><span class="params">                p.set_exception(<span class="built_in">std</span>::current_exception());</span></span></span><br><span class="line"><span class="function"><span class="params">            &#125; <span class="keyword">catch</span>(...) &#123;&#125; <span class="comment">// set_exception() may throw too</span></span></span></span><br><span class="line"><span class="function"><span class="params">        &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; f.get();</span><br><span class="line">    &#125; <span class="keyword">catch</span>(<span class="keyword">const</span> <span class="built_in">std</span>::exception&amp; e) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Exception from the thread: "</span> &lt;&lt; e.what() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    t.join();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="packaged-task"><a href="#packaged-task" class="headerlink" title="packaged_task"></a>packaged_task</h3><p>std::packaged_task 包装一个可调用的对象，并且允许异步获取该可调用对象产生的结果，从包装可调用对象意义上来讲，std::packaged_task 与 std::function 类似（可参照），只不过 std::packaged_task 将其包装的可调用对象的执行结果传递给一个 std::future 对象（该对象通常在另外一个线程中获取 std::packaged_task 任务的执行结果）。</p>
+<p>std::packaged_task 对象内部包含了两个最基本元素：</p>
+<ol>
+<li>被包装的任务(stored task)，任务(task)是一个可调用的对象，如函数指针、成员函数指针或者函数对象，</li>
+<li>共享状态(shared state)，用于保存任务的返回值，可以通过 std::future 对象来达到异步访问共享状态的效果。</li>
+</ol>
+<p><strong>构造函数：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">R</span>, <span class="title">class</span> ...<span class="title">Args</span> &gt; </span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">packaged_task</span>&lt;R(Args...)&gt;;</span></span><br></pre></td></tr></table></figure>
+<p><strong>成员方法：</strong></p>
+<ul>
+<li><p><code>valid()</code>  checks if the task object has a valid function.</p>
+</li>
+<li><p><code>swap()</code></p>
+</li>
+<li><p><code>get_future()</code>  returns a <code>std::future</code> associated with the promised result </p>
+</li>
+<li><p><code>void operator()( ArgTypes... args );</code></p>
+<p>Calls the stored task with <code>args</code> as the arguments. The return value of the task or any exceptions thrown are stored in the shared state. The shared state is made ready and any threads waiting for this are unblocked.</p>
+</li>
+<li><p><code>void make_ready_at_thread_exit( ArgTypes... args );</code></p>
+<p>和 <code>operator()</code> 一样，但是 The shared state is only made ready after the current thread exits and all objects of <em>thread local</em> storage duration are destroyed.</p>
+</li>
+<li><p><code>reset()</code>  </p>
+<p>Resets the state abandoning the results of previous executions. New shared state is constructed.</p>
+<p>Equivalent to <code>*this = packaged_task(std::move(f))</code>, where <code>f</code> is the stored task.</p>
+</li>
+</ul>
+<p><strong>例子：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// unique function to avoid disambiguating the std::pow overload set</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">std</span>::<span class="built_in">pow</span>(x,y); &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">task_lambda</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::packaged_task&lt;<span class="keyword">int</span>(<span class="keyword">int</span>,<span class="keyword">int</span>)&gt; task([](<span class="keyword">int</span> a, <span class="keyword">int</span> b) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">std</span>::<span class="built_in">pow</span>(a, b); </span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt; result = task.get_future();</span><br><span class="line"> </span><br><span class="line">    task(<span class="number">2</span>, <span class="number">9</span>);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"task_lambda:\t"</span> &lt;&lt; result.get() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">task_bind</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::packaged_task&lt;<span class="keyword">int</span>()&gt; task(<span class="built_in">std</span>::bind(f, <span class="number">2</span>, <span class="number">11</span>));</span><br><span class="line">    <span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt; result = task.get_future();</span><br><span class="line"> </span><br><span class="line">    task();</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"task_bind:\t"</span> &lt;&lt; result.get() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">task_thread</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::packaged_task&lt;<span class="keyword">int</span>(<span class="keyword">int</span>,<span class="keyword">int</span>)&gt; task(f);</span><br><span class="line">    <span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt; result = task.get_future();</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">task_td</span><span class="params">(<span class="built_in">std</span>::move(task), <span class="number">2</span>, <span class="number">10</span>)</span></span>;</span><br><span class="line">    task_td.join();</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"task_thread:\t"</span> &lt;&lt; result.get() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    task_lambda();</span><br><span class="line">    task_bind();</span><br><span class="line">    task_thread();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><p>大致上有两类函数原型（省略模板声明部分）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="function">future <span class="title">async</span><span class="params">( Function&amp;&amp; f, Args&amp;&amp;... args )</span></span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="function">future <span class="title">async</span><span class="params">( <span class="built_in">std</span>::launch policy, Function&amp;&amp; f, Args&amp;&amp;... args )</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>std::async() 的 fn 和 args 参数用来指定异步任务及其参数。另外，std::async() 返回一个 std::future 对象，通过该对象可以获取异步任务的值或异常（如果异步任务抛出了异常）。</p>
+</li>
+<li><p>第二类函数指定了启动策略。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>std::launch::async</td>
+<td>a new thread is launched to execute the task asynchronously</td>
+</tr>
+<tr>
+<td>std::launch::deferred</td>
+<td>the task is executed on the calling thread the first time its result is requested (lazy evaluation)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>例子：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> RandomIt&gt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">parallel_sum</span><span class="params">(RandomIt beg, RandomIt end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> len = end - beg;</span><br><span class="line">    <span class="keyword">if</span> (len &lt; <span class="number">1000</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">std</span>::accumulate(beg, end, <span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">    RandomIt mid = beg + len/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">auto</span> handle = <span class="built_in">std</span>::async(<span class="built_in">std</span>::launch::async,</span><br><span class="line">                             parallel_sum&lt;RandomIt&gt;, mid, end);</span><br><span class="line">    <span class="keyword">int</span> sum = parallel_sum(beg, mid);</span><br><span class="line">    <span class="keyword">return</span> sum + handle.get();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(<span class="number">10000</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The sum is "</span> &lt;&lt; parallel_sum(v.begin(), v.end()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="fin"><a href="#fin" class="headerlink" title="fin"></a>fin</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C-C++/C++Collection/C++chrono时间库" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -900,74 +1376,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C-C++/Mess/C++运算符优先级" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/08/C-C++/Mess/C++运算符优先级/" class="article-date">
-      <time datetime="2019-03-08T12:41:09.000Z" itemprop="datePublished">2019-03-08</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/08/C-C++/Mess/C++运算符优先级/">C运算符优先级</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="初单算移关-位逻条赋逗"><a href="#初单算移关-位逻条赋逗" class="headerlink" title="初单算移关,位逻条赋逗!"></a>初单算移关,位逻条赋逗!</h2>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/08/C-C++/Mess/C++运算符优先级/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

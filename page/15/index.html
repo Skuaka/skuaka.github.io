@@ -234,6 +234,84 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/SQLserver/mssql实验(放弃更新)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/18/Database/SQLserver/mssql实验(放弃更新)/" class="article-date">
+      <time datetime="2018-10-18T09:12:06.000Z" itemprop="datePublished">2018-10-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/18/Database/SQLserver/mssql实验(放弃更新)/">mssql实验(放弃更新)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="一：SQL-定义子语句"><a href="#一：SQL-定义子语句" class="headerlink" title="一：SQL 定义子语句"></a>一：SQL 定义子语句</h3><h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">create database pay </span><br><span class="line">	on (</span><br><span class="line">		name = pay1, </span><br><span class="line">		filename = &apos;c:\myTestSQL\paydata1.mdf&apos;,</span><br><span class="line">		size = 10,</span><br><span class="line">		maxsize = 100,</span><br><span class="line">		filegrowth = 5%)</span><br><span class="line">	log on (</span><br><span class="line">		name = pay3,</span><br><span class="line">		filename = &apos;c:\myTestSQL\paylog.ldf&apos;,</span><br><span class="line">		size = 5,</span><br><span class="line">		maxsize = 25,</span><br><span class="line">		filegrowth = 10)</span><br></pre></td></tr></table></figure>
+<h4 id="修改数据库"><a href="#修改数据库" class="headerlink" title="修改数据库"></a>修改数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">alter database pay</span><br><span class="line">	add file (name = pay2,</span><br><span class="line">				filename = &apos;c:\myTestSQL\paydata2.ndf&apos;,</span><br><span class="line">				size = 5,</span><br><span class="line">				maxsize = 20,</span><br><span class="line">				filegrowth = 2)</span><br></pre></td></tr></table></figure>
+<h5 id="注：mdf-和-ndf-和-ldf-文件"><a href="#注：mdf-和-ndf-和-ldf-文件" class="headerlink" title="注：mdf 和 ndf 和 ldf 文件"></a>注：mdf 和 ndf 和 ldf 文件</h5><p>mdf是 primary data file 的缩写<br>ndf是Secondary data files的缩写<br>并不是取的单词的首字母。</p>
+<p>SQL Server 2000 数据库有三种类型的文件： </p>
+<p><strong>主要</strong><br>主要数据文件包含数据库的启动信息，并指向数据库中的其他文件。用户数据和对象可存储在此文件中，也可以存储在次要数据文件中。每个数据库有一个主要数据文件。主要数据文件的建议文件扩展名是 .mdf。 </p>
+<p><strong>次要</strong><br>次要数据文件是可选的，由用户定义并存储用户数据。通过将每个文件放在不同的<a href="https://www.baidu.com/s?wd=%E7%A3%81%E7%9B%98%E9%A9%B1%E5%8A%A8%E5%99%A8&amp;tn=SE_PcZhidaonwhc_ngpagmjz&amp;rsv_dl=gh_pc_zhidao" target="_blank" rel="noopener">磁盘驱动器</a>上，次要文件可用于将数据分散到多个磁盘上。另外，如果数据库超过了单个 Windows 文件的最大大小，可以使用次要数据文件，这样数据库就能继续增长。</p>
+<p>次要数据文件的建议文件扩展名是 .ndf。</p>
+<p><strong>事务日志</strong><br>事务日志文件保存用于恢复数据库的日志信息。每个数据库必须至少有一个日志文件。事务日志的建议文件扩展名是 .ldf。</p>
+<h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">use pay</span><br><span class="line">create table pay.dbo.person(</span><br><span class="line">	No char(6) not null,</span><br><span class="line">	Name char(10) not null,</span><br><span class="line">	Sex char(2) not null,</span><br><span class="line">	Birthday datetime null,</span><br><span class="line">	Professor varchar(12) null,</span><br><span class="line">	DeptNo varchar(10) not null)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use pay</span><br><span class="line">create table pay.dbo.pay(</span><br><span class="line">	No char(6) not null,</span><br><span class="line">	Year int not null,</span><br><span class="line">	Month int not null,</span><br><span class="line">	Base dec(5,1) null,</span><br><span class="line">	Bonus dec(5,1) null,</span><br><span class="line">	Deduct dec(5,1) null,</span><br><span class="line">	Fact dec(5,1) null)</span><br></pre></td></tr></table></figure>
+<h4 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create [unique] [clustered] index sort_name on person(name)</span><br></pre></td></tr></table></figure>
+<h4 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop index pay.sort_no</span><br></pre></td></tr></table></figure>
+<h3 id="二：SQL-查询语言"><a href="#二：SQL-查询语言" class="headerlink" title="二：SQL 查询语言"></a>二：SQL 查询语言</h3><p>条件查询</p>
+<p>嵌套查询</p>
+<h4 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create view dbo.view_pay(Year,Month,No,Name,Sex,Professor,DeptNo,Base,Bonus,Deduct,Fact)</span><br><span class="line">AS</span><br><span class="line">	select pay.Year,pay.Month,person.No,person.Name,person.Sex,person.Professor,person.DeptNo,</span><br><span class="line">			pay.Base,pay.Bonus,pay.Deduct,pay.Fact</span><br><span class="line">		from dbo.person,dbo.pay where pay.No = person.No</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/SQLserver/">SQLserver</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQLserver/">SQLserver</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/Mysql/mysql-基本命令" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1271,94 +1349,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Database/PostgreSQL/Linux 下 PostgreSQL" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/14/Database/PostgreSQL/Linux 下 PostgreSQL/" class="article-date">
-      <time datetime="2018-08-14T07:25:06.000Z" itemprop="datePublished">2018-08-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/14/Database/PostgreSQL/Linux 下 PostgreSQL/">Linux 下 PostgreSQL 配置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>yum install postgresql postgresql-server</code></p>
-<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /var/lib/pgsql/data      //创建pgsql的数据库目录  </span><br><span class="line">cd /var/lib/pgsql  </span><br><span class="line">chown postgres.postgres data     //改变目录的所属用户用组  </span><br><span class="line">su  postgres                     //切换到postgres，不然初始化不了  </span><br><span class="line">bash-3.2$ initdb -E UTF-8 -D /var/lib/pgsql/data --locale=en_US.UTF-8 -U postgres -W   //初始化数据库</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">Enter new superuser password:     //超级管理员密码  </span><br><span class="line">Enter it again:                   //确认密码</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
-<h3 id="远程连接配置"><a href="#远程连接配置" class="headerlink" title="远程连接配置"></a>远程连接配置</h3><p><strong>修改/var/lib/pgsql/data/postgresql.conf</strong></p>
-<p><code>listen_addresses = &#39;*&#39;     //监听所有ip的连接，默认是本机</code></p>
-<p><strong>修改/var/lib/pgsql/data/pg_hba.conf</strong></p>
-<p><code>host    all         all         0.0.0.0/0             md5   //添加这行，允许所有IP登入</code></p>
-<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su  postgres</span><br><span class="line">pg_ctl start/stop/restart -D /var/lib/pgsql/data</span><br><span class="line">netstat -tpnl |grep 5432       //查看端口状态</span><br></pre></td></tr></table></figure>
-<h3 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">su postgres</span><br><span class="line">psql</span><br><span class="line">postgres=# Alter USER postgres WITH PASSWORD &apos;***密码**&apos;;  //添加密码  </span><br><span class="line">ALTER ROLE        //表示修改成功</span><br><span class="line">postgres=# \q</span><br></pre></td></tr></table></figure>
-<h3 id="openssl加密-可选"><a href="#openssl加密-可选" class="headerlink" title="openssl加密(可选)"></a>openssl加密(可选)</h3><p>转自：<a href="https://my.oschina.net/tianbing/blog/744826" target="_blank" rel="noopener">https://my.oschina.net/tianbing/blog/744826</a></p>
-<ol>
-<li>利用openssl生成私钥和证书，可以写成一个shell脚本来实现。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">#/C -- Country Name</span><br><span class="line">#/ST -- Province Name</span><br><span class="line">#/L -- Locality Name (eg, city)</span><br><span class="line">#/O -- Organization Name (eg, company)</span><br><span class="line">#/CN -- Common Name (eg, your name or your server&apos;s hostname):</span><br><span class="line"></span><br><span class="line">PGDATA=/var/lib/pgsql/data</span><br><span class="line">LOGNAME=postgres</span><br><span class="line"></span><br><span class="line">openssl req -nodes -new -text -subj &quot;/C=CH/ST=Shandong/L=Jinan/O=HighGo/CN=tbing&quot; -out server.req</span><br><span class="line">openssl rsa -in privkey.pem -out $PGDATA/server.key</span><br><span class="line">rm privkey.pem</span><br><span class="line">openssl req -x509 -in server.req -text -key $PGDATA/server.key -out $PGDATA/server.crt</span><br><span class="line">rm server.req</span><br><span class="line"></span><br><span class="line">chown -R $LOGNAME $PGDATA/server.key $PGDATA/server.crt</span><br><span class="line">chmod 600 $PGDATA/server.key</span><br></pre></td></tr></table></figure>
-<p>在执行脚本文件前，注意定义好data目录的环境变量。执行脚本后就会发现在data目录下生成两个文件：私钥server.key和证书server.crt。在shell脚本中需要对这两个密钥修改一下权限，否则数据库起动不了。</p>
-<ol start="2">
-<li>修改postgresql.conf配置文件，打开ssl连接。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ssl = on                                # (change requires restart)</span><br><span class="line">ssl_ciphers = &apos;HIGH:MEDIUM:+3DES:!aNULL&apos; # allowed SSL ciphers</span><br><span class="line">                                        # (change requires restart)</span><br><span class="line">ssl_prefer_server_ciphers = on          # (change requires restart)</span><br><span class="line">ssl_ecdh_curve = &apos;prime256v1&apos;           # (change requires restart)</span><br><span class="line">ssl_cert_file = &apos;server.crt&apos;            # (change requires restart)</span><br><span class="line">ssl_key_file = &apos;server.key&apos;             # (change requires restart)</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>修改pg_hba.conf配置文件，以hostssl方式连接。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostssl    all             all             0.0.0.0/0            md5</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>重启数据库，使配置生效。</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
     </div>
 
       

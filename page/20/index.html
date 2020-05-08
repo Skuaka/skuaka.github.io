@@ -234,6 +234,263 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Linux/Programming/Shell入门杂记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/13/Linux/Programming/Shell入门杂记/" class="article-date">
+      <time datetime="2018-01-13T13:25:31.000Z" itemprop="datePublished">2018-01-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/13/Linux/Programming/Shell入门杂记/">Shell入门杂记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Shell入门杂记"><a href="#Shell入门杂记" class="headerlink" title="Shell入门杂记"></a>Shell入门杂记</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h4 id="标准shell——bash"><a href="#标准shell——bash" class="headerlink" title="标准shell——bash"></a>标准shell——bash</h4><p>​    在Linux中，总是作为/bin/sh安装的标准shell是GNU工具集中的bash，它是开源的并且可以被移植到几乎所有的类unix系统上。</p>
+<p>​    在大多数Linux发行版中，默认的shell程序/bin/sh实际上是对程序/bin/bash的一个连接。</p>
+<p>​    可以使用如下命令来查看bash的版本号</p>
+<p><code>$/bin/bash --version</code></p>
+<h4 id="切换shell"><a href="#切换shell" class="headerlink" title="切换shell"></a>切换shell</h4><p>​    只需要直接执行需要的shell程序，例如<code>/bin/bash</code>，就能够运行新的shell并且改变命令提示符了。</p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><h4 id="创建脚本"><a href="#创建脚本" class="headerlink" title="创建脚本"></a>创建脚本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bash/sh</span></span><br><span class="line"><span class="comment"># 脚本名字为skuaka</span></span><br><span class="line"></span><br><span class="line">命令</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p>​    <code>#!</code>字符告诉系统同一行上<strong>紧跟</strong>在它后面的那个参数是用来执行本文件的程序。</p>
+<p>​    <code>#</code>字符后面的整行为注释</p>
+<p>​    <code>exit</code>命令的作用是确保脚本程序能够返回一个有意义的退出码，以供其他脚本调用。0表示运行成功。</p>
+<p>​    查看一个文件是否是脚本的最好方法是使用file命令<code>file skuaka</code></p>
+<h4 id="执行脚本"><a href="#执行脚本" class="headerlink" title="执行脚本"></a>执行脚本</h4><p>两种方法：</p>
+<ol>
+<li><p>调用shell，把脚本文件名当做参数<code>$ /bin/sh skuaka</code></p>
+</li>
+<li><p>把脚本当做可执行文件<code>$ chmod +x skuaka</code></p>
+<p>如果skuaka在当前目录，则用<code>./skuaka</code>调用脚本（推荐习惯）</p>
+<p>如果想直接用<code>skuaka</code>调用脚本，修改环境变量(不推荐，有安全隐患)。</p>
+</li>
+</ol>
+<h5 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h5><p>​    输入<code>PATH=$PATH:.</code>或者编辑<code>.bash_profile</code>文件，把前者添加到文件末尾，然后重新登入。</p>
+<p>如果这个命令只供你本人使用，可以在自己的家目录中创建一个bin目录，并且将这个目录添加到自己的PATH变量中。</p>
+<p>如果想让别人使用，可以将程序存放到/usr/local/bin或其他系统目录。</p>
+<p>为了防止其他用户修改程序，应该去掉脚本程序的写权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp  skuaka /usr/<span class="built_in">local</span>/bin</span><br><span class="line">chown root /usr/<span class="built_in">local</span>/bin/skuaka</span><br><span class="line">chgrp root /usr/<span class="built_in">local</span>/bin/skuaka</span><br><span class="line">chmod 755  /usr/<span class="built_in">local</span>/bin/skuaka</span><br></pre></td></tr></table></figure>
+<h3 id="shell语法"><a href="#shell语法" class="headerlink" title="shell语法"></a>shell语法</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><ul>
+<li>变量不需要声明，使用它们的时候自动创建。</li>
+<li>默认情况下，所有变量都被看做字符串并且以字符串来储存，即使被赋值为数字时也是如此。</li>
+<li>在变量名前面加一个$来访问它储存的内容</li>
+<li>为变量赋值时<strong>等号两边不能有空格</strong>。</li>
+<li>read命令读取用户的输入为变量a赋值<code>read a</code></li>
+<li>使用双引号将<strong>包含空白字符的参数</strong>引起来。</li>
+<li>双引号中的<code>$</code>变量在运行时会被替换为值，通过在<code>$</code>前面加上<code>\</code>字符以取消它的特殊含义。</li>
+<li>单引号中不会发生替换现象</li>
+</ul>
+<h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$HOME</span>	<span class="comment">#当前用户的家目录</span></span><br><span class="line"><span class="variable">$PATH</span>	<span class="comment">#以冒号分隔的用来搜索命令的目录列表</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$PS1</span>	<span class="comment">#命令提示符，通常为$</span></span><br><span class="line"><span class="variable">$PS2</span>	<span class="comment">#二级提示符，通常为&gt;</span></span><br><span class="line"><span class="variable">$IFS</span>	<span class="comment">#输入域分隔符，读取输入时用来分隔单词的一组字符，它们通常是空格、制表符和换行符</span></span><br><span class="line"></span><br><span class="line">$$		<span class="comment">#shell脚本的进程号</span></span><br><span class="line">$?		<span class="comment">#前一个命令的退出码</span></span><br></pre></td></tr></table></figure>
+<h5 id="参数变量"><a href="#参数变量" class="headerlink" title="参数变量"></a>参数变量</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$#</span>				<span class="comment">#传递给脚本的参数个数</span></span><br><span class="line"><span class="variable">$0</span>				<span class="comment">#shell脚本的名字</span></span><br><span class="line"><span class="variable">$1</span>,<span class="variable">$2</span>,...	<span class="comment">#脚本程序的参数</span></span><br><span class="line"></span><br><span class="line">$*				<span class="comment">#在一个变量中列出所有参数，用IFS中的第一个字符分隔</span></span><br><span class="line"><span class="variable">$@</span>				<span class="comment">#$*的变体，不使用IFS变量，所以即使IFS为空，参数也不会挤在一起</span></span><br></pre></td></tr></table></figure>
+<h4 id="通配符扩展"><a href="#通配符扩展" class="headerlink" title="通配符扩展"></a>通配符扩展</h4><p><code>*</code>匹配一个字符串</p>
+<p><code>?</code>匹配单个字符</p>
+<p><code>[set]</code>匹配方括号中任意一个单字符</p>
+<p><code>[^set]</code>匹配没有出现在方括号中的单字符</p>
+<p><code>{str1,str2}</code>匹配字符串组（只能用在部分shell，其中包括bash）</p>
+<h4 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h4><h5 id="if-test"><a href="#if-test" class="headerlink" title="if/test"></a>if/test</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> condition	<span class="comment">#可以用[]替换test</span></span><br><span class="line"><span class="comment">#if [ condition ]   # [ 的左右要有空格</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">statement1</span><br><span class="line"><span class="keyword">elif</span></span><br><span class="line">statement2</span><br><span class="line"><span class="keyword">elif</span></span><br><span class="line">statement3</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">statement4</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>test命令可以使用的条件类型可以归为3类：</p>
+<ol>
+<li><p>字符串比较</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运算符两边必须要有空格</span></span><br><span class="line">string1 = string2		<span class="comment">#相等</span></span><br><span class="line">string1 != string2		<span class="comment">#不相等</span></span><br><span class="line">-n string				<span class="comment">#字符串不为空</span></span><br><span class="line">-z string				<span class="comment">#字符串为空</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>算数比较</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">exp1 -eq exp2		<span class="comment">#相等</span></span><br><span class="line">exp1 -ne exp2		<span class="comment">#不相等</span></span><br><span class="line">exp1 -gt exp2		<span class="comment">#大于</span></span><br><span class="line">exp1 -ge exp2		<span class="comment">#大于等于</span></span><br><span class="line">exp1 -lt exp2		<span class="comment">#小于</span></span><br><span class="line">exp1 -le exp2		<span class="comment">#小于等于</span></span><br><span class="line">!exp				<span class="comment">#表达式为假</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件条件测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-d file		<span class="comment">#是目录</span></span><br><span class="line">-e file		<span class="comment">#和-f相似，历史上-e不可移植，所以常用的是-f选项</span></span><br><span class="line">-f file		<span class="comment">#是普通文件</span></span><br><span class="line">-g file		<span class="comment">#gid被设置</span></span><br><span class="line">-r file		<span class="comment">#可读</span></span><br><span class="line">-s file		<span class="comment">#大小不为0</span></span><br><span class="line">-u file		<span class="comment">#uid被设置</span></span><br><span class="line">-w file		<span class="comment">#可写</span></span><br><span class="line">-x file		<span class="comment">#可执行</span></span><br></pre></td></tr></table></figure>
+<p>注：gid和uid只对可执行的二进制文件有用，对shell脚本不起作用。</p>
+</li>
+<li><p>逻辑测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!</span><br><span class="line">-a &amp;&amp;</span><br><span class="line">-o ||</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>语句块</p>
+<p>如果要在只允许单语句的地方（比如在AND或OR列表中）使用多条语句，可以把多条语句括在花括号中<code>{ }</code>来构造一个语句块。</p>
+<h5 id="for-while-until"><a href="#for-while-until" class="headerlink" title="for/while/until"></a>for/while/until</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> variable <span class="keyword">in</span> values</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	statements</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> condition</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	statements</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">untill condition	<span class="comment">#反复执行到条件为真</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	statements</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h5 id="case"><a href="#case" class="headerlink" title="case"></a>case</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> variable <span class="keyword">in</span></span><br><span class="line">	pattern [ | pattern] ...) statements;;</span><br><span class="line">	pattern [ | pattern] ...) statements;;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>注意：每个模式行都以双分号(;;)结尾。因为你可以在前后模式之间放置多条语句。</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Is it morning? Please answer yes or no"</span></span><br><span class="line"><span class="built_in">read</span> timeofday</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$timeofday</span>"</span> <span class="keyword">in</span></span><br><span class="line">	[yY] | [yY][eE][sS] )	</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Good morning"</span></span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Up bright and early this morning"</span></span><br><span class="line">		;;</span><br><span class="line">	[nN]*)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Good afternoon"</span></span><br><span class="line">		;;</span><br><span class="line">	*)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Sorry, answer not recognized"</span></span><br><span class="line">		<span class="built_in">exit</span> 1</span><br><span class="line">		;;		<span class="comment">####这里的;;可以不写</span></span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><h5 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h5><ul>
+<li><p>在一个脚本程序中执行另外一个脚本程序要比执行一个函数慢的多</p>
+</li>
+<li><p>函数的定义方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">function_name</span></span>()&#123;</span><br><span class="line">  statements</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shell中不存在前向声明，要把所有函数定义都放在<strong>任何一个</strong>函数调用之前。</p>
+</li>
+<li><p>当函数被调用时，脚本程序的位置参数(<code>$*,$@,$#,$1,$2等</code>)会被替换为函数的参数，这就是读取传递给函数的参数的方法。当函数执行完毕后，这些参数会恢复为之前的值。</p>
+</li>
+<li><p>return让函数返回数字值</p>
+</li>
+<li><p>让函数返回字符串值的常用方法是让函数将字符串保存在一个变量中，然后在函数结束之后使用这个变量</p>
+<p>还可以echo一个字符串并捕获其结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">foo</span></span> () &#123;<span class="built_in">echo</span> JAY;&#125;</span><br><span class="line">...</span><br><span class="line">result=<span class="string">"<span class="variable">$(foo)</span>"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用local关键字在shell函数中声明局部变量，如果一个局部变量名字和全局变量名字相同，在函数的作用范围内，前者就会覆盖后者。</p>
+</li>
+</ul>
+<h5 id="shell常见命令"><a href="#shell常见命令" class="headerlink" title="shell常见命令"></a>shell常见命令</h5><p>shell脚本内部可以执行两种命令：</p>
+<ul>
+<li>外部命令(external command): 可以在命令提示符中执行的普通命令</li>
+<li>内部命令(internal command):  内部命令是在shell内部实现的，不能作为外部程序被调用。（然而，大部分的内部命令同时也提供了独立运行的程序版本——属于POSIX规范）</li>
+</ul>
+<p>常用命令：</p>
+<ol>
+<li><p>break 跳出循环</p>
+</li>
+<li><p>冒号(:)命令是一个空命令。</p>
+<p>它偶尔用于简化条件逻辑，相当于true的别名，while ：实现了无限循环。由于它是内置命令，所以运行的比true快，但是输出可读性差。</p>
+</li>
+<li><p>continue 跳到下一次循环</p>
+</li>
+<li><p>点(.)命令，用于在当前shell中执行命令。</p>
+<p>​    通常，当一个脚本执行一条外部命令或脚本程序时，它会创建一个新的环境（一个子shell），命令将在这个行环境中执行，在命令执行完毕后，这个环境被丢弃，留下退出码返回给父shell。</p>
+<p>​    所以，当你要用一个脚本来为后续执行的命令设置环境时，这命令就非常有用，在这种意义上，点命令的作用类似于C/C++的<code>#include</code>指令。</p>
+<p>​    示例：假设有两个包含环境设置的文件，他们分别针对两个不同的开发环境。</p>
+<p>（1）为了设置老的环境，可以使用文件classic_set</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">version=classic</span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/old_bin:/usr/bin:/bin:.</span><br><span class="line">PS1=<span class="string">"classc&gt; "</span></span><br></pre></td></tr></table></figure>
+<p>（2）对于新命令，使用文件lastest_set</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">version=lastest</span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/new_bin:/usr/bin:/bin:.</span><br><span class="line">PS1=<span class="string">"lastest version&gt; "</span></span><br></pre></td></tr></table></figure>
+<p>（3）可以通过将这些脚本程序和点命令结合来设置环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ . ./class_set</span><br><span class="line">classic&gt; echo $version</span><br><span class="line">classic</span><br><span class="line">classic&gt; . /lastest_set</span><br><span class="line">lastest version&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>echo命令</p>
+<p>​    虽然，X/Open建议在现代shell中使用printf命令，但是使用echo方便。</p>
+<p>​    如何去掉换行符？</p>
+<ul>
+<li><p><code>echo -n &quot;str&quot;</code>      -n参数去掉换行符</p>
+</li>
+<li><p><code>echo -e &quot;str\c&quot;</code>     -e参数确保启用了反斜线转义字符的解释(\c代表去掉换行符)</p>
+<p>老版本bash默认开启反斜线转义字符的解释，但最新版本的bash不一定开启。</p>
+</li>
+</ul>
+<p>如果需要脚本兼容UNIX系统并且需要删除换行符，最好坚持使用printf命令。</p>
+<p>如果只运行在Linux和bash上，那么echo-n是不错的选择。</p>
+</li>
+<li><p>eval命令，允许你对参数进行求值。示例如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foo=10</span><br><span class="line">x=foo</span><br><span class="line">y=<span class="string">'$'</span><span class="variable">$x</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$y</span></span><br></pre></td></tr></table></figure>
+<p>它输出$foo，而</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foo=10</span><br><span class="line">x=foo</span><br><span class="line"><span class="built_in">eval</span> y=<span class="string">'$'</span><span class="variable">$x</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$y</span></span><br></pre></td></tr></table></figure>
+<p>输出10。因此，eval命令有点像一个额外的$，它给出一个变量的值的值。</p>
+</li>
+<li><p>exec命令   有两种用法,第二种略。</p>
+<p>典型用法是将当前shell替换为一个不同的程序。</p>
+<p><code>exec wall &quot;Thanks for all the fish&quot;</code></p>
+<p>脚本中的这个命令会用wall命令替换当前的shell。脚本程序中exec命令后面的代码都不会执行，因为执行这个脚本的shell已经不存在了。</p>
+</li>
+<li><p>exit n 命令</p>
+<ul>
+<li><p>使脚本以退出码n结束运行。</p>
+</li>
+<li><p>在交互式shell命令提示符中输入exit以退出系统。</p>
+</li>
+<li><p>如果脚本程序在退出时不指定退出状态，那么脚本中最后一条被执行的命令状态将被用作返回值。</p>
+</li>
+<li><p>退出码</p>
+<p>0         表示成功</p>
+<p>1-125    脚本程序可以使用的错误代码</p>
+<p>126   文件不可执行</p>
+<p>127   命令未找到</p>
+<p>128及以上  出现一个信号</p>
+</li>
+<li><p>精简的退出码示例：如果文件存在则返回0，否则1。</p>
+<p><code>[ -f .profile ] &amp;&amp; exit 0 || exit 1</code></p>
+</li>
+</ul>
+</li>
+<li><p>export命令  导出命令</p>
+<p>作为export参数的变量，就可以在子shell中使用。而不会因为调用子shell而清除变量的值。</p>
+<p><code>set -a</code> 或<code>set -o allexport</code>命令将导出它之后声明的所有变量。</p>
+</li>
+<li><p>expr命令将它的参数当做一个表达式来求值，如</p>
+<p><code>x=$(expr $x + 1)</code>  使x取值为表达式 <code>expr $x + 1</code>的执行结果。也可以用反引号(`)字符将表达式括起来。</p>
+<p>expr可以用于很多算数表达式。比大小、加减乘除、取模取余。比较特殊的两个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expr1 | expr2			<span class="comment">#如果expr1非零，则等于expr1；否则等于expr2</span></span><br><span class="line">expr1 &amp; expr2			<span class="comment">#只要有一个表达式等于0，则等于0,；否则等于expr1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>printf命令与C/C++类似，不一样的是不需要括号、不支持浮点数，因为shell中所有算数运算都是按照整数来进行运算的</p>
+</li>
+<li><p>return命令，使函数返回一个数值。</p>
+</li>
+<li><p>set命令，为shell设置参数变量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> $(date)</span><br><span class="line"><span class="built_in">echo</span> The month is <span class="variable">$2</span></span><br></pre></td></tr></table></figure>
+<p>这样就可以单独提取date里面的月份。</p>
+<p>还有其他用处，略。</p>
+</li>
+<li><p>shift命令，将所有参数都左移一个位置，<code>$2</code>变成<code>$1</code>,<code>$3</code>变成<code>$2</code>，<code>$* $@ $#</code>也相应地改变。（<code>$0</code>是脚本名字，不变）。</p>
+<p>如果shift后面带有数值参数n，则表明左移n位。</p>
+</li>
+<li><p>trap命令，指定在收到信号后将要采取的行动。<code>trap command signal</code></p>
+</li>
+<li><p>unset命令，从环境中删除变量或函数（不能删除shell本身的只读变量）</p>
+</li>
+</ol>
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="$ 拓展"></a>$ 拓展</h3><h4 id="捕获输出"><a href="#捕获输出" class="headerlink" title="捕获输出"></a>捕获输出</h4><p><code>$(command)</code>的结果就是其中命令的输出。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> The current directory is <span class="variable">$PWD</span></span><br><span class="line"><span class="built_in">echo</span> The current users are $(who)</span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p><code>$PWD</code>是一个shell环境变量，所以不需要使用这个命令结构。但想用who命令的输出结果，就要使用这个结构。</p>
+<h4 id="算数拓展"><a href="#算数拓展" class="headerlink" title="算数拓展"></a>算数拓展</h4><p>​    之前说的expr命令可以处理一些简单的算数命令，但这个命令执行起来很慢，因为它需要调用一个新的shell来处理expr命令。</p>
+<p>​    一种更好的方法是使用<code>$((...))</code>拓展。例如<code>x=$(($x+1))</code>。</p>
+<h4 id="参数拓展"><a href="#参数拓展" class="headerlink" title="参数拓展"></a>参数拓展</h4><p>​    <code>${}</code>把参数值替换进字符串。如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> 1 2 ; <span class="keyword">do</span></span><br><span class="line">	my_process <span class="variable">$&#123;i&#125;</span>_tmp</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>参数拓展有很多种方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;param:-defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值，param不会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:+defult&#125;</span>	<span class="comment">#如果param存在且不会空，就把它设置为defult</span></span><br><span class="line"><span class="variable">$&#123;param:=defult&#125;</span>	<span class="comment">#如果param为空，就把它设置为default的值,并且param也会被赋值</span></span><br><span class="line"><span class="variable">$&#123;param:?defult&#125;</span>	<span class="comment">#如果param为空，输出param:defult并异常终止脚本</span></span><br><span class="line"><span class="variable">$&#123;#param&#125;</span>			<span class="comment">#输出param的长度</span></span><br><span class="line"><span class="variable">$&#123;param%word&#125;</span>		<span class="comment">#从param的尾部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param%%word&#125;</span>		<span class="comment">#从param的尾部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param#word&#125;</span>		<span class="comment">#从param的头部开始删除与word匹配的最小部分，然后返回剩余部分</span></span><br><span class="line"><span class="variable">$&#123;param##word&#125;</span>		<span class="comment">#从param的头部开始删除与word匹配的最长部分，然后返回剩余部分</span></span><br></pre></td></tr></table></figure>
+<p>例子</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">假设一个字符串如下：</span><br><span class="line">str="aa.bb.cc.bb.ee.bin"</span><br><span class="line"></span><br><span class="line">1. 去头，从开头去除最短匹配前缀:      echo $&#123;str#*.&#125;              #bb.cc.bb.ee.bin</span><br><span class="line">2. 去头，从开头去除最长匹配前缀:      echo $&#123;str##*.&#125;            #bin</span><br><span class="line">3. 去尾，从结尾去除最短匹配后缀:      echo $&#123;str%.*&#125;             #aa.bb.cc.bb.ee</span><br><span class="line">4. 去尾，从结尾去除最长匹配后缀:      echo $&#123;str%%.*&#125;          #aa</span><br><span class="line">5. 删除第一个与"bb"匹配的字符串:      echo $&#123;str/bb&#125;             #aa..cc.bb.ee.bin</span><br><span class="line">6. 删除所有与"bb"匹配的字符串:           echo $&#123;str//bb&#125;            #aa..cc..ee.bin</span><br><span class="line">7. 将第一个"bb"替换成"gg":                   echo $&#123;str/bb/gg&#125;        #aa.gg.cc.bb.ee.bin</span><br><span class="line">8. 将所有的"bb"替换成"gg":                   echo $&#123;str//bb/gg&#125;       #aa.gg.cc.gg.ee.bin</span><br></pre></td></tr></table></figure>
+<h3 id="获取字符串的子串"><a href="#获取字符串的子串" class="headerlink" title="获取字符串的子串"></a>获取字符串的子串</h3><p><code>${a:0:4}</code></p>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> &#123;a..z&#125;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> -n <span class="variable">$n</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p>shell并没有真正意义上的多进程。而最简单的节省时间，达到“<strong>多线程</strong>”效果的办法，是将前台命令变成后台进程。</p>
+<p>使用 <code>&amp;</code> 创建后台命令。</p>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Mess/Markdown" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">

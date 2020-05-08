@@ -234,6 +234,121 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Security/linux服务器入侵检测" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/05/12/Security/linux服务器入侵检测/" class="article-date">
+      <time datetime="2019-05-12T15:19:13.000Z" itemprop="datePublished">2019-05-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/12/Security/linux服务器入侵检测/">linux服务器入侵检测</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>source: <a href="https://bash-prompt.net/guides/server-hacked/" target="_blank" rel="noopener">https://bash-prompt.net/guides/server-hacked/</a></p>
+<p>一篇翻译：<a href="https://linux.cn/article-9116-1.html" target="_blank" rel="noopener">https://linux.cn/article-9116-1.html</a></p>
+<h1 id="How-To-Tell-If-Your-Linux-Server-Has-Been-Compromised"><a href="#How-To-Tell-If-Your-Linux-Server-Has-Been-Compromised" class="headerlink" title="How To Tell If Your Linux Server Has Been Compromised"></a>How To Tell If Your Linux Server Has Been Compromised</h1><p>A server being compromised or hacked for the purpose of this guide is an unauthorized person or bot logging into the server in order to use it for their own, usually negative ends.</p>
+<p>Disclaimer: If your server has been compromised by a state organization like the NSA or a serious criminal group then you will not notice any problems and the following techniques will not register their presence.</p>
+<p>However, the majority of compromised servers are carried out by bots i.e. automated attack programs, in-experienced attackers e.g. “script kiddies”, or dumb criminals.</p>
+<p>These sorts of attackers will abuse the server for all it’s worth whilst they have access to it and take few precautions to hide what they are doing.</p>
+<h2 id="Symptoms-of-a-compromised-server"><a href="#Symptoms-of-a-compromised-server" class="headerlink" title="Symptoms of a compromised server"></a>Symptoms of a compromised server</h2><p>When a server has been compromised by an in-experienced or automated attacker they will usually do something with it that consumes 100% of a resource. This resource will usually be either the CPU for something like crypt-currency mining or email spamming, or bandwidth for launching a DOS attack.</p>
+<p>This means that the first indication that something is amiss is that the server is “going slow”. This could manifest in the website serving pages much slower than usual, or email taking many minutes to deliver or send.</p>
+<p>So what should you look for?</p>
+<h2 id="Check-1-Who’s-currently-logged-in"><a href="#Check-1-Who’s-currently-logged-in" class="headerlink" title="Check 1 - Who’s currently logged in?"></a>Check 1 - Who’s currently logged in?</h2><p>The first thing you should look for is who is currently logged into the server. It is not uncommon to find the attacker actually logged into the server and working on it.</p>
+<p>The shell command to do this is <code>w</code>. Running <code>w</code> gives the following output:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 08:32:55 up 98 days,  5:43,  2 users,  load average: 0.05, 0.03, 0.00</span><br><span class="line">USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">root     pts/0    113.174.161.1    08:26    0.00s  0.03s  0.02s ssh root@coopeaa12</span><br><span class="line">root     pts/1    78.31.109.1      08:26    0.00s  0.01s  0.00s w</span><br></pre></td></tr></table></figure>
+<p>One of those IP’s is a UK IP and the second is Vietnamese. That’s probably not a good thing.</p>
+<p>Stop and take a breath, don’t panic and simply kill their SSH connection. Unless you can stop then re-entering the server they will do so quickly and quite likely kick you off and stop you getting back in.</p>
+<p>Please see the <strong>What should I do if I’ve been compromised</strong> section at the end of this guide no how to proceed if you do find evidence of compromise.</p>
+<p>The <code>whois</code> command can be run on IP addresses and will tell you what all the information about the organization that the IP is registered to, including the country.</p>
+<h2 id="Check-2-Who-has-logged-in"><a href="#Check-2-Who-has-logged-in" class="headerlink" title="Check 2 - Who has logged in?"></a>Check 2 - Who has logged in?</h2><p>Linux servers keep a record of which users logged in, from what IP, when and for how long. This information is accessed with the <code>last</code> command.</p>
+<p>The output looks like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root     pts/1        78.31.109.1      Thu Nov 30 08:26   still logged in</span><br><span class="line">root     pts/0        113.174.161.1    Thu Nov 30 08:26   still logged in</span><br><span class="line">root     pts/1        78.31.109.1      Thu Nov 30 08:24 - 08:26  (00:01)</span><br><span class="line">root     pts/0        113.174.161.1    Wed Nov 29 12:34 - 12:52  (00:18)</span><br><span class="line">root     pts/0        14.176.196.1     Mon Nov 27 13:32 - 13:53  (00:21)</span><br></pre></td></tr></table></figure>
+<p>There is a mix of my UK IP’s and some Vietnamese ones, with the top two still logged in. If you see any IP’s that are not authorized then refer to the final section.</p>
+<p>The login history is contained in a text file at <code>~/.bash_history</code> and is therefore easily removable. Often, attackers will simply delete this file to try to cover their tracks. Consequently, if you run <code>last</code> and only see your current login, this is a <strong>Bad Sign</strong>.</p>
+<p>If there is no login history be very, very suspicious and continue looking for indications of compromise.</p>
+<h2 id="Check-3-Review-the-command-history"><a href="#Check-3-Review-the-command-history" class="headerlink" title="Check 3 - Review the command history"></a>Check 3 - Review the command history</h2><p>This level of attacker will frequently take no precautions to leave no command history so running the <code>history</code> command will show you everything they have done. Be on the lookout for <code>wget</code> or <code>curl</code> commands to download out-of-repo software such as spam bots or crypto miners.</p>
+<p>The command history is contained in the <code>~/.bash_history</code> file so some attackers will delete this file to cover what they have done. Just as with the login history, if you run <code>history</code> and don’t see anything then the history file has been deleted. Again this is a <strong>Bad Sign</strong> and you should review the server very carefully.</p>
+<h2 id="Check-4-What’s-using-all-the-CPU"><a href="#Check-4-What’s-using-all-the-CPU" class="headerlink" title="Check 4 - What’s using all the CPU?"></a>Check 4 - What’s using all the CPU?</h2><p>The sorts of attackers that you will encounter usually don’t take too many precautions to hide what they are doing. So they will run processes that consume all the CPU. This generally makes it pretty easy to spot them. Simply run <code>top</code> and look at the highest process.</p>
+<p>This will also show people exploiting your server without having logged in. This could be, for example, someone using an unprotected form-mail script to relay spam.</p>
+<p>If you don’t recognize the top process then either Google its name or investigate what it’s doing with <code>losf</code> or <code>strace</code>.</p>
+<p>To use these tools first copy its PID from <code>top</code> and run:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace -p PID</span><br></pre></td></tr></table></figure>
+<p>This will display all the system calls the process is making. It’s a lot of information but looking through it will give you a good idea what’s going on.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof  -p PID</span><br></pre></td></tr></table></figure>
+<p>This program will <strong>l</strong>i<strong>s</strong>t the <strong>o</strong>pen <strong>f</strong>iles that the process has. Again, this will give you a good idea what it’s doing by showing you what files it is accessing.</p>
+<h2 id="Check-5-Review-the-all-the-system-processes"><a href="#Check-5-Review-the-all-the-system-processes" class="headerlink" title="Check 5 - Review the all the system processes"></a>Check 5 - Review the all the system processes</h2><p>If an unauthorized process is not consuming enough CPU to get listed noticeably on <code>top</code> it will still get displayed in a full process listing with <code>ps</code>. My proffered command is <code>ps auxf</code> for providing the most information clearly.</p>
+<p>You should be looking for any processes that you don’t recognize. The more times you run <code>ps</code> on your servers (which is a good habit to get into) the more obvious an alien process will stand out.</p>
+<h2 id="Check-6-Review-network-usage-by-process"><a href="#Check-6-Review-network-usage-by-process" class="headerlink" title="Check 6 - Review network usage by process"></a>Check 6 - Review network usage by process</h2><p>The command <code>iftop</code> functions like <code>top</code> to show a ranked list of processes that are sending and receiving network data along with their source and destination. A process like a DOS attack or spam bot will immediately show itself at the top of the list.</p>
+<h2 id="Check-7-What-processes-are-listening-for-network-connections"><a href="#Check-7-What-processes-are-listening-for-network-connections" class="headerlink" title="Check 7 - What processes are listening for network connections?"></a>Check 7 - What processes are listening for network connections?</h2><p>Often an attacker will install a program that doesn’t do anything except listen on the network port for instructions. This does not consume CPU or bandwidth whilst it is waiting so can get overlooked in the <code>top</code> type commands.</p>
+<p>The commands <code>lsof</code> and <code>netstat</code> will both list all networked processes. I use them with the following options:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsof -i</span><br><span class="line">netstat -plunt</span><br></pre></td></tr></table></figure>
+<p>You should look for any process that is listed as in the <code>LISTEN</code> or <code>ESTABLISHED</code> status as these processes are either waiting for a connection (LISTEN) or have a connection open (ESTABLISHED). If you don’t recognize these processes use <code>strace</code> or <code>lsof</code> to try to see what they are doing.</p>
+<h2 id="What-should-I-do-if-I’ve-been-compromised"><a href="#What-should-I-do-if-I’ve-been-compromised" class="headerlink" title="What should I do if I’ve been compromised?"></a>What should I do if I’ve been compromised?</h2><p>The first thing to do is not to panic, especially if the attacker is currently logged in. You need to be able to take back control of the machine before the attacker is aware that you know about them. If they realize you know about them they may well lock you out of your server and start destroying any assets out of spite.</p>
+<p>If you are not very technical then simply shut down the server. Either from the server itself with <code>shutdown -h now</code> or <code>systemctl poweroff</code>. Or log into your hosting provider’s control panel and shut down the server. Once it’s powered off you can work on the needed firewall rules and consult with your provider in your own time.</p>
+<p>If you’re feeling a bit more confident and your hosting provider has an upstream firewall then create and enable the following two rules in this order:</p>
+<ol>
+<li>Allow SSH traffic from only your IP address.</li>
+<li>Block <strong>everything</strong> else, not just SSH but every protocol on every port.</li>
+</ol>
+<p>This will immediately kill their SSH session and give only you access to the server.</p>
+<p>If you don’t have access to an upstream firewall then you will have to create and enable these firewall rules on the server itself and then, when they are in place kill the attacker’s ssh session with the <code>kill</code> command.</p>
+<p>A final method, where available, is to log into the server via an out-of-band connection such as the serial console and stop networking with <code>systemctl stop network.service</code>. This will completely stop any network access so you can now enable the firewall rules in your own time.</p>
+<p>Once you have regained control of the server <strong>do not trust it</strong>.</p>
+<p>Do not attempt to fix things up and continue using the server. You can never be sure what the attacker did and so you can never sure the server is secure.</p>
+<p>The <strong>only sensible</strong> course of action is to copy off all the data that you need and start again from a fresh install.</p>
+<h1 id="Fin"><a href="#Fin" class="headerlink" title="Fin"></a>Fin</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Security/">Security</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Security/">Security</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Network/IO/libevent进阶" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1018,129 +1133,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C-C++/C++Template/C++Compile-time-quicksort" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/11/C-C++/C++Template/C++Compile-time-quicksort/" class="article-date">
-      <time datetime="2019-04-11T14:53:26.000Z" itemprop="datePublished">2019-04-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/11/C-C++/C++Template/C++Compile-time-quicksort/">C++Compile-time-quicksort</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>From: <a href="https://playfulprogramming.blogspot.com/2015/01/compile-time-quicksort-in-idiomatic.html" target="_blank" rel="noopener">https://playfulprogramming.blogspot.com/2015/01/compile-time-quicksort-in-idiomatic.html</a></p>
-<p>文章太好，阅读完受益匪浅，完整拷贝防遗失。</p>
-<h2 id="Compile-time-quicksort-in-idiomatic-modern-C"><a href="#Compile-time-quicksort-in-idiomatic-modern-C" class="headerlink" title="Compile time quicksort in idiomatic modern C++"></a>Compile time quicksort in idiomatic modern C++</h2><p>A contender for the most useless program ever written just got a much needed overhaul. In 2011 I <a href="http://playfulprogramming.blogspot.se/2011/09/compile-time-quick-sort-using-c.html" target="_blank" rel="noopener">wrote</a> about compile time quick sort as a challenge to myself, and as an exercise in the then newfangled variadic templates. Now, having worked with C++11 for a few years, and lately also C++14, I see that the code I wrote then is unnecessarily clumsy and highly unidiomatic.</p>
-<p>In C++14 the data representation is easy. <a href="http://en.cppreference.com/w/cpp/utility/integer_sequence" target="_blank" rel="noopener">std::integer_sequence</a> fits perfectly. It really is the same as I used in 2011, but this time it’s provided by the standard library.</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>In order to show sequences, an output streaming operator is handy:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T ... ts&gt;</span><br><span class="line"><span class="built_in">std</span>::ostream&amp; <span class="keyword">operator</span>&lt;&lt;(<span class="built_in">std</span>::ostream&amp; os,</span><br><span class="line">                         <span class="keyword">const</span> <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;&amp;)</span><br><span class="line">&#123;</span><br><span class="line">  os &lt;&lt; <span class="string">"&#123; "</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> T values[] &#123; ts... &#125;;</span><br><span class="line">  <span class="built_in">std</span>::copy(<span class="built_in">std</span>::begin(values),</span><br><span class="line">            <span class="built_in">std</span>::end(values),</span><br><span class="line">            <span class="built_in">std</span>::ostream_iterator&lt;T&gt;(os, <span class="string">" "</span>));</span><br><span class="line">  <span class="keyword">return</span> os &lt;&lt; <span class="string">"&#125;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Note that the value of the integer sequence is not used. All information is in the type.  That’s why filling the values in a static array makes sense - the output stream operator function will be instantiated for each different sequence being output by a program.</p>
-<h3 id="Concatenating-sequences"><a href="#Concatenating-sequences" class="headerlink" title="Concatenating sequences"></a>Concatenating sequences</h3><p>An important problem to solve is that of concatenating sequences. It will be needed in quick sort itself, since it concatenates the sorted sub sequences.</p>
-<p>First an introduction of the concat template, accompanied by an alias for making life easier.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ... T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">concat</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ... T&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">concat_t</span> = <span class="keyword">typename</span> concat&lt;T...&gt;::type;</span><br></pre></td></tr></table></figure>
-<p>The alias concat_t&lt;T…&gt; is a convenience. Instead of having to write using a = typename concat&lt;T…&gt;::type, you just write using a = concat_t&lt;T…&gt;.</p>
-<p>In ways I dislike the naming convention (I’d like it reversed,) but it follows that of the C++14 standard library, and that is not unimportant. Regardless, I argue that the latter is not just less typing, but is easier to read too.</p>
-<p>Now for the partial specializations.</p>
-<p>As so often in template meta programming, the solution is recursive. First concatenating a single integer sequence is the trivial base case.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T ... ts&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">concat</span>&lt;std::integer_sequence&lt;T, ts...&gt; &gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> type = <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>In ways this is even unnecessarily complicated. You can say that concatenating one type (any type) is that type itself. That would work, but I choose to make partial specializations for std::integer_sequence&lt;&gt; only, since it makes it slightly easier to catch stupid programming mistakes. It also future proofs concat, should I ever feel a need to concatenate other types.</p>
-<p>The general case, concatenating two integer sequences, and some unknown tail is the same as concatenating the combination of the two integer sequences with the tail.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T... s1, T... s2, <span class="keyword">typename</span> ... Tail&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">concat</span>&lt;std::integer_sequence&lt;T, s1...&gt;,</span></span><br><span class="line"><span class="class">              std::integer_sequence&lt;T, s2...&gt;,</span></span><br><span class="line"><span class="class">              Tail...&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> type = <span class="keyword">concat_t</span>&lt;<span class="built_in">std</span>::integer_sequence&lt;T, s1..., s2...&gt;, Tail...&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Note how the convenience alias concat_t is useful even in the implementation of concat itself.</p>
-<p>Let’s see if this works, using a simple program:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">using</span> s1 = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&gt;;</span><br><span class="line">  <span class="keyword">using</span> s2 = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&gt;;</span><br><span class="line">  <span class="keyword">using</span> s3 = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&gt;;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">concat_t</span>&lt;s1, s2, s3&gt;&#123;&#125; &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Note that even though the output stream operator for std::integer_sequence&lt;&gt; doesn’t use the value itself, a value is none the less needed, so an instance is created.</p>
-<p>The output of running the program is:</p>
-<p><code>{ 1 2 3 4 5 6 7 8 9 }</code></p>
-<p>so that is good.</p>
-<h3 id="Partitioning"><a href="#Partitioning" class="headerlink" title="Partitioning"></a>Partitioning</h3><p>Quick sort works by partitioning the sequence into a sequence of the values less than a selected pivot element, and the rest, and then recursively sort those partitions. So partitioning a sequence into two sequences based on a predicate is important.</p>
-<p>Here too, the solution is a recursive. The base case of partitioning an empty sequence is trivial:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> V, V&gt; <span class="class"><span class="keyword">class</span> <span class="title">pred</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">partition</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> V, V&gt; <span class="class"><span class="keyword">class</span> <span class="title">pred</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">partition</span>&lt;pred, std::integer_sequence&lt;T&gt;&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> incl_type = <span class="built_in">std</span>::integer_sequence&lt;T&gt;;</span><br><span class="line">  <span class="keyword">using</span> excl_type = <span class="built_in">std</span>::integer_sequence&lt;T&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>After all, the number of elements selected by the predicate from the empty sequence are none, and likewise for those rejected by it.</p>
-<p>The general case is not much more difficult:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> V, V&gt; <span class="class"><span class="keyword">class</span> <span class="title">pred</span>, <span class="title">typename</span> <span class="title">T</span>, <span class="title">T</span> <span class="title">t</span>, <span class="title">T</span> ... <span class="title">ts</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">partition</span>&lt;pred, std::integer_sequence&lt;T, t, ts...&gt;&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> incl = <span class="built_in">std</span>::integer_sequence&lt;T, t&gt;;</span><br><span class="line">  <span class="keyword">using</span> excl = <span class="built_in">std</span>::integer_sequence&lt;T&gt;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">using</span> tail = partition&lt;pred, <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt; &gt;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">bool</span> outcome = pred&lt;T, t&gt;::value;</span><br><span class="line">  <span class="keyword">using</span> incl_type = <span class="keyword">concat_t</span>&lt;<span class="built_in">std</span>::<span class="keyword">conditional_t</span>&lt;outcome, incl, excl&gt;,</span><br><span class="line">                             <span class="keyword">typename</span> tail::incl_type&gt;;</span><br><span class="line">  <span class="keyword">using</span> excl_type = <span class="keyword">concat_t</span>&lt;<span class="built_in">std</span>::<span class="keyword">conditional_t</span>&lt;outcome, excl, incl&gt;,</span><br><span class="line">                             <span class="keyword">typename</span> tail::excl_type&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>As always in C++ template meta programming, using alias names for things is a must to keep the code anywhere near readable.</p>
-<p>Above tail is the result of the partitioning of the rest of the values. <a href="http://en.cppreference.com/w/cpp/types/conditional" target="_blank" rel="noopener">std::conditional_t</a> results in either TrueType or FalseType depending on the boolean value of the selector.</p>
-<p>If we assume that the outcome of the predicate on t (the first element in the sequence) is true, then incl_type becomes the concatenation of std::integer_sequence&lt;T, t&gt; and incl_type from tail, otherwise it becomes the concatenation of the empty sequence and incl_type from tail.</p>
-<p>Since this implementation builds both the included sequence and the excluded sequence in parallel, the convention of a convenience alias partition_t&lt;&gt; is of little use. It would be possible to make a filter template instead, that just provides a sequence of selected elements, but then filtering would have to be done twice, the second time with the inverted predicate, and even though we’re in compile time computation, we care about performance and avoid two-pass implementations if we can, right?</p>
-<p>Let’s see how this partitioning works, with another simple program:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T v&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">is_odd</span> :</span> <span class="built_in">std</span>::integral_constant&lt;<span class="keyword">bool</span>, v &amp; <span class="number">1</span>&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">using</span> seq = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&gt;;</span><br><span class="line">  <span class="keyword">using</span> elems = partition&lt;is_odd, seq&gt;;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; elems::incl_type&#123;&#125; &lt;&lt; <span class="string">' '</span> &lt;&lt; elems::excl_type&#123;&#125; &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Lines 1-2 defines the simple predicate that tells if an integral value is odd. Line 7 partitions the provided sequence into those selected by the predicate and those rejected by it.</p>
-<p>The result of running the program is:</p>
-<p><code>{ 1 3 5 } { 2 4 6 }</code></p>
-<p>so again, it looks OK.</p>
-<h3 id="Quick-sort"><a href="#Quick-sort" class="headerlink" title="Quick sort"></a>Quick sort</h3><p>Given the availability of concat and partition, quicksort becomes rather simple to implement. First the typical introduction of the template:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, U, U&gt; <span class="class"><span class="keyword">class</span> <span class="title">compare</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">quicksort</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, U, U&gt; <span class="class"><span class="keyword">class</span> <span class="title">compare</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">using</span> <span class="title">quicksort_t</span> = <span class="title">typename</span> <span class="title">quicksort</span>&lt;compare, T&gt;:</span>:type;</span><br></pre></td></tr></table></figure>
-<p>Since quicksort only has one result, the convenience alias quicksort_t becomes handy. compare is a binary predicate accepting two values of a given type.</p>
-<p>As so often, the base case is trivial.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, U, U&gt; <span class="class"><span class="keyword">class</span> <span class="title">compare</span>, <span class="title">typename</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">quicksort</span>&lt;compare, std::integer_sequence&lt;T&gt;&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">using</span> type = <span class="built_in">std</span>::integer_sequence&lt;T&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>After all, the result of sorting an empty sequence is always an empty sequence.</p>
-<p>The general case, a partial specialization of quicksort with a binary predicate compare and an std::integer_sequence&lt;&gt; of at least one element, is surprisingly simple too:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, U, U&gt; <span class="class"><span class="keyword">class</span> <span class="title">compare</span>,</span></span><br><span class="line"><span class="class">          <span class="title">typename</span> <span class="title">T</span>, <span class="title">T</span> <span class="title">t</span>, <span class="title">T</span> ... <span class="title">ts</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">quicksort</span>&lt;compare, std::integer_sequence&lt;T, t, ts...&gt;&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> V, V v&gt;</span><br><span class="line">  <span class="keyword">using</span> pred = compare&lt;V, v, t&gt;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">using</span> partitions = partition&lt;pred, <span class="built_in">std</span>::integer_sequence&lt;T, ts...&gt;&gt;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">using</span> incl_seq = <span class="keyword">typename</span> partitions::incl_type;</span><br><span class="line">  <span class="keyword">using</span> excl_seq = <span class="keyword">typename</span> partitions::excl_type;</span><br><span class="line">  <span class="keyword">using</span> type = <span class="keyword">concat_t</span>&lt;<span class="keyword">quicksort_t</span>&lt;compare, incl_seq&gt;,</span><br><span class="line">                        <span class="built_in">std</span>::integer_sequence&lt;T, t&gt;,</span><br><span class="line">                        <span class="keyword">quicksort_t</span>&lt;compare, excl_seq&gt; &gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Lines 5-6 is an interesting template alias. It makes a unary predicate from the binary predicate compare and the first element of the sequence, t. So, the first element becomes the pivot element to partition the rest of the elements around, and partition requires a unary predicate as its selection criteria. As an example, if compare is “less than”, and the first element t is 8, then predbecomes “is less than 8”.</p>
-<p>Line 8 is where this partitioning is done.</p>
-<p>Lines 10-11 are just short hand conveniences to make lines 12-14 readable.</p>
-<p>Lines 12-14 are just as from the text book, the result of quick sort is the concatenation of quick sort on the partition of elements included by the predicate, the pivot element, and the result of quick sort on the partition of elements excluded by the predicate.</p>
-<p>Another simple program shows the result:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T lh, T rh&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">less</span> :</span> <span class="built_in">std</span>::integral_constant&lt;<span class="keyword">bool</span>, (lh &lt; rh)&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">using</span> seq = <span class="built_in">std</span>::integer_sequence&lt;<span class="keyword">int</span>, <span class="number">32</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">99</span>, <span class="number">101</span>, <span class="number">5</span>&gt;;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">quicksort_t</span>&lt;less, seq&gt;&#123;&#125; &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The output from running this program is unsurprisingly:</p>
-<p><code>{ 1 3 4 5 7 8 32 99 101 }</code></p>
-<h3 id="A-word-on-performance"><a href="#A-word-on-performance" class="headerlink" title="A word on performance"></a>A word on performance</h3><p>Everyone who has studied algorithms knows that it’s poor practice to partition the elements around the first element for quick sort, since it gives sorting an already sorted sequence O(n²) complexity. For any deterministic element selection, there is a vulnerable family of sequences, so to protect against this, the selection of the pivot element for partitioning should be random. Just two days ago, a solution to this was shown by <a href="http://mattbierner.com/" target="_blank" rel="noopener">Matt Bierner</a> in his blog post <a href="http://blog.mattbierner.com/stupid-template-tricks-compile-time-pseudo-random-number-generator/" target="_blank" rel="noopener">“Compile Time Pseudo-Random Number Generator”</a>.  I leave it as an exercise for someone else to improve on the quick sort implementation.</p>
-<h3 id="Wrap-up"><a href="#Wrap-up" class="headerlink" title="Wrap up"></a>Wrap up</h3><p>The readability of this code is vastly improved over the 2011 original, and its shorter too. Using alias templates does not just save typing, but also removes the need for many transformation templates. Performance is also improved over the 2011 original, which used two pass partitioning using a filter.</p>
-<p>The utter uselessness of compile time quicksort, however, is not threatened.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li></ul>
     </div>
 
       

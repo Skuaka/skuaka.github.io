@@ -234,6 +234,71 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Linux/Command/Linux文本处理笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/22/Linux/Command/Linux文本处理笔记/" class="article-date">
+      <time datetime="2019-10-22T08:48:30.000Z" itemprop="datePublished">2019-10-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/22/Linux/Command/Linux文本处理笔记/">Linux文本处理笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="Linux文本处理笔记"><a href="#Linux文本处理笔记" class="headerlink" title="Linux文本处理笔记"></a>Linux文本处理笔记</h3><p>写过的做一下笔记，方便以后回忆</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">perl -pe 's/\$&#123;.+_url&#125;\ /"http:\/\/54.187.92.81:4010"\ /g' deploy.sh &gt; deploy_temp.sh</span><br><span class="line"><span class="meta">#</span><span class="bash"> perl内<span class="string">'&#123;'</span>不需要转义，而sed需要，还需要-E开启正则表达式扩展</span></span><br><span class="line">sed -iE 's/\$\&#123;.+_url\&#125;\ /"http:\/\/54.187.92.81:4010"\ /g' deploy.sh</span><br><span class="line"></span><br><span class="line">n1=`cat sp-outbound.yaml | grep -n LOG_CONFIG_SECRET`</span><br><span class="line">n1=$&#123;n1%%:*&#125;</span><br><span class="line">n2=`sed -n "$(($n1+1)),$(($n1+100))p" sp-outbound.yaml | grep -n -- "- name"`</span><br><span class="line">n2=$&#123;n2%%:*&#125;</span><br><span class="line">sed -i "$&#123;n1&#125;,$(($n1+$n2-1))d" sp-outbound.yaml</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Develop/Robot-framework-note" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -984,74 +1049,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/Vultr/vultr" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/14/Network/Vultr/vultr/" class="article-date">
-      <time datetime="2019-09-14T07:00:16.000Z" itemprop="datePublished">2019-09-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/14/Network/Vultr/vultr/">vultr</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="vultr"><a href="#vultr" class="headerlink" title="vultr"></a>vultr</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br><span class="line"></span><br><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh</span><br><span class="line">chmod +x bbr.sh</span><br><span class="line">./bbr.sh</span><br><span class="line"></span><br><span class="line">lsmod | grep bbr</span><br></pre></td></tr></table></figure>
-<hr>
-<p>之前看到的文章“被删除”，赶紧history自己的机子并记录下来。</p>
-<h3 id="PS"><a href="#PS" class="headerlink" title="PS:"></a>PS:</h3><p>查看shadowsocks连接了多少用户</p>
-<p><code>netstat -ta | grep [port-id]</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vultr/">Vultr</a></li></ul>
     </div>
 
       

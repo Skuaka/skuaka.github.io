@@ -234,6 +234,79 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Database/SQLserver/远程登入sqlserver" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/06/Database/SQLserver/远程登入sqlserver/" class="article-date">
+      <time datetime="2018-12-06T06:18:58.000Z" itemprop="datePublished">2018-12-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/06/Database/SQLserver/远程登入sqlserver/">远程登入 SQL server</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="远程登入-SQL-server"><a href="#远程登入-SQL-server" class="headerlink" title="远程登入 SQL server"></a>远程登入 SQL server</h3><p><a href="https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/6c67b1d6ca06f02787bb1ed1.html</a></p>
+<ol>
+<li><p>登录sqlserver manager 后，右键选择“属性”。左侧选择“安全性”，选中右侧的“SQL Server 和 Windows 身份验证模式”以启用混合登录模式</p>
+</li>
+<li><p>选择“连接”，勾选“允许远程连接此服务器”，然后点“确定”</p>
+</li>
+<li>展开“安全性”，“登录名”选择一个服务器登入名，右键选择“属性”，左侧选择“常规”，右侧选择“SQL Server 身份验证”，并设置密码</li>
+<li>打开sql server配置管理器，在左则选择sql server网络配置节点下的sqlexpress的协议，在右侧的TCP/IP默认是“否”，右键启用或者双击打开设置面板将其修改为“是”。</li>
+<li>重启服务器</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/SQLserver/">SQLserver</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQLserver/">SQLserver</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/Mysql/mysql-c-api" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1932,98 +2005,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C-C++/Concept-gcc/标准IO的三类缓冲" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/26/C-C++/Concept-gcc/标准IO的三类缓冲/" class="article-date">
-      <time datetime="2018-11-26T14:12:50.000Z" itemprop="datePublished">2018-11-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/26/C-C++/Concept-gcc/标准IO的三类缓冲/">标准IO的三类缓冲</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <table>
-<thead>
-<tr>
-<th style="text-align:center">缓冲类型</th>
-<th style="text-align:center">发生I/O的条件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">完全缓冲</td>
-<td style="text-align:center">缓冲区满，进程调用fflush，进程调用exit终止自身。</td>
-</tr>
-<tr>
-<td style="text-align:center">行缓冲</td>
-<td style="text-align:center">碰到换行符，进程调用fflush，进程调用exit终止自身。</td>
-</tr>
-<tr>
-<td style="text-align:center">不缓冲</td>
-<td style="text-align:center">每次调用标准I/O输出函数都发生I/O</td>
-</tr>
-</tbody>
-</table>
-<p>标准I/O函数库的大多数Unix实现使用如下规则：</p>
-<ul>
-<li>标准错误输出总是不缓冲</li>
-<li>标准输入和标准输出完全缓冲，除非它们指代终端设备（这种情况下它们行缓冲）</li>
-<li>所有其他I/O流都是完全缓冲，除非它们指代终端设备（这种情况下它们行缓冲）</li>
-</ul>
-<p>可以通过调用 setvbuf 改变缓冲类型。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
     </div>
 
       
