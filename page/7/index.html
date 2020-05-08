@@ -234,6 +234,793 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-C-C++/C++Collection/C++algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/20/C-C++/C++Collection/C++algorithm/" class="article-date">
+      <time datetime="2019-03-20T07:51:15.000Z" itemprop="datePublished">2019-03-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/20/C-C++/C++Collection/C++algorithm/">c++algorithm</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="c-算法库"><a href="#c-算法库" class="headerlink" title="c++算法库"></a>c++算法库</h1><h2 id="不修改元素的序列操作"><a href="#不修改元素的序列操作" class="headerlink" title="不修改元素的序列操作"></a>不修改元素的序列操作</h2><p>序列操作的前两个参数都是指向序列首尾的迭代器。</p>
+<table>
+<thead>
+<tr>
+<th>all_of(C++11)<br>any_of(C++11)<br>none_of(C++11)</th>
+<th>checks if a predicate is true for all, any or none <br>of the elements in a range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>for_each</td>
+<td>applies a function to a range of elements</td>
+</tr>
+<tr>
+<td>for_each_n(C++17)</td>
+<td>applies a function object <strong><em>to the first n elements</em></strong> of a sequence</td>
+</tr>
+<tr>
+<td>count<br>count_if</td>
+<td>returns the number of elements satisfying specific criteria</td>
+</tr>
+<tr>
+<td>mismatch</td>
+<td>finds the first position where two ranges differ</td>
+</tr>
+<tr>
+<td>find<br>find_if<br>find_if_not(C++11)</td>
+<td>finds the first element satisfying specific criteria</td>
+</tr>
+<tr>
+<td>find_end</td>
+<td>finds the last sequence of elements in a certain range</td>
+</tr>
+<tr>
+<td>find_first_of</td>
+<td>searches for any one of a set of elements<br>在第一个范围内找存在于第二个范围内的任何一个数。</td>
+</tr>
+<tr>
+<td>adjacent_find</td>
+<td>finds the first two adjacent items that are equal <br>(or satisfy a given predicate)</td>
+</tr>
+<tr>
+<td>search</td>
+<td>searches for a range of elements<br>find是找一个数，search是找一个序列。</td>
+</tr>
+<tr>
+<td>search_n</td>
+<td>searches a range for a number of consecutive copies of an element</td>
+</tr>
+</tbody>
+</table>
+<h2 id="会修改元素的序列操作"><a href="#会修改元素的序列操作" class="headerlink" title="会修改元素的序列操作"></a>会修改元素的序列操作</h2><table>
+<thead>
+<tr>
+<th>copy<br>copy_if(C++11)</th>
+<th>copies a range of elements to a new location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>copy_n(C++11)</td>
+<td>copies a number of elements to a new location</td>
+</tr>
+<tr>
+<td>copy_backward</td>
+<td>copies a range of elements in backwards order</td>
+</tr>
+<tr>
+<td>move(C++11)</td>
+<td>moves a range of elements to a new location</td>
+</tr>
+<tr>
+<td>move_backward(C++11)</td>
+<td>moves a range of elements to a new location in backwards order</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>copy-assigns the given value to every element in a range</td>
+</tr>
+<tr>
+<td>fill_n</td>
+<td>copy-assigns the given value to N elements in a range</td>
+</tr>
+<tr>
+<td>transform</td>
+<td>applies a function to a range of elements</td>
+</tr>
+<tr>
+<td>generate</td>
+<td>assigns the results of successive function calls to every element in a range</td>
+</tr>
+<tr>
+<td>generate_n</td>
+<td>assigns the results of successive function calls to N elements in a range</td>
+</tr>
+<tr>
+<td>remove<br>remove_if</td>
+<td>removes elements satisfying specific criteria</td>
+</tr>
+<tr>
+<td>remove_copy<br>remove_copy_if</td>
+<td>copies a range of elements omitting those that satisfy specific criteria</td>
+</tr>
+<tr>
+<td>replace<br>replace_if</td>
+<td>replaces all values satisfying specific criteria with another value</td>
+</tr>
+<tr>
+<td>replace_copy<br>replace_copy_if</td>
+<td>copies a range, replacing elements satisfying specific criteria with another value</td>
+</tr>
+<tr>
+<td>swap</td>
+<td>swaps the values of two objects</td>
+</tr>
+<tr>
+<td>swap_ranges</td>
+<td>swaps two ranges of elements</td>
+</tr>
+<tr>
+<td>iter_swap</td>
+<td>swaps the elements pointed to by two iterators</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>reverses the order of elements in a range</td>
+</tr>
+<tr>
+<td>reverse_copy</td>
+<td>creates a copy of a range that is reversed</td>
+</tr>
+<tr>
+<td>rotate</td>
+<td>rotates the order of elements in a range</td>
+</tr>
+<tr>
+<td>rotate_copy</td>
+<td>copies and rotate a range of elements</td>
+</tr>
+<tr>
+<td>shift_left(C++20)<br>shift_right(C++20)</td>
+<td>shifts elements in a range</td>
+</tr>
+<tr>
+<td>random_shuffle<br>(until C++17)<br>shuffle(C++11)</td>
+<td>randomly re-orders elements in a range</td>
+</tr>
+<tr>
+<td>sample(C++17)</td>
+<td>selects n random elements from a sequence</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>removes consecutive duplicate elements in a range</td>
+</tr>
+<tr>
+<td>unique_copy</td>
+<td>creates a copy of some range of elements that contains no consecutive duplicates</td>
+</tr>
+</tbody>
+</table>
+<h2 id="分割"><a href="#分割" class="headerlink" title="分割"></a>分割</h2><table>
+<thead>
+<tr>
+<th>is_partitioned(C++11)</th>
+<th>determines if the range is partitioned by the given predicate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>partition</td>
+<td>divides a range of elements into two groups,<br><strong>returns</strong> iterator to the first element of the second group.</td>
+</tr>
+<tr>
+<td>partition_copy(C++11)</td>
+<td>copies a range dividing the elements into two groups</td>
+</tr>
+<tr>
+<td>stable_partition</td>
+<td>divides elements into two groups while preserving their relative order</td>
+</tr>
+<tr>
+<td>partition_point(C++11)</td>
+<td>locates the partition point of a partitioned range</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> it = <span class="built_in">std</span>::partition(v.begin(), v.end(), [](<span class="keyword">int</span> i)&#123;<span class="keyword">return</span> i % <span class="number">2</span> == <span class="number">0</span>;&#125;);</span><br><span class="line"><span class="built_in">std</span>::copy(<span class="built_in">std</span>::begin(v), it, <span class="built_in">std</span>::ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">std</span>::<span class="built_in">cout</span>, <span class="string">" "</span>));</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" * "</span>;</span><br><span class="line"><span class="built_in">std</span>::copy(it,<span class="built_in">std</span>::end(v), <span class="built_in">std</span>::ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">std</span>::<span class="built_in">cout</span>, <span class="string">" "</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>基于排序的算法，基本上都可以增加一个参数，即比较函数。</p>
+<p>需要随机访问迭代器。</p>
+<table>
+<thead>
+<tr>
+<th>is_sorted(C++11)</th>
+<th>checks whether a range is sorted into ascending order</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is_sorted_until(C++11)</td>
+<td>finds the largest sorted subrange</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>sorts a range into ascending order</td>
+</tr>
+<tr>
+<td>partial_sort</td>
+<td>sorts the first N elements of a range</td>
+</tr>
+<tr>
+<td>partial_sort_copy</td>
+<td>copies and partially sorts a range of elements</td>
+</tr>
+<tr>
+<td>stable_sort</td>
+<td>(稳定排序)sorts a range of elements while preserving order between equal elements</td>
+</tr>
+<tr>
+<td>nth_element</td>
+<td>partially sorts the given range making sure that it is partitioned by the given element</td>
+</tr>
+</tbody>
+</table>
+<p><strong>partial_sort:</strong></p>
+<p>partial_sort(first, middle, last);</p>
+<p>其实就是类似<em>用堆找第K大数</em>的方法，先 <code>make_heap(first, middle)</code>，然后不断比较替换堆顶，最后<code>sort_heap(first, heap);</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找出[first,last)中6个最小的元素，并且排序在[first,middle)，其余部分无序</span></span><br><span class="line">partial_sort(v.begin(), v.begin()+<span class="number">6</span>, v.end());</span><br></pre></td></tr></table></figure>
+<p><strong>nth_element:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nth_element</span><span class="params">( RandomIt first, RandomIt nth, RandomIt last )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>排序后a[n]就是数列中第n+1大的数（下标从0開始计数），a[start,n)中的数肯定不大于a[n,end]中的数。但是a[start,n), a[n,end]内的大小顺序还不一定。<strong>并不返回值。</strong></p>
+<p><strong>partial_sort_copy:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partial_sort_copy( InputIt first, InputIt last, RandomIt d_first, RandomIt d_last );</span><br></pre></td></tr></table></figure>
+<p>将排序后的内容复制到新的地方。输入输出迭代器范围的一大一小会产生不同效果，见如下例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v0&#123;<span class="number">4</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2&#123;<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v1.begin(), v1.end());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the smaller vector in ascending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v1) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">if</span>(it == v1.end())</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The return value is the end iterator\n"</span>;</span><br><span class="line"> </span><br><span class="line">    it = <span class="built_in">std</span>::partial_sort_copy(v0.begin(), v0.end(), v2.begin(), v2.end(), </span><br><span class="line">                                <span class="built_in">std</span>::greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Writing to the larger vector in descending order gives: "</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> a : v2) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> &lt;&lt; <span class="string">"The return value is the iterator to "</span> &lt;&lt; *it &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Writing to the smaller vector in ascending order gives: 1 2 3</span><br><span class="line">The return value is the end iterator</span><br><span class="line">Writing to the larger vector in descending order gives: 5 4 3 2 1 15 16</span><br><span class="line">The return value is the iterator to 15</span><br></pre></td></tr></table></figure>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p><strong>前提是已经排序。</strong></p>
+<table>
+<thead>
+<tr>
+<th>binary_search</th>
+<th>determines if an element exists in a certain range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lower_bound</td>
+<td>returns an iterator to the first element <strong><em>not less</em></strong> than the given value</td>
+</tr>
+<tr>
+<td>upper_bound</td>
+<td>returns an iterator to the first element <strong><em>greater</em></strong> than a certain value</td>
+</tr>
+<tr>
+<td>equal_range</td>
+<td>returns range of elements matching a specific key</td>
+</tr>
+</tbody>
+</table>
+<p><strong>equal_range:</strong></p>
+<p>试图在已排序的[first,last)中寻找value，它返回一对迭代器i和j，其中i是在不破坏次序的前提下，value可插入的第一个位置（亦即lower_bound），j则是在不破坏次序的前提下，value可插入的最后一个位置（亦即upper_bound），因此，[i,j)内的每个元素都等同于value，而且[i,j)是[first,last)之中符合此一性质的最大子区间。</p>
+<h2 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h2><table>
+<thead>
+<tr>
+<th>merge</th>
+<th>merges two sorted ranges</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inplace_merge</td>
+<td>merges two ordered ranges in-place</td>
+</tr>
+</tbody>
+</table>
+<p><strong>inplace_merge:</strong></p>
+<p>Merges two consecutive sorted ranges <code>[first, middle)</code> and <code>[middle, last)</code> into one sorted range <code>[first, last)</code></p>
+<p>用inplace_merge<strong>实现归并排序</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Iter</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">merge_sort</span>(<span class="title">Iter</span> <span class="title">first</span>, <span class="title">Iter</span> <span class="title">last</span>) &#123;</span></span><br><span class="line">    <span class="keyword">if</span> (last - first &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        Iter middle = first + (last - first) / <span class="number">2</span>;</span><br><span class="line">        merge_sort(first, middle);</span><br><span class="line">        merge_sort(middle, last);</span><br><span class="line">        <span class="built_in">std</span>::inplace_merge(first, middle, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123;<span class="number">8</span>, <span class="number">2</span>, <span class="number">-2</span>, <span class="number">0</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    merge_sort(v.begin(), v.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> n : v) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><table>
+<thead>
+<tr>
+<th>includes</th>
+<th>returns true if one set is a subset of another</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set_difference</td>
+<td>computes the difference between two sets</td>
+</tr>
+<tr>
+<td>set_intersection</td>
+<td>computes the intersection of two sets</td>
+</tr>
+<tr>
+<td>set_symmetric_difference</td>
+<td>computes the symmetric difference between two sets</td>
+</tr>
+<tr>
+<td>set_union</td>
+<td>computes the union of two sets</td>
+</tr>
+</tbody>
+</table>
+<p><strong>set_开头的函数</strong>的第五个参数是一个输出迭代器，可以用输出容器的插入迭代器。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; s1&#123;<span class="string">"3"</span>,<span class="string">"2"</span>,<span class="string">"1"</span>&#125;;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; s2&#123;<span class="string">"2"</span>&#125;;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; s3;</span><br><span class="line">	</span><br><span class="line">set_difference(s1.begin(), s1.end(), s2.begin(), s2.end(), </span><br><span class="line">               insert_iterator&lt;<span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt;&gt;(s3,s3.begin()));</span><br><span class="line">copy(s3.begin(),s3.end(),ostream_iterator&lt;<span class="built_in">string</span>, <span class="keyword">char</span>&gt;(<span class="built_in">cout</span>,<span class="string">" "</span>));</span><br><span class="line"><span class="comment">//output: 1 3</span></span><br></pre></td></tr></table></figure>
+<p><strong>set_symmetric_difference:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>  &#125;;</span><br><span class="line">&#123;  <span class="number">2</span>,    <span class="number">5</span>,    <span class="number">7</span>&#125;;</span><br><span class="line"><span class="comment">//set_symmetric_difference</span></span><br><span class="line">&#123;<span class="number">1</span>,  <span class="number">3</span>,<span class="number">4</span>,  <span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>排序算法基本默认都是递增的，而堆排序如果要递增排序的话，则是建立最大堆，这就是我理解的默认是建立最大堆而不是最小堆的原因。</p>
+<table>
+<thead>
+<tr>
+<th>is_heap(C++11)</th>
+<th>checks if the given range is a max heap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is_heap_until(C++11)</td>
+<td>finds the largest subrange that is a max heap</td>
+</tr>
+<tr>
+<td>make_heap</td>
+<td>creates a max heap out of a range of elements</td>
+</tr>
+<tr>
+<td>push_heap</td>
+<td>inserts the element at the position <code>last-1</code> into the <em>max heap</em></td>
+</tr>
+<tr>
+<td>pop_heap</td>
+<td>swaps <code>first</code> and  <code>last-1</code> and makes the subrange <code>[first, last-1)</code> into a <em>max heap</em>.</td>
+</tr>
+<tr>
+<td>sort_heap</td>
+<td>turns a max heap into a range of elements sorted in ascending order</td>
+</tr>
+</tbody>
+</table>
+<p>example:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v &#123; <span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span> &#125;;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"initially      : "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"> </span><br><span class="line">	<span class="built_in">std</span>::make_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after make_heap: "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::pop_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after pop_heap : "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">std</span>::push_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after push_heap: "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">std</span>::sort_heap(v.begin(), v.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after sort_heap: "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : v) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">initially      : 3 1 4 1 5 9 </span><br><span class="line">after make_heap: 9 5 4 1 1 3 </span><br><span class="line">after pop_heap : 5 3 4 1 1 9 </span><br><span class="line">after push_heap: 9 3 5 1 1 4 </span><br><span class="line">after sort_heap: 1 1 3 4 5 9</span><br></pre></td></tr></table></figure>
+<h2 id="最值"><a href="#最值" class="headerlink" title="最值"></a>最值</h2><table>
+<thead>
+<tr>
+<th>max</th>
+<th>returns the greater of the given values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_element</td>
+<td>returns the largest element in a range</td>
+</tr>
+<tr>
+<td>min</td>
+<td>returns the smaller of the given values</td>
+</tr>
+<tr>
+<td>min_element</td>
+<td>returns the smallest element in a range</td>
+</tr>
+</tbody>
+</table>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><table>
+<thead>
+<tr>
+<th>equal</th>
+<th>determines if two sets of elements are the same</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lexicographical_compare</td>
+<td>returns true if one range is lexicographically less than another</td>
+</tr>
+</tbody>
+</table>
+<h2 id="排列"><a href="#排列" class="headerlink" title="排列"></a>排列</h2><table>
+<thead>
+<tr>
+<th>is_permutation(C++11)</th>
+<th>determines if a sequence is a permutation of another sequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>next_permutation</td>
+<td>generates the next greater lexicographic permutation of a range of elements</td>
+</tr>
+<tr>
+<td>prev_permutation</td>
+<td>generates the next smaller lexicographic permutation of a range of elements</td>
+</tr>
+</tbody>
+</table>
+<p><strong>next_permutation:</strong></p>
+<p>Transforms the range <code>[first, last)</code> into the next permutation from the set of all permutations that are lexicographically ordered with respect to <code>operator&lt;</code> or <code>comp</code>. Returns true if such permutation exists, otherwise transforms the range into the first permutation (as if by <code>std::sort(first, last)</code>) and returns false.</p>
+<p><strong>prev_permutation</strong>类似，都是反过来。</p>
+<p>example:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3,5,4,1,2 is a permutation of 1,2,3,4,5? "</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::boolalpha</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::is_permutation(v1.begin(), v1.end(), v2.begin()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3,5,4,1,1 is a permutation of 1,2,3,4,5? "</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::boolalpha</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::is_permutation(v1.begin(), v1.end(), v3.begin()) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span> is a permutation of <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>? <span class="literal">true</span></span><br><span class="line"><span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">1</span> is a permutation of <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>? <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Network/Unp/unp笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/17/Network/Unp/unp笔记/" class="article-date">
+      <time datetime="2019-03-17T07:01:56.000Z" itemprop="datePublished">2019-03-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/17/Network/Unp/unp笔记/">《unp》笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="《unp》笔记"><a href="#《unp》笔记" class="headerlink" title="《unp》笔记"></a>《unp》笔记</h2><p>以前读的《Unix网络编程》，最近整理一下概念性的知识点。</p>
+<h3 id="OSI模型"><a href="#OSI模型" class="headerlink" title="OSI模型"></a>OSI模型</h3><p><img src="http://118.25.53.128/Picture/Unp/unp01.jpg" alt="unp01"></p>
+<p>TCP和UDP之间留有空隙，表明网络应用是可以直接绕过传输层使用IPv4或IPv6的。这就是所谓的原始套接字。</p>
+<p>本书所讲的套接字编程是从顶上三层进入传输层的接口。</p>
+<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><h4 id="TCP特性"><a href="#TCP特性" class="headerlink" title="TCP特性"></a>TCP特性</h4><ul>
+<li><p>TCP含有用于动态估算客户和服务器之间的<strong>RTT</strong>的算法，以便知道它等待一个确认需要多少时间。</p>
+<ul>
+<li>RTT-(round-trip time) 往返时间。RTT在一个局域网上大约是几毫秒，广域网则可能数秒。</li>
+</ul>
+</li>
+<li><p>TCP通过给其中每个字节关联一个<strong>序列号</strong>对所发送的数据进行排序。</p>
+<p>接收端可以按顺序重排或丢弃重复。</p>
+</li>
+<li><p>TCP提供<strong>流量控制</strong></p>
+<p>TCP总是告知对端在任何时刻它一次能够从对端接收多少字节的数据，这称为<strong>窗口通告</strong>。</p>
+</li>
+<li><p>TCP是<strong>全双工</strong>的。</p>
+</li>
+</ul>
+<h4 id="TCP连接建立"><a href="#TCP连接建立" class="headerlink" title="TCP连接建立"></a>TCP连接建立</h4><p><img src="http://118.25.53.128/Picture/Unp/unp02.jpg" alt="unp02"></p>
+<ol>
+<li><p>服务器必须准备好接受外来的连接。这称为<strong>被动打开</strong>。</p>
+<p>通常需要socket、bind、listen。</p>
+</li>
+<li><p>客户端通过调用connect发起<strong>主动打开</strong>。</p>
+<p>客户端发送一个SYN(同步)分节，它告诉服务器客户将在连接中发送的数据的<strong>初始序列号</strong>。</p>
+<p>通常SYN分节不携带数据，其所在IP数据报只含有一个IP首部、一个TCP首部、可能有的TCP选项。</p>
+</li>
+<li><p>服务器确认(ACK)客户端的SYN，同时自己也发送一个SYN分节。</p>
+</li>
+<li><p>客户端确认(ACK)服务器的SYN。</p>
+</li>
+</ol>
+<hr>
+<p><strong>PS：</strong>ACK中的确认号是发送这个ACK的一端所期待的下一个序列号。</p>
+<p>​    因为SYN分节占据一个字节的序列号空间，所以每一个SYN的ACK中的确认号就是该SYN的初始序列号加1.</p>
+<p>​    类似地，每一个FIN的ACK也这样。</p>
+<h4 id="TCP选项"><a href="#TCP选项" class="headerlink" title="TCP选项"></a>TCP选项</h4><p>每一个SYN可以含有多个TCP选项。</p>
+<ul>
+<li><strong>MSS选项</strong>。通告对端它的最大分节大小(maximum segment size)，也就是在本次连接的每个TCP分节中愿意接受的最大数据量。</li>
+<li><strong>窗口规模选项</strong>。TCP连接任何一端能够通告对端的最大窗口大小是65535(2^16 -1)，因为在TCP首部中相应的字段占16位。但是当今因特网上有时需要更大的窗口以获得更大的吞吐量。这个新选项指定TCP首部中的通告窗口必须扩大的位数(0~14)。因此所提供的最大窗口接近1GB(<code>65535*2^14</code>)</li>
+<li><strong>时间戳选项</strong>。作为网络编程人员无需考虑。</li>
+</ul>
+<h4 id="TCP连接终止"><a href="#TCP连接终止" class="headerlink" title="TCP连接终止"></a>TCP连接终止</h4><p><img src="http://118.25.53.128/Picture/Unp/unp03.jpg" alt="unp03"></p>
+<ol>
+<li><strong>主动关闭</strong>。调用close，于是发送一个FIN分节表示数据发送完毕。</li>
+<li><strong>被动关闭</strong>。客户端的FIN由TCP确认，它的接收也作为一个文件结束符(EOF，end-of-file)传递给接收端应用进程。</li>
+<li>一段时间后，接收到EOF的应用进程将调用close关闭它的套接字，这导致它的TCP也发送一个FIN。</li>
+<li>确认服务器的FIN。</li>
+</ol>
+<hr>
+<p>每个方向都需要一个FIN和一个ACK。<strong>通常</strong>终止一个连接需要4个分节。但是：</p>
+<ul>
+<li>某些情况下步骤1的FIN随数据一起发送；</li>
+<li>步骤2和步骤3发送的分节可能被合并成一个分节。</li>
+</ul>
+<h4 id="TCP连接的分组交换"><a href="#TCP连接的分组交换" class="headerlink" title="TCP连接的分组交换"></a>TCP连接的分组交换</h4><p><img src="http://118.25.53.128/Picture/Unp/unp04.jpg" alt="unp04"></p>
+<ul>
+<li>服务器对客户请求的ACK是伴随其数据应答发送的，这种做法称为捎带，它通常在服务器处理请求并应答的时间少于200ms时发生的，如果服务器耗时更长，那么我们将看到先是确认后是应答。</li>
+</ul>
+<h5 id="TIME-WAIT状态"><a href="#TIME-WAIT状态" class="headerlink" title="TIME_WAIT状态"></a>TIME_WAIT状态</h5><p>该状态持续2MSL时间。</p>
+<p><strong>MSL</strong>是Maximum Segment Lifetime英文的缩写，中文可以译为“<strong>报文最大生存时间</strong>”，他是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。RFC 793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分钟等。</p>
+<p>区别于<strong>TTL</strong>：tcp报文（segment）是ip数据报（datagram）的数据部分，而ip头中有一个<strong>TTL</strong>域(time to live)，这个生存时间是由源主机设置初始值，存储了一个ip数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减1，当此值为0则数据报将被丢弃，同时发送ICMP报文通知源主机。</p>
+<p><strong>为什么要等待2MSL时间？</strong></p>
+<ol>
+<li><p>可靠地实现TCP全双工连接的终止</p>
+<p>主要目的是怕最后一个ACK包对方没收到，那么对方在超时后(1MSL)将重发FIN包，主动关闭端接收到(1MSL)重发的FIN包后可以再发一个ACK应答包。</p>
+</li>
+<li><p>允许老的重复分节在网络中消逝</p>
+<p>我们假设在关闭一个连接，过一段时间后在相同的IP和端口之间建立另一个连接，后一个连接称为前一个连接的<strong>化身</strong>。通过设置2MSL的TIME_WAIT状态，我们就可以确保每次成功建立一个TCP连接时，来自该连接先前化身的老的重复分组都已在网络中消失了。</p>
+<p>这个规则存在一个例外：如果到达的SYN的序列号大于前一化身的结束序列号，源自Berkeley的实现将给当前处于TIME_WAIT状态的连接启动新的化身。</p>
+</li>
+<li><p>在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
+</li>
+</ol>
+<h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><h4 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h4><p>客户在调用函数connect之前不必非得调用bind函数。如果需要，内核会确定源IP地址，并选择一个临时端口。</p>
+<p>如果是TCP套接字，调用connect将激发三路握手，仅在成功或者出错时返回，返回错误有三种情况：</p>
+<ol>
+<li><p>若<strong>客户没有收到SYN分节的响应</strong>，则返回<code>ETIMEDOUT</code>错误。</p>
+<p>一般的实现无响应等待6s后再发送一个，若仍无响应则等24s发送一个。若等了75s仍未响应，则返回本错误。</p>
+</li>
+<li><p>若<strong>客户的SYN响应是RST</strong>，则表明服务器在指定端口没有进程在等待连接(也许服务器根本没运行)。</p>
+<p>这是一种<em>硬错误</em>，马上返回<code>ECONNREFUSED</code>错误。</p>
+</li>
+<li><p>若客户发出的SYN在某个路由器上引发了”目的地不可达”ICMP错误，则认为是一种<em>软错误</em>，并按照第一种情况继续发送。若等了75s仍未响应，则把保存的消息(ICMP错误)作为<code>EHOSTUNREACH</code>或<code>ENETUNREACH</code>错误返回给进程。</p>
+<p>对于第三种，以下两种情况也是可能的：</p>
+<ul>
+<li>按照本地系统的转发表，根本没有到达远程系统的路径</li>
+<li>connect调用根本不等待就返回</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意：如果connect()失败</strong>，必须close该套接字，不可对它再次调用connect。</p>
+<h5 id="产生RST的三个条件"><a href="#产生RST的三个条件" class="headerlink" title="产生RST的三个条件"></a>产生RST的三个条件</h5><ol>
+<li>目的地为某端口的SYN到达，但是该端口上没有正在监听的服务器。</li>
+<li>TCP想取消某个连接。</li>
+<li>TCP收到一个根本不存在的连接上的分节。</li>
+</ol>
+<h4 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h4><p>bind把一个本地协议地址赋予一个套接字，对于TCP则是IP和端口号的组合。</p>
+<p>对于TCP，可以都指定、也可以只指定一个、也可以都不指定。</p>
+<ul>
+<li>端口号赋0可以让内核选择端口，使用通配地址(INADDR_ANY，也就是0)可以让内核选择地址。</li>
+<li>一般服务器要定端口，不定ip；客户端都不需要定。</li>
+</ul>
+<p>从bind返回的常见错误就是<code>EADDRINUSE</code> 地址已使用。</p>
+<h4 id="listen"><a href="#listen" class="headerlink" title="listen()"></a>listen()</h4><p>listen仅由TCP服务器调用，它做两件事：</p>
+<ol>
+<li>当socket()创建一个套接字时，它被假设为一个主动套接字，listen()把一个未连接的套接字转化为一个被动套接字。</li>
+<li>本函数的第二个参数<em>规定</em>了内核应该为相应套接字排队的最大连接个数。</li>
+</ol>
+<p>内核为任何一个给定的监听套接字维护两个队列：</p>
+<ul>
+<li>未完成连接队列：SYN已收到，正在完成三路握手。SYN_RECD状态。</li>
+<li>已完成连接队列：已经完成三路握手。ESTABLISHED状态。</li>
+</ul>
+<p><img src="Picture/unp05.jpg" alt="unp05"></p>
+<p><img src="Picture/unp06.jpg" alt="unp06"></p>
+<p>如果三路握手完成，该项就从未完成队列移动到已完成队列队尾。当进程调用accept()时，已完成队列的队头将返回给进程；或者该队列为空，那么进程睡眠等待唤醒。</p>
+<p>当一个客户SYN到达时，如果队列是满的，那么TCP就忽略该分节，而不发送RST。因为这么做是暂时的，客户会重发SYN分节。</p>
+<h4 id="accept"><a href="#accept" class="headerlink" title="accept()"></a>accept()</h4><p>如果accept成功，那么其返回值是内核生成的全新的描述符（<em>已连接套接字</em>，区别于<em>监听套接字</em>），代表与所返回客户的TCP连接。</p>
+<h3 id="套接字选项"><a href="#套接字选项" class="headerlink" title="套接字选项"></a>套接字选项</h3><h4 id="SO-KEEPALIVE"><a href="#SO-KEEPALIVE" class="headerlink" title="SO_KEEPALIVE"></a>SO_KEEPALIVE</h4><p>设置后，如果两小时内在该套接字的任一方向上都没有数据交换，TCP 就会自动给对端发送一个<strong>保持存活探测分节</strong>(keep-alive probe)。这是一个对端必须响应的 TCP 分节，它会导致以下三种情况之一：</p>
+<ol>
+<li><p>ACK。</p>
+</li>
+<li><p>RST，返回 <code>ECONNRESET</code> 错误。</p>
+</li>
+<li><p>没有任何响应，隔一段时间再发送几次，还没有响应则放弃，返回 <code>ETIMEOUT</code> 错误。</p>
+<p>然而如果套接字收到一个 ICMP 错误作为某个探测分节的响应，则返回相应的错误。</p>
+</li>
+</ol>
+<h4 id="SO-LINGER"><a href="#SO-LINGER" class="headerlink" title="SO_LINGER"></a>SO_LINGER</h4><p>可以改变close的行为。</p>
+<p>本选项要求在用户进程与内核间传递如下结构：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">linger</span>&#123;</span></span><br><span class="line">  <span class="keyword">int</span> l_onoff;	<span class="comment">// 0 = off, nonzero = on</span></span><br><span class="line">  <span class="keyword">int</span> l_linger;	<span class="comment">// linger time, seconds</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>如果 <code>l_onoff</code> 为 0，即关闭本选项，TCP 默认设置生效，close 立即返回。</p>
+</li>
+<li><p>如果 <code>l_onoff</code> 非 0，</p>
+<ul>
+<li><p><code>l_linger</code> 为 0，TCP 将丢弃套接字发送缓冲区的数据，并发送一个 RST 给对端，没有四次挥手。</p>
+</li>
+<li><p><code>l_linger</code> 非 0，如果在套接字发送缓冲区仍有数据，那么进程将睡眠，直到：(a)所有数据都发送完且被确认，(b) <code>l_linger</code> 延滞时间到。</p>
+<p>如果是因为延滞时间到，那么返回 <code>EWOULDBLOCK</code> 错误。</p>
+</li>
+</ul>
+<p>如果套接字设置了<strong><em>非阻塞</em></strong>，那么它将不等待 <code>close</code> 完成，即使延滞时间非 0 也是如此。</p>
+</li>
+</ol>
+<p><strong>总结来说，当关闭客户端时，可以在以下3个不同的时机返回：</strong></p>
+<ol>
+<li><code>close</code> 立即返回。</li>
+<li><code>close</code> 一直拖延直到接收了对于客户端 FIN 的 ACK 才返回。</li>
+<li>后跟一个 read 调用的 写关闭<code>shutdown</code> 一直等到接收了对端的 FIN 才返回。</li>
+</ol>
+<h4 id="TCP-NODELAY"><a href="#TCP-NODELAY" class="headerlink" title="TCP_NODELAY"></a>TCP_NODELAY</h4><p>默认情况下 Nagle 算法是开启的，本选项可以关闭此算法。</p>
+<h5 id="Nagle-算法"><a href="#Nagle-算法" class="headerlink" title="Nagle 算法"></a>Nagle 算法</h5><p><strong><em>目的</em></strong>：减少广域网(WAN)上小分组的数目。</p>
+<p><strong><em>内容</em></strong>：如果某个给定连接上有待确认数据，那么原本应该作为用户写操作响应的在该连接上立即发送相应小分组的行为就不会发生，直到现有数据被确认为止。</p>
+<p>这里”小”分组的定义就是小于 MSS 的任何分组，TCP 总是尽可能地发送最大大小的分组。</p>
+<h5 id="ACK-延滞算法"><a href="#ACK-延滞算法" class="headerlink" title="ACK 延滞算法"></a>ACK 延滞算法</h5><p>Nagle 算法通常与 ACK 延滞算法联合使用。</p>
+<p><strong><em>内容</em></strong>：TCP 在接收到数据后不立即发送 ACK，而是等待一小段时间才发送 ACK。TCP 期待在这一小段时间内自身有数据要发送回对端，被延滞的 ACK 就可以由这些数据捎带，从而省掉一个 TCP 分节。</p>
+<h5 id="不适合的情况"><a href="#不适合的情况" class="headerlink" title="不适合的情况"></a>不适合的情况</h5><ul>
+<li><p>在快速的<strong><em>局域网</em></strong>上，我们通常不会注意到 Nagle 算法对客户进程的影响，然而在<strong><em>广域网</em></strong>上，小分组所需的确认时间可能长达一秒，本来就有的延迟被 Nagle 算法进一步放大。</p>
+</li>
+<li><p>对于服务器不在相反方向产生数据以便携带 ACK 的情况，客户可能察觉到明显的延迟。</p>
+</li>
+<li><p>客户以若干小片数据向服务器发送单个逻辑请求，比如发送一个 4 字节的请求类型后跟 396 字节的请求数据。</p>
+<p>如果客户先执行 4 字节的 write 调用，再执行 396 字节的 write 调用，那么第二个写操作的数据将一直等到服务器的 TCP 确认了第一个写操作的 4 字节数据后才由客户的 TCP 发送出去。</p>
+<p>如果服务器需要接收到 400 字节才进行操作，此时服务器的 TCP 将延滞该 4 字节的 ACK。</p>
+<p>有<strong><em>三种办法修正</em></strong>这类程序：</p>
+<ol>
+<li>使用 writev 而不是调用两次 write，（首选方法）。</li>
+<li>把两次数据复制到单个缓冲区，然后对该缓冲区调用一次 write。</li>
+<li>设置 TCP_NODELAY 套接字选项。但是这最不可取，有损网络。</li>
+</ol>
+</li>
+</ul>
+<h3 id="Socket-Errno"><a href="#Socket-Errno" class="headerlink" title="Socket Errno"></a>Socket Errno</h3><p><a href="https://blog.csdn.net/huangwei858/article/details/47723613" target="_blank" rel="noopener">https://blog.csdn.net/huangwei858/article/details/47723613</a></p>
+<p><a href="https://blog.csdn.net/u010629326/article/details/76021420" target="_blank" rel="noopener">https://blog.csdn.net/u010629326/article/details/76021420</a></p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unp/"><unp></unp></a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Algorithm/逆元" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/14/Algorithm/逆元/" class="article-date">
+      <time datetime="2019-03-14T12:31:21.000Z" itemprop="datePublished">2019-03-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/14/Algorithm/逆元/">逆元</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="逆元（inv）"><a href="#逆元（inv）" class="headerlink" title="逆元（inv）"></a>逆元（inv）</h3><h4 id="什么是逆元"><a href="#什么是逆元" class="headerlink" title="什么是逆元"></a>什么是逆元</h4><p>当求解公式：(a/b)%m 时，因b可能会过大，会出现爆精度的情况，所以需变除法为乘法：</p>
+<p>设c是b的逆元，则有<code>b*c≡1(mod m)</code>；</p>
+<p>则<code>(a/b)%m = (a/b)*1%m = (a/b)*b*c%m = a*c(mod m)</code>;</p>
+<p>即a/b的模等于a*c的模；</p>
+<h4 id="求逆元的方法"><a href="#求逆元的方法" class="headerlink" title="求逆元的方法"></a>求逆元的方法</h4><h5 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h5><p>当p为质数时候，<code>a^(p-1)≡1(mod p)</code></p>
+<p>所以 <code>a^(p-2)</code> 是 a 的逆元</p>
+<p>复杂度O(logn)。</p>
+<p>例子 p=1000000007</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1000000009</span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">quickpow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ret = <span class="number">1</span>;</span><br><span class="line">    a %= mod;</span><br><span class="line">    <span class="keyword">while</span>(b) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>)</span><br><span class="line">            ret = (ret * a) % mod;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = (a * a) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">inv</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> quickpow(a, mod - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="阶乘的逆元"><a href="#阶乘的逆元" class="headerlink" title="阶乘的逆元"></a>阶乘的逆元</h4><p>记数字 x 的逆元为f(x)</p>
+<p>因为 <code>n! = (n-1)! * n</code></p>
+<p>所以 <code>f(n!) = f( (n-1)! * n) = f( (n-1)! ) * f(n)</code></p>
+<p>所以 <code>f( (n-1)! ) = f(n!) * n</code>  (逆元的逆元就是他自身)</p>
+<p>这样子我们就可以用后项推出前面的项了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//阶乘</span></span><br><span class="line">fac[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; MAXN; i++)</span><br><span class="line">    fac[i] = (fac[i<span class="number">-1</span>]*i)%MOD;</span><br><span class="line"><span class="comment">//逆元</span></span><br><span class="line">inv[MAXN<span class="number">-1</span>] = quickpow(fac[MAXN<span class="number">-1</span>], MOD<span class="number">-2</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = MAXN<span class="number">-2</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">    inv[i] = (inv[i+<span class="number">1</span>]*(i+<span class="number">1</span>))%MOD;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C-C++/C++Collection/C++线程库" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1156,226 +1943,6 @@
         <p class="article-more-link">
           <a href="/2019/03/10/C-C++/C++Collection/C++强制类型转换/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Operating-System/浮点数存储法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/09/Operating-System/浮点数存储法/" class="article-date">
-      <time datetime="2019-03-09T08:05:06.000Z" itemprop="datePublished">2019-03-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/09/Operating-System/浮点数存储法/">浮点数存储法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="浮点数存储法"><a href="#浮点数存储法" class="headerlink" title="浮点数存储法"></a>浮点数存储法</h2><p>目前所有的C/C++编译器都是采用IEEE所制定的标准浮点格式，即二进制科学表示法。</p>
-<h3 id="二进制科学表示法"><a href="#二进制科学表示法" class="headerlink" title="二进制科学表示法"></a>二进制科学表示法</h3><p>二进制科学表示法中，S=M*2^N 主要由三部分构成：符号位+阶码(N)+尾数(M)。对于float型数据，其二进制有32位，其中符号位1位，阶码8位，尾数23位；对于double型数据，其二进制为64位，符号位1位，阶码11位，尾数52位。</p>
-<p>​                31        30-23       22-0</p>
-<p>float       符号位     阶码        尾数</p>
-<p>​                63        62-52       51-0</p>
-<p>double    符号位     阶码        尾数</p>
-<p><em>符号位</em>：0表示正，1表示负</p>
-<p><em>阶码</em>：这里阶码采用移码表示，对于float型数据其规定<em>偏置量</em>为127,阶码有正有负，对于8位二进制，则其表示范围为-128-127，double型规定为1023，其表示范围为-1024-1023。比如对于float型数据，若阶码的真实值为2，则加上127后为129，其阶码表示形式为10000010</p>
-<p><em>尾数</em>：有效数字位，即部分二进制位(<strong>小数点后面的二进制位</strong>)，<strong>因为规定M的整数部分恒为1，所以这个1就不进行存储了。</strong></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Op-System/">Op-System</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Op-System/">Op-System</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/09/Operating-System/浮点数存储法/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C-C++/Mess/C_C++pow函数实现" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/09/C-C++/Mess/C_C++pow函数实现/" class="article-date">
-      <time datetime="2019-03-09T07:12:01.000Z" itemprop="datePublished">2019-03-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/09/C-C++/Mess/C_C++pow函数实现/">C_C++ pow函数实现</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>整理翻译自 <a href="https://stackoverflow.com/questions/101439/the-most-efficient-way-to-implement-an-integer-based-power-function-powint-int" target="_blank" rel="noopener">stackoverflow</a></p>
-<h3 id="整数pow-实现方式"><a href="#整数pow-实现方式" class="headerlink" title="整数pow()实现方式"></a>整数pow()实现方式</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ipow</span><span class="params">(<span class="keyword">int</span> base, <span class="keyword">int</span> <span class="built_in">exp</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">exp</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">exp</span> &amp; <span class="number">1</span>)</span><br><span class="line">            result *= base;</span><br><span class="line">        <span class="built_in">exp</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        base *= base;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2的n次方的常数时间方法"><a href="#2的n次方的常数时间方法" class="headerlink" title="2的n次方的常数时间方法"></a>2的n次方的常数时间方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">IeeeFloat</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> base : <span class="number">23</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> exponent : <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> signBit : <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> IeeeFloatUnion</span><br><span class="line">&#123;</span><br><span class="line">    IeeeFloat brokenOut;</span><br><span class="line">    <span class="keyword">float</span> f;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">float</span> <span class="title">twoToThe</span><span class="params">(<span class="keyword">char</span> exponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// notice how the range checking is already done on the exponent var</span></span><br><span class="line">    <span class="keyword">static</span> IeeeFloatUnion u;</span><br><span class="line">    u.f = <span class="number">2.0</span>;</span><br><span class="line">    <span class="comment">// Change the exponent part of the float</span></span><br><span class="line">    u.brokenOut.exponent += (exponent - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> (u.f);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个方法在指数是负的或者指数太大以至于不能存储在int中时仍能使用。</p>
-<p>这里是使用的float，可以用double来运算更大的指数。</p>
-<p>原理详见另一篇–浮点数存储法。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/03/09/C-C++/Mess/C_C++pow函数实现/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C-C++/C++Collection/C++杂类" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/03/09/C-C++/C++Collection/C++杂类/" class="article-date">
-      <time datetime="2019-03-08T17:50:50.000Z" itemprop="datePublished">2019-03-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/09/C-C++/C++Collection/C++杂类/">C++杂类（持续更新</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="C-杂类记录"><a href="#C-杂类记录" class="headerlink" title="C++杂类记录"></a>C++杂类记录</h2><h3 id="数值限制numeric-limits-lt-T"><a href="#数值限制numeric-limits-lt-T" class="headerlink" title="数值限制numeric_limits&lt;T>"></a>数值限制numeric_limits&lt;T></h3><p>Defined in header <code>&lt;limits&gt;</code>。</p>
-<p><code>template&lt;class T&gt; class numeric_limits;</code></p>
-<p><strong>Example</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"type\tlowest()\tmin()\t\tmax()\n\n"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"uchar\t"</span></span><br><span class="line">              &lt;&lt; +<span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">unsigned</span> <span class="keyword">char</span>&gt;::lowest() &lt;&lt; <span class="string">'\t'</span> &lt;&lt; <span class="string">'\t'</span></span><br><span class="line">              &lt;&lt; +<span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">unsigned</span> <span class="keyword">char</span>&gt;::min() &lt;&lt; <span class="string">'\t'</span> &lt;&lt; <span class="string">'\t'</span></span><br><span class="line">              &lt;&lt; +<span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">unsigned</span> <span class="keyword">char</span>&gt;::max() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"int\t"</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">int</span>&gt;::lowest() &lt;&lt; <span class="string">'\t'</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">int</span>&gt;::min() &lt;&lt; <span class="string">'\t'</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">int</span>&gt;::max() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"float\t"</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">float</span>&gt;::lowest() &lt;&lt; <span class="string">'\t'</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">float</span>&gt;::min() &lt;&lt; <span class="string">'\t'</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">float</span>&gt;::max() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"double\t"</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">double</span>&gt;::lowest() &lt;&lt; <span class="string">'\t'</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">double</span>&gt;::min() &lt;&lt; <span class="string">'\t'</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">double</span>&gt;::max() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>Possible output:</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">type	<span class="title">lowest</span><span class="params">()</span>	<span class="title">min</span><span class="params">()</span>		<span class="title">max</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function">uchar	0		0		255</span></span><br><span class="line">int	-2147483648	-2147483648	2147483647</span><br><span class="line"><span class="keyword">float</span>	<span class="number">-3.40282e+38</span>	<span class="number">1.17549e-38</span>	<span class="number">3.40282e+38</span></span><br><span class="line"><span class="keyword">double</span>	<span class="number">-1.79769e+308</span>	<span class="number">2.22507e-308</span>	<span class="number">1.79769e+308</span></span><br></pre></td></tr></table></figure>
-<p>可以检查溢出，比如加法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( (a &lt; <span class="number">0.0</span>) == (b &lt; <span class="number">0.0</span>)</span><br><span class="line">    &amp;&amp; <span class="built_in">std</span>::<span class="built_in">abs</span>( b ) &gt; <span class="built_in">std</span>::numeric_limits&lt;<span class="keyword">double</span>&gt;::max() - <span class="built_in">std</span>::<span class="built_in">abs</span>( a ) ) &#123;</span><br><span class="line">    <span class="comment">//  Addition would overflow...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>

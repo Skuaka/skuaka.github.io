@@ -234,6 +234,316 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Linux/Command/yum-error" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/12/06/Linux/Command/yum-error/" class="article-date">
+      <time datetime="2019-12-06T03:01:56.000Z" itemprop="datePublished">2019-12-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/06/Linux/Command/yum-error/">yum error</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="yum-error"><a href="#yum-error" class="headerlink" title="yum error"></a>yum error</h3><p>error:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># yum install sth</span><br><span class="line">File &quot;/usr/bin/yum&quot;, line 30</span><br><span class="line">  except KeyboardInterrupt, e:</span><br></pre></td></tr></table></figure>
+<p>solve:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/bin/yum</span><br><span class="line">#!/usr/bin/python -&gt; #!/usr/bin/python2.7</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Develop/kubectl-Cheat-Sheet" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/29/Develop/kubectl-Cheat-Sheet/" class="article-date">
+      <time datetime="2019-11-29T08:34:50.000Z" itemprop="datePublished">2019-11-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/29/Develop/kubectl-Cheat-Sheet/">kubectl-Cheat-Sheet</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="kubectl-Cheat-Sheet"><a href="#kubectl-Cheat-Sheet" class="headerlink" title="kubectl Cheat Sheet"></a>kubectl Cheat Sheet</h1><p>From: <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/" target="_blank" rel="noopener">https://kubernetes.io/docs/reference/kubectl/cheatsheet/</a></p>
+<h2 id="Shell-autocompletion"><a href="#Shell-autocompletion" class="headerlink" title="Shell autocompletion"></a>Shell autocompletion</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install bash-completion	# Usually already installed</span><br><span class="line"><span class="meta">#</span><span class="bash"> restart session</span></span><br><span class="line">type _init_completion		# verify that bash-completion is correctly</span><br><span class="line"></span><br><span class="line">echo 'source &lt;(kubectl completion bash)' &gt;&gt;~/.bashrc</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">kubectl completion bash &gt;/etc/bash_completion.d/kubectl</span><br><span class="line"><span class="meta">#</span><span class="bash"> restart session</span></span><br></pre></td></tr></table></figure>
+<h2 id="Kubectl-Context-and-Configuration"><a href="#Kubectl-Context-and-Configuration" class="headerlink" title="Kubectl Context and Configuration"></a>Kubectl Context and Configuration</h2><p>Set which Kubernetes cluster <code>kubectl</code> communicates with and modifies configuration information. See <a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/" target="_blank" rel="noopener">Authenticating Across Clusters with kubeconfig</a> documentation for detailed config file information.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">kubectl config view <span class="comment"># Show Merged kubeconfig settings.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use multiple kubeconfig files at the same time and view merged config</span></span><br><span class="line">KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 </span><br><span class="line"></span><br><span class="line">kubectl config view</span><br><span class="line"></span><br><span class="line"><span class="comment"># get the password for the e2e user</span></span><br><span class="line">kubectl config view -o jsonpath=<span class="string">'&#123;.users[?(@.name == "e2e")].user.password&#125;'</span></span><br><span class="line"></span><br><span class="line">kubectl config view -o jsonpath=<span class="string">'&#123;.users[].name&#125;'</span>    <span class="comment"># display the first user</span></span><br><span class="line">kubectl config view -o jsonpath=<span class="string">'&#123;.users[*].name&#125;'</span>   <span class="comment"># get a list of users</span></span><br><span class="line">kubectl config get-contexts                          <span class="comment"># display list of contexts </span></span><br><span class="line">kubectl config current-context                       <span class="comment"># display the current-context</span></span><br><span class="line">kubectl config use-context my-cluster-name           <span class="comment"># set the default context to my-cluster-name</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># add a new cluster to your kubeconf that supports basic auth</span></span><br><span class="line">kubectl config <span class="built_in">set</span>-credentials kubeuser/foo.kubernetes.com --username=kubeuser --password=kubepassword</span><br><span class="line"></span><br><span class="line"><span class="comment"># permanently save the namespace for all subsequent kubectl commands in that context.</span></span><br><span class="line">kubectl config <span class="built_in">set</span>-context --current --namespace=ggckad-s2</span><br><span class="line"></span><br><span class="line"><span class="comment"># set a context utilizing a specific username and namespace.</span></span><br><span class="line">kubectl config <span class="built_in">set</span>-context gce --user=cluster-admin --namespace=foo \</span><br><span class="line">  &amp;&amp; kubectl config use-context gce</span><br><span class="line"> </span><br><span class="line">kubectl config <span class="built_in">unset</span> users.foo                       <span class="comment"># delete user foo</span></span><br></pre></td></tr></table></figure>
+<h2 id="Apply"><a href="#Apply" class="headerlink" title="Apply"></a>Apply</h2><p><code>apply</code> manages applications through files defining Kubernetes resources. It creates and updates resources in a cluster through running <code>kubectl apply</code>. This is the recommended way of managing Kubernetes applications on production. See <a href="https://kubectl.docs.kubernetes.io/" target="_blank" rel="noopener">Kubectl Book</a>.</p>
+<h2 id="Creating-Objects"><a href="#Creating-Objects" class="headerlink" title="Creating Objects"></a>Creating Objects</h2><p>Kubernetes manifests can be defined in json or yaml. The file extension <code>.yaml</code>, <code>.yml</code>, and <code>.json</code> can be used.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f ./my-manifest.yaml            <span class="comment"># create resource(s)</span></span><br><span class="line">kubectl apply -f ./my1.yaml -f ./my2.yaml      <span class="comment"># create from multiple files</span></span><br><span class="line">kubectl apply -f ./dir                         <span class="comment"># create resource(s) in all manifest files in dir</span></span><br><span class="line">kubectl apply -f https://git.io/vPieo          <span class="comment"># create resource(s) from url</span></span><br><span class="line">kubectl create deployment nginx --image=nginx  <span class="comment"># start a single instance of nginx</span></span><br><span class="line">kubectl explain pods,svc                       <span class="comment"># get the documentation for pod and svc manifests</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create multiple YAML objects from stdin</span></span><br><span class="line">cat &lt;&lt;EOF | kubectl apply -f -</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: busybox-sleep</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: busybox</span><br><span class="line">    image: busybox</span><br><span class="line">    args:</span><br><span class="line">    - sleep</span><br><span class="line">    - <span class="string">"1000000"</span></span><br><span class="line">---</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: busybox-sleep-less</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: busybox</span><br><span class="line">    image: busybox</span><br><span class="line">    args:</span><br><span class="line">    - sleep</span><br><span class="line">    - <span class="string">"1000"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a secret with several keys</span></span><br><span class="line">cat &lt;&lt;EOF | kubectl apply -f -</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Secret</span><br><span class="line">metadata:</span><br><span class="line">  name: mysecret</span><br><span class="line"><span class="built_in">type</span>: Opaque</span><br><span class="line">data:</span><br><span class="line">  password: $(<span class="built_in">echo</span> -n <span class="string">"s33msi4"</span> | base64 -w0)</span><br><span class="line">  username: $(<span class="built_in">echo</span> -n <span class="string">"jane"</span> | base64 -w0)</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h2 id="Viewing-Finding-Resources"><a href="#Viewing-Finding-Resources" class="headerlink" title="Viewing, Finding Resources"></a>Viewing, Finding Resources</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Get commands with basic output</span></span><br><span class="line">kubectl get services                          <span class="comment"># List all services in the namespace</span></span><br><span class="line">kubectl get pods --all-namespaces             <span class="comment"># List all pods in all namespaces</span></span><br><span class="line">kubectl get pods -o wide                      <span class="comment"># List all pods in the namespace, with more details</span></span><br><span class="line">kubectl get deployment my-dep                 <span class="comment"># List a particular deployment</span></span><br><span class="line">kubectl get pods                              <span class="comment"># List all pods in the namespace</span></span><br><span class="line">kubectl get pod my-pod -o yaml                <span class="comment"># Get a pod's YAML</span></span><br><span class="line">kubectl get pod my-pod -o yaml --<span class="built_in">export</span>       <span class="comment"># Get a pod's YAML without cluster specific information</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Describe commands with verbose output</span></span><br><span class="line">kubectl describe nodes my-node</span><br><span class="line">kubectl describe pods my-pod</span><br><span class="line"></span><br><span class="line"><span class="comment"># List Services Sorted by Name</span></span><br><span class="line">kubectl get services --sort-by=.metadata.name</span><br><span class="line"></span><br><span class="line"><span class="comment"># List pods Sorted by Restart Count</span></span><br><span class="line">kubectl get pods --sort-by=<span class="string">'.status.containerStatuses[0].restartCount'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># List PersistentVolumes sorted by capacity</span></span><br><span class="line"></span><br><span class="line">kubectl get pv --sort-by=.spec.capacity.storage</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get the version label of all pods with label app=cassandra</span></span><br><span class="line">kubectl get pods --selector=app=cassandra -o \</span><br><span class="line">  jsonpath=<span class="string">'&#123;.items[*].metadata.labels.version&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Get all worker nodes (use a selector to exclude results that have a label</span></span><br><span class="line"><span class="comment"># named 'node-role.kubernetes.io/master')</span></span><br><span class="line">kubectl get node --selector=<span class="string">'!node-role.kubernetes.io/master'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Get all running pods in the namespace</span></span><br><span class="line">kubectl get pods --field-selector=status.phase=Running</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get ExternalIPs of all nodes</span></span><br><span class="line">kubectl get nodes -o jsonpath=<span class="string">'&#123;.items[*].status.addresses[?(@.type=="ExternalIP")].address&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># List Names of Pods that belong to Particular RC</span></span><br><span class="line"><span class="comment"># "jq" command useful for transformations that are too complex for jsonpath, it can be found at https://stedolan.github.io/jq/</span></span><br><span class="line">sel=<span class="variable">$&#123;$(kubectl get rc my-rc --output=json | jq -j '.spec.selector | to_entries | .[] | "\(.key)=\(.value),"')%?&#125;</span></span><br><span class="line"><span class="built_in">echo</span> $(kubectl get pods --selector=<span class="variable">$sel</span> --output=jsonpath=&#123;.items..metadata.name&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Show labels for all pods (or any other Kubernetes object that supports labelling)</span></span><br><span class="line">kubectl get pods --show-labels</span><br><span class="line"></span><br><span class="line"><span class="comment"># Check which nodes are ready</span></span><br><span class="line">JSONPATH=<span class="string">'&#123;range .items[*]&#125;&#123;@.metadata.name&#125;:&#123;range @.status.conditions[*]&#125;&#123;@.type&#125;=&#123;@.status&#125;;&#123;end&#125;&#123;end&#125;'</span> \</span><br><span class="line"> &amp;&amp; kubectl get nodes -o jsonpath=<span class="string">"<span class="variable">$JSONPATH</span>"</span> | grep <span class="string">"Ready=True"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># List all Secrets currently in use by a pod</span></span><br><span class="line">kubectl get pods -o json | jq <span class="string">'.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name'</span> | grep -v null | sort | uniq</span><br><span class="line"></span><br><span class="line"><span class="comment"># List Events sorted by timestamp</span></span><br><span class="line">kubectl get events --sort-by=.metadata.creationTimestamp</span><br></pre></td></tr></table></figure>
+<h2 id="Updating-Resources"><a href="#Updating-Resources" class="headerlink" title="Updating Resources"></a>Updating Resources</h2><p>As of version 1.11 <code>rolling-update</code> have been deprecated (see <a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md" target="_blank" rel="noopener">CHANGELOG-1.11.md</a>), use <code>rollout</code> instead.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">set</span> image deployment/frontend www=image:v2               <span class="comment"># Rolling update "www" containers of "frontend" deployment, updating the image</span></span><br><span class="line">kubectl rollout <span class="built_in">history</span> deployment/frontend                      <span class="comment"># Check the history of deployments including the revision </span></span><br><span class="line">kubectl rollout undo deployment/frontend                         <span class="comment"># Rollback to the previous deployment</span></span><br><span class="line">kubectl rollout undo deployment/frontend --to-revision=2         <span class="comment"># Rollback to a specific revision</span></span><br><span class="line">kubectl rollout status -w deployment/frontend                    <span class="comment"># Watch rolling update status of "frontend" deployment until completion</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># deprecated starting version 1.11</span></span><br><span class="line">kubectl rolling-update frontend-v1 -f frontend-v2.json           <span class="comment"># (deprecated) Rolling update pods of frontend-v1</span></span><br><span class="line">kubectl rolling-update frontend-v1 frontend-v2 --image=image:v2  <span class="comment"># (deprecated) Change the name of the resource and update the image</span></span><br><span class="line">kubectl rolling-update frontend --image=image:v2                 <span class="comment"># (deprecated) Update the pods image of frontend</span></span><br><span class="line">kubectl rolling-update frontend-v1 frontend-v2 --rollback        <span class="comment"># (deprecated) Abort existing rollout in progress</span></span><br><span class="line"></span><br><span class="line">cat pod.json | kubectl replace -f -                              <span class="comment"># Replace a pod based on the JSON passed into std</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Force replace, delete and then re-create the resource. Will cause a service outage.</span></span><br><span class="line">kubectl replace --force -f ./pod.json</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a service for a replicated nginx, which serves on port 80 and connects to the containers on port 8000</span></span><br><span class="line">kubectl expose rc nginx --port=80 --target-port=8000</span><br><span class="line"></span><br><span class="line"><span class="comment"># Update a single-container pod's image version (tag) to v4</span></span><br><span class="line">kubectl get pod mypod -o yaml | sed <span class="string">'s/\(image: myimage\):.*$/\1:v4/'</span> | kubectl replace -f -</span><br><span class="line"></span><br><span class="line">kubectl label pods my-pod new-label=awesome                      <span class="comment"># Add a Label</span></span><br><span class="line">kubectl annotate pods my-pod icon-url=http://goo.gl/XXBTWq       <span class="comment"># Add an annotation</span></span><br><span class="line">kubectl autoscale deployment foo --min=2 --max=10                <span class="comment"># Auto scale a deployment "foo"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Patching-Resources"><a href="#Patching-Resources" class="headerlink" title="Patching Resources"></a>Patching Resources</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Partially update a node</span></span><br><span class="line">kubectl patch node k8s-node-1 -p <span class="string">'&#123;"spec":&#123;"unschedulable":true&#125;&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Update a container's image; spec.containers[*].name is required because it's a merge key</span></span><br><span class="line">kubectl patch pod valid-pod -p <span class="string">'&#123;"spec":&#123;"containers":[&#123;"name":"kubernetes-serve-hostname","image":"new image"&#125;]&#125;&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Update a container's image using a json patch with positional arrays</span></span><br><span class="line">kubectl patch pod valid-pod --<span class="built_in">type</span>=<span class="string">'json'</span> -p=<span class="string">'[&#123;"op": "replace", "path": "/spec/containers/0/image", "value":"new image"&#125;]'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Disable a deployment livenessProbe using a json patch with positional arrays</span></span><br><span class="line">kubectl patch deployment valid-deployment  --<span class="built_in">type</span> json   -p=<span class="string">'[&#123;"op": "remove", "path": "/spec/template/spec/containers/0/livenessProbe"&#125;]'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Add a new element to a positional array</span></span><br><span class="line">kubectl patch sa default --<span class="built_in">type</span>=<span class="string">'json'</span> -p=<span class="string">'[&#123;"op": "add", "path": "/secrets/1", "value": &#123;"name": "whatever" &#125; &#125;]'</span></span><br></pre></td></tr></table></figure>
+<h2 id="Editing-Resources"><a href="#Editing-Resources" class="headerlink" title="Editing Resources"></a>Editing Resources</h2><p>Edit any API resource in your preferred editor.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit svc/docker-registry                      <span class="comment"># Edit the service named docker-registry</span></span><br><span class="line">KUBE_EDITOR=<span class="string">"nano"</span> kubectl edit svc/docker-registry   <span class="comment"># Use an alternative editor</span></span><br></pre></td></tr></table></figure>
+<h2 id="Scaling-Resources"><a href="#Scaling-Resources" class="headerlink" title="Scaling Resources"></a>Scaling Resources</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale --replicas=3 rs/foo                                 <span class="comment"># Scale a replicaset named 'foo' to 3</span></span><br><span class="line">kubectl scale --replicas=3 -f foo.yaml                            <span class="comment"># Scale a resource specified in "foo.yaml" to 3</span></span><br><span class="line">kubectl scale --current-replicas=2 --replicas=3 deployment/mysql  <span class="comment"># If the deployment named mysql's current size is 2, scale mysql to 3</span></span><br><span class="line">kubectl scale --replicas=5 rc/foo rc/bar rc/baz                   <span class="comment"># Scale multiple replication controllers</span></span><br></pre></td></tr></table></figure>
+<h2 id="Deleting-Resources"><a href="#Deleting-Resources" class="headerlink" title="Deleting Resources"></a>Deleting Resources</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete -f ./pod.json                                              <span class="comment"># Delete a pod using the type and name specified in pod.json</span></span><br><span class="line">kubectl delete pod,service baz foo                                        <span class="comment"># Delete pods and services with same names "baz" and "foo"</span></span><br><span class="line">kubectl delete pods,services -l name=myLabel                              <span class="comment"># Delete pods and services with label name=myLabel</span></span><br><span class="line">kubectl -n my-ns delete pod,svc --all                                      <span class="comment"># Delete all pods and services in namespace my-ns,</span></span><br><span class="line"><span class="comment"># Delete all pods matching the awk pattern1 or pattern2</span></span><br><span class="line">kubectl get pods  -n mynamespace --no-headers=<span class="literal">true</span> | awk <span class="string">'/pattern1|pattern2/&#123;print $1&#125;'</span> | xargs  kubectl delete -n mynamespace pod</span><br></pre></td></tr></table></figure>
+<h2 id="Interacting-with-running-Pods"><a href="#Interacting-with-running-Pods" class="headerlink" title="Interacting with running Pods"></a>Interacting with running Pods</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">kubectl logs my-pod                                 <span class="comment"># dump pod logs (stdout)</span></span><br><span class="line">kubectl logs -l name=myLabel                        <span class="comment"># dump pod logs, with label name=myLabel (stdout)</span></span><br><span class="line">kubectl logs my-pod --previous                      <span class="comment"># dump pod logs (stdout) for a previous instantiation of a container</span></span><br><span class="line">kubectl logs my-pod -c my-container                 <span class="comment"># dump pod container logs (stdout, multi-container case)</span></span><br><span class="line">kubectl logs -l name=myLabel -c my-container        <span class="comment"># dump pod logs, with label name=myLabel (stdout)</span></span><br><span class="line">kubectl logs my-pod -c my-container --previous      <span class="comment"># dump pod container logs (stdout, multi-container case) for a previous instantiation of a container</span></span><br><span class="line">kubectl logs -f my-pod                              <span class="comment"># stream pod logs (stdout)</span></span><br><span class="line">kubectl logs -f my-pod -c my-container              <span class="comment"># stream pod container logs (stdout, multi-container case)</span></span><br><span class="line">kubectl logs -f -l name=myLabel --all-containers    <span class="comment"># stream all pods logs with label name=myLabel (stdout)</span></span><br><span class="line">kubectl run -i --tty busybox --image=busybox -- sh  <span class="comment"># Run pod as interactive shell</span></span><br><span class="line">kubectl run nginx --image=nginx --restart=Never -n </span><br><span class="line">mynamespace                                         <span class="comment"># Run pod nginx in a specific namespace</span></span><br><span class="line">kubectl run nginx --image=nginx --restart=Never     <span class="comment"># Run pod nginx and write its spec into a file called pod.yaml</span></span><br><span class="line">--dry-run -o yaml &gt; pod.yaml</span><br><span class="line"></span><br><span class="line">kubectl attach my-pod -i                            <span class="comment"># Attach to Running Container</span></span><br><span class="line">kubectl port-forward my-pod 5000:6000               <span class="comment"># Listen on port 5000 on the local machine and forward to port 6000 on my-pod</span></span><br><span class="line">kubectl <span class="built_in">exec</span> my-pod -- ls /                         <span class="comment"># Run command in existing pod (1 container case)</span></span><br><span class="line">kubectl <span class="built_in">exec</span> my-pod -c my-container -- ls /         <span class="comment"># Run command in existing pod (multi-container case)</span></span><br><span class="line">kubectl top pod POD_NAME --containers               <span class="comment"># Show metrics for a given pod and its containers</span></span><br></pre></td></tr></table></figure>
+<h2 id="Interacting-with-Nodes-and-Cluster"><a href="#Interacting-with-Nodes-and-Cluster" class="headerlink" title="Interacting with Nodes and Cluster"></a>Interacting with Nodes and Cluster</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">kubectl cordon my-node                                                <span class="comment"># Mark my-node as unschedulable</span></span><br><span class="line">kubectl drain my-node                                                 <span class="comment"># Drain my-node in preparation for maintenance</span></span><br><span class="line">kubectl uncordon my-node                                              <span class="comment"># Mark my-node as schedulable</span></span><br><span class="line">kubectl top node my-node                                              <span class="comment"># Show metrics for a given node</span></span><br><span class="line">kubectl cluster-info                                                  <span class="comment"># Display addresses of the master and services</span></span><br><span class="line">kubectl cluster-info dump                                             <span class="comment"># Dump current cluster state to stdout</span></span><br><span class="line">kubectl cluster-info dump --output-directory=/path/to/cluster-state   <span class="comment"># Dump current cluster state to /path/to/cluster-state</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># If a taint with that key and effect already exists, its value is replaced as specified.</span></span><br><span class="line">kubectl taint nodes foo dedicated=special-user:NoSchedule</span><br></pre></td></tr></table></figure>
+<h3 id="Resource-types"><a href="#Resource-types" class="headerlink" title="Resource types"></a>Resource types</h3><p>List all supported resource types along with their shortnames, <a href="https://kubernetes.io/docs/concepts/overview/kubernetes-api/#api-groups" target="_blank" rel="noopener">API group</a>, whether they are <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces" target="_blank" rel="noopener">namespaced</a>, and <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects" target="_blank" rel="noopener">Kind</a>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl api-resources</span><br></pre></td></tr></table></figure>
+<p>Other operations for exploring API resources:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kubectl api-resources --namespaced=<span class="literal">true</span>      <span class="comment"># All namespaced resources</span></span><br><span class="line">kubectl api-resources --namespaced=<span class="literal">false</span>     <span class="comment"># All non-namespaced resources</span></span><br><span class="line">kubectl api-resources -o name                <span class="comment"># All resources with simple output (just the resource name)</span></span><br><span class="line">kubectl api-resources -o wide                <span class="comment"># All resources with expanded (aka "wide") output</span></span><br><span class="line">kubectl api-resources --verbs=list,get       <span class="comment"># All resources that support the "list" and "get" request verbs</span></span><br><span class="line">kubectl api-resources --api-group=extensions <span class="comment"># All resources in the "extensions" API group</span></span><br></pre></td></tr></table></figure>
+<h3 id="Formatting-output"><a href="#Formatting-output" class="headerlink" title="Formatting output"></a>Formatting output</h3><p>To output details to your terminal window in a specific format, you can add either the <code>-o</code> or <code>--output</code> flags to a supported <code>kubectl</code> command.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Output format</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>-o=custom-columns=</code></td>
+<td style="text-align:left">Print a table using a comma separated list of custom columns</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-o=custom-columns-file=</code></td>
+<td style="text-align:left">Print a table using the custom columns template in the <code></code> file</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-o=json</code></td>
+<td style="text-align:left">Output a JSON formatted API object</td>
+</tr>
+<tr>
+<td style="text-align:left">`-o=jsonpath=</td>
+<td style="text-align:left">Print the fields defined in a <a href="https://kubernetes.io/docs/reference/kubectl/jsonpath" target="_blank" rel="noopener">jsonpath</a> expression</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-o=jsonpath-file=</code></td>
+<td style="text-align:left">Print the fields defined by the <a href="https://kubernetes.io/docs/reference/kubectl/jsonpath" target="_blank" rel="noopener">jsonpath</a> expression in the <code></code> file</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-o=name</code></td>
+<td style="text-align:left">Print only the resource name and nothing else</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-o=wide</code></td>
+<td style="text-align:left">Output in the plain-text format with any additional information, and for pods, the node name is included</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-o=yaml</code></td>
+<td style="text-align:left">Output a YAML formatted API object</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Kubectl-output-verbosity-and-debugging"><a href="#Kubectl-output-verbosity-and-debugging" class="headerlink" title="Kubectl output verbosity and debugging"></a>Kubectl output verbosity and debugging</h3><p>Kubectl verbosity is controlled with the <code>-v</code> or <code>--v</code> flags followed by an integer representing the log level. General Kubernetes logging conventions and the associated log levels are described <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md" target="_blank" rel="noopener">here</a>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Verbosity</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>--v=0</code></td>
+<td style="text-align:left">Generally useful for this to <em>always</em> be visible to a cluster operator.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--v=1</code></td>
+<td style="text-align:left">A reasonable default log level if you don’t want verbosity.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--v=2</code></td>
+<td style="text-align:left">Useful steady state information about the service and important log messages that may correlate to significant changes in the system. This is the recommended default log level for most systems.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--v=3</code></td>
+<td style="text-align:left">Extended information about changes.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--v=4</code></td>
+<td style="text-align:left">Debug level verbosity.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--v=6</code></td>
+<td style="text-align:left">Display requested resources.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--v=7</code></td>
+<td style="text-align:left">Display HTTP request headers.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--v=8</code></td>
+<td style="text-align:left">Display HTTP request contents.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--v=9</code></td>
+<td style="text-align:left">Display HTTP request contents without truncation of contents.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="What’s-next"><a href="#What’s-next" class="headerlink" title="What’s next"></a>What’s next</h2><ul>
+<li>Learn more about <a href="https://kubernetes.io/docs/reference/kubectl/overview/" target="_blank" rel="noopener">Overview of kubectl</a>.</li>
+<li>See <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/" target="_blank" rel="noopener">kubectl</a> options.</li>
+<li>Also <a href="https://kubernetes.io/docs/reference/kubectl/conventions/" target="_blank" rel="noopener">kubectl Usage Conventions</a> to understand how to use it in reusable scripts.</li>
+<li>See more community <a href="https://github.com/dennyzhang/cheatsheet-kubernetes-A4" target="_blank" rel="noopener">kubectl cheatsheets</a>.</li>
+</ul>
+<h1 id="Fin"><a href="#Fin" class="headerlink" title="Fin"></a>Fin</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Mess/Game/steamcmd" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/30/Mess/Game/steamcmd/" class="article-date">
+      <time datetime="2019-10-30T02:32:44.000Z" itemprop="datePublished">2019-10-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/30/Mess/Game/steamcmd/">steamcmd</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="steam-ERROR-Timed-out-waiting-for-AppInfo-update"><a href="#steam-ERROR-Timed-out-waiting-for-AppInfo-update" class="headerlink" title="steam ERROR! Timed out waiting for AppInfo update."></a>steam ERROR! Timed out waiting for AppInfo update.</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm ~/Steam/appcache/packageinfo.vdf</span><br><span class="line">rm ~/Steam/appcache/appinfo.vdf</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Game/">Game</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Game/">Game</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/steamcmd/">steamcmd</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux/Command/Linux文本处理笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -771,284 +1081,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swagger/">swagger</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Develop/travis" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/22/Develop/travis/" class="article-date">
-      <time datetime="2019-09-21T17:45:17.000Z" itemprop="datePublished">2019-09-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/22/Develop/travis/">travis笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="travis"><a href="#travis" class="headerlink" title="travis"></a>travis</h2><h3 id="travis-yml格式"><a href="#travis-yml格式" class="headerlink" title=".travis.yml格式"></a><code>.travis.yml</code>格式</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">c</span></span><br><span class="line"><span class="attr">compiler:</span> <span class="string">gcc</span></span><br><span class="line"></span><br><span class="line"><span class="attr">before_install:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">sudo</span> <span class="string">apt-get</span> <span class="string">install</span> <span class="string">valgrind</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span> </span><br><span class="line"><span class="bullet">  -</span> <span class="string">make</span> <span class="string">all</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">gcc</span> <span class="bullet">--std=c11</span> <span class="bullet">-Wall</span> <span class="bullet">-o</span> <span class="string">testcase1</span> <span class="string">testcase1.c</span> <span class="string">object.c</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">./testcase1</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">./testcase2.sh</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">gcc</span> <span class="bullet">--std=c11</span> <span class="bullet">-Wall</span> <span class="bullet">-g</span> <span class="bullet">-o</span> <span class="string">tc1-valgrind</span> <span class="string">testcase1.c</span> <span class="string">object.c</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">valgrind</span> <span class="bullet">--error-exitcode=5</span> <span class="bullet">--leak-check=yes</span> <span class="string">./tc1-valgrind</span></span><br></pre></td></tr></table></figure>
-<h4 id="如何触发测试"><a href="#如何触发测试" class="headerlink" title="如何触发测试"></a>如何触发测试</h4><p>在仓库添加正确的<code>.travis.yml</code>，然后每次push自动触发测试。</p>
-<h4 id="build图标"><a href="#build图标" class="headerlink" title="build图标"></a>build图标</h4><p>点击travis相关仓库的右上角的build图标，复制Markdown格式然后粘贴在README.md中即可。</p>
-<h4 id="Permission-denied"><a href="#Permission-denied" class="headerlink" title="Permission denied"></a>Permission denied</h4><p>可执行文件没有加执行权限。</p>
-<p>加上后再push就行了。</p>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Develop/">Develop</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/travis/">travis</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux/System/ssh证书改变后无法登入" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/21/Linux/System/ssh证书改变后无法登入/" class="article-date">
-      <time datetime="2019-09-21T15:30:05.000Z" itemprop="datePublished">2019-09-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/21/Linux/System/ssh证书改变后无法登入/">ssh证书改变后无法登入</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>今天服务器reinstall后ssh登入会报如下错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span><br><span class="line">Someone could be eavesdropping on you right now (man-in-the-middle attack)!</span><br><span class="line">It is also possible that a host key has just been changed.</span><br></pre></td></tr></table></figure>
-<p>解决：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.ssh/known_hosts</span><br></pre></td></tr></table></figure>
-<p>把相应的IP那行删掉就行了。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C-C++/C++Template/C++SFINAE" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/16/C-C++/C++Template/C++SFINAE/" class="article-date">
-      <time datetime="2019-09-16T04:30:18.000Z" itemprop="datePublished">2019-09-16</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/16/C-C++/C++Template/C++SFINAE/">C++SFINAE</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="C-SFINAE"><a href="#C-SFINAE" class="headerlink" title="C++ SFINAE"></a>C++ SFINAE</h2><h3 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h3><p>“<strong>Substitution Failure Is Not An Error</strong>“</p>
-<p>This rule applies during overload resolution of function templates: </p>
-<p>When substituting the explicitly specified or deduced type for the template parameter fails, the specialization is discarded from the <em>overload set</em> instead of causing a compile error.</p>
-<h3 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h3><p>Function template parameters are substituted (replaced by template arguments) twice:</p>
-<ul>
-<li>explicitly specified template arguments are substituted before template argument deduction</li>
-<li>deduced arguments and the arguments obtained from the defaults are substituted after template argument deduction</li>
-</ul>
-<p>Substitution occurs in</p>
-<table>
-<thead>
-<tr>
-<th>all types used in the function type (return type / parameter type) <br>all types used in the template parameter declarations</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>all expressions used in the function type<br>all expressions used in a template parameter declaration</td>
-<td>(since C++11)</td>
-</tr>
-<tr>
-<td>all expressions used in the explicit specifier</td>
-<td>(since C++20)</td>
-</tr>
-</tbody>
-</table>
-<p>A <em>substitution failure</em> is any situation when the type or expression above would be ill-formed (with a required diagnostic), if written using the substituted arguments.</p>
-<p>If the evaluation of a substituted type/expression causes a side-effect such as instantiation of some template specialization, generation of an implicitly-defined member function, etc, <strong>errors in those side-effects are treated as hard errors</strong>.</p>
-<h3 id="Type-SFINAE"><a href="#Type-SFINAE" class="headerlink" title="Type SFINAE"></a>Type SFINAE</h3><p>The following type errors are SFINAE errors:</p>
-<ul>
-<li><p>attempting to instantiate a pack expansion containing multiple packs of different lengths. (since C++11)</p>
-</li>
-<li><p>attempting to create an array of void, array of reference, array of function, array of negative size, array of non-integral size, or array of size zero.</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">int</span> I&gt; <span class="function"><span class="keyword">void</span> <span class="title">div</span><span class="params">(<span class="keyword">char</span>(*)[I % <span class="number">2</span> == <span class="number">0</span>] = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// this overload is selected when I is even</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">int</span> I&gt; <span class="function"><span class="keyword">void</span> <span class="title">div</span><span class="params">(<span class="keyword">char</span>(*)[I % <span class="number">2</span> == <span class="number">1</span>] = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// this overload is selected when I is odd</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>attempting to use a type that is not a class or enumeration on the left of a scope resolution operator <code>::</code></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">int</span> <span class="title">f</span>(<span class="title">typename</span> <span class="title">T</span>:</span>:B*);</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">int</span> <span class="title">f</span>(<span class="title">T</span>);</span></span><br><span class="line"><span class="keyword">int</span> i = f&lt;<span class="keyword">int</span>&gt;(<span class="number">0</span>); <span class="comment">// int::B* failed. So uses second overload</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>attempting to use a member of a type, where<ul>
-<li>the type does not contain the specified member</li>
-<li>the specified member is not a type where a type is required</li>
-<li>the specified member is not a non-type where a non-type is required</li>
-<li>the specified member is not a template where a template is required</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">int</span> I&gt; <span class="class"><span class="keyword">struct</span> <span class="title">X</span> &#123;</span> &#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">class</span>&gt; <span class="title">struct</span> <span class="title">Z</span> &#123;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">void</span> <span class="title">f</span>(<span class="title">typename</span> <span class="title">T</span>:</span>:Y*)&#123;&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">void</span> <span class="title">g</span>(<span class="title">X</span>&lt;T::N&gt;*)&#123;</span>&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">void</span> <span class="title">h</span>(<span class="title">Z</span>&lt;T::template TT&gt;*)&#123;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span>&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span> &#123;</span> <span class="keyword">int</span> Y; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span> &#123;</span> <span class="keyword">typedef</span> <span class="keyword">int</span> N; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D</span> &#123;</span> <span class="keyword">typedef</span> <span class="keyword">int</span> TT; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B1</span> &#123;</span> <span class="keyword">typedef</span> <span class="keyword">int</span> Y; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C1</span> &#123;</span> <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">0</span>; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D1</span> &#123;</span> </span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TT</span></span></span><br><span class="line"><span class="class">    &#123;</span> </span><br><span class="line">    &#125;; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Deduction fails in each of these cases:</span></span><br><span class="line">    f&lt;A&gt;(<span class="number">0</span>); <span class="comment">// A does not contain a member Y</span></span><br><span class="line">    f&lt;B&gt;(<span class="number">0</span>); <span class="comment">// The Y member of B is not a type</span></span><br><span class="line">    g&lt;C&gt;(<span class="number">0</span>); <span class="comment">// The N member of C is not a non-type</span></span><br><span class="line">    h&lt;D&gt;(<span class="number">0</span>); <span class="comment">// The TT member of D is not a template</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Deduction succeeds in each of these cases:</span></span><br><span class="line">    f&lt;B1&gt;(<span class="number">0</span>); </span><br><span class="line">    g&lt;C1&gt;(<span class="number">0</span>); </span><br><span class="line">    h&lt;D1&gt;(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>attempting to create a pointer to reference</li>
-<li>attempting to create a reference to void</li>
-<li>attempting to create pointer to member of T, where T is not a class type</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">is_class</span> &#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">char</span> yes[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">char</span> no [<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C&gt; <span class="function"><span class="keyword">static</span> yes&amp; <span class="title">test</span><span class="params">(<span class="keyword">int</span> C::*)</span></span>; <span class="comment">// selected if C is a class type</span></span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C&gt; <span class="function"><span class="keyword">static</span> no&amp;  <span class="title">test</span><span class="params">(...)</span></span>;      <span class="comment">// selected otherwise</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">bool</span> <span class="keyword">const</span> value = <span class="keyword">sizeof</span>(test&lt;T&gt;(<span class="number">0</span>)) == <span class="keyword">sizeof</span>(yes);</span><br><span class="line">    <span class="comment">// if C is a class type, value is true.</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>attempting to give an invalid type to a non-type template parameter</li>
-<li>attempting to perform an invalid conversion in <ul>
-<li>in a template argument expression</li>
-<li>in an expression used in function declaration</li>
-</ul>
-</li>
-<li>attempting to create a function type with a parameter of type void</li>
-<li>attempting to create a function type which returns an array type or a function type</li>
-<li>attempting to create a cv-qualified function type  (until C++11)</li>
-</ul>
-<h3 id="Expression-SFINAE"><a href="#Expression-SFINAE" class="headerlink" title="Expression SFINAE"></a>Expression SFINAE</h3><p><strong>since C++11</strong></p>
-<p>The following expression errors are SFINAE errors</p>
-<ul>
-<li>ill-formed expression used in a template parameter type</li>
-<li>ill-formed expression used in the function type</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">X</span> &#123;</span>&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Y</span> &#123;</span> Y(X)&#123;&#125; &#125;; <span class="comment">// X is convertible to Y</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">auto</span> <span class="title">f</span>(<span class="title">T</span> <span class="title">t1</span>, <span class="title">T</span> <span class="title">t2</span>) -&gt; <span class="title">decltype</span>(<span class="title">t1</span> + <span class="title">t2</span>);</span> <span class="comment">// overload #1</span></span><br><span class="line"></span><br><span class="line"><span class="function">X <span class="title">f</span><span class="params">(Y, Y)</span></span>;  <span class="comment">// overload #2</span></span><br><span class="line"></span><br><span class="line">X x1, x2;</span><br><span class="line">X x3 = f(x1, x2);  <span class="comment">// deduction fails on #1 (expression x1+x2 is ill-formed)</span></span><br><span class="line">                   <span class="comment">// only #2 is in the overload set, and is called</span></span><br></pre></td></tr></table></figure>
-<p><strong>until C++11</strong></p>
-<p>Only constant expressions that are used in types (such as array bounds) were required to be treated as SFINAE (and not hard errors) before C++11.</p>
-<h3 id="Library-support"><a href="#Library-support" class="headerlink" title="Library support"></a>Library support</h3><p>The standard library component <code>std::enable_if</code> allows for creating a substitution failure in order to enable or disable particular overloads based on a condition evaluated at compile time.</p>
-<p>The standard library component <code>std::void_t</code> is another utility metafunction that simplifies SFINAE applications.</p>
-<p>In addition, many <code>type traits</code> are implemented using SFINAE.</p>
-<h3 id="Alternatives"><a href="#Alternatives" class="headerlink" title="Alternatives"></a>Alternatives</h3><p>Where applicable, <code>tag dispatch</code>, <code>static_assert</code>, and, if available, <code>concepts</code>, are usually preferred over direct use of SFINAE.</p>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://en.cppreference.com/w/cpp/language/sfinae" target="_blank" rel="noopener">https://en.cppreference.com/w/cpp/language/sfinae</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/21314708" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21314708</a></p>
-<h2 id="Fin"><a href="#Fin" class="headerlink" title="Fin"></a>Fin</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li></ul>
     </div>
 
       

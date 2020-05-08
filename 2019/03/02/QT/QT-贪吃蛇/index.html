@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Skuaka">
+
+
+
+<meta name="description" content="贪吃蛇">
+<meta name="keywords" content="QT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT 贪吃蛇">
+<meta property="og:url" content="http://skuaka.cn/2019/03/02/QT/QT-贪吃蛇/index.html">
+<meta property="og:site_name" content="Skuaka">
+<meta property="og:description" content="贪吃蛇">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://118.25.53.128/Picture/Snake/snake-score.jpg">
+<meta property="og:image" content="http://118.25.53.128/Picture/Snake/snake-score.jpg">
+<meta property="og:updated_time" content="2020-05-08T20:17:42.623Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QT 贪吃蛇">
+<meta name="twitter:description" content="贪吃蛇">
+<meta name="twitter:image" content="http://118.25.53.128/Picture/Snake/snake-score.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Skuaka" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/avatar.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>QT 贪吃蛇 | Skuaka</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Skuaka</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">For you, a thousand times over.</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">Home</a></li>
+                        
+                            <li><a href="/archives/">Archives</a></li>
+                        
+                            <li><a href="/tags/">Tags</a></li>
+                        
+                            <li><a href="/about/">about</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:skuaka@icloud.com" title="Email"></a>
+                            
+                                <a class="fa bilibili" href="https://space.bilibili.com/5006495" title="bilibili"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/unp/"><unp></unp></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CCIE/">CCIE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMake/">CMake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDos/">DDos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTD/">DTD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DoNotStarve/">DoNotStarve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dreamweaver/">Dreamweaver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game/">Game</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/">IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Job/">Job</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kali/">Kali</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Makefile/">Makefile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MetaProgram/">MetaProgram</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mp3/">Mp3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Op-System/">Op-System</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Perl/">Perl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QT/">QT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberrypi/">Raspberrypi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLserver/">SQLserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Security/">Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tcp-ip/">Tcp/ip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vultr/">Vultr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wifi/">Wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/">base64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc-gdb/">gcc,gdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS/">macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openSSL/">openSSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/postman/">postman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/robotframework/">robotframework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/steamcmd/">steamcmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger/">swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travis/">travis</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Skuaka</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Skuaka</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">For you, a thousand times over.</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">Home</a></li>
+                
+                    <li><a href="/archives/">Archives</a></li>
+                
+                    <li><a href="/tags/">Tags</a></li>
+                
+                    <li><a href="/about/">about</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:skuaka@icloud.com" title="Email"></a>
+                            
+                                <a class="fa bilibili" target="_blank" href="https://space.bilibili.com/5006495" title="bilibili"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-QT/QT-贪吃蛇" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/02/QT/QT-贪吃蛇/" class="article-date">
+      <time datetime="2019-03-02T08:42:42.000Z" itemprop="datePublished">2019-03-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      QT 贪吃蛇
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/QT/">QT</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="贪吃蛇"><a href="#贪吃蛇" class="headerlink" title="贪吃蛇"></a>贪吃蛇</h3><p><img src="http://118.25.53.128/Picture/Snake/snake-score.jpg" alt="snake-score"></p>
+<a id="more"></a>
+<p>要实现这个贪吃蛇游戏，会利用到事件系统、Graphics View Framework、QPainter 等相关内容，也会了解到一个游戏所具有的一些特性，比如游戏循环等。</p>
+<p>很明显，绘制图形和移动图形，是一个游戏的核心。对于游戏而言，将其中的每一个部分看做对象是非常合理的。因此，我们选择 Graphics View Framework 作为核心框架。同时，Graphics View Framework 的性能很好，即便是数千上万的图形也没有压力。这一点非常适合于游戏。</p>
+<p>对于游戏而言，我们需要一个QGraphicsScene，作为游戏发生的舞台；一个QGraphicsView，作为观察游戏舞台的组件；以及若干元素，用于表示游戏对象，比如蛇、食物以及障碍物等。</p>
+<p>大致分析过游戏组成以及各部分的实现方式后，我们可以开始编码了。这当然是一个 GUI 工程，主窗口应该是一个QGraphicsView。为了以后的实现方便（比如，我们希望向工具栏添加按钮等），我们不会直接以QGraphicsView 作为顶层窗口，而是<strong>将其添加到一个主窗口上</strong>。这里，我们不使用 QtDesigner 进行界面设计，而是直接编码完成。</p>
+<h4 id="MainWindow"><a href="#MainWindow" class="headerlink" title="MainWindow"></a>MainWindow</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMainWindow&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QGraphicsScene</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QGraphicsView</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GameController</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> :</span> <span class="keyword">public</span> QMainWindow</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MainWindow(QWidget *parent = <span class="number">0</span>);</span><br><span class="line">    ~MainWindow();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">adjustViewSize</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initScene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initSceneBackground</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    QGraphicsScene *scene;</span><br><span class="line">    QGraphicsView *view;</span><br><span class="line"></span><br><span class="line">    GameController *game;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>构造函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MainWindow::MainWindow(QWidget *parent) :</span><br><span class="line">    QMainWindow(parent),</span><br><span class="line">    scene(<span class="keyword">new</span> QGraphicsScene(<span class="keyword">this</span>)),</span><br><span class="line">    view(<span class="keyword">new</span> QGraphicsView(scene, <span class="keyword">this</span>)),</span><br><span class="line">    game(<span class="keyword">new</span> GameController(*scene, <span class="keyword">this</span>))</span><br><span class="line">&#123;</span><br><span class="line">    setCentralWidget(view);</span><br><span class="line">    resize(<span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line"></span><br><span class="line">    initScene();</span><br><span class="line">    initSceneBackground();</span><br><span class="line"></span><br><span class="line">    QTimer::singleShot(<span class="number">0</span>, <span class="keyword">this</span>, SLOT(adjustViewSize()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>最后一行的 singleShot() 函数原型如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> QTimer::singleShot(<span class="keyword">int</span> msec, QObject * receiver, <span class="keyword">const</span> <span class="keyword">char</span> * member);</span><br></pre></td></tr></table></figure>
+<p>该函数接受三个参数，简单来说，它的意思是，在 msec 毫秒之后，调用 receiver 的 member <strong>槽函数</strong>。在我们的代码中，第一个参数传递的是 0，也就是 0ms 之后，调用<code>this-&gt;adjustViewSize()</code>。</p>
+<p>QTimer 的处理是将其放到事件列表中，等到下一次事件循环开始时去调用这个函数。那么，<code>QTimer::signleShot(0, ...)</code>意思是，在下一次事件循环开始时，立刻调用指定的槽函数。</p>
+<p>在我们的例子中，我们需要在视图绘制完毕后才去改变大小（视图绘制当然是在<code>paintEvent()</code>事件中），因此我们需要在下一次事件循环中调用<code>adjustViewSize()</code>函数。这就是为什么我们需要用<code>QTimer</code>而不是直接调用<code>adjustViewSize()</code>。</p>
+<p>上面看不懂，去stackflow看到了看得懂的：</p>
+<p><strong>Every call to QTimer::singleShot(…) is executed on the event loop of the thread where it is invoked. If invoked from the main thread, it’ll be the event loop started with app.exec().</strong></p>
+</li>
+</ul>
+<p>接下来看看<code>initScene()</code>和<code>initSceneBackground()</code>的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MainWindow::initScene()</span><br><span class="line">&#123;</span><br><span class="line">    scene-&gt;setSceneRect(<span class="number">-100</span>, <span class="number">-100</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::initSceneBackground()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">QPixmap <span class="title">bg</span><span class="params">(TILE_SIZE, TILE_SIZE)</span></span>;</span><br><span class="line">    <span class="function">QPainter <span class="title">p</span><span class="params">(&amp;bg)</span></span>;</span><br><span class="line">    p.setBrush(QBrush(Qt::gray));</span><br><span class="line">    p.drawRect(<span class="number">0</span>, <span class="number">0</span>, TILE_SIZE, TILE_SIZE);</span><br><span class="line"></span><br><span class="line">    view-&gt;setBackgroundBrush(QBrush(bg));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>initSceneBackground()</code>函数看似很长，实际却很简单。首先我们创建一个边长 TILE_SIZE 的 QPixmap，将其使用灰色填充矩形。我们没有设置边框颜色，默认就是黑色。然后将这个 QPixmap 作为背景画刷，铺满整个视图。</li>
+</ul>
+<hr>
+<p>我们的地图是建立在<code>QGraphicsScene</code>的基础之上的，所以，里面的对象应该是<code>QGraphicsItem</code>实例。通常，我们会把所有的图形元素（这里便是游戏中需要的对象，例如蛇、食物等）设计为<code>QGraphicsItem</code>的子类，在这个类中添加绘制自身的代码以及动画逻辑。这也是面向对象的开发方式：封装自己的属性和操作。在我们的游戏中，应该有三个对象：<strong>蛇 Snake</strong>、<strong>食物 Food</strong>、<strong>墙 Wall</strong>。</p>
+<h4 id="food"><a href="#food" class="headerlink" title="food"></a>food</h4><p>我们从食物开始。因为它是最简单的。我们将其作为一个红色的小圆饼，大小要比地图中的一个方格要小，因此我们可以将其放置在一个方格中。正如上面分析的那样，我们的Food 类需要继承<code>QGraphicsItem</code>。<strong>按照接口约束，<code>QGraphicsItem</code>的子类需要重写至少两个函数：<code>boundingRect()</code>和<code>paint()</code>。</strong></p>
+<ul>
+<li><p><code>boundingRect()</code>返回一个用于包裹住图形元素的矩形，也就是这个图形元素的范围。</p>
+<p>需要注意的是，这个矩形必须能够<strong>完全包含</strong>图形元素。所谓“完全包含”，意思是，在图形元素有动画的时候，这个矩形也必须将整个图形元素包含进去。如果范围矩形过小。图形会被剪切；如果范围矩形过大，就会影响性能。</p>
+</li>
+<li><p><code>paint()</code>的作用是使用<code>QPainter</code>将图形元素绘制出来。</p>
+</li>
+</ul>
+<p>下面是 food.h 和 food.cpp 的内容：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">////////// food.h //////////</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGraphicsItem&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Food</span> :</span> <span class="keyword">public</span> QGraphicsItem</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Food(qreal x, qreal y);</span><br><span class="line"></span><br><span class="line">    <span class="function">QRectF <span class="title">boundingRect</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">paint</span><span class="params">(QPainter *painter, <span class="keyword">const</span> QStyleOptionGraphicsItem *, QWidget *)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">QPainterPath <span class="title">shape</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////// food.cpp //////////</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPainter&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"constants.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"food.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> qreal FOOD_RADIUS = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">Food::Food(qreal x, qreal y)</span><br><span class="line">&#123;</span><br><span class="line">    setPos(x, y);</span><br><span class="line">    setData(GD_Type, GO_Food);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QRectF Food::boundingRect() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> QRectF(-TILE_SIZE,    -TILE_SIZE,</span><br><span class="line">                   TILE_SIZE * <span class="number">2</span>, TILE_SIZE * <span class="number">2</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Food::paint(QPainter *painter, <span class="keyword">const</span> QStyleOptionGraphicsItem *, QWidget *)</span><br><span class="line">&#123;</span><br><span class="line">    painter-&gt;save();</span><br><span class="line"></span><br><span class="line">    painter-&gt;setRenderHint(QPainter::Antialiasing);</span><br><span class="line">    painter-&gt;fillPath(shape(), Qt::red);</span><br><span class="line"></span><br><span class="line">    painter-&gt;restore();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QPainterPath Food::shape() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    QPainterPath p;</span><br><span class="line">    p.addEllipse(QPointF(TILE_SIZE / <span class="number">2</span>, TILE_SIZE / <span class="number">2</span>), FOOD_RADIUS, FOOD_RADIUS);</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>setPos() 函数就是设置 item 的位置，其坐标是相对父对象的。</p>
+</li>
+<li><p><code>setData()</code>函数是我们之后要用到的，这里简单提一句，它的作用为该图形元素添加额外的数据信息，类似于散列一样的键值对的形式。</p>
+</li>
+<li><p><code>boundingRect()</code>简单地返回一个<code>QRect</code>对象。由于我们的元素就是一个圆形，所以我们返回的是一个简单的矩形。注意，这个矩形的范围实际是四倍于实际区域的：以元素坐标 (x, y) 为中心，边长为<code>TILE_SIZE * 2</code>的正方形。</p>
+</li>
+<li><p>我们还重写了<code>shape()</code>函数。这也是一个虚函数，但是并不是必须覆盖的。这个函数返回的是元素实际的路径。所谓路径，可以理解成元素的矢量轮廓线，就是<code>QPainterPath</code>所表示的。</p>
+<p>我们使用<code>addEllipse()</code>函数，添加了一个圆心为 (TILE_SIZE / 2, TILE_SIZE / 2)，半径 FOOD_RADIUS 的圆，正好是矩形的右下角的中心点。由于设置了<code>shape()</code>函数，我们所要做的，就是用painter的fillPath()方法把<code>shape()</code>函数定义的路径绘制出来。注意，我们使用了<code>QPainter::save()</code>和<code>QPainter::restore()</code>两个函数，用于保存画笔状态。</p>
+</li>
+</ul>
+<hr>
+<h4 id="游戏循环"><a href="#游戏循环" class="headerlink" title="游戏循环"></a>游戏循环</h4><p>现在我们有了第一个图形元素，那么，就让我们把它添加到场景中吧！对于一个游戏，通常需要有一个中心控制的类，用于控制所有游戏相关的行为。我们将其取名为<code>GameController</code>。</p>
+<p><code>GameController</code>的工作是，初始化场景中的游戏对象，开始游戏循环。l</p>
+<p><strong>在 Graphics View Framework 中，每一帧都应该调用一个称为<code>advance()</code>的函数。<code>QGraphicsScene::advance()</code>会调用场景中每一个元素自己的<code>advance()</code>函数。所以，如果图形元素需要做什么事，必须重写<code>QGraphicsItem</code>的<code>advance()</code>，然后在游戏循环中调用这个函数。</strong></p>
+<p><code>GameController</code>创建并开始游戏循环。当然，我们也可以加入<code>pause()</code>和<code>resume()</code>函数。现在，我们来看看它的实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GameController::GameController(QGraphicsScene *scene, QObject *parent) :</span><br><span class="line">    QObject(parent),</span><br><span class="line">    scene(scene),</span><br><span class="line">    snake(<span class="keyword">new</span> Snake(<span class="keyword">this</span>))</span><br><span class="line">&#123;</span><br><span class="line">    timer.start(<span class="number">1000</span>/<span class="number">33</span>);</span><br><span class="line"></span><br><span class="line">    Food *a1 = <span class="keyword">new</span> Food(<span class="number">0</span>, <span class="number">-50</span>);</span><br><span class="line">    scene-&gt;addItem(a1);</span><br><span class="line">    scene-&gt;addItem(snake);</span><br><span class="line"></span><br><span class="line">    scene-&gt;installEventFilter(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    resume();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>GameController</code>的构造函数。首先开启充当游戏循环的定时器，定时间隔是 1000 / 33 毫秒，也就是每秒 30（1000 / 33 = 30）帧，resume() 将这个定时器安装到advance() 槽上。<code>GameController</code>有两个成员变量：scene 和 snake，我们将第一个食物和蛇都加入到场景中。同时，我们为<code>GameController</code>添加了事件过滤器，以便监听键盘事件。这里我们先不管这个事件过滤器，直接看看后面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::pause()</span><br><span class="line">&#123;</span><br><span class="line">    disconnect(&amp;timer, SIGNAL(timeout()),</span><br><span class="line">               scene,  SLOT(advance()));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> GameController::resume()</span><br><span class="line">&#123;</span><br><span class="line">    connect(&amp;timer, SIGNAL(timeout()),</span><br><span class="line">            scene,  SLOT(advance()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>pause()</code>和<code>resume()</code>函数很简单：我们只是连接或者断开定时器的信号。</strong>当我们把这一切都准备好之后，我们把<code>GameController</code>添加到<code>MainWindow</code>中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent),</span><br><span class="line">      game(<span class="keyword">new</span> GameController(scene, <span class="keyword">this</span>))</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于<code>GameController</code>在构造时已经开始游戏循环，因此我们不需要另外调用一个所谓的“start”函数。这样，我们就把第一个食物添加到了游戏场景。</p>
+<hr>
+<h4 id="snake绘制"><a href="#snake绘制" class="headerlink" title="snake绘制"></a>snake绘制</h4><p>蛇要更复杂一些。在我们的游戏中，蛇是由黄色的小方块组成，这是最简单的实现方式了。第一个是蛇的头部，紧接着是它的身体。对此，我们有两个必须面对的困难：</p>
+<ol>
+<li>蛇具有复杂得多的形状。因为蛇的形状随着游戏者的控制而不同，因此，我们必须找出一个能够恰好包含蛇头和所有身体块的矩形。这也是 boundingRect() 函数所要解决的问题。</li>
+<li>蛇会长大（比如吃了食物之后）。因此，我们需要在蛇对象中增加一个用于代表蛇身体长度的<code>growing</code>变量：当<code>growing</code>为正数时，蛇的身体增加一格；当<code>growing</code>为负数时，蛇的身体减少一格。</li>
+<li><code>advance()</code>函数用于编码移动部分，这个函数会在一秒内调用 30 次（这是我们在<code>GameController</code>的定时器中决定的）。</li>
+</ol>
+<p>我们首先从<code>boundingRect()</code>开始看起：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">QRectF Snake::boundingRect() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    qreal minX = head.x();</span><br><span class="line">    qreal minY = head.y();</span><br><span class="line">    qreal maxX = head.x();</span><br><span class="line">    qreal maxY = head.y();</span><br><span class="line"></span><br><span class="line">    foreach (QPointF p, tail) &#123;</span><br><span class="line">        maxX = p.x() &gt; maxX ? p.x() : maxX;</span><br><span class="line">        maxY = p.y() &gt; maxY ? p.y() : maxY;</span><br><span class="line">        minX = p.x() &lt; minX ? p.x() : minX;</span><br><span class="line">        minY = p.y() &lt; minY ? p.y() : minY;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    QPointF tl = mapFromScene(QPointF(minX, minY));</span><br><span class="line">    QPointF br = mapFromScene(QPointF(maxX, maxY));</span><br><span class="line"></span><br><span class="line">    QRectF bound = QRectF(tl.x(),  <span class="comment">// x</span></span><br><span class="line">                          tl.y(),  <span class="comment">// y</span></span><br><span class="line">                          br.x() - tl.x() + SNAKE_SIZE,      <span class="comment">// width</span></span><br><span class="line">                          br.y() - tl.y() + SNAKE_SIZE       <span class="comment">//height</span></span><br><span class="line">                          );</span><br><span class="line">    <span class="keyword">return</span> bound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这个函数的算法是：遍历蛇身体的每一个方块，找出所有部分的最大的 x 坐标和 y 坐标，以及最小的 x 坐标和 y 坐标。这样，夹在其中的便是蛇身体的外围区域。</li>
+</ul>
+<p><code>shape()</code> 函数决定了蛇身体的形状，我们遍历蛇身体的每一个方块向路径中添加：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">QPainterPath Snake::shape() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    QPainterPath path;</span><br><span class="line">    path.setFillRule(Qt::WindingFill);</span><br><span class="line"></span><br><span class="line">    path.addRect(QRectF(<span class="number">0</span>, <span class="number">0</span>, SNAKE_SIZE, SNAKE_SIZE));</span><br><span class="line"></span><br><span class="line">    foreach (QPointF p, tail) &#123;</span><br><span class="line">        QPointF itemp = mapFromScene(p);</span><br><span class="line">        path.addRect(QRectF(itemp.x(), itemp.y(), SNAKE_SIZE, SNAKE_SIZE));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在我们实现了<code>shape()</code>函数的基础之上，<code>paint()</code>函数就很简单了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Snake::paint(QPainter *painter, <span class="keyword">const</span> QStyleOptionGraphicsItem *, QWidget *)</span><br><span class="line">&#123;</span><br><span class="line">    painter-&gt;save();</span><br><span class="line">    painter-&gt;fillPath(shape(), Qt::yellow);</span><br><span class="line">    painter-&gt;restore();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们已经把蛇“画”出来。</p>
+<hr>
+<h4 id="snake动画"><a href="#snake动画" class="headerlink" title="snake动画"></a>snake动画</h4><p>现在，我们开始添加游戏控制的代码。首先我们从最简单的四个方向键开始：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Snake::moveLeft()</span><br><span class="line">&#123;</span><br><span class="line">    head.rx() -= SNAKE_SIZE;</span><br><span class="line">    <span class="keyword">if</span> (head.rx() &lt; <span class="number">-100</span>) &#123;</span><br><span class="line">        head.rx() = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Snake::moveRight()</span><br><span class="line">&#123;</span><br><span class="line">    head.rx() += SNAKE_SIZE;</span><br><span class="line">    <span class="keyword">if</span> (head.rx() &gt; <span class="number">100</span>) &#123;</span><br><span class="line">        head.rx() = <span class="number">-100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Snake::moveUp()</span><br><span class="line">&#123;</span><br><span class="line">    head.ry() -= SNAKE_SIZE;</span><br><span class="line">    <span class="keyword">if</span> (head.ry() &lt; <span class="number">-100</span>) &#123;</span><br><span class="line">        head.ry() = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Snake::moveDown()</span><br><span class="line">&#123;</span><br><span class="line">    head.ry() += SNAKE_SIZE;</span><br><span class="line">    <span class="keyword">if</span> (head.ry() &gt; <span class="number">100</span>) &#123;</span><br><span class="line">        head.ry() = <span class="number">-100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们有四个以 move 开头的函数，内容都很类似：分别以 SNAKE_SIZE 为基准改变头部坐标，然后与场景边界比较，大于边界值时，设置为边界值。这么做的结果是，当蛇运动到场景最右侧时，会从最左侧出来；当运行到场景最上侧时，会从最下侧出来。</p>
+<p>然后我们添加一个比较复杂的函数，借此，我们可以看出 Graphics View Framework 的强大之处：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Snake::handleCollisions()</span><br><span class="line">&#123;</span><br><span class="line">    QList&lt;QGraphicsItem *&gt; collisions = collidingItems();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check collisions with other objects on screen</span></span><br><span class="line">    foreach (QGraphicsItem *collidingItem, collisions) &#123;</span><br><span class="line">        <span class="keyword">if</span> (collidingItem-&gt;data(GD_Type) == GO_Food) &#123;</span><br><span class="line">            <span class="comment">// Let GameController handle the event by putting another apple</span></span><br><span class="line">            controller.snakeAteFood(<span class="keyword">this</span>, (Food *)collidingItem);</span><br><span class="line">            growing += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Check snake eating itself</span></span><br><span class="line">    <span class="keyword">if</span> (tail.contains(head)) &#123;</span><br><span class="line">        controller.snakeAteItself(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>首先，我们使用<code>collidingItems()</code>取得所有碰撞的元素。这个函数的签名是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QList&lt;QGraphicsItem *&gt; QGraphicsItem::collidingItems(</span><br><span class="line">        Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) <span class="keyword">const</span></span><br></pre></td></tr></table></figure>
+<p>该函数返回与这个元素碰撞的所有元素。Graphcis View Framework 提供了四种碰撞检测的方式：</p>
+<ul>
+<li><code>Qt::ContainsItemShape</code>：如果被检测物的形状（<code>shape()</code>）完全包含在检测物内，算做碰撞；</li>
+<li><code>Qt::IntersectsItemShape</code>：如果被检测物的形状（<code>shape()</code>）与检测物有交集，算做碰撞；</li>
+<li><code>Qt::ContainsItemBoundingRect</code>：如果被检测物的包含矩形（<code>boundingRect()</code>）完全包含在检测物内，算做碰撞；</li>
+<li><code>Qt::IntersectsItemBoundingRect</code>：如果被检测物的包含矩形（<code>boundingRect()</code>）与检测物有交集，算做碰撞。</li>
+</ul>
+<p>注意，该函数默认是<code>Qt::IntersectsItemShape</code>。回忆一下，我们之前编写的代码，<code>Food</code>的<code>boundingRect()</code>要大于其实际值，却不影响我们的游戏逻辑判断，这就是原因：因为我们使用的是<code>Qt::IntersectsItemShape</code>判断检测，这与<code>boundingRect()</code>无关。</p>
+<p>后面的代码就很简单了。我们遍历所有被碰撞的元素，如果是食物，则进行吃食物的算法，同时将蛇的长度加 1；如果身体包含了头，那就是蛇吃了自己的身体。</p>
+</li>
+<li><p>还记得我们在 Food 类中有这么一句：<code>setData(GD_Type, GO_Food);</code></p>
+<p><code>QGraphicsItem::setData()</code>以键值对的形式设置元素的自定义数据。所谓自定义数据，就是对应用程序有所帮助的用户数据。Qt 不会使用这种机制来存储数据，因此你可以放心地将所需要的数据存储到元素对象。例如，我们在Food的构造函数中，将GD_Type的值设置为GO_Food。那么，这里我们取出GD_Type，如果其值是GO_Food，意味着这个QGraphicsItem就是一个Food，因此我们可以将其安全地进行后面的类型转换。</p>
+</li>
+</ul>
+<p>下面是<code>advance()</code>函数的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Snake::advance(<span class="keyword">int</span> step)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!step) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (tickCounter++ % speed != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (moveDirection == NoMove) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (growing &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        tail &lt;&lt; head;</span><br><span class="line">        growing -= <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        tail.takeFirst();</span><br><span class="line">        tail &lt;&lt; head;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (moveDirection) &#123;</span><br><span class="line">        <span class="keyword">case</span> MoveLeft:</span><br><span class="line">            moveLeft();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> MoveRight:</span><br><span class="line">            moveRight();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> MoveUp:</span><br><span class="line">            moveUp();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> MoveDown:</span><br><span class="line">            moveDown();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    setPos(head);</span><br><span class="line">    handleCollisions();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>QGraphicsItem::advance()</code>函数接受一个 int 作为参数。这个 int 代表该函数被调用的时间。<code>QGraphicsItem::advance()</code>函数会被<code>QGraphicsScene::advance()</code>函数调用两次：第一次时这个 int 为 0，代表即将开始调用；第二次这个 int 为 1，代表已经开始调用。在我们的代码中，我们只使用不为 0 的阶段，因此当 !step 时，函数直接返回。</li>
+<li><code>tickCounter</code>实际是我们内部的一个计时器。我们使用 speed 作为蛇的两次动作的间隔时间，直接影响到游戏的难度。speed 值越大，两次运动的间隔时间越大，游戏越简单。这是因为随着 speed 的增大，tickCounter % speed != 0 的次数响应越多，刷新的次数就会越少，蛇运动得越慢。</li>
+<li><code>moveDirection</code>显然就是运动方向，当是 NoMove 时，函数直接返回。</li>
+<li><code>growing</code>是正在增长的方格数。当其大于 0 时，我们将头部追加到尾部的位置，同时减少一个增长值；当其小于 0 时，我们删除第一个，然后把头部添加进去。我们可以把 growing 看做即将发生的变化。比如，我们将 growing 初始化为 7。第一次运行<code>advance()</code>时，由于 7 &gt; 1，因此将头部追加，然后 growing 减少 1。直到 growing 为 0，此时，蛇的长度不再发生变化，直到我们吃了一个食物。</li>
+<li>下面是相应的方向时需要调用对应的函数。最后，我们设置元素的坐标，同时检测碰撞。</li>
+</ul>
+<hr>
+<h4 id="用户控制"><a href="#用户控制" class="headerlink" title="用户控制"></a>用户控制</h4><p>接下来完成<code>GameController</code>中有关用户控制的相关代码。</p>
+<p>首先，我们来给<code>GameController</code>添加一个事件过滤器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> GameController::eventFilter(QObject *object, QEvent *event)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (event-&gt;type() == QEvent::KeyPress) &#123;</span><br><span class="line">        handleKeyPressed((QKeyEvent *)event);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> QObject::eventFilter(object, event);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>回忆一下，我们使用<code>QGraphicsScene</code>作为游戏场景。为什么不直接继承<code>QGprahicsScene</code>，重写其<code>keyPressEvent()</code>函数呢？这里的考虑是：</p>
+<ul>
+<li>第一，我们不想只为重写一个键盘事件而继承<code>QGraphicScene</code>。这不符合面向对象设计的要求。继承首先应该有“是一个（is-a）”的关系。我们将游戏场景继承<code>QGraphcisScene</code>当然满足这个关系，无可厚非。但是，继承还有一个“特化”的含义，我们只想控制键盘事件，并没有添加其它额外的代码，因此感觉并不应该作此继承。</li>
+<li>第二，我们希望将表示层与控制层分离：明明已经有了<code>GameController</code>，显然，这是一个用于控制游戏的类，那么，为什么键盘控制还要放在场景中呢？这岂不将控制与表现层耦合起来了吗？</li>
+</ul>
+<p>基于以上两点考虑，我们选择不继承<code>QGraphicsScene</code>，而是在<code>GameController</code>中为场景添加事件过滤器，从而完成键盘事件的处理。下面我们看看这个<code>handleKeyPressed()</code>函数是怎样的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::handleKeyPressed(QKeyEvent *event)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span> (event-&gt;key()) &#123;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Left:</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveLeft);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Right:</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveRight);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Up:</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveUp);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Down:</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveDown);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码并不复杂：只是设置蛇的运动方向。我们在前面的代码中，已经为蛇添加了运动方向的控制，因此，我们只需要修改这个状态，即可完成对蛇的控制。</p>
+<h4 id="游戏逻辑"><a href="#游戏逻辑" class="headerlink" title="游戏逻辑"></a>游戏逻辑</h4><p>接下来，我们要完成游戏逻辑：吃食物、生成新的食物以及咬到自己这三个逻辑：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::snakeAteFood(Snake *snake, Food *food)</span><br><span class="line">&#123;</span><br><span class="line">    scene.removeItem(food);</span><br><span class="line">    <span class="keyword">delete</span> food;</span><br><span class="line"></span><br><span class="line">    addNewFood();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先是蛇吃到食物。如果蛇吃到了食物，那么，我们将食物从场景中移除，然后添加新的食物。为了避免内存泄露，我们需要在这里 delete 食物，以释放占用的空间。当然，你应该想到，我们肯定会在<code>addNewFood()</code>函数中使用 new 运算符重新生成新的食物。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::addNewFood()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        x = (<span class="keyword">int</span>) (qrand() % <span class="number">100</span>) / <span class="number">10</span>;</span><br><span class="line">        y = (<span class="keyword">int</span>) (qrand() % <span class="number">100</span>) / <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">        x *= <span class="number">10</span>;</span><br><span class="line">        y *= <span class="number">10</span>;</span><br><span class="line">    &#125; <span class="keyword">while</span> (snake-&gt;shape().contains(snake-&gt;mapFromScene(QPointF(x + <span class="number">5</span>, y + <span class="number">5</span>))));</span><br><span class="line"></span><br><span class="line">    Food *food = <span class="keyword">new</span> Food(x , y);</span><br><span class="line">    scene.addItem(food);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>addNewFood()</code>代码中，我们首先计算新的食物的坐标：使用一个循环，直到找到一个不在蛇身体中的坐标。为了判断一个坐标是不是位于蛇的身体上，我们利用蛇的shape()函数。需要注意的是，shape()返回元素坐标系中的坐标，而我们计算而得的 x，y 坐标位于场景坐标系，因此我们必须利用<code>QGraphicsItem::mapFromScene()</code>将场景坐标系映射为元素坐标系。当我们计算出食物坐标后，我们在堆上重新创建这个食物，并将其添加到游戏场景。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::snakeAteItself(Snake *snake)</span><br><span class="line">&#123;</span><br><span class="line">    QTimer::singleShot(<span class="number">0</span>, <span class="keyword">this</span>, SLOT(gameOver()));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> GameController::gameOver()</span><br><span class="line">&#123;</span><br><span class="line">    scene.clear();</span><br><span class="line"></span><br><span class="line">    snake = <span class="keyword">new</span> Snake(*<span class="keyword">this</span>);</span><br><span class="line">    scene.addItem(snake);</span><br><span class="line">    addNewFood();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果蛇咬到了它自己，游戏即宣告结束。因此，我们直接调用<code>gameOver()</code>函数。这个函数将场景清空，然后重新创建蛇并增加第一个食物。为什么我们不直接调用gameOver()函数，而是利用QTimer调用呢？这是因为，我们不应该在一个 update 操作中去清空整个场景。因此我们使用QTimer，在 update 事件之后完成这个操作。否则程序会奔溃。</p>
+<p>至此，我们已经把这个简单的贪吃蛇游戏全部完成。其实还没有完成整个游戏：<code>Wall</code>对象完全没有实现，难度控制也没有完成。</p>
+<hr>
+<h3 id="优化日志"><a href="#优化日志" class="headerlink" title="优化日志"></a>优化日志</h3><h4 id="显示优化"><a href="#显示优化" class="headerlink" title="显示优化"></a>显示优化</h4><ol>
+<li><p>物品坐标是 -100到100，但是物品显示在右下角 10 像素的正方形内，所以场景长宽应该是210。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MainWindow::initScene()</span><br><span class="line">&#123;</span><br><span class="line">    scene-&gt;setSceneRect(<span class="number">-100</span>, <span class="number">-100</span>, <span class="number">210</span>, <span class="number">210</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>窗口的等比例缩放</p>
+<p>重写event()，通过监听Resize事件设置了窗口的等比例缩放</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> MainWindow::event(QEvent *e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (e-&gt;type() == QEvent::Resize) &#123;</span><br><span class="line">        <span class="comment">//QTimer::singleShot(0, this, SLOT(adjustViewSize()));</span></span><br><span class="line">        <span class="keyword">int</span> InnerWidth = <span class="keyword">this</span>-&gt;width();</span><br><span class="line">        <span class="keyword">int</span> InnerHeight = <span class="keyword">this</span>-&gt;height();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (InnerWidth &gt; InnerHeight)&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;resize(InnerWidth, InnerWidth);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;resize(InnerHeight, InnerHeight);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        adjustViewSize();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> QWidget::event(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>蛇身体占位太大</p>
+<p>因为一个格子是10像素，黑色边框线1像素，所以蛇身体方块长宽应该减少两像素。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">QPainterPath Snake::shape() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    QPainterPath path;</span><br><span class="line">    path.setFillRule(Qt::WindingFill);</span><br><span class="line"></span><br><span class="line">    path.addRect(QRectF(<span class="number">1</span>, <span class="number">1</span>, SNAKE_SIZE<span class="number">-1</span>, SNAKE_SIZE<span class="number">-1</span>));</span><br><span class="line"></span><br><span class="line">    foreach (QPointF p, tail) &#123;</span><br><span class="line">        QPointF itemp = mapFromScene(p);</span><br><span class="line">        path.addRect(QRectF(itemp.x()+<span class="number">1</span>, itemp.y()+<span class="number">1</span>, SNAKE_SIZE<span class="number">-1</span>, SNAKE_SIZE<span class="number">-1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="功能优化"><a href="#功能优化" class="headerlink" title="功能优化"></a>功能优化</h4><p>#####添加暂停功能</p>
+<p><code>GameController::handleKeyPressed()</code>是用来检测上下左右运动的，现在添加检测P键作为暂停。</p>
+<p>因为暂停后不应该再监听上下左右，所以要先检查P键，并且添加了一个<code>bool paused</code>成员。</p>
+<p>修改后的handleKeyPressed()如下：</p>
+   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameController::handleKeyPressed(QKeyEvent *event)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">if</span>(event-&gt;key() == Qt::Key_P)</span><br><span class="line">           <span class="keyword">if</span>(paused)&#123;</span><br><span class="line">               resume();</span><br><span class="line">               paused = <span class="literal">false</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span>&#123;</span><br><span class="line">               pause();</span><br><span class="line">               paused = <span class="literal">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">   </span><br><span class="line">       <span class="keyword">if</span>(paused)</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">   </span><br><span class="line">       <span class="keyword">switch</span> (event-&gt;key()) &#123;</span><br><span class="line">           <span class="keyword">case</span> Qt::Key_Left:</span><br><span class="line">           <span class="comment">//...</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="蛇的反向运动"><a href="#蛇的反向运动" class="headerlink" title="蛇的反向运动"></a>蛇的反向运动</h5><p>原本代码在蛇反向运动的时候会认为蛇撞到了自己，即gameover，现在修改成需要检查方向否是反向的，如果是反向的，则直接返回。为了GameController能使用蛇的方向，添加snake的getMoveDirection()方法。</p>
+<p>继续上面的<code>handleKeyPressed()</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Snake::Direction Snake::getMoveDirection()&#123;</span><br><span class="line">    <span class="keyword">return</span> moveDirection;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> GameController::handleKeyPressed(QKeyEvent *event)&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	<span class="keyword">switch</span> (event-&gt;key()) &#123;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Left:</span><br><span class="line">            <span class="keyword">if</span>(snake-&gt;getMoveDirection() == Snake::MoveRight)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveLeft);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Right:</span><br><span class="line">            <span class="keyword">if</span>(snake-&gt;getMoveDirection() == Snake::MoveLeft)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveRight);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Up:</span><br><span class="line">            <span class="keyword">if</span>(snake-&gt;getMoveDirection() == Snake::MoveDown)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveUp);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Qt::Key_Down:</span><br><span class="line">            <span class="keyword">if</span>(snake-&gt;getMoveDirection() == Snake::MoveUp)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            snake-&gt;setMoveDirection(Snake::MoveDown);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="分数显示模块"><a href="#分数显示模块" class="headerlink" title="分数显示模块"></a>分数显示模块</h5><p>先给Mainwindow添加水平布局管理器，然后在这个布局管理器内添加一个垂直布局管理器，垂直布局管理器里添加两个Label，一个显示 “Score:” ，另一个显示分数（要用到信号槽），再添加一个垂直Spacer，美化界面。最后在水平布局管理器里添加view。</p>
+<p>首先在mainwindow内连接信号和槽</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent),</span><br><span class="line">      scene(<span class="keyword">new</span> QGraphicsScene(<span class="keyword">this</span>)),</span><br><span class="line">      view(<span class="keyword">new</span> QGraphicsView(scene, <span class="keyword">this</span>)),</span><br><span class="line">      game(<span class="keyword">new</span> GameController(*scene, <span class="keyword">this</span>)),</span><br><span class="line">      ui(<span class="keyword">new</span> Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</span><br><span class="line">    ui-&gt;horizontalLayout_2-&gt;addWidget(view);</span><br><span class="line"></span><br><span class="line">    resize(<span class="number">690</span>, <span class="number">600</span>);</span><br><span class="line">    <span class="keyword">this</span>-&gt;setWindowTitle(<span class="string">"Snake"</span>);</span><br><span class="line"></span><br><span class="line">    initScene();</span><br><span class="line">    initSceneBackground();</span><br><span class="line"></span><br><span class="line">    QObject::connect(game, &amp;GameController::changeScore,</span><br><span class="line">                     [=](<span class="keyword">int</span> s)&#123;ui-&gt;label_score_num-&gt;setText(QString::number(s));&#125; );</span><br><span class="line"></span><br><span class="line">    QTimer::singleShot(<span class="number">0</span>, <span class="keyword">this</span>, SLOT(adjustViewSize()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在gameController里添加 score 变量，并且按逻辑增加和置零，每次变动的时候 emit changeScore(score)。</p>
+<p><img src="http://118.25.53.128/Picture/Snake/snake-score.jpg" alt="snake-score"></p>
+<h5 id="最高分记录"><a href="#最高分记录" class="headerlink" title="最高分记录"></a>最高分记录</h5><h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2019/03/02/QT/QT-贪吃蛇/">QT 贪吃蛇</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Skuaka</a></p>
+        <p><span>Created:</span>2019-03-02, 16:42:42</p>
+        <p><span>Updated:</span>2020-05-09, 04:17:42</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2019/03/02/QT/QT-贪吃蛇/" title="QT 贪吃蛇">http://skuaka.cn/2019/03/02/QT/QT-贪吃蛇/</a>
+            <span class="copy-path" data-clipboard-text="From http://skuaka.cn/2019/03/02/QT/QT-贪吃蛇/　　By Skuaka" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/03/04/C-C++/C++Collection/C++Lambda表达式/">
+                    C++ Lambda表达式
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/03/01/QT/PaintEvent/">
+                    QT PaintEvent
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#贪吃蛇"><span class="toc-number">1.</span> <span class="toc-text">贪吃蛇</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MainWindow"><span class="toc-number">1.1.</span> <span class="toc-text">MainWindow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#food"><span class="toc-number">1.2.</span> <span class="toc-text">food</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#游戏循环"><span class="toc-number">1.3.</span> <span class="toc-text">游戏循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#snake绘制"><span class="toc-number">1.4.</span> <span class="toc-text">snake绘制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#snake动画"><span class="toc-number">1.5.</span> <span class="toc-text">snake动画</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户控制"><span class="toc-number">1.6.</span> <span class="toc-text">用户控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#游戏逻辑"><span class="toc-number">1.7.</span> <span class="toc-text">游戏逻辑</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化日志"><span class="toc-number">2.</span> <span class="toc-text">优化日志</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#显示优化"><span class="toc-number">2.1.</span> <span class="toc-text">显示优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#功能优化"><span class="toc-number">2.2.</span> <span class="toc-text">功能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#蛇的反向运动"><span class="toc-number">2.2.1.</span> <span class="toc-text">蛇的反向运动</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#分数显示模块"><span class="toc-number">2.2.2.</span> <span class="toc-text">分数显示模块</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#最高分记录"><span class="toc-number">2.2.3.</span> <span class="toc-text">最高分记录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#待续"><span class="toc-number">3.</span> <span class="toc-text">待续</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-5 i,
+        .toc-level-5 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide" title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"QT 贪吃蛇　| Skuaka　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/03/04/C-C++/C++Collection/C++Lambda表达式/" title="Pre: C++ Lambda表达式">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/03/01/QT/PaintEvent/" title="Next: QT PaintEvent">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/QT/Qt-with-CMake/">Qt-with-CMake</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/Develop/CMake-Note/">CMake-Note</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/QT/Qt-for-Macos/">Qt for Macos</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/QT/Qt-Note/">Qt Note</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/16/C-C++/Concept-gcc/gcc_cmake_gdb升级/">gcc_cmake_gdb升级</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/MacOS/mac维修记录/">mac维修记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Develop/CMake依赖图/">CMake依赖图</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/C-C++/Mess/va_list和vprintf/">va_list和vprintf</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/16/Develop/hexo-note/">hexo-note</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/13/Develop/开发工具问题集合/">开发工具问题集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/06/Linux/Command/yum-error/">yum error</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/29/Develop/kubectl-Cheat-Sheet/">kubectl-Cheat-Sheet</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/30/Mess/Game/steamcmd/">steamcmd</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/Linux/Command/Linux文本处理笔记/">Linux文本处理笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/Develop/Robot-framework-note/">Robot framework note</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/Linux/System/ppk-to-pem/">ppk_to_pem</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/Linux/Programming/Shell控制语句笔记/">Shell控制语句笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/Linux/Programming/Shell变量笔记/">Shell变量笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/27/Develop/docker笔记/">docker笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Develop/swagger搭建mock_server/">swagger搭建mock_server</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/22/Develop/travis/">travis笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/Linux/System/ssh证书改变后无法登入/">ssh证书改变后无法登入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/C-C++/C++Template/C++SFINAE/">C++SFINAE</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/Network/Vultr/vultr/">vultr</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/MacOS/macOS-command-line-tools/">macOS command line tools</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/Backend/Node-js/node-js笔记/">node-js笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/25/Linux/System/Linux操作系统笔记/">Linux操作系统笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/Algorithm/链表算法题笔记/">链表算法题笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/29/Database/Concept/事务加锁协议/">事务加锁协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/24/Python/virtualenv/">virtualenv</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/Database/Mysql/mysql-dual表/">mysql-dual表</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/27/Database/Mysql/mysql-EXPLAIN/">mysql-EXPLAIN</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/18/Linux/Command/grep减号/">shell double-dash(--)作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/Security/linux服务器入侵检测/">linux服务器入侵检测</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/27/Network/IO/libevent进阶/">libevent进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/Linux/Programming/守护进程的创建/">守护进程的创建</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/C-C++/Concept-gcc/attribute-packed/">__attribute__</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/24/Linux/System/SIGINT-SIGTERM-SIGKILL区别/">SIGINT SIGTERM SIGKILL区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/23/Mess/趋势科技秋招面经/">趋势科技 Linux C++ 面经</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/20/QT/Qt-issues/">Qt issues</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/19/QT/qt隐藏标题栏并鼠标拖动/">qt隐藏标题栏并鼠标拖动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/17/Security/openssl/">openSSL</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/14/Algorithm/C++栈实现队列/">C++栈实现队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/11/C-C++/C++Template/C++Compile-time-quicksort/">C++Compile-time-quicksort</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/11/Algorithm/Data Structure/Hash/">Hash</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/11/C-C++/C++Collection/C++bitset/">C++bitset</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/11/C-C++/C++Template/C++可变参数模板/">C++可变参数模板</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/09/C-C++/Mess/C++多线程多路归并排序/">C++多线程多路归并排序函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/08/C-C++/Mess/new和malloc区别/">new和malloc区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/C-C++/Concept-gcc/C++命名规范/">C++命名规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/06/Network/Http/https与ssl/">https 与 ssl</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/01/Develop/Git笔记/">Git使用笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/Network/IO/libevent基础/">libevent基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Operating-System/操作系统知识笔记/">操作系统知识笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Database/Concept/数据库理论知识/">数据库理论知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/24/Operating-System/Linux虚拟地址空间/">Linux虚拟地址空间</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/23/C-C++/C++Collection/C++ref/">C++ref</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/Network/Tcp/IP头_TCP头_UDP头/">IP头_TCP头_UDP头</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/Network/Tcp/ICMP/">ICMP</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/C-C++/C++Collection/C++线程池/">C++线程池</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/20/C-C++/C++Collection/C++algorithm/">c++algorithm</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/17/Network/Unp/unp笔记/">《unp》笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/Algorithm/逆元/">逆元</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/C-C++/C++Collection/C++线程库/">C++线程库</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/C-C++/C++Collection/C++chrono时间库/">C++chrono时间库</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/11/C-C++/C++Collection/C++右值引用和移动/">C++右值引用和移动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/11/Network/Http/http/">http</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/11/Algorithm/Data Structure/堆和优先队列/">堆和优先队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/C-C++/C++Collection/C++string/">C++ string类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/C-C++/C++Collection/C++强制类型转换/">C++强制类型转换</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/09/Operating-System/浮点数存储法/">浮点数存储法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/09/C-C++/Mess/C_C++pow函数实现/">C_C++ pow函数实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/09/C-C++/C++Collection/C++杂类/">C++杂类（持续更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/08/C-C++/Mess/C++运算符优先级/">C运算符优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/08/C-C++/C++Collection/C++虚函数表/">C++虚函数表</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/08/C-C++/Mess/结构体offsetof宏/">结构体offsetof宏 和 bit位测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/Operating-System/互斥锁-自旋锁-读写锁/">互斥锁 自旋锁 读写锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/Operating-System/虚拟内存概念/">虚拟内存概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/C-C++/C++Collection/C++智能指针/">C++智能指针</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/Operating-System/C程序内存区域/">C程序内存区域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/05/Algorithm/LIS-最长上升子序列/">LIS 最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Algorithm/LCS-最长公共子序列/">LCS (最长公共子序列)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/C-C++/C++Collection/C++Lambda表达式/">C++ Lambda表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/02/QT/QT-贪吃蛇/">QT 贪吃蛇</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/QT/PaintEvent/">QT PaintEvent</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/C-C++/Mess/C语言杂记/">C语言杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/QT/窗口视口/">窗口视口</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/Network/Tcp/TCP半关闭,半连接,半打开/">TCP 半关闭,半连接,半打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/Network/Tcp/Tcp如何保证可靠/">Tcp_ip协议栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/Linux/Command/系统资源check/">System resource usage check</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Linux/Command/tar/">Tar命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Linux/Command/ln/">ln</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Linux/Command/screen/">使用 screen 管理远程会话</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Mess/Game/DoNotStarve/饥荒联机控制台/">饥荒联机控制台</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/Mess/Game/DoNotStarve/饥荒Linux服务器/">饥荒Linux服务器搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/28/Linux/Command/输出重定向/">Linux 输出重定向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/C-C++/C++Template/C++编译期备忘录/">C++ 编译期备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/C-C++/C++Template/C++typename/">C++ typename 用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/C-C++/C++Template/C++模板元编程书上习题/">C++模板元编程书上习题（待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/22/C-C++/C++Template/C++模板元编程/">C++模板元编程(待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/20/C-C++/C++Collection/C++基础笔记/">C++ 基础笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/20/C-C++/Mess/C++和Java的引用/">C++和Java的引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/18/Network/IO/Reactor/">高性能IO之Reactor模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/18/Database/Redis/Redis设计与实现/">Redis 设计与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/17/Database/Redis/Mac-Redis-Usage/">Mac-Redis-Usage</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/10/Operating-System/操作系统期末背诵点/">操作系统期末背诵点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/05/QT/QT入门/">QT 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/04/QT/QString/">QString与char*的相互转换</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/28/Algorithm/排序算法/">排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/24/Network/Tcp/TCP网络拥塞控制/">TCP网络拥塞控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/Develop/Makefile学习/">Makefile学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/07/C-C++/C++Collection/C++STL/">C++ STL</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/07/Algorithm/Data Structure/查找树/">查找树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/06/Database/SQLserver/远程登入sqlserver/">远程登入 SQL server</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Database/Mysql/mysql-c-api/">mysql-c-api</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Database/Mysql/mac下安装与配置mysql/">mac下安装与配置mysql</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/C-C++/Mess/C++显式实例化的用途/">C++显式实例化的用途</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/C-C++/Mess/C++ofstream输出为1的情况/">fstream输出为1的情况</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Backend/Mess/Dreamweaver服务器配置/">Dreamweaver 连接到 Linux 云服务器 php</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/MacOS/Mac杂项/">Mac杂项</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/Mess/Raspberrypi/树莓派安装kali/">树莓派安装kali</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/Perl/Perl入门/">Perl 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/Linux/Command/vim备忘录/">vim备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/C-C++/Concept-gcc/标准IO的三类缓冲/">标准IO的三类缓冲</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/25/C-C++/Mess/C++杂记/">C++杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Network/Wireshark/Wireshark入门/">Wireshark 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Linux/Command/Linux小命令/">Linux 小命令记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/C-C++/Mess/C++类与结构区别/">C++中结构体和类的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/17/Security/DDos/DDos攻击详解/">DDos 攻击详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/17/Network/Wireshark/qq好友IP定位/">qq好友IP定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/Backend/Mess/apache删除后Nginx显示Apache界面/">apache删除后使用Nginx服务仍然显示Apache界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/14/Network/IO/epoll/">epoll</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/13/Linux/Command/sed/">sed 命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/12/Linux/Command/awk/">awk 命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/06/Linux/Command/nmap/">nmap</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/06/Linux/System/使用过的端口/">使用过的端口(待续</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/06/MacOS/mac显示隐藏文件/">macos 显示隐藏文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/06/Mess/win逆向工程(弃)/">win逆向工程（放弃）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/01/Mess/计算机专业名词/">计算机专业名词记录(放弃更新）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/01/C-C++/Concept-gcc/不可重入函数/">不可重入函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/Linux/System/Linux日志文件分析/">Linux 日志文件分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/26/Linux/Programming/解释器文件/">解释器文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/26/Python/Python杂记/">Python 杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/18/Database/SQLserver/mssql实验(放弃更新)/">mssql实验(放弃更新)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/06/Database/Mysql/mysql-基本命令/">mysql-基本命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/06/Database/Mysql/mysql-大小写区分/">mysql-大小写区分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/Develop/CMake入门/">CMake入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/Linux/System/Linux备忘录/">Linux备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/Network/Unp/unp_code/">《unp》源代码问题笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/20/Database/PostgreSQL/C++ connector for PostgreSQL/">C++ connector for PostgreSQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/">PostgreSQL 命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /">Mac 下 PostgreSQL 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/15/Database/Mysql/mysql-创建时间和更新时间/">mysql-创建时间和更新时间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/14/Database/PostgreSQL/Linux 下 PostgreSQL/">Linux 下 PostgreSQL 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/09/Backend/php入门/">php入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/09/Frontend/DTD入门/">DTD入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/09/Mess/File structure/mp3文件格式/">mp3文件格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/多播/">CCIE 多播（multicast）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/BGP 补充知识/">CCIE BGP 补充知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/IS-IS/">CCIE IS-IS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/DM-VPN/">CCIE DM-VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/MPLS/">CCIE MPLS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/acl控制/">CCIE acl控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/防火墙/">CCIE 防火墙</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/逻辑子接口/">CCIE 逻辑子接口</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/NAT 地址转换协议/">CCIE NAT 地址转换协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/STP生成树协议/">CCIE STP生成树协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/重分发 /">CCIE 重分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/路由协议分类/">CCIE 路由协议分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/ipv6/">CCIE ipv6</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/跨域的多播/">CCIE 跨域的多播</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/MPLS VPN/">CCIE MPLS VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/交换机基础/">CCIE 交换机基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/bgp/">CCIE bgp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/IPSEC VPN/">CCIE IPSEC VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/IS-IS协议/">CCIE IS-IS协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/01/Network/Ccie/网络知识总结/">CCIE 网络知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/13/C-C++/Concept-gcc/gcc_gdb备忘录/">gcc_gdb备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/18/Frontend/Javascript入门/">Javascript 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Frontend/XML入门/">XML入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Database/Mysql/mysql-用户操作/">mysql-用户操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/03/Database/Mysql/Mess/centos彻底删除mysql/">centos彻底删除mysql</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/25/Security/无线安全/Dsniff/">Dsniff</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/Backend/base64原理/">Base64原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/18/Security/无线安全/reaver/">reaver</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/15/Security/无线安全/wireshark fatal IO error 2/">kali vnc wireshark fatal IO error 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/15/Security/无线安全/Aircrack-ng/">Aircrack-ng</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/10/C-C++/C++Collection/C++11-new-feature/">C++11-new-feature</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/03/Frontend/HTMLl5+CSS3入门/">HTML5+CSS3入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/03/Frontend/Html入门/">Html入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/03/Frontend/CSS入门/">CSS入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/25/Algorithm/DFS/">DFS BFS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/26/Python/懒得整理的python学习笔记/">懒得整理的python学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/13/Linux/Programming/Shell入门杂记/">Shell入门杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/10/Mess/Markdown/">Markdown标记语言</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 Skuaka
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 1;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

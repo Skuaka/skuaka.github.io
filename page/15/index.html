@@ -234,6 +234,229 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Linux/System/Linux日志文件分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/29/Linux/System/Linux日志文件分析/" class="article-date">
+      <time datetime="2018-10-29T13:53:48.000Z" itemprop="datePublished">2018-10-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/29/Linux/System/Linux日志文件分析/">Linux 日志文件分析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在Linux系统中，有三类主要的日志子系统:</p>
+<p>● 连接时间日志: 由多个程序执行，把记录写入到/var/log/wtmp和/var/run/utmp，login等程序会更新wtmp和utmp文件，使系统管理员能够跟踪谁在何时登录到系统。</p>
+<p>● 进程统计: 由系统内核执行，当一个进程终止时，为每个进程往进程统计文件（pacct或acct）中写一个记录。进程统计的目的是为系统中的基本服务提供命令使用统计。</p>
+<p>● 错误日志: 由syslogd（8）守护程序执行，各种系统守护进程、用户程序和内核通过syslogd（3）守护程序向文件/var/log/messages报告值得注意的事件。另外有许多Unix程序创建日志。像HTTP和FTP这样提供网络服务的服务器也保持详细的日志。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Linux/Programming/解释器文件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/26/Linux/Programming/解释器文件/" class="article-date">
+      <time datetime="2018-10-26T09:37:54.000Z" itemprop="datePublished">2018-10-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/26/Linux/Programming/解释器文件/">解释器文件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="什么是解释器文件"><a href="#什么是解释器文件" class="headerlink" title="什么是解释器文件"></a>什么是解释器文件</h3><p>解释器文件是文本文件，它起始行的格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#! pathname [optional-argument]</span><br></pre></td></tr></table></figure>
+<p>感叹号和pathname之间的空格是可选的。常见的解释器文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">#!/usr/bin/python</span><br><span class="line">#!/usr/bin/perl </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>注意以下区别</p>
+<ul>
+<li>​      <em>解释器文件</em>： 以#!开头的文本文件</li>
+<li>​      <em>解释器</em>：解释器文件第一行pathname所指定的程序</li>
+</ul>
+<h3 id="为什么使用解释器文件"><a href="#为什么使用解释器文件" class="headerlink" title="为什么使用解释器文件"></a>为什么使用解释器文件</h3><p>解释器文件能得到效率方面的好处，但代价是内核的额外开销（因为识别解释器文件的是内核）。以下是使用解释器文件的理由：</p>
+<ul>
+<li>有些程序是使用某种脚本语言编写的脚本，而解释器文件隐藏了这一事实。</li>
+<li>解释器文件使我们可以使用除/bin/sh以外的shell来执行shell脚本。</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>#!这一行的长度有一定的限制，linux为127，其他的系统最少的为63。</li>
+<li>别在选项之后放任何空白，空白也会跟着选项一起传给被引用的程序。</li>
+<li>解释器需要完整路径名。以避免可移植问题。</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Python/Python杂记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/26/Python/Python杂记/" class="article-date">
+      <time datetime="2018-10-26T05:44:02.000Z" itemprop="datePublished">2018-10-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/26/Python/Python杂记/">Python 杂记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="安装matplotlib"><a href="#安装matplotlib" class="headerlink" title="安装matplotlib"></a>安装matplotlib</h4><p><code>pip3 install --index-url https://pypi.douban.com/simple matplotlib</code></p>
+<h4 id="Macos安装pip"><a href="#Macos安装pip" class="headerlink" title="Macos安装pip"></a>Macos安装pip</h4><p><code>sudo easy_install pip</code></p>
+<h4 id="查看pip包安装位置"><a href="#查看pip包安装位置" class="headerlink" title="查看pip包安装位置"></a>查看pip包安装位置</h4><p><code>pip3 show [package-name]</code></p>
+<h4 id="Sublime-Build-with-Python3"><a href="#Sublime-Build-with-Python3" class="headerlink" title="Sublime Build with Python3"></a>Sublime Build with Python3</h4><p>Tools -&gt; Build System -&gt; New Build System</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;env&quot;: &#123;&quot;PYTHONIOENCODING&quot;: &quot;utf8&quot;&#125;,</span><br><span class="line">    &quot;cmd&quot;: [&quot;/usr/bin/python3&quot;, &quot;-u&quot;, &quot;$file&quot;],</span><br><span class="line">    &quot;file_regex&quot;: &quot;^[ ]*File \&quot;(...*?)\&quot;, line ([0-9]*)&quot;,</span><br><span class="line">    &quot;selector&quot;: &quot;source.python&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Change your python3 path in <em>“cmd”</em> ( see with <code>$ which python3</code>)</p>
+<p>Save as <code>python3.sublime-build</code></p>
+<h4 id="Sublime-translate-tabs-to-spaces"><a href="#Sublime-translate-tabs-to-spaces" class="headerlink" title="Sublime translate tabs to spaces"></a>Sublime translate tabs to spaces</h4><p>Preferences -&gt; Settings-User<br>add the two lines below:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;tab_size&quot;: 4,</span><br><span class="line">&quot;translate_tabs_to_spaces&quot;: true</span><br></pre></td></tr></table></figure>
+<h4 id="osx-文件编码"><a href="#osx-文件编码" class="headerlink" title="osx 文件编码"></a>osx 文件编码</h4><p>latin1</p>
+<p><code>open(&quot;filename&quot;,encoding=&#39;latin1&#39;)</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Database/SQLserver/mssql实验(放弃更新)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -714,7 +937,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMake/">CMake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMake/">CMake</a></li></ul>
     </div>
 
       
@@ -1086,269 +1309,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Database/PostgreSQL/PostgreSQL 命令" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/" class="article-date">
-      <time datetime="2018-08-17T14:49:50.000Z" itemprop="datePublished">2018-08-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/17/Database/PostgreSQL/PostgreSQL 命令/">PostgreSQL 命令</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><p>查看所有命令</p>
-<p><code>\?</code></p>
-<p>显示已创建的数据库</p>
-<p><code>\l</code>  或者</p>
-<p><code>SELECT datname FROM pg_database;</code></p>
-<p>在不连接进 PostgreSQL 数据库的情况下，也可以在终端上查看显示已创建的列表：</p>
-<p><code>psql -l</code></p>
-<p>查看postgresql数据库用户</p>
-<p><code>\du</code></p>
-<p>显示数据库表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、通过命令行查询</span><br><span class="line">\d 数据库 —— 得到所有表的名字</span><br><span class="line">\d 表名 —— 得到表结构</span><br><span class="line"></span><br><span class="line">2、通过SQL语句查询</span><br><span class="line">select * from pg_tables;	//得到当前db中所有表的信息（这里pg_tables是系统视图）</span><br><span class="line">select tablename from pg_tables where schemaname=&apos;public&apos;	//得到所有用户自定义表的名字（这里&quot;tablename&quot;字段是表的名字，&quot;schemaname&quot;是schema的名字。用户自定义的表，如果未经特殊处理，默认都是放在名为public的schema下）</span><br></pre></td></tr></table></figure>
-<h5 id="d命令"><a href="#d命令" class="headerlink" title="\d命令"></a>\d命令</h5><p>该命令将显示每个匹配关系（表，视图，索引，序列）的信息，包括对象所有的列，它们的类型，表空间（如果不是默认的）和任何特殊属性（如NOT NULL或默认值等）。与唯一约束相关的索引，规则，约束，触发器也同样会显示出来。如果关系是一个视图，还会显示视图的定义。</p>
-<ol>
-<li>如果\d命令什么都不带，将列出当前数据库中的所有表。</li>
-<li>\d后面跟一个表名，表示显示这个表的结构定义。</li>
-<li>\d也可以显示索引信息</li>
-<li>\d后面可以跟一通配符”*“或”?”</li>
-<li><p>\d+命令，该命令将显示比\d命令更详细的信息</p>
-</li>
-<li><p>匹配不同对象类型的\d命令</p>
-<p>如果想只显示匹配的表，可以使用\dt命令</p>
-<p>如果想只显示索引，可以使用\di命令</p>
-<p>如果想只显示序号，可以使用\ds命令</p>
-<p>如果想只显示视图，可以使用\dv命令</p>
-<p>如果想只显示函数，可以使用\df命令</p>
-</li>
-<li><p>如果想显示SQL已执行的时间，可以用\timing命令</p>
-</li>
-<li><p>列出所有的schemas可以使用\dn命令</p>
-</li>
-<li><p>显示所有的表空间可以用\db命令</p>
-<p>表空间就是一个目录，放在这个表空间的表，就是把表的数据文件放到这个表空间下。</p>
-</li>
-<li><p>列出数据库所有角色或用户\du或\dg</p>
-</li>
-<li>\dp或\z命令用于显示表的权限分配情况</li>
-</ol>
-<h3 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h3><p>连接数据库</p>
-<p><code>\c dbname</code></p>
-<p>创建一个名为 test 的表</p>
-<p><code>CREATE TABLE test(id int, text VARCHAR(255));</code></p>
-<p>插入一条记录</p>
-<p><code>insert into test(id,text) values ( 1,&#39;heihei&#39;);</code></p>
-<p>查询记录</p>
-<p><code>select * from test where id = 1;</code></p>
-<p>更新记录</p>
-<p><code>update test set text =&#39;update&#39; where id =5;</code></p>
-<p>删除指定的记录</p>
-<p><code>delete from test where id = 1;</code></p>
-<p>删除表</p>
-<p><code>drop table test;</code></p>
-<p>删除数据库</p>
-<p><code>drop database test_db0;</code></p>
-<p>或者利用 dropdb 指令，在终端上删除数据库</p>
-<p><code>dropdb test0</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Database/PostgreSQL/Mac 下 PostgreSQL " class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /" class="article-date">
-      <time datetime="2018-08-17T14:20:14.000Z" itemprop="datePublished">2018-08-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/17/Database/PostgreSQL/Mac 下 PostgreSQL /">Mac 下 PostgreSQL 配置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在 mac 下，可以利用 <a href="http://dhq.me/mac-apt-get-homebrew" target="_blank" rel="noopener">homebrew</a> 直接安装 PostgreSQL：</p>
-<p><code>brew install postgresql</code></p>
-<p>初始数据库：</p>
-<p><code>initdb /usr/local/var/postgres -E utf8</code></p>
-<p>上面指定 “/usr/local/var/postgres” 为 PostgreSQL 的配置数据存放目录，并且设置数据库数据编码是 utf8，更多配置信息可以 “initdb –help” 查看。</p>
-<p>启动 PostgreSQL：</p>
-<p><code>pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start</code></p>
-<p>关闭 PostgreSQL：</p>
-<p><code>pg_ctl -D /usr/local/var/postgres stop -s -m fast</code></p>
-<p><strong>创建一个 PostgreSQL 用户</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">createuser username -P</span><br><span class="line"></span><br><span class="line"><span class="comment">#Enter password for new role:`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Enter it again:</span></span><br></pre></td></tr></table></figure>
-<p>上面的 username 是用户名，回车输入 2 次用户密码后即用户创建完成。更多用户创建信息可以 “createuser –help” 查看。</p>
-<p><strong>创建数据库</strong></p>
-<p><code>createdb dbname -O username -E UTF8 -e</code></p>
-<p>上面创建了一个名为 dbname 的数据库，并指定 username 为改数据库的拥有者（owner），数据库的编码（encoding）是 UTF8，参数 “-e” 是指把数据库执行操作的命令显示出来。</p>
-<p>更多数据库创建信息可以 “createdb –help” 查看。</p>
-<p><strong>连接数据库</strong></p>
-<p><code>psql -U username -d dbname -h 127.0.0.1</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PostgreSQL/">PostgreSQL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PostgreSQL/">PostgreSQL</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Database/Mysql/mysql-创建时间和更新时间" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/15/Database/Mysql/mysql-创建时间和更新时间/" class="article-date">
-      <time datetime="2018-08-15T08:06:08.000Z" itemprop="datePublished">2018-08-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/15/Database/Mysql/mysql-创建时间和更新时间/">mysql-创建时间和更新时间</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="mysql-创建时间和更新时间"><a href="#mysql-创建时间和更新时间" class="headerlink" title="mysql-创建时间和更新时间"></a>mysql-创建时间和更新时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">`create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP comment &apos;创建时间&apos;,</span><br><span class="line">`update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment &apos;更新时间&apos;,</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
     </div>
 
       

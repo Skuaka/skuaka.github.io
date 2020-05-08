@@ -234,6 +234,1266 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Mess/Raspberrypi/树莓派安装kali" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/04/Mess/Raspberrypi/树莓派安装kali/" class="article-date">
+      <time datetime="2018-12-04T14:08:32.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/Mess/Raspberrypi/树莓派安装kali/">树莓派安装kali</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="烧录系统到sd卡"><a href="#烧录系统到sd卡" class="headerlink" title="烧录系统到sd卡"></a>烧录系统到sd卡</h3><ol>
+<li>下载<a href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/" target="_blank" rel="noopener">Kali Linux 树莓派TFT屏版镜像</a>，并解压。（如不使用触摸屏显示器<a href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/" target="_blank" rel="noopener">下载kali For树莓派的regular版本镜像</a>）;</li>
+<li>下载Win32DiskImager;</li>
+<li>用读卡器把SD连接到Windows主机；</li>
+<li>运行Win32DiskImager.exe；</li>
+<li>在右侧“设备Device”栏目选择SD卡的盘符；</li>
+<li>浏览找到树莓派的进行文件；</li>
+<li>点击“Write”按钮，把镜像文件写入SD卡，制作启动盘，操作完成以后把SD卡插入树莓派</li>
+</ol>
+<h3 id="下载raspi-config（树莓派最好的扩展工具）"><a href="#下载raspi-config（树莓派最好的扩展工具）" class="headerlink" title="下载raspi-config（树莓派最好的扩展工具）"></a>下载raspi-config（树莓派最好的扩展工具）</h3><p><a href="http://archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20180406+1.tar.xz" target="_blank" rel="noopener">http://archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20180406+1.tar.xz</a></p>
+<ul>
+<li><p>按照里面的选项修改root密码。</p>
+</li>
+<li><p>树莓派默认不会完整的使用整个SD卡空间，所以需要扩展分区 ，在advance里面有扩展选项</p>
+</li>
+</ul>
+<h3 id="安装中文字体"><a href="#安装中文字体" class="headerlink" title="安装中文字体"></a>安装中文字体</h3><p>sudo apt-get install ttf-wqy-zenhei</p>
+<p>安装完成后输入sudo dpkg-reconfigure locales，选择en_US.UTF-8、zh_CN.GBK、zh_CN.UTF-8。</p>
+<p>table 键选择ok然后选择zh_CN.UTF-8</p>
+<p>完成后重新启动（然后中文系统连接vncserver不会乱码了）</p>
+<h3 id="vnc远程登入"><a href="#vnc远程登入" class="headerlink" title="vnc远程登入"></a>vnc远程登入</h3><p>apt-get install vnc-server</p>
+<p>选择一个vnc服务器软件并下载</p>
+<p>然后vncserver开启vnc服务</p>
+<p>关闭vnc：vncserver -kill :1</p>
+<p>（冒号后面数字是想关闭的vnc桌面编号，从1开始递增）</p>
+<h3 id="LED亮灯状态"><a href="#LED亮灯状态" class="headerlink" title="LED亮灯状态"></a>LED亮灯状态</h3><table>
+<thead>
+<tr>
+<th>LED</th>
+<th>颜色</th>
+<th>功能</th>
+<th>正常状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACT</td>
+<td>绿色</td>
+<td>card status</td>
+<td>闪烁:SD卡正在活动（类似电脑的硬盘灯）</td>
+</tr>
+<tr>
+<td>PWR</td>
+<td>红色</td>
+<td>power</td>
+<td>不闪烁:正常</td>
+</tr>
+<tr>
+<td>FDX</td>
+<td>橙</td>
+<td>full duplex</td>
+<td>亮:全双工/不亮:半双工</td>
+</tr>
+<tr>
+<td>LNK</td>
+<td>橙</td>
+<td>link</td>
+<td>亮:网络连接成功</td>
+</tr>
+<tr>
+<td>100</td>
+<td>橙</td>
+<td>100 Mbps</td>
+<td>亮:100 Mbps/不亮:10 Mbps</td>
+</tr>
+</tbody>
+</table>
+<h3 id="快捷键打开终端"><a href="#快捷键打开终端" class="headerlink" title="快捷键打开终端"></a>快捷键打开终端</h3><p>首先查看自己终端的名字，打开终端-&gt;help-&gt;about，就可以发现名字，我的是xfce4-terminal。</p>
+<p>然后去左上角找到设置-&gt;键盘-&gt;快捷键-&gt;添加，命令就是上一步看到的名字，快捷键自己按。</p>
+<p>（本人最新kali镜像的终端是 gnome-terminal）</p>
+<h3 id="开启ssh"><a href="#开启ssh" class="headerlink" title="开启ssh"></a>开启ssh</h3><p>1.sudo systemctl enable ssh</p>
+<p>2.sudo systemctl start ssh</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Raspberrypi/">Raspberrypi</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Raspberrypi/">Raspberrypi</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Perl/Perl入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/30/Perl/Perl入门/" class="article-date">
+      <time datetime="2018-11-30T08:21:48.000Z" itemprop="datePublished">2018-11-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/30/Perl/Perl入门/">Perl 入门</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Perl-简介"><a href="#Perl-简介" class="headerlink" title="Perl 简介"></a>Perl 简介</h2><p>Perl 是 Practical Extraction and Report Language 的缩写，可翻译为 “实用报表提取语言”。</p>
+<p>Perl 最重要的特性是Perl内部集成了正则表达式的功能，以及巨大的第三方代码库CPAN。</p>
+<p>Perl具有高级语言（如C）的强大能力和灵活性。它的许多特性是从C语言中借用来的。</p>
+<p>Perl提供脚本语言（如sed和awk）的所有功能，还具有它们所不具备的很多功能。Perl还支持sed到Perl及awk到Perl的翻译器。</p>
+<p>简而言之，Perl像C一样强大，像awk、sed等脚本描述语言一样方便。</p>
+<ul>
+<li>Perl 是可扩展的，我们可以通过<a href="http://cpan.perl.org/" target="_blank" rel="noopener">CPAN（”the Comprehensive Perl Archive Network”全面的 Perl 存档网络）</a>中心仓库找到很多我们需要的模块。</li>
+</ul>
+<h2 id="Perl-语法"><a href="#Perl-语法" class="headerlink" title="Perl 语法"></a>Perl 语法</h2><h3 id="交互式编程"><a href="#交互式编程" class="headerlink" title="交互式编程"></a>交互式编程</h3><p>在命令行中使用 <strong>-e</strong> 选项来输入语句来执行代码，实例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ perl -e &apos;print &quot;Hello World\n&quot;&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="脚本式编程"><a href="#脚本式编程" class="headerlink" title="脚本式编程"></a>脚本式编程</h3><p>将以下代码放到 <strong>hello.pl</strong> 文件中，然后添加执行权限。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/perl</span></span><br><span class="line"><span class="comment"># 输出 "Hello, World"</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Hello, world\n"</span>;</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"Hello, world\n"</span>);</span><br><span class="line"><span class="comment">#两种函数表示法等效</span></span><br></pre></td></tr></table></figure>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>perl 也支持多行注释，最常用的方法是使用 POD(Plain Old Documentations) 来进行多行注释。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/perl</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 这是一个单行注释</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Hello, world\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">=pod 注释</span></span><br><span class="line"><span class="comment">这是一个多行注释</span></span><br><span class="line"><span class="comment">这是一个多行注释</span></span><br><span class="line"><span class="comment">这是一个多行注释</span></span><br><span class="line"><span class="comment">这是一个多行注释</span></span><br><span class="line"><span class="comment">=cut</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#  =pod、 =cut只能在行首。</span></span><br><span class="line"><span class="comment">#  以=开头，以=cut结尾。</span></span><br><span class="line"><span class="comment">#  =后面要紧接一个字符，=cut后面可以不用。</span></span><br></pre></td></tr></table></figure>
+<p>Pod(Plain Old Documentation), 是一种简单而易用的标记型语言（置标语言），它经常用于在perl程序和模块中的文档书写。</p>
+<p>Pod 的 转化器可以将 Pod 转换成很多种格式，例如 text, html, man 等很多。</p>
+<h3 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h3><p>Perl 解释器不会关心有多少个空白</p>
+<p>Perl 标识符区分大小写</p>
+<h3 id="单引号和双引号"><a href="#单引号和双引号" class="headerlink" title="单引号和双引号"></a>单引号和双引号</h3><p>（1）双中有双，单中有单都需要 \ 转义。</p>
+<p>（2）双中有单或单中有双均不需要转义。</p>
+<p>（3）单引号直接了当，引号内是什么就显示什么，双引号则需要考虑转义或变量替换等。</p>
+<p>（4）单引号内可以使用多行文本。</p>
+<h3 id="Here-文档"><a href="#Here-文档" class="headerlink" title="Here 文档"></a>Here 文档</h3><p>Here文档又称作heredoc、hereis、here-字串或here-脚本，是一种在命令行shell（如sh、csh、ksh、bash、PowerShell和zsh）和程序语言（像Perl、PHP、Python和Ruby）里定义一个字串的方法。</p>
+<p>使用概述：</p>
+<p>1.必须后接分号，否则编译通不过。</p>
+<p>2.EOF 可以用任意其它字符代替，只需保证结束标识与开始标识一致。</p>
+<p>3.结束标识必须顶格独自占一行。</p>
+<p>4.开始标识可以不带引号号或带单双引号，不带引号与带双引号效果一致，解释内嵌的变量和转义符号，带单引号则不解释内嵌的变量和转义符号。</p>
+<p>5.当内容需要内嵌引号（单引号或双引号）时，不需要加转义符。</p>
+<p><strong>示例</strong>：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/perl</span></span><br><span class="line"></span><br><span class="line">$a = <span class="number">10</span>;</span><br><span class="line">$var = &lt;&lt;<span class="string">"EOF"</span>;</span><br><span class="line">这是一个 Here 文档实例，使用双引号。</span><br><span class="line">可以在这输如字符串和变量。</span><br><span class="line">例如：a = $a</span><br><span class="line">EOF</span><br><span class="line"><span class="keyword">print</span> <span class="string">"$var\n"</span>;</span><br><span class="line"></span><br><span class="line">$var = &lt;&lt;<span class="string">'EOF'</span>;</span><br><span class="line">这是一个 Here 文档实例，使用单引号。</span><br><span class="line">例如：a = $a</span><br><span class="line">EOF</span><br><span class="line"><span class="keyword">print</span> <span class="string">"$var\n"</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>输出结果</strong>：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">这是一个 Here 文档实例，使用双引号。</span><br><span class="line">可以在这输如字符串和变量。</span><br><span class="line">例如：a = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">这是一个 Here 文档实例，使用单引号。</span><br><span class="line">例如：a = $a</span><br></pre></td></tr></table></figure>
+<h3 id="use-strict"><a href="#use-strict" class="headerlink" title="use strict"></a>use strict</h3><p>​    use strict是Perl中编译指令，是提供给Perl编译器的指令，告诉编译器，如果perl代码中有不好的编码风格，那么提示编译失败。也就是说，加上use strict后，我们的Perl代码的编写必须遵循一些规范，否则编译器会报错。</p>
+<h2 id="Perl-数据类型"><a href="#Perl-数据类型" class="headerlink" title="Perl 数据类型"></a>Perl 数据类型</h2><p>Perl 是一种弱类型语言，所以变量不需要指定类型，Perl 解释器会根据上下文自动选择匹配类型。</p>
+<p>Perl 有三个基本的数据类型：标量、数组、哈希。</p>
+<h3 id="标量"><a href="#标量" class="headerlink" title="标量"></a>标量</h3><p>是Perl语言中最简单的一种数据类型。这种数据类型的变量可以是数字，字符串，浮点数，不作严格的区分。在使用时在变量的名字前面加上一个”$”,表示是标量。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$myfirst=<span class="number">123</span>;　    <span class="comment">#数字123</span></span><br><span class="line">$mysecond=<span class="string">"123"</span>;   <span class="comment">#字符串123</span></span><br></pre></td></tr></table></figure>
+<p>字符串之间可以用小数点拼接。</p>
+<p>可以使用单引号来输出多行字符串。</p>
+<h4 id="v-字符串"><a href="#v-字符串" class="headerlink" title="v 字符串"></a>v 字符串</h4><p>一个以 v 开头,后面跟着一个或多个用句点分隔的整数,会被当作一个字串文本。</p>
+<p>当你想为每个字符 直接声明其数字值时,v-字串提供了一种更清晰的构造这类字串的方法，而不像 “\x{1}\x{14}\x{12c}\x{fa0}” 这种不易于理解</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$smile  = v9786;</span><br><span class="line">$foo    = v102.<span class="number">111.111</span>;</span><br><span class="line">$martin = v77.<span class="number">97.114</span>.<span class="number">116.105</span>.<span class="number">110</span>; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">print</span> <span class="string">"smile = $smile\n"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">"foo = $foo\n"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">"martin = $martin\n"</span>;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">smile = &amp;#x263a;</span><br><span class="line">foo = foo</span><br><span class="line">martin = Martin</span><br></pre></td></tr></table></figure>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 创建数组，以 @ 符号开始，也可以以 qw 开始定义数组。</span></span><br><span class="line">@array = (<span class="number">1</span>, <span class="number">2</span>, <span class="string">'Hello'</span>);</span><br><span class="line">@array = <span class="keyword">qw</span>/<span class="number">1</span> <span class="number">2</span> <span class="string">'Hello'</span>/;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 负数索引，反向读取</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"$array[-1]\n"</span>;</span><br><span class="line"><span class="comment">## 可以直接在列表后面加索引</span></span><br><span class="line">$var = (<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>)[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">## 数组序列号: (起始值 + .. + 结束值)</span></span><br><span class="line">@var_10 = (<span class="number">1</span>..<span class="number">10</span>);	<span class="comment">#from 1 to 10</span></span><br><span class="line">@var_abc = (a..z);	<span class="comment">#from a to z</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 数组大小 和 最大索引</span></span><br><span class="line">$size = @array;</span><br><span class="line">$max_index = $#array;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 添加和删除数组元素</span></span><br><span class="line"><span class="keyword">push</span>(@sites, <span class="string">"baidu"</span>);   <span class="comment"># 在数组结尾添加一个元素</span></span><br><span class="line"><span class="keyword">unshift</span>(@sites, <span class="string">"weibo"</span>);<span class="comment"># 在数组开头添加一个元素</span></span><br><span class="line"><span class="keyword">pop</span>(@sites);             <span class="comment"># 删除数组末尾的元素</span></span><br><span class="line"><span class="keyword">shift</span>(@sites);			 <span class="comment"># 移除数组开头的元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 切割数组</span></span><br><span class="line">@sites2 = @sites[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line">@sites2 = @sites[<span class="number">3</span>..<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">## 替换/删除数组元素</span></span><br><span class="line"><span class="keyword">splice</span> @ARRAY, OFFSET [ , LENGTH [ , LIST ] ]</span><br><span class="line"><span class="comment">#  		@ARRAY：要替换的数组。   OFFSET：起始位置。</span></span><br><span class="line"><span class="comment">#  		LENGTH：替换的元素个数。  LIST：替换元素列表。</span></span><br><span class="line"><span class="comment">#  			不加 LIST 即为删除</span></span><br><span class="line"><span class="comment">#			LENGTH 也不加即删除到末尾</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 将字符串转换为数组</span></span><br><span class="line"><span class="keyword">split</span> [ PATTERN [ , EXPR [ , LIMIT ] ] ]</span><br><span class="line"><span class="comment">#  		PATTERN：分隔符，默认为空格。</span></span><br><span class="line"><span class="comment">#		EXPR：指定字符串数。</span></span><br><span class="line"><span class="comment">#		LIMIT：如果指定该参数，则返回该数组的元素个数。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 将数组转换为字符串</span></span><br><span class="line"><span class="keyword">join</span> EXPR, LIST</span><br><span class="line"><span class="comment">#  		EXPR：连接符。LIST：列表或数组。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 排序</span></span><br><span class="line"><span class="keyword">sort</span> [ SUBROUTINE ] LIST</span><br><span class="line"><span class="comment">#		SUBROUTINE：指定规则。默认值为 cmp,即根据 ASCII 值来排序。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 特殊变量:</span></span><br><span class="line">$[</span><br><span class="line"><span class="comment">#  $[ 表示数组的第一索引值，一般都为0,如果我们将 $[ 设置为1，则数组的第一个索引值即为1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 合并数组</span></span><br><span class="line">@numbers = (<span class="number">1</span>,<span class="number">3</span>,(<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>));</span><br><span class="line">@numbers = (@num1, @num2);</span><br></pre></td></tr></table></figure>
+<h3 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 创建哈希</span></span><br><span class="line"><span class="comment">#  为每个 key 设置 value</span></span><br><span class="line">$data&#123;<span class="string">'google'</span>&#125; = <span class="string">'google.com'</span>;</span><br><span class="line">$data&#123;<span class="string">'runoob'</span>&#125; = <span class="string">'runoob.com'</span>;</span><br><span class="line"><span class="comment">#  通过列表设置 3种方法</span></span><br><span class="line">%data = (<span class="string">'google'</span>, <span class="string">'google.com'</span>, <span class="string">'runoob'</span>, <span class="string">'runoob.com'</span>);</span><br><span class="line">%data = (<span class="string">'google'</span>=&gt;<span class="string">'google.com'</span>, <span class="string">'runoob'</span>=&gt;<span class="string">'runoob.com'</span>);</span><br><span class="line">%data = (<span class="string">-google=&gt;</span><span class="string">'google.com'</span>, <span class="string">-runoob=&gt;</span><span class="string">'runoob.com'</span>);</span><br><span class="line"><span class="comment">#  使用第三种方式 key 不能出现空格，读取元素方式为：</span></span><br><span class="line">$val = $data&#123;-google&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 读取哈希</span></span><br><span class="line">$value = $hash<span class="string">&#123;key&#125;</span></span><br><span class="line">@array = @hash&#123;key1, key2&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 读取所有key</span></span><br><span class="line">@array = <span class="keyword">keys</span> %hash;</span><br><span class="line"><span class="comment">## 读取所有value</span></span><br><span class="line">@array = <span class="keyword">values</span> %hash;</span><br><span class="line"><span class="comment">#  读取了所有的key或value后可以以此获取哈希的大小</span></span><br><span class="line">$size = @array</span><br><span class="line"></span><br><span class="line"><span class="comment">## 检测元素是否存在</span></span><br><span class="line"><span class="keyword">if</span>( <span class="keyword">exists</span>($hash<span class="string">&#123;key&#125;</span>) )&#123;	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 删除元素</span></span><br><span class="line"><span class="keyword">delete</span> $hash<span class="string">&#123;key&#125;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="变量上下文"><a href="#变量上下文" class="headerlink" title="变量上下文"></a>变量上下文</h3><p>所谓上下文：指的是表达式所在的位置。</p>
+<p>上下文是由等号左边的变量类型决定的，等号左边是标量，则是标量上下文，等号左边是列表，则是列表上下文。</p>
+<p>Perl 解释器会根据上下文来决定变量的类型。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@names = (<span class="string">'google'</span>, <span class="string">'runoob'</span>, <span class="string">'taobao'</span>);</span><br><span class="line"> </span><br><span class="line">@copy = @names;   <span class="comment"># 复制数组</span></span><br><span class="line">$size = @names;   <span class="comment"># 数组赋值给标量，返回数组元素个数</span></span><br></pre></td></tr></table></figure>
+<h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><p>以下我们将演示 Perl 中特殊字符的应用，如 <code>__FILE__</code>, <code>__LINE__</code>, 和 <code>__PACKAGE__</code> 分别表示当前执行脚本的文件名，行号，包名。</p>
+<p><strong>注意</strong>： <code>__</code> 是两条下划线，<code>__FILE__</code> 前后各两条下划线。</p>
+<p>这些特殊字符是单独的标记，不能写在字符串中，例如：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">"文件名 "</span>. __FILE_<span class="number">_</span> . <span class="string">"\n"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">"行号 "</span> . __LINE_<span class="number">_</span> .<span class="string">"\n"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">"包名 "</span> . __PACKAGE_<span class="number">_</span> .<span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 无法解析</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"__FILE__ __LINE__ __PACKAGE__\n"</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Perl-运算符"><a href="#Perl-运算符" class="headerlink" title="Perl 运算符"></a>Perl 运算符</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本和c语一样，并且支持位运算</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数值运算</span></span><br><span class="line">$a**$b <span class="comment">#a的b次幂</span></span><br><span class="line"></span><br><span class="line">$a==$b <span class="comment">#返回true/false</span></span><br><span class="line">$a&lt;=&gt;$b<span class="comment">#左小于右返回-1，相等返回0, 左大于右返回 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 字符串运算</span></span><br><span class="line"><span class="keyword">lt</span>	检查左边的字符串是否小于右边的字符串</span><br><span class="line"><span class="keyword">gt</span>	检查左边的字符串是否大于右边的字符串</span><br><span class="line">le	检查左边的字符串是否小于或等于右边的字符串</span><br><span class="line">ge	检查左边的字符串是否大于或等于右边的字符串</span><br><span class="line">eq	检查左边的字符串是否等于右边的字符串</span><br><span class="line"><span class="keyword">ne</span>	检查左边的字符串是否不等于右边的字符串</span><br><span class="line">cmp	返回 -<span class="number">1</span>，<span class="number">0</span>，<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 引号运算符</span></span><br><span class="line"><span class="string">q&#123; &#125;</span>	为字符串添加单引号	 <span class="string">q&#123;abcd&#125;</span> 结果为 <span class="string">'abcd'</span></span><br><span class="line"><span class="string">qq&#123; &#125;</span>	为字符串添加双引号	<span class="string">qq&#123;abcd&#125;</span> 结果为 <span class="string">"abcd"</span></span><br><span class="line"><span class="string">qx&#123; &#125;</span>	为字符串添加反引号	<span class="string">qx&#123;abcd&#125;</span> 结果为 <span class="string">`abcd`</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 其他运算符</span></span><br><span class="line">.	点号 (.) 用于连接两个字符串。	如果 $a=<span class="string">"run"</span>, $b=<span class="string">"oob"</span> ， $a.$b 结果为 <span class="string">"runoob"</span></span><br><span class="line"><span class="keyword">x</span>	<span class="keyword">x</span> 运算符返回字符串重复的次数。	(<span class="string">'-'</span> <span class="keyword">x</span> <span class="number">3</span>) 输出为 ---。</span><br><span class="line">..	.. 为范围运算符。	(<span class="number">2</span>..<span class="number">5</span>) 输出结果为 (<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">++	自增运算符，整数值增加 <span class="number">1</span>	$a =<span class="number">10</span>, $a++ will 输出为 <span class="number">11</span></span><br><span class="line">--	自减运算符，整数值减少 <span class="number">1</span>	$a =<span class="number">10</span>, $a-- 输出为 <span class="number">9</span></span><br><span class="line">-&gt;	箭号用于指定一个类的方法	$obj-&gt;$a 表示对象 $obj 的 $a 方法。</span><br></pre></td></tr></table></figure>
+<h2 id="Perl-时间日期"><a href="#Perl-时间日期" class="headerlink" title="Perl 时间日期"></a>Perl 时间日期</h2><ul>
+<li><strong>localtime()</strong></li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sec,     <span class="comment"># 秒， 0 到 61</span></span><br><span class="line">min,     <span class="comment"># 分钟， 0 到 59</span></span><br><span class="line">hour,    <span class="comment"># 小时， 0 到 24</span></span><br><span class="line">mday,    <span class="comment"># 天， 1 到 31</span></span><br><span class="line">mon,     <span class="comment"># 月， 0 到 11</span></span><br><span class="line">year,    <span class="comment"># 年，从 1900 开始</span></span><br><span class="line">wday,    <span class="comment"># 星期几，0-6,0表示周日</span></span><br><span class="line">yday,    <span class="comment"># 一年中的第几天,0-364,365</span></span><br><span class="line">isdst    <span class="comment"># 如果夏令时有效，则为真</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@months = <span class="string">qw( 一月 二月 三月 四月 五月 六月 七月 八月 九月 十月 十一月 十二月 )</span>;</span><br><span class="line">@days = <span class="string">qw(星期天 星期一 星期二 星期三 星期四 星期五 星期六)</span>;</span><br><span class="line">($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = <span class="keyword">localtime</span>();</span><br><span class="line"><span class="keyword">print</span> <span class="string">"$mday $months[$mon] $days[$wday]\n"</span>;</span><br></pre></td></tr></table></figure>
+<p>也可以直接调用 localtime() ，它返回系统当期设置时区的时间</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$datestring = <span class="keyword">localtime</span>();</span><br><span class="line"><span class="keyword">print</span> <span class="string">"时间日期为：$datestring\n"</span>;</span><br></pre></td></tr></table></figure>
+<p>格式化日期和时间</p>
+<p><code>printf(&quot;%02d:%02d:%02d&quot;, $hour, $min, $sec);</code></p>
+<ul>
+<li><p><strong>gmtime()</strong> 类似，返回标准格林威治 (GMT)时间</p>
+</li>
+<li><p><strong>time()</strong>  获取新纪元时间，返回从1970年1月1日起累计的秒数。</p>
+</li>
+<li><p><strong>strftime()</strong> 可以将时间格式化为我们想要的格式。<a href="http://www.runoob.com/perl/perl-date-time.html" target="_blank" rel="noopener">用法</a>]</p>
+</li>
+</ul>
+<h2 id="Perl-子程序-函数"><a href="#Perl-子程序-函数" class="headerlink" title="Perl 子程序(函数)"></a>Perl 子程序(函数)</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">subroutine</span></span>&#123;</span><br><span class="line">   statements;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 函数定义</span></span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"Hello, World!\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 函数调用</span></span><br><span class="line">Hello();</span><br></pre></td></tr></table></figure>
+<h3 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 子程序参数使用特殊数组 @_ 标明</span></span><br><span class="line"><span class="comment"># 子程序第一个参数为 $_[0], 第二个参数为 $_[1], 以此类推。</span></span><br><span class="line"><span class="comment"># 不论参数是标量型还是数组型的，用户把参数传给子程序时，perl默认按引用的方式调用它们。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 例子：定义求平均值函数</span></span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">Average</span></span>&#123;</span><br><span class="line">   <span class="comment"># 获取所有传入的参数</span></span><br><span class="line">   $n = <span class="keyword">scalar</span>(@_);</span><br><span class="line">   $sum = <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">foreach</span> $item (@_)&#123;</span><br><span class="line">      $sum += $item;</span><br><span class="line">   &#125;</span><br><span class="line">   $average = $sum / $n;</span><br><span class="line">   <span class="keyword">print</span> <span class="string">'传入的参数为 : '</span>,<span class="string">"@_\n"</span>;           <span class="comment"># 打印整个数组</span></span><br><span class="line">   <span class="keyword">print</span> <span class="string">"第一个参数值为 : $_[0]\n"</span>;         <span class="comment"># 打印第一个参数</span></span><br><span class="line">   <span class="keyword">print</span> <span class="string">"传入参数的平均值为 : $average\n"</span>;  <span class="comment"># 打印平均值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果我们需要传入标量和数组参数时，需要把列表放在最后一个参数上</span></span><br><span class="line">func($a, @b);</span><br><span class="line"></span><br><span class="line"><span class="comment"># 向子程序传递哈希</span></span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">PrintHash</span></span>&#123;</span><br><span class="line">   <span class="keyword">my</span> (%hash) = @_;</span><br><span class="line">   <span class="keyword">foreach</span> <span class="keyword">my</span> $key ( <span class="keyword">keys</span> %hash )&#123;</span><br><span class="line">      <span class="keyword">my</span> $value = $hash&#123;$key&#125;;</span><br><span class="line">      <span class="keyword">print</span> <span class="string">"$key : $value\n"</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如果没有使用 return 语句，则子程序的最后一行语句将作为返回值。</p>
+<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><p>默认情况下，Perl 中所有的变量都是全局变量，这就是说变量在程序的任何地方都可以调用。</p>
+<p>可以使用 <strong>my</strong> 操作符来设置私有变量。</p>
+<p><strong>my</strong> 操作符用于创建词法作用域变量，通过 <strong>my</strong> 创建的变量，存活于声明开始的地方，直到闭合作用域的结尾。</p>
+<p>闭合作用域指的可以是一对花括号中的区域，可以是一个文件，也可以是一个 if, while, for, foreach, eval字符串。</p>
+<h3 id="变量的临时赋值"><a href="#变量的临时赋值" class="headerlink" title="变量的临时赋值"></a>变量的临时赋值</h3><p>我们可以使用 local 为全局变量提供临时的值，在退出作用域后将原来的值还回去。</p>
+<p>local 定义的变量不存在于主程序中，但存在于该子程序和该子程序调用的子程序中。定义时可以给其赋值。</p>
+<h3 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h3><p>state操作符功能类似于C里面的static修饰符。</p>
+<p>state也是词法变量，所以只在定义该变量的词法作用域中有效。</p>
+<ul>
+<li><p>state仅能创建闭合作用域为子程序内部的变量。</p>
+</li>
+<li><p>state是从Perl 5.9.4开始引入的，所以使用前必须加上 use。<code>use feature &#39;state&#39;;</code></p>
+</li>
+<li><p>state可以声明标量、数组、哈希。但在声明数组和哈希时，不能对其初始化（至少Perl 5.14不支持）。</p>
+</li>
+</ul>
+<h3 id="子程序调用上下文"><a href="#子程序调用上下文" class="headerlink" title="子程序调用上下文"></a>子程序调用上下文</h3><p>子程序调用过程中，会根据上下文来返回不同类型的值。</p>
+<p>比如 localtime() ，在标量上下文返回字符串，在列表上下文返回列表。</p>
+<h2 id="Perl-引用"><a href="#Perl-引用" class="headerlink" title="Perl 引用"></a>Perl 引用</h2><h3 id="变量引用"><a href="#变量引用" class="headerlink" title="变量引用"></a>变量引用</h3><p>定义变量的时候，在变量名前面加个\，就得到了这个变量的一个引用。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$scalarref = \$foo;     <span class="comment"># 标量变量引用</span></span><br><span class="line">$arrayref  = \@ARGV;    <span class="comment"># 列表的引用</span></span><br><span class="line">$hashref   = \%ENV;     <span class="comment"># 哈希的引用</span></span><br><span class="line">$coderef   = \&amp;handler; <span class="comment"># 子过程引用</span></span><br><span class="line">$globref   = \*foo;     <span class="comment"># GLOB句柄引用</span></span><br></pre></td></tr></table></figure>
+<h3 id="匿名引用"><a href="#匿名引用" class="headerlink" title="匿名引用"></a>匿名引用</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 匿名数组引用</span></span><br><span class="line">$aref= [ <span class="number">1</span>,<span class="string">"foo"</span>,<span class="keyword">undef</span>,<span class="number">13</span> ];</span><br><span class="line"><span class="keyword">my</span> $aref = [</span><br><span class="line">        [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">        [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">        [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 匿名哈希引用</span></span><br><span class="line">$href= &#123; <span class="string">APR =&gt;</span><span class="number">4</span>, <span class="string">AUG =&gt;</span><span class="number">8</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 匿名子程序引用</span></span><br><span class="line">$coderef = <span class="function"><span class="keyword">sub</span> </span>&#123; <span class="keyword">print</span> <span class="string">"Runoob!\n"</span> &#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="取消引用"><a href="#取消引用" class="headerlink" title="取消引用"></a>取消引用</h3><p>根据不同的类型使用 $, @ 或 % 来取消，取得引用指向的值。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$r</span><br><span class="line">@$r</span><br><span class="line">%$r</span><br></pre></td></tr></table></figure>
+<h4 id="判断变量类型"><a href="#判断变量类型" class="headerlink" title="判断变量类型"></a>判断变量类型</h4><p>如果你不能确定变量类型，你可以使用 <strong>ref</strong> 来判断，返回值列表如下，如果没有以下的值返回 false：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SCALAR</span><br><span class="line">ARRAY</span><br><span class="line">HASH</span><br><span class="line">CODE</span><br><span class="line">GLOB</span><br><span class="line">REF</span><br></pre></td></tr></table></figure>
+<h3 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">my</span> $foo = <span class="number">100</span>;</span><br><span class="line">$foo = \$foo;</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Value of foo is : "</span>, $$foo, <span class="string">"\n"</span>;</span><br></pre></td></tr></table></figure>
+<p>result:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Value of foo is : REF(<span class="number">0x9aae38</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="引用函数"><a href="#引用函数" class="headerlink" title="引用函数"></a>引用函数</h3><p>调用引用函数格式: &amp; + 创建的引用名</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建函数的引用</span></span><br><span class="line">$cref = \&amp;PrintHash;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 使用引用调用函数</span></span><br><span class="line">&amp;$cref(%hash);</span><br></pre></td></tr></table></figure>
+<h2 id="Perl-格式化输出"><a href="#Perl-格式化输出" class="headerlink" title="Perl 格式化输出"></a>Perl 格式化输出</h2><p>Perl 中可以使用 format 来定义一个模板，然后使用 write 按指定模板输出数据。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">format</span> FormatName =</span><br><span class="line">fieldline</span><br><span class="line">value_one, value_two, value_three</span><br><span class="line">fieldline</span><br><span class="line">value_one, value_two</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>FormatName</strong> ：格式化名称。</li>
+<li><strong>fieldline</strong> ：一个格式行，用来定义一个输出行的格式,类似 @,^,&lt;,&gt;,| 这样的字符。</li>
+<li><strong>value_one,value_two……</strong> ：数据行，用来向前面的格式行中插入值,都是perl的变量。</li>
+<li><strong>.</strong> ：结束符号。</li>
+</ul>
+<p><strong>格式行(图形行)语法</strong></p>
+<ul>
+<li>格式行以 @ 或者 ^ 开头，这些行不作任何形式的变量代换。</li>
+<li>@ 字段是普通的字段。</li>
+<li>@,^ 后的 &lt;, &gt;,| 长度决定了字段的长度，如果变量超出定义的长度,那么它将被截断。</li>
+<li>&lt;, &gt;,| 还分别表示,左对齐,右对齐,居中对齐。</li>
+<li>^ 字段用于多行文本块填充。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>值域含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@&lt;&lt;&lt;</td>
+<td>左对齐输出</td>
+</tr>
+<tr>
+<td>@&gt;&gt;&gt;</td>
+<td>右对齐输出</td>
+</tr>
+<tr>
+<td>@\</td>
+<td>\</td>
+<td>\</td>
+<td></td>
+<td>中对齐输出</td>
+</tr>
+<tr>
+<td>@##.##</td>
+<td>固定精度数字</td>
+</tr>
+<tr>
+<td>@*</td>
+<td>多行文本</td>
+</tr>
+</tbody>
+</table>
+<p>示例：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">format</span> EMPLOYEE =</span><br><span class="line">===================================</span><br><span class="line">@&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; @&lt;&lt; </span><br><span class="line">$name, $age</span><br><span class="line">@#<span class="comment">####.##</span></span><br><span class="line">$salary</span><br><span class="line">===================================</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span>(STDOUT);</span><br><span class="line">$~ = EMPLOYEE;</span><br><span class="line"></span><br><span class="line">@n = (<span class="string">"Ali"</span>, <span class="string">"Runoob"</span>, <span class="string">"Jaffer"</span>);</span><br><span class="line">@a  = (<span class="number">20</span>,<span class="number">30</span>, <span class="number">40</span>);</span><br><span class="line">@s = (<span class="number">2000.00</span>, <span class="number">2500.00</span>, <span class="number">4000.000</span>);</span><br><span class="line"></span><br><span class="line">$i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">foreach</span> (@n)&#123;</span><br><span class="line">    $name = $_;</span><br><span class="line">    $age = $a[$i];</span><br><span class="line">    $salary = $s[$i++];</span><br><span class="line">    <span class="keyword">write</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果为：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">===================================</span><br><span class="line">Ali                     <span class="number">20</span></span><br><span class="line">  <span class="number">2000.00</span></span><br><span class="line">===================================</span><br><span class="line">===================================</span><br><span class="line">Runoob                  <span class="number">30</span></span><br><span class="line">  <span class="number">2500.00</span></span><br><span class="line">===================================</span><br><span class="line">===================================</span><br><span class="line">Jaffer                  <span class="number">40</span></span><br><span class="line">  <span class="number">4000.00</span></span><br><span class="line">===================================</span><br></pre></td></tr></table></figure>
+<p><strong>格式变量</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$~ ($FORMAT_NAME) ：格式名字 $^ ($FORMAT_TOP_NAME) ：当前的表头格式名字</span><br><span class="line">$% ($FORMAT_PAGE_NUMBER) ：当前输出的页号</span><br><span class="line">$= ($FORMAT_LINES_PER_PAGE) ：每页中的行数</span><br><span class="line">$| ($FORMAT_AUTOFLUSH) ：是否自动刷新输出缓冲区存储</span><br><span class="line">$^L ($FORMAT_FORMFEED) ：在每一页(除了第一页)表头之前需要输出的字符串存储在</span><br></pre></td></tr></table></figure>
+<p>还有一些知识点，自行百度吧。</p>
+<h2 id="Perl-文件操作"><a href="#Perl-文件操作" class="headerlink" title="Perl 文件操作"></a>Perl 文件操作</h2><p>Perl 使用一种叫做文件句柄类型的变量来操作文件。</p>
+<p>文件句柄(file handle)是一个I/O连接的名称。</p>
+<p>Perl提供了三种文件句柄:STDIN,STDOUT,STDERR。</p>
+<h3 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h3><p>Perl 中打开文件可以使用以下方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">open FILEHANDLE, EXPR</span><br><span class="line">open FILEHANDLE</span><br><span class="line"></span><br><span class="line">sysopen FILEHANDLE, FILENAME, MODE, PERMS</span><br><span class="line">sysopen FILEHANDLE, FILENAME, MODE</span><br></pre></td></tr></table></figure>
+<p>参数说明:</p>
+<ul>
+<li>FILEHANDLE：文件句柄，用于存放一个文件唯一标识符。</li>
+<li>EXPR：文件名及文件访问类型组成的表达式。</li>
+<li>MODE：文件访问类型。</li>
+<li>PERMS：访问权限位(permission bits)。</li>
+</ul>
+<h4 id="open-函数"><a href="#open-函数" class="headerlink" title="open 函数"></a>open 函数</h4><p>打开文件并读取内容：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span>(DATA, <span class="string">"&lt;file.txt"</span>) || <span class="keyword">die</span> <span class="string">"file.txt 文件无法打开, $!"</span>;</span><br><span class="line"><span class="keyword">while</span>(&lt;DATA&gt;)&#123;</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"$_"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 或 r</td>
+<td>只读方式打开，将文件指针指向文件头。</td>
+</tr>
+<tr>
+<td>&gt; 或 w</td>
+<td>写入方式打开，将文件指针指向文件头并将文件大小截为零。如果文件不存在则尝试创建之。</td>
+</tr>
+<tr>
+<td>&gt;&gt; 或 a</td>
+<td>写入方式打开，将文件指针指向文件末尾。如果文件不存在则尝试创建之。</td>
+</tr>
+<tr>
+<td>+&lt; 或 r+</td>
+<td>读写方式打开，将文件指针指向文件头。</td>
+</tr>
+<tr>
+<td>+&gt; 或 w+</td>
+<td>读写方式打开，将文件指针指向文件头并将文件大小截为零。如果文件不存在则尝试创建之。</td>
+</tr>
+<tr>
+<td>+&gt;&gt; 或 a+</td>
+<td>读写方式打开，将文件指针指向文件末尾。如果文件不存在则尝试创建之。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Sysopen函数"><a href="#Sysopen函数" class="headerlink" title="Sysopen函数"></a>Sysopen函数</h4><p><strong>sysopen</strong> 函数类似于 open 函数，只是它们的参数形式不一样。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sysopen</span> FILEHANDLE, FILENAME, MODE, PERMS</span><br><span class="line"><span class="keyword">sysopen</span>(DATA, <span class="string">"file.txt"</span>, O_RDWR|O_TRUNC );</span><br></pre></td></tr></table></figure>
+<p><strong>PERMS</strong> 参数为八进制属性值，表示文件创建后的权限，默认为 <strong>0x666</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O_RDWR</td>
+<td>读写方式打开，将文件指针指向文件头。</td>
+</tr>
+<tr>
+<td>O_RDONLY</td>
+<td>只读方式打开，将文件指针指向文件头。</td>
+</tr>
+<tr>
+<td>O_WRONLY</td>
+<td>写入方式打开，将文件指针指向文件头并将文件大小截为零。如果文件不存在则尝试创建之。</td>
+</tr>
+<tr>
+<td>O_CREAT</td>
+<td>创建文件</td>
+</tr>
+<tr>
+<td>O_APPEND</td>
+<td>追加文件</td>
+</tr>
+<tr>
+<td>O_TRUNC</td>
+<td>将文件大小截为零</td>
+</tr>
+<tr>
+<td>O_EXCL</td>
+<td>如果使用O_CREAT时文件存在,就返回错误信息,它可以测试文件是否存在</td>
+</tr>
+<tr>
+<td>O_NONBLOCK</td>
+<td>非阻塞I/O使我们的操作要么成功，要么立即返回错误，不被阻塞。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Close-函数"><a href="#Close-函数" class="headerlink" title="Close 函数"></a>Close 函数</h4><p>FILEHANDLE 为指定的文件句柄，如果成功关闭则返回 true。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">close</span>(DATA) || <span class="keyword">die</span> <span class="string">"无法关闭文件"</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h3><h4 id="lt-FILEHANDL-gt-操作符"><a href="#lt-FILEHANDL-gt-操作符" class="headerlink" title="&lt;FILEHANDL&gt;操作符"></a><code>&lt;FILEHANDL&gt;</code>操作符</h4><p>从打开的文件句柄读取信息的主要方法是 <code>&lt;FILEHANDLE&gt;</code> 操作符。在标量上下文中，它从文件句柄返回单一行。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$name = &lt;STDIN&gt;; <span class="comment">#从标准输入读取一行</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"名字：$name\n"</span>;</span><br></pre></td></tr></table></figure>
+<p>当我们使用 <code>&lt;FILEHANDLE&gt;</code> 操作符时，它会返回文件句柄中每一行的列表</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span>(DATA,<span class="string">"&lt;import.txt"</span>) <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"无法打开数据"</span>;</span><br><span class="line">@lines = &lt;DATA&gt;;</span><br><span class="line"><span class="keyword">print</span> @lines;    <span class="comment"># 输出数组内容</span></span><br></pre></td></tr></table></figure>
+<h4 id="getc-函数"><a href="#getc-函数" class="headerlink" title="getc 函数"></a>getc 函数</h4><p>xgetc 函数从指定的 FILEHANDLE 返回单一的字符，如果没指定返回 STDIN：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">getc</span> FILEHANDLE</span><br><span class="line"><span class="keyword">getc</span></span><br></pre></td></tr></table></figure>
+<p>如果发生错误，或在文件句柄在文件末尾，则返回 undef。</p>
+<h4 id="read-函数"><a href="#read-函数" class="headerlink" title="read 函数"></a>read 函数</h4><p>read 函数用于从缓冲区的文件句柄读取信息。</p>
+<p>这个函数用于从文件读取二进制数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read FILEHANDLE, SCALAR, LENGTH, OFFSET</span><br><span class="line">read FILEHANDLE, SCALAR, LENGTH</span><br></pre></td></tr></table></figure>
+<p>参数说明:</p>
+<ul>
+<li>FILEHANDLE：文件句柄，用于存放一个文件唯一标识符。</li>
+<li>SCALAR：存贮结果，如果没有指定OFFSET，数据将放在SCALAR的开头。否则数据放在SCALAR中的OFFSET字节之后。</li>
+<li>LENGTH：读取的内容长度。</li>
+<li>OFFSET：偏移量。</li>
+</ul>
+<p>如果读取成功返回读取的字节数，如果在文件结尾返回 0，如果发生错误返回 undef。</p>
+<h4 id="print-函数"><a href="#print-函数" class="headerlink" title="print 函数"></a>print 函数</h4><p>对于所有从文件句柄中读取信息的函数，在后端主要的写入函数为 print：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> FILEHANDLE LIST</span><br><span class="line"><span class="keyword">print</span> LIST</span><br><span class="line"><span class="keyword">print</span></span><br></pre></td></tr></table></figure>
+<h3 id="文件拷贝"><a href="#文件拷贝" class="headerlink" title="文件拷贝"></a>文件拷贝</h3><p>以下实例我们将打开一个已存在的文件 file1.txt ，并读取它的每一行写入到文件 file2.txt 中：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只读方式打开文件</span></span><br><span class="line"><span class="keyword">open</span>(DATA1, <span class="string">"&lt;file1.txt"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 打开新文件并写入</span></span><br><span class="line"><span class="keyword">open</span>(DATA2, <span class="string">"&gt;file2.txt"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 拷贝数据</span></span><br><span class="line"><span class="keyword">while</span>(&lt;DATA1&gt;)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">print</span> DATA2 $_;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">close</span>( DATA1 );</span><br><span class="line"><span class="keyword">close</span>( DATA2 );</span><br></pre></td></tr></table></figure>
+<h3 id="文件重命名"><a href="#文件重命名" class="headerlink" title="文件重命名"></a>文件重命名</h3><p>以下实例，我们将已存在的文件 file1.txt 重命名为 file2.txt，指定的目录是在 /usr/runoob/test/ 下：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">rename</span> (<span class="string">"/usr/test/file1.txt"</span>, <span class="string">"/usr/test/file2.txt"</span> );</span><br></pre></td></tr></table></figure>
+<p>函数 <strong>renames</strong> 只接受两个参数，只对已存在的文件进行重命名。</p>
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unlink</span> (<span class="string">"/usr/runoob/test/file1.txt"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="指定文件位置"><a href="#指定文件位置" class="headerlink" title="指定文件位置"></a>指定文件位置</h3><p>你可以使用 <strong>tell</strong> 函数来获取文件的位置，并通过使用 <strong>seek</strong> 函数来指定文件内的的位置：</p>
+<h4 id="tell-函数"><a href="#tell-函数" class="headerlink" title="tell 函数"></a>tell 函数</h4><p>tell 函数用于获取文件位置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tell FILEHANDLE</span><br><span class="line">tell</span><br></pre></td></tr></table></figure>
+<p>如果指定 FILEHANDLE 该函数返回文件指针的位置，以字节计。如果没有指定则返回默认选取的文件句柄。</p>
+<h4 id="seek-函数"><a href="#seek-函数" class="headerlink" title="seek 函数"></a>seek 函数</h4><p>seek()函数是通过文件句柄来移动文件读写指针的方式来读取或写入文件的，以字节为单位进行读取和写入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seek FILEHANDLE, POSITION, WHENCE</span><br></pre></td></tr></table></figure>
+<p>参数说明:</p>
+<ul>
+<li>FILEHANDLE：文件句柄，用于存放一个文件唯一标识符。</li>
+<li>POSITION：表示文件句柄(读写位置指针)要移动的字节数。</li>
+<li>WHENCE：表示文件句柄(读写位置指针)开始移动时的起始位置，可以取的值为0、1、2；分别表示文件开头、当前位置和文件尾。</li>
+</ul>
+<p>以下实例为从文件开头读取 256 个字节：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seek DATA, 256, 0;</span><br></pre></td></tr></table></figure>
+<h3 id="文件信息"><a href="#文件信息" class="headerlink" title="文件信息"></a>文件信息</h3><p>Perl 的文件操作也可以先测试文件是否存在，是否可读写等。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">my</span> $file = <span class="string">"/usr/test/runoob/file1.txt"</span>;</span><br><span class="line"><span class="keyword">my</span> (@description, $size);</span><br><span class="line"><span class="keyword">if</span> (-e $file)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">push</span> @description, <span class="string">'是一个二进制文件'</span> <span class="keyword">if</span> (-B <span class="number">_</span>);</span><br><span class="line">    <span class="keyword">push</span> @description, <span class="string">'是一个socket(套接字)'</span> <span class="keyword">if</span> (-S <span class="number">_</span>);</span><br><span class="line">    <span class="keyword">push</span> @description, <span class="string">'是一个文本文件'</span> <span class="keyword">if</span> (-T <span class="number">_</span>);</span><br><span class="line">    <span class="keyword">push</span> @description, <span class="string">'是一个特殊块文件'</span> <span class="keyword">if</span> (-b <span class="number">_</span>);</span><br><span class="line">    <span class="keyword">push</span> @description, <span class="string">'是一个特殊字符文件'</span> <span class="keyword">if</span> (-c <span class="number">_</span>);</span><br><span class="line">    <span class="keyword">push</span> @description, <span class="string">'是一个目录'</span> <span class="keyword">if</span> (-d <span class="number">_</span>);</span><br><span class="line">    <span class="keyword">push</span> @description, <span class="string">'文件存在'</span> <span class="keyword">if</span> (-<span class="keyword">x</span> <span class="number">_</span>);</span><br><span class="line">    <span class="keyword">push</span> @description, (($size = -<span class="keyword">s</span> <span class="number">_</span>)) ? <span class="string">"$size 字节"</span> : <span class="string">'空'</span>;</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"$file 信息："</span>, <span class="keyword">join</span>(<span class="string">', '</span>,@description),<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>文件测试操作符如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-A</td>
+<td>文件上一次被访问的时间(单位：天)</td>
+</tr>
+<tr>
+<td>-B</td>
+<td>是否为二进制文件</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>文件的(inode)索引节点修改时间(单位：天)</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>文件上一次被修改的时间(单位：天)</td>
+</tr>
+<tr>
+<td>-O</td>
+<td>文件被真实的UID所有</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>文件或目录可以被真实的UID/GID读取</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>为socket(套接字)</td>
+</tr>
+<tr>
+<td>-T</td>
+<td>是否为文本文件</td>
+</tr>
+<tr>
+<td>-W</td>
+<td>文件或目录可以被真实的UID/GID写入</td>
+</tr>
+<tr>
+<td>-X</td>
+<td>文件或目录可以被真实的UID/GID执行</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>为block-special (特殊块)文件(如挂载磁盘)</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>为character-special (特殊字符)文件(如I/O 设备)</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>为目录</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>文件或目录名存在</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>为普通文件</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>文件或目录具有setgid属性</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>文件或目录设置了sticky位</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>为符号链接</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>文件被有效UID所有</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>文件是命名管道(FIFO)</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>文件可以被有效的UID/GID读取</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>文件或目录存在且不为0(返回字节数)</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>文件句柄为TTY(系统函数isatty()的返回结果；不能对文件名使用这个测试)</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>文件或目录具有setuid属性</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>文件可以被有效的UID/GID写入</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>文件可以被有效的UID/GID执行</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>文件存在，大小为0(目录恒为false)，即是否为空文件，</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Perl-目录操作"><a href="#Perl-目录操作" class="headerlink" title="Perl 目录操作"></a>Perl 目录操作</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">opendir</span> DIRHANDLE, EXPR  <span class="comment"># 打开目录</span></span><br><span class="line"><span class="keyword">readdir</span> DIRHANDLE        <span class="comment"># 读取目录</span></span><br><span class="line"><span class="keyword">rewinddir</span> DIRHANDLE      <span class="comment"># 定位指针到开头</span></span><br><span class="line"><span class="keyword">telldir</span> DIRHANDLE        <span class="comment"># 返回目录的当前位置</span></span><br><span class="line"><span class="keyword">seekdir</span> DIRHANDLE, POS   <span class="comment"># 定位指定到目录的 POS 位置</span></span><br><span class="line">closedir DIRHANDLE       <span class="comment"># 关闭目录</span></span><br><span class="line"><span class="keyword">glob</span> 					 <span class="comment"># 显示文件</span></span><br><span class="line">以下需要有足够权限</span><br><span class="line"><span class="keyword">mkdir</span>					 <span class="comment"># 创建目录</span></span><br><span class="line"><span class="keyword">rmdir</span>					 <span class="comment"># 删除目录</span></span><br><span class="line"><span class="keyword">chdir</span>					 <span class="comment"># 切换目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="显示文件"><a href="#显示文件" class="headerlink" title="显示文件"></a>显示文件</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示 /tmp 和 /home 目录下的所有文件</span></span><br><span class="line">$dir = <span class="string">"/tmp/* /home/*"</span>;</span><br><span class="line">@files = <span class="keyword">glob</span>( $dir );</span><br><span class="line"> </span><br><span class="line"><span class="keyword">foreach</span> (@files )&#123;</span><br><span class="line">   <span class="keyword">print</span> $_ . <span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示 /tmp 目录下所有以 .c 结尾的文件</span></span><br><span class="line">$dir = <span class="string">"/tmp/*.c"</span>;</span><br><span class="line">@files = <span class="keyword">glob</span>( $dir );</span><br><span class="line"> </span><br><span class="line"><span class="keyword">foreach</span> (@files )&#123;</span><br><span class="line">   <span class="keyword">print</span> $_ . <span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出当前目录下的所有文件：</span></span><br><span class="line"><span class="keyword">opendir</span> (DIR, <span class="string">'.'</span>) <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"无法打开目录, $!"</span>;</span><br><span class="line"><span class="keyword">while</span> ($file = <span class="keyword">readdir</span> DIR) &#123;</span><br><span class="line">  <span class="keyword">print</span> <span class="string">"$file\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line">closedir DIR;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示 /tmp 目录下所有以 .c 结尾的文件</span></span><br><span class="line"><span class="keyword">opendir</span>(DIR, <span class="string">'.'</span>) <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"无法打开目录, $!"</span>;</span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">sort</span> <span class="keyword">grep</span>(<span class="regexp">/^.*\.c$/</span>,<span class="keyword">readdir</span>(DIR)))&#123;</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"$_\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line">closedir DIR;</span><br></pre></td></tr></table></figure>
+<h2 id="Perl-错误处理"><a href="#Perl-错误处理" class="headerlink" title="Perl 错误处理"></a>Perl 错误处理</h2><h3 id="warn-die-函数"><a href="#warn-die-函数" class="headerlink" title="warn / die 函数"></a>warn / die 函数</h3><p><strong>warn</strong> 函数用于触发一个警告信息，不会有其他操作，输出到 STDERR(标准输出文件)，</p>
+<p><strong>die</strong> 函数类似于 warn, 但它会执行退出。</p>
+<h3 id="carp-模块"><a href="#carp-模块" class="headerlink" title="carp 模块"></a>carp 模块</h3><p>标准 Carp 模块提供了 warn() 和 die() 函数的替代方法，它们在提供错误定位方面提供更多信息，而且更加友好。当在模块中使用时，错误消息中包含模块名称和行号。</p>
+<p><strong>carp</strong> 函数可以输出程序的跟踪信息，类似于 warn 函数，通常会将该信息发送到 STDERR。</p>
+<p><strong>cluck</strong> 与 warn 类似，提供了从产生错误处的栈回溯追踪。</p>
+<p><strong>croak</strong> 与 die 一样，可以结束脚本。</p>
+<p><strong>confess</strong> 与 die 类似，但提供了从产生错误处的栈回溯追踪。</p>
+<h2 id="Perl-特殊变量"><a href="#Perl-特殊变量" class="headerlink" title="Perl 特殊变量"></a>Perl 特殊变量</h2><p>Perl 语言中定义了一些特殊的变量，通常以 <code>$, @, %</code> 作为前缀。</p>
+<p>很多特殊的变量有一个很长的英文名，比如操作系统变量 <code>$!</code> 可以写为 <code>$OS_ERROR</code>。</p>
+<p>如果你想使用英文名的特殊变量需要在程序头部添加 <strong>use English</strong>。</p>
+<h3 id><a href="#" class="headerlink" title="$_"></a><code>$_</code></h3><p>最常用的特殊变量为 <code>$_</code> 即 <code>$ARG</code>该变量包含了默认输入和模式匹配内容。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在迭代循环中，当前循环的字符串会放在 $_ 中, 然后 通过 print 输出。另外 print 在不指定输出变量，默认情况下使用的也是 $_。</span></span><br><span class="line"><span class="keyword">foreach</span> (<span class="string">'Google'</span>,<span class="string">'Runoob'</span>,<span class="string">'Taobao'</span>) &#123;</span><br><span class="line">    <span class="keyword">print</span> $_;</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 等效于</span></span><br><span class="line"><span class="keyword">foreach</span> (<span class="string">'Google'</span>,<span class="string">'Runoob'</span>,<span class="string">'Taobao'</span>) &#123;</span><br><span class="line">    <span class="keyword">print</span>;</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="特殊变量类型"><a href="#特殊变量类型" class="headerlink" title="特殊变量类型"></a>特殊变量类型</h3><p>根据特殊的变量的使用性质，可以分为以下几类：</p>
+<ul>
+<li>全局标量特殊变量。</li>
+<li>全局数组特殊变量。</li>
+<li>全局哈希特殊变量。</li>
+<li>全局特殊文件句柄。</li>
+<li>全局特殊常量。</li>
+<li>正则表达式特殊变量。</li>
+<li>文件句柄特殊变量。</li>
+</ul>
+<p><a href="http://www.runoob.com/perl/perl-special-variables.html" target="_blank" rel="noopener">点此查看具体</a></p>
+<h2 id="Perl-正则表达式"><a href="#Perl-正则表达式" class="headerlink" title="Perl 正则表达式"></a>Perl 正则表达式</h2><p>正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。</p>
+<p>Perl语言的正则表达式功能非常强大，基本上是常用语言中最强大的，很多语言设计正则式支持的时候都参考Perl的正则表达式。</p>
+<p>Perl的正则表达式的三种形式，分别是匹配，替换和转化:</p>
+<ul>
+<li>匹配：m//（还可以简写为//，略去m）</li>
+<li>替换：s///</li>
+<li>转化：tr///</li>
+</ul>
+<p>这三种形式一般都和 <strong>=~</strong> 或 <strong>!~</strong> 搭配使用， =~ 表示相匹配，!~ 表示不匹配。</p>
+<h3 id="匹配操作符"><a href="#匹配操作符" class="headerlink" title="匹配操作符"></a>匹配操作符</h3><p>匹配操作符 m// 用于匹配一个字符串语句或者一个正则表达式</p>
+<p>例如，要匹配 标量 <code>$str</code> 中的 “run”，并且忽略模式中的大小写</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ($str =~ <span class="regexp">m/run/</span>)&#123;</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"匹配\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>模式匹配修饰符</strong></p>
+<p>修饰符加在操作符最后</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>忽略模式中的大小写</td>
+</tr>
+<tr>
+<td>m</td>
+<td>多行模式</td>
+</tr>
+<tr>
+<td>o</td>
+<td>仅赋值一次</td>
+</tr>
+<tr>
+<td>s</td>
+<td>单行模式，”.”匹配”\n”（默认不匹配）</td>
+</tr>
+<tr>
+<td>x</td>
+<td>忽略模式中的空白</td>
+</tr>
+<tr>
+<td>g</td>
+<td>全局匹配</td>
+</tr>
+<tr>
+<td>cg</td>
+<td>全局匹配失败后，允许再次查找匹配串</td>
+</tr>
+</tbody>
+</table>
+<h4 id="正则表达式变量"><a href="#正则表达式变量" class="headerlink" title="正则表达式变量"></a>正则表达式变量</h4><p>perl处理完后会给匹配到的值存在三个特殊变量名: </p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$` <span class="comment"># 匹配部分的前一部分字符串</span></span><br><span class="line">$&amp; <span class="comment"># 匹配的字符串</span></span><br><span class="line">$' <span class="comment"># 还没有匹配的剩余字符串</span></span><br></pre></td></tr></table></figure>
+<p>如果将这三个变量放在一起,你将得到原始字符串。</p>
+<h3 id="替换操作符"><a href="#替换操作符" class="headerlink" title="替换操作符"></a>替换操作符</h3><p>替换操作符 s/// 是匹配操作符的扩展，使用新的字符串替换指定的字符串。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">s</span>/PATTERN/REPLACEMENT/;</span><br></pre></td></tr></table></figure>
+<p>PATTERN 为匹配模式，REPLACEMENT 为替换的字符串。</p>
+<p><strong>替换操作修饰符</strong></p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>如果在修饰符中加上”i”，则正则将会取消大小写敏感性，即”a”和”A” 是一样的。</td>
+</tr>
+<tr>
+<td>m</td>
+<td>默认的正则开始”^”和结束<code>$</code>只是对于正则字符串如果在修饰符中加上”m”，那么开始和结束将会指字符串的每一行：每一行的开头就是”^”，结尾就是<code>$</code>。</td>
+</tr>
+<tr>
+<td>o</td>
+<td>表达式只执行一次。</td>
+</tr>
+<tr>
+<td>s</td>
+<td>如果在修饰符中加入”s”，那么默认的”.”代表除了换行符以外的任何字符将会变成任意字符，也就是包括换行符！</td>
+</tr>
+<tr>
+<td>x</td>
+<td>如果加上该修饰符，表达式中的空白字符将会被忽略，除非它已经被转义。</td>
+</tr>
+<tr>
+<td>g</td>
+<td>替换所有匹配的字符串。</td>
+</tr>
+<tr>
+<td>e</td>
+<td>替换字符串作为表达式</td>
+</tr>
+</tbody>
+</table>
+<h3 id="转化操作符"><a href="#转化操作符" class="headerlink" title="转化操作符"></a>转化操作符</h3><p>以下是转化操作符相关的修饰符：</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c</td>
+<td>转化所有未指定字符</td>
+</tr>
+<tr>
+<td>d</td>
+<td>删除所有指定字符</td>
+</tr>
+<tr>
+<td>s</td>
+<td>把多个相同的输出字符缩成一个</td>
+</tr>
+</tbody>
+</table>
+<p>例子</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$string =~ <span class="regexp">tr/a-z/A-z/</span>;   <span class="comment"># 所有小写字母转化为大写字母</span></span><br><span class="line">$string =~ <span class="regexp">tr/a-z/a-z/s</span>;  <span class="comment"># 将变量 $string 重复的字符删除</span></span><br><span class="line">$string =~ <span class="regexp">tr/\d/ /c</span>;     <span class="comment"># 把所有非数字字符替换为空格</span></span><br><span class="line">$string =~ <span class="regexp">tr/\t //d</span>;     <span class="comment"># 删除tab和空格</span></span><br><span class="line">$string =~ <span class="regexp">tr/0-9/ /cs</span>    <span class="comment"># 把数字间的其它字符替换为一个空格。</span></span><br></pre></td></tr></table></figure>
+<h3 id="更多正则表达式规则"><a href="#更多正则表达式规则" class="headerlink" title="更多正则表达式规则"></a>更多正则表达式规则</h3><table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>匹配除换行符以外的所有字符</td>
+</tr>
+<tr>
+<td>x?</td>
+<td>匹配 0 次或一次 x 字符串</td>
+</tr>
+<tr>
+<td>x*</td>
+<td>匹配 0 次或多次 x 字符串,但匹配可能的最少次数</td>
+</tr>
+<tr>
+<td>x+</td>
+<td>匹配 1 次或多次 x 字符串,但匹配可能的最少次数</td>
+</tr>
+<tr>
+<td>.*</td>
+<td>匹配 0 次或多次的任何字符</td>
+</tr>
+<tr>
+<td>.+</td>
+<td>匹配 1 次或多次的任何字符</td>
+</tr>
+<tr>
+<td>{m}</td>
+<td>匹配刚好是 m 个 的指定字符串</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>匹配在 m个 以上 n个 以下 的指定字符串</td>
+</tr>
+<tr>
+<td>{m,}</td>
+<td>匹配 m个 以上 的指定字符串</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配符合 [] 内的字符</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>匹配不符合 [] 内的字符</td>
+</tr>
+<tr>
+<td>[0-9]</td>
+<td>匹配所有数字字符</td>
+</tr>
+<tr>
+<td>[a-z]</td>
+<td>匹配所有小写字母字符</td>
+</tr>
+<tr>
+<td>[^0-9]</td>
+<td>匹配所有非数字字符</td>
+</tr>
+<tr>
+<td>[^a-z]</td>
+<td>匹配所有非小写字母字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配字符开头的字符</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符结尾的字符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配一个数字的字符,和 [0-9] 语法一样</td>
+</tr>
+<tr>
+<td>\d+</td>
+<td>匹配多个数字字符串,和 [0-9]+ 语法一样</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>非数字,其他同 \d</td>
+</tr>
+<tr>
+<td>\D+</td>
+<td>非数字,其他同 \d+</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>英文字母或数字的字符串,和 [a-zA-Z0-9_] 语法一样</td>
+</tr>
+<tr>
+<td>\w+</td>
+<td>和 [a-zA-Z0-9_]+ 语法一样</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>非英文字母或数字的字符串,和 <code>[^a-zA-Z0-9_]</code> 语法一样</td>
+</tr>
+<tr>
+<td>\W+</td>
+<td>和 <code>[^a-zA-Z0-9_]</code>+ 语法一样</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>空格,和 [\n\t\r\f] 语法一样</td>
+</tr>
+<tr>
+<td>\s+</td>
+<td>和 [\n\t\r\f]+ 一样</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>非空格,和 <code>[^\n\t\r\f]</code> 语法一样</td>
+</tr>
+<tr>
+<td>\S+</td>
+<td>和 <code>[^\n\t\r\f]</code>+ 语法一样</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配以英文字母,数字为边界的字符串</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配不以英文字母,数值为边界的字符串</td>
+</tr>
+<tr>
+<td>a\</td>
+<td>b\</td>
+<td>c</td>
+<td>匹配符合a字符 或是b字符 或是c字符 的字符串</td>
+</tr>
+<tr>
+<td>abc</td>
+<td>匹配含有 abc 的字符串 (pattern) () 这个符号会记住所找寻到的字符串,是一个很实用的语法.第一个 () 内所找到的字符串变成 <code>$1</code> 这个变量或是 \1 变量,第二个 () 内所找到的字符串变成 <code>$2</code> 这个变量或是 \2 变量,以此类推下去.</td>
+</tr>
+<tr>
+<td>/pattern/i</td>
+<td>i 这个参数表示忽略英文大小写,也就是在匹配字符串的时候,不考虑英文的大小写问题. \ 如果要在 pattern 模式中找寻一个特殊字符,如 “*”,则要在这个字符前加上 \ 符号,这样才会让特殊字符失效</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Perl-Socket-编程"><a href="#Perl-Socket-编程" class="headerlink" title="Perl Socket 编程"></a>Perl Socket 编程</h2><p><strong>创建服务端</strong></p>
+<ul>
+<li>使用 <strong>socket</strong> 函数来创建 socket服务。</li>
+<li>使用 <strong>bind</strong> 函数绑定端口。 </li>
+<li>使用 <strong>listen</strong> 函数监听端口。 </li>
+<li>使用 <strong>accept</strong> 函数接收客户端请求。</li>
+</ul>
+<p><strong>创建客户端</strong></p>
+<ul>
+<li>使用 <strong>socket</strong> 函数来创建 socket 服务。</li>
+<li>使用 <strong>connect</strong> 函数连接到 socket 服务端。</li>
+</ul>
+<h3 id="服务端函数"><a href="#服务端函数" class="headerlink" title="服务端函数"></a>服务端函数</h3><h4 id="socket-函数"><a href="#socket-函数" class="headerlink" title="socket 函数"></a>socket 函数</h4><p>用 socket（）函数来创建套接字，语法格式如下：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">socket</span>( SOCKET, DOMAIN, TYPE, PROTOCOL );</span><br></pre></td></tr></table></figure>
+<p>参数解析：</p>
+<ul>
+<li><strong>DOMAIN</strong> 创建的套接字指定协议集。 例如：<ul>
+<li><code>AF_INET</code> 表示IPv4网络协议</li>
+<li><code>AF_INET6</code> 表示IPv6</li>
+<li><code>AF_UNIX</code> 表示本地套接字（使用一个文件）</li>
+</ul>
+</li>
+<li><strong>TYPE</strong> 套接字类型可以根据是面向连接的还是非连接分为SOCK_STREAM或SOCK_DGRAM</li>
+<li><strong>PROTOCOL</strong> 应该是 <strong>(getprotobyname(‘tcp’))[2]</strong>。指定实际使用的传输协议。 </li>
+</ul>
+<p>所以 socket 函数调用方式如下：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> Socket     <span class="comment"># 定义了 PF_INET 和 SOCK_STREAM</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">socket</span>(SOCKET,PF_INET,SOCK_STREAM,(<span class="keyword">getprotobyname</span>(<span class="string">'tcp'</span>))[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+<h4 id="bind-函数"><a href="#bind-函数" class="headerlink" title="bind() 函数"></a>bind() 函数</h4><p>使用 bind() 为套接字分配一个地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bind( SOCKET, ADDRESS );</span><br></pre></td></tr></table></figure>
+<p>SOCKET 一个socket的描述符。 ADDRESS 是 socket 地址 ( TCP/IP ) 包含了三个元素:</p>
+<ul>
+<li>地址簇 (TCP/IP, 是 AF_INET, 在你系统上可能是 2)</li>
+<li>端口号 (例如 21)</li>
+<li>网络地址 (例如 10.12.12.168)</li>
+</ul>
+<p>使用socket()创建套接字后，只赋予其所使用的协议，并未分配地址。在接受其它主机的连接前，必须先调用bind()为套接字分配一个地址。</p>
+<p>简单实例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use Socket        # 定义了 PF_INET 和 SOCK_STREAM</span><br><span class="line"></span><br><span class="line">$port = 12345;    # 监听的端口</span><br><span class="line">$server_ip_address = &quot;10.12.12.168&quot;;</span><br><span class="line">bind( SOCKET, pack_sockaddr_in($port, inet_aton($server_ip_address)))</span><br><span class="line">   or die &quot;无法绑定端口! \n&quot;;</span><br></pre></td></tr></table></figure>
+<p><strong>or die</strong> 在绑定地址失败后执行。</p>
+<p>通过设置 setsockopt() 可选项 SO_REUSEADDR 设置端口可立即重复使用。</p>
+<p><strong>pack_sockaddr_in()</strong> 函数将地址转换为二进制格式。</p>
+<h4 id="listen-函数"><a href="#listen-函数" class="headerlink" title="listen() 函数"></a>listen() 函数</h4><p>当socket和一个地址绑定之后，listen()函数会开始监听可能的连接请求。然而，这只能在有可靠数据流保证的时候使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen( SOCKET, QUEUESIZE );</span><br></pre></td></tr></table></figure>
+<p>SOCKET : 一个socket的描述符。</p>
+<p>QUEUESIZE : 是 一个决定监听队列大小的整数，当有一个连接请求到来，就会进入此监听队列；当一个连接请求被accept()接受，则从监听队列中移出；当队列满后，新的连接请求会返回错误。</p>
+<p>一旦连接被接受，返回0表示成功，错误返回-1。</p>
+<h4 id="accept-函数"><a href="#accept-函数" class="headerlink" title="accept() 函数"></a>accept() 函数</h4><p>accept() 函数接受请求的socket连接。如果成功则返回压缩形式的网络地址，否则返回FALSE： </p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">accept</span>( NEW_SOCKET, SOCKET );</span><br></pre></td></tr></table></figure>
+<p>NEW_SOCKET : 一个socket的描述符。</p>
+<p>SOCKET : 一个socket的描述符。</p>
+<p>accept() 通常应用在无限循环当中：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">   <span class="keyword">accept</span>( NEW_SOCKET, SOCKT );</span><br><span class="line">   .......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="客户端函数"><a href="#客户端函数" class="headerlink" title="客户端函数"></a>客户端函数</h3><h4 id="connect-函数"><a href="#connect-函数" class="headerlink" title="connect() 函数"></a>connect() 函数</h4><p>connect()系统调用为一个套接字设置连接，参数有文件描述符和主机地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connect( SOCKET, ADDRESS );</span><br></pre></td></tr></table></figure>
+<p>以下创建一个连接到服务端 socket 的实例：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$port = <span class="number">21</span>;    <span class="comment">#  ftp 端口</span></span><br><span class="line">$server_ip_address = <span class="string">"10.12.12.168"</span>;</span><br><span class="line"><span class="keyword">connect</span>( SOCKET, pack_sockaddr_in($port, inet_aton($server_ip_address)))</span><br><span class="line">    <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"无法绑定端口! \n"</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="完整实例"><a href="#完整实例" class="headerlink" title="完整实例"></a>完整实例</h3><p>服务端 server.pl 代码：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/perl -w</span></span><br><span class="line"><span class="comment"># Filename : server.pl</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">use</span> strict;</span><br><span class="line"><span class="keyword">use</span> Socket;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 使用端口 7890 作为默认值</span></span><br><span class="line"><span class="keyword">my</span> $port = <span class="keyword">shift</span> || <span class="number">7890</span>;</span><br><span class="line"><span class="keyword">my</span> $proto = <span class="keyword">getprotobyname</span>(<span class="string">'tcp'</span>);</span><br><span class="line"><span class="keyword">my</span> $server = <span class="string">"localhost"</span>;  <span class="comment"># 设置本地地址</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 创建 socket, 端口可重复使用，创建多个连接</span></span><br><span class="line"><span class="keyword">socket</span>(SOCKET, PF_INET, SOCK_STREAM, $proto)</span><br><span class="line">   <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"无法打开 socket $!\n"</span>;</span><br><span class="line"><span class="keyword">setsockopt</span>(SOCKET, SOL_SOCKET, SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line">   <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"无法设置 SO_REUSEADDR $!\n"</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 绑定端口并监听</span></span><br><span class="line"><span class="keyword">bind</span>( SOCKET, pack_sockaddr_in($port, inet_aton($server)))</span><br><span class="line">   <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"无法绑定端口 $port! \n"</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">listen</span>(SOCKET, <span class="number">5</span>) <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"listen: $!"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">"访问启动：$port\n"</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 接收请求</span></span><br><span class="line"><span class="keyword">my</span> $client_addr;</span><br><span class="line"><span class="keyword">while</span> ($client_addr = <span class="keyword">accept</span>(NEW_SOCKET, SOCKET)) &#123;</span><br><span class="line">   <span class="comment"># send them a message, close connection</span></span><br><span class="line">   <span class="keyword">my</span> $name = <span class="keyword">gethostbyaddr</span>($client_addr, AF_INET );</span><br><span class="line">   <span class="keyword">print</span> NEW_SOCKET <span class="string">"我是来自服务端的信息"</span>;</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"Connection recieved from $name\n"</span>;</span><br><span class="line">   <span class="keyword">close</span> NEW_SOCKET;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端 client.pl 代码：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/perl -w</span></span><br><span class="line"><span class="comment"># Filename : client.pl</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">use</span> strict;</span><br><span class="line"><span class="keyword">use</span> Socket;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 初始化地址与端口</span></span><br><span class="line"><span class="keyword">my</span> $host = <span class="keyword">shift</span> || <span class="string">'localhost'</span>;</span><br><span class="line"><span class="keyword">my</span> $port = <span class="keyword">shift</span> || <span class="number">7890</span>;</span><br><span class="line"><span class="keyword">my</span> $server = <span class="string">"localhost"</span>;  <span class="comment"># 主机地址</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 创建 socket 并连接</span></span><br><span class="line"><span class="keyword">socket</span>(SOCKET,PF_INET,SOCK_STREAM,(<span class="keyword">getprotobyname</span>(<span class="string">'tcp'</span>))[<span class="number">2</span>])</span><br><span class="line">   <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"无法创建 socket $!\n"</span>;</span><br><span class="line"><span class="keyword">connect</span>( SOCKET, pack_sockaddr_in($port, inet_aton($server)))</span><br><span class="line">   <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"无法连接：port $port! \n"</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">my</span> $line;</span><br><span class="line"><span class="keyword">while</span> ($line = &lt;SOCKET&gt;) &#123;</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"$line\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">close</span> SOCKET <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"close: $!"</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Perl-面向对象"><a href="#Perl-面向对象" class="headerlink" title="Perl 面向对象"></a>Perl 面向对象</h2><p>Perl 中有两种不同地面向对象编程的实现：</p>
+<ul>
+<li>一是基于匿名哈希表的方式，每个对象实例的实质就是一个指向匿名哈希表的引用。在这个匿名哈希表中，存储来所有的实例属性。</li>
+<li>二是基于数组的方式，在定义一个类的时候，我们将为每一个实例属性创建一个数组，而每一个对象实例的实质就是一个指向这些数组中某一行索引的引用。在这些数组中，存储着所有的实例属性。</li>
+</ul>
+<p>perl 的面向对象概念</p>
+<ul>
+<li><strong>对象</strong>：对象是对类中数据项的引用。.</li>
+<li><strong>类</strong>：类是个Perl包，其中含提供对象方法的类。</li>
+<li><strong>方法</strong>：方法是个Perl子程序，类名是其第一个参数。</li>
+</ul>
+<h3 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h3><p>一个类只是一个简单的包。</p>
+<p>可以把一个包当作一个类用，并且把包里的函数当作类的方法来用。</p>
+<p>Perl 的包提供了独立的命名空间，所以不同包的方法与变量名不会冲突。</p>
+<p>Perl 类的文件后缀为 .pm。</p>
+<p>接下来我们创建一个 Person 类：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Person;</span><br></pre></td></tr></table></figure>
+<p>类的代码范围到脚本文件的最后一行，或者到下一个 package 关键字前。</p>
+<h3 id="创建和使用对象"><a href="#创建和使用对象" class="headerlink" title="创建和使用对象"></a>创建和使用对象</h3><p>创建一个类的实例 (对象) 我们需要定义一个构造函数，大多数程序使用类名作为构造函数，Perl 中可以使用任何名字。</p>
+<p>你可以使用多种 Perl 的变量作为 Perl 的对象。大多数情况下我们会使用引用数组或哈希。</p>
+<p>接下来我们为 Person 类创建一个构造函数，使用了 Perl 的哈希引用。</p>
+<p>在创建对象时，你需要提供一个构造函数，它是一个子程序，返回对象的引用。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Person;</span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">new</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">my</span> $class = <span class="keyword">shift</span>;</span><br><span class="line">    <span class="keyword">my</span> $self = &#123;</span><br><span class="line">        <span class="string">_firstName =&gt;</span> <span class="keyword">shift</span>,</span><br><span class="line">        <span class="string">_lastName  =&gt;</span> <span class="keyword">shift</span>,</span><br><span class="line">        <span class="string">_ssn       =&gt;</span> <span class="keyword">shift</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment"># 输出用户信息</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"名字：$self-&gt;&#123;_firstName&#125;\n"</span>;</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"姓氏：$self-&gt;&#123;_lastName&#125;\n"</span>;</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"编号：$self-&gt;&#123;_ssn&#125;\n"</span>;</span><br><span class="line">    <span class="keyword">bless</span> $self, $class;</span><br><span class="line">    <span class="keyword">return</span> $self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$object = new Person( <span class="string">"小明"</span>, <span class="string">"王"</span>, <span class="number">23234345</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="定义方法"><a href="#定义方法" class="headerlink" title="定义方法"></a>定义方法</h3><p>Perl类的方法只但是是个Perl子程序而已，也即通常所说的成员函数。</p>
+<p>Perl面向对象中Perl的方法定义不提供任何特别语法，但规定方法的第一个参数为对象或其被引用的包。</p>
+<p>Perl 没有提供私有变量，但我们可以通过辅助的方式来管理对象数据。</p>
+<p>接下来我们定义一个获取名字的方法：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">getFirstName</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $self-&gt;&#123;_firstName&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样也可以这么写：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">setFirstName</span> </span>&#123;</span><br><span class="line">    <span class="keyword">my</span> ( $self, $firstName ) = @_;</span><br><span class="line">    $self-&gt;&#123;_firstName&#125; = $firstName <span class="keyword">if</span> <span class="keyword">defined</span>($firstName);</span><br><span class="line">    <span class="keyword">return</span> $self-&gt;&#123;_firstName&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">]$object-&gt;setFirstName( <span class="string">"小强"</span> );</span><br><span class="line">$firstName = $object-&gt;getFirstName();</span><br></pre></td></tr></table></figure>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>Perl 里 类方法通过@ISA数组继承，这个数组里面包含其他包（类）的名字，变量的继承必须明确设定。</p>
+<p>多继承就是这个@ISA数组包含多个类（包）名字。</p>
+<p>通过@ISA只能继承方法，不能继承数据。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Employee;</span><br><span class="line"><span class="keyword">use</span> Person;</span><br><span class="line"><span class="keyword">use</span> strict;</span><br><span class="line"><span class="keyword">our</span> @ISA = <span class="string">qw(Person)</span>;    <span class="comment"># 从 Person 继承</span></span><br></pre></td></tr></table></figure>
+<p>方法重写只需要覆盖本来的定义。</p>
+<h3 id="默认载入"><a href="#默认载入" class="headerlink" title="默认载入"></a>默认载入</h3><p>如果在当前类、当前类所有的基类、还有 UNIVERSAL 类中都找不到请求的方法， 这时会再次查找名为 AUTOLOAD() 的一个方法。如果找到了 AUTOLOAD，那么就会 调用，同时设定全局变量 $AUTOLOAD 的值为缺失的方法的全限定名称。</p>
+<p>如果还不行，那么 Perl 就宣告失败并出错。</p>
+<p>如果你不想继承基类的 AUTOLOAD，很简单，只需要一句：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">AUTOLOAD</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="析构函数及垃圾回收"><a href="#析构函数及垃圾回收" class="headerlink" title="析构函数及垃圾回收"></a>析构函数及垃圾回收</h3><p>当对象的最后一个引用释放时，对象会自动析构。</p>
+<p>如果你想在析构的时候做些什么，那么你可以在类中定义一个名为”DESTROY”的方法。它将在适合的时机自动调用，并且按照你的意思执行额外的清理动作。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">DESTROY</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"MyClass::DESTROY called\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># Perl 会把对象的引用作为 唯一的参数传递给 DESTROY。</span></span><br><span class="line"><span class="comment"># 注意这个引用是只读的，也就是说你不能通过访问$_[0] 来修改它。</span></span><br><span class="line"><span class="comment"># 但是对象自身（比如 "$&#123;$_[0]" 或者 "@&#123;$_[0]&#125;" 还有 "%&#123;$_[0]&#125;" 等等）还是可写的。</span></span><br></pre></td></tr></table></figure>
+<h2 id="Perl-数据库连接"><a href="#Perl-数据库连接" class="headerlink" title="Perl 数据库连接"></a>Perl 数据库连接</h2><p>Perl 5 中我们可以使用 DBI 模块来连接数据库。</p>
+<p>DBI 英文全称：Database Independent Interface，中文称为数据库独立接口。</p>
+<p>DBI 作为 Perl 语言中和数据库进行通讯的标准接口，它定义了一系列的方法，变量和常量，提供一个和具体数据库<strong>平台无关</strong>的数据库持久层。</p>
+<h3 id="DBI-结构"><a href="#DBI-结构" class="headerlink" title="DBI 结构"></a>DBI 结构</h3><p>DBI 和具体数据库平台无关，我们可以将其应用在Oracle, MySQL 或 Informix, 等数据库中。</p>
+<h4 id="变量名约定"><a href="#变量名约定" class="headerlink" title="变量名约定"></a>变量名约定</h4><p>以下设置了比较常用的变量名命名方法：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$dsn    驱动程序对象的句柄</span><br><span class="line">$dbh    一个数据库对象的句柄</span><br><span class="line">$sth    一个语句或者一个查询对象的句柄</span><br><span class="line">$h      通用的句柄 ($dbh, $sth, 或 $drh)，依赖于上下文</span><br><span class="line">$rc     操作代码返回的布什值（true 或 false）</span><br><span class="line">$rv     操作代码返回的整数值</span><br><span class="line">@ary    查询返回的一行值的数组（列表）</span><br><span class="line">$rows   操作代码返回的行数值</span><br><span class="line">$fh     文件句柄</span><br><span class="line"><span class="keyword">undef</span>   NULL 值表示未定义</span><br><span class="line">\%attr  引用属性的哈希值并传到方法上</span><br></pre></td></tr></table></figure>
+<h3 id="数据库连接"><a href="#数据库连接" class="headerlink" title="数据库连接"></a>数据库连接</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/perl -w</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">use</span> strict;</span><br><span class="line"><span class="keyword">use</span> DBI;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">my</span> $host = <span class="string">"localhost"</span>;         <span class="comment"># 主机地址</span></span><br><span class="line"><span class="keyword">my</span> $driver = <span class="string">"mysql"</span>;           <span class="comment"># 接口类型 默认为 localhost</span></span><br><span class="line"><span class="keyword">my</span> $database = <span class="string">"RUNOOB"</span>;        <span class="comment"># 数据库</span></span><br><span class="line"><span class="comment"># 驱动程序对象的句柄</span></span><br><span class="line"><span class="keyword">my</span> $dsn = <span class="string">"DBI:$driver:database=$database:$host"</span>;  </span><br><span class="line"><span class="keyword">my</span> $userid = <span class="string">"root"</span>;            <span class="comment"># 数据库用户名</span></span><br><span class="line"><span class="keyword">my</span> $password = <span class="string">"123456"</span>;        <span class="comment"># 数据库密码</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 连接数据库</span></span><br><span class="line"><span class="keyword">my</span> $dbh = DBI-&gt;<span class="keyword">connect</span>($dsn, $userid, $password ) <span class="keyword">or</span> <span class="keyword">die</span> $DBI::errstr;</span><br><span class="line"><span class="keyword">my</span> $sth = $dbh-&gt;prepare(<span class="string">"SELECT * FROM Websites"</span>);   <span class="comment"># 预处理 SQL  语句</span></span><br><span class="line">$sth-&gt;execute();    <span class="comment"># 执行 SQL 操作</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 注释这部分使用的是绑定值操作</span></span><br><span class="line"><span class="comment"># $alexa = 20;</span></span><br><span class="line"><span class="comment"># my $sth = $dbh-&gt;prepare("SELECT name, url</span></span><br><span class="line"><span class="comment">#                        FROM Websites</span></span><br><span class="line"><span class="comment">#                        WHERE alexa &gt; ?");</span></span><br><span class="line"><span class="comment"># $sth-&gt;execute( $alexa ) or die $DBI::errstr;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 循环输出所有数据</span></span><br><span class="line"><span class="keyword">while</span> ( <span class="keyword">my</span> @row = $sth-&gt;fetchrow_array() )</span><br><span class="line">&#123;</span><br><span class="line">       <span class="keyword">print</span> <span class="keyword">join</span>(<span class="string">'\t'</span>, @row).<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">$sth-&gt;finish();</span><br><span class="line">$dbh-&gt;disconnect();</span><br></pre></td></tr></table></figure>
+<h3 id="插入-更新-修改"><a href="#插入-更新-修改" class="headerlink" title="插入/更新/修改"></a>插入/更新/修改</h3><p>执行步骤:</p>
+<ul>
+<li>使用 prepare() API 预处理 SQL 语句。</li>
+<li>使用 execute() API 执行 SQL 语句。</li>
+<li>使用 finish() API 释放语句句柄。</li>
+<li>最后如果一切顺利就会提交以上执行操作。</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">my</span> $sth = $dbh-&gt;prepare(<span class="string">"INSERT INTO Websites</span></span><br><span class="line"><span class="string">                       (name, url, alexa, conutry )</span></span><br><span class="line"><span class="string">                        values</span></span><br><span class="line"><span class="string">                       ('Twitter', 'https://twitter.com/', 10, 'USA')"</span>);</span><br><span class="line">$sth-&gt;execute() <span class="keyword">or</span> <span class="keyword">die</span> $DBI::errstr;</span><br><span class="line">$sth-&gt;finish();</span><br><span class="line">$dbh-&gt;commit <span class="keyword">or</span> <span class="keyword">die</span> $DBI::errstr;</span><br></pre></td></tr></table></figure>
+<p>应用程序还可以绑定输出和输入参数,下面例子通过用变量 取代 ? 占位符的位置来执行一条插入查询：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">my</span> $name = <span class="string">"Twitter"</span>;</span><br><span class="line"><span class="keyword">my</span> $url = <span class="string">"https://twitter.com/"</span>;</span><br><span class="line"><span class="keyword">my</span> $alexa = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">my</span> $conutry = <span class="string">"USA"</span>;</span><br><span class="line"><span class="keyword">my</span> $sth = $dbh-&gt;prepare(<span class="string">"INSERT INTO Websites</span></span><br><span class="line"><span class="string">                       (name, url, alexa, conutry )</span></span><br><span class="line"><span class="string">                        values</span></span><br><span class="line"><span class="string">                       (?,?,?,?)"</span>);</span><br><span class="line">$sth-&gt;execute($name,$url,$alexa, $conutry) </span><br><span class="line">          <span class="keyword">or</span> <span class="keyword">die</span> $DBI::errstr;</span><br><span class="line">$sth-&gt;finish();</span><br><span class="line">$dbh-&gt;commit <span class="keyword">or</span> <span class="keyword">die</span> $DBI::errstr;</span><br></pre></td></tr></table></figure>
+<h3 id="使用-do-语句"><a href="#使用-do-语句" class="headerlink" title="使用 do 语句"></a>使用 do 语句</h3><p><strong>do</strong> 语句可以执行 UPDATE, INSERT, 或 DELETE 操作，使用他比较简短，执行成功返回true，执行失败返回 false，实例如下：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$dbh-&gt;<span class="keyword">do</span>(<span class="string">'DELETE FROM Websites WHERE alexa&gt;1000'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="COMMIT-操作"><a href="#COMMIT-操作" class="headerlink" title="COMMIT 操作"></a>COMMIT 操作</h3><p>commit 为提交事务，完成数据库的操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$dbh-&gt;commit or die $dbh-&gt;errstr;</span><br></pre></td></tr></table></figure>
+<h3 id="ROLLBACK-操作"><a href="#ROLLBACK-操作" class="headerlink" title="ROLLBACK 操作"></a>ROLLBACK 操作</h3><p>如果在 SQL 执行过程中发生错误，可以回滚数据，不做任何改变：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$dbh-&gt;rollback or die $dbh-&gt;errstr;</span><br></pre></td></tr></table></figure>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>和其它的语言一样, perl DBI对数据库的操作也支持事务处理， 它的实现方式有两个：</p>
+<p>1、 在连接数据库的时候就开始一个事务</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$dbh = DBI-&gt;<span class="keyword">connect</span>($dsn, $userid, $password, &#123;<span class="string">AutoCommit =&gt;</span> <span class="number">0</span>&#125;) <span class="keyword">or</span> <span class="keyword">die</span> $DBI::errstr;</span><br><span class="line"><span class="comment"># 以上代码在连接的时候设置了AutoCommit为false， 也就是说当你对数据库进行更新操作的时候， 它不会自动地把那些更新直接写到数据库里， 而是要程序通过 dbh-&gt;commit 来使数据真正地写到数据库里， 或 dbh-&gt;rollback 来回滚刚才的操作。</span></span><br></pre></td></tr></table></figure>
+<p>2、 通过<code>$dbh-&gt;begin_work()</code>语句来开始一个事务</p>
+<p>这种方式就不需要在连接数据库的时候设置 AutoCommit ＝ 0 。 </p>
+<p>可以一次数据库连接进行多次事务操作， 不用每一次事务的开始都去连接一次数据库。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$rc  = $dbh-&gt;begin_work  <span class="keyword">or</span> <span class="keyword">die</span> $dbh-&gt;errstr;</span><br><span class="line"><span class="comment">#####################</span></span><br><span class="line"><span class="comment">##这里执行一些 SQL 操作</span></span><br><span class="line"><span class="comment">#####################</span></span><br><span class="line">$dbh-&gt;commit;    <span class="comment"># 成功后操作</span></span><br><span class="line">-----------------------------</span><br><span class="line">$dbh-&gt;rollback;  <span class="comment"># 失败后回滚</span></span><br></pre></td></tr></table></figure>
+<h3 id="断开数据库连接"><a href="#断开数据库连接" class="headerlink" title="断开数据库连接"></a>断开数据库连接</h3><p>如果我们需要断开数据库连接，可以使用 disconnect API：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$rc = $dbh-&gt;disconnect  <span class="keyword">or</span> <span class="keyword">warn</span> $dbh-&gt;errstr;</span><br></pre></td></tr></table></figure>
+<h2 id="Perl-CGI编程"><a href="#Perl-CGI编程" class="headerlink" title="Perl CGI编程"></a>Perl CGI编程</h2><p>CGI 目前由NCSA维护，NCSA定义CGI如下：</p>
+<p>CGI(Common Gateway Interface),通用网关接口,它是一段程序,运行在服务器上如：HTTP服务器，提供同客户端HTML页面的接口。</p>
+<p><a href="http://www.runoob.com/perl/perl-cgi-programming.html" target="_blank" rel="noopener">详情</a></p>
+<h2 id="Perl-包和模块"><a href="#Perl-包和模块" class="headerlink" title="Perl 包和模块"></a>Perl 包和模块</h2><h3 id="包"><a href="#包" class="headerlink" title="包"></a>包</h3><p>Perl 中每个包有一个单独的符号表，定义语法为：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mypack;</span><br></pre></td></tr></table></figure>
+<p>此语句定义一个名为 <strong>mypack</strong> 的包，在此后定义的所有变量和子程序的名字都存贮在该包关联的符号表中，直到遇到另一个 <strong>package</strong> 语句为止。</p>
+<ul>
+<li><p>从一个包中访问另外一个包的变量，可通过” 包名 + 双冒号( :: ) + 变量名 “ 的方式指定。</p>
+</li>
+<li><p>存贮变量和子程序的名字的默认符号表是与名为 <strong>main</strong>的包相关联的。如果在程序里定义了其它的包，当你想切换回去使用默认的符号表，可以重新指定main包。</p>
+  <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main;</span><br></pre></td></tr></table></figure>
+<p>  这样，接下来的程序就好象从没定义过包一样，变量和子程序的名字象通常那样存贮。</p>
+</li>
+<li><p>特殊变量 <strong><strong>PACKAGE</strong></strong> 用于输出包名。</p>
+</li>
+</ul>
+<h3 id="BEGIN-和-END-模块"><a href="#BEGIN-和-END-模块" class="headerlink" title="BEGIN 和 END 模块"></a>BEGIN 和 END 模块</h3><p>Perl语言提供了两个关键字：BEGIN，END。它们可以分别包含一组脚本，用于程序体运行前或者运行后的执行。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BEGIN &#123; ... &#125;</span><br><span class="line">END &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>每个 <strong>BEGIN</strong> 模块在 Perl 脚本载入和编译后但在其他语句执行前执行。</li>
+<li>每个 <strong>END</strong> 语句块在解释器退出前执行。</li>
+<li><strong>BEGIN</strong> 和 <strong>END</strong> 语句块在创建 Perl 模块时特别有用。</li>
+</ul>
+<h3 id="Perl-模块"><a href="#Perl-模块" class="headerlink" title="Perl 模块"></a>Perl 模块</h3><p>Perl5 中用Perl包来创建模块。</p>
+<p>Perl 模块是一个可重复使用的包，模块的名字与包名相同，定义的文件后缀为 <strong>.pm</strong>。</p>
+<p>注意：</p>
+<ul>
+<li>函数 <strong>require</strong> 和 <strong>use</strong> 将载入一个模块。</li>
+<li><strong>@INC</strong> 是 Perl 内置的一个特殊数组，它包含指向库例程所在位置的目录路径。</li>
+<li><strong>require</strong> 和 <strong>use</strong> 函数调用 <strong>eval</strong> 函数来执行代码。</li>
+<li>末尾 <strong>1;</strong> 执行返回 TRUE，这是必须的，否则返回错误。</li>
+</ul>
+<h3 id="Require-和-Use-函数"><a href="#Require-和-Use-函数" class="headerlink" title="Require 和 Use 函数"></a>Require 和 Use 函数</h3><p>模块可以通过 <strong>require</strong> 函数来调用</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> Foo;</span><br><span class="line">Foo::bar( <span class="string">"a"</span> );</span><br></pre></td></tr></table></figure>
+<p>也可以通过 <strong>use</strong> 函数来引用</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> Foo;</span><br><span class="line">bar( <span class="string">"a"</span> );</span><br></pre></td></tr></table></figure>
+<p>我们注意到 require 引用需要使用包名指定函数，而 use 不需要，二者的主要区别在于：</p>
+<ul>
+<li><p>1、require用于载入module或perl程序(.pm后缀可以省略，但.pl必须有)</p>
+</li>
+<li><p>2、Perl use语句是编译时引入的，require是运行时引入的</p>
+</li>
+<li><p>3、Perl use引入模块的同时，也引入了模块的子模块。而require则不能引入，要再重新声明</p>
+</li>
+<li><p>4、USE是在当前默认的@INC里面去寻找,一旦模块不在@INC中的话,用USE是不可以引入的，但是require可以指定路径</p>
+</li>
+<li><p>5、USE引用模块时，如果模块名称中包含::双冒号，该双冒号将作为路径分隔符，相当于Unix下的/或者Windows下的\。 如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use MyDirectory::MyModule</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="创建-Perl-模块"><a href="#创建-Perl-模块" class="headerlink" title="创建 Perl 模块"></a>创建 Perl 模块</h3><p>通过 Perl 分发自带的工具 h2xs 可以很简单的创建一个 Perl 模块。</p>
+<p>你可以在命令行模式键入 h2xs 来看看它的参数列表。</p>
+<p>h2xs 语法格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ h2xs -AX -n  ModuleName</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li><strong>-A</strong> 忽略 autoload 机制</li>
+<li><strong>-X</strong> 忽略 XS 元素</li>
+<li><strong>-n</strong> 指定扩展模块的名字</li>
+</ul>
+<p>例如，如果你的模块在 <strong>Person.pm</strong> 文件中，使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ h2xs -AX -n Person</span><br></pre></td></tr></table></figure>
+<p>执行以上程序将输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Writing Person/lib/Person.pm</span><br><span class="line">Writing Person/Makefile.PL</span><br><span class="line">Writing Person/README</span><br><span class="line">Writing Person/t/Person.t</span><br><span class="line">Writing Person/Changes</span><br><span class="line">Writing Person/MANIFEST</span><br></pre></td></tr></table></figure>
+<p>Person 目录下你可以看到新增加的目录及文件说明:</p>
+<ul>
+<li>README ：这个文件包含一些安装信息，模块依赖性，版权信息等。</li>
+<li>Changes ：这个文件作为你的项目的修改日志（changelog）文件。</li>
+<li>Makefile.PL ：这是标准的 Perl Makefile 构造器。用于创建 Makefile.PL 文件来编译该模块。</li>
+<li>MANIFEST ：本文件用于自动构建 tar.gz 类型的模块版本分发。这样你就可以把你的模块拿到 CPAN 发布或者分发给其他人。它包含了你在这个项目中所有文件的列表。</li>
+<li>Person.pm ：这是主模块文件，包含你的 mod_perl 句柄代码（handler code）。</li>
+<li>Person.t ：针对该模块的一些测试脚本。默认情况下它只是检查模块的载入，你可以添加一些新的测试单元。</li>
+<li>t/ ：测试文件</li>
+<li>lib/ ：实际源码存放的目录</li>
+</ul>
+<p>你可以使用 tar (Linux 上) 命令来将以上目录打包为 Person.tar.gz。</p>
+<h3 id="安装-Perl-模块"><a href="#安装-Perl-模块" class="headerlink" title="安装 Perl 模块"></a>安装 Perl 模块</h3><p>我们可以对刚才压缩的 <strong>Person.tar.gz</strong> 文件进行解压安装，执行步骤如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar xvfz Person.tar.gz</span><br><span class="line">cd Person</span><br><span class="line">perl Makefile.PL</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>首先运行 “perl Makefile.PL” 在当前目录生成 Makefile；</p>
+<p>然后运行 “make” 编译并创建所需的库文件；</p>
+<p>之后用 “make test” 测试编译结果是否正确；最后运行 “make install” 将库文件安装到系统目录，至此整个编译过程结束。</p>
+<h2 id="Perl-进程管理"><a href="#Perl-进程管理" class="headerlink" title="Perl 进程管理"></a>Perl 进程管理</h2><p>Perl 中你可以以不同的方法来创建进程。</p>
+<ul>
+<li>你可以使用特殊变量 <strong>$$</strong> 或 <strong>$PROCESS_ID</strong> 来获取进程 ID。</li>
+<li>%ENV 哈希存放了父进程，也就是shell中的环境变量，在Perl中可以修改这些变量。</li>
+<li><strong>exit()</strong> 通常用于退出子进程，主进程在子进程全部退出后再退出。</li>
+<li>所有打开的句柄会在子程序中被 dup() 函数复制, 所有关闭进程所有句柄不会影响其他进程 。</li>
+</ul>
+<h3 id="反引号运算符"><a href="#反引号运算符" class="headerlink" title="反引号运算符"></a>反引号运算符</h3><p>使用反引号运算符可以很容易的执行 Unix 命令。你可以在反引号中插入一些简单的命令。命令执行后将返回结果：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@files = <span class="string">`ls -l`</span>;</span><br><span class="line"><span class="keyword">foreach</span> $file (@files)&#123;</span><br><span class="line">   <span class="keyword">print</span> $file;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="system-函数"><a href="#system-函数" class="headerlink" title="system() 函数"></a>system() 函数</h3><p>你也可以使用 <strong>system()</strong> 函数执行 Unix 命令, 执行该命令将直接输出结果。默认情况下会送到目前Perl的STDOUT指向的地方，一般是屏幕。你也可以使用重定向运算符 &gt; 输出到指定文件。</p>
+<p>你需要注意命令包含环境变量如 <code>$PATH</code> 或 <code>$HOME</code> 的输出结果，如下所示：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$PATH = <span class="string">"我是 Perl 的变量"</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">system</span>(<span class="string">'echo $PATH'</span>);  <span class="comment"># $PATH 作为 shell 环境变量</span></span><br><span class="line"><span class="keyword">system</span>(<span class="string">"echo $PATH"</span>);  <span class="comment"># $PATH 作为 Perl 的变量</span></span><br><span class="line"><span class="keyword">system</span>(<span class="string">"echo \$PATH"</span>); <span class="comment"># 转义 $</span></span><br></pre></td></tr></table></figure>
+<p>执行以上程序，输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin</span><br><span class="line">我是 Perl 的变量</span><br><span class="line">/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin</span><br></pre></td></tr></table></figure>
+<h3 id="fork-函数"><a href="#fork-函数" class="headerlink" title="fork() 函数"></a>fork() 函数</h3><p>Perl fork() 函数用于创建一个新进程。</p>
+<p>在父进程中返回子进程的PID，在子进程中返回0。如果发生错误（比如，内存不足）返回undef，并将<code>$!</code>设为对应的错误信息。</p>
+<p>fork 可以和 exec 配合使用。exec 函数执行完引号中的命令后进程即结束。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> $SIG<span class="string">&#123;CHLD&#125;</span> = <span class="string">"IGNORE"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">defined</span>($pid = <span class="keyword">fork</span>())) &#123;</span><br><span class="line">   <span class="comment"># fork 发生错误返回 undef</span></span><br><span class="line">   <span class="keyword">die</span> <span class="string">"无法创建子进程: $!"</span>;</span><br><span class="line">&#125;<span class="keyword">elsif</span> ($pid == <span class="number">0</span>) &#123;</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"通过子进程输出\n"</span>;</span><br><span class="line">   <span class="keyword">exec</span>(<span class="string">"date"</span>) || <span class="keyword">die</span> <span class="string">"无法输出日期: $!"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment"># 在父进程中</span></span><br><span class="line">   <span class="keyword">print</span> <span class="string">"通过父进程输出\n"</span>;</span><br><span class="line">   $ret = <span class="keyword">waitpid</span>($pid, <span class="number">0</span>);</span><br><span class="line">   <span class="keyword">print</span> <span class="string">"完成的进程ID: $ret\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>进程退出时,会向父进程发送一个CHLD的信号后,就会变成僵死的进程,需要父进程使用wait和waitpid来终止。当然,也可以设置<code>$SIG{CHLD}</code>为IGNORG</p>
+<h3 id="Kill-函数"><a href="#Kill-函数" class="headerlink" title="Kill 函数"></a>Kill 函数</h3><p>Perl <strong>kill(‘signal’, (Process List))</strong>给一组进程发送信号。signal是发送的数字信号，9为杀掉进程。</p>
+<p><code>kill(&#39;INT&#39;, 104, 102);</code></p>
+<h2 id="Perl-POD-文档"><a href="#Perl-POD-文档" class="headerlink" title="Perl POD 文档"></a>Perl POD 文档</h2><p>Perl 中可以在模块或脚本中嵌入 POD（Plain Old Documentation） 文档。</p>
+<p>POD 是一种简单而易用的标记型语言（置标语言）。</p>
+<p>POD 文档使用规则：</p>
+<blockquote>
+<p>POD 文档以 <strong>=head1</strong> 开始，  <strong>=cut</strong> 结束， <strong>=head1</strong> 前与 <strong>=cut</strong> 后添加一空行。</p>
+</blockquote>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Perl/">Perl</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Perl/">Perl</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Linux/Command/vim备忘录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/29/Linux/Command/vim备忘录/" class="article-date">
+      <time datetime="2018-11-29T13:43:25.000Z" itemprop="datePublished">2018-11-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/29/Linux/Command/vim备忘录/">vim备忘录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><p>Ctrl+u: 向上翻半屏<br>Ctrl+d: 向下翻半屏<br>Ctrl+f: 向上翻一屏<br>Ctrl+b: 向下翻一屏 </p>
+<p>hjkl上左右下移动光标</p>
+<p>i：在当前光标前插入，光标后文本向后移<br>I：在光标所在行首插入（第一个非空白字符前）<br>a：从当前光标后插入，光标后文本后移<br>A：从光标所在行末插入</p>
+<p>nG: 光标移至第n行首<br>n$: 光标移至第n行尾 </p>
+<p>0: 光标移至当前行首<br>$: 光标移至当前行尾</p>
+<p>n+: 光标下移n行<br>n-: 光标上移n行 </p>
+<p>r: 修改光标所在字符<br>R: 替换任意字符，直到按 [ESC] </p>
+<p>o: 在光标所在行下面新增一行（并进入输入模式）<br>O: 在光标所在行上方新增一行（并进入输入模式） </p>
+<p>x: 删除光标所在字符，等同于[Delete]功能键<br>X: 删除光标前字符，相当与[Backspace] </p>
+<p>dd: 删除光标所在的行<br>do: 删至行首<br>d$: 删至行尾 </p>
+<p>yy：复制当前行正行内容到剪切板<br>nyy：复制从光标处开始的n行内容<br>p：粘贴剪切板中的内容到当前光标位置之后<br>P：粘贴剪切板中的内容到当前光标位置之前</p>
+<p>按/键——输入指定的字符串，从当前光标处向下查找。<br>按?键——输入指定的字符串，从当前光标处向上查找。<br>查找完按n、N键在不同的查找结果中进行选择。</p>
+<p>“:e 新的文件”编辑新文件。<br>“:r 其他文件”读入其他文件的内容，将其复制到当前光标的所在位置。<br>“:r !命令”将命令的输出粘贴至文本文件光标所在位置。<br>“set number”命令可显示行号，执行”set nonu”取消显示行号。</p>
+<p>vim编辑器的参数<br>-o file1  file2;将同时打开两个文件，上下显示，使用ctrl+w切换文件。<br>-O file1  file2；将同时打开两个文件，左右显示，使用ctrl+ww切换文件。</p>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><ol>
+<li><p>配置文件的位置</p>
+<p>在目录 /etc/ 下面，有个名为vimrc的文件，这是系统中公共的vim配置文件，对所有用户都有效。而在每个用户的主目录下，都可以自己建立私有的配置文件，命名为：“.vimrc”。例如，/root目录下，通常已经存在一个.vimrc文件。</p>
+<p>在mac下要先拷贝一份配置文件cp  /usr/share/vim/vimrc  ~/.vimrc</p>
+</li>
+</ol>
+<ol start="2">
+<li>设置语法高亮显示</li>
+</ol>
+<p>　　1) 打开vimrc，添加以下语句来使得语法高亮显示：<br>　　syntax on</p>
+<p>　　2) 如果此时语法还是没有高亮显示，那么在/etc目录下的profile文件中添加以下语句：<br>　　export TERM=xterm-color</p>
+<ol start="3">
+<li>设置Windows风格的C/C++自动缩进（添加以下set语句到vimrc中）</li>
+</ol>
+<p>　　1）设置（软）制表符宽度为4：<br>　　set tabstop=4<br>　　set softtabstop=4</p>
+<p>　　2）设置缩进的空格数为4<br>　　set shiftwidth=4</p>
+<p>　　3）设置自动缩进：即每行的缩进值与上一行相等；使用 noautoindent 取消设置：<br>　　set autoindent</p>
+<p>　　4）设置使用 C/C++ 语言的自动缩进方式：<br>　　set cindent（有点问题，未解决）</p>
+<p>　　5）设置C/C++语言的具体缩进方式（以我的windows风格为例）：<br>　　set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,&gt;1s,=1s,:1s</p>
+<ol start="4">
+<li>如果想在左侧显示文本的行号，可以用以下语句：</li>
+</ol>
+<p>　　set nu</p>
+<h4 id="文件冲突"><a href="#文件冲突" class="headerlink" title="文件冲突"></a>文件冲突</h4><p>按照提示删除文件目录下的<code>.[filename].swp</code> 文件</p>
+<h4 id="查看文件信息"><a href="#查看文件信息" class="headerlink" title="查看文件信息"></a>查看文件信息</h4><p><code>:set</code></p>
+<h4 id="粘贴时候取消自动缩进"><a href="#粘贴时候取消自动缩进" class="headerlink" title="粘贴时候取消自动缩进"></a>粘贴时候取消自动缩进</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set paste</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-C-C++/Concept-gcc/标准IO的三类缓冲" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -832,408 +2092,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/">Wireshark</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Backend/Mess/apache删除后Nginx显示Apache界面" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/15/Backend/Mess/apache删除后Nginx显示Apache界面/" class="article-date">
-      <time datetime="2018-11-15T14:09:42.000Z" itemprop="datePublished">2018-11-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/15/Backend/Mess/apache删除后Nginx显示Apache界面/">apache删除后使用Nginx服务仍然显示Apache界面</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Even after you <a href="https://askubuntu.com/questions/176964/permanently-removing-apache2" target="_blank" rel="noopener">remove apache2 completely</a>, you will still have its “default site” files sitting in <code>/var/www/</code>. By default, Nginx will attempt to serve these or its own version of these files for sites it cannot otherwise match. You can see this all in <code>/etc/nginx/sites-available/default</code>.</p>
-<p>What you’re seeing is by design, it was just unexpected.</p>
-<p>To fix it, you can edit or remove the default site… Or alter the files in <code>/var/www/</code> to better suit your needs. If you want rid of the default, you can delete <code>/etc/nginx/sites-available/default</code>. It’s just a symlink so if you want to restore it, you can with:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /etc/nginx/sites-&#123;available,enabled&#125;/default</span><br></pre></td></tr></table></figure>
-<p>And remember to reload after making configuration changes:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx configtest  # make sure the config is good before reloading!</span><br><span class="line">sudo service nginx reload</span><br></pre></td></tr></table></figure>
-<p><a href="https://askubuntu.com/questions/642238/why-do-i-still-see-an-apache-site-on-nginx" target="_blank" rel="noopener">https://askubuntu.com/questions/642238/why-do-i-still-see-an-apache-site-on-nginx</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Backend/">Backend</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Network/IO/epoll" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/14/Network/IO/epoll/" class="article-date">
-      <time datetime="2018-11-14T13:06:04.000Z" itemprop="datePublished">2018-11-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/14/Network/IO/epoll/">epoll</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="I-O复用模型之epoll"><a href="#I-O复用模型之epoll" class="headerlink" title="I/O复用模型之epoll"></a>I/O复用模型之epoll</h2><h3 id="epoll模型简介"><a href="#epoll模型简介" class="headerlink" title="epoll模型简介"></a>epoll模型简介</h3><p>epoll是Linux特有的多路服用IO接口select/poll的加强版，e对应的英文单词就是enhancement，中文翻译为增强，加强，提高，充实的意思。所以epoll模型会显著提高程序在大量并发连接中只有少量活跃的情况下的系统CPU利用率。</p>
-<ul>
-<li>epoll把用户关心的文件描述符上的事件放在内核的一个事件表中，无需像select和poll那样每次调用都重复传入文件描述符集。</li>
-<li>epoll在获取事件的时候，无需遍历整个被监听的文件描述符集合，而是<em>遍历那些<strong>被内核IO事件异步唤醒</strong>而加入ready队列的描述符集合</em>。</li>
-</ul>
-<p>所以，epoll是<em>Linux</em>大规模高并发网络程序的首选模型。</p>
-<h4 id="epoll的优势"><a href="#epoll的优势" class="headerlink" title="epoll的优势"></a>epoll的优势</h4><ol>
-<li><p>select==&gt;时间复杂度O(n)</p>
-<p>它仅仅知道了，有I/O事件发生了，却并不知道是哪那几个流（可能有一个，多个，甚至全部），我们只能无差别轮询所有流，找出能读出数据，或者写入数据的流，对他们进行操作。所以<strong>select具有O(n)的无差别轮询复杂度</strong>，同时处理的流越多，无差别轮询时间就越长。</p>
-</li>
-<li><p>poll==&gt;时间复杂度O(n)</p>
-<p>poll本质上和select没有区别，<strong>但是它没有最大连接数的限制</strong>，原因是它是基于链表来存储的.</p>
-</li>
-<li><p>epoll==&gt;时间复杂度O(1)</p>
-<p><strong>epoll可以理解为event poll</strong>，不同于忙轮询和无差别轮询，epoll会把哪个流发生了怎样的I/O事件通知我们。所以我们说epoll实际上是<strong>事件驱动（每个事件关联上fd）</strong>的，此时我们对这些流的操作都是有意义的。<strong>（复杂度降低到了O(1)）</strong></p>
-</li>
-</ol>
-<p><strong>select的几大缺点：</strong></p>
-<p>（1）每次调用select，都需要把fd集合从用户态拷贝到内核态，这个开销在fd很多时会很大</p>
-<p>（2）每次调用select，都需要在内核遍历传递进来的所有fd，这个开销在fd很多时也很大</p>
-<p>（3）select支持的文件描述符数量太小了，默认是1024</p>
-<p><strong>epoll的解决方式：</strong></p>
-<p>对于第一个缺点，epoll的解决方案在epoll_ctl函数中。每次注册新的事件到epoll句柄中时，会把所有的fd拷贝进内核，而不是在epoll_wait的时候重复拷贝。<strong>epoll保证了每个fd在整个过程中只会拷贝一次</strong>。</p>
-<p>对于第二个缺点，epoll的解决方案不像select或poll一样每次都把current轮流加入fd对应的设备等待队列中，而只在epoll_ctl时把current挂一遍（这一遍必不可少）并为每个fd指定一个回调函数，当设备就绪，唤醒等待队列上的等待者时，就会调用这个回调函数，而<strong>这个回调函数会把就绪的fd加入一个就绪链表</strong>）。<strong>epoll_wait的工作实际上就是在这个就绪链表中查看有没有就绪的fd</strong>（利用schedule_timeout()实现睡一会，判断一会的效果，和select实现中的第7步是类似的）。</p>
-<p>对于第三个缺点，epoll没有这个限制，<strong>它所支持的FD上限是最大可以打开文件的数目</strong>，这个数字一般远大于2048,举个例子,在1GB内存的机器上大约是10万左右。</p>
-<h3 id="epoll模型的API"><a href="#epoll模型的API" class="headerlink" title="epoll模型的API"></a>epoll模型的API</h3><p>epoll使用一组函数来完成任务</p>
-<p><strong>最后别忘记调用系统函数 close() 来关闭创建出的epoll句柄</strong></p>
-<h4 id="epoll-create"><a href="#epoll-create" class="headerlink" title="epoll_create()"></a>epoll_create()</h4><p>创建一个epoll句柄，句柄的英文是handle。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;</span><br><span class="line"><span class="comment">//返回值：若成功，返回一个非负的文件描述符，若出错，返回-1。</span></span><br></pre></td></tr></table></figure>
-<p>该函数返回一个文件描述符，用来唯一标示内核中这个事件表，size参数提示内核要监听的文件描述符个数，这与内存大小有关。</p>
-<p>返回的文件描述符将是其他所有epoll系统调用的第一个参数，以指定要访问的内核事件表，所以用该返回的文件描述符相当与其他epoll调用的把手、把柄一样。</p>
-<p><strong>查看进程能够打开的最大数目的文件描述符</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/sys/fs/file-max</span><br><span class="line">//该值与内存大小有关</span><br></pre></td></tr></table></figure>
-<p><strong>修改最大文件描述符限制</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/security/limits.conf</span><br><span class="line">//重启生效</span><br></pre></td></tr></table></figure>
-<h4 id="epoll-ctl"><a href="#epoll-ctl" class="headerlink" title="epoll_ctl()"></a>epoll_ctl()</h4><p>该函数用来操作epoll的内核事件表</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event *event)</span></span>;</span><br><span class="line"><span class="comment">//返回值：若成功，返回0，若出错返回-1。</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><strong>op</strong> 是指定操作类型，有一下三种 </p>
-<ul>
-<li>EPOLL_CTL_ADD，向epfd注册fd的上的event</li>
-<li>EPOLL_CTL_MOD，修改fd已注册的event</li>
-<li>EPOLL_CTL_DEL，从epfd上删除fd的event </li>
-</ul>
-</li>
-<li><p><strong>fd</strong> 是操作的文件描述符</p>
-</li>
-<li><p><strong>event</strong> 指定内核要监听事件,它是 epoll_event 结构类型的指针。定义如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span>     events;      <span class="comment">/* Epoll events */</span></span><br><span class="line">    <span class="keyword">epoll_data_t</span> data;        <span class="comment">/* User data variable */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><strong>events</strong> 成员描述事件类型，将以下宏定义通过<strong>位或</strong> ( | ) 方式组合</p>
-<ul>
-<li><strong>EPOLLIN</strong> : 表示对应的文件描述符<strong>可读</strong>(包括对端SOCKET正常关闭)</li>
-<li><strong>POLLOUT</strong> : 表示对应的文件描述符<strong>可写</strong></li>
-<li><strong>EPOLLPRI</strong> : 表示对应的文件描述符有紧急的数据可读(这里应该表示有<strong>带外数据</strong>到来)</li>
-<li><strong>EPOLLERR</strong> : 表示对应的文件描述符发生<strong>错误</strong></li>
-<li><strong>EPOLLHUP</strong> : 表示对应的文件描述符被<strong>挂断</strong></li>
-<li><strong>EPOLLET</strong> : 将EPOLL设为<strong>边缘触发</strong>(Edge Triggered)模式,这是相对于水平触发(Level Triggered)来说的</li>
-<li><strong>EPOLLONESHOT</strong> : <strong>只监听一次</strong>事件,当监听完这次事件之后,如果还需要继续监听这个socket的话,需要再次把这个socket加入到EPOLL队列里</li>
-</ul>
-</li>
-<li><p><strong>data</strong> 用于存储用户数据，是 epoll_data_t 联合体，定义如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> epoll_data &#123;</span><br><span class="line">    <span class="keyword">void</span>        *ptr;</span><br><span class="line">    <span class="keyword">int</span>          fd;</span><br><span class="line">    <span class="keyword">uint32_t</span>     u32;</span><br><span class="line">    <span class="keyword">uint64_t</span>     u64;</span><br><span class="line">&#125; <span class="keyword">epoll_data_t</span>;</span><br></pre></td></tr></table></figure>
-<p>epoll_data_t 是一个联合体，</p>
-<ul>
-<li>fd 指定事件所从属的目标文件描述符。</li>
-<li>ptr 指定 fd 相关的用户数据，但两者不能同时使用。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="epoll-wait"><a href="#epoll-wait" class="headerlink" title="epoll_wait()"></a>epoll_wait()</h4><p>函数epoll_wait用来等待所监听文件描述符上有事件发生</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event *events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"><span class="comment">//返回值：若成功，返回就绪的文件描述符个数，若出错，返回-1，时间超时返回0</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>epfd</strong> 就是函数epoll_create创建的句柄</li>
-<li><strong>events</strong> 是一个传入传出参数，它是epoll_event结构的指针，用来从内核得到事件的集合</li>
-<li><strong>maxevents</strong> 告知内核events的大小，但不能大于epoll_create()时创建的size</li>
-<li><strong>timeout</strong> 是超时事件，-1为阻塞，0为立即返回，非阻塞，大于0是指定的微秒</li>
-</ul>
-<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>在调用epoll_create时：</p>
-<ul>
-<li><p>在epoll文件系统里建了个<strong>file结点</strong></p>
-</li>
-<li><p>在内核cache里建了个<strong>红黑树</strong>，用于存储以后epoll_ctl传来的socket。</p>
-<p>执行epoll_ctl时，<strong>如果增加socket句柄，则检查在红黑树中是否存在</strong>，存在立即返回，不存在则添加到树干上，然后向内核注册回调函数，用于当中断事件来临时向准备就绪链表中插入数据。</p>
-</li>
-<li><p>建立一个<strong>list链表</strong>，用于存储准备就绪的事件。</p>
-<p>当epoll_wait调用时，仅仅观察这个list链表里有没有数据即可。有数据就返回，没有数据就sleep，等到timeout时间到后即使链表没数据也返回。</p>
-</li>
-</ul>
-<h3 id="LT和ET模式"><a href="#LT和ET模式" class="headerlink" title="LT和ET模式"></a>LT和ET模式</h3><ul>
-<li>LT（Level Triggered，电平触发）：<strong><em>LT模式是epoll默认的工作模式，也是select和poll的工作模式</em></strong>，在LT模式下，epoll相当于一个效率较高的poll。<ul>
-<li>采用LT模式的文件描述符，当epoll_wait检测到其上有事件发生并将此事件通知应用程序后，应用程序可以不立即处理此事件，当下一次调用epoll_wait时，epoll_wait还会将此事件通告应用程序。</li>
-</ul>
-</li>
-<li>ET（Edge Triggered，边沿触发）: 当调用epoll_ctl，向参数event注册EPOLLET事件时，epoll将以ET模式来操作该文件描述符，<strong><em>ET模式是epoll的高效工作模式</em></strong>. <ul>
-<li>对于采用ET模式的文件描述符，当 epoll_wait 检测到其上有事件发生并将此通知应用程序后，应用程序必须立即处理该事件，因为后续的 epoll_wait 调用将不再向应用程序通知这一事件。ET模式降低了同一 epoll 事件被触发的次数，效率比LT模式高。</li>
-</ul>
-</li>
-</ul>
-<p>ET模式仅当状态发生变化的时候才获得通知,这里所谓的状态的变化并不包括缓冲区中还有未处理的数据。</p>
-<p>对于套接字也就是说,边缘触发只有数据到来,才触发,不管缓存区中是否还有数据。</p>
-<h4 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h4><p>ET（Edge Triggered，边沿触发）</p>
-<p>句柄在发生读写事件时只会通知用户一次。</p>
-<p>ET模式主要关注fd从不可用到可用或者可用到不可用的情况。</p>
-<p>ET只支持非阻塞模式。</p>
-<p><strong>应用层逻辑</strong></p>
-<p>ET模式下读写操作时要用wihle循环，直到读/写够足够多的数据，或者读/写到返回EAGAIN。尤其时在写大块数据时，一次write操作不足以写完全部数据，或者在读大块数据时，应用层缓冲区数据太小，一次read操作不足以读完全部数据，<strong>应用层要么一直调用while循环一直IO到EAGAIN 或者自己调用epoll_ctl手动触发ET响应</strong>。</p>
-<p><strong>优缺点</strong></p>
-<p>缺点：应用层业务逻辑复杂，容易遗漏事件，很难用好。</p>
-<p>优点：相对LT模式效率比较高。</p>
-<h4 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h4><p>LT（Level Triggered，电平触发）</p>
-<p>LT模式是epoll默认的工作模式，也是select和poll的工作模式。</p>
-<p>只要句柄一直处于可用状态，就会一直通知用户。</p>
-<p>LT模式下，句柄读缓冲区被读空后，句柄会从可用转变为不可用，这个时候不会通知用户。写缓冲区只要还没写满，就会一直通知用户。</p>
-<p>LT下，应用层的业务逻辑比较简单，更不容易遗漏事件，更不容易出错。通常，在将数据写完后，我们会关闭句柄的写事件。</p>
-<p><strong>优缺点</strong></p>
-<p>优点：编程更符合用户直觉，业务层逻辑更简单。</p>
-<p>缺点：效率比ET低。</p>
-<h4 id="ET比LT效率高的原因"><a href="#ET比LT效率高的原因" class="headerlink" title="ET比LT效率高的原因"></a>ET比LT效率高的原因</h4><p><strong>ET在通知用户后，就会把fd从就绪队列里删除。而LT通知用户后fd还在就绪链表中</strong>，随着fd的增多，就绪链表越大。下次epoll要通知用户时还需要遍历整个就绪链表。遍历的性能是线性，如果fd的数量非常多，就会带来比较显著的效率下降。</p>
-<p>同样数量的fd下，LT模式维护的就绪链表比ET的大。</p>
-<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>使用ET的例子：nginx</p>
-<p>使用LT的例子：redis</p>
-<hr>
-<p>epoll工作在ET模式的时候，必须使用非阻塞套接口，以避免由于一个文件句柄的阻塞读/阻塞写操作把处理多个文件描述符的任务饿死。最好以下面的方式调用ET模式的epoll接口，在后面会介绍避免可能的缺陷。</p>
-<ul>
-<li><p>基于非阻塞文件句柄</p>
-</li>
-<li><p>只有当read或者write返回EAGAIN时才需要挂起，等待。但这并不是说每次read()时都需要循环读，直到读到产生一个EAGAIN才认为此次事件处理完成，当read()返回的读到的数据长度小于请求的数据长度时，就可以确定此时缓冲中已没有数据了，也就可以认为此事读事件已处理完成。</p>
-<ul>
-<li>以 O_NONBLOCK的标志打开文件/socket/FIFO，<strong>如果你连续做read操作而没有数据可读，此时程序不会阻塞起来等待数据准备就绪返回，read函数会返回一个错误EAGAIN</strong>，提示你的应用程序现在没有数据可读请稍后再试。</li>
-</ul>
-</li>
-</ul>
-<p>另外，当使用epoll的ET模型来工作时，当产生了一个EPOLLIN事件后，读数据的时候需要考虑的是当recv()返回的大小如果等于请求的大小，那么很有可能是缓冲区还有数据未读完，也意味着该次事件还没有处理完，所以还需要再次读取：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(rs)</span><br><span class="line">&#123;</span><br><span class="line">	buflen = recv(activeevents[i].data.fd, buf, <span class="keyword">sizeof</span>(buf), <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span>(buflen &lt; <span class="number">0</span>)</span><br><span class="line">  	&#123;</span><br><span class="line">    <span class="comment">// 由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可读</span></span><br><span class="line">    <span class="comment">// 在这里就当作是该次事件已处理处.</span></span><br><span class="line">    <span class="keyword">if</span>(errno == EAGAIN)</span><br><span class="line">    	<span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    	<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(buflen == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">// 这里表示对端的socket已正常关闭.</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span>(buflen == <span class="keyword">sizeof</span>(buf)</span><br><span class="line">		rs = <span class="number">1</span>;   <span class="comment">// 需要再次读取</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		rs = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>还有，<strong>假如发送端流量大于接收端的流量</strong>(意思是epoll所在的程序读比转发的socket要快),由于是非阻塞的socket,那么send()函数虽然返回,但实际缓冲区的数据并未真正发给接收端,这样不断的读和发，当缓冲区满后会产生EAGAIN错误(参考man send),同时,不理会这次请求发送的数据.所以,需要封装socket_send()的函数用来处理这种情况,该函数会尽量将数据写完再返回，返回-1表示出错。在socket_send()内部,当写缓冲已满(send()返回-1,且errno为EAGAIN),那么会等待后再重试.这种方式并不很完美,在理论上可能会长时间的阻塞在socket_send()内部,但暂没有更好的办法.</p>
-<h3 id="服务器端epoll程序框架"><a href="#服务器端epoll程序框架" class="headerlink" title="服务器端epoll程序框架"></a>服务器端epoll程序框架</h3><p>一个完整的服务器端例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLINE 5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OPEN_MAX 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTENQ 20</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERV_PORT 5000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INFTIM 1000</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setnonblocking</span><span class="params">(<span class="keyword">int</span> sock)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> opts;</span><br><span class="line">    opts = fcntl(sock, F_GETFL);</span><br><span class="line">    <span class="keyword">if</span>(opts&lt;<span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">"fcntl(sock, GETFL)"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    opts = opts|O_NONBLOCK;</span><br><span class="line">    <span class="keyword">if</span>(fcntl(sock, F_SETFL, opts)&lt;<span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">"fcntl(sock, SETFL, opts)"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, listenfd, connfd, sockfd, epfd, nfds, portnumber;</span><br><span class="line">    <span class="keyword">ssize_t</span> n;</span><br><span class="line">    <span class="keyword">char</span> line[MAXLINE];</span><br><span class="line">    <span class="keyword">socklen_t</span> clilen;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( <span class="number">2</span> == argc ) &#123;</span><br><span class="line">        <span class="keyword">if</span>( (portnumber = atoi(argv[<span class="number">1</span>])) &lt; <span class="number">0</span> )&#123;</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"Usage:%s portnumber\a\n"</span>,argv[<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"Usage:%s portnumber\a\n"</span>,argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明epoll_event结构体的变量,ev用于注册事件,数组用于回传要处理的事件</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">ev</span>, <span class="title">events</span>[20];</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//生成用于处理accept的epoll专用的文件描述符</span></span><br><span class="line">    epfd = epoll_create(<span class="number">256</span>);</span><br><span class="line">    listenfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">//把socket设置为非阻塞方式</span></span><br><span class="line">    <span class="comment">//setnonblocking(listenfd);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//设置与要处理的事件相关的文件描述符</span></span><br><span class="line">    ev.data.fd = listenfd;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">//设置要处理的事件类型</span></span><br><span class="line">    ev.events=EPOLLIN|EPOLLET;</span><br><span class="line">    <span class="comment">//ev.events=EPOLLIN;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//注册epoll事件</span></span><br><span class="line">    epoll_ctl(epfd, EPOLL_CTL_ADD, listenfd, &amp;ev);</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">clientaddr</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serveraddr</span>;</span></span><br><span class="line">    bzero(&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line">    serveraddr.sin_family = AF_INET;</span><br><span class="line"></span><br><span class="line">		serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);		<span class="comment">//1</span></span><br><span class="line">    <span class="comment">//const char *local_addr = "127.0.0.1";					//2</span></span><br><span class="line">    <span class="comment">//inet_aton(local_addr, &amp;(serveraddr.sin_addr));//2</span></span><br><span class="line"></span><br><span class="line">    serveraddr.sin_port = htons(portnumber);</span><br><span class="line"></span><br><span class="line">    bind(listenfd, (sockaddr*)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line">    listen(listenfd, LISTENQ);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( ; ; ) &#123;</span><br><span class="line">        <span class="comment">//等待epoll事件的发生</span></span><br><span class="line">        nfds = epoll_wait(epfd, events, <span class="number">20</span>, <span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//处理所发生的所有事件</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;nfds; ++i) &#123;</span><br><span class="line">        		<span class="comment">//如果新监测到一个SOCKET用户连接到了绑定的SOCKET端口，建立新的连接。</span></span><br><span class="line">            <span class="keyword">if</span>(events[i].data.fd == listenfd) &#123;</span><br><span class="line">                connfd = accept(listenfd, (sockaddr *)&amp;clientaddr, &amp;clilen);</span><br><span class="line">                <span class="keyword">if</span>(connfd&lt;<span class="number">0</span>) &#123;</span><br><span class="line">                    perror(<span class="string">"connfd&lt;0"</span>);</span><br><span class="line">                    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">              	<span class="comment">//把socket设置为非阻塞方式</span></span><br><span class="line">                <span class="comment">//setnonblocking(connfd);</span></span><br><span class="line"></span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"accapt a connection from "</span></span><br><span class="line">                  &lt;&lt; inet_ntoa(clientaddr.sin_addr) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">              	<span class="comment">//设置用于读操作的文件描述符</span></span><br><span class="line">                ev.data.fd = connfd;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//设置用于注测的读操作事件</span></span><br><span class="line">                ev.events = EPOLLIN|EPOLLET;</span><br><span class="line">                <span class="comment">//ev.events=EPOLLIN;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//注册ev</span></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&amp;ev);</span><br><span class="line">            &#125; </span><br><span class="line">          	<span class="comment">//如果是已经连接的用户，并且收到数据，那么进行读入。</span></span><br><span class="line">          	<span class="keyword">else</span> <span class="keyword">if</span>(events[i].events &amp; EPOLLIN) &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"EPOLLIN"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">if</span> ( (sockfd = events[i].data.fd) &lt; <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span> ( (n = read(sockfd, line, MAXLINE)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (errno == ECONNRESET) &#123;</span><br><span class="line">                        close(sockfd);</span><br><span class="line">                        events[i].data.fd = <span class="number">-1</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span></span><br><span class="line">                        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"readline error"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">                    close(sockfd);</span><br><span class="line">                    events[i].data.fd = <span class="number">-1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                line[n] = <span class="string">'\0'</span>;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"read "</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">              </span><br><span class="line">                <span class="comment">//设置用于写操作的文件描述符</span></span><br><span class="line">                ev.data.fd = sockfd;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//设置用于注测的写操作事件</span></span><br><span class="line">                ev.events = EPOLLOUT|EPOLLET;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//修改sockfd上要处理的事件为EPOLLOUT</span></span><br><span class="line">                epoll_ctl(epfd, EPOLL_CTL_MOD, sockfd, &amp;ev);</span><br><span class="line">            &#125;</span><br><span class="line">           	<span class="comment">//如果有数据发送</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(events[i].events &amp; EPOLLOUT) &#123;</span><br><span class="line">                sockfd = events[i].data.fd;</span><br><span class="line">                write(sockfd, line, n);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//设置用于读操作的文件描述符</span></span><br><span class="line">                ev.data.fd = sockfd;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//设置用于注测的读操作事件</span></span><br><span class="line">                ev.events = EPOLLIN|EPOLLET;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//修改sockfd上要处理的事件为EPOLIN</span></span><br><span class="line">                epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Network/">Network</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO/">IO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux/Command/sed" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/13/Linux/Command/sed/" class="article-date">
-      <time datetime="2018-11-13T05:53:36.000Z" itemprop="datePublished">2018-11-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/13/Linux/Command/sed/">sed 命令</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Linux sed命令是利用script来处理文本文件。</p>
-<p>sed可依照script的指令，来处理、编辑文本文件。</p>
-<p>Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [-hnV][-e&lt;script&gt;][-f&lt;script文件&gt;][文本文件]</span><br></pre></td></tr></table></figure>
-<p><strong>参数说明</strong>：</p>
-<ul>
-<li><code>-e&lt;script&gt;</code>或<code>--expression=&lt;script&gt;</code> 以选项中指定的script来处理输入的文本文件。</li>
-<li><code>-f&lt;script文件&gt;</code>或<code>--file=&lt;script文件&gt;</code> 以选项中指定的script文件来处理输入的文本文件。</li>
-<li><code>-n</code>或 <code>--quiet</code>或<code>--silent</code> 仅显示script处理后的结果。</li>
-</ul>
-<p><strong>动作说明</strong>：</p>
-<ul>
-<li>a ：新增， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～</li>
-<li>c ：取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！</li>
-<li>d ：删除，因为是删除啊，所以 d 后面通常不接任何咚咚；</li>
-<li>i ：插入， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；</li>
-<li>p ：打印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～</li>
-<li>s ：取代，可以直接进行取代的工作哩！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是啦！</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>在testfile文件的第四行后添加一行，并将结果输出到标准输出，在命令行提示符下输入如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -e 4a\newLine testfile</span><br></pre></td></tr></table></figure>
-<h3 id="删除行"><a href="#删除行" class="headerlink" title="删除行"></a>删除行</h3><p>将 /etc/passwd 的内容列出并且列印行号，同时，请将第 2~5 行删除！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# nl /etc/passwd | sed &apos;2,5d&apos;</span><br><span class="line">1 root:x:0:0:root:/root:/bin/bash</span><br><span class="line">6 sync:x:5:0:sync:/sbin:/bin/sync</span><br><span class="line">7 shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br><span class="line">.....(后面省略).....</span><br></pre></td></tr></table></figure>
-<p>只要删除第 2 行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nl /etc/passwd | sed &apos;2d&apos;</span><br></pre></td></tr></table></figure>
-<p>要删除第 3 到最后一行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nl /etc/passwd | sed &apos;3,$d&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="新增行"><a href="#新增行" class="headerlink" title="新增行"></a>新增行</h3><p>在第二行后(即第三行)加上 drink tea</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# nl /etc/passwd | sed &apos;2a drink tea&apos;</span><br><span class="line">1 root:x:0:0:root:/root:/bin/bash</span><br><span class="line">2 bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">drink tea</span><br><span class="line">3 daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">.....(后面省略).....</span><br></pre></td></tr></table></figure>
-<p>那如果是要在第二行前</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nl /etc/passwd | sed &apos;2i drink tea&apos;</span><br></pre></td></tr></table></figure>
-<p>如果是要增加两行以上，在第二行后面加入两行字，例如 <strong>Drink tea or …..</strong> 与 <strong>drink beer?</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# nl /etc/passwd | sed &apos;2a Drink tea or ......\</span><br><span class="line">&gt; drink beer ?&apos;</span><br><span class="line">1 root:x:0:0:root:/root:/bin/bash</span><br><span class="line">2 bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">Drink tea or ......</span><br><span class="line">drink beer ?</span><br><span class="line">3 daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">.....(后面省略).....</span><br></pre></td></tr></table></figure>
-<p>每一行之间都必须要以反斜杠『 \ 』来进行新行的添加。</p>
-<h3 id="替换行"><a href="#替换行" class="headerlink" title="替换行"></a>替换行</h3><p>将第2-5行的内容取代成为『No 2-5 number』呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# nl /etc/passwd | sed &apos;2,5c No 2-5 number&apos;</span><br><span class="line">1 root:x:0:0:root:/root:/bin/bash</span><br><span class="line">No 2-5 number</span><br><span class="line">6 sync:x:5:0:sync:/sbin:/bin/sync</span><br><span class="line">.....(后面省略).....</span><br></pre></td></tr></table></figure>
-<h3 id="显示行"><a href="#显示行" class="headerlink" title="显示行"></a>显示行</h3><p>仅列出 /etc/passwd 文件内的第 5-7 行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# nl /etc/passwd | sed -n &apos;5,7p&apos;</span><br><span class="line">5 lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">6 sync:x:5:0:sync:/sbin:/bin/sync</span><br><span class="line">7 shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br></pre></td></tr></table></figure>
-<h3 id="数据的搜寻并显示"><a href="#数据的搜寻并显示" class="headerlink" title="数据的搜寻并显示"></a>数据的搜寻并显示</h3><p>搜索 /etc/passwd有root关键字的行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nl /etc/passwd | sed &apos;/root/p&apos;</span><br><span class="line">1  root:x:0:0:root:/root:/bin/bash</span><br><span class="line">1  root:x:0:0:root:/root:/bin/bash</span><br><span class="line">2  daemon:x:1:1:daemon:/usr/sbin:/bin/sh</span><br><span class="line">3  bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">4  sys:x:3:3:sys:/dev:/bin/sh</span><br><span class="line">5  sync:x:4:65534:sync:/bin:/bin/sync</span><br><span class="line">....下面忽略</span><br></pre></td></tr></table></figure>
-<p>如果root找到，除了输出所有行，还会输出匹配行。</p>
-<p>使用-n的时候将只打印包含模板的行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nl /etc/passwd | sed -n &apos;/root/p&apos;</span><br><span class="line">1  root:x:0:0:root:/root:/bin/bash</span><br></pre></td></tr></table></figure>
-<h3 id="数据的搜寻并删除"><a href="#数据的搜寻并删除" class="headerlink" title="数据的搜寻并删除"></a>数据的搜寻并删除</h3><p>删除/etc/passwd所有包含root的行，其他行输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nl /etc/passwd | sed  &apos;/root/d&apos;</span><br><span class="line">2  daemon:x:1:1:daemon:/usr/sbin:/bin/sh</span><br><span class="line">3  bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">....下面忽略</span><br><span class="line">#第一行的匹配root已经删除了</span><br></pre></td></tr></table></figure>
-<h3 id="数据的搜寻并执行命令"><a href="#数据的搜寻并执行命令" class="headerlink" title="数据的搜寻并执行命令"></a>数据的搜寻并执行命令</h3><p>搜索/etc/passwd,找到root对应的行，执行后面花括号中的一组命令，每个命令之间用分号分隔，这里把bash替换为blueshell，再输出这行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nl /etc/passwd | sed -n &apos;/root/&#123;s/bash/blueshell/;p;q&#125;&apos;    </span><br><span class="line">1  root:x:0:0:root:/root:/bin/blueshell</span><br></pre></td></tr></table></figure>
-<p>最后的q是退出。</p>
-<h3 id="数据的搜寻并替换"><a href="#数据的搜寻并替换" class="headerlink" title="数据的搜寻并替换"></a>数据的搜寻并替换</h3><p>除了整行的处理模式之外， sed 还可以用行为单位进行部分数据的搜寻并取代。基本上 sed 的搜寻与替代的与 vi 相当的类似！他有点像这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &apos;s/要被取代的字串/新的字串/g&apos;</span><br></pre></td></tr></table></figure>
-<p>先观察原始信息，利用 /sbin/ifconfig 查询 IP</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# /sbin/ifconfig eth0</span><br><span class="line">eth0 Link encap:Ethernet HWaddr 00:90:CC:A6:34:84</span><br><span class="line">inet addr:192.168.1.100 Bcast:192.168.1.255 Mask:255.255.255.0</span><br><span class="line">inet6 addr: fe80::290:ccff:fea6:3484/64 Scope:Link</span><br><span class="line">UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1</span><br><span class="line">.....(以下省略).....</span><br></pre></td></tr></table></figure>
-<p>将 IP 前面的部分予以删除</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# /sbin/ifconfig eth0 | grep &apos;inet addr&apos; | sed &apos;s/^.*addr://g&apos;</span><br><span class="line">192.168.1.100 Bcast:192.168.1.255 Mask:255.255.255.0</span><br></pre></td></tr></table></figure>
-<p>接下来将 IP 后面的部分予以删除</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# /sbin/ifconfig eth0 | grep &apos;inet addr&apos; | sed &apos;s/^.*addr://g&apos; | sed &apos;s/Bcast.*$//g&apos;</span><br><span class="line">192.168.1.100</span><br></pre></td></tr></table></figure>
-<h3 id="多点编辑"><a href="#多点编辑" class="headerlink" title="多点编辑"></a>多点编辑</h3><p>一条sed命令，删除/etc/passwd第三行到末尾的数据，并把bash替换为blueshell</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nl /etc/passwd | sed -e &apos;3,$d&apos; -e &apos;s/bash/blueshell/&apos;</span><br><span class="line">1  root:x:0:0:root:/root:/bin/blueshell</span><br><span class="line">2  daemon:x:1:1:daemon:/usr/sbin:/bin/sh</span><br></pre></td></tr></table></figure>
-<p>-e表示多点编辑，第一个编辑命令删除/etc/passwd第三行到末尾的数据，第二条命令搜索bash替换为blueshell。</p>
-<h3 id="直接修改文件内容-危险动作"><a href="#直接修改文件内容-危险动作" class="headerlink" title="直接修改文件内容(危险动作)"></a>直接修改文件内容(危险动作)</h3><p>sed 可以直接修改文件的内容，不必使用管道命令或数据流重导向！ 不过，由於这个动作会直接修改到原始的文件，所以请你千万不要随便拿系统配置来测试！ 我们还是使用文件 regular_express.txt 文件来测试看看吧！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# cat regular_express.txt </span><br><span class="line">runoob.</span><br><span class="line">google.</span><br><span class="line">taobao.</span><br><span class="line">facebook.</span><br><span class="line">zhihu-</span><br><span class="line">weibo-</span><br></pre></td></tr></table></figure>
-<p>利用 sed 将 regular_express.txt 内每一行结尾若为 . 则换成 !</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# sed -i &apos;s/\.$/\!/g&apos; regular_express.txt</span><br><span class="line">[root@www ~]# cat regular_express.txt </span><br><span class="line">runoob!</span><br><span class="line">google!</span><br><span class="line">taobao!</span><br><span class="line">facebook!</span><br><span class="line">zhihu-</span><br><span class="line">weibo-</span><br></pre></td></tr></table></figure>
-<p>利用 sed 直接在 regular_express.txt 最后一行加入 <strong># This is a test</strong>: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# sed -i &apos;$a # This is a test&apos; regular_express.txt</span><br><span class="line">[root@www ~]# cat regular_express.txt </span><br><span class="line">runoob!</span><br><span class="line">google!</span><br><span class="line">taobao!</span><br><span class="line">facebook!</span><br><span class="line">zhihu-</span><br><span class="line">weibo-</span><br><span class="line"># This is a test</span><br></pre></td></tr></table></figure>
-<p>sed 的 -i 选项可以直接修改文件内容，这功能非常有帮助！举例来说，如果你有一个 100 万行的文件，你要在第 100 行加某些文字，此时使用 vim 可能会疯掉！因为文件太大了！透过 sed 直接修改/取代的功能，你甚至不需要使用 vim 去修订！</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li></ul>
     </div>
 
       

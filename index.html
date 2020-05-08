@@ -234,10 +234,310 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-QT/Qt杂记" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-QT/Qt-with-CMake" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/05/08/QT/Qt杂记/" class="article-date">
+      <a href="/2020/05/09/QT/Qt-with-CMake/" class="article-date">
+      <time datetime="2020-05-08T20:58:29.000Z" itemprop="datePublished">2020-05-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/09/QT/Qt-with-CMake/">Qt-with-CMake</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="Qt-with-CMake"><a href="#Qt-with-CMake" class="headerlink" title="Qt-with-CMake"></a>Qt-with-CMake</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span>)</span><br><span class="line"><span class="keyword">project</span>(Client)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用Qt 至少需要C++11</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动调用moc，uic，rcc处理qt的扩展部分</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOMOC <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOUIC <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTORCC <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置Qt5的cmake模块所在目录</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_PREFIX_PATH <span class="variable">$&#123;CMAKE_PREFIX_PATH&#125;</span> /usr/local/opt/qt/lib/cmake)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 找到对应的qt模块，名字为qmake中QT += &lt;name&gt;中的name首字母大写后加上Qt5前缀</span></span><br><span class="line"><span class="comment"># NO_DEFAULT_PATH : 让find_package跳过系统目录的查找</span></span><br><span class="line"><span class="keyword">find_package</span>(Qt5Core REQUIRED)</span><br><span class="line"><span class="keyword">find_package</span>(Qt5Gui REQUIRED)</span><br><span class="line"><span class="keyword">find_package</span>(Qt5Widgets REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 前三行是为了可以直接include &lt;Q...&gt;，而不需要include &lt;QtWidgets/Q...&gt;</span></span><br><span class="line"><span class="comment"># 最后一行必加，qt的代码是 include &lt;QtWidgets/Q...&gt; 的</span></span><br><span class="line"><span class="keyword">include_directories</span>(/usr/local/opt/qt/<span class="keyword">include</span>/QtWidgets)</span><br><span class="line"><span class="keyword">include_directories</span>(/usr/local/opt/qt/<span class="keyword">include</span>/QtCore)</span><br><span class="line"><span class="keyword">include_directories</span>(/usr/local/opt/qt/<span class="keyword">include</span>/QtGui)</span><br><span class="line"><span class="keyword">include_directories</span>(/usr/local/opt/qt/<span class="keyword">include</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(Client Qt5::Core)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(Client Qt5::Gui)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(Client Qt5::Widgets)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/QT/">QT</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMake/">CMake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Develop/CMake-Note" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/09/Develop/CMake-Note/" class="article-date">
+      <time datetime="2020-05-08T20:39:41.000Z" itemprop="datePublished">2020-05-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/09/Develop/CMake-Note/">CMake-Note</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="CMake-Note"><a href="#CMake-Note" class="headerlink" title="CMake-Note"></a>CMake-Note</h3><h4 id="cmake-build-type"><a href="#cmake-build-type" class="headerlink" title="cmake build type"></a>cmake build type</h4><p><a href="https://stackoverflow.com/questions/48754619/what-are-cmake-build-type-debug-release-relwithdebinfo-and-minsizerel/48755129" target="_blank" rel="noopener">https://stackoverflow.com/questions/48754619/what-are-cmake-build-type-debug-release-relwithdebinfo-and-minsizerel/48755129</a></p>
+<h5 id="brief"><a href="#brief" class="headerlink" title="brief"></a>brief</h5><p><strong>RelWithDebInfo</strong> is the same as <strong>Release</strong>, allowing you to have <a href="https://en.wikipedia.org/wiki/Debug_symbol" target="_blank" rel="noopener">symbol files</a> for debugging.</p>
+<p>For example in Visual Studio, you’ll have <code>.pdb</code> files and without them, it’ll be hard to debug because all the signatures in the binary files are not going to be <em>human readable</em> and there’s no way to map them to the source code.</p>
+<p><strong>MinSizeRel</strong> is the same as <strong>Release</strong>, with its optimization configuration just set to <a href="https://msdn.microsoft.com/en-us/library/8f8h5cxt.aspx" target="_blank" rel="noopener">Minimize size, Maximize speed</a> in Visual Studio, for example.</p>
+<blockquote>
+<p>If I want to generate a production build, should I choose Release?</p>
+</blockquote>
+<blockquote>
+<p>Yes, that should do the right job for you. Debug/Release are the most commonly used options.</p>
+</blockquote>
+<h5 id="detail"><a href="#detail" class="headerlink" title="detail"></a>detail</h5><p><code>CMAKE_BUILD_TYPE</code> is about,</p>
+<ol>
+<li>Optimization (level) [<code>-O0, -O1, -O2, -O3, -Ofast, -Os, -Oz, -Og, -O, -O4</code>]</li>
+<li>Including ‘debug info’ in the executable [<code>-g, -gline-tables-only, -gmodules, -g</code><em>level</em><code>, -gcoff, -gdwarf, -gdwarf-</code><em>version</em><code>, -ggdb, -grecord-gcc-switches, -gno-record-gcc-switches, -gstabs, -gstabs+, -gstrict-dwarf, -gno-strict-dwarf, -gcolumn-info, -gno-column-info, -gvms, -gxcoff, -gxcoff+, -gz[=</code><em>type</em><code>]</code>]</li>
+<li>Generating code for <code>assert()</code> or not [<code>-DNDEBUG</code>]</li>
+<li>Including debug (output) code or not [custom]</li>
+</ol>
+<p>Most such compiler options are compiler and/or platform specific. So, extended support for a build type needs updating every existing tool chain that you want to support.</p>
+<p>The default build types that come with cmake more or less mean the following,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. Release: high optimization level, no debug info, code or asserts.</span><br><span class="line">2. Debug: No optimization, asserts enabled, [custom debug (output) code enabled],</span><br><span class="line">   debug info included in executable (so you can step through the code with a</span><br><span class="line">   debugger and have address to source-file:line-number translation).</span><br><span class="line">3. RelWithDebInfo: optimized, *with* debug info, but no debug (output) code or asserts.</span><br><span class="line">4. MinSizeRel: same as Release but optimizing for size rather than speed.</span><br></pre></td></tr></table></figure>
+<p>In terms of compiler flags that usually means (since these are supported in most cases on all platforms anyway):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. Release: `-O3 -DNDEBUG`</span><br><span class="line">2. Debug: `-O0 -g`</span><br><span class="line">3. RelWithDebInfo: `-O2 -g -DNDEBUG`</span><br><span class="line">4. MinSizeRel: `-Os -DNDEBUG`</span><br></pre></td></tr></table></figure>
+<p>Where defining <code>NDEBUG</code> is added on platforms that support this (it disables <code>assert()</code>). This is why you should make sure that none of your asserts have side effects, of course.</p>
+<h3 id="To-be-Continue"><a href="#To-be-Continue" class="headerlink" title="To be Continue"></a>To be Continue</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMake/">CMake</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-QT/Qt-for-Macos" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/09/QT/Qt-for-Macos/" class="article-date">
+      <time datetime="2020-05-08T20:15:32.000Z" itemprop="datePublished">2020-05-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/09/QT/Qt-for-Macos/">Qt for Macos</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="Qt-for-Macos"><a href="#Qt-for-Macos" class="headerlink" title="Qt for Macos"></a>Qt for Macos</h3><h4 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> Q_OS_MACOS</span></span><br><span class="line">	...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="最大化按钮"><a href="#最大化按钮" class="headerlink" title="最大化按钮"></a>最大化按钮</h4><p>mac有两种最大化按钮，在setWindowFlags时分别为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Qt::WindowMaximizeButtonHint</span><br><span class="line">Qt::WindowFullscreenButtonHint</span><br></pre></td></tr></table></figure>
+<h4 id="AppMenu"><a href="#AppMenu" class="headerlink" title="AppMenu"></a>AppMenu</h4><p>Macos的第一个menu是应用名字，里面通常有preferences、about。但是在qt内无法直接获取到这个menu。</p>
+<p>可以通过qt专门为mac系统内置的方法来添加。</p>
+<p><strong>方法1</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">menuBar()-&gt;addMenu(<span class="string">"doesn't matter"</span>)-&gt;addAction(<span class="string">"preferences"</span>);</span><br></pre></td></tr></table></figure>
+<p>menu的title无关紧要，只要在一个全新的menu内添加一个Action，这个Action的title匹配到如下的string，qt就会自动在第一个menu内添加相应Action。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">String matches</th>
+<th style="text-align:center">Placement</th>
+<th style="text-align:center">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">about.*</td>
+<td style="text-align:center">Application Menu \</td>
+<td style="text-align:center">About \<application name\></application></td>
+<td>The application name is fetched from the <code>Info.plist</code> file (see note below). If this entry is not found no About item will appear in the Application Menu.</td>
+</tr>
+<tr>
+<td style="text-align:center">config, options, setup, settings or preferences</td>
+<td style="text-align:center">Application Menu \</td>
+<td style="text-align:center">Preferences</td>
+<td>If this entry is not found the Settings item will be disabled</td>
+</tr>
+<tr>
+<td style="text-align:center">quit or exit</td>
+<td style="text-align:center">Application Menu \</td>
+<td style="text-align:center">Quit \<application name\></application></td>
+<td>If this entry is not found a default Quit item will be created to call QCoreApplication::quit()</td>
+</tr>
+</tbody>
+</table>
+<p><strong>方法2</strong></p>
+<p>方法2的行为是覆盖方法1的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">menuBar()-&gt;addMenu(<span class="string">"doesn't matter"</span>)-&gt;addAction(<span class="string">"doesn't matter"</span>)</span><br><span class="line">    	-&gt;setMenuRole(QAction::PreferencesRole);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>QAction::NoRole</code></td>
+<td><code>0</code></td>
+<td>This action should not be put into the application menu</td>
+</tr>
+<tr>
+<td><code>QAction::TextHeuristicRole</code></td>
+<td><code>1</code></td>
+<td>This action should be put in the application menu based on the action’s text as described in the <a href="https://doc.qt.io/qt-5/qmenubar.html" target="_blank" rel="noopener">QMenuBar</a> documentation.</td>
+</tr>
+<tr>
+<td><code>QAction::ApplicationSpecificRole</code></td>
+<td><code>2</code></td>
+<td>This action should be put in the application menu with an application specific role</td>
+</tr>
+<tr>
+<td><code>QAction::AboutQtRole</code></td>
+<td><code>3</code></td>
+<td>This action handles the “About Qt” menu item.</td>
+</tr>
+<tr>
+<td><code>QAction::AboutRole</code></td>
+<td><code>4</code></td>
+<td>This action should be placed where the “About” menu item is in the application menu. The text of the menu item will be set to “About \<application name\>“. The application name is fetched from the <code>Info.plist</code> file in the application’s bundle (See <a href="https://doc.qt.io/qt-5/macos-deployment.html" target="_blank" rel="noopener">Qt for macOS - Deployment</a>).</application></td>
+</tr>
+<tr>
+<td><code>QAction::PreferencesRole</code></td>
+<td><code>5</code></td>
+<td>This action should be placed where the “Preferences…” menu item is in the application menu.</td>
+</tr>
+<tr>
+<td><code>QAction::QuitRole</code></td>
+<td><code>6</code></td>
+<td>This action should be placed where the Quit menu item is in the application menu.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最重要的</strong>：使用 <code>QAction::ApplicationSpecificRole</code>，则可以将任意string的Action添加到AppMenu。</p>
+<h3 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/QT/">QT</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-QT/Qt-Note" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/08/QT/Qt-Note/" class="article-date">
       <time datetime="2020-05-08T11:35:32.000Z" itemprop="datePublished">2020-05-08</time>
 </a>
 
@@ -253,7 +553,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/08/QT/Qt杂记/">Qt杂记</a>
+      <a class="article-title" href="/2020/05/08/QT/Qt-Note/">Qt Note</a>
     </h1>
   
 
@@ -272,15 +572,14 @@
 <p>If you’re subclassing a <code>QDialog</code>, the <code>closeEvent</code> will not be called and so you have to override <code>reject()</code>:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MyDialog::reject()</span><br><span class="line">&#123;</span><br><span class="line">    QMessageBox::StandardButton resBtn = QMessageBox::Yes;</span><br><span class="line">    <span class="keyword">if</span> (changes) &#123;</span><br><span class="line">        resBtn = QMessageBox::question( <span class="keyword">this</span>, APP_NAME,</span><br><span class="line">                                        tr(<span class="string">"Are you sure?\n"</span>),</span><br><span class="line">                                        QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,</span><br><span class="line">                                        QMessageBox::Yes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (resBtn == QMessageBox::Yes) &#123;</span><br><span class="line">        QDialog::reject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>实践证明，在mac下，如果QMainWindow的windowFlag设置为QDialog，此时重写closeEvent是有bug的。</p>
+<p>可以通过如下方式达到类似效果并且不触发bug：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint |</span><br><span class="line">                       Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);</span><br></pre></td></tr></table></figure>
 <h3 id="qt和模板类"><a href="#qt和模板类" class="headerlink" title="qt和模板类"></a>qt和模板类</h3><p>标记为QObject的类不能使用模板，因为QObject有很多内置的信号/槽函数，除非把这些函数显式声明。</p>
 <h3 id="windowFlag"><a href="#windowFlag" class="headerlink" title="windowFlag"></a>windowFlag</h3><p>you can not remove the maximize button without the customizewindowhint.</p>
 <p><strong>remove maximize button:</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);</span><br></pre></td></tr></table></figure>
 <p><strong>StayOnTop:</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(StaysOnTop) &#123; setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint); &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Macos"><a href="#Macos" class="headerlink" title="Macos"></a>Macos</h3><h4 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> Q_OS_MACOS</span></span><br><span class="line">	...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-<h4 id="最大化按钮"><a href="#最大化按钮" class="headerlink" title="最大化按钮"></a>最大化按钮</h4><p>mac有两种最大化按钮，在setWindowFlags时分别为：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Qt::WindowMaximizeButtonHint</span><br><span class="line">Qt::WindowFullscreenButtonHint</span><br></pre></td></tr></table></figure>
 <h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
       
     </div>
@@ -498,7 +797,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMake/">CMake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMake/">CMake</a></li></ul>
     </div>
 
       
@@ -697,316 +996,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postman/">postman</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sublime/">sublime</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux/Command/yum-error" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/06/Linux/Command/yum-error/" class="article-date">
-      <time datetime="2019-12-06T03:01:56.000Z" itemprop="datePublished">2019-12-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/06/Linux/Command/yum-error/">yum error</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="yum-error"><a href="#yum-error" class="headerlink" title="yum error"></a>yum error</h3><p>error:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># yum install sth</span><br><span class="line">File &quot;/usr/bin/yum&quot;, line 30</span><br><span class="line">  except KeyboardInterrupt, e:</span><br></pre></td></tr></table></figure>
-<p>solve:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/bin/yum</span><br><span class="line">#!/usr/bin/python -&gt; #!/usr/bin/python2.7</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Develop/kubectl-Cheat-Sheet" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/11/29/Develop/kubectl-Cheat-Sheet/" class="article-date">
-      <time datetime="2019-11-29T08:34:50.000Z" itemprop="datePublished">2019-11-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/29/Develop/kubectl-Cheat-Sheet/">kubectl-Cheat-Sheet</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="kubectl-Cheat-Sheet"><a href="#kubectl-Cheat-Sheet" class="headerlink" title="kubectl Cheat Sheet"></a>kubectl Cheat Sheet</h1><p>From: <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/" target="_blank" rel="noopener">https://kubernetes.io/docs/reference/kubectl/cheatsheet/</a></p>
-<h2 id="Shell-autocompletion"><a href="#Shell-autocompletion" class="headerlink" title="Shell autocompletion"></a>Shell autocompletion</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install bash-completion	# Usually already installed</span><br><span class="line"><span class="meta">#</span><span class="bash"> restart session</span></span><br><span class="line">type _init_completion		# verify that bash-completion is correctly</span><br><span class="line"></span><br><span class="line">echo 'source &lt;(kubectl completion bash)' &gt;&gt;~/.bashrc</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">kubectl completion bash &gt;/etc/bash_completion.d/kubectl</span><br><span class="line"><span class="meta">#</span><span class="bash"> restart session</span></span><br></pre></td></tr></table></figure>
-<h2 id="Kubectl-Context-and-Configuration"><a href="#Kubectl-Context-and-Configuration" class="headerlink" title="Kubectl Context and Configuration"></a>Kubectl Context and Configuration</h2><p>Set which Kubernetes cluster <code>kubectl</code> communicates with and modifies configuration information. See <a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/" target="_blank" rel="noopener">Authenticating Across Clusters with kubeconfig</a> documentation for detailed config file information.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">kubectl config view <span class="comment"># Show Merged kubeconfig settings.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use multiple kubeconfig files at the same time and view merged config</span></span><br><span class="line">KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 </span><br><span class="line"></span><br><span class="line">kubectl config view</span><br><span class="line"></span><br><span class="line"><span class="comment"># get the password for the e2e user</span></span><br><span class="line">kubectl config view -o jsonpath=<span class="string">'&#123;.users[?(@.name == "e2e")].user.password&#125;'</span></span><br><span class="line"></span><br><span class="line">kubectl config view -o jsonpath=<span class="string">'&#123;.users[].name&#125;'</span>    <span class="comment"># display the first user</span></span><br><span class="line">kubectl config view -o jsonpath=<span class="string">'&#123;.users[*].name&#125;'</span>   <span class="comment"># get a list of users</span></span><br><span class="line">kubectl config get-contexts                          <span class="comment"># display list of contexts </span></span><br><span class="line">kubectl config current-context                       <span class="comment"># display the current-context</span></span><br><span class="line">kubectl config use-context my-cluster-name           <span class="comment"># set the default context to my-cluster-name</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># add a new cluster to your kubeconf that supports basic auth</span></span><br><span class="line">kubectl config <span class="built_in">set</span>-credentials kubeuser/foo.kubernetes.com --username=kubeuser --password=kubepassword</span><br><span class="line"></span><br><span class="line"><span class="comment"># permanently save the namespace for all subsequent kubectl commands in that context.</span></span><br><span class="line">kubectl config <span class="built_in">set</span>-context --current --namespace=ggckad-s2</span><br><span class="line"></span><br><span class="line"><span class="comment"># set a context utilizing a specific username and namespace.</span></span><br><span class="line">kubectl config <span class="built_in">set</span>-context gce --user=cluster-admin --namespace=foo \</span><br><span class="line">  &amp;&amp; kubectl config use-context gce</span><br><span class="line"> </span><br><span class="line">kubectl config <span class="built_in">unset</span> users.foo                       <span class="comment"># delete user foo</span></span><br></pre></td></tr></table></figure>
-<h2 id="Apply"><a href="#Apply" class="headerlink" title="Apply"></a>Apply</h2><p><code>apply</code> manages applications through files defining Kubernetes resources. It creates and updates resources in a cluster through running <code>kubectl apply</code>. This is the recommended way of managing Kubernetes applications on production. See <a href="https://kubectl.docs.kubernetes.io/" target="_blank" rel="noopener">Kubectl Book</a>.</p>
-<h2 id="Creating-Objects"><a href="#Creating-Objects" class="headerlink" title="Creating Objects"></a>Creating Objects</h2><p>Kubernetes manifests can be defined in json or yaml. The file extension <code>.yaml</code>, <code>.yml</code>, and <code>.json</code> can be used.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f ./my-manifest.yaml            <span class="comment"># create resource(s)</span></span><br><span class="line">kubectl apply -f ./my1.yaml -f ./my2.yaml      <span class="comment"># create from multiple files</span></span><br><span class="line">kubectl apply -f ./dir                         <span class="comment"># create resource(s) in all manifest files in dir</span></span><br><span class="line">kubectl apply -f https://git.io/vPieo          <span class="comment"># create resource(s) from url</span></span><br><span class="line">kubectl create deployment nginx --image=nginx  <span class="comment"># start a single instance of nginx</span></span><br><span class="line">kubectl explain pods,svc                       <span class="comment"># get the documentation for pod and svc manifests</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create multiple YAML objects from stdin</span></span><br><span class="line">cat &lt;&lt;EOF | kubectl apply -f -</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: busybox-sleep</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: busybox</span><br><span class="line">    image: busybox</span><br><span class="line">    args:</span><br><span class="line">    - sleep</span><br><span class="line">    - <span class="string">"1000000"</span></span><br><span class="line">---</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: busybox-sleep-less</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: busybox</span><br><span class="line">    image: busybox</span><br><span class="line">    args:</span><br><span class="line">    - sleep</span><br><span class="line">    - <span class="string">"1000"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a secret with several keys</span></span><br><span class="line">cat &lt;&lt;EOF | kubectl apply -f -</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Secret</span><br><span class="line">metadata:</span><br><span class="line">  name: mysecret</span><br><span class="line"><span class="built_in">type</span>: Opaque</span><br><span class="line">data:</span><br><span class="line">  password: $(<span class="built_in">echo</span> -n <span class="string">"s33msi4"</span> | base64 -w0)</span><br><span class="line">  username: $(<span class="built_in">echo</span> -n <span class="string">"jane"</span> | base64 -w0)</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<h2 id="Viewing-Finding-Resources"><a href="#Viewing-Finding-Resources" class="headerlink" title="Viewing, Finding Resources"></a>Viewing, Finding Resources</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Get commands with basic output</span></span><br><span class="line">kubectl get services                          <span class="comment"># List all services in the namespace</span></span><br><span class="line">kubectl get pods --all-namespaces             <span class="comment"># List all pods in all namespaces</span></span><br><span class="line">kubectl get pods -o wide                      <span class="comment"># List all pods in the namespace, with more details</span></span><br><span class="line">kubectl get deployment my-dep                 <span class="comment"># List a particular deployment</span></span><br><span class="line">kubectl get pods                              <span class="comment"># List all pods in the namespace</span></span><br><span class="line">kubectl get pod my-pod -o yaml                <span class="comment"># Get a pod's YAML</span></span><br><span class="line">kubectl get pod my-pod -o yaml --<span class="built_in">export</span>       <span class="comment"># Get a pod's YAML without cluster specific information</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Describe commands with verbose output</span></span><br><span class="line">kubectl describe nodes my-node</span><br><span class="line">kubectl describe pods my-pod</span><br><span class="line"></span><br><span class="line"><span class="comment"># List Services Sorted by Name</span></span><br><span class="line">kubectl get services --sort-by=.metadata.name</span><br><span class="line"></span><br><span class="line"><span class="comment"># List pods Sorted by Restart Count</span></span><br><span class="line">kubectl get pods --sort-by=<span class="string">'.status.containerStatuses[0].restartCount'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># List PersistentVolumes sorted by capacity</span></span><br><span class="line"></span><br><span class="line">kubectl get pv --sort-by=.spec.capacity.storage</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get the version label of all pods with label app=cassandra</span></span><br><span class="line">kubectl get pods --selector=app=cassandra -o \</span><br><span class="line">  jsonpath=<span class="string">'&#123;.items[*].metadata.labels.version&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Get all worker nodes (use a selector to exclude results that have a label</span></span><br><span class="line"><span class="comment"># named 'node-role.kubernetes.io/master')</span></span><br><span class="line">kubectl get node --selector=<span class="string">'!node-role.kubernetes.io/master'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Get all running pods in the namespace</span></span><br><span class="line">kubectl get pods --field-selector=status.phase=Running</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get ExternalIPs of all nodes</span></span><br><span class="line">kubectl get nodes -o jsonpath=<span class="string">'&#123;.items[*].status.addresses[?(@.type=="ExternalIP")].address&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># List Names of Pods that belong to Particular RC</span></span><br><span class="line"><span class="comment"># "jq" command useful for transformations that are too complex for jsonpath, it can be found at https://stedolan.github.io/jq/</span></span><br><span class="line">sel=<span class="variable">$&#123;$(kubectl get rc my-rc --output=json | jq -j '.spec.selector | to_entries | .[] | "\(.key)=\(.value),"')%?&#125;</span></span><br><span class="line"><span class="built_in">echo</span> $(kubectl get pods --selector=<span class="variable">$sel</span> --output=jsonpath=&#123;.items..metadata.name&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Show labels for all pods (or any other Kubernetes object that supports labelling)</span></span><br><span class="line">kubectl get pods --show-labels</span><br><span class="line"></span><br><span class="line"><span class="comment"># Check which nodes are ready</span></span><br><span class="line">JSONPATH=<span class="string">'&#123;range .items[*]&#125;&#123;@.metadata.name&#125;:&#123;range @.status.conditions[*]&#125;&#123;@.type&#125;=&#123;@.status&#125;;&#123;end&#125;&#123;end&#125;'</span> \</span><br><span class="line"> &amp;&amp; kubectl get nodes -o jsonpath=<span class="string">"<span class="variable">$JSONPATH</span>"</span> | grep <span class="string">"Ready=True"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># List all Secrets currently in use by a pod</span></span><br><span class="line">kubectl get pods -o json | jq <span class="string">'.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name'</span> | grep -v null | sort | uniq</span><br><span class="line"></span><br><span class="line"><span class="comment"># List Events sorted by timestamp</span></span><br><span class="line">kubectl get events --sort-by=.metadata.creationTimestamp</span><br></pre></td></tr></table></figure>
-<h2 id="Updating-Resources"><a href="#Updating-Resources" class="headerlink" title="Updating Resources"></a>Updating Resources</h2><p>As of version 1.11 <code>rolling-update</code> have been deprecated (see <a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md" target="_blank" rel="noopener">CHANGELOG-1.11.md</a>), use <code>rollout</code> instead.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">set</span> image deployment/frontend www=image:v2               <span class="comment"># Rolling update "www" containers of "frontend" deployment, updating the image</span></span><br><span class="line">kubectl rollout <span class="built_in">history</span> deployment/frontend                      <span class="comment"># Check the history of deployments including the revision </span></span><br><span class="line">kubectl rollout undo deployment/frontend                         <span class="comment"># Rollback to the previous deployment</span></span><br><span class="line">kubectl rollout undo deployment/frontend --to-revision=2         <span class="comment"># Rollback to a specific revision</span></span><br><span class="line">kubectl rollout status -w deployment/frontend                    <span class="comment"># Watch rolling update status of "frontend" deployment until completion</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># deprecated starting version 1.11</span></span><br><span class="line">kubectl rolling-update frontend-v1 -f frontend-v2.json           <span class="comment"># (deprecated) Rolling update pods of frontend-v1</span></span><br><span class="line">kubectl rolling-update frontend-v1 frontend-v2 --image=image:v2  <span class="comment"># (deprecated) Change the name of the resource and update the image</span></span><br><span class="line">kubectl rolling-update frontend --image=image:v2                 <span class="comment"># (deprecated) Update the pods image of frontend</span></span><br><span class="line">kubectl rolling-update frontend-v1 frontend-v2 --rollback        <span class="comment"># (deprecated) Abort existing rollout in progress</span></span><br><span class="line"></span><br><span class="line">cat pod.json | kubectl replace -f -                              <span class="comment"># Replace a pod based on the JSON passed into std</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Force replace, delete and then re-create the resource. Will cause a service outage.</span></span><br><span class="line">kubectl replace --force -f ./pod.json</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a service for a replicated nginx, which serves on port 80 and connects to the containers on port 8000</span></span><br><span class="line">kubectl expose rc nginx --port=80 --target-port=8000</span><br><span class="line"></span><br><span class="line"><span class="comment"># Update a single-container pod's image version (tag) to v4</span></span><br><span class="line">kubectl get pod mypod -o yaml | sed <span class="string">'s/\(image: myimage\):.*$/\1:v4/'</span> | kubectl replace -f -</span><br><span class="line"></span><br><span class="line">kubectl label pods my-pod new-label=awesome                      <span class="comment"># Add a Label</span></span><br><span class="line">kubectl annotate pods my-pod icon-url=http://goo.gl/XXBTWq       <span class="comment"># Add an annotation</span></span><br><span class="line">kubectl autoscale deployment foo --min=2 --max=10                <span class="comment"># Auto scale a deployment "foo"</span></span><br></pre></td></tr></table></figure>
-<h2 id="Patching-Resources"><a href="#Patching-Resources" class="headerlink" title="Patching Resources"></a>Patching Resources</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Partially update a node</span></span><br><span class="line">kubectl patch node k8s-node-1 -p <span class="string">'&#123;"spec":&#123;"unschedulable":true&#125;&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Update a container's image; spec.containers[*].name is required because it's a merge key</span></span><br><span class="line">kubectl patch pod valid-pod -p <span class="string">'&#123;"spec":&#123;"containers":[&#123;"name":"kubernetes-serve-hostname","image":"new image"&#125;]&#125;&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Update a container's image using a json patch with positional arrays</span></span><br><span class="line">kubectl patch pod valid-pod --<span class="built_in">type</span>=<span class="string">'json'</span> -p=<span class="string">'[&#123;"op": "replace", "path": "/spec/containers/0/image", "value":"new image"&#125;]'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Disable a deployment livenessProbe using a json patch with positional arrays</span></span><br><span class="line">kubectl patch deployment valid-deployment  --<span class="built_in">type</span> json   -p=<span class="string">'[&#123;"op": "remove", "path": "/spec/template/spec/containers/0/livenessProbe"&#125;]'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Add a new element to a positional array</span></span><br><span class="line">kubectl patch sa default --<span class="built_in">type</span>=<span class="string">'json'</span> -p=<span class="string">'[&#123;"op": "add", "path": "/secrets/1", "value": &#123;"name": "whatever" &#125; &#125;]'</span></span><br></pre></td></tr></table></figure>
-<h2 id="Editing-Resources"><a href="#Editing-Resources" class="headerlink" title="Editing Resources"></a>Editing Resources</h2><p>Edit any API resource in your preferred editor.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit svc/docker-registry                      <span class="comment"># Edit the service named docker-registry</span></span><br><span class="line">KUBE_EDITOR=<span class="string">"nano"</span> kubectl edit svc/docker-registry   <span class="comment"># Use an alternative editor</span></span><br></pre></td></tr></table></figure>
-<h2 id="Scaling-Resources"><a href="#Scaling-Resources" class="headerlink" title="Scaling Resources"></a>Scaling Resources</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale --replicas=3 rs/foo                                 <span class="comment"># Scale a replicaset named 'foo' to 3</span></span><br><span class="line">kubectl scale --replicas=3 -f foo.yaml                            <span class="comment"># Scale a resource specified in "foo.yaml" to 3</span></span><br><span class="line">kubectl scale --current-replicas=2 --replicas=3 deployment/mysql  <span class="comment"># If the deployment named mysql's current size is 2, scale mysql to 3</span></span><br><span class="line">kubectl scale --replicas=5 rc/foo rc/bar rc/baz                   <span class="comment"># Scale multiple replication controllers</span></span><br></pre></td></tr></table></figure>
-<h2 id="Deleting-Resources"><a href="#Deleting-Resources" class="headerlink" title="Deleting Resources"></a>Deleting Resources</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete -f ./pod.json                                              <span class="comment"># Delete a pod using the type and name specified in pod.json</span></span><br><span class="line">kubectl delete pod,service baz foo                                        <span class="comment"># Delete pods and services with same names "baz" and "foo"</span></span><br><span class="line">kubectl delete pods,services -l name=myLabel                              <span class="comment"># Delete pods and services with label name=myLabel</span></span><br><span class="line">kubectl -n my-ns delete pod,svc --all                                      <span class="comment"># Delete all pods and services in namespace my-ns,</span></span><br><span class="line"><span class="comment"># Delete all pods matching the awk pattern1 or pattern2</span></span><br><span class="line">kubectl get pods  -n mynamespace --no-headers=<span class="literal">true</span> | awk <span class="string">'/pattern1|pattern2/&#123;print $1&#125;'</span> | xargs  kubectl delete -n mynamespace pod</span><br></pre></td></tr></table></figure>
-<h2 id="Interacting-with-running-Pods"><a href="#Interacting-with-running-Pods" class="headerlink" title="Interacting with running Pods"></a>Interacting with running Pods</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">kubectl logs my-pod                                 <span class="comment"># dump pod logs (stdout)</span></span><br><span class="line">kubectl logs -l name=myLabel                        <span class="comment"># dump pod logs, with label name=myLabel (stdout)</span></span><br><span class="line">kubectl logs my-pod --previous                      <span class="comment"># dump pod logs (stdout) for a previous instantiation of a container</span></span><br><span class="line">kubectl logs my-pod -c my-container                 <span class="comment"># dump pod container logs (stdout, multi-container case)</span></span><br><span class="line">kubectl logs -l name=myLabel -c my-container        <span class="comment"># dump pod logs, with label name=myLabel (stdout)</span></span><br><span class="line">kubectl logs my-pod -c my-container --previous      <span class="comment"># dump pod container logs (stdout, multi-container case) for a previous instantiation of a container</span></span><br><span class="line">kubectl logs -f my-pod                              <span class="comment"># stream pod logs (stdout)</span></span><br><span class="line">kubectl logs -f my-pod -c my-container              <span class="comment"># stream pod container logs (stdout, multi-container case)</span></span><br><span class="line">kubectl logs -f -l name=myLabel --all-containers    <span class="comment"># stream all pods logs with label name=myLabel (stdout)</span></span><br><span class="line">kubectl run -i --tty busybox --image=busybox -- sh  <span class="comment"># Run pod as interactive shell</span></span><br><span class="line">kubectl run nginx --image=nginx --restart=Never -n </span><br><span class="line">mynamespace                                         <span class="comment"># Run pod nginx in a specific namespace</span></span><br><span class="line">kubectl run nginx --image=nginx --restart=Never     <span class="comment"># Run pod nginx and write its spec into a file called pod.yaml</span></span><br><span class="line">--dry-run -o yaml &gt; pod.yaml</span><br><span class="line"></span><br><span class="line">kubectl attach my-pod -i                            <span class="comment"># Attach to Running Container</span></span><br><span class="line">kubectl port-forward my-pod 5000:6000               <span class="comment"># Listen on port 5000 on the local machine and forward to port 6000 on my-pod</span></span><br><span class="line">kubectl <span class="built_in">exec</span> my-pod -- ls /                         <span class="comment"># Run command in existing pod (1 container case)</span></span><br><span class="line">kubectl <span class="built_in">exec</span> my-pod -c my-container -- ls /         <span class="comment"># Run command in existing pod (multi-container case)</span></span><br><span class="line">kubectl top pod POD_NAME --containers               <span class="comment"># Show metrics for a given pod and its containers</span></span><br></pre></td></tr></table></figure>
-<h2 id="Interacting-with-Nodes-and-Cluster"><a href="#Interacting-with-Nodes-and-Cluster" class="headerlink" title="Interacting with Nodes and Cluster"></a>Interacting with Nodes and Cluster</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">kubectl cordon my-node                                                <span class="comment"># Mark my-node as unschedulable</span></span><br><span class="line">kubectl drain my-node                                                 <span class="comment"># Drain my-node in preparation for maintenance</span></span><br><span class="line">kubectl uncordon my-node                                              <span class="comment"># Mark my-node as schedulable</span></span><br><span class="line">kubectl top node my-node                                              <span class="comment"># Show metrics for a given node</span></span><br><span class="line">kubectl cluster-info                                                  <span class="comment"># Display addresses of the master and services</span></span><br><span class="line">kubectl cluster-info dump                                             <span class="comment"># Dump current cluster state to stdout</span></span><br><span class="line">kubectl cluster-info dump --output-directory=/path/to/cluster-state   <span class="comment"># Dump current cluster state to /path/to/cluster-state</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># If a taint with that key and effect already exists, its value is replaced as specified.</span></span><br><span class="line">kubectl taint nodes foo dedicated=special-user:NoSchedule</span><br></pre></td></tr></table></figure>
-<h3 id="Resource-types"><a href="#Resource-types" class="headerlink" title="Resource types"></a>Resource types</h3><p>List all supported resource types along with their shortnames, <a href="https://kubernetes.io/docs/concepts/overview/kubernetes-api/#api-groups" target="_blank" rel="noopener">API group</a>, whether they are <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces" target="_blank" rel="noopener">namespaced</a>, and <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects" target="_blank" rel="noopener">Kind</a>:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl api-resources</span><br></pre></td></tr></table></figure>
-<p>Other operations for exploring API resources:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kubectl api-resources --namespaced=<span class="literal">true</span>      <span class="comment"># All namespaced resources</span></span><br><span class="line">kubectl api-resources --namespaced=<span class="literal">false</span>     <span class="comment"># All non-namespaced resources</span></span><br><span class="line">kubectl api-resources -o name                <span class="comment"># All resources with simple output (just the resource name)</span></span><br><span class="line">kubectl api-resources -o wide                <span class="comment"># All resources with expanded (aka "wide") output</span></span><br><span class="line">kubectl api-resources --verbs=list,get       <span class="comment"># All resources that support the "list" and "get" request verbs</span></span><br><span class="line">kubectl api-resources --api-group=extensions <span class="comment"># All resources in the "extensions" API group</span></span><br></pre></td></tr></table></figure>
-<h3 id="Formatting-output"><a href="#Formatting-output" class="headerlink" title="Formatting output"></a>Formatting output</h3><p>To output details to your terminal window in a specific format, you can add either the <code>-o</code> or <code>--output</code> flags to a supported <code>kubectl</code> command.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Output format</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>-o=custom-columns=</code></td>
-<td style="text-align:left">Print a table using a comma separated list of custom columns</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>-o=custom-columns-file=</code></td>
-<td style="text-align:left">Print a table using the custom columns template in the <code></code> file</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>-o=json</code></td>
-<td style="text-align:left">Output a JSON formatted API object</td>
-</tr>
-<tr>
-<td style="text-align:left">`-o=jsonpath=</td>
-<td style="text-align:left">Print the fields defined in a <a href="https://kubernetes.io/docs/reference/kubectl/jsonpath" target="_blank" rel="noopener">jsonpath</a> expression</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>-o=jsonpath-file=</code></td>
-<td style="text-align:left">Print the fields defined by the <a href="https://kubernetes.io/docs/reference/kubectl/jsonpath" target="_blank" rel="noopener">jsonpath</a> expression in the <code></code> file</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>-o=name</code></td>
-<td style="text-align:left">Print only the resource name and nothing else</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>-o=wide</code></td>
-<td style="text-align:left">Output in the plain-text format with any additional information, and for pods, the node name is included</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>-o=yaml</code></td>
-<td style="text-align:left">Output a YAML formatted API object</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Kubectl-output-verbosity-and-debugging"><a href="#Kubectl-output-verbosity-and-debugging" class="headerlink" title="Kubectl output verbosity and debugging"></a>Kubectl output verbosity and debugging</h3><p>Kubectl verbosity is controlled with the <code>-v</code> or <code>--v</code> flags followed by an integer representing the log level. General Kubernetes logging conventions and the associated log levels are described <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md" target="_blank" rel="noopener">here</a>.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Verbosity</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>--v=0</code></td>
-<td style="text-align:left">Generally useful for this to <em>always</em> be visible to a cluster operator.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>--v=1</code></td>
-<td style="text-align:left">A reasonable default log level if you don’t want verbosity.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>--v=2</code></td>
-<td style="text-align:left">Useful steady state information about the service and important log messages that may correlate to significant changes in the system. This is the recommended default log level for most systems.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>--v=3</code></td>
-<td style="text-align:left">Extended information about changes.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>--v=4</code></td>
-<td style="text-align:left">Debug level verbosity.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>--v=6</code></td>
-<td style="text-align:left">Display requested resources.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>--v=7</code></td>
-<td style="text-align:left">Display HTTP request headers.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>--v=8</code></td>
-<td style="text-align:left">Display HTTP request contents.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>--v=9</code></td>
-<td style="text-align:left">Display HTTP request contents without truncation of contents.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="What’s-next"><a href="#What’s-next" class="headerlink" title="What’s next"></a>What’s next</h2><ul>
-<li>Learn more about <a href="https://kubernetes.io/docs/reference/kubectl/overview/" target="_blank" rel="noopener">Overview of kubectl</a>.</li>
-<li>See <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/" target="_blank" rel="noopener">kubectl</a> options.</li>
-<li>Also <a href="https://kubernetes.io/docs/reference/kubectl/conventions/" target="_blank" rel="noopener">kubectl Usage Conventions</a> to understand how to use it in reusable scripts.</li>
-<li>See more community <a href="https://github.com/dennyzhang/cheatsheet-kubernetes-A4" target="_blank" rel="noopener">kubectl cheatsheets</a>.</li>
-</ul>
-<h1 id="Fin"><a href="#Fin" class="headerlink" title="Fin"></a>Fin</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Develop/">Develop</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Mess/Game/steamcmd" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/10/30/Mess/Game/steamcmd/" class="article-date">
-      <time datetime="2019-10-30T02:32:44.000Z" itemprop="datePublished">2019-10-30</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/30/Mess/Game/steamcmd/">steamcmd</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="steam-ERROR-Timed-out-waiting-for-AppInfo-update"><a href="#steam-ERROR-Timed-out-waiting-for-AppInfo-update" class="headerlink" title="steam ERROR! Timed out waiting for AppInfo update."></a>steam ERROR! Timed out waiting for AppInfo update.</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm ~/Steam/appcache/packageinfo.vdf</span><br><span class="line">rm ~/Steam/appcache/appinfo.vdf</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Game/">Game</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Game/">Game</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/steamcmd/">steamcmd</a></li></ul>
     </div>
 
       
