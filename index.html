@@ -234,6 +234,73 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Develop/Github-config" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/08/Develop/Github-config/" class="article-date">
+      <time datetime="2020-07-08T03:12:23.000Z" itemprop="datePublished">2020-07-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/08/Develop/Github-config/">Github config</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="Github-config"><a href="#Github-config" class="headerlink" title="Github config"></a>Github config</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "xxx@xxx.com"</span><br></pre></td></tr></table></figure>
+<p>选择秘钥位置</p>
+<p>密码（可以不用）</p>
+<p>然后将公钥复制到GitHub的个人settings里。</p>
+<p>如果不是默认的秘钥名字，在本地需要指出秘钥文件位置。</p>
+<p>在ssh时可以用<code>-i</code>来标识，但是git没有相应的方法。</p>
+<p>解决方法之一是在ssh里配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.ssh/config</span><br><span class="line">////////////////////////</span><br><span class="line">host xxx.github.com</span><br><span class="line"> HostName xxx.github.com</span><br><span class="line"> IdentityFile ~/.ssh/id_rsa_XXX</span><br><span class="line"> User git</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-QT/Qt-with-CMake" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -931,72 +998,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Develop/开发工具问题集合" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/13/Develop/开发工具问题集合/" class="article-date">
-      <time datetime="2019-12-13T07:33:31.000Z" itemprop="datePublished">2019-12-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/13/Develop/开发工具问题集合/">开发工具问题集合</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="开发工具问题集合"><a href="#开发工具问题集合" class="headerlink" title="开发工具问题集合"></a>开发工具问题集合</h2><h3 id="Sublime"><a href="#Sublime" class="headerlink" title="Sublime"></a>Sublime</h3><h4 id="十六进制打开文件"><a href="#十六进制打开文件" class="headerlink" title="十六进制打开文件"></a>十六进制打开文件</h4><p>File - &gt; Reopen with Encoding  可以用不同编码方式打开文件，经常以此查看文件的十六进制编码。</p>
-<p>(需要安装)</p>
-<h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><h4 id="Self-signed-SSL"><a href="#Self-signed-SSL" class="headerlink" title="Self-signed SSL"></a>Self-signed SSL</h4><p>https 请求的时候提示服务器无响应，最后发现是因为 <em>设置里开启了验证SSL证书</em>，关闭即可。</p>
-<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Develop/">Develop</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postman/">postman</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sublime/">sublime</a></li></ul>
     </div>
 
       

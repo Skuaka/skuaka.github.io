@@ -234,6 +234,79 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Develop/swagger搭建mock_server" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/25/Develop/swagger搭建mock_server/" class="article-date">
+      <time datetime="2019-09-25T01:47:08.000Z" itemprop="datePublished">2019-09-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/25/Develop/swagger搭建mock_server/">swagger搭建mock_server</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>GitHub项目地址：<a href="https://github.com/stoplightio/prism" target="_blank" rel="noopener">https://github.com/stoplightio/prism</a></p>
+<p>Doc: <a href="https://stoplight.io/p/docs/gh/stoplightio/prism/docs/getting-started/installation.md" target="_blank" rel="noopener">https://stoplight.io/p/docs/gh/stoplightio/prism/docs/getting-started/installation.md</a></p>
+<p><strong>安装</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @stoplight/prism-cli</span><br></pre></td></tr></table></figure>
+<p><strong>启动命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prism mock -h 0.0.0.0 -p 4010 example.yaml</span><br></pre></td></tr></table></figure>
+<p><strong>docker镜像</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stoplight/prism:3</span><br></pre></td></tr></table></figure>
+<p><strong>PS</strong></p>
+<p>这里有一个坑，nodejs版本10才可以正常使用这个工具。有的机器默认安装的6和最新的12都是会报错的。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swagger/">swagger</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Develop/travis" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -972,128 +1045,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Python/virtualenv" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/06/24/Python/virtualenv/" class="article-date">
-      <time datetime="2019-06-24T09:09:51.000Z" itemprop="datePublished">2019-06-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/24/Python/virtualenv/">virtualenv</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="virtualenv使用"><a href="#virtualenv使用" class="headerlink" title="virtualenv使用"></a>virtualenv使用</h3><ol>
-<li><p>通过 pip 安装 virtualenv</p>
-<p><code>pip install virtualenv</code></p>
-</li>
-<li><p>创建虚拟环境 my_venv</p>
-<p><code>virtualenv my_venv</code></p>
-<ul>
-<li>virtualenv 会创建一个目录 <code>my_venv/</code>，目录结构：<ul>
-<li><code>lib/</code>，包含虚拟环境中后续安装的软件包</li>
-<li><code>include/</code>，包含支持Python的类库</li>
-<li><code>bin/</code>，可执行文件</li>
-<li><code>python</code>，可执行python的命令文件</li>
-<li><code>pip</code>，辅助安装其他软件包的命令文件</li>
-<li><code>setuptools</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>指定参数</p>
-<ul>
-<li><p>指定要使用的 Python 版本：</p>
-<p><code>virtualenv -p /usr/bin/python2.7 my_venv</code></p>
-<p>或者在 <code>~/.bashrc</code> 文件中设置环境变量</p>
-<p><code>VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7</code></p>
-</li>
-<li><p>不继承全局软件包：</p>
-<p><code>virtualenv --no-site-packages my_venv</code></p>
-</li>
-<li><p>继承全局软件包：</p>
-<p><code>virtualenv --system-site-packages my_venv</code></p>
-<blockquote>
-<p>从virtualenv 1.7开始，默认不包含全局软件包；</p>
-<p>全局软件包默认位于 <code>/usr/lib/python&lt;version&gt;/site-packages</code></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>激活运行环境：</p>
-<p><code>source my_venv/bin/activate</code></p>
-<blockquote>
-<p>这条命令修改了当前用户的环境变量 <code>$PATH</code>，将我们新建的虚拟环境目录 <code>ENV/bin/</code> 作为第一个元素添加到了 $PATH 中。因为在Linux系统中输入命令时，命令可执行文件的搜索路径是根据 $PATH 中配置的路径的先后顺序来的，所以接下来你执行的所有命令都将是 <code>ENV/bin/</code> 中的命令（如果此目录中存在这个命令的话），新安装的模块都只会安装到该目录（ENV）中去。</p>
-</blockquote>
-<p>PS：有时候缺失这个脚本文件，重新创建一下虚拟环境。</p>
-</li>
-<li><p>在激活的虚拟环境中，通过pip安装其他必要的软件包。</p>
-</li>
-<li><p>注销虚拟环境：</p>
-<p><code>deactivate</code></p>
-</li>
-<li><p>删除虚拟环境：</p>
-<p><code>rm -rf my_venv</code></p>
-</li>
-<li><p>备份虚拟环境配置文件：</p>
-<p><code>pip freeze &gt; requirements.txt</code></p>
-</li>
-<li><p>将备份文件还原到虚拟环境中：</p>
-<p><code>pip install -r requirements.txt</code></p>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Python/">Python</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
     </div>
 
       

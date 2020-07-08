@@ -234,6 +234,90 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-QT/Qt-issues" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/20/QT/Qt-issues/" class="article-date">
+      <time datetime="2019-04-20T09:16:08.000Z" itemprop="datePublished">2019-04-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/20/QT/Qt-issues/">Qt issues</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Qt-issues"><a href="#Qt-issues" class="headerlink" title="Qt issues"></a>Qt issues</h2><h3 id="symbol-not-found-iconv"><a href="#symbol-not-found-iconv" class="headerlink" title="symbol not found: _iconv"></a>symbol not found: _iconv</h3><p><strong>problem:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dyld: Symbol not found: _iconv</span><br><span class="line">  Referenced from: /usr/lib/libcups.2.dylib</span><br><span class="line">  Expected in: /****/lib/libiconv.2.dylib</span><br><span class="line"> in /usr/lib/libcups.2.dylib</span><br></pre></td></tr></table></figure>
+<p>经本人实践：在 Run 设置下，<strong>取消勾选</strong> “Add build library search path to …” 即可。</p>
+<p>原方法：</p>
+<p><strong>fix:</strong></p>
+<ol>
+<li>Go to Projects -&gt; Run -&gt; “Run Environment” (show Details)</li>
+<li>I would not recommend <strong>Unset</strong>, rather you should <strong>edit</strong> Both: <strong>DYLD_LIBRARY_PATH</strong>and <strong>DYLD_FRAMEWORK_PATH</strong></li>
+<li>Add <em>/usr/lib:</em> to the beginning for both paths (colon delimited string)</li>
+<li>Build project again - this will fix it for good</li>
+</ol>
+<p><strong>from:</strong></p>
+<p><a href="https://stackoverflow.com/questions/38131011/qt-application-throws-dyld-symbol-not-found-cg-jpeg-resync-to-restart" target="_blank" rel="noopener">https://stackoverflow.com/questions/38131011/qt-application-throws-dyld-symbol-not-found-cg-jpeg-resync-to-restart</a></p>
+<h3 id="QLineEdit响应回车时避免Button同时响应"><a href="#QLineEdit响应回车时避免Button同时响应" class="headerlink" title="QLineEdit响应回车时避免Button同时响应"></a>QLineEdit响应回车时避免Button同时响应</h3><p>在Dialog中的按钮默认有autoDefault属性，外观都会变，而且lineEdit响应回车信号的时候，按钮会同时响应点击事件。</p>
+<p>解决办法：</p>
+<p>在designer中，找到QPushButton的autoDefault属性，将对勾去掉即可。</p>
+<p>或者代码修改: pButton-&gt;setAutoDefault(false);</p>
+<h3 id="No-rule-to-make-target-“-“-Stop"><a href="#No-rule-to-make-target-“-“-Stop" class="headerlink" title="No rule to make target “ “. Stop."></a>No rule to make target “ “. Stop.</h3><p>On Qt Creator, go into “Projects Tab”, then you can see “Shadow build”. Uncheck this and compile. The error disappears.</p>
+<p>from: <a href="https://stackoverflow.com/questions/28767895/qt-no-rule-to-make-target-controlpanel-ui-needed-by-ui-controlpanel-h" target="_blank" rel="noopener">https://stackoverflow.com/questions/28767895/qt-no-rule-to-make-target-controlpanel-ui-needed-by-ui-controlpanel-h</a></p>
+<p>经本人测试，只需要删除shadow build 文件夹中原有的内容（注意隐藏文件）。以及删除项目目录下自动生成的文件。</p>
+<h3 id="取消创建文件时自动小写"><a href="#取消创建文件时自动小写" class="headerlink" title="取消创建文件时自动小写"></a>取消创建文件时自动小写</h3><p>preference -&gt; C++ -&gt; File Naming -&gt; Lower case file names</p>
+<h2 id="to-be-continued"><a href="#to-be-continued" class="headerlink" title="to be continued"></a>to be continued</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/QT/">QT</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QT/">QT</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-QT/qt隐藏标题栏并鼠标拖动" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1011,249 +1095,6 @@
 <h4 id="自由存储区和堆"><a href="#自由存储区和堆" class="headerlink" title="自由存储区和堆"></a>自由存储区和堆</h4><p>从技术上来说，堆（heap）是C语言和操作系统的术语。堆是操作系统所维护的一块特殊内存。而自由存储是C++中通过new和delete动态分配和释放对象的抽象概念，通过new来申请的内存区域可称为自由存储区。</p>
 <p>基本上，所有的C++编译器默认使用堆来实现自由存储，也即是缺省的全局运算符new和delete也许会按照malloc和free的方式来被实现，这时藉由new运算符分配的对象，说它在堆上也对，说它在自由存储区上也正确。但程序员也可以<strong>通过重载操作符</strong>，改用其他内存来实现自由存储，例如全局变量做的对象池，这时自由存储区就区别于堆了。</p>
 <h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C-C/">C/C++</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C-C++/Concept-gcc/C++命名规范" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/07/C-C++/Concept-gcc/C++命名规范/" class="article-date">
-      <time datetime="2019-04-07T08:37:00.000Z" itemprop="datePublished">2019-04-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/07/C-C++/Concept-gcc/C++命名规范/">C++命名规范</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="C-命名规范"><a href="#C-命名规范" class="headerlink" title="C++命名规范"></a>C++命名规范</h2><p>源自：<a href="https://www.cnblogs.com/heyonggang/p/3362873.html" target="_blank" rel="noopener">https://www.cnblogs.com/heyonggang/p/3362873.html</a></p>
-<h3 id="整体原则"><a href="#整体原则" class="headerlink" title="整体原则"></a>整体原则</h3><p>在引入细节之前，先说明一下命名规范的整体原则：</p>
-<table>
-<thead>
-<tr>
-<th>同一性</th>
-<th>在编写一个子模块或派生类的时候，要遵循其基类或整体模块的命名风格，保持命名风格在整个模块中的同一性。</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>标识符组成</td>
-<td>标识符采用英文单词或其组合，应当直观且可以拼读，可望文知意，用词应当准确。</td>
-</tr>
-<tr>
-<td>最小化长度 &amp;&amp; 最大化信息量原则</td>
-<td>在保持一个标识符意思明确的同时，应当尽量缩短其长度。</td>
-</tr>
-<tr>
-<td>避免过于相似</td>
-<td>不要出现仅靠大小写区分的相似的标识符，例如“i”与“I”，“function”与“Function”等等。</td>
-</tr>
-<tr>
-<td>避免在不同级别的作用域中重名</td>
-<td>程序中不要出现名字完全相同的局部变量和全局变量，尽管两者的作用域不同而不会发生语法错误，但容易使人误解。</td>
-</tr>
-<tr>
-<td>正确命名具有互斥意义的标识符</td>
-<td>用正确的反义词组命名具有互斥意义的标识符，如：”nMinValue”和”nMaxValue”，”GetName()” 和 “SetName()” ….</td>
-</tr>
-<tr>
-<td>避免名字中出现数字编号</td>
-<td>尽量避免名字中出现数字编号，如Value1,Value2等，除非逻辑上的确需要编号。这是为了防止程序员偷懒，不肯为命名动脑筋而导致产生无意义的名字（因为用数字编号最省事）。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="类-结构"><a href="#类-结构" class="headerlink" title="类/结构"></a>类/结构</h3><p>除了异常类等个别情况（不希望用户把该类看作一个普通的、正常的类之情况）外，C++类/结构<br>的命名应该遵循以下准则：</p>
-<table>
-<thead>
-<tr>
-<th>C++类/结构的命名</th>
-<th>类的名称都要以大写字母“C”开头，后跟一个或多个单词。为便于界定，每个单词的首字母要大写。</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>推荐的组成形式</td>
-<td>类的命名推荐用”名词”或”形容词＋名词”的形式，例如：”CAnalyzer”, “CFastVector” ….</td>
-</tr>
-<tr>
-<td>传统C结构体的命名</td>
-<td>传统C结构体的名称全部由大写字母组成，单词间使用下划线界定，例如：”SERVICE_STATUS”, “DRIVER_INFO” ….</td>
-</tr>
-</tbody>
-</table>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><table>
-<thead>
-<tr>
-<th>函数的命名</th>
-<th>函数的名称由一个或多个单词组成。为便于界定，每个单词的首字母要大写。</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>推荐的组成形式</td>
-<td>函数名应当使用”动词”或者”动词＋名词”（动宾词组）的形式。例如：”GetName()”, “SetValue()”, “Erase()”, “Reserve()” ….</td>
-</tr>
-<tr>
-<td>保护成员函数</td>
-<td>保护成员函数的开头应当加上一个下划线以示区别，例如：”<code>_SetState()</code>“ ….</td>
-</tr>
-<tr>
-<td>私有成员函数</td>
-<td>类似地，私有成员函数的开头应当加上两个下划线，例如：”<code>__DestroyImp()</code>“ ….</td>
-</tr>
-<tr>
-<td>虚函数</td>
-<td>虚函数习惯以“Do”开头，如：”DoRefresh()”, “_DoEncryption()” ….</td>
-</tr>
-<tr>
-<td>回调和事件处理函数</td>
-<td>回调和事件处理函数习惯以单词“On”开头。例如：”_OnTimer()”, “OnExit()” ….</td>
-</tr>
-</tbody>
-</table>
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量名由<strong><em>作用域前缀＋类型前缀＋一个或多个单词</em></strong>组成。为便于界定，每个单词的首字母要大写。</p>
-<p>对于某些用途简单明了的局部变量，也可以使用简化的方式，如：i, j, k, x, y, z ….</p>
-<p><strong>作用域前缀</strong></p>
-<table>
-<thead>
-<tr>
-<th><strong>前缀</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><em>无</em></td>
-<td>局部变量</td>
-</tr>
-<tr>
-<td>m_</td>
-<td>类的成员变量（member）</td>
-</tr>
-<tr>
-<td>sm_</td>
-<td>类的静态成员变量（static member）</td>
-</tr>
-<tr>
-<td>s_</td>
-<td>静态变量（static）</td>
-</tr>
-<tr>
-<td>g_</td>
-<td>外部全局变量（global）</td>
-</tr>
-<tr>
-<td>sg_</td>
-<td>静态全局变量（static global）</td>
-</tr>
-<tr>
-<td>gg_</td>
-<td>进程间共享的共享数据段全局变量（global global）</td>
-</tr>
-</tbody>
-</table>
-<p><strong>类型前缀</strong></p>
-<p>类型前缀可以组合使用，例如”gc”表示字符数组，”ppn”表示指向整型的指针的指针等等。</p>
-<table>
-<thead>
-<tr>
-<th>前缀</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>n</td>
-<td>整型和位域变量（number）</td>
-</tr>
-<tr>
-<td>e</td>
-<td>枚举型变量（enumeration）</td>
-</tr>
-<tr>
-<td>c</td>
-<td>字符型变量（char）</td>
-</tr>
-<tr>
-<td>b</td>
-<td>布尔型变量（bool）</td>
-</tr>
-<tr>
-<td>f</td>
-<td>浮点型变量（float）</td>
-</tr>
-<tr>
-<td>p</td>
-<td>指针型变量和迭代子（pointer）</td>
-</tr>
-<tr>
-<td>pfn</td>
-<td>特别针对指向函数的指针变量和函数对象指针（pointer of function）</td>
-</tr>
-<tr>
-<td>g</td>
-<td>数组（grid）</td>
-</tr>
-<tr>
-<td>i</td>
-<td>类的实例（instance）<br>对于经常用到的类，也可以定义一些专门的前缀，<br>如：std::string类的前缀可以定义为”st”，std::vector类的前缀可以定义为”v”。</td>
-</tr>
-</tbody>
-</table>
-<p><strong>推荐的组成形式</strong></p>
-<p>变量的名字应当使用”名词”或者”形容词＋名词”。例如：”nCode”, “m_nState”，”nMaxWidth” ….</p>
-<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量名由类型前缀＋全大写字母组成，单词间通过下划线来界定，如：cDELIMITER, nMAX_BUFFER ….</p>
-<p>类型前缀的定义与变量命名规则中的相同。</p>
-<h3 id="枚举-联合-typedef"><a href="#枚举-联合-typedef" class="headerlink" title="枚举/联合/typedef"></a>枚举/联合/typedef</h3><p>枚举、联合、typedef语句生成的类型名由全大写字母组成，单词间通过下划线来界定，如：FAR_PROC, ERROR_TYPE ….</p>
-<h3 id="宏-枚举"><a href="#宏-枚举" class="headerlink" title="宏/枚举"></a>宏/枚举</h3><p>宏和枚举值由全大写字母组成，单词间通过下划线来界定，如：ERROR_UNKNOWN, OP_STOP ….</p>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2>
       
     </div>
     
